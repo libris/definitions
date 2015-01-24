@@ -1,23 +1,33 @@
-## Resource lists ##
+# KB/LIBRIS Definitions
 
-Currently, whelk-core/src/main/resources/ contains a number of resource lists with various origins.
+This repository is a collection of vocabulary and scheme definitions and
+mappings to external resources. These define the foundation of linked library
+data used by the National Library of Sweden.
 
-nationalitycodes.json
-countrycodes.json
-langcodes.json
+## Generate Datasets
 
-### relatorcodes.json ###
+Run the following script to build the full set of definition resources:
 
-Source: http://www.loc.gov/marc/relators/relacode.html
-Additional source: manually added swedish labels
+    $ python scripts/compile_defs.py -c datatools/cache/ -o datatools/build/
 
-### typedefs.json ###
+You can also provide resource names to generate the different parts in
+isolation. Pass `--help` to the script for details.
 
-Source: hand-curated definitions of RDF-based types inferred from MARC.
+## Upload Datasets to an LDP-compliant Service
 
+Use this script to HTTP PUT resources to a resource collection:
 
-## Generate the definition datasets
+    $ scripts/load_defs_whelk.sh <COLLECTION-URL>
 
-  $ python datatools/scripts/compile_defs.py -c datatools/cache/ -o datatools/build/
+## Contents
 
-ÅÄÖ
+The `def/` directory contains local RDF definitions and mappings.
+
+The `etc/` directory defines mappings from MARC to the terms used in the JSON-LD
+context.
+
+The `source/` directory mainly contains language labels manually synced with
+various external origins. See `scripts/compile_defs.py` for the details. It
+also contains `enums.json`, which is a hand-curated set of RDF types extracted
+from MARC fixed field definitions (006, 007 and 008 for bib, auth and hold).
+
