@@ -3,7 +3,7 @@
 WHELK=$1
 FILTER=$2
 DOBUILD=$3
-BUILDBASE="datatools/build"
+BUILDBASE="build"
 
 put() {
     if [[ $3 == *"$FILTER"* ]]; then
@@ -13,10 +13,10 @@ put() {
 }
 
 # Generate and load library terms context
-libcontext=datatools/build/lib-context.jsonld
+libcontext=build/lib-context.jsonld
 if [[ $DOBUILD != "--nobuild" && ($FILTER == "" || $FILTER == "context/lib") ]]; then
     echo "Generate ${libcontext}..."
-    python datatools/scripts/context_from_vocab.py datatools/def/terms.ttl datatools/def/terms-overlay.jsonld > $libcontext
+    python scripts/context_from_vocab.py def/terms.ttl def/terms-overlay.jsonld > $libcontext
     echo "Done."
 fi
 put $libcontext application/ld+json ${WHELK}/sys/context/lib.jsonld
@@ -25,13 +25,13 @@ put $libcontext application/ld+json ${WHELK}/sys/context/lib.jsonld
 # Generate datasets
 if [[ $DOBUILD != "--nobuild" && $FILTER == "" ]]; then
     echo "Compile definitions..."
-    python datatools/scripts/compile_defs.py -c datatools/cache/ -o datatools/build/
+    python scripts/compile_defs.py -c cache/ -o build/
     echo "Done."
 fi
 
 # Load JSON-LD contexts
 for ctx in owl skos; do
-    put datatools/sys/context/${ctx}.jsonld application/ld+json ${WHELK}/sys/context/${ctx}.jsonld
+    put sys/context/${ctx}.jsonld application/ld+json ${WHELK}/sys/context/${ctx}.jsonld
 done
 
 # Load standalone documents
