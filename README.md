@@ -8,7 +8,7 @@ data used by the National Library of Sweden.
 
 Run the following script to build the full set of definition resources:
 
-    $ python scripts/compile_defs.py -c datatools/cache/ -o datatools/build/
+    $ python scripts/compile_defs.py -c cache/ -o build/
 
 You can also provide resource names to generate the different parts in
 isolation. Pass `--help` to the script for details.
