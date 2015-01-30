@@ -1,19 +1,12 @@
 import json
 from rdflib import *
 from rdflib.namespace import SKOS
+from util import vocabcache
 
 DC = Namespace("http://purl.org/dc/terms/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 SCHEMA = Namespace("http://schema.org/")
-
-from util import vocabcache
-
-vocabcachedir = "cache/vocab-cache"
-vocabgraph = Graph().parse("def/terms.ttl", format='turtle')
-
-extgraph = vocabcache.load_imports(vocabcachedir, vocabgraph,
-        {str(SCHEMA): "http://schema.org/docs/schema_org_rdfa.html"})
 
 
 from flask import Flask, render_template
@@ -41,9 +34,14 @@ def index():
     return render_template('index.html', **vars())
 
 
-@app.route('/vocab/')
+@app.route('/vocabview/')
 def vocabview():
-    graph = vocabgraph
+
+    graph = Graph().parse("def/terms.ttl", format='turtle')
+    vocabcachedir = "cache/vocab-cache"
+    extgraph = vocabcache.load_imports(vocabcachedir, graph,
+            {str(SCHEMA): "http://schema.org/docs/schema_org_rdfa.html"})
+
 
     def getrestrictions(rclass):
         for c in rclass.objects(RDFS.subClassOf):
@@ -69,8 +67,9 @@ def vocabview():
     return render_template('vocab.html', **vars())
 
 
-@app.route('/marcframe/')
+@app.route('/marcframeview/')
 def marcframeview():
+
     marcframe_path = "etc/marcframe.json"
     with open(marcframe_path) as fp:
         marcframe = json.load(fp)
