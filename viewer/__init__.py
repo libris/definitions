@@ -1,7 +1,9 @@
 import json
 from rdflib import *
 from rdflib.namespace import SKOS
-from util import vocabcache
+from flask import Flask, render_template
+from util.graphcache import GraphCache
+
 
 DC = Namespace("http://purl.org/dc/terms/")
 VANN = Namespace("http://purl.org/vocab/vann/")
@@ -9,7 +11,7 @@ VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 SCHEMA = Namespace("http://schema.org/")
 
 
-from flask import Flask, render_template
+graphcache = GraphCache("cache/graph-cache")
 
 
 class MyFlask(Flask):
@@ -38,10 +40,11 @@ def index():
 def vocabview():
 
     graph = Graph().parse("def/terms.ttl", format='turtle')
-    vocabcachedir = "cache/vocab-cache"
-    extgraph = vocabcache.load_imports(vocabcachedir, graph,
-            {str(SCHEMA): "http://schema.org/docs/schema_org_rdfa.html"})
-
+    graphcache.update(
+            ("http://schema.org/docs/schema_org_rdfa.html" if str(url) ==
+                str(SCHEMA) else url)
+            for url in graph.objects(None, OWL.imports))
+    extgraph = graphcache.graph
 
     def getrestrictions(rclass):
         for c in rclass.objects(RDFS.subClassOf):
