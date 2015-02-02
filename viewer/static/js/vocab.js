@@ -1,15 +1,16 @@
 window.onload = function () {
 
+  function accept(id) { return id.indexOf(':') == -1 }
+
   var nodes = Array.prototype.map.call(document.querySelectorAll(".class"), function (el) {
-    return {
+    return accept(el.id)? {
       name: el.id,
-      children: Array.prototype.map.call(el.querySelectorAll(".subclasses a"),
-                                         function (el) {
-                                           var ref = el.getAttribute('href')
-                                           return (ref[0] == '#')? ref.substring(1) : null
-                                         }).filter(function (it) { return it })
-    }
-  })
+      children: Array.prototype.map.call(el.querySelectorAll(".subclasses a"), function (el) {
+        var ref = el.getAttribute('href')
+        return ref[0] == '#' && accept(ref)? ref.substring(1) : null
+      }).filter(function (it) { return it })
+    } : null
+  }).filter(function (it) { return it })
 
   var graphView = null
   var loaded = false
