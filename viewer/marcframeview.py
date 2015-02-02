@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+import re
 import json
 
 
@@ -29,5 +30,10 @@ def marcframeview():
         for code, subdfn in sorted(dfn.items()):
             if code.startswith('$') and subdfn:
                 yield code, subdfn
+
+    def pretty_json(data):
+        s = json.dumps(data, sort_keys=True, ensure_ascii=False, indent=2,
+                separators=(',', ': '))
+        return re.sub(r'{\s+(\S+: "[^"]*")\s+}', r'{\1}', s)
 
     return render_template('marcframeview.html', **vars())

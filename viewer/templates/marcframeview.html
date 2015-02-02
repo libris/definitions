@@ -97,6 +97,22 @@
                     </table>
                   % endif
                 </td>
+                <td>
+                  % if dfn._spec
+                    <ol>
+                      % for spec in dfn._spec
+                        % if spec.source and spec.result
+                          <li>
+                            <b>MARC</b>
+                            <pre><code>${pretty_json(spec.source)}</code></pre>
+                            <b>JSON-LD</b>
+                            <pre><code>${pretty_json(spec.result)}</code></pre>
+                          </li>
+                        % endif
+                      % endfor
+                    </ol>
+                  % endif
+                </td>
               </tr>
             % endfor
           </table>
