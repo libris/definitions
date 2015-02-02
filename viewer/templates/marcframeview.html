@@ -9,7 +9,7 @@
   % macro show_value(cat, tag_or_code, key, value)
     % if (not isinstance(value, basestring) or not value.startswith(('@', '_'))
         ) and key in ('aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
-      <a href="../vocabview/#${value}">${value}</a>
+      <a href="../vocabview/#${value}" target="vocabview">${value}</a>
     % elif key == 'tokenMap'
       <a href="#map-${value}">${value}</a>
     % elif key == 'inherit' and value.isdigit()
@@ -139,5 +139,8 @@
           </div>
         % endfor
     </section>
+    <iframe name="vocabview"></iframe>
+    <script src="/vendor/jquery/js/jquery.js"></script>
+    <script src="/js/marcframeview.js"></script>
   </body>
 </html>
