@@ -13,6 +13,7 @@ rdfutils = {name: obj for name, obj in globals().items()
                 if isinstance(obj, (Namespace, ClosedNamespace))
                     or obj in (URIRef, Literal, BNode)}
 
+vocab_path = "def/terms.ttl"
 graphcache = GraphCache("cache/graph-cache")
 
 app = Blueprint('vocabview', __name__)
@@ -21,12 +22,11 @@ app.context_processor(lambda: rdfutils)
 
 @app.route('/vocabview/')
 def vocabview():
-
-    graph = Graph().parse("def/terms.ttl", format='turtle')
-    graphcache.update(
-            ("http://schema.org/docs/schema_org_rdfa.html" if str(url) ==
-                str(SCHEMA) else url)
-            for url in graph.objects(None, OWL.imports))
+    graph = graphcache.load(vocab_path)
+    for url in graph.objects(None, OWL.imports):
+        if str(url) == str(SCHEMA):
+            url = "http://schema.org/docs/schema_org_rdfa.html"
+        graphcache.load(url)
     extgraph = graphcache.graph
 
     def getrestrictions(rclass):
