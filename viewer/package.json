@@ -12,8 +12,9 @@
     "bower-installer": "~1.2.0"
   },
   "scripts": {
-    "vendor": "bower-installer && parallelshell 'npm run vendor:js' 'npm run vendor:css'",
-    "vendor:js": "uglifyjs static/vendor/*/js/*.js -o static/build/vendor.min.js --source-map static/build/vendor.min.js.map --source-map-url ./vendor.min.js.map --source-map-root /",
+    "vendor": "npm run vendor:fetch && parallelshell 'npm run vendor:js' 'npm run vendor:css'",
+    "vendor:fetch": "bower-installer",
+    "vendor:js": "uglifyjs static/vendor/{jquery,lodash,bootstrap,d3}/js/*.js -o static/build/vendor.min.js --source-map static/build/vendor.min.js.map --source-map-url ./vendor.min.js.map --source-map-root /",
     "vendor:css": "cleancss static/vendor/*/css/*.css -o static/build/vendor.min.css #--source-map",
     "build": "parallelshell 'npm run build:js' 'npm run build:less'",
     "build:js": "uglifyjs static/js/*.js -o static/build/app.min.js --source-map static/build/app.min.js.map --source-map-url ./app.min.js.map --source-map-root /",
