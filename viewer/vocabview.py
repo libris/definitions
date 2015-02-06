@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from rdflib import Graph, URIRef, Literal, BNode, RDF, RDFS, OWL
 from rdflib.namespace import SKOS, Namespace, ClosedNamespace
-from util.graphcache import GraphCache
+from util.graphcache import GraphCache, vocab_source_map
 
 
 DC = Namespace("http://purl.org/dc/terms/")
@@ -24,9 +24,7 @@ app.context_processor(lambda: rdfutils)
 def vocabview():
     graph = graphcache.load(vocab_path)
     for url in graph.objects(None, OWL.imports):
-        if str(url) == str(SCHEMA):
-            url = "http://schema.org/docs/schema_org_rdfa.html"
-        graphcache.load(url)
+        graphcache.load(vocab_source_map.get(url, url))
     extgraph = graphcache.graph
 
     def getrestrictions(rclass):

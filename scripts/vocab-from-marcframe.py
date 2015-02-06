@@ -3,6 +3,8 @@ from urlparse import urljoin
 from rdflib import *
 from rdflib.namespace import *
 from rdflib.util import guess_format
+from util.graphcache import GraphCache, vocab_source_map
+
 
 SDO = Namespace("http://schema.org/")
 VANN = Namespace("http://purl.org/vocab/vann/")
@@ -221,16 +223,21 @@ if __name__ == '__main__':
 
     parse_marcframe(dataset, marcframe)
 
-    for refpath in args:
-        refgraph = Graph().parse(refpath, format=guess_format(refpath))
-        destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % refpath])
+    termsgraph = Graph()
+    if termspath:
+        termsgraph.parse(termspath, format=guess_format(termspath))
+
+    graphcache = GraphCache("cache/graph-cache")
+
+    for url in termsgraph.objects(None, OWL.imports):
+        refgraph = graphcache.load(vocab_source_map.get(url, url))
+        destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
         add_equivalent(dataset, destgraph, refgraph)
 
-    if termspath:
-        tg = Graph().parse(termspath, format=guess_format(termspath))
-        dataset -= tg
+    if termsgraph:
+        dataset -= termsgraph
         dataset.remove((None, VANN.termGroup, None))
-        dataset.namespace_manager = tg.namespace_manager
+        dataset.namespace_manager = termsgraph.namespace_manager
 
     for update_fpath in glob.glob(
             os.path.join(os.path.dirname(__file__), 'vocab-update-*.rq')):

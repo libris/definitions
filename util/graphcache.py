@@ -10,6 +10,11 @@ from rdflib.util import guess_format
 logger = logging.getLogger(__name__)
 
 
+vocab_source_map = {
+    "http://schema.org/": "http://schema.org/docs/schema_org_rdfa.html"
+}
+
+
 class GraphCache(object):
 
     def __init__(self, cachedir):
