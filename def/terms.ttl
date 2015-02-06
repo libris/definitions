@@ -120,7 +120,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subPropertyOf foaf:primaryTopic .
 
 :describedBy a owl:ObjectProperty;
-    rdfs:label "beskriven av"@sv;
+    rdfs:label "Beskriven av"@sv;
     owl:inverseOf :about;
     owl:equivalentProperty iana:describedby;
     rdfs:subPropertyOf foaf:isPrimaryTopicOf .
@@ -189,7 +189,8 @@ marcenum:bibLevel a skos:Collection;
     owl:equivalentProperty dc:isFormatOf .
 
 :hasFormat a owl:ObjectProperty;
-    rdfs:label "har format"@sv;
+    rdfs:label "Format"@sv;
+    rdfs:comment "Är på angivet format."@sv;
     rdfs:subPropertyOf :exampleOfWork;
     owl:equivalentProperty dc:hasFormat .
 
@@ -475,7 +476,7 @@ marcenum:bibLevel a skos:Collection;
     owl:equivalentClass bf:Print .
 
 :Electronic a owl:Class;
-    rdfs:label "Elektronisk resurs"@sv;
+    rdfs:label "Elektronisk"@sv;
     skos:exactMatch rdamedia:1003 ; # "computer"
     rdfs:subClassOf :Digital, :Product .
 
@@ -685,6 +686,10 @@ marcenum:bibLevel a skos:Collection;
     owl:equivalentProperty dc:modified;
     rdfs:range xsd:dateTime .
 
+:date a owl:DatatypeProperty;
+    rdfs:label "datum"@sv;
+    owl:equivalentProperty dc:date .
+
 :title a owl:DatatypeProperty;
     rdfs:label "titel"@sv;
     owl:equivalentProperty bf:title, dc:title .
@@ -694,8 +699,13 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subPropertyOf skos:prefLabel .
 
 :instanceTitle a owl:ObjectProperty;
-    rdfs:label "instanstitel"@sv;
+    rdfs:label "Huvudtitel"@sv;
+    #rdfs:label "instanstitel"@sv;
     owl:equivalentProperty bf:instanceTitle .
+
+:keyTitle a owl:ObjectProperty ;
+    rdfs:label "Nyckeltitel"@sv;
+    owl:equivalentProperty bf:keyTitle .
 
 :Title a owl:Class;
     rdfs:label "Titel"@sv;
@@ -711,6 +721,7 @@ marcenum:bibLevel a skos:Collection;
 
 :language a owl:ObjectProperty;
     rdfs:label "språk"@sv;
+    rdfs:comment "Verkets språk"@sv;
     owl:equivalentProperty bf:language;
     rdfs:subPropertyOf dc:language;
     rdfs:range sdo:Language .
@@ -1661,6 +1672,7 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 773.p" .
 
 :abbreviatedTitle a owl:ObjectProperty ;
+    rdfs:label "Förkortad titel"@sv;
     sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :Title ;
     owl:equivalentProperty bf:abbreviatedTitle ;
