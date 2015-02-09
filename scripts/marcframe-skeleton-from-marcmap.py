@@ -390,6 +390,9 @@ for marc_type in 'bib', 'auth', 'hold':
                             del tokenMaps[dfn_key]
                         else:
                             tokenMaps[dfn_key] = OrderedDict(items)
+                        if len(items) == 1 and items[0][0] != 'u':
+                            col_dfn['fixedDefault'] = items[0][0]
+                        #else:
                         col_dfn['tokenMap' if is_link else 'patternMap'] = tkey
 
                 #enums |= local_enums
