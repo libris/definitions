@@ -29,9 +29,6 @@ Use this script to HTTP PUT resources to a resource collection:
 
 The `def/` directory contains local RDF definitions and mappings.
 
-The `etc/` directory defines mappings from MARC to the terms used in the JSON-LD
-context.
-
 The `source/` directory mainly contains language labels manually synced with
 various external origins. See `scripts/compile_defs.py` for the details. It
 also contains `enums.json`, which is a hand-curated set of RDF types extracted

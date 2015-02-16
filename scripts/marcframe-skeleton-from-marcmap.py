@@ -4,7 +4,7 @@ import json
 import sys
 
 args = sys.argv[1:]
-fpath = args.pop(0) if args else "etc/marcmap.json"
+fpath = args.pop(0) if args else "legacy/marcmap.json"
 with open(fpath) as f:
     marcmap = json.load(f)
 
