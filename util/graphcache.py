@@ -46,8 +46,8 @@ class GraphCache(object):
             return self.graph.parse(cache_path, format='turtle', publicID=context_id)
         else:
             logger.debug("Fetching <%s> to '%s'", context_id, cache_path)
-            graph = self.graph.parse(source,
-                    format='rdfa' if cache_path.endswith('html') else None)
+            graph = self.graph.parse(url,
+                    format='rdfa' if url.endswith('html') else None)
             with open(cache_path, 'w') as f:
                 graph.serialize(f, format='turtle')
             return graph
