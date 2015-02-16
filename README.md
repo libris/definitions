@@ -4,6 +4,12 @@ This repository is a collection of vocabulary and scheme definitions and
 mappings to external resources. These define the foundation of linked library
 data used by the National Library of Sweden.
 
+## Dependencies
+
+Install the Python-based dependencies (preferably within a virtualenv):
+
+    $ pip install -r requirements.txt
+
 ## Generate Datasets
 
 Run the following script to build the full set of definition resources:
