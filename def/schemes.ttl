@@ -26,15 +26,15 @@
 
 <sao> a skos:ConceptScheme;
     dc:title "Svenska ämnesord"@sv;
-    skos:notation "sao" .
+    skos:notation "SAO" .
 
 <saogf> a skos:ConceptScheme;
     dc:title "SAO - Genre och form"@sv;
-    skos:notation "saogf" .
+    skos:notation "SAOGf" .
 
 <barn> a skos:ConceptScheme;
     dc:title "Barnämnesord"@sv;
-    skos:notation "barn" .
+    skos:notation "Barn" .
 
 <albt> a skos:ConceptScheme;
     skos:notation "albt//swe";
@@ -124,6 +124,10 @@ _:mesh a skos:ConceptScheme;
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
 
+_:nlm a skos:ConceptScheme;
+    skos:notation "NLM ";
+    dc:title "National Library of Medicine"@en .
+
 _:rswk a skos:ConceptScheme;
     skos:notation "rswk";
     dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)"@de;
@@ -146,5 +150,15 @@ _:sipri a skos:ConceptScheme;
 
 <http://id.loc.gov/authorities/classification> a skos:ConceptScheme .
 
-<http://dewey.info/scheme/ddc/> a skos:ConceptScheme; skos:notation "ddc" .
+# Other Public Schemes
+
+<http://dewey.info/scheme/ddc/> a skos:ConceptScheme;
+    skos:notation "DDC";
+    dc:alternative "DDK"@sv;
+    rdfs:label "Dewey decimalklassifikation"@sv .
+
+<http://udcdata.info/udc-schema> a skos:ConceptScheme;
+    skos:notation "UDC";
+    dc:alternative "UDK "@sv;
+    rdfs:label "Universell decimalklassifikation"@sv .
 
