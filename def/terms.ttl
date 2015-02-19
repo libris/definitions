@@ -207,8 +207,8 @@ marcenum:bibLevel a skos:Collection;
 :holdingFor a owl:ObjectProperty;
     rdfs:label "bestånd på"@sv;
     rdfs:domain :HeldMaterial;
-    rdfs:range :Organization;
-    rdfs:subPropertyOf bf:holdingFor .
+    rdfs:range :CreativeWork;
+    owl:equivalentProperty bf:holdingFor .
 
 :heldBy a owl:ObjectProperty;
     rdfs:label "beståndsinnehavare"@sv;
@@ -2728,7 +2728,6 @@ content:Yearbook a owl:Class ;
 :historyNote skos:note "MARC auth 688.a" .
 
 :holdingFor a owl:FunctionalProperty ;
-    owl:equivalentProperty bf:holdingFor ;
     skos:note "MARC hold 004" .
 
 :holdingType a owl:FunctionalProperty,
