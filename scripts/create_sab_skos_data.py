@@ -28,13 +28,25 @@ def to_uri(scheme, code):
 
 
 def create_sab_skos_data(graph, fpath, limit=0):
+    label_map = {}
+    pending_broader = []
+
     for i, (code, label) in enumerate(read_csv_items(fpath)):
-        r = graph.resource(to_uri(SAB, code))
+        uri = to_uri(SAB, code)
+        r = graph.resource(uri)
         r.add(RDF.type, SKOS.Concept)
         r.add(SKOS.notation, Literal(code))
         r.add(SKOS.prefLabel, Literal(label, lang=LANG))
+        label_map[label] = uri
+        if ': ' in label:
+            pending_broader.append((r, label.rsplit(': ', 1)[0]))
         if limit and i > limit:
             break
+
+    for r, broader_label in pending_broader:
+        broader_uri = label_map.get(broader_label)
+        if broader_uri:
+            r.add(SKOS.broader, broader_uri)
 
 
 def create_sab_ddc_data(graph, fpath, limit=0):
