@@ -8,8 +8,8 @@ from rdflib.namespace import SKOS
 import urllib
 
 
-SAB = Namespace("http://id.kb.se/def/scheme/sab/")
-DDC = Namespace("http://dewey.info/class/")
+SAB_BASE = "http://id.kb.se/def/scheme/sab/{0}"
+DDC_BASE = "http://dewey.info/class/{0}/"
 LANG = 'sv'
 
 hint_link_map = {
@@ -23,8 +23,9 @@ hint_link_map = {
     'DDK22': SKOS.relatedMatch, # TODO
 }
 
-def to_uri(scheme, code):
-    return scheme[urllib.quote(code.encode('utf-8'), safe=b':(),')]
+def to_uri(base, code):
+    slug = urllib.quote(code.encode('utf-8'), safe=b':(),')
+    return URIRef(base.format(slug))
 
 
 def create_sab_skos_data(graph, fpath, limit=0):
@@ -32,7 +33,7 @@ def create_sab_skos_data(graph, fpath, limit=0):
     pending_broader = []
 
     for i, (code, label) in enumerate(read_csv_items(fpath)):
-        uri = to_uri(SAB, code)
+        uri = to_uri(SAB_BASE, code)
         r = graph.resource(uri)
         r.add(RDF.type, SKOS.Concept)
         r.add(SKOS.notation, Literal(code))
@@ -49,7 +50,7 @@ def create_sab_skos_data(graph, fpath, limit=0):
             r.add(SKOS.broader, broader_uri)
 
 
-def create_sab_ddc_data(graph, fpath, limit=0):
+def create_sab_ddc_data(graph, fpath):
     for number, sab_code, ddc_code, hint in read_csv_items(
             fpath, skip_comment=True, coding='utf-8', size=4):
         hint = re.split(r'\s+|\w(?=#)', hint)[-1].strip()
@@ -57,8 +58,8 @@ def create_sab_ddc_data(graph, fpath, limit=0):
         if not link:
             print >> sys.stderr, "No link map for", hint.encode('utf-8')
             continue
-        r = graph.resource(to_uri(SAB, sab_code))
-        r.add(link, to_uri(DDC, ddc_code))
+        r = graph.resource(to_uri(SAB_BASE, sab_code))
+        r.add(link, to_uri(DDC_BASE, ddc_code))
 
 
 def read_csv_items(fpath, skip_first=True, skip_comment=False,
@@ -68,7 +69,7 @@ def read_csv_items(fpath, skip_first=True, skip_comment=False,
         if skip_first is True:
             reader.next()
         for row in reader:
-            if not row or skip_comment and row[0][0] == '#':
+            if not row or skip_comment and row[0].startswith(b'#'):
                 continue
             cols = [col.strip().decode(coding) for col in row]
             if size and len(cols) > size:
@@ -85,5 +86,5 @@ if __name__ == '__main__':
     graph = Graph()
     graph.namespace_manager.bind('skos', SKOS)
     create_sab_skos_data(graph, sab_codes_fpath, limit=limit)
-    create_sab_ddc_data(graph, ddc_map_fpath, limit=limit)
+    create_sab_ddc_data(graph, ddc_map_fpath)
     graph.serialize(sys.stdout, format='turtle')
