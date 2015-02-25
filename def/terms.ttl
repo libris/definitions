@@ -208,6 +208,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "bestånd på"@sv;
     rdfs:domain :HeldMaterial;
     rdfs:range :CreativeWork;
+    #rdfs:subPropertyOf sdo:exampleOfWork;
     owl:equivalentProperty bf:holdingFor .
 
 :heldBy a owl:ObjectProperty;
@@ -1112,6 +1113,29 @@ marcenum:bibLevel a skos:Collection;
 #    rdfs:domain :Record;
 #    rdfs:label "Datum då posten skapades"@sv .
 
+:availability a rdf:Property;
+    owl:equivalentProperty sdo:availability;
+    rdfs:label "Exemplarstatus"@sv .
+
+:termsOfAvailability a rdf:Property;
+    owl:equivalentProperty rdael:termsOfAvailability;
+    rdfs:label "Anskaffningsvillkor"@sv .
+
+:sigel a rdf:Property;
+    rdfs:domain sdo:Library;
+    rdfs:subPropertyOf skos:notation;
+    rdfs:label "Sigel"@sv .
+
+:url a rdf:Property;
+    owl:equivalentProperty sdo:url;
+    rdfs:label "URL"@sv .
+
+:classificationPart a rdf:Property; rdfs:label "Klassifikation (hylla)"@sv .
+:copyNumber a rdf:Property; rdfs:label "Exemplarnummer"@sv .
+:shelfControlNumber a rdf:Property; rdfs:label "Löpnummer"@sv .
+:shelfLabel a rdf:Property; rdfs:label "Uppställningsord"@sv .
+:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv .
+
 :medium a rdf:Property; rdfs:label "Medieterm"@sv .
 :musicArrangement a rdf:Property; rdfs:label "Arrangemang (musik)"@sv .
 :musicKey a rdf:Property; rdfs:label "Tonart"@sv .
@@ -1138,7 +1162,6 @@ marcenum:bibLevel a skos:Collection;
 :identifierValue a rdf:Property; rdfs:label "Nummer"@sv .
 :identifierNote a rdf:Property; rdfs:label "Notering"@sv .
 :classification a rdf:Property; rdfs:label "Klassifikation"@sv .
-:availability a rdf:Property; rdfs:label "Anskaffningsvillkor"@sv .
 :mediaTerm a rdf:Property; rdfs:label "Allmän medieterm"@sv .
 :publication a rdf:Property; rdfs:label "Publicering"@sv .
 :publicationCountry a rdf:Property; rdfs:label "Utgivningsland"@sv .
