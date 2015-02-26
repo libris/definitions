@@ -2,9 +2,12 @@ import os
 import sys
 import urllib2
 import logging
-from rdflib import ConjunctiveGraph
+from rdflib import ConjunctiveGraph, Graph
 from rdflib.parser import create_input_source
-from rdflib.util import guess_format
+from rdflib.util import guess_format, SUFFIX_FORMAT_MAP
+
+
+SUFFIX_FORMAT_MAP['jsonld'] = 'json-ld'
 
 
 logger = logging.getLogger(__name__)
@@ -32,7 +35,13 @@ class GraphCache(object):
             if not last_vocab_mtime or last_vocab_mtime < vocab_mtime:
                 logger.debug("Parse file: '%s'", url)
                 self.mtime_map[url] = vocab_mtime
-                return self.graph.parse(url, format=guess_format(url))
+                # use CG as workaround for json-ld always loading as dataset
+                graph = ConjunctiveGraph()
+                graph.parse(url, format=guess_format(url))
+                self.graph.remove_context(context_id)
+                for s, p, o in graph:
+                    self.graph.add((s, p, o, context_id))
+                return graph
         else:
             context_id = url
 

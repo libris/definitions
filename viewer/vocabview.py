@@ -13,7 +13,7 @@ rdfutils = {name: obj for name, obj in globals().items()
                 if isinstance(obj, (Namespace, ClosedNamespace))
                     or obj in (URIRef, Literal, BNode)}
 
-vocab_path = "def/terms.ttl"
+vocab_paths = ["def/terms.ttl", "sys/app/help.jsonld"]
 graphcache = GraphCache("cache/graph-cache")
 
 app = Blueprint('vocabview', __name__)
@@ -22,7 +22,13 @@ app.context_processor(lambda: rdfutils)
 
 @app.route('/vocabview/')
 def vocabview():
-    graph = graphcache.load(vocab_path)
+    graph = None
+    for path in vocab_paths:
+        lgraph = graphcache.load(path)
+        if not graph:
+            graph = lgraph
+        else:
+            graph += lgraph
     for url in graph.objects(None, OWL.imports):
         graphcache.load(vocab_source_map.get(url, url))
     extgraph = graphcache.graph
