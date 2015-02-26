@@ -10,14 +10,8 @@
   <link rel="stylesheet" href="/css/graph.css" />
 % endblock
 
-% set rclasses = map(graph.resource, sorted(
-              union(set((graph.subjects(RDF.type, RDFS.Class))),
-                set((graph.subjects(RDF.type, OWL.Class))))))
-% set rproperties = map(graph.resource, sorted(
-              union(set(graph.subjects(RDF.type, RDF.Property)),
-                set(graph.subjects(RDF.type, OWL.ObjectProperty)),
-                set(graph.subjects(RDF.type, OWL.DatatypeProperty)))
-            ))
+% set rclasses = get_classes(graph)
+% set rproperties = get_properties(graph)
 
 % set DOMAIN = union(SCHEMA.domainIncludes, RDFS.domain)
 
@@ -99,7 +93,9 @@
                 % if ranges
                   <span>&rarr;
                     % for range_ in ranges
-                      <a href="${link(range_)}">${range_.qname()}</a>{% if not loop.last %},{% endif %}
+                      % if isinstance(range_.identifier, URIRef)
+                        <a href="${link(range_)}">${range_.qname()}</a>{% if not loop.last %},{% endif %}
+                      % endif
                     % endfor
                   </span>
                 % endif
@@ -123,8 +119,9 @@
                 % set rtype = restr.value(OWL.allValuesFrom)
                 <li>
                   <a href="${link(prop)}">${prop.qname()}</a>
-                  &rarr;
-                  <a href="${link(rtype)}">${rtype.qname()}</a>
+                  % if isinstance(rtype.identifier, URIRef)
+                    &rarr; <a href="${link(rtype)}">${rtype.qname()}</a>
+                  % endif
                 </li>
               % endfor
             </ul>
@@ -142,7 +139,9 @@
                 % if domains
                   <span>&larr;
                     % for domain in domains
-                      <a href="${link(domain)}">${domain.qname()}</a>{% if not loop.last %},{% endif %}
+                      % if isinstance(domain.identifier, URIRef)
+                        <a href="${link(domain)}">${domain.qname()}</a>{% if not loop.last %},{% endif %}
+                      % endif
                     % endfor
                   </span>
                 % endif
@@ -207,6 +206,16 @@
           <em>&mdash; ${(rprop.value(RDFS.comment))}</em>
         % endif
       </p>
+      % if rprop.value(SKOS.scopeNote)
+        <div class="panel panel-info">
+          <header class="panel-heading">
+            Använding
+          </header>
+          <div class="panel-body">
+            ${(rprop.value(SKOS.scopeNote)) | safe}
+          </div>
+        </div>
+      % endif
       <div class="notes">
         % set notes = sorted(rprop.objects(SKOS.note))
         % if notes

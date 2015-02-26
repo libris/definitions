@@ -27,6 +27,18 @@ def vocabview():
         graphcache.load(vocab_source_map.get(url, url))
     extgraph = graphcache.graph
 
+    def get_classes(graph):
+        return [graph.resource(cid) for cid in sorted(
+                set((graph.subjects(RDF.type, RDFS.Class)))
+                | set((graph.subjects(RDF.type, OWL.Class))))
+            if isinstance(cid, URIRef)]
+
+    def get_properties(graph):
+        return map(graph.resource, sorted(
+            set(graph.subjects(RDF.type, RDF.Property))
+            | set(graph.subjects(RDF.type, OWL.ObjectProperty))
+            | set(graph.subjects(RDF.type, OWL.DatatypeProperty))))
+
     def getrestrictions(rclass):
         for c in rclass.objects(RDFS.subClassOf):
             rtype = c.value(RDF.type)
