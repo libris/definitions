@@ -1999,13 +1999,10 @@ content:Yearbook a owl:Class ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 042.a" .
 
-:availability a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    sdo:domainIncludes :Identifier,
-        :Offer ;
+:availability a owl:DatatypeProperty ;
+    sdo:domainIncludes :Offer ;
     vs:term_status "unstable" ;
-    skos:note "MARC bib 020.c",
-        "MARC hold 852.i" .
+    skos:note "MARC hold 852.i" .
 
 :base a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -2025,8 +2022,9 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 042.9" .
 
 :bindingInformation a owl:DatatypeProperty ;
+    sdo:domainIncludes :Product ;
     vs:term_status "unstable" ;
-    skos:note "MARC hold 563" .
+    skos:note "MARC hold 563.a" .
 
 :biography a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -2407,8 +2405,9 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 508.a" .
 
 :custodialHistoryOfItem a owl:DatatypeProperty ;
+    sdo:domainIncludes :Product ;
     vs:term_status "unstable" ;
-    skos:note "MARC hold 561" .
+    skos:note "MARC hold 561.a" .
 
 :date a owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
@@ -4230,6 +4229,12 @@ content:Yearbook a owl:Class ;
         "MARC bib 337.2",
         "MARC bib 338.2" .
 
+:termsOfAvailability a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    sdo:domainIncludes :Identifier ;
+    vs:term_status "unstable" ;
+    skos:note "MARC bib 020.c" .
+
 :text a owl:FunctionalProperty,
         owl:ObjectProperty ;
     sdo:domainIncludes :Audio ;
@@ -4439,6 +4444,8 @@ content:Yearbook a owl:Class ;
 :workExample sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :SomeProducts ;
     skos:note "MARC bib 562",
+        "MARC hold 561",
+        "MARC hold 563",
         "MARC hold 866" .
 
 :HeldMaterial owl:equivalentClass bf:HeldMaterial .
