@@ -206,25 +206,41 @@
           <em>&mdash; ${(rprop.value(RDFS.comment))}</em>
         % endif
       </p>
-      % if rprop.value(SKOS.scopeNote)
-        <div class="panel panel-info">
-          <header class="panel-heading">
-            Använding
-          </header>
-          <div class="panel-body">
-            ${(rprop.value(SKOS.scopeNote)) | safe}
-          </div>
-        </div>
-      % endif
-      <div class="notes">
+      <dl>
+        % for prop in [DC.description, SKOS.scopeNote]
+          % set value = rprop.value(prop)
+          % if value
+            <dt>${extgraph.preferredLabel(prop, lang='en')[0][1].title()}</dt>
+            <dd>
+              % if value.datatype == RDF.HTML
+                ${value | safe}
+              % else
+                ${value}
+              % endif
+            </dd>
+          % endif
+        % endfor
+        % if rprop.value(SKOS.example)
+          <dt>Example Values</dt>
+          <dd>
+            <ul class="list-inline">
+              % for example in rprop.objects(SKOS.example)
+                <li class="note">${example}</li>
+              %endfor
+            </ul>
+          </dd>
+        % endif
         % set notes = sorted(rprop.objects(SKOS.note))
         % if notes
-          % for note in notes
-            <p class="note">${note}</p>
-          % endfor
+          <dt>Related MARC notation</dt>
+          <dd>
+            <ul class="list-inline">
+              % for note in notes
+                <li class="note">${note}</li>
+              % endfor
+            </ul>
+          </dd>
         % endif
-      </div>
-      <dl>
         ${itemsblock(rprop.objects(OWL.equivalentProperty), "Equivalent properties", 'baseproperties', True)}
         ${itemsblock(rprop.objects(RDFS.subPropertyOf), "Base properties", 'baseproperties')}
         ${itemsblock(rprop.subjects(union(RDFS.subPropertyOf, OWL.equivalentProperty)), "Subproperties", 'subproperties')}
