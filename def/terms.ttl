@@ -1100,6 +1100,33 @@ marcenum:bibLevel a skos:Collection;
             owl:allValuesFrom :UniformWork ] .
 
 
+# Annotations
+
+:Annotation a owl:Class;
+    rdfs:subClassOf bf:Annotation .
+
+:annotationSource a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:annotationSource .
+
+:CoverArt a owl:Class;
+    rdfs:subClassOf bf:Summary .
+
+:annotates a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:annotates .
+
+:Summary a owl:Class;
+    rdfs:subClassOf bf:CoverArt .
+
+:summary a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:summary .
+
+:coverArt a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:coverArt .
+
+:coverArtThumb a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:coverArtThumb .
+
+
 # work-in-progress
 
 #@prefix app: <http://id.kb.se/def/application#> .
