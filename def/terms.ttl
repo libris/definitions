@@ -1142,7 +1142,9 @@ marcenum:bibLevel a skos:Collection;
 
 :availability a rdf:Property;
     owl:equivalentProperty sdo:availability;
-    rdfs:label "Exemplarstatus"@sv .
+    rdfs:label "Exemplarstatus"@sv;
+    rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
+    skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
 
 :termsOfAvailability a rdf:Property;
     owl:equivalentProperty rdael:termsOfAvailability;
@@ -1157,11 +1159,30 @@ marcenum:bibLevel a skos:Collection;
     owl:equivalentProperty sdo:url;
     rdfs:label "URL"@sv .
 
-:classificationPart a rdf:Property; rdfs:label "Klassifikation (hylla)"@sv .
-:copyNumber a rdf:Property; rdfs:label "Exemplarnummer"@sv .
-:shelfControlNumber a rdf:Property; rdfs:label "Löpnummer"@sv .
-:shelfLabel a rdf:Property; rdfs:label "Uppställningsord"@sv .
-:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv .
+:classificationPart a rdf:Property;
+    rdfs:label "Klassifikation (hylla)"@sv;
+    rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
+    skos:example "Hc", "Hc Lagerlöf" .
+
+:copyNumber a rdf:Property;
+    rdfs:label "Exemplarnummer"@sv;
+    rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
+    skos:example "A-C", "5" .
+
+:shelfControlNumber a rdf:Property;
+    rdfs:label "Löpnummer"@sv;
+    rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord. Klicka på ”Visa fler fält” om respektive uppställningsled behöver särskiljas."@sv;
+    skos:note "Kan även kombineras med ytterligare placeringsuppgifter."@sv;
+    skos:example "96-3899" .
+
+:shelfLabel a rdf:Property;
+    rdfs:label "Uppställningsord"@sv;
+    rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord."@sv;
+    skos:example "Deckare", "Lagerlöf" .
+
+:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv;
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi" .
 
 :medium a rdf:Property; rdfs:label "Medieterm"@sv .
 :musicArrangement a rdf:Property; rdfs:label "Arrangemang (musik)"@sv .
