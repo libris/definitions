@@ -45,12 +45,14 @@
             <tr id="${cat}-${tag}">
               <th>${tag}</th>
               <td>
-                % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty']
+                % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
                   % if key in dfn
-                    <p>
-                      <em>${key}:</em>
-                      ${show_value(cat, tag, key, dfn[key])}
-                    </p>
+                    <dl class="dl-horizontal">
+                      <dt>${key}:</dt>
+                      <dd>
+                        ${show_value(cat, tag, key, dfn[key])}
+                      </dd>
+                    </dl>
                   % endif
                 % endfor
                 % if kind == 'field'
@@ -69,9 +71,9 @@
                                 <i>${k}</i>: ${show_value(cat, code, k, v)}
                                 <br />
                               % endfor
-                          % else
-                            ${subdfn}
-                          % endif
+                            % else
+                                ${subdfn}
+                            % endif
                           </td>
                         </tr>
                       % endif
@@ -106,26 +108,27 @@
   </section>
   <section>
     <h2>Token Maps</h2>
-      % for tkey, token_map in sorted(marcframe.tokenMaps.items())
-        <div class="tokenmap" id="map-${tkey}">
-          <h3>${tkey}</h3>
-          % if isinstance(token_map, unicode)
-            ${token_map}
-          % else
-            <select>
-              % for key, term in sorted(token_map.items())
-                <option>${key}: ${term}</option>
-              % endfor
-            </select>
-          % endif
-        </div>
-      % endfor
+    % for tkey, token_map in sorted(marcframe.tokenMaps.items())
+      <div class="tokenmap" id="map-${tkey}">
+        <h3>${tkey}</h3>
+        % if isinstance(token_map, unicode)
+          ${token_map}
+        % else
+          <select>
+            % for key, term in sorted(token_map.items())
+              <option>${key}: ${term}</option>
+            % endfor
+          </select>
+        % endif
+      </div>
+    % endfor
   </section>
 % endblock
 
 % macro show_value(cat, tag_or_code, key, value)
   % if (not isinstance(value, basestring) or not value.startswith(('@', '_'))
-      ) and key in ('aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
+      ) and not isinstance(value, bool) and key in (
+        'aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
     <a href="../vocabview/#${value}">${value}</a>
   % elif key == 'tokenMap'
     <a href="#map-${value}">${value}</a>
@@ -135,6 +138,26 @@
     TEST <a href="#${value.replace(':', '-')}">${value.replace(':', ' ')}</a>
   % elif key == 'inherit'
     <a href="#${value}-${tag_or_code}">${value} ${tag_or_code}</a>
+  % elif isinstance(value, dict)
+    <table class="table table-condensed table-striped">
+        % for key, val in sorted(value.items())
+        <tr>
+            <th>${key}</th>
+            <td>
+              % if isinstance(val, dict)
+                % for k, v in sorted(val.items())
+                  % if not k.startswith('TODO:')
+                  <i>${k}</i>: ${show_value(cat, key, k, v)}
+                  <br />
+                  % endif
+                % endfor
+              % else
+                ${show_value(None, None, key, val)}
+              % endif
+            </td>
+        </tr>
+        % endfor
+    </table>
   % else
     ${value}
   % endif
