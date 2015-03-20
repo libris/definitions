@@ -42,8 +42,8 @@
         <p>thingLink: ${catdfn.thingLink}</p>
         <table class="table table-bordered">
           % for tag, kind, dfn in fields(catdfn)
-            <tr id="${cat}-${tag}">
-              <th>${tag}</th>
+            <tr>
+              <th><div id="${cat}-${tag}">${tag}</div></th>
               <td>
                 % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
                   % if key in dfn
@@ -61,8 +61,9 @@
                   <table class="">
                     % for key, subdfn in sorted(dfn.items())
                       % if key[0] != '_' and not key.startswith('TODO:')
-                        <tr id="${cat}-${tag}-${key}">
-                          <th>${show_value(cat, tag, 'aboutType', key)}</th>
+                        <tr>
+                          <th><div id="${cat}-${tag}-${key}"
+                                    >${show_value(cat, tag, 'aboutType', key)}</div></th>
                           <td>
                             % if key[0].isupper() and isinstance(subdfn, dict)
                               ${show_dfn(cat, tag, sorted(subdfn.items()))}
@@ -166,8 +167,8 @@
 % macro show_dfn(cat, tag, items)
   <table class="table table-condensed table-striped">
     % for key, subdfn in items
-      <tr id="${cat}-${tag}-${key}">
-        <th>${key}</th>
+      <tr>
+        <th><div id="${cat}-${tag}-${key}">${key}</div></th>
         <td>
           % for k, v in sorted(subdfn.items())
             % if not k.startswith('TODO:')
