@@ -36,7 +36,7 @@ def vocabview():
         else:
             graph += lgraph
     for url in graph.objects(None, OWL.imports):
-        graphcache.load(vocab_source_map.get(url, url))
+        graphcache.load(vocab_source_map.get(str(url), url))
     extgraph = graphcache.graph
 
     def get_classes(graph):
