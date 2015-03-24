@@ -8,7 +8,7 @@ app = Blueprint('marcframeview', __name__)
 @app.route('/marcframeview/')
 def marcframeview():
 
-    marcframe_path = "etc/marcframe.json"
+    marcframe_path = "cache/ext/marcframe.json"
     with open(marcframe_path) as fp:
         marcframe = json.load(fp)
 

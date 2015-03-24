@@ -1,17 +1,27 @@
-
 body {
-  max-width: 64em;
+  position: relative;
 }
 
-table, th, td {
-  border: 2px inset;
-  border-collapse: collapse;
+body.has-navbar {
+  padding-top: 70px;
 }
-th {
-  font-weight: bold;
+
+.dropdown-menu.list-inline {
+  width: 42em;
 }
-th, td {
+.dropdown-menu.list-inline > li > a {
+  padding: 2px 8px;
+}
+
+tbody td, tbody th {
   vertical-align: top;
+}
+
+.has-navbar [id]:before {
+  display: block;
+  content: " ";
+  height: 50px;
+  margin-top: -50px;
 }
 
 iframe[name=vocabview] {
