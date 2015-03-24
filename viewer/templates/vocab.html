@@ -72,7 +72,7 @@
       <h3 class="panel-title ${rclass.value(VS.term_status)}">${rclass.qname()}</h3>
     </header>
     <div class="panel-body">
-      ${classinfo(rclass, "...")}
+      ${terminfo(rclass, "...")}
       <dl>
         ${itemsblock(rclass.objects(OWL.equivalentClass), "Equivalent classes", 'rdf-baseclasses', True)}
         ${itemsblock(rclass.objects(RDFS.subClassOf), "Base classes", 'rdf-baseclasses')}
@@ -170,12 +170,12 @@
     <dt>${label}</dt>
     <dd>
       <ul class="list-unstyled items ${classname}">
-        % for c in itemlist
-          % if isinstance(c.identifier, URIRef)
-            <li class="${listclass(c)}">
-              <a href="${link(c)}">${c.qname()}</a>
+        % for item in itemlist
+          % if isinstance(item.identifier, URIRef)
+            <li class="${listclass(item)}">
+              <a href="${link(item)}">${item.qname()}</a>
               % if iteminfo and extgraph
-                ${classinfo(extgraph.resource(c.identifier))}
+                ${terminfo(extgraph.resource(item.identifier))}
               % endif
             </li>
           % endif
@@ -185,11 +185,11 @@
   % endif
 % endmacro
 
-% macro classinfo(rclass, nolabel='')
+% macro terminfo(term, nolabel='')
   <p>
-    ${(label(rclass) or nolabel)}
-    % if rclass.value(RDFS.comment)
-      <em>&mdash; ${(rclass.value(RDFS.comment))}</em>
+    ${(label(term) or nolabel)}
+    % if term.value(RDFS.comment)
+      <em>&mdash; ${(term.value(RDFS.comment))}</em>
     % endif
   </p>
 % endmacro
@@ -242,7 +242,7 @@
           </dd>
         % endif
         ${itemsblock(rprop.objects(OWL.equivalentProperty), "Equivalent properties", 'baseproperties', True)}
-        ${itemsblock(rprop.objects(RDFS.subPropertyOf), "Base properties", 'baseproperties')}
+        ${itemsblock(rprop.objects(RDFS.subPropertyOf), "Base properties", 'baseproperties', True)}
         ${itemsblock(rprop.subjects(union(RDFS.subPropertyOf, OWL.equivalentProperty)), "Subproperties", 'subproperties')}
         % set inverse = rprop.value(OWL.inverseOf)
         % if inverse
