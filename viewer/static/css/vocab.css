@@ -18,6 +18,19 @@ nav.affix a {
   margin: 0 0 0.2em;
 }
 
+body > header,
+body > section {
+  margin-left: 15em;
+}
+body > section {
+  overflow: auto;
+}
+
+.class, .property {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 section > article {
   margin: 0 1.0em 0.6em 0;
   float: left;
@@ -71,6 +84,23 @@ li.ext {
 }
 .ext p {
   font-size: 0.8em;
+}
+
+#embedvocab article.panel {
+  display: none;
+}
+#embedvocab article.panel.active {
+  display: block;
+  position: fixed;
+  width: 40em;
+  height: 80%;
+  top: 4em;
+  right: 4em;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+#embedvocab article.panel > .panel-body {
+  height: 90%;
+  overflow: auto;
 }
 
 body svg {
