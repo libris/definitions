@@ -1861,41 +1861,23 @@ content:Yearbook a owl:Class ;
 :Collection owl:equivalentClass bibo:Collection,
         prov:Collection .
 
+:FunctionOrRole a owl:Class ;
+    vs:term_status "unstable" .
+
 :Integrating rdfs:subClassOf :Aggregate .
 
 :Monograph rdfs:subClassOf :Aggregate .
 
 :Periodical rdfs:subClassOf :Aggregate ;
-    owl:equivalentClass bibo:Periodical .
+    owl:equivalentClass bibo:Periodical,
+        sdo:Periodical .
+
+:Profession a owl:Class ;
+    vs:term_status "unstable" .
 
 :SerialComponentPart rdfs:subClassOf :Part .
 
 :SubCollection rdfs:subClassOf :Aggregate .
-
-:_groupID a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    vs:term_status "unstable" ;
-    skos:note "MARC bib 336.8",
-        "MARC bib 337.8",
-        "MARC bib 338.8" .
-
-:_providerDateStatus a owl:FunctionalProperty,
-        owl:ObjectProperty ;
-    sdo:domainIncludes :CreativeWork ;
-    vs:term_status "unstable" ;
-    skos:note "MARC bib 008[6:7]" .
-
-:_providerOtherYear a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    sdo:domainIncludes :CreativeWork ;
-    vs:term_status "unstable" ;
-    skos:note "MARC bib 008[11:15]" .
-
-:_providerYear a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    sdo:domainIncludes :CreativeWork ;
-    vs:term_status "unstable" ;
-    skos:note "MARC bib 008[7:11]" .
 
 :abbrevTitle a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -1944,7 +1926,7 @@ content:Yearbook a owl:Class ;
         owl:ObjectProperty ;
     sdo:domainIncludes :Audio,
         :Cartography ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:additionalType ;
     skos:note "MARC bib 006[16:17]",
         "MARC bib 006[17:18]",
         "MARC bib 006[3:4]",
@@ -1954,7 +1936,7 @@ content:Yearbook a owl:Class ;
 
 :address a owl:DatatypeProperty ;
     sdo:domainIncludes :Offer ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:address ;
     skos:note "MARC hold 852.e" .
 
 :alphabet a owl:FunctionalProperty,
@@ -1965,7 +1947,9 @@ content:Yearbook a owl:Class ;
         "MARC bib 008[33:34]" .
 
 :altLabel a owl:FunctionalProperty ;
-    sdo:domainIncludes :Document ;
+    sdo:domainIncludes :Document,
+        :Electronic,
+        :MediaObject ;
     skos:note "MARC auth 400",
         "MARC bib 856.y" .
 
@@ -1998,19 +1982,20 @@ content:Yearbook a owl:Class ;
     sdo:domainIncludes :Globe,
         :Map,
         :Microform ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:aspect ;
     skos:note "MARC bib 007[2:3]" .
 
 :associatedMedia a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :MediaObject ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:associatedMedia ;
     skos:note "MARC bib 856" .
 
 :attributedTo a owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
         :UniformWork ;
-    sdo:rangeIncludes :Organization,
+    sdo:rangeIncludes :Family,
+        :Organization,
         :Person ;
     skos:note "MARC auth 100",
         "MARC auth 400",
@@ -2027,7 +2012,8 @@ content:Yearbook a owl:Class ;
         :Visual ;
     sdo:rangeIncludes :Audience ;
     owl:equivalentProperty bf:audience,
-        dc:audience ;
+        dc:audience,
+        sdo:audience ;
     skos:note "MARC bib 006[5:6]",
         "MARC bib 008[22:23]",
         "MARC bib 521" .
@@ -2085,8 +2071,7 @@ content:Yearbook a owl:Class ;
     vs:term_status "unstable" ;
     skos:note "MARC auth 046.f" .
 
-:broader sdo:domainIncludes :Concept,
-        :CreativeWork ;
+:broader sdo:domainIncludes :Concept ;
     sdo:rangeIncludes :Concept,
         :Event,
         :Place ;
@@ -2203,6 +2188,8 @@ content:Yearbook a owl:Class ;
         "MARC bib 008[39:40]" .
 
 :cataloguersNote sdo:domainIncludes :Document,
+        :Electronic,
+        :MediaObject,
         :Offer,
         :SomeProducts ;
     skos:note "MARC bib 856.x",
@@ -2285,13 +2272,14 @@ content:Yearbook a owl:Class ;
         :Globe,
         :Map,
         :Microform ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:color ;
     skos:note "MARC bib 007[3:4]",
         "MARC bib 007[9:10]" .
 
 :comment a owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
         :DissertationAnnotation,
+        :Family,
         :Person,
         :UniformWork ;
     skos:note "MARC bib 100.j",
@@ -2345,7 +2333,7 @@ content:Yearbook a owl:Class ;
         owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :Country ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:containedIn ;
     skos:note "MARC bib 008[15:18]" .
 
 :contains a owl:ObjectProperty ;
@@ -2357,6 +2345,7 @@ content:Yearbook a owl:Class ;
         :Serial,
         :Text,
         :Visual ;
+    owl:equivalentProperty sdo:contentType ;
     skos:note "MARC bib 006[10:11]",
         "MARC bib 006[16:17]",
         "MARC bib 006[4:5]",
@@ -2399,6 +2388,8 @@ content:Yearbook a owl:Class ;
 
 :copyNote a owl:DatatypeProperty ;
     sdo:domainIncludes :Document,
+        :Electronic,
+        :MediaObject,
         :Offer,
         :SomeProducts ;
     owl:equivalentProperty bf:copyNote ;
@@ -2419,6 +2410,7 @@ content:Yearbook a owl:Class ;
 
 :copyright a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
+    sdo:rangeIncludes :ProviderEvent ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 264" .
 
@@ -2463,7 +2455,6 @@ content:Yearbook a owl:Class ;
         :Record,
         :Serial,
         :UniformWork ;
-    owl:equivalentProperty <http://purl.org/dc/elements/1.1/date> ;
     skos:note "MARC bib 111.d",
         "MARC bib 130.d",
         "MARC bib 240.f",
@@ -2517,9 +2508,11 @@ content:Yearbook a owl:Class ;
         owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
         :Document,
+        :Electronic,
+        :MediaObject,
         :SomeProducts ;
-    owl:equivalentProperty <http://purl.org/dc/elements/1.1/description>,
-        dc:description ;
+    owl:equivalentProperty dc:description,
+        sdo:description ;
     skos:note "MARC bib 533.a",
         "MARC bib 856.3",
         "MARC hold 866.a" .
@@ -2539,6 +2532,7 @@ content:Yearbook a owl:Class ;
 :device a owl:FunctionalProperty ;
     sdo:domainIncludes :Product ;
     sdo:rangeIncludes :Device ;
+    owl:equivalentProperty sdo:device ;
     skos:note "MARC bib 300.f" .
 
 :dimensions a owl:DatatypeProperty,
@@ -2562,7 +2556,9 @@ content:Yearbook a owl:Class ;
 
 :distribution a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
-    owl:equivalentProperty bf:distribution ;
+    sdo:rangeIncludes :ProviderEvent ;
+    owl:equivalentProperty bf:distribution,
+        sdo:distribution ;
     skos:note "MARC bib 264" .
 
 :easternmostLongitudeCoordinates a owl:DatatypeProperty,
@@ -2576,7 +2572,6 @@ content:Yearbook a owl:Class ;
     sdo:domainIncludes :CreativeWork,
         :Product ;
     owl:equivalentProperty bf:edition,
-        prism:edition,
         bibo:edition ;
     skos:note "MARC bib 250.a",
         "MARC bib 772.b" .
@@ -2607,7 +2602,7 @@ content:Yearbook a owl:Class ;
 :endDate a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :CartographyCoordinates ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:endDate ;
     skos:note "MARC bib 034.y" .
 
 :entryMap a owl:DatatypeProperty,
@@ -2674,7 +2669,8 @@ content:Yearbook a owl:Class ;
         owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
         :Serial ;
-    owl:equivalentProperty bf:frequency ;
+    owl:equivalentProperty bf:frequency,
+        sdo:frequency ;
     skos:note "MARC bib 310.a",
         "MARC bib 321.a" .
 
@@ -2714,7 +2710,8 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 007[11:12]" .
 
 :genre sdo:domainIncludes :CreativeWork ;
-    owl:equivalentProperty bf:genre ;
+    owl:equivalentProperty bf:genre,
+        sdo:genre ;
     skos:note "MARC bib 655" .
 
 :govtAgency a owl:FunctionalProperty,
@@ -2751,7 +2748,8 @@ content:Yearbook a owl:Class ;
 
 :hasPart sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :CreativeWork ;
-    owl:equivalentProperty bf:hasPart ;
+    owl:equivalentProperty bf:hasPart,
+        sdo:hasPart ;
     skos:note "MARC bib 006",
         "MARC bib 041",
         "MARC bib 336",
@@ -2766,7 +2764,8 @@ content:Yearbook a owl:Class ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 041.b" .
 
-:hasVersion sdo:rangeIncludes :Product ;
+:hasVersion sdo:domainIncludes :Person ;
+    sdo:rangeIncludes :Product ;
     skos:note "MARC auth 400",
         "MARC auth 410",
         "MARC auth 411",
@@ -2916,7 +2915,8 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 006[14:15]",
         "MARC bib 008[31:32]" .
 
-:influencedBy sdo:domainIncludes :CreativeWork ;
+:influencedBy sdo:domainIncludes :CreativeWork,
+        :Person ;
     sdo:rangeIncludes :Person ;
     skos:note "MARC bib 700",
         "MARC bib 710" .
@@ -2940,15 +2940,17 @@ content:Yearbook a owl:Class ;
 
 :inventoryLevel a owl:DatatypeProperty ;
     sdo:domainIncludes :Product ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:inventoryLevel ;
     skos:note "MARC bib 562.e" .
 
 :isPartOf a owl:FunctionalProperty ;
-    sdo:domainIncludes :CreativeWork ;
+    sdo:domainIncludes :CreativeWork,
+        :Organization ;
     sdo:rangeIncludes :Aggregate,
         :CreativeWork,
         :Organization,
         :PublicationVolume ;
+    owl:equivalentProperty sdo:isPartOf ;
     skos:note "MARC bib 110.a",
         "MARC bib 610.a",
         "MARC bib 772",
@@ -2969,21 +2971,22 @@ content:Yearbook a owl:Class ;
     sdo:domainIncludes :PublicationVolume,
         :Serial ;
     owl:equivalentProperty bf:issn,
-        prism:issn,
-        bibo:issn ;
+        bibo:issn,
+        sdo:issn ;
     skos:note "MARC bib 440.x",
         "MARC bib 830.x" .
 
 :issueNumber a owl:DatatypeProperty ;
     sdo:domainIncludes :CreativeWork ;
-    owl:equivalentProperty bf:issueNumber ;
+    owl:equivalentProperty bf:issueNumber,
+        sdo:issueNumber ;
     skos:note "MARC bib 362.a" .
 
 :itemCondition a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :Offer,
         :Product ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:itemCondition ;
     skos:note "MARC bib 562.a",
         "MARC hold 852.q" .
 
@@ -3010,6 +3013,7 @@ content:Yearbook a owl:Class ;
     sdo:domainIncludes :Audience,
         :CreativeWork,
         :Device,
+        :Family,
         :Language,
         :Person,
         :Place,
@@ -3036,9 +3040,11 @@ content:Yearbook a owl:Class ;
 
 :language a owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork,
+        :Person,
         :UniformWork ;
     sdo:rangeIncludes :Language ;
-    owl:equivalentProperty dc:language ;
+    owl:equivalentProperty dc:language,
+        sdo:language ;
     skos:note "MARC bib 008[35:38]",
         "MARC bib 040.b",
         "MARC bib 041.a",
@@ -3091,12 +3097,13 @@ content:Yearbook a owl:Class ;
 :license a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :CreativeWork ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:license ;
     skos:note "MARC bib 040" .
 
 :lifeSpan a owl:DatatypeProperty,
         owl:FunctionalProperty ;
-    sdo:domainIncludes :Person ;
+    sdo:domainIncludes :Family,
+        :Person ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 100.d" .
 
@@ -3129,7 +3136,7 @@ content:Yearbook a owl:Class ;
         :DissertationAnnotation,
         :Offer ;
     sdo:rangeIncludes :Place ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:location ;
     skos:note "MARC bib 111.c",
         "MARC bib 502.c",
         "MARC hold 852.a" .
@@ -3137,6 +3144,7 @@ content:Yearbook a owl:Class ;
 :manufacture a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork,
         :ProviderEvent ;
+    sdo:rangeIncludes :ProviderEvent ;
     owl:equivalentProperty bf:manufacture ;
     skos:note "MARC bib 260",
         "MARC bib 264" .
@@ -3144,7 +3152,7 @@ content:Yearbook a owl:Class ;
 :material a owl:FunctionalProperty,
         owl:ObjectProperty ;
     sdo:domainIncludes :Cartography ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:material ;
     skos:note "MARC bib 006[8:9]",
         "MARC bib 008[25:26]" .
 
@@ -3316,7 +3324,7 @@ content:Yearbook a owl:Class ;
 :musicArrangement a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :UniformWork ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:musicArrangement ;
     skos:note "MARC bib 240.o" .
 
 :musicKey a owl:DatatypeProperty,
@@ -3344,10 +3352,11 @@ content:Yearbook a owl:Class ;
 
 :name a owl:DatatypeProperty,
         owl:FunctionalProperty ;
-    sdo:domainIncludes :CreativeWork,
+    sdo:domainIncludes :Family,
         :Organization,
+        :Person,
         :PlanetaryObject ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:name ;
     skos:note "MARC bib 028.b",
         "MARC bib 034.z",
         "MARC bib 040.a",
@@ -3372,7 +3381,7 @@ content:Yearbook a owl:Class ;
 
 :nationality a owl:FunctionalProperty,
         owl:ObjectProperty ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:nationality ;
     skos:note "MARC auth 043.a" .
 
 :nature a owl:FunctionalProperty,
@@ -3465,7 +3474,7 @@ content:Yearbook a owl:Class ;
 
 :numberOfItems a owl:DatatypeProperty,
         owl:FunctionalProperty ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:numberOfItems ;
     skos:note "MARC hold 008[17:20]" .
 
 :numberOfPartOfAWork a owl:DatatypeProperty ;
@@ -3480,14 +3489,15 @@ content:Yearbook a owl:Class ;
 
 :numeration a owl:DatatypeProperty,
         owl:FunctionalProperty ;
-    sdo:domainIncludes :Person ;
+    sdo:domainIncludes :Family,
+        :Person ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 100.b" .
 
 :offers a owl:ObjectProperty ;
     sdo:domainIncludes :HeldMaterial ;
     sdo:rangeIncludes :Offer ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:offers ;
     skos:note "MARC hold 852" .
 
 :originalCatalogingAgency a owl:FunctionalProperty,
@@ -3519,7 +3529,7 @@ content:Yearbook a owl:Class ;
         owl:FunctionalProperty ;
     sdo:domainIncludes :Aggregate,
         :CreativeWork ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:pagination ;
     skos:note "MARC bib 510.c",
         "MARC bib 773.q" .
 
@@ -3562,7 +3572,8 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 511.a" .
 
 :personTitle a owl:DatatypeProperty ;
-    sdo:domainIncludes :Person ;
+    sdo:domainIncludes :Family,
+        :Person ;
     vs:term_status "unstable" ;
     skos:note "MARC bib 100.c" .
 
@@ -3589,7 +3600,7 @@ content:Yearbook a owl:Class ;
     sdo:domainIncludes :CreativeWork,
         :ProviderEvent ;
     sdo:rangeIncludes :Place ;
-    owl:equivalentProperty <http://purl.org/NET/c4dm/event.owl#place> ;
+    vs:term_status "unstable" ;
     skos:note "MARC bib 008[15:18]",
         "MARC bib 260.a",
         "MARC bib 260.e",
@@ -3655,6 +3666,7 @@ content:Yearbook a owl:Class ;
 
 :production a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
+    sdo:rangeIncludes :ProviderEvent ;
     owl:equivalentProperty bf:production ;
     skos:note "MARC bib 264" .
 
@@ -3710,7 +3722,8 @@ content:Yearbook a owl:Class ;
 :provider a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork ;
     sdo:rangeIncludes :ProviderEvent ;
-    owl:equivalentProperty bf:provider ;
+    owl:equivalentProperty bf:provider,
+        sdo:provider ;
     skos:note "MARC bib 260",
         "MARC bib 264" .
 
@@ -3740,7 +3753,9 @@ content:Yearbook a owl:Class ;
 :publication a owl:ObjectProperty ;
     sdo:domainIncludes :CreativeWork,
         :ProviderEvent ;
-    owl:equivalentProperty bf:publication ;
+    sdo:rangeIncludes :ProviderEvent ;
+    owl:equivalentProperty bf:publication,
+        sdo:publication ;
     skos:note "MARC bib 260",
         "MARC bib 264" .
 
@@ -4124,7 +4139,7 @@ content:Yearbook a owl:Class ;
 :startDate a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :CartographyCoordinates ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:startDate ;
     skos:note "MARC bib 034.x" .
 
 :statistics a owl:FunctionalProperty,
@@ -4137,6 +4152,7 @@ content:Yearbook a owl:Class ;
         owl:ObjectProperty ;
     sdo:domainIncludes :Record ;
     owl:equivalentProperty bibo:status,
+        sdo:status,
         foaf:status ;
     skos:note "MARC bib 000[5:6]",
         "MARC hold 000[5:6]" .
@@ -4146,7 +4162,8 @@ content:Yearbook a owl:Class ;
     vs:term_status "unstable" ;
     skos:note "MARC auth 008[6:7]" .
 
-:subject sdo:domainIncludes :CreativeWork ;
+:subject sdo:domainIncludes :CreativeWork,
+        :Person ;
     sdo:rangeIncludes :Concept,
         :Meeting,
         :Organization,
@@ -4285,7 +4302,7 @@ content:Yearbook a owl:Class ;
 :text a owl:FunctionalProperty,
         owl:ObjectProperty ;
     sdo:domainIncludes :Audio ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:text ;
     skos:note "MARC bib 006[13:14]",
         "MARC bib 006[14:15]",
         "MARC bib 008[30:31]",
@@ -4302,8 +4319,7 @@ content:Yearbook a owl:Class ;
         :Person,
         :Serial,
         :UniformWork ;
-    owl:equivalentProperty <http://purl.org/dc/elements/1.1/title>,
-        foaf:title ;
+    owl:equivalentProperty foaf:title ;
     skos:note "MARC auth 100.t",
         "MARC auth 400.t",
         "MARC bib 240.a",
@@ -4473,7 +4489,7 @@ content:Yearbook a owl:Class ;
 :volumeNumber a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     sdo:domainIncludes :PublicationVolume ;
-    vs:term_status "unstable" ;
+    owl:equivalentProperty sdo:volumeNumber ;
     skos:note "MARC bib 830.v" .
 
 :volumeNumberSequentialDesignation a owl:DatatypeProperty,
@@ -4505,30 +4521,81 @@ content:Yearbook a owl:Class ;
 
 :NotatedMusic rdfs:subClassOf :Product .
 
+:Event owl:equivalentClass bf:Event,
+        dctype:Event,
+        bibo:Event .
+
+:Language a owl:Class ;
+    owl:equivalentClass bf:Language,
+        sdo:Language .
+
+:PlanetaryObject a owl:Class ;
+    vs:term_status "unstable" .
+
+:WebPage a owl:Class ;
+    owl:equivalentClass sdo:WebPage .
+
+:SomeProducts a owl:Class ;
+    owl:equivalentClass sdo:SomeProducts .
+
+:Identifier a owl:Class ;
+    owl:equivalentClass bf:Identifier .
+
+:MediaObject a owl:Class ;
+    owl:equivalentClass sdo:MediaObject .
+
+:PublicationVolume a owl:Class ;
+    owl:equivalentClass sdo:PublicationVolume .
+
+:DissertationAnnotation a owl:Class ;
+    vs:term_status "unstable" .
+
+:Place owl:equivalentClass bf:Place .
+
+:Document a owl:Class ;
+    owl:equivalentClass bibo:Document,
+        foaf:Document .
+
+:Family owl:equivalentClass bf:Family .
+
 :Globe rdfs:subClassOf :Product .
 
 :TactileMaterial a owl:Class ;
     rdfs:subClassOf :Product ;
     vs:term_status "unstable" .
 
+:Organization owl:equivalentClass prov:Organization .
+
 :ProjectedImage rdfs:subClassOf :Product .
 
-:Map rdfs:subClassOf :Product .
+:Map rdfs:subClassOf :Product ;
+    owl:equivalentClass sdo:Map .
+
+:Person owl:equivalentClass bf:Person,
+        prov:Person .
 
 :Digital rdfs:subClassOf :CreativeWork .
 
 :MovingImage rdfs:subClassOf :Product .
 
+:CartographyCoordinates a owl:Class ;
+    vs:term_status "unstable" .
+
 :StillImage rdfs:subClassOf :Product .
 
-:Electronic owl:equivalentClass bf:Electronic .
+:Offer owl:equivalentClass sdo:Offer .
 
 :Visual a owl:Class ;
     rdfs:subClassOf :CreativeWork ;
     vs:term_status "unstable" .
 
+:Product owl:equivalentClass sdo:Product .
+
+:Electronic owl:equivalentClass bf:Electronic .
+
 :Serial rdfs:subClassOf :Aggregate,
         :CreativeWork .
 
-:Text rdfs:subClassOf :Product .
+:Text rdfs:subClassOf :Product ;
+    owl:equivalentClass sdo:Text .
 

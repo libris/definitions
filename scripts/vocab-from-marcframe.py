@@ -95,10 +95,23 @@ def add_terms(g, marc_source, dfn, parentdomain=None):
             continue
         if not v:
             continue
+
         if k == 'defaults':
             for dp in v:
                 newprop(g, dp, {RDF.Property})
             continue
+
+        if k in ('match-i1', 'match-i2', 'match-code'):
+            for matchdfn in v.values():
+                matchdfn = matchdfn.copy()
+                matchdfn.update({dk: dfn[dk] for dk in dfn
+                        if dk not in matchdfn
+                        and dk != k})
+                add_terms(g, marc_source, matchdfn, parentdomain)
+            continue
+
+        elif dfn.get('addLink') == True:
+            continue # actual definition comes from a matching rule per above
 
         rtypes = {
             'property': {OWL.DatatypeProperty, OWL.FunctionalProperty},
@@ -127,6 +140,10 @@ def add_terms(g, marc_source, dfn, parentdomain=None):
             domainname = dfn.get('aboutType') or domainname
             rangename = dfn.get('resourceType')
 
+        for classname in [domainname, rangename]:
+            if classname:
+                newclass(g, classname)
+
         marc_source_path = marc_source
         if k.startswith('$'):
             marc_source_path = "%s.%s" % (marc_source, k[1:])
@@ -146,10 +163,10 @@ def add_terms(g, marc_source, dfn, parentdomain=None):
                         subdomainname = k
                     elif is_link and not key_is_property:
                         subdomainname = rangename
-                    elif k.startswith('['):
-                        subdomainname = parentdomain
-                    else :
+                    else:
                         subdomainname = None
+                    if k.startswith('['):
+                        subdomainname = parentdomain
                     add_terms(g, marc_source_path, subdfn, subdomainname)
             continue
 
@@ -172,7 +189,7 @@ def newclass(g, name, base=None, termgroup=None):
     return rclass
 
 def newprop(g, name, rtypes, domainname=None, rangename=None, marc_source=None):
-    if not name or name in ('@id', '@type'):
+    if not isinstance(name, basestring) or name[0] == '_' or name in ('@id', '@type'):
         return
     rprop = g.resource(URIRef(TERMS[name]))
     for rtype in rtypes:
@@ -186,12 +203,11 @@ def newprop(g, name, rtypes, domainname=None, rangename=None, marc_source=None):
     return rprop
 
 
-def add_equivalent(dataset, g, refgraph):
+def add_equivalent(dataset, g, refgraph, base):
     for s in refgraph.subjects():
-        try:
-            qname = refgraph.qname(s)
-        except:
+        if not s.startswith(base) or s == base:
             continue
+        qname = refgraph.qname(s)
         if ':' in qname:
             qname = qname.split(':')[-1]
         term = TERMS[qname]
@@ -230,9 +246,9 @@ if __name__ == '__main__':
     graphcache = GraphCache("cache/graph-cache")
 
     for url in termsgraph.objects(None, OWL.imports):
-        refgraph = graphcache.load(vocab_source_map.get(url, url))
+        refgraph = graphcache.load(vocab_source_map.get(str(url), url))
         destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
-        add_equivalent(dataset, destgraph, refgraph)
+        add_equivalent(dataset, destgraph, refgraph, url)
 
     if termsgraph:
         dataset -= termsgraph
