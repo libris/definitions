@@ -2012,8 +2012,7 @@ content:Yearbook a owl:Class ;
         :Visual ;
     sdo:rangeIncludes :Audience ;
     owl:equivalentProperty bf:audience,
-        dc:audience,
-        sdo:audience ;
+        dc:audience ;
     skos:note "MARC bib 006[5:6]",
         "MARC bib 008[22:23]",
         "MARC bib 521" .
@@ -2532,7 +2531,6 @@ content:Yearbook a owl:Class ;
 :device a owl:FunctionalProperty ;
     sdo:domainIncludes :Product ;
     sdo:rangeIncludes :Device ;
-    owl:equivalentProperty sdo:device ;
     skos:note "MARC bib 300.f" .
 
 :dimensions a owl:DatatypeProperty,
@@ -2710,8 +2708,7 @@ content:Yearbook a owl:Class ;
     skos:note "MARC bib 007[11:12]" .
 
 :genre sdo:domainIncludes :CreativeWork ;
-    owl:equivalentProperty bf:genre,
-        sdo:genre ;
+    owl:equivalentProperty bf:genre ;
     skos:note "MARC bib 655" .
 
 :govtAgency a owl:FunctionalProperty,
@@ -2788,7 +2785,6 @@ content:Yearbook a owl:Class ;
 
 :heldBy sdo:domainIncludes :Offer ;
     sdo:rangeIncludes :Organization ;
-    owl:equivalentProperty bf:heldBy ;
     skos:note "MARC hold 852.b" .
 
 :hiddenLabel skos:note "MARC auth 450.a" .
@@ -3043,8 +3039,7 @@ content:Yearbook a owl:Class ;
         :Person,
         :UniformWork ;
     sdo:rangeIncludes :Language ;
-    owl:equivalentProperty dc:language,
-        sdo:language ;
+    owl:equivalentProperty sdo:language ;
     skos:note "MARC bib 008[35:38]",
         "MARC bib 040.b",
         "MARC bib 041.a",
@@ -4219,7 +4214,7 @@ content:Yearbook a owl:Class ;
 
 :summary a owl:DatatypeProperty ;
     sdo:domainIncludes :CreativeWork ;
-    owl:equivalentProperty bf:summary ;
+    vs:term_status "unstable" ;
     skos:note "MARC bib 520.a" .
 
 :supplementaryContentNote a owl:DatatypeProperty ;
@@ -4511,8 +4506,6 @@ content:Yearbook a owl:Class ;
         "MARC hold 563",
         "MARC hold 866" .
 
-:HeldMaterial owl:equivalentClass bf:HeldMaterial .
-
 :Kit rdfs:subClassOf :Product .
 
 :Mixed a owl:Class ;
@@ -4583,13 +4576,9 @@ content:Yearbook a owl:Class ;
 
 :StillImage rdfs:subClassOf :Product .
 
-:Offer owl:equivalentClass sdo:Offer .
-
 :Visual a owl:Class ;
     rdfs:subClassOf :CreativeWork ;
     vs:term_status "unstable" .
-
-:Product owl:equivalentClass sdo:Product .
 
 :Electronic owl:equivalentClass bf:Electronic .
 

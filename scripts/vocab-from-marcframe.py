@@ -203,15 +203,15 @@ def newprop(g, name, rtypes, domainname=None, rangename=None, marc_source=None):
     return rprop
 
 
-def add_equivalent(dataset, g, refgraph, base):
+def add_equivalent(dataset, g, refgraph, refbase, termsgraph):
     for s in refgraph.subjects():
-        if not s.startswith(base) or s == base:
+        if not s.startswith(refbase) or s == refbase:
             continue
         qname = refgraph.qname(s)
         if ':' in qname:
             qname = qname.split(':')[-1]
         term = TERMS[qname]
-        if (term, None, s) not in dataset:
+        if (term, None, s) not in termsgraph:
             if (term, RDF.type, OWL.Class) in dataset:
                 rel = OWL.equivalentClass
             elif (term, None, None) in dataset:
@@ -248,7 +248,7 @@ if __name__ == '__main__':
     for url in termsgraph.objects(None, OWL.imports):
         refgraph = graphcache.load(vocab_source_map.get(str(url), url))
         destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
-        add_equivalent(dataset, destgraph, refgraph, url)
+        add_equivalent(dataset, destgraph, refgraph, url, termsgraph)
 
     if termsgraph:
         dataset -= termsgraph
