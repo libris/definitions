@@ -362,6 +362,7 @@ for marc_type in 'bib', 'auth', 'hold':
                                         related_types.append({"@id": related_id})
                                 dest = enum_defs[type_id] = {
                                     "@id": type_id, "@type": "Concept",
+                                    "notation": "%s:%s" % (dfn_key, key),
                                     "inCollection": in_coll
                                 }
                                 #if related_types:
