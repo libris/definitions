@@ -4,6 +4,12 @@ This repository is a collection of vocabulary and scheme definitions and
 mappings to external resources. These define the foundation of linked library
 data used by the National Library of Sweden.
 
+## Dependencies
+
+Install the Python-based dependencies (preferably within a virtualenv):
+
+    $ pip install -r requirements.txt
+
 ## Generate Datasets
 
 Run the following script to build the full set of definition resources:
@@ -22,9 +28,6 @@ Use this script to HTTP PUT resources to a resource collection:
 ## Contents
 
 The `def/` directory contains local RDF definitions and mappings.
-
-The `etc/` directory defines mappings from MARC to the terms used in the JSON-LD
-context.
 
 The `source/` directory mainly contains language labels manually synced with
 various external origins. See `scripts/compile_defs.py` for the details. It

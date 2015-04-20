@@ -4,7 +4,7 @@ import json
 import sys
 
 args = sys.argv[1:]
-fpath = args.pop(0) if args else "etc/resources/libris/marcmap.json"
+fpath = args.pop(0) if args else "legacy/marcmap.json"
 with open(fpath) as f:
     marcmap = json.load(f)
 
@@ -362,6 +362,7 @@ for marc_type in 'bib', 'auth', 'hold':
                                         related_types.append({"@id": related_id})
                                 dest = enum_defs[type_id] = {
                                     "@id": type_id, "@type": "Concept",
+                                    "notation": "%s:%s" % (dfn_key, key),
                                     "inCollection": in_coll
                                 }
                                 #if related_types:
@@ -390,6 +391,9 @@ for marc_type in 'bib', 'auth', 'hold':
                             del tokenMaps[dfn_key]
                         else:
                             tokenMaps[dfn_key] = OrderedDict(items)
+                        if len(items) == 1 and items[0][0] != 'u':
+                            col_dfn['fixedDefault'] = items[0][0]
+                        #else:
                         col_dfn['tokenMap' if is_link else 'patternMap'] = tkey
 
                 #enums |= local_enums

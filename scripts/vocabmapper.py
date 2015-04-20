@@ -99,12 +99,20 @@ if __name__ == '__main__':
         json_dump(term_map)
     else:
         map_fpath, fpath = args
-        graph = Graph().parse(fpath, format='turtle')
         with open(map_fpath) as fp:
             mapping = json.load(fp)['mapping']
-        #remapped = remap(mapping, graph.serialize(format='json-ld-object'))
-        from rdflib_jsonld.serializer import from_rdf
-        o = from_rdf(graph, auto_compact=True)
-        remap(mapping, o)
-        del o['@context']
-        json_dump(autoframe(o))
+        if fpath.endswith('.ttl'):
+            graph = Graph().parse(fpath, format='turtle')
+            #remapped = remap(mapping, graph.serialize(format='json-ld-object'))
+            from rdflib_jsonld.serializer import from_rdf
+            data = from_rdf(graph, auto_compact=True)
+        else:
+            if fpath == '-':
+                data = json.load(sys.stdin)
+            else:
+                with open(fpath) as fp:
+                    data = json.load(fp)
+        remap(mapping, data)
+        del data['@context']
+        data = autoframe(data)
+        json_dump(data)

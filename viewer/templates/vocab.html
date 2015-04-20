@@ -1,0 +1,292 @@
+% extends "base.html"
+
+% set vocabs = union(set(graph.subjects(RDF.type, OWL.Ontology)),
+                set(graph.objects(RDFS.isDefinedBy)))
+
+{% block title %}${graph.label(list(vocabs)[0])} - Vocab View{% endblock %}
+
+% block stylesheets
+  <link rel="stylesheet" href="/css/vocab.css" />
+  <link rel="stylesheet" href="/css/graph.css" />
+% endblock
+
+% set rclasses = get_classes(graph)
+% set rproperties = get_properties(graph)
+
+% set DOMAIN = union(SCHEMA.domainIncludes, RDFS.domain)
+
+% set RANGE = union(SCHEMA.rangeIncludes, RDFS.range)
+
+% block navigation
+% endblock
+
+% block content
+  <div class="row">
+    <div class="col-md-2">
+      <nav class="col-md-2 affix">
+        <section>
+          <b>Classes</b>
+          % for rclass in rclasses
+          <a href="${link(rclass)}">${rclass.qname()}</a>
+          % endfor
+        </section>
+        <section>
+          <b>Properties</b>
+          % for rprop in rproperties
+          <a href="${link(rprop)}">${rprop.qname()}</a>
+          % endfor
+        </section>
+      </nav>
+    </div>
+
+    <div class="col-md-10">
+      <header>
+      % for vocab in vocabs
+        <h1><a href="${vocab}">
+            ${graph.value(vocab, union(DC.title, RDFS.label)) or "&lt;%s>" % vocab}</a>
+        </h1>
+        <p>${graph.value(vocab, union(DC.description, RDFS.comment))}</p>
+      % endfor
+      </header>
+
+      <section>
+        <h2 class="page-header">Classes</h2>
+        % for rclass in rclasses
+          ${classdefinition(rclass)}
+        % endfor
+      </section>
+
+      <section>
+        <h2 class="page-header">Properties</h2>
+        % for rprop in rproperties
+          ${propertydefinition(rprop)}
+        % endfor
+      </section>
+    </div>
+  </div>
+% endblock
+
+% macro classdefinition(rclass)
+  <article id="${rclass.qname()}" class="panel panel-default rdf-class">
+    <header class="panel-heading">
+      <h3 class="panel-title ${rclass.value(VS.term_status)}">${rclass.qname()}</h3>
+    </header>
+    <div class="panel-body">
+      ${terminfo(rclass, "...")}
+      <dl>
+        ${itemsblock(rclass.objects(OWL.equivalentClass), "Equivalent classes", 'rdf-baseclasses', True)}
+        ${itemsblock(rclass.objects(RDFS.subClassOf), "Base classes", 'rdf-baseclasses')}
+        ${itemsblock(rclass.subjects(RDFS.subClassOf), "Subclasses", 'rdf-subclasses')}
+        % set props = sorted(set(rclass.subjects(DOMAIN)))
+        % if props
+          <dt>Properties</dt>
+          <dd>
+            <ul class="list-unstyled">
+              % for prop in props
+              <li class="${listclass(prop)}">
+                <a href="${link(prop)}">${prop.qname()}</a>
+                % if prop.value(SKOS.notation)
+                <span>(${prop.value(SKOS.notation)})</span>
+                % endif
+                <i>${(label(prop) or '')}</i>
+                % set ranges = sorted(set(prop.objects(RANGE)))
+                % if ranges
+                  <span>&rarr;
+                    % for range_ in ranges
+                      % if isinstance(range_.identifier, URIRef)
+                        <a href="${link(range_)}">${range_.qname()}</a>{% if not loop.last %},{% endif %}
+                      % endif
+                    % endfor
+                  </span>
+                % endif
+                <!--!
+                % for g in prop.objects(VANN.termGroup)
+                <i><a href="${link(g)}">${g.qname()}</a></i>
+                % endfor
+                -->
+              </li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+        % set restrictions = sorted(getrestrictions(rclass))
+        % if restrictions
+          <dt>Restrictions</dt>
+          <dd>
+            <ul class="">
+              % for restr in restrictions
+                % set prop = restr.value(OWL.onProperty)
+                % set rtype = restr.value(OWL.allValuesFrom)
+                <li>
+                  <a href="${link(prop)}">${prop.qname()}</a>
+                  % if isinstance(rtype.identifier, URIRef)
+                    &rarr; <a href="${link(rtype)}">${rtype.qname()}</a>
+                  % endif
+                </li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+        % set rangeprops = sorted(set(rclass.subjects(RANGE)))
+        % if rangeprops
+          <dt>In range of properties</dt>
+          <dd>
+            <ul class="list-unstyled">
+              % for prop in rangeprops
+              <li class="${listclass(prop)}">
+                &larr; <a href="${link(prop)}">${prop.qname()}</a>
+                % set domains = sorted(set(prop.objects(DOMAIN)))
+                % if domains
+                  <span>&larr;
+                    % for domain in domains
+                      % if isinstance(domain.identifier, URIRef)
+                        <a href="${link(domain)}">${domain.qname()}</a>{% if not loop.last %},{% endif %}
+                      % endif
+                    % endfor
+                  </span>
+                % endif
+              </li>
+            % endfor
+          </dd>
+        % endif
+        % if any(rclass.subjects(RDF.type))
+          <dt>Instances</dt>
+          <dd>
+            <ul class="items rdf-instances">
+              % for i in sorted(rclass.subjects(RDF.type))
+              <li><a href="${link(i)}">${i.qname()}</a></li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+      </dl>
+    </div>
+  </article>
+% endmacro
+
+% macro itemsblock(items, label, classname, iteminfo=False)
+  % set itemlist = sorted(items)
+  % if itemlist
+    <dt>${label}</dt>
+    <dd>
+      <ul class="list-unstyled items ${classname}">
+        % for item in itemlist
+          % if isinstance(item.identifier, URIRef)
+            <li class="${listclass(item)}">
+              <a href="${link(item)}">${item.qname()}</a>
+              % if iteminfo and extgraph
+                ${terminfo(extgraph.resource(item.identifier))}
+              % endif
+            </li>
+          % endif
+        % endfor
+      </ul>
+    </dd>
+  % endif
+% endmacro
+
+% macro terminfo(term, nolabel='')
+  <p>
+    ${(label(term) or nolabel)}
+    % if term.value(RDFS.comment)
+      <em>&mdash; ${(term.value(RDFS.comment))}</em>
+    % endif
+  </p>
+% endmacro
+
+% macro propertydefinition(rprop)
+  <article id="${rprop.qname()}" class="panel panel-default">
+    <header class="panel-heading">
+      <h2 class="panel-title ${rprop.value(VS.term_status) or ''}">${rprop.qname()}</h2>
+    </header>
+    <div class="panel-body">
+      <p>
+        ${(label(rprop) or '...')}
+        % if rprop.value(RDFS.comment)
+          <em>&mdash; ${(rprop.value(RDFS.comment))}</em>
+        % endif
+      </p>
+      <dl>
+        % for prop in [DC.description, SKOS.scopeNote]
+          % set value = rprop.value(prop)
+          % if value
+            <dt>${extgraph.preferredLabel(prop, lang='en')[0][1].title()}</dt>
+            <dd>
+              % if value.datatype == RDF.HTML
+                ${value | safe}
+              % else
+                ${value}
+              % endif
+            </dd>
+          % endif
+        % endfor
+        % if rprop.value(SKOS.example)
+          <dt>Example Values</dt>
+          <dd>
+            <ul class="list-inline">
+              % for example in rprop.objects(SKOS.example)
+                <li class="note">${example}</li>
+              %endfor
+            </ul>
+          </dd>
+        % endif
+        % set notes = sorted(rprop.objects(SKOS.note))
+        % if notes
+          <dt>Related MARC notation</dt>
+          <dd>
+            <ul class="list-inline">
+              % for note in notes
+                <li class="note">${note}</li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+        ${itemsblock(rprop.objects(OWL.equivalentProperty), "Equivalent properties", 'baseproperties', True)}
+        ${itemsblock(rprop.objects(RDFS.subPropertyOf), "Base properties", 'baseproperties', True)}
+        ${itemsblock(rprop.subjects(union(RDFS.subPropertyOf, OWL.equivalentProperty)), "Subproperties", 'subproperties')}
+        % set inverse = rprop.value(OWL.inverseOf)
+        % if inverse
+          <dt>Inverse of</dt>
+          <dd>
+            <a href="${link(inverse)}">${inverse.qname()}</a>
+            <i>${(label(inverse) or '')}</i>
+          </dd>
+        % endif
+        % set domains = sorted(set(rprop.objects(DOMAIN)))
+        % if domains
+          <dt>Domain(s)</dt>
+          <dd>
+            <ul class="list-unstyled">
+              % for c in domains
+              <li class="${listclass(c)}">
+                <a href="${link(c)}">${c.qname()}</a>
+                <i>${(label(c) or '')}</i>
+              </li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+        % set ranges = sorted(set(rprop.objects(RANGE)))
+        % if ranges
+          <dt>Range(s)</dt>
+          <dd>
+            <ul class="list-unstyled">
+              % for c in ranges
+              <li class="${listclass(c)}">
+                <a href="${link(c)}">${c.qname()}</a>
+                <i>${(label(c) or '')}</i>
+              </li>
+              % endfor
+            </ul>
+          </dd>
+        % endif
+      </dl>
+    </div>
+  </article>
+% endmacro
+
+% block scripts
+    <script src="/vendor/d3/js/d3.js"></script>
+    <script src="/js/graph.js"></script>
+    <script src="/js/vocab.js"></script>
+% endblock

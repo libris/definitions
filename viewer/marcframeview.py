@@ -1,15 +1,16 @@
-#!/usr/bin/env python
+from flask import Blueprint, render_template
+import re
 import json
-from jinja2 import Environment, PackageLoader
 
 
-env = Environment(loader=PackageLoader(__name__, '.'),
-        variable_start_string='${', variable_end_string='}',
-        line_statement_prefix='%')
-tplt = env.get_template('template.html')
+app = Blueprint('marcframeview', __name__)
 
+@app.route('/marcframeview/')
+def marcframeview():
 
-def render(marcframe):
+    marcframe_path = "cache/ext/marcframe.json"
+    with open(marcframe_path) as fp:
+        marcframe = json.load(fp)
 
     MARC_CATEGORIES = 'bib', 'auth', 'hold'
 
@@ -30,13 +31,9 @@ def render(marcframe):
             if code.startswith('$') and subdfn:
                 yield code, subdfn
 
-    return tplt.render(dict(vars(__builtins__), **vars())).encode('utf-8')
+    def pretty_json(data):
+        s = json.dumps(data, sort_keys=True, ensure_ascii=False, indent=2,
+                separators=(',', ': '))
+        return re.sub(r'{\s+(\S+: "[^"]*")\s+}', r'{\1}', s)
 
-
-if __name__ == '__main__':
-    import sys
-    args = sys.argv[1:]
-    marcframe_path = args.pop(0)
-    with open(marcframe_path) as fp:
-        marcframe = json.load(fp)
-    sys.stdout.write(render(marcframe))
+    return render_template('marcframeview.html', **vars())
