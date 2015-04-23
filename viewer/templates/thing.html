@@ -1,0 +1,23 @@
+% extends "base.html"
+
+{% block title %}${thing.label}{% endblock %}
+
+{% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
+
+% block content
+  <article class="panel panel-default"
+      {% if ID in thing %} resource="${thing[ID]}"{% endif %}
+      {% if TYPE in thing %} typeof="${thing[TYPE]}"{% endif %}>
+    <h1>${thing.label}</h1>
+    <dl class="dl-horizontal">
+      % for k in thing
+        % if k in vocab
+          % set p = vocab[k]
+          % set v = thing[k]
+          <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
+          <dd property="${p.curie}">${v}</dd>
+        % endif
+      % endfor
+    </dl>
+  </article>
+% endblock
