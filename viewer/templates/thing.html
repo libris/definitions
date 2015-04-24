@@ -12,7 +12,7 @@
   % set t = vocab[thing[TYPE]]
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
-      {% if rev %} rev="${rel}"{% endif %}
+      {% if rev %} rev="${rev}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
       {% if TYPE in thing %} typeof="${thing[TYPE]}"{% endif %}>
     % set h = 'h1'
@@ -28,7 +28,7 @@
             % set p = vocab[k]
             % set v = thing[k]
             <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
-            <dd {% if p.curie %}} property="${p.curie}"{% endif %}>
+            <dd>
               % if k == '@id' and v[0] != '_'
                 <a href="${v}">&lt;${v}&gt;</a>
               % elif k == '@type'
@@ -36,7 +36,7 @@
               % elif isinstance(v, dict)
                 ${viewthing(v, rel=k)}
               % else
-                ${v}
+                 <span {% if p.curie %} property="${p.curie}"{% endif %}>${v}</span>
               % endif
             </dd>
           % endif
@@ -52,7 +52,7 @@
           <dt>&larr; ${p.label}</dt>
           <dd>
               % for v in vs
-                ${viewthing(v, rev=k)}
+                ${viewthing(v, rev=p.curie)}
               % endfor
           </dd>
           % endfor

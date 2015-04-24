@@ -14,7 +14,6 @@ vocab = {
     },
     '@type': {
         ID: RDF.type,
-        'curie': 'rdf:type',
         'label': "Typ"
     },
     'Thing': {
