@@ -4,20 +4,60 @@
 
 {% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
 
-% block content
-  <article class="panel panel-default"
+% macro viewthing(thing, element='div', classes='well', rel=None, rev=None)
+  % set uri = thing[ID] if thing[ID] and thing[ID][0] != '_' else None
+  <${element} class="${classes}"
+      {% if rel %} property="${rel}"{% endif %}
+      {% if rev %} rev="${rel}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
       {% if TYPE in thing %} typeof="${thing[TYPE]}"{% endif %}>
-    <h1>${thing.label}</h1>
-    <dl class="dl-horizontal">
-      % for k in thing
-        % if k in vocab
-          % set p = vocab[k]
-          % set v = thing[k]
-          <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
-          <dd property="${p.curie}">${v}</dd>
-        % endif
-      % endfor
-    </dl>
-  </article>
+    % set h = 'h1' if element == 'article' else 'b'
+    % set t = vocab[thing[TYPE]]
+    <${h}>
+      ${thing.label} {% if t %}(${t.label}){% endif %}
+      % if thing[ID]
+        <a href="${thing[ID]}">&lt;${thing[ID]}&gt;</a>
+      % endif
+    </${h}>
+    <div>
+      <dl class="dl-horizontal">
+        % for k in thing | sort
+          % if k in vocab
+            % set p = vocab[k]
+            % set v = thing[k]
+            <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
+            <dd {% if p.curie %}} property="${p.curie}"{% endif %}>
+              % if k == '@type'
+                <a href="${t[ID]}">${t.label}</a>
+              % elif isinstance(v, dict)
+                ${viewthing(v, rel=k)}
+              % else
+                ${v}
+              % endif
+            </dd>
+          % endif
+        % endfor
+      </dl>
+    </div>
+    % if not rel and thing[REV]
+      <div class="">
+        <b>${ui[REV].label}</b>
+        <dl class="dl-horizontal">
+          % for k, vs in thing[REV].items()
+            % set p = vocab[k]
+          <dt>&larr; ${p.label}</dt>
+          <dd>
+              % for v in vs
+                ${viewthing(v, rev=k)}
+              % endfor
+          </dd>
+          % endfor
+        </dl>
+      </div>
+    % endif
+  </${element}>
+% endmacro
+
+% block content
+  ${viewthing(thing, element='article', classes='panel panel-default')}
 % endblock
