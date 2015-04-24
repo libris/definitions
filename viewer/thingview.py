@@ -8,6 +8,10 @@ app = Blueprint('thingview', __name__)
 ID, TYPE, REV = '@id', '@type', '@reverse'
 
 vocab = {
+    '@id': {
+        ID: ID,
+        'label': "URI"
+    },
     '@type': {
         ID: RDF.type,
         'curie': 'rdf:type',

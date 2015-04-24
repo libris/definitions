@@ -4,22 +4,24 @@
 
 {% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
 
+% block content
+  ${viewthing(thing, element='article', classes='panel panel-default')}
+% endblock
+
 % macro viewthing(thing, element='div', classes='well', rel=None, rev=None)
-  % set uri = thing[ID] if thing[ID] and thing[ID][0] != '_' else None
+  % set t = vocab[thing[TYPE]]
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rel}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
       {% if TYPE in thing %} typeof="${thing[TYPE]}"{% endif %}>
-    % set h = 'h1' if element == 'article' else 'b'
-    % set t = vocab[thing[TYPE]]
-    <${h}>
-      ${thing.label} {% if t %}(${t.label}){% endif %}
-      % if thing[ID]
-        <a href="${thing[ID]}">&lt;${thing[ID]}&gt;</a>
-      % endif
-    </${h}>
-    <div>
+    % set h = 'h1'
+    <header class="panel-heading">
+      <${h} class="panel-title">
+        ${thing.label} {% if t %}(${t.label}){% endif %}
+      </${h}>
+    </header>
+    <div class="panel-body">
       <dl class="dl-horizontal">
         % for k in thing | sort
           % if k in vocab
@@ -27,7 +29,9 @@
             % set v = thing[k]
             <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
             <dd {% if p.curie %}} property="${p.curie}"{% endif %}>
-              % if k == '@type'
+              % if k == '@id' and v[0] != '_'
+                <a href="${v}">&lt;${v}&gt;</a>
+              % elif k == '@type'
                 <a href="${t[ID]}">${t.label}</a>
               % elif isinstance(v, dict)
                 ${viewthing(v, rel=k)}
@@ -57,7 +61,3 @@
     % endif
   </${element}>
 % endmacro
-
-% block content
-  ${viewthing(thing, element='article', classes='panel panel-default')}
-% endblock
