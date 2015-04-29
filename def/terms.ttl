@@ -26,6 +26,7 @@
 @prefix dbpo: <http://dbpedia.org/ontology/> .
 @prefix prism: <http://prismstandard.org/namespaces/1.2/basic/> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
+@prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
 
 @prefix : <http://libris.kb.se/def/terms#> .
 @prefix marcenum: <http://libris.kb.se/def/marc/enum/> .
@@ -78,10 +79,6 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "samma sak som"@sv;
     owl:equivalentProperty owl:sameAs .
 
-:identifiedBy a owl:ObjectProperty;
-    rdfs:label "identifierad av"@sv;
-    owl:equivalentProperty sdo:sameAs .
-
 :Date a rdfs:Datatype;
     owl:sameAs xsd:date .
 :Time a rdfs:Datatype;
@@ -117,16 +114,20 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Post"@sv;
     rdfs:subClassOf foaf:Document .
 
-:about a owl:ObjectProperty;
+:mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
-    owl:equivalentProperty sdo:about;
-    rdfs:subPropertyOf foaf:primaryTopic .
+    owl:equivalentProperty sdo:mainEntity, foaf:primaryTopic .
 
 :describedBy a owl:ObjectProperty;
     rdfs:label "Beskriven av"@sv;
-    owl:inverseOf :about;
-    owl:equivalentProperty iana:describedby;
+    owl:inverseOf :mainEntity;
+    owl:equivalentProperty sdo:mainEntityOfPage, iana:describedby, wdrs:describedby;
     rdfs:subPropertyOf foaf:isPrimaryTopicOf .
+
+:identifiedBy a owl:ObjectProperty;
+    rdfs:label "identifierad av"@sv;
+    rdfs:subPropertyOf :describedBy;
+    owl:equivalentProperty sdo:sameAs .
 
 :controlNumber a owl:DatatypeProperty;
     rdfs:label "kontrollnummer"@sv;
@@ -820,8 +821,13 @@ marcenum:bibLevel a skos:Collection;
     skos:closeMatch skos:editorialNote;
     owl:equivalentProperty rdael:cataloguersNote .
 
+:about a owl:ObjectProperty;
+    rdfs:label "handlar om"@sv;
+    owl:equivalentProperty sdo:about .
+
 :subject a owl:ObjectProperty;
     rdfs:label "ämneord"@sv;
+    rdfs:subPropertyOf :about;
     owl:equivalentProperty dc:subject .
 
 :keyword a owl:ObjectProperty;
