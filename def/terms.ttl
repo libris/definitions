@@ -747,7 +747,7 @@ marcenum:bibLevel a skos:Collection;
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "upphovsbeskrivning"@sv;
     rdfs:comment "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer. Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
-    owl:equivalentProperty bf:responsibilityStatement .
+    owl:equivalentProperty bf:responsibilityStatement, rdael:statementOfResponsibility .
 
 :language a owl:ObjectProperty;
     rdfs:label "språk"@sv;
@@ -1149,6 +1149,10 @@ marcenum:bibLevel a skos:Collection;
 :termsOfAvailability a rdf:Property;
     owl:equivalentProperty rdael:termsOfAvailability;
     rdfs:label "Anskaffningsvillkor"@sv .
+
+:numberOfPages a rdf:Property;
+    rdfs:subPropertyOf :extent;
+    owl:equivalentProperty sdo:numberOfPages .
 
 :sigel a rdf:Property;
     rdfs:domain sdo:Library;
