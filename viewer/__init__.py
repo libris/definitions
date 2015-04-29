@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from flask import Flask, render_template
-from . import vocabview, marcframeview
+from . import thingview, vocabview, marcframeview
 
 
 class MyFlask(Flask):
@@ -24,5 +24,6 @@ def union(*args):
 def index():
     return render_template('index.html', **vars())
 
+app.register_blueprint(thingview.app)
 app.register_blueprint(vocabview.app)
 app.register_blueprint(marcframeview.app)
