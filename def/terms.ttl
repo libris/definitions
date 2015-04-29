@@ -32,6 +32,9 @@
 @prefix content: <http://libris.kb.se/def/enum/content/> .
 @prefix carrier: <http://libris.kb.se/def/enum/carrier/> .
 
+@prefix rdfa: <http://www.w3.org/ns/rdfa#> .
+@prefix l: <http://w3id.org/libris/logic/> .
+
 
 : a owl:Ontology;
     rdfs:label "LIBRIS Terms"@en;
@@ -171,6 +174,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "exemplifierar verk"@sv;
     owl:equivalentProperty sdo:exampleOfWork;
     rdfs:subPropertyOf bf:instanceOf;
+    rdfs:subPropertyOf rdfa:copy;
     sdo:rangeIncludes :UniformWork .
 
 :workExample a owl:ObjectProperty ;
@@ -599,6 +603,8 @@ marcenum:bibLevel a skos:Collection;
 #Music
 #MusicCD
 
+# TODO: informative: <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
+
 # TODO: missing rdacarrier mappings:
 #    skos:exactMatch rdacarrier:1001 ; # "Audio carriers"
 #    skos:exactMatch rdacarrier:1002 ; # "audio cartridge"
@@ -691,13 +697,14 @@ marcenum:bibLevel a skos:Collection;
 
 :title a owl:DatatypeProperty;
     rdfs:label "titel"@sv;
-    owl:equivalentProperty bf:title, dc:title .
+    owl:equivalentProperty bf:title, dc:title;
+    owl:propertyChainAxiom ( :qualifiedTitle :titleValue ) .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
     rdfs:subPropertyOf skos:prefLabel .
 
-:instanceTitle a owl:ObjectProperty;
+:qualifiedTitle a owl:ObjectProperty;
     rdfs:label "Huvudtitel"@sv;
     #rdfs:label "instanstitel"@sv;
     owl:equivalentProperty bf:instanceTitle;
@@ -706,7 +713,7 @@ marcenum:bibLevel a skos:Collection;
 :keyTitle a owl:ObjectProperty ;
     rdfs:label "Nyckeltitel"@sv;
     owl:equivalentProperty bf:keyTitle;
-    rdfs:subPropertyOf :instanceTitle .
+    rdfs:subPropertyOf :qualifiedTitle .
 
 :titleVariation a owl:ObjectProperty ;
     rdfs:label "Varianttitel"@sv;
@@ -882,15 +889,25 @@ marcenum:bibLevel a skos:Collection;
 :attributedTo a owl:ObjectProperty;
     rdfs:label "Huvuduppslag"@sv;
     rdfs:comment "Ange namnet för först nämnda upphov här, om det finns högst tre upphov. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
-    owl:equivalentProperty prov:wasAttributedTo .
+    owl:equivalentProperty prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :qualifiedAttribution :agent ) .
 
 :influencedBy a owl:ObjectProperty;
     rdfs:label "Biuppslag"@sv;
     rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
     owl:equivalentProperty prov:wasInfluencedBy .
 
+# TODO: these constructs, used below, will yield inferred statements, which if interpreted, will produce direct links using subject of qualifiedRole, predicate from a role and object from an object property.
+l:qualifiedRole a owl:ObjectProperty;
+    rdfs:domain [ rdfs:subPropertyOf [ owl:inverseOf rdf:subject ] ];
+    rdfs:range rdf:Statement .
+l:role rdfs:subPropertyOf rdf:predicate .
+l:object rdfs:subPropertyOf rdf:object .
+
+#CONSTRUCT { ?s ?p ?o . } WHERE { ?s :qualifiedAttribution [ :role ?p :agent ?o ] . }
 :qualifiedAttribution a owl:ObjectProperty;
     rdfs:label "Detaljerat huvuduppslag"@sv;
+    rdfs:subPropertyOf l:qualifiedRole;
     owl:equivalentProperty prov:qualifiedAttribution .
 
 :qualifiedInfluence a owl:ObjectProperty;
@@ -899,10 +916,12 @@ marcenum:bibLevel a skos:Collection;
 
 :agent a owl:ObjectProperty;
     rdfs:label "aktör"@sv;
+    rdfs:subPropertyOf l:object;
     owl:equivalentProperty prov:agent .
 
 :role a owl:ObjectProperty;
     rdfs:label "roll"@sv;
+    rdfs:subPropertyOf l:role;
     owl:equivalentProperty prov:hadRole .
 
 :Agent a owl:Class;
@@ -1081,6 +1100,17 @@ marcenum:bibLevel a skos:Collection;
 :PersonTerm a owl:Class;
     rdfs:label "Personterm"@sv;
     rdfs:subClassOf :Concept;
+    l:magicProperty [
+            l:resultProperty skos:prefLabel;
+            l:useLink foaf:focus;
+            l:template (:familyName
+                        (l:if (l:and :familyName :givenName) ", ")
+                        :givenName
+                        (l:if :numeration (" " :numeration))
+                        (l:if :personTitle (", " :personTitle))
+                        (l:if (l:or :birthYear :deathYear)
+                            (:birthYear "-" :deathYear)));
+        ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Person ] .
@@ -1127,7 +1157,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subPropertyOf bf:coverArtThumb .
 
 
-# work-in-progress
+# TODO: work-in-progress
 
 #@prefix app: <http://id.kb.se/def/application#> .
 #
