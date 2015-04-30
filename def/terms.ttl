@@ -1109,14 +1109,12 @@ l:object rdfs:subPropertyOf rdf:object .
     l:magicProperty [
             l:resultProperty :prefLabel;
             l:useLink :focus;
-            l:template ((l:or (:familyName
-                               (l:if (l:and :familyName :givenName) ", ")
-                               :givenName)
-                              :name)
-                        (l:if :numeration (" " :numeration))
-                        (l:if :personTitle (" (" :personTitle ")"))
+            l:template (l:join " "
+                        (l:or (l:join ", " :familyName :givenName) :name)
+                        :numeration
+                        (l:if :personTitle ("(" :personTitle ")"))
                         (l:if (l:or :birthYear :deathYear)
-                            (" " :birthYear "-" :deathYear)));
+                            (:birthYear "-" :deathYear)));
         ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;

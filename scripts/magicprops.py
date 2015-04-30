@@ -23,7 +23,7 @@ def expand_template(s, tplt):
         if any(tplt.objects(RDF.first)):
             parts = list(tplt.items())
             first = parts[0]
-            ctrl = first.identifier if first and isinstance(first, Resource) else None
+            ctrl = first.identifier if isinstance(first, Resource) else None
             if ctrl == L['if']:
                 if expand_template(s, parts[1]):
                     return expand_template(s, parts[2])
@@ -37,7 +37,10 @@ def expand_template(s, tplt):
                     if v:
                         return v
             else:
-                return "".join(filter(None, (expand_template(s, part) for part in parts)))
+                join = ""
+                if ctrl == L['join']:
+                    join, parts = parts[1], parts[2:]
+                return join.join(filter(None, (expand_template(s, part) for part in parts)))
         else:
             return s.value(tplt.identifier)
     else:
