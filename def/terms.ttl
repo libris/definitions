@@ -1107,15 +1107,16 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "Personterm"@sv;
     rdfs:subClassOf :Concept;
     l:magicProperty [
-            l:resultProperty skos:prefLabel;
-            l:useLink foaf:focus;
-            l:template (:familyName
-                        (l:if (l:and :familyName :givenName) ", ")
-                        :givenName
+            l:resultProperty :prefLabel;
+            l:useLink :focus;
+            l:template ((l:or (:familyName
+                               (l:if (l:and :familyName :givenName) ", ")
+                               :givenName)
+                              :name)
                         (l:if :numeration (" " :numeration))
-                        (l:if :personTitle (", " :personTitle))
+                        (l:if :personTitle (" (" :personTitle ")"))
                         (l:if (l:or :birthYear :deathYear)
-                            (:birthYear "-" :deathYear)));
+                            (" " :birthYear "-" :deathYear)));
         ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
