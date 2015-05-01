@@ -903,21 +903,28 @@ marcenum:bibLevel a skos:Collection;
     rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
     owl:equivalentProperty prov:wasInfluencedBy .
 
-# TODO: these constructs, used below, will yield inferred statements, which if interpreted, will produce direct links using subject of qualifiedRole, predicate from a role and object from an object property.
-l:qualifiedRole a owl:ObjectProperty;
-    rdfs:domain [ rdfs:subPropertyOf [ owl:inverseOf rdf:subject ] ];
+# TODO: these constructs, used below, will yield inferred statements, which if
+# interpreted, will produce direct links using subject of hasStatement,
+# predicate(s) from role(s) and object from an object property. Like:
+#CONSTRUCT { ?s ?p ?o } WHERE {
+#    ?s [rdfs:subPropertyOf? l:hasStatement] [
+#            [rdfs:subPropertyOf? l:role] ?p;
+#            [rdfs:subPropertyOf? l:object] ?o ]
+#}
+l:hasStatement a owl:ObjectProperty;
+    rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
     rdfs:range rdf:Statement .
 l:role rdfs:subPropertyOf rdf:predicate .
 l:object rdfs:subPropertyOf rdf:object .
 
-#CONSTRUCT { ?s ?p ?o . } WHERE { ?s :qualifiedAttribution [ :role ?p :agent ?o ] . }
 :qualifiedAttribution a owl:ObjectProperty;
     rdfs:label "Detaljerat huvuduppslag"@sv;
-    rdfs:subPropertyOf l:qualifiedRole;
+    rdfs:subPropertyOf l:hasStatement;
     owl:equivalentProperty prov:qualifiedAttribution .
 
 :qualifiedInfluence a owl:ObjectProperty;
     rdfs:label "Detaljerat biuppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement;
     owl:equivalentProperty prov:qualifiedInfluence .
 
 :agent a owl:ObjectProperty;
