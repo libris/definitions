@@ -8,7 +8,7 @@
   ${viewthing(thing, element='article', classes='panel panel-default')}
 % endblock
 
-% macro viewthing(thing, element='div', classes='well', rel=None, rev=None)
+% macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
   % set t = vocab[thing[TYPE]]
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
@@ -24,17 +24,33 @@
     <div class="panel-body">
       <dl class="dl-horizontal">
         % for k in thing | sort
-          % if k in vocab
+          % if k in vocab or k != REV
             % set p = vocab[k]
             % set v = thing[k]
-            <dt title="&lt;${p[ID]}&gt;">${p.label}</dt>
+            <dt title="&lt;${p[ID]}&gt;">${p.label or k}</dt>
             <dd>
               % if k == '@id' and v[0] != '_'
-                <a href="${v}">&lt;${v}&gt;</a>
+                % if v.startswith(('http:', 'https:'))
+                  <a href="${v}">&lt;${v}&gt;</a>
+                % else
+                  <a href="/page/${v[1:]}">&lt;${v}&gt;</a>
+                % endif
               % elif k == '@type'
                 <a href="${t[ID]}">${t.label}</a>
               % elif isinstance(v, dict)
                 ${viewthing(v, rel=k)}
+              % elif isinstance(v, list)
+                <ul>
+                  % for sub in v
+                    <li>
+                      % if isinstance(sub, dict)
+                        ${viewthing(sub, rel=k)}
+                      % else
+                      <span {% if p.curie %} property="${p.curie}"{% endif %}>${sub}</span>
+                      % endif
+                    </li>
+                  % endfor
+                </ul>
               % else
                  <span {% if p.curie %} property="${p.curie}"{% endif %}>${v}</span>
               % endif

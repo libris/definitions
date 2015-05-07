@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import operator
 from flask import Flask, render_template
 from . import thingview, vocabview, marcframeview
 
@@ -10,11 +11,14 @@ class MyFlask(Flask):
 
 app = MyFlask(__name__, static_url_path='', static_folder='static')
 
-#app.config.from_pyfile('config.cfg')
+#app.config.from_pyfile('config.cfg', silent=True)
 
 for name, obj in __builtins__.items():
     if callable(obj):
         app.add_template_global(obj, name)
+
+for func in [operator.itemgetter]:
+    app.add_template_global(func, func.__name__)
 
 @app.template_global()
 def union(*args):
