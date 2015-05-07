@@ -36,6 +36,11 @@
   <link rel="stylesheet" href="/css/vocab.css" />
 % endblock
 
+% block scripts
+  <script src="/vendor/jquery/js/jquery.js"></script>
+  <script src="/js/marcframeview.js"></script>
+% endblock
+
 % block content
   <section>
     <h1>MARCFrame</h1>
@@ -128,11 +133,6 @@
       </div>
     % endfor
   </section>
-% endblock
-
-% block scripts
-  <script src="/vendor/jquery/js/jquery.js"></script>
-  <script src="/js/marcframeview.js"></script>
 % endblock
 
 % macro show_value(cat, tag_or_code, key, value)
