@@ -1,0 +1,82 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix edtf: <http://id.loc.gov/datatypes/edtf/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix dctype: <http://purl.org/dc/dcmitype/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix dc: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix sdo: <http://schema.org/>
+prefix rda: <http://rdvocab.info/Elements/>
+prefix bf: <http://bibframe.org/vocab/>
+
+<http://libris.kb.se/bib/1234567> a foaf:Document ;
+    dc:identifier "1234567" ;
+    sdo:about <http://libris.kb.se/bib/1234567#thing> ;
+    dc:created "2015-04-30"^^xsd:date ;
+    dc:modified "2015-04-30T08:32:55+01:00"^^xsd:dateTime ;
+    dc:creator <http://bibdb.libris.kb.se/library/S> .
+
+<http://libris.kb.se/bib/1234567#thing> a sdo:Product, sdo:Book ;
+    owl:sameAs <http://libris.kb.se/resource/bib/1234567> ; 
+    sdo:exampleOfWork <http://libris.kb.se/text/theTempestByShakespeareCreativeWork> ;
+    sdo:name "The tempest@en" ;
+    dc:title "The tempest@en" ;
+    rda:titleProperManifestation "The tempest@en" ;		
+    rda:statementOfResponsibility "William Shakespeare@en" ;
+    dc:title "The tempest"@en ;
+    bf:responsibilityStatement "William Shakespeare@en" ;
+
+    bf:edition "edited by Peter Holland@en" ;
+    rda:designationOfEdition "edited by Peter Holland@en" ;
+    sdo:bookEdition
+
+    bf:publication [ a bf:Provider ;
+    bf:providerName <http://id.kb.se/penguinBooks> ;
+    bf:providerDate "1999"^^xsd:date ;
+    bf:providerPlace <http://id.kb.se/place/US_NewYork> ] ;
+
+    rda:publicationStatementManifestation [ a rda:publishersNameManifestation <http://id.kb.se/penguinBooks> ;
+    rda:dateOfPublication "1999"^^xsd:date  ;
+    rda:placeOfPublication <http://id.kb.se/place/US_NewYork> ] ;
+
+    bf:manufacture [ a bf:Provider ;
+    bf:providerName "misterPrinter@en" ;
+    bf:providerPlace [ a sdo:Place ;
+    sdo:name "US_of_A@en" ] ] ;
+
+    rda:manufactureStatementManifestation [ a rda:manufacturersName <http://id.kb.se/misterPrinter>
+    rda:dateOfManufactureManifestation "1999"^^xsd:date 
+    rda:PlaceOfManufacture <http://id.kb.se/place/US_of_A> ] ;
+
+    sdo:manufacturer
+    sdo:releaseDate
+
+    dc:extent "vliv, 84, s. : 19 cm" ;
+    sdo:bookFormat "Paperback" ;
+    sdo:numberOfPages "vliv, 84, s. ;
+    sdo:height "19 cm" ;
+
+    dc:isPartOf <http://id.kb.se/ThePelicanShakespeare> ;
+    bf:relatedResource [ a bf: partOf <http://id.kb.se/ThePelicanShakespeare> ;
+    bf:partNumber "##" ] ;
+
+    dc:hasPart [ a sdo:CreativeWork ;
+    dc:title "The theatrical world@en ] ;
+
+    dc:hasPart [ a sdo:CreativeWork ;
+    rda:titleProperManifestation "Introduction@en ;
+    rda:statementOfResponsibility "Peter Holland"@en ] ;
+
+    rda:publicationStatement "© Penguin Books Inc. 1959, 1970" ;
+    rda:publicationStatement "© Penguin Putnam Inc. 1999" ;
+    bf:noteOnPublicationStatement 
+ 
+    bf:contentsNote "S. vii-xxi: The theatrical world / Peter Holland"@sv ;
+    bf:contentsNote "S. xxiii-xxvi: The texts of Shakespeare / Peter Holland"@sv ;
+    bf:contentsNote "S. xxvii-xli: Introduction / Peter Holland"@sv ;
+
+    sdo:gtin13 "978-0-14-071485-2" ;
+    sdo:isbn "978-0-14-071485-2" .
