@@ -121,7 +121,7 @@ class DB:
                 item['describedBy'] = data
             else:
                 item = data
-            print item[ID]
+            logger.debug("Loading item: <%s>", item[ID])
             self.index[item[ID]] = item
 
             if 'prefLabel_en' in item and 'prefLabel' not in item:

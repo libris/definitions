@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 import glob
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, redirect, abort
 from util.datatools import RDF, Vocab, DB, ID, TYPE, REV
 
 ui_defs = {
@@ -47,7 +47,9 @@ def thingview(path):
         path = '/' + path
     if path in db.same_as:
         return redirect('/page' + db.same_as[path], 302)
-    thing = db.index[path]
+    thing = db.index.get(path)
+    if not thing:
+        return abort(404)
     return render_template('thing.html', thing=thing)
 
 @app.route('/def/terms/<term>')
