@@ -691,11 +691,16 @@ marcenum:bibLevel a skos:Collection;
 
 :title a owl:DatatypeProperty;
     rdfs:label "titel"@sv;
+    rdfs:subPropertyOf :label;
     owl:equivalentProperty bf:title, dc:title .
+
+:identifier a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty dc:identifier, bibo:identifier .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
-    rdfs:subPropertyOf skos:prefLabel .
+    rdfs:subPropertyOf :prefLabel .
 
 :instanceTitle a owl:ObjectProperty;
     rdfs:label "Huvudtitel"@sv;
@@ -877,6 +882,7 @@ marcenum:bibLevel a skos:Collection;
 :name a owl:ObjectProperty;
     rdfs:label "Namn"@sv;
     rdfs:comment "Aktörens allmänna namn"@sv;
+    rdfs:subPropertyOf :label;
     owl:equivalentProperty foaf:name .
 
 :attributedTo a owl:ObjectProperty;
@@ -1013,10 +1019,12 @@ marcenum:bibLevel a skos:Collection;
 :narrower a owl:ObjectProperty;
     owl:equivalentProperty skos:narrower .
 :notation a owl:DatatypeProperty;
+    rdfs:subPropertyOf :identifier;
     owl:equivalentProperty skos:notation .
 :note a owl:DatatypeProperty;
     owl:equivalentProperty skos:note .
 :prefLabel a owl:DatatypeProperty;
+    rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:prefLabel .
 :related a owl:ObjectProperty;
     owl:equivalentProperty skos:related .
