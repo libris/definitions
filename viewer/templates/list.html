@@ -1,0 +1,13 @@
+% extends "base.html"
+
+{% block title %}list{% endblock %}
+
+% block content
+  <ul>
+    % for item in sorted(db.values())
+      <li>
+        <a href="/page${item[ID]}">${item.label or item[ID]} (${item[TYPE]})</a>
+      </li>
+    % endfor
+  </ul>
+% endblock
