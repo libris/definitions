@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
+import glob
 from flask import Blueprint, render_template, redirect
 from util.datatools import RDF, Vocab, DB, ID, TYPE, REV
 
@@ -26,7 +27,7 @@ def setup_app(setup_state):
     })
 
     global db
-    db = DB("cache/db", vocab)
+    db = DB(vocab, "cache/db", *glob.glob("build/*/"))
 
     ld_context = {
         'ID': ID,'TYPE': TYPE, 'REV': REV,

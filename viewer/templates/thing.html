@@ -9,16 +9,22 @@
 % endblock
 
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
-  % set t = vocab.index[thing[TYPE]]
+  % set typename = thing[TYPE]
+  % if isinstance(typename, list)
+    % set t = vocab.index[typename[0]]
+  % else
+    % set t = vocab.index[typename]
+  % endif
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
-      {% if TYPE in thing %} typeof="${thing[TYPE]}"{% endif %}>
+      {% if typename %} typeof="${typename}"{% endif %}>
     % set h = 'h1'
     <header class="panel-heading">
       <${h} class="panel-title">
-        ${vocab.labelgetter(thing)} {% if t %}(${t.label}){% endif %}
+        ${vocab.labelgetter(db.index.get(thing[ID], thing))}
+        {% if t %}(${t.label}){% endif %}
       </${h}>
     </header>
     <div class="panel-body">

@@ -57,9 +57,11 @@ class Vocab:
             try:
                 return (self.label_keys.index(key), key)
             except ValueError:
-                weight = 200 if self.index[key].get(TYPE) == ID else 100
+                weight = len(self.label_keys)
+                if self.index[key].get(TYPE) == ID:
+                    weight += 1
                 return (weight, key)
-        return sorted(thing, key=keykey)
+        return sorted((key for key in thing if key in self.index), key=keykey)
 
     def labelgetter(self, item):
         for lkey in self.label_keys:
@@ -107,20 +109,24 @@ def path_distance(g, s, p, base):
 
 class DB:
 
-    def __init__(self, db_source, vocab):
+    def __init__(self, vocab, *sources):
+        self.vocab = vocab
         self.index = {}
         self.same_as = {}
 
-        if not os.path.isfile(db_source):
-            logger.warn("DB source %s does not exist", db_source)
-            return
-
-        for l in open(db_source):
-            data = json.loads(l)
+        for data in DB.load_data(sources):
             data.pop('_marcUncompleted', None)
-            item = data.pop('about')
-            item['describedBy'] = data
+            if 'about' in data:
+                item = data.pop('about')
+                item['describedBy'] = data
+            else:
+                item = data
+            print item[ID]
             self.index[item[ID]] = item
+
+            if 'prefLabel_en' in item and 'prefLabel' not in item:
+                item['prefLabel'] = item['prefLabel_en']
+
             if 'sameAs' in item:
                 for ref in item.get('sameAs'):
                     if ID in ref:
@@ -145,6 +151,26 @@ class DB:
                             continue
                         item.setdefault(REV, {}
                                 ).setdefault(link, []).append(chip)
+
+    @staticmethod
+    def load_data(sources):
+        for source in sources:
+            if os.path.isdir(source):
+                fpaths = (os.path.join(root, fname)
+                        for root, dnames, fnames in os.walk(source)
+                        for fname in fnames
+                        if fname.endswith('.jsonld'))
+                for fpath in fpaths:
+                    logger.debug("Loading JSON from: %s", fpath)
+                    with open(fpath) as f:
+                        yield json.load(f)
+            elif os.path.isfile(source):
+                logger.debug("Loading lines from: %s", source)
+                with open(source) as f:
+                    for l in f:
+                        yield json.loads(l)
+            else:
+                logger.warn("DB source %s does not exist", source)
 
 
 if __name__ == '__main__':
