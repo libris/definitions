@@ -1,6 +1,6 @@
 % extends "base.html"
 
-{% block title %}${thing.label}{% endblock %}
+{% block title %}${vocab.labelgetter(thing)}{% endblock %}
 
 {% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
 
@@ -9,7 +9,7 @@
 % endblock
 
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
-  % set t = vocab[thing[TYPE]]
+  % set t = vocab.index[thing[TYPE]]
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
@@ -18,14 +18,14 @@
     % set h = 'h1'
     <header class="panel-heading">
       <${h} class="panel-title">
-        ${thing.label} {% if t %}(${t.label}){% endif %}
+        ${vocab.labelgetter(thing)} {% if t %}(${t.label}){% endif %}
       </${h}>
     </header>
     <div class="panel-body">
       <dl class="dl-horizontal">
-        % for k in thing | sort
-          % if k in vocab or k != REV
-            % set p = vocab[k]
+        % for k in vocab.sortedkeys(thing)
+          % if k in vocab.index or k != REV
+            % set p = vocab.index[k]
             % set v = thing[k]
             <dt title="&lt;${p[ID]}&gt;">${p.label or k}</dt>
             <dd>
@@ -64,7 +64,7 @@
         <b>${ui[REV].label}</b>
         <dl class="dl-horizontal">
           % for k, vs in thing[REV].items()
-            % set p = vocab[k]
+            % set p = vocab.index[k]
           <dt>&larr; ${p.label}</dt>
           <dd>
               % for v in vs
