@@ -124,6 +124,12 @@ class DB:
             logger.debug("Loading item: <%s>", item[ID])
             self.index[item[ID]] = item
 
+            itype = item[TYPE]
+            if isinstance(itype, list):
+                itype.remove('Concept')
+                if len(itype) == 1:
+                    item[TYPE] = itype[0]
+
             if 'prefLabel_en' in item and 'prefLabel' not in item:
                 item['prefLabel'] = item['prefLabel_en']
 

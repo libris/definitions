@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 import glob
+import itertools
+from operator import itemgetter
 from flask import Blueprint, render_template, redirect, abort
 from util.datatools import RDF, Vocab, DB, ID, TYPE, REV
 
@@ -39,7 +41,10 @@ def setup_app(setup_state):
 
 @app.route('/list/')
 def listview():
-    return render_template('list.html')
+    typegetter = itemgetter(TYPE)
+    items = db.index.values()
+    type_groups = itertools.groupby(sorted(items, key=typegetter), typegetter)
+    return render_template('list.html', item_groups_by_type=type_groups)
 
 @app.route('/page/<path:path>')
 def thingview(path):

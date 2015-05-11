@@ -3,11 +3,17 @@
 {% block title %}list{% endblock %}
 
 % block content
-  <ul>
-    % for item in sorted(db.index.values(), key=vocab.labelgetter)
-      <li>
-        <a href="/page${item[ID]}">${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
-      </li>
-    % endfor
-  </ul>
+  % for itype, items in item_groups_by_type
+  <section>
+  % set t = vocab.index[itype]
+  <h2>${t and t.label or itype}</h2>
+    <ul>
+      % for item in sorted(items, key=vocab.labelgetter)
+        <li>
+          <a href="/page${item[ID]}">${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
+        </li>
+      % endfor
+    </ul>
+  </section>
+  % endfor
 % endblock
