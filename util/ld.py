@@ -2,25 +2,22 @@
 from __future__ import unicode_literals
 __metaclass__ = type
 
-import logging
-import os
-import json
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, OWL
-
-
-logger = logging.getLogger(__name__)
-
 ID, TYPE, REV = '@id', '@type', '@reverse'
 
 
 class Vocab:
 
-    def __init__(self, vocab_source, vocab_uri, lang):
+    def __init__(self, vocab_source, vocab_uri=None, lang='en'):
         self.index = {}
         label_key_items = []
 
-        BASE_LABEL = URIRef(vocab_uri + 'label')
         g = Graph().parse(vocab_source, format='turtle')
+        default_ns = g.store.namespace('')
+        if not vocab_uri and (default_ns, RDF.type, OWL.Ontology) in g:
+            vocab_uri = default_ns
+
+        BASE_LABEL = URIRef(vocab_uri + 'label')
 
         for s in set(g.subjects()):
             if not isinstance(s, URIRef):
@@ -105,78 +102,6 @@ def path_distance(g, s, p, base):
                     shortest = candidate
         return shortest
     return find_path(s)
-
-
-class DB:
-
-    def __init__(self, vocab, *sources):
-        self.vocab = vocab
-        self.index = {}
-        self.same_as = {}
-
-        for data in DB.load_data(sources):
-            data.pop('_marcUncompleted', None)
-            if 'about' in data:
-                item = data.pop('about')
-                item['describedBy'] = data
-            else:
-                item = data
-            logger.debug("Loading item: <%s>", item[ID])
-            self.index[item[ID]] = item
-
-            itype = item[TYPE]
-            if isinstance(itype, list):
-                itype.remove('Concept')
-                if len(itype) == 1:
-                    item[TYPE] = itype[0]
-
-            if 'prefLabel_en' in item and 'prefLabel' not in item:
-                item['prefLabel'] = item['prefLabel_en']
-
-            if 'sameAs' in item:
-                for ref in item.get('sameAs'):
-                    if ID in ref:
-                        self.same_as[ref[ID]] = item[ID]
-
-        chip_keys = [ID, TYPE] + vocab.label_keys
-        for other in self.index.values():
-            chip = {k: v for k, v in other.items() if k in chip_keys}
-            for link, refs in other.items():
-                if link == 'sameAs':
-                    continue
-                if not isinstance(refs, list):
-                    refs = [refs]
-                for ref in refs:
-                    if not isinstance(ref, dict):
-                        continue
-                    ref_id = ref.get(ID)
-                    if ref_id:
-                        item = self.index.get(ref_id) or self.index.get(
-                                self.same_as.get(ref_id))
-                        if not item:
-                            continue
-                        item.setdefault(REV, {}
-                                ).setdefault(link, []).append(chip)
-
-    @staticmethod
-    def load_data(sources):
-        for source in sources:
-            if os.path.isdir(source):
-                fpaths = (os.path.join(root, fname)
-                        for root, dnames, fnames in os.walk(source)
-                        for fname in fnames
-                        if fname.endswith('.jsonld'))
-                for fpath in fpaths:
-                    logger.debug("Loading JSON from: %s", fpath)
-                    with open(fpath) as f:
-                        yield json.load(f)
-            elif os.path.isfile(source):
-                logger.debug("Loading lines from: %s", source)
-                with open(source) as f:
-                    for l in f:
-                        yield json.loads(l)
-            else:
-                logger.warn("DB source %s does not exist", source)
 
 
 if __name__ == '__main__':
