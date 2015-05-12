@@ -1,7 +1,9 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 import glob
-from flask import Blueprint, render_template, redirect
+import itertools
+from operator import itemgetter
+from flask import Blueprint, render_template, redirect, abort
 from util.datatools import RDF, Vocab, DB, ID, TYPE, REV
 
 ui_defs = {
@@ -39,7 +41,10 @@ def setup_app(setup_state):
 
 @app.route('/list/')
 def listview():
-    return render_template('list.html')
+    typegetter = itemgetter(TYPE)
+    items = db.index.values()
+    type_groups = itertools.groupby(sorted(items, key=typegetter), typegetter)
+    return render_template('list.html', item_groups_by_type=type_groups)
 
 @app.route('/page/<path:path>')
 def thingview(path):
@@ -47,7 +52,9 @@ def thingview(path):
         path = '/' + path
     if path in db.same_as:
         return redirect('/page' + db.same_as[path], 302)
-    thing = db.index[path]
+    thing = db.index.get(path)
+    if not thing:
+        return abort(404)
     return render_template('thing.html', thing=thing)
 
 @app.route('/def/terms/<term>')

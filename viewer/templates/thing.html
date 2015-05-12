@@ -42,7 +42,11 @@
                   <a href="/page/${v[1:]}">&lt;${v}&gt;</a>
                 % endif
               % elif k == '@type'
-                <a href="${t[ID]}">${t.label}</a>
+                % if t
+                  <a href="${t[ID]}">${t.label}</a>
+                % else
+                  ${v}
+                % endif
               % elif isinstance(v, dict)
                 ${viewthing(v, rel=k)}
               % elif isinstance(v, list)
