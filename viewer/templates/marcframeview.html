@@ -97,8 +97,13 @@
                     % for spec in dfn._spec
                       % if spec.source and spec.result
                         <li>
+                          <p>Example{% if spec.name %}: <i>${spec.name}</i>{% endif %}</p>
                           <b>MARC</b>
                           <pre><code>${pretty_json(spec.source)}</code></pre>
+                          % if spec.normalized
+                            <i>Normalized when converted back from JSON-LD:</i>
+                            <pre><code>${pretty_json(spec.normalized)}</code></pre>
+                          % endif
                           <b>JSON-LD</b>
                           <pre><code>${pretty_json(spec.result)}</code></pre>
                         </li>
