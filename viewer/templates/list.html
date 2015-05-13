@@ -10,7 +10,7 @@
     <ul>
       % for item in sorted(items, key=vocab.labelgetter)
         <li>
-          <a href="/page${item[ID]}">${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
+          <a href="${url_for('thingview.thingview', path=item[ID][1:])}">${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
         </li>
       % endfor
     </ul>

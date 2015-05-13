@@ -39,7 +39,7 @@ def setup_app(setup_state):
     }
     app.context_processor(lambda: ld_context)
 
-@app.route('/list/', defaults=dict(chunk=-1))
+@app.route('/list/', defaults=dict(chunk=10000))
 @app.route('/list/<int:chunk>')
 def listview(chunk):
     typegetter = itemgetter(TYPE)
@@ -47,12 +47,12 @@ def listview(chunk):
     type_groups = itertools.groupby(sorted(items, key=typegetter), typegetter)
     return render_template('list.html', item_groups_by_type=type_groups)
 
-@app.route('/page/<path:path>')
+@app.route('/<path:path>/data.html')
 def thingview(path):
     if not path.startswith(('/', 'http:', 'https:')):
         path = '/' + path
     if path in db.same_as:
-        return redirect('/page' + db.same_as[path], 302)
+        return redirect(db.same_as[path] + '/', 302)
     thing = db.get_item(path)
     if not thing:
         return abort(404)

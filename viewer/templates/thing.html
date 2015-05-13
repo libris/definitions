@@ -39,7 +39,7 @@
                 % if v.startswith(('http:', 'https:'))
                   <a href="${v}">&lt;${v}&gt;</a>
                 % else
-                  <a href="/page/${v[1:]}">&lt;${v}&gt;</a>
+                  <a href="${url_for('thingview.thingview', path=v[1:])}">&lt;${v}&gt;</a>
                 % endif
               % elif k == '@type'
                 % if t
