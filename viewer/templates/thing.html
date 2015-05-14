@@ -8,6 +8,23 @@
   ${viewthing(thing, element='article', classes='panel panel-default')}
 % endblock
 
+% block footer
+  <nav class="navbar navbar-default">
+    <p class="navbar-text">Other formats:</p>
+    <ul class="nav nav-pills">
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
+      </li>
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
+      </li>
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
+      </li>
+    </ul>
+  </nav>
+% endblock
+
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
