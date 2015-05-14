@@ -27,7 +27,7 @@ class Vocab:
 
             key = s.replace(vocab_uri, '')
 
-            label = key
+            label = None
             for label in g.objects(s, RDFS.label):
                 if label.language == lang:
                     break
