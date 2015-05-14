@@ -30,62 +30,86 @@
   % if isinstance(typename, list)
     % set t = vocab.index[typename[0]]
   % else
-    % set t = vocab.index[typename]
+    % set t = vocab.index[typename] or {}
   % endif
   <${element} class="${classes}"
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
-      {% if typename %} typeof="${typename}"{% endif %}>
-    % set h = 'h1'
-    <header class="panel-heading">
-      <${h} class="panel-title">
-        ${vocab.labelgetter(db.index.get(thing[ID], thing))}
-        {% if t %}(${t.label}){% endif %}
-      </${h}>
-    </header>
-    <div class="panel-body">
-      <dl class="dl-horizontal">
-        % for k in vocab.sortedkeys(thing)
-          % if k in vocab.index or k != REV
-            % set p = vocab.index[k]
-            % set v = thing[k]
-            <dt title="&lt;${p[ID]}&gt;">${p.label or k}</dt>
+      {% if t.curie %} typeof="${t.curie}"{% endif %}>
+    % if ID in thing
+      <header class="panel-heading">
+        <h1 class="panel-title">
+          <a href="${url_for('thingview.thingview', path=thing[ID][1:])}">
+            ${vocab.labelgetter(db.index.get(thing[ID], thing))}
+            % if t
+              <span class="badge">${t.label}</span>
+            % endif
+          </a>
+          </h1>
+      </header>
+    % endif
+    % if len(thing) > 1
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+
+          % if ID in thing
+            <dt>${ui[ID].label}</dt>
             <dd>
-              % if k == '@id' and v[0] != '_'
-                % if v.startswith(('http:', 'https:'))
-                  <a href="${v}">&lt;${v}&gt;</a>
-                % else
-                  <a href="${url_for('thingview.thingview', path=v[1:])}">&lt;${v}&gt;</a>
-                % endif
-              % elif k == '@type'
-                % if t
-                  <a href="${t[ID]}">${t.label}</a>
-                % else
-                  ${v}
-                % endif
-              % elif isinstance(v, dict)
-                ${viewthing(v, rel=k)}
-              % elif isinstance(v, list)
-                <ul>
-                  % for sub in v
-                    <li>
-                      % if isinstance(sub, dict)
-                        ${viewthing(sub, rel=k)}
-                      % else
-                      <span {% if p.curie %} property="${p.curie}"{% endif %}>${sub}</span>
-                      % endif
-                    </li>
-                  % endfor
-                </ul>
+              <a href="${url_for('thingview.thingview', path=thing[ID][1:])}"
+                 ><code>&lt;${thing[ID]}&gt;</code></a>
+            </dd>
+          %endif
+
+          % if typename
+            <dt>${ui[TYPE].label}</dt>
+            <dd>
+              % if t
+                <a href="${url_for('thingview.termview', term=t.curie)}"
+                  class="label label-primary">${t.label}</a>
               % else
-                 <span {% if p.curie %} property="${p.curie}"{% endif %}>${v}</span>
+                ${typename}
               % endif
             </dd>
-          % endif
-        % endfor
-      </dl>
-    </div>
+          %endif
+
+          % for k in vocab.sortedkeys(thing)
+            % if k in vocab.index or k != REV
+              % set p = vocab.index[k] or {'curie': k}
+              <dt>
+                ${propref(p)}
+              </dt>
+              % set v = thing[k]
+              <dd>
+                % if k == ID and v[0] != '_'
+                  % if v.startswith(('http:', 'https:'))
+                    <a href="${v}">&lt;${v}&gt;</a>
+                  % else
+                    <a href="${url_for('thingview.thingview', path=v[1:])}">&lt;${v}&gt;</a>
+                  % endif
+                % elif isinstance(v, dict)
+                  ${viewthing(v, rel=k)}
+                % elif isinstance(v, list)
+                  <ul>
+                    % for sub in v
+                      <li>
+                        % if isinstance(sub, dict)
+                          ${viewthing(sub, rel=k)}
+                        % else
+                        <span {% if p.curie %} property="${p.curie}"{% endif %}>${sub}</span>
+                        % endif
+                      </li>
+                    % endfor
+                  </ul>
+                % else
+                  <span {% if p.curie %} property="${p.curie}"{% endif %}>${v}</span>
+                % endif
+              </dd>
+            % endif
+          % endfor
+        </dl>
+      </div>
+    % endif
     % if not rel and thing[REV]
       <div class="">
         <b>${ui[REV].label}</b>
@@ -103,4 +127,19 @@
       </div>
     % endif
   </${element}>
+% endmacro
+
+% macro propref(p)
+  % set label = p.curie
+  % if p.label
+    % set label = p.label.title()
+  % endif
+  % if p.curie
+    <a href="${url_for('thingview.termview', term=p.curie)}"
+       class="term">${label}</a>
+  % elif p.label
+    ${label}
+  % else
+    <code>${p.curie}</code>
+  % endif
 % endmacro

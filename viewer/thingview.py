@@ -13,9 +13,9 @@ from .conneg import Negotiator
 BASE_URI = "http://id.kb.se/"
 
 ui_defs = {
-    REV: {
-        'label': "Saker som länkar hit"
-    }
+    REV: {'label': "Saker som länkar hit"},
+    ID: {'label': "URI"},
+    TYPE: {'label': "Typ"}
 }
 
 app = Blueprint('thingview', __name__)
@@ -27,11 +27,6 @@ def setup_app(setup_state):
 
     global vocab
     vocab = Vocab("def/terms.ttl", lang='sv')
-
-    vocab.index.update({
-        '@id': {ID: ID, 'label': "URI"},
-        '@type': {ID: RDF.type, 'label': "Typ"}
-    })
 
     global db
     db = DB(vocab, "cache/db", *glob.glob("build/*/"))
@@ -66,7 +61,7 @@ def thingview(path, suffix=None):
     if not path.startswith(('/', 'http:', 'https:')):
         path = '/' + path
     if path in db.same_as:
-        return redirect(db.same_as[path] + '/', 302)
+        return redirect(db.same_as[path] + '/data', 302)
     thing = db.get_item(path)
     if not thing:
         return abort(404)
