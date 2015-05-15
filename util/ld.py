@@ -41,7 +41,8 @@ class Vocab:
 
             self.index[key] = term
 
-            label_distance = path_distance(g, s, RDFS.subPropertyOf, BASE_LABEL)
+            label_distance = path_distance(g, s,
+                RDFS.subPropertyOf | OWL.equivalentProperty, BASE_LABEL)
             if label_distance is not None:
                 label_key_items.append((label_distance, key))
 
@@ -65,7 +66,7 @@ class Vocab:
             label = item.get(lkey)
             if label:
                 return label
-        return item.get('@id')
+        return ""
 
 
 def path_distance(g, s, p, base):
