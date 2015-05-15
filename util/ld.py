@@ -5,6 +5,8 @@ __metaclass__ = type
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, OWL
 ID, TYPE, REV = '@id', '@type', '@reverse'
 
+SDO = Namespace("http://schema.org/")
+
 
 class Vocab:
 
@@ -17,6 +19,8 @@ class Vocab:
         if not vocab_uri and (default_ns, RDF.type, OWL.Ontology) in g:
             vocab_uri = default_ns
 
+        get_key = lambda s: s.replace(vocab_uri, '')
+
         BASE_LABEL = URIRef(vocab_uri + 'label')
 
         for s in set(g.subjects()):
@@ -25,7 +29,7 @@ class Vocab:
             if not s.startswith(vocab_uri):
                 continue
 
-            key = s.replace(vocab_uri, '')
+            key = get_key(s)
 
             label = None
             for label in g.objects(s, RDFS.label):
@@ -34,12 +38,17 @@ class Vocab:
             if label:
                 label = unicode(label)
 
+            for domain in g.objects(s, RDFS.domain | SDO.domainIncludes):
+                domain_key = get_key(domain)
+                self.index.setdefault(domain_key, {}).setdefault(
+                        'properties', []).append(key)
+
             term = {ID: unicode(s),'label': label, 'curie': key}
 
             if (s, RDF.type, OWL.ObjectProperty) in g:
                 term[TYPE] = ID
 
-            self.index[key] = term
+            self.index.setdefault(key, {}).update(term)
 
             label_distance = path_distance(g, s,
                 RDFS.subPropertyOf | OWL.equivalentProperty, BASE_LABEL)
@@ -48,18 +57,23 @@ class Vocab:
 
         self.label_keys = [key for ldist, key in sorted(label_key_items, reverse=True)]
 
-    def sortedkeys(self, thing):
+    def sortedkeys(self, item):
+        typedfn = self.index.get(item.get(TYPE))
+        typeprops = typedfn.get('properties') if typedfn else None
+
         def keykey(key):
+            classdistance = 0 if typeprops and key in typeprops else 1
             if key.startswith('@'):
-                return (0, key)
-            try:
-                return (self.label_keys.index(key), key)
-            except ValueError:
-                weight = len(self.label_keys)
-                if self.index[key].get(TYPE) == ID:
-                    weight += 1
-                return (weight, key)
-        return sorted((key for key in thing if key in self.index), key=keykey)
+                importance_index = 0
+            else:
+                try:
+                    importance_index = self.label_keys.index(key)
+                except ValueError:
+                    importance_index = len(self.label_keys)
+            is_link = self.index[key].get(TYPE) == ID
+            return (importance_index, is_link, classdistance, key)
+
+        return sorted((key for key in item if key in self.index), key=keykey)
 
     def labelgetter(self, item):
         for lkey in self.label_keys:
