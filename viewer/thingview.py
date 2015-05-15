@@ -31,13 +31,16 @@ def setup_app(setup_state):
     global db
     db = DB(vocab, "cache/db", *glob.glob("build/*/"))
 
-    ld_context = {
+    global jsonld_context
+    jsonld_context = "build/lib-context.jsonld"
+
+    view_context = {
         'ID': ID,'TYPE': TYPE, 'REV': REV,
         'vocab': vocab,
         'db': db,
         'ui': ui_defs,
     }
-    app.context_processor(lambda: ld_context)
+    app.context_processor(lambda: view_context)
 
 
 @app.route('/list/', defaults={'chunk': 10000})
@@ -103,4 +106,4 @@ def render_xml(path, data):
 
 def to_graph(data):
     return Graph().parse(data=json.dumps(data), base=BASE_URI,
-            format='json-ld', context="build/lib-context.jsonld")
+            format='json-ld', context=jsonld_context)
