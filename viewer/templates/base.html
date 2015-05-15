@@ -8,17 +8,24 @@
     {% block stylesheets %}{% endblock %}
   </head>
   <body {% block bodyattrs %}{% endblock %}>
-    <div class="{% block containerclass %}container{% endblock %}">
-      <nav>
-        {% block navigation %}{% endblock %}
+    {% block navigation %}
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">id.kb.se</a>
+        </div>
+        <ol class="nav navbar-nav">
+          {% block navpath %}
+            <li class="active"><a>${self.title()}</a></li>
+          {% endblock %}
+        </ol>
       </nav>
-      <main>
-        {% block content %}{% endblock %}
-      </main>
-      <footer>
-        {% block footer %}{% endblock %}
-      </footer>
-    </div>
+    {% endblock %}
+    <main class="{% block containerclass %}container{% endblock %}">
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      {% block footer %}{% endblock %}
+    </footer>
     <script src="/vendor/jquery/js/jquery.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
     {% block scripts %}{% endblock %}

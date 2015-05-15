@@ -4,25 +4,33 @@
 
 {% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
 
-% block content
-  ${viewthing(thing, element='article', classes='panel panel-default')}
-% endblock
+{% block navpath %}
+  <li><a href="${url_for('thingview.listview')}">Saker</a></li>
+  <li class="active"><a>${self.title()}</a></li>
+{% endblock %}
 
-% block footer
-  <nav class="navbar navbar-default">
-    <p class="navbar-text">Other formats:</p>
-    <ul class="nav nav-pills">
-      <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
-      </li>
-      <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
-      </li>
-      <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
-      </li>
-    </ul>
-  </nav>
+% block content
+  <div class="row">
+    <div class="col-md-9">
+      ${viewthing(thing, element='article', classes='panel panel-default')}
+    </div>
+    % if not rel and thing[REV]
+      <div class="col-md-3">
+        <h4>${ui[REV].label}</h4>
+        <dl resource="${thing[ID]}">
+          % for k, vs in thing[REV].items()
+            % set p = vocab.index[k]
+          <dt>&larr; ${termref(p)}</dt>
+          <dd>
+              % for v in vs
+                ${viewthing(v, rev=p.curie)}
+              % endfor
+          </dd>
+          % endfor
+        </dl>
+      </div>
+    % endif
+  </div>
 % endblock
 
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
@@ -33,26 +41,30 @@
     % set t = vocab.index[typename] or {}
   % endif
   <${element} class="${classes}"
+
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
       {% if ID in thing %} resource="${thing[ID]}"{% endif %}
       {% if t.curie %} typeof="${t.curie}"{% endif %}>
+
     % if ID in thing
       <header class="panel-heading">
         <h1 class="panel-title">
-          <a href="${url_for('thingview.thingview', path=thing[ID][1:])}">
-            ${vocab.labelgetter(db.index.get(thing[ID], thing))}
-            % if t
-              <span class="badge">${t.label}</span>
-            % endif
-          </a>
-          </h1>
+          % set thing_url = url_for('thingview.thingview', path=thing[ID][1:])
+          <a href="${thing_url}">
+            ${vocab.labelgetter(db.index.get(thing[ID], thing))}</a>
+          ${termref(t, classes='btn btn-primary')}
+          <a href="${thing_url}">
+            <small><code>&lt;${thing[ID]}&gt;</code></small></a>
+        </h1>
       </header>
     % endif
+
     % if len(thing) > 1
       <div class="panel-body">
-        <dl class="dl-horizontal">
+        <dl class="{% if not rel %}dl-horizontal{% endif %}">
 
+          {#
           % if ID in thing
             <dt>${ui[ID].label}</dt>
             <dd>
@@ -60,24 +72,24 @@
                  ><code>&lt;${thing[ID]}&gt;</code></a>
             </dd>
           %endif
-
           % if typename
             <dt>${ui[TYPE].label}</dt>
             <dd>
               % if t
                 <a href="${url_for('thingview.termview', term=t.curie)}"
-                  class="label label-primary">${t.label}</a>
+                  class="label label-primary">${t.label or t.curie}</a>
               % else
                 ${typename}
               % endif
             </dd>
           %endif
+          #}
 
           % for k in vocab.sortedkeys(thing)
             % if k in vocab.index or k != REV
               % set p = vocab.index[k] or {'curie': k}
               <dt>
-                ${propref(p)}
+                ${termref(p)}
               </dt>
               % set v = thing[k]
               <dd>
@@ -107,39 +119,42 @@
               </dd>
             % endif
           % endfor
+
         </dl>
       </div>
     % endif
-    % if not rel and thing[REV]
-      <div class="">
-        <b>${ui[REV].label}</b>
-        <dl class="dl-horizontal">
-          % for k, vs in thing[REV].items()
-            % set p = vocab.index[k]
-          <dt>&larr; ${p.label}</dt>
-          <dd>
-              % for v in vs
-                ${viewthing(v, rev=p.curie)}
-              % endfor
-          </dd>
-          % endfor
-        </dl>
-      </div>
-    % endif
+
   </${element}>
 % endmacro
 
-% macro propref(p)
-  % set label = p.curie
-  % if p.label
-    % set label = p.label.title()
+% macro termref(term, classes='')
+  % set label = term.curie
+  % if term.label
+    % set label = term.label.title()
   % endif
-  % if p.curie
-    <a href="${url_for('thingview.termview', term=p.curie)}"
-       class="term">${label}</a>
-  % elif p.label
+  % if term.curie
+    <a href="${url_for('thingview.termview', term=term.curie)}"><span
+        class="${classes}">${label}</span></a>
+  % elif term.label
     ${label}
   % else
-    <code>${p.curie}</code>
+    <code>${term.curie}</code>
   % endif
 % endmacro
+
+% block footer
+  <nav class="navbar navbar-default navbar-static-top">
+    <p class="navbar-text">Other formats:</p>
+    <ul class="nav nav-pills">
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
+      </li>
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
+      </li>
+      <li>
+        <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
+      </li>
+    </ul>
+  </nav>
+% endblock
