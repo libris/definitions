@@ -60,10 +60,16 @@ negotiator = Negotiator()
 def thingview(path, suffix=None):
     if not path.startswith(('/', 'http:', 'https:')):
         path = '/' + path
-    if path in db.same_as:
-        return redirect(db.same_as[path] + '/data', 302)
+
     thing = db.get_item(path)
     if not thing:
+        see_path = db.same_as.get(path)
+        if not see_path:
+            thing_path = '/resource' + path
+            if thing_path in db.index:
+                see_path = thing_path
+        if see_path:
+            return redirect(see_path + '/data', 302)
         return abort(404)
 
     mimetype, render = negotiator.negotiate(request, suffix)
