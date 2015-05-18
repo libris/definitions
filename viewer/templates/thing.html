@@ -34,6 +34,7 @@
 % endblock
 
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
+  % set thing_id = thing[ID]
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
     % set t = vocab.index[typename[0]]
@@ -44,18 +45,24 @@
 
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
-      {% if ID in thing %} resource="${thing[ID]}"{% endif %}
+      {% if ID in thing %} resource="${thing_id}"{% endif %}
       {% if t.curie %} typeof="${t.curie}"{% endif %}>
 
     % if ID in thing
       <header class="panel-heading">
         <h1 class="panel-title">
-          % set thing_url = url_for('thingview.thingview', path=thing[ID][1:])
+          % if config.FREEZER_DESTINATION and rel == 'describedBy' or rel == 'sameAs'
+            % set thing_url = ""
+          % elif thing_id.startswith('/def/terms#')
+            % set thing_url = url_for('vocabview.vocabview') +'#'+ thing_id.split('#', 1)[-1]
+          % else
+            % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
+          % endif
           <a href="${thing_url}">
-            ${vocab.labelgetter(db.index.get(thing[ID], thing))}</a>
+            ${vocab.labelgetter(db.index.get(thing_id, thing))}</a>
           ${termref(t, classes='btn btn-primary')}
           <a href="${thing_url}">
-            <small><code>&lt;${thing[ID]}&gt;</code></small></a>
+            <small><code>&lt;${thing_id}&gt;</code></small></a>
         </h1>
       </header>
     % endif
@@ -68,8 +75,8 @@
           % if ID in thing
             <dt>${ui[ID].label}</dt>
             <dd>
-              <a href="${url_for('thingview.thingview', path=thing[ID][1:])}"
-                 ><code>&lt;${thing[ID]}&gt;</code></a>
+              <a href="${url_for('thingview.thingview', path=thing_id[1:], suffix='html')}"
+                 ><code>&lt;${thing_id}&gt;</code></a>
             </dd>
           %endif
           % if typename
@@ -97,7 +104,7 @@
                   % if v.startswith(('http:', 'https:'))
                     <a href="${v}">&lt;${v}&gt;</a>
                   % else
-                    <a href="${url_for('thingview.thingview', path=v[1:])}">&lt;${v}&gt;</a>
+                    <a href="${url_for('thingview.thingview', path=v[1:], suffix='html')}">&lt;${v}&gt;</a>
                   % endif
                 % elif isinstance(v, dict)
                   ${viewthing(v, rel=k)}
@@ -133,7 +140,12 @@
     % set label = term.label.title()
   % endif
   % if term.curie
-    <a href="${url_for('thingview.termview', term=term.curie)}"><span
+    % if config.FREEZER_DESTINATION
+      % set term_url = "/vocabview#" + term.curie
+    % else
+      % set term_url = url_for('thingview.termview', term=term.curie)
+    % endif
+    <a href="${term_url}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}

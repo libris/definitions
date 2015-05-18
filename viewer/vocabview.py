@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from rdflib import Graph, URIRef, Literal, BNode, RDF, RDFS, OWL
 from rdflib.namespace import SKOS, Namespace, ClosedNamespace
 from util.graphcache import GraphCache, vocab_source_map
@@ -22,6 +22,10 @@ app = Blueprint('vocabview', __name__)
 app.context_processor(lambda: rdfutils)
 
 @app.route('/vocabview/')
+def redir_vocabview():
+    return redirect('/def/terms.html', 302)
+
+@app.route('/def/terms.html')
 def vocabview():
     global ns_mgr
     graph = None
