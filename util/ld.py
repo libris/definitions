@@ -58,8 +58,14 @@ class Vocab:
         self.label_keys = [key for ldist, key in sorted(label_key_items, reverse=True)]
 
     def sortedkeys(self, item):
-        typedfn = self.index.get(item.get(TYPE))
-        typeprops = typedfn.get('properties') if typedfn else None
+        itypes = item.get(TYPE) or []
+        if not isinstance(itypes, list):
+            itypes = [itypes]
+        typeprops = set()
+        for itype in itypes:
+            typedfn = self.index.get(itype)
+            if typedfn:
+                typeprops.update(typedfn.get('properties', []))
 
         def keykey(key):
             classdistance = 0 if typeprops and key in typeprops else 1
