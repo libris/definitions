@@ -72,7 +72,10 @@ def thingview(path, suffix=None):
             if thing_path in db.index:
                 see_path = thing_path
         if see_path:
-            return redirect(see_path + '/data', 302)
+            data_file = '/data'
+            if suffix:
+                data_file += '.' + suffix
+            return redirect(see_path + data_file, 302)
         return abort(404)
 
     mimetype, render = negotiator.negotiate(request, suffix)
