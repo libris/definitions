@@ -51,7 +51,9 @@
     % if ID in thing
       <header class="panel-heading">
         <h1 class="panel-title">
-          % if config.FREEZER_DESTINATION and rel == 'describedBy' or rel == 'sameAs'
+          % if thing_id.startswith(('http:', 'https:'))
+            % set thing_url = thing_id
+          % elif config.FREEZER_DESTINATION and rel == 'describedBy' or rel == 'sameAs'
             % set thing_url = ""
           % elif thing_id.startswith('/def/terms#')
             % set thing_url = url_for('vocabview.vocabview') +'#'+ thing_id.split('#', 1)[-1]
