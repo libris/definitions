@@ -117,6 +117,8 @@ def process_links(db, item):
 # TODO: work as much as possible into initial conversion
 def reshape(data):
     data.pop('_marcUncompleted', None)
+    data.pop('_marcBroken', None)
+    data.pop('_marcFailedFixedFields', None)
     if 'about' in data:
         item = data.pop('about')
         item['describedBy'] = data
