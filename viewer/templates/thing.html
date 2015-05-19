@@ -163,12 +163,14 @@
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
       </li>
+      % if not config.FREEZER_DESTINATION
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
       </li>
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
       </li>
+      % endif
     </ul>
   </nav>
 % endblock
