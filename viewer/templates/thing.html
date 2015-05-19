@@ -19,7 +19,7 @@
         <h4>${ui[REV].label}</h4>
         <dl resource="${thing[ID]}">
           % for k, vs in thing[REV].items()
-            % set p = vocab.index[k]
+            % set p = vocab.index[k] or {'curie': k}
           <dt>&larr; ${termref(p)}</dt>
           <dd>
               % for v in vs
