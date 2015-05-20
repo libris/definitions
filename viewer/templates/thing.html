@@ -143,7 +143,7 @@
   % endif
   % if term.curie
     % if config.FREEZER_DESTINATION
-      % set term_url = "/vocabview#" + term.curie
+      % set term_url = url_for('vocabview.vocabview') +'#'+ term.curie
     % else
       % set term_url = url_for('thingview.termview', term=term.curie)
     % endif
@@ -163,14 +163,12 @@
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
       </li>
-      % if not config.FREEZER_DESTINATION
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
       </li>
       <li>
         <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
       </li>
-      % endif
     </ul>
   </nav>
 % endblock
