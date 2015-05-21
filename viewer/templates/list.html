@@ -3,18 +3,27 @@
 {% block title %}Saker{% endblock %}
 
 % block content
-  % for itype, items in item_groups_by_type
-  <section class="pull-left col-md-4">
-  % set t = vocab.index[itype]
-  <h2>${t and t.label or itype}</h2>
-    <ul>
-      % for item in items
+  <nav class="navbar navbar-default">
+    <ol class="nav navbar-nav">
+      % for itype, items in item_groups_by_type
         <li>
-          <a href="${url_for('thingview.thingview', path=item[ID][1:], suffix='html')}">
-            ${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
+          <a href="#${itype}">${t and t.label or itype}</a>
         </li>
       % endfor
-    </ul>
-  </section>
+    </ol>
+  </nav>
+  % for itype, items in item_groups_by_type
+    <section id="${itype}" class="pull-left col-md-4">
+      % set t = vocab.index[itype]
+      <h2>${t and t.label or itype}</h2>
+      <ul>
+        % for item in items
+          <li>
+            <a href="${url_for('thingview.thingview', path=item[ID][1:], suffix='html')}">
+              ${vocab.labelgetter(item) or item[ID]} (${item[TYPE]})</a>
+          </li>
+        % endfor
+      </ul>
+    </section>
   % endfor
 % endblock
