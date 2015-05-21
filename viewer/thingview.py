@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 import glob
-import itertools
 import json
 from operator import itemgetter
 from flask import Blueprint, request, Response, render_template, redirect, abort
@@ -43,12 +42,12 @@ def setup_app(setup_state):
     app.context_processor(lambda: view_context)
 
 
-@app.route('/list/', defaults={'chunk': 10000})
+@app.route('/list/', defaults={'chunk': 1000})
 @app.route('/list/<int:chunk>')
 def listview(chunk):
-    typegetter = itemgetter(TYPE)
-    items = db.index.values()[:chunk]
-    type_groups = itertools.groupby(sorted(items, key=typegetter), typegetter)
+    typekeylabel = lambda (t, items): vocab.index.get(t, {'label': t})['label']
+    type_groups = sorted(((itype, sorted(items[:chunk], key=vocab.labelgetter))
+        for itype, items in db.types.iteritems()), key=typekeylabel)
     return render_template('list.html', item_groups_by_type=type_groups)
 
 @app.route('/def/terms/<term>')

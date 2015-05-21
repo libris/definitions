@@ -6,19 +6,21 @@ import logging
 import os
 import urllib2
 import json
-from util.ld import Vocab, ID, TYPE, REV
 
+
+ID, TYPE, REV = '@id', '@type', '@reverse'
 
 logger = logging.getLogger(__name__)
 
 
 class DB:
 
-    def __init__(self, vocab, *sources):
-        self.vocab = vocab
+    def __init__(self, context=None, *sources):
+        self.context = context # TODO: use to map types and keys to (vocab) uris
         self.index = {}
         self.same_as = {}
         self.revs = {}
+        self.types = {}
         self.rev_limit = 4000
         build_db_index(sources, self)
 
@@ -33,6 +35,7 @@ class DB:
         expanded = dict(item)
         rev_map = self.revs.get(item[ID])
         if rev_map:
+            rev_map = dict(rev_map)
             for link, revitems in rev_map.items():
                 if len(revitems) > self.rev_limit:
                     logger.info("More than %s reverse links for '%s' in <%s>",
@@ -43,8 +46,6 @@ class DB:
 
 
 def build_db_index(sources, db, db_dir=None, limit=None):
-
-    chips = {}
 
     logger.info("Loading data")
     for i, item in enumerate(load_data(sources)):
@@ -61,29 +62,11 @@ def build_db_index(sources, db, db_dir=None, limit=None):
                     db.same_as[ref[ID]] = item_id
         db.index[item_id] = item
 
-    #items_dir = os.path.join(db_dir, 'items')
-    #if not os.path.isdir(items_dir):
-    #    os.makedirs(items_dir)
-
     logger.info("Processing items")
     for i, item in enumerate(db.index.values()):
         item_id = item[ID]
         logger.debug("Updating links and saving item #%s: <%s>", i, item_id)
         process_links(db, item)
-
-        #item_path = get_item_path(items_dir, item_id)
-        #with open(item_path + '.jsonld', 'w') as f:
-        #    save_json(item, f)
-
-        #chips[item_id] = chip = to_chip(db.vocab, item)
-        #with open(item_path + '-chip.jsonld', 'w') as f:
-        #    save_json(chip, f)
-
-    #for i, (item_id, rev_map) in enumerate(revs.items()):
-    #    logger.debug("Saving reverses #%s: <%s>", i, item_id)
-    #    item_path = get_item_path(items_dir, item_id)
-    #    with open(item_path + '-reverse.jsonld', 'w') as f:
-    #        save_json({ID: item_id, REV: rev_map}, f)
 
 
 def process_links(db, item):
@@ -95,7 +78,9 @@ def process_links(db, item):
             refs = [refs]
 
         if link == TYPE:
-            refs = [{ID: ref} for ref in refs]
+            for typekey in refs:
+                db.types.setdefault(typekey, []).append(item)
+            continue
 
         for ref in refs:
             if not isinstance(ref, dict):
@@ -138,11 +123,6 @@ def reshape(data):
         item['prefLabel'] = item['prefLabel_en']
 
     return item
-
-
-def to_chip(vocab, item):
-    chip_keys = [ID, TYPE] + vocab.label_keys
-    return {k: v for k, v in item.items() if k in chip_keys}
 
 
 def load_data(sources):
@@ -190,7 +170,6 @@ if __name__ == '__main__':
     argp.add_argument('-t', '--test', action='store_true', default=False)
     argp.add_argument('-o', '--output-dir')
     argp.add_argument('-l', '--limit', type=int, default=0)
-    argp.add_argument('vocab', metavar='VOCAB', nargs='?')
     argp.add_argument('sources', metavar='SOURCE', nargs='*')
     args = argp.parse_args()
 
@@ -204,6 +183,5 @@ if __name__ == '__main__':
         #log.setLevel(logging.DEBUG)
         log.setLevel(logging.INFO)
 
-        vocab = Vocab(args.vocab, lang='sv')
-        db = DB(vocab)
+        db = DB()
         build_db_index(args.sources, db, args.output_dir, args.limit)

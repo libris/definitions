@@ -125,6 +125,11 @@ def path_distance(g, s, p, base):
     return find_path(s)
 
 
+def to_chip(vocab, item):
+    chip_keys = [ID, TYPE] + vocab.label_keys
+    return {k: v for k, v in item.items() if k in chip_keys}
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
