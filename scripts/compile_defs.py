@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 import re
@@ -298,10 +299,10 @@ def split_dataset(base, data):
             id_ = node['@id']
             # TODO: Absence caused by mismatch between external id and local mapping
             if not id_:
-                print "Missing id for:", node
+                print("Missing id for:", node)
                 continue
             if not id_.startswith(base):
-                print "Missing mapping of <%s> under base <%s>" % (id_, base)
+                print("Missing mapping of <%s> under base <%s>" % (id_, base))
                 continue
             #resultset[id_[len(base):]] = node
             rel_path = id_[len(base):]
@@ -357,7 +358,7 @@ def run(names, outdir, cache):
         CACHEDIR = cache
     for name in names:
         if len(names) > 1:
-            print "Dataset:", name
+            print("Dataset:", name)
         data = datasets[name]()
         if isinstance(data, tuple):
             context, resultset = data
@@ -381,7 +382,7 @@ def _output(name, data, outdir):
         if result:
             fp.write(result)
         else:
-            print "N/A"
+            print("N/A")
     finally:
         if fp is not sys.stdout:
             fp.close()

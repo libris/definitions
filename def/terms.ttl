@@ -131,7 +131,7 @@ marcenum:bibLevel a skos:Collection;
 
 :controlNumber a owl:DatatypeProperty;
     rdfs:label "kontrollnummer"@sv;
-    owl:equivalentProperty dc:identifier .
+    owl:equivalentProperty :identifier .
 
 
 ##
@@ -769,7 +769,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subPropertyOf dc:language;
     rdfs:range sdo:Language .
 
-:languageNote a owl:ObjectProperty;
+:languageNote a owl:DatatypeProperty;
     rdfs:label "språkanteckning"@sv;
     owl:equivalentProperty bf:languageNote .
 
@@ -892,7 +892,7 @@ marcenum:bibLevel a skos:Collection;
 ##
 # Agents
 
-:name a owl:ObjectProperty;
+:name a owl:DatatypeProperty;
     rdfs:label "Namn"@sv;
     rdfs:comment "Aktörens allmänna namn"@sv;
     rdfs:subPropertyOf :label;
@@ -970,23 +970,23 @@ l:object rdfs:subPropertyOf rdf:object .
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
 
 #titlesAndOtherWordsAssociatedWithName / personTitle
-:personTitle a owl:ObjectProperty;
+:personTitle a owl:DatatypeProperty;
     rdfs:label "persontitel"@sv;
     owl:equivalentProperty sdo:jobTitle, foaf:title .
 
-:familyName a owl:ObjectProperty;
+:familyName a owl:DatatypeProperty;
     rdfs:label "familjenamn"@sv;
     owl:equivalentProperty sdo:familyName, foaf:familyName .
 
-:givenName a owl:ObjectProperty;
+:givenName a owl:DatatypeProperty;
     rdfs:label "egennamn"@sv;
     owl:equivalentProperty sdo:givenName, foaf:givenName .
 
-:birthDate a owl:ObjectProperty;
+:birthDate a owl:DatatypeProperty;
     rdfs:label "födelsedatum"@sv;
     owl:equivalentProperty sdo:birthDate .
 
-:deathDate a owl:ObjectProperty;
+:deathDate a owl:DatatypeProperty;
     rdfs:label "dödsdatum"@sv;
     owl:equivalentProperty sdo:deathDate .
 
@@ -1051,7 +1051,7 @@ l:object rdfs:subPropertyOf rdf:object .
 :narrower a owl:ObjectProperty;
     owl:equivalentProperty skos:narrower .
 :notation a owl:DatatypeProperty;
-    rdfs:subPropertyOf :identifier;
+    rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:notation .
 :note a owl:DatatypeProperty;
     owl:equivalentProperty skos:note .

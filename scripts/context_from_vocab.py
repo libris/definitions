@@ -1,3 +1,4 @@
+from __future__ import print_function
 import json
 from rdflib import *
 from rdflib.resource import Resource
@@ -164,4 +165,4 @@ if __name__ == '__main__':
         extend(context, overlay)
     s = json.dumps(context, sort_keys=True, indent=2, separators=(',', ': '),
             ensure_ascii=False).encode('utf-8')
-    print s
+    print(s)

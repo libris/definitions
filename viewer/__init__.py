@@ -13,7 +13,8 @@ app = MyFlask(__name__, static_url_path='', static_folder='static')
 
 #app.config.from_pyfile('config.cfg', silent=True)
 
-for name, obj in __builtins__.items():
+import __builtin__
+for name, obj in vars(__builtin__).items():
     if callable(obj):
         app.add_template_global(obj, name)
 

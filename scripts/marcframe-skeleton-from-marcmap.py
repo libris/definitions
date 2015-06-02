@@ -308,6 +308,11 @@ for marc_type in 'bib', 'auth', 'hold':
                                 subname = to_name(v)
                             else:
                                 subname = dfn['label_sv']
+                                if ' [' in subname:
+                                    subname, comment = subname.split(' [', 1)
+                                    if comment[-1] == ']':
+                                        comment = comment[:-1]
+
                                 for char, repl in [(' (', '-'), (' ', '_'), ('/', '-')]:
                                     subname = subname.replace(char, repl)
                                 for badchar in ',()':
