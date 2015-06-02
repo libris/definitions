@@ -1,3 +1,4 @@
+from __future__ import print_function
 import json
 from rdflib import *
 from rdflib.resource import Resource
