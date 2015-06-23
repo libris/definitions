@@ -1029,7 +1029,7 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:equivalentClass skos:Concept;
     owl:hasKey (:notation :prefLabel :inScheme) .
 
-:Collection a owl:Class;
+:ConceptCollection a owl:Class;
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
@@ -1071,10 +1071,13 @@ l:object rdfs:subPropertyOf rdf:object .
 :focusOf a owl:ObjectProperty;
     owl:inverseOf :focus .
 
+:collectionItem a owl:ObjectProperty;
+    owl:equivalentProperty skos:member .
+
 :inCollection a owl:ObjectProperty;
-    owl:inverseOf skos:member;
-    rdfs:domain skos:Concept;
-    rdfs:range skos:Collection .
+    owl:inverseOf :collectionItem;
+    rdfs:domain :Concept;
+    rdfs:range :ConceptCollection .
 
 # Domain Specific Term Classes
 
