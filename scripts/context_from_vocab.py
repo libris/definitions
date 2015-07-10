@@ -25,6 +25,8 @@ def context_from_vocab(graph, dest_vocab=None, ns_pref_order=None, use_sub=False
     defs = {}
     for term in terms:
         dfn = termdef(term, ns_pref_order, use_sub)
+        # TODO: if SDO.rangeIncludes RDF.langString:
+        #  key + 'ByLang': {"@id": key, "@container": "@language"}
         if dfn:
             curie = dfn.get('@reverse') or dfn['@id'] if isinstance(dfn, dict) else dfn
             if ':' in curie:
