@@ -5,7 +5,7 @@ the core vocabulary and some supplied example usage data.
 
 from __future__ import unicode_literals, print_function
 import json
-from rdflib import Graph
+from rdflib import Graph, BNode
 from rdflib.namespace import OWL, RDF, RDFS, SKOS
 from os import path as P
 import sys
@@ -40,8 +40,12 @@ examples = Graph().parse(fpath, format="json-ld", context=ctx)
 for p, o in examples.predicate_objects():
     if p == RDF.type:
         terms.add(o)
+        terms |= set(o for o in vocab.objects(o, (OWL.equivalentClass | RDFS.subClassOf)*'+')
+                if not isinstance(o, BNode))
     else:
         terms.add(p)
+        terms |= set(o for o in vocab.objects(p, (OWL.equivalentProperty | RDFS.subPropertyOf)*'+')
+                if not isinstance(o, BNode))
 
 
 # Gather used parts described with a limited selection of classes and predicates
