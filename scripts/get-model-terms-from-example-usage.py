@@ -68,8 +68,7 @@ for t in props | types:
     key = vocab.qname(t).split(':')[-1]
     if key.lower().endswith('label'):
         ctx[key + 'ByLang'] = {"@id": unicode(t), "@container": "@language"}
-    else:
-        ctx[key] = unicode(t)
+    ctx[key] = unicode(t)
 for pfx, ns in vocab.namespaces():
     ctx[pfx if pfx else '@vocab'] = ns
 
