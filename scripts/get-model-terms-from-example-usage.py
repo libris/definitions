@@ -62,6 +62,8 @@ types = {OWL.Class, OWL.DatatypeProperty, OWL.ObjectProperty, OWL.Restriction, R
 for t in terms:
     for p, o in vocab.predicate_objects(t):
         if p in props or p == RDF.type and o in types:
+            if isinstance(o, BNode):
+                continue
             parts.add((t,p, o))
 
 missing = sorted(parts.qname(t) for t in (terms - set(parts.subjects())))
