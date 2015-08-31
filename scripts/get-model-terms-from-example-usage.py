@@ -52,10 +52,13 @@ for p, o in examples.predicate_objects():
 parts = Graph()
 parts.namespace_manager = vocab.namespace_manager
 
-props = {RDFS.label, RDFS.subPropertyOf, RDFS.subClassOf,
-         OWL.equivalentProperty, OWL.equivalentClass,
-         SKOS.prefLabel, SKOS.altLabel}
-types = {OWL.Class, OWL.DatatypeProperty, OWL.ObjectProperty}
+textprops = {RDFS.label, RDFS.comment,
+         SKOS.prefLabel, SKOS.altLabel, SKOS.definition, SKOS.note}
+props = {RDFS.subPropertyOf, RDFS.subClassOf,
+         OWL.equivalentProperty, OWL.equivalentClass} | {
+         RDFS.domain, RDFS.range
+         } | textprops
+types = {OWL.Class, OWL.DatatypeProperty, OWL.ObjectProperty, OWL.Restriction, RDFS.Datatype}
 for t in terms:
     for p, o in vocab.predicate_objects(t):
         if p in props or p == RDF.type and o in types:
@@ -63,14 +66,14 @@ for t in terms:
 
 missing = sorted(parts.qname(t) for t in (terms - set(parts.subjects())))
 if missing:
-    print("# Missing:", ", ".join(missing))
+    print("# Missing:", ", ".join(missing), file=sys.stderr)
 
 
 # Make a nice compact context for the output model
 ctx = {}
 for t in props | types:
     key = vocab.qname(t).split(':')[-1]
-    if key.lower().endswith('label'):
+    if t in textprops:
         ctx[key + 'ByLang'] = {"@id": unicode(t), "@container": "@language"}
     ctx[key] = unicode(t)
 for pfx, ns in vocab.namespaces():
