@@ -163,6 +163,7 @@ marcenum:bibLevel a skos:Collection;
 
 :mediaType a owl:ObjectProperty;
     rdfs:label "media type"@en, "mediatyp"@sv;
+    rdfs:range :MediaType;
     rdfs:subPropertyOf rdael:mediaType .
 
 :carrierType a owl:ObjectProperty;
@@ -731,12 +732,14 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Event"@en;
     owl:equivalentClass prov:Activity, sdo:Event .
 
-:when a owl:ObjectProperty ;
+:when a owl:DatatypeProperty ;
     rdfs:domain :Event;
+    rdfs:range :AnyDateTime;
     rdfs:label "when"@en, "när"@sv .
 
 :where a owl:ObjectProperty ;
     rdfs:domain :Event;
+    rdfs:range :Place;
     rdfs:label "where"@en, "var"@sv .
 
 :who a owl:ObjectProperty ;
@@ -749,6 +752,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subClassOf :Event .
 
 :creator a owl:ObjectProperty;
+    skos:prefLabel "upphovsman"@sv;
     rdfs:label "skapare"@sv;
     owl:equivalentProperty dc:creator .
 
@@ -796,7 +800,10 @@ marcenum:bibLevel a skos:Collection;
 :qualifiedTitle a owl:ObjectProperty;
     rdfs:label "qualified title"@en, "kvalificerad titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv;
+    skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
+    rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
+    dc:references [ skos:notation "RDA 1.7" ];
     owl:equivalentProperty bf:instanceTitle;
     rdfs:range :Title .
 
@@ -858,7 +865,11 @@ marcenum:bibLevel a skos:Collection;
 
 :editionStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:providerStatement;
-    rdfs:label "editionStatement"@en, "utgåveuppgift"@sv .
+    rdfs:label "edition statement"@en, "utgåveuppgift"@sv .
+
+:manufactureStatement a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv .
 
 :publicationStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:providerStatement;
@@ -1155,6 +1166,10 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subClassOf :Agent;
     owl:equivalentClass bf:Organization, sdo:Organization, foaf:Organization  .
 
+:legalName a owl:DatatypeProperty;
+    rdfs:label "legal name"@en, "juridiskt namn"@sv;
+    owl:equivalentProperty sdo:legalName .
+
 :Place a owl:Class;
     rdfs:label "Plats"@sv;
     owl:equivalentClass sdo:Place .
@@ -1163,6 +1178,11 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "Land"@sv;
     owl:equivalentClass sdo:Country;
     rdfs:subClassOf :Place .
+
+:Language a owl:Class ;
+    rdfs:label "Språk"@sv;
+    owl:equivalentClass bf:Language,
+        sdo:Language .
 
 #generalSubdivision
 #geographicSubdivision
@@ -1188,32 +1208,54 @@ l:object rdfs:subPropertyOf rdf:object .
     #owl:hasKey (:notation) .
 
 :altLabel a owl:DatatypeProperty;
+    rdfs:label "alternativ etikett"@sv;
     owl:equivalentProperty skos:altLabel .
 :broader a owl:ObjectProperty;
+    rdfs:label "bredare"@sv;
     owl:equivalentProperty skos:broader .
+:broadMatch a owl:ObjectProperty;
+    rdfs:label "bredare match"@sv;
+    owl:equivalentProperty skos:broadMatch .
 :closeMatch a owl:ObjectProperty;
+    rdfs:label "nära match"@sv;
     owl:equivalentProperty skos:closeMatch .
+:exactMatch a owl:ObjectProperty;
+    rdfs:label "exakt match"@sv;
+    owl:equivalentProperty skos:exactMatch .
 :hiddenLabel a owl:DatatypeProperty;
+    rdfs:label "dold etikett"@sv;
     owl:equivalentProperty skos:hiddenLabel .
 :historyNote a owl:DatatypeProperty;
+    rdfs:label "historikanteckning"@sv;
     owl:equivalentProperty skos:historyNote .
 :inScheme a owl:ObjectProperty;
+    rdfs:label "ingår i schema"@sv;
     owl:equivalentProperty skos:inScheme .
 :narrower a owl:ObjectProperty;
+    rdfs:label "smalare"@sv;
     owl:equivalentProperty skos:narrower .
+:narrowMatch a owl:ObjectProperty;
+    rdfs:label "smalare match"@sv;
+    owl:equivalentProperty skos:narrowMatch .
 :notation a owl:DatatypeProperty;
+    rdfs:label "notation"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:notation .
 :note a owl:DatatypeProperty;
+    rdfs:label "anteckning"@sv;
     owl:equivalentProperty skos:note .
 :prefLabel a owl:DatatypeProperty;
+    rdfs:label "föredragen etikett"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:prefLabel .
 :related a owl:ObjectProperty;
+    rdfs:label "relaterad"@sv;
     owl:equivalentProperty skos:related .
 :scopeNote a owl:DatatypeProperty;
+    rdfs:label "omfångsanteckning"@sv;
     owl:equivalentProperty skos:scopeNote .
 :editorialNote a owl:DatatypeProperty;
+    rdfs:label "redaktionell anteckning"@sv;
     owl:equivalentProperty skos:editorialNote .
 
 :focus a owl:ObjectProperty;
@@ -1483,7 +1525,6 @@ l:object rdfs:subPropertyOf rdf:object .
 :technicalNote a rdf:Property; rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
 :listOfContents a rdf:Property; rdfs:label "Formaterad innehållsförteckning"@sv .
 :performerNote a rdf:Property; rdfs:label "Medverkande"@sv .
-:note a rdf:Property; rdfs:label "note"@sv .
 :systemRequirements a rdf:Property; rdfs:label "Systemkrav"@sv .
 :isPrimaryTopicOf a rdf:Property; rdfs:label "Är huvudämne för"@sv .
 :audience a rdf:Property; rdfs:label "Målgrupp"@sv .
