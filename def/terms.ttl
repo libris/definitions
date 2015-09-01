@@ -793,16 +793,16 @@ marcenum:bibLevel a skos:Collection;
     owl:propertyChainAxiom ( :qualifiedIdentifier :value ) .
 
 :qualifiedIdentifier a owl:ObjectProperty ;
-    rdfs:label "structured identifier"@en, "strukturerad identifikator"@sv;
+    rdfs:label "qualified identifier"@en, "kvalificerad identifikator"@sv;
     rdfs:range :Identifier .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
-    rdfs:subPropertyOf :prefLabel .
+    rdfs:subPropertyOf :prefLabel, :title .
 
 :qualifiedTitle a owl:ObjectProperty;
-    rdfs:label "structured title"@en, "strukturerad titel"@sv;
-    skos:hiddenLabel "Huvudtitel"@sv;
+    rdfs:label "qualified title"@en, "kvalificerad titel"@sv;
+    skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
