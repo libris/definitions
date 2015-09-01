@@ -744,6 +744,7 @@ marcenum:bibLevel a skos:Collection;
 
 :who a owl:ObjectProperty ;
     rdfs:domain :Event;
+    rdfs:range :Agent;
     rdfs:label "who"@en, "vem"@sv .
 
 :ProviderEvent a owl:Class;
@@ -791,14 +792,14 @@ marcenum:bibLevel a skos:Collection;
     owl:propertyChainAxiom ( :qualifiedIdentifier :value ) .
 
 :qualifiedIdentifier a owl:ObjectProperty ;
-    rdfs:label "qualified identifier"@en, "kvalificerad identifikator"@sv .
+    rdfs:label "structured identifier"@en, "strukturerad identifikator"@sv .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
     rdfs:subPropertyOf :prefLabel .
 
 :qualifiedTitle a owl:ObjectProperty;
-    rdfs:label "qualified title"@en, "kvalificerad titel"@sv;
+    rdfs:label "structured title"@en, "strukturerad titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv;
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
@@ -860,23 +861,30 @@ marcenum:bibLevel a skos:Collection;
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
-    rdfs:comment "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer. Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
+    skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
+    # TODO: remove "klammer" form in favour of placing :responsibilityStatement
+    # in relevant entity (e.g. :TitlePage)
+    rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
     owl:equivalentProperty bf:responsibilityStatement, rdael:statementOfResponsibility .
 
 :editionStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:providerStatement;
-    rdfs:label "edition statement"@en, "utgåveuppgift"@sv .
+    rdfs:label "edition statement"@en, "utgåveuppgift"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :manufactureStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:providerStatement;
-    rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv .
+    rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :publicationStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:providerStatement;
-    rdfs:label "publication statement"@en, "utgivningsuppgift"@sv .
+    rdfs:label "publication statement"@en, "utgivningsuppgift"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :noteOnPublicationStatement a owl:DatatypeProperty;
-    rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanteckning"@sv .
+    rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanteckning"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :contentsNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:contentsNote;
