@@ -48,19 +48,29 @@ section > article:nth-of-type(even) {
   margin-top: 2em;
 }
 section > article:target {
-  border-color: #08c;
+  border-color: #000;
+  border-width: 2px;
   background-color: #fff;
+}
+
+/* Content styles */
+
+.menu-col nav a {
+  display: block;
+  font-size: 0.8em;
+  margin: 0 0 0.2em;
 }
 
 .unstable:after {
   float: right;
   content: "unstable";
-  font-size: 0.6em;
-  color: #999;
+  font-size: 0.8em;
 }
 
 dt {
   color: #999;
+  font-weight: normal;
+  margin: 4px 0px 0px 0px;
 }
 
 .note {
@@ -79,6 +89,8 @@ dt {
 }
 .items > li {
   border: 1px solid #7af;
+  border-width: 1px 1px 1px 3px;
+  padding: 0px 5px;
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 4px;
@@ -90,8 +102,9 @@ li.ext {
 .ext a {
   color: #d51;
 }
-.ext p {
+.ext p, .baseproperties p {
   font-size: 0.8em;
+  margin: 0 0 4px;
 }
 
 #embedvocab article.panel.popover {
@@ -114,6 +127,24 @@ li.ext {
 body svg {
   visibility: hidden;
 }
+
+/* Panels */
+
+.panel .panel-title {
+  font-weight: normal;
+  text-shadow: 0px 0.1em 0px rgba(0, 0, 0, 0.3);
+}
+.panel.rdf-class header {
+  background-color: #56B7DE;
+  color: #FFF;
+}
+.panel.rdf-property header {
+  background-color: #2eb5b6;
+  color: #fff;
+}
+
+
+/* Graph styles */
 
 .graph svg {
   visibility: visible;
