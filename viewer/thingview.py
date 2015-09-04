@@ -3,16 +3,20 @@ from __future__ import unicode_literals
 import glob
 import json
 from operator import itemgetter
-from flask import Blueprint, request, Response, render_template, redirect, abort
-from util.ld import Graph, RDF, Vocab, ID, TYPE, REV
-from util.db import DB
+
+from flask import request, Response, render_template, redirect, abort
+from flask import Blueprint, current_app
+from flask.helpers import NotFound
+
+from lddb.storage import Storage
+from util.ld import Graph, RDF, Vocab, View, ID, TYPE, REVERSE
 from .conneg import Negotiator
 
 
 BASE_URI = "http://id.kb.se/"
 
 ui_defs = {
-    REV: {'label': "Saker som länkar hit"},
+    REVERSE: {'label': "Saker som länkar hit"},
     ID: {'label': "URI"},
     TYPE: {'label': "Typ"}
 }
@@ -21,22 +25,25 @@ app = Blueprint('thingview', __name__)
 
 @app.record
 def setup_app(setup_state):
-    # TODO: use config
-    #setup_state.app.config['SOME_KEY']
+    config = setup_state.app.config
+
+    storage = Storage('lddb',
+            config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
+            config.get('DBUSER'), config.get('DBPASSWORD'))
 
     global vocab
     vocab = Vocab("def/terms.ttl", lang='sv')
 
-    global db
-    db = DB(vocab, "cache/db", *glob.glob("build/*/"))
+    global ldview
+    ldview = View(vocab, storage)
 
     global jsonld_context
     jsonld_context = "build/lib-context.jsonld"
 
     view_context = {
-        'ID': ID,'TYPE': TYPE, 'REV': REV,
+        'ID': ID,'TYPE': TYPE, 'REVERSE': REVERSE,
         'vocab': vocab,
-        'db': db,
+        'ldview': ldview,
         'ui': ui_defs,
     }
     app.context_processor(lambda: view_context)
@@ -47,7 +54,7 @@ def setup_app(setup_state):
 def listview(chunk):
     typekeylabel = lambda (t, items): vocab.index.get(t, {'label': t})['label']
     type_groups = sorted(((itype, sorted(items[:chunk], key=vocab.labelgetter))
-        for itype, items in db.types.iteritems()), key=typekeylabel)
+        for itype, items in ldview.types.iteritems()), key=typekeylabel)
     return render_template('list.html', item_groups_by_type=type_groups)
 
 @app.route('/def/terms/<term>')
@@ -57,31 +64,45 @@ def termview(term):
 
 negotiator = Negotiator()
 
+def to_data_path(path, suffix):
+    if suffix:
+        return '%s/data.%s' % (path, suffix)
+    else:
+        return path
+
+
 @app.route('/<path:path>/data')
 @app.route('/<path:path>/data.<suffix>')
+@app.route('/<path:path>')
 def thingview(path, suffix=None):
-    if not path.startswith(('/', 'http:', 'https:')):
-        path = '/' + path
+    try:
+        return current_app.send_static_file(path)
+    except NotFound:
+        print 'not found', path
+        pass
 
-    thing = db.get_item(path)
+    item_id = path if path.startswith(
+            ('/', 'http:', 'https:')) else '/' + path
+
+    thing = ldview.get_record_data(item_id)
+
     if not thing:
-        see_path = db.same_as.get(path)
-        if not see_path:
-            thing_path = '/resource' + path
-            if thing_path in db.index:
-                see_path = thing_path
+        record_ids = ldview.find_record_ids(item_id)
+        if record_ids: #and len(record_ids) == 1:
+            return redirect(to_data_path(record_ids[0], suffix), 303)
+
+        see_path = ldview.find_same_as(item_id)
         if see_path:
-            data_file = '/data'
-            if suffix:
-                data_file += '.' + suffix
-            return redirect(see_path + data_file, 302)
-        return abort(404)
+            return redirect(to_data_path(see_path, suffix), 302)
+        else:
+            return abort(404)
 
     mimetype, render = negotiator.negotiate(request, suffix)
     if not render:
         return abort(406)
 
     result = render(path, thing)
+    mimetype = mimetype + '; charset=UTF-8' # technically redundant, but for e.g. JSONView
     return Response(result, mimetype=mimetype) if isinstance(
             result, bytes) else result
 

@@ -14,11 +14,11 @@
     <div class="col-md-9">
       ${viewthing(thing, element='article', classes='panel panel-default')}
     </div>
-    % if not rel and thing[REV]
+    % if not rel and thing[REVERSE]
       <div class="col-md-3">
-        <h4>${ui[REV].label}</h4>
+        <h4>${ui[REVERSE].label}</h4>
         <dl resource="${thing[ID]}">
-          % for k, vs in thing[REV].items()
+          % for k, vs in thing[REVERSE].items()
             % set p = vocab.index[k] or {'curie': k}
           <dt>&larr; ${termref(p)}</dt>
           <dd>
@@ -53,15 +53,13 @@
         <h1 class="panel-title">
           % if thing_id.startswith(('http:', 'https:'))
             % set thing_url = thing_id
-          % elif config.FREEZER_DESTINATION and rel == 'describedBy' or rel == 'sameAs'
-            % set thing_url = ""
           % elif thing_id.startswith('/def/terms#')
-            % set thing_url = url_for('vocabview.vocabview') +'#'+ thing_id.split('#', 1)[-1]
+            % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
           <a href="${thing_url}">
-            ${vocab.labelgetter(db.index.get(thing_id, thing))}</a>
+            ${ldview.getlabel(thing)}</a>
           ${termref(t, classes='btn btn-primary')}
           <a href="${thing_url}">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
@@ -95,7 +93,7 @@
           #}
 
           % for k in vocab.sortedkeys(thing)
-            % if k in vocab.index or k != REV
+            % if k in vocab.index or k != REVERSE
               % set p = vocab.index[k] or {'curie': k}
               <dt>
                 ${termref(p)}
@@ -142,12 +140,7 @@
     % set label = term.label.title()
   % endif
   % if term.curie
-    % if config.FREEZER_DESTINATION
-      % set term_url = url_for('vocabview.vocabview') +'#'+ term.curie
-    % else
-      % set term_url = url_for('thingview.termview', term=term.curie)
-    % endif
-    <a href="${term_url}"><span
+    <a href="${url_for('thingview.termview', term=term.curie)}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}
