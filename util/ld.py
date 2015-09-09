@@ -24,6 +24,7 @@ class Vocab:
 
         get_key = lambda s: s.replace(vocab_uri, '')
 
+        PREF_LABEL = URIRef(vocab_uri + 'prefLabel')
         BASE_LABEL = URIRef(vocab_uri + 'label')
 
         for s in set(g.subjects()):
@@ -53,10 +54,18 @@ class Vocab:
 
             self.index.setdefault(key, {}).update(term)
 
-            label_distance = path_distance(g, s,
-                RDFS.subPropertyOf | OWL.equivalentProperty, BASE_LABEL)
+            def distance_to(prop):
+                return path_distance(g, s,
+                    RDFS.subPropertyOf | OWL.equivalentProperty, prop)
+
+            label_distance = distance_to(BASE_LABEL)
+
             if label_distance is not None:
-                label_key_items.append((label_distance, key))
+                preflabel_distance = distance_to(PREF_LABEL)
+                order = (preflabel_distance
+                         if preflabel_distance is not None else -1,
+                         label_distance)
+                label_key_items.append((order, key))
 
         self.label_keys = [key for ldist, key in sorted(label_key_items, reverse=True)]
 
@@ -95,6 +104,7 @@ class View:
         self.vocab = vocab
         self.storage = storage
         self.rev_limit = 4000
+        self.chip_keys = {ID, TYPE} | set(self.vocab.label_keys)
 
     def get_record_data(self, item_id):
         if item_id[0] != '/':
@@ -146,9 +156,8 @@ class View:
         return getlabel(item) or item[ID] # getlabel(self.get_item(item[ID]))
 
     def to_chip(self, item, *keep_refs):
-        chip_keys = [ID, TYPE] + self.vocab.label_keys
         return {k: v for k, v in item.items()
-                if k in chip_keys or has_ref(v, *keep_refs)}
+                if k in self.chip_keys or has_ref(v, *keep_refs)}
 
     def _make_references_for(self, item):
         references = []
@@ -175,14 +184,14 @@ def _fix_refs(real_id, ref_id, descriptions):
     items = descriptions.get('items') or []
     quoted = descriptions.get('quoted') or []
 
-    alias_map = {ref_id: real_id}
+    alias_map = {}
     for quote in quoted:
         item = quote[GRAPH]
         alias = item[ID]
         if alias.startswith('_:'):
-            same_as = item.get('sameAs')
-            if same_as:
-                alias_map[alias] = same_as[0][ID]
+            for same_as in as_iterable(item.get('sameAs')):
+                if same_as[ID] == ref_id:
+                    alias_map[alias] = real_id
 
     _fix_ref(entry, alias_map)
     for item in items:
@@ -194,7 +203,7 @@ def _fix_ref(item, alias_map):
             if isinstance(v, dict):
                 mapped = alias_map.get(v.get(ID))
                 if mapped:
-                    v[ID] = alias_map.get(mapped, mapped)
+                    v[ID] = mapped
 
 
 # TODO: work as much as possible into initial conversion, rest into filtered view
