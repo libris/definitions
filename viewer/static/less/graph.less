@@ -32,9 +32,26 @@
 }
 
 svg {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  background-color: fadeout(@gray-lighter, 25%);
+}
+.graph svg {
+  display: block;
+}
+.toggle {
+  display: none;
+}
+.graph .toggle {
+  display: block;
+  cursor: pointer;
+  position: fixed;
+  top: 0px;
+  right: 50px;
+  font-size: 50px;
+  z-index: 999;  
 }
