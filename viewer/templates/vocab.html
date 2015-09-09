@@ -5,10 +5,8 @@
 
 {% block title %}${graph.label(list(vocabs)[0])} - Vocab View{% endblock %}
 
-% block stylesheets
-  <link rel="stylesheet" href="/css/vocab.css" />
-  <link rel="stylesheet" href="/css/graph.css" />
-% endblock
+{% block bodyattrs %}id="vocab"{% endblock %}
+
 
 % set rclasses = get_classes(graph)
 % set rproperties = get_properties(graph)

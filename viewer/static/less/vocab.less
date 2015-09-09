@@ -1,9 +1,5 @@
-
-/* Main layout, containers etc */
-
-body {
+body#vocab { // Opening bracket for body#vocab, everything in this file should be inside it
   overflow-x: hidden;
-}
 
 .navbar {
   position: fixed;
@@ -123,21 +119,23 @@ li.ext {
   margin: 0 0 4px;
 }
 
-#embedvocab article.panel.popover {
-  display: none;
-}
-#embedvocab article.panel.popover.state-active {
-  display: block;
-  position: fixed;
-  max-width: 40em;
-  height: 80%;
-  top: 4em;
-  right: 4em;
-  left: auto;
-}
-#embedvocab article.panel > .panel-body {
-  height: 90%;
-  overflow: auto;
+#embedvocab {
+  article.panel.popover {
+    display: none;
+  }
+  article.panel.popover.state-active {
+    display: block;
+    position: fixed;
+    max-width: 40em;
+    height: 80%;
+    top: 4em;
+    right: 4em;
+    left: auto;
+  }
+  article.panel > .panel-body {
+    height: 90%;
+    overflow: auto;
+  }
 }
 
 body svg {
@@ -146,49 +144,52 @@ body svg {
 
 /* Panels */
 
-.panel .panel-title {
-  font-weight: normal;
-  text-shadow: 0px 0.1em 0px rgba(0, 0, 0, 0.3);
+.panel {
+  .panel-title {
+    font-weight: normal;
+    text-shadow: 0px 0.1em 0px rgba(0, 0, 0, 0.3);
+  }
+  &.rdf-class header {
+    background-color: @happy-blue;
+    color: #FFF;
+  }
+  &.rdf-property header {
+    background-color: @happy-magenta;
+    color: #fff;
+  }
 }
-.panel.rdf-class header {
-  background-color: #56B7DE;
-  color: #FFF;
-}
-.panel.rdf-property header {
-  background-color: #2eb5b6;
-  color: #fff;
-}
-
 
 /* Graph styles */
 
-.graph svg {
-  visibility: visible;
-  display: inherit;
-  position: fixed;
-  width: 100vw;
-  left: inherit;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.75);
+.graph {
+  svg {
+    visibility: visible;
+    display: inherit;
+    position: fixed;
+    width: 100vw;
+    left: inherit;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+  nav {
+    visibility: hidden;
+  }
+  div:target {
+    visibility: visible;
+    z-index: 1;
+  }
+  .toggle {
+    position: fixed;
+    top: 0; right: 0;
+    z-index: 10;
+    display: block;
+    padding: 0.25em 0.3em;
+    font-family: courier;
+    font-size: 4em;
+    line-height: 0.72;
+    cursor: pointer;
+  }
 }
 
-.graph nav {
-  visibility: hidden;
-}
 
-.graph div:target {
-  visibility: visible;
-  z-index: 1;
-}
-
-.graph .toggle {
-  position: fixed;
-  top: 0; right: 0;
-  z-index: 10;
-  display: block;
-  padding: 0.25em 0.3em;
-  font-family: courier;
-  font-size: 4em;
-  line-height: 0.72;
-  cursor: pointer;
-}
+} // Closing bracket for body#vocab
