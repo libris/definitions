@@ -1,0 +1,88 @@
+/*
+Layout
+
+Designen av tjänsten påverkas av målgrupp men försök att utgå från “mobile first” eftersom vi inte alltid kan göra antaganden om vilka plattformar som används.
+
+
+Styleguide 2.
+*/
+
+/*
+Visuell hierarki
+
+Används för att förstå stora mängder med information. Visuell hierarki kan hjälpa användarna att förstå vilken information som är viktig.
+
+Styleguide 2.1
+*/
+
+/*
+Rutnät
+
+Bootstraps inbyggda rutnätssystem gör det väldigt enkelt att bygga responsiva layouter som fungerar bra på olika enheter.
+
+Rutnätssystemet går ut på att man delar upp sidan i 12 kolumner och genom att ge specifika klasser till olika behållare får man dem att ta upp olika många kolumner beroende på browserns totala bredd. Man kan t ex definera en ``<div>`` att vara 6 kolumner bred på en större upplösning och 12 kolumner på en mindre upplösning.
+
+Man placerar varje behållare i större behållare med klassen ``.row`` och den behållaren måste befinna sig inuti antingen en ``.container`` (låst bredd enligt tabellen nedan, se raden *Behållarbredd*) eller en ``.container-fluid`` (full bredd, 100%).
+
+Läs mer om [Bootstraps rutnätssystem](http://getbootstrap.com/css/#grid) (Grid).
+
+### Rutnäts-inställningar
+
+| Väldigt små | Små | Mellanstora |  Stora
+--- | --- | --- | ---
+Enhet | Telefoner (<768px) |	 Surfplattor (≥768px)	| Desktops (≥992px) |	Desktops (≥1200px)
+Prefix | col-xs- | col-sm- | col-md- | col-lg- |
+Kolumnbredd | Auto | ~62px | ~81px | ~97px |
+Behållarbredd | Auto | 750px | 970px | 1170px |
+
+Styleguide 2.2
+*/
+
+/*
+Startsida
+
+Utgå från tjänstens behov med fokus på det som ska göras på sidan. Varför kommer de dit?
+
+Exempel: (bild)
+
+Styleguide 2.3
+*/
+
+/*
+Navigation
+
+Styleguide 2.6
+*/
+
+/*
+Anpassningar
+
+Då de olika tjänsterna varierar i sitt uttryck kan det ibland behöva göras anpassningar i stilmallarna.
+Om anpassningen inte är omfattande så finns inget behov av att bygga om grund-stilmallen, utan kan göras med hjälp av en egen stilmall ovanpå grund-stilmallen.
+
+Tänk på att ladda in dina egna regler *efter* grund-stilmallen.
+
+    <link href="../css/kb-style.css" rel="stylesheet">
+    <link href="../css/egna-styles.css" rel="stylesheet">
+
+
+Nedan följer ett par exempel på när det kan behövas.
+
+Styleguide 9.
+*/
+
+/*
+Marginaler
+
+Önskad marginaler mellan olika block i layouten kan variera beroende på hur din layout är uppbyggd. Ett sidhuvud med en jumbotron behöver sannolikt andra marginaler än en utan jumbotron, och ibland varierar layouten inom samma tjänst.
+
+Istället för att lägga din marginal på navigerings-baren eller på jumbotronen kan man ge sin innehålls-container en extra klass (t ex .content-container).
+
+I din egna CSS ger du sedan denna klassen en specifik marginal.
+
+    .content-container {
+      margin-top: 50px;
+    }
+
+Styleguide 9.1
+*/

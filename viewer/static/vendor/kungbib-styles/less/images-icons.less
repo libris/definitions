@@ -1,0 +1,102 @@
+/*
+Bilder och ikoner
+
+Använd bilder och ikoner endast om det finns ett tydligt användarbehov.
+
+Styleguide 5.
+*/
+
+
+/*
+Bilder
+
+Tänk på att använda passande proportioner för bilder. För att ge bilder en ram, ange klassen ``.image-frame``
+
+Använd alltid [alt-attributet](http://webaim.org/techniques/alttext/) för bilder. Denna bör innehålla en beskrivande text om bilden. Texten bör vara kort och innehålla viktiga nyckelord. Om bilden används som länk bör alt-texten beskriva vart länken leder istället för bilden i sig. Alt-texten visas som alternativ istället för bilden om denna av olika anledningar inte kan visas. De är även centrala för sökmotorer. Alt-texter underlättar för användare som använder skärmläsare.
+
+[Title-attributet](http://www.searchenginejournal.com/image-alt-text-vs-image-title-whats-the-difference/) kan användas för att ge användaren ytterligare information om bilden. Texten kan vara en längre beskrivning eller en uppmaning för att få användaren att agera. Texten visas när man hovrar över bilden.
+
+Om man vill att [skärmläsare inte ska ta hänsyn till bilden](http://www.w3.org/TR/WCAG20-TECHS/H67.html) så behöver följande gälla:
+* alt-attributet används men är tomt (alt=" ").
+* title-attributet används inte eller är tomt (alt=" ").
+
+
+Markup:
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Devil_codex_Gigas.jpg" alt="Uppslag ur Codex Gigas där en av sidorna visar djävulen" class="image-frame" />
+
+Styleguide 5.3
+*/
+
+.image-frame {
+  width: auto;
+  border: 3px solid #E6E6E6;
+  border-radius: 2px;
+}
+
+
+/*
+Ikoner
+
+Ikoner behöver vara enkla, tydliga och bör kompletteras med text.
+
+Vi använder [Font Awesome](http://fontawesome.io/) som är ett open source bibliotek för ikoner.
+
+För fler exempel på hur man kan använda Font Awesome, se [deras egna exempel](http://fontawesome.io/examples/).
+
+Markup:
+<i class="fa fa-star"></i>
+
+Styleguide 5.2
+*/
+
+/*
+Favicon
+
+Favicon är en ikon som används för att representera hela webbsidan och visas till vänster i adressfältet, samt i bokmärken.
+
+Använd KBs logotyp?
+
+Exempel: (bild)
+
+Styleguide 5.4
+*/
+
+
+
+
+/*
+Beta-flaggor
+
+Visa tjänstens status tydligt i sidhuvudet. Dessa flaggor används för att signalera att tjänsten är i Beta.
+
+
+Dessa flaggor är enbart tillfälliga och kommer ses över, nya varianter kommer!
+
+Ladda ner:
+* [Variant 1 (PNG, 4 K)](./assets/beta_1.png)
+* [Variant 2 (PNG, 3 K)](./assets/beta_2.png)
+* [Variant 3 (PNG, 8 K)](./assets/beta_3.png)
+
+Markup:
+<div class="logo-box bg-happy-blue">
+  Variant 1<br/>
+  <img src="./assets/beta_1.png" />
+</div>
+<div class="logo-box bg-happy-blue">
+  Variant 2<br/>
+  <img src="./assets/beta_2.png" />
+</div>
+<div class="logo-box bg-happy-blue">
+  Variant 3<br/>
+  <img src="./assets/beta_3.png" />
+</div>
+
+Styleguide 5.5
+*/
+
+.logo-box {
+  vertical-align: top;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+}

@@ -1,0 +1,247 @@
+/*
+Formulär
+
+Skapa formulär som är så enkla som möjligt för användaren att fylla i.
+
+Styleguide 6.
+*/
+
+/*
+Valfria och obligatoriska fält
+
+Fråga bara om den information som verkligen behövs. Om du frågar om information som är valfri så bör fältet markeras med (valfri). Markera inte obligatoriska fält med asterix (*).
+
+Markup:
+<form>
+  <div class="form-group">
+    <label for="exampleInputName1">Namn</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputOptional">Favoritbok</label>
+    <span id="helpBlock" class="help-block">(Valfri)</span>
+    <input type="text" class="form-control" id="exampleInputOptional" placeholder="">
+  </div>
+</form>
+
+Styleguide 6.1
+*/
+
+/*
+Etiketter
+
+Alla formulärfält ska beskrivs med en etikett. Etiketter ska vara linjerande ovanför sitt formulärfältet. Texten ska vara kort, kärnfull och tydlig. Kolon (:) ska inte användas på slutet. Göm inte etiketter såtillvida inte kontext och övrigt innehåll gör etiketten onödig.
+
+Markup:
+<form>
+  <div class="form-group">
+    <label for="exampleInputName1">Namn</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+  </div>
+</form>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Namn</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="">
+    </div>
+  </div>
+</form>
+
+Styleguide 6.2
+*/
+
+/*
+Formulärfält
+
+Gör fältens bredd proportionerligt till den information som ska fyllas i. Se till att informationen som fylls i får plats i fältet. Se till att användaren kan fylla i den information som behövs även på mindre skärmstorlekar. Sätt alltid formulärfälten till 100% bredd för mindre skärmstorlekar.
+
+Markup:
+<div class="form-group">
+	<input class="form-control" type="text" placeholder="">
+</div>
+<div class="form-group">
+  <input class="form-control input-lg" type="text" placeholder="">
+</div>
+<div class="form-group">
+	<input class="form-control input-sm" type="text" placeholder="">
+</div>
+
+Styleguide 6.3
+*/
+
+/*
+Fältgrupper
+
+Använd fältgrupper (fieldsets) för att gruppera formulärkontroller (form controls?) som är relaterade till varandra. Det första elementet i en fältgrupp måste vara ett legend-element som beskriver gruppen.
+
+Markup:
+<div>
+  <div class="form-group">
+    <label for="exampleInputName1">Postnummer</label>
+    <input type="text" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+  	<label for="exampleInputName1">Postort</label>
+    <input type="text" class="form-control" placeholder="">
+  </div>
+</div>
+
+Styleguide 6.4
+*/
+
+/*
+Fokustillstånd
+
+För att visa att ett element är aktivt så bör fokusfärgen användas. Ingen åtgärd behövs för denna funktionalitet.
+
+Markup:
+<form>
+  <label for="exampleInputName1">Namn</label>
+  <input class="form-control" id="focusedInput" type="text" value="">
+</form>
+
+Styleguide 6.5
+*/
+
+#focusedInput {
+  border: 2px solid transparent;
+  outline: 0;
+  box-shadow: 0px 0px 0px 2px @brand-primary;
+  outline: 0;
+  outline: thin dotted\9;
+}
+.form-control {
+	.form-control-focus();
+}
+
+
+/*
+Hjälptexter
+
+Använd hjälptexter för att förklara vad som ska fyllas i fältet om det inte är självklart.
+
+Placera hjälptexten ovanför fältet. [Undvik att använda platshållare](http://www.nngroup.com/articles/form-design-placeholders/) inuti formulärfälten eftersom dessa försvinner direkt när användaren skriver in information i fältet.
+
+Markup:
+<form>
+  <div class="form-group">
+    <label for="exampleInputName1">Födelseår</label>
+    <span id="helpBlock" class="help-block">Ange året med 4 siffror</span>
+    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+  </div>
+</form>
+
+Styleguide 6.6
+*/
+
+.help-block {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 15px;
+  display: inline-block;
+}
+
+/*
+Formulärelement
+
+Styleguide 6.7.
+*/
+
+.form-control {
+  color: @black;
+  border: 2px solid @gray-darker;
+  box-shadow: 0px 0px 0px 2px transparent;
+}
+
+/*
+Rullgardinslistor
+
+Rullgardinslistor kan användas när det finns flera alternativ att välja mellan och användaren enbart ska kunna välja en. En rullgardinslista kan ofta medföra [en dålig användarupplevelse](https://medium.com/apegroup-texts/why-drop-down-lists-are-bad-for-the-user-experience-eeda5cbbd315) och bör bara användas om det finns goda skäl. Många gånger finns det bättre alternativ att välja.
+
+Rullgardinslistor kan passa om antalet alternativ är ungefär 5 - 15 stycken och om användaren inte känner till alternativen. För färre alternativ passar det oftast bättre med radioknappar. När det finns många alternativ kan fritextfält eller komboboxar (rullgardinslista med textfält för autocomplete) passa.
+
+Läs mer om hur du [använder rullgardinslistor rätt](http://uxmovement.com/forms/stop-misusing-select-menus/)
+och [väljer andra kontroller anpassade för mobila plattformar](http://www.lukew.com/ff/entry.asp?1950).
+
+Exempel på projekt där andra kontroller utforskats som alternativ till rullgardinslistor för stora datamängder: [välja land](http://www.smashingmagazine.com/2011/11/redesigning-the-country-selector/).
+
+Exempel:
+
+Styleguide 6.7.1
+*/
+
+/*
+Kryssrutor
+
+Använd kryssrutor när användarens ska kunna välja på/av för ett enskilt alternativ eller flera alternativ i en lista.
+
+Markup:
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+    Alternativ 1
+  </label>
+</div>
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+   	Alternativ 2
+  </label>
+</div>
+
+Styleguide 6.7.2
+*/
+
+/*
+Radioknappar
+
+Använd radioknappar när användaren ska kunna välja ett alternativ från en lista.
+
+Markup:
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+    Alternativ 1
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+    Alternativ 2
+  </label>
+</div>
+<div class="radio disabled">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+    Alternativ 3
+  </label>
+</div>
+
+Styleguide 6.7.3
+*/
+
+/*
+Fel och validering
+
+Tydlig kommunikation i formulär minimerar risken för användaren att göra fel.
+- [Gruppera långa formulär](http://webbriktlinjer.se/r/53-gruppera-formularets-falt/) i till exempel flera sidor.
+- [Minimera antalet fält](http://webbriktlinjer.se/r/50-minimera-antal-falt-och-obligatoriska-falt-i-formular/).
+- Ge [direkt och konstruktiv feedback](http://webbriktlinjer.se/r/77-notifiera-och-ge-anvandaren-aterkoppling/) till användaren om vad som blivit fel med hjälp av statusfärger.
+
+Läs mer [vägledning för formulär](http://webbriktlinjer.se/vagledning/taggar/formular/).
+
+Exempel:
+
+Styleguide 6.8
+*/
+
+/*
+Infällda formulärelement
+
+Kan användas för att be användaren lägga till extra kontextuell information.
+
+Exempel:
+
+Styleguide 6.9
+*/

@@ -1,0 +1,233 @@
+/*
+Typografi
+
+Styleguide 3.
+*/
+
+/*
+Typsnitt
+
+Vi använder oss av [Open Sans från Google Fonts](https://www.google.com/fonts/specimen/Open+Sans) som standard. Det är ett  öppet Sans serif-typsnitt som ger ett neutralt men vänligt intryck. Vid behov av att använda ytterligare typsnitt ska dessa väljas med hänsyn till tillgänglighet och öppenhet. Välj om möjligt licensfria alternativ.
+
+Styleguide 3.1
+*/
+
+@font-family-base: 'Open Sans', sans-serif;
+
+
+/*
+Rubriker
+
+Använd rubriker kontinuerligt för att skapa en tydlig hierarki.
+
+Huvudrubriken ska tydligt beskriva sidans innehåll och innefatta de viktigaste nyckelorden och sökorden. Den bör inte vara för lång. Använd bara en huvudrubrik per sida.
+
+| Element | Storlek | Vikt
+|---|---|---|
+| h1  | 36px | 700
+| h2  | 30px | 700
+| h3  | 24px | 700
+| h4  | 20px | 700
+
+Markup:
+<h1>h1 - Det här är en huvudrubrik (nivå 1)</h1>
+<h2>h2 - Det här är en underrubrik (nivå 2)</h2>
+<h3>h3 - Det här är en underrubrik (nivå 3) </h3>
+<h4>h4 - Det här är en underrubrik (nivå 4)</h4>
+
+Styleguide 3.2
+*/
+
+body {
+	line-height: 1.6;
+	font-size: 16px;
+	color: @black;
+}
+
+h1, h2, h3, h4 {
+	font-weight: 700;
+}
+h1 {
+	font-size: 36px;
+}
+h2 {
+	font-size: 30px;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 20px;
+}
+
+/*
+Sekundär text
+
+Sekundär rubrik används bland annat i sidhuvudet för vissa tjänster.
+Implementeras genom att använda &lt;small&gt; eller .small
+
+Markup:
+<h1>h1 - Det här är en huvudrubrik <small>med sekundär text</small></h1>
+<h2>h2 - Det här är en underrubrik <small>med sekundär text</small></h2>
+<h3>h3 - Det här är en underrubrik <small>med sekundär text</small></h3>
+<h4>h4 - Det här är en underrubrik <small>med sekundär text</small></h4>
+
+Styleguide 3.2.1
+*/
+
+h1, h2, h3, h4 {
+	.small, small {
+		color: @gray;
+	}
+}
+
+
+/*
+Brödtext
+
+
+| Element | Storlek | Vikt
+|---|---|---|
+| p 	| 16px | 400
+
+
+font-size
+line-height
+radavstånd
+spaltbredd och radlängd
+paragraf .lead.
+
+Styleguide 3.3
+*/
+
+
+
+/*
+Markera nyckelord i text
+
+Genom att betona viktiga delar i en text kan man stödja användaren i läsningen och tydligare nå fram med sitt budskap. Det är viktigt att tänka på textens läsbarhet. Detta kan göras genom att ge särskilda nyckelord en <strong>tyngre vikt</strong> eller genom att använda <em>kursiv stil</em>. Om [länkar](https://sv.wikipedia.org/wiki/Hyperl%C3%A4nk) används i löpande text blir dessa även mer framträdande. Undvik alltid att använda <u>understrykna ord</u> eftersom dessa kan blandas ihop med länkar. Detsamma kan även gälla ord med tyngre vikt beroende på vilket visuellt uttryck länkarna har. Att blanda olika sätt att lyfta fram utvalda ord i en text bör göras med försiktighet. Undvik alltså att göra som i det här stycket.
+
+Förkortningar bör undvikas i den mån det är möjligt. I brödtext finns det sällan skäl att använda förkortningar. Däremot kan ett mer kompakt skrivsätt hjälpa användaren att söka igenom en text till exempel för tabeller eller listor.
+
+Text som inte längre är aktuell kan vid vissa tillfällen ändå vara värda att finnas kvar men markerade som inaktuella. Detta ska bara användas om det finns ett särskilt syfte, om det ger nytta för användaren att ordet är kvar. Många gånger är det bättre att bara ta bort texten.
+
+Markup:
+<p>Den här texten innehåller ett <strong>viktigt</strong> ord.</p>
+<p>Den här texten innehåller ett <em>viktigt</em> ord.</p>
+<p><s>Den här texten är inte längre aktuell.</s></p>
+<p class="text-uppercase">Det här står med stora bokstäver</p>
+<p>En förkortning av JavaScript Object Notation for Linked Data är <abbr title="JavaScript Object Notation for Linked Data">JSON-LD</abbr>.</p>
+<p><abbr title="JavaScript Object Notation for Linked Data" class="initialism">JSON-LD</abbr> är ganska coolt.</p>
+
+
+Styleguide 3.3.1
+*/
+
+/*
+Fotnot och finstilt
+
+För fotnoter och text i finstilt så kan en mindre textstorlek användas. Standard är att textstorleken då sätts till 85%.
+
+Markup:
+<p>Lorem ipsum dolor sit amet, liber doming appareat eu vel. Option tritani blandit ne sit. Ea nam etiam forensibus, discere adolescens accommodare mel cu. Qui sumo erant habemus ut, ex vis nisl adipisci percipitur. Unum nibh illud an sit, ad omnis semper moderatius mei, ei vel dicta eruditi intellegebat. Mea graece efficiendi ei, nec eirmod deterruisset id. Et eam nulla instructior, vel cu delenit scaevola complectitur.</p>
+<p class="small">Källhänvisning eller särskilt vilkor</p>
+
+
+Styleguide 3.3.2
+*/
+
+
+/*
+Ka­pi­tä­ler
+
+Ka­pi­tä­ler, ”små ver­sa­ler” kan användas för att ge en ele­gant ef­fekt på till ex­em­pel sid­fo­ten eller för så kal­la­de ”by­li­nes”.
+
+För detta ändamål kan du använda klassen ``.small-caps``.
+
+Markup:
+<p class="small-caps">Foto: Sven Andersson</p>
+
+Styleguide 3.4
+*/
+
+.small-caps {
+	font-variant: small-caps;
+}
+
+
+/*
+Färga text
+
+Om man vill använda en annan färg på en text kan man enkelt färga text med prefixet ``.text-`` och valfri färg från de olika paletterna.
+
+Markup:
+<h3 class="text-happy-magenta">Rubrik med färgen happy-magenta</h3>
+<p class="text-happy-magenta">Paragraf med färgen happy-magenta</p>
+
+Styleguide 3.5
+*/
+
+
+/*
+Flytta text
+
+För att justera text kan man använda särskilda klasser.
+
+Markup:
+<p class="text-left">Den här texten är vänsterjusterat</p>
+<p class="text-center">Den här texten är centrerad</p>
+<p class="text-right">Den här texten är högerjusterat</p>
+
+Styleguide 3.6
+*/
+
+
+
+/*
+Listor
+
+Listor används för att strukturera upp innehåll. Det finns tre varianter av listor: oordnade, ordnade och definitionslistor.
+
+[Rekommendationer för listor på webbriktlinjer.se](http://webbriktlinjer.se/r/104-gor-listor-med-de-html-element-som-ar-till-for-att-skapa-listor/#rekommendationer-fr-listor).
+
+
+[Tips på hur man skriver punktlistor på Klartext](http://www.iklartext.se/skriv-punktlistor/).
+
+Exempel på olika listor:
+
+Styleguide 3.7
+*/
+
+/*
+Länkar
+
+Länkar är centralt för att skapa en bra användarupplevelse. Visa vart en länk leder någonstans även när länken är lyft ur sitt sammanhang. Detta är extra viktigt för personer som använder olika hjälpmedel, som till exempel skärmläsare, eftersom de kan välja att navigera genom att enbart läsa upp länkarna. Länkar gör det även lättare för sökmotorer att analysera innehållet, vilket leder till bättre relevansrankning.
+
+Att skriva [länkar direkt i texten](http://www.inuse.se/blogg/lankar-direkt-i-texten-inuseful/) kan försämra texten läsbarheten men även bidra till inspiration och ökad trovärdighet. Använd dem på ett genomtänkt sätt, utifrån tjänstens kontext och målgruppens förutsättningar.
+
+Texten på en länk bör inte innehålla någon onödig information. Skriv det viktigaste först och undvik att använda formuleringar som: "För mer information om" eller "...klicka här". Du bör inte heller skriva "Länk till...". Gör det uppenbart för användaren att en länk just är en länk, genom att skilja ut den grafiskt från övrigt innehåll.
+
+Styleguide 3.8
+*/
+
+/*
+Länka till externa webbplatser
+
+För länkar till externa webbplatser kan det vara bra att skriva ut organisation eller webbplatsens namn i slutet av länktexten. Länkar till andra webbplatser ska inte öppnas i nytt fönster.
+
+[Riktlinjer för att skriva tydliga länkar på webbriktlinjer.se](http://webbriktlinjer.se/r/5-skriv-tydliga-lankar/)
+
+Styleguide 3.8.1
+*/
+
+/*
+Länka till filer
+
+Undvik att länka enbart till en fil om det inte behövs eller uppfyller särskild nytta för användaren. Många gånger är det bättre att visa innehållet direkt på webplatsen. Länkar till filer bör öppnas i  samma fönster om det inte är uppenbart att användaren vill ladda ner filen. Välj ett filformat som så många som möjligt kan ta del av, tex pdf för textdokument.
+
+Länkar till filer för nedladdning bör tydligt visa för användaren att det just rör sig om nedladdning. Skriv detta tydligt i texten. Ange filens format och storlek. Denna information gör att det blir tydligt för användaren att länken inte leder till en webbplats. Att veta filens storlek hjälper användaren att avgöra hur lång tid det tar att ladda ner filen. Länkar för nerladdning bör alltid öppnas i ett nytt fönster.
+
+[Ladda ner KBs Logotyp svart (SVG, 6K)](./assets/kb_logo_black.svg)
+
+Styleguide 3.8.2
+*/

@@ -1,0 +1,360 @@
+
+
+/*
+Sidhuvud
+
+Sidhuvudet används tillsammans med sidfoten, för att [signalera källa och tjänstens namn](http://webbriktlinjer.se/r/22-ange-vilken-organisation-som-ar-utgivare-till-webbplatsen-pa-samtliga-sidor/).
+
+Vid behov använd toppnavigation för länkar som till exempel: Logga in, Feedback, Kontakt.
+
+För att fästa sidhuvudet till toppen av sidan (sk "fixed" eller "sticky"), ge den klassen ``.navbar-fixed-top`` och anpassa dina marginaler efter behov. [Se exempel](http://getbootstrap.com/examples/sticky-footer-navbar/).
+
+Styleguide 2.4
+*/
+
+/*
+Sidhuvud version 1
+
+I denna version skrivs KB:s logotyp följt av tjänstens namn ut i headern. Typsnittet som ska användas för tjänstens namn är Open sans googlefont. Viktigt att tänka på är att länka logotyp + namn till tjänstens startsida. Vid behov ange beskrivande text om tjänsten i kursiv stil.
+
+
+Markup:
+<div class="navbar">
+	<div class="container">
+	  <div class="navbar-header">
+	    <a class="navbar-brand navbar-logo" href="#"><img src="./assets/kb_logo_black.svg" alt="" /></a>
+	    <a class="navbar-brand" href="#">Projektnamn</a>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li><a href="#about">About</a></li>
+	      <li><a href="#contact">Contact</a></li>
+	      <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+</div>
+<br>
+<div class="navbar navbar-inverse">
+	<div class="container">
+	  <div class="navbar-header">
+	    <a class="navbar-brand navbar-logo" href="#"><img src="./assets/kb_logo_white.svg" alt="" /></a>
+	    <a class="navbar-brand" href="#">Projektnamn</a>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li><a href="#about">About</a></li>
+	      <li><a href="#contact">Contact</a></li>
+	      <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+</div>
+
+Styleguide 2.4.1
+*/
+
+
+.navbar {
+	border-radius: 0px;
+	margin-bottom: 0px;
+	border-width: 0px;
+
+  color: @black;
+  .navbar-nav>li>a {
+    &:hover, &:focus {
+      background-color: @gray-lighter;
+    }
+    &:active {
+      background-color: @gray-light;
+    }
+    color: @black;
+  }
+}
+.navbar-collapse {
+	border-color: rgba(0, 0, 0, 0.2) !important;
+}
+.navbar-inverse {
+	background-color: @black;
+	border-color: @black;
+	color: @white;
+	.navbar-brand {
+    color: @white;
+	}
+}
+.navbar-inverse .navbar-nav>li>a {
+  &:hover, &:focus {
+    background-color: @gray-dark;
+  }
+  &:active {
+    background-color: @gray-darker;
+  }
+  color: @white;
+}
+
+.navbar-brand {
+	margin: 0px !important;
+  @media screen and (max-width: @screen-sm-min) {
+    margin: 4px 0px 4px 10px !important;
+  }
+	color: @gray-dark;
+	font-size: 25px;
+	font-weight: 500;
+	small {
+		margin-left: 10px;
+		margin-top: -5px;
+		font-size: 16px;
+	}
+}
+
+.navbar {
+	a {
+		display: inline;
+		text-decoration: none;
+		color: inherit;
+	}
+}
+.navbar-logo {
+  padding: 0px;
+  img {
+		display: inline-block;
+    margin: 0.2em 0 0.2em 0px;
+    height: 80%;
+  }
+  // margin: 0px 15px 0px 0px;
+}
+
+
+/*
+Logotyper
+
+KB har två olika logotyper, dels en kombinerad logotyp med symbol och text och dels en logotyp enbart i text.
+
+Logotyperna används bland annat i sidhuvudet och bör då länka till tjänstens startsida. Om logotypen används för navigation som i sidhuvudet så bör det framgå i alt-texten (alt="Kungliga bibliotekets webbplats"). Läs mer i avsnittet [Sidhuvud](/frontend-guide/section-2.4.html).
+
+Om logotypen används i annat syfte, kan alt-texten ange att det är en logotyp (alt="Kungliga bibliotekets logotyp" eller så kan alt-attributet vara tomt (alt=" ").
+
+Ge logotypen klassen ``.logotype`` så att dimensioner och andra attribut hanteras korrekt. Det finns även hjälpklasser som ``.logo-small`` och ``.logo-large`` som kan användas i kombination med logotype-klassen.
+
+Logotyper bör, precis som andra bilder, alltid ha attributet alt. Detta underlättar för användare som använder skärmläsare.
+Om man vill att skärmläsare inte ska ta hänsyn till logotypen så behöver alt-attributet finnas men vara tomt (alt=" ").
+Title-attributet ska då inte finnas eller vara tomt.
+Mer information om detta finns på [W3C:s webbplats](http://www.w3.org/TR/WCAG20-TECHS/H67.html).
+
+För tjänster med unikt uttryck, ange logotypen i Cabin (?). (Det här behöver undersökas).
+
+
+Styleguide 5.1
+*/
+
+/*
+Kombinerad logotyp
+
+Den kombinerade logotypen består av en symbol och Kungl. biblioteket skrivet i text runt om symbolen.
+Logotypen finns i svart och vitt. Denna ska alltid användas i sidhuvudet för KB:s tjänster.
+
+
+#### Ladda ner logotyp
+* [KB Logotyp svart (SVG, 6K)](./assets/kb_logo_black.svg)
+* [KB Logotyp vit (SVG, 6K)](./assets/kb_logo_white.svg)
+
+
+.logo-small - Liten logga (50px)
+.logo-large - Stor logga (150px)
+
+Markup:
+<img src="./assets/kb_logo_black.svg" class="logotype {{modifier_class}}" alt="Kungliga bibliotekets logotyp" />
+<img src="./assets/kb_logo_white.svg" class="bg-black logotype {{modifier_class}}" alt="Kungliga bibliotekets logotyp" />
+
+Styleguide 5.1.1
+*/
+
+
+.logotype {
+	height: 100px;
+	&.logo-small {
+		height: 50px;
+	}
+	&.logo-large {
+		height: 150px;
+	}
+}
+.navbar .logotype {
+	height: 100%;
+}
+
+// DEPRECATED CLASS .logo-medium
+.logo-medium {
+	height: 75px;
+}
+
+
+/*
+Textlogotyp
+
+Textlogotypen består av Kungl Biblioteket utskrivet i text. Logotypen finns i svart och vitt.
+
+#### Ladda ner logotyp:
+* [KBs textlogotyp svart (SVG, 5K)](./assets/kb_text_black.svg)
+* [KBs textlogotyp vitt (SVG, 5K)](./assets/kb_text_white.svg)
+
+Markup:
+<img src="./assets/kb_text_black.svg" class="logotype {{modifier_class}}" alt="Kungl. biblioteket" />
+<img src="./assets/kb_text_white.svg" class="bg-happy-magenta logotype {{modifier_class}}" alt="Kungl. biblioteket" />
+
+Styleguide 5.1.2
+*/
+
+
+/*
+Sidfot
+
+Sidfot används tillsammans med sidhuvudet, för att [signalera källa och tjänstens namn](http://webbriktlinjer.se/r/22-ange-vilken-organisation-som-ar-utgivare-till-webbplatsen-pa-samtliga-sidor/).
+
+
+Det finns två varianter av sidfötter, den minimala och den utökade. Det går att kombinera de båda alternativt att endast använda den minimala.
+
+### Användning
+Använd .footer-container för att stapla flera footers inuti footer-tagen.
+
+#### Fästa sidfoten
+För att fästa sidfoten till botten av sidan (sk "sticky") se [detta exemplet](http://getbootstrap.com/examples/sticky-footer/).
+
+Styleguide 2.5
+*/
+
+/*
+Minimal sidfot
+
+Använd den minimala sidfoten för tjänster där behovet endast är att förmedla att KB är avsändare. Länka Kungl. biblioteket till www.kb.se och ange rätt länk till specifik support för tjänsten. Kan leda till Kundo-forum, mejladress eller en kontaktsida.
+
+Markup:
+<div class="container-fluid">
+  <footer class="footer">
+    <div class="footer-container bg-happy-muted-light-blue">
+    <div class="container">
+      <div class="col-md-2 text-center">
+        <img src="./assets/kb_logo_black.svg" class="logo-medium" alt="" />
+      </div>
+      <div class="col-md-10 text-black">
+        <p>
+          <strong><a href="http://www.kb.se" alt="Länk till Kungl. bibliotekets webbplats">
+            KUNGL. BIBLIOTEKET
+          </a></strong>
+          <br>
+          <span>Support: <a href="mailto:test.test@kb.se">test.test@kb.se</a></span>
+        </p>
+      </div>
+    </div>
+    </div>
+  </footer>
+</div>
+
+Styleguide 2.5.1
+*/
+
+/*
+Utökad sidfot
+
+Använd den utökade sidfoten om det finns behov av att förmedla ytterligare information som till exempel fler kontaktvägar, relaterade tjänster, licensuppgifter eller redovisa samarbeten med övriga organisationer för den specifika tjänsten. Tänk på att använda ytan i den utökade sidfoten endast för att stötta användarnas behov av mer information för att nå sina mål.
+
+Markup:
+<div class="container-fluid">
+  <footer class="footer">
+    <div class="footer-container bg-gray-lighter">
+      <div class="container">
+        <div class="col-md-3">
+          <h1>List 1</h1>
+          <ul class="list-unstyled">
+            <li>Lorem ipsum</li>
+            <li>Dorem</li>
+            <li>Ipsum santi laninum</li>
+            <li>Verti absolutom</li>
+            <li>Neo geosatium</li>
+            <li>Verti absolutom</li>
+            <li>Neo geosatium</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h1>List 2</h1>
+          <ul class="list-unstyled">
+            <li>Ipsum santi laninum</li>
+            <li>Lorem ipsum</li>
+            <li>Neo geosatium</li>
+            <li>Verti absolutom</li>
+            <li>Neo geosatium</li>
+            <li>Dorem</li>
+            <li>Verti absolutom</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h1>List 3</h1>
+          <ul class="list-unstyled">
+            <li>Verti absolutom</li>
+            <li>Ipsum santi laninum</li>
+            <li>Dorem</li>
+            <li>Lorem ipsum</li>
+            <li>Neo geosatium</li>
+            <li>Verti absolutom</li>
+            <li>Neo geosatium</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-container bg-happy-muted-light-blue">
+      <div class="container">
+        <div class="col-md-2 text-center">
+          <img src="./assets/kb_logo_black.svg" class="logo-medium" alt="" />
+        </div>
+        <div class="col-md-10 text-black">
+          <p>
+            <strong><a href="http://www.kb.se" alt="Länk till Kungl. bibliotekets webbplats">
+              KUNGL. BIBLIOTEKET
+            </a></strong>
+            <br>
+            <span>Support: <a href="mailto:test.test@kb.se">test.test@kb.se</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+Styleguide 2.5.2
+*/
+.footer {
+	overflow: hidden;
+}
+.footer {
+  .logo-small, .logo-medium, .logo-large {
+    @media screen and (max-width: @screen-sm-min) {
+      margin-bottom: 1em;
+    }
+  }
+  &>div:first-of-type {
+    margin-top: 50px;
+  }
+}
+.footer-container {
+  &>div {
+    padding: 25px 0px;
+  }
+}
+
+.footer h1 {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+}
+.footer h2 {
+  font-size: 14px;
+  font-weight: 700;
+}

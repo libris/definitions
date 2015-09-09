@@ -1,0 +1,51 @@
+// Bg colors
+.forced-bg(@color) {
+  background-color: @color !important;
+  .navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+    background-color: darken(@color, 15%) !important;
+  }
+  .navbar-nav>li>a:active {
+    background-color: darken(@color, 20%) !important;
+  }
+  .navbar-toggle {
+    border-color: transparent;
+    &:hover, &:focus {
+      background-color: transparent;
+    }
+  }
+  & when (luma(@color) >= 50%) {
+    .navbar-toggle {
+      .icon-bar {
+        background-color: @black;
+      }
+    }
+  }
+  & when (luma(@color) < 50%) {
+    .navbar-toggle {
+      .icon-bar {
+        background-color: @white;
+      }
+    }
+  }
+}
+// Text Colors
+.forced-text-color(@color) {
+  color: @color !important;
+  a {
+    color: @color !important;
+    &:hover {
+      color: lighten(@color, 10%) !important;
+    }
+  }
+}
+
+.calculate-text(@color) {
+  & when (luma(@color) >= 50%) {
+    color: darken(@color, 40%);
+    // color: @black;
+  }
+  & when (luma(@color) < 50%) {
+    color: lighten(@color, 35%);
+    // color: @white;
+  }
+}
