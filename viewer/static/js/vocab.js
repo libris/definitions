@@ -36,4 +36,28 @@ window.onload = function () {
     document.body.classList.toggle('graph')
   })
 
+  
+  
+  // Target Navigation
+  function setActive(item) {
+    window.location.hash = item;
+    if(item.indexOf(':') != -1) {
+      var parts = item.split(':');
+      item = parts.join('\\:');
+    }
+    $('.active-item').removeClass('active-item');
+    $('body').scrollTop($(item).offset().top - 100);
+    $(item).addClass('active-item');
+  };
+  $('body#vocab .menu-col a').click(function (e) {
+    e.preventDefault();
+    setActive($(this).attr('href'));
+  });
+  $('body#vocab .loc a').click(function (e) {
+    e.preventDefault();
+    setActive($(this).attr('href'));
+    
+  });
+
+
 }

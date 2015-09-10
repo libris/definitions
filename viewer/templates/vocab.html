@@ -7,6 +7,7 @@
 
 {% block bodyattrs %}id="vocab"{% endblock %}
 
+{% block containerclass %}container-fluid{% endblock %}
 
 % set rclasses = get_classes(graph)
 % set rproperties = get_properties(graph)
@@ -15,8 +16,6 @@
 
 % set RANGE = union(SCHEMA.rangeIncludes, RDFS.range)
 
-% block navigation
-% endblock
 
 
 % block content
