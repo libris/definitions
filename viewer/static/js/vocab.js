@@ -39,16 +39,25 @@ window.onload = function () {
   
   
   // Target Navigation
+  if(window.location.hash.length > 0) {
+    setTimeout(function () {
+      setActive(window.location.hash);
+    }, 250);
+  }
+  
   function setActive(item) {
-    window.location.hash = item;
+    var itemOrg = item;
     if(item.indexOf(':') != -1) {
       var parts = item.split(':');
+      itemOrg = item;
       item = parts.join('\\:');
     }
+    window.location.hash = itemOrg;
     $('.active-item').removeClass('active-item');
     $('body').scrollTop($(item).offset().top - 100);
     $(item).addClass('active-item');
   };
+  
   $('body#vocab .menu-col a').click(function (e) {
     e.preventDefault();
     setActive($(this).attr('href'));
@@ -56,8 +65,6 @@ window.onload = function () {
   $('body#vocab .loc a').click(function (e) {
     e.preventDefault();
     setActive($(this).attr('href'));
-    
   });
-
 
 }
