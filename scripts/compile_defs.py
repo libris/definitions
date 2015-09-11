@@ -1,5 +1,5 @@
 from __future__ import print_function
-import os
+from os import makedirs, path as P
 import sys
 import re
 import json
@@ -11,7 +11,7 @@ from rdflib.namespace import SKOS, DCTERMS
 from rdflib_jsonld.serializer import from_rdf
 
 
-scriptpath = lambda pth: os.path.join(os.path.dirname(__file__), pth)
+scriptpath = lambda pth: P.join(P.dirname(__file__), pth)
 
 
 SDO = Namespace("http://schema.org/")
@@ -336,14 +336,14 @@ def cached_rdf(fpath):
     source = Graph()
     http = 'http://'
     if not CACHEDIR:
-        print >> sys.stderr, "No cache directory configured"
+        print("No cache directory configured", file=sys.stderr)
     elif fpath.startswith(http):
         remotepath = fpath
-        fpath = os.path.join(CACHEDIR, remotepath[len(http):]) + '.ttl'
-        if not os.path.isfile(fpath):
-            fdir = os.path.dirname(fpath)
-            if not os.path.isdir(fdir):
-                os.makedirs(fdir)
+        fpath = P.join(CACHEDIR, remotepath[len(http):]) + '.ttl'
+        if not P.isfile(fpath):
+            fdir = P.dirname(fpath)
+            if not P.isdir(fdir):
+                makedirs(fdir)
             source.parse(remotepath)
             source.serialize(fpath, format='turtle')
             return source
@@ -352,7 +352,7 @@ def cached_rdf(fpath):
     return source.parse(fpath)
 
 
-def run(names, outdir, cache):
+def compile_defs(names, outdir, cache):
     global CACHEDIR
     if cache:
         CACHEDIR = cache
@@ -366,15 +366,49 @@ def run(names, outdir, cache):
             resultset = {name: data}
         for name, data in resultset.items():
             _output(name, data, outdir)
-        print
+        print()
+
+def compile_defs_lines(names, outfpath, cache):
+    global CACHEDIR
+    if cache:
+        CACHEDIR = cache
+    with open(outfpath, 'w') as fp:
+        for name in names:
+            if len(names) > 1:
+                print("Dataset:", name)
+            data = datasets[name]()
+            if isinstance(data, tuple):
+                context, resultset = data
+            else:
+                context = data.pop('@context')
+                if len(data) == 1:
+                    resultset = (data.get('byNotation') or data['index'])
+                else:
+                    resultset = {name: data}
+            for key, data in resultset.items():
+                item = data.pop('about', None)
+                if item:
+                    # TODO: this just undoes what's done above; just don't do it above...
+                    if data['@id'].endswith('?data'):
+                        assert len(data) == 1
+                        data, item = item, None
+                    else:
+                        data['about'] = {'@id': item['@id']}
+                data['inDataset'] = '/dataset/%s' % name
+                descriptions = {'entry': data}
+                if item:
+                    descriptions['items'] = [item]
+                data = {'descriptions': descriptions}
+                # TODO: inspect links and add 'quoted' objects...
+                print(json.dumps(data), file=fp)
 
 def _output(name, data, outdir):
     result = _serialize(data)
     if result and outdir:
-        outfile = os.path.join(outdir, "%s.jsonld" % name)
-        outdir = os.path.dirname(outfile)
-        if not os.path.isdir(outdir):
-            os.makedirs(outdir)
+        outfile = P.join(outdir, "%s.jsonld" % name)
+        outdir = P.dirname(outfile)
+        if not P.isdir(outdir):
+            makedirs(outdir)
         fp = open(outfile, 'w')
     else:
         fp = sys.stdout
@@ -397,19 +431,24 @@ def _serialize(data):
 
 
 if __name__ == '__main__':
+    import argparse
 
-    from optparse import OptionParser
-    op = OptionParser("Usage: %prog [-h] [-o OUTPUT_DIR] [DATASET..]",
-            description="Available datasets: " + ", ".join(datasets))
-    op.add_option('-o', '--outdir', type=str, help="Output directory")
-    op.add_option('-c', '--cache', type=str, help="Cache directory")
-    opts, args = op.parse_args()
+    argp = argparse.ArgumentParser(
+            description="Available datasets: " + ", ".join(datasets),
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    arg = argp.add_argument
+    arg('-o', '--outdir', type=str, default="build", help="Output directory")
+    arg('-c', '--cache', type=str, default="cache", help="Cache directory")
+    arg('-l', '--lines', action='store_true',
+            help="Output a single file with one JSON-LD document per line")
+    arg('datasets', metavar='DATASET', nargs='*')
 
-    if not args:
-        if opts.outdir:
-            args = list(datasets)
-        else:
-            op.print_usage()
-            op.exit()
+    args = argp.parse_args()
+    if not args.datasets and args.outdir:
+        args.datasets = list(datasets)
 
-    run(args, opts.outdir, opts.cache)
+    if args.lines:
+        fname = 'definitions.jsonld.lines'
+        compile_defs_lines(args.datasets, P.join(args.outdir, fname), args.cache)
+    else:
+        compile_defs(args.datasets, args.outdir, args.cache)
