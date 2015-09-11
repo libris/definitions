@@ -10,6 +10,7 @@
 @import 'list.less';
 @import 'thing.less';
 @import 'items.less';
+@import 'marcframe.less';
 
 // ----------- VARIABLES ------------
 @bg-site: lighten(@happy-muted-desert, 15%);
@@ -39,7 +40,16 @@ body.has-navbar {
   padding-top: 70px;
 }
 
+body#index {
+  padding-top: 100px;
+}
+
 body > .navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 999;
   border: solid @border-navbar;
   background-color: @bg-navbar;
   border-width: 0px 0px 1px 0px;
