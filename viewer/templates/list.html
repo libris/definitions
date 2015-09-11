@@ -7,8 +7,7 @@
 
 % block content
 
-  <div class="row">
-  <nav class="navbar navbar-default nav-groups bg-gray-lighter col-md-offset-2 col-md-8">
+  <nav class="navbar navbar-default nav-groups bg-gray-lighter hidden-xs">
     <ol class="nav navbar-nav">
       % for itype, items in item_groups_by_type
         <li>
@@ -17,6 +16,7 @@
       % endfor
     </ol>
   </nav>
+  <div class="row">
   % for itype, items in item_groups_by_type
     <section id="${itype}" class="col-md-4">
       % set t = vocab.index[itype]

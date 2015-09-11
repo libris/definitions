@@ -1,0 +1,60 @@
+
+.chip-class {
+  .vocab-item-style(@color-class, solid);
+}
+.chip-prop {
+  .vocab-item-style(@color-prop, solid);
+}
+.chip-ext {
+  .vocab-item-style(@color-ext, dashed);
+}
+
+.vocab-item-style(@color, @border-style) {
+  border: solid @color;
+  border-width: 1px 1px 1px 6px;
+  border-style: @border-style;
+  border-left-style: solid;
+  background-color: @white;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  padding: 0px 5px;
+  border-radius: 4px;
+  a {
+    color: @color;
+  }
+}
+
+.items .ext a:after {
+  font-family: FontAwesome;
+  font-size: 85%;
+  content: " \f08e";
+}
+
+.items,
+.items > li {
+  list-style: none;
+  display: inline;
+  word-break: break-word;
+}
+.items > li {
+  .vocab-item-style(@color-class, solid);
+  display: inline-block;
+  margin-bottom: 4px;
+}
+// .rdf-baseclasses
+// .rdf-subclasses
+
+.items {
+  li.ext {
+    .vocab-item-style(@color-ext, dashed);
+  }
+  &.baseproperties, &.subproperties {
+    li {
+      .vocab-item-style(@color-prop, solid);
+    }
+  }
+  .ext p, .baseproperties p {
+    font-size: 0.8em;
+    margin: 0 0 4px;
+  }
+  
+}
