@@ -2,8 +2,13 @@
 
 {% block title %}Saker{% endblock %}
 
+{% block bodyattrs %}id="list"{% endblock %}
+
+
 % block content
-  <nav class="navbar navbar-default">
+
+  <div class="row">
+  <nav class="navbar navbar-default nav-groups bg-gray-lighter col-md-offset-2 col-md-8">
     <ol class="nav navbar-nav">
       % for itype, items in item_groups_by_type
         <li>
@@ -13,7 +18,7 @@
     </ol>
   </nav>
   % for itype, items in item_groups_by_type
-    <section id="${itype}" class="pull-left col-md-4">
+    <section id="${itype}" class="col-md-4">
       % set t = vocab.index[itype]
       <h2>${t and t.label or itype}</h2>
       <ul>
@@ -26,4 +31,5 @@
       </ul>
     </section>
   % endfor
+  </div>
 % endblock

@@ -5,10 +5,9 @@
 
 {% block title %}${graph.label(list(vocabs)[0])} - Vocab View{% endblock %}
 
-% block stylesheets
-  <link rel="stylesheet" href="/css/vocab.css" />
-  <link rel="stylesheet" href="/css/graph.css" />
-% endblock
+{% block bodyattrs %}id="vocab"{% endblock %}
+
+{% block containerclass %}container-fluid{% endblock %}
 
 % set rclasses = get_classes(graph)
 % set rproperties = get_properties(graph)
@@ -17,8 +16,6 @@
 
 % set RANGE = union(SCHEMA.rangeIncludes, RDFS.range)
 
-% block navigation
-% endblock
 
 
 % block content
@@ -257,7 +254,7 @@
         % if domains
           <dt>Domain(s)</dt>
           <dd>
-            <ul class="list-unstyled">
+            <ul class="list-unstyled items ${classname}">
               % for c in domains
               <li class="${listclass(c)}">
                 <a href="${link(c)}">${c.qname()}</a>
@@ -271,7 +268,7 @@
         % if ranges
           <dt>Range(s)</dt>
           <dd>
-            <ul class="list-unstyled">
+            <ul class="list-unstyled items ${classname}">
               % for c in ranges
               <li class="${listclass(c)}">
                 <a href="${link(c)}">${c.qname()}</a>

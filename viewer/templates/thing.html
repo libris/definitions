@@ -2,7 +2,8 @@
 
 {% block title %}${vocab.labelgetter(thing)}{% endblock %}
 
-{% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
+{% block bodyattrs %}vocab="http://schema.org/" id="thing"{% endblock %}
+
 
 {% block navpath %}
   <li><a href="${url_for('thingview.listview')}">Saker</a></li>
@@ -10,12 +11,13 @@
 {% endblock %}
 
 % block content
+
   <div class="row">
-    <div class="col-md-9">
-      ${viewthing(thing, element='article', classes='panel panel-default')}
+    <div class="col-lg-9 col-md-12">
+      ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
     % if not rel and thing[REVERSE]
-      <div class="col-md-3">
+      <div class="col-lg-3">
         <h4>${ui[REVERSE].label}</h4>
         <dl resource="${thing[ID]}">
           % for k, vs in thing[REVERSE].items()
@@ -33,7 +35,7 @@
   </div>
 % endblock
 
-% macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
+% macro viewthing(thing, element='div', classes='panel panel-default link-item', rel=None, rev=None)
   % set thing_id = thing[ID]
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
@@ -61,7 +63,7 @@
           <a href="${thing_url}">
             ${ldview.getlabel(thing)}</a>
           ${termref(t, classes='btn btn-primary')}
-          <a href="${thing_url}">
+          <a href="${thing_url}" class="thing-id">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
         </h1>
       </header>
@@ -150,7 +152,7 @@
 % endmacro
 
 % block footer
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default">
     <p class="navbar-text">Other formats:</p>
     <ul class="nav nav-pills">
       <li>

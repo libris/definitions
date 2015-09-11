@@ -74,6 +74,6 @@ def vocabview():
         return '#' + obj.qname()
 
     def listclass(o):
-        return 'ext' if ':' in o.qname() else ''
+        return 'ext' if ':' in o.qname() else 'loc'
 
     return render_template('vocab.html', **vars())

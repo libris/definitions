@@ -18,9 +18,9 @@
     "vendor:css": "cleancss static/vendor/*/css/*.css -o static/build/vendor.min.css #--source-map",
     "build": "mkdir -p static/build && parallelshell 'npm run build:js' 'npm run build:less'",
     "build:js": "uglifyjs static/js/*.js -o static/build/app.min.js --source-map static/build/app.min.js.map --source-map-url ./app.min.js.map --source-map-root /",
-    "build:less": "#lessc static/less/*.less static/build/app.css --source-map=static/build/app.css.map",
+    "build:less": "lessc static/less/main.less static/css/app.css --source-map=static/build/app.css.map",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:less'",
     "watch:js": "watch 'npm run build:js' static/js/",
-    "watch:less": "#watch 'npm run build:less' static/less/"
+    "watch:less": "watch 'npm run build:less' static/less/"
   }
 }

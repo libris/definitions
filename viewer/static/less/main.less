@@ -1,0 +1,62 @@
+// ----------- IMPORT CORES ---------
+// Import standard bootstrap
+@import '../vendor/bootstrap/less/bootstrap.less';
+// Import KB styles
+@import '../vendor/kungbib-styles/less/kb-styles.less';
+
+// ----------- IMPORT COMPONENTS ----
+@import 'vocab.less';
+@import 'graph.less';
+@import 'list.less';
+@import 'thing.less';
+
+// ----------- VARIABLES ------------
+@bg-site: lighten(@happy-muted-desert, 15%);
+@bg-navbar: @white;
+@border-navbar: @gray-light;
+@bg-footer: @white;
+@border-footer: @gray-light;
+@color-class: @happy-blue;
+@color-prop: @happy-magenta;
+@color-ext: #d51;
+
+// ----------- BASE STYLES ----------
+
+body {
+  position: relative;
+  background-color: @bg-site;
+}
+
+body.has-navbar {
+  padding-top: 70px;
+}
+
+body > .navbar {
+  border: solid @border-navbar;
+  background-color: @bg-navbar;
+  border-width: 0px 0px 1px 0px;
+}
+
+.dropdown-menu.list-inline {
+  width: 42em;
+}
+.dropdown-menu.list-inline > li > a {
+  padding: 2px 8px;
+}
+
+tbody td, tbody th {
+  vertical-align: top;
+}
+
+.has-navbar [id]:before {
+  display: block;
+  content: " ";
+  height: 50px;
+  margin-top: -50px;
+}
+
+footer {
+  background-color: @bg-footer;
+  border: solid @border-footer;
+  border-width: 1px 0px 0px 0px;
+}
