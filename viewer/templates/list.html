@@ -4,17 +4,20 @@
 
 {% block bodyattrs %}id="list"{% endblock %}
 
+{% block navcontainerclass %} container-fluid {% endblock %}
 
 % block content
 
   <nav class="navbar navbar-default nav-groups bg-gray-lighter hidden-xs">
-    <ol class="nav navbar-nav">
-      % for itype, items in item_groups_by_type
-        <li>
-          <a href="#${itype}">${t and t.label or itype}</a>
-        </li>
-      % endfor
-    </ol>
+    <div class="container-fluid">
+      <ol class="nav navbar-nav">
+        % for itype, items in item_groups_by_type
+          <li>
+            <a href="#${itype}">${t and t.label or itype}</a>
+          </li>
+          % endfor
+        </ol>
+    </div>
   </nav>
   <div class="row">
   % for itype, items in item_groups_by_type

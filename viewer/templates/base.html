@@ -9,7 +9,8 @@
   </head>
   <body {% block bodyattrs %}{% endblock %}>
     {% block navigation %}
-      <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
+      <div class="{% block navcontainerclass %}container{% endblock %}">
         <div class="navbar-header">
           <div class="navbar-brand navbar-logo">
                 <a href="/"><img src="/assets/kb_logo_black.svg"></a>
@@ -21,7 +22,8 @@
             <li class="active"><a>${self.title()}</a></li>
           {% endblock %}
         </ol>
-      </nav>
+      </div>
+    </nav>
     {% endblock %}
     <main class="{% block containerclass %}container{% endblock %}">
       {% block content %}{% endblock %}
