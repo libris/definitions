@@ -20,12 +20,17 @@ $(function () {
     function display() {
       $('.state-active').removeClass('state-active');
       $('#' + ref).addClass('state-active');
-      $('.state-active').css('top', linkPos.Y - ($('.state-active').height()/2) + 8 + "px");
-      $('.state-active').css('left', (linkPos.X + 10) + "px");
+      
+      $('.state-active')
+        .css('top', linkPos.Y - ($('.state-active').height()/2) + 8 + "px")
+        .css('left', (linkPos.X + 10) + "px");
+      $('.state-active .panel-body').scrollTop(0);
+        
       if(insidePopover)
         $('.state-active .arrow').css('display', 'none');
       else
         $('.state-active .arrow').css('display', 'block');
+        
     }
     if (!loaded) {
       embedvocab.append('<article class="panel text-center">' +
