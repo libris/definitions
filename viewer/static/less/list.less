@@ -21,16 +21,28 @@ body#list {
     margin-top: 1em;
   }
   .ul-group {
-    -webkit-columns: 3 200px;
-    -moz-columns: 3 200px;
+    @media screen and (min-width: @screen-sm-min) {
+      -webkit-columns: 2 200px;
+      -moz-columns: 2 200px;
+        columns: 2 200px;
+    };
+    @media screen and (min-width: @screen-lg-min) {
+      -webkit-columns: 3 200px;
+      -moz-columns: 3 200px;
         columns: 3 200px;
+    };
     list-style: none;
     padding: 0px;
     li {
       border: solid fadeout(@black, 90%);
       padding: 0px 1em 0px 1em;
       border-width: 0px 0px 0px 3px;
-      display: block;
+      a {
+        display: block;
+        -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+          page-break-inside: avoid; /* Firefox */
+               break-inside: avoid; /* IE 10+ */
+      }
     }
   }
   
