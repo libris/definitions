@@ -3,8 +3,16 @@
 
 {% block bodyattrs %}id="index"{% endblock %}
 
+% block jumbotron
+<div class="jumbotron bg-happy-muted-magenta">
+  <div class="container">
+    <h1>ID.KB.SE</h1>
+  </div>
+</div>
+% endblock
+
 % block content
-  <h1>Definitioner för id.kb.se</h1>
+  <h1>Definitioner</h1>
   <ul>
     <li>
       <a href="${url_for('vocabview.vocabview')}">Basvokabulär för bibliografiska termer</a>
@@ -32,7 +40,7 @@
           KUNGL. BIBLIOTEKET
         </a></strong>
         <br>
-        <span>Support: <a href="mailto:libris@kb.se">libris@kb.se</a></span>
+        <!-- <span>Support: <a href="mailto:libris@kb.se">libris@kb.se</a></span> -->
       </p>
     </div>
   </div>
