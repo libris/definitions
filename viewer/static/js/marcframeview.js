@@ -57,6 +57,7 @@ $(function () {
     var ref = $(this).attr('href').replace(/[^#]*#(.*)/, "$1");
     
     openTerm(ref, true);
+    return false;
   });
     
   $(document).on('click', termLinkSel, function (e) {
@@ -69,5 +70,38 @@ $(function () {
     
     return false;
   });
+  
+  
+  $(document).on('click', '.menu-col a', function(e) {
+    e.preventDefault();
+    var ref = $(this).attr('href');
+    setActive(ref);
+  });
+  
+  function setActive(ref) {
+    window.location.hash = ref;
+    console.log(ref);
+    $('body').scrollTop($(ref).offset().top - 75);
+  }
+  function setActive(ref) {
+    var itemOrg = ref;
+    if(ref.indexOf(':') != -1) {
+      var parts = ref.split(':');
+      itemOrg = ref;
+      ref = parts.join('\\:');
+    }
+    window.location.hash = itemOrg;
+    $('body').scrollTop($(ref).offset().top - 100);
+  };
+  
+  $(document).ready(function () {
+    // Target Navigation
+    if(window.location.hash.length > 0) {
+      setTimeout(function () {
+        setActive(window.location.hash);
+      }, 250);
+    }
+  })
+  
 
 });

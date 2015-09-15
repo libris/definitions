@@ -44,7 +44,7 @@
         <table class="table table-bordered marcframetable">
           % for tag, kind, dfn in fields(catdfn)
             <tr>
-              <th><div id="${cat}-${tag}">${tag}</div></th>
+              <th><div id="${cat}-${tag}" class="chip-marc">${tag}</div></th>
               <td>
                 % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
                   % if key in dfn
@@ -85,7 +85,7 @@
               </td>
               <td class="col-md-6">
                 % if dfn._spec
-                  <ol>
+                  <ul class="example">
                     % for spec in dfn._spec
                       % if spec.source and spec.result
                         <li>
@@ -101,7 +101,7 @@
                         </li>
                       % endif
                     % endfor
-                  </ol>
+                  </ul>
                 % endif
               </td>
             </tr>
