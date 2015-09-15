@@ -44,7 +44,7 @@
         <table class="table table-bordered marcframetable">
           % for tag, kind, dfn in fields(catdfn)
             <tr>
-              <th><div id="${cat}-${tag}" class="chip-marc">${tag}</div></th>
+              <th><div id="${cat}-${tag}">${tag}</div></th>
               <td>
                 % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
                   % if key in dfn
@@ -137,15 +137,15 @@
   % if (not isinstance(value, basestring) or not value.startswith(('@', '_'))
       ) and not isinstance(value, bool) and key in (
         'aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
-    <a href="../vocabview/#${value}">${value}</a>
+    <a href="../vocabview/#${value}" class="${key}">${value}</a>
   % elif key == 'tokenMap'
     <a href="#map-${value}">${value}</a>
   % elif key == 'inherit' and value.isdigit()
-    <a href="#${cat}-${value}">${cat} ${value}</a>
+    <a href="#${cat}-${value}" class="chip-marc">${cat} ${value}</a>
   % elif key == 'inherit' and ':' in value
-    TEST <a href="#${value.replace(':', '-')}">${value.replace(':', ' ')}</a>
+    TEST <a href="#${value.replace(':', '-')}" class="chip-marc">${value.replace(':', ' ')}</a>
   % elif key == 'inherit'
-    <a href="#${value}-${tag_or_code}">${value} ${tag_or_code}</a>
+    <a href="#${value}-${tag_or_code}" class="chip-marc">${value} ${tag_or_code}</a>
   % elif isinstance(value, dict)
     <table class="table table-condensed table-striped">
         % for key, val in sorted(value.items())

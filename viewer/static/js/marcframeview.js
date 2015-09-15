@@ -72,17 +72,12 @@ $(function () {
   });
   
   
-  $(document).on('click', '.menu-col a', function(e) {
+  $(document).on('click', ".menu-col a, .marcframetable a[href^='#']", function(e) {
     e.preventDefault();
     var ref = $(this).attr('href');
     setActive(ref);
   });
   
-  function setActive(ref) {
-    window.location.hash = ref;
-    console.log(ref);
-    $('body').scrollTop($(ref).offset().top - 75);
-  }
   function setActive(ref) {
     var itemOrg = ref;
     if(ref.indexOf(':') != -1) {
@@ -91,7 +86,7 @@ $(function () {
       ref = parts.join('\\:');
     }
     window.location.hash = itemOrg;
-    $('body').scrollTop($(ref).offset().top - 100);
+    $('body').scrollTop($(ref).offset().top - 75);
   };
   
   $(document).ready(function () {
