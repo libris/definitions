@@ -2,19 +2,22 @@
 from __future__ import unicode_literals
 __metaclass__ = type
 
-from rdflib import Graph, URIRef, Namespace, RDF, RDFS, OWL
+from rdflib import Graph, Literal, URIRef, Namespace, RDF, RDFS, OWL
 
 from lddb.ld.keys import *
 from lddb.ld.frame import autoframe
 
 
 SDO = Namespace("http://schema.org/")
+VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 
 
 class Vocab:
 
     def __init__(self, vocab_source, vocab_uri=None, lang='en'):
         self.index = {}
+        self.unstable_keys = set()
+
         label_key_items = []
 
         g = Graph().parse(vocab_source, format='turtle')
@@ -54,6 +57,9 @@ class Vocab:
 
             self.index.setdefault(key, {}).update(term)
 
+            if (s, VS.term_status, Literal('unstable')) in g:
+                self.unstable_keys.add(key)
+
             def distance_to(prop):
                 return path_distance(g, s,
                     RDFS.subPropertyOf | OWL.equivalentProperty, prop)
@@ -76,15 +82,18 @@ class Vocab:
             if typedfn:
                 typeprops.update(typedfn.get('properties', []))
 
+        label_keys_size = len(self.label_keys)
         def keykey(key):
             classdistance = 0 if typeprops and key in typeprops else 1
             if key.startswith('@'):
                 importance_index = 0
+            elif key in self.unstable_keys:
+                importance_index = label_keys_size + 1
             else:
                 try:
                     importance_index = self.label_keys.index(key)
                 except ValueError:
-                    importance_index = len(self.label_keys)
+                    importance_index = label_keys_size
             is_link = self.index[key].get(TYPE) == ID
             return (importance_index, is_link, classdistance, key)
 
