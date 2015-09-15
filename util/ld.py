@@ -110,7 +110,7 @@ class View:
         if item_id[0] != '/':
             item_id = '/' + item_id
         record = self.storage.get_record(item_id)
-        return self.get_decorated_data(record) if record else None
+        return self.get_decorated_data(record, True) if record else None
 
     def find_record_ids(self, item_id):
         record_ids = self.storage.find_record_ids(item_id)
@@ -122,7 +122,7 @@ class View:
         if records:
             return records[0].identifier
 
-    def get_decorated_data(self, record):
+    def get_decorated_data(self, record, add_references=False):
         # TODO: note what is entry and quoted explicitly, for view to display accordingly
         descriptions = record.data['descriptions']
         entry = descriptions.get('entry')
@@ -144,7 +144,8 @@ class View:
         main_item = entry if entry else items[0] if items else None
         main_id = main_item.get(ID) if main_item else None
 
-        graph += self._make_references_for(main_item)
+        if add_references:
+            graph += self._get_references_to(main_item)
 
         view = autoframe({GRAPH: graph}, main_id) or data
 
@@ -153,20 +154,18 @@ class View:
     def getlabel(self, item):
         # TODO: cache label...
         getlabel = self.vocab.labelgetter
-        return getlabel(item) or item[ID] # getlabel(self.get_item(item[ID]))
+        return getlabel(item) or item[ID] # getlabel(self.get_chip(item[ID]))
 
     def to_chip(self, item, *keep_refs):
         return {k: v for k, v in item.items()
                 if k in self.chip_keys or has_ref(v, *keep_refs)}
 
-    def _make_references_for(self, item):
+    def _get_references_to(self, item):
         references = []
+        # TODO: send choice of id:s to find_by_quotation?
         same_as = item.get('sameAs') if item else None
-        if not same_as:
-            return references
-
         item_id = item[ID]
-        quoted_id = same_as[0][ID]
+        quoted_id = same_as[0][ID] if same_as else item_id
         for quoting in self.storage.find_by_quotation(quoted_id, limit=256):
             qdesc = quoting.data['descriptions']
             _fix_refs(item_id, quoted_id, qdesc)
@@ -177,7 +176,7 @@ class View:
         return references
 
 
-# TODO: quoted id:s are temporary and should be replaced with canonical id (or
+# FIXME: quoted id:s are temporary and should be replaced with canonical id (or
 # *at least* sameAs id) in stored data
 def _fix_refs(real_id, ref_id, descriptions):
     entry = descriptions.get('entry')
