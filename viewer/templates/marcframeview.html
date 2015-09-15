@@ -4,8 +4,8 @@
 
 {% block bodyattrs %}class="has-navbar" data-spy="scroll" data-target="#marcnavbar" id="marcframeview"{% endblock %}
 
-{% block containerclass %}container{% endblock %}
-
+{% block containerclass %}container-fluid{% endblock %}
+{% block navcontainerclass %} container-fluid {% endblock %}
 
 
 % block scripts
@@ -14,29 +14,26 @@
 % endblock
 
 % block content
-<nav id="marcnavbar" class="navbar navbar-inverse bg-happy-muted-denim navbar-fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">MARCFrame</a>
-    <ul class="nav navbar-nav">
+<div class="row">
+  <div class="col-sm-3 col-md-3 col-lg-2 hidden-xs menu-col">
+    <nav>
       % for cat, catdfn in marc_categories()
-        <li>
+        <h3>
           <a href="#${cat}">${cat}</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-            aria-expanded="false"><span class="caret"></span></a>
-          <ul class="dropdown-menu list-inline" role="menu" style="">
-            % for tag, kind, dfn in fields(catdfn)
-              <li>
-                <a href="#${cat}-${tag}">${tag}</a>
-              </li>
-            % endfor
-          </ul>
-        </li>
+        </h3>
+        <ul>
+          % for tag, kind, dfn in fields(catdfn)
+            <li>
+              <a href="#${cat}-${tag}">${tag}</a>
+            </li>
+          % endfor
+        </ul>
       % endfor
-    </ul>
+    </nav>
   </div>
-</nav>
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 content-col">
   <section>
     <h1>MARCFrame</h1>
     <p>KB/LIBRIS mappings of MARC to RDF vocabulary terms.</p>
@@ -133,6 +130,7 @@
       </div>
     % endfor
   </section>
+</div>
 % endblock
 
 % macro show_value(cat, tag_or_code, key, value)
