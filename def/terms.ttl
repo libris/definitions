@@ -28,6 +28,7 @@
 @prefix prism: <http://prismstandard.org/namespaces/1.2/basic/> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
 
 @prefix : <http://libris.kb.se/def/terms#> .
 @prefix marcenum: <http://libris.kb.se/def/marc/enum/> .
@@ -134,6 +135,40 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
 
+
+##
+# Paged Collections
+
+:PagedCollection a owl:Class;
+    owl:equivalentClass hydra:PagedCollection .
+
+:itemsPerPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:itemsPerPage .
+
+:firstPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:firstPage;
+    rdfs:subPropertyOf iana:first .
+
+:previousPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:previousPage;
+    rdfs:subPropertyOf iana:prev .
+
+:nextPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:nextPage;
+    rdfs:subPropertyOf iana:next .
+
+:lastPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:lastPage;
+    rdfs:subPropertyOf iana:last .
+
+:items a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:member .
 
 ##
 # Creative Works
