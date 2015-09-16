@@ -142,12 +142,12 @@ class View:
 
         graph = []
         if entry:
-            entry['_graph_id'] = record.identifier
+            entry['quotedFrom'] = {ID: record.identifier}
             graph.append(entry)
         if items:
             graph += items
         if quoted:
-            graph += [dict(ngraph[GRAPH], _graph_id=ngraph.get(ID))
+            graph += [dict(ngraph[GRAPH], quotedFrom={ID: ngraph.get(ID)})
                       for ngraph in quoted]
 
         main_item = entry if entry else items[0] if items else None
@@ -162,8 +162,7 @@ class View:
 
     def getlabel(self, item):
         # TODO: cache label...
-        getlabel = self.vocab.labelgetter
-        return getlabel(item) or item[ID] # getlabel(self.get_chip(item[ID]))
+        return self.vocab.get_label_for(item) or item[ID] # getlabel(self.get_chip(item[ID]))
 
     def to_chip(self, item, *keep_refs):
         return {k: v for k, v in item.items()
@@ -174,7 +173,7 @@ class View:
         # TODO: send choice of id:s to find_by_quotation?
         same_as = item.get('sameAs') if item else None
         item_id = item[ID]
-        quoted_id = same_as[0][ID] if same_as else item_id
+        quoted_id = same_as[0].get(ID) if same_as else item_id
         for quoting in self.storage.find_by_quotation(quoted_id, limit=256):
             qdesc = quoting.data['descriptions']
             _fix_refs(item_id, quoted_id, qdesc)
