@@ -17,7 +17,7 @@ scriptpath = lambda pth: P.join(P.dirname(__file__), pth)
 SDO = Namespace("http://schema.org/")
 LIBRIS = Namespace("http://libris.kb.se/def/terms#")
 
-BASE = "http://libris.kb.se/"
+BASE = "http://id.kb.se/"
 
 ISO639_1Lang = URIRef("http://id.loc.gov/vocabulary/iso639-1/iso639-1_Language")
 
