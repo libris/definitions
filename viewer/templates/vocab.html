@@ -8,6 +8,7 @@
 {% block bodyattrs %}id="vocab"{% endblock %}
 
 {% block containerclass %}container-fluid{% endblock %}
+{% block navcontainerclass %} container-fluid {% endblock %}
 
 % set rclasses = get_classes(graph)
 % set rproperties = get_properties(graph)
@@ -234,7 +235,7 @@
           <dd>
             <ul class="list-inline">
               % for note in notes
-                <li class="note">${note}</li>
+                <li class="chip-marc">${note}</li>
               % endfor
             </ul>
           </dd>

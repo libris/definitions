@@ -1,7 +1,18 @@
 % extends "base.html"
 {% block title %}Index{% endblock %}
+
+{% block bodyattrs %}id="index"{% endblock %}
+
+% block jumbotron
+<div class="jumbotron bg-happy-muted-denim">
+  <div class="container">
+    <h1>ID.KB.SE</h1>
+  </div>
+</div>
+% endblock
+
 % block content
-  <h1>Definitioner för id.kb.se</h1>
+  <h1>Definitioner</h1>
   <ul>
     <li>
       <a href="${url_for('vocabview.vocabview')}">Basvokabulär för bibliografiska termer</a>
@@ -13,4 +24,27 @@
       <a href="${url_for('thingview.listview')}">Saker</a>
     </li>
   </ul>
+% endblock
+
+% block footer
+
+<footer class="footer">
+  <div class="footer-container">
+  <div class="container">
+    <div class="col-md-2 text-center">
+      <img src="/assets/kb_logo_black.svg" class="logo-medium" />
+    </div>
+    <div class="col-md-10">
+      <p>
+        <strong><a href="http://www.kb.se" alt="Länk till Kungl. Bibliotekets webbplats">
+          KUNGL. BIBLIOTEKET
+        </a></strong>
+        <br>
+        <!-- <span>Support: <a href="mailto:libris@kb.se">libris@kb.se</a></span> -->
+      </p>
+    </div>
+  </div>
+  </div>
+</footer>
+
 % endblock

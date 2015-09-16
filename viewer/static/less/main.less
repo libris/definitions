@@ -5,10 +5,13 @@
 @import '../vendor/kungbib-styles/less/kb-styles.less';
 
 // ----------- IMPORT COMPONENTS ----
+@import 'index.less';
 @import 'vocab.less';
 @import 'graph.less';
 @import 'list.less';
 @import 'thing.less';
+@import 'items.less';
+@import 'marcframe.less';
 
 // ----------- VARIABLES ------------
 @bg-site: lighten(@happy-muted-desert, 15%);
@@ -19,6 +22,13 @@
 @color-class: @happy-blue;
 @color-prop: @happy-magenta;
 @color-ext: #d51;
+
+// ----------- FONTS ----------------
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
 
 // ----------- BASE STYLES ----------
 
@@ -31,10 +41,23 @@ body.has-navbar {
   padding-top: 70px;
 }
 
+body#index {
+  padding-top: 100px;
+}
+
 body > .navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 999;
   border: solid @border-navbar;
   background-color: @bg-navbar;
   border-width: 0px 0px 1px 0px;
+}
+
+.navbar-header {
+  margin-left: 1em;
 }
 
 .dropdown-menu.list-inline {

@@ -3,6 +3,7 @@
 {% block title %}${vocab.labelgetter(thing)}{% endblock %}
 
 {% block bodyattrs %}vocab="http://schema.org/" id="thing"{% endblock %}
+{% block navcontainerclass %} container-fluid {% endblock %}
 
 
 {% block navpath %}
@@ -13,7 +14,7 @@
 % block content
 
   <div class="row">
-    <div class="col-lg-9 col-md-12">
+    <div class="col-lg-12 col-md-12">
       ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
     % if not rel and thing[REVERSE]
@@ -67,7 +68,7 @@
           % endif
           <a href="${thing_url}">
             ${ldview.getlabel(thing)}</a>
-          ${termref(t, classes='btn btn-primary')}
+          ${termref(t, classes='btn btn-primary', chiptype='chip-class')}
           <a href="${thing_url}" class="thing-id">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
         </h1>
@@ -141,13 +142,13 @@
   </${element}>
 % endmacro
 
-% macro termref(term, classes='')
+% macro termref(term, classes='', chiptype='')
   % set label = term.curie
   % if term.label
     % set label = term.label.title()
   % endif
   % if term.curie
-    <a href="${url_for('thingview.termview', term=term.curie)}"><span
+    <a href="${url_for('thingview.termview', term=term.curie)}" class="${chiptype}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}

@@ -9,8 +9,12 @@
   </head>
   <body {% block bodyattrs %}{% endblock %}>
     {% block navigation %}
-      <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
+      <div class="{% block navcontainerclass %}container{% endblock %}">
         <div class="navbar-header">
+          <div class="navbar-brand navbar-logo">
+                <a href="/"><img src="/assets/kb_logo_black.svg"></a>
+          </div>
           <a class="navbar-brand" href="/">id.kb.se</a>
         </div>
         <ol class="nav navbar-nav">
@@ -18,8 +22,10 @@
             <li class="active"><a>${self.title()}</a></li>
           {% endblock %}
         </ol>
-      </nav>
+      </div>
+    </nav>
     {% endblock %}
+    {% block jumbotron %}{% endblock %}
     <main class="{% block containerclass %}container{% endblock %}">
       {% block content %}{% endblock %}
     </main>
