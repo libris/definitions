@@ -19,6 +19,9 @@
     % if not rel and thing[REVERSE]
       <div class="col-lg-3">
         <h4>${ui[REVERSE].label}</h4>
+        <p>
+          <a href="${url_for('.find', o=thing[ID], limit=2000)}">${ui.SEE_ALL.label}&hellip;</a>
+        </p>
         <dl resource="${thing[ID]}">
           % for k, vs in thing[REVERSE].items()
             % set p = vocab.index[k] or {'curie': k}
@@ -57,6 +60,8 @@
             % set thing_url = thing_id
           % elif thing_id.startswith('/def/terms#')
             % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
+          % elif thing_id.startswith('/find?')
+            % set thing_url = thing_id
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
@@ -69,7 +74,7 @@
       </header>
     % endif
 
-    % if (not rev) and len(thing) > 1
+    % if (not rev) and rel != 'items' and len(thing) > 1
       <div class="panel-body">
         <dl class="{% if not rel %}dl-horizontal{% endif %}">
 
