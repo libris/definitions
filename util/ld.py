@@ -99,6 +99,38 @@ class Vocab:
 
         return sorted((key for key in item if key in self.index), key=keykey)
 
+    def get_label_for(self, item):
+        focus = item.get('focus')
+        if focus:
+            label = self.construct_label(focus)
+            if label:
+                return label
+        return self.labelgetter(item)
+
+    def construct_label(self, item):
+        has = item.__contains__
+        v = lambda k: " ".join(as_iterable(item.get(k, '')))
+        vs = lambda *ks: [v(k) for k in ks if has(k)]
+
+        types = set(as_iterable(item.get(TYPE)))
+
+        if types & {'UniformWork', 'CreativeWork'}:
+            label = self.labelgetter(item)
+            attr = item.get('attributedTo')
+            if attr:
+                attr_label = self.construct_label(attr)
+                if attr_label:
+                    label = "%s (%s)" % (label, attr_label)
+            return label
+
+        if types & {'Person', 'Persona', 'Family', 'Organization'}:
+            return " ".join([
+                    v('name') or ", ".join(vs('familyName', 'givenName')),
+                    v('numeration'),
+                    "(%s)" % v('personTitle') if has('personTitle') else "",
+                    "%s-%s" % (v('birthYear'), v('deathYear'))
+                    if (has('birthYear') or has('deathYear')) else ""])
+
     def labelgetter(self, item):
         for lkey in self.label_keys:
             label = item.get(lkey)
@@ -174,7 +206,7 @@ class View:
         same_as = item.get('sameAs') if item else None
         item_id = item[ID]
         quoted_id = same_as[0].get(ID) if same_as else item_id
-        for quoting in self.storage.find_by_quotation(quoted_id, limit=256):
+        for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
             qdesc = quoting.data['descriptions']
             _fix_refs(item_id, quoted_id, qdesc)
             references.append(self.to_chip(qdesc['entry'], item_id, quoted_id))
