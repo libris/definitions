@@ -14,7 +14,7 @@
 % block content
 
   <div class="row">
-    <div class="col-lg-9 col-md-12">
+    <div class="col-lg-12 col-md-12">
       ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
     % if not rel and thing[REV]
@@ -65,7 +65,7 @@
           % endif
           <a href="${thing_url}">
             ${vocab.labelgetter(db.index.get(thing_id, thing))}</a>
-          ${termref(t, classes='chip-class')}
+          ${termref(t, classes='', chiptype='chip-class')}
           <a href="${thing_url}" class="thing-id">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
         </h1>
@@ -139,7 +139,7 @@
   </${element}>
 % endmacro
 
-% macro termref(term, classes='')
+% macro termref(term, classes='', chiptype='')
   % set label = term.curie
   % if term.label
     % set label = term.label.title()
@@ -150,7 +150,7 @@
     % else
       % set term_url = url_for('thingview.termview', term=term.curie)
     % endif
-    <a href="${term_url}"><span
+    <a href="${term_url}" class="${chiptype}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}

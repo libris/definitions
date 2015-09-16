@@ -8,13 +8,41 @@ body#thing {
   }
   
   .link-item > .panel-heading {
-    background-color: @white;
+    // background-color: @white;
     overflow-x: hidden;
   }
   
   .main-item {
-    .panel-title > .thing-id {
+    .panel-title .chip-class {
       float: right;
+    }
+    .panel-body {
+      padding: 4px 4px;
+    }
+  }
+  dl {
+    margin-bottom: 0px;
+    display: inline-block;
+    
+    dd, dt {
+      padding: 0px;
+    }
+    dd {    
+      margin-bottom: 10px;
+      ul {
+        list-style: none;
+        padding: 0px;
+      }
+      .panel {
+        margin-bottom: 0px;
+      }
+    }
+    dt {
+      display: table-cell;
+      margin-bottom: 5px;
+      a {
+        color: @color-prop;
+      }
     }
   }
   
