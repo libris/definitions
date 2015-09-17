@@ -100,6 +100,7 @@
           % for k in vocab.sortedkeys(thing)
             % if k in vocab.index or k != REV
               % set p = vocab.index[k] or {'curie': k}
+              {% if loop.index > 1 %}<hr/>{% endif %}
               <dt>
                 ${termref(p)}
               </dt>
