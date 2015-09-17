@@ -16,20 +16,36 @@
 % block content
 <div class="row">
   <div class="col-sm-3 col-md-3 col-lg-2 hidden-xs menu-col">
-    <nav>
-      % for cat, catdfn in marc_categories()
-        <h3>
-          <a href="#${cat}">${cat}</a>
-        </h3>
+    
+    <ul class="nav nav-tabs" role="tablist">
+    % for cat, catdfn in marc_categories()
+      {% if cat == 'bib' %}
+        <li role="presentation" class="active">
+      {% else %}
+        <li role="presentation">
+      {% endif %}
+        <a href="#tab-${cat}" aria-controls="tab-${cat}" role="tab" data-toggle="tab">${cat}</a>
+      </li>
+    % endfor
+    </ul>
+    <div class="tab-content">
+    % for cat, catdfn in marc_categories()
+      {% if cat == 'bib' %}
+        <div role="tabpanel" class="tab-pane active" id="tab-${cat}">
+      {% else %}
+        <div role="tabpanel" class="tab-pane" id="tab-${cat}">
+      {% endif %}
         <ul>
           % for tag, kind, dfn in fields(catdfn)
-            <li>
-              <a href="#${cat}-${tag}">${tag}</a>
-            </li>
+          <li>
+            <a href="#${cat}-${tag}">${tag}</a>
+          </li>
           % endfor
         </ul>
-      % endfor
-    </nav>
+      </div>
+    % endfor
+    </div>
+    
   </div>
 </div>
 

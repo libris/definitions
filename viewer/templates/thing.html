@@ -14,11 +14,11 @@
 % block content
 
   <div class="row">
-    <div class="col-lg-12 col-md-12">
+    <div class="col-md-9">
       ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
     % if not rel and thing[REVERSE]
-      <div class="col-lg-3">
+      <div class="col-md-3">
         <h4>${ui[REVERSE].label}</h4>
         <p>
           <a href="${url_for('.find', o=thing[ID], limit=2000)}">${ui.SEE_ALL.label}&hellip;</a>
