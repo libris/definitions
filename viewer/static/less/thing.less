@@ -12,6 +12,9 @@ body#thing {
     overflow-x: hidden;
   }
   
+  .panel {
+    margin-bottom: 0.5em;
+  }
   .main-item {
     .panel-title .chip-class {
       float: right;
@@ -19,35 +22,35 @@ body#thing {
     .panel-body {
       padding: 4px 4px;
     }
-  }
-  dl {
-    margin-bottom: 0px;
-    display: inline-block;
-    
-    dd, dt {
-      padding: 0px;
-    }
-    dd {    
-      margin-bottom: 10px;
-      &:last-of-type {
-        margin-bottom: 0px;
-      }
-      ul {
-        list-style: none;
+    dl {
+      margin-bottom: 0px;
+      display: inline-block;
+      
+      dd, dt {
         padding: 0px;
-        li {
-          margin-bottom: 10px;
+      }
+      dd {    
+        margin-bottom: 10px;
+        &:last-of-type {
+          margin-bottom: 0px;
+        }
+        ul {
+          list-style: none;
+          padding: 0px;
+          li {
+            margin-bottom: 10px;
+          }
+        }
+        .panel {
+          margin-bottom: 0px;
         }
       }
-      .panel {
-        margin-bottom: 0px;
-      }
-    }
-    dt {
-      display: table-cell;
-      margin-bottom: 5px;
-      a {
-        color: @color-prop;
+      dt {
+        display: table-cell;
+        margin-bottom: 5px;
+        a {
+          color: @color-prop;
+        }
       }
     }
   }
