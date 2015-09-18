@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 from collections import OrderedDict
-import glob
+import re
 import json
 
 from flask import request, Response, render_template, redirect, abort, url_for, send_file
@@ -56,7 +56,16 @@ negotiator = Negotiator()
 @negotiator.add('text/html', 'html')
 @negotiator.add('application/xhtml+xml', 'xhtml')
 def render_html(path, data):
-    return render_template('thing.html', path=path, thing=data)
+    def data_url(suffix):
+        if path == '/find':
+            return url_for('thingview.find', suffix=suffix, **request.args)
+        elif isinstance(path, tuple):
+            somepath, rtype, match = path
+            return url_for('thingview.some', rtype=rtype, match=match, suffix=suffix)
+        else:
+            return url_for('thingview.thingview', path=path, suffix=suffix)
+
+    return render_template('thing.html', path=path, thing=data, data_url=data_url)
 
 @negotiator.add('application/ld+json', 'jsonld')
 def render_jsonld(path, data):
