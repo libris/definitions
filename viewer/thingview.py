@@ -204,6 +204,32 @@ def _get_limit_offset(args):
     return limit, offset
 
 
+@app.route('/some/<rtype>/<match>')
+@app.route('/some/<rtype>/<match>/data.<suffix>')
+def some(rtype, match, suffix=None):
+    parts = _tokenize(match.replace(':', ' '))
+    canonical_match = ":".join(parts)
+    if match != canonical_match:
+        return redirect(url_for('.some',
+            rtype=rtype, match=canonical_match, suffix=suffix), 301)
+    thing = {
+        "@type": "Ambiguity",
+        "notation": "%".join(parts),
+        "maybe": [{"@type": rtype, "notation": match}]
+    }
+    # TODO: find candidates; else 404
+    return rendered_response(('/some', rtype, match), suffix, thing)
+
+def _tokenize(stuff):
+    """
+    >>> print(_tokenize("One, Any (1911-)"))
+    1911 any one
+    """
+    return sorted(set(
+        re.sub(r'\W(?u)', '', part.lower(), flags=re.UNICODE)
+        for part in stuff.split(" ")))
+
+
 @app.route('/list/')
 def listview():
     return render_template('list.html')
