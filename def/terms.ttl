@@ -170,6 +170,20 @@ marcenum:bibLevel a skos:Collection;
     rdfs:domain :PagedCollection;
     owl:equivalentProperty hydra:member .
 
+
+##
+# Ambiguity
+
+:Ambiguity a owl:Class;
+    rdfs:label "Ambiguity"@en, "Otydlighet"@sv;
+    rdfs:comment "An ambiguous group of things sharing similar characteristics."@en .
+
+:maybe a owl:ObjectProperty;
+    rdfs:domain :Ambiguity;
+    rdfs:range owl:Thing;
+    rdfs:label "may be"@en, "kan vara"@sv;
+    rdfs:comment "A thing that something ambiguous may be."@en .
+
 ##
 # Creative Works
 
