@@ -1,6 +1,56 @@
 # Definitions Viewer
 
+## Requirements
+
+Requires the following to be installed on the host machine:
+
+* [Python 2.7+](http://python.org/)
+* [Pip](https://pip.pypa.io/) (commonly installed along with Python on modern distros)
+* [PostgreSQL 9.4+](http://www.postgresql.org/) (you need the JSON support of 9.4 or greater)
+
+(It is recommended to create a virtualenv for hosting self-contained Python
+environments.)
+
+Run:
+
+    $ pip install -r requirements.txt
+
+## Storage Preparation
+
+Create a psql database:
+
+    $ createdb -E UTF8 definitions
+
+Set up tables and indexes by calling:
+
+    $ python -mlddb.loader -n definitions --setup
+
+## Creating and Loading the Core Definitions
+
+Go to the root of this repository (`../`), and run:
+
+    $ python scripts/compile_defs.py --lines
+
+Import the result by running:
+
+    $ python -mlddb.loader -n definitions build/definitions.jsonld.lines
+
+## Running
+
+Just call:
+
+    $ python serve.py
+
+And go to <http://localhost:5000/>
+
+If you want to change settings for database access or Flask, create a file
+called `config-local.cfg` and edit to your liking (e.g. add `DEBUG = True`).
+See the base `config.cfg` for the default settings.
+
 ## Managing CSS and JS Resources
+
+Requires an installation of [Node](http://nodejs.org/) (including
+[NPM](https://www.npmjs.com/)).
 
 During development:
 
