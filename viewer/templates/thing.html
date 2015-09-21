@@ -66,11 +66,11 @@
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
-          <a href="${thing_url}">
+          <a href="${thing_url}" class="thing-label">
             ${ldview.getlabel(thing)}</a>
-          ${termref(t, classes='', chiptype='chip-class')}
           <a href="${thing_url}" class="thing-id">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
+          ${termref(t, classes='', chiptype='chip-class')}
         </h1>
       </header>
     % endif
