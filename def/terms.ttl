@@ -28,6 +28,7 @@
 @prefix prism: <http://prismstandard.org/namespaces/1.2/basic/> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
 
 @prefix : <http://libris.kb.se/def/terms#> .
 @prefix marcenum: <http://libris.kb.se/def/marc/enum/> .
@@ -134,6 +135,54 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
 
+
+##
+# Paged Collections
+
+:PagedCollection a owl:Class;
+    owl:equivalentClass hydra:PagedCollection .
+
+:itemsPerPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:itemsPerPage .
+
+:firstPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:firstPage;
+    rdfs:subPropertyOf iana:first .
+
+:previousPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:previousPage;
+    rdfs:subPropertyOf iana:prev .
+
+:nextPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:nextPage;
+    rdfs:subPropertyOf iana:next .
+
+:lastPage a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:lastPage;
+    rdfs:subPropertyOf iana:last .
+
+:items a owl:ObjectProperty;
+    rdfs:domain :PagedCollection;
+    owl:equivalentProperty hydra:member .
+
+
+##
+# Ambiguity
+
+:Ambiguity a owl:Class;
+    rdfs:label "Ambiguity"@en, "Otydlighet"@sv;
+    rdfs:comment "An ambiguous group of things sharing similar characteristics."@en .
+
+:maybe a owl:ObjectProperty;
+    rdfs:domain :Ambiguity;
+    rdfs:range owl:Thing;
+    rdfs:label "may be"@en, "kan vara"@sv;
+    rdfs:comment "A thing that something ambiguous may be."@en .
 
 ##
 # Creative Works
@@ -889,16 +938,16 @@ marcenum:bibLevel a skos:Collection;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :noteOnPublicationStatement a owl:DatatypeProperty;
-    rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanteckning"@sv;
+    rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :contentsNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:contentsNote;
-    rdfs:label "contents note"@en, "innehållsanteckning"@sv .
+    rdfs:label "contents note"@en, "innehållsanmärkning"@sv .
 
 :illustrationNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:illustrationNote;
-    rdfs:label "illustration note"@en, "illustrationsanteckning"@sv .
+    rdfs:label "illustration note"@en, "illustrationsanmärkning"@sv .
 
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
@@ -908,7 +957,7 @@ marcenum:bibLevel a skos:Collection;
     rdfs:range :Language .
 
 :languageNote a owl:DatatypeProperty;
-    rdfs:label "språkanteckning"@sv;
+    rdfs:label "språkanmärkning"@sv;
     owl:equivalentProperty bf:languageNote .
 
 :country a owl:ObjectProperty ;
@@ -1242,7 +1291,7 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "dold etikett"@sv;
     owl:equivalentProperty skos:hiddenLabel .
 :historyNote a owl:DatatypeProperty;
-    rdfs:label "historikanteckning"@sv;
+    rdfs:label "historikanmärkning"@sv;
     owl:equivalentProperty skos:historyNote .
 :inScheme a owl:ObjectProperty;
     rdfs:label "ingår i schema"@sv;
@@ -1258,7 +1307,7 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:notation .
 :note a owl:DatatypeProperty;
-    rdfs:label "anteckning"@sv;
+    rdfs:label "anmärkning"@sv;
     owl:equivalentProperty skos:note .
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen etikett"@sv;
@@ -1268,10 +1317,10 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "relaterad"@sv;
     owl:equivalentProperty skos:related .
 :scopeNote a owl:DatatypeProperty;
-    rdfs:label "omfångsanteckning"@sv;
+    rdfs:label "omfångsanmärkning"@sv;
     owl:equivalentProperty skos:scopeNote .
 :editorialNote a owl:DatatypeProperty;
-    rdfs:label "redaktionell anteckning"@sv;
+    rdfs:label "redaktionell anmärkning"@sv;
     owl:equivalentProperty skos:editorialNote .
 
 :focus a owl:ObjectProperty;

@@ -14,10 +14,10 @@ Install the Python-based dependencies (preferably within a virtualenv):
 
 Run the following script to build the full set of definition resources:
 
-    $ python scripts/compile_defs.py -c cache/ -o build/
+    $ python scripts/compile_defs.py
 
-You can also provide resource names to generate the different parts in
-isolation. Pass `--help` to the script for details.
+You can also pass dataset names to generate the different parts in isolation.
+Pass `-h` or `--help` to the script for details.
 
 ## Upload Datasets to an LDP-compliant Service
 

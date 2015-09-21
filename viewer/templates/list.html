@@ -8,6 +8,34 @@
 
 % block content
 
+  <h1>Ett urval av KBs definitioner och auktoriteter</h1>
+  <p>
+    <a href="${url_for('.find', p=TYPE, value='ConceptScheme')}">Konceptscheman</a>
+  </p>
+  <p>
+    <a href="${url_for('.find', p=TYPE, value='Person', limit=2000)}">Personer</a>
+  </p>
+  <p>
+    <a href="${url_for('.find', p=TYPE, value='UniformWork', limit=2000)}">Verk</a>
+  </p>
+  <h2>Sök termer</h2>
+  <p>
+    <form action="/find" method="GET">
+      <input name="limit" value="100" type="hidden" />
+      <label>
+        Term:
+        <input name="p" value="prefLabel" />
+      </label>
+      <label>
+        Söksträng:
+        <input name="q" value="" />
+      </label>
+      <button>Sök</button>
+    </form>
+  </p>
+
+  {#
+  <div class="row">
   <nav class="navbar navbar-inverse nav-groups bg-happy-muted-denim hidden-xs">
     <div class="container-fluid">
       <ol class="nav navbar-nav">
@@ -35,4 +63,6 @@
     </section>
   % endfor
   </div>
+  #}
+
 % endblock

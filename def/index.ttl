@@ -6,10 +6,10 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix sdo: <http://schema.org/> .
-@base <http://libris.kb.se/def/> .
 
+@base <http://id.kb.se/dataset/> .
 
-<> a void:Dataset;
+</dataset> a void:Dataset;
     foaf:isPrimaryTopicOf </.well-known/void>;
     dc:publisher </resource/auth/121848>;
     foaf:homepage </>;
@@ -42,14 +42,12 @@
     dc:language "sv";
     dc:format "application/ld+json" .
 
-
 # LoC Sources
-
 <http://id.loc.gov/vocabulary/countries> a skos:ConceptScheme .
-
 #<http://id.loc.gov/vocabulary/languages> a skos:ConceptScheme .
 # NOTE: dereference each concept in iso639-2 to get exactMatch for iso639-1/* and languages/*
 <http://id.loc.gov/vocabulary/iso639-2> a skos:ConceptScheme .
-
 <http://id.loc.gov/vocabulary/relators> a skos:ConceptScheme .
 
+# Candidate Sources
+#<http://www.lexvo.org/>

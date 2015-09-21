@@ -6,9 +6,10 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://libris.kb.se/def/schemes/> .
 
-<../schemes> a void:Dataset;
+@base <http://id.kb.se/scheme/> .
+
+</scheme> a void:Dataset;
     void:class skos:ConceptScheme .
 
 # See also:
@@ -92,48 +93,50 @@
 
 # External Schemes
 
-_:agrovoc a skos:ConceptScheme;
+@base <http://id.kb.se/ext/scheme/> .
+
+<agrovoc> a skos:ConceptScheme;
     dc:title "AgroVoc"@en;
     skos:notation "agrovoc" .
 
-_:bnb a skos:ConceptScheme;
+<bnb> a skos:ConceptScheme;
     skos:notation "bnb";
     dc:title "British National Bibliography"@en .
 
-_:fao a skos:ConceptScheme;
+<fao> a skos:ConceptScheme;
     skos:notation "fao"; #, "agrissc"; #?
     foaf:homepage <http://agris.fao.org/?InfoT=Subject&Language=EN> .
 
-_:fiaf a skos:ConceptScheme;
+<fiaf> a skos:ConceptScheme;
     skos:notation "fiaf"; #"fiaf/2" #?
     dc:title "International Federation of Film Archives"@en .
 
-_:mipfesd a skos:ConceptScheme;
+<mipfesd> a skos:ConceptScheme;
     skos:notation "mipfesd"; #"mipfesd/5"
     dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en .
 
-_:msc a skos:ConceptScheme;
+<msc> a skos:ConceptScheme;
     skos:notation "msc";
     dc:title "Mathematical subject classification"@en;
     rdfs:comment "Providence, RI: American Mathematical Society"@en .
 
-_:mesh a skos:ConceptScheme;
+<mesh> a skos:ConceptScheme;
     skos:notation "MeSH";
     dc:title "Medical Subject Headings"@en;
     dc:alternative "MeSH";
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
 
-_:nlm a skos:ConceptScheme;
+<nlm> a skos:ConceptScheme;
     skos:notation "NLM ";
     dc:title "National Library of Medicine"@en .
 
-_:rswk a skos:ConceptScheme;
+<rswk> a skos:ConceptScheme;
     skos:notation "rswk";
     dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)"@de;
     foaf:homepage <http://deposit.ddb.de/ep/netpub/89/96/96/967969689/_data_stat/www.dbi-berlin.de/dbi_pub/einzelpu/regelw/rswk/rswk_00.htm> .
 
-_:sipri a skos:ConceptScheme;
+<sipri> a skos:ConceptScheme;
     skos:notation "sipri";
     dc:title "SIPRI Library thesaurus"@en;
     foaf:homepage <http://www.sipri.org/library/thesaurus/thesaurus.html/> .
