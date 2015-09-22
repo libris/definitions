@@ -194,7 +194,9 @@ class View:
 
     def getlabel(self, item):
         # TODO: cache label...
-        return self.vocab.get_label_for(item) or item[ID] # getlabel(self.get_chip(item[ID]))
+        return self.vocab.get_label_for(item) or ",".join(v for k, v in item.items()
+                if k[0] != '@' and isinstance(v, unicode)) or item[ID]
+                #or getlabel(self.get_chip(item[ID]))
 
     def to_chip(self, item, *keep_refs):
         return {k: v for k, v in item.items()
@@ -227,7 +229,9 @@ def _fix_refs(real_id, ref_id, descriptions):
     for quote in quoted:
         item = quote[GRAPH]
         alias = item[ID]
-        if alias.startswith('_:'):
+        if alias == ref_id:
+            alias_map[alias] = real_id
+        else:
             for same_as in as_iterable(item.get('sameAs')):
                 if same_as[ID] == ref_id:
                     alias_map[alias] = real_id
@@ -246,16 +250,7 @@ def _fix_ref(item, alias_map):
 
 
 # TODO: work as much as possible into initial conversion, rest into filtered view
-def _cleanup(data):
-    data.pop('_marcUncompleted', None)
-    data.pop('_marcBroken', None)
-    data.pop('_marcFailedFixedFields', None)
-    if False:# and 'about' in data:
-        item = data.pop('about')
-        item['describedBy'] = data
-    else:
-        item = data
-
+def _cleanup(item):
     itype = item[TYPE]
     if isinstance(itype, list):
         try:
@@ -264,10 +259,8 @@ def _cleanup(data):
             pass
         if len(itype) == 1:
             item[TYPE] = itype[0]
-
     if 'prefLabel_en' in item and 'prefLabel' not in item:
         item['prefLabel'] = item['prefLabel_en']
-
     return item
 
 def as_iterable(vs):
