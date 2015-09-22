@@ -4,7 +4,7 @@
 {% block bodyattrs %}id="index"{% endblock %}
 
 % block jumbotron
-<div class="jumbotron bg-happy-muted-denim">
+<div class="jumbotron">
   <div class="container">
     <h1>ID.KB.SE</h1>
   </div>
@@ -12,17 +12,20 @@
 % endblock
 
 % block content
-  <h1>Definitioner</h1>
-  <ul>
-    <li>
-      <a href="${url_for('vocabview.vocabview')}">Basvokabulär för bibliografiska termer</a>
-    </li>
-    <li>
-      <a href="${url_for('marcframeview.marcframeview')}">MARC-mappningar</a>
-    </li>
-    <li>
-      <a href="${url_for('thingview.listview')}">Saker</a>
-    </li>
+  <!-- <h1>Definitioner</h1> -->
+  <ul class="pages row">
+    <a class="col-lg-4 col-md-12 col-sm-12 col-xs-12" href="${url_for('vocabview.vocabview')}"><li>
+      <i class="fa fa-book"></i>
+      Basvokabulär för bibliografiska termer
+    </li></a>
+    <a class="col-lg-4 col-md-12 col-sm-12 col-xs-12" href="${url_for('marcframeview.marcframeview')}"><li>
+      <i class="fa fa-exchange"></i>
+      MARC-mappningar
+    </li></a>
+    <a class="col-lg-4 col-md-12 col-sm-12 col-xs-12" href="${url_for('thingview.listview')}"><li>
+      <i class="fa fa-cube"></i>
+      Saker
+    </li></a>
   </ul>
 % endblock
 
