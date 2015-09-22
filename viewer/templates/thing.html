@@ -21,7 +21,7 @@
       <div class="col-md-3">
         <h4>${ui[REVERSE].label}</h4>
         <p>
-          <a href="${url_for('.find', o=thing[ID], limit=2000)}">${ui.SEE_ALL.label}&hellip;</a>
+          <a href="${url_for('.find', o=thing[ID], limit=page_limit)}">${ui.SEE_ALL.label}&hellip;</a>
         </p>
         <dl resource="${thing[ID]}">
           % for k, vs in thing[REVERSE].items()

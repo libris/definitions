@@ -8,7 +8,7 @@ from flask import request, Response, render_template, redirect, abort, url_for, 
 from flask import Blueprint, current_app
 from flask.helpers import NotFound
 
-from lddb.storage import Storage
+from lddb.storage import Storage, DEFAULT_LIMIT
 from util.ld import Graph, RDF, Vocab, View, CONTEXT, ID, TYPE, REVERSE
 from .conneg import Negotiator
 
@@ -47,6 +47,7 @@ def setup_app(setup_state):
         'vocab': vocab,
         'ldview': ldview,
         'ui': ui_defs,
+        'page_limit': 400
     }
     app.context_processor(lambda: view_context)
 
