@@ -57,12 +57,10 @@
     % if ID in thing
       <header class="panel-heading">
         <h1 class="panel-title">
-          % if thing_id.startswith(('http:', 'https:'))
+          % if thing_id.startswith(('http:', 'https:')) or '?' in thing_id
             % set thing_url = thing_id
           % elif thing_id.startswith('/def/terms#')
             % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
-          % elif thing_id.startswith('/find?')
-            % set thing_url = thing_id
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
