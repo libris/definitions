@@ -9,7 +9,8 @@ from flask import Blueprint, current_app
 from flask.helpers import NotFound
 
 from lddb.storage import Storage, DEFAULT_LIMIT
-from util.ld import Graph, RDF, Vocab, View, CONTEXT, ID, TYPE, REVERSE
+from util.ld import (Graph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
+        REVERSE, as_iterable, autoframe)
 from .conneg import Negotiator
 
 
@@ -60,9 +61,8 @@ def render_html(path, data):
     def data_url(suffix):
         if path == '/find':
             return url_for('thingview.find', suffix=suffix, **request.args)
-        elif isinstance(path, tuple):
-            somepath, rtype, match = path
-            return url_for('thingview.some', rtype=rtype, match=match, suffix=suffix)
+        elif path == '/some':
+            return url_for('thingview.some', suffix=suffix, **request.args)
         else:
             return url_for('thingview.thingview', path=path, suffix=suffix)
 
@@ -205,21 +205,50 @@ def _get_limit_offset(args):
     return limit, offset
 
 
-@app.route('/some/<rtype>/<match>')
-@app.route('/some/<rtype>/<match>/data.<suffix>')
-def some(rtype, match, suffix=None):
-    parts = _tokenize(match.replace(':', ' '))
-    canonical_match = ":".join(parts)
-    if match != canonical_match:
-        return redirect(url_for('.some',
-            rtype=rtype, match=canonical_match, suffix=suffix), 301)
-    thing = {
+@app.route('/some')
+@app.route('/some.<suffix>')
+def some(suffix=None):
+    kws = dict(request.args)
+    rtype = kws.pop('type', None)
+    q = kws.pop('q', None)
+    if q:
+        q = " ".join(q)
+        #parts = _tokenize(q)
+    maybe = {}
+    if rtype:
+        rtype = rtype[0]
+        maybe['@type'] = rtype
+    if q:
+        maybe['label'] = q
+    if kws:
+        maybe.update({k: v[0] for k, v in kws.items()})
+
+    def pick_thing(rec):
+        data = rec.data['descriptions']
+        entry = data['entry']
+        for item in [entry] + data.get('items', []):
+            if rtype in as_iterable(item[TYPE]):
+                return item
+        return entry
+
+    maybes  = [
+        #ldview.get_decorated_data(rec)
+        pick_thing(rec)
+        for rec in storage.find_by_example(maybe)
+    ]
+    if not maybes:
+        return abort(404)
+
+    some_id = '%s?%s' % (request.path, request.query_string)
+    item = {
+        "@id": some_id,
         "@type": "Ambiguity",
-        "notation": "%".join(parts),
-        "maybe": [{"@type": rtype, "notation": match}]
+        "label": q or ",".join(maybe.values()),
+        "maybe": maybes
     }
-    # TODO: find candidates; else 404
-    return rendered_response(('/some', rtype, match), suffix, thing)
+    graph = [item] + ldview._get_references_to(item)
+    data = autoframe({GRAPH: graph}, some_id)
+    return rendered_response('/some', suffix, data)
 
 def _tokenize(stuff):
     """
