@@ -50,6 +50,15 @@ def terms():
             }, index=('index', '#'))
 
 
+#@dataset
+#def datasets():
+#    source = Graph().parse(scriptpath('../def/index.ttl'), format='turtle')
+#    return to_jsonld(source, None, {
+#            "index": {"@id": "@graph", "@container": "@index"},
+#            "@language": "sv"
+#            }, index=('index', '#'))
+
+
 @dataset
 def schemes():
     source = Graph().parse(scriptpath('../def/schemes.ttl'), format='turtle')
@@ -368,11 +377,12 @@ def compile_defs(names, outdir, cache):
             _output(name, data, outdir)
         print()
 
-def compile_defs_lines(names, outfpath, cache):
+def compile_defs_lines(names, outfile, cache):
     global CACHEDIR
     if cache:
         CACHEDIR = cache
-    with open(outfpath, 'w') as fp:
+    _ensure_fpath(outfile)
+    with open(outfile, 'w') as fp:
         for name in names:
             if len(names) > 1:
                 print("Dataset:", name)
@@ -406,9 +416,7 @@ def _output(name, data, outdir):
     result = _serialize(data)
     if result and outdir:
         outfile = P.join(outdir, "%s.jsonld" % name)
-        outdir = P.dirname(outfile)
-        if not P.isdir(outdir):
-            makedirs(outdir)
+        _ensure_fpath(outfile)
         fp = open(outfile, 'w')
     else:
         fp = sys.stdout
@@ -429,6 +437,10 @@ def _serialize(data):
         data = data.encode('utf-8')
     return data
 
+def _ensure_fpath(fpath):
+    fdir = P.dirname(fpath)
+    if not P.isdir(fdir):
+        makedirs(fdir)
 
 if __name__ == '__main__':
     import argparse
