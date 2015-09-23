@@ -8,16 +8,22 @@
 
 % block content
 
-  <h1>Ett urval av KBs definitioner och auktoriteter</h1>
-  <p>
-    <a href="${url_for('.find', p=TYPE, value='ConceptScheme')}">Konceptscheman</a>
-  </p>
-  <p>
-    <a href="${url_for('.find', p=TYPE, value='Person', limit=page_limit)}">Personer</a>
-  </p>
-  <p>
-    <a href="${url_for('.find', p=TYPE, value='UniformWork', limit=page_limit)}">Verk</a>
-  </p>
+  <nav class="navbar navbar-inverse nav-groups bg-happy-muted-denim hidden-xs">
+    <div class="container-fluid">
+      <ol class="nav navbar-nav">
+        % for rtype, count in type_count
+          <li>
+            <a href="${url_for('.find', p=TYPE, value=rtype.curie, limit=page_limit)}">
+              ${rtype.label} (${count} st.)</a>
+          </li>
+        % endfor
+      </ol>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+  <h1>KBs definitioner och auktoriteter</h1>
   <h2>Sök termer</h2>
   <p>
     <form action="/find" method="GET">
@@ -35,19 +41,6 @@
   </p>
 
   {#
-  <div class="row">
-  <nav class="navbar navbar-inverse nav-groups bg-happy-muted-denim hidden-xs">
-    <div class="container-fluid">
-      <ol class="nav navbar-nav">
-        % for itype, items in item_groups_by_type
-          <li>
-            <a href="#${itype}">${t and t.label or itype}</a>
-          </li>
-          % endfor
-        </ol>
-    </div>
-  </nav>
-  <div class="row">
   % for itype, items in item_groups_by_type
     <section id="${itype}" class="col-md-12">
       % set t = vocab.index[itype]
@@ -62,7 +55,6 @@
       </ul>
     </section>
   % endfor
-  </div>
   #}
 
 % endblock

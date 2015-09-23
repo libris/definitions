@@ -123,7 +123,7 @@ class Vocab:
                     label = "%s (%s)" % (label, attr_label)
             return label
 
-        if types & {'Person', 'Persona', 'Family', 'Organization'}:
+        if types & {'Person', 'Persona', 'Family', 'Organization', 'Meeting'}:
             return " ".join([
                     v('name') or ", ".join(vs('familyName', 'givenName')),
                     v('numeration'),
@@ -162,6 +162,12 @@ class View:
         records = self.storage.find_by_relation('sameAs', item_id, limit=1)
         if records:
             return records[0].identifier
+
+    def get_type_count(self):
+        return [(self.vocab.index[rtype], count)
+                for rtype, count in self.storage.get_type_count()
+                if isinstance(rtype, str)
+                if rtype in self.vocab.index]
 
     def get_decorated_data(self, record, add_references=False):
         # TODO: note what is entry and quoted explicitly, for view to display accordingly

@@ -7,6 +7,7 @@ import json
 from flask import request, Response, render_template, redirect, abort, url_for, send_file
 from flask import Blueprint, current_app
 from flask.helpers import NotFound
+from werkzeug.contrib.cache import SimpleCache
 
 from lddb.storage import Storage, DEFAULT_LIMIT
 from util.ld import (Graph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
@@ -28,6 +29,9 @@ app = Blueprint('thingview', __name__)
 @app.record
 def setup_app(setup_state):
     config = setup_state.app.config
+
+    global cache
+    cache = SimpleCache()
 
     global storage
     storage = Storage('lddb',
@@ -160,6 +164,7 @@ def find(suffix=None):
     q = request.args.get('q')
     limit, offset = _get_limit_offset(request.args)
 
+    #items = ldview.find(p, o, value, q, limit, offset)
     records = []
     if p:
         if o:
@@ -170,10 +175,10 @@ def find(suffix=None):
             records = storage.find_by_query(p, q, limit, offset)
     elif o:
         records = storage.find_by_quotation(o, limit, offset)
+    items = [ldview.get_decorated_data(rec) for rec in records]
 
     def ref(link): return {ID: link}
 
-    items = [ldview.get_decorated_data(rec) for rec in records]
     page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}
     results = OrderedDict({'@type': 'PagedCollection'})
     results['@id'] = url_for('.find', offset=offset, **page_params)
@@ -199,10 +204,10 @@ def _get_limit_offset(args):
     limit = args.get('limit')
     offset = args.get('offset')
     if limit and limit.isdigit():
-        limit = storage.get_real_limit(int(limit))
+        limit = int(limit)
     if offset and offset.isdigit():
         offset = int(offset)
-    return limit, offset
+    return storage.get_real_limit(limit), offset
 
 
 @app.route('/some')
@@ -262,7 +267,11 @@ def _tokenize(stuff):
 
 @app.route('/list/')
 def listview():
-    return render_template('list.html')
+    type_count = cache.get('type_count')
+    if type_count is None:
+        type_count = ldview.get_type_count()
+        cache.set('type_count', type_count, timeout=5 * 60) # seconds
+    return render_template('list.html', type_count=type_count)
 
 
 @app.route('/def/terms/<term>')
