@@ -25,6 +25,10 @@ for func in [operator.itemgetter]:
 def union(*args):
     return reduce(lambda a, b: a | b, args)
 
+@app.template_global()
+def format_number(n):
+    return '{:,}'.format(n).replace(',', ' ')
+
 @app.route('/')
 def index():
     return render_template('index.html', **vars())

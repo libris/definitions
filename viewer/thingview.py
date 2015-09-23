@@ -38,7 +38,6 @@ def setup_app(setup_state):
             config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
             config.get('DBUSER'), config.get('DBPASSWORD'))
 
-    global vocab
     vocab = Vocab("def/terms.ttl", lang='sv')
 
     global ldview
@@ -273,7 +272,7 @@ def listview():
     type_count = cache.get('type_count')
     if type_count is None:
         type_count = ldview.get_type_count()
-        cache.set('type_count', type_count, timeout=5 * 60) # seconds
+        cache.set('type_count', type_count, timeout=10 * 60) # seconds
     return render_template('list.html', type_count=type_count)
 
 

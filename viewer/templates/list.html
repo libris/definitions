@@ -14,7 +14,7 @@
         % for rtype, count in type_count
           <li>
             <a href="${url_for('.find', p=TYPE, value=rtype.curie, limit=page_limit)}">
-              ${rtype.label} (${count} st.)</a>
+              ${rtype.label} (${format_number(count)} st.)</a>
           </li>
         % endfor
       </ol>
@@ -29,7 +29,7 @@
     <form action="/find" method="GET">
       <input name="limit" value="100" type="hidden" />
       <label>
-        Term:
+        Egenskap:
         <input name="p" value="prefLabel" />
       </label>
       <label>
