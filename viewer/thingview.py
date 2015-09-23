@@ -241,8 +241,6 @@ def some(suffix=None):
         pick_thing(rec)
         for rec in storage.find_by_example(maybe)
     ]
-    if not maybes:
-        return abort(404)
 
     some_id = '%s?%s' % (request.path, request.query_string)
     item = {
@@ -251,8 +249,13 @@ def some(suffix=None):
         "label": q or ",".join(maybe.values()),
         "maybe": maybes
     }
-    graph = [item] + ldview._get_references_to(item)
-    data = autoframe({GRAPH: graph}, some_id)
+
+    references = ldview._get_references_to(item)
+
+    if not maybes and not references:
+        return abort(404)
+
+    data = autoframe({GRAPH: [item] + references}, some_id)
     return rendered_response('/some', suffix, data)
 
 def _tokenize(stuff):
