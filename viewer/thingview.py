@@ -10,7 +10,7 @@ from flask.helpers import NotFound
 from werkzeug.contrib.cache import SimpleCache
 
 from lddb.storage import Storage, DEFAULT_LIMIT
-from util.ld import (Graph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
+from util.ld import (ConjunctiveGraph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
         REVERSE, as_iterable, autoframe)
 from .conneg import Negotiator
 
@@ -61,6 +61,8 @@ negotiator = Negotiator()
 @negotiator.add('text/html', 'html')
 @negotiator.add('application/xhtml+xml', 'xhtml')
 def render_html(path, data):
+    data = ldview.get_decorated_data(data, True)
+
     def data_url(suffix):
         if path == '/find':
             return url_for('thingview.find', suffix=suffix, **request.args)
@@ -71,19 +73,25 @@ def render_html(path, data):
 
     return render_template('thing.html', path=path, thing=data, data_url=data_url)
 
+@negotiator.add('application/json', 'json')
+@negotiator.add('text/json')
+def render_jsonld(path, data):
+    data = ldview.get_decorated_data(data, True)
+    return _to_json(data)
+
 @negotiator.add('application/ld+json', 'jsonld')
 def render_jsonld(path, data):
     data[CONTEXT] = '/context.jsonld'
     return _to_json(data)
 
-@negotiator.add('application/json', 'json')
-@negotiator.add('text/json')
-def render_jsonld(path, data):
-    return _to_json(data)
-
 @negotiator.add('text/turtle', 'ttl')
+@negotiator.add('text/n3', 'n3') # older: text/rdf+n3, application/n3
 def render_ttl(path, data):
     return _to_graph(data).serialize(format='turtle')
+
+@negotiator.add('text/trig', 'trig')
+def render_trig(path, data):
+    return _to_graph(data).serialize(format='trig')
 
 @negotiator.add('application/rdf+xml', 'rdf')
 @negotiator.add('text/xml', 'xml')
@@ -96,8 +104,10 @@ def _to_json(data):
             separators=(',', ': '), ensure_ascii=False).encode('utf-8')
 
 def _to_graph(data):
-    return Graph().parse(data=json.dumps(data), base=BASE_URI,
-            format='json-ld', context=jsonld_context_file)
+    cg = ConjunctiveGraph()
+    cg.parse(data=json.dumps(data), base=BASE_URI,
+                format='json-ld', context=jsonld_context_file)
+    return cg
 
 
 @app.route('/context.jsonld')
@@ -174,7 +184,7 @@ def find(suffix=None):
             records = storage.find_by_query(p, q, limit, offset)
     elif o:
         records = storage.find_by_quotation(o, limit, offset)
-    items = [ldview.get_decorated_data(rec) for rec in records]
+    items = [ldview.get_decorated_data(rec.data) for rec in records]
 
     def ref(link): return {ID: link}
 
@@ -254,8 +264,7 @@ def some(suffix=None):
     if not maybes and not references:
         return abort(404)
 
-    data = autoframe({GRAPH: [item] + references}, some_id)
-    return rendered_response('/some', suffix, data)
+    return rendered_response('/some', suffix, {GRAPH: [item] + references})
 
 def _tokenize(stuff):
     """

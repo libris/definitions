@@ -73,7 +73,8 @@
       </header>
     % endif
 
-    % if (not rev) and rel != 'items' and len(thing) > 1
+    {# TODO: replace this check with is_chip(...) #}
+    % if (not rev) and rel != 'items' and 'quotedFromGraph' not in thing and len(thing) > 1
       <div class="panel-body">
         <dl class="{% if not rel %}dl-horizontal{% endif %}">
 

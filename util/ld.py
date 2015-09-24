@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 __metaclass__ = type
 
-from rdflib import Graph, Literal, URIRef, Namespace, RDF, RDFS, OWL
+from rdflib import Graph, ConjunctiveGraph, Literal, URIRef, Namespace, RDF, RDFS, OWL
 
 from lddb.ld.keys import *
 from lddb.ld.frame import autoframe
@@ -151,7 +151,7 @@ class View:
         if item_id[0] != '/':
             item_id = '/' + item_id
         record = self.storage.get_record(item_id)
-        return self.get_decorated_data(record, True) if record else None
+        return record.data if record else None
 
     def find_record_ids(self, item_id):
         record_ids = self.storage.find_record_ids(item_id)
@@ -169,34 +169,39 @@ class View:
                 if isinstance(rtype, str)
                 if rtype in self.vocab.index]
 
-    def get_decorated_data(self, record, add_references=False):
-        # TODO: note what is entry and quoted explicitly, for view to display accordingly
-        descriptions = record.data['descriptions']
-        entry = descriptions.get('entry')
-        items = descriptions.get('items')
-        quoted = descriptions.get('quoted')
+    def get_decorated_data(self, data, add_references=False):
+        if GRAPH in data:
+            root = data
+            main_id = data[GRAPH][0][ID]
+        elif 'descriptions' in data:
+            descriptions = data['descriptions']
+            entry = descriptions.get('entry')
+            items = descriptions.get('items')
+            quoted = descriptions.get('quoted')
 
-        _cleanup(entry)
+            graph = []
+            if entry:
+                _cleanup(entry)
+                graph.append(entry)
+            if items:
+                graph += items
+                graph.append(entry)
+            if quoted:
+                graph += [dict(ngraph[GRAPH], quotedFromGraph={ID: ngraph.get(ID)})
+                        for ngraph in quoted]
 
-        graph = []
-        if entry:
-            entry['quotedFrom'] = {ID: record.identifier}
-            graph.append(entry)
-        if items:
-            graph += items
-        if quoted:
-            graph += [dict(ngraph[GRAPH], quotedFrom={ID: ngraph.get(ID)})
-                      for ngraph in quoted]
+            main_item = entry if entry else items[0] if items else None
+            main_id = main_item.get(ID) if main_item else None
 
-        main_item = entry if entry else items[0] if items else None
-        main_id = main_item.get(ID) if main_item else None
+            if add_references:
+                graph += self._get_references_to(main_item)
 
-        if add_references:
-            graph += self._get_references_to(main_item)
+            root = {GRAPH: graph}
 
-        view = autoframe({GRAPH: graph}, main_id) or data
+        else:
+            return data
 
-        return view
+        return autoframe(root, main_id) or data
 
     def getlabel(self, item):
         # TODO: cache label...
