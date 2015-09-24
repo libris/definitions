@@ -10,7 +10,7 @@ from flask.helpers import NotFound
 from werkzeug.contrib.cache import SimpleCache
 
 from lddb.storage import Storage, DEFAULT_LIMIT
-from util.ld import (ConjunctiveGraph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
+from .ld import (ConjunctiveGraph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
         REVERSE, as_iterable, autoframe)
 from .conneg import Negotiator
 
