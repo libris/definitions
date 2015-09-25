@@ -223,7 +223,7 @@ class View:
             qdesc = quoting.data['descriptions']
             _fix_refs(item_id, quoted_id, qdesc)
             references.append(self.to_chip(qdesc['entry'], item_id, quoted_id))
-            for it in qdesc['items']:
+            for it in qdesc.get('items', ()):
                 references.append(self.to_chip(it, item_id, quoted_id))
 
         return references
