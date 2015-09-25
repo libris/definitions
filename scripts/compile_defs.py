@@ -315,8 +315,7 @@ def split_dataset(base, data):
                 continue
             #resultset[id_[len(base):]] = node
             rel_path = id_[len(base):]
-            data_path = "%s?data" % id_
-            resultset[rel_path] = {'@id': data_path, 'about': node}
+            resultset[rel_path] = node
     return context, resultset
 
 
@@ -398,19 +397,24 @@ def compile_defs_lines(names, outfile, cache):
             for key, data in resultset.items():
                 item = data.pop('about', None)
                 if item:
-                    # TODO: this just undoes what's done above; just don't do it above...
-                    if data['@id'].endswith('?data'):
-                        assert len(data) == 1
-                        data, item = item, None
-                    else:
-                        data['about'] = {'@id': item['@id']}
+                    data['about'] = {'@id': item['@id']}
                 data['inDataset'] = '/dataset/%s' % name
                 descriptions = {'entry': data}
                 if item:
                     descriptions['items'] = [item]
-                data = {'descriptions': descriptions}
-                # TODO: inspect links and add 'quoted' objects...
-                print(json.dumps(data), file=fp)
+                quoted = []
+                for vs in data.values():
+                    vs = vs if isinstance(vs, list) else [vs]
+                    for v in vs:
+                        if isinstance(v, dict) and '@id' in v:
+                            quoted.append({'@graph': {'@id': v['@id']}})
+                # TODO: move addition of 'quoted' objects to (decorated) storage?
+                # ... actually move the entire 'descriptions' structure...
+                # ... let storage accept a single resource or named graph
+                # (with optional, "nested" quotes), and extract links (and sameAs)
+                if quoted:
+                    descriptions.setdefault('quoted', []).extend(quoted)
+                print(json.dumps({'descriptions': descriptions}), file=fp)
 
 def _output(name, data, outdir):
     result = _serialize(data)
