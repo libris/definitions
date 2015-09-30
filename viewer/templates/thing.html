@@ -5,6 +5,10 @@
 {% block bodyattrs %}vocab="http://schema.org/" id="thing"{% endblock %}
 {% block navcontainerclass %} container-fluid {% endblock %}
 
+% block scripts
+  <script src="/vendor/jquery/js/jquery.js"></script>
+  <script src="/js/vocabloader.js"></script>
+% endblock
 
 {% block navpath %}
   <li><a href="${url_for('thingview.listview')}">Saker</a></li>
@@ -148,7 +152,7 @@
     % set label = term.label.title()
   % endif
   % if term.curie
-    <a href="${url_for('thingview.termview', term=term.curie)}" class="${chiptype}"><span
+    <a href="/vocabview/#${term.curie}" class="${chiptype}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}

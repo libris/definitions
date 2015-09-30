@@ -11,6 +11,7 @@
 % block scripts
   <script src="/vendor/jquery/js/jquery.js"></script>
   <script src="/js/marcframeview.js"></script>
+  <script src="/js/vocabloader.js"></script>
 % endblock
 
 % block content
@@ -153,7 +154,7 @@
   % if (not isinstance(value, basestring) or not value.startswith(('@', '_'))
       ) and not isinstance(value, bool) and key in (
         'aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
-    <a href="../vocabview/#${value}" class="${key}">${value}</a>
+    <a href="/vocabview/#${value}" class="${key}">${value}</a>
   % elif key == 'tokenMap'
     <a href="#map-${value}">${value}</a>
   % elif key == 'inherit' and value.isdigit()
