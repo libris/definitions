@@ -54,10 +54,10 @@ $(function () {
           
       $('.state-active .panel-body').scrollTop(0);
         
-      if(insidePopover)
+      // if(insidePopover)
         $('.state-active .arrow').css('display', 'none');
-      else
-        $('.state-active .arrow').css('display', 'block');
+      // else
+        // $('.state-active .arrow').css('display', 'block');
         
     }
     if (!loaded) {

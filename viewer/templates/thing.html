@@ -8,6 +8,7 @@
 % block scripts
   <script src="/vendor/jquery/js/jquery.js"></script>
   <script src="/js/vocabloader.js"></script>
+  <script src="/js/thing.js"></script>
 % endblock
 
 {% block navpath %}
@@ -22,7 +23,7 @@
       ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
     % if not rel and thing[REVERSE]
-      <div class="col-md-3">
+      <div class="col-md-3 side-view">
         <h4>${ui[REVERSE].label}</h4>
         <p>
           <a href="${url_for('.find', o=thing[ID], limit=page_limit)}">${ui.SEE_ALL.label}&hellip;</a>
@@ -68,11 +69,11 @@
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
+          ${termref(t, classes='', chiptype='chip-class')}
           <a href="${thing_url}" class="thing-label">
             ${ldview.getlabel(thing)}</a>
           <a href="${thing_url}" class="thing-id">
             <small><code>&lt;${thing_id}&gt;</code></small></a>
-          ${termref(t, classes='', chiptype='chip-class')}
         </h1>
       </header>
     % endif

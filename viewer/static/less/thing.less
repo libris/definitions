@@ -4,10 +4,20 @@ body#thing {
     margin-top: 70px;
     margin-bottom: 100px;
   }
+  .side-view {
+    .link-item {
+      width: 100%;
+    }
+  }
   .link-item {
+    display: inline-block;
+    float: left;
+    margin: 5px;
     .chip-class {
-      display: inline-block;
-      margin-top: 0.2em;
+      display: none;
+    }
+    .thing-id {
+      display: none;
     }
     > .panel-heading {
       overflow-x: hidden;
@@ -68,6 +78,46 @@ body#thing {
     position: fixed;
     bottom: 0px;
     width: 100%;
+  }
+  
+  .chip-expanded {
+    background-color: white;
+    position: absolute;
+    z-index: 500;
+    width: 400px;
+    margin-left: -1px;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    // transition: ease 0.5s;
+    // transition-property: opacity;
+    // opacity: 0;
+    display: none;
+    &.active {
+      // transition: ease 0.5s;
+      // opacity: 1;
+      display: block;
+    }
+    &.to-be-active {
+      display: none;
+    }
+    .thing-label {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .thing-id {
+      margin-top: 0.5em;
+      display: block;
+    }
+    .chip-class {
+      display: inline-block;
+      float: right;
+      font-size: 0.7em;
+    }
   }
   
 }
