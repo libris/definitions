@@ -64,7 +64,7 @@
               <th><div id="${cat}-${tag}">${tag}</div></th>
               <td>
                 % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
-                  % if key in dfn
+                  % if dfn.get(key)
                     <dl class="dl-horizontal">
                       <dt>${key}:</dt>
                       <dd>
@@ -160,7 +160,7 @@
   % elif key == 'inherit' and value.isdigit()
     <a href="#${cat}-${value}" class="chip-marc">${cat} ${value}</a>
   % elif key == 'inherit' and ':' in value
-    TEST <a href="#${value.replace(':', '-')}" class="chip-marc">${value.replace(':', ' ')}</a>
+    <a href="#${value.replace(':', '-')}" class="chip-marc">${value.replace(':', ' ')}</a>
   % elif key == 'inherit'
     <a href="#${value}-${tag_or_code}" class="chip-marc">${value} ${tag_or_code}</a>
   % elif isinstance(value, dict)
@@ -195,7 +195,7 @@
         <th><div id="${cat}-${tag}-${key}">${key}</div></th>
         <td>
           % for k, v in sorted(subdfn.items())
-            % if not k.startswith('TODO:')
+            % if not k.startswith('TODO:') and v
               <i>${k}</i>: ${show_value(cat, key, k, v)}
               <br />
             % endif
