@@ -48,7 +48,7 @@
   % set thing_id = thing[ID]
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
-    % set t = vocab.index[typename[0]]
+    % set t = vocab.index[typename[0]] or vocab.index[typename[1]] or {}
   % else
     % set t = vocab.index[typename] or {}
   % endif
