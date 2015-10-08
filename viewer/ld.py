@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 __metaclass__ = type
 
+from collections import OrderedDict
+
 from rdflib import Graph, ConjunctiveGraph, Literal, URIRef, Namespace, RDF, RDFS, OWL
 
 from lddb.ld.keys import *
@@ -163,6 +165,64 @@ class View:
         if records:
             return records[0].identifier
 
+    def get_search_results(self, req_args, make_find_url):
+        #s = req_args.get('s')
+        p = req_args.get('p')
+        o = req_args.get('o')
+        value = req_args.get('value')
+        #language = req_args.get('language')
+        #datatype = req_args.get('datatype')
+        q = req_args.get('q')
+        limit, offset = self._get_limit_offset(req_args)
+
+        records = []
+        # TODO: unify find_by_relation and find_by_example, support the latter form here too
+        if p:
+            if o:
+                records = self.storage.find_by_relation(p, o, limit, offset)
+            elif value:
+                records = self.storage.find_by_value(p, value, limit, offset)
+            elif q:
+                records = self.storage.find_by_query(p, q, limit, offset)
+        elif o:
+            records = self.storage.find_by_quotation(o, limit, offset)
+        items = []
+        for rec in records:
+            data = self.get_decorated_data({
+                    'descriptions': {'entry': rec.data['descriptions']['entry']}})
+            items.append(self.to_chip(data))
+
+        def ref(link): return {ID: link}
+
+        page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}
+        results = OrderedDict({'@type': 'PagedCollection'})
+        results['@id'] = make_find_url(offset=offset, **page_params)
+        results['itemsPerPage'] = limit
+        results['firstPage'] = ref(make_find_url(**page_params))
+        #'totalItems' ...
+        #'lastPage' ...
+        if offset:
+            prev_offset = offset - limit
+            if prev_offset <= 0:
+                prev_offset = None
+            results['previousPage'] = ref(make_find_url(offset=prev_offset, **page_params))
+        if len(items) == limit:
+            next_offset = offset + limit if offset else limit
+            results['nextPage'] = ref(make_find_url(offset=next_offset, **page_params))
+        # hydra:member
+        results['items'] = items
+
+        return results
+
+    def _get_limit_offset(self, args):
+        limit = args.get('limit')
+        offset = args.get('offset')
+        if limit and limit.isdigit():
+            limit = int(limit)
+        if offset and offset.isdigit():
+            offset = int(offset)
+        return self.storage.get_real_limit(limit), offset
+
     def get_type_count(self):
         return [(self.vocab.index[rtype], count)
                 for rtype, count in self.storage.get_type_count()
@@ -181,11 +241,12 @@ class View:
 
             graph = []
             if entry:
-                _cleanup(entry)
                 graph.append(entry)
+                # TODO: fix this in source and/or handle in view
+                if 'prefLabel_en' in entry and 'prefLabel' not in entry:
+                    entry['prefLabel'] = entry['prefLabel_en']
             if items:
                 graph += items
-                graph.append(entry)
             if quoted:
                 graph += [dict(ngraph[GRAPH], quotedFromGraph={ID: ngraph.get(ID)})
                         for ngraph in quoted]
@@ -259,20 +320,6 @@ def _fix_ref(item, alias_map):
                 if mapped:
                     v[ID] = mapped
 
-
-# TODO: work as much as possible into initial conversion, rest into filtered view
-def _cleanup(item):
-    itype = item[TYPE]
-    if isinstance(itype, list):
-        try:
-            itype.remove('Concept')
-        except ValueError:
-            pass
-        if len(itype) == 1:
-            item[TYPE] = itype[0]
-    if 'prefLabel_en' in item and 'prefLabel' not in item:
-        item['prefLabel'] = item['prefLabel_en']
-    return item
 
 def as_iterable(vs):
     """

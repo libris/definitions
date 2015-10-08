@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
-from collections import OrderedDict
 import re
 import json
 
@@ -164,60 +163,9 @@ def to_data_path(path, suffix):
 @app.route('/find')
 @app.route('/find.<suffix>')
 def find(suffix=None):
-    #s = request.args.get('s')
-    p = request.args.get('p')
-    o = request.args.get('o')
-    value = request.args.get('value')
-    #language = request.args.get('language')
-    #datatype = request.args.get('datatype')
-    q = request.args.get('q')
-    limit, offset = _get_limit_offset(request.args)
-
-    #items = ldview.find(p, o, value, q, limit, offset)
-    records = []
-    if p:
-        if o:
-            records = storage.find_by_relation(p, o, limit, offset)
-        elif value:
-            records = storage.find_by_value(p, value, limit, offset)
-        elif q:
-            records = storage.find_by_query(p, q, limit, offset)
-    elif o:
-        records = storage.find_by_quotation(o, limit, offset)
-    items = [ldview.get_decorated_data(rec.data) for rec in records]
-
-    def ref(link): return {ID: link}
-
-    page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}
-    results = OrderedDict({'@type': 'PagedCollection'})
-    results['@id'] = url_for('.find', offset=offset, **page_params)
-    results['itemsPerPage'] = limit
-    results['firstPage'] = ref(url_for('.find', **page_params))
-
-    #'totalItems' ...
-    #'lastPage' ...
-    if offset:
-        prev_offset = offset - limit
-        if prev_offset <= 0:
-            prev_offset = None
-        results['previousPage'] = ref(url_for('.find', offset=prev_offset, **page_params))
-    if len(items) == limit:
-        next_offset = offset + limit if offset else limit
-        results['nextPage'] = ref(url_for('.find', offset=next_offset, **page_params))
-    # hydra:member
-    results['items'] = items
-
+    make_find_url = lambda **kws: url_for('.find', **kws)
+    results = ldview.get_search_results(request.args, make_find_url)
     return rendered_response('/find', suffix, results)
-
-def _get_limit_offset(args):
-    limit = args.get('limit')
-    offset = args.get('offset')
-    if limit and limit.isdigit():
-        limit = int(limit)
-    if offset and offset.isdigit():
-        offset = int(offset)
-    return storage.get_real_limit(limit), offset
-
 
 @app.route('/some')
 @app.route('/some.<suffix>')
