@@ -10,6 +10,7 @@ body#thing {
     }
   }
   .link-item {
+    position: relative;
     display: inline-block;
     float: left;
     margin: 5px;
@@ -84,24 +85,25 @@ body#thing {
     background-color: white;
     position: absolute;
     z-index: 500;
-    width: 400px;
     margin-left: -1px;
+    margin-top: -1px;
+    min-width: 400px;
     border: 1px solid #cccccc;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    // transition: ease 0.5s;
-    // transition-property: opacity;
-    // opacity: 0;
+    transition: ease 0.25s;
+    transition-property: opacity;
+    opacity: 0;
     display: none;
     &.active {
-      // transition: ease 0.5s;
-      // opacity: 1;
+      opacity: 1;
       display: block;
     }
     &.to-be-active {
-      display: none;
+      display: block;
+      opacity: 0;
     }
     .thing-label {
       display: block;
@@ -119,5 +121,9 @@ body#thing {
       font-size: 0.7em;
     }
   }
-  
+
+  .side-view .chip-expanded {
+    min-width: 100%;
+  }
+
 }
