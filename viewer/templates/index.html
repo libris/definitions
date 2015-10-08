@@ -13,6 +13,15 @@
 
 % block content
   <!-- <h1>Definitioner</h1> -->
+  <!-- 
+  <div>
+    % for rtype, count in type_count
+      <li>
+        <a href="${url_for('.find', p=TYPE, value=rtype.curie, limit=page_limit)}">
+          ${rtype.label} (${format_number(count)} st.)</a>
+      </li>
+    % endfor
+  </div>
   <ul class="pages row">
     <a class="col-lg-4 col-md-12 col-sm-12 col-xs-12" href="${url_for('vocabview.vocabview')}"><li>
       <i class="fa fa-book"></i>
@@ -26,7 +35,7 @@
       <i class="fa fa-cube"></i>
       Saker
     </li></a>
-  </ul>
+  </ul> -->
 % endblock
 
 % block footer
