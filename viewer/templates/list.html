@@ -15,32 +15,31 @@
 {% block navcontainerclass %} container {% endblock %}
 
 % block content
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h1>KBs definitioner och auktoriteter</h1>
-    <h2>Sök termer</h2>
-    <p>
-      <form action="/find" method="GET">
-        <input name="limit" value="100" type="hidden" />
-        <label>
-          Egenskap:
-          <input name="p" value="prefLabel" />
-        </label>
-        <label>
-          Söksträng:
-          <input name="q" value="" />
-        </label>
-        <button>Sök</button>
-      </form>
-    </p>
+    <div class="list-group">
+    % for rtype, count in type_count
+      <a class="list-group-item"
+          href="${url_for('.find', p=TYPE, value=rtype.curie, limit=page_limit)}">
+          ${rtype.label} <span class="badge">${format_number(count)} st.</span></a>
+    % endfor
+    </div>
   </div>
 
-  <div class="col-md-4">
-    % for rtype, count in type_count
-      <li>
-        <a href="${url_for('.find', p=TYPE, value=rtype.curie, limit=page_limit)}">
-          ${rtype.label} (${format_number(count)} st.)</a>
-      </li>
-    % endfor
+  <div class="col-md-3">
+    <h2>Sök termer</h2>
+    <form action="/find" method="GET">
+    <input name="limit" value="100" type="hidden" />
+    <label>
+      <!-- Egenskap: -->
+      <input name="p" value="prefLabel" type="hidden" />
+    </label>
+    <label>
+      <!-- Söksträng: -->
+      <input name="q" value="" />
+    </label>
+    <button>Sök</button>
+    </form>
   </div>
 
 
