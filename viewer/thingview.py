@@ -20,6 +20,7 @@ ui_defs = {
     REVERSE: {'label': "Saker som länkar hit"},
     ID: {'label': "URI"},
     TYPE: {'label': "Typ"},
+    'SEARCH_RESULTS': {'label': "Sökresultat"},
     'SEE_ALL': {'label': "Se alla"},
 }
 
@@ -70,7 +71,16 @@ def render_html(path, data):
         else:
             return url_for('thingview.thingview', path=path, suffix=suffix)
 
-    return render_template('thing.html', path=path, thing=data, data_url=data_url)
+    return render_template(_get_template_for(data),
+            path=path, thing=data, data_url=data_url)
+
+TYPE_TEMPLATES = {'pagedcollection'}
+
+def _get_template_for(data):
+    template_key = data.get(TYPE).lower()
+    if template_key in TYPE_TEMPLATES:
+        return '%s.html' % template_key
+    return 'thing.html'
 
 @negotiator.add('application/json', 'json')
 @negotiator.add('text/json')
@@ -96,7 +106,6 @@ def render_trig(path, data):
 @negotiator.add('text/xml', 'xml')
 def render_xml(path, data):
     return _to_graph(data).serialize(format='pretty-xml')
-
 
 def _to_json(data):
     return json.dumps(data, indent=2, sort_keys=True,

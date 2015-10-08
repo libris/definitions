@@ -1,0 +1,20 @@
+% extends "thing.html"
+
+% block title
+  ${ui.SEARCH_RESULTS.label}
+% endblock
+
+% block content
+  % set items = thing.pop('items')
+  <h1>${self.title()}</h1>
+  <div class="col-md-12">
+    ${viewthing(thing, element='article', classes='panel panel-default main-item')}
+  </div>
+  % if items
+    % for item in items
+    <ul>
+        ${viewthing(item, classes='main-item', rel='items')}
+    </ul>
+    % endfor
+  % endif
+% endblock
