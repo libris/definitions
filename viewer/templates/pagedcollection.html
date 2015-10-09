@@ -4,17 +4,60 @@
   ${ui.SEARCH_RESULTS.label}
 % endblock
 
+% macro search_controls(details)
+  <div class="col-md-12 panel panel-default search-controls">
+    % if details == 'true'
+    <div class="search-details">
+      <span class="search-keyword">
+          
+        % if thing.query
+          Sökning: <i>"${thing.query}"</i>
+        % elif thing.value
+          Sökning: ${thing.value}
+        % endif
+      </span>
+      <span class="search-items-per-page pull-right">Visar ${thing.itemsPerPage} saker per sida</span>
+    </div>
+    % endif
+    
+    <div class="search-buttons">
+      % if thing.firstPage and thing.previousPage
+      <a class="btn btn-primary" href="${thing.firstPage[ID]}">Första</a>
+      % else
+      <a class="btn btn-primary" disabled>Första</a>
+      % endif
+      % if thing.previousPage
+      <a class="btn btn-primary" href="${thing.previousPage[ID]}">Föregående</a>
+      % else
+      <a class="btn btn-primary" disabled>Föregående</a>
+      % endif
+      % if thing.nextPage
+      <a class="btn btn-primary" href="${thing.nextPage[ID]}">Nästa</a>
+      % else
+      <a class="btn btn-primary" disabled>Nästa</a>
+      % endif
+    </div>
+    <!-- ${viewthing(thing, element='article', classes='')} -->
+  </div>
+% endmacro
+
 % block content
   % set items = thing.pop('items')
   <h1>${self.title()}</h1>
-  <div class="col-md-12">
-    ${viewthing(thing, element='article', classes='panel panel-default main-item')}
-  </div>
+  
+  ${ search_controls('true') }
+  <div class="col-md-12 panel panel-default hits">
   % if items
     % for item in items
-    <ul>
-        ${viewthing(item, classes='main-item', rel='items')}
-    </ul>
+    <!-- <ul class="panel panel-default"> -->
+        ${viewthing(item, classes='hit-item', rel='items')}
+    <!-- </ul> -->
     % endfor
+  % else
+    <div class="no-hits">
+    Din sökning gav inget resultat...
+    </div>
   % endif
+  </div>
+  ${ search_controls('false') }
 % endblock

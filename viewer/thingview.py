@@ -51,7 +51,7 @@ def setup_app(setup_state):
         'vocab': vocab,
         'ldview': ldview,
         'ui': ui_defs,
-        'page_limit': 400
+        'page_limit': 50
     }
     app.context_processor(lambda: view_context)
 
