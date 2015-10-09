@@ -199,6 +199,8 @@ class View:
         results['@id'] = make_find_url(offset=offset, **page_params)
         results['itemsPerPage'] = limit
         results['firstPage'] = ref(make_find_url(**page_params))
+        results['query'] = q
+        results['value'] = value
         #'totalItems' ...
         #'lastPage' ...
         if offset:
