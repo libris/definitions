@@ -151,7 +151,7 @@ class View:
         self.vocab = vocab
         self.storage = storage
         self.rev_limit = 4000
-        self.chip_keys = {ID, TYPE} | set(self.vocab.label_keys)
+        self.chip_keys = {ID, TYPE, 'focus', 'mainEntity'} | set(self.vocab.label_keys)
 
     def get_record_data(self, item_id):
         if item_id[0] != '/':
@@ -192,9 +192,10 @@ class View:
             records = self.storage.find_by_quotation(o, limit, offset)
         items = []
         for rec in records:
-            data = self.get_decorated_data({
-                    'descriptions': {'entry': rec.data['descriptions']['entry']}})
-            items.append(self.to_chip(data))
+            descs = rec.data['descriptions']
+            descs.pop('quoted', None)
+            chip = self.to_chip(self.get_decorated_data({'descriptions': descs}))
+            items.append(chip)
 
         def ref(link): return {ID: link}
 
@@ -271,7 +272,7 @@ class View:
         return autoframe(root, main_id) or data
 
     def getlabel(self, item):
-        # TODO: cache label...
+        # TODO: get and cache chip for item (unless already quotedFrom)...
         return self.vocab.get_label_for(item) or ",".join(v for k, v in item.items()
                 if k[0] != '@' and isinstance(v, unicode)) or item[ID]
                 #or getlabel(self.get_chip(item[ID]))
