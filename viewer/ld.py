@@ -107,6 +107,10 @@ class Vocab:
             label = self.construct_label(focus)
             if label:
                 return label
+        if 'prefLabel' not in item:
+            broader = item.get('broader', [])
+            if broader:
+                return " - ".join(self.labelgetter(bit) for bit in broader)
         return self.labelgetter(item)
 
     def construct_label(self, item):
