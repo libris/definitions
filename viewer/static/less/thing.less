@@ -139,32 +139,40 @@ body#thing {
   .no-hits {
     padding: 20px;
   }
-  .hits {
-    // border: 1px solid @gray-light;
-    // background-color: white;
-    // border-radius: 4px;
+
+  .hit-item {
+    margin: 0px 0px 10px 0px;
     padding: 0px;
-    .hit-item {
-      margin: 0px;
-      border-bottom: 1px dotted @gray-light;
-      .thing-label {
-        font-size: 1.3em;
-        display: block;
-      }
-      &:hover {
-        background-color: #EFEFEF;
-        .chip-class {
-        
-        }
-      }
-      .chip-class {
-        float: right;
-        background-color: inherit;
-        border: none;
-        color: @gray;
-        font-weight: normal;
+    border-bottom: 1px dotted @gray-light;
+    hr {
+      margin: 5px 0px;
+    }
+    dt {
+      a {
+        color: @color-prop;
       }
     }
+    .panel-body {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    .thing-label {
+      font-size: 1.3em;
+      display: block;
+    }
+    &:hover {
+      // background-color: #EFEFEF;
+      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
+      .chip-class {
+      
+      }
+    }
+    .chip-class {
+      float: right;
+      background-color: inherit;
+      border: none;
+      box-shadow: none;
+      color: @color-class;
+    }
   }
-
 }

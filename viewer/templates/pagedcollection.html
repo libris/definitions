@@ -46,18 +46,20 @@
   <h1>${self.title()}</h1>
   
   ${ search_controls('true') }
-  <div class="col-md-12 panel panel-default hits">
   % if items
     % for item in items
+    <div class="col-md-12 panel panel-default hit-item">
     <!-- <ul class="panel panel-default"> -->
-        ${viewthing(item, classes='hit-item', rel='items')}
+        ${viewthing(item, classes='', rel='items')}
     <!-- </ul> -->
+    </div>
     % endfor
   % else
-    <div class="no-hits">
-    Din sökning gav inget resultat...
+    <div class="col-md-12 panel panel-default">
+      <div class="panel-body">
+        Din sökning gav inget resultat...
+      </div>
     </div>
   % endif
-  </div>
   ${ search_controls('false') }
 % endblock
