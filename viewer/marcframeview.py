@@ -5,14 +5,19 @@ import json
 
 app = Blueprint('marcframeview', __name__)
 
+MARC_CATEGORIES = 'bib', 'auth', 'hold'
+
+@app.record
+def setup_app(setup_state):
+    config = setup_state.app.config
+    global MARCFRAME_SOURCE
+    MARCFRAME_SOURCE = config['MARCFRAME_SOURCE']
+
 @app.route('/marcframeview/')
 def marcframeview():
 
-    marcframe_path = "cache/ext/marcframe.json"
-    with open(marcframe_path) as fp:
+    with open(MARCFRAME_SOURCE) as fp:
         marcframe = json.load(fp)
-
-    MARC_CATEGORIES = 'bib', 'auth', 'hold'
 
     def marc_categories():
         for cat in MARC_CATEGORIES:

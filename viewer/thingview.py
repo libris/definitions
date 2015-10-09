@@ -8,9 +8,12 @@ from flask import Blueprint, current_app
 from flask.helpers import NotFound
 from werkzeug.contrib.cache import SimpleCache
 
+from rdflib import Graph, ConjunctiveGraph
+
+from util.graphcache import GraphCache
+
 from lddb.storage import Storage, DEFAULT_LIMIT
-from .ld import (ConjunctiveGraph, RDF, Vocab, View, CONTEXT, ID, TYPE, GRAPH,
-        REVERSE, as_iterable, autoframe)
+from .ld import Vocab, View, CONTEXT, ID, TYPE, GRAPH, REVERSE, as_iterable
 from .conneg import Negotiator
 
 
@@ -38,7 +41,13 @@ def setup_app(setup_state):
             config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
             config.get('DBUSER'), config.get('DBPASSWORD'))
 
-    vocab = Vocab("def/terms.ttl", lang='sv')
+    vocab_uri = config['VOCAB_IRI']
+    lang = config['LANG']
+    vocab_paths = config['VOCAB_SOURCES']
+    graphcache = GraphCache("cache/graph-cache")
+    for path in vocab_paths:
+        graphcache.load(path)
+    vocab = Vocab(graphcache.graph, vocab_uri, lang=lang)
 
     global ldview
     ldview = View(vocab, storage)

@@ -4,7 +4,7 @@ __metaclass__ = type
 
 from collections import OrderedDict
 
-from rdflib import Graph, ConjunctiveGraph, Literal, URIRef, Namespace, RDF, RDFS, OWL
+from rdflib import Graph, Literal, URIRef, Namespace, RDF, RDFS, OWL
 
 from lddb.ld.keys import *
 from lddb.ld.frame import autoframe
@@ -14,18 +14,17 @@ SDO = Namespace("http://schema.org/")
 VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 
 
+# TODO: VocabView?
 class Vocab:
 
-    def __init__(self, vocab_source, vocab_uri=None, lang='en'):
+    def __init__(self, vocab_graph, vocab_uri, lang='en'):
         self.index = {}
         self.unstable_keys = set()
 
         label_key_items = []
 
-        g = Graph().parse(vocab_source, format='turtle')
+        g = vocab_graph
         default_ns = g.store.namespace('')
-        if not vocab_uri and (default_ns, RDF.type, OWL.Ontology) in g:
-            vocab_uri = default_ns
 
         get_key = lambda s: s.replace(vocab_uri, '')
 
