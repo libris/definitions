@@ -49,14 +49,34 @@
 
 
 ##
-# Enumeration Groups
+# Extended Vocabulary Components
 
-marcenum:typeOfRecord a skos:Collection;
-    rdfs:label "Typ"@sv .
+:Class a owl:Class;
+    owl:equivalentClass owl:Class;
+    rdfs:label "Klass"@sv .
 
-marcenum:bibLevel a skos:Collection;
-    rdfs:label "Bibliografisk nivå"@sv .
+:ObjectProperty a owl:Class;
+    owl:equivalentClass owl:ObjectProperty;
+    rdfs:label "Relation"@sv .
 
+:DatatypeProperty a owl:Class;
+    owl:equivalentClass owl:DatatypeProperty;
+    rdfs:range :Datatype;
+    rdfs:label "Egenskap"@sv .
+
+:Datatype a owl:Class;
+    owl:equivalentClass rdfs:Datatype;
+    rdfs:label "Datatyp"@sv .
+
+:StructuredProperty a owl:Class;
+    rdfs:subPropertyOf owl:ObjectProperty;
+    rdfs:range :StructuredValue;
+    rdfs:label "Strukturerad egenskap"@sv .
+
+:StructuredValue a owl:Class;
+    owl:equivalentClass sdo:StructuredValue;
+    skos:closeMatch rdfs:Datatype;
+    rdfs:label "Strukturerat värde"@sv .
 
 ##
 # Common Properties
@@ -184,6 +204,24 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "may be"@en, "kan vara"@sv;
     rdfs:comment "A thing that something ambiguous may be."@en .
 
+:disambiguates a owl:ObjectProperty;
+    owl:inverseOf :maybe;
+    rdfs:domain owl:Thing;
+    rdfs:range :Ambiguity;
+    rdfs:label "disambiguates"@en, "disambiguerar"@sv;
+    rdfs:comment "Something ambiguous that may be this distinct thing."@en .
+
+
+##
+# Enumeration Groups
+
+marcenum:typeOfRecord a skos:Collection;
+    rdfs:label "Typ"@sv .
+
+marcenum:bibLevel a skos:Collection;
+    rdfs:label "Bibliografisk nivå"@sv .
+
+
 ##
 # Creative Works
 
@@ -310,7 +348,7 @@ marcenum:bibLevel a skos:Collection;
 :Cartography a owl:Class;
     rdfs:label "Kartmaterial"@sv;
     rdfs:subClassOf :CreativeWork;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:Cartography .
 
 :Dataset a owl:Class;
@@ -331,7 +369,7 @@ marcenum:bibLevel a skos:Collection;
 :MixedMaterial a owl:Class;
     rdfs:label "Blandat material"@sv;
     rdfs:subClassOf :CreativeWork, :Aggregate;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:MixedMaterial .
 
 :MovingImage a owl:Class; # Film, Video
@@ -348,7 +386,7 @@ marcenum:bibLevel a skos:Collection;
 :Multimedia a owl:Class;
     rdfs:label "Multimedia"@sv;
     rdfs:subClassOf :CreativeWork;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:Multimedia .
 
 :NotatedMovement a owl:Class;
@@ -361,15 +399,15 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Musiknoter"@sv;
     skos:exactMatch rdacontent:1010 ; # "notated music"
     rdfs:subClassOf :CreativeWork;
-    vann:termGroup marcenum:typeOfRecord;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:NotatedMusic .
 
 :Audio a owl:Class;
     rdfs:subClassOf :CreativeWork;
     rdfs:label "Ljudmaterial"@sv;
     skos:exactMatch rdamedia:1001 ; # "audio"
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass dctype:Sound, bf:Audio .
 
 :Music a owl:Class;
@@ -380,20 +418,20 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Stillbild"@sv;
     skos:exactMatch rdacontent:1014 ; # "still image"
     rdfs:subClassOf :Image;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:StillImage, dctype:StillImage .
 
 :Text a owl:Class;
     rdfs:label "Text"@sv;
     skos:exactMatch rdacontent:1020 ; # "text"
     rdfs:subClassOf :CreativeWork;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass dctype:Text, bf:Text .
 
 :Realia a owl:Class;
     rdfs:label "Realia"@sv;
     skos:exactMatch rdacontent:1021 ; # "three-dimensional form"
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     owl:equivalentClass bf:ThreeDimensionalObject .
 
 :InteractiveResource a owl:Class;
@@ -403,13 +441,13 @@ marcenum:bibLevel a skos:Collection;
 
 :Kit a owl:Class; # TODO: equivalentClass ?
     rdfs:label "Kit"@sv;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     rdfs:subClassOf :CreativeWork .
 
 :ArchivalUnit a owl:Class;
     rdfs:label "Arkivenhet"@sv;
     owl:deprecated true;
-    vann:termGroup marcenum:typeOfRecord .
+    :inCollection marcenum:typeOfRecord .
 
 # Combined Content Types
 
@@ -464,7 +502,7 @@ marcenum:bibLevel a skos:Collection;
 
 :Monograph a owl:Class;
     rdfs:label "Monografisk resurs"@sv;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     owl:equivalentClass bf:Monograph .
 
 :Part a owl:Class;
@@ -473,7 +511,7 @@ marcenum:bibLevel a skos:Collection;
 
 :ComponentPart a owl:Class;
     rdfs:label "Del av sammansatt resurs"@sv;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     rdfs:subClassOf :Part .
 
 :Aggregate a owl:Class;
@@ -493,18 +531,18 @@ marcenum:bibLevel a skos:Collection;
 :Collection a owl:Class;
     rdfs:label "Samling"@sv;
     rdfs:subClassOf :Aggregate;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     owl:equivalentClass dctype:Collection, bf:Collection .
 
 :SubCollection a owl:Class;
     rdfs:label "Delsamling"@sv;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     rdfs:subClassOf :Collection, :Part .
 
 :Integrating a owl:Class;
     rdfs:label "Integrerande resurs"@sv;
     rdfs:subClassOf :Continuing;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     owl:equivalentClass bf:Integrating .
 
 :MonographicComponentPart a owl:Class;
@@ -514,7 +552,7 @@ marcenum:bibLevel a skos:Collection;
 
 :SerialComponentPart a owl:Class;
     rdfs:label "Del av sammansatt seriell resurs"@sv;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     rdfs:subClassOf :Serial, :ComponentPart  .
 
 :Multipart a owl:Class;
@@ -529,14 +567,14 @@ marcenum:bibLevel a skos:Collection;
 :Serial a owl:Class;
     rdfs:label "Seriell resurs"@sv;
     rdfs:subClassOf :Continuing;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     owl:equivalentClass bf:Serial .
 
 :Periodical a owl:Class;
     rdfs:label "Periodical"@en, "Periodika"@sv;
     skos:altLabel "Periodisk resurs"@sv;
     rdfs:comment "Samma sak som seriell resurs."@sv;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     owl:equivalentClass bf:Serial .
 
 :CreativeWorkSeries a owl:Class;
@@ -547,7 +585,7 @@ marcenum:bibLevel a skos:Collection;
 :LicenseAgreementBoundDescription a owl:Class ;
     rdfs:label "Licensavtalsbunden beskrivning"@sv;
     owl:deprecated true;
-    vann:termGroup marcenum:bibLevel;
+    :inCollection marcenum:bibLevel;
     rdfs:subClassOf :Aggregate .
 
 # Manifestation Dimensions
@@ -582,7 +620,7 @@ marcenum:bibLevel a skos:Collection;
 :ProjectedImage a owl:Class;
     rdfs:label "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     rdfs:subClassOf :Image .
 
 :PhysicalObject a owl:Class;
@@ -654,17 +692,17 @@ marcenum:bibLevel a skos:Collection;
 
 :ManuscriptCartography a owl:Class;
     rdfs:label "Kartmanuscript"@sv;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     rdfs:subClassOf :Cartography, :Manuscript .
 
 :ManuscriptNotatedMusic a owl:Class;
     rdfs:label "Musiknotmanuscript"@sv;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     rdfs:subClassOf :NotatedMusic, :Manuscript .
 
 :ManuscriptText a owl:Class;
     rdfs:label "Textmanuscript"@sv;
-    vann:termGroup marcenum:typeOfRecord;
+    :inCollection marcenum:typeOfRecord;
     rdfs:subClassOf :Text, :Manuscript .
 
 :MultiVolumeBook a owl:Class;
@@ -838,6 +876,7 @@ marcenum:bibLevel a skos:Collection;
 :identifier a owl:DatatypeProperty ;
     rdfs:label "identifier"@en, "identifikator"@sv;
     rdfs:subPropertyOf :label;
+    rdfs:range :Identifier;
     owl:equivalentProperty dc:identifier, bibo:identifier;
     owl:propertyChainAxiom ( :qualifiedIdentifier :value ) .
 
@@ -850,14 +889,14 @@ marcenum:bibLevel a skos:Collection;
     rdfs:subPropertyOf :prefLabel, :title .
 
 :qualifiedTitle a owl:ObjectProperty;
+    owl:equivalentProperty bf:instanceTitle;
+    rdfs:range :Title;
     rdfs:label "qualified title"@en, "kvalificerad titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
-    dc:references [ skos:notation "RDA 1.7" ];
-    owl:equivalentProperty bf:instanceTitle;
-    rdfs:range :Title .
+    dc:references [ skos:notation "RDA 1.7" ] .
 
 :keyTitle a owl:ObjectProperty ;
     rdfs:label "Nyckeltitel"@sv;
@@ -870,10 +909,12 @@ marcenum:bibLevel a skos:Collection;
     rdfs:range :Title .
 
 :Identifier a owl:Class ;
+    rdfs:subClassOf :StructuredValue;
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf:Identifier .
 
 :Title a owl:Class;
+    rdfs:subClassOf :StructuredValue;
     rdfs:label "Titel"@sv;
     owl:equivalentClass bf:Title .
 
@@ -1247,8 +1288,8 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:equivalentClass bf:Language,
         sdo:Language .
 
-#generalSubdivision
-#geographicSubdivision
+:Nationality a owl:Class ;
+    rdfs:label "Nationalitet"@sv .
 
 :controlledLabel a owl:DatatypeProperty;
     rdfs:label "kontrollerad etikett"@sv;
@@ -1265,6 +1306,7 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:hasKey (:notation :prefLabel :inScheme) .
 
 :ConceptCollection a owl:Class;
+    rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
@@ -1335,10 +1377,14 @@ l:object rdfs:subPropertyOf rdf:object .
 
 :inCollection a owl:ObjectProperty;
     owl:inverseOf :collectionItem;
+    rdfs:subPropertyOf vann:termGroup;
     rdfs:domain :Concept;
     rdfs:range :ConceptCollection .
 
 # Domain Specific Term Classes
+
+# TODO: should *Term corresponding 1xx really be more loose, like *Entry?
+# (but still subclasses of :Concept though(?), unlike :Record)
 
 :Authority a owl:Class ;
     owl:equivalentClass bf:Authority ;
@@ -1353,8 +1399,8 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "Genre-/formterm"@sv;
     rdfs:subClassOf :Concept .
 
-:AspectTerm a owl:Class;
-    rdfs:label "Aspektterm"@sv;
+:SubdivisionTerm a owl:Class;
+    rdfs:label "Underindelning"@sv;
     rdfs:subClassOf :Concept .
 
 :ChronologicalTerm a owl:Class;
@@ -1370,6 +1416,22 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Place ] .
+
+:ChronologicalSubdivisionTerm a owl:Class ;
+    rdfs:subClassOf :SubdivisionTerm, :ChronologicalTerm;
+    rdfs:label "Underindelning för kronologisk term"@sv .
+
+:GenreSubdivisionTerm a owl:Class ;
+    rdfs:subClassOf :SubdivisionTerm, :GenreTerm;
+    rdfs:label "Underindelning för genre/form"@sv .
+
+:GeographicalSubdivisionTerm a owl:Class ;
+    rdfs:subClassOf :SubdivisionTerm, :GeographicalTerm;
+    rdfs:label "Underindelning för geografisk term"@sv .
+
+:OrchestraTerm a owl:Class ;
+    rdfs:subClassOf :Concept;
+    rdfs:label "Term för besättning (musik)"@sv .
 
 :MeetingTerm a owl:Class;
     rdfs:label "Term för möte"@sv;
@@ -1415,6 +1477,9 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :UniformWork ] .
+
+#generalSubdivision
+#geographicSubdivision
 
 
 # Annotations
