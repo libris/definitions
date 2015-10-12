@@ -230,10 +230,12 @@ class View:
         return self.storage.get_real_limit(limit), offset
 
     def get_type_count(self):
-        return [(self.vocab.index[rtype], count)
+        pairs = [(self.vocab.index[rtype], count)
                 for rtype, count in self.storage.get_type_count()
                 if isinstance(rtype, str)
                 if rtype in self.vocab.index]
+        pairs.sort(key=lambda pair: pair[0]['label'])
+        return pairs
 
     def get_decorated_data(self, data, add_references=False):
         if GRAPH in data:
