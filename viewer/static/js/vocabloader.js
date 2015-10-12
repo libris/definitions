@@ -23,11 +23,9 @@ $(function () {
       $('.state-active').removeClass('state-active');
       $('#' + ref).addClass('state-active');
       
-      if($('.main-item').length>0) {
-        var flipOrientation = false;
-        if(linkPos.right > $(window).width()/1.5) {
-          flipOrientation = true;
-        }
+      var flipOrientation = false;
+      if(linkPos.right > $(window).width()/1.5) {
+        flipOrientation = true;
       }
       
       var popoverY = linkPos.Y - ($('.state-active').height()/2) + 8;
