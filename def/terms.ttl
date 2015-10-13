@@ -1391,28 +1391,33 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subClassOf :Concept ;
     rdfs:label "Authority"@en, "Auktoritet"@sv .
 
+:IndexTerm a owl:Class;
+    rdfs:label "Index Term"@en, "Indexterm"@sv;
+    rdfs:subClassOf :Concept;
+    foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
+
 :TopicalTerm a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
-    owl:equivalentClass :Concept .
+    rdfs:subClassOf :IndexTerm .
 
 :GenreTerm a owl:Class;
     rdfs:label "Genre-/formterm"@sv;
-    rdfs:subClassOf :Concept .
+    rdfs:subClassOf :IndexTerm .
 
 :SubdivisionTerm a owl:Class;
     rdfs:label "Underindelning"@sv;
-    rdfs:subClassOf :Concept .
+    rdfs:subClassOf :IndexTerm .
 
 :ChronologicalTerm a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Event ] .
 
 :GeographicalTerm a owl:Class;
     rdfs:label "Geografiskt ämnesord"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Place ] .
@@ -1430,26 +1435,26 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "Underindelning för geografisk term"@sv .
 
 :OrchestraTerm a owl:Class ;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:label "Term för besättning (musik)"@sv .
 
 :MeetingTerm a owl:Class;
     rdfs:label "Term för möte"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Meeting ] .
 
 :OrganizationTerm a owl:Class;
     rdfs:label "Term för organisation"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Organization ] .
 
 :PersonTerm a owl:Class;
     rdfs:label "Personterm"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     l:magicProperty [
             l:resultProperty :prefLabel;
             l:useLink :focus;
@@ -1466,14 +1471,14 @@ l:object rdfs:subPropertyOf rdf:object .
 
 :FamilyTerm a owl:Class;
     rdfs:label "Familjeterm"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Family ] .
 
 :WorkTerm a owl:Class;
     rdfs:label "Term för verk"@sv;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :UniformWork ] .
