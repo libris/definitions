@@ -83,7 +83,7 @@
             <ul class="list-unstyled">
               % for prop in props
               <li class="${listclass(prop)}">
-                <a href="${link(prop)}">${prop.qname()}</a>
+                <a href="${link(prop)}" class="chip-prop">${prop.qname()}</a>
                 % if prop.value(SKOS.notation)
                 <span>(${prop.value(SKOS.notation)})</span>
                 % endif
@@ -93,17 +93,18 @@
                   <span>&rarr;
                     % for range_ in ranges
                       % if isinstance(range_.identifier, URIRef)
-                        <a href="${link(range_)}">${range_.qname()}</a>{% if not loop.last %},{% endif %}
+                        <a href="${link(range_)}" class="chip-class">${range_.qname()}</a>
                       % endif
                     % endfor
                   </span>
                 % endif
+              </li>
                 <!--!
                 % for g in prop.objects(VANN.termGroup)
                 <i><a href="${link(g)}">${g.qname()}</a></i>
                 % endfor
                 -->
-              </li>
+              
               % endfor
             </ul>
           </dd>
@@ -112,7 +113,7 @@
         % if restrictions
           <dt>Restrictions</dt>
           <dd>
-            <ul class="">
+            <ul class="list-unstyled">
               % for restr in restrictions
                 % set prop = restr.value(OWL.onProperty)
                 % set rtype = restr.value(OWL.allValuesFrom)
@@ -132,18 +133,19 @@
           <dd>
             <ul class="list-unstyled">
               % for prop in rangeprops
+              
               <li class="${listclass(prop)}">
-                &larr; <a href="${link(prop)}">${prop.qname()}</a>
-                % set domains = sorted(set(prop.objects(DOMAIN)))
-                % if domains
-                  <span>&larr;
-                    % for domain in domains
-                      % if isinstance(domain.identifier, URIRef)
-                        <a href="${link(domain)}">${domain.qname()}</a>{% if not loop.last %},{% endif %}
-                      % endif
-                    % endfor
-                  </span>
-                % endif
+              &larr; <a href="${link(prop)}" class="chip-prop">${prop.qname()}</a>
+              % set domains = sorted(set(prop.objects(DOMAIN)))
+              % if domains
+                <span>&larr;
+                  % for domain in domains
+                    % if isinstance(domain.identifier, URIRef)
+                      <a href="${link(domain)}" class="chip-class">${domain.qname()}</a>
+                    % endif
+                  % endfor
+                </span>
+              % endif
               </li>
             % endfor
           </dd>

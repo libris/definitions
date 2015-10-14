@@ -21,14 +21,12 @@
 
 .vocab-item-style(@color, @border-style) {
   text-align: left !important;
-  border: solid @color;
-  border-width: 1px 1px 1px 6px;
-  border-style: @border-style;
-  border-left-style: solid;
-  background-color: @white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  background-color: fadeout(@color, 90%);
+  border: solid fadeout(@color, 85%);
+  border-width: 0px 1px 1px 1px;
+  border-radius: 5px;
   padding: 0px 5px;
-  border-radius: 4px;
+  font-weight: normal;
   color: @color;
   a {
     color: @color;
@@ -55,8 +53,6 @@
   display: inline-block;
   margin-bottom: 4px;
 }
-// .rdf-baseclasses
-// .rdf-subclasses
 
 .items {
   &.baseproperties, &.subproperties {
@@ -67,7 +63,7 @@
   li.ext {
     .vocab-item-style(@color-ext, dashed);
   }
-  .ext p, .baseproperties p {
+  .ext p, .baseproperties p, .loc p {
     font-size: 0.8em;
     margin: 0 0 4px;
   }
