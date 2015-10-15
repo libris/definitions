@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import unicode_literals, print_function
 from os import makedirs, path as P
 import sys
 import re
@@ -14,13 +14,14 @@ from rdflib_jsonld.serializer import from_rdf
 scriptpath = lambda pth: P.join(P.dirname(__file__), pth)
 
 
-SDO = Namespace("http://schema.org/")
-LIBRIS = Namespace("http://libris.kb.se/def/terms#")
-
 BASE = "http://id.kb.se/"
 
-ISO639_1Lang = URIRef("http://id.loc.gov/vocabulary/iso639-1/iso639-1_Language")
 
+# TODO:
+# - use the same context for all datasets (no @language or only use @container: @language)
+# - explicitly link each record to it's parent dataset record
+# - explicitly link each record to its logical source (or just the parent dataset record?)
+# - do not add 'quoted' here but in loader (see TODO below)
 
 datasets = {}
 def dataset(func):
@@ -31,42 +32,25 @@ def dataset(func):
 @dataset
 def terms():
     source = Graph()
-    ignore = Graph()
-
     #./datatools/scripts/vocab-from-marcframe.py
     #           ext-libris/src/main/resources/marcframe.json
     #           datatools/def/terms.ttl
     #           bibframe.ttl schema_org_rdfa.ttl dcterms.rdfs bibo.owl dbpedia_ontology.ttl
-    for part in [scriptpath('../def/terms.ttl')] \
-            + glob(scriptpath('../source/terms/*.ttl')):
-        if '-ignore' in part:
-            ignore.parse(part, format='turtle')
-        else:
-            source.parse(part, format='turtle')
-    source -= ignore
-    return to_jsonld(source, "owl", {
-            "index": {"@id": "@graph", "@container": "@index"},
-            "@language": "sv"
-            }, index=('index', '#'))
+    for part in [scriptpath('../def/terms.ttl')]:
+        source.parse(part, format='turtle')
+    return "/def/terms/", to_jsonld(source, "owl", {"@base": BASE})
 
 
 #@dataset
 #def datasets():
 #    source = Graph().parse(scriptpath('../def/index.ttl'), format='turtle')
-#    return to_jsonld(source, None, {
-#            "index": {"@id": "@graph", "@container": "@index"},
-#            "@language": "sv"
-#            }, index=('index', '#'))
+#    return to_jsonld(source, None, { "@language": "sv"})
 
 
 @dataset
 def schemes():
     source = Graph().parse(scriptpath('../def/schemes.ttl'), format='turtle')
-    return to_jsonld(source, "skos", {
-            "byNotation": {"@id": "@graph", "@container": "@index"},
-            "@base": BASE,
-            "@language": "sv"
-            }, index=('byNotation', 'notation'))
+    return "/scheme/", to_jsonld(source, "skos", {"@base": BASE, "@language": "sv"})
 
 
 @dataset
@@ -75,23 +59,21 @@ def relators():
     source = filter_graph(source, (RDF, RDFS, OWL, SKOS, DCTERMS),
             oftype=OWL.ObjectProperty)
 
-    data = to_jsonld(source, "owl", {
-            "byNotation": {"@id": "@graph", "@container": "@index"},
-            "@base": BASE,
-            "@language": "sv"
-            }, index=('byNotation', 'notation'))
+    data = to_jsonld(source, "owl", {"@base": BASE})
 
-    extend(data['byNotation'], 'funktionskoder.tsv', 'sv',
-            term_source='label_en', iri_template="/def/relators/{term}",
+    extend(data, 'funktionskoder.tsv', 'sv',
+            term_source='label_en', iri_template="/relator/{term}",
             addtype='ObjectProperty',
             relation='equivalentProperty')
 
-    return split_dataset("/def/", data)
+    return "/relator/", data
 
 
 @dataset
 def languages():
     source = cached_rdf('http://id.loc.gov/vocabulary/iso639-2')
+
+    ISO639_1Lang = URIRef("http://id.loc.gov/vocabulary/iso639-1/iso639-1_Language")
 
     items = {}
 
@@ -109,8 +91,8 @@ def languages():
 
     for code, (lang_concept, extra) in code_pairs.items():
         node = items[code] = {
-            '@id': "/def/languages/%s" % code,
-            '@type': ['Language', 'Concept'],
+            '@id': "/language/%s" % code,
+            '@type': 'Language',
             'notation': code,
             'langCode': code
         }
@@ -132,20 +114,15 @@ def languages():
         if extra:
             node['prefLabel'] = extra['prefLabel_sv']
 
-    basecontext = "/sys/context/skos.jsonld"
-    langcontext = {
-        "@base": BASE,
-        "@language": "sv"
-    }
     data = {
         '@context': [
-            basecontext,
-            dict(langcontext, byCode={"@id": "@graph", "@container": "@index"})
+            "/sys/context/skos.jsonld",
+            {"@base": BASE, "@language": "sv"}
         ],
-        'byCode': items
+        '@graph': items.values()
     }
 
-    return split_dataset("/def/", data)
+    return "/language/", data
 
 
 @dataset
@@ -154,20 +131,19 @@ def countries():
     source = filter_graph(source, (RDF, RDFS, OWL, SKOS, DCTERMS),
             oftype=SKOS.Concept)
 
+    SDO = Namespace("http://schema.org/")
+
     for concept in source.resource(SKOS.Concept).subjects(RDF.type):
+        concept.remove(RDF.type, None)
         concept.add(RDF.type, SDO.Country)
 
-    data = to_jsonld(source, "skos", {
-            "byNotation": {"@id": "@graph", "@container": "@index"},
-            "@base": BASE,
-            "@language": "sv"
-            }, index=('byNotation', 'notation'))
+    data = to_jsonld(source, "skos", {"@base": BASE, "@language": "sv"})
 
-    extend(data['byNotation'], 'landskoder.tsv', 'sv',
-            iri_template="/def/countries/{notation}",
+    extend(data, 'landskoder.tsv', 'sv',
+            iri_template="/country/{notation}",
             relation='exactMatch')
 
-    return split_dataset("/def/", data)
+    return "/country/", data
 
 
 @dataset
@@ -175,18 +151,24 @@ def nationalities():
     source = scriptpath('../source/nationalitetskoder.tsv')
     items = load_data(source, encoding='latin-1')
     for code, item in items.items():
-        item['@id'] = "/def/nationalities/%s" % code
-        item['@type'] = ['Nationality', 'Concept']
+        item['@id'] = "/nationality/%s" % code
+        item['@type'] = 'Nationality'
         item['prefLabel'] = item.pop('prefLabel_sv')
-    data = {"@graph": items}
-    return split_dataset("/def/", data)
+    data = {"@graph": items.values()}
+    return "/nationality/", data
 
 
 @dataset
 def enums():
     data = load_data(scriptpath('../source/enums.jsonld'))
-    return split_dataset("/def/", data)
+    return "/def/enum/", {
+            '@context': data['@context'],
+            '@graph': data['enumDefs'].values()
+        }
 
+
+##
+# Data shape utils
 
 def filter_graph(source, propspaces, oftype=None):
     propspaces = tuple(map(unicode, propspaces))
@@ -204,61 +186,12 @@ def filter_graph(source, propspaces, oftype=None):
     return graph
 
 
-def to_jsonld(source, contextref, contextobj=None, index=None):
-    contextpath = scriptpath("../sys/context/%s.jsonld" % contextref)
-    contexturi = "/sys/context/%s.jsonld" % contextref
-    context = [contextpath, contextobj] if contextobj else contextpath
-    data = from_rdf(source, context_data=context)
-    data['@context'] = [contexturi, contextobj] if contextobj else contexturi
-
-    # customize to a convenient shape (within the bounds of JSON-LD)
-    if index:
-        graph_key, index_key = index
-        nodes = data.pop(graph_key)
-        graphmap = data[graph_key] = {}
-    else:
-        nodes = data['@graph']
-        index_key = None
-    base = contextobj.get('@base')
-    to_embed = {}
-    refs = {}
-    for node in nodes:
-        nodeid = node['@id']
-        if base and nodeid.startswith(base):
-            node['@id'] = nodeid[len(base)-1:]
-        elif nodeid.startswith('_:'):
-            to_embed[nodeid] = node
-            continue
-        if index_key:
-            key = None
-            if index_key in ('#', '/'):
-                leaf = node['@id'].rsplit(index_key, 1)[-1]
-                key = leaf or node['@id']
-            elif index_key in node:
-                key = node[index_key]
-            if key:
-                graphmap[key] = node
-            for value in node.values():
-                values = value if isinstance(value, list) else [value]
-                for value in values:
-                    if not isinstance(value, dict):
-                        continue
-                    valueid = value.get('@id', '')
-                    if valueid.startswith('_:'):
-                        assert valueid not in refs # NOTE: not a tree...
-                        refs[valueid] = value
-    for idref, obj in refs.items():
-        obj.update(to_embed[idref])
-        #del obj['@id']
-
-    return data
-
-
-def extend(index, extradata, lang, keys=('label', 'prefLabel', 'comment'),
+def extend(data, extradata, lang, keys=('label', 'prefLabel', 'comment'),
         term_source=None, iri_template=None, addtype=None, relation=None,
         key_term='notation'):
     fpath = scriptpath('../source/%s' % extradata)
     extras = load_data(fpath)
+    index = {node[key_term]: node for node in data['@graph']}
     for key, item in extras.items():
         iri = None
         if iri_template:
@@ -292,32 +225,76 @@ def to_camel_case(label):
             for (i, s) in enumerate(re.split(r'[\s,.-]', label)) if s)
 
 
-def split_dataset(base, data):
-    context = None
-    resultset = OrderedDict()
-    for key, obj in data.items():
-        if key == '@context':
-            context = obj
-            continue
-        if not isinstance(obj, list):
-            if context:
-                dfn = context[-1][key]
-                assert dfn['@id'] == '@graph' and dfn['@container'] == '@index'
-            obj = obj.values()
-        for node in obj:
-            id_ = node['@id']
-            # TODO: Absence caused by mismatch between external id and local mapping
-            if not id_:
-                print("Missing id for:", node)
-                continue
-            if not id_.startswith(base):
-                print("Missing mapping of <%s> under base <%s>" % (id_, base))
-                continue
-            #resultset[id_[len(base):]] = node
-            rel_path = id_[len(base):]
-            resultset[rel_path] = node
-    return context, resultset
+def to_jsonld(source, contextref, contextobj=None):
+    contextpath = scriptpath("../sys/context/%s.jsonld" % contextref)
+    contexturi = "../sys/context/%s.jsonld" % contextref
+    context = [contextpath, contextobj] if contextobj else contextpath
+    data = from_rdf(source, context_data=context)
+    data['@context'] = [contexturi, contextobj] if contextobj else contexturi
 
+    # customize to a convenient shape (within the bounds of JSON-LD)
+    base = contextobj.get('@base')
+    to_embed = {}
+    refs = {}
+    for node in data['@graph']:
+        nodeid = node['@id']
+        if base and nodeid.startswith(base):
+            node['@id'] = nodeid[len(base)-1:]
+        elif nodeid.startswith('_:'):
+            to_embed[nodeid] = node
+            continue
+    for idref, obj in refs.items():
+        obj.update(to_embed[idref])
+        #del obj['@id']
+
+    return data
+
+
+def partition_dataset(base, data):
+    resultset = OrderedDict()
+    for node in data.pop('@graph'):
+        nodeid = node['@id']
+        # TODO: Absence caused by mismatch between external id and local mapping
+        if not nodeid:
+            print("Missing id for:", node)
+            continue
+        if not nodeid.startswith(base):
+            print("Missing mapping of <%s> under base <%s>" % (nodeid, base))
+            continue
+        rel_path = nodeid[1:]
+        resultset[rel_path] = node
+    return data.get('@context'), resultset
+
+
+def _to_desc_form(node, dataset=None, source=None):
+    item = node.pop('about', None)
+    if item:
+        node['about'] = {'@id': item['@id']}
+    if dataset:
+        node['inDataset'] = dataset
+    if source:
+        node['wasDerivedFrom'] = source
+    descriptions = {'entry': node}
+    if item:
+        descriptions['items'] = [item]
+    quoted = []
+    for vs in node.values():
+        vs = vs if isinstance(vs, list) else [vs]
+        for v in vs:
+            if isinstance(v, dict) and '@id' in v:
+                quoted.append({'@graph': {'@id': v['@id']}})
+    # TODO: move addition of 'quoted' objects to (decorated) storage?
+    # ... actually move this entire 'descriptions' structure...
+    # ... let storage accept a single resource or named graph
+    # (with optional, "nested" quotes), and extract links (and sameAs)
+    if quoted:
+        descriptions.setdefault('quoted', []).extend(quoted)
+
+    return {'descriptions': descriptions}
+
+
+##
+# Data load utils
 
 def load_data(fpath, encoding='utf-8'):
     csv_dialect = ('excel' if fpath.endswith('.csv')
@@ -349,9 +326,7 @@ def cached_rdf(fpath):
         remotepath = fpath
         fpath = P.join(CACHEDIR, remotepath[len(http):]) + '.ttl'
         if not P.isfile(fpath):
-            fdir = P.dirname(fpath)
-            if not P.isdir(fdir):
-                makedirs(fdir)
+            _ensure_fpath(fpath)
             source.parse(remotepath)
             source.serialize(fpath, format='turtle')
             return source
@@ -360,78 +335,50 @@ def cached_rdf(fpath):
     return source.parse(fpath)
 
 
-def compile_defs(names, outdir, cache):
+##
+# Data write utils
+
+def compile_defs(names, outdir, cache, onefile=False):
     global CACHEDIR
     if cache:
         CACHEDIR = cache
+    if onefile:
+        union_fpath = P.join(outdir, 'definitions.jsonld.lines')
+        _ensure_fpath(union_fpath)
+        union_file = open(union_fpath, 'w')
+    else:
+        union_file = None
+    try:
+        _compile_defs_files(names, outdir, union_file)
+    finally:
+        if union_file:
+            union_file.close()
+
+def _compile_defs_files(names, outdir, union_file):
     for name in names:
         if len(names) > 1:
             print("Dataset:", name)
-        data = datasets[name]()
-        if isinstance(data, tuple):
-            context, resultset = data
-        else:
-            resultset = {name: data}
-        for name, data in resultset.items():
-            _output(name, data, outdir)
+        basepath, data = datasets[name]()
+        _output(name, data, outdir)
+        context, resultset = partition_dataset(basepath, data)
+        for key, node in resultset.items():
+            # TODO: add source
+            node = _to_desc_form(node, '/dataset/%s' % name, source=None)
+            if union_file:
+                print(json.dumps(node), file=union_file)
+            _output(key, node, outdir)
         print()
 
-def compile_defs_lines(names, outfile, cache):
-    global CACHEDIR
-    if cache:
-        CACHEDIR = cache
-    _ensure_fpath(outfile)
-    with open(outfile, 'w') as fp:
-        for name in names:
-            if len(names) > 1:
-                print("Dataset:", name)
-            data = datasets[name]()
-            if isinstance(data, tuple):
-                context, resultset = data
-            else:
-                context = data.pop('@context')
-                if len(data) == 1:
-                    resultset = (data.get('byNotation') or data['index'])
-                else:
-                    resultset = {name: data}
-            for key, data in resultset.items():
-                item = data.pop('about', None)
-                if item:
-                    data['about'] = {'@id': item['@id']}
-                data['inDataset'] = '/dataset/%s' % name
-                descriptions = {'entry': data}
-                if item:
-                    descriptions['items'] = [item]
-                quoted = []
-                for vs in data.values():
-                    vs = vs if isinstance(vs, list) else [vs]
-                    for v in vs:
-                        if isinstance(v, dict) and '@id' in v:
-                            quoted.append({'@graph': {'@id': v['@id']}})
-                # TODO: move addition of 'quoted' objects to (decorated) storage?
-                # ... actually move the entire 'descriptions' structure...
-                # ... let storage accept a single resource or named graph
-                # (with optional, "nested" quotes), and extract links (and sameAs)
-                if quoted:
-                    descriptions.setdefault('quoted', []).extend(quoted)
-                print(json.dumps({'descriptions': descriptions}), file=fp)
-
-def _output(name, data, outdir):
-    result = _serialize(data)
-    if result and outdir:
+def _output(name, node, outdir):
+    result = _serialize(node)
+    if result:
         outfile = P.join(outdir, "%s.jsonld" % name)
+        print("Writing:", outfile)
         _ensure_fpath(outfile)
-        fp = open(outfile, 'w')
-    else:
-        fp = sys.stdout
-    try:
-        if result:
+        with open(outfile, 'w') as fp:
             fp.write(result)
-        else:
-            print("N/A")
-    finally:
-        if fp is not sys.stdout:
-            fp.close()
+    else:
+        print("No data")
 
 def _serialize(data):
     if isinstance(data, (list, dict)):
@@ -445,6 +392,7 @@ def _ensure_fpath(fpath):
     fdir = P.dirname(fpath)
     if not P.isdir(fdir):
         makedirs(fdir)
+
 
 if __name__ == '__main__':
     import argparse
@@ -463,8 +411,4 @@ if __name__ == '__main__':
     if not args.datasets and args.outdir:
         args.datasets = list(datasets)
 
-    if args.lines:
-        fname = 'definitions.jsonld.lines'
-        compile_defs_lines(args.datasets, P.join(args.outdir, fname), args.cache)
-    else:
-        compile_defs(args.datasets, args.outdir, args.cache)
+    compile_defs(args.datasets, args.outdir, args.cache, onefile=args.lines)
