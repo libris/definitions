@@ -12,24 +12,16 @@ put() {
     fi
 }
 
-# Generate and load library terms context
-libcontext=build/lib-context.jsonld
-if [[ $DOBUILD != "--nobuild" && ($FILTER == "" || $FILTER == "context/lib") ]]; then
-    echo "Generate ${libcontext}..."
-    python scripts/context_from_vocab.py def/terms.ttl def/terms-overlay.jsonld > $libcontext
-    echo "Done."
-fi
-put $libcontext application/ld+json ${WHELK}/sys/context/lib.jsonld
-
-
 # Generate datasets
 if [[ $DOBUILD != "--nobuild" && $FILTER == "" ]]; then
     echo "Compile definitions..."
-    python scripts/compile_defs.py -c cache/ -o build/
+    python datasets.py -c cache/ -o $BUILDBASE/
     echo "Done."
 fi
 
 # Load JSON-LD contexts
+libcontext=$BUILDBASE/lib-context.jsonld
+put $libcontext application/ld+json ${WHELK}/sys/context/lib.jsonld
 for ctx in owl skos; do
     put sys/context/${ctx}.jsonld application/ld+json ${WHELK}/sys/context/${ctx}.jsonld
 done
