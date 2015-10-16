@@ -1,0 +1,152 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix persona: <http://www.pipian.com/schemas/foaf/persona#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix bf: <http://bibframe.org/vocab/> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix l: <http://w3id.org/libris/logic/> .
+
+@prefix : <http://id.kb.se/vocab/> .
+
+
+##
+# Agents
+
+:name a owl:DatatypeProperty;
+    rdfs:label "name"@en, "namn"@sv;
+    rdfs:comment "Aktörens allmänna namn"@sv;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty foaf:name .
+
+:additionalName a owl:DatatypeProperty ;
+    owl:equivalentProperty sdo:additionalName;
+    rdfs:label "additional name"@en, "tilläggsnamn"@sv .
+
+:attributedTo a owl:ObjectProperty;
+    rdfs:label "Huvuduppslag"@sv;
+    rdfs:comment "Ange namnet för först nämnda upphov här, om det finns högst tre upphov. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
+    owl:equivalentProperty prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :qualifiedAttribution :agent ) .
+
+:influencedBy a owl:ObjectProperty;
+    rdfs:label "Biuppslag"@sv;
+    rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
+    owl:equivalentProperty prov:wasInfluencedBy .
+
+# TODO: these constructs, used below, will yield inferred statements, which if
+# interpreted, will produce direct links using subject of hasStatement,
+# predicate(s) from role(s) and object from an object property. Like:
+#CONSTRUCT { ?s ?p ?o } WHERE {
+#    ?s [rdfs:subPropertyOf? l:hasStatement] [
+#            [rdfs:subPropertyOf? l:role] ?p;
+#            [rdfs:subPropertyOf? l:object] ?o ]
+#}
+l:hasStatement a owl:ObjectProperty;
+    rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
+    rdfs:range rdf:Statement .
+l:role rdfs:subPropertyOf rdf:predicate .
+l:object rdfs:subPropertyOf rdf:object .
+
+:qualifiedAttribution a owl:ObjectProperty;
+    rdfs:label "Detaljerat huvuduppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement;
+    owl:equivalentProperty prov:qualifiedAttribution .
+
+:qualifiedInfluence a owl:ObjectProperty;
+    rdfs:label "Detaljerat biuppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement;
+    owl:equivalentProperty prov:qualifiedInfluence .
+
+:agent a owl:ObjectProperty;
+    rdfs:label "aktör"@sv;
+    rdfs:subPropertyOf l:object;
+    owl:equivalentProperty prov:agent .
+
+:role a owl:ObjectProperty;
+    rdfs:label "roll"@sv;
+    rdfs:subPropertyOf l:role;
+    owl:equivalentProperty prov:hadRole .
+
+:Agent a owl:Class;
+    rdfs:label "Aktör"@sv;
+    rdfs:subClassOf foaf:Agent, bf:Agent, prov:Agent .
+
+:Person a owl:Class;
+    rdfs:label "Person"@sv;
+    rdfs:subClassOf :Agent;
+    owl:equivalentClass foaf:Person, sdo:Person .
+
+:Family a owl:Class;
+    rdfs:label "Familj"@sv;
+    rdfs:subClassOf :Agent .
+
+:Event a owl:Class;
+    rdfs:label "Händelse"@sv;
+    owl:equivalentClass sdo:Event .
+
+:Meeting a owl:Class;
+    rdfs:label "Möte"@sv;
+    rdfs:comment "En formell sammankomst"@sv;
+    rdfs:subClassOf :Event;
+    owl:equivalentClass bf:Meeting, bibo:Conference .
+
+#[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
+#    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
+
+#titlesAndOtherWordsAssociatedWithName / personTitle
+:personTitle a owl:DatatypeProperty;
+    rdfs:label "persontitel"@sv;
+    owl:equivalentProperty sdo:jobTitle, foaf:title .
+
+:familyName a owl:DatatypeProperty;
+    rdfs:label "family name"@en, "familjenamn"@sv;
+    owl:equivalentProperty sdo:familyName, foaf:familyName .
+
+:givenName a owl:DatatypeProperty;
+    rdfs:label "given name"@en, "egennamn"@sv;
+    owl:equivalentProperty sdo:givenName, foaf:givenName .
+
+:birthDate a owl:DatatypeProperty;
+    rdfs:label "födelsedatum"@sv;
+    owl:equivalentProperty sdo:birthDate .
+
+:birthYear a owl:DatatypeProperty;
+    rdfs:subPropertyOf :birthDate;
+    rdfs:range :Year;
+    rdfs:label "birth year"@en, "födelseår"@sv .
+
+:deathDate a owl:DatatypeProperty;
+    rdfs:label "dödsdatum"@sv;
+    owl:equivalentProperty sdo:deathDate .
+
+:deathYear a owl:DatatypeProperty;
+    rdfs:subPropertyOf :deathDate;
+    rdfs:range :Year;
+    owl:equivalentProperty sdo:deathYear;
+    rdfs:label "death year"@en, "dödsår"@sv .
+
+:Persona a owl:Class;
+    rdfs:label "Persona"@sv;
+    rdfs:subClassOf :Person;
+    owl:equivalentClass persona:Persona .
+
+:hasPersona a owl:ObjectProperty;
+    rdfs:label "har persona"@sv;
+    rdfs:subPropertyOf rdfs:seeAlso;
+    owl:equivalentProperty persona:hasPersona .
+
+:Organization a owl:Class;
+    rdfs:label "Organization"@en, "Organisation"@sv;
+    rdfs:subClassOf :Agent;
+    owl:equivalentClass bf:Organization, sdo:Organization, foaf:Organization  .
+
+:legalName a owl:DatatypeProperty;
+    rdfs:label "legal name"@en, "juridiskt namn"@sv;
+    owl:equivalentProperty sdo:legalName .

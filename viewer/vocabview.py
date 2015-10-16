@@ -14,13 +14,23 @@ rdfutils = {name: obj for name, obj in globals().items()
                 if isinstance(obj, (Namespace, ClosedNamespace))
                     or obj in (URIRef, Literal, BNode)}
 
-vocab_paths = ["def/terms.ttl", "sys/app/help.jsonld"]
-graphcache = GraphCache("cache/graph-cache")
-ns_mgr = None
+graphcache = None
+vocab_paths = None
 
 app = Blueprint('vocabview', __name__)
 
 app.context_processor(lambda: rdfutils)
+
+@app.record
+def setup_app(setup_state):
+    global graphcache
+    global vocab_paths
+    config = setup_state.app.config
+    graphcache = GraphCache(config['GRAPH_CACHE'])
+    vocab_uri = config['VOCAB_IRI']
+    ns_mgr = graphcache.graph.namespace_manager
+    ns_mgr.bind("", vocab_uri)
+    vocab_paths = config['VOCAB_SOURCES'][:1]
 
 @app.route('/vocabview/')
 def redir_vocabview():
@@ -28,16 +38,13 @@ def redir_vocabview():
 
 @app.route('/def/terms.html')
 def vocabview():
-    global ns_mgr
     graph = None
+    ns_mgr = graphcache.graph.namespace_manager
     for path in vocab_paths:
         lgraph = graphcache.load(path)
         if not graph:
             graph = lgraph
-            if ns_mgr:
-                graph.namespace_manager = ns_mgr
-            else:
-                ns_mgr = graph.namespace_manager
+            graph.namespace_manager = ns_mgr
         else:
             graph += lgraph
     for url in graph.objects(None, OWL.imports):

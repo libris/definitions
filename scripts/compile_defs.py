@@ -30,15 +30,31 @@ def dataset(func):
 
 
 @dataset
-def terms():
+def vocab():
     source = Graph()
-    #./datatools/scripts/vocab-from-marcframe.py
-    #           ext-libris/src/main/resources/marcframe.json
-    #           datatools/def/terms.ttl
-    #           bibframe.ttl schema_org_rdfa.ttl dcterms.rdfs bibo.owl dbpedia_ontology.ttl
-    for part in [scriptpath('../def/terms.ttl')]:
+
+    for part in glob(scriptpath('../source/vocab/*.ttl')):
         source.parse(part, format='turtle')
-    return "/def/terms/", to_jsonld(source, "owl", {"@base": BASE})
+
+    with open(scriptpath('../source/vocab/update.rq')) as fp:
+        source.update(fp.read())
+
+    #python scripts/vocab-from-marcframe.py
+    #       ext-libris/src/main/resources/marcframe.json build/vocab.ttl
+    #
+    #python scripts/context_from_vocab.py
+    #       build/vocab.jsonld source/vocab-overlay.jsonld {BASE}
+
+    return "/vocab/", to_jsonld(source, "owl", {"@base": BASE})
+
+
+@dataset
+def enums():
+    data = load_data(scriptpath('../source/enums.jsonld'))
+    return "/enum/", {
+            '@context': data['@context'],
+            '@graph': data.get('@graph') or data['enumDefs'].values()
+        }
 
 
 #@dataset
@@ -156,15 +172,6 @@ def nationalities():
         item['prefLabel'] = item.pop('prefLabel_sv')
     data = {"@graph": items.values()}
     return "/nationality/", data
-
-
-@dataset
-def enums():
-    data = load_data(scriptpath('../source/enums.jsonld'))
-    return "/def/enum/", {
-            '@context': data['@context'],
-            '@graph': data['enumDefs'].values()
-        }
 
 
 ##
