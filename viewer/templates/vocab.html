@@ -88,13 +88,11 @@
                 <span>(${prop.value(SKOS.notation)})</span>
                 % endif
                 <i>${(label(prop) or '')}</i>
-                % set ranges = sorted(set(prop.objects(RANGE)))
+                % set ranges = sorted(set(find_references(prop.objects(RANGE))))
                 % if ranges
                   <span>&rarr;
-                    % for range_ in ranges
-                      % if isinstance(range_.identifier, URIRef)
-                        <a href="${link(range_)}" class="chip-class">${range_.qname()}</a>
-                      % endif
+                    % for c in ranges
+                      <a href="${link(c)}" class="chip-class">${c.qname()}</a>
                     % endfor
                   </span>
                 % endif
@@ -133,21 +131,19 @@
           <dd>
             <ul class="list-unstyled">
               % for prop in rangeprops
-              
-              <li class="${listclass(prop)}">
-              &larr; <a href="${link(prop)}" class="chip-prop">${prop.qname()}</a>
-              % set domains = sorted(set(prop.objects(DOMAIN)))
-              % if domains
-                <span>&larr;
-                  % for domain in domains
-                    % if isinstance(domain.identifier, URIRef)
-                      <a href="${link(domain)}" class="chip-class">${domain.qname()}</a>
-                    % endif
-                  % endfor
-                </span>
-              % endif
-              </li>
-            % endfor
+                <li class="${listclass(prop)}">
+                &larr; <a href="${link(prop)}" class="chip-prop">${prop.qname()}</a>
+                % set domains = sorted(set(find_references(prop.objects(DOMAIN))))
+                % if domains
+                    <span>&larr;
+                    % for domain in domains
+                        <a href="${link(domain)}" class="chip-class">${domain.qname()}</a>
+                    % endfor
+                    </span>
+                % endif
+                </li>
+                % endfor
+            </ul>
           </dd>
         % endif
         % if any(rclass.subjects(RDF.type))
@@ -166,20 +162,18 @@
 % endmacro
 
 % macro itemsblock(items, label, classname, iteminfo=False)
-  % set itemlist = sorted(items)
+  % set itemlist = sorted(set(find_references(items)))
   % if itemlist
     <dt>${label}</dt>
     <dd>
       <ul class="list-unstyled items ${classname}">
         % for item in itemlist
-          % if isinstance(item.identifier, URIRef)
-            <li class="${listclass(item)}">
-              <a href="${link(item)}">${item.qname()}</a>
-              % if iteminfo and extgraph
-                ${terminfo(extgraph.resource(item.identifier))}
-              % endif
-            </li>
-          % endif
+          <li class="${listclass(item)}">
+            <a href="${link(item)}">${item.qname()}</a>
+            % if iteminfo and extgraph
+              ${terminfo(extgraph.resource(item.identifier))}
+            % endif
+          </li>
         % endfor
       </ul>
     </dd>
@@ -267,7 +261,7 @@
             </ul>
           </dd>
         % endif
-        % set ranges = sorted(set(rprop.objects(RANGE)))
+        % set ranges = sorted(set(find_references(rprop.objects(RANGE))))
         % if ranges
           <dt>Range(s)</dt>
           <dd>

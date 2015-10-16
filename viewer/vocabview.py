@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect
 from rdflib import Graph, URIRef, Literal, BNode, RDF, RDFS, OWL
+from rdflib.resource import Resource
 from rdflib.namespace import SKOS, Namespace, ClosedNamespace
 from util.graphcache import GraphCache, vocab_source_map
 
@@ -67,6 +68,12 @@ def vocabview():
             if label.language == lang:
                 return label
         return label
+
+    def find_references(items):
+        for o in items:
+            ref = o.identifier if isinstance(o, Resource) else o
+            if isinstance(ref, URIRef):
+                yield o
 
     def link(obj):
         if ':' in obj.qname() and not any(obj.objects(None)):
