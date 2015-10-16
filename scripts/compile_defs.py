@@ -43,13 +43,13 @@ def terms():
 
 #@dataset
 #def datasets():
-#    source = Graph().parse(scriptpath('../def/index.ttl'), format='turtle')
+#    source = Graph().parse(scriptpath('../source/index.ttl'), format='turtle')
 #    return to_jsonld(source, None, { "@language": "sv"})
 
 
 @dataset
 def schemes():
-    source = Graph().parse(scriptpath('../def/schemes.ttl'), format='turtle')
+    source = Graph().parse(scriptpath('../source/schemes.ttl'), format='turtle')
     return "/scheme/", to_jsonld(source, "skos", {"@base": BASE, "@language": "sv"})
 
 
