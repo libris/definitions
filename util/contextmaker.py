@@ -14,7 +14,7 @@ CLASS_TYPES = {RDFS.Class, OWL.Class, RDFS.Datatype}
 PROP_TYPES = {RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty}
 
 
-def make_context(graph, dest_vocab=None, ns_pref_order=None, use_sub=False):
+def make_context(graph, dest_vocab=None, ns_pref_order=DEFAULT_NS_PREF_ORDER, use_sub=False):
     terms = set()
     for s in graph.subjects():
         if not isinstance(s, URIRef):
@@ -23,7 +23,8 @@ def make_context(graph, dest_vocab=None, ns_pref_order=None, use_sub=False):
         in_source_vocab = True # TODO: provide source and target vocab(s)
         if in_source_vocab:
             terms.add(r)
-    #dest_vocab = graph.store.namespace(dest_vocab)
+    if dest_vocab.isalnum():
+        dest_vocab = graph.store.namespace(dest_vocab)
     prefixes = set()
     defs = {}
     for term in terms:
@@ -162,7 +163,8 @@ if __name__ == '__main__':
         use_sub = False
     ns_pref_order = args if args else DEFAULT_NS_PREF_ORDER
 
-    graph = Graph().parse(fpath, format=guess_format(fpath))
+    graph = ConjunctiveGraph()
+    graph.parse(fpath, format=guess_format(fpath))
 
     context = make_context(graph, dest_vocab, ns_pref_order, use_sub)
     if overlay_fpath:

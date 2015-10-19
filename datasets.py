@@ -5,7 +5,7 @@ from glob import glob
 from rdflib import Graph, URIRef, Namespace, RDF, RDFS, OWL
 from rdflib.namespace import SKOS, DCTERMS
 from util.datacompiler import Compiler, filter_graph, extend, load_data, to_jsonld
-from util.contextmaker import make_context, add_overlay
+from util.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 
 
 # TODO:
@@ -45,7 +45,7 @@ def vocab():
     with open(scriptpath('source/vocab/update.rq')) as fp:
         source.update(fp.read())
 
-    lib_context = make_context(source, BASE + 'vocab/')
+    lib_context = make_context(source, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_data(scriptpath('source/vocab-overlay.jsonld')))
     compiler.write(lib_context, 'lib-context')
 
