@@ -152,6 +152,54 @@ describe('id.kb.se', function() {
       
     })
     
+    describe('Marcframe view', function() {
+      
+      it('Should load', function(client) {
+        client
+          .url('http://localhost:5000/marcframeview/')
+          .waitForElementPresent('body', 10000)
+      })
+        
+      it('Sidenav Should show a menu of categories', function(client) {
+        client
+          .expect.element('.menu-col .nav-tabs').to.be.present
+      });
+      
+      it('Sidenav Should initially show BIB fields', function(client) {
+        client.expect.element('.menu-col .nav-tabs .active a').text.to.equal('bib')
+        client.expect.element('#tab-bib').to.be.visible
+        client.expect.element('#tab-auth').to.not.be.visible
+        client.expect.element('#tab-hold').to.not.be.visible
+      });
+      
+      it('Sidenav Should switch fields when another tab is clicked', function(client) {
+        client.click('a[href="#tab-auth"]', function() {
+          client.expect.element('#tab-bib').to.not.be.visible
+          client.expect.element('#tab-auth').to.be.visible
+          client.expect.element('#tab-hold').to.not.be.visible
+        })
+      });
+      
+    })
+    
+    describe('Vocab view', function() {
+      
+      it('Should load', function(client) {
+        client
+          .url('http://localhost:5000/def/terms.html')
+          .waitForElementPresent('body', 10000)
+      })
+      
+      it('Sidenav should show classes', function(client) {
+        client.expect.element('.menu-col .nav-classes').to.be.present
+      });
+      
+      it('Sidenav should show properties', function(client) {
+        client.expect.element('.menu-col .nav-properties').to.be.present
+      });
+      
+    })
+    
   });
 
 });
