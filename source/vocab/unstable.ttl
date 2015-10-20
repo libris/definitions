@@ -1,0 +1,183 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix bf: <http://bibframe.org/vocab/> .
+@prefix sdo: <http://schema.org/> .
+@prefix rdael: <http://rdvocab.info/Elements/> .
+
+@prefix : <http://id.kb.se/vocab/> .
+
+
+# MARC terms, unstable enums...
+
+# TODO: work-in-progress
+
+#@prefix app: <http://id.kb.se/def/application#> .
+#
+#_:exampleOfWorkPartNumber a app:ContextualProperty;
+#    owl:propertyChainAxiom (:exampleOfWork :partNumber) ;
+#    rdfs:label "Nummer på del eller avsnitt av verk"@sv .
+#
+#_:createdOfRecord a app:ContextualProperty;
+#    owl:equivalentProperty :created;
+#    rdfs:domain :Record;
+#    rdfs:label "Datum då posten skapades"@sv .
+
+:ISBN13 a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISBN-13" .
+
+
+
+:availability a rdf:Property;
+    owl:equivalentProperty sdo:availability;
+    rdfs:label "Exemplarstatus"@sv;
+    rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
+    skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
+
+:termsOfAvailability a rdf:Property;
+    owl:equivalentProperty rdael:termsOfAvailability;
+    rdfs:label "Anskaffningsvillkor"@sv .
+
+:sigel a rdf:Property;
+    rdfs:domain sdo:Library;
+    rdfs:subPropertyOf skos:notation;
+    rdfs:label "Sigel"@sv .
+
+:url a rdf:Property;
+    owl:equivalentProperty sdo:url;
+    rdfs:label "URL"@sv .
+
+:classificationPart a rdf:Property;
+    # TODO: rename to shelfMark? rdfs:subPropertyOf bf:shelfMark ?
+    rdfs:label "Hyllsignum: Klassifikation"@sv;
+    rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
+    skos:example "Hc", "Hc Lagerlöf" .
+
+:copyNumber a rdf:Property;
+    rdfs:label "Exemplarnummer"@sv;
+    rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
+    skos:example "A-C", "5" .
+
+:shelfControlNumber a rdf:Property;
+    rdfs:label "Hyllsignum: Löpnummer"@sv;
+    rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord."@sv;
+    skos:note "Kan även kombineras med ytterligare placeringsuppgifter."@sv;
+    skos:example "96-3899" .
+
+:shelfLabel a rdf:Property;
+    rdfs:label "Hyllsignum: Uppställningsord"@sv;
+    rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
+    skos:example "Deckare", "Lagerlöf" .
+
+:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv;
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi" .
+
+:containedIn rdfs:label "contained in"@en, "belägen i"@sv .
+:description rdfs:label "description"@en, "beskrivning"@sv .
+:medium a rdf:Property; rdfs:label "Medieterm"@sv .
+:musicArrangement a rdf:Property; rdfs:label "Arrangemang (musik)"@sv .
+:musicKey a rdf:Property; rdfs:label "Tonart"@sv .
+:musicPerformanceMedium a rdf:Property; rdfs:label "Besättning (musik)"@sv .
+:partTitle a rdf:Property; rdfs:label "Deltitel"@sv .
+:partNumber a rdf:Property; rdfs:label "Delbeteckning"@sv .
+:previousTitle a rdf:Property; rdfs:label "Tidigare titel"@sv .
+:translatedTitle a rdf:Property; rdfs:label "Översatt/Normaliserad titel"@sv .
+:treatySigningDate a rdf:Property; rdfs:label "Datum för undertecknande av fördrag"@sv .
+:originalLanguage a rdf:Property; rdfs:label "Originalspråk"@sv .
+:responsibilityStatement a rdf:Property; skos:altLabel "Upphov"@sv .
+:literaryForm a rdf:Property; rdfs:label "Litterär genre"@sv .
+:publication a rdf:Property; rdfs:label "publication"@en, "utgivning"@sv .
+:manufacture a rdf:Property; rdfs:label "manufacture"@en, "tillverkning"@sv .
+:place a rdf:Property; rdfs:label "Ort"@sv .
+:providerName a rdf:Property; rdfs:label "Utgivare/förlag/tryckeri"@sv .
+:providerDate a rdf:Property;
+    rdfs:label "datum"@sv;
+    rdfs:comment "Ange utgivningstid, i första hand utgivningsår, tillverkningsår eller copyright-år."@sv .
+:publisherNumber a rdf:Property; rdfs:label "Utgivningsnummer"@sv .
+:frequencyCategory a rdf:Property; rdfs:label "Frekvens"@sv .
+:frequency a rdf:Property; rdfs:label "Frekvensanmärkning"@sv .
+:regularity a rdf:Property; rdfs:label "Regelbundenhet"@sv .
+:identifierValue a rdf:Property; rdfs:label "Nummer"@sv .
+:identifierNote a rdf:Property; rdfs:label "Notering"@sv .
+:classification a rdf:Property; rdfs:label "Klassifikation"@sv .
+:mediaTerm a rdf:Property; rdfs:label "Allmän medieterm"@sv .
+:publicationCountry a rdf:Property; rdfs:label "Utgivningsland"@sv .
+:material a rdf:Property; rdfs:label "Material"@sv .
+:fileType a rdf:Property; rdfs:label "Filtyp"@sv .
+:relief a rdf:Property; rdfs:label "Relief"@sv .
+:index a rdf:Property; rdfs:label "Index"@sv .
+:extent a rdf:Property; rdfs:label "Omfång"@sv .
+:otherPhysicalDetails a rdf:Property; rdfs:label "Övriga fysiska detaljer"@sv .
+:materialsSpecified a rdf:Property; rdfs:label "specificerat material"@sv .
+:color a rdf:Property; rdfs:label "Färg"@sv .
+:dimensions a rdf:Property;
+    rdfs:label "dimensions"@en, "dimensioner"@sv;
+    skos:altLabel "Mått"@sv .
+:sound a rdf:Property; rdfs:label "Ljud"@sv .
+:fileFormats a rdf:Property; rdfs:label "filformat"@sv .
+:qATarget a rdf:Property; rdfs:label "__qATarget__"@sv .
+:medium a rdf:Property; rdfs:label "medium"@sv .
+:reproduction a rdf:Property; rdfs:label "reproduktion"@sv .
+:details a rdf:Property; rdfs:label "detaljnivå"@sv .
+:posNeg a rdf:Property; rdfs:label "__posNeg__"@sv .
+:nonProjColor a rdf:Property; rdfs:label "__nonProjColor__"@sv .
+:nonProjPrimary a rdf:Property; rdfs:label "__nonProjPrimary__"@sv .
+:nonProjSecondary a rdf:Property; rdfs:label "__nonProjSecondary__"@sv .
+:motionPicFormat a rdf:Property; rdfs:label "__motionPicFormat__"@sv .
+:motionPicSound a rdf:Property; rdfs:label "__motionPicSound__"@sv .
+:motionPicMedium a rdf:Property; rdfs:label "__motionPicMedium__"@sv .
+:motionPicDimensions a rdf:Property; rdfs:label "__motionPicDimensions__"@sv .
+:cartographicScale a rdf:Property; rdfs:label "Kartografisk skala"@sv .
+:cartographicCoordinates a rdf:Property; rdfs:label "Kartografiska koordinater"@sv .
+:cartographicScale a rdf:Property; rdfs:label "__cartographicScale__"@sv .
+:constantRatioLinearHorizontalScale a rdf:Property; rdfs:label "Linjär horisontell skala med konstant proportion"@sv .
+:constantRatioLinearVerticalScale a rdf:Property; rdfs:label "Linjär vertikal skala med konstant proportion"@sv .
+:westernmostLongitudeCoordinates a rdf:Property; rdfs:label "Koordinater - västlig gränslongitud "@sv .
+:easternmostLongitudeCoordinates a rdf:Property; rdfs:label "Koordinater - östlig gränslongitud"@sv .
+:northernmostLatitudeCoordinates a rdf:Property; rdfs:label "Koordinater - nordlig gränslatitud"@sv .
+:southernmostLatitudeCoordinates a rdf:Property; rdfs:label "Koordinater - sydlig gränslatitud"@sv .
+:angularScale a rdf:Property; rdfs:label "__angularScale__"@sv .
+:declinationNorthernLimit a rdf:Property; rdfs:label "__declinationNorthernLimit__"@sv .
+:declinationSouthernLimit a rdf:Property; rdfs:label "__declinationSouthernLimit__"@sv .
+:rightAscensionEasternLimit a rdf:Property; rdfs:label "__rightAscensionEasternLimit__"@sv .
+:rightAscensionWesternLimit a rdf:Property; rdfs:label "__rightAscensionWesternLimit__"@sv .
+:cartographicEquinox a rdf:Property; rdfs:label "kartografisk equinox"@sv .
+:distanceFromEarth a rdf:Property; rdfs:label "avstånd från jorden"@sv .
+:gRingLatitude a rdf:Property; rdfs:label "__gRingLatitude__"@sv .
+:gRingLongitude a rdf:Property; rdfs:label "__gRingLongitude__"@sv .
+:startDate a rdf:Property; rdfs:label "startdatum"@sv .
+:endDate a rdf:Property; rdfs:label "slutdatum"@sv .
+:extraterrestrialBody a rdf:Property; rdfs:label "himlakropp"@sv .
+:relatedTitles a rdf:Property; rdfs:label "Sammanhörande titlar"@sv .
+:alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
+:alternateFormat a rdf:Property; rdfs:label "Annat format"@sv .
+:summary a rdf:Property; rdfs:label "sammanfattning"@sv .
+:languageNote a rdf:Property; rdfs:label "Språkanmärkning"@sv .
+:technicalNote a rdf:Property; rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
+:listOfContents a rdf:Property; rdfs:label "Formaterad innehållsförteckning"@sv .
+:performerNote a rdf:Property; rdfs:label "Medverkande"@sv .
+:systemRequirements a rdf:Property; rdfs:label "Systemkrav"@sv .
+:isPrimaryTopicOf a rdf:Property; rdfs:label "Är huvudämne för"@sv .
+:audience a rdf:Property; rdfs:label "Målgrupp"@sv .
+:sourceNote a rdf:Property; rdfs:label "Intern anmärkning om katalogiseringskälla"@sv .
+:copyNote a rdf:Property; rdfs:label "Publik anmärkning"@sv .
+:hasAnnotation a rdf:Property; rdfs:label "Annotering"@sv .
+:degree a rdf:Property; rdfs:label "Akademisk examen"@sv .
+:alphabet a rdf:Property; rdfs:label "Alfabet/Skriftart"@sv .
+:audience a rdf:Property; rdfs:label "Målgrupp"@sv .
+:confPub a rdf:Property; rdfs:label "Konferenspublikation"@sv .
+:contentType a rdf:Property; skos:altLabel "Form för utgåva"@sv .
+:festschrift a rdf:Property; rdfs:label "Festskrift"@sv .
+:illustrations a rdf:Property; rdfs:label "Illustrationer i resursen"@sv .
+:nature a rdf:Property; rdfs:label "Innehållsmässig karaktär"@sv .
+:offers rdfs:label "product offer"@en, "produkterbjudande"@sv .
+:originalItem a rdf:Property; rdfs:label "Bärartyp"@sv .
+:runningTime a rdf:Property; rdfs:label "Speltid"@sv .
+
+

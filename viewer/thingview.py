@@ -42,12 +42,11 @@ def setup_app(setup_state):
             config.get('DBUSER'), config.get('DBPASSWORD'))
 
     vocab_uri = config['VOCAB_IRI']
-    lang = config['LANG']
-    vocab_paths = config['VOCAB_SOURCES']
-    graphcache = GraphCache("cache/graph-cache")
-    for path in vocab_paths:
+    graphcache = GraphCache(config['GRAPH_CACHE'])
+    graphcache.graph.namespace_manager.bind("", vocab_uri)
+    for path in config['VOCAB_SOURCES']:
         graphcache.load(path)
-    vocab = Vocab(graphcache.graph, vocab_uri, lang=lang)
+    vocab = Vocab(graphcache.graph, vocab_uri, lang=config['LANG'])
 
     global ldview
     ldview = View(vocab, storage)

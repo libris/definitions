@@ -1,8 +1,11 @@
 from __future__ import print_function
 import json
 from rdflib import *
+from rdflib.util import guess_format, SUFFIX_FORMAT_MAP
 from rdflib.resource import Resource
+
 Resource.id = Resource.identifier
+SUFFIX_FORMAT_MAP['jsonld'] = 'json-ld'
 
 
 DEFAULT_NS_PREF_ORDER = 'dc sdo skos prov bf bibo foaf dctype owl rdfs rdf xsd edtf'.split()
@@ -11,7 +14,7 @@ CLASS_TYPES = {RDFS.Class, OWL.Class, RDFS.Datatype}
 PROP_TYPES = {RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty}
 
 
-def context_from_vocab(graph, dest_vocab=None, ns_pref_order=None, use_sub=False):
+def make_context(graph, dest_vocab=None, ns_pref_order=DEFAULT_NS_PREF_ORDER, use_sub=False):
     terms = set()
     for s in graph.subjects():
         if not isinstance(s, URIRef):
@@ -20,7 +23,8 @@ def context_from_vocab(graph, dest_vocab=None, ns_pref_order=None, use_sub=False
         in_source_vocab = True # TODO: provide source and target vocab(s)
         if in_source_vocab:
             terms.add(r)
-    dest_vocab = graph.store.namespace(dest_vocab)
+    if dest_vocab.isalnum():
+        dest_vocab = graph.store.namespace(dest_vocab)
     prefixes = set()
     defs = {}
     for term in terms:
@@ -129,7 +133,7 @@ def _pfx(term):
     qname = term.qname()
     return qname.split(':', 1)[0] if ':' in qname else ""
 
-def extend(context, overlay):
+def add_overlay(context, overlay):
     ns, defs = context['@context']
     overlay = overlay.get('@context') or overlay
     for term, dfn in overlay.items():
@@ -148,6 +152,7 @@ def extend(context, overlay):
 if __name__ == '__main__':
     import sys
     args = sys.argv[1:]
+
     fpath = args.pop(0)
     overlay_fpath = args.pop(0) if args else None
     dest_vocab = args.pop(0) if args else None
@@ -158,13 +163,15 @@ if __name__ == '__main__':
         use_sub = False
     ns_pref_order = args if args else DEFAULT_NS_PREF_ORDER
 
-    fmt = 'n3' if fpath.endswith(('.n3', '.ttl')) else 'xml'
-    graph = Graph().parse(fpath, format=fmt)
-    context = context_from_vocab(graph, dest_vocab, ns_pref_order, use_sub)
+    graph = ConjunctiveGraph()
+    graph.parse(fpath, format=guess_format(fpath))
+
+    context = make_context(graph, dest_vocab, ns_pref_order, use_sub)
     if overlay_fpath:
         with open(overlay_fpath) as fp:
             overlay = json.load(fp)
-        extend(context, overlay)
+        add_overlay(context, overlay)
+
     s = json.dumps(context, sort_keys=True, indent=2, separators=(',', ': '),
             ensure_ascii=False).encode('utf-8')
     print(s)
