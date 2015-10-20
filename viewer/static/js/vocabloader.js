@@ -2,9 +2,12 @@ $(function () {
 
   var loaded = false;
   var embedvocab = $('<div id="embedvocab"></div>').appendTo('body');
+  
+  $('#embedvocab').hide();
 
   $(document).on('click', 'body', function (event) {
     $('.state-active').removeClass('state-active');
+    $('#embedvocab').hide();
   });
 
   $(document).on('click', '#embedvocab article.panel', function (event) {
@@ -20,6 +23,7 @@ $(function () {
     
     function display() {
       
+      $('#embedvocab').show();
       $('.state-active').removeClass('state-active');
       $('#' + ref).addClass('state-active');
       
