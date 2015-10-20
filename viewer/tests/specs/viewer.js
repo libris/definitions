@@ -146,7 +146,6 @@ describe('id.kb.se', function() {
       it('Should hide vocab popup on click outside popup', function(client) {
         client
           .click('footer .navbar-text', function() {
-            client.pause(5000)
             client.expect.element('#embedvocab').to.not.be.visible.before(5000)
           })
       });
