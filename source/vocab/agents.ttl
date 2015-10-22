@@ -1,6 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -150,3 +151,12 @@ l:object rdfs:subPropertyOf rdf:object .
 :legalName a owl:DatatypeProperty;
     rdfs:label "legal name"@en, "juridiskt namn"@sv;
     owl:equivalentProperty sdo:legalName .
+
+:Library a owl:Class;
+    rdfs:label "Library"@en, "Bibliotek"@sv;
+    rdfs:subClassOf :Organisation;
+    owl:equivalentClass sdo:Library .
+
+:sigel a owl:ObjectProperty;
+    rdfs:subPropertyOf skos:notation;
+    rdfs:domain :Library .
