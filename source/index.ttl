@@ -31,9 +31,14 @@
 
 <relators> a void:Dataset;
     void:class owl:ObjectProperty;
-    dc:source <relators/additional.jsonld>;
-    dc:source <relators/labels-sv.jsonld>;
-    dc:source <http://id.loc.gov/vocabulary/relators> .
+    void:vocabulary rdfs:, owl:, skos:, dc:;
+    dc:source <http://id.loc.gov/vocabulary/relators>;
+    dc:source <source/funktionskoder.tsv>;
+    #dc:source <relators/labels-sv.jsonld>;
+    #dc:source <relators/additional.jsonld>;
+    prov:hadGeneration <source/update-relators.rq>;
+    #:slugFrom (skos:notation skos:prefLabel "en");
+    void:uriSpace "/relator/" .
 
 <types> a void:Dataset; # work > form > carrier
     void:class [ rdfs:subClassOf sdo:CreativeWork ] .

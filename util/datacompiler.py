@@ -1,14 +1,15 @@
 from __future__ import unicode_literals, print_function
 __metaclass__ = type
+from collections import OrderedDict
 from os import makedirs, path as Path
+import urllib2
 import sys
-import re
 import json
 import csv
-from collections import OrderedDict
 
-from rdflib import Graph, RDF
+from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
+from rdflib_jsonld.parser import to_rdf
 
 
 class Compiler:
@@ -64,8 +65,19 @@ class Compiler:
         else:
             print("No data")
 
-    def deref(self, iri):
-        return self.cached_rdf(iri).resource(iri)
+    def get_cached_path(self, url):
+        return Path.join(self.cachedir, urllib2.quote(url, safe=""))
+
+    def cache_url(self, url):
+        path = self.get_cached_path(url)
+        if not Path.exists(path):
+            with open(path, 'wb') as fp:
+                r = urllib2.urlopen(url)
+                while True:
+                    chunk = r.read(1024 * 8)
+                    if not chunk: break
+                    fp.write(chunk)
+        return path
 
     def cached_rdf(self, fpath):
         source = Graph()
@@ -82,7 +94,8 @@ class Compiler:
                 return source
             else:
                 return source.parse(fpath, format='turtle')
-        return source.parse(fpath)
+        source.parse(fpath)
+        return source
 
 
 def _serialize(data):
@@ -99,75 +112,48 @@ def _ensure_fpath(fpath):
         makedirs(fdir)
 
 
-def filter_graph(source, propspaces, oftype=None):
-    propspaces = tuple(map(unicode, propspaces))
-    okspace = lambda t: any(t.startswith(ns) for ns in propspaces)
-    selected = set(source[:RDF.type:oftype]) if oftype else None
-
-    graph = Graph()
-    for s, p, o in source:
-        if selected and s not in selected:
-            continue
-        if not okspace(p) or p == RDF.type and oftype and o != oftype:
-            continue
-        graph.add((s, p, o))
-
-    return graph
+def load_json(fpath):
+    with open(fpath) as fp:
+        return json.load(fp)
 
 
-def extend(data, extradata, lang, keys=('label', 'prefLabel', 'comment'),
-        term_source=None, iri_template=None, addtype=None, relation=None,
-        key_term='notation'):
-    extras = load_data(extradata)
-    index = {node[key_term]: node for node in data['@graph']}
-    for key, item in extras.items():
-        iri = None
-        if iri_template:
-            term = item.pop('term', None)
-            if not term and term_source:
-                term = to_camel_case(item[term_source])
-            if term:
-                iri = iri_template.format(term=term)
-        node = index.get(key)
-        if not node:
-            if iri:
-                node = index[key] = {}
-                if addtype:
-                    node['@type'] = addtype
-                node[key_term] = key
-            else:
-                continue
-        for key in keys:
-            item_key = "%s_%s" % (key, lang) if lang else key
-            if item_key in item:
-                node[key] = item[item_key]
-        if not iri and iri_template:
-            iri = iri_template.format(**node)
-        if iri:
-            node['@id'], orig_iri = iri, node.get('@id')
-            if relation and orig_iri:
-                node[relation] = orig_iri
-
-
-def load_data(fpath, encoding='utf-8'):
+def read_csv(fpath, encoding='utf-8'):
     csv_dialect = ('excel' if fpath.endswith('.csv')
             else 'excel-tab' if fpath.endswith('.tsv')
             else None)
-    if csv_dialect:
-        with open(fpath, 'rb') as fp:
-            reader = csv.DictReader(fp, dialect=csv_dialect)
-            return {item.pop('code'):
-                        {k: v.decode(encoding).strip()
+    assert csv_dialect
+    with open(fpath, 'rb') as fp:
+        reader = csv.DictReader(fp, dialect=csv_dialect)
+        for item in reader:
+            yield {k: v.decode(encoding).strip()
                             for (k, v) in item.items() if v}
-                    for item in reader}
-    else:
-        with open(fpath) as fp:
-            return json.load(fp)
 
 
-def to_camel_case(label):
-    return "".join((s[0].upper() if i else s[0].lower()) + s[1:]
-            for (i, s) in enumerate(re.split(r'[\s,.-]', label)) if s)
+def decorate(items, template):
+    def decorator(item):
+        for k, tplt in template.items():
+            item[k] = tplt.format(**item)
+        return item
+    return map(decorator, items)
+
+
+def construct(load_rdf, sources, query):
+    dataset = ConjunctiveGraph()
+    for sourcedfn in sources:
+        source = sourcedfn['source']
+        graph = dataset.get_context(URIRef(sourcedfn.get('dataset') or source))
+        if isinstance(source, (dict, list)):
+            to_rdf(source, graph, context_data=sourcedfn['context'])
+        elif isinstance(source, Graph):
+            graph += source
+        else:
+            graph += load_rdf(source)
+    with open(query) as fp:
+        result = dataset.query(fp.read())
+    g = Graph()
+    for spo in result:
+        g.add(spo)
+    return g
 
 
 def to_jsonld(source, contextref, contextobj=None):
