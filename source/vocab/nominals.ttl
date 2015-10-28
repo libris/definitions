@@ -8,7 +8,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix sdo: <http://schema.org/> .
-@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix mads: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix : <http://id.kb.se/vocab/> .
 
@@ -17,16 +17,16 @@
 
 :Place a owl:Class;
     rdfs:label "Plats"@sv;
-    owl:equivalentClass sdo:Place .
+    owl:equivalentClass sdo:Place, mads:Geographic .
 
 :Country a owl:Class;
     rdfs:label "Land"@sv;
-    owl:equivalentClass sdo:Country;
+    owl:equivalentClass sdo:Country, mads:Country;
     rdfs:subClassOf :Place .
 
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
-    owl:equivalentClass bf:Language,
+    owl:equivalentClass bf:Language, mads:Language,
         sdo:Language .
 
 :Nationality a owl:Class ;
@@ -34,7 +34,8 @@
 
 :controlledLabel a owl:DatatypeProperty;
     rdfs:label "kontrollerad etikett"@sv;
-    owl:equivalentProperty bf:authorizedAccessPoint .
+    owl:equivalentProperty bf:authorizedAccessPoint, mads:authoritativeLabel;
+    rdfs:subPropertyOf :prefLabel .
     #owl:propertyChainAxiom ( [owl:inverseOf foaf:focus] skos:prefLabel ) .
 
 
@@ -118,7 +119,7 @@
 
 :inCollection a owl:ObjectProperty;
     owl:inverseOf :collectionItem;
-    owl:equivalentProperty madsrdf:isMemberOfMADSCollection;
+    owl:equivalentProperty mads:isMemberOfMADSCollection;
     rdfs:subPropertyOf vann:termGroup;
     rdfs:domain :Concept;
     rdfs:range :ConceptCollection .
@@ -136,6 +137,7 @@
 
 :IndexTerm a owl:Class;
     rdfs:label "Index Term"@en, "Indexterm"@sv;
+    owl:equivalentClass mads:MADSType;
     rdfs:subClassOf :Concept;
     foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
 
