@@ -8,6 +8,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix sdo: <http://schema.org/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix : <http://id.kb.se/vocab/> .
 
@@ -117,6 +118,7 @@
 
 :inCollection a owl:ObjectProperty;
     owl:inverseOf :collectionItem;
+    owl:equivalentProperty madsrdf:isMemberOfMADSCollection;
     rdfs:subPropertyOf vann:termGroup;
     rdfs:domain :Concept;
     rdfs:range :ConceptCollection .
