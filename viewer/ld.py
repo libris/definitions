@@ -146,9 +146,10 @@ class Vocab:
 
 class View:
 
-    def __init__(self, vocab, storage):
+    def __init__(self, vocab, storage, elastic):
         self.vocab = vocab
         self.storage = storage
+        self.elastic = elastic
         self.rev_limit = 4000
         self.chip_keys = {ID, TYPE, 'focus', 'mainEntity'} | set(self.vocab.label_keys)
 
@@ -179,6 +180,7 @@ class View:
         limit, offset = self._get_limit_offset(req_args)
 
         records = []
+        items = []
         # TODO: unify find_by_relation and find_by_example, support the latter form here too
         if p:
             if o:
@@ -189,12 +191,16 @@ class View:
                 records = self.storage.find_by_query(p, q, limit, offset)
         elif o:
             records = self.storage.find_by_quotation(o, limit, offset)
-        items = []
+        elif q and not p:
+            # Search in elastic
+            items = [r.get('_source') for r in self.elastic.search(q=q, size=limit, doc_type='auth', index='libris').get('hits').get('hits')]
+
         for rec in records:
             descs = rec.data['descriptions']
             descs.pop('quoted', None)
             chip = self.to_chip(self.get_decorated_data({'descriptions': descs}))
             items.append(chip)
+
 
         def ref(link): return {ID: link}
 

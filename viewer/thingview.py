@@ -16,6 +16,8 @@ from lddb.storage import Storage, DEFAULT_LIMIT
 from .ld import Vocab, View, CONTEXT, ID, TYPE, GRAPH, REVERSE, as_iterable
 from .conneg import Negotiator
 
+from elasticsearch import Elasticsearch
+
 
 BASE_URI = "http://id.kb.se/"
 
@@ -41,6 +43,9 @@ def setup_app(setup_state):
             config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
             config.get('DBUSER'), config.get('DBPASSWORD'))
 
+    global elastic
+    elastic = Elasticsearch(config['ESHOST'], sniff_on_start=True, sniff_on_connection_fail=True, sniff_timeout=60, sniffer_timeout=300, timeout=10)
+
     vocab_uri = config['VOCAB_IRI']
     graphcache = GraphCache(config['GRAPH_CACHE'])
     graphcache.graph.namespace_manager.bind("", vocab_uri)
@@ -49,7 +54,7 @@ def setup_app(setup_state):
     vocab = Vocab(graphcache.graph, vocab_uri, lang=config['LANG'])
 
     global ldview
-    ldview = View(vocab, storage)
+    ldview = View(vocab, storage, elastic)
 
     global jsonld_context_file
     jsonld_context_file = config['JSONLD_CONTEXT_FILE']

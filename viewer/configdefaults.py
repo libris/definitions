@@ -8,6 +8,8 @@ DBNAME='definitions'
 DBUSER=None
 DBPASSWORD=None
 
+ESHOST='127.0.0.1'
+
 VOCAB_IRI = "http://id.kb.se/vocab/"
 LANG = "sv"
 
