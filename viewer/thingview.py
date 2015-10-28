@@ -43,8 +43,10 @@ def setup_app(setup_state):
             config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
             config.get('DBUSER'), config.get('DBPASSWORD'))
 
-    global elastic
-    elastic = Elasticsearch(config['ESHOST'], sniff_on_start=True, sniff_on_connection_fail=True, sniff_timeout=60, sniffer_timeout=300, timeout=10)
+    elastic = Elasticsearch(config['ESHOST'],
+            sniff_on_start=config.get('ES_SNIFF_ON_START', True),
+            sniff_on_connection_fail=True, sniff_timeout=60,
+            sniffer_timeout=300, timeout=10)
 
     vocab_uri = config['VOCAB_IRI']
     graphcache = GraphCache(config['GRAPH_CACHE'])

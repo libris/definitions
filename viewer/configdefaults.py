@@ -9,6 +9,7 @@ DBUSER=None
 DBPASSWORD=None
 
 ESHOST='127.0.0.1'
+ES_SNIFF_ON_START=True
 
 VOCAB_IRI = "http://id.kb.se/vocab/"
 LANG = "sv"
