@@ -56,7 +56,7 @@ def setup_app(setup_state):
     vocab = Vocab(graphcache.graph, vocab_uri, lang=config['LANG'])
 
     global ldview
-    ldview = View(vocab, storage, elastic)
+    ldview = View(vocab, storage, elastic, config['ES_INDEX'])
 
     global jsonld_context_file
     jsonld_context_file = config['JSONLD_CONTEXT_FILE']

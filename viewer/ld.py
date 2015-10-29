@@ -146,10 +146,11 @@ class Vocab:
 
 class View:
 
-    def __init__(self, vocab, storage, elastic):
+    def __init__(self, vocab, storage, elastic, es_index):
         self.vocab = vocab
         self.storage = storage
         self.elastic = elastic
+        self.es_index = es_index
         self.rev_limit = 4000
         self.chip_keys = {ID, TYPE, 'focus', 'mainEntity'} | set(self.vocab.label_keys)
 
@@ -196,9 +197,9 @@ class View:
         elif q and not p:
             # Search in elastic
             dsl = { "query": { "query_string": { "query": "{0}".format(q) } } }
-            items = [r.get('_source') for r in self.elastic.search(body=dsl, size=limit, from_=offset, doc_type='auth', index='libris').get('hits').get('hits')]
-
-            #items = [r.get('_source') for r in self.elastic.search(q=q, size=limit, from_=offset, doc_type='auth', index='libris').get('hits').get('hits')]
+            items = [r.get('_source') for r in self.elastic.search(
+                    body=dsl, size=limit, from_=offset,
+                    index=self.es_index).get('hits').get('hits')]
 
         for rec in records:
             descs = rec.data['descriptions']
