@@ -143,10 +143,12 @@
 
 :TopicalTerm a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
+    owl:equivalentClass mads:Topic;
     rdfs:subClassOf :IndexTerm .
 
 :GenreTerm a owl:Class;
     rdfs:label "Genre-/formterm"@sv;
+    owl:equivalentClass mads:GenreForm;
     rdfs:subClassOf :IndexTerm .
 
 :SubdivisionTerm a owl:Class;
@@ -155,6 +157,7 @@
 
 :ChronologicalTerm a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
+    owl:equivalentClass mads:Temporal;
     rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
@@ -162,6 +165,7 @@
 
 :GeographicalTerm a owl:Class;
     rdfs:label "Geografiskt ämnesord"@sv;
+    owl:equivalentClass mads:Geographic;
     rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
@@ -199,6 +203,7 @@
 
 :PersonTerm a owl:Class;
     rdfs:label "Personterm"@sv;
+    owl:equivalentClass mads:PersonalName;
     rdfs:subClassOf :IndexTerm;
     l:magicProperty [
             l:resultProperty :prefLabel;
@@ -216,6 +221,7 @@
 
 :FamilyTerm a owl:Class;
     rdfs:label "Familjeterm"@sv;
+    owl:equivalentClass mads:FamilyName;
     rdfs:subClassOf :IndexTerm;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
