@@ -197,9 +197,10 @@ class View:
         elif q and not p:
             # Search in elastic
             dsl = { "query": { "query_string": { "query": "{0}".format(q) } } }
-            items = [r.get('_source') for r in self.elastic.search(
-                    body=dsl, size=limit, from_=offset,
-                    index=self.es_index).get('hits').get('hits')]
+            # TODO: only ask ES for chip properties instead of post-processing
+            items = [self.to_chip(r.get('_source')) for r in
+                     self.elastic.search(body=dsl, size=limit, from_=offset,
+                             index=self.es_index).get('hits').get('hits')]
 
         for rec in records:
             descs = rec.data['descriptions']
