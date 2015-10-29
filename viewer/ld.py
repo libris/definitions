@@ -195,10 +195,10 @@ class View:
             records = self.storage.find_by_quotation(o, limit, offset)
         elif q and not p:
             # Search in elastic
-            #dsl = { "query": { "query_string": { "query": "{0}".format(q) } } }
-            #items = [r.get('_source') for r in self.elastic.search(body=dsl, size=limit, doc_type='auth', index='libris').get('hits').get('hits')]
+            dsl = { "query": { "query_string": { "query": "{0}".format(q) } } }
+            items = [r.get('_source') for r in self.elastic.search(body=dsl, size=limit, from_=offset, doc_type='auth', index='libris').get('hits').get('hits')]
 
-            items = [r.get('_source') for r in self.elastic.search(q=q, size=limit, from_=offset, doc_type='auth', index='libris').get('hits').get('hits')]
+            #items = [r.get('_source') for r in self.elastic.search(q=q, size=limit, from_=offset, doc_type='auth', index='libris').get('hits').get('hits')]
 
         for rec in records:
             descs = rec.data['descriptions']
