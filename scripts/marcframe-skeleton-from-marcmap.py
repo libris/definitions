@@ -191,6 +191,7 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
     # TODO: if off_key, type as boolean and define boolean property (w/o tokenMap)
     #if key == off_key:
     #    print('off key:', key, dfn)
+    # TODO: also, detect and type numeric (and possibly numeric range) types
 
     return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items), tokenmap_key
 
@@ -200,6 +201,7 @@ def _make_collection_id(dfn_ref_key):
 
 def get_enum_id(key, dfn):
     if 'id' in dfn:
+        # TODO: move id generation from legwcy config code here (to fix at least "'s" => "S")?
         v = dfn['id']
         subname, plural_name = to_name(v)
     else:
@@ -214,7 +216,8 @@ def get_enum_id(key, dfn):
         for badchar in ',()':
             subname = subname.replace(badchar, '')
 
-    if key in ('_', '|', '||', '|||') and any(t in subname for t in ('No', 'Ej', 'Inge')):
+    if key in ('_', '|', '||', '|||') and any(t in subname
+            for t in ('No', 'Ej', 'Inge', 'Uppgift_saknas')):
         raise Continue
 
     if subname.replace('Obsolete', '') in {
@@ -255,8 +258,8 @@ def to_name(name):
                 for s in name.split('And'))
     elif name[0].isdigit() \
             or name.startswith(('Missing', 'Mixed', 'Multiple')) \
-            or name.endswith(('Atlas', 'Arms', 'Blues', 'BubblesBlisters',
-                'Canvas', 'Characteristics', 'Contents',
+            or name.endswith(('Access', 'Atlas', 'Arms', 'Blues',
+                'BubblesBlisters', 'Canvas', 'Characteristics', 'Contents',
                 'ExceedsThreeCharacters', 'Glass', 'Series', 'Statistics',
                 'Previous')):
         pass
@@ -506,7 +509,7 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     colpropid = '%s-%s-%s' % (marc_type, tag, key)
                     #if colpropid in ENUM_DEFS: print(colpropid)
                     prop_dfn = {'@id': propname, '@type': 'owl:ObjectProperty'}
-                    prop_dfn['range'] = enumcoll.id
+                    prop_dfn['schema:rangeIncludes'] = {'@id': enumcoll.id}
                     add_labels(col, prop_dfn)
                     ENUM_DEFS[colpropid] = prop_dfn
 
@@ -517,6 +520,18 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                         # NOTE: means "enumeration only applicable if type of
                         # thing linking to it is of this type"
                         coll_dfn.setdefault('broadMatch', []).append('v:' + type_name)
+
+                    # TODO: represent broadMatch and
+                    # domainIncludes+rangeIncludes combos as anonymous
+                    # subproperties, like:
+                    #   :contentType a owl:ObjectProperty;
+                    #       :combinations [
+                    #               :prefLabel "Type of Continuing Resource"@en;
+                    #               rdfs:domain v:Serial; rdfs:range :SerialsTypeOfSerialType
+                    #           ], [
+                    #               :prefLabel "Type of Material"@en;
+                    #               rdfs:domain v:Visual; rdfs:range :VisualMaterialType
+                    #           ].
 
                 # TODO: check type of tokenmap (boolean, numeric (or fixed like here))
                 items = enumcoll.items.items()
