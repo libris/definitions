@@ -15,12 +15,12 @@ $(function () {
     if(diff > 0) {
       xMove += diff + 20;
     }
+    chip.css('margin-left', (-xMove));
     
     chip.addClass('to-be-active');
     setTimeout(function() {
       if(chip.hasClass('to-be-active'))
         chip.addClass('active').removeClass('to-be-active');
-        chip.css('margin-left', (-xMove));
     }, 500);
   }, function() {
     var chip = $(this).find('.chip-expanded');
