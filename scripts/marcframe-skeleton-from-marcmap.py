@@ -265,8 +265,8 @@ def to_name(name):
             or name.startswith(('Missing', 'Mixed', 'Multiple')) \
             or name.endswith(('Access', 'Atlas', 'Arms', 'Blues',
                 'BubblesBlisters', 'Canvas', 'Characteristics', 'Contents',
-                'ExceedsThreeCharacters', 'Glass', 'Series', 'Statistics',
-                'Previous')):
+                'ExceedsThreeCharacters', 'Glass', 'Lossless', 'Series',
+                'Statistics', 'Previous')):
         pass
     elif name.endswith('ies'):
         pural_name = name
