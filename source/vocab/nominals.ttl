@@ -115,14 +115,16 @@
     owl:inverseOf :focus .
 
 :collectionItem a owl:ObjectProperty;
-    owl:equivalentProperty skos:member .
+    owl:equivalentProperty skos:member;
+    rdfs:domain :ConceptCollection .
 
 :inCollection a owl:ObjectProperty;
     owl:inverseOf :collectionItem;
     owl:equivalentProperty mads:isMemberOfMADSCollection;
     rdfs:subPropertyOf vann:termGroup;
     rdfs:domain :Concept;
-    rdfs:range :ConceptCollection .
+    rdfs:range :ConceptCollection;
+    rdfs:label "Part of collection"@en, "Del av termsamling"@sv .
 
 # Domain Specific Term Classes
 
@@ -151,6 +153,16 @@
     owl:equivalentClass mads:GenreForm;
     rdfs:subClassOf :IndexTerm .
 
+:ComplexTerm a owl:Class;
+    owl:equivalentClass mads:ComplexSubject;
+    rdfs:label "Complex Term"@en, "Sammansatt term"@sv .
+
+:termParts a owl:ObjectProperty;
+    owl:equivalentClass mads:componentList;
+    rdfs:subPropertyOf :label;
+    rdfs:domain :IndexTerm;
+    rdfs:label "Term components"@en, "Termkomponenter"@sv .
+
 :SubdivisionTerm a owl:Class;
     rdfs:label "Underindelning"@sv;
     rdfs:subClassOf :IndexTerm .
@@ -170,6 +182,11 @@
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Place ] .
+
+# TODO: replace *SubdivisionTerm with inCollection <general-subdivision> etc.?
+
+#generalSubdivision
+#geographicSubdivision
 
 :ChronologicalSubdivisionTerm a owl:Class ;
     rdfs:subClassOf :SubdivisionTerm, :ChronologicalTerm;
@@ -233,8 +250,4 @@
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :UniformWork ] .
-
-#generalSubdivision
-#geographicSubdivision
-
 
