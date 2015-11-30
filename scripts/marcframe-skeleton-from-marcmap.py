@@ -73,13 +73,12 @@ common_columns = {
     '008': {"[0:6]", "[6:7]", "[7:11]", "[11:15]", "[15:18]", "[35:38]", "[38:39]", "[39:40]"}
 }
 
-# TODO: make and use separate BOOLEAN-map for non-computable boolean types
 canonical_coll_id_map = {
   "ReproductionType": ["ComputerFileAspectType", "SoundAspectType", "MicroformAspectType", "MotionPicAspectType", "ProjGraphAspectType", "NonProjAspectType", "GlobeAspectType", "MapAspectType"],
   "AudienceType": ["ComputerAudienceType", "MusicAudienceType", "VisualAudienceType", "BooksAudienceType"],
   "FilmBaseType": ["MotionPicBaseType", "MicroformBaseType"],
   "ColorType": ["MapColorType", "GlobeColorType"],
-  "HeadingType": ["BOOLEAN", "HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
+  "HeadingType": ["HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
   "IndexType": ["MapsIndexType", "BooksIndexType"],
   "ItemType": ["SerialsItemType", "VisualItemType", "MusicItemType", "MapsItemType", "MixedItemType"],
   "MediumType": ["MotionPicMediumType", "ProjGraphMediumType", "VideoMediumType"],
@@ -88,7 +87,7 @@ canonical_coll_id_map = {
   "NonProjectedType": ["NonProjSecondaryType", "NonProjPrimaryType"],
   "ColorType": ["ProjGraphColorType", "NonProjColorType"],
   "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
-  "ConferencePublicationType": ["BOOLEAN", "SerialsConfPubType", "BooksConfPubType"],
+  "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
   "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
   "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"]
 }
@@ -104,7 +103,7 @@ ENUM_DEFS = OrderedDict()
 #compositionTypeMap = OUT['compositionTypeMap'] = OrderedDict()
 #contentTypeMap = OUT['contentTypeMap'] = OrderedDict()
 
-EnumCollection = namedtuple('EnumCollection', 'ref_key, map_key, id, items')
+EnumCollection = namedtuple('EnumCollection', 'ref_key, map_key, id, items, type')
 
 class Continue(Exception): pass
 
@@ -187,13 +186,18 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
                 ENUM_DEFS.setdefault(canonical_coll_id, {"@id": canonical_coll_id}
                         ).setdefault('sameAs', []).append({"@id": cid})
 
-    off_key = _find_boolean_off_key(valuemap)
+    off_key = _find_boolean_off_key(items)
     # TODO: if off_key, type as boolean and define boolean property (w/o tokenMap)
     #if key == off_key:
     #    print('off key:', key, dfn)
     # TODO: also, detect and type numeric (and possibly numeric range) types
+    enumtype = None
+    if off_key:
+        enumtype = 'Boolean'
+    elif all((v.get('id') or v.get('label_en', '')).isdigit() for v in valuemap.values()):
+        enumtype = 'Number'
 
-    return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items), tokenmap_key
+    return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items, enumtype), tokenmap_key
 
 def _make_collection_id(dfn_ref_key):
     coll_id = dfn_ref_key[0].upper() + dfn_ref_key[1:] + 'Type'
@@ -236,6 +240,7 @@ def get_enum_id(key, dfn):
     return type_id
 
 def _find_boolean_off_key(valuemap):
+    valuemap = {k: v for k, v in valuemap.items() if k != '|'} # FIXME: reuse get_enum_id
     if valuemap and len(valuemap) == 2:
         items = [(k, (v.get('id') or v.get('label_en', '')).lower() if v else '_')
                     for (k, v) in valuemap.items()]
@@ -289,6 +294,8 @@ def add_enum_collection_def(enumcoll):
         "sameAs": same_as
         #"inRangeOf": propname
     }
+    if enumcoll.type:
+        coll_def['subClassOf'].append(enumcoll.type)
     return coll_def
 
 def add_enum_def(coll_id, type_id, dfn_ref_key, dfn, key):
@@ -509,7 +516,10 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     colpropid = '%s-%s-%s' % (marc_type, tag, key)
                     #if colpropid in ENUM_DEFS: print(colpropid)
                     prop_dfn = {'@id': propname, '@type': 'owl:ObjectProperty'}
-                    prop_dfn['schema:rangeIncludes'] = {'@id': enumcoll.id}
+                    ranges = [{'@id': enumcoll.id}]
+                    if enumcoll.type:
+                        ranges.append({'@id': enumcoll.type})
+                    prop_dfn['schema:rangeIncludes'] = ranges
                     add_labels(col, prop_dfn)
                     ENUM_DEFS[colpropid] = prop_dfn
 
