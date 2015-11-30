@@ -1,5 +1,6 @@
 body#thing {
   
+  
   main {
     margin-top: 100px;
     margin-bottom: 100px;
@@ -29,6 +30,10 @@ body#thing {
     margin-bottom: 0.5em;
   }
   .panel-heading {
+    background-color: #fff;
+    .panel-title a {
+      color: @color-headers;
+    }
     .chip-class {
       background-color: inherit;
       border: none;
@@ -40,11 +45,19 @@ body#thing {
   }
   
   .main-item {
+    font-size: 12px;
     > header .thing-label {
-      font-size: 1.5em;
+      font-weight: bold;
+      font-size: 2em;
     }
-    .panel-title .chip-class {
+    .thing-id {
       float: right;
+    }
+    .panel-title {
+    }
+    .chip-class {
+      font-weight: bold;
+      text-transform: uppercase;
     }
     .panel-body {
       padding: 4px 4px;
@@ -58,14 +71,22 @@ body#thing {
         margin: 0px 0px 0px 0px;
       }
       dd, dt {
-        padding: 6px 0px 0px 0px;
+        padding: 3px 0px 0px 0px;
       }
       dt {
         width: 160px;
         text-align: right;
         margin-right: 1em;
         a {
-          color: @color-prop;
+          cursor: help;
+          color: @color-prop-list;
+          font-weight: normal;
+          border-bottom: dashed #fff 1px;
+          display: inline-block;
+          &:hover, &:focus {
+            text-decoration: none;
+            border-bottom: dashed @color-prop-list 1px;
+          }
         }
       }
       dd {    
@@ -157,6 +178,7 @@ body#thing {
   }
 
   .hit-item {
+    font-size: 12px;
     margin: 0px 0px 15px 0px;
     padding: 0px;
     transition: 0.3s linear all;
@@ -185,7 +207,15 @@ body#thing {
       text-align: right;
       margin-right: 1em;
       a {
-        color: @color-prop;
+        cursor: help;
+        color: @color-prop-list;
+        font-weight: normal;
+        border-bottom: dashed #fff 1px;
+        display: inline-block;
+        &:hover, &:focus {
+          text-decoration: none;
+          border-bottom: dashed @color-prop-list 1px;
+        }
       }
     }
     .panel-body {
@@ -195,11 +225,16 @@ body#thing {
     .thing-label {
       display: inline-block;
     }
+    .thing-id {
+      float: right;
+    }
     > .panel-heading .thing-label {
-      font-size: 1.3em;
+      font-size: 2em;
+      color: @color-headers;
     }
     .chip-class {
-      float: right;
+      font-weight: bold;
+      text-transform: uppercase;
     }
   }
 }
