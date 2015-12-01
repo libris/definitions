@@ -28,8 +28,14 @@
   padding: 0px 5px;
   font-weight: normal;
   color: @color;
+  &:hover {
+    color: darken(@color, 10%);
+  }
   a {
     color: @color;
+    &:hover, &:focus {
+      color: darken(@color, 10%);
+    }
   }
   i, p {
     color: @gray-darker;
