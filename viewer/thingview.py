@@ -35,6 +35,7 @@ app = Blueprint('thingview', __name__)
 def setup_app(setup_state):
     config = setup_state.app.config
 
+    # TODO: create_vocab(config, cache?)
     global cache
     cache = SimpleCache()
 
@@ -66,6 +67,7 @@ def setup_app(setup_state):
         'vocab': vocab,
         'ldview': ldview,
         'ui': ui_defs,
+        'lang': vocab.lang,
         'page_limit': 50
     }
     app.context_processor(lambda: view_context)
