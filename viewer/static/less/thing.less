@@ -34,6 +34,19 @@ body#thing {
     .chip-prop {
         
     }
+    .thing-id {
+      text-decoration: none;
+      &:hover {
+        overflow: visible;
+      }
+      code {
+       border: 1px solid #fff;
+       &:hover {
+         text-decoration: none;
+         border: 1px solid @color-id;
+       }
+    }
+    }
   }
   
   .link-item {
@@ -160,6 +173,11 @@ body#thing {
     .thing-id {
       float: right;
       display: block;
+      max-width: 175px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: @color-id;
     }
   }
 
