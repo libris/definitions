@@ -10,21 +10,6 @@ body#thing {
       width: 100%;
     }
   }
-  .link-item {
-    position: relative;
-    display: inline-block;
-    float: left;
-    margin: 5px;
-    .chip-class {
-      display: none;
-    }
-    .thing-id {
-      display: none;
-    }
-    > .panel-heading {
-      overflow-x: hidden;
-    }
-  }
   
   .panel {
     margin-bottom: 0.5em;
@@ -34,13 +19,30 @@ body#thing {
     .panel-title a {
       color: @color-headers;
     }
-    .chip-class {
-      background-color: inherit;
-      border: none;
+    .label-class {
       color: @color-class;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: inline-block;
     }
     .chip-prop {
         
+    }
+  }
+  
+  .link-item {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin: 5px;
+    > * > .label-class {
+      display: none;
+    }
+    .thing-id {
+      display: none;
+    }
+    > .panel-heading {
+      overflow-x: hidden;
     }
   }
   
@@ -54,10 +56,6 @@ body#thing {
       float: right;
     }
     .panel-title {
-    }
-    .chip-class {
-      font-weight: bold;
-      text-transform: uppercase;
     }
     .panel-body {
       padding: 4px 4px;
@@ -128,7 +126,7 @@ body#thing {
     font-size: 12px;
     margin-left: -1px;
     margin-top: -1px;
-    min-width: 600px;
+    min-width: 400px;
     border: 1px solid #cccccc;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
@@ -156,11 +154,6 @@ body#thing {
     .thing-id {
       float: right;
       display: block;
-    }
-    .chip-class {
-      text-transform: uppercase;
-      font-weight: bold;
-      display: inline-block;
     }
   }
 
@@ -233,10 +226,6 @@ body#thing {
     > .panel-heading .thing-label {
       font-size: 2em;
       color: @color-headers;
-    }
-    .chip-class {
-      font-weight: bold;
-      text-transform: uppercase;
     }
   }
 }

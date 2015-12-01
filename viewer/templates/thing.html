@@ -70,7 +70,7 @@
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
           % if t
-            ${termref(t, classes='', chiptype='chip-class')}
+            ${termref(t, classes='', labeltype='label-class')}
           % endif
         <a href="${thing_url}" class="thing-id">
           <small><code>&lt;${thing_id}&gt;</code></small>
@@ -151,13 +151,13 @@
   </${element}>
 % endmacro
 
-% macro termref(term, classes='', chiptype='')
+% macro termref(term, classes='', labeltype='')
   % set label = term.curie
   % if term.label
     % set label = term.label.title()
   % endif
   % if term.curie
-    <a href="/vocabview/#${term.curie}" class="${chiptype}"><span
+    <a href="/vocabview/#${term.curie}" class="${labeltype}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}
