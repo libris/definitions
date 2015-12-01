@@ -2,7 +2,7 @@
 <html lang="${lang}">
   <head>
     <meta charset="utf-8" />
-    <title>{% block title %}{% endblock %} : definitioner : id.kb.se</title>
+    <title>id.kb.se - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/build/app.css" />
     {% block stylesheets %}{% endblock %}
@@ -11,16 +11,16 @@
     {% block navigation %}
     <nav class="navbar navbar-default">
       <div class="{% block navcontainerclass %}container{% endblock %}">
-        <div class="navbar-header">
+        <div class="navbar-header" role="banner">
           <div class="navbar-brand navbar-logo">
                 <a href="/"><img src="/assets/kb_logo_black.svg" alt="Kungliga Bibliotekets logotyp"></a>
           </div>
           <a class="navbar-brand" href="/">id.kb.se</a>
         </div>
-        <ol class="nav navbar-nav">
+        <ol class="nav navbar-nav" role="navigation">
           <li class=""><a href="${url_for('thingview.listview')}"><i class="fa fa-cube"></i> Saker</a></li>
         </ol>
-        <ol class="nav navbar-nav navbar-right">
+        <ol class="nav navbar-nav navbar-right" role="navigation">
           <li class=""><a href="${url_for('marcframeview.marcframeview')}"><i class="fa fa-exchange"></i> Marc-mappningar</a></li>
           <li class=""><a href="${url_for('vocabview.vocabview')}"><i class="fa fa-book"></i> Basvokabulär</a></li>
         </ol>
