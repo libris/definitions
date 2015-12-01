@@ -20,6 +20,7 @@ class Vocab:
     def __init__(self, vocab_graph, vocab_uri, lang='en'):
         self.index = {}
         self.unstable_keys = set()
+        self.lang = lang
 
         label_key_items = []
 
