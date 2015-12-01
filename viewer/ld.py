@@ -20,6 +20,7 @@ class Vocab:
     def __init__(self, vocab_graph, vocab_uri, lang='en'):
         self.index = {}
         self.unstable_keys = set()
+        self.lang = lang
 
         label_key_items = []
 
@@ -76,29 +77,47 @@ class Vocab:
 
         self.label_keys = [key for ldist, key in sorted(label_key_items, reverse=True)]
 
+        self.partof_keys = ['inScheme', 'isDefinedBy', 'inCollection', 'inDataset']
+        # TODO: generate vocab-json for label keys, sorting etc.
+        #import pprint
+        #pprint.pprint(self.index)
+
     def sortedkeys(self, item):
+        # TODO: groups:
+        #   - main: labels, descriptions, type-close links, notes
+        #   - provenance: dates, publication, ...
+        #   - for pages/records:
+        #       - administrativa: created, updated
+        #       - structural navigation: prev, next, alternate formats
         typeprops = set()
         for itype in as_iterable(item.get(TYPE)):
             typedfn = self.index.get(itype)
             if typedfn:
                 typeprops.update(typedfn.get('properties', []))
 
-        label_keys_size = len(self.label_keys)
         def keykey(key):
-            classdistance = 0 if typeprops and key in typeprops else 1
-            if key.startswith('@'):
-                importance_index = 0
-            elif key in self.unstable_keys:
-                importance_index = label_keys_size + 1
-            else:
-                try:
-                    importance_index = self.label_keys.index(key)
-                except ValueError:
-                    importance_index = label_keys_size
+            is_kw = key.startswith('@')
+            is_unstable = key in self.unstable_keys
+            try:
+                label_number = self.label_keys.index(key)
+            except ValueError:
+                label_number = len(self.label_keys)
+            try:
+                partof_number = self.partof_keys.index(key)
+            except ValueError:
+                partof_number = len(self.partof_keys)
             is_link = self.index[key].get(TYPE) == ID
-            return (importance_index, is_link, classdistance, key)
+            classdistance = 0 if typeprops and key in typeprops else 1
+            return (is_kw,
+                    partof_number,
+                    label_number,
+                    is_link,
+                    classdistance,
+                    key)
 
-        return sorted((key for key in item if key in self.index), key=keykey)
+        return sorted((key for key in item
+            if key in self.index
+            and key not in self.unstable_keys), key=keykey)
 
     def get_label_for(self, item):
         focus = item.get('focus')
@@ -106,10 +125,10 @@ class Vocab:
             label = self.construct_label(focus)
             if label:
                 return label
-        if 'prefLabel' not in item:
-            broader = item.get('broader', [])
-            if broader:
-                return " - ".join(self.labelgetter(bit) for bit in broader)
+        if 'prefLabel' not in item: # ComplexTerm in types
+            termparts = item.get('termParts', [])
+            if termparts:
+                return " - ".join(self.labelgetter(bit) for bit in termparts)
         return self.labelgetter(item)
 
     def construct_label(self, item):
