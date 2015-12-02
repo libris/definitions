@@ -20,8 +20,10 @@ $(function () {
     
   function openTerm(ref, insidePopover) {
     
-    
     function display() {
+      // Log
+      var layoutRef = $('body').attr('id');
+      if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Vocab popup', ref]);
       
       $('#embedvocab').show();
       $('.state-active').removeClass('state-active');

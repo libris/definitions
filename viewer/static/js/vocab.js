@@ -35,8 +35,6 @@ window.onload = function () {
   toggle.addEventListener('click', function () {
     document.body.classList.toggle('graph')
   })
-
-  
   
   // Target Navigation
   if(window.location.hash.length > 0) {
@@ -46,6 +44,7 @@ window.onload = function () {
   }
   
   function setActive(item) {
+    
     var itemOrg = item;
     if(item.indexOf(':') != -1) {
       var parts = item.split(':');
@@ -61,10 +60,18 @@ window.onload = function () {
   $('body#vocab .menu-col a').click(function (e) {
     e.preventDefault();
     setActive($(this).attr('href'));
+    // Log
+    var ref = $(this).attr('href').split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Menu click', ref]);
   });
   $('body#vocab .loc a').click(function (e) {
     e.preventDefault();
     setActive($(this).attr('href'));
+    // Log
+    var ref = $(this).attr('href').split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Card click', ref]);
   });
 
 }

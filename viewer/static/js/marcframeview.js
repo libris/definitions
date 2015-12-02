@@ -7,6 +7,12 @@ $(function () {
   });
   
   function setActive(ref) {
+    
+    // Log
+    var logRef = ref.split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Menu click', logRef]);
+    
     var itemOrg = ref;
     if(ref.indexOf(':') != -1) {
       var parts = ref.split(':');

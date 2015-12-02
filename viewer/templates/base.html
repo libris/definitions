@@ -37,5 +37,24 @@
     <script src="/vendor/jquery/js/jquery.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
     {% block scripts %}{% endblock %}
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var siteId = false;
+      
+      if (siteId) {
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//analytics.kb.se/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', siteId]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      }
+    
+    </script>
+    <!-- End Piwik Code -->
   </body>
 </html>
