@@ -32,14 +32,17 @@ $(function () {
         flipOrientation = true;
       }
       
-      var popoverY = linkPos.Y - ($('.state-active').height()/2) + 8;
+      // Constrain popover location to within page
+      var popoverY = linkPos.Y - ($('.state-active').height()*0.5) + 8;
       $('.state-active .arrow').css('top', '50%');
-      if (linkPos.Y < 300) {
-        popoverY = linkPos.Y - ($('.state-active').height()/4) + 8;
+      if (popoverY < 50) {
+        popoverY = linkPos.Y - ($('.state-active').height()*0.25) + 8;
         $('.state-active .arrow').css('top', '25%');
       }
-      if (popoverY < 75)
-        popoverY = 75;
+      if (popoverY + $('.state-active').height() > $(document).height()) {
+        popoverY -= $('.state-active').height()*0.25;
+      }
+      popoverY -= $('.main-item').offset().top;
       
       if(flipOrientation) {
         $('.state-active')
