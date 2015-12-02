@@ -42,6 +42,8 @@ $(function () {
       if (popoverY + $('.state-active').height() > $(document).height()) {
         popoverY -= $('.state-active').height()*0.25;
       }
+      if (popoverY < 55)
+        popoverY = 55;
       popoverY -= $('.main-item').offset().top;
       
       if(flipOrientation) {
