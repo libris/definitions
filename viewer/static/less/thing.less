@@ -13,39 +13,51 @@ body#thing {
   
   .panel {
     margin-bottom: 0.5em;
-  }
-  .panel-heading {
-    background-color: #fff;
-    .panel-title a {
-      color: @color-headers;
-    }
-    .label-class {
-      color: @color-class;
-      font-weight: bold;
-      text-transform: uppercase;
-      display: inline-block;
-      cursor: help;
-      border-bottom: 1px dashed #fff;
-      text-decoration: none;
-      &:hover {
-        border-bottom: 1px dashed @color-class;
+    .panel-body {
+      dl {
+        dt {
+          font-size: 12px;
+        }
+        dd {
+          font-size: 14px;
+        }
       }
     }
-    .chip-prop {
-        
-    }
-    .thing-id {
-      text-decoration: none;
-      &:hover {
-        overflow: visible;
+    .panel-heading {
+      background-color: #fff;
+      .panel-title a {
+        color: @color-headers;
       }
-      code {
-       border: 1px solid #fff;
-       &:hover {
-         text-decoration: none;
-         border: 1px solid @color-id;
-       }
-    }
+      .label-class {
+        font-size: 12px;
+        color: @color-class;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: inline-block;
+        cursor: help;
+        line-height: 12px;
+        border-bottom: 1px dashed #fff;
+        text-decoration: none;
+        &:hover {
+          border-bottom: 1px dashed @color-class;
+        }
+      }
+      .chip-prop {
+          
+      }
+      .thing-id {
+        text-decoration: none;
+        &:hover {
+          overflow: visible;
+        }
+        code {
+          border: 1px solid #fff;
+          &:hover {
+            text-decoration: none;
+            border: 1px solid @color-id;
+          }
+        }
+      }
     }
   }
   
@@ -54,8 +66,11 @@ body#thing {
     display: inline-block;
     float: left;
     margin: 5px;
-    > * > .label-class {
-      display: none;
+    > .panel-heading {
+      padding: 5px;
+      > .label-class {
+        display: none;
+      }
     }
     .thing-id {
       display: none;
@@ -66,7 +81,6 @@ body#thing {
   }
   
   .main-item {
-    font-size: 12px;
     > header .thing-label {
       font-weight: bold;
       font-size: 2em;
@@ -113,9 +127,6 @@ body#thing {
         ul {
           list-style: none;
           padding: 0px;
-          li {
-            margin-bottom: 10px;
-          }
         }
         .panel {
           margin-top: 0px;
@@ -142,7 +153,6 @@ body#thing {
     background-color: white;
     position: absolute;
     z-index: 500;
-    font-size: 12px;
     margin-left: -1px;
     margin-top: -1px;
     min-width: 400px;
@@ -155,6 +165,10 @@ body#thing {
     transition-property: opacity;
     opacity: 0;
     display: none;
+    > .panel-heading {
+      padding: 5px;
+      margin-bottom: 5px;
+    }
     &.active {
       opacity: 1;
       display: block;
@@ -163,9 +177,12 @@ body#thing {
       display: block;
       opacity: 0;
     }
+    .label-class {
+      margin-bottom: 8px;
+    }
     .thing-label {
       display: block;
-      font-size: 1.6em;
+      font-size: 16px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -197,7 +214,6 @@ body#thing {
   }
 
   .hit-item {
-    font-size: 12px;
     margin: 0px 0px 15px 0px;
     padding: 0px;
     transition: 0.3s linear all;
