@@ -34,6 +34,13 @@ $(function () {
         flipOrientation = true;
       }
       
+      var $topReference;
+      if ($('.main-item').length > 0) {
+        $topReference = $('.main-item');
+      } else {
+        $topReference = $('main');
+      }
+      
       // Constrain popover location to within page
       var popoverY = linkPos.Y - ($('.state-active').height()*0.5) + 8;
       $('.state-active .arrow').css('top', '50%');
@@ -46,7 +53,7 @@ $(function () {
       }
       if (popoverY < 55)
         popoverY = 55;
-      popoverY -= $('.main-item').offset().top;
+      popoverY -= $topReference.offset().top;
       
       if(flipOrientation) {
         $('.state-active')
