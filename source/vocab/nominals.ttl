@@ -52,7 +52,7 @@
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
-    rdfs:label "Concept scheme"@en, "Konceptschema"@sv;
+    rdfs:label "Concept scheme"@en, "Terminologisystem"@sv;
     owl:equivalentClass skos:ConceptScheme .
     #owl:hasKey (:notation) .
 
@@ -78,7 +78,7 @@
     rdfs:label "historikanmärkning"@sv;
     owl:equivalentProperty skos:historyNote .
 :inScheme a owl:ObjectProperty;
-    rdfs:label "ingår i schema"@sv;
+    rdfs:label "terminologisystem"@sv;
     owl:equivalentProperty skos:inScheme .
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
@@ -160,6 +160,7 @@
 :termParts a owl:ObjectProperty;
     owl:equivalentProperty mads:componentList;
     rdfs:subPropertyOf :label;
+    skos:related :broader;
     rdfs:domain :IndexTerm;
     rdfs:label "Term components"@en, "Termkomponenter"@sv .
 
