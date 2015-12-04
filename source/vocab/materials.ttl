@@ -15,7 +15,7 @@
 @prefix rdacarrier: <http://rdvocab.info/termList/RDACarrierType/> .
 
 @prefix : <http://id.kb.se/vocab/> .
-@prefix marcenum: <http://id.kb.se/enum/marc/> .
+@prefix marc: <http://id.kb.se/marc/> .
 
 
 # Manifestation Dimensions
@@ -50,7 +50,7 @@
 :ProjectedImage a owl:Class;
     rdfs:label "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Image .
 
 :PhysicalObject a owl:Class;
@@ -122,17 +122,17 @@
 
 :ManuscriptCartography a owl:Class;
     rdfs:label "Kartmanuscript"@sv;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Cartography, :Manuscript .
 
 :ManuscriptNotatedMusic a owl:Class;
     rdfs:label "Musiknotmanuscript"@sv;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     rdfs:subClassOf :NotatedMusic, :Manuscript .
 
 :ManuscriptText a owl:Class;
     rdfs:label "Textmanuscript"@sv;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Text, :Manuscript .
 
 :MultiVolumeBook a owl:Class;

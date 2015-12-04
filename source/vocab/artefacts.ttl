@@ -20,16 +20,16 @@
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 
 @prefix : <http://id.kb.se/vocab/> .
-@prefix marcenum: <http://id.kb.se/enum/marc/> .
+@prefix marc: <http://id.kb.se/marc/> .
 
 
 ##
 # Enumeration Groups
 
-marcenum:typeOfRecord a skos:Collection;
+marc:typeOfRecord a skos:Collection;
     rdfs:label "Typ"@sv .
 
-marcenum:bibLevel a skos:Collection;
+marc:bibLevel a skos:Collection;
     rdfs:label "Bibliografisk nivå"@sv .
 
 
@@ -159,7 +159,7 @@ marcenum:bibLevel a skos:Collection;
 :Cartography a owl:Class;
     rdfs:label "Kartmaterial"@sv;
     rdfs:subClassOf :CreativeWork;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:Cartography .
 
 :Dataset a owl:Class;
@@ -180,7 +180,7 @@ marcenum:bibLevel a skos:Collection;
 :MixedMaterial a owl:Class;
     rdfs:label "Blandat material"@sv;
     rdfs:subClassOf :CreativeWork, :Aggregate;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:MixedMaterial .
 
 :MovingImage a owl:Class; # Film, Video
@@ -197,7 +197,7 @@ marcenum:bibLevel a skos:Collection;
 :Multimedia a owl:Class;
     rdfs:label "Multimedia"@sv;
     rdfs:subClassOf :CreativeWork;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:Multimedia .
 
 :NotatedMovement a owl:Class;
@@ -210,15 +210,15 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Musiknoter"@sv;
     skos:exactMatch rdacontent:1010 ; # "notated music"
     rdfs:subClassOf :CreativeWork;
-    :inCollection marcenum:typeOfRecord;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:NotatedMusic .
 
 :Audio a owl:Class;
     rdfs:subClassOf :CreativeWork;
     rdfs:label "Ljudmaterial"@sv;
     skos:exactMatch rdamedia:1001 ; # "audio"
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass dctype:Sound, bf:Audio .
 
 :Music a owl:Class;
@@ -229,20 +229,20 @@ marcenum:bibLevel a skos:Collection;
     rdfs:label "Stillbild"@sv;
     skos:exactMatch rdacontent:1014 ; # "still image"
     rdfs:subClassOf :Image;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:StillImage, dctype:StillImage .
 
 :Text a owl:Class;
     rdfs:label "Text"@sv;
     skos:exactMatch rdacontent:1020 ; # "text"
     rdfs:subClassOf :CreativeWork;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass dctype:Text, bf:Text .
 
 :Realia a owl:Class;
     rdfs:label "Realia"@sv;
     skos:exactMatch rdacontent:1021 ; # "three-dimensional form"
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:ThreeDimensionalObject .
 
 :InteractiveResource a owl:Class;
@@ -252,13 +252,13 @@ marcenum:bibLevel a skos:Collection;
 
 :Kit a owl:Class; # TODO: equivalentClass ?
     rdfs:label "Kit"@sv;
-    :inCollection marcenum:typeOfRecord;
+    :inCollection marc:typeOfRecord;
     rdfs:subClassOf :CreativeWork .
 
 :ArchivalUnit a owl:Class;
     rdfs:label "Arkivenhet"@sv;
     owl:deprecated true;
-    :inCollection marcenum:typeOfRecord .
+    :inCollection marc:typeOfRecord .
 
 # Combined Content Types
 
@@ -313,7 +313,7 @@ marcenum:bibLevel a skos:Collection;
 
 :Monograph a owl:Class;
     rdfs:label "Monografisk resurs"@sv;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     owl:equivalentClass bf:Monograph .
 
 :Part a owl:Class;
@@ -322,7 +322,7 @@ marcenum:bibLevel a skos:Collection;
 
 :ComponentPart a owl:Class;
     rdfs:label "Del av sammansatt resurs"@sv;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     rdfs:subClassOf :Part .
 
 :Aggregate a owl:Class;
@@ -342,18 +342,18 @@ marcenum:bibLevel a skos:Collection;
 :Collection a owl:Class;
     rdfs:label "Samling"@sv;
     rdfs:subClassOf :Aggregate;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     owl:equivalentClass dctype:Collection, bf:Collection .
 
 :SubCollection a owl:Class;
     rdfs:label "Delsamling"@sv;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     rdfs:subClassOf :Collection, :Part .
 
 :Integrating a owl:Class;
     rdfs:label "Integrerande resurs"@sv;
     rdfs:subClassOf :Continuing;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     owl:equivalentClass bf:Integrating .
 
 :MonographicComponentPart a owl:Class;
@@ -363,7 +363,7 @@ marcenum:bibLevel a skos:Collection;
 
 :SerialComponentPart a owl:Class;
     rdfs:label "Del av sammansatt seriell resurs"@sv;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     rdfs:subClassOf :Serial, :ComponentPart  .
 
 :Multipart a owl:Class;
@@ -378,14 +378,14 @@ marcenum:bibLevel a skos:Collection;
 :Serial a owl:Class;
     rdfs:label "Seriell resurs"@sv;
     rdfs:subClassOf :Continuing;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     owl:equivalentClass bf:Serial .
 
 :Periodical a owl:Class;
     rdfs:label "Periodical"@en, "Periodika"@sv;
     skos:altLabel "Periodisk resurs"@sv;
     rdfs:comment "Samma sak som seriell resurs."@sv;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     owl:equivalentClass bf:Serial .
 
 :CreativeWorkSeries a owl:Class;
@@ -396,6 +396,6 @@ marcenum:bibLevel a skos:Collection;
 :LicenseAgreementBoundDescription a owl:Class ;
     rdfs:label "Licensavtalsbunden beskrivning"@sv;
     owl:deprecated true;
-    :inCollection marcenum:bibLevel;
+    :inCollection marc:bibLevel;
     rdfs:subClassOf :Aggregate .
 

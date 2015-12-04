@@ -12,7 +12,7 @@ VANN = Namespace("http://purl.org/vocab/vann/")
 BASE = "http://id.kb.se/"
 TERMS = Namespace(BASE + "vocab/")
 DATASET_BASE = Namespace(BASE + "dataset/")
-ENUM_BASEPATH = "/marc/enum/"
+ENUM_BASEPATH = "/marc/"
 
 SKIP = ('Other', 'Unspecified', 'Unknown')
 

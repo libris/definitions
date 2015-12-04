@@ -103,7 +103,7 @@ ENUM_DEFS = OrderedDict()
 #compositionTypeMap = OUT['compositionTypeMap'] = OrderedDict()
 #contentTypeMap = OUT['contentTypeMap'] = OrderedDict()
 
-EnumCollection = namedtuple('EnumCollection', 'ref_key, map_key, id, items, type')
+EnumCollection = namedtuple('EnumCollection', 'ref_key, map_key, id, items, type, off_key')
 
 class Continue(Exception): pass
 
@@ -136,7 +136,7 @@ def build_enums(marc_type):
                 continue
 
             if MAKE_VOCAB and type_id:
-                add_enum_def(coll_def['@id'], type_id, dfn_ref_key, dfn, key)
+                add_enum_def(enumcoll, type_id, dfn_ref_key, dfn, key)
 
             if overwriting:
                 assert tokenmap.get(key, type_id) == type_id, "%s: %s missing in %r" % (
@@ -197,7 +197,8 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
     elif all((v.get('id') or v.get('label_en', '')).isdigit() for v in valuemap.values()):
         enumtype = 'Number'
 
-    return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items, enumtype), tokenmap_key
+    return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items,
+            enumtype, off_key), tokenmap_key
 
 def _make_collection_id(dfn_ref_key):
     coll_id = dfn_ref_key[0].upper() + dfn_ref_key[1:] + 'Type'
@@ -254,19 +255,25 @@ def _find_boolean_off_key(valuemap):
 
 def to_name(name):
     name = name[0].upper() + name[1:]
+    #return name, None
     plural_name = None
+
+    if 'And' in name:
+        name_plural_pairs = [to_name(part) for part in name.split('And')]
+        if name == 'CanonsAndRounds' or any(plural for name, plural in name_plural_pairs):
+            return 'Or'.join(name for name, plural in name_plural_pairs), name
+        else:
+            return name, None
+
     if name == 'Theses':
         pural_name = name
         name = 'Thesis'
-    elif 'And' in name:
-        name = 'Or'.join(s[0:-1] if s.endswith('s') else s
-                for s in name.split('And'))
     elif name[0].isdigit() \
             or name.startswith(('Missing', 'Mixed', 'Multiple')) \
             or name.endswith(('Access', 'Atlas', 'Arms', 'Blues',
                 'BubblesBlisters', 'Canvas', 'Characteristics', 'Contents',
-                'ExceedsThreeCharacters', 'Glass', 'Lossless', 'Series',
-                'Statistics', 'Previous')):
+                'ExceedsThreeCharacters', 'Glass', 'Lossless', 'Previous',
+                'Series', 'Statistics', 'Thesaurus')):
         pass
     elif name.endswith('ies'):
         pural_name = name
@@ -276,6 +283,7 @@ def to_name(name):
         pural_name = name
         name = name[0:-2]
     elif name.endswith('s'):
+        plural_name = name
         name = name[0:-1]
     return name, plural_name
 
@@ -290,7 +298,7 @@ def add_enum_collection_def(enumcoll):
         "@type": ["CollectionClass"],
         "subClassOf": ["EnumeratedTerm"],
         #"inScheme": "",
-        #"notation": coll_id,
+        "notation": enumcoll.map_key,
         "sameAs": same_as
         #"inRangeOf": propname
     }
@@ -298,19 +306,28 @@ def add_enum_collection_def(enumcoll):
         coll_def['subClassOf'].append(enumcoll.type)
     return coll_def
 
-def add_enum_def(coll_id, type_id, dfn_ref_key, dfn, key):
+def add_enum_def(enumcoll, type_id, dfn_ref_key, dfn, key):
     #assert type_id not in ENUM_DEFS
-    assert type_id != coll_id, "Same as collection: %s" % type_id
+    assert type_id != enumcoll.id, "Same as collection: %s" % type_id
 
-    in_coll = ENUM_DEFS[type_id]['inCollection'] if type_id in ENUM_DEFS else []
+    predef = ENUM_DEFS.get(type_id)
+    in_coll = predef['inCollection'] if predef else []
+    if not any(r['@id'] == enumcoll.id for r in in_coll):
+        in_coll.append({"@id": enumcoll.id})
 
-    if not any(r['@id'] == coll_id for r in in_coll):
-        in_coll.append({"@id": coll_id})
+    notation = predef['notation'] if predef else []
+    if key not in notation:
+        notation.append(key)
+
+    sameas = predef['sameAs'] if predef else []
+    sameas.append({"@id": "%s-%s" % (enumcoll.map_key, key)})
+    if key == enumcoll.off_key:
+        sameas.append({'@id': 'schema:False'})
 
     dest = ENUM_DEFS[type_id] = {
         "@id": type_id, "@type": in_coll,
-        "sameAs": {"@id": "%s-%s" % (dfn_ref_key, key)},
-        "notation": key,
+        "sameAs": sameas,
+        "notation": notation,
         "inCollection": in_coll
     }
     add_labels(dfn, dest)
@@ -545,12 +562,18 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
 
                 # TODO: check type of tokenmap (boolean, numeric (or fixed like here))
                 items = enumcoll.items.items()
-                TOKEN_MAPS[enumcoll.map_key] = OrderedDict(items)
                 if len(items) == 1 and items[0][0] != 'u':
                     col_dfn['fixedDefault'] = items[0][0]
 
-                #else:
-                col_dfn['tokenMap' if is_link else 'patternMap'] = enumcoll.map_key
+                if enumcoll.type == 'Number':
+                    col_dfn['valueType'] = enumcoll.type
+                elif enumcoll.type == 'Boolean':
+                    col_dfn['fixedDefault'] = enumcoll.off_key
+                if is_link:
+                    #col_dfn['tokenMap'] = enumcoll.map_key
+                    col_dfn['uriTemplate'] = "marc:%s/{_}" % enumcoll.map_key
+                else:
+                    col_dfn['valuePattern'] = [k for k, v in items]
 
 
 #def fixprop_to_name(fixprops, propname, key):
@@ -588,9 +611,10 @@ if __name__ == '__main__':
     if MAKE_VOCAB:
         import string
         terms = {
-            "@base": "http://id.kb.se/ns/marc/",
+            "@base": "http://id.kb.se/marc/",
             "v": "http://id.kb.se/vocab/",
-            "inCollection": {"@reverse": "skos:member"},
+            #"inCollection": {"@reverse": "skos:member"},
+            "inCollection": None,
             "prefLabel": {"@language": "sv"},
             "prefLabel_en": {"@id": "prefLabel", "@language": "en"},
             "tokenMaps": None,
@@ -610,7 +634,7 @@ if __name__ == '__main__':
             "addProperty": {"@id": "sameAs", "@type": "@vocab"},
             "inScheme": {"@type": "@id"},
             "marcType": {"@id": "inScheme", "@type": "@id"},
-            "@vocab": "http://id.kb.se/ns/marc/",
+            "@vocab": "http://id.kb.se/marc/",
             #'i1': None,
             #'i2': None,
         }
@@ -618,7 +642,7 @@ if __name__ == '__main__':
         OUT["@context"] = ["../sys/context/base.jsonld", terms]
         OUT['@graph'] = []
     #else:
-    OUT['tokenMaps'] = TOKEN_MAPS
+    OUT['tokenMaps'] = None
 
     for marc_type in MARC_TYPES:
         build_enums(marc_type)
@@ -641,6 +665,14 @@ if __name__ == '__main__':
             "subClassOf": ["skos:Concept", "schema:Enumeration"]
         }
         OUT['@graph'].append({"@id": "enums", "@graph": ENUM_DEFS.values()})
+
+    #collids = {collkey: coll.id for k, v in PROCESSED_ENUMS.items() for collkey, coll in v.items()}
+    #tmaps = OrderedDict(sorted((collids[tk],
+    #            OrderedDict(sorted((k,
+    #                    v.get('id') or v.get('label_sv') if isinstance(v, dict) else v)
+    #                for k, v in tv.items())))
+    #         for tk, tv in TOKEN_MAPS.items()))
+    #OUT['tokenMaps'] = TOKEN_MAPS
 
     ## sanity check..
     #prevranges = None
