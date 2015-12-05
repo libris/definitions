@@ -60,21 +60,6 @@
     owl:sameAs :bib-soundSpeed-h ;
     skos:notation "h" .
 
-<http://id.kb.se/marc/12In> a :ComputerFileDimensionsType,
-        :HoldingSoundTapeWidthType,
-        :SoundDimensionsType,
-        :SoundTapeWidthType,
-        :VideoDimensionsType ;
-    :prefLabel "1/2 in."@en,
-        "1/2 tum"@sv ;
-    owl:sameAs :bib-computerFileDimensions-e,
-        :bib-soundDimensions-e,
-        :bib-soundTapeWidth-o,
-        :bib-videoDimensions-o,
-        :hold-soundTapeWidth-o ;
-    skos:notation "e",
-        "o" .
-
 <http://id.kb.se/marc/12_in> a :ComputerDimensionsType ;
     :prefLabel "12 tum"@sv ;
     owl:sameAs :bib-computerDimensions-e ;
@@ -124,6 +109,7 @@
         :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "16 mm."@en,
+        "16 mm"@sv,
         "16 mm (filmbredd)"@sv ;
     owl:sameAs :bib-microformDimensions-d,
         :bib-motionPicDimensions-d,
@@ -186,6 +172,7 @@
 <http://id.kb.se/marc/28Mm> a :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "28 mm."@en,
+        "28 mm"@sv,
         "28 mm (filmbredd)"@sv ;
     owl:sameAs :bib-motionPicDimensions-e,
         :bib-projGraphDimensions-e ;
@@ -275,6 +262,7 @@
         :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "35 mm."@en,
+        "35 mm"@sv,
         "35 mm (filmbredd)"@sv ;
     owl:sameAs :bib-microformDimensions-f,
         :bib-motionPicDimensions-f,
@@ -283,7 +271,8 @@
 
 <http://id.kb.se/marc/378X212In> a :ComputerFileDimensionsType,
         :SoundDimensionsType ;
-    :prefLabel "3 7/8 x 2 1/2 in."@en ;
+    :prefLabel "3 7/8 x 2 1/2 in."@en,
+        "3 7/8 x 2 1/2 tum (höjd x bredd)"@sv ;
     owl:sameAs :bib-computerFileDimensions-j,
         :bib-soundDimensions-j ;
     skos:notation "j" .
@@ -336,7 +325,8 @@
 
 <http://id.kb.se/marc/434InOr12Cm> a :ComputerFileDimensionsType,
         :SoundDimensionsType ;
-    :prefLabel "4 3/4 in. or 12 cm."@en ;
+    :prefLabel "4 3/4 in. or 12 cm."@en,
+        "4 3/4 tum (12 cm) (diameter)"@sv ;
     owl:sameAs :bib-computerFileDimensions-g,
         :bib-soundDimensions-g ;
     skos:notation "g" .
@@ -430,6 +420,7 @@
         :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "70 mm."@en,
+        "70 mm"@sv,
         "70 mm (filmbredd)"@sv ;
     owl:sameAs :bib-microformDimensions-g,
         :bib-motionPicDimensions-g,
@@ -476,19 +467,6 @@
     owl:sameAs :bib-computerFileDimensions-v ;
     skos:notation "v" .
 
-<http://id.kb.se/marc/8Mm> a :HoldingVideoFormatType,
-        :MicroformDimensionsType,
-        :VideoDimensionsType,
-        :VideoFormatType ;
-    :prefLabel "8 mm."@en,
-        "8 mm"@sv ;
-    owl:sameAs :bib-microformDimensions-a,
-        :bib-videoDimensions-a,
-        :bib-videoFormat-p,
-        :hold-videoFormat-p ;
-    skos:notation "a",
-        "p" .
-
 <http://id.kb.se/marc/8Rpm> a :SoundSpeedType ;
     :prefLabel "8 rpm"@en,
         "8 varv per minut (skiva)"@sv ;
@@ -520,6 +498,7 @@
 <http://id.kb.se/marc/95Mm> a :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "9.5 mm."@en,
+        "9,5 mm"@sv,
         "9.5 mm (filmbredd)"@sv ;
     owl:sameAs :bib-motionPicDimensions-c,
         :bib-projGraphDimensions-c ;
@@ -536,15 +515,6 @@
         "AACR 1"@sv ;
     owl:sameAs :auth-catalogingRules-b ;
     skos:notation "b" .
-
-:Aacr2 a :CatFormType,
-        :CatalogingRulesType ;
-    :prefLabel "AACR 2"@en,
-        "AACR 2/KRS"@sv ;
-    owl:sameAs :auth-catalogingRules-c,
-        :bib-catForm-a ;
-    skos:notation "a",
-        "c" .
 
 :Aacr2CompatibleHeading a :CatalogingRulesType ;
     :prefLabel "AACR 2 compatible heading"@en,
@@ -618,14 +588,14 @@
     :prefLabel "Adolescent"@en,
         "Tonår inkl. gymnasial utbildningsnivå (ca 13-16 år)"@sv ;
     owl:sameAs :bib-booksAudience-d,
-        :bib-computerAudience-d ;
+        :bib-musicAudience-d ;
     skos:notation "d" .
 
 :Adult a :AudienceType ;
     :prefLabel "Adult"@en,
         "Vuxna"@sv ;
     owl:sameAs :bib-booksAudience-e,
-        :bib-computerAudience-e ;
+        :bib-musicAudience-e ;
     skos:notation "e" .
 
 :Airborne a :HoldingRemoteSensImageAltitudeType,
@@ -712,6 +682,7 @@
 
 :Annual-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Annual (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-a ;
     skos:notation "a" .
 
@@ -728,7 +699,8 @@
     skos:notation "a" .
 
 :Appropriate a :HeadingType ;
-    :prefLabel "Appropriate"@en ;
+    :prefLabel "Appropriate"@en,
+        "Kan användas som seriebiuppslag"@sv ;
     owl:sameAs :auth-headingMain-a,
         :auth-headingSeries-a ;
     skos:notation "a" .
@@ -747,6 +719,7 @@
 
 :ArchiveAndManuscriptsControl-Obsolete a :TypeOfRecordType ;
     :prefLabel "Archive and manuscripts control (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-typeOfRecord-b ;
     skos:notation "b" .
 
@@ -780,19 +753,11 @@
     owl:sameAs :bib-visualMaterial-c ;
     skos:notation "c" .
 
-:Atlas a :MapMaterialType,
-        :MapsMaterialType ;
-    :prefLabel "Atlas"@en,
-        "Atlas"@sv ;
-    owl:sameAs :bib-mapMaterial-d,
-        :bib-mapsMaterial-e ;
-    skos:notation "d",
-        "e" .
-
 :Autobiography a :BooksBiographyType,
         :MusicTextType ;
     :prefLabel "Autobiography"@en,
-        "Självbiografi"@sv ;
+        "Självbiografi"@sv,
+        "Självbiografisk text"@sv ;
     owl:sameAs :bib-booksBiography-a,
         :bib-musicText-a ;
     skos:notation "a" .
@@ -800,7 +765,7 @@
 :AutonomousOrSemiAutonomousComponent a :GovernmentPublicationType ;
     :prefLabel "Autonomous or semi-autonomous component"@en,
         "Självständig del av en stat"@sv ;
-    owl:sameAs :bib-serialsGovtPub-a ;
+    owl:sameAs :bib-booksGovtPub-a ;
     skos:notation "a" .
 
 :AutonomousOrSemiAutonomousComponentOfMalaysia a :GovtAgencyType ;
@@ -852,20 +817,16 @@
         :hold-remoteSensImageConstruction-a ;
     skos:notation "a" .
 
-:BarByBar a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:BarByBar a :TacBrailleMusicType ;
     :prefLabel "Bar by bar"@en,
         "<Bar by bar>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-b,
-        :hold-tacBrailleMusic-b ;
+    owl:sameAs :bib-tacBrailleMusic-b ;
     skos:notation "b" .
 
-:BarOverBar a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:BarOverBar a :TacBrailleMusicType ;
     :prefLabel "Bar over bar"@en,
         "<Bar over bar>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-a,
-        :hold-tacBrailleMusic-a ;
+    owl:sameAs :bib-tacBrailleMusic-a ;
     skos:notation "a" .
 
 :BasicRoman a :SerialsAlphabetType ;
@@ -921,6 +882,7 @@
         :SerialsContentsType,
         :SerialsNatureType ;
     :prefLabel "Bibliographies"@en,
+        "Bibliography"@en,
         "Bibliografi"@sv ;
     owl:sameAs :bib-booksContents-b,
         :bib-musicMatter-b,
@@ -936,11 +898,13 @@
 
 :Biennial-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Biennial (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-g ;
     skos:notation "g" .
 
 :Bimonthly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Bimonthly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-b ;
     skos:notation "b" .
 
@@ -949,17 +913,6 @@
         "Varannan månad (6-8 ggr/år)"@sv ;
     owl:sameAs :bib-serialsFrequency-b ;
     skos:notation "b" .
-
-:Biography a :MusicTextType,
-        :SerialsContentsType,
-        :SerialsNatureType ;
-    :prefLabel "Biography"@en,
-        "Biografi"@sv ;
-    owl:sameAs :bib-musicText-b,
-        :bib-serialsContents-h,
-        :bib-serialsNature-h ;
-    skos:notation "b",
-        "h" .
 
 :BiographyOfComposerOrAuthor a :MusicMatterType ;
     :prefLabel "Biography of composer or author"@en,
@@ -981,6 +934,7 @@
 
 :Biweekly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Biweekly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-e ;
     skos:notation "e" .
 
@@ -1048,27 +1002,10 @@
     owl:sameAs :bib-remoteSensImageData-rc ;
     skos:notation "rc" .
 
-:Braille a :BooksItemType,
-        :ItemType,
-        :SerialsOriginalItemType,
-        :TacMaterialType,
-        :TextMaterialType ;
-    :prefLabel "Braille"@en,
-        "Punktskrift"@sv ;
-    owl:sameAs :bib-booksItem-f,
-        :bib-mapsItem-f,
-        :bib-serialsOriginalItem-f,
-        :bib-tacMaterial-b,
-        :bib-textMaterial-c ;
-    skos:notation "b",
-        "c",
-        "f" .
-
 :BristolBoard a :NonProjectedType ;
     :prefLabel "Bristol board"@en,
         "Pannå"@sv ;
-    owl:sameAs :bib-nonProjPrimary-b,
-        :bib-nonProjSecondary-b ;
+    owl:sameAs :bib-nonProjPrimary-b ;
     skos:notation "b" .
 
 :Butterfly a :MapsProjectionType ;
@@ -1076,16 +1013,6 @@
         "Fjäril"@sv ;
     owl:sameAs :bib-mapsProjection-db ;
     skos:notation "db" .
-
-:Calendar a :BooksContentsType,
-        :MapsFormatType,
-        :SerialsContentsType ;
-    :prefLabel "Kalender"@sv ;
-    owl:sameAs :bib-booksContents-5,
-        :bib-mapsFormat-k,
-        :bib-serialsContents-5 ;
-    skos:notation "5",
-        "k" .
 
 :Canada a :SerialsISSNType ;
     :prefLabel "Canada"@en,
@@ -1114,8 +1041,7 @@
 :Canvas a :NonProjectedType ;
     :prefLabel "Canvas"@en,
         "Målarduk"@sv ;
-    owl:sameAs :bib-nonProjPrimary-a,
-        :bib-nonProjSecondary-a ;
+    owl:sameAs :bib-nonProjPrimary-a ;
     skos:notation "a" .
 
 :Canzona a :MusicCompositionType ;
@@ -1132,8 +1058,7 @@
 :CardboardIllustrationBoard a :NonProjectedType ;
     :prefLabel "Cardboard/illustration board"@en,
         "Papp och kartong"@sv ;
-    owl:sameAs :bib-nonProjPrimary-c,
-        :bib-nonProjSecondary-c ;
+    owl:sameAs :bib-nonProjPrimary-c ;
     skos:notation "c" .
 
 :Carol a :MusicCompositionType ;
@@ -1179,7 +1104,8 @@
 
 :CelluloseNitrate a :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
-    :prefLabel "Cellulose nitrate"@en ;
+    :prefLabel "Cellulose nitrate"@en,
+        "Cellulosanitrat"@sv ;
     owl:sameAs :bib-soundKindOfMaterial-b,
         :hold-soundKindOfMaterial-b ;
     skos:notation "b" .
@@ -1220,17 +1146,6 @@
     owl:sameAs :bib-musicComposition-cb ;
     skos:notation "cb" .
 
-:Chart a :BooksIllustrationsType,
-        :NonProjMaterialType,
-        :VisualMaterialType ;
-    :prefLabel "Chart"@en,
-        "Tabell-/diagramark eller blädderblock"@sv ;
-    owl:sameAs :bib-booksIllustrations-d,
-        :bib-nonProjMaterial-n,
-        :bib-visualMaterial-n ;
-    skos:notation "d",
-        "n" .
-
 :Chinese a :SerialsAlphabetType ;
     :prefLabel "Chinese"@en,
         "Kinesisk skrift"@sv ;
@@ -1239,7 +1154,8 @@
 
 :ChipCartridge a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Chip cartridge"@en ;
+    :prefLabel "Chip cartridge"@en,
+        "Datorminnesmodul"@sv ;
     owl:sameAs :bib-computerFileMaterial-b,
         :bib-computerMaterial-b ;
     skos:notation "b" .
@@ -1303,20 +1219,6 @@
     owl:sameAs :bib-booksBiography-c ;
     skos:notation "c" .
 
-:Combination a :ComputerTypeOfFileType,
-        :RemoteSensImageDataType,
-        :TacContractionType,
-        :TacMaterialType ;
-    :prefLabel "Combinations"@en,
-        "Combinations"@sv ;
-    owl:sameAs :bib-computerTypeOfFile-m,
-        :bib-remoteSensImageData-dv,
-        :bib-tacContraction-m,
-        :bib-tacMaterial-c ;
-    skos:notation "c",
-        "dv",
-        "m" .
-
 :CombinationOfVariousDataType a :RemoteSensImageDataType ;
     :prefLabel "Combination of various data types"@en,
         "Combination of various data types"@sv ;
@@ -1344,15 +1246,6 @@
     owl:sameAs :bib-booksLiteraryForm-c ;
     skos:notation "c" .
 
-:Complete a :CompletenessType,
-        :MotionPicCompletenessType ;
-    :prefLabel "Complete"@en,
-        "Fullständig"@sv ;
-    owl:sameAs :bib-motionPicCompleteness-c,
-        :hold-completeness-1 ;
-    skos:notation "1",
-        "c" .
-
 :CompleteAuthorityRecord a :AuthorityEncLevelType ;
     :prefLabel "Complete authority record"@en,
         "Fullständig"@sv ;
@@ -1378,6 +1271,7 @@
 
 :CompletelyIrregular-Obsolete a :ComputerRegularityType ;
     :prefLabel "Completely irregular (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerRegularity-x ;
     skos:notation "x" .
 
@@ -1399,12 +1293,10 @@
     owl:sameAs :hold-copyReport-1 ;
     skos:notation "1" .
 
-:ComputerBraille a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:ComputerBraille a :TacBrailleWritingType ;
     :prefLabel "Computer braille"@en,
         "Punktskrift för databehandling (åttapunktsskrift)"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-d,
-        :hold-tacBrailleWriting-d ;
+    owl:sameAs :bib-tacBrailleWriting-d ;
     skos:notation "d" .
 
 :ComputerCard a :ComputerMaterialType ;
@@ -1430,7 +1322,8 @@
 
 :ComputerOpticalDiscCartridge a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Computer optical disc cartridge"@en ;
+    :prefLabel "Computer optical disc cartridge"@en,
+        "Datorskivmagasin"@sv ;
     owl:sameAs :bib-computerFileMaterial-c,
         :bib-computerMaterial-c ;
     skos:notation "c" .
@@ -1473,7 +1366,7 @@
 :ConferencePublication a :ConferencePublicationType ;
     :prefLabel "Conference publication"@en,
         "Ja, resursen härrör från konferens"@sv ;
-    owl:sameAs :bib-serialsConfPub-1 ;
+    owl:sameAs :bib-booksConfPub-1 ;
     skos:notation "1" .
 
 :ConicOther a :MapsProjectionType ;
@@ -1539,6 +1432,7 @@
 :CooperativeCatalogingProgram a :AuthorityCatalogingSourceType,
         :CatalogingSourceType ;
     :prefLabel "Cooperative cataloging program"@en,
+        "LIBRIS-bibliotek / Kooperativt katalogiseringsprogram"@sv,
         "Nationellt auktoritetsprojekt"@sv ;
     owl:sameAs :auth-catalogingSource-c,
         :bib-catalogingSource-c ;
@@ -1566,7 +1460,9 @@
         :HoldingStatusType,
         :StatusType ;
     :prefLabel "Corrected or revised"@en,
-        "Rättad eller reviderad post"@sv ;
+        "Rättad eller reviderad post"@sv,
+        "Rättad eller reviderad post (sätts maskinellt)"@sv,
+        "Rättad/Reviderad"@sv ;
     owl:sameAs :auth-status-c,
         :bib-status-c,
         :hold-status-c ;
@@ -1636,6 +1532,7 @@
 
 :Daily-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Daily (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-d ;
     skos:notation "d" .
 
@@ -1673,7 +1570,8 @@
         :HoldingStatusType,
         :StatusType ;
     :prefLabel "Deleted"@en,
-        "Borttagen post (används ej)"@sv ;
+        "Borttagen post (används ej)"@sv,
+        "Makulerad: inget av följande"@sv ;
     owl:sameAs :auth-status-d,
         :bib-status-d,
         :hold-status-d ;
@@ -1773,7 +1671,7 @@
     :prefLabel "Utgåva i direkt elektronisk form"@sv ;
     owl:sameAs :bib-booksItem-q,
         :bib-computerItem-q,
-        :bib-mapsItem-q,
+        :bib-musicItem-q,
         :bib-serialsOriginalItem-q ;
     skos:notation "q" .
 
@@ -1798,19 +1696,6 @@
         "Negativ modermatris"@sv ;
     owl:sameAs :bib-soundKindOfDisc-d ;
     skos:notation "d" .
-
-:Discography a :BooksContentsType,
-        :MusicMatterType,
-        :SerialsContentsType,
-        :SerialsNatureType ;
-    :prefLabel "Discographies"@en,
-        "Diskografi"@sv ;
-    owl:sameAs :bib-booksContents-k,
-        :bib-musicMatter-a,
-        :bib-serialsContents-k,
-        :bib-serialsNature-k ;
-    skos:notation "a",
-        "k" .
 
 :DivertimentosSerenadesCassationsDivertissementsNotturni a :MusicCompositionType ;
     :prefLabel "Divertimentos, serenades, cassations, divertissements, notturni"@en,
@@ -1844,8 +1729,10 @@
 
 :Drama a :BooksLiteraryFormType,
         :MusicTextType ;
-    :prefLabel "Dramas"@en,
-        "Dramatiskt verk"@sv ;
+    :prefLabel "Drama"@en,
+        "Dramas"@en,
+        "Dramatiskt verk"@sv,
+        "Upptagning av en talpjäs som dramatiskt verk"@sv ;
     owl:sameAs :bib-booksLiteraryForm-d,
         :bib-musicText-d ;
     skos:notation "d" .
@@ -1922,7 +1809,7 @@
         "Utgåva i ospecificerad elektronisk form"@sv ;
     owl:sameAs :bib-booksItem-s,
         :bib-computerItem-s,
-        :bib-mapsItem-s,
+        :bib-musicItem-s,
         :bib-serialsOriginalItem-s ;
     skos:notation "s" .
 
@@ -2009,7 +1896,8 @@
 
 :Exemplarinformation_finns_ej a :ItemInfoInRecordType ;
     :prefLabel "Exemplarinformation finns ej"@sv ;
-    owl:sameAs :hold-itemInfoInRecord-n ;
+    owl:sameAs :hold-itemInfoInRecord-n,
+        schema:False ;
     skos:notation "n" .
 
 :ExtendedRoman a :SerialsAlphabetType ;
@@ -2018,21 +1906,10 @@
     owl:sameAs :bib-serialsAlphabet-b ;
     skos:notation "b" .
 
-:Facsimile a :BooksIllustrationsType,
-        :HoldingReproductionType,
-        :ReproductionType ;
-    :prefLabel "Facsimile"@en,
-        "Faksimil"@sv ;
-    owl:sameAs :bib-booksIllustrations-h,
-        :bib-mapReproduction-f,
-        :hold-globeReproduction-f,
-        :hold-mapReproduction-f ;
-    skos:notation "f",
-        "h" .
-
-:Facsimile-Obsolete a :MotionPicAspectType ;
+:Facsimile-Obsolete a :MapAspectType ;
     :prefLabel "Facsimile (OBSOLETE)"@en ;
-    owl:sameAs :bib-motionPicAspect-f ;
+    owl:deprecated true ;
+    owl:sameAs :bib-mapAspect-f ;
     skos:notation "f" .
 
 :Fantasia a :MusicCompositionType ;
@@ -2056,13 +1933,15 @@
 :FederalNational a :GovernmentPublicationType,
         :GovtAgencyType ;
     :prefLabel "Federal/national"@en,
+        "Federal eller nationell"@sv,
         "Nationell"@sv ;
     owl:sameAs :auth-govtAgency-f,
-        :bib-serialsGovtPub-f ;
+        :bib-booksGovtPub-f ;
     skos:notation "f" .
 
 :Ferro-Obsolete a :MapsPrimeMeridianType ;
     :prefLabel "Ferro (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-mapsPrimeMeridian-f ;
     skos:notation "f" .
 
@@ -2106,14 +1985,16 @@
 
 :FileReproducedFromMicroform a :ComputerAntecedentType,
         :ComputerFileAntecedentType ;
-    :prefLabel "File reproduced from microform"@en ;
+    :prefLabel "File reproduced from microform"@en,
+        "Filens källa är ett mikromedium"@sv ;
     owl:sameAs :bib-computerAntecedent-b,
         :bib-computerFileAntecedent-b ;
     skos:notation "b" .
 
 :FileReproducedFromOriginal a :ComputerAntecedentType,
         :ComputerFileAntecedentType ;
-    :prefLabel "File reproduced from original"@en ;
+    :prefLabel "File reproduced from original"@en,
+        "Filens källa är en originalresurs"@sv ;
     owl:sameAs :bib-computerAntecedent-a,
         :bib-computerFileAntecedent-a ;
     skos:notation "a" .
@@ -2207,6 +2088,7 @@
 :FlashCard a :NonProjMaterialType,
         :VisualMaterialType ;
     :prefLabel "Flash card"@en,
+        "\"Flash card\""@sv,
         "Bildkort"@sv ;
     owl:sameAs :bib-nonProjMaterial-o,
         :bib-visualMaterial-o ;
@@ -2242,27 +2124,16 @@
     owl:sameAs :bib-computerTypeOfFile-f ;
     skos:notation "f" .
 
-:Form a :BooksIllustrationsType,
-        :SubjectSubdivisionType ;
-    :prefLabel "Form"@en,
-        "Formell (formämnesord)"@sv ;
-    owl:sameAs :auth-subjectSubdivision-b,
-        :bib-booksIllustrations-k ;
-    skos:notation "b",
-        "k" .
-
 :FormLine a :MapsReliefType ;
     :prefLabel "Form lines"@en,
         "Formlinjer"@sv ;
     owl:sameAs :bib-mapsRelief-f ;
     skos:notation "f" .
 
-:FormatCodeBraille a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:FormatCodeBraille a :TacBrailleWritingType ;
     :prefLabel "Format code braille"@en,
         "Punktskrift för formatering"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-b,
-        :hold-tacBrailleWriting-b ;
+    owl:sameAs :bib-tacBrailleWriting-b ;
     skos:notation "b" .
 
 :Free a :MethodType ;
@@ -2341,17 +2212,6 @@
     owl:sameAs :bib-mapsProjection-ba ;
     skos:notation "ba" .
 
-:Game a :ComputerTypeOfFileType,
-        :MapsFormatType,
-        :VisualMaterialType ;
-    :prefLabel "Game"@en,
-        "Sällskapsspel"@sv ;
-    owl:sameAs :bib-computerTypeOfFile-g,
-        :bib-mapsFormat-n,
-        :bib-visualMaterial-g ;
-    skos:notation "g",
-        "n" .
-
 :GaussKruger a :MapsProjectionType ;
     :prefLabel "Gauss-Kruger"@en,
         "Gauss-Kruger"@sv ;
@@ -2368,7 +2228,7 @@
     :prefLabel "General"@en,
         "Allmän"@sv ;
     owl:sameAs :bib-booksAudience-g,
-        :bib-computerAudience-g ;
+        :bib-musicAudience-g ;
     skos:notation "g" .
 
 :GeneralVerticalNearSided a :MapsProjectionType ;
@@ -2388,22 +2248,6 @@
         "Gåva"@sv ;
     owl:sameAs :hold-method-g ;
     skos:notation "g" .
-
-:Glass a :MapMediumType,
-        :NonProjectedType,
-        :ProjGraphEmulsionType,
-        :ProjGraphSecondaryType,
-        :ProjGraphSupportType ;
-    :prefLabel "Glass"@en,
-        "Glas"@sv ;
-    owl:sameAs :bib-mapMedium-j,
-        :bib-nonProjPrimary-d,
-        :bib-nonProjSecondary-d,
-        :bib-projGraphEmulsion-d,
-        :bib-projGraphSecondary-d,
-        :bib-projGraphSupport-d ;
-    skos:notation "d",
-        "j" .
 
 :GlassWithLacquer a :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
@@ -2452,7 +2296,7 @@
 :GovernmentPublicationLevelUndetermined a :GovernmentPublicationType ;
     :prefLabel "Government publication--level undetermined"@en,
         "Nivå ej specificerad"@sv ;
-    owl:sameAs :bib-serialsGovtPub-o ;
+    owl:sameAs :bib-booksGovtPub-o ;
     skos:notation "o" .
 
 :GradientOrBathymetricTint a :MapsReliefType ;
@@ -2475,7 +2319,8 @@
 
 :GrayScale a :ComputerColorType,
         :ComputerFileColorType ;
-    :prefLabel "Gray scale"@en ;
+    :prefLabel "Gray scale"@en,
+        "Gråskala"@sv ;
     owl:sameAs :bib-computerColor-g,
         :bib-computerFileColor-g ;
     skos:notation "g" .
@@ -2488,6 +2333,7 @@
 
 :Greenwich-Obsolete a :MapsPrimeMeridianType ;
     :prefLabel "Greenwich (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-mapsPrimeMeridian-e ;
     skos:notation "e" .
 
@@ -2503,18 +2349,6 @@
     owl:sameAs :bib-soundTapeConfiguration-b ;
     skos:notation "b" .
 
-:HandColored a :ColorType,
-        :MotionPicCategoriesType,
-        :MotionPicColorType ;
-    :prefLabel "Hand colored"@en,
-        "Handkolorerad"@sv ;
-    owl:sameAs :bib-motionPicCategories-v,
-        :bib-motionPicColor-h,
-        :bib-nonProjColor-h,
-        :bib-projGraphColor-h ;
-    skos:notation "h",
-        "v" .
-
 :Handbook a :BooksContentsType,
         :SerialsContentsType,
         :SerialsNatureType ;
@@ -2528,8 +2362,7 @@
 :Hardboard a :NonProjectedType ;
     :prefLabel "Hardboard"@en,
         "Hardboard"@sv ;
-    owl:sameAs :bib-nonProjPrimary-q,
-        :bib-nonProjSecondary-q ;
+    owl:sameAs :bib-nonProjPrimary-q ;
     skos:notation "q" .
 
 :Hebrew a :SerialsAlphabetType ;
@@ -2577,13 +2410,6 @@
         "Text av historiskt innehåll"@sv ;
     owl:sameAs :bib-musicText-h ;
     skos:notation "h" .
-
-:HoldingNotatedMusicMaterialType a :CollectionClass ;
-    :prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch v:NotatedMusic ;
-    skos:notation "hold-notatedMusicMaterial" .
 
 :HoldingsLevel1 a :HoldingEncLevelType ;
     :prefLabel "Holdings level 1"@en,
@@ -2661,15 +2487,6 @@
     owl:sameAs :bib-publicationStatus-i ;
     skos:notation "i" .
 
-:Incomplete a :CompletenessType,
-        :MotionPicCompletenessType ;
-    :prefLabel "Incomplete"@en,
-        "Ofullständig"@sv ;
-    owl:sameAs :bib-motionPicCompleteness-i,
-        :hold-completeness-2 ;
-    skos:notation "2",
-        "i" .
-
 :IncompleteAuthorityRecord a :AuthorityEncLevelType ;
     :prefLabel "Incomplete authority record"@en,
         "Ofullständig"@sv ;
@@ -2679,7 +2496,8 @@
 :IncreaseInEncodingLevel a :AuthorityStatusType,
         :StatusType ;
     :prefLabel "Increase in encoding level"@en,
-        "Uppgraderad"@sv ;
+        "Uppgraderad"@sv,
+        "Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv ;
     owl:sameAs :auth-status-a,
         :bib-status-a ;
     skos:notation "a" .
@@ -2738,6 +2556,7 @@
 
 :InstructionalMaterials-Obsolete a :VisualMatterType ;
     :prefLabel "Instructional materials (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-r ;
     skos:notation "r" .
 
@@ -2780,9 +2599,10 @@
 :InternationalIntergovernmental a :GovernmentPublicationType,
         :GovtAgencyType ;
     :prefLabel "International intergovernmental"@en,
+        "Internationell"@sv,
         "Övernationell (t.ex. EU)"@sv ;
     owl:sameAs :auth-govtAgency-i,
-        :bib-serialsGovtPub-i ;
+        :bib-booksGovtPub-i ;
     skos:notation "i" .
 
 :InternationalStandard a :RomanizationType ;
@@ -2843,17 +2663,17 @@
     :prefLabel "Juvenile"@en,
         "Barn och ungdom (0-16 år)"@sv ;
     owl:sameAs :bib-booksAudience-j,
-        :bib-computerAudience-j ;
+        :bib-musicAudience-j ;
     skos:notation "j" .
 
-:Kit a :TypeOfRecordType,
-        :VisualMaterialType ;
-    :prefLabel "Kit"@en,
-        "Paket"@sv ;
-    owl:sameAs :bib-typeOfRecord-o,
-        :bib-visualMaterial-b ;
-    skos:notation "b",
-        "o" .
+:KitMaterialType a :CollectionClass ;
+    :prefLabel "Specific Material Designation"@en,
+        "Särskild bärarbeteckning"@sv ;
+    rdfs:subClassOf :EnumeratedTerm ;
+    owl:sameAs :NotatedMusicMaterialType ;
+    skos:broadMatch v:Kit,
+        v:NotatedMusic ;
+    skos:notation "bib-kitMaterial" .
 
 :Korean a :SerialsAlphabetType ;
     :prefLabel "Korean"@en,
@@ -2869,7 +2689,8 @@
 :LacquerCoating a :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
     :prefLabel "Lacquer coating"@en,
-        "Lackerat material"@sv ;
+        "Lackerat material"@sv,
+        "Lackerat material (ospecificerat)"@sv ;
     owl:sameAs :bib-soundKindOfMaterial-a,
         :hold-soundKindOfMaterial-a ;
     skos:notation "a" .
@@ -2930,22 +2751,10 @@
     owl:sameAs :bib-typeOfRecord-a ;
     skos:notation "a" .
 
-:LargePrint a :BooksItemType,
-        :ItemType,
-        :SerialsOriginalItemType,
-        :TextMaterialType ;
-    :prefLabel "Large print"@en,
-        "Stor stil"@sv ;
-    owl:sameAs :bib-booksItem-d,
-        :bib-mapsItem-d,
-        :bib-serialsOriginalItem-d,
-        :bib-textMaterial-b ;
-    skos:notation "b",
-        "d" .
-
 :Laserdisc a :HoldingVideoFormatType,
         :VideoFormatType ;
     :prefLabel "Laserdisc"@en,
+        "Laserskiva"@sv,
         "Laseroptisk videoskiva"@sv ;
     owl:sameAs :bib-videoFormat-g,
         :hold-videoFormat-g ;
@@ -2991,8 +2800,7 @@
     :prefLabel "Läder"@sv ;
     owl:sameAs :bib-globeMedium-v,
         :bib-mapMedium-v,
-        :bib-nonProjPrimary-v,
-        :bib-nonProjSecondary-v ;
+        :bib-nonProjPrimary-v ;
     skos:notation "v" .
 
 :LecturesSpeech a :MusicTextType ;
@@ -3015,6 +2823,7 @@
         :SerialsContentsType,
         :SerialsNatureType ;
     :prefLabel "Legal cases and case notes"@en,
+        "Rättsfallsdiskussion"@sv,
         "Rättsfallsdsikussion"@sv ;
     owl:sameAs :bib-booksContents-v,
         :bib-serialsContents-v,
@@ -3071,28 +2880,22 @@
     owl:sameAs :hold-lendingPolicy-l ;
     skos:notation "l" .
 
-:LineByLine a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:LineByLine a :TacBrailleMusicType ;
     :prefLabel "Line by line"@en,
         "<Line by line>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-g,
-        :hold-tacBrailleMusic-g ;
+    owl:sameAs :bib-tacBrailleMusic-g ;
     skos:notation "g" .
 
-:LineOverLine a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:LineOverLine a :TacBrailleMusicType ;
     :prefLabel "Line over line"@en,
         "<Line over line>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-c,
-        :hold-tacBrailleMusic-c ;
+    owl:sameAs :bib-tacBrailleMusic-c ;
     skos:notation "c" .
 
-:LiteraryBraille a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:LiteraryBraille a :TacBrailleWritingType ;
     :prefLabel "Literary braille"@en,
         "Litterär punktskrift"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-a,
-        :hold-tacBrailleWriting-a ;
+    owl:sameAs :bib-tacBrailleWriting-a ;
     skos:notation "a" .
 
 :LiveAction a :VisualTechniqueType ;
@@ -3103,6 +2906,7 @@
 
 :LobbyCards-Obsolete a :VisualMatterType ;
     :prefLabel "Lobby cards (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-q ;
     skos:notation "q" .
 
@@ -3111,7 +2915,7 @@
     :prefLabel "Local"@en,
         "Lokal"@sv ;
     owl:sameAs :auth-govtAgency-l,
-        :bib-serialsGovtPub-l ;
+        :bib-booksGovtPub-l ;
     skos:notation "l" .
 
 :LocalStandard a :RomanizationType ;
@@ -3194,22 +2998,19 @@
 :MagneticAudioTapeInCartridge a :MediumType ;
     :prefLabel "Magnetic audio tape in cartridge"@en,
         "Magnetiskt ljudband i magasin"@sv ;
-    owl:sameAs :bib-motionPicMedium-c,
-        :bib-videoMedium-c ;
+    owl:sameAs :bib-projGraphMedium-c ;
     skos:notation "c" .
 
 :MagneticAudioTapeInCassette a :MediumType ;
     :prefLabel "Magnetic audio tape in cassette"@en,
         "Magnetiskt ljudband i kassett"@sv ;
-    owl:sameAs :bib-motionPicMedium-f,
-        :bib-videoMedium-f ;
+    owl:sameAs :bib-projGraphMedium-f ;
     skos:notation "f" .
 
 :MagneticAudioTapeOnReel a :MediumType ;
     :prefLabel "Magnetic audio tape on reel"@en,
         "Magnetiskt ljudband på spole"@sv ;
-    owl:sameAs :bib-motionPicMedium-e,
-        :bib-videoMedium-e ;
+    owl:sameAs :bib-projGraphMedium-e ;
     skos:notation "e" .
 
 :MagneticDisc a :ComputerFileMaterialType ;
@@ -3231,13 +3032,13 @@
 :MagneticSoundTrackOnMotionPictureFilm a :MediumType ;
     :prefLabel "Magnetic sound track on motion picture film"@en,
         "Magnetiskt ljudspår på spelfilm"@sv ;
-    owl:sameAs :bib-motionPicMedium-b,
-        :bib-videoMedium-b ;
+    owl:sameAs :bib-projGraphMedium-b ;
     skos:notation "b" .
 
 :MagnetoOpticalDisc a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Magneto-optical disc"@en ;
+    :prefLabel "Magneto-optical disc"@en,
+        "Magnet-optisk skiva"@sv ;
     owl:sameAs :bib-computerFileMaterial-m,
         :bib-computerMaterial-m ;
     skos:notation "m" .
@@ -3334,12 +3135,10 @@
     owl:sameAs :bib-soundKindOfDisc-a ;
     skos:notation "a" .
 
-:MathematicOrScientificBraille a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:MathematicOrScientificBraille a :TacBrailleWritingType ;
     :prefLabel "Mathematics and scientific braille"@en,
         "Matematisk och vetenskaplig punktskrift"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-c,
-        :hold-tacBrailleWriting-c ;
+    owl:sameAs :bib-tacBrailleWriting-c ;
     skos:notation "c" .
 
 :Mazurka a :MusicCompositionType ;
@@ -3378,30 +3177,10 @@
     owl:sameAs :bib-mapsProjection-bd ;
     skos:notation "bd" .
 
-:Metal a :GlobeMediumType,
-        :HoldingSoundKindOfMaterialType,
-        :MapMediumType,
-        :NonProjectedType,
-        :ProjGraphSecondaryType,
-        :ProjGraphSupportType,
-        :SoundKindOfMaterialType ;
-    :prefLabel "Metal"@en,
-        "Metall"@sv ;
-    owl:sameAs :bib-globeMedium-d,
-        :bib-mapMedium-d,
-        :bib-nonProjPrimary-h,
-        :bib-nonProjSecondary-h,
-        :bib-projGraphSecondary-h,
-        :bib-projGraphSupport-h,
-        :bib-soundKindOfMaterial-l,
-        :hold-soundKindOfMaterial-l ;
-    skos:notation "d",
-        "h",
-        "l" .
-
 :MetalAndGlass a :ProjGraphSecondaryType,
         :ProjGraphSupportType ;
-    :prefLabel "Metal and glass"@en ;
+    :prefLabel "Metal and glass"@en,
+        "Metall och glas"@sv ;
     owl:sameAs :bib-projGraphSecondary-j,
         :bib-projGraphSupport-j ;
     skos:notation "j" .
@@ -3413,19 +3192,6 @@
     owl:sameAs :bib-remoteSensImageUse-a,
         :hold-remoteSensImageUse-a ;
     skos:notation "a" .
-
-:Microfiche a :BooksItemType,
-        :ItemType,
-        :MicroformMaterialType,
-        :SerialsOriginalItemType ;
-    :prefLabel "Microfiche"@en,
-        "Microfiche"@sv ;
-    owl:sameAs :bib-booksItem-b,
-        :bib-mapsItem-b,
-        :bib-microformMaterial-e,
-        :bib-serialsOriginalItem-b ;
-    skos:notation "b",
-        "e" .
 
 :MicroficheCassette a :MicroformMaterialType ;
     :prefLabel "Microfiche cassette"@en,
@@ -3439,7 +3205,7 @@
     :prefLabel "Microfilm"@en,
         "Mikrofilm"@sv ;
     owl:sameAs :bib-booksItem-a,
-        :bib-mapsItem-a,
+        :bib-musicItem-a,
         :bib-serialsOriginalItem-a ;
     skos:notation "a" .
 
@@ -3476,19 +3242,6 @@
         "Mikrospår"@sv ;
     owl:sameAs :bib-soundGroove-m ;
     skos:notation "m" .
-
-:Microopaque a :BooksItemType,
-        :ItemType,
-        :MicroformMaterialType,
-        :SerialsOriginalItemType ;
-    :prefLabel "Microopaque"@en,
-        "Mikrokort"@sv ;
-    owl:sameAs :bib-booksItem-c,
-        :bib-mapsItem-c,
-        :bib-microformMaterial-g,
-        :bib-serialsOriginalItem-c ;
-    skos:notation "c",
-        "g" .
 
 :MicroscopeSlide a :VisualMaterialType ;
     :prefLabel "Microscope slide"@en,
@@ -3535,33 +3288,11 @@
 :MissingCharacters a :ModifiedRecordType,
         :ModifiedType ;
     :prefLabel "Missing characters"@en,
+        "Vissa tecken och symboler har uteslutits i posten"@sv,
         "Vissa tecken saknas"@sv ;
     owl:sameAs :auth-modified-x,
         :bib-modifiedRecord-x ;
     skos:notation "x" .
-
-:Mixed a :ColorType,
-        :ComputerFileAntecedentType,
-        :ComputerFileColorType,
-        :ComputerFileCompressionType,
-        :MicroformColorType,
-        :MotionPicColorType,
-        :MotionPicConfigurationOrVideoPlaybackType,
-        :VideoColorType ;
-    :prefLabel "Mixed"@en,
-        "Blandad färgstatus"@sv ;
-    owl:sameAs :bib-computerFileAntecedent-m,
-        :bib-computerFileColor-m,
-        :bib-computerFileCompression-m,
-        :bib-microformColor-m,
-        :bib-motionPicColor-m,
-        :bib-motionPicConfiguration-k,
-        :bib-nonProjColor-m,
-        :bib-projGraphColor-m,
-        :bib-videoColor-m,
-        :bib-videoPlayback-k ;
-    skos:notation "k",
-        "m" .
 
 :MixedBaseNitrateAndSafety a :FilmBaseType ;
     :prefLabel "Mixed base (nitrate and safety)"@en,
@@ -3573,9 +3304,9 @@
         :ProjGraphEmulsionType,
         :ProjGraphSecondaryType ;
     :prefLabel "Mixed collection"@en,
-        "Blandade material"@sv ;
+        "Blandade material"@sv,
+        "Samling i blandade material"@sv ;
     owl:sameAs :bib-nonProjPrimary-m,
-        :bib-nonProjSecondary-m,
         :bib-projGraphEmulsion-m,
         :bib-projGraphSecondary-m ;
     skos:notation "m" .
@@ -3691,15 +3422,6 @@
     owl:sameAs :bib-bibLevel-a ;
     skos:notation "a" .
 
-:MonographicSeries a :SerialsTypeOfSerialType,
-        :TypeOfSeriesType ;
-    :prefLabel "Monographic series"@en,
-        "Monografiserie"@sv ;
-    owl:sameAs :auth-typeOfSeries-a,
-        :bib-serialsTypeOfSerial-m ;
-    skos:notation "a",
-        "m" .
-
 :MonthSTime a :UnitTypeType ;
     :prefLabel "Month(s) [Time]"@en,
         "Månad/månader"@sv ;
@@ -3708,6 +3430,7 @@
 
 :Monthly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Monthly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-m ;
     skos:notation "m" .
 
@@ -3762,7 +3485,7 @@
 :Multicolored a :ColorType,
         :ComputerColorType,
         :ComputerFileColorType,
-        :GlobeColorType,
+        :MapColorType,
         :MicroformColorType,
         :MotionPicColorType,
         :VideoColorType ;
@@ -3770,7 +3493,7 @@
         "Flera färger"@sv ;
     owl:sameAs :bib-computerColor-c,
         :bib-computerFileColor-c,
-        :bib-globeColor-c,
+        :bib-mapColor-c,
         :bib-microformColor-c,
         :bib-motionPicColor-c,
         :bib-nonProjColor-c,
@@ -3781,9 +3504,10 @@
 :Multilocal a :GovernmentPublicationType,
         :GovtAgencyType ;
     :prefLabel "Multilocal"@en,
-        "Flera lokala"@sv ;
+        "Flera lokala"@sv,
+        "Grupp av lokala enheter"@sv ;
     owl:sameAs :auth-govtAgency-c,
-        :bib-serialsGovtPub-c ;
+        :bib-booksGovtPub-c ;
     skos:notation "c" .
 
 :MultipartItem a :TypeOfSeriesType ;
@@ -3792,26 +3516,16 @@
     owl:sameAs :auth-typeOfSeries-b ;
     skos:notation "b" .
 
-:MultipartItemHolding a :TypeType ;
+:MultipartItemHolding a :HoldingType ;
     :prefLabel "Multipart item holdings"@en,
         "Monografisk resurs (1 bibliografisk post med flera delar)"@sv ;
     owl:sameAs :hold-type-v ;
     skos:notation "v" .
 
-:Multiple a :ComputerFileFileFormatsType,
-        :ComputerFileImageBitDepthType ;
-    :prefLabel "Multiple"@en ;
-    owl:sameAs :bib-computerFileFileFormats-m,
-        :bib-computerFileImageBitDepth-mmm ;
-    skos:notation "m",
-        "mmm" .
-
-:MultipleBrailleTypes a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:MultipleBrailleTypes a :TacBrailleWritingType ;
     :prefLabel "Multiple braille types"@en,
         "Flera typer av punktskriftssystem"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-m,
-        :hold-tacBrailleWriting-m ;
+    owl:sameAs :bib-tacBrailleWriting-m ;
     skos:notation "m" .
 
 :MultipleDates a :PublicationStatusType ;
@@ -3845,31 +3559,22 @@
 :Multistate a :GovernmentPublicationType,
         :GovtAgencyType ;
     :prefLabel "Multistate"@en,
-        "Flera delstater"@sv ;
+        "Flera delstater"@sv,
+        "Grupp av provinser"@sv ;
     owl:sameAs :auth-govtAgency-m,
-        :bib-serialsGovtPub-m ;
+        :bib-booksGovtPub-m ;
     skos:notation "m" .
-
-:Music a :BooksIllustrationsType,
-        :MusicMatterType ;
-    :prefLabel "Music"@en,
-        "Musiknoter (exempel)"@sv ;
-    owl:sameAs :bib-booksIllustrations-g,
-        :bib-musicMatter-s ;
-    skos:notation "g",
-        "s" .
 
 :Music-Obsolete a :VisualMatterType ;
     :prefLabel "Music (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-s ;
     skos:notation "s" .
 
-:MusicBraille a :HoldingTacBrailleWritingType,
-        :TacBrailleWritingType ;
+:MusicBraille a :TacBrailleWritingType ;
     :prefLabel "Music braille"@en,
         "Punktskrift för musik"@sv ;
-    owl:sameAs :bib-tacBrailleWriting-e,
-        :hold-tacBrailleWriting-e ;
+    owl:sameAs :bib-tacBrailleWriting-e ;
     skos:notation "e" .
 
 :MusicalRevueOrComedy a :MusicCompositionType ;
@@ -3899,7 +3604,8 @@
 :NationalBibliographicAgency a :AuthorityCatalogingSourceType,
         :CatalogingSourceType ;
     :prefLabel "National bibliographic agency"@en,
-        "Nationalbibliografi"@sv ;
+        "Nationalbibliografi"@sv,
+        "Nationalbibliografisk verksamhet"@sv ;
     owl:sameAs :auth-catalogingSource-_,
         :bib-catalogingSource-_ ;
     skos:notation "_" .
@@ -3937,6 +3643,7 @@
 :Negative a :MotionPicPosNegType,
         :PolarityType ;
     :prefLabel "Negative"@en,
+        "Negativ bild"@sv,
         "Negativ polaritet"@sv ;
     owl:sameAs :bib-mapPosNeg-b,
         :bib-microformPosNeg-b,
@@ -3947,6 +3654,7 @@
         :HoldingStatusType,
         :StatusType ;
     :prefLabel "New"@en,
+        "Ny"@sv,
         "Ny post"@sv ;
     owl:sameAs :auth-status-n,
         :bib-status-n,
@@ -4108,13 +3816,14 @@
 
 :NormalizedIrregular-Obsolete a :ComputerRegularityType ;
     :prefLabel "Normalized irregular (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerRegularity-n ;
     skos:notation "n" .
 
 :NotAConferencePublication a :ConferencePublicationType ;
     :prefLabel "Not a conference publication"@en,
         "Nej, resursen härrör ej från konferens"@sv ;
-    owl:sameAs :bib-serialsConfPub-0,
+    owl:sameAs :bib-booksConfPub-0,
         schema:False ;
     skos:notation "0" .
 
@@ -4126,7 +3835,8 @@
     skos:notation "0" .
 
 :NotAppropriate a :HeadingType ;
-    :prefLabel "Not Appropriate"@en ;
+    :prefLabel "Not Appropriate"@en,
+        "Kan inte användas som seriebiuppslag"@sv ;
     owl:sameAs :auth-headingMain-b,
         :auth-headingSeries-b,
         schema:False ;
@@ -4149,15 +3859,6 @@
         "Sparas ej"@sv ;
     owl:sameAs :hold-generalRetention-7 ;
     skos:notation "7" .
-
-:NotatedMusicMaterialType a :CollectionClass ;
-    :prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    owl:sameAs :KitMaterialType ;
-    skos:broadMatch v:Kit,
-        v:NotatedMusic ;
-    skos:notation "bib-notatedMusicMaterial" .
 
 :Novel a :BooksLiteraryFormType ;
     :prefLabel "Novels"@en,
@@ -4209,12 +3910,15 @@
 :OneColor a :ColorType,
         :ComputerColorType,
         :ComputerFileColorType,
-        :GlobeColorType,
+        :MapColorType,
         :VideoColorType ;
-    :prefLabel "One color"@en ;
+    :prefLabel "One color"@en,
+        "En färg"@sv,
+        "En färg (ej svart)"@sv,
+        "En färg som kontrasterar mot vitt"@sv ;
     owl:sameAs :bib-computerColor-a,
         :bib-computerFileColor-a,
-        :bib-globeColor-a,
+        :bib-mapColor-a,
         :bib-nonProjColor-a,
         :bib-projGraphColor-a,
         :bib-videoColor-a ;
@@ -4232,7 +3936,7 @@
     :prefLabel "Onlineutgåva"@sv ;
     owl:sameAs :bib-booksItem-o,
         :bib-computerItem-o,
-        :bib-mapsItem-o,
+        :bib-musicItem-o,
         :bib-serialsOriginalItem-o ;
     skos:notation "o" .
 
@@ -4247,12 +3951,10 @@
     owl:sameAs :bib-computerTypeOfFile-j ;
     skos:notation "j" .
 
-:OpenScore a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:OpenScore a :TacBrailleMusicType ;
     :prefLabel "Open score"@en,
         "<Open score>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-h,
-        :hold-tacBrailleMusic-h ;
+    owl:sameAs :bib-tacBrailleMusic-h ;
     skos:notation "h" .
 
 :Opera a :MusicCompositionType ;
@@ -4264,13 +3966,13 @@
 :OpticalAndMagneticSoundTrackOnMotionPictureFilm a :MediumType ;
     :prefLabel "Optical and magnetic sound track on motion picture film"@en,
         "Optiskt och magnetiskt ljudspår på spelfilm"@sv ;
-    owl:sameAs :bib-motionPicMedium-g,
-        :bib-videoMedium-g ;
+    owl:sameAs :bib-projGraphMedium-g ;
     skos:notation "g" .
 
 :OpticalDisc a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Optical disc"@en ;
+    :prefLabel "Optical disc"@en,
+        "Optisk skiva (CD-A, CD-R, CD-ROM)"@sv ;
     owl:sameAs :bib-computerFileMaterial-o,
         :bib-computerMaterial-o ;
     skos:notation "o" .
@@ -4278,8 +3980,7 @@
 :OpticalSoundTrackOnMotionPictureFilm a :MediumType ;
     :prefLabel "Optical sound track on motion picture film"@en,
         "Optiskt ljudspår på spelfilm"@sv ;
-    owl:sameAs :bib-motionPicMedium-a,
-        :bib-videoMedium-a ;
+    owl:sameAs :bib-projGraphMedium-a ;
     skos:notation "a" .
 
 :Oratorio a :MusicCompositionType ;
@@ -4294,9 +3995,10 @@
     owl:sameAs :bib-motionPicGeneration-o ;
     skos:notation "o" .
 
-:Original-Obsolete a :MotionPicAspectType ;
+:Original-Obsolete a :MapAspectType ;
     :prefLabel "Original (OBSOLETE)"@en ;
-    owl:sameAs :bib-motionPicAspect-o ;
+    owl:deprecated true ;
+    owl:sameAs :bib-mapAspect-o ;
     skos:notation "o" .
 
 :Orthographic a :MapsProjectionType ;
@@ -4311,11 +4013,9 @@
     owl:sameAs :bib-remoteSensImageData-pz ;
     skos:notation "pz" .
 
-:OtherBrailleFormat a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:OtherBrailleFormat a :TacBrailleMusicType ;
     :prefLabel "Annat punktskriftsformat"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-z,
-        :hold-tacBrailleMusic-z ;
+    owl:sameAs :bib-tacBrailleMusic-z ;
     skos:notation "z" .
 
 :OtherFilmstripType a :HoldingProjGraphMaterialType,
@@ -4328,6 +4028,7 @@
 
 :OtherFrequencies-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Other frequencies (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-z ;
     skos:notation "z" .
 
@@ -4409,12 +4110,10 @@
     owl:sameAs :bib-motionPicFormat-e ;
     skos:notation "e" .
 
-:Outline a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:Outline a :TacBrailleMusicType ;
     :prefLabel "Outline"@en,
         "<Outline>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-k,
-        :hold-tacBrailleMusic-k ;
+    owl:sameAs :bib-tacBrailleMusic-k ;
     skos:notation "k" .
 
 :Outtake a :MotionPicElementsType ;
@@ -4435,37 +4134,19 @@
     owl:sameAs :bib-nonProjMaterial-e ;
     skos:notation "e" .
 
-:Paper a :GlobeMediumType,
-        :MapMediumType,
-        :NonProjectedType,
-        :ProjGraphEmulsionType,
-        :ProjGraphSupportType ;
-    :prefLabel "Paper"@en,
-        "Papper"@sv ;
-    owl:sameAs :bib-globeMedium-a,
-        :bib-mapMedium-a,
-        :bib-nonProjPrimary-o,
-        :bib-nonProjSecondary-o,
-        :bib-projGraphEmulsion-o,
-        :bib-projGraphSupport-c ;
-    skos:notation "a",
-        "c",
-        "o" .
-
 :PaperWithLacquerOrFerrousOxide a :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
     :prefLabel "Paper with lacquer or ferrous oxide"@en,
-        "Pappersbas med järnoxidyta"@sv ;
+        "Pappersbas med järnoxidyta"@sv,
+        "Pappersbas med lack- eller järnoxidyta"@sv ;
     owl:sameAs :bib-soundKindOfMaterial-r,
         :hold-soundKindOfMaterial-r ;
     skos:notation "r" .
 
-:Paragraph a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:Paragraph a :TacBrailleMusicType ;
     :prefLabel "Paragraph"@en,
         "<Paragraph>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-d,
-        :hold-tacBrailleMusic-d ;
+    owl:sameAs :bib-tacBrailleMusic-d ;
     skos:notation "d" .
 
 :Parchment a :GlobeMediumType,
@@ -4474,12 +4155,12 @@
     :prefLabel "Pergament"@sv ;
     owl:sameAs :bib-globeMedium-w,
         :bib-mapMedium-w,
-        :bib-nonProjPrimary-w,
-        :bib-nonProjSecondary-w ;
+        :bib-nonProjPrimary-w ;
     skos:notation "w" .
 
 :Paris-Obsolete a :MapsPrimeMeridianType ;
     :prefLabel "Paris (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-mapsPrimeMeridian-g ;
     skos:notation "g" .
 
@@ -4491,14 +4172,16 @@
 
 :PartWithDependentTitle a :LinkedRecordReqType,
         :LinkedType ;
-    :prefLabel "Part with dependent title"@en ;
+    :prefLabel "Part with dependent title"@en,
+        "Del med beroende titel"@sv ;
     owl:sameAs :bib-linked-c,
         :bib-linkedRecordReq-c ;
     skos:notation "c" .
 
 :PartWithIndependentTitle a :LinkedRecordReqType,
         :LinkedType ;
-    :prefLabel "Part with independent title"@en ;
+    :prefLabel "Part with independent title"@en,
+        "Del med oberoende titel"@sv ;
     owl:sameAs :bib-linked-b,
         :bib-linkedRecordReq-b ;
     skos:notation "b" .
@@ -4569,6 +4252,7 @@
 
 :Philadelphia-Obsolete a :MapsPrimeMeridianType ;
     :prefLabel "Philadelphia (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-mapsPrimeMeridian-p ;
     skos:notation "p" .
 
@@ -4589,14 +4273,6 @@
         "Blåkopia"@sv ;
     owl:sameAs :bib-mapDetails-a ;
     skos:notation "a" .
-
-:Photograph a :BooksIllustrationsType,
-        :NonProjMaterialType ;
-    :prefLabel "Fotografi (ospecificerad typ)"@sv ;
-    owl:sameAs :bib-booksIllustrations-o,
-        :bib-nonProjMaterial-v ;
-    skos:notation "o",
-        "v" .
 
 :PhotomechanicalPrint a :NonProjMaterialType ;
     :prefLabel "Photomechanical print"@en,
@@ -4625,6 +4301,7 @@
 :Picture a :NonProjMaterialType,
         :VisualMaterialType ;
     :prefLabel "Picture"@en,
+        "Bild"@sv,
         "Bild (om specifikation saknas)"@sv ;
     owl:sameAs :bib-nonProjMaterial-i,
         :bib-visualMaterial-i ;
@@ -4655,24 +4332,8 @@
         "Gips"@sv ;
     owl:sameAs :bib-globeMedium-p,
         :bib-mapMedium-p,
-        :bib-nonProjPrimary-p,
-        :bib-nonProjSecondary-p ;
+        :bib-nonProjPrimary-p ;
     skos:notation "p" .
-
-:Plastic a :GlobeMediumType,
-        :HoldingSoundKindOfMaterialType,
-        :MapMediumType,
-        :NonProjectedType,
-        :SoundKindOfMaterialType ;
-    :prefLabel "Plast"@sv ;
-    owl:sameAs :bib-globeMedium-i,
-        :bib-mapMedium-i,
-        :bib-nonProjPrimary-i,
-        :bib-nonProjSecondary-i,
-        :bib-soundKindOfMaterial-p,
-        :hold-soundKindOfMaterial-p ;
-    skos:notation "i",
-        "p" .
 
 :PlasticWithMetal a :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
@@ -4740,8 +4401,7 @@
 :Porcelain a :NonProjectedType ;
     :prefLabel "Porcelain"@en,
         "Porslin och kakel"@sv ;
-    owl:sameAs :bib-nonProjPrimary-r,
-        :bib-nonProjSecondary-r ;
+    owl:sameAs :bib-nonProjPrimary-r ;
     skos:notation "r" .
 
 :Portrait a :BooksIllustrationsType ;
@@ -4753,6 +4413,7 @@
 :Positive a :MotionPicPosNegType,
         :PolarityType ;
     :prefLabel "Positive"@en,
+        "Positiv bild"@sv,
         "Positiv polaritet"@sv ;
     owl:sameAs :bib-mapPosNeg-a,
         :bib-microformPosNeg-a,
@@ -4771,6 +4432,7 @@
 
 :Posters-Obsolete a :VisualMatterType ;
     :prefLabel "Posters (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-o ;
     skos:notation "o" .
 
@@ -4778,7 +4440,7 @@
     :prefLabel "Pre-adolescent"@en,
         "Barn (ca 10-12 år) / Läromedel"@sv ;
     owl:sameAs :bib-booksAudience-c,
-        :bib-computerAudience-c ;
+        :bib-musicAudience-c ;
     skos:notation "c" .
 
 :PreProduction a :MapDetailsType ;
@@ -4809,7 +4471,7 @@
     :prefLabel "Preschool"@en,
         "Småbarn (ca 0-5 år)"@sv ;
     owl:sameAs :bib-booksAudience-a,
-        :bib-computerAudience-a ;
+        :bib-musicAudience-a ;
     skos:notation "a" .
 
 :Present a :ComputerFileQATargetType ;
@@ -4829,6 +4491,7 @@
 
 :Pressbooks-Obsolete a :VisualMatterType ;
     :prefLabel "Pressbooks (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-p ;
     skos:notation "p" .
 
@@ -4840,9 +4503,10 @@
 
 :Primary a :AudienceType ;
     :prefLabel "Primary"@en,
-        "Barn (ca 6-9 år)"@sv ;
+        "Barn (ca 6-9 år)"@sv,
+        "Barn(ca 6-9 år)"@sv ;
     owl:sameAs :bib-booksAudience-b,
-        :bib-computerAudience-b ;
+        :bib-musicAudience-b ;
     skos:notation "b" .
 
 :Print a :NonProjMaterialType ;
@@ -4968,6 +4632,7 @@
 
 :Quarterly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Quarterly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-q ;
     skos:notation "q" .
 
@@ -5081,6 +4746,7 @@
 
 :Regular-Obsolete a :ComputerRegularityType ;
     :prefLabel "Regular (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerRegularity-r ;
     skos:notation "r" .
 
@@ -5099,7 +4765,7 @@
 :RegularPrintReproductionEyeReadablePrint a :ItemType ;
     :prefLabel "Regular print reproduction Eye-readable print."@en,
         "Reproduktion i originalstorlek"@sv ;
-    owl:sameAs :bib-mapsItem-r ;
+    owl:sameAs :bib-musicItem-r ;
     skos:notation "r" .
 
 :Rehearsal a :MusicTextType ;
@@ -5110,6 +4776,7 @@
 
 :RelatedRecordRequired-Obsolete a :LinkedRecordReqType ;
     :prefLabel "Related record required (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-linkedRecordReq-r ;
     skos:notation "r" .
 
@@ -5165,9 +4832,10 @@
     owl:sameAs :bib-publicationStatus-r ;
     skos:notation "r" .
 
-:Reproduction-Obsolete a :MotionPicAspectType ;
+:Reproduction-Obsolete a :MapAspectType ;
     :prefLabel "Reproduction (OBSOLETE)"@en ;
-    owl:sameAs :bib-motionPicAspect-r ;
+    owl:deprecated true ;
+    owl:sameAs :bib-mapAspect-r ;
     skos:notation "r" .
 
 :Requiem a :MusicCompositionType ;
@@ -5373,6 +5041,7 @@
 
 :ScriptsMaterial-Obsolete a :VisualMatterType ;
     :prefLabel "Scripts material (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-m ;
     skos:notation "m" .
 
@@ -5388,12 +5057,10 @@
     owl:sameAs :bib-mapMaterial-s ;
     skos:notation "s" .
 
-:SectionBySection a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:SectionBySection a :TacBrailleMusicType ;
     :prefLabel "Section by section"@en,
         "<Section by section>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-f,
-        :hold-tacBrailleMusic-f ;
+    owl:sameAs :bib-tacBrailleMusic-f ;
     skos:notation "f" .
 
 :SeismicSurvey a :RemoteSensImageDataType ;
@@ -5404,6 +5071,7 @@
 
 :Semiannual-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Semiannual (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-f ;
     skos:notation "f" .
 
@@ -5421,6 +5089,7 @@
 
 :Semimonthly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Semimonthly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-s ;
     skos:notation "s" .
 
@@ -5432,6 +5101,7 @@
 
 :Semiweekly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Semiweekly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-c ;
     skos:notation "c" .
 
@@ -5465,7 +5135,7 @@
     owl:sameAs :bib-bibLevel-b ;
     skos:notation "b" .
 
-:SerialItemHolding a :TypeType ;
+:SerialItemHolding a :HoldingType ;
     :prefLabel "Serial item holdings"@en,
         "Fortlöpande (seriell eller integrerande) resurs"@sv ;
     owl:sameAs :hold-type-y ;
@@ -5491,7 +5161,8 @@
 
 :Set a :LinkedRecordReqType,
         :LinkedType ;
-    :prefLabel "Set"@en ;
+    :prefLabel "Set"@en,
+        "Set"@sv ;
     owl:sameAs :bib-linked-a,
         :bib-linkedRecordReq-a ;
     skos:notation "a" .
@@ -5510,12 +5181,10 @@
         :hold-soundKindOfMaterial-s ;
     skos:notation "s" .
 
-:ShortFormScoring a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:ShortFormScoring a :TacBrailleMusicType ;
     :prefLabel "Short form scoring"@en,
         "<Short form scoring>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-j,
-        :hold-tacBrailleMusic-j ;
+    owl:sameAs :bib-tacBrailleMusic-j ;
     skos:notation "j" .
 
 :ShortStory a :BooksLiteraryFormType ;
@@ -5527,7 +5196,8 @@
 :Shortened a :ModifiedRecordType,
         :ModifiedType ;
     :prefLabel "Shortened"@en,
-        "Förkortad"@sv ;
+        "Förkortad"@sv,
+        "Posten är förkortad av tekniska skäl"@sv ;
     owl:sameAs :auth-modified-s,
         :bib-modifiedRecord-s ;
     skos:notation "s" .
@@ -5556,12 +5226,10 @@
     owl:sameAs :bib-publicationStatus-s ;
     skos:notation "s" .
 
-:SingleLine a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:SingleLine a :TacBrailleMusicType ;
     :prefLabel "Single line"@en,
         "<Single line>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-e,
-        :hold-tacBrailleMusic-e ;
+    owl:sameAs :bib-tacBrailleMusic-e ;
     skos:notation "e" .
 
 :SingleMap a :MapsMaterialType ;
@@ -5570,7 +5238,7 @@
     owl:sameAs :bib-mapsMaterial-a ;
     skos:notation "a" .
 
-:SinglePartItemHolding a :TypeType ;
+:SinglePartItemHolding a :HoldingType ;
     :prefLabel "Single-part item holdings"@en,
         "Monografisk resurs"@sv ;
     owl:sameAs :hold-type-x ;
@@ -5595,8 +5263,7 @@
         "Skinn"@sv ;
     owl:sameAs :bib-globeMedium-f,
         :bib-mapMedium-f,
-        :bib-nonProjPrimary-f,
-        :bib-nonProjSecondary-f ;
+        :bib-nonProjPrimary-f ;
     skos:notation "f" .
 
 :Slide a :HoldingProjGraphMaterialType,
@@ -5645,19 +5312,6 @@
     owl:sameAs :bib-musicComposition-sg ;
     skos:notation "sg" .
 
-:Sound a :ComputerSoundType,
-        :ComputerTypeOfFileType,
-        :HoldingComputerSoundType,
-        :MusicTextType ;
-    :prefLabel "Resursen innehåller ljud eller avser att alstra ljud"@sv ;
-    owl:sameAs :bib-computerSound-a,
-        :bib-computerTypeOfFile-h,
-        :bib-musicText-s,
-        :hold-computerSound-a ;
-    skos:notation "a",
-        "h",
-        "s" .
-
 :SoundCartridge a :SoundMaterialType ;
     :prefLabel "Sound cartridge"@en,
         "Ljudmagasin"@sv ;
@@ -5674,9 +5328,8 @@
         :SoundMaterialType ;
     :prefLabel "Sound disc"@en,
         "Ljudskiva"@sv ;
-    owl:sameAs :bib-motionPicMedium-d,
-        :bib-soundMaterial-d,
-        :bib-videoMedium-d ;
+    owl:sameAs :bib-projGraphMedium-d,
+        :bib-soundMaterial-d ;
     skos:notation "d" .
 
 :SoundOnMedium a :ComputerFileSoundType,
@@ -5684,14 +5337,14 @@
     :prefLabel "Sound on medium"@en,
         "Ljud finns på samma bärare"@sv ;
     owl:sameAs :bib-computerFileSound-a,
-        :bib-motionPicSound-a,
+        :bib-projGraphSound-a,
         :bib-videoSound-a ;
     skos:notation "a" .
 
 :SoundSeparateFromMedium a :SoundType ;
     :prefLabel "Sound separate from medium"@en,
         "Ljud finns på separat bärare"@sv ;
-    owl:sameAs :bib-motionPicSound-b,
+    owl:sameAs :bib-projGraphSound-b,
         :bib-videoSound-b ;
     skos:notation "b" .
 
@@ -5729,19 +5382,17 @@
         :hold-remoteSensImageAltitude-c ;
     skos:notation "c" .
 
-:SpannerShortFormScoring a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:SpannerShortFormScoring a :TacBrailleMusicType ;
     :prefLabel "Spanner short form scoring"@en,
         "<Spanner short form scoring>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-i,
-        :hold-tacBrailleMusic-i ;
+    owl:sameAs :bib-tacBrailleMusic-i ;
     skos:notation "i" .
 
 :Specialized a :AudienceType ;
     :prefLabel "Specialized"@en,
         "Specialiserad"@sv ;
     owl:sameAs :bib-booksAudience-f,
-        :bib-computerAudience-f ;
+        :bib-musicAudience-f ;
     skos:notation "f" .
 
 :Speech a :BooksLiteraryFormType ;
@@ -5771,6 +5422,7 @@
 :Standard8Mm a :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "Standard 8 mm."@en,
+        "Standard 8 mm"@sv,
         "Standard 8 mm (filmbredd)"@sv ;
     owl:sameAs :bib-motionPicDimensions-a,
         :bib-projGraphDimensions-a ;
@@ -5807,9 +5459,10 @@
 :StateProvincialTerritorialDependentEtc a :GovernmentPublicationType,
         :GovtAgencyType ;
     :prefLabel "State, provincial, territorial, dependent, etc."@en,
+        "Delstat, provins, län"@sv,
         "Delstat/provins"@sv ;
     owl:sameAs :auth-govtAgency-s,
-        :bib-serialsGovtPub-s ;
+        :bib-booksGovtPub-s ;
     skos:notation "s" .
 
 :Statistics a :BooksContentsType,
@@ -5837,7 +5490,8 @@
 :Stereophonic a :MotionPicConfigurationOrVideoPlaybackType,
         :SoundPlaybackChannelType ;
     :prefLabel "Stereophonic"@en,
-        "Tvåkanalsljud (stereo)"@sv ;
+        "Tvåkanalsljud (stereo)"@sv,
+        "Tvåkanalsljud (stero)"@sv ;
     owl:sameAs :bib-motionPicConfiguration-s,
         :bib-soundPlaybackChannel-s,
         :bib-videoPlayback-s ;
@@ -5845,20 +5499,9 @@
 
 :Stills-Obsolete a :VisualMatterType ;
     :prefLabel "Stills (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-visualMatter-l ;
     skos:notation "l" .
-
-:Stone a :GlobeMediumType,
-        :MapMediumType,
-        :NonProjectedType ;
-    :prefLabel "Stone"@en,
-        "Sten"@sv ;
-    owl:sameAs :bib-globeMedium-c,
-        :bib-mapMedium-c,
-        :bib-nonProjPrimary-s,
-        :bib-nonProjSecondary-s ;
-    skos:notation "c",
-        "s" .
 
 :StudyOrExercise a :MusicCompositionType ;
     :prefLabel "Studies and exercises"@en,
@@ -5918,6 +5561,7 @@
 :Super8MmSingle8Mm a :MotionPicDimensionsType,
         :ProjGraphDimensionsType ;
     :prefLabel "Super 8 mm./single 8 mm."@en,
+        "Super-8 / Single 8 mm"@sv,
         "Super-8 / Single 8 mm (filmbredd)"@sv ;
     owl:sameAs :bib-motionPicDimensions-b,
         :bib-projGraphDimensions-b ;
@@ -5991,7 +5635,6 @@
     owl:sameAs :bib-globeMedium-e,
         :bib-mapMedium-e,
         :bib-nonProjPrimary-e,
-        :bib-nonProjSecondary-e,
         :bib-projGraphEmulsion-e,
         :bib-projGraphSecondary-e,
         :bib-projGraphSupport-e ;
@@ -5999,7 +5642,8 @@
 
 :SyntheticAndGlass a :ProjGraphSecondaryType,
         :ProjGraphSupportType ;
-    :prefLabel "Synthetic and glass"@en ;
+    :prefLabel "Synthetic and glass"@en,
+        "Syntetiskt material och glas"@sv ;
     owl:sameAs :bib-projGraphSecondary-k,
         :bib-projGraphSupport-k ;
     skos:notation "k" .
@@ -6029,14 +5673,16 @@
 
 :TapeCartridge a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Tape cartridge"@en ;
+    :prefLabel "Tape cartridge"@en,
+        "Datorbandmagasin"@sv ;
     owl:sameAs :bib-computerFileMaterial-a,
         :bib-computerMaterial-a ;
     skos:notation "a" .
 
 :TapeCassette a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Tape cassette"@en ;
+    :prefLabel "Tape cassette"@en,
+        "Datorkassett"@sv ;
     owl:sameAs :bib-computerFileMaterial-f,
         :bib-computerMaterial-f ;
     skos:notation "f" .
@@ -6049,7 +5695,8 @@
 
 :TapeReel a :ComputerFileMaterialType,
         :ComputerMaterialType ;
-    :prefLabel "Tape reel"@en ;
+    :prefLabel "Tape reel"@en,
+        "Datorbandspole"@sv ;
     owl:sameAs :bib-computerFileMaterial-h,
         :bib-computerMaterial-h ;
     skos:notation "h" .
@@ -6062,6 +5709,7 @@
 :TechnicalDrawing a :NonProjMaterialType,
         :VisualMaterialType ;
     :prefLabel "Technical drawing"@en,
+        "Ritning"@sv,
         "Teknisk ritning"@sv ;
     owl:sameAs :bib-nonProjMaterial-l,
         :bib-visualMaterial-l ;
@@ -6124,8 +5772,7 @@
         "Textil"@sv ;
     owl:sameAs :bib-globeMedium-g,
         :bib-mapMedium-g,
-        :bib-nonProjPrimary-g,
-        :bib-nonProjSecondary-g ;
+        :bib-nonProjPrimary-g ;
     skos:notation "g" .
 
 :Thai a :SerialsAlphabetType ;
@@ -6182,6 +5829,7 @@
 
 :ThreeTimesAMonth-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Three times a month (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-j ;
     skos:notation "j" .
 
@@ -6193,6 +5841,7 @@
 
 :ThreeTimesAWeek-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Three times a week (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-i ;
     skos:notation "i" .
 
@@ -6204,6 +5853,7 @@
 
 :ThreeTimesAYear-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Three times a year (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-t ;
     skos:notation "t" .
 
@@ -6259,7 +5909,9 @@
         :ProjGraphMaterialType,
         :VisualMaterialType ;
     :prefLabel "Transparency"@en,
-        "OH-bild"@sv ;
+        "OH-bild"@sv,
+        "Stordia"@sv,
+        "Transparang"@sv ;
     owl:sameAs :bib-projGraphMaterial-t,
         :bib-visualMaterial-t,
         :hold-projGraphMaterial-t ;
@@ -6295,6 +5947,7 @@
 
 :Triennial-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Triennial (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-h ;
     skos:notation "h" .
 
@@ -6362,7 +6015,8 @@
 
 :Uncompressed a :ComputerCompressionType,
         :ComputerFileCompressionType ;
-    :prefLabel "Uncompressed"@en ;
+    :prefLabel "Uncompressed"@en,
+        "Filen är ej komprimerad"@sv ;
     owl:sameAs :bib-computerCompression-a,
         :bib-computerFileCompression-a ;
     skos:notation "a" .
@@ -6417,7 +6071,7 @@
 :UnknownIfItemIsGovernmentPublication a :GovernmentPublicationType ;
     :prefLabel "Unknown if item is government publication"@en,
         "Okänt"@sv ;
-    owl:sameAs :bib-serialsGovtPub-u ;
+    owl:sameAs :bib-booksGovtPub-u ;
     skos:notation "u" .
 
 :UnmannedSpacecraft a :HoldingRemoteSensImageConstructionType,
@@ -6470,8 +6124,7 @@
     :prefLabel "Velin"@sv ;
     owl:sameAs :bib-globeMedium-n,
         :bib-mapMedium-n,
-        :bib-nonProjPrimary-n,
-        :bib-nonProjSecondary-n ;
+        :bib-nonProjPrimary-n ;
     skos:notation "n" .
 
 :Vertical a :RemoteSensImageAttitudeType ;
@@ -6480,12 +6133,10 @@
     owl:sameAs :bib-remoteSensImageAttitude-c ;
     skos:notation "c" .
 
-:VerticalScore a :HoldingTacBrailleMusicType,
-        :TacBrailleMusicType ;
+:VerticalScore a :TacBrailleMusicType ;
     :prefLabel "Vertical score"@en,
         "<Vertical score>"@sv ;
-    owl:sameAs :bib-tacBrailleMusic-l,
-        :hold-tacBrailleMusic-l ;
+    owl:sameAs :bib-tacBrailleMusic-l ;
     skos:notation "l" .
 
 :VeryHighReduction a :HoldingMicroformRangeType,
@@ -6522,16 +6173,6 @@
     owl:sameAs :bib-videoMaterial-f ;
     skos:notation "f" .
 
-:Videodisc a :MediumType,
-        :VideoMaterialType ;
-    :prefLabel "Videodisc"@en,
-        "Videoskiva"@sv ;
-    owl:sameAs :bib-motionPicMedium-i,
-        :bib-videoMaterial-d,
-        :bib-videoMedium-i ;
-    skos:notation "d",
-        "i" .
-
 :Videorecording a :VisualMaterialType ;
     :prefLabel "Videorecording"@en,
         "Videoupptagning"@sv ;
@@ -6547,8 +6188,7 @@
 :Videotape a :MediumType ;
     :prefLabel "Videotape"@en,
         "Videoband"@sv ;
-    owl:sameAs :bib-motionPicMedium-h,
-        :bib-videoMedium-h ;
+    owl:sameAs :bib-projGraphMedium-h ;
     skos:notation "h" .
 
 :View a :MapMaterialType ;
@@ -6568,8 +6208,7 @@
     :prefLabel "Vinyl"@sv ;
     owl:sameAs :bib-globeMedium-l,
         :bib-mapMedium-l,
-        :bib-nonProjPrimary-l,
-        :bib-nonProjSecondary-l ;
+        :bib-nonProjPrimary-l ;
     skos:notation "l" .
 
 :VisibleLight a :RemoteSensImageDataType ;
@@ -6609,6 +6248,7 @@
 
 :WashingtonDC-Obsolete a :MapsPrimeMeridianType ;
     :prefLabel "Washington, D.C. (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-mapsPrimeMeridian-w ;
     skos:notation "w" .
 
@@ -6642,6 +6282,7 @@
 
 :Weekly-Obsolete a :ComputerFrequencyType ;
     :prefLabel "Weekly (OBSOLETE)"@en ;
+    owl:deprecated true ;
     owl:sameAs :bib-computerFrequency-w ;
     skos:notation "w" .
 
@@ -6680,18 +6321,6 @@
         "Ljudtråd"@sv ;
     owl:sameAs :bib-soundMaterial-w ;
     skos:notation "w" .
-
-:Wood a :GlobeMediumType,
-        :MapMediumType,
-        :NonProjectedType ;
-    :prefLabel "Wood"@en,
-        "Trä"@sv ;
-    owl:sameAs :bib-globeMedium-b,
-        :bib-mapMedium-b,
-        :bib-nonProjPrimary-t,
-        :bib-nonProjSecondary-t ;
-    skos:notation "b",
-        "t" .
 
 :Workprint a :MotionPicElementsType ;
     :prefLabel "Workprint"@en,
@@ -6743,6 +6372,280 @@
         "Målgrupp"@sv ;
     schema:domainIncludes v:Visual ;
     schema:rangeIncludes :AudienceType .
+
+:auth-catalogingRules-c a :CatalogingRulesType ;
+    :prefLabel "AACR 2"@en,
+        "AACR 2/KRS"@sv ;
+    skos:broader :Aacr2 ;
+    skos:notation "c" .
+
+:auth-subjectSubdivision-b a :SubjectSubdivisionType ;
+    :prefLabel "Form"@en,
+        "Formell (formämnesord)"@sv ;
+    skos:broader :Form ;
+    skos:notation "b" .
+
+:auth-typeOfSeries-a a :TypeOfSeriesType ;
+    :prefLabel "Monographic series"@en,
+        "Monografiserie"@sv ;
+    skos:broader :MonographicSeries ;
+    skos:notation "a" .
+
+:bib-computerFileFileFormats-m a :ComputerFileFileFormatsType ;
+    :prefLabel "Multiple"@en ;
+    skos:broader :Multiple ;
+    skos:notation "m" .
+
+:bib-computerSound-a a :ComputerSoundType ;
+    :prefLabel "Resursen innehåller ljud eller avser att alstra ljud"@sv ;
+    skos:broader :Sound ;
+    skos:notation "a" .
+
+:bib-computerTypeOfFile-g a :ComputerTypeOfFileType ;
+    :prefLabel "Game"@en,
+        "Dataspel"@sv ;
+    skos:broader :Game ;
+    skos:notation "g" .
+
+:bib-computerTypeOfFile-h a :ComputerTypeOfFileType ;
+    :prefLabel "Sound"@en,
+        "Ljuddokument (används ej)"@sv ;
+    skos:broader :Sound ;
+    skos:notation "h" .
+
+:bib-mapMaterial-d a :MapMaterialType ;
+    :prefLabel "Atlas"@en,
+        "Atlas"@sv ;
+    skos:broader :Atlas ;
+    skos:notation "d" .
+
+:bib-mapReproduction-f a :ReproductionType ;
+    :prefLabel "Facsimile"@en,
+        "Faksimil"@sv ;
+    skos:broader :Facsimile ;
+    skos:notation "f" .
+
+:bib-mapsFormat-k a :MapsFormatType ;
+    :prefLabel "Calendar"@en,
+        "Kalender"@sv ;
+    skos:broader :Calendar ;
+    skos:notation "k" .
+
+:bib-microformMaterial-e a :MicroformMaterialType ;
+    :prefLabel "Microfiche"@en,
+        "Microfiche"@sv ;
+    skos:broader :Microfiche ;
+    skos:notation "e" .
+
+:bib-microformMaterial-g a :MicroformMaterialType ;
+    :prefLabel "Microopaque"@en,
+        "Mikrokort"@sv ;
+    skos:broader :Microopaque ;
+    skos:notation "g" .
+
+:bib-motionPicCategories-v a :MotionPicCategoriesType ;
+    :prefLabel "Hand colored"@en,
+        "Handkolorerad"@sv ;
+    skos:broader :HandColored ;
+    skos:notation "v" .
+
+:bib-motionPicConfiguration-k a :MotionPicConfigurationOrVideoPlaybackType ;
+    :prefLabel "Mixed"@en,
+        "Blandad ljudkonfiguration"@sv ;
+    skos:broader :Mixed ;
+    skos:notation "k" .
+
+:bib-musicMatter-a a :MusicMatterType ;
+    :prefLabel "Discography"@en,
+        "Diskografi"@sv ;
+    skos:broader :Discography ;
+    skos:notation "a" .
+
+:bib-musicMatter-s a :MusicMatterType ;
+    :prefLabel "Music"@en,
+        "Musikillustration"@sv ;
+    skos:broader :Music ;
+    skos:notation "s" .
+
+:bib-nonProjMaterial-n a :NonProjMaterialType ;
+    :prefLabel "Chart"@en,
+        "Tabell-/diagramark eller blädderblock"@sv ;
+    skos:broader :Chart ;
+    skos:notation "n" .
+
+:bib-nonProjMaterial-v a :NonProjMaterialType ;
+    :prefLabel "Fotografi (ospecificerad typ)"@sv ;
+    skos:broader :Photograph ;
+    skos:notation "v" .
+
+:bib-nonProjPrimary-d a :NonProjectedType ;
+    :prefLabel "Glass"@en,
+        "Glas"@sv ;
+    skos:broader :Glass ;
+    skos:notation "d" .
+
+:bib-nonProjPrimary-h a :NonProjectedType ;
+    :prefLabel "Metal"@en,
+        "Metall"@sv ;
+    skos:broader :Metal ;
+    skos:notation "h" .
+
+:bib-nonProjPrimary-o a :NonProjectedType ;
+    :prefLabel "Paper"@en,
+        "Papper"@sv ;
+    skos:broader :Paper ;
+    skos:notation "o" .
+
+:bib-nonProjPrimary-s a :NonProjectedType ;
+    :prefLabel "Stone"@en,
+        "Sten"@sv ;
+    skos:broader :Stone ;
+    skos:notation "s" .
+
+:bib-nonProjPrimary-t a :NonProjectedType ;
+    :prefLabel "Wood"@en,
+        "Trä"@sv ;
+    skos:broader :Wood ;
+    skos:notation "t" .
+
+:bib-projGraphEmulsion-d a :ProjGraphEmulsionType ;
+    :prefLabel "Glass"@en,
+        "Glas"@sv ;
+    skos:broader :Glass ;
+    skos:notation "d" .
+
+:bib-projGraphEmulsion-o a :ProjGraphEmulsionType ;
+    :prefLabel "Paper"@en,
+        "Papper"@sv ;
+    skos:broader :Paper ;
+    skos:notation "o" .
+
+:bib-projGraphSecondary-d a :ProjGraphSecondaryType ;
+    :prefLabel "Glass"@en ;
+    skos:broader :Glass ;
+    skos:notation "d" .
+
+:bib-projGraphSecondary-h a :ProjGraphSecondaryType ;
+    :prefLabel "Metal"@en ;
+    skos:broader :Metal ;
+    skos:notation "h" .
+
+:bib-projGraphSupport-c a :ProjGraphSupportType ;
+    :prefLabel "Papp"@sv ;
+    skos:broader :Paper ;
+    skos:notation "c" .
+
+:bib-projGraphSupport-d a :ProjGraphSupportType ;
+    :prefLabel "Glas"@sv ;
+    skos:broader :Glass ;
+    skos:notation "d" .
+
+:bib-projGraphSupport-h a :ProjGraphSupportType ;
+    :prefLabel "Metall"@sv ;
+    skos:broader :Metal ;
+    skos:notation "h" .
+
+:bib-remoteSensImageData-dv a :RemoteSensImageDataType ;
+    :prefLabel "Combinations"@en,
+        "Combinations"@sv ;
+    skos:broader :Combination ;
+    skos:notation "dv" .
+
+:bib-serialsContents-h a :SerialsContentsType ;
+    :prefLabel "Biography"@en,
+        "Biografi"@sv ;
+    skos:broader :Biography ;
+    skos:notation "h" .
+
+:bib-serialsNature-h a :SerialsNatureType ;
+    :prefLabel "Biography"@en,
+        "Biografi"@sv ;
+    skos:broader :Biography ;
+    skos:notation "h" .
+
+:bib-soundKindOfMaterial-l a :SoundKindOfMaterialType ;
+    :prefLabel "Metal"@en,
+        "Metall"@sv ;
+    skos:broader :Metal ;
+    skos:notation "l" .
+
+:bib-soundKindOfMaterial-p a :SoundKindOfMaterialType ;
+    :prefLabel "Plastic"@en,
+        "Plast (hit vinylskivor)"@sv ;
+    skos:broader :Plastic ;
+    skos:notation "p" .
+
+:bib-soundTapeWidth-o a :SoundTapeWidthType ;
+    :prefLabel "1/2 in."@en,
+        "1/2 tum"@sv ;
+    skos:broader <http://id.kb.se/marc/12In> ;
+    skos:notation "o" .
+
+:bib-tacMaterial-b a :TacMaterialType ;
+    :prefLabel "Braille"@en,
+        "Punktskrift"@sv ;
+    skos:broader :Braille ;
+    skos:notation "b" .
+
+:bib-tacMaterial-c a :TacMaterialType ;
+    :prefLabel "Combination"@en,
+        "Kombination av flera system"@sv ;
+    skos:broader :Combination ;
+    skos:notation "c" .
+
+:bib-textMaterial-b a :TextMaterialType ;
+    :prefLabel "Large print"@en,
+        "Stor stil"@sv ;
+    skos:broader :LargePrint ;
+    skos:notation "b" .
+
+:bib-textMaterial-c a :TextMaterialType ;
+    :prefLabel "Braille"@en,
+        "Punktskrift"@sv ;
+    skos:broader :Braille ;
+    skos:notation "c" .
+
+:bib-videoDimensions-o a :VideoDimensionsType ;
+    :prefLabel "1/2 in."@en,
+        "1/2 tum"@sv ;
+    skos:broader <http://id.kb.se/marc/12In> ;
+    skos:notation "o" .
+
+:bib-videoFormat-p a :VideoFormatType ;
+    :prefLabel "8 mm."@en,
+        "8 mm"@sv ;
+    skos:broader <http://id.kb.se/marc/8Mm> ;
+    skos:notation "p" .
+
+:bib-videoMaterial-d a :VideoMaterialType ;
+    :prefLabel "Videodisc"@en,
+        "Videoskiva"@sv ;
+    skos:broader :Videodisc ;
+    skos:notation "d" .
+
+:bib-videoPlayback-k a :MotionPicConfigurationOrVideoPlaybackType ;
+    :prefLabel "Mixed"@en,
+        "Blandad ljudkonfiguration"@sv ;
+    skos:broader :Mixed ;
+    skos:notation "k" .
+
+:bib-visualMaterial-b a :VisualMaterialType ;
+    :prefLabel "Kit"@en,
+        "Paket"@sv ;
+    skos:broader :Kit ;
+    skos:notation "b" .
+
+:bib-visualMaterial-g a :VisualMaterialType ;
+    :prefLabel "Game"@en,
+        "Spel"@sv ;
+    skos:broader :Game ;
+    skos:notation "g" .
+
+:bib-visualMaterial-n a :VisualMaterialType ;
+    :prefLabel "Chart"@en,
+        "Graf eller diagram"@sv ;
+    skos:broader :Chart ;
+    skos:notation "n" .
 
 :bibLevel a owl:ObjectProperty ;
     :prefLabel "Bibliographic Level"@en,
@@ -6872,10 +6775,63 @@
     schema:rangeIncludes :Boolean,
         :HeadingType .
 
+:hold-completeness-1 a :CompletenessType ;
+    :prefLabel "Complete"@en,
+        "Fullständig"@sv ;
+    skos:broader :Complete ;
+    skos:notation "1" .
+
+:hold-completeness-2 a :CompletenessType ;
+    :prefLabel "Incomplete"@en,
+        "Ofullständig"@sv ;
+    skos:broader :Incomplete ;
+    skos:notation "2" .
+
+:hold-computerSound-a a :HoldingComputerSoundType ;
+    :prefLabel "Resursen innehåller ljud eller avser att alstra ljud"@sv ;
+    skos:broader :Sound ;
+    skos:notation "a" .
+
+:hold-globeReproduction-f a :ReproductionType ;
+    :prefLabel "Facsimile"@en,
+        "Faksimil"@sv ;
+    skos:broader :Facsimile ;
+    skos:notation "f" .
+
+:hold-mapReproduction-f a :HoldingReproductionType ;
+    :prefLabel "Facsimile"@en,
+        "Faksimil"@sv ;
+    skos:broader :Facsimile ;
+    skos:notation "f" .
+
+:hold-soundKindOfMaterial-l a :HoldingSoundKindOfMaterialType ;
+    :prefLabel "Metal"@en,
+        "Metall"@sv ;
+    skos:broader :Metal ;
+    skos:notation "l" .
+
+:hold-soundKindOfMaterial-p a :HoldingSoundKindOfMaterialType ;
+    :prefLabel "Plastic"@en,
+        "Plast (hit vinylskivor)"@sv ;
+    skos:broader :Plastic ;
+    skos:notation "p" .
+
+:hold-soundTapeWidth-o a :HoldingSoundTapeWidthType ;
+    :prefLabel "1/2 in."@en,
+        "1/2 tum"@sv ;
+    skos:broader <http://id.kb.se/marc/12In> ;
+    skos:notation "o" .
+
+:hold-videoFormat-p a :HoldingVideoFormatType ;
+    :prefLabel "8 mm."@en,
+        "8 mm"@sv ;
+    skos:broader <http://id.kb.se/marc/8Mm> ;
+    skos:notation "p" .
+
 :holdingType a owl:ObjectProperty ;
     :prefLabel "Type of Record"@en,
         "Posttyp"@sv ;
-    schema:rangeIncludes :TypeType .
+    schema:rangeIncludes :HoldingType .
 
 :iSSN a owl:ObjectProperty ;
     :prefLabel "ISSN Center (OBSOLETE)"@en,
@@ -6898,7 +6854,8 @@
 
 :itemInfoInRecord a owl:ObjectProperty ;
     :prefLabel "Exemplarinformation"@sv ;
-    schema:rangeIncludes :ItemInfoInRecordType .
+    schema:rangeIncludes :Boolean,
+        :ItemInfoInRecordType .
 
 :kindOfRecord a owl:ObjectProperty ;
     :prefLabel "Kind of Record"@en,
@@ -6976,7 +6933,8 @@
 
 :numberUnits a owl:ObjectProperty ;
     :prefLabel "Specific Retention Policy - Number of Units"@en ;
-    schema:rangeIncludes :NumberUnitsType .
+    schema:rangeIncludes :Number,
+        :NumberUnitsType .
 
 :numberedSeries a owl:ObjectProperty ;
     :prefLabel "Numbered or Unnumbered Series"@en,
@@ -7057,7 +7015,7 @@
 :soundAspect a owl:ObjectProperty ;
     :prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en ;
     schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :MotionPicAspectType .
+    schema:rangeIncludes :MapAspectType .
 
 :soundCapture a owl:ObjectProperty ;
     :prefLabel "Capture & Storage Techniques"@en,
@@ -7134,8 +7092,7 @@
 :typeOfControl a owl:ObjectProperty ;
     :prefLabel "Type of Control"@en,
         "Kontrollkod för arkivmaterial"@sv ;
-    schema:rangeIncludes :Boolean,
-        :TypeOfControlType .
+    schema:rangeIncludes :TypeOfControlType .
 
 :typeOfEntry a owl:ObjectProperty ;
     :prefLabel "Entry Convention"@en,
@@ -7200,6 +7157,31 @@
     owl:sameAs <http://id.kb.se/marc/bib-computerImageBitDepth-001~999> ;
     skos:notation "001~999" .
 
+:Aacr2 a :CatFormType ;
+    :prefLabel "AACR 2"@en,
+        "AACR2/KRS (normalvärde)"@sv ;
+    owl:sameAs :bib-catForm-a ;
+    skos:notation "a" .
+
+:Atlas a :MapsMaterialType ;
+    :prefLabel "Atlas"@en,
+        "Atlas / Kartbok"@sv ;
+    owl:sameAs :bib-mapsMaterial-e ;
+    skos:notation "e" .
+
+:Calendar a :BooksContentsType,
+        :SerialsContentsType ;
+    :prefLabel "Kalender"@sv ;
+    owl:sameAs :bib-booksContents-5,
+        :bib-serialsContents-5 ;
+    skos:notation "5" .
+
+:Complete a :MotionPicCompletenessType ;
+    :prefLabel "Complete"@en,
+        "Katalogiserat exemplar är komplett"@sv ;
+    owl:sameAs :bib-motionPicCompleteness-c ;
+    skos:notation "c" .
+
 :ComputerFileSoundType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "bib-computerFileSound" .
@@ -7210,6 +7192,31 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Electronic ;
     skos:notation "bib-computerSound" .
+
+:Discography a :BooksContentsType,
+        :SerialsContentsType,
+        :SerialsNatureType ;
+    :prefLabel "Discographies"@en,
+        "Diskografi"@sv ;
+    owl:sameAs :bib-booksContents-k,
+        :bib-serialsContents-k,
+        :bib-serialsNature-k ;
+    skos:notation "k" .
+
+:Form a :BooksIllustrationsType ;
+    :prefLabel "Forms"@en,
+        "Blanketter"@sv ;
+    owl:sameAs :bib-booksIllustrations-k ;
+    skos:notation "k" .
+
+:HandColored a :ColorType,
+        :MotionPicColorType ;
+    :prefLabel "Hand colored"@en,
+        "Handkolorerad"@sv ;
+    owl:sameAs :bib-motionPicColor-h,
+        :bib-nonProjColor-h,
+        :bib-projGraphColor-h ;
+    skos:notation "h" .
 
 :HoldingComputerSoundType a :CollectionClass ;
     :prefLabel "Sound on Medium"@en,
@@ -7225,6 +7232,116 @@
     skos:broadMatch v:Map ;
     skos:notation "hold-mapReproduction" .
 
+:Incomplete a :MotionPicCompletenessType ;
+    :prefLabel "Incomplete"@en,
+        "Katalogiserat exemplar är ej komplett"@sv ;
+    owl:sameAs :bib-motionPicCompleteness-i ;
+    skos:notation "i" .
+
+:Kit a :TypeOfRecordType ;
+    :prefLabel "Kit"@en,
+        "Paket"@sv ;
+    owl:sameAs :bib-typeOfRecord-o ;
+    skos:notation "o" .
+
+:LargePrint a :BooksItemType,
+        :ItemType,
+        :SerialsOriginalItemType ;
+    :prefLabel "Large print"@en,
+        "Storstilspublikation"@sv ;
+    owl:sameAs :bib-booksItem-d,
+        :bib-musicItem-d,
+        :bib-serialsOriginalItem-d ;
+    skos:notation "d" .
+
+:Microfiche a :BooksItemType,
+        :ItemType,
+        :SerialsOriginalItemType ;
+    :prefLabel "Microfiche"@en,
+        "Mikrofiche"@sv ;
+    owl:sameAs :bib-booksItem-b,
+        :bib-musicItem-b,
+        :bib-serialsOriginalItem-b ;
+    skos:notation "b" .
+
+:Microopaque a :BooksItemType,
+        :ItemType,
+        :SerialsOriginalItemType ;
+    :prefLabel "Microopaque"@en,
+        "Microkort"@sv,
+        "Mikrokort"@sv ;
+    owl:sameAs :bib-booksItem-c,
+        :bib-musicItem-c,
+        :bib-serialsOriginalItem-c ;
+    skos:notation "c" .
+
+:MonographicSeries a :SerialsTypeOfSerialType ;
+    :prefLabel "Monographic series"@en,
+        "Monografiserie"@sv ;
+    owl:sameAs :bib-serialsTypeOfSerial-m ;
+    skos:notation "m" .
+
+:Multiple a :ComputerFileImageBitDepthType ;
+    :prefLabel "Multiple"@en ;
+    owl:sameAs :bib-computerFileImageBitDepth-mmm ;
+    skos:notation "mmm" .
+
+:Music a :BooksIllustrationsType ;
+    :prefLabel "Music"@en,
+        "Musiknoter (exempel)"@sv ;
+    owl:sameAs :bib-booksIllustrations-g ;
+    skos:notation "g" .
+
+:NotatedMusicMaterialType a :CollectionClass ;
+    :prefLabel "Specific Material Designation"@en,
+        "Särskild bärarbeteckning"@sv ;
+    rdfs:subClassOf :EnumeratedTerm ;
+    skos:broadMatch v:NotatedMusic ;
+    skos:notation "hold-notatedMusicMaterial" .
+
+:Photograph a :BooksIllustrationsType ;
+    :prefLabel "Photographs"@en,
+        "Fotografier"@sv ;
+    owl:sameAs :bib-booksIllustrations-o ;
+    skos:notation "o" .
+
+:Stone a :GlobeMediumType,
+        :MapMediumType ;
+    :prefLabel "Stone"@en,
+        "Sten"@sv ;
+    owl:sameAs :bib-globeMedium-c,
+        :bib-mapMedium-c ;
+    skos:notation "c" .
+
+:Videodisc a :MediumType ;
+    :prefLabel "Videodisc"@en,
+        "Videoskiva"@sv ;
+    owl:sameAs :bib-projGraphMedium-i ;
+    skos:notation "i" .
+
+:Wood a :GlobeMediumType,
+        :MapMediumType ;
+    :prefLabel "Wood"@en,
+        "Trä"@sv ;
+    owl:sameAs :bib-globeMedium-b,
+        :bib-mapMedium-b ;
+    skos:notation "b" .
+
+<http://id.kb.se/marc/8Mm> a :MicroformDimensionsType,
+        :VideoDimensionsType ;
+    :prefLabel "8 mm."@en,
+        "8 mm"@sv,
+        "8 mm (filmbredd)"@sv ;
+    owl:sameAs :bib-microformDimensions-a,
+        :bib-videoDimensions-a ;
+    skos:notation "a" .
+
+:Biography a :MusicTextType ;
+    :prefLabel "Biography"@en,
+        "Biografisk text"@sv ;
+    owl:sameAs :bib-musicText-b ;
+    skos:notation "b" .
+
 :BooksFestschriftType a :CollectionClass ;
     :prefLabel "Festschrift"@en,
         "Festskrift"@sv ;
@@ -7232,6 +7349,31 @@
         :EnumeratedTerm ;
     skos:broadMatch v:Text ;
     skos:notation "bib-booksFestschrift" .
+
+:Braille a :BooksItemType,
+        :ItemType,
+        :SerialsOriginalItemType ;
+    :prefLabel "Braille"@en,
+        "Taktil utgåva"@sv ;
+    owl:sameAs :bib-booksItem-f,
+        :bib-musicItem-f,
+        :bib-serialsOriginalItem-f ;
+    skos:notation "f" .
+
+:Chart a :BooksIllustrationsType ;
+    :prefLabel "Charts"@en,
+        "Grafiska diagram"@sv ;
+    owl:sameAs :bib-booksIllustrations-d ;
+    skos:notation "d" .
+
+:Combination a :ComputerTypeOfFileType,
+        :TacContractionType ;
+    :prefLabel "Combination"@en,
+        "Kombination"@sv,
+        "Mer än en typ av resurs"@sv ;
+    owl:sameAs :bib-computerTypeOfFile-m,
+        :bib-tacContraction-m ;
+    skos:notation "m" .
 
 :ComputerFileFileFormatsType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -7264,14 +7406,39 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "bib-entryMap" .
 
-:GlobeColorType a :CollectionClass ;
+:Game a :MapsFormatType ;
+    :prefLabel "Game"@en,
+        "Sällskapsspel"@sv ;
+    owl:sameAs :bib-mapsFormat-n ;
+    skos:notation "n" .
+
+:MapColorType a :CollectionClass ;
     :prefLabel "Color"@en,
         "Färg"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
-    owl:sameAs :MapColorType ;
+    owl:sameAs :GlobeColorType ;
     skos:broadMatch v:Globe,
         v:Map ;
-    skos:notation "bib-globeColor" .
+    skos:notation "bib-mapColor" .
+
+:Mixed a :ColorType,
+        :ComputerFileAntecedentType,
+        :ComputerFileColorType,
+        :ComputerFileCompressionType,
+        :MicroformColorType,
+        :MotionPicColorType,
+        :VideoColorType ;
+    :prefLabel "Mixed"@en,
+        "Blandad färgstatus"@sv ;
+    owl:sameAs :bib-computerFileAntecedent-m,
+        :bib-computerFileColor-m,
+        :bib-computerFileCompression-m,
+        :bib-microformColor-m,
+        :bib-motionPicColor-m,
+        :bib-nonProjColor-m,
+        :bib-projGraphColor-m,
+        :bib-videoColor-m ;
+    skos:notation "m" .
 
 :MotionPicPosNegType a :CollectionClass ;
     :prefLabel "Positive/Negative Aspect"@en,
@@ -7279,6 +7446,15 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:MovingImage ;
     skos:notation "bib-motionPicPosNeg" .
+
+:Plastic a :GlobeMediumType,
+        :MapMediumType,
+        :NonProjectedType ;
+    :prefLabel "Plast"@sv ;
+    owl:sameAs :bib-globeMedium-i,
+        :bib-mapMedium-i,
+        :bib-nonProjPrimary-i ;
+    skos:notation "i" .
 
 :RemoteSensImageSensorType a :CollectionClass ;
     :prefLabel "Sensor Type"@en,
@@ -7304,9 +7480,16 @@
 :TypeOfControlType a :CollectionClass ;
     :prefLabel "Type of Control"@en,
         "Kontrollkod för arkivmaterial"@sv ;
-    rdfs:subClassOf :Boolean,
-        :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "bib-typeOfControl" .
+
+<http://id.kb.se/marc/12In> a :ComputerFileDimensionsType,
+        :SoundDimensionsType ;
+    :prefLabel "12 in."@en,
+        "12 tum (diameter)"@sv ;
+    owl:sameAs :bib-computerFileDimensions-e,
+        :bib-soundDimensions-e ;
+    skos:notation "e" .
 
 :AuthorityCharacterCodingType a :CollectionClass ;
     :prefLabel "Teckenuppsättning"@sv ;
@@ -7369,6 +7552,7 @@
 
 :ConferencePublicationType a :CollectionClass ;
     :prefLabel "Conf. Publication"@en,
+        "Conf. Publications"@en,
         "Konferenspublikation"@sv ;
     rdfs:subClassOf :Boolean,
         :EnumeratedTerm ;
@@ -7376,13 +7560,19 @@
         :SerialsConfPubType ;
     skos:broadMatch v:Serial,
         v:Text ;
-    skos:notation "bib-serialsConfPub" .
+    skos:notation "bib-booksConfPub" .
 
 :CopyReportType a :CollectionClass ;
     :prefLabel "Copy Report"@en,
         "Underlag för beståndsuppgift"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "hold-copyReport" .
+
+:Facsimile a :BooksIllustrationsType ;
+    :prefLabel "Facsimiles"@en,
+        "Faksimil"@sv ;
+    owl:sameAs :bib-booksIllustrations-h ;
+    skos:notation "h" .
 
 :HoldingCharacterCodingType a :CollectionClass ;
     :prefLabel "Teckenuppsättning"@sv ;
@@ -7410,7 +7600,8 @@
 
 :ItemInfoInRecordType a :CollectionClass ;
     :prefLabel "Exemplarinformation"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :Boolean,
+        :EnumeratedTerm ;
     skos:notation "hold-itemInfoInRecord" .
 
 :MicroformColorType a :CollectionClass ;
@@ -7435,6 +7626,7 @@
 
 :MusicPartsType a :CollectionClass ;
     :prefLabel "Music Parts"@en,
+        "Music parts"@en,
         "Delar/Stämmor"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Audio ;
@@ -7446,6 +7638,14 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Audio ;
     skos:notation "bib-musicTransposition" .
+
+:Paper a :GlobeMediumType,
+        :MapMediumType ;
+    :prefLabel "Paper"@en,
+        "Papper, papp"@sv ;
+    owl:sameAs :bib-globeMedium-a,
+        :bib-mapMedium-a ;
+    skos:notation "a" .
 
 :PersonalNameType a :CollectionClass ;
     :prefLabel "Undifferentiated Personal Name"@en,
@@ -7461,7 +7661,7 @@
         :MicroformPosNegType ;
     skos:broadMatch v:Map,
         v:Microform ;
-    skos:notation "bib-mapPosNeg" .
+    skos:notation "bib-microformPosNeg" .
 
 :PolicyTypeType a :CollectionClass ;
     :prefLabel "Specific Retention Policy - Policy Type"@en,
@@ -7495,6 +7695,12 @@
     skos:broadMatch v:RemoteSensingImage ;
     skos:notation "bib-remoteSensImageAttitude" .
 
+:Sound a :MusicTextType ;
+    :prefLabel "Sounds"@en,
+        "Resursen inbegriper ljud"@sv ;
+    owl:sameAs :bib-musicText-s ;
+    skos:notation "s" .
+
 :SoundKindOfCuttingType a :CollectionClass ;
     :prefLabel "Kind of Cutting"@en,
         "Spårskärning"@sv ;
@@ -7519,7 +7725,7 @@
     skos:broadMatch v:MovingImage,
         v:ProjectedImage,
         v:VideoRecording ;
-    skos:notation "bib-motionPicSound" .
+    skos:notation "bib-videoSound" .
 
 :SubdivisionType a :CollectionClass ;
     :prefLabel "Subdivision"@en,
@@ -7570,6 +7776,12 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "bib-computerFileCompression" .
 
+:Glass a :MapMediumType ;
+    :prefLabel "Glass"@en,
+        "Glas"@sv ;
+    owl:sameAs :bib-mapMedium-j ;
+    skos:notation "j" .
+
 :GlobeMaterialType a :CollectionClass ;
     :prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning"@sv ;
@@ -7597,6 +7809,12 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "hold-status" .
 
+:HoldingType a :CollectionClass ;
+    :prefLabel "Type of Record"@en,
+        "Posttyp"@sv ;
+    rdfs:subClassOf :EnumeratedTerm ;
+    skos:notation "hold-type" .
+
 :LanguageOfCatalogType a :CollectionClass ;
     :prefLabel "Language of Catalog"@en,
         "Katalogiseringsspråk(endast engelska/franska)"@sv ;
@@ -7606,6 +7824,26 @@
 :LinkedRecordReqType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "bib-linkedRecordReq" .
+
+:MapAspectType a :CollectionClass ;
+    :prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en ;
+    rdfs:subClassOf :EnumeratedTerm ;
+    owl:sameAs :ComputerFileAspectType,
+        :GlobeAspectType,
+        :MicroformAspectType,
+        :MotionPicAspectType,
+        :NonProjAspectType,
+        :ProjGraphAspectType,
+        :SoundAspectType ;
+    skos:broadMatch v:Electronic,
+        v:Globe,
+        v:Map,
+        v:Microform,
+        v:MovingImage,
+        v:ProjectedImage,
+        v:SoundRecording,
+        v:StillImage ;
+    skos:notation "bib-mapAspect" .
 
 :MapDetailsType a :CollectionClass ;
     :prefLabel "Production/Reproduction Detail"@en,
@@ -7627,26 +7865,6 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Microform ;
     skos:notation "bib-microformGeneration" .
-
-:MotionPicAspectType a :CollectionClass ;
-    :prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    owl:sameAs :ComputerFileAspectType,
-        :GlobeAspectType,
-        :MapAspectType,
-        :MicroformAspectType,
-        :NonProjAspectType,
-        :ProjGraphAspectType,
-        :SoundAspectType ;
-    skos:broadMatch v:Electronic,
-        v:Globe,
-        v:Map,
-        v:Microform,
-        v:MovingImage,
-        v:ProjectedImage,
-        v:SoundRecording,
-        v:StillImage ;
-    skos:notation "bib-motionPicAspect" .
 
 :MotionPicColorType a :CollectionClass ;
     :prefLabel "Color"@en,
@@ -7681,16 +7899,6 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:RemoteSensingImage ;
     skos:notation "bib-remoteSensImageUse" .
-
-:ReproductionType a :CollectionClass ;
-    :prefLabel "Reproduction Policy"@en,
-        "Reproduktionspolicy"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    owl:sameAs :GlobeReproductionType,
-        :MapReproductionType ;
-    skos:broadMatch v:Globe,
-        v:Map ;
-    skos:notation "hold-reproduction" .
 
 :SerialsRegularityType a :CollectionClass ;
     :prefLabel "Regularity"@en,
@@ -7738,12 +7946,6 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "auth-typeOfSeries" .
 
-:TypeType a :CollectionClass ;
-    :prefLabel "Type of Record"@en,
-        "Posttyp"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "hold-type" .
-
 :VisualRunningTimeType a :CollectionClass ;
     :prefLabel "Running Time"@en,
         "Speltid"@sv ;
@@ -7765,7 +7967,7 @@
         :ProjGraphColorType ;
     skos:broadMatch v:ProjectedImage,
         v:StillImage ;
-    skos:notation "bib-projGraphColor" .
+    skos:notation "bib-nonProjColor" .
 
 :ComputerAntecedentType a :CollectionClass ;
     :prefLabel "Antecedent/Source"@en,
@@ -7790,7 +7992,9 @@
     skos:notation "bib-computerFileColor" .
 
 :HeadingType a :CollectionClass ;
-    :prefLabel "Heading Use - Subject Added Entry"@en,
+    :prefLabel "Heading Use - Main or Added Entry"@en,
+        "Heading Use - Series Added Entry"@en,
+        "Heading Use - Subject Added Entry"@en,
         "Användningsområdeseriesökelement"@sv ;
     rdfs:subClassOf :Boolean,
         :EnumeratedTerm ;
@@ -7822,6 +8026,14 @@
     skos:broadMatch v:Cartography ;
     skos:notation "bib-mapsPrimeMeridian" .
 
+:Metal a :GlobeMediumType,
+        :MapMediumType ;
+    :prefLabel "Metal"@en,
+        "Metall"@sv ;
+    owl:sameAs :bib-globeMedium-d,
+        :bib-mapMedium-d ;
+    skos:notation "d" .
+
 :MotionPicColorStockType a :CollectionClass ;
     :prefLabel "Color Stock or Print"@en,
         "Färgteknik (brukskopia)"@sv ;
@@ -7829,15 +8041,17 @@
     skos:broadMatch v:MovingImage ;
     skos:notation "bib-motionPicColorStock" .
 
-:MotionPicConfigurationOrVideoPlaybackType a :CollectionClass ;
-    :prefLabel "Playback Channels"@en,
-        "Ljudkonfigurtion"@sv ;
+:ReproductionType a :CollectionClass ;
+    :prefLabel "Reproduction Policy"@en,
+        "Type of Reproduction"@en,
+        "Reproduktionspolicy"@sv,
+        "Typ av reproduktion"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
-    owl:sameAs :MotionPicConfigurationType,
-        :VideoPlaybackType ;
-    skos:broadMatch v:MovingImage,
-        v:VideoRecording ;
-    skos:notation "bib-videoPlayback" .
+    owl:sameAs :GlobeReproductionType,
+        :MapReproductionType ;
+    skos:broadMatch v:Globe,
+        v:Map ;
+    skos:notation "hold-reproduction" .
 
 :SoundCaptureType a :CollectionClass ;
     :prefLabel "Capture & Storage Techniques"@en,
@@ -7881,13 +8095,6 @@
     skos:broadMatch v:ProjectedImage ;
     skos:notation "hold-projGraphMaterial" .
 
-:HoldingTacBrailleWritingType a :CollectionClass ;
-    :prefLabel "Braille Writing 2"@en,
-        "Typ av punktskrift 2"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch v:TactileMaterial ;
-    skos:notation "hold-tacBrailleWriting" .
-
 :MicroformRangeType a :CollectionClass ;
     :prefLabel "Reduction Ratio Range"@en,
         "Förminskningsgrad (kodad)"@sv ;
@@ -7907,6 +8114,18 @@
         v:Text,
         v:Visual ;
     skos:notation "bib-modifiedRecord" .
+
+:MotionPicConfigurationOrVideoPlaybackType a :CollectionClass ;
+    :prefLabel "Configuration"@en,
+        "Playback Channels"@en,
+        "Ljudkonfiguration"@sv,
+        "Ljudkonfigurtion"@sv ;
+    rdfs:subClassOf :EnumeratedTerm ;
+    owl:sameAs :MotionPicConfigurationType,
+        :VideoPlaybackType ;
+    skos:broadMatch v:MovingImage,
+        v:VideoRecording ;
+    skos:notation "bib-videoPlayback" .
 
 :MotionPicFormatType a :CollectionClass ;
     :prefLabel "Presentation Format"@en,
@@ -7962,7 +8181,9 @@
     skos:notation "auth-subjectSubdivision" .
 
 :TacBrailleWritingType a :CollectionClass ;
-    :prefLabel "Braille Writing 2"@en,
+    :prefLabel "Braille Writing 1"@en,
+        "Braille Writing 2"@en,
+        "Typ av punktskrift 1"@sv,
         "Typ av punktskrift 2"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:TactileMaterial ;
@@ -7981,6 +8202,7 @@
 
 :MapsMaterialType a :CollectionClass ;
     :prefLabel "Material"@en,
+        "Type of Cartographic Material"@en,
         "Typ"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Cartography ;
@@ -8067,7 +8289,11 @@
     skos:notation "bib-mapMaterial" .
 
 :MapsFormatType a :CollectionClass ;
-    :prefLabel "Special Format Characteristics 2"@en,
+    :prefLabel "Special Format Characteristics 1"@en,
+        "Special Format Characteristics 2"@en,
+        "Special Format Characters 1"@en,
+        "Special Format Characters 2"@en,
+        "Särskilda formella egenskaper 1"@sv,
         "Särskilda formella egenskaper 2"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Cartography ;
@@ -8087,13 +8313,18 @@
     skos:notation "bib-soundMaterial" .
 
 :VisualMatterType a :CollectionClass ;
-    :prefLabel "Accompanying Matter 5 (OBSOLETE)"@en ;
+    :prefLabel "Accompanying Matter 1 (OBSOLETE)"@en,
+        "Accompanying Matter 2 (OBSOLETE)"@en,
+        "Accompanying Matter 3 (OBSOLETE)"@en,
+        "Accompanying Matter 4 (OBSOLETE)"@en,
+        "Accompanying Matter 5 (OBSOLETE)"@en ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Visual ;
     skos:notation "bib-visualMatter" .
 
 :AudienceType a :CollectionClass ;
     :prefLabel "Audience"@en,
+        "Target Audience"@en,
         "Målgrupp"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     owl:sameAs :ComputerAudienceType,
@@ -8103,10 +8334,11 @@
         v:Digital,
         v:Text,
         v:Visual ;
-    skos:notation "bib-computerAudience" .
+    skos:notation "bib-musicAudience" .
 
 :BooksItemType a :CollectionClass ;
-    :prefLabel "Form of Item"@en,
+    :prefLabel "Form Of Item"@en,
+        "Form of Item"@en,
         "Form"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Text ;
@@ -8159,7 +8391,8 @@
 
 :SoundPlaybackCharacterType a :CollectionClass ;
     :prefLabel "Playback Characteristics"@en,
-        "Inspelningskontroll"@sv ;
+        "Inspelningskontroll"@sv,
+        "Inspelningsprotokoll"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:SoundRecording ;
     skos:notation "bib-soundPlaybackCharacter" .
@@ -8178,6 +8411,7 @@
 
 :GovernmentPublicationType a :CollectionClass ;
     :prefLabel "Govt. Publication"@en,
+        "Govt. Publications"@en,
         "Offentlig resurs"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     owl:sameAs :BooksGovtPubType,
@@ -8190,7 +8424,7 @@
         v:Serial,
         v:Text,
         v:Visual ;
-    skos:notation "bib-serialsGovtPub" .
+    skos:notation "bib-booksGovtPub" .
 
 :ItemType a :CollectionClass ;
     :prefLabel "Form of Item"@en,
@@ -8206,7 +8440,7 @@
         v:Mixed,
         v:Serial,
         v:Visual ;
-    skos:notation "bib-mapsItem" .
+    skos:notation "bib-musicItem" .
 
 :MediumType a :CollectionClass ;
     :prefLabel "Medium for Sound"@en,
@@ -8218,11 +8452,12 @@
     skos:broadMatch v:MovingImage,
         v:ProjectedImage,
         v:VideoRecording ;
-    skos:notation "bib-motionPicMedium" .
+    skos:notation "bib-projGraphMedium" .
 
 :NumberUnitsType a :CollectionClass ;
     :prefLabel "Specific Retention Policy - Number of Units"@en ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm,
+        :Number ;
     skos:notation "hold-numberUnits" .
 
 :RemoteSensImageCloudType a :CollectionClass ;
@@ -8247,7 +8482,8 @@
     skos:notation "bib-soundDimensions" .
 
 :ComputerTypeOfFileType a :CollectionClass ;
-    :prefLabel "Type of File"@en,
+    :prefLabel "Type Of File"@en,
+        "Type of File"@en,
         "Typ"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Digital ;
@@ -8287,7 +8523,17 @@
     skos:notation "hold-soundKindOfMaterial" .
 
 :MapsReliefType a :CollectionClass ;
-    :prefLabel "Relief 4"@en,
+    :prefLabel "Map Relief 1"@en,
+        "Map Relief 2"@en,
+        "Map Relief 3"@en,
+        "Map Relief 4"@en,
+        "Relief 1"@en,
+        "Relief 2"@en,
+        "Relief 3"@en,
+        "Relief 4"@en,
+        "Relief (höjdskillndader) 1"@sv,
+        "Relief (höjdskillndader) 2"@sv,
+        "Relief (höjdskillndader) 3"@sv,
         "Relief (höjdskillndader) 4"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Cartography ;
@@ -8308,7 +8554,17 @@
     skos:notation "bib-musicFormat" .
 
 :MusicMatterType a :CollectionClass ;
-    :prefLabel "Accompanying Matter 6"@en,
+    :prefLabel "Accompanying Matter 1"@en,
+        "Accompanying Matter 2"@en,
+        "Accompanying Matter 3"@en,
+        "Accompanying Matter 4"@en,
+        "Accompanying Matter 5"@en,
+        "Accompanying Matter 6"@en,
+        "Bifogat material 1"@sv,
+        "Bifogat material 2"@sv,
+        "Bifogat material 3"@sv,
+        "Bifogat material 4"@sv,
+        "Bifogat material 5"@sv,
         "Bifogat material 6"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Audio ;
@@ -8328,13 +8584,6 @@
     skos:broadMatch v:Globe ;
     skos:notation "bib-globeMedium" .
 
-:HoldingTacBrailleMusicType a :CollectionClass ;
-    :prefLabel "Braille Music 3"@en,
-        "Format för musiknoter i punktskrift 3"@sv ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch v:TactileMaterial ;
-    skos:notation "hold-tacBrailleMusic" .
-
 :SerialsAlphabetType a :CollectionClass ;
     :prefLabel "Alphabet"@en,
         "Alfabet/Skriftart"@sv ;
@@ -8343,7 +8592,11 @@
     skos:notation "bib-serialsAlphabet" .
 
 :TacBrailleMusicType a :CollectionClass ;
-    :prefLabel "Braille Music 3"@en,
+    :prefLabel "Braille Music 1"@en,
+        "Braille Music 2"@en,
+        "Braille Music 3"@en,
+        "Format för musiknoter i punktskrift 1"@sv,
+        "Format för musiknoter i punktskrift 2"@sv,
         "Format för musiknoter i punktskrift 3"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:TactileMaterial ;
@@ -8357,7 +8610,13 @@
     skos:notation "bib-soundSpeed" .
 
 :BooksIllustrationsType a :CollectionClass ;
-    :prefLabel "Illustrations 4"@en,
+    :prefLabel "Illustrations 1"@en,
+        "Illustrations 2"@en,
+        "Illustrations 3"@en,
+        "Illustrations 4"@en,
+        "Illustrationer 1"@sv,
+        "Illustrationer 2"@sv,
+        "Illustrationer 3"@sv,
         "Illustrationer 4"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Text ;
@@ -8444,14 +8703,18 @@
     skos:notation "bib-motionPicCategories" .
 
 :MusicTextType a :CollectionClass ;
-    :prefLabel "Literary Text for Sound Recording 2"@en,
+    :prefLabel "Literary Text for Sound Recording 1"@en,
+        "Literary Text for Sound Recording 2"@en,
+        "Typ av genre för text till ljudupptagning (ej musik) 1"@sv,
         "Typ av genre för text till ljudupptagning (ej musik) 2"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Audio ;
     skos:notation "bib-musicText" .
 
 :NonProjectedType a :CollectionClass ;
-    :prefLabel "Secondary Support Material"@en,
+    :prefLabel "Primary Support Material"@en,
+        "Secondary Support Material"@en,
+        "Bildens bärande material"@sv,
         "Montering"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     owl:sameAs :NonProjPrimaryType,
@@ -8474,14 +8737,24 @@
     skos:notation "bib-serialsNature" .
 
 :BooksContentsType a :CollectionClass ;
-    :prefLabel "Contents 4"@en,
+    :prefLabel "Contents 1"@en,
+        "Contents 2"@en,
+        "Contents 3"@en,
+        "Contents 4"@en,
+        "Innehållsmässig karaktär 1"@sv,
+        "Innehållsmässig karaktär 2"@sv,
+        "Innehållsmässig karaktär 3"@sv,
         "Innehållsmässig karaktär 4"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Text ;
     skos:notation "bib-booksContents" .
 
 :SerialsContentsType a :CollectionClass ;
-    :prefLabel "Nature of Contents 3"@en,
+    :prefLabel "Nature of Contents 1"@en,
+        "Nature of Contents 2"@en,
+        "Nature of Contents 3"@en,
+        "Innehåll 1"@sv,
+        "Innehåll 2"@sv,
         "Innehåll 3"@sv ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch v:Serial ;

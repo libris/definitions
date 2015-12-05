@@ -20,15 +20,15 @@ def dump(data):
     print(json.dumps(data, indent=2, sort_keys=True, separators=(',', ': ')))
 
 
-uri_map = {}
-for coll in sorted(cg.resource(MAP.CollectionClass).subjects(RDF.type)):
-    for dfn in coll.subjects(RDF.type):
-        for alias in dfn.objects(OWL.sameAs):
-            if dfn.identifier == SDO.False:
-                continue
-            uri_map[alias.identifier] = dfn.identifier
-dump(uri_map)
-exit()
+#uri_map = {}
+#for coll in sorted(cg.resource(MAP.CollectionClass).subjects(RDF.type)):
+#    for dfn in coll.subjects(RDF.type):
+#        for alias in dfn.objects(OWL.sameAs):
+#            if dfn.identifier == SDO.False:
+#                continue
+#            uri_map[alias.identifier] = dfn.identifier
+#dump(uri_map)
+#exit()
 
 
 # NOTE: this approach is abandoned, tokens with multiple types may have multiple notations
@@ -42,12 +42,11 @@ for coll in sorted(cg.resource(MAP.CollectionClass).subjects(RDF.type)):
     for dfn in members:
         dup = 1
         for token_key in dfn.objects(SKOS.notation):
-            #token_key = dfn.value(OWL.sameAs).identifier.rsplit('/')[-1]
             if token_key in token_map:
                 dup += 1
                 token_key = token_key +'-'+ str(dup)
             token_map[token_key] = False if dfn[OWL.sameAs:SDO.False] \
-                    else dfn.identifier
+                    else dfn.identifier.replace('http://id.kb.se/marc/', 'marc:')
     #if coll[RDFS.subClassOf:MAP.Boolean]:
     #    token_map['__bool__'] = True
 dump(token_maps)

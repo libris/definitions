@@ -89,7 +89,8 @@ canonical_coll_id_map = {
   "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
   "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
   "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
-  "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"]
+  "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"],
+  "HoldingType": ["TypeType"]
 }
 
 get_canonical_coll_id = {alias: key
@@ -104,8 +105,6 @@ ENUM_DEFS = OrderedDict()
 #contentTypeMap = OUT['contentTypeMap'] = OrderedDict()
 
 EnumCollection = namedtuple('EnumCollection', 'ref_key, map_key, id, items, type, off_key')
-
-class Continue(Exception): pass
 
 
 PROCESSED_ENUMS = {}
@@ -130,31 +129,27 @@ def build_enums(marc_type):
         tokenmap = TOKEN_MAPS.setdefault(enumcoll.map_key, {})
 
         for key, dfn in enumcoll.items.items():
-            try:
-                type_id = get_enum_id(key, dfn)
-            except Continue:
-                continue
+            enum_id = dfn['enum_id']
 
-            if MAKE_VOCAB and type_id:
-                add_enum_def(enumcoll, type_id, dfn_ref_key, dfn, key)
+            if MAKE_VOCAB and enum_id:
+                add_enum_def(enumcoll, enum_id, dfn_ref_key, dfn, key)
 
             if overwriting:
-                assert tokenmap.get(key, type_id) == type_id, "%s: %s missing in %r" % (
-                        key, type_id, tokenmap)
+                assert tokenmap.get(key, enum_id) == enum_id, "%s: %s missing in %r" % (
+                        key, enum_id, tokenmap)
 
-            existing_type_id = tokenmap.get(key, type_id)
-            if existing_type_id is not None and existing_type_id != type_id:
+            existing_enum_id = tokenmap.get(key, enum_id)
+            if existing_enum_id is not None and existing_enum_id != enum_id:
                 print("tokenMap mismatch in %s for key %s: %s != %s"
-                        % (dfn_ref_key, key, type_id, tokenmap[key]), file=sys.stderr)
+                        % (dfn_ref_key, key, enum_id, tokenmap[key]), file=sys.stderr)
             else:
-                tokenmap[key] = type_id
+                tokenmap[key] = enum_id
 
 
 TMAP_HASHES = {} # to reuse repeated tokenmap
 
 def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
-    # TODO: clear out unwanted values *first* (see get_enum_id)
-    items = OrderedDict(sorted((k.lower(), v) for k, v in valuemap.items()))
+    items = filtered_enum_values(valuemap)
     tokenmap_key = marc_type + '-' + dfn_ref_key
     # reuse repeated tokenmaps
     canonical_tokenmap_key = TMAP_HASHES.setdefault(
@@ -187,15 +182,14 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
                         ).setdefault('sameAs', []).append({"@id": cid})
 
     off_key = _find_boolean_off_key(items)
-    # TODO: if off_key, type as boolean and define boolean property (w/o tokenMap)
-    #if key == off_key:
-    #    print('off key:', key, dfn)
-    # TODO: also, detect and type numeric (and possibly numeric range) types
+    # TODO: use key length to detect data properties (see is_link check far below)
     enumtype = None
     if off_key:
         enumtype = 'Boolean'
-    elif all((v.get('id') or v.get('label_en', '')).isdigit() for v in valuemap.values()):
+    elif all((v.get('id') or v.get('label_en', '')).isdigit()
+            for k, v in valuemap.items() if k not in ('_', '|')):
         enumtype = 'Number'
+        assert canonical_coll_id == 'NumberUnitsType'
 
     return EnumCollection(dfn_ref_key, canonical_tokenmap_key, canonical_coll_id, items,
             enumtype, off_key), tokenmap_key
@@ -204,7 +198,14 @@ def _make_collection_id(dfn_ref_key):
     coll_id = dfn_ref_key[0].upper() + dfn_ref_key[1:] + 'Type'
     return coll_id
 
-def get_enum_id(key, dfn):
+def filtered_enum_values(valuemap):
+    def filtered():
+        for k, v in valuemap.items():
+            if fixed_enum_value(k, v):
+                yield k.lower(), v
+    return OrderedDict(sorted(filtered()))
+
+def fixed_enum_value(key, dfn):
     if 'id' in dfn:
         # TODO: move id generation from legwcy config code here (to fix at least "'s" => "S")?
         v = dfn['id']
@@ -223,30 +224,29 @@ def get_enum_id(key, dfn):
 
     if key in ('_', '|', '||', '|||') and any(t in subname
             for t in ('No', 'Ej', 'Inge', 'Uppgift_saknas')):
-        raise Continue
+        return False
 
     if subname.replace('Obsolete', '') in {
             'Unknown',
             'Other', 'NotApplicable',
             'Unspecified', 'Undefined'}:
-        type_id = None
+        enum_id = None
     else:
-        type_id = subname
+        enum_id = subname
 
-    # TODO: use Obsolete to mark enum or entire collection as deprecated
+    if enum_id and enum_id.endswith('Obsolete') and len(enum_id) > 8 and enum_id[-9] not in ('/', '-'):
+        enum_id = enum_id[:-8] + '-Obsolete'
+        dfn['obsolete'] = True
 
-    if type_id and type_id.endswith('Obsolete') and len(type_id) > 8 and type_id[-9] not in ('/', '-'):
-        type_id = type_id[:-8] + '-Obsolete'
-
-    return type_id
+    dfn['enum_id'] = enum_id
+    return True
 
 def _find_boolean_off_key(valuemap):
-    valuemap = {k: v for k, v in valuemap.items() if k != '|'} # FIXME: reuse get_enum_id
     if valuemap and len(valuemap) == 2:
-        items = [(k, (v.get('id') or v.get('label_en', '')).lower() if v else '_')
+        items = [(k, v['enum_id'].lower() if v['enum_id'] else '_')
                     for (k, v) in valuemap.items()]
         for off_index, (k, v) in enumerate(items):
-            if v.startswith('no'):
+            if v.startswith('no') or v.endswith('finns_ej'):
                 on_k, on_v = items[not off_index]
                 if True:# v.endswith(on_v.replace('present', '')):
                     #assert k == '0' and on_k == '1'
@@ -306,31 +306,63 @@ def add_enum_collection_def(enumcoll):
         coll_def['subClassOf'].append(enumcoll.type)
     return coll_def
 
-def add_enum_def(enumcoll, type_id, dfn_ref_key, dfn, key):
-    #assert type_id not in ENUM_DEFS
-    assert type_id != enumcoll.id, "Same as collection: %s" % type_id
+def add_enum_def(enumcoll, enum_id, dfn_ref_key, dfn, key):
+    #assert enum_id not in ENUM_DEFS
+    assert enum_id != enumcoll.id, "Same as collection: %s" % enum_id
 
-    predef = ENUM_DEFS.get(type_id)
+    ideal_enum_id = enum_id
+    raw_id = "%s-%s" % (enumcoll.map_key, key)
+
+    predef = ENUM_DEFS.get(enum_id)
+
+    notation = predef['notation'] if predef else []
+    if key not in notation:
+        if notation:
+            predef = None
+            enum_id = raw_id
+            notation = [key]
+        else:
+            notation.append(key)
+
     in_coll = predef['inCollection'] if predef else []
     if not any(r['@id'] == enumcoll.id for r in in_coll):
         in_coll.append({"@id": enumcoll.id})
 
-    notation = predef['notation'] if predef else []
-    if key not in notation:
-        notation.append(key)
-
     sameas = predef['sameAs'] if predef else []
-    sameas.append({"@id": "%s-%s" % (enumcoll.map_key, key)})
+    broader = predef['broader'] if predef else []
+    if enum_id == raw_id:
+        broader.append({"@id": ideal_enum_id})
+    else:
+        sameas.append({"@id": raw_id})
     if key == enumcoll.off_key:
         sameas.append({'@id': 'schema:False'})
 
-    dest = ENUM_DEFS[type_id] = {
-        "@id": type_id, "@type": in_coll,
+    dest = ENUM_DEFS[enum_id] = {
+        "@id": enum_id, "@type": in_coll,
         "sameAs": sameas,
+        "broader": broader,
         "notation": notation,
         "inCollection": in_coll
     }
     add_labels(dfn, dest)
+    if predef:
+        for labelkey in 'prefLabel', 'prefLabel_en':
+            dest[labelkey] = predef.get(labelkey, ()) + dest.get(labelkey, ())
+    if dfn.get('obsolete'):
+        dest['owl:deprecated'] = True
+
+
+def add_labels(src, dest):
+    sv = src.get('label_sv')
+    en = src.get('label_en')
+    #if sv or en:
+    #    lang = dest['prefLabel'] = {}
+    #    if sv: lang['sv'] = sv
+    #    if en: lang['en'] = en
+    if sv:
+        dest['prefLabel'] = tuple(list(dest.get('prefLabel', [])) + [sv])
+    if en:
+        dest['prefLabel_en'] = tuple(list(dest.get('prefLabel_en', [])) + [en])
 
 
 def process_marcmap(OUT, marc_type):
@@ -356,7 +388,7 @@ def process_marcmap(OUT, marc_type):
             process_fixmaps(marc_type, tag, fixmaps, outf)
 
         elif not subfields:
-            outf['addProperty'] = field['id']
+            outf['addProperty'] = prep_propname(field['id'])
 
         else:
             for ind_key in ('ind1', 'ind2'):
@@ -378,7 +410,7 @@ def process_marcmap(OUT, marc_type):
                 repeatable = subfield.get('repeatable', False)
                 p_key = 'addProperty' if repeatable else 'property'
                 if sid or not MAKE_VOCAB:
-                    subf[p_key] = sid
+                    subf[p_key] = prep_propname(sid)
                 if MAKE_VOCAB:
                     subf['@type'] = 'rdf:Property'
                     subf['@id'] = '%s-%s-%s' % (marc_type, tag, code)
@@ -421,11 +453,11 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                 pass #rt_bl_map = outf.setdefault('recTypeBibLevelMap', OrderedDict())
             else:
                 outf['addLink'] = 'hasFormat' if tag == '007' else 'hasPart'
-                outf['[0:1]'] = {
+                outf['[0]'] = {
                     'addProperty': '@type',
                     'tokenMap': tokenTypeMap,
                 }
-                outf['tokenTypeMap'] = '[0:1]'
+                outf['tokenTypeMap'] = '[0]'
 
             orig_type_name =  fixmap['name'].split(tag + '_')[1]
             type_name = fixmap.get('term') or orig_type_name
@@ -475,8 +507,8 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
         real_fm = fm
         for col in fixmap['columns']:
             off, length = col['offset'], col['length']
-            key = (#str(off) if length == 1 else
-                    '[%s:%s]' % (off, off+length))
+            key = ('[%s]' % off if length == 1 else
+                    '[%s-%s]' % (off, (off+length)-1))
             if key in common_columns.get(tag, ()):
                 # IMPROVE: verify expected props?
                 fm = outf
@@ -514,20 +546,41 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
             if MAKE_VOCAB:
                 add_labels(col, col_dfn)
 
-            enumcoll = enum_map.get(marc_type + '-' + dfn_ref_key)
-
             if domainname:
                 col_dfn['domainEntity'] = domainname
 
-            is_link = length < 3
+            enumcoll = enum_map.get(marc_type + '-' + dfn_ref_key)
+
+            is_link = length < 3 and not enumcoll or enumcoll and enumcoll.type != 'Number'
             if is_link:
-                col_dfn['addLink' if repeat else 'link'] = propname
+                col_dfn['addLink' if repeat else 'link'] = prep_propname(propname)
                 col_dfn['uriTemplate'] = "{_}"
             else:
                 if propname or not MAKE_VOCAB:
-                    col_dfn['addProperty' if repeat else 'property'] = propname
+                    col_dfn['addProperty' if repeat else 'property'] = prep_propname(propname)
+
+            default = col.get('default')
+            if default:
+                col_dfn['default'] = default
 
             if enumcoll:
+
+                # TODO: check type of tokenmap (boolean, numeric (or fixed like here))
+                items = enumcoll.items.items()
+                if len(items) == 1 and items[0][0] != 'u':
+                    col_dfn['fixedDefault'] = items[0][0]
+
+                if enumcoll.type:
+                    col_dfn['valueType'] = enumcoll.type
+                    if enumcoll.type == 'Boolean':
+                        col_dfn['fixedDefault'] = enumcoll.off_key
+                        col_dfn['valueMap'] = {k: k != enumcoll.off_key for k, v in items}
+
+                if is_link:
+                    col_dfn['tokenMap'] = enumcoll.id
+                    col_dfn['uriTemplate'] = "marc:%s-{_}" % enumcoll.map_key
+                else:
+                    col_dfn['valuePattern'] = [k for k, v in items]
 
                 if MAKE_VOCAB:
                     colpropid = '%s-%s-%s' % (marc_type, tag, key)
@@ -560,21 +613,6 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     #               rdfs:domain v:Visual; rdfs:range :VisualMaterialType
                     #           ].
 
-                # TODO: check type of tokenmap (boolean, numeric (or fixed like here))
-                items = enumcoll.items.items()
-                if len(items) == 1 and items[0][0] != 'u':
-                    col_dfn['fixedDefault'] = items[0][0]
-
-                if enumcoll.type == 'Number':
-                    col_dfn['valueType'] = enumcoll.type
-                elif enumcoll.type == 'Boolean':
-                    col_dfn['fixedDefault'] = enumcoll.off_key
-                if is_link:
-                    #col_dfn['tokenMap'] = enumcoll.map_key
-                    col_dfn['uriTemplate'] = "marc:%s/{_}" % enumcoll.map_key
-                else:
-                    col_dfn['valuePattern'] = [k for k, v in items]
-
 
 #def fixprop_to_name(fixprops, propname, key):
 #    dfn = fixprops[propname].get(key)
@@ -584,24 +622,17 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
 #        return None
 
 
-def add_labels(src, dest):
-    sv = src.get('label_sv')
-    en = src.get('label_en')
-    #if sv or en:
-    #    lang = dest['prefLabel'] = {}
-    #    if sv: lang['sv'] = sv
-    #    if en: lang['en'] = en
-    if sv:
-        dest['prefLabel'] = sv
-    if en:
-        dest['prefLabel_en'] = en
+def prep_propname(propname):
+    if not propname:
+        return None
+    return 'marc:%s' % propname
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     fpath = args.pop(0) if args else "legacy/marcmap.json"
     with open(fpath) as f:
-        MARCMAP = json.load(f)
+        MARCMAP = json.load(f, object_pairs_hook=OrderedDict)
 
     ONLYENUMS = '--enums' in args
     MAKE_VOCAB = ONLYENUMS or '--vocab' in args
