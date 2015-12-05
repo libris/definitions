@@ -298,7 +298,7 @@ def add_enum_collection_def(enumcoll):
         "@type": ["CollectionClass"],
         "subClassOf": ["EnumeratedTerm"],
         #"inScheme": "",
-        "notation": enumcoll.map_key,
+        "notation": enumcoll.id, #enumcoll.map_key,
         "sameAs": same_as
         #"inRangeOf": propname
     }
@@ -311,7 +311,7 @@ def add_enum_def(enumcoll, enum_id, dfn_ref_key, dfn, key):
     assert enum_id != enumcoll.id, "Same as collection: %s" % enum_id
 
     ideal_enum_id = enum_id
-    raw_id = "%s-%s" % (enumcoll.map_key, key)
+    raw_id = "%s-%s" % (enumcoll.id, key)
 
     predef = ENUM_DEFS.get(enum_id)
 
@@ -578,7 +578,7 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
 
                 if is_link:
                     col_dfn['tokenMap'] = enumcoll.id
-                    col_dfn['uriTemplate'] = "marc:%s-{_}" % enumcoll.map_key
+                    col_dfn['uriTemplate'] = "marc:%s-{_}" % enumcoll.id
                 else:
                     col_dfn['valuePattern'] = [k for k, v in items]
 
