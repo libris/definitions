@@ -5,18 +5,24 @@ $(function () {
   
   $('#embedvocab').hide();
 
-  $(document).on('click', 'body', function (event) {
+  $('*').click(function(event) {
+    // Handles closing of popovers
+    var $elem = $(event.target);
+    if (!$elem.is('a')) {
+      for (var i = 0; i < 10; i++) {
+        if ($elem.attr('id') == 'embedvocab') {
+          return false;
+        }
+        $elem = $elem.parent();
+      }
+    }
     $('.state-active').removeClass('state-active');
     $('#embedvocab').hide();
   });
-
-  $(document).on('click', '#embedvocab article.panel', function (event) {
-    event.stopPropagation();
-  });
   
-    var termLinkSel = 'a[href^="/vocabview"]';
-    var articleLinkSel = 'article.panel a[href^="#"]';
-    var linkPos = {};
+  var termLinkSel = 'a[href^="/vocabview"]';
+  var articleLinkSel = 'article.panel a[href^="#"]';
+  var linkPos = {};
     
   function openTerm(ref, insidePopover) {
     
