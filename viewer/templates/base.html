@@ -38,9 +38,16 @@
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
     {% block scripts %}{% endblock %}
     <!-- Piwik -->
+    {% if config.ENVIRONMENT == 'STG' %}
     <script type="text/javascript">
-      var siteId = false;
-      
+      var siteId = 29;
+    </script>
+    {% elif config.ENVIRONMENT == 'PROD' %}
+    <script type="text/javascript">
+      var siteId = 27;
+    </script>
+    {% endif %}
+    <script type="text/javascript">
       if (siteId) {
         var _paq = _paq || [];
         _paq.push(['trackPageView']);
