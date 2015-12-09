@@ -3,6 +3,8 @@ from os import path as P
 
 DEBUG=False
 
+ENVIRONMENT = 'UNKNOWN'
+
 DBHOST='127.0.0.1'
 DBNAME='definitions'
 DBUSER=None
