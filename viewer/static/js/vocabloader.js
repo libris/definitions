@@ -83,14 +83,14 @@ $(function () {
         
     }
     if (!loaded) {
-      $('*').addClass('loading');
+      $('body').addClass('loading');
       embedvocab.append('<article class="panel text-center">' +
                         '<i class="glyphicon glyphicon-refresh btn-lg"></i></article>');
       embedvocab.load("/vocabview/ article.panel[id]", function() {
         $('article.panel[id]', this).
           addClass('popover').
           prepend('<div class="arrow"></div>');
-        $('*').removeClass('loading');
+        $('body').removeClass('loading');
         $('a[href^="http"]').attr('target', '_blank').click(function (event) {
           event.stopPropagation();
         });
