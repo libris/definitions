@@ -29,7 +29,7 @@ $(function () {
         }
         
       }
-    }, 250);
+    }, 500);
   };
   var collapse = function (elem) {
     var $chip = elem.find('.chip-expanded');
