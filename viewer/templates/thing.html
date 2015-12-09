@@ -154,7 +154,7 @@
 % macro termref(term, classes='', labeltype='')
   % set label = term.curie
   % if term.label
-    % set label = term.label.title()
+    % set label = term.label[0].upper() + term.label[1:]
   % endif
   % if term.curie
     <a href="/vocabview/#${term.curie}" class="${labeltype}"><span
