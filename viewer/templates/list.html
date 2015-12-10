@@ -7,7 +7,21 @@
 % block jumbotron
 <div class="jumbotron">
   <div class="container">
-    <h1>ID.KB.SE</h1>
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Sök termer</h2>
+      <form action="/find" method="GET" class="form-inline">
+      <div class="input-group">
+        <input name="limit" value="50" type="hidden" />
+        <label for="q">
+          <!-- Söksträng: -->
+        </label>
+        <input class="form-control" name="q" id="q" value="" />
+        <span class="input-group-btn">
+          <button class="btn btn-primary">Sök</button>
+        </span>
+      </div>
+      </form>
+    </div>
   </div>
 </div>
 % endblock
@@ -15,7 +29,7 @@
 {% block navcontainerclass %} container {% endblock %}
 
 % block content
-  <div class="col-md-9">
+  <div class="col-md-12">
     <h1>KBs definitioner och auktoriteter</h1>
     % for rtype, count in type_count
       <a class="list-group-item"
@@ -25,21 +39,7 @@
     </div>
   </div>
 
-  <div class="col-md-3">
-    <h2>Sök termer</h2>
-    <form action="/find" method="GET" class="form-inline">
-    <div class="input-group">
-      <input name="limit" value="50" type="hidden" />
-      <label for="q">
-        <!-- Söksträng: -->
-      </label>
-      <input class="form-control" name="q" id="q" value="" />
-      <span class="input-group-btn">
-        <button class="btn btn-primary">Sök</button>
-      </span>
-    </div>
-    </form>
-  </div>
+
 
 
   {#
