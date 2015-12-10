@@ -138,7 +138,7 @@ describe('id.kb.se', function() {
       it('Should show vocab popup on class click', function(client) {
         client
         
-          .click('.main-item .panel-title .chip-class', function() {
+          .click('.main-item .panel-heading .label-class', function() {
             client.expect.element('#embedvocab').to.be.visible.before(5000)
           })
       });
