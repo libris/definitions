@@ -31,7 +31,7 @@
         <dl resource="${thing[ID]}">
           % for k, vs in thing[REVERSE].items()
             % set p = vocab.index[k] or {'curie': k}
-          <dt>&larr; ${termref(p)}</dt>
+          <dt>Med relation: ${termref(p)}</dt>
           <dd>
               % for v in vs
                 ${viewthing(v, rev=p.curie)}
