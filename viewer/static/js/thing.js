@@ -1,57 +1,64 @@
 $(function () {
 
+  // Copy everything
+  var createDuplicates = function () {
+    $('.link-item').each(function() {
+      var $subject = $(this);
+      $subject.addClass('link-item-original');
+      var $copy = $subject.clone();
+      var bounding = $subject[0].getBoundingClientRect();
+      $copy.addClass('link-item-copy').appendTo($subject.parent());
+      $copy.removeClass('link-item-original');
+      $copy.css('top', $subject.position().top).css('left', $subject.position().left);
+    });
+  }
+
   var expand = function (elem) {
-    var $chip = elem.find('.chip-expanded');
-    var $parent = elem;
-    
-    // Calculate if we're outside viewport
-    var diff = ($parent.offset().left + $chip.width()) - $(window).width()
-    var xMove = 1;
-    if(diff > 0) {
-      xMove += diff + 20;
-    }
-    $chip.css('margin-left', (-xMove));
-    
-    $chip.addClass('to-be-active');
+    elem.addClass('to-be-active');
     setTimeout(function() {
-      if($chip.hasClass('to-be-active')) {
-        $chip.addClass('active').removeClass('to-be-active');
-        $chip.find('.panel-heading').focus();
+      if(elem.hasClass('to-be-active')) {
         
-        // Adjust Y-axis so that the panel will "grow" out of the chip
-        if(!$chip.hasClass('adjustedTop')) {
-          var $parentLabel = $parent.find('.panel-title').first();
-          var yDiff = $parentLabel.offset().top - $chip.find('.panel-title').offset().top;
-          if (yDiff !== 0) {
-            $chip.css('margin-top', yDiff - 1);
-            $chip.addClass('adjustedTop');
-          }
+        elem.addClass('active');
+        elem.css('width', 500);
+        
+        if(!elem.hasClass('adjusted-top')) {
+          var $parent = elem.closest('li');
+          var $rootHeading = $parent.find('.link-item-original .panel-title');
+          var $elemHeading = $parent.find('.link-item-copy .panel-title');
+          var diffY = $elemHeading.offset().top - $rootHeading.offset().top;
+          elem.css('margin-top', -diffY);
+          elem.addClass('adjusted-top');
         }
         
       }
     }, 500);
+    
   };
   var collapse = function (elem) {
-    var $chip = elem.find('.chip-expanded');
-    $chip.removeClass('active').removeClass('to-be-active');
-  }
-
-  $('.link-item').each(function() {
-    var $parent = $(this);
-    $parent.append('<div class="chip-expanded">'+ $parent.html() +'</div>');
-  });
-
-  $('.link-item').hover(function() {
-    expand($(this));
-  }, function() {
-    collapse($(this));
-  }).focusin(function() {
-    expand($(this));
-  }).focusout(function() {
-    collapse($(this));
-  });
+    elem.removeClass('to-be-active');
+    elem.removeClass('active');
+    elem.css('margin-top', '');
+    elem.removeClass('adjusted-top');
+    
+    elem.css('width', '').css('height', '');
+  };
 
   $(document).ready(function () {
+    setTimeout(function() {
+      
+      createDuplicates();
+      
+      $('.link-item-copy').hover(function() {
+        expand($(this));
+      }, function() {
+        collapse($(this));
+      }).focusin(function() {
+        expand($(this));
+      }).focusout(function() {
+        collapse($(this));
+      });
+      
+    }, 10);
   });
 
 });

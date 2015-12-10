@@ -12,6 +12,7 @@ body#thing {
     }
   }
   
+  
   .panel {
     margin-bottom: 0.5em;
     .panel-body {
@@ -61,9 +62,7 @@ body#thing {
       }
     }
   }
-  
   .link-item {
-    position: relative;
     display: inline-block;
     float: left;
     margin: 5px;
@@ -78,6 +77,25 @@ body#thing {
     }
     > .panel-heading {
       overflow-x: hidden;
+    }
+  }
+  .link-item-copy {
+    position: absolute;
+    transition: 0.25s ease;
+    transition-property: opacity;
+    opacity: 0;
+    margin-top: 0px;
+    &:hover {
+      z-index: 985;
+    }
+    &.active {
+      opacity: 1;
+      > .panel-heading > .label-class {
+        display: inline-block;
+      }
+      .thing-id {
+        display: inline-block;
+      }
     }
   }
   
