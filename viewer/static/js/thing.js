@@ -23,6 +23,9 @@ $(function () {
         
         if(!elem.hasClass('adjusted-top')) {
           var $parent = elem.closest('li');
+          if ($parent.length == 0) {
+            $parent = elem.closest('dd');
+          }
           var $rootHeading = $parent.find('.link-item-original .panel-title');
           var $elemHeading = $parent.find('.link-item-copy .panel-title');
           var diffY = $elemHeading.offset().top - $rootHeading.offset().top;
