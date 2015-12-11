@@ -4,10 +4,9 @@ $(function () {
   var createDuplicates = function () {
     $('.link-item').each(function() {
       var $subject = $(this);
-      $subject.addClass('link-item-original');
       var $copy = $subject.clone();
+      $subject.addClass('link-item-original');
       $copy.addClass('link-item-copy').appendTo($subject.parent());
-      $copy.removeClass('link-item-original');
       $copy.css('top', $subject.position().top).css('left', $subject.position().left);
     });
   }
