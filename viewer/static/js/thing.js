@@ -6,7 +6,6 @@ $(function () {
       var $subject = $(this);
       $subject.addClass('link-item-original');
       var $copy = $subject.clone();
-      var bounding = $subject[0].getBoundingClientRect();
       $copy.addClass('link-item-copy').appendTo($subject.parent());
       $copy.removeClass('link-item-original');
       $copy.css('top', $subject.position().top).css('left', $subject.position().left);
@@ -15,6 +14,7 @@ $(function () {
 
   var expand = function (elem) {
     elem.addClass('to-be-active');
+    var resource = elem.attr('resource');
     setTimeout(function() {
       if(elem.hasClass('to-be-active')) {
         
@@ -26,13 +26,12 @@ $(function () {
           if ($parent.length == 0) {
             $parent = elem.closest('dd');
           }
-          var $rootHeading = $parent.find('.link-item-original .panel-title');
-          var $elemHeading = $parent.find('.link-item-copy .panel-title');
+          var $rootHeading = $parent.find('.link-item-original[resource="'+resource+'"] .panel-title');
+          var $elemHeading = $parent.find('.link-item-copy[resource="'+resource+'"] .panel-title');
           var diffY = $elemHeading.offset().top - $rootHeading.offset().top;
           elem.css('margin-top', -diffY);
           elem.addClass('adjusted-top');
         }
-        
       }
     }, 500);
     
