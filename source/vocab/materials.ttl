@@ -1,0 +1,244 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+
+@prefix bf: <http://bibframe.org/vocab/> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
+@prefix rdacarrier: <http://rdvocab.info/termList/RDACarrierType/> .
+
+@prefix : <http://id.kb.se/vocab/> .
+@prefix marc: <http://id.kb.se/marc/> .
+
+
+# Manifestation Dimensions
+
+:Digital a owl:Class;
+    ptg:abstract true;
+    rdfs:label "Digital resurs"@sv;
+    #rdfs:subClassOf [ owl:unionOf (dctype:InteractiveResource dctype:Software) ]
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Electronic .
+
+:Manuscript a owl:Class;
+    rdfs:label "Manuscript"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Manuscript, bibo:Manuscript .
+
+:Print a owl:Class;
+    rdfs:label "Tryck"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Print .
+
+:Electronic a owl:Class;
+    rdfs:label "Elektronisk"@sv;
+    skos:exactMatch rdamedia:1003 ; # "computer"
+    rdfs:subClassOf :Digital, :Product .
+
+:Tactile a owl:Class;
+    rdfs:label "Taktil resurs"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Tactile .
+
+:ProjectedImage a owl:Class;
+    rdfs:label "Projicerad bild"@sv;
+    skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Image .
+
+:PhysicalObject a owl:Class;
+    rdfs:label "Föremål"@sv;
+    skos:altLabel "Realia"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass dctype:PhysicalObject .
+
+:Software a owl:Class;
+    rdfs:label "Mjukvara"@sv;
+    rdfs:subClassOf :Digital;
+    owl:equivalentClass dctype:Software, sdo:SoftwareApplication .
+
+# TODO: missing rdamedia mappings:
+#    skos:exactMatch rdamedia:1004 ; # "microscopic"
+#    skos:exactMatch rdamedia:1006 ; # "stereographic"
+#    skos:exactMatch rdamedia:1007 ; # "unmediated" ("text", "non-projected graphic")
+#    skos:exactMatch rdamedia:1008 ; # "video"
+
+
+# Common Carrier Types
+
+#:Disc
+#:CD
+#:DVD
+
+# Concrete Types (can grow a lot, be combined with e.g. productontology...)
+
+:Globe a owl:Class;
+    rdfs:label "Kartglob"@sv;
+    rdfs:subClassOf :Cartography, :Realia .
+
+:Map a owl:Class;
+    rdfs:label "Karta"@sv;
+    rdfs:subClassOf :Cartography;
+    owl:equivalentClass bibo:Map .
+
+:Microform a owl:Class;
+    rdfs:label "Mikroform"@sv;
+    skos:exactMatch rdamedia:1002 ; # "microform"
+    rdfs:subClassOf :Product .
+
+:RemoteSensingImage a owl:Class;
+    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
+    rdfs:subClassOf :Product, :Cartography .
+
+:SoundRecording a owl:Class;
+    rdfs:label "Ljudinspelning"@sv;
+    rdfs:subClassOf :Product, :Audio .
+
+:VideoRecording a owl:Class;
+    rdfs:label "Videoinspelning"@sv;
+    rdfs:subClassOf :Product, :MovingImage .
+
+:Database a owl:Class;
+    rdfs:label "Databas"@sv;
+    rdfs:subClassOf :Integrating, :Digital, :Dataset .
+
+:Website a owl:Class;
+    rdfs:label "Webbplats"@sv;
+    rdfs:subClassOf :Integrating, :Digital, :Text;
+    owl:equivalentClass bibo:Website .
+
+:Book a owl:Class;
+    rdfs:label "Book"@en, "Bok"@sv;
+    owl:equivalentClass bibo:Book;
+    rdfs:subClassOf :Text, :Monograph ;
+    skos:broadMatch rdacarrier:1049 . # "volume"
+
+:ManuscriptCartography a owl:Class;
+    rdfs:label "Kartmanuscript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Cartography, :Manuscript .
+
+:ManuscriptNotatedMusic a owl:Class;
+    rdfs:label "Musiknotmanuscript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :NotatedMusic, :Manuscript .
+
+:ManuscriptText a owl:Class;
+    rdfs:label "Textmanuscript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Text, :Manuscript .
+
+:MultiVolumeBook a owl:Class;
+    rdfs:label "Multipart Book"@en, "Bokverk"@sv;
+    skos:altLabel "Flervolymsbok"@sv;
+    rdfs:subClassOf :Book, :MultipartMonograph;
+    owl:equivalentClass bibo:MultiVolumeBook .
+
+:BookVolume a owl:Class;
+    rdfs:label "Book Volume"@en, "Bokband"@sv ;
+    skos:altLabel "Band"@sv, "Volym"@sv ;
+    rdfs:subClassOf :Book,
+        :PublicationVolume .
+
+:PrintedText a owl:Class;
+    rdfs:label "Tryckt text"@sv;
+    rdfs:subClassOf :Text, :Print .
+
+:PrintedBook a owl:Class;
+    rdfs:label "Printed Book"@en, "Tryckt bok"@sv;
+    rdfs:subClassOf :Book, :PrintedText;
+    rdfs:subClassOf [
+            a owl:Restriction;
+            owl:onProperty :contentType;
+            owl:hasValue :Text
+        ], [
+            a owl:Restriction;
+            owl:onProperty :mediaType;
+            owl:hasValue :Unmediated
+        ], [
+            a owl:Restriction;
+            owl:onProperty :contentType;
+            owl:hasValue :Volume
+        ] .
+
+:EBook a owl:Class;
+    rdfs:label "E-bok"@sv;
+    rdfs:subClassOf :Book, :Digital .
+
+:Audiobook a owl:Class;
+    rdfs:label "Ljudbok"@sv;
+    #owl:equivalentClass bibo:AudioDocument;
+    rdfs:subClassOf :Book, :Audio, bibo:AudioDocument .
+
+#CDBook
+#CDMap
+#ESerial
+#Music
+#MusicCD
+
+# TODO: informative: <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
+
+# TODO: missing rdacarrier mappings:
+#    skos:exactMatch rdacarrier:1001 ; # "Audio carriers"
+#    skos:exactMatch rdacarrier:1002 ; # "audio cartridge"
+#    skos:exactMatch rdacarrier:1003 ; # "audio cylinder"
+#    skos:exactMatch rdacarrier:1004 ; # "audio disc"
+#    skos:exactMatch rdacarrier:1005 ; # "sound-track reel"
+#    skos:exactMatch rdacarrier:1006 ; # "audio roll"
+#    skos:exactMatch rdacarrier:1007 ; # "audiocassette"
+#    skos:exactMatch rdacarrier:1008 ; # "audiotape reel"
+#    skos:exactMatch rdacarrier:1010 ; # "Computer carriers"
+#    skos:exactMatch rdacarrier:1011 ; # "computer card"
+#    skos:exactMatch rdacarrier:1012 ; # "computer chip cartridge"
+#    skos:exactMatch rdacarrier:1013 ; # "computer disc"
+#    skos:exactMatch rdacarrier:1014 ; # "computer disc cartridge"
+#    skos:exactMatch rdacarrier:1015 ; # "computer tape cartridge"
+#    skos:exactMatch rdacarrier:1016 ; # "computer tape cassette"
+#    skos:exactMatch rdacarrier:1017 ; # "computer tape reel"
+#    skos:exactMatch rdacarrier:1018 ; # "online resource"
+#    skos:exactMatch rdacarrier:1020 ; # "Microform carriers"
+#    skos:exactMatch rdacarrier:1021 ; # "aperture card"
+#    skos:exactMatch rdacarrier:1022 ; # "microfiche"
+#    skos:exactMatch rdacarrier:1023 ; # "microfiche cassette"
+#    skos:exactMatch rdacarrier:1024 ; # "microfilm cartridge"
+#    skos:exactMatch rdacarrier:1025 ; # "microfilm cassette"
+#    skos:exactMatch rdacarrier:1026 ; # "microfilm reel"
+#    skos:exactMatch rdacarrier:1027 ; # "microfilm slip"
+#    skos:exactMatch rdacarrier:1028 ; # "microopaque"
+#    skos:exactMatch rdacarrier:1029 ; # "Microscopic carriers"
+#    skos:exactMatch rdacarrier:1030 ; # "microscope slide"
+#    skos:exactMatch rdacarrier:1031 ; # "Projected image carriers"
+#    skos:exactMatch rdacarrier:1032 ; # "film cartridge"
+#    skos:exactMatch rdacarrier:1033 ; # "film cassette"
+#    skos:exactMatch rdacarrier:1034 ; # "film reel"
+#    skos:exactMatch rdacarrier:1035 ; # "filmslip"
+#    skos:exactMatch rdacarrier:1036 ; # "filmstrip"
+#    skos:exactMatch rdacarrier:1037 ; # "filmstrip cartridge"
+#    skos:exactMatch rdacarrier:1039 ; # "overhead transparency"
+#    skos:exactMatch rdacarrier:1040 ; # "slide"
+#    skos:exactMatch rdacarrier:1041 ; # "Stereographic carriers"
+#    skos:exactMatch rdacarrier:1042 ; # "stereograph card"
+#    skos:exactMatch rdacarrier:1043 ; # "stereograph disc"
+#    skos:exactMatch rdacarrier:1044 ; # "Unmediated carriers"
+#    skos:exactMatch rdacarrier:1045 ; # "card"
+#    skos:exactMatch rdacarrier:1046 ; # "flipchart"
+#    skos:exactMatch rdacarrier:1047 ; # "roll"
+#    skos:exactMatch rdacarrier:1048 ; # "sheet"
+#    skos:exactMatch rdacarrier:1049 ; # "volume"
+#    skos:exactMatch rdacarrier:1050 ; # "Video carriers"
+#    skos:exactMatch rdacarrier:1051 ; # "video cartridge"
+#    skos:exactMatch rdacarrier:1052 ; # "videocassette"
+#    skos:exactMatch rdacarrier:1053 ; # "videotape reel"
+#    skos:exactMatch rdacarrier:1056 ; # "microfilm roll"
+#    skos:exactMatch rdacarrier:1059 ; # "object"
+#    skos:exactMatch rdacarrier:1060 ; # "videodisc"
+#    skos:exactMatch rdacarrier:1069 ; # "film roll"
+
+

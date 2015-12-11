@@ -2,46 +2,55 @@
 
 {% block title %}MARCFrame View{% endblock %}
 
-{% block bodyattrs %}class="has-navbar" data-spy="scroll" data-target="#marcnavbar"{% endblock %}
+{% block bodyattrs %}class="has-navbar" data-spy="scroll" data-target="#marcnavbar" id="marcframeview"{% endblock %}
 
-{% block containerclass %}container{% endblock %}
+{% block containerclass %}container-fluid{% endblock %}
+{% block navcontainerclass %} container-fluid {% endblock %}
 
-% block navigation
-  <nav id="marcnavbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">MARCFrame</a>
-      <ul class="nav navbar-nav">
-        % for cat, catdfn in marc_categories()
-          <li>
-            <a href="#${cat}">${cat}</a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-              aria-expanded="false"><span class="caret"></span></a>
-            <ul class="dropdown-menu list-inline" role="menu" style="">
-              % for tag, kind, dfn in fields(catdfn)
-                <li>
-                  <a href="#${cat}-${tag}">${tag}</a>
-                </li>
-              % endfor
-            </ul>
-          </li>
-        % endfor
-      </ul>
-    </div>
-  </nav>
-% endblock
-
-% block stylesheets
-  <link rel="stylesheet" href="/css/vocab.css" />
-% endblock
 
 % block scripts
   <script src="/vendor/jquery/js/jquery.js"></script>
   <script src="/js/marcframeview.js"></script>
+  <script src="/js/vocabloader.js"></script>
 % endblock
 
 % block content
+<div class="row">
+  <div class="col-sm-3 col-md-3 col-lg-2 hidden-xs menu-col">
+    
+    <ul class="nav nav-tabs" role="tablist">
+    % for cat, catdfn in marc_categories()
+      {% if cat == 'bib' %}
+        <li role="presentation" class="active">
+      {% else %}
+        <li role="presentation">
+      {% endif %}
+        <a href="#tab-${cat}" aria-controls="tab-${cat}" role="tab" data-toggle="tab">${cat}</a>
+      </li>
+    % endfor
+    </ul>
+    <div class="tab-content">
+    % for cat, catdfn in marc_categories()
+      {% if cat == 'bib' %}
+        <div role="tabpanel" class="tab-pane active" id="tab-${cat}">
+      {% else %}
+        <div role="tabpanel" class="tab-pane" id="tab-${cat}">
+      {% endif %}
+        <ul>
+          % for tag, kind, dfn in fields(catdfn)
+          <li>
+            <a href="#${cat}-${tag}">${tag}</a>
+          </li>
+          % endfor
+        </ul>
+      </div>
+    % endfor
+    </div>
+    
+  </div>
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 content-col">
   <section>
     <h1>MARCFrame</h1>
     <p>KB/LIBRIS mappings of MARC to RDF vocabulary terms.</p>
@@ -49,13 +58,13 @@
       <div class="cat" id="${cat}">
         <h3>${cat}</h3>
         <p>thingLink: ${catdfn.thingLink}</p>
-        <table class="table table-bordered">
+        <table class="table table-bordered marcframetable">
           % for tag, kind, dfn in fields(catdfn)
             <tr>
               <th><div id="${cat}-${tag}">${tag}</div></th>
               <td>
                 % for key in ['inherit', 'aboutType', 'link', 'addLink', 'resourceType', 'property', 'addProperty', 'i1', 'i2', 'match-i1', 'match-i2']
-                  % if key in dfn
+                  % if dfn.get(key)
                     <dl class="dl-horizontal">
                       <dt>${key}:</dt>
                       <dd>
@@ -93,7 +102,7 @@
               </td>
               <td class="col-md-6">
                 % if dfn._spec
-                  <ol>
+                  <ul class="example">
                     % for spec in dfn._spec
                       % if spec.source and spec.result
                         <li>
@@ -109,7 +118,7 @@
                         </li>
                       % endif
                     % endfor
-                  </ol>
+                  </ul>
                 % endif
               </td>
             </tr>
@@ -138,21 +147,22 @@
       </div>
     % endfor
   </section>
+</div>
 % endblock
 
 % macro show_value(cat, tag_or_code, key, value)
   % if (not isinstance(value, basestring) or not value.startswith(('@', '_'))
       ) and not isinstance(value, bool) and key in (
         'aboutType', 'link', 'addLink', 'property', 'addProperty', 'resourceType')
-    <a href="../vocabview/#${value}">${value}</a>
+    <a href="/vocabview/#${value}" class="${key}">${value}</a>
   % elif key == 'tokenMap'
     <a href="#map-${value}">${value}</a>
   % elif key == 'inherit' and value.isdigit()
-    <a href="#${cat}-${value}">${cat} ${value}</a>
+    <a href="#${cat}-${value}" class="chip-marc">${cat} ${value}</a>
   % elif key == 'inherit' and ':' in value
-    TEST <a href="#${value.replace(':', '-')}">${value.replace(':', ' ')}</a>
+    <a href="#${value.replace(':', '-')}" class="chip-marc">${value.replace(':', ' ')}</a>
   % elif key == 'inherit'
-    <a href="#${value}-${tag_or_code}">${value} ${tag_or_code}</a>
+    <a href="#${value}-${tag_or_code}" class="chip-marc">${value} ${tag_or_code}</a>
   % elif isinstance(value, dict)
     <table class="table table-condensed table-striped">
         % for key, val in sorted(value.items())
@@ -185,7 +195,7 @@
         <th><div id="${cat}-${tag}-${key}">${key}</div></th>
         <td>
           % for k, v in sorted(subdfn.items())
-            % if not k.startswith('TODO:')
+            % if not k.startswith('TODO:') and v
               <i>${k}</i>: ${show_value(cat, key, k, v)}
               <br />
             % endif

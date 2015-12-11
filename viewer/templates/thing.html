@@ -2,7 +2,14 @@
 
 {% block title %}${vocab.labelgetter(thing)}{% endblock %}
 
-{% block bodyattrs %}vocab="http://schema.org/"{% endblock %}
+{% block bodyattrs %}vocab="http://schema.org/" id="thing"{% endblock %}
+{% block navcontainerclass %} container {% endblock %}
+
+% block scripts
+  <script src="/vendor/jquery/js/jquery.js"></script>
+  <script src="/js/vocabloader.js"></script>
+  <script src="/js/thing.js"></script>
+% endblock
 
 {% block navpath %}
   <li><a href="${url_for('thingview.listview')}">Saker</a></li>
@@ -10,17 +17,21 @@
 {% endblock %}
 
 % block content
+
   <div class="row">
     <div class="col-md-9">
-      ${viewthing(thing, element='article', classes='panel panel-default')}
+      ${viewthing(thing, element='article', classes='panel panel-default main-item')}
     </div>
-    % if not rel and thing[REV]
-      <div class="col-md-3">
-        <h4>${ui[REV].label}</h4>
+    % if not rel and thing[REVERSE]
+      <div class="col-md-3 side-view">
+        <h4>${ui[REVERSE].label}</h4>
+        <p>
+          <a href="${url_for('.find', o=thing[ID], limit=page_limit)}">${ui.SEE_ALL.label}&hellip;</a>
+        </p>
         <dl resource="${thing[ID]}">
-          % for k, vs in thing[REV].items()
+          % for k, vs in thing[REVERSE].items()
             % set p = vocab.index[k] or {'curie': k}
-          <dt>&larr; ${termref(p)}</dt>
+          <dt>Med relation: ${termref(p)}</dt>
           <dd>
               % for v in vs
                 ${viewthing(v, rev=p.curie)}
@@ -37,11 +48,12 @@
   % set thing_id = thing[ID]
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
-    % set t = vocab.index[typename[0]]
+    % set t = vocab.index[typename[0]] or vocab.index[typename[1]] or {}
   % else
     % set t = vocab.index[typename] or {}
   % endif
-  <${element} class="${classes}"
+  % set as_chip = rev or (rel and 'quotedFromGraph' in thing or len(thing) < 2)
+  <${element} class="${classes}{% if as_chip%} link-item{% endif %}"
 
       {% if rel %} property="${rel}"{% endif %}
       {% if rev %} rev="${rev}"{% endif %}
@@ -50,26 +62,28 @@
 
     % if ID in thing
       <header class="panel-heading">
-        <h1 class="panel-title">
-          % if thing_id.startswith(('http:', 'https:'))
+          % if thing_id.startswith(('http:', 'https:')) or '?' in thing_id
             % set thing_url = thing_id
-          % elif config.FREEZER_DESTINATION and rel == 'describedBy' or rel == 'sameAs'
-            % set thing_url = ""
           % elif thing_id.startswith('/def/terms#')
-            % set thing_url = url_for('vocabview.vocabview') +'#'+ thing_id.split('#', 1)[-1]
+            % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
           % else
             % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
           % endif
-          <a href="${thing_url}">
-            ${vocab.labelgetter(db.index.get(thing_id, thing))}</a>
-          ${termref(t, classes='btn btn-primary')}
-          <a href="${thing_url}">
-            <small><code>&lt;${thing_id}&gt;</code></small></a>
+          % if t
+            ${termref(t, classes='', labeltype='label-class')}
+          % endif
+        <a href="${thing_url}" class="thing-id">
+          <small><code>&lt;${thing_id}&gt;</code></small>
+        </a>
+        <h1 class="panel-title">
+          <a href="${thing_url}" class="thing-label">
+            ${ldview.getlabel(thing)}
+          </a>
         </h1>
       </header>
     % endif
 
-    % if len(thing) > 1
+    % if not as_chip
       <div class="panel-body">
         <dl class="{% if not rel %}dl-horizontal{% endif %}">
 
@@ -95,8 +109,9 @@
           #}
 
           % for k in vocab.sortedkeys(thing)
-            % if k in vocab.index or k != REV
+            % if k in vocab.index or k != REVERSE
               % set p = vocab.index[k] or {'curie': k}
+              {% if loop.index > 1 %}<hr/>{% endif %}
               <dt>
                 ${termref(p)}
               </dt>
@@ -136,18 +151,13 @@
   </${element}>
 % endmacro
 
-% macro termref(term, classes='')
+% macro termref(term, classes='', labeltype='')
   % set label = term.curie
   % if term.label
-    % set label = term.label.title()
+    % set label = term.label[0].upper() + term.label[1:]
   % endif
   % if term.curie
-    % if config.FREEZER_DESTINATION
-      % set term_url = url_for('vocabview.vocabview') +'#'+ term.curie
-    % else
-      % set term_url = url_for('thingview.termview', term=term.curie)
-    % endif
-    <a href="${term_url}"><span
+    <a href="/vocabview/#${term.curie}" class="${labeltype}"><span
         class="${classes}">${label}</span></a>
   % elif term.label
     ${label}
@@ -157,17 +167,17 @@
 % endmacro
 
 % block footer
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default" role="navigation">
     <p class="navbar-text">Other formats:</p>
     <ul class="nav nav-pills">
       <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='jsonld')}">JSON-LD</a>
+        <a href="${data_url('jsonld')}">JSON-LD</a>
       </li>
       <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='ttl')}">Turtle</a>
+        <a href="${data_url('ttl')}">Turtle</a>
       </li>
       <li>
-        <a href="${url_for('thingview.thingview', path=path, suffix='rdf')}">RDF/XML</a>
+        <a href="${data_url('rdf')}">RDF/XML</a>
       </li>
     </ul>
   </nav>

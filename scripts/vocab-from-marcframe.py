@@ -9,10 +9,10 @@ from util.graphcache import GraphCache, vocab_source_map
 SDO = Namespace("http://schema.org/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 
-BASE = "http://libris.kb.se/"
-TERMS = Namespace(BASE + "def/terms#")
-DATASET_BASE = Namespace("http://w3id.org/libris/sys/dataset/")
-ENUM_BASEPATH = "/def/enum/"
+BASE = "http://id.kb.se/"
+TERMS = Namespace(BASE + "vocab/")
+DATASET_BASE = Namespace(BASE + "dataset/")
+ENUM_BASEPATH = "/marc/"
 
 SKIP = ('Other', 'Unspecified', 'Unknown')
 

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect
 from rdflib import Graph, URIRef, Literal, BNode, RDF, RDFS, OWL
+from rdflib.resource import Resource
 from rdflib.namespace import SKOS, Namespace, ClosedNamespace
 from util.graphcache import GraphCache, vocab_source_map
 
@@ -13,13 +14,23 @@ rdfutils = {name: obj for name, obj in globals().items()
                 if isinstance(obj, (Namespace, ClosedNamespace))
                     or obj in (URIRef, Literal, BNode)}
 
-vocab_paths = ["def/terms.ttl", "sys/app/help.jsonld"]
-graphcache = GraphCache("cache/graph-cache")
-ns_mgr = None
+graphcache = None
+vocab_paths = None
 
 app = Blueprint('vocabview', __name__)
 
 app.context_processor(lambda: rdfutils)
+
+@app.record
+def setup_app(setup_state):
+    global graphcache
+    global vocab_paths
+    config = setup_state.app.config
+    graphcache = GraphCache(config['GRAPH_CACHE'])
+    vocab_uri = config['VOCAB_IRI']
+    ns_mgr = graphcache.graph.namespace_manager
+    ns_mgr.bind("", vocab_uri)
+    vocab_paths = config['VOCAB_SOURCES'][:1]
 
 @app.route('/vocabview/')
 def redir_vocabview():
@@ -27,16 +38,13 @@ def redir_vocabview():
 
 @app.route('/def/terms.html')
 def vocabview():
-    global ns_mgr
     graph = None
+    ns_mgr = graphcache.graph.namespace_manager
     for path in vocab_paths:
         lgraph = graphcache.load(path)
         if not graph:
             graph = lgraph
-            if ns_mgr:
-                graph.namespace_manager = ns_mgr
-            else:
-                ns_mgr = graph.namespace_manager
+            graph.namespace_manager = ns_mgr
         else:
             graph += lgraph
     for url in graph.objects(None, OWL.imports):
@@ -68,12 +76,18 @@ def vocabview():
                 return label
         return label
 
+    def find_references(items):
+        for o in items:
+            ref = o.identifier if isinstance(o, Resource) else o
+            if isinstance(ref, URIRef):
+                yield o
+
     def link(obj):
         if ':' in obj.qname() and not any(obj.objects(None)):
             return obj.identifier
         return '#' + obj.qname()
 
     def listclass(o):
-        return 'ext' if ':' in o.qname() else ''
+        return 'ext' if ':' in o.qname() else 'loc'
 
     return render_template('vocab.html', **vars())

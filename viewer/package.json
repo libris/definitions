@@ -12,15 +12,16 @@
     "bower-installer": "~1.2.0"
   },
   "scripts": {
+    "postinstall": "mkdir -p static/build && npm run vendor && npm run app",
     "vendor": "npm run vendor:fetch && parallelshell 'npm run vendor:js' 'npm run vendor:css'",
     "vendor:fetch": "bower-installer",
     "vendor:js": "uglifyjs static/vendor/{jquery,lodash,bootstrap,d3}/js/*.js -o static/build/vendor.min.js --source-map static/build/vendor.min.js.map --source-map-url ./vendor.min.js.map --source-map-root /",
     "vendor:css": "cleancss static/vendor/*/css/*.css -o static/build/vendor.min.css #--source-map",
-    "build": "parallelshell 'npm run build:js' 'npm run build:less'",
-    "build:js": "uglifyjs static/js/*.js -o static/build/app.min.js --source-map static/build/app.min.js.map --source-map-url ./app.min.js.map --source-map-root /",
-    "build:less": "lessc static/less/*.less static/build/app.css --source-map=static/build/app.css.map",
+    "app": "parallelshell 'npm run app:js' 'npm run app:less'",
+    "app:js": "uglifyjs static/js/*.js -o static/build/app.min.js --source-map static/build/app.min.js.map --source-map-url ./app.min.js.map --source-map-root /",
+    "app:less": "lessc static/less/main.less static/build/app.css --source-map=static/build/app.css.map",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:less'",
-    "watch:js": "watch 'npm run build:js' static/js/",
-    "watch:less": "watch 'npm run build:less' static/less/"
+    "watch:js": "watch 'npm run app:js' static/js/",
+    "watch:less": "watch 'npm run app:less' static/less/"
   }
 }

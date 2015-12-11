@@ -1,41 +1,36 @@
 $(function () {
-
-  var loaded = false;
-  var embedvocab = $('<div id="embedvocab"></div>').appendTo('body');
-
-  $(document).on('click', 'body', function (event) {
-    $('.state-active').removeClass('state-active');
+  
+  $(document).on('click', ".menu-col .tab-content a, .marcframetable a[href^='#']", function(e) {
+    e.preventDefault();
+    var ref = $(this).attr('href');
+    setActive(ref);
   });
-
-  $(document).on('click', 'article.panel', function (event) {
-    event.stopPropagation();
-  });
-
-  var termLinkSel = 'a[href^="../vocabview"], article.panel a[href^="#"]';
-  $(document).on('click', termLinkSel, function () {
-    var ref = $(this).attr('href').replace(/[^#]*#(.*)/, "$1");
-    function display() {
-      $('.state-active').removeClass('state-active');
-      $('#' + ref).addClass('state-active');
+  
+  function setActive(ref) {
+    
+    // Log
+    var logRef = ref.split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Menu click', logRef]);
+    
+    var itemOrg = ref;
+    if(ref.indexOf(':') != -1) {
+      var parts = ref.split(':');
+      itemOrg = ref;
+      ref = parts.join('\\:');
     }
-    if (!loaded) {
-      embedvocab.append('<article class="panel state-active text-center">' +
-                        '<i class="glyphicon glyphicon-refresh btn-lg"></i></article>');
-      embedvocab.load("/vocabview/ article.panel[id]", function() {
-        $('article.panel[id]', this).
-          addClass('popover').
-          addClass('right').
-          prepend('<div class="arrow"></div>');
-        $('a[href^="http"]').attr('target', '_blank').click(function (event) {
-          event.stopPropagation();
-        });
-        display();
-      });
-      loaded = true;
-    } else {
-      display();
+    window.location.hash = itemOrg;
+    $('body').scrollTop($(ref).offset().top - 50);
+  };
+  
+  $(document).ready(function () {
+    // Target Navigation
+    if(window.location.hash.length > 0) {
+      setTimeout(function () {
+        setActive(window.location.hash);
+      }, 250);
     }
-    return false;
-  });
+  })
+  
 
 });

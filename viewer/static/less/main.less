@@ -1,0 +1,127 @@
+// ----------- IMPORT CORES ---------
+// Import standard bootstrap
+@import '../vendor/bootstrap/less/bootstrap.less';
+// Import KB styles
+@import '../vendor/kungbib-styles/less/kb-styles.less';
+
+// ----------- IMPORT COMPONENTS ----
+@import 'index.less';
+@import 'vocab.less';
+@import 'graph.less';
+@import 'list.less';
+@import 'thing.less';
+@import 'items.less';
+@import 'marcframe.less';
+
+// ----------- VARIABLES ------------
+@bg-site: #F7F7F7;
+@bg-content: @white;
+@bg-navbar: @white;
+@bg-sidebars: darken(@white, 5%);
+@border-navbar: @gray-light;
+@bg-footer: darken(@white, 5%);
+// @bg-jumbotron: #76C79E;
+@bg-jumbotron: lighten(@happy-muted-denim,15%);
+@brand-primary: @happy-muted-denim;
+@border-footer: @grey-light;
+@color-class: @happy-blue;
+@color-prop: @happy-magenta;
+@color-prop-list: @grey;
+@color-ext: #d51;
+@color-id: #c7254e;
+
+@color-headers: #555;
+
+// ----------- FONTS ----------------
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../vendor/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+// ----------- BASE STYLES ----------
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: @bg-site;
+}
+
+body.loading * {
+  cursor: progress;
+}
+
+body > .navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 999;
+  border: solid @border-navbar;
+  background-color: @bg-navbar;
+  border-width: 0px 0px 1px 0px;
+}
+
+.navbar-header {
+  margin-left: 1em;
+}
+
+.dropdown-menu.list-inline {
+  width: 42em;
+}
+.dropdown-menu.list-inline > li > a {
+  padding: 2px 8px;
+}
+
+tbody td, tbody th {
+  vertical-align: top;
+}
+
+.has-navbar [id]:before {
+  display: block;
+  content: " ";
+  height: 50px;
+  margin-top: -50px;
+}
+
+footer {
+  background-color: @bg-footer;
+  border: solid @border-footer;
+  border-width: 1px 0px 0px 0px;
+}
+
+.popover.state-active {
+  display: block;
+  width: 460px;
+  max-width: 460px;
+  z-index: 990;
+  .panel-body {
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
+.badge {
+  background-color: fadeout(@brand-primary, 30%);
+}
+
+.rdf-class, .rdf-property {
+  margin: 0 1.0em 0.6em 0;
+  float: left;
+  width: 100%;
+  max-width: 800px;
+  .loc {
+    // margin-bottom: 10px;
+    .chip-prop {
+      display: inline;
+      line-height: 1.7;
+    }
+    .chip-class {
+      display: inline;
+      line-height: 1.7;
+    }
+  }
+}

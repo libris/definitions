@@ -35,5 +35,43 @@ window.onload = function () {
   toggle.addEventListener('click', function () {
     document.body.classList.toggle('graph')
   })
+  
+  // Target Navigation
+  if(window.location.hash.length > 0) {
+    setTimeout(function () {
+      setActive(window.location.hash);
+    }, 250);
+  }
+  
+  function setActive(item) {
+    
+    var itemOrg = item;
+    if(item.indexOf(':') != -1) {
+      var parts = item.split(':');
+      itemOrg = item;
+      item = parts.join('\\:');
+    }
+    window.location.hash = itemOrg;
+    $('.active-item').removeClass('active-item');
+    $('body').scrollTop($(item).offset().top - 100);
+    $(item).addClass('active-item');
+  };
+  
+  $('body#vocab .menu-col a').click(function (e) {
+    e.preventDefault();
+    setActive($(this).attr('href'));
+    // Log
+    var ref = $(this).attr('href').split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Menu click', ref]);
+  });
+  $('body#vocab .loc a').click(function (e) {
+    e.preventDefault();
+    setActive($(this).attr('href'));
+    // Log
+    var ref = $(this).attr('href').split('#')[1];
+    var layoutRef = $('body').attr('id');
+    if (typeof(_paq) !== 'undefined') _paq.push(['trackEvent', layoutRef, 'Card click', ref]);
+  });
 
 }

@@ -2,24 +2,28 @@
 <html lang="${lang}">
   <head>
     <meta charset="utf-8" />
-    <title>{% block title %}{% endblock %} : definitioner : id.kb.se</title>
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <title>id.kb.se - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/build/app.css" />
     {% block stylesheets %}{% endblock %}
   </head>
   <body {% block bodyattrs %}{% endblock %}>
     {% block navigation %}
-      <nav class="navbar navbar-default">
-        <div class="navbar-header">
+    <nav class="navbar navbar-default">
+      <div class="{% block navcontainerclass %}container{% endblock %}">
+        <div class="navbar-header" role="banner">
+          <div class="navbar-brand navbar-logo">
+                <a href="/"><img src="/assets/kb_logo_black.svg" alt="Kungliga Bibliotekets logotyp"></a>
+          </div>
           <a class="navbar-brand" href="/">id.kb.se</a>
         </div>
-        <ol class="nav navbar-nav">
-          {% block navpath %}
-            <li class="active"><a>${self.title()}</a></li>
-          {% endblock %}
+        <ol class="nav navbar-nav navbar-right" role="navigation">
+          <li class=""><a href="${url_for('vocabview.vocabview')}"><i class="fa fa-book"></i> Basvokabulär</a></li>
         </ol>
-      </nav>
+      </div>
+    </nav>
     {% endblock %}
+    {% block jumbotron %}{% endblock %}
     <main class="{% block containerclass %}container{% endblock %}">
       {% block content %}{% endblock %}
     </main>
@@ -29,5 +33,31 @@
     <script src="/vendor/jquery/js/jquery.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.js"></script>
     {% block scripts %}{% endblock %}
+    <!-- Piwik -->
+    {% if config.ENVIRONMENT == 'STG' %}
+    <script type="text/javascript">
+      var siteId = 29;
+    </script>
+    {% elif config.ENVIRONMENT == 'PROD' %}
+    <script type="text/javascript">
+      var siteId = 27;
+    </script>
+    {% endif %}
+    <script type="text/javascript">
+      if (typeof siteId !== 'undefined') {
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//analytics.kb.se/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', siteId]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      }
+    
+    </script>
+    <!-- End Piwik Code -->
   </body>
 </html>

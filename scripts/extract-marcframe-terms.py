@@ -10,6 +10,9 @@ def get_keywords(marcframe, ignore_speced=True):
             if not field:
                 continue
             is_speced = any(kw in field for kw in ['_specSource', '_spec'])
+            if not isinstance(field, dict):
+                #print "Skipping:", field
+                continue
             for kw, obj in field.items():
                 if 'NOTE:' in kw.upper() or 'TODO' in kw.upper():
                     continue
