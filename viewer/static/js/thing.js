@@ -1,7 +1,9 @@
 $(function () {
 
-  // Copy everything
+  
   var createDuplicates = function () {
+    // Copies every chip so that we can use absolute positioning on
+    // the expanded chips without breaking the layout.
     $('.link-item').each(function() {
       var $subject = $(this);
       var $copy = $subject.clone();
@@ -16,11 +18,10 @@ $(function () {
     var resource = elem.attr('resource');
     setTimeout(function() {
       if(elem.hasClass('to-be-active')) {
-        
         elem.addClass('active');
         elem.css('width', 500);
-        
         if(!elem.hasClass('adjusted-top')) {
+          // Adjust position so that the chip "grows" around the prefLabel
           var $parent = elem.closest('li');
           if ($parent.length == 0) {
             $parent = elem.closest('dd');
@@ -46,7 +47,8 @@ $(function () {
 
   $(document).ready(function () {
     setTimeout(function() {
-      
+      // Small delay to let the chips stack correctly in their lists
+      // before we copy every position.
       createDuplicates();
       
       $('.link-item-copy').hover(function() {
