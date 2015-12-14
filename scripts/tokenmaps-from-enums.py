@@ -45,8 +45,10 @@ for coll in sorted(cg.resource(MAP.CollectionClass).subjects(RDF.type)):
             if token_key in token_map:
                 dup += 1
                 token_key = token_key +'-'+ str(dup)
+            token_value = dfn.identifier.replace('http://id.kb.se/marc/', 'marc:')
             token_map[token_key] = False if dfn[OWL.sameAs:SDO.False] \
-                    else dfn.identifier.replace('http://id.kb.se/marc/', 'marc:')
+                    else None if token_value in ('marc:Undefined', 'marc:Unknown') \
+                    else token_value
     #if coll[RDFS.subClassOf:MAP.Boolean]:
     #    token_map['__bool__'] = True
 dump(token_maps)
