@@ -29,6 +29,31 @@ propname_map = {
     'type': 'holdingType',
 }
 
+canonical_coll_id_map = {
+  "ReproductionType": ["ComputerFileAspectType", "SoundAspectType", "MicroformAspectType", "MotionPicAspectType", "ProjGraphAspectType", "NonProjAspectType", "GlobeAspectType", "MapAspectType"],
+  "AudienceType": ["ComputerAudienceType", "MusicAudienceType", "VisualAudienceType", "BooksAudienceType"],
+  "FilmBaseType": ["MotionPicBaseType", "MicroformBaseType"],
+  "ColorType": ["MapColorType", "GlobeColorType"],
+  "HeadingType": ["HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
+  "IndexType": ["MapsIndexType", "BooksIndexType"],
+  "ItemType": ["SerialsItemType", "VisualItemType", "MusicItemType", "MapsItemType", "MixedItemType"],
+  "MediumType": ["MotionPicMediumType", "ProjGraphMediumType", "VideoMediumType"],
+  "PolarityType": ["MicroformPosNegType", "MapPosNegType"],
+  "MotionPicConfigurationOrVideoPlaybackType": ["MotionPicConfigurationType", "VideoPlaybackType"],
+  "NonProjectedType": ["NonProjSecondaryType", "NonProjPrimaryType"],
+  "ColorType": ["ProjGraphColorType", "NonProjColorType"],
+  "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
+  "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
+  "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
+  "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"],
+  "HoldingType": ["TypeType"]
+}
+
+get_canonical_coll_id = {alias: key
+    for key, aliases in canonical_coll_id_map.items()
+        for alias in aliases}.get
+
+
 fixprop_typerefs = {
     '000': [
         'typeOfRecord',
@@ -73,29 +98,6 @@ common_columns = {
     '008': {"[0:6]", "[6:7]", "[7:11]", "[11:15]", "[15:18]", "[35:38]", "[38:39]", "[39:40]"}
 }
 
-canonical_coll_id_map = {
-  "ReproductionType": ["ComputerFileAspectType", "SoundAspectType", "MicroformAspectType", "MotionPicAspectType", "ProjGraphAspectType", "NonProjAspectType", "GlobeAspectType", "MapAspectType"],
-  "AudienceType": ["ComputerAudienceType", "MusicAudienceType", "VisualAudienceType", "BooksAudienceType"],
-  "FilmBaseType": ["MotionPicBaseType", "MicroformBaseType"],
-  "ColorType": ["MapColorType", "GlobeColorType"],
-  "HeadingType": ["HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
-  "IndexType": ["MapsIndexType", "BooksIndexType"],
-  "ItemType": ["SerialsItemType", "VisualItemType", "MusicItemType", "MapsItemType", "MixedItemType"],
-  "MediumType": ["MotionPicMediumType", "ProjGraphMediumType", "VideoMediumType"],
-  "PolarityType": ["MicroformPosNegType", "MapPosNegType"],
-  "MotionPicConfigurationOrVideoPlaybackType": ["MotionPicConfigurationType", "VideoPlaybackType"],
-  "NonProjectedType": ["NonProjSecondaryType", "NonProjPrimaryType"],
-  "ColorType": ["ProjGraphColorType", "NonProjColorType"],
-  "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
-  "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
-  "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
-  "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"],
-  "HoldingType": ["TypeType"]
-}
-
-get_canonical_coll_id = {alias: key
-    for key, aliases in canonical_coll_id_map.items()
-        for alias in aliases}.get
 
 TOKEN_MAPS = OrderedDict()
 
