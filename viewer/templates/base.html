@@ -15,7 +15,16 @@
           <div class="navbar-brand navbar-logo">
                 <a href="/"><img src="/assets/kb_logo_black.svg" alt="Kungliga Bibliotekets logotyp"></a>
           </div>
-          <a class="navbar-brand" href="/">id.kb.se</a>
+          <a class="navbar-brand" href="/">id.kb.se
+            <span class="environment-label">
+              {% if config.ENVIRONMENT == 'STG' %}
+                STG
+              {% elif config.ENVIRONMENT == 'PROD' %}
+              {% else %}
+                DEV
+              {% endif %}
+            </span>
+          </a>
         </div>
         <ol class="nav navbar-nav navbar-right" role="navigation">
           <li class=""><a href="${url_for('vocabview.vocabview')}"><i class="fa fa-book"></i> Basvokabulär</a></li>
