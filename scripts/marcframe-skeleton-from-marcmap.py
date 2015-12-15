@@ -27,7 +27,45 @@ propname_map = {
     'item': 'additionalCarrierType',
     'format': 'additionalType',
     'type': 'holdingType',
+
+    'receipt': 'acquisitionStatus',
+    'method': 'acquisitionMethod',
+    'generalRetention': 'retentionPolicy',
+    'policyType': 'specificRetentionPolicy',
+    'unitType': 'retentionPolicyUnitType',
+    'reproduction': 'reproductionPolicy',
 }
+
+canonical_coll_id_map = {
+    "ReproductionType": ["ComputerFileAspectType", "SoundAspectType", "MicroformAspectType", "MotionPicAspectType", "ProjGraphAspectType", "NonProjAspectType", "GlobeAspectType", "MapAspectType"],
+    "AudienceType": ["ComputerAudienceType", "MusicAudienceType", "VisualAudienceType", "BooksAudienceType"],
+    "FilmBaseType": ["MotionPicBaseType", "MicroformBaseType"],
+    "ColorType": ["MapColorType", "GlobeColorType"],
+    "HeadingType": ["HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
+    "IndexType": ["MapsIndexType", "BooksIndexType"],
+    "ItemType": ["SerialsItemType", "VisualItemType", "MusicItemType", "MapsItemType", "MixedItemType"],
+    "MediumType": ["MotionPicMediumType", "ProjGraphMediumType", "VideoMediumType"],
+    "PolarityType": ["MicroformPosNegType", "MapPosNegType"],
+    "MotionPicConfigurationOrVideoPlaybackType": ["MotionPicConfigurationType", "VideoPlaybackType"],
+    "NonProjectedType": ["NonProjSecondaryType", "NonProjPrimaryType"],
+    "ColorType": ["ProjGraphColorType", "NonProjColorType"],
+    "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
+    "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
+    "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
+    "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"],
+    "HoldingType": ["Type"],
+    'AcquisitionStatusType': ['ReceiptType'],
+    'AcquisitionMethodType': ['MethodType'],
+    'RetentionPolicyType': ['GeneralRetentionType'],
+    'SpecificRetentionPolicyType': ['PolicyType'],
+    'RetentionPolicyUnitType': ['UnitType'],
+    'ReproductionPolicyType': ['ReproductionType'],
+}
+
+get_canonical_coll_id = {alias: key
+    for key, aliases in canonical_coll_id_map.items()
+        for alias in aliases}.get
+
 
 fixprop_typerefs = {
     '000': [
@@ -73,29 +111,6 @@ common_columns = {
     '008': {"[0:6]", "[6:7]", "[7:11]", "[11:15]", "[15:18]", "[35:38]", "[38:39]", "[39:40]"}
 }
 
-canonical_coll_id_map = {
-  "ReproductionType": ["ComputerFileAspectType", "SoundAspectType", "MicroformAspectType", "MotionPicAspectType", "ProjGraphAspectType", "NonProjAspectType", "GlobeAspectType", "MapAspectType"],
-  "AudienceType": ["ComputerAudienceType", "MusicAudienceType", "VisualAudienceType", "BooksAudienceType"],
-  "FilmBaseType": ["MotionPicBaseType", "MicroformBaseType"],
-  "ColorType": ["MapColorType", "GlobeColorType"],
-  "HeadingType": ["HeadingSeriesType", "HeadingMainType", "HeadingSubjectType"],
-  "IndexType": ["MapsIndexType", "BooksIndexType"],
-  "ItemType": ["SerialsItemType", "VisualItemType", "MusicItemType", "MapsItemType", "MixedItemType"],
-  "MediumType": ["MotionPicMediumType", "ProjGraphMediumType", "VideoMediumType"],
-  "PolarityType": ["MicroformPosNegType", "MapPosNegType"],
-  "MotionPicConfigurationOrVideoPlaybackType": ["MotionPicConfigurationType", "VideoPlaybackType"],
-  "NonProjectedType": ["NonProjSecondaryType", "NonProjPrimaryType"],
-  "ColorType": ["ProjGraphColorType", "NonProjColorType"],
-  "ReproductionType": ["GlobeReproductionType", "MapReproductionType"],
-  "ConferencePublicationType": ["SerialsConfPubType", "BooksConfPubType"],
-  "GovernmentPublicationType": ["SerialsGovtPubType", "ComputerGovtPubType", "BooksGovtPubType", "VisualGovtPubType", "MapsGovtPubType"],
-  "SoundType": ["ProjGraphSoundType", "MotionPicSoundType", "VideoSoundType"],
-  "HoldingType": ["TypeType"]
-}
-
-get_canonical_coll_id = {alias: key
-    for key, aliases in canonical_coll_id_map.items()
-        for alias in aliases}.get
 
 TOKEN_MAPS = OrderedDict()
 
@@ -195,7 +210,9 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
             enumtype, off_key), tokenmap_key
 
 def _make_collection_id(dfn_ref_key):
-    coll_id = dfn_ref_key[0].upper() + dfn_ref_key[1:] + 'Type'
+    coll_id = dfn_ref_key[0].upper() + dfn_ref_key[1:]
+    if not coll_id.endswith('Type'):
+        coll_id += 'Type'
     return coll_id
 
 def filtered_enum_values(valuemap):
@@ -224,13 +241,18 @@ def fixed_enum_value(key, dfn):
 
     if key in ('_', '|', '||', '|||') and any(t in subname
             for t in ('No', 'Ej', 'Inge', 'Uppgift_saknas')):
+        #if key == '_':
+        #    enum_id = 'Undefined'
+        #else:
         return False
 
-    if subname.replace('Obsolete', '') in {
+    elif subname.replace('Obsolete', '') in {
             'Unknown',
-            'Other', 'NotApplicable',
+            #'Other',
+            'NotApplicable',
             'Unspecified', 'Undefined'}:
         enum_id = None
+        #enum_id = 'Unknown'
     else:
         enum_id = subname
 
