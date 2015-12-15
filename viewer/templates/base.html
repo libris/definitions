@@ -17,11 +17,11 @@
           </div>
           <a class="navbar-brand" href="/">id.kb.se
             <span class="environment-label">
-              {% if config.ENVIRONMENT == 'STG' %}
-                STG
-              {% elif config.ENVIRONMENT == 'PROD' %}
+              {% if config.ENVIRONMENT == 'prod' %}
+              {% elif config.ENVIRONMENT %}
+                {{config.ENVIRONMENT}}
               {% else %}
-                DEV
+                dev
               {% endif %}
             </span>
           </a>
