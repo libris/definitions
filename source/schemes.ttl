@@ -7,10 +7,10 @@
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@base <http://id.kb.se/scheme/> .
+@base <https://id.kb.se/term/> .
 
-</scheme> a void:Dataset;
-    void:class skos:ConceptScheme .
+#</term> a void:Dataset;
+#    void:class skos:ConceptScheme .
 
 # See also:
 # <http://www.kb.se/katalogisering/Formathandboken/kallorsystem/>
@@ -25,28 +25,75 @@
 #        rdfs:range [ a owl:Restriction; owl:onProperty skos:inScheme; owl:hasValue ?scheme ] .
 #}
 
+# "ours"
+
 <sao> a skos:ConceptScheme;
+    skos:notation "SAO";
     dc:title "Svenska ämnesord"@sv;
-    skos:notation "SAO" .
+    dc:description """
+        Svenska ämnesord (SAO) är ett kontrollerat ämnesordssystem med nästan 38 000 termer från alla ämnesområden. Systemet har funnits sedan 2000 och används av de flesta högskole- och universitetsbibliotek och av många LIBRIS-bibliotek.
+
+        I Svenska ämnesord kan du hitta ämnesord för att söka i bibliotekskataloger och andra databaser, och för att indexera facklitteratur och annat material.
+
+        Svenska ämnesord används huvudsakligen inom ett brett humanistiskt och samhällsvetenskapligt område. För bibliotek som är specialiserade på medicin, naturvetenskap och teknik finns andra system som är lämpligare.
+
+        Svenska ämnesord följer IFLA:s  (International Federation of Library Associations and Institutions) principer och riktlinjer för ämnesord. De flesta termerna är hierarkiskt ordnade och de semantiska relationerna mellan termerna är angivna. De flesta ämnesorden har en klassifikationskod från SAB-systemet (Klassifikationssystem för svenska bibliotek). Från och med KB:s övergång till DDK (Dewey decimalklassifikation) i januari 2011 kompletteras ämnesorden istället med koder från DDK. Ämnesorden förses också med sina motsvarigheter i Library of Congress Subject Headings (LCSH).
+
+        Underhållet av Svenska ämnesord sköts av en redaktionskommitté vid Kungl. biblioteket.
+    """@sv;
+    void:inDataset </> .
 
 <saogf> a skos:ConceptScheme;
+    skos:notation "SAOGf";
     dc:title "SAO - Genre och form"@sv;
-    skos:notation "SAOGf" .
+    dc:description """
+        Genre/formtermer kan användas som ett komplement till klassifikation och ämnesord.
+
+        Verk som kännetecknas av snarlika motiv, teman eller andra innehållsliga faktorer förs till samma genre. För tidskrifter beskriver genrebeteckningen oftast tidskriftens innehållskategori, eller annars dess målgrupp eller typ av utgivare. Samtidigt ingår nästan alltid ett tillägg för tidskriftens form: -tidskrifter, -tidningar eller -press.
+        Form talar om att verket har en särskild form och/eller särskilt syfte. Eftersom det ofta är svårt att skilja form från genre är de sammanförda till samma fasett.
+    I vissa fall kan flera genre/formtermer användas.
+    """@sv;
+    void:inDataset </> .
 
 <barn> a skos:ConceptScheme;
+    skos:notation "Barn";
     dc:title "Barnämnesord"@sv;
-    skos:notation "Barn" .
+    dc:description """
+        Barnämnesorden (Barn) är en lista med termer för indexering av litteratur för barn och ungdomar. Den innehåller cirka 1 500 godkända termer. Dessa finns i databasen Svenska ämnesord sedan 2005.
+
+        Nya ämnesord för barnlistan godkänns av Svenska barnboksinstitutets redaktion för barnämnesord och förs därefter in i databasen.
+    """@sv;
+    void:inDataset </> .
+
+<gmgpc> a skos:ConceptScheme;
+    skos:notation "gmgpc//swe";
+    dc:title "Tesaurus för grafiskt material"@sv;
+    dc:description """
+        Tesaurus för grafiskt material (TGM) innehåller cirka 650 termer för form och genrer, framställningssätt och tekniker. De är avsedda att användas vid indexering av bilder, kartor och efemärt tryck.
+
+        TGM är en översättning av Library of Congress' Thesaurus for Graphic Materials II. Tesaurusen är hierarkiskt ordnad med de semantiska relationerna mellan termerna angivna. Listan infördes i databasen i oktober 2007.
+
+        Underhållet av TGM sköts av en redaktionskommitté vid Kungl. biblioteket tillsammans med bildexperter på biblioteket. Det finns också en referensgrupp för TGM med representanter för bibliotek, arkiv och museer.
+    """@sv;
+    void:inDataset </>;
+    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
+
+<fack> a skos:Collection;
+    dc:title "Facktermer"@sv;
+    void:inDataset </> .
+
+<skon> a skos:Collection;
+    dc:title "Skönlitterära termer"@sv;
+    void:inDataset </> .
+
+
+#<kaab/8> ?
+
+# "others"
 
 <albt> a skos:ConceptScheme;
     skos:notation "albt//swe";
     dc:title "Arbetslivsbibliotekets tesaurus"@sv .
-
-<gmgpc>
-    skos:notation "gmgpc//swe";
-    dc:title "Tesaurus för grafiskt material"@sv;
-    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
-
-#<kaab/8> ?
 
 <kao> a skos:ConceptScheme;
     skos:notation "kao";
@@ -93,7 +140,7 @@
 
 # Aliases for external schemes
 
-@base <http://id.kb.se/scheme/> . # TODO: base /alias/ ?
+#@base <https://id.kb.se/ext/term/> . # ?
 
 <agrovoc> a skos:ConceptScheme;
     dc:title "AgroVoc"@en;

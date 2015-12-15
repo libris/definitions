@@ -14,7 +14,7 @@ ESHOST='127.0.0.1'
 ES_INDEX = DBNAME
 ES_SNIFF_ON_START=True
 
-VOCAB_IRI = "http://id.kb.se/vocab/"
+VOCAB_IRI = "https://id.kb.se/vocab/"
 LANG = "sv"
 
 # TODO: Move relative locations below to application-defined storage when

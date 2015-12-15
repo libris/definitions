@@ -11,7 +11,7 @@ fpath = sys.argv[1]
 
 
 SDO = Namespace("http://schema.org/")
-MAP = Namespace("http://id.kb.se/marc/")
+MAP = Namespace("https://id.kb.se/marc/")
 
 cg = ConjunctiveGraph()
 cg.parse(sys.stdin if fpath == '-' else fpath, format=guess_format(fpath), publicID="source/")
@@ -45,7 +45,7 @@ for coll in sorted(cg.resource(MAP.CollectionClass).subjects(RDF.type)):
             if token_key in token_map:
                 dup += 1
                 token_key = token_key +'-'+ str(dup)
-            token_value = dfn.identifier.replace('http://id.kb.se/marc/', 'marc:')
+            token_value = dfn.identifier.replace('https://id.kb.se/marc/', 'marc:')
             token_map[token_key] = False if dfn[OWL.sameAs:SDO.False] \
                     else None if token_value in ('marc:Undefined', 'marc:Unknown') \
                     else token_value

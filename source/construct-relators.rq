@@ -9,7 +9,7 @@ construct {
         owl:equivalentProperty ?locrel;
         rdfs:subPropertyOf ?superrel .
 } where {
-    graph <http://id.kb.se/dataset/relators> {
+    graph <https://id.kb.se/dataset/relators> {
         {
             ?idrel ?p ?o .
         } union {
@@ -20,7 +20,7 @@ construct {
                     ?locrel rdfs:subPropertyOf ?locsuperrel .
                     optional {
                         ?locsuperrel skos:notation ?supernot .
-                        graph <http://id.kb.se/dataset/relators> {
+                        graph <https://id.kb.se/dataset/relators> {
                             ?idsuperrel skos:notation ?supernot .
                         }
                     }

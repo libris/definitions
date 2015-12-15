@@ -174,8 +174,6 @@ class View:
         self.chip_keys = {ID, TYPE, 'focus', 'mainEntity'} | set(self.vocab.label_keys)
 
     def get_record_data(self, item_id):
-        if item_id[0] != '/':
-            item_id = '/' + item_id
         record = self.storage.get_record(item_id)
         return record.data if record else None
 
@@ -189,7 +187,7 @@ class View:
         if records:
             return records[0].identifier
 
-    def get_search_results(self, req_args, make_find_url):
+    def get_search_results(self, req_args, make_find_url, base_uri=None):
         #s = req_args.get('s')
         p = req_args.get('p')
         o = req_args.get('o')
@@ -201,6 +199,7 @@ class View:
         if not isinstance(offset, (int, long)):
             offset = 0
 
+        total = None
         records = []
         items = []
         # TODO: unify find_by_relation and find_by_example, support the latter form here too
@@ -215,11 +214,26 @@ class View:
             records = self.storage.find_by_quotation(o, limit, offset)
         elif q and not p:
             # Search in elastic
-            dsl = { "query": { "query_string": { "query": "{0}".format(q) } } }
+            dsl = {
+                "query": {
+                    "bool": {
+                        "must": [
+                            {"query_string": { "query": "{0}".format(q) }}
+                        ],
+                        "should": [
+                            {"prefix" : {"@id": base_uri}},
+                            {"prefix" : {"sameAs.@id": base_uri}}
+                        ],
+                        "minimum_should_match": 1
+                    }
+                }
+            }
             # TODO: only ask ES for chip properties instead of post-processing
+            results = self.elastic.search(body=dsl, size=limit, from_=offset,
+                             index=self.es_index).get('hits')
+            total = results.get('total')
             items = [self.to_chip(r.get('_source')) for r in
-                     self.elastic.search(body=dsl, size=limit, from_=offset,
-                             index=self.es_index).get('hits').get('hits')]
+                     results.get('hits')]
 
         for rec in records:
             descs = rec.data['descriptions']
@@ -234,6 +248,8 @@ class View:
         results = OrderedDict({'@type': 'PagedCollection'})
         results['@id'] = make_find_url(offset=offset, **page_params)
         results['itemsPerPage'] = limit
+        if total:
+            results['totalItems'] = total
         results['firstPage'] = ref(make_find_url(**page_params))
         results['query'] = q
         results['value'] = value
@@ -268,6 +284,40 @@ class View:
                 if rtype in self.vocab.index]
         pairs.sort(key=lambda pair: pair[0]['label'])
         return pairs
+
+    def get_index_aggregate(self, base_uri):
+        #items = [self.to_chip(r.get('_source')) for r in
+        dsl = {
+            "size": 0,
+            "query" : {
+                "bool": {
+                    "should": [
+                        {"prefix" : {"@id": base_uri}},
+                        {"prefix" : {"sameAs.@id": base_uri}}
+                    ]
+                }
+            },
+            "aggs": {
+                "inScheme.@id": {
+                    "terms": {
+                        "field": "inScheme.@id",
+                        #"size": 1000
+                    },
+                    "aggs": {
+                        "@type": {
+                            "terms": {
+                                "field": "@type",
+                                #"size": 1000
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        results = self.elastic.search(body=dsl, size=dsl['size'],
+                index=self.es_index)
+        #]
+        return {'@type': 'DatasetPage', 'results': results}
 
     def get_decorated_data(self, data, add_references=False):
         if GRAPH in data:

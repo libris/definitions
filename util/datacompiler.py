@@ -2,6 +2,7 @@ from __future__ import unicode_literals, print_function
 __metaclass__ = type
 from collections import OrderedDict
 from os import makedirs, path as Path
+from urlparse import urlparse, urljoin
 import urllib2
 import sys
 import json
@@ -14,8 +15,9 @@ from rdflib_jsonld.parser import to_rdf
 
 class Compiler:
 
-    def __init__(self):
+    def __init__(self, dataset_id=None):
         self.datasets = {}
+        self.dataset_id = dataset_id
         self.cachedir = None
 
     def dataset(self, func):
@@ -45,10 +47,10 @@ class Compiler:
                 print("Dataset:", name)
             basepath, data = self.datasets[name]()
             self.write(data, name)
-            context, resultset = partition_dataset(basepath, data)
+            context, resultset = partition_dataset(urljoin(self.dataset_id, basepath), data)
             for key, node in resultset.items():
-                # TODO: add source
-                node = to_desc_form(node, '/dataset/%s' % name, source=None)
+                node = to_desc_form(node, dataset=self.dataset_id,
+                        source='/dataset/%s' % name)
                 if self.union_file:
                     print(json.dumps(node), file=self.union_file)
                 self.write(node, key)
@@ -163,7 +165,7 @@ def to_jsonld(source, contextref, contextobj=None):
     data['@context'] = [contexturi, contextobj] if contextobj else contexturi
 
     # customize to a convenient shape (within the bounds of JSON-LD)
-    base = contextobj.get('@base')
+    base = contextobj.get('@base') if contextobj else None
     to_embed = {}
     refs = {}
     for node in data['@graph']:
@@ -191,7 +193,7 @@ def partition_dataset(base, data):
         if not nodeid.startswith(base):
             print("Missing mapping of <%s> under base <%s>" % (nodeid, base))
             continue
-        rel_path = nodeid[1:]
+        rel_path = urlparse(nodeid).path[1:]
         resultset[rel_path] = node
     return data.get('@context'), resultset
 

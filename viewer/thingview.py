@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import re
 import json
+from urlparse import urlparse, urljoin
 
 from flask import request, Response, render_template, redirect, abort, url_for, send_file
 from flask import Blueprint, current_app
@@ -19,7 +20,16 @@ from .conneg import Negotiator
 from elasticsearch import Elasticsearch
 
 
-BASE_URI = "http://id.kb.se/"
+IDKBSE = "https://id.kb.se/"
+LIBRIS = "https://libris.kb.se/"
+DOMAIN_BASE_MAP = {
+    'localhost': IDKBSE,
+    '127.0.0.1': LIBRIS,
+    'id.local.dev': IDKBSE,
+    'libris.local.dev': LIBRIS,
+    'id.kb.se':  IDKBSE,
+    'libris.kb.se': LIBRIS,
+}
 
 ui_defs = {
     REVERSE: {'label': "Saker som länkar hit"},
@@ -28,6 +38,23 @@ ui_defs = {
     'SEARCH_RESULTS': {'label': "Sökresultat"},
     'SEE_ALL': {'label': "Se alla"},
 }
+
+def _get_base_uri(url=None):
+    url = url or request.url
+    domain = urlparse(url).netloc.split(':', 1)[0]
+    return DOMAIN_BASE_MAP.get(domain)
+
+def _get_served_uri(url, path):
+    mapped_base_uri = _get_base_uri(url)
+    if mapped_base_uri:
+        return urljoin(mapped_base_uri, path)
+    else:
+        return url
+
+# TODO: use to rewrite full canonical uri:s to non-prod environment url:s
+#def _get_viewer_url(uri):
+#    return urljoin(_get_base_uri(uri), urlparse(uri).path)
+
 
 app = Blueprint('thingview', __name__)
 
@@ -128,9 +155,9 @@ def _to_json(data):
     return json.dumps(data, indent=2, sort_keys=True,
             separators=(',', ': '), ensure_ascii=False).encode('utf-8')
 
-def _to_graph(data):
+def _to_graph(data, base=None):
     cg = ConjunctiveGraph()
-    cg.parse(data=json.dumps(data), base=BASE_URI,
+    cg.parse(data=json.dumps(data), base=base or IDKBSE,
                 format='json-ld', context=jsonld_context_file)
     return cg
 
@@ -147,11 +174,9 @@ def thingview(path, suffix=None):
     try:
         return current_app.send_static_file(path)
     except NotFound:
-        print 'not found', path
         pass
 
-    item_id = path if path.startswith(
-            ('/', 'http:', 'https:')) else '/' + path
+    item_id = _get_served_uri(request.url, path)
 
     thing = ldview.get_record_data(item_id)
     if thing:
@@ -190,7 +215,8 @@ def to_data_path(path, suffix):
 @app.route('/find.<suffix>')
 def find(suffix=None):
     make_find_url = lambda **kws: url_for('.find', **kws)
-    results = ldview.get_search_results(request.args, make_find_url)
+    results = ldview.get_search_results(request.args, make_find_url,
+            _get_base_uri(request.url))
     return rendered_response('/find', suffix, results)
 
 @app.route('/some')
@@ -250,6 +276,12 @@ def _tokenize(stuff):
         for part in stuff.split(" ")))
 
 
+@app.route('/datasets/')
+@app.route('/datasets/data.<suffix>')
+def datasetview(suffix=None):
+    results = ldview.get_index_aggregate(_get_base_uri(request.url))
+    return rendered_response('/dataset', suffix, results)
+
 @app.route('/list/')
 def listview():
     type_count = cache.get('type_count')
@@ -259,6 +291,6 @@ def listview():
     return render_template('list.html', type_count=type_count)
 
 
-@app.route('/def/terms/<term>')
-def termview(term):
-    return redirect('/vocabview#' + term, 303)
+#@app.route('/vocab/<term>')
+#def termview(term):
+#    return redirect('/vocabview#' + term, 303)

@@ -16,13 +16,13 @@ from util.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 # - do not add 'quoted' here but in loader (see TODO below)
 
 
-BASE = "http://id.kb.se/"
+BASE = "https://id.kb.se/"
 
 scriptpath = lambda pth: Path.join(Path.dirname(__file__), pth)
 
 def build_jsonld(graph):
     path = "sys/context/base.jsonld"
-    return to_jsonld(graph, ("../"+path, scriptpath(path)), {"@base": BASE})
+    return to_jsonld(graph, ("../"+path, scriptpath(path)))
 
 def to_camel_case(label):
     return "".join((s[0].upper() if i else s[0].lower()) + s[1:]
@@ -33,7 +33,7 @@ def _get_zipped_graph(path, name):
         return Graph().parse(zipped.open(name), format='turtle')
 
 
-compiler = Compiler()
+compiler = Compiler(dataset_id=BASE + 'dataset')
 
 
 #@compiler.dataset
@@ -70,15 +70,17 @@ def vocab():
 
 @compiler.dataset
 def enums():
-    data = load_json(scriptpath('source/enums.jsonld'))
-    data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
-    return "/enum/", data
+    #data = load_json(scriptpath('source/enums.jsonld'))
+    #data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
+    #return "/enum/", data
+    graph = Graph().parse(scriptpath('source/marc/enums.ttl'), format='turtle')
+    return "/marc/", build_jsonld(graph)
 
 
 @compiler.dataset
 def schemes():
     graph = Graph().parse(scriptpath('source/schemes.ttl'), format='turtle')
-    return "/scheme/", build_jsonld(graph)
+    return "/term/", build_jsonld(graph)
 
 
 @compiler.dataset

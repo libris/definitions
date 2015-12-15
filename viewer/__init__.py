@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 import operator
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, redirect, abort
 from . import thingview, vocabview, marcframeview
 
 
@@ -33,7 +33,8 @@ def format_number(n):
 
 @app.route('/')
 def index():
-    return render_template('index.html', **vars())
+    return redirect('/datasets/', 302)
+    #return render_template('index.html', **vars())
 
 @app.route('/favicon.ico')
 def favicon():

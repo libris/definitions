@@ -9,7 +9,7 @@ from util.graphcache import GraphCache, vocab_source_map
 SDO = Namespace("http://schema.org/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 
-BASE = "http://id.kb.se/"
+BASE = "https://id.kb.se/"
 TERMS = Namespace(BASE + "vocab/")
 DATASET_BASE = Namespace(BASE + "dataset/")
 ENUM_BASEPATH = "/marc/"

@@ -664,8 +664,8 @@ if __name__ == '__main__':
     if MAKE_VOCAB:
         import string
         terms = {
-            "@base": "http://id.kb.se/marc/",
-            "v": "http://id.kb.se/vocab/",
+            "@base": "https://id.kb.se/marc/",
+            "v": "https://id.kb.se/vocab/",
             #"inCollection": {"@reverse": "skos:member"},
             "inCollection": None,
             "prefLabel": {"@language": "sv"},
@@ -687,7 +687,7 @@ if __name__ == '__main__':
             "addProperty": {"@id": "sameAs", "@type": "@vocab"},
             "inScheme": {"@type": "@id"},
             "marcType": {"@id": "inScheme", "@type": "@id"},
-            "@vocab": "http://id.kb.se/marc/",
+            "@vocab": "https://id.kb.se/marc/",
             #'i1': None,
             #'i2': None,
         }
