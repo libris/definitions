@@ -10,6 +10,9 @@ $(function () {
       $subject.addClass('link-item-original');
       $copy.addClass('link-item-copy').appendTo($subject.parent());
       $copy.css('top', $subject.position().top).css('left', $subject.position().left);
+      if ($subject.width() > 260) {
+        $copy.css('min-width', $subject.width());
+      }
     });
   }
 
@@ -19,7 +22,6 @@ $(function () {
     setTimeout(function() {
       if(elem.hasClass('to-be-active')) {
         elem.addClass('active');
-        elem.css('width', 500);
         if(!elem.hasClass('adjusted-top')) {
           // Adjust position so that the chip "grows" around the prefLabel
           var $parent = elem.closest('li');

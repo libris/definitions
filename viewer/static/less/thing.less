@@ -85,6 +85,11 @@ body#thing {
     transition-property: opacity;
     opacity: 0;
     margin-top: 0px;
+    overflow-x: visible;
+    min-width: 260px;
+    .panel-heading {
+      overflow-x: visible;
+    }
     &:hover {
       z-index: 985;
     }
@@ -92,10 +97,24 @@ body#thing {
       opacity: 1;
       > .panel-heading > .label-class {
         display: inline-block;
+        margin-right: 1em;
+        margin-bottom: 3px;
       }
       .thing-id {
         display: inline-block;
         float: right;
+        max-width: 175px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &:hover {
+          overflow: visible;
+          text-overflow: none;
+          z-index: 986;
+        }
+      }
+      .panel-title {
+        width: 100%;
       }
     }
   }
