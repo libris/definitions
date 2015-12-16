@@ -1,0 +1,98 @@
+% extends "base.html"
+
+% macro viewscheme(scheme)
+  % if scheme.resource is not none and 'titleByLang' in scheme.resource
+  <div class="panel panel-default scheme-item">
+    <header class="panel-heading">
+      <h1 class="panel-title">
+        ${scheme.resource.titleByLang[lang]}
+      </h1>
+    </header>
+    <div class="panel-body">
+      % if 'descriptionByLang' in scheme.resource
+      <p class="description collapsed">
+        ${scheme.resource.descriptionByLang[lang]}
+      </p>
+      % endif
+        <ul>
+          % for type in scheme['@type'].buckets
+            <a class="list-group-item"
+                href="/find?q=*&limit=50&inScheme.@id=${scheme.key}&@type=${type.key}">
+                ${type.resource.label} <span class="badge">${format_number(type.doc_count)} st.</span>
+              </a>
+          % endfor
+        </ul>
+      </div>
+    </div>
+  % endif
+% endmacro
+
+{% block title %}Saker{% endblock %}
+
+{% block bodyattrs %}id="website"{% endblock %}
+
+% block jumbotron
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Sök termer</h2>
+      <form action="/find" method="GET" class="form-inline">
+      <div class="input-group">
+        <input name="limit" value="50" type="hidden" />
+        <label for="q">
+          <!-- Söksträng: -->
+        </label>
+        <input class="form-control" name="q" id="q" value="" />
+        <span class="input-group-btn">
+          <button class="btn btn-primary">Sök</button>
+        </span>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+% endblock
+
+{% block navcontainerclass %} container {% endblock %}
+
+% block content
+
+  % for scheme in thing.statistics.aggregations['inScheme.@id'].buckets
+    ${viewscheme(scheme)}
+  % endfor
+
+% endblock
+
+% block footer
+
+    <div class="footer-container bg-gray-lighter">
+      <div class="container">
+          <div class="col-md-3 col-md-offset-3 col-md-push-2">
+            <h1>Kontakt</h1>
+            <ul class="list-unstyled">
+              <li class=""><a href="mailto:libris@kb.se?Subject=id.kb.se">libris@kb.se</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-md-push-2">
+            <h1>Resurser</h1>
+            <ul class="list-unstyled">
+              <li class=""><a href="${url_for('marcframeview.marcframeview')}">Marc-mappningar</a></li>
+              <li class=""><a href="${url_for('vocabview.vocabview')}">Basvokabulär</a></li>
+            </ul>
+          </div>
+          <div class="text-center col-md-3 col-md-pull-8">
+            <div class="">
+              <img src="/assets/kb_logo_black.svg" class="logo-medium" alt="" />
+            </div>
+            <div class="text-black">
+              <p><br/>
+                <strong><a href="http://www.kb.se" alt="Länk till Kungl. bibliotekets webbplats">
+                  KUNGL. BIBLIOTEKET
+                </a></strong>
+              </p>
+            </div>
+          </div>
+      </div>
+    </div>
+
+% endblock
