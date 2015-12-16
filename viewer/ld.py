@@ -214,7 +214,6 @@ class View:
             offset = 0
 
         total = None
-        offset = None
         records = []
         items = []
         page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}

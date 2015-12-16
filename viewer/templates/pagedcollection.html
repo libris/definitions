@@ -20,8 +20,10 @@
         % endif
       </span>
       <span class="search-items-per-page pull-right">
+        % if thing.totalItems
         Visar resultat
-        ${thing.itemOffset + 1}-${min(thing.totalItems, thing.itemOffset + thing.itemsPerPage)}.
+          ${thing.itemOffset + 1}-${min(thing.totalItems, thing.itemOffset + thing.itemsPerPage)}.
+        % endif
       </span>
     </div>
     % endif
