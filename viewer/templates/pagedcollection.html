@@ -11,7 +11,10 @@
       <span class="search-keyword">
           
         % if thing.query
-          Sökning: <i>"${thing.query}"</i>
+          Sökning på: <i>"${thing.query}"</i>
+          % if thing.totalItems
+            <i>gav ${thing.totalItems} träffar</i>
+          % endif
         % elif thing.value
           Sökning: ${thing.value}
         % endif
