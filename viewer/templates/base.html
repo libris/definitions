@@ -27,7 +27,20 @@
           </a>
         </div>
         <ol class="nav navbar-nav navbar-right" role="navigation">
-          <li class=""><a href="${url_for('vocabview.vocabview')}"><i class="fa fa-book"></i> Basvokabulär</a></li>
+          <li class="search">
+          <form action="/find" method="GET" class="form-inline">
+            <div class="input-group">
+              <input name="limit" value="50" type="hidden" />
+              <label for="q">
+                <!-- Söksträng: -->
+              </label>
+              <input class="form-control" name="q" id="q" value="" />
+              <span class="input-group-btn">
+                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          </li>
         </ol>
       </div>
     </nav>
