@@ -286,7 +286,6 @@ class View:
         return pairs
 
     def get_index_aggregate(self, base_uri):
-        #items = [self.to_chip(r.get('_source')) for r in
         dsl = {
             "size": 0,
             "query" : {
@@ -316,8 +315,7 @@ class View:
         }
         results = self.elastic.search(body=dsl, size=dsl['size'],
                 index=self.es_index)
-        #]
-        return {'@type': 'DatasetPage', 'results': results}
+        return {'@type': 'WebSite', 'statistics': results}
 
     def get_decorated_data(self, data, add_references=False):
         if GRAPH in data:

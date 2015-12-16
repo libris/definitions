@@ -276,11 +276,11 @@ def _tokenize(stuff):
         for part in stuff.split(" ")))
 
 
-@app.route('/datasets/')
-@app.route('/datasets/data.<suffix>')
+@app.route('/')
+@app.route('/data.<suffix>')
 def datasetview(suffix=None):
     results = ldview.get_index_aggregate(_get_base_uri(request.url))
-    return rendered_response('/dataset', suffix, results)
+    return rendered_response('/', suffix, results)
 
 @app.route('/list/')
 def listview():

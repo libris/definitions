@@ -31,11 +31,6 @@ def union(*args):
 def format_number(n):
     return '{:,}'.format(n).replace(',', ' ')
 
-@app.route('/')
-def index():
-    return redirect('/datasets/', 302)
-    #return render_template('index.html', **vars())
-
 @app.route('/favicon.ico')
 def favicon():
     abort(404)
