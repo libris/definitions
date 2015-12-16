@@ -334,6 +334,20 @@ class View:
         }
         results = self.elastic.search(body=dsl, size=dsl['size'],
                 index=self.es_index)
+
+        def lookup(item_id):
+            try:
+                return self.get_record_data(item_id)['descriptions']['entry']
+            except:
+                pass
+
+        for path, agg in results['aggregations'].items():
+            for bucket in agg['buckets']:
+                item_id = bucket['key']
+                bucket['resource'] = lookup(item_id)
+                for bucket2 in bucket['@type']['buckets']:
+                    bucket2['resource'] = self.vocab.index[bucket2['key']]
+
         return {'@type': 'WebSite', 'statistics': results}
 
     def get_decorated_data(self, data, add_references=False):
