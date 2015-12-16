@@ -11,11 +11,6 @@
   <script src="/js/thing.js"></script>
 % endblock
 
-{% block navpath %}
-  <li><a href="${url_for('thingview.listview')}">Saker</a></li>
-  <li class="active"><a>${self.title()}</a></li>
-{% endblock %}
-
 % block content
 
   <div class="row">
@@ -62,13 +57,7 @@
 
     % if ID in thing
       <header class="panel-heading">
-          % if thing_id.startswith(('http:', 'https:')) or '?' in thing_id
-            % set thing_url = view_url(thing_id)
-          % elif thing_id.startswith('/def/terms#')
-            % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
-          % else
-            % set thing_url = url_for('thingview.thingview', path=thing_id[1:], suffix='html')
-          % endif
+          % set thing_url = view_url(thing_id)
           % if t
             ${termref(t, classes='', labeltype='label-class')}
           % endif
@@ -86,28 +75,6 @@
     % if not as_chip
       <div class="panel-body">
         <dl class="{% if not rel %}dl-horizontal{% endif %}">
-
-          {#
-          % if ID in thing
-            <dt>${ui[ID].label}</dt>
-            <dd>
-              <a href="${url_for('thingview.thingview', path=thing_id[1:], suffix='html')}"
-                 ><code>&lt;${thing_id}&gt;</code></a>
-            </dd>
-          %endif
-          % if typename
-            <dt>${ui[TYPE].label}</dt>
-            <dd>
-              % if t
-                <a href="${url_for('thingview.termview', term=t.curie)}"
-                  class="label label-primary">${t.label or t.curie}</a>
-              % else
-                ${typename}
-              % endif
-            </dd>
-          %endif
-          #}
-
           % for k in vocab.sortedkeys(thing)
             % set v = thing[k]
             % if (k in vocab.index or k != REVERSE) and not isinstance(v, dict) or len(v) > 3
@@ -118,11 +85,7 @@
               </dt>
               <dd>
                 % if k == ID and v[0] != '_'
-                  % if v.startswith(('http:', 'https:'))
-                    <a href="${view_url(v)}">&lt;${v}&gt;</a>
-                  % else
-                    <a href="${url_for('thingview.thingview', path=v[1:], suffix='html')}">&lt;${v}&gt;</a>
-                  % endif
+                  <a href="${view_url(v)}">&lt;${v}&gt;</a>
                 % elif isinstance(v, dict) and len(v) > 2
                   ${viewthing(v, rel=k)}
                 % elif isinstance(v, list)
