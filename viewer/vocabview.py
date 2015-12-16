@@ -32,11 +32,7 @@ def setup_app(setup_state):
     ns_mgr.bind("", vocab_uri)
     vocab_paths = config['VOCAB_SOURCES'][:1]
 
-@app.route('/vocabview/')
-def redir_vocabview():
-    return redirect('/def/terms.html', 302)
-
-@app.route('/def/terms.html')
+@app.route('/vocab/')
 def vocabview():
     graph = None
     ns_mgr = graphcache.graph.namespace_manager

@@ -20,7 +20,7 @@ $(function () {
     $('#embedvocab').hide();
   });
   
-  var termLinkSel = 'a[href^="/vocabview"]';
+  var termLinkSel = 'a[href^="/vocab/#"]';
   var articleLinkSel = 'article.panel a[href^="#"]';
   var linkPos = {};
     
@@ -86,7 +86,7 @@ $(function () {
       $('body').addClass('loading');
       embedvocab.append('<article class="panel text-center">' +
                         '<i class="glyphicon glyphicon-refresh btn-lg"></i></article>');
-      embedvocab.load("/vocabview/ article.panel[id]", function() {
+      embedvocab.load("/vocab/ article.panel[id]", function() {
         $('article.panel[id]', this).
           addClass('popover').
           prepend('<div class="arrow"></div>');
