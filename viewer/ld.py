@@ -184,7 +184,8 @@ class View:
         self.elastic = elastic
         self.es_index = es_index
         self.rev_limit = 4000
-        self.chip_keys = {ID, TYPE, 'focus', 'mainEntity'} | set(self.vocab.label_keys)
+        self.chip_keys = {ID, TYPE, 'focus', 'mainEntity', 'sameAs'} | set(self.vocab.label_keys)
+        self.reserved_parameters = ['q', 'limit', 'offset', 'p', 'o', 'value']
 
     def get_record_data(self, item_id):
         record = self.storage.get_record(item_id)
@@ -227,12 +228,17 @@ class View:
             records = self.storage.find_by_quotation(o, limit, offset)
         elif q and not p:
             # Search in elastic
+            musts = [
+                {"query_string": { "query": "{0}".format(q) }}
+            ]
+            for param, paramvalue in req_args.items():
+                if param.startswith('_') or param in self.reserved_parameters:
+                    continue
+                musts.append({"match": {param: paramvalue}})
             dsl = {
                 "query": {
                     "bool": {
-                        "must": [
-                            {"query_string": { "query": "{0}".format(q) }}
-                        ],
+                        "must": musts,
                         "should": [
                             {"prefix" : {"@id": base_uri}},
                             {"prefix" : {"sameAs.@id": base_uri}}
