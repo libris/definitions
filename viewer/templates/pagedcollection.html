@@ -13,13 +13,16 @@
         % if thing.query
           Sökning på: <i>"${thing.query}"</i>
           % if thing.totalItems
-            <i>gav ${thing.totalItems} träffar</i>
+            gav ${thing.totalItems} träffar.
           % endif
         % elif thing.value
           Sökning: ${thing.value}
         % endif
       </span>
-      <span class="search-items-per-page pull-right">Visar ${thing.itemsPerPage} saker per sida</span>
+      <span class="search-items-per-page pull-right">
+        Visar resultat
+        ${thing.itemOffset + 1}-${min(thing.totalItems, thing.itemOffset + thing.itemsPerPage)}.
+      </span>
     </div>
     % endif
     
