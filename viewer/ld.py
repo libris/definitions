@@ -115,6 +115,17 @@ class Vocab:
                     classdistance,
                     key)
 
+        # Changing language containers to simple values...
+        # TODO:
+        # - either support containers by properly using the context
+        # - or optimize this rewriting
+        # - or do not allow this form (remove from base context)
+        for key in item:
+            if key.endswith('ByLang'):
+                v = item.pop(key).get(self.lang)
+                newk = key[:-len('ByLang')]
+                item[newk] = v
+
         return sorted((key for key in item
             if key in self.index
             and key not in self.unstable_keys), key=keykey)
@@ -159,6 +170,8 @@ class Vocab:
         for lkey in self.label_keys:
             label = item.get(lkey)
             if label:
+                if isinstance(label, list):
+                    return label[0]
                 return label
         return ""
 
