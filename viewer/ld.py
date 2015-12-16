@@ -348,7 +348,7 @@ class View:
                 for bucket2 in bucket['@type']['buckets']:
                     bucket2['resource'] = self.vocab.index[bucket2['key']]
 
-        return {'@type': 'WebSite', 'statistics': results}
+        return {TYPE: 'WebSite', ID: base_uri, 'statistics': results}
 
     def get_decorated_data(self, data, add_references=False):
         if GRAPH in data:
