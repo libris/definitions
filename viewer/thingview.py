@@ -147,7 +147,7 @@ def render_html(path, data):
     return render_template(_get_template_for(data),
             path=path, thing=data, data_url=data_url)
 
-TYPE_TEMPLATES = {'pagedcollection'}
+TYPE_TEMPLATES = {'website', 'pagedcollection'}
 
 def _get_template_for(data):
     template_key = data.get(TYPE).lower()
