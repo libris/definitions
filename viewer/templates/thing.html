@@ -63,7 +63,7 @@
     % if ID in thing
       <header class="panel-heading">
           % if thing_id.startswith(('http:', 'https:')) or '?' in thing_id
-            % set thing_url = thing_id
+            % set thing_url = view_url(thing_id)
           % elif thing_id.startswith('/def/terms#')
             % set thing_url = url_for('thingview.termview', term=thing_id.split('#', 1)[-1])
           % else
@@ -109,21 +109,21 @@
           #}
 
           % for k in vocab.sortedkeys(thing)
-            % if k in vocab.index or k != REVERSE
+            % set v = thing[k]
+            % if (k in vocab.index or k != REVERSE) and not isinstance(v, dict) or len(v) > 3
               % set p = vocab.index[k] or {'curie': k}
               {% if loop.index > 1 %}<hr/>{% endif %}
               <dt>
                 ${termref(p)}
               </dt>
-              % set v = thing[k]
               <dd>
                 % if k == ID and v[0] != '_'
                   % if v.startswith(('http:', 'https:'))
-                    <a href="${v}">&lt;${v}&gt;</a>
+                    <a href="${view_url(v)}">&lt;${v}&gt;</a>
                   % else
                     <a href="${url_for('thingview.thingview', path=v[1:], suffix='html')}">&lt;${v}&gt;</a>
                   % endif
-                % elif isinstance(v, dict)
+                % elif isinstance(v, dict) and len(v) > 2
                   ${viewthing(v, rel=k)}
                 % elif isinstance(v, list)
                   <ul>

@@ -27,6 +27,8 @@ DOMAIN_BASE_MAP = {
     '127.0.0.1': LIBRIS,
     'id.local.dev': IDKBSE,
     'libris.local.dev': LIBRIS,
+    'id-dev.kb.se':  IDKBSE,
+    'id-stg.kb.se':  IDKBSE,
     'id.kb.se':  IDKBSE,
     'libris.kb.se': LIBRIS,
 }
@@ -45,15 +47,24 @@ def _get_base_uri(url=None):
     return DOMAIN_BASE_MAP.get(domain)
 
 def _get_served_uri(url, path):
+    # TODO: why is Flask unquoting url and path values?
+    from werkzeug.urls import url_quote
+    url = url_quote(url)
+    path = url_quote(path)
     mapped_base_uri = _get_base_uri(url)
     if mapped_base_uri:
         return urljoin(mapped_base_uri, path)
     else:
         return url
 
-# TODO: use to rewrite full canonical uri:s to non-prod environment url:s
-#def _get_viewer_url(uri):
-#    return urljoin(_get_base_uri(uri), urlparse(uri).path)
+def _get_viewer_url(uri):
+    url_base = _get_base_uri(uri)
+    if url_base == _get_base_uri(request.url):
+        return urlparse(uri).path
+    elif url_base:
+        return urljoin(url_base, urlparse(uri).path)
+    else:
+        return uri
 
 
 app = Blueprint('thingview', __name__)
@@ -95,7 +106,8 @@ def setup_app(setup_state):
         'ldview': ldview,
         'ui': ui_defs,
         'lang': vocab.lang,
-        'page_limit': 50
+        'page_limit': 50,
+        'view_url': _get_viewer_url
     }
     app.context_processor(lambda: view_context)
 
@@ -180,16 +192,16 @@ def thingview(path, suffix=None):
 
     thing = ldview.get_record_data(item_id)
     if thing:
+        #canonical = thing[ID]
+        #if canonocal != item_id:
+        #    return redirect(to_data_path(see_path, suffix), 302)
         return rendered_response(path, suffix, thing)
     else:
         record_ids = ldview.find_record_ids(item_id)
         if record_ids: #and len(record_ids) == 1:
             return redirect(to_data_path(record_ids[0], suffix), 303)
-        see_path = ldview.find_same_as(item_id)
-        if see_path:
-            return redirect(to_data_path(see_path, suffix), 302)
-        else:
-            return abort(404)
+        #else:
+        return abort(404)
 
 def rendered_response(path, suffix, thing):
     mimetype, render = negotiator.negotiate(request, suffix)
