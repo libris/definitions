@@ -57,7 +57,13 @@ def _get_served_uri(url, path):
     else:
         return url
 
-def _get_viewer_url(uri):
+
+def view_url(uri):
+    if uri.startswith('/'):
+        return uri
+        #if '?' in uri: # implies other views, see data_url below
+        #    raise NotImplementedError
+        #return url_for('thingview.thingview', path=uri[1:], suffix='html')
     url_base = _get_base_uri(uri)
     if url_base == _get_base_uri(request.url):
         return urlparse(uri).path
@@ -65,6 +71,16 @@ def _get_viewer_url(uri):
         return urljoin(url_base, urlparse(uri).path)
     else:
         return uri
+
+def canonical_uri(thing):
+    base = _get_base_uri()
+    thing_id = thing[ID]
+    if not thing_id.startswith(base):
+        for same in thing.get('sameAs', []):
+            same_id = same[ID]
+            if same_id.startswith(base):
+                return same_id
+    return thing_id
 
 
 app = Blueprint('thingview', __name__)
@@ -107,7 +123,8 @@ def setup_app(setup_state):
         'ui': ui_defs,
         'lang': vocab.lang,
         'page_limit': 50,
-        'view_url': _get_viewer_url
+        'canonical_uri': canonical_uri,
+        'view_url': view_url
     }
     app.context_processor(lambda: view_context)
 

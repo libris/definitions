@@ -41,6 +41,7 @@
 
 % macro viewthing(thing, element='div', classes='panel panel-default', rel=None, rev=None)
   % set thing_id = thing[ID]
+  % set canonical_id = canonical_uri(thing)
   % set typename = thing[TYPE]
   % if isinstance(typename, list)
     % set t = vocab.index[typename[0]] or vocab.index[typename[1]] or {}
@@ -57,7 +58,7 @@
 
     % if ID in thing
       <header class="panel-heading">
-          % set thing_url = view_url(thing_id)
+          % set thing_url = view_url(canonical_id)
           % if t
             ${termref(t, classes='', labeltype='label-class')}
           % endif
