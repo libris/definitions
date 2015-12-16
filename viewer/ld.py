@@ -216,6 +216,8 @@ class View:
         total = None
         records = []
         items = []
+        page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}
+
         # TODO: unify find_by_relation and find_by_example, support the latter form here too
         if p:
             if o:
@@ -228,13 +230,17 @@ class View:
             records = self.storage.find_by_quotation(o, limit, offset)
         elif q and not p:
             # Search in elastic
+
             musts = [
                 {"query_string": { "query": "{0}".format(q) }}
             ]
+
             for param, paramvalue in req_args.items():
                 if param.startswith('_') or param in self.reserved_parameters:
                     continue
                 musts.append({"match": {param: paramvalue}})
+                page_params.setdefault(param, []).append(paramvalue)
+
             dsl = {
                 "query": {
                     "bool": {
@@ -263,16 +269,15 @@ class View:
 
         def ref(link): return {ID: link}
 
-        page_params = {'p': p, 'o': o, 'value': value, 'q': q, 'limit': limit}
         results = OrderedDict({'@type': 'PagedCollection'})
         results['@id'] = make_find_url(offset=offset, **page_params)
         results['itemsPerPage'] = limit
         if total:
+            results['itemOffset'] = offset
             results['totalItems'] = total
         results['firstPage'] = ref(make_find_url(**page_params))
         results['query'] = q
         results['value'] = value
-        #'totalItems' ...
         #'lastPage' ...
         if offset:
             prev_offset = offset - limit
