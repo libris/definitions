@@ -272,7 +272,7 @@ class View:
         results = OrderedDict({'@type': 'PagedCollection'})
         results['@id'] = make_find_url(offset=offset, **page_params)
         results['itemsPerPage'] = limit
-        if total:
+        if total is not None:
             results['itemOffset'] = offset
             results['totalItems'] = total
         results['firstPage'] = ref(make_find_url(**page_params))
