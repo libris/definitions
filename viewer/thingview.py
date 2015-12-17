@@ -202,7 +202,7 @@ def jsonld_context():
 def thingview(path, suffix=None):
     try:
         return current_app.send_static_file(path)
-    except NotFound:
+    except NotFound, UnicodeEncodeError:
         pass
 
     item_id = _get_served_uri(request.url, path)
