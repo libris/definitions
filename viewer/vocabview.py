@@ -24,18 +24,19 @@ app.context_processor(lambda: rdfutils)
 @app.record
 def setup_app(setup_state):
     global graphcache
+    global ns_mgr
     global vocab_paths
     config = setup_state.app.config
-    graphcache = GraphCache(config['GRAPH_CACHE'])
     vocab_uri = config['VOCAB_IRI']
-    ns_mgr = graphcache.graph.namespace_manager
-    ns_mgr.bind("", vocab_uri)
     vocab_paths = config['VOCAB_SOURCES'][:1]
+    jsonld_context_file = config['JSONLD_CONTEXT_FILE']
+    graphcache = GraphCache(config['GRAPH_CACHE'])
+    ns_mgr = Graph().parse(jsonld_context_file, format='json-ld').namespace_manager
+    ns_mgr.bind("", vocab_uri)
 
 @app.route('/vocab/')
 def vocabview():
     graph = None
-    ns_mgr = graphcache.graph.namespace_manager
     for path in vocab_paths:
         lgraph = graphcache.load(path)
         if not graph:
@@ -46,6 +47,7 @@ def vocabview():
     for url in graph.objects(None, OWL.imports):
         graphcache.load(vocab_source_map.get(str(url), url))
     extgraph = graphcache.graph
+    graphcache.graph.namespace_manager = ns_mgr
 
     def get_classes(graph):
         return [graph.resource(cid) for cid in sorted(
