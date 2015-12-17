@@ -29,15 +29,17 @@
         <ol class="nav navbar-nav navbar-right" role="navigation">
           <li class="search">
           <form action="/find" method="GET" class="form-inline">
-            <div class="input-group">
+            <div class="form-group">
               <input name="limit" value="50" type="hidden" />
-              <label for="q">
-                <!-- Söksträng: -->
+              <label id="searchlabel" for="q">
+                Sök term
               </label>
-              <input class="form-control" name="q" id="q" value="" />
-              <span class="input-group-btn">
-                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-              </span>
+              <div class="input-group">
+                <input aria-labelledby="searchlabel" class="form-control" name="q" id="q" value="" />
+                <span class="input-group-btn">
+                  <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
             </div>
           </form>
           </li>
