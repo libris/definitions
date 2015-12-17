@@ -77,8 +77,8 @@ def canonical_uri(thing):
     thing_id = thing.get(ID) or ""
     if not thing_id.startswith(base):
         for same in thing.get('sameAs', []):
-            same_id = same[ID]
-            if same_id.startswith(base):
+            same_id = same.get(ID)
+            if same_id and same_id.startswith(base):
                 return same_id
     return thing_id
 
