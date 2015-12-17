@@ -7,6 +7,7 @@ from urlparse import urlparse, urljoin
 from flask import request, Response, render_template, redirect, abort, url_for, send_file
 from flask import Blueprint, current_app
 from flask.helpers import NotFound
+from werkzeug.urls import url_quote
 from werkzeug.contrib.cache import SimpleCache
 
 from rdflib import Graph, ConjunctiveGraph
@@ -48,7 +49,6 @@ def _get_base_uri(url=None):
 
 def _get_served_uri(url, path):
     # TODO: why is Flask unquoting url and path values?
-    from werkzeug.urls import url_quote
     url = url_quote(url)
     path = url_quote(path)
     mapped_base_uri = _get_base_uri(url)
@@ -124,7 +124,8 @@ def setup_app(setup_state):
         'lang': vocab.lang,
         'page_limit': 50,
         'canonical_uri': canonical_uri,
-        'view_url': view_url
+        'view_url': view_url,
+        'url_quote': url_quote,
     }
     app.context_processor(lambda: view_context)
 
