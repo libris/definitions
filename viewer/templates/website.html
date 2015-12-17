@@ -16,12 +16,14 @@
           ${ scheme.resource.descriptionByLang[lang].strip().replace('\n','<br/>') | safe }
         </p>
         <ul class="col-md-6">
-          % for type in scheme['@type'].buckets
+          % for bucket in scheme['@type'].buckets
             <a class="list-group-item"
-                href="/find?q=*&limit=50&inScheme.@id=${scheme.key}&@type=${type.key}">
-                ${type.resource.label} <span class="badge">${format_number(type.doc_count)} st.</span>
-              </a>
-              % endfor
+                href="/find?q=*&limit=50&inScheme.@id=${
+                        url_quote(scheme.key)}&@type=${url_quote(bucket.key)}">
+                ${bucket.resource.label}
+                <span class="badge">${format_number(bucket.doc_count)} st.</span>
+            </a>
+          % endfor
         </ul>
       </div>
     </div>
