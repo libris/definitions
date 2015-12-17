@@ -74,7 +74,7 @@ def view_url(uri):
 
 def canonical_uri(thing):
     base = _get_base_uri()
-    thing_id = thing[ID]
+    thing_id = thing.get(ID) or ""
     if not thing_id.startswith(base):
         for same in thing.get('sameAs', []):
             same_id = same[ID]

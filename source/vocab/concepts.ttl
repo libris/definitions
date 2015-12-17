@@ -59,50 +59,65 @@
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ etikett"@sv;
     owl:equivalentProperty skos:altLabel .
+
 :broader a owl:ObjectProperty;
     rdfs:label "bredare"@sv;
     owl:equivalentProperty skos:broader .
+
 :broadMatch a owl:ObjectProperty;
     rdfs:label "bredare match"@sv;
     owl:equivalentProperty skos:broadMatch .
+
 :closeMatch a owl:ObjectProperty;
     rdfs:label "nära match"@sv;
     owl:equivalentProperty skos:closeMatch .
+
 :exactMatch a owl:ObjectProperty;
     rdfs:label "exakt match"@sv;
     owl:equivalentProperty skos:exactMatch .
+
 :hiddenLabel a owl:DatatypeProperty;
     rdfs:label "dold etikett"@sv;
     owl:equivalentProperty skos:hiddenLabel .
+
 :historyNote a owl:DatatypeProperty;
     rdfs:label "historikanmärkning"@sv;
     owl:equivalentProperty skos:historyNote .
+
 :inScheme a owl:ObjectProperty;
     rdfs:label "terminologisystem"@sv;
     owl:equivalentProperty skos:inScheme .
+
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
     owl:equivalentProperty skos:narrower .
+
 :narrowMatch a owl:ObjectProperty;
     rdfs:label "smalare match"@sv;
     owl:equivalentProperty skos:narrowMatch .
+
 :notation a owl:DatatypeProperty;
     rdfs:label "notation"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:notation .
+
 :note a owl:DatatypeProperty;
     rdfs:label "anmärkning"@sv;
     owl:equivalentProperty skos:note .
+
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen etikett"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:prefLabel .
+
 :related a owl:ObjectProperty;
     rdfs:label "relaterad"@sv;
     owl:equivalentProperty skos:related .
+
 :scopeNote a owl:DatatypeProperty;
     rdfs:label "omfångsanmärkning"@sv;
     owl:equivalentProperty skos:scopeNote .
+
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "redaktionell anmärkning"@sv;
     owl:equivalentProperty skos:editorialNote .
@@ -122,8 +137,8 @@
     owl:inverseOf :collectionItem;
     owl:equivalentProperty mads:isMemberOfMADSCollection;
     rdfs:subPropertyOf vann:termGroup;
-    rdfs:domain :Concept;
-    rdfs:range :ConceptCollection;
+    rdfs:domain :IndexTerm;
+    rdfs:range :TermCollection;
     rdfs:label "Part of collection"@en, "Del av termsamling"@sv .
 
 # Domain Specific Term Classes
@@ -142,6 +157,11 @@
     owl:equivalentClass mads:MADSType;
     rdfs:subClassOf :Concept;
     foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
+
+:TermCollection a owl:Class;
+    rdfs:label "Term Collection"@en, "Termsamling"@sv;
+    rdfs:subClassOf :ConceptCollection;
+    owl:equivalentClass mads:MADSCollection .
 
 :TopicalTerm a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
