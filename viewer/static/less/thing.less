@@ -240,7 +240,15 @@ body#thing {
     dt {
       font-size: 12px;
       a {
-        
+        font-weight: normal;
+        cursor: help;
+        color: @gray;
+        border-bottom: dashed @bg-site 1px;
+        display: inline-block;
+        &:hover, &:focus {
+          text-decoration: none;
+          border-bottom: dashed @color-prop-list 1px;
+        }
       }
     }
   }
