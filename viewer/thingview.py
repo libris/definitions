@@ -77,8 +77,8 @@ def canonical_uri(thing):
     thing_id = thing.get(ID) or ""
     if not thing_id.startswith(base):
         for same in thing.get('sameAs', []):
-            same_id = same[ID]
-            if same_id.startswith(base):
+            same_id = same.get(ID)
+            if same_id and same_id.startswith(base):
                 return same_id
     return thing_id
 
@@ -202,7 +202,7 @@ def jsonld_context():
 def thingview(path, suffix=None):
     try:
         return current_app.send_static_file(path)
-    except NotFound:
+    except (NotFound, UnicodeEncodeError) as e:
         pass
 
     item_id = _get_served_uri(request.url, path)
