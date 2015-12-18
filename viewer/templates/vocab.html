@@ -3,7 +3,9 @@
 % set vocabs = union(set(graph.subjects(RDF.type, OWL.Ontology)),
                 set(graph.objects(RDFS.isDefinedBy)))
 
-{% block title %} - ${graph.label(list(vocabs)[0])} - Vocab View{% endblock %}
+% set vocab = graph.resource(list(vocabs)[0])
+
+{% block title %} - ${label(vocab, lang=LANG)} - Vocab View{% endblock %}
 
 {% block bodyattrs %}id="vocab"{% endblock %}
 
@@ -42,9 +44,9 @@
       <header>
       % for vocab in vocabs
         <h1><a href="${vocab}">
-            ${graph.value(vocab, union(DC.title, RDFS.label)) or "&lt;%s>" % vocab}</a>
+            ${label(graph.resource(vocab)) or "&lt;%s>" % vocab}</a>
         </h1>
-        <p>${graph.value(vocab, union(DC.description, RDFS.comment))}</p>
+        <p>${value(graph.resource(vocab), union(DC.description, RDFS.comment))}</p>
       % endfor
       </header>
 
