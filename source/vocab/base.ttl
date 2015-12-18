@@ -23,13 +23,17 @@
 
 
 : a owl:Ontology;
-    rdfs:label "LIBRIS Terms"@en;
+    rdfs:label "KB Base Vocabulary"@en;
+    rdfs:label "KBs basvokabulär"@sv;
+    rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@en;
     rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
     owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf: .
 
 # Various sources beyond the linked defintions themselves:
 # - <http://bibframe.org/documentation/resource-types/#proposal>
 
+rdf:type a owl:ObjectProperty;
+    rdfs:label "type"@en, "typ"@sv .
 
 ##
 # Extended Vocabulary Components
