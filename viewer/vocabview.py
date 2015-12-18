@@ -21,6 +21,8 @@ app.context_processor(lambda: rdfutils)
 @app.record
 def setup_app(setup_state):
     config = setup_state.app.config
+    global LANG
+    LANG = config['LANG']
 
     graphcache = GraphCache(config['GRAPH_CACHE'])
     ns_mgr = Graph().parse(config['JSONLD_CONTEXT_FILE'],
@@ -66,7 +68,17 @@ def vocabview():
             if rtype and rtype.identifier == OWL.Restriction:
                 yield c
 
-    def label(obj, lang='sv'):
+    def value(obj, prop, lang=None):
+        lang = lang or LANG
+        label = None
+        for label in obj.objects(prop):
+            if label.language == lang:
+                return label
+        return label
+
+    def label(obj, lang=None):
+        lang = lang or LANG
+        return value(obj, RDFS.label, lang)
         label = None
         for label in obj.objects(RDFS.label):
             if label.language == lang:

@@ -151,9 +151,10 @@ def render_html(path, data):
 TYPE_TEMPLATES = {'website', 'pagedcollection'}
 
 def _get_template_for(data):
-    template_key = data.get(TYPE).lower()
-    if template_key in TYPE_TEMPLATES:
-        return '%s.html' % template_key
+    for rtype in as_iterable(data.get(TYPE)):
+        template_key = rtype.lower()
+        if template_key in TYPE_TEMPLATES:
+            return '%s.html' % template_key
     return 'thing.html'
 
 @negotiator.add('application/json', 'json')
