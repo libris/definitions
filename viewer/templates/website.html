@@ -2,7 +2,7 @@
 
 % macro viewscheme(scheme)
   % if scheme.resource is not none and 'titleByLang' in scheme.resource and 'descriptionByLang' in scheme.resource
-  <div class="panel panel-default scheme-item">
+  <div id="${scheme.resource.notation[0].replace('/','-')}" class="panel panel-default scheme-item">
     <header class="panel-heading">
       <h1 class="panel-title">
         <a href="${view_url(scheme.resource[ID])}">
@@ -53,19 +53,33 @@
 
   <div class="panel panel-default intro-text">
     <div class="panel-body container-fluid">
-      <p>
-        <b>id.kb.se</b> är en tjänst som tillgängliggör de grundstenar Kungl.
-        biblioteket använder för att publicera strukturerad,
-        <a href="https://sv.wikipedia.org/wiki/L%C3%A4nkad_data">länkad data</a>.
-        Här finns en samling gemensamma definitioner och begrepp som hälper
-        till att samordna beskrivningar av vårt material. I grunden finns bl.a.
-        ett basvokabulär med gemensamma egenskaper och typer. I möjligaste mån
-        länkar alla definitioner till internationella, välkända motsvarigheter.
-      </p>
-      <p>
-        Här tillgängliggörs bl.a. Svenska ämnesord, barnämnesord och
-        genre/formtermer, vilka utgör viktiga byggstenar för denna samordning.
-      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            <b>id.kb.se</b> är en tjänst som tillgängliggör de grundstenar Kungl.
+            biblioteket använder för att publicera strukturerad,
+            <a href="https://sv.wikipedia.org/wiki/L%C3%A4nkad_data">länkad data</a>.
+            Här finns en samling gemensamma definitioner och begrepp som hälper
+            till att samordna beskrivningar av vårt material. I grunden finns bl.a.
+            ett basvokabulär med gemensamma egenskaper och typer. I möjligaste mån
+            länkar alla definitioner till internationella, välkända motsvarigheter.
+          </p>
+          <p>
+            Här tillgängliggörs bl.a. Svenska ämnesord, barnämnesord och
+            genre/formtermer, vilka utgör viktiga byggstenar för denna samordning.
+          </p>
+        </div>
+        <ul class="col-md-6 main-nav">
+          % for scheme in thing.statistics.aggregations['inScheme.@id'].buckets
+            % if scheme.resource is not none and 'titleByLang' in scheme.resource and 'descriptionByLang' in scheme.resource
+            <a class="list-group-item"
+                href="#${scheme.resource.notation[0].replace('/','-')}">
+                ${scheme.resource.titleByLang[lang]}
+            </a>
+            % endif
+          % endfor
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -107,4 +121,9 @@
       </div>
     </div>
 
+% endblock
+
+
+% block scripts
+    <script src="/js/website.js"></script>
 % endblock
