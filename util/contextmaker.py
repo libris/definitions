@@ -8,7 +8,7 @@ Resource.id = Resource.identifier
 SUFFIX_FORMAT_MAP['jsonld'] = 'json-ld'
 
 
-DEFAULT_NS_PREF_ORDER = 'dc sdo mads skos prov bf bibo foaf dctype owl rdfs rdf xsd edtf'.split()
+DEFAULT_NS_PREF_ORDER = 'dc sdo mads skos prov bf bibo foaf dctype void owl rdfs rdf xsd edtf'.split()
 
 CLASS_TYPES = {RDFS.Class, OWL.Class, RDFS.Datatype}
 PROP_TYPES = {RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty}

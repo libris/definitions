@@ -17,6 +17,7 @@
 
 @prefix iana: <http://www.iana.org/assignments/relation/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix void: <http://rdfs.org/ns/void#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
 
 @prefix : <https://id.kb.se/vocab/> .
@@ -141,6 +142,10 @@ rdf:type a owl:ObjectProperty;
 :controlNumber a owl:DatatypeProperty;
     rdfs:label "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
+
+:inDataset a owl:ObjectProperty;
+    rdfs:label "ingår i dataset"@sv;
+    owl:equivalentProperty void:inDataset .
 
 
 ##
