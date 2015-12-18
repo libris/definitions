@@ -1,15 +1,14 @@
 $(function () {
 
-function setActive(item) {
-  console.log("going to " + item);
-  $('body').scrollTop($(item).offset().top - 75);
-};
-
-$('body').ready(function() {
-  $('.main-nav a').click(function(e){
-    e.preventDefault();
-    setActive($(this).attr('href'));
-  });
-});
+  function shiftWindow() {
+    var navbarHeight = $('.navbar').height();
+    if (navbarHeight) {
+      scrollBy(0, -navbarHeight);
+    }
+  }
+  if (window.location.hash) {
+    shiftWindow();
+  }
+  window.addEventListener("hashchange", shiftWindow);
 
 });
