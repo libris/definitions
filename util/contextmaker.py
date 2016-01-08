@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import unicode_literals, print_function
 import json
 from rdflib import *
 from rdflib.util import guess_format, SUFFIX_FORMAT_MAP
@@ -42,7 +42,7 @@ def make_context(graph, dest_vocab=None, ns_pref_order=DEFAULT_NS_PREF_ORDER, us
     ns = {}
     for pfx, iri in graph.namespaces():
         if pfx in prefixes:
-            ns[pfx] = iri
+            ns[pfx] = unicode(iri)
         elif pfx == "":
             ns["@vocab"] = iri
     if dest_vocab:
@@ -138,10 +138,12 @@ def add_overlay(context, overlay):
     overlay = overlay.get('@context') or overlay
     for term, dfn in overlay.items():
         if isinstance(dfn, basestring) and dfn.endswith(('/', '#', ':', '?')):
-            assert term not in ns
+            assert term not in ns or ns[term] == dfn
             ns[term] = dfn
         elif term in defs:
             v = defs[term]
+            if v == dfn:
+                continue
             if isinstance(v, basestring):
                 v = defs[term] = {'@id': v}
             v.update(dfn)
