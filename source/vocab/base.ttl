@@ -73,7 +73,7 @@ rdf:type a owl:ObjectProperty;
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "etikett"@sv;
-    owl:equivalentProperty rdfs:label, sdo:name .
+    owl:equivalentProperty rdfs:label .
 :comment a owl:DatatypeProperty;
     rdfs:label "kommentar"@sv;
     owl:equivalentProperty rdfs:comment .
@@ -138,6 +138,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "identifierad av"@sv;
     rdfs:subPropertyOf :describedBy;
     owl:equivalentProperty sdo:sameAs .
+
+:name a owl:DatatypeProperty;
+    rdfs:label "name"@en, "namn"@sv;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty sdo:name .
 
 :controlNumber a owl:DatatypeProperty;
     rdfs:label "kontrollnummer"@sv;
