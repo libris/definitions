@@ -15,20 +15,19 @@ main {
   background-color: @bg-jumbotron;
   display: block;
   position: relative;
-  text-shadow: 0px 1px 3px #000;
   h1 {
     font-size: 56px;
   }
-  &::after {
+  &::before {
     content: "";
     background: url('/assets/gplaypattern.png'); /* Background pattern from subtlepatterns.com */
-    opacity: 0.5;
+    opacity: 0.4;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: 0;   
+    z-index: 0;
   }
 }
 
@@ -105,6 +104,12 @@ footer {
   width: 100%;
   h1 {
     font-size: 16px;
+  }
+  h1, ul, li {
+    color: @black;
+  }
+  a {
+    color: @link-hover-color;
   }
 }
   

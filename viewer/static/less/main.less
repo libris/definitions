@@ -15,21 +15,22 @@
 @import 'website.less';
 
 // ----------- VARIABLES ------------
-@bg-site: #F1F0E9;
+@bg-site: #F5F5F5;
 @bg-content: @white;
-@bg-navbar: @white;
+@bg-navbar: #F5F5F5;
 @bg-sidebars: darken(@white, 5%);
-@border-navbar: @gray-light;
-@bg-footer: darken(@white, 5%);
-// @bg-jumbotron: #76C79E;
-@bg-jumbotron: #0A6690;
-@brand-primary: @happy-muted-denim;
+@border-navbar: fadeout(#fff, 100%);
+@bg-footer: lighten(@pastel-muted-blue,25%);
+@brand-primary: @pastel-muted-blue;
+@bg-jumbotron: darken(@brand-primary,15%);
 @border-footer: @grey-light;
 @color-class: @happy-blue;
 @color-prop: @happy-magenta;
 @color-prop-list: @grey;
 @color-ext: #d51;
 @color-id: #c7254e;
+@link-color: @brand-primary;
+@link-hover-color: darken(@link-color,15%);
 
 @color-headers: #555;
 
@@ -64,15 +65,19 @@ body > .navbar {
   border: solid @border-navbar;
   background-color: @bg-navbar;
   border-width: 0px 0px 1px 0px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
   .search {
     margin-top: 7px;
     label {
-      color: @brand-primary;
+      color: @gray;
       margin-right: 1em;
     }
   }
   @media screen and (max-width: @screen-sm-min) {
     padding: 0 20px;
+  }
+  .container-fluid {
+    padding: 0 30px 0 15px;
   }
 }
 
@@ -111,6 +116,7 @@ footer {
   background-color: @bg-footer;
   border: solid @border-footer;
   border-width: 1px 0px 0px 0px;
+  
 }
 
 .popover.state-active {
@@ -143,5 +149,19 @@ footer {
       display: inline;
       line-height: 1.7;
     }
+  }
+}
+
+.panel-default:not(.link-item) {
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: @link-hover-color;
+    text-decoration: underline;
   }
 }
