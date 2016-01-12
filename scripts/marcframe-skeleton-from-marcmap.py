@@ -194,7 +194,7 @@ def _make_enumcollection(marc_type, dfn_ref_key, valuemap):
                 if cid == canonical_coll_id:
                     continue
                 ENUM_DEFS.setdefault(canonical_coll_id, {"@id": canonical_coll_id}
-                        ).setdefault('sameAs', []).append({"@id": cid})
+                        ).setdefault('equivalentClass', []).append({"@id": cid})
 
     off_key = _find_boolean_off_key(items)
     # TODO: use key length to detect data properties (see is_link check far below)
@@ -314,14 +314,14 @@ def add_enum_collection_def(enumcoll):
     coll_id = enumcoll.id
     #assert coll_id not in ENUM_DEFS, "Collection duplicate: %s" % coll_id
     coll_predef = ENUM_DEFS.get(coll_id)
-    same_as = coll_predef['sameAs'] if coll_predef else []
+    equiv_class = coll_predef['equivalentClass'] if coll_predef else []
     coll_def = ENUM_DEFS[coll_id] = {
         "@id": coll_id,
         "@type": ["CollectionClass"],
         "subClassOf": ["EnumeratedTerm"],
         #"inScheme": "",
         "notation": enumcoll.id, #enumcoll.map_key,
-        "sameAs": same_as
+        "equivalentClass": equiv_class
         #"inRangeOf": propname
     }
     if enumcoll.type:
