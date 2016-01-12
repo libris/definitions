@@ -352,19 +352,23 @@ def add_enum_def(enumcoll, enum_id, dfn_ref_key, dfn, key):
 
     sameas = predef['sameAs'] if predef else []
     broader = predef['broader'] if predef else []
+    broadmatch = predef['broadMatch'] if predef else []
+
     if enum_id == raw_id:
         broader.append({"@id": ideal_enum_id})
     else:
         sameas.append({"@id": raw_id})
+
     if key == enumcoll.off_key:
-        sameas.append({'@id': 'schema:False'})
+        broadmatch.append({'@id': 'schema:False'})
 
     dest = ENUM_DEFS[enum_id] = {
         "@id": enum_id, "@type": in_coll,
         "sameAs": sameas,
         "broader": broader,
         "notation": notation,
-        "inCollection": in_coll
+        "inCollection": in_coll,
+        "broadMatch": broadmatch,
     }
     add_labels(dfn, dest)
     if predef:
