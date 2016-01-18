@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 __metaclass__ = type
 
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 
 from rdflib import Graph, Literal, URIRef, Namespace, RDF, RDFS, OWL
 
@@ -261,9 +261,7 @@ class View:
                      results.get('hits')]
 
         for rec in records:
-            descs = rec.data['descriptions']
-            descs.pop('quoted', None)
-            chip = self.to_chip(self.get_decorated_data({'descriptions': descs}))
+            chip = self.to_chip(self.get_decorated_data(rec.data, include_quoted=False))
             items.append(chip)
 
 
@@ -341,10 +339,8 @@ class View:
                 index=self.es_index)
 
         def lookup(item_id):
-            try:
-                return self.get_record_data(item_id)['descriptions']['entry']
-            except:
-                pass
+            data = self.get_record_data(item_id)
+            return get_descriptions(data).entry if data else None
 
         for path, agg in results['aggregations'].items():
             for bucket in agg['buckets']:
@@ -355,40 +351,36 @@ class View:
 
         return {TYPE: 'WebSite', ID: base_uri, 'statistics': results}
 
-    def get_decorated_data(self, data, add_references=False):
-        if GRAPH in data:
-            root = data
-            main_id = data[GRAPH][0][ID]
-        elif 'descriptions' in data:
-            descriptions = data['descriptions']
-            entry = descriptions.get('entry')
-            items = descriptions.get('items')
-            quoted = descriptions.get('quoted')
+    def get_decorated_data(self, data, add_references=False, include_quoted=True):
+        entry, other, quoted = get_descriptions(data)
 
-            graph = []
-            if entry:
-                graph.append(entry)
-                # TODO: fix this in source and/or handle in view
-                if 'prefLabel_en' in entry and 'prefLabel' not in entry:
-                    entry['prefLabel'] = entry['prefLabel_en']
-            if items:
-                graph += items
-            if quoted:
-                graph += [dict(ngraph[GRAPH], quotedFromGraph={ID: ngraph.get(ID)})
-                        for ngraph in quoted]
+        main_item = entry if entry else other.pop(0) if other else None
+        main_id = main_item.get(ID) if main_item else None
 
-            main_item = entry if entry else items[0] if items else None
-            main_id = main_item.get(ID) if main_item else None
+        items = []
+        if entry:
+            items.append(entry)
+            # TODO: fix this in source and/or handle in view
+            #if 'prefLabel_en' in entry and 'prefLabel' not in entry:
+            #    entry['prefLabel'] = entry['prefLabel_en']
+        if other:
+            items += other
 
-            if add_references:
-                graph += self._get_references_to(main_item)
+        if quoted and include_quoted:
+            unquoted = [dict(ngraph[GRAPH], quotedFromGraph={ID: ngraph.get(ID)})
+                    for ngraph in quoted]
+            items += unquoted
 
-            root = {GRAPH: graph}
-
+        framed = autoframe({GRAPH: items}, main_id)
+        if framed:
+            refs = self._get_references_to(main_item) if add_references else []
+            # NOTE: workaround for autoframing frailties
+            refs = [ref for ref in refs if ref[ID] != main_id]
+            framed.update(autoframe({GRAPH: [{ID: main_id}] + refs}, main_id))
+            return framed
         else:
             return data
 
-        return autoframe(root, main_id) or data
 
     def getlabel(self, item):
         # TODO: get and cache chip for item (unless already quotedFrom)...
@@ -406,23 +398,39 @@ class View:
         same_as = item.get('sameAs') if item else None
         item_id = item[ID]
         quoted_id = same_as[0].get(ID) if same_as else item_id
+
         for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
-            qdesc = quoting.data['descriptions']
+            qdesc = get_descriptions(quoting.data)
+
             _fix_refs(item_id, quoted_id, qdesc)
-            references.append(self.to_chip(qdesc['entry'], item_id, quoted_id))
-            for it in qdesc.get('items', ()):
+            references.append(self.to_chip(qdesc.entry, item_id, quoted_id))
+            for it in qdesc.items:
                 references.append(self.to_chip(it, item_id, quoted_id))
 
         return references
 
 
+Descriptions = namedtuple('Descriptions', 'entry, items, quoted')
+
+def get_descriptions(data):
+    if 'descriptions' in data:
+        return Descriptions(**data['descriptions'])
+    elif GRAPH in data:
+        items, quoted = [], []
+        for item in data[GRAPH]:
+            if GRAPH in item:
+                quoted.append(item)
+            else:
+                items.append(item)
+        entry = items.pop(0)
+        return Descriptions(entry, items, quoted)
+    else:
+        return Descriptions(data, [], [])
+
 # FIXME: quoted id:s are temporary and should be replaced with canonical id (or
 # *at least* sameAs id) in stored data
 def _fix_refs(real_id, ref_id, descriptions):
-    entry = descriptions.get('entry')
-    items = descriptions.get('items') or []
-    quoted = descriptions.get('quoted') or []
-
+    entry, items, quoted = descriptions
     alias_map = {}
     for quote in quoted:
         item = quote[GRAPH]

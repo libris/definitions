@@ -206,9 +206,9 @@ def to_desc_form(node, dataset=None, source=None):
         node['inDataset'] = dataset
     if source:
         node['wasDerivedFrom'] = source
-    descriptions = {'entry': node}
+    items = [node]
     if item:
-        descriptions['items'] = [item]
+        items.append(item)
     quoted = []
     for vs in node.values():
         vs = vs if isinstance(vs, list) else [vs]
@@ -216,10 +216,9 @@ def to_desc_form(node, dataset=None, source=None):
             if isinstance(v, dict) and '@id' in v:
                 quoted.append({'@graph': {'@id': v['@id']}})
     # TODO: move addition of 'quoted' objects to (decorated) storage?
-    # ... actually move this entire 'descriptions' structure...
     # ... let storage accept a single resource or named graph
     # (with optional, "nested" quotes), and extract links (and sameAs)
     if quoted:
-        descriptions.setdefault('quoted', []).extend(quoted)
+        items += quoted
 
-    return {'descriptions': descriptions}
+    return {'@graph': items}
