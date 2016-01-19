@@ -8,14 +8,13 @@ from flask import request, Response, render_template, redirect, abort, url_for, 
 from flask import Blueprint, current_app
 from flask.helpers import NotFound
 from werkzeug.urls import url_quote
-from werkzeug.contrib.cache import SimpleCache
 
 from rdflib import Graph, ConjunctiveGraph
 
 from util.graphcache import GraphCache
 
 from lddb.storage import Storage, DEFAULT_LIMIT
-from .ld import Vocab, View, CONTEXT, ID, TYPE, GRAPH, REVERSE, as_iterable
+from .ld import Vocab, View, CONTEXT, ID, TYPE, REVERSE, as_iterable
 from .conneg import Negotiator
 
 from elasticsearch import Elasticsearch
@@ -89,11 +88,6 @@ app = Blueprint('thingview', __name__)
 def setup_app(setup_state):
     config = setup_state.app.config
 
-    # TODO: create_vocab(config, cache?)
-    global cache
-    cache = SimpleCache()
-
-    global storage
     storage = Storage('lddb',
             config['DBNAME'], config.get('DBHOST', '127.0.0.1'),
             config.get('DBUSER'), config.get('DBPASSWORD'))
@@ -253,49 +247,10 @@ def find(suffix=None):
 @app.route('/some')
 @app.route('/some.<suffix>')
 def some(suffix=None):
-    kws = dict(request.args)
-    rtype = kws.pop('type', None)
-    q = kws.pop('q', None)
-    if q:
-        q = " ".join(q)
-        #parts = _tokenize(q)
-    maybe = {}
-    if rtype:
-        rtype = rtype[0]
-        maybe['@type'] = rtype
-    if q:
-        maybe['label'] = q
-    if kws:
-        maybe.update({k: v[0] for k, v in kws.items()})
-
-    def pick_thing(rec):
-        data = rec.data['descriptions']
-        entry = data['entry']
-        for item in [entry] + data.get('items', []):
-            if rtype in as_iterable(item[TYPE]):
-                return item
-        return entry
-
-    maybes  = [
-        #ldview.get_decorated_data(rec)
-        pick_thing(rec)
-        for rec in storage.find_by_example(maybe)
-    ]
-
-    some_id = '%s?%s' % (request.path, request.query_string)
-    item = {
-        "@id": some_id,
-        "@type": "Ambiguity",
-        "label": q or ",".join(maybe.values()),
-        "maybe": maybes
-    }
-
-    references = ldview._get_references_to(item)
-
-    if not maybes and not references:
+    ambiguity = ldview.find_ambiguity(request)
+    if not ambiguity:
         return abort(404)
-
-    return rendered_response('/some', suffix, {GRAPH: [item] + references})
+    return rendered_response('/some', suffix, ambiguity)
 
 def _tokenize(stuff):
     """
@@ -312,14 +267,6 @@ def _tokenize(stuff):
 def datasetview(suffix=None):
     results = ldview.get_index_aggregate(_get_base_uri(request.url))
     return rendered_response('/', suffix, results)
-
-@app.route('/list/')
-def listview():
-    type_count = cache.get('type_count')
-    if type_count is None:
-        type_count = ldview.get_type_count()
-        cache.set('type_count', type_count, timeout=10 * 60) # seconds
-    return render_template('list.html', type_count=type_count)
 
 
 #@app.route('/vocab/<term>')

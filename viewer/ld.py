@@ -299,14 +299,6 @@ class View:
             offset = int(offset)
         return self.storage.get_real_limit(limit), offset
 
-    def get_type_count(self):
-        pairs = [(self.vocab.index[rtype], count)
-                for rtype, count in self.storage.get_type_count()
-                if isinstance(rtype, str)
-                if rtype in self.vocab.index]
-        pairs.sort(key=lambda pair: pair[0]['label'])
-        return pairs
-
     def get_index_aggregate(self, base_uri):
         dsl = {
             "size": 0,
@@ -325,6 +317,12 @@ class View:
                         #"size": 1000
                     },
                     "aggs": {
+                        "inCollection.@id": {
+                            "terms": {
+                                "field": "inCollection.@id",
+                                #"size": 1000
+                            }
+                        },
                         "@type": {
                             "terms": {
                                 "field": "@type",
@@ -348,8 +346,53 @@ class View:
                 bucket['resource'] = lookup(item_id)
                 for bucket2 in bucket['@type']['buckets']:
                     bucket2['resource'] = self.vocab.index[bucket2['key']]
+                for subkey in ['@type', 'inCollection.@id']:
+                    if subkey not in bucket:
+                        continue
+                    for bucket2 in bucket[subkey]['buckets']:
+                        key = bucket2['key']
+                        bucket2['resource'] = self.vocab.index.get(key) or lookup(key)
 
         return {TYPE: 'WebSite', ID: base_uri, 'statistics': results}
+
+    def find_ambiguity(self, request):
+        kws = dict(request.args)
+        rtype = kws.pop('type', None)
+        q = kws.pop('q', None)
+        if q:
+            q = " ".join(q)
+            #parts = _tokenize(q)
+        example = {}
+        if rtype:
+            rtype = rtype[0]
+            example['@type'] = rtype
+        if q:
+            example['label'] = q
+        if kws:
+            example.update({k: v[0] for k, v in kws.items()})
+
+        def pick_thing(rec):
+            for item in rec.data[GRAPH]:
+                if rtype in as_iterable(item[TYPE]):
+                    return item
+
+        maybes  = [pick_thing(rec) #self.get_decorated_data(rec)
+                   for rec in self.storage.find_by_example(example)]
+
+        some_id = '%s?%s' % (request.path, request.query_string)
+        item = {
+            "@id": some_id,
+            "@type": "Ambiguity",
+            "label": q or ",".join(example.values()),
+            "maybe": maybes
+        }
+
+        references = self._get_references_to(item)
+
+        if not maybes and not references:
+            return None
+
+        return {GRAPH: [item] + references}
 
     def get_decorated_data(self, data, add_references=False, include_quoted=True):
         entry, other, quoted = get_descriptions(data)
