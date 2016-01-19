@@ -10,14 +10,15 @@ from flask.helpers import NotFound
 from werkzeug.urls import url_quote
 
 from rdflib import Graph, ConjunctiveGraph
-
-from util.graphcache import GraphCache
-
-from lddb.storage import Storage, DEFAULT_LIMIT
-from .ld import Vocab, View, CONTEXT, ID, TYPE, REVERSE, as_iterable
-from .conneg import Negotiator
-
 from elasticsearch import Elasticsearch
+
+from lddb.storage import Storage
+from util import as_iterable
+from util.graphcache import GraphCache
+from util.vocabview import VocabView
+from util.dataview import DataView, CONTEXT, ID, TYPE, REVERSE
+
+from .conneg import Negotiator
 
 
 IDKBSE = "https://id.kb.se/"
@@ -102,10 +103,10 @@ def setup_app(setup_state):
     graphcache.graph.namespace_manager.bind("", vocab_uri)
     for path in config['VOCAB_SOURCES']:
         graphcache.load(path)
-    vocab = Vocab(graphcache.graph, vocab_uri, lang=config['LANG'])
+    vocab = VocabView(graphcache.graph, vocab_uri, lang=config['LANG'])
 
     global ldview
-    ldview = View(vocab, storage, elastic, config['ES_INDEX'])
+    ldview = DataView(vocab, storage, elastic, config['ES_INDEX'])
 
     global jsonld_context_file
     jsonld_context_file = config['JSONLD_CONTEXT_FILE']
