@@ -317,12 +317,12 @@ class View:
                         #"size": 1000
                     },
                     "aggs": {
-                        "inCollection.@id": {
-                            "terms": {
-                                "field": "inCollection.@id",
-                                #"size": 1000
-                            }
-                        },
+                        #"inCollection.@id": {
+                        #    "terms": {
+                        #        "field": "inCollection.@id",
+                        #        #"size": 1000
+                        #    }
+                        #},
                         "@type": {
                             "terms": {
                                 "field": "@type",
@@ -346,12 +346,12 @@ class View:
                 bucket['resource'] = lookup(item_id)
                 for bucket2 in bucket['@type']['buckets']:
                     bucket2['resource'] = self.vocab.index[bucket2['key']]
-                for subkey in ['@type', 'inCollection.@id']:
-                    if subkey not in bucket:
-                        continue
-                    for bucket2 in bucket[subkey]['buckets']:
-                        key = bucket2['key']
-                        bucket2['resource'] = self.vocab.index.get(key) or lookup(key)
+                #for subkey in ['@type', 'inCollection.@id']:
+                #    if subkey not in bucket:
+                #        continue
+                #    for bucket2 in bucket[subkey]['buckets']:
+                #        key = bucket2['key']
+                #        bucket2['resource'] = self.vocab.index.get(key) or lookup(key)
 
         return {TYPE: 'WebSite', ID: base_uri, 'statistics': results}
 

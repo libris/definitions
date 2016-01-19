@@ -24,6 +24,25 @@
                 <span class="badge">${format_number(bucket.doc_count)} st.</span>
             </a>
           % endfor
+          {#
+          % for subkey in ['@type', 'inCollection.@id']
+            % if scheme[subkey].buckets
+              <h4>Uppdelning: ${subkey}</h4>
+            % endif
+            % for bucket in scheme[subkey].buckets
+              <a class="list-group-item"
+                 href="/find?q=*&limit=50&inScheme.@id=${
+                          url_quote(scheme.key)}&${subkey}=${url_quote(bucket.key)}">
+                  % if bucket.resource
+                    ${bucket.resource.label or bucket.resource.titleByLang.sv}
+                  % else
+                    ${bucket.key}
+                  % endif
+                  <span class="badge">${format_number(bucket.doc_count)} st.</span>
+              </a>
+            % endfor
+          % endfor
+          #}
         </ul>
       </div>
     </div>
