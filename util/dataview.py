@@ -346,3 +346,13 @@ def has_ref(vs, *refs):
         if isinstance(v, dict) and v.get(ID) in refs:
             return True
     return False
+
+
+def _tokenize(stuff):
+    """
+    >>> print(_tokenize("One, Any (1911-)"))
+    1911 any one
+    """
+    return sorted(set(
+        re.sub(r'\W(?u)', '', part.lower(), flags=re.UNICODE)
+        for part in stuff.split(" ")))
