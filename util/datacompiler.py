@@ -203,9 +203,9 @@ def to_desc_form(node, dataset=None, source=None):
     if item:
         node['about'] = {'@id': item['@id']}
     if dataset:
-        node['inDataset'] = dataset
+        node['inDataset'] = {'@id': dataset}
     if source:
-        node['wasDerivedFrom'] = source
+        node['wasDerivedFrom'] = {'@id': source}
     items = [node]
     if item:
         items.append(item)
