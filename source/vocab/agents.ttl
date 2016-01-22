@@ -119,6 +119,9 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:equivalentProperty sdo:birthDate .
 
 :birthYear a owl:DatatypeProperty;
+    #a l:ComputedProperty; l:sourceProperty :birthDate, l:apply xsd:gYear;
+    ## or
+    #owl:propertyChainAxiom (:birthDate :year); # if typed literal is a "virtual" resource
     rdfs:subPropertyOf :birthDate;
     rdfs:range :Year;
     rdfs:label "birth year"@en, "födelseår"@sv .
