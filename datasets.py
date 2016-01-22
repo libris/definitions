@@ -62,6 +62,7 @@ def vocab():
         graph.update(fp.read())
 
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
+    add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
     compiler.write(lib_context, 'lib-context')
 
@@ -105,7 +106,7 @@ def relators():
                 "source": "http://id.loc.gov/vocabulary/relators"
             }
         ],
-        query="source/construct-relators.rq")
+        query=scriptpath("source/construct-relators.rq"))
     return "/relator/", build_jsonld(graph)
 
 
@@ -134,14 +135,14 @@ def languages():
             {
                 "source": languages,
                 "dataset": BASE + "dataset/languages",
-                "context": load_json("source/table-context.jsonld")['@context']
+                "context": load_json(scriptpath("source/table-context.jsonld"))['@context']
             },
             {
                 "source": loclanggraph,
                 "dataset": "http://id.loc.gov/vocabulary/languages"
             }
         ],
-        query="source/construct-languages.rq")
+        query=scriptpath("source/construct-languages.rq"))
 
     return "/language/", build_jsonld(graph)
 
@@ -154,13 +155,13 @@ def countries():
                     {"@id": BASE + "country/{code}"}),
                 "dataset": BASE + "dataset/countries",
                 # TODO: fix rdflib_jsonld so urls in external contexts are loaded
-                "context": load_json("source/table-context.jsonld")['@context']
+                "context": load_json(scriptpath("source/table-context.jsonld"))['@context']
             },
             {
                 "source": "http://id.loc.gov/vocabulary/countries"
             }
         ],
-        query="source/construct-countries.rq")
+        query=scriptpath("source/construct-countries.rq"))
     return "/country/", build_jsonld(graph)
 
 
@@ -182,8 +183,8 @@ if __name__ == '__main__':
             description="Available datasets: " + ", ".join(compiler.datasets),
             formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     arg = argp.add_argument
-    arg('-o', '--outdir', type=str, default="build", help="Output directory")
-    arg('-c', '--cache', type=str, default="cache", help="Cache directory")
+    arg('-o', '--outdir', type=str, default=scriptpath("build"), help="Output directory")
+    arg('-c', '--cache', type=str, default=scriptpath("cache"), help="Cache directory")
     arg('-l', '--lines', action='store_true',
             help="Output a single file with one JSON-LD document per line")
     arg('datasets', metavar='DATASET', nargs='*')
