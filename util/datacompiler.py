@@ -15,20 +15,21 @@ from rdflib_jsonld.parser import to_rdf
 
 class Compiler:
 
-    def __init__(self, dataset_id=None):
+    def __init__(self, dataset_id=None, union='all.jsonld.lines'):
         self.datasets = {}
         self.dataset_id = dataset_id
         self.cachedir = None
+        self.union = union
 
     def dataset(self, func):
         self.datasets[func.__name__] = func
         return func
 
-    def configure(self, outdir, cachedir=None, onefile=False):
+    def configure(self, outdir, cachedir=None, use_union=False):
         self.outdir = outdir
         self.cachedir = cachedir
-        if onefile:
-            union_fpath = Path.join(self.outdir, 'definitions.jsonld.lines')
+        if use_union:
+            union_fpath = Path.join(self.outdir, self.union)
             _ensure_fpath(union_fpath)
             self.union_file = open(union_fpath, 'w')
         else:

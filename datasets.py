@@ -33,7 +33,7 @@ def _get_zipped_graph(path, name):
         return Graph().parse(zipped.open(name), format='turtle')
 
 
-compiler = Compiler(dataset_id=BASE + 'dataset')
+compiler = Compiler(dataset_id=BASE + 'dataset', union='definitions.jsonld.lines')
 
 
 #@compiler.dataset
@@ -66,7 +66,7 @@ def vocab():
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
     compiler.write(lib_context, 'lib-context')
 
-    return "/vocab/", build_jsonld(graph)
+    return "/vocab", build_jsonld(graph)
 
 
 @compiler.dataset
@@ -196,5 +196,5 @@ if __name__ == '__main__':
     if not args.datasets and args.outdir:
         args.datasets = list(compiler.datasets)
 
-    compiler.configure(args.outdir, args.cache, onefile=args.lines)
+    compiler.configure(args.outdir, args.cache, use_union=args.lines)
     compiler.run(args.datasets)
