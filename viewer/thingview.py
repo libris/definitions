@@ -10,15 +10,23 @@ from flask.helpers import NotFound
 from werkzeug.urls import url_quote
 
 from rdflib import Graph, ConjunctiveGraph
+from rdflib import URIRef, RDF, RDFS, OWL
+from rdflib.namespace import SKOS, DCTERMS, Namespace, ClosedNamespace
+
 from elasticsearch import Elasticsearch
 
 from lddb.storage import Storage
 from util import as_iterable
-from util.graphcache import GraphCache
-from util.vocabview import VocabView
+from util.graphcache import GraphCache, vocab_source_map
+from util.vocabview import VocabView, VocabUtil
 from util.dataview import DataView, CONTEXT, ID, TYPE, REVERSE
 
 from .conneg import Negotiator
+
+
+VANN = Namespace("http://purl.org/vocab/vann/")
+VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+SCHEMA = Namespace("http://schema.org/")
 
 
 IDKBSE = "https://id.kb.se/"
@@ -98,12 +106,30 @@ def setup_app(setup_state):
             sniff_on_connection_fail=True, sniff_timeout=60,
             sniffer_timeout=300, timeout=10)
 
+    global LANG
+    LANG = config['LANG']
+
     vocab_uri = config['VOCAB_IRI']
+
     graphcache = GraphCache(config['GRAPH_CACHE'])
-    graphcache.graph.namespace_manager.bind("", vocab_uri)
-    for path in config['VOCAB_SOURCES']:
-        graphcache.load(path)
-    vocab = VocabView(graphcache.graph, vocab_uri, lang=config['LANG'])
+    ns_mgr = Graph().parse(config['JSONLD_CONTEXT_FILE'],
+            format='json-ld').namespace_manager
+    ns_mgr .bind("", vocab_uri)
+    graphcache.graph.namespace_manager = ns_mgr
+
+    global load_vocab_graph
+    def load_vocab_graph():
+        vocabgraph = graphcache.load(config['VOCAB_SOURCE'])
+        vocabgraph.namespace_manager = ns_mgr
+        # TODO: load base vocabularies for labels, inheritance here,
+        # or in vocab build step?
+        #for url in vocabgraph.objects(None, OWL.imports):
+        #    graphcache.load(vocab_source_map.get(str(url), url))
+        return vocabgraph
+
+    load_vocab_graph()
+
+    vocab = VocabView(graphcache.graph, vocab_uri, lang=LANG)
 
     global ldview
     ldview = DataView(vocab, storage, elastic, config['ES_INDEX'])
@@ -181,6 +207,26 @@ def datasetview(suffix=None):
 #@app.route('/vocab/<term>')
 #def termview(term):
 #    return redirect('/vocabview#' + term, 303)
+
+rdfns = {name: obj for name, obj in globals().items()
+                if isinstance(obj, (Namespace, ClosedNamespace))}
+
+app.context_processor(lambda: rdfns)
+
+@app.route('/vocab/')
+def vocabview():
+    voc = VocabUtil(load_vocab_graph(), LANG)
+
+    def link(obj):
+        if ':' in obj.qname() and not any(obj.objects(None)):
+            return obj.identifier
+        return '#' + obj.qname()
+
+    def listclass(o):
+        return 'ext' if ':' in o.qname() else 'loc'
+
+    return render_template('vocab.html',
+            URIRef=URIRef, **vars())
 
 
 def rendered_response(path, suffix, thing):

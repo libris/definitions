@@ -1,22 +1,13 @@
 % extends "base.html"
 
-% set vocabs = union(set(graph.subjects(RDF.type, OWL.Ontology)),
-                set(graph.objects(RDFS.isDefinedBy)))
-
-% set vocab = graph.resource(list(vocabs)[0])
-
-{% block title %} - ${label(vocab, lang=LANG)} - Vocab View{% endblock %}
+{% block title %} - ${voc.label(voc.vocab, lang=LANG)} - Vocab View{% endblock %}
 
 {% block bodyattrs %}id="vocab"{% endblock %}
 
 {% block containerclass %}container-fluid{% endblock %}
 {% block navcontainerclass %} container-fluid {% endblock %}
 
-% set rclasses = get_classes(graph)
-% set rproperties = get_properties(graph)
-
 % set DOMAIN = union(SCHEMA.domainIncludes, RDFS.domain)
-
 % set RANGE = union(SCHEMA.rangeIncludes, RDFS.range)
 
 
@@ -27,13 +18,13 @@
       <nav>
         <section class="nav-classes">
           <b>Classes</b>
-          % for rclass in rclasses
+          % for rclass in voc.classes
           <a href="${link(rclass)}">${rclass.qname()}</a>
           % endfor
         </section>
         <section class="nav-properties">
           <b>Properties</b>
-          % for rprop in rproperties
+          % for rprop in voc.properties
           <a href="${link(rprop)}">${rprop.qname()}</a>
           % endfor
         </section>
@@ -42,24 +33,24 @@
     
     <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-7 col-lg-offset-2 content-col">
       <header>
-      % for vocab in vocabs
+      % for vocab in voc.vocabs
         <h1><a href="${vocab}">
-            ${label(graph.resource(vocab)) or "&lt;%s>" % vocab}</a>
+            ${voc.label(voc.resource(vocab)) or "&lt;%s>" % vocab}</a>
         </h1>
-        <p>${value(graph.resource(vocab), union(DC.description, RDFS.comment))}</p>
+        <p>${voc.value(voc.resource(vocab), union(DCTERMS.description, RDFS.comment))}</p>
       % endfor
       </header>
 
       <section>
         <h2 class="page-header">Classes</h2>
-        % for rclass in rclasses
+        % for rclass in voc.classes
           ${classdefinition(rclass)}
         % endfor
       </section>
 
       <section>
         <h2 class="page-header">Properties</h2>
-        % for rprop in rproperties
+        % for rprop in voc.properties
           ${propertydefinition(rprop)}
         % endfor
       </section>
@@ -89,8 +80,8 @@
                 % if prop.value(SKOS.notation)
                 <span>(${prop.value(SKOS.notation)})</span>
                 % endif
-                <i>${(label(prop) or '')}</i>
-                % set ranges = sorted(set(find_references(prop.objects(RANGE))))
+                <i>${(voc.label(prop) or '')}</i>
+                % set ranges = sorted(set(voc.find_references(prop.objects(RANGE))))
                 % if ranges
                   <span>&rarr;
                     % for c in ranges
@@ -104,12 +95,11 @@
                 <i><a href="${link(g)}">${g.qname()}</a></i>
                 % endfor
                 -->
-              
               % endfor
             </ul>
           </dd>
         % endif
-        % set restrictions = sorted(getrestrictions(rclass))
+        % set restrictions = sorted(voc.getrestrictions(rclass))
         % if restrictions
           <dt>Restrictions</dt>
           <dd>
@@ -135,7 +125,7 @@
               % for prop in rangeprops
                 <li class="${listclass(prop)}">
                 &larr; <a href="${link(prop)}" class="chip-prop">${prop.qname()}</a>
-                % set domains = sorted(set(find_references(prop.objects(DOMAIN))))
+                % set domains = sorted(set(voc.find_references(prop.objects(DOMAIN))))
                 % if domains
                     <span>&larr;
                     % for domain in domains
@@ -164,7 +154,7 @@
 % endmacro
 
 % macro itemsblock(items, label, classname, iteminfo=False)
-  % set itemlist = sorted(set(find_references(items)))
+  % set itemlist = sorted(set(voc.find_references(items)))
   % if itemlist
     <dt>${label}</dt>
     <dd>
@@ -184,7 +174,7 @@
 
 % macro terminfo(term, nolabel='')
   <p>
-    ${(label(term) or nolabel)}
+    ${(voc.label(term) or nolabel)}
     % if term.value(RDFS.comment)
       <em>&mdash; ${(term.value(RDFS.comment))}</em>
     % endif
@@ -198,13 +188,13 @@
     </header>
     <div class="panel-body">
       <p>
-        ${(label(rprop) or '...')}
+        ${(voc.label(rprop) or '...')}
         % if rprop.value(RDFS.comment)
           <em>&mdash; ${(rprop.value(RDFS.comment))}</em>
         % endif
       </p>
       <dl>
-        % for prop in [DC.description, SKOS.scopeNote]
+        % for prop in [DCTERMS.description, SKOS.scopeNote]
           % set value = rprop.value(prop)
           % if value
             <dt>${extgraph.preferredLabel(prop, lang='en')[0][1].title()}</dt>
@@ -246,7 +236,7 @@
           <dt>Inverse of</dt>
           <dd>
             <a href="${link(inverse)}">${inverse.qname()}</a>
-            <i>${(label(inverse) or '')}</i>
+            <i>${(voc.label(inverse) or '')}</i>
           </dd>
         % endif
         % set domains = sorted(set(rprop.objects(DOMAIN)))
@@ -257,13 +247,13 @@
               % for c in domains
               <li class="${listclass(c)}">
                 <a href="${link(c)}">${c.qname()}</a>
-                <i>${(label(c) or '')}</i>
+                <i>${(voc.label(c) or '')}</i>
               </li>
               % endfor
             </ul>
           </dd>
         % endif
-        % set ranges = sorted(set(find_references(rprop.objects(RANGE))))
+        % set ranges = sorted(set(voc.find_references(rprop.objects(RANGE))))
         % if ranges
           <dt>Range(s)</dt>
           <dd>
@@ -271,7 +261,7 @@
               % for c in ranges
               <li class="${listclass(c)}">
                 <a href="${link(c)}">${c.qname()}</a>
-                <i>${(label(c) or '')}</i>
+                <i>${(voc.label(c) or '')}</i>
               </li>
               % endfor
             </ul>
