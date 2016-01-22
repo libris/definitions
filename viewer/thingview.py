@@ -10,14 +10,23 @@ from flask.helpers import NotFound
 from werkzeug.urls import url_quote
 
 from rdflib import Graph, ConjunctiveGraph
-
-from util.graphcache import GraphCache
-
-from lddb.storage import Storage, DEFAULT_LIMIT
-from .ld import Vocab, View, CONTEXT, ID, TYPE, REVERSE, as_iterable
-from .conneg import Negotiator
+from rdflib import URIRef, RDF, RDFS, OWL
+from rdflib.namespace import SKOS, DCTERMS, Namespace, ClosedNamespace
 
 from elasticsearch import Elasticsearch
+
+from lddb.storage import Storage
+from util import as_iterable
+from util.graphcache import GraphCache, vocab_source_map
+from util.vocabview import VocabView, VocabUtil
+from util.dataview import DataView, CONTEXT, ID, TYPE, REVERSE
+
+from .conneg import Negotiator
+
+
+VANN = Namespace("http://purl.org/vocab/vann/")
+VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+SCHEMA = Namespace("http://schema.org/")
 
 
 IDKBSE = "https://id.kb.se/"
@@ -31,14 +40,6 @@ DOMAIN_BASE_MAP = {
     'id-stg.kb.se':  IDKBSE,
     'id.kb.se':  IDKBSE,
     'libris.kb.se': LIBRIS,
-}
-
-ui_defs = {
-    REVERSE: {'label': "Saker som länkar hit"},
-    ID: {'label': "URI"},
-    TYPE: {'label': "Typ"},
-    'SEARCH_RESULTS': {'label': "Sökresultat"},
-    'SEE_ALL': {'label': "Se alla"},
 }
 
 def _get_base_uri(url=None):
@@ -81,6 +82,14 @@ def canonical_uri(thing):
                 return same_id
     return thing_id
 
+ui_defs = {
+    REVERSE: {'label': "Saker som länkar hit"},
+    ID: {'label': "URI"},
+    TYPE: {'label': "Typ"},
+    'SEARCH_RESULTS': {'label': "Sökresultat"},
+    'SEE_ALL': {'label': "Se alla"},
+}
+
 
 app = Blueprint('thingview', __name__)
 
@@ -97,15 +106,33 @@ def setup_app(setup_state):
             sniff_on_connection_fail=True, sniff_timeout=60,
             sniffer_timeout=300, timeout=10)
 
+    global LANG
+    LANG = config['LANG']
+
     vocab_uri = config['VOCAB_IRI']
+
     graphcache = GraphCache(config['GRAPH_CACHE'])
-    graphcache.graph.namespace_manager.bind("", vocab_uri)
-    for path in config['VOCAB_SOURCES']:
-        graphcache.load(path)
-    vocab = Vocab(graphcache.graph, vocab_uri, lang=config['LANG'])
+    ns_mgr = Graph().parse(config['JSONLD_CONTEXT_FILE'],
+            format='json-ld').namespace_manager
+    ns_mgr .bind("", vocab_uri)
+    graphcache.graph.namespace_manager = ns_mgr
+
+    global load_vocab_graph
+    def load_vocab_graph():
+        vocabgraph = graphcache.load(config['VOCAB_SOURCE'])
+        vocabgraph.namespace_manager = ns_mgr
+        # TODO: load base vocabularies for labels, inheritance here,
+        # or in vocab build step?
+        #for url in vocabgraph.objects(None, OWL.imports):
+        #    graphcache.load(vocab_source_map.get(str(url), url))
+        return vocabgraph
+
+    load_vocab_graph()
+
+    vocab = VocabView(graphcache.graph, vocab_uri, lang=LANG)
 
     global ldview
-    ldview = View(vocab, storage, elastic, config['ES_INDEX'])
+    ldview = DataView(vocab, storage, elastic, config['ES_INDEX'])
 
     global jsonld_context_file
     jsonld_context_file = config['JSONLD_CONTEXT_FILE']
@@ -123,6 +150,100 @@ def setup_app(setup_state):
     }
     app.context_processor(lambda: view_context)
 
+
+@app.route('/context.jsonld')
+def jsonld_context():
+    return send_file(jsonld_context_file, mimetype='application/ld+json')
+
+@app.route('/<path:path>/data')
+@app.route('/<path:path>/data.<suffix>')
+@app.route('/<path:path>')
+def thingview(path, suffix=None):
+    try:
+        return current_app.send_static_file(path)
+    except (NotFound, UnicodeEncodeError) as e:
+        pass
+
+    item_id = _get_served_uri(request.url, path)
+
+    thing = ldview.get_record_data(item_id)
+    if thing:
+        #canonical = thing[ID]
+        #if canonocal != item_id:
+        #    return redirect(_to_data_path(see_path, suffix), 302)
+        return rendered_response(path, suffix, thing)
+    else:
+        record_ids = ldview.find_record_ids(item_id)
+        if record_ids: #and len(record_ids) == 1:
+            return redirect(_to_data_path(record_ids[0], suffix), 303)
+        #else:
+        return abort(404)
+
+def _to_data_path(path, suffix):
+    return '%s/data.%s' % (path, suffix) if suffix else path
+
+@app.route('/find')
+@app.route('/find.<suffix>')
+def find(suffix=None):
+    make_find_url = lambda **kws: url_for('.find', **kws)
+    results = ldview.get_search_results(request.args, make_find_url,
+            _get_base_uri(request.url))
+    return rendered_response('/find', suffix, results)
+
+@app.route('/some')
+@app.route('/some.<suffix>')
+def some(suffix=None):
+    ambiguity = ldview.find_ambiguity(request)
+    if not ambiguity:
+        return abort(404)
+    return rendered_response('/some', suffix, ambiguity)
+
+@app.route('/')
+@app.route('/data.<suffix>')
+def datasetview(suffix=None):
+    results = ldview.get_index_aggregate(_get_base_uri(request.url))
+    return rendered_response('/', suffix, results)
+
+#@app.route('/vocab/<term>')
+#def termview(term):
+#    return redirect('/vocabview#' + term, 303)
+
+rdfns = {name: obj for name, obj in globals().items()
+                if isinstance(obj, (Namespace, ClosedNamespace))}
+
+app.context_processor(lambda: rdfns)
+
+@app.route('/vocab/')
+def vocabview():
+    voc = VocabUtil(load_vocab_graph(), LANG)
+
+    def link(obj):
+        if ':' in obj.qname() and not any(obj.objects(None)):
+            return obj.identifier
+        return '#' + obj.qname()
+
+    def listclass(o):
+        return 'ext' if ':' in o.qname() else 'loc'
+
+    return render_template('vocab.html',
+            URIRef=URIRef, **vars())
+
+
+def rendered_response(path, suffix, thing):
+    mimetype, render = negotiator.negotiate(request, suffix)
+    if not render:
+        return abort(406)
+    result = render(path, thing)
+    charset = 'charset=UTF-8' # technically redundant, but for e.g. JSONView
+    resp = Response(result, mimetype=mimetype +'; '+ charset) if isinstance(
+            result, bytes) else result
+    if mimetype == 'application/json':
+        context_link = '</context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"'
+        resp.headers['Link'] = context_link
+    return resp
+
+
+TYPE_TEMPLATES = {'website', 'pagedcollection'}
 
 negotiator = Negotiator()
 
@@ -142,18 +263,9 @@ def render_html(path, data):
     return render_template(_get_template_for(data),
             path=path, thing=data, data_url=data_url)
 
-TYPE_TEMPLATES = {'website', 'pagedcollection'}
-
-def _get_template_for(data):
-    for rtype in as_iterable(data.get(TYPE)):
-        template_key = rtype.lower()
-        if template_key in TYPE_TEMPLATES:
-            return '%s.html' % template_key
-    return 'thing.html'
-
 @negotiator.add('application/json', 'json')
 @negotiator.add('text/json')
-def render_jsonld(path, data):
+def render_json(path, data):
     data = ldview.get_decorated_data(data, True)
     return _to_json(data)
 
@@ -186,89 +298,9 @@ def _to_graph(data, base=None):
                 format='json-ld', context=jsonld_context_file)
     return cg
 
-
-@app.route('/context.jsonld')
-def jsonld_context():
-    return send_file(jsonld_context_file, mimetype='application/ld+json')
-
-
-@app.route('/<path:path>/data')
-@app.route('/<path:path>/data.<suffix>')
-@app.route('/<path:path>')
-def thingview(path, suffix=None):
-    try:
-        return current_app.send_static_file(path)
-    except (NotFound, UnicodeEncodeError) as e:
-        pass
-
-    item_id = _get_served_uri(request.url, path)
-
-    thing = ldview.get_record_data(item_id)
-    if thing:
-        #canonical = thing[ID]
-        #if canonocal != item_id:
-        #    return redirect(to_data_path(see_path, suffix), 302)
-        return rendered_response(path, suffix, thing)
-    else:
-        record_ids = ldview.find_record_ids(item_id)
-        if record_ids: #and len(record_ids) == 1:
-            return redirect(to_data_path(record_ids[0], suffix), 303)
-        #else:
-        return abort(404)
-
-def rendered_response(path, suffix, thing):
-    mimetype, render = negotiator.negotiate(request, suffix)
-    if not render:
-        return abort(406)
-    result = render(path, thing)
-    charset = 'charset=UTF-8' # technically redundant, but for e.g. JSONView
-    resp = Response(result, mimetype=mimetype +'; '+ charset) if isinstance(
-            result, bytes) else result
-    if mimetype == 'application/json':
-        context_link = '</context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"'
-        resp.headers['Link'] = context_link
-    return resp
-
-def to_data_path(path, suffix):
-    if suffix:
-        return '%s/data.%s' % (path, suffix)
-    else:
-        return path
-
-
-@app.route('/find')
-@app.route('/find.<suffix>')
-def find(suffix=None):
-    make_find_url = lambda **kws: url_for('.find', **kws)
-    results = ldview.get_search_results(request.args, make_find_url,
-            _get_base_uri(request.url))
-    return rendered_response('/find', suffix, results)
-
-@app.route('/some')
-@app.route('/some.<suffix>')
-def some(suffix=None):
-    ambiguity = ldview.find_ambiguity(request)
-    if not ambiguity:
-        return abort(404)
-    return rendered_response('/some', suffix, ambiguity)
-
-def _tokenize(stuff):
-    """
-    >>> print(_tokenize("One, Any (1911-)"))
-    1911 any one
-    """
-    return sorted(set(
-        re.sub(r'\W(?u)', '', part.lower(), flags=re.UNICODE)
-        for part in stuff.split(" ")))
-
-
-@app.route('/')
-@app.route('/data.<suffix>')
-def datasetview(suffix=None):
-    results = ldview.get_index_aggregate(_get_base_uri(request.url))
-    return rendered_response('/', suffix, results)
-
-
-#@app.route('/vocab/<term>')
-#def termview(term):
-#    return redirect('/vocabview#' + term, 303)
+def _get_template_for(data):
+    for rtype in as_iterable(data.get(TYPE)):
+        template_key = rtype.lower()
+        if template_key in TYPE_TEMPLATES:
+            return '%s.html' % template_key
+    return 'thing.html'

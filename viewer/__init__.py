@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import operator
 from flask import Flask, render_template, redirect, abort
-from . import thingview, vocabview, marcframeview
+from . import thingview, marcframeview
 
 
 class MyFlask(Flask):
@@ -35,6 +35,5 @@ def format_number(n):
 def favicon():
     abort(404)
 
-app.register_blueprint(vocabview.app)
 app.register_blueprint(marcframeview.app)
 app.register_blueprint(thingview.app)
