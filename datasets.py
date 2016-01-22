@@ -87,8 +87,10 @@ def schemes():
 @compiler.dataset
 def relators():
     def relitem(item):
-        item['@id'] = BASE + "relator/" + (
-                item.get('term') or to_camel_case(item['label_en'].strip()))
+        mk_uri = lambda leaf: BASE + "relator/" + leaf
+        item['@id'] = mk_uri(item.get('term') or
+                to_camel_case(item['label_en'].strip()))
+        item['sameAs'] = {'@id': mk_uri(item['code'])}
         return item
     graph = construct(compiler.cached_rdf, sources=[
             {
@@ -99,7 +101,8 @@ def relators():
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
-                    "term": "rdfs:label"
+                    "term": "rdfs:label",
+                    "sameAs": "owl:sameAs"
                 }]
             },
             {
