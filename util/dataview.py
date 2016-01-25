@@ -269,19 +269,24 @@ class DataView:
                 if k in self.chip_keys or has_ref(v, *keep_refs)}
 
     def _get_references_to(self, item):
-        references = []
-        # TODO: send choice of id:s to find_by_quotation?
-        same_as = item.get('sameAs') if item else None
         item_id = item[ID]
-        quoted_id = same_as[0].get(ID) if same_as else item_id
+        # TODO: send choice of id:s to find_by_quotation?
+        ids = [item_id]
+        same_as = item.get('sameAs')
+        if same_as:
+            ids.append(same_as[0].get(ID))
 
-        for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
-            qdesc = get_descriptions(quoting.data)
-
-            _fix_refs(item_id, quoted_id, qdesc)
-            references.append(self.to_chip(qdesc.entry, item_id, quoted_id))
-            for it in qdesc.items:
-                references.append(self.to_chip(it, item_id, quoted_id))
+        references = []
+        for quoted_id in ids:
+            if references:
+                break
+            for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
+                qdesc = get_descriptions(quoting.data)
+                if quoted_id != item_id:
+                    _fix_refs(item_id, quoted_id, qdesc)
+                references.append(self.to_chip(qdesc.entry, item_id, quoted_id))
+                for it in qdesc.items:
+                    references.append(self.to_chip(it, item_id, quoted_id))
 
         return references
 
