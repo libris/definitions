@@ -61,12 +61,16 @@ def vocab():
     with open(scriptpath('source/vocab/update.rq')) as fp:
         graph.update(fp.read())
 
+    data = build_jsonld(graph)
+
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
-    compiler.write(lib_context, 'lib-context')
+    lib_context['@id'] = BASE + 'vocab/context'
 
-    return "/vocab", build_jsonld(graph)
+    data['@graph'].append(lib_context)
+
+    return "/vocab", data
 
 
 @compiler.dataset

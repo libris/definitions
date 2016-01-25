@@ -9,6 +9,10 @@ from lddb.ld.keys import *
 from lddb.ld.frame import autoframe
 
 
+MAX_LIMIT = 4000
+DEFAULT_LIMIT = 200
+
+
 class DataView:
 
     def __init__(self, vocab, storage, elastic, es_index):
@@ -130,7 +134,10 @@ class DataView:
             limit = int(limit)
         if offset and offset.isdigit():
             offset = int(offset)
-        return self.storage.get_real_limit(limit), offset
+        return self.get_real_limit(limit), offset
+
+    def get_real_limit(self, limit):
+        return DEFAULT_LIMIT if limit is None or limit > MAX_LIMIT else limit
 
     def get_index_aggregate(self, base_uri):
         dsl = {
@@ -266,22 +273,28 @@ class DataView:
 
     def to_chip(self, item, *keep_refs):
         return {k: v for k, v in item.items()
-                if k in self.chip_keys or has_ref(v, *keep_refs)}
+                if k in self.chip_keys or k.endswith('ByLang')
+                   or has_ref(v, *keep_refs)}
 
     def _get_references_to(self, item):
-        references = []
-        # TODO: send choice of id:s to find_by_quotation?
-        same_as = item.get('sameAs') if item else None
         item_id = item[ID]
-        quoted_id = same_as[0].get(ID) if same_as else item_id
+        # TODO: send choice of id:s to find_by_quotation?
+        ids = [item_id]
+        same_as = item.get('sameAs')
+        if same_as:
+            ids.append(same_as[0].get(ID))
 
-        for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
-            qdesc = get_descriptions(quoting.data)
-
-            _fix_refs(item_id, quoted_id, qdesc)
-            references.append(self.to_chip(qdesc.entry, item_id, quoted_id))
-            for it in qdesc.items:
-                references.append(self.to_chip(it, item_id, quoted_id))
+        references = []
+        for quoted_id in ids:
+            if references:
+                break
+            for quoting in self.storage.find_by_quotation(quoted_id, limit=200):
+                qdesc = get_descriptions(quoting.data)
+                if quoted_id != item_id:
+                    _fix_refs(item_id, quoted_id, qdesc)
+                references.append(self.to_chip(qdesc.entry, item_id, quoted_id))
+                for it in qdesc.items:
+                    references.append(self.to_chip(it, item_id, quoted_id))
 
         return references
 

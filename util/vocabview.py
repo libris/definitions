@@ -223,6 +223,11 @@ class VocabView:
     def labelgetter(self, item):
         for lkey in self.label_keys:
             label = item.get(lkey)
+            if not label:
+                for label in as_iterable(item.get(lkey + 'ByLang')):
+                    label = label.get(self.lang)
+                    if label:
+                        break
             if label:
                 if isinstance(label, list):
                     return label[0]
