@@ -96,6 +96,10 @@ app = Blueprint('thingview', __name__)
 
 @app.record
 def setup_app(setup_state):
+    global LANG
+    global load_vocab_graph
+    global ldview
+
     config = setup_state.app.config
 
     storage = Storage('lddb',
@@ -107,7 +111,6 @@ def setup_app(setup_state):
             sniff_on_connection_fail=True, sniff_timeout=60,
             sniffer_timeout=300, timeout=10)
 
-    global LANG
     LANG = config['LANG']
 
     vocab_uri = config['VOCAB_IRI']
@@ -123,17 +126,19 @@ def setup_app(setup_state):
     if not P.isdir(cachedir):
         makedirs(cachedir)
 
-    global load_vocab_graph
     def load_vocab_graph():
+        global jsonld_context_data
+
+        jsonld_context_data = storage.get_record(vocab_uri + 'context').data[GRAPH][0]
+
         #vocabgraph = graphcache.load(config['VOCAB_SOURCE'])
         vocab_items = sum((record.data[GRAPH] for record in
                        storage.find_by_quotation(vocab_uri, limit=4096)),
                        storage.get_record(vocab_uri).data[GRAPH])
         vocabdata = json.dumps(vocab_items, indent=2)
-        context_data = storage.get_record(vocab_uri + 'context').data[GRAPH][0]
         vocabgraph = Graph().parse(
                 data=vocabdata,
-                context=context_data,
+                context=jsonld_context_data,
                 format='json-ld')
         #vocabgraph.namespace_manager = ns_mgr
         vocabgraph.namespace_manager.bind("", vocab_uri)
@@ -147,7 +152,6 @@ def setup_app(setup_state):
 
     vocab = VocabView(load_vocab_graph(), vocab_uri, lang=LANG)
 
-    global ldview
     ldview = DataView(vocab, storage, elastic, config['ES_INDEX'])
 
     view_context = {
@@ -166,7 +170,8 @@ def setup_app(setup_state):
 
 @app.route('/context.jsonld')
 def jsonld_context():
-    return send_file(jsonld_context_file, mimetype='application/ld+json')
+    return Response(json.dumps(jsonld_context_data),
+            mimetype='application/ld+json; charset=UTF-8')
 
 @app.route('/<path:path>/data')
 @app.route('/<path:path>/data.<suffix>')
@@ -308,7 +313,7 @@ def _to_json(data):
 def _to_graph(data, base=None):
     cg = ConjunctiveGraph()
     cg.parse(data=json.dumps(data), base=base or IDKBSE,
-                format='json-ld', context=jsonld_context_file)
+                format='json-ld', context=jsonld_context_data)
     return cg
 
 def _get_template_for(data):
