@@ -42,6 +42,10 @@ $(function () {
     elem.removeClass('to-be-active');
     elem.removeClass('active');
     
+    // Removing these so that the chip isn't activated when hovering on the ghost of it...
+    elem.css('margin-top', '');
+    elem.removeClass('adjusted-top');
+    
     elem.css('width', '').css('height', '');
   };
 
