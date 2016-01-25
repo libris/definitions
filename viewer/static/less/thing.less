@@ -30,33 +30,45 @@ body#thing {
       .panel-title a {
         color: @color-headers;
       }
-      .label-class {
-        font-size: 12px;
-        color: @color-class;
-        font-weight: bold;
-        text-transform: uppercase;
-        display: inline-block;
-        cursor: help;
-        line-height: 12px;
-        border-bottom: 1px dashed #fff;
-        text-decoration: none;
-        &:hover {
-          border-bottom: 1px dashed @color-class;
-        }
-      }
       .chip-prop {
           
       }
-      .thing-id {
-        text-decoration: none;
-        &:hover {
-          overflow: visible;
-        }
-        code {
-          border: 1px solid #fff;
+      .panel-heading-meta {
+        display: block;
+        height: 22px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        .label-class {
+          // height: 22px;
+          font-size: 12px;
+          color: @color-class;
+          font-weight: bold;
+          text-transform: uppercase;
+          display: inline-block;
+          cursor: help;
+          line-height: 18px;
+          border-bottom: 1px dashed #fff;
+          text-decoration: none;
+          width: auto;
+          float: left;
           &:hover {
-            text-decoration: none;
-            border: 1px solid @color-id;
+            border-bottom: 1px dashed @color-class;
+          }
+        }
+        .thing-id {
+          height: 22px;
+          float: left;
+          line-height: 12px;
+          margin-left: 1em;
+          display: inline-block;
+          text-decoration: none;
+          color: @color-id;
+          code {
+            border: 1px solid #fff;
+            &:hover {
+              text-decoration: none;
+              border: 1px solid @color-id;
+            }
           }
         }
       }
@@ -68,8 +80,9 @@ body#thing {
     margin: 5px;
     > .panel-heading {
       padding: 5px;
-      > .label-class {
+      > .panel-heading-meta {
         display: none;
+        width: 260px;
       }
     }
     .thing-id {
@@ -89,6 +102,16 @@ body#thing {
     min-width: 260px;
     .panel-heading {
       overflow-x: visible;
+      .panel-heading-meta {
+        display: block;
+        margin-bottom: 4px;
+        .thing-id {
+          &:hover {
+            overflow: visible;
+            position: absolute;
+          }
+        }
+      }
     }
     &:hover {
       z-index: 985;
@@ -125,7 +148,8 @@ body#thing {
       font-size: 2em;
     }
     .thing-id {
-      float: right;
+      position: absolute;
+      right: 25px;
     }
     .panel-title {
     }

@@ -58,6 +58,7 @@
 
     % if ID in thing
       <header class="panel-heading">
+        <div class="panel-heading-meta">
           % set thing_url = view_url(canonical_id)
           % if t
             ${termref(t, classes='', labeltype='label-class')}
@@ -65,6 +66,7 @@
         <a href="${thing_url}" class="thing-id">
           <small><code>&lt;${thing_id}&gt;</code></small>
         </a>
+        </div>
         <h1 class="panel-title">
           <a href="${thing_url}" class="thing-label">
             ${ldview.getlabel(thing)}

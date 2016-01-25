@@ -41,8 +41,6 @@ $(function () {
   var collapse = function (elem) {
     elem.removeClass('to-be-active');
     elem.removeClass('active');
-    elem.css('margin-top', '');
-    elem.removeClass('adjusted-top');
     
     elem.css('width', '').css('height', '');
   };
