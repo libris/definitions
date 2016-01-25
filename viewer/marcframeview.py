@@ -1,6 +1,9 @@
-from flask import Blueprint, render_template
 import re
 import json
+from os import makedirs, path as P
+
+import requests
+from flask import Blueprint, render_template
 
 
 app = Blueprint('marcframeview', __name__)
@@ -9,15 +12,33 @@ MARC_CATEGORIES = 'bib', 'auth', 'hold'
 
 @app.record
 def setup_app(setup_state):
+    global marcframe
+
     config = setup_state.app.config
-    global MARCFRAME_SOURCE
+
     MARCFRAME_SOURCE = config['MARCFRAME_SOURCE']
+
+    cachedir = config['CACHE_DIR']
+    if not P.isdir(cachedir):
+        makedirs(cachedir)
+    marcframe_file = P.join(cachedir, 'marcframe.json')
+
+    try:
+        with open(marcframe_file, 'w') as f:
+            resp = requests.get(MARCFRAME_SOURCE, stream=True)
+            for chunk in resp.iter_content(1024):
+                f.write(chunk)
+    except requests.exceptions.ConnectionError:
+        pass
+
+    with open(marcframe_file) as fp:
+        try:
+            marcframe = json.load(fp)
+        except ValueError:
+            marcframe = None
 
 @app.route('/marcframeview/')
 def marcframeview():
-
-    with open(MARCFRAME_SOURCE) as fp:
-        marcframe = json.load(fp)
 
     def marc_categories():
         for cat in MARC_CATEGORIES:
@@ -41,4 +62,4 @@ def marcframeview():
                 separators=(',', ': '))
         return re.sub(r'{\s+(\S+: "[^"]*")\s+}', r'{\1}', s)
 
-    return render_template('marcframeview.html', **vars())
+    return render_template('marcframeview.html', marcframe=marcframe, **vars())
