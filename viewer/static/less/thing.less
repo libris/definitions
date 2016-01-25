@@ -94,31 +94,31 @@ body#thing {
   }
   .link-item-copy {
     position: absolute;
-    transition: 0.25s ease;
-    transition-property: opacity;
     opacity: 0;
     margin-top: 0px;
     overflow-x: visible;
-    min-width: 260px;
-    .panel-heading {
-      overflow-x: visible;
-      .panel-heading-meta {
-        display: block;
-        margin-bottom: 4px;
-        .thing-id {
-          max-width: 100px;
-          &:hover {
-            overflow: visible;
-            position: absolute;
-          }
-        }
-      }
-    }
     &:hover {
       z-index: 985;
     }
     &.active {
+      transition: 0.25s ease;
+      transition-property: opacity;
+      min-width: 260px;
       opacity: 1;
+      .panel-heading {
+        overflow-x: visible;
+        .panel-heading-meta {
+          display: block;
+          margin-bottom: 4px;
+          .thing-id {
+            max-width: 100px;
+            &:hover {
+              overflow: visible;
+              position: absolute;
+            }
+          }
+        }
+      }
       > .panel-heading > .label-class {
         display: inline-block;
         margin-right: 1em;
