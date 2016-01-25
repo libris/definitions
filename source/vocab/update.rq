@@ -1,9 +1,9 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix : <http://id.kb.se/vocab/>
+prefix : <https://id.kb.se/vocab/>
 
 insert {
     ?term rdfs:isDefinedBy :
 } where {
     ?term ?p ?o
-    filter strstarts(str(?term), str(:))
+    filter ((?term != :) && strstarts(str(?term), str(:)))
 }
