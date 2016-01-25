@@ -217,7 +217,8 @@ class DataView:
                     return item
 
         maybes  = [pick_thing(rec) #self.get_decorated_data(rec)
-                   for rec in self.storage.find_by_example(example)]
+                   for rec in self.storage.find_by_example(example,
+                           limit=MAX_LIMIT)]
 
         some_id = '%s?%s' % (request.path, request.query_string)
         item = {
