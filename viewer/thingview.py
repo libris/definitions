@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import re
 import json
 from urlparse import urlparse, urljoin
+from os import makedirs, path as P
 
 from flask import request, Response, render_template, redirect, abort, url_for, send_file
 from flask import Blueprint, current_app
@@ -19,7 +20,7 @@ from lddb.storage import Storage
 from util import as_iterable
 from util.graphcache import GraphCache, vocab_source_map
 from util.vocabview import VocabView, VocabUtil
-from util.dataview import DataView, CONTEXT, ID, TYPE, REVERSE
+from util.dataview import DataView, CONTEXT, GRAPH, ID, TYPE, REVERSE
 
 from .conneg import Negotiator
 
@@ -111,31 +112,43 @@ def setup_app(setup_state):
 
     vocab_uri = config['VOCAB_IRI']
 
-    graphcache = GraphCache(config['GRAPH_CACHE'])
-    ns_mgr = Graph().parse(config['JSONLD_CONTEXT_FILE'],
-            format='json-ld').namespace_manager
-    ns_mgr .bind("", vocab_uri)
-    graphcache.graph.namespace_manager = ns_mgr
+    #ns_mgr = Graph().parse('sys/context/base.jsonld',
+    #        format='json-ld').namespace_manager
+    #ns_mgr.bind("", vocab_uri)
+
+    #graphcache = GraphCache(config['GRAPH_CACHE'])
+    #graphcache.graph.namespace_manager = ns_mgr
+
+    cachedir = config['CACHE_DIR']
+    if not P.isdir(cachedir):
+        makedirs(cachedir)
 
     global load_vocab_graph
     def load_vocab_graph():
-        vocabgraph = graphcache.load(config['VOCAB_SOURCE'])
-        vocabgraph.namespace_manager = ns_mgr
+        #vocabgraph = graphcache.load(config['VOCAB_SOURCE'])
+        vocab_items = sum((record.data[GRAPH] for record in
+                       storage.find_by_quotation(vocab_uri, limit=4096)),
+                       storage.get_record(vocab_uri).data[GRAPH])
+        vocabdata = json.dumps(vocab_items, indent=2)
+        context_data = storage.get_record(vocab_uri + 'context').data[GRAPH][0]
+        vocabgraph = Graph().parse(
+                data=vocabdata,
+                context=context_data,
+                format='json-ld')
+        #vocabgraph.namespace_manager = ns_mgr
+        vocabgraph.namespace_manager.bind("", vocab_uri)
+
         # TODO: load base vocabularies for labels, inheritance here,
         # or in vocab build step?
         #for url in vocabgraph.objects(None, OWL.imports):
         #    graphcache.load(vocab_source_map.get(str(url), url))
+
         return vocabgraph
 
-    load_vocab_graph()
-
-    vocab = VocabView(graphcache.graph, vocab_uri, lang=LANG)
+    vocab = VocabView(load_vocab_graph(), vocab_uri, lang=LANG)
 
     global ldview
     ldview = DataView(vocab, storage, elastic, config['ES_INDEX'])
-
-    global jsonld_context_file
-    jsonld_context_file = config['JSONLD_CONTEXT_FILE']
 
     view_context = {
         'ID': ID,'TYPE': TYPE, 'REVERSE': REVERSE,
@@ -205,8 +218,8 @@ def datasetview(suffix=None):
     return rendered_response('/', suffix, results)
 
 #@app.route('/vocab/<term>')
-#def termview(term):
-#    return redirect('/vocabview#' + term, 303)
+#def vocab_term(term):
+#    return redirect('/vocab/#' + term, 303)
 
 rdfns = {name: obj for name, obj in globals().items()
                 if isinstance(obj, (Namespace, ClosedNamespace))}

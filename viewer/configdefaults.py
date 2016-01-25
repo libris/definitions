@@ -18,10 +18,8 @@ ES_SNIFF_ON_START=True
 VOCAB_IRI = "https://id.kb.se/vocab/"
 LANG = "sv"
 
-# TODO: Move relative locations below to application-defined storage when
-# separating viewer instance from definitions data.
+# TODO: Move relative cache location to instance directory (or application storage)
 BASE_DIR = P.join(P.dirname(__file__), "..")
-GRAPH_CACHE = P.join(BASE_DIR, "cache/graph-cache")
-VOCAB_SOURCE = P.join(BASE_DIR, "build/vocab.jsonld")
-JSONLD_CONTEXT_FILE = P.join(BASE_DIR, "build/lib-context.jsonld")
+CACHE_DIR = P.join(BASE_DIR, "cache")
+#GRAPH_CACHE = P.join(CACHE_DIR, "graph-cache")
 MARCFRAME_SOURCE = P.join(BASE_DIR, "cache/ext/marcframe.json")
