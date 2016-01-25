@@ -9,6 +9,10 @@ from lddb.ld.keys import *
 from lddb.ld.frame import autoframe
 
 
+MAX_LIMIT = 4000
+DEFAULT_LIMIT = 200
+
+
 class DataView:
 
     def __init__(self, vocab, storage, elastic, es_index):
@@ -130,7 +134,10 @@ class DataView:
             limit = int(limit)
         if offset and offset.isdigit():
             offset = int(offset)
-        return self.storage.get_real_limit(limit), offset
+        return self.get_real_limit(limit), offset
+
+    def get_real_limit(self, limit):
+        return DEFAULT_LIMIT if limit is None or limit > MAX_LIMIT else limit
 
     def get_index_aggregate(self, base_uri):
         dsl = {
