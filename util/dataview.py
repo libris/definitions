@@ -266,7 +266,8 @@ class DataView:
 
     def to_chip(self, item, *keep_refs):
         return {k: v for k, v in item.items()
-                if k in self.chip_keys or has_ref(v, *keep_refs)}
+                if k in self.chip_keys or k.endswith('ByLang')
+                   or has_ref(v, *keep_refs)}
 
     def _get_references_to(self, item):
         item_id = item[ID]
