@@ -16,11 +16,11 @@ from rdflib.namespace import SKOS, DCTERMS, Namespace, ClosedNamespace
 
 from elasticsearch import Elasticsearch
 
-from lddb.storage import Storage
-from util import as_iterable
-from util.graphcache import GraphCache, vocab_source_map
-from util.vocabview import VocabView, VocabUtil
-from util.dataview import DataView, CONTEXT, GRAPH, ID, TYPE, REVERSE
+from lxltools.lddb.storage import Storage
+from lxltools.util import as_iterable
+from lxltools.graphcache import GraphCache, vocab_source_map
+from lxltools.vocabview import VocabView, VocabUtil
+from lxltools.dataview import DataView, CONTEXT, GRAPH, ID, TYPE, REVERSE
 
 from .conneg import Negotiator
 
