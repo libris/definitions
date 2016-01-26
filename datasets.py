@@ -5,9 +5,9 @@ import os.path as Path
 from glob import glob
 import zipfile
 from rdflib import Graph
-from util.datacompiler import (Compiler, load_json, read_csv, decorate,
+from lxltools.datacompiler import (Compiler, load_json, read_csv, decorate,
         construct, to_jsonld, to_rdf)
-from util.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
+from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 
 
 # TODO:

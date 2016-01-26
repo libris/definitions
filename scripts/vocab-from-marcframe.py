@@ -3,7 +3,7 @@ from urlparse import urljoin
 from rdflib import *
 from rdflib.namespace import *
 from rdflib.util import guess_format
-from util.graphcache import GraphCache, vocab_source_map
+from lxltools.graphcache import GraphCache, vocab_source_map
 
 
 SDO = Namespace("http://schema.org/")
