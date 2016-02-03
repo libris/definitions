@@ -243,15 +243,16 @@
     rdfs:label "Personterm"@sv;
     owl:equivalentClass mads:PersonalName;
     rdfs:subClassOf :IndexTerm;
-    l:magicProperty [
+    l:propertyTemplate [
             l:resultProperty :prefLabel;
-            l:useLink :focus;
-            l:template (l:join " "
-                        (l:or (l:join ", " :familyName :givenName) :name)
+            l:sourceLink :focus;
+            l:template [l:join (
+                        " "
+                        [l:or ([l:join (", " :familyName :givenName)] :name)]
                         :numeration
-                        (l:if :personTitle ("(" :personTitle ")"))
-                        (l:if (l:or :birthYear :deathYear)
-                            (:birthYear "-" :deathYear)));
+                        [l:if :personTitle; l:then ("(" :personTitle ")")]
+                        [l:if [l:or (:birthYear :deathYear)];
+                         l:then (:birthYear "-" :deathYear)])];
         ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
