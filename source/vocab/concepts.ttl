@@ -177,12 +177,13 @@
     owl:equivalentClass mads:ComplexSubject;
     rdfs:label "Complex Term"@en, "Sammansatt term"@sv .
 
-:termParts a owl:ObjectProperty;
+:termComponentList a owl:ObjectProperty;
     owl:equivalentProperty mads:componentList;
-    rdfs:subPropertyOf :label;
+    rdfs:subPropertyOf :label, :hasPart;
     skos:related :broader;
     rdfs:domain :IndexTerm;
-    rdfs:label "Term components"@en, "Termkomponenter"@sv .
+    rdfs:label "Term components"@en, "Termkomponenter"@sv;
+    rdfs:comment "En ordnad lista på de komponenter som termen består av."@sv .
 
 :SubdivisionTerm a owl:Class;
     rdfs:label "Underindelning"@sv;
