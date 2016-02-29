@@ -360,7 +360,7 @@ def add_enum_def(enumcoll, enum_id, dfn_ref_key, dfn, key):
         sameas.append({"@id": raw_id})
 
     if key == enumcoll.off_key:
-        broadmatch.append({'@id': 'schema:False'})
+        broadmatch.append({'@id': 'sdo:False'})
 
     dest = ENUM_DEFS[enum_id] = {
         "@id": enum_id, "@type": in_coll,
@@ -615,14 +615,14 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     ranges = [{'@id': enumcoll.id}]
                     if enumcoll.type:
                         ranges.append({'@id': enumcoll.type})
-                    prop_dfn['schema:rangeIncludes'] = ranges
+                    prop_dfn['sdo:rangeIncludes'] = ranges
                     add_labels(col, prop_dfn)
                     ENUM_DEFS[colpropid] = prop_dfn
 
                     coll_dfn = ENUM_DEFS[enumcoll.id]
                     add_labels(col, coll_dfn)
                     if type_name:
-                        prop_dfn['schema:domainIncludes'] = {'@id': 'v:' + type_name}
+                        prop_dfn['sdo:domainIncludes'] = {'@id': 'v:' + type_name}
                         # NOTE: means "enumeration only applicable if type of
                         # thing linking to it is of this type"
                         coll_dfn.setdefault('broadMatch', []).append('v:' + type_name)
@@ -672,7 +672,7 @@ if __name__ == '__main__':
             "v": "https://id.kb.se/vocab/",
             #"inCollection": {"@reverse": "skos:member"},
             "inCollection": None,
-            "prefLabel": {"@language": "sv"},
+            "prefLabel": {"@id": "skos:prefLabel", "@language": "sv"},
             "prefLabel_en": {"@id": "prefLabel", "@language": "en"},
             "tokenMaps": None,
             "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
@@ -719,7 +719,7 @@ if __name__ == '__main__':
         }
         ENUM_DEFS['EnumeratedTerm'] = {
             "@id": "EnumeratedTerm", "@type": "owl:Class",
-            "subClassOf": ["skos:Concept", "schema:Enumeration"]
+            "subClassOf": ["skos:Concept", "sdo:Enumeration"]
         }
         OUT['@graph'].append({"@id": "enums", "@graph": ENUM_DEFS.values()})
 
