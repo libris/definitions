@@ -1,5 +1,5 @@
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix mads: <http://www.loc.gov/mads/rdf/v1#>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 
 construct {
     ?s a ?type;
@@ -8,7 +8,7 @@ construct {
         skos:exactMatch ?match .
 } where {
     ?s a ?type;
-        mads:code ?not;
-        mads:authoritativeLabel ?label;
-        mads:hasExactExternalAuthority ?match .
+        madsrdf:code ?not;
+        madsrdf:authoritativeLabel ?label;
+        madsrdf:hasExactExternalAuthority ?match .
 }
