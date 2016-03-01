@@ -3,12 +3,15 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
@@ -52,7 +55,21 @@
     rdfs:label "ingår i dataset"@sv;
     rdfs:domain :Record;
     rdfs:range :Dataset;
-    owl:equivalentProperty void:inDataset .
+    owl:equivalentProperty void:inDataset;
+    rdfs:subPropertyOf dc:isPartOf .
+
+:DataCatalog a owl:Class;
+    owl:equivalentClass sdo:DataCatalog, dcat:Catalog .
+
+:Dataset a owl:Class;
+    owl:equivalentClass sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
+
+:hasDataset a owl:ObjectProperty;
+    rdfs:label "har dataset"@sv;
+    rdfs:domain :DataCatalog;
+    rdfs:range :Dataset;
+    owl:equivalentProperty sdo:dataset, dcat:dataset;
+    rdfs:subPropertyOf dc:hasPart .
 
 
 ##
