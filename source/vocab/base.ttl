@@ -15,11 +15,6 @@
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix sdo: <http://schema.org/> .
 
-@prefix iana: <http://www.iana.org/assignments/relation/> .
-@prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
-@prefix void: <http://rdfs.org/ns/void#> .
-@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
-
 @prefix : <https://id.kb.se/vocab/> .
 
 
@@ -89,6 +84,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "samma sak som"@sv;
     owl:equivalentProperty owl:sameAs .
 
+:name a owl:DatatypeProperty;
+    rdfs:label "name"@en, "namn"@sv;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty sdo:name .
+
 :Date a rdfs:Datatype;
     owl:sameAs xsd:date .
 :Time a rdfs:Datatype;
@@ -115,77 +115,6 @@ rdf:type a owl:ObjectProperty;
 :PartialDateTime a rdfs:Datatype;
     rdfs:comment "Used for dates, dates and times, and intervals combining precise elements with uncertain, approximate, or unspecified parts. Also applicable for sets of dates."@en;
     owl:equivalentClass edtf:EDTF-level2 .
-
-
-##
-# Records
-
-:Record a owl:Class;
-    rdfs:label "Post"@sv;
-    rdfs:subClassOf foaf:Document .
-
-:mainEntity a owl:ObjectProperty;
-    rdfs:label "handlar om"@sv;
-    owl:equivalentProperty sdo:mainEntity, foaf:primaryTopic .
-
-:describedBy a owl:ObjectProperty;
-    rdfs:label "Beskriven av"@sv;
-    owl:inverseOf :mainEntity;
-    owl:equivalentProperty sdo:mainEntityOfPage, iana:describedby, wdrs:describedby;
-    rdfs:subPropertyOf foaf:isPrimaryTopicOf .
-
-:identifiedBy a owl:ObjectProperty;
-    rdfs:label "identifierad av"@sv;
-    rdfs:subPropertyOf :describedBy;
-    owl:equivalentProperty sdo:sameAs .
-
-:name a owl:DatatypeProperty;
-    rdfs:label "name"@en, "namn"@sv;
-    rdfs:subPropertyOf :label;
-    owl:equivalentProperty sdo:name .
-
-:controlNumber a owl:DatatypeProperty;
-    rdfs:label "kontrollnummer"@sv;
-    owl:equivalentProperty :identifier .
-
-:inDataset a owl:ObjectProperty;
-    rdfs:label "ingår i dataset"@sv;
-    owl:equivalentProperty void:inDataset .
-
-
-##
-# Paged Collections
-
-:PagedCollection a owl:Class;
-    owl:equivalentClass hydra:PagedCollection .
-
-:itemsPerPage a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:itemsPerPage .
-
-:firstPage a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:firstPage;
-    rdfs:subPropertyOf iana:first .
-
-:previousPage a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:previousPage;
-    rdfs:subPropertyOf iana:prev .
-
-:nextPage a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:nextPage;
-    rdfs:subPropertyOf iana:next .
-
-:lastPage a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:lastPage;
-    rdfs:subPropertyOf iana:last .
-
-:items a owl:ObjectProperty;
-    rdfs:domain :PagedCollection;
-    owl:equivalentProperty hydra:member .
 
 
 ##
