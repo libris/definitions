@@ -1,13 +1,28 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix sdo: <http://schema.org/> .
 
+@prefix : <https://id.kb.se/vocab/> .
+prefix faicon: <http://fortawesome.github.io/Font-Awesome/icon/>
+
 @base <http://id.kb.se/dataset/> .
+
+</> a sdo:DataCatalog;
+    dc:title "ID.KB.SE"@sv;
+    :itemList ( </docs/about> </marcframe> </vocab> ) .
+
+</about> xhv:alternate </about.sv>; :icon faicon:info-circle .
+</about.sv> dc:language </language/swe> .
+
+</marcframe> a sdo:Service; dc:title "MARC-mappningar"@sv; :icon faicon:exchange . 
+
+</vocab> dc:title "Basvokabulär"@sv; :icon faicon:book .
 
 </dataset> a void:Dataset;
     owl:sameAs </.well-known/void>;
