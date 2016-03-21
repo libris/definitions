@@ -33,7 +33,7 @@ def _get_zipped_graph(path, name):
         return Graph().parse(zipped.open(name), format='turtle')
 
 
-compiler = Compiler(dataset_id=BASE + 'dataset', union='definitions.jsonld.lines')
+compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.lines')
 
 
 #@compiler.dataset
