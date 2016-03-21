@@ -1,9 +1,8 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function
 import re
-import os.path as Path
-from glob import glob
 import zipfile
+from pathlib2 import Path
 from rdflib import Graph
 from lxltools.datacompiler import (Compiler, load_json, read_csv, decorate,
         construct, to_jsonld, to_rdf)
@@ -18,7 +17,10 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 
 BASE = "https://id.kb.se/"
 
-scriptpath = lambda pth: Path.join(Path.dirname(__file__), pth)
+SCRIPT_DIR = Path(__file__).parent
+
+scriptpath = lambda pth: str(SCRIPT_DIR / pth)
+
 
 def build_jsonld(graph):
     path = "sys/context/base.jsonld"
@@ -55,11 +57,10 @@ compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.l
 def vocab():
     graph = Graph()
 
-    for part in glob(scriptpath('source/vocab/*.ttl')):
-        graph.parse(part, format='turtle')
+    for part in (SCRIPT_DIR/'source/vocab').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
 
-    with open(scriptpath('source/vocab/update.rq')) as fp:
-        graph.update(fp.read())
+    graph.update((SCRIPT_DIR/'source/vocab/update.rq').read_text())
 
     data = build_jsonld(graph)
 
@@ -121,10 +122,10 @@ def relators():
 def languages():
     loclangpath, fmt = compiler.get_cached_path("loc-language-data.ttl"), 'turtle'
     loclanggraph = Graph()
-    if not Path.exists(loclangpath):
+    if not Path(loclangpath).exists():
         # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
-        with open(scriptpath('source/construct-loc-language-data.rq')) as fp:
-            cherry_pick_loc_lang_data = fp.read()
+        cherry_pick_loc_lang_data = (
+                SCRIPT_DIR/'source/construct-loc-language-data.rq').read_text()
         loclanggraph += _get_zipped_graph(
                 compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
                 'iso6391.ttl').query(cherry_pick_loc_lang_data)
