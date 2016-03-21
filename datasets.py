@@ -184,6 +184,35 @@ def nationalities():
     return "/nationality/", build_jsonld(graph)
 
 
+@compiler.dataset
+def docs():
+    import markdown
+    docs = []
+    for fpath in (SCRIPT_DIR/'source/doc').glob('**/*.mkd'):
+        text = fpath.read_text(encoding='utf-8')
+        html = markdown.markdown(text)
+        doc_id = str(fpath).replace('source/', '').replace('.mkd', '')
+        doc_id, dot, lang = doc_id.partition('.')
+        lang = lang or None
+        h1end = html.find('</h1>')
+        if h1end > -1:
+            title = html[len('<h1>'):h1end]
+        doc = {
+            "@type": "Article",
+            "@id": BASE + doc_id,
+            "title": title,
+            "articleBody": html
+        }
+        if lang:
+            doc["language"] = {"langTag": lang},
+        docs.append(doc)
+
+    return "/doc", {
+        "@context": "../sys/context/base.jsonld",
+        "@graph": docs
+    }
+
+
 if __name__ == '__main__':
     import argparse
 
