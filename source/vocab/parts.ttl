@@ -10,6 +10,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://bibframe.org/vocab/> . # TODO: new URI?
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
@@ -74,22 +75,48 @@
     rdfs:label "datum"@sv;
     owl:equivalentProperty dc:date .
 
-:title a owl:DatatypeProperty;
-    rdfs:label "title"@en, "titel"@sv;
-    rdfs:subPropertyOf :label;
-    owl:equivalentProperty bf:title, dc:title;
-    owl:propertyChainAxiom ( :qualifiedTitle :titleValue ) .
-
 :identifier a owl:DatatypeProperty ;
     rdfs:label "identifier"@en, "identifikator"@sv;
     rdfs:subPropertyOf :label;
     rdfs:range :Identifier;
     owl:equivalentProperty dc:identifier, bibo:identifier;
-    owl:propertyChainAxiom ( :qualifiedIdentifier :value ) .
+    owl:propertyChainAxiom ( :identifiedBy :value ) .
 
-:qualifiedIdentifier a owl:ObjectProperty ;
-    rdfs:label "qualified identifier"@en, "specificerad identifikator"@sv;
+:isbn a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :ISBN .
+
+:issn a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :ISSN .
+
+:identifiedBy a owl:ObjectProperty ;
+    rdfs:label "identified by"@en, "identifierad av"@sv;
+    rdfs:subPropertyOf bf2:identifiedBy;
     rdfs:range :Identifier .
+
+:Identifier a owl:Class ;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Identifikator"@sv;
+    owl:equivalentClass bf:Identifier .
+
+:ISBN a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISBN" .
+
+:ISBN13 a rdfs:Datatype;
+    rdfs:subClassOf :ISBN;
+    rdfs:label "ISBN-13" .
+
+:ISSN a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISSN" .
+
+:title a owl:DatatypeProperty;
+    rdfs:label "title"@en, "titel"@sv;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty bf:title, dc:title;
+    owl:propertyChainAxiom ( :qualifiedTitle :mainTitle ) .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
@@ -115,15 +142,6 @@
     owl:equivalentProperty bf:titleVariation;
     rdfs:range :Title .
 
-:Identifier a owl:Class ;
-    rdfs:subClassOf :StructuredValue;
-    rdfs:label "Identifikator"@sv;
-    owl:equivalentClass bf:Identifier .
-
-:ISBN13 a rdfs:Datatype;
-    rdfs:subClassOf :Identifier;
-    rdfs:label "ISBN-13" .
-
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Titel"@sv;
@@ -137,17 +155,18 @@
     rdfs:subClassOf :Title;
     rdfs:label "Title Page"@en, "Titelsida"@sv .
 
-:titleValue a owl:DatatypeProperty;
+:mainTitle a owl:DatatypeProperty;
     rdfs:label "titelvärde"@sv;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv;
     rdfs:subPropertyOf :value;
-    owl:equivalentProperty bf:titleValue;
+    owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
 
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "undertitel"@sv;
     skos:hiddenLabel "Övrig titelinformation"@sv;
     rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    owl:equivalentProperty bf2:subTitle;
     rdfs:domain :Title .
 
 :titleDate a owl:DatatypeProperty;
