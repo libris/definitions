@@ -88,10 +88,6 @@
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
 
-:textQuery a owl:DatatypeProperty;
-    rdfs:domain :PartialCollectionView;
-    owl:equivalentProperty hydra:freetextQuery .
-
 :first a owl:ObjectProperty;
     rdfs:domain :PartialCollectionView;
     owl:equivalentProperty hydra:first;
@@ -119,6 +115,36 @@
 :itemsPerPage a owl:DatatypeProperty .
 
 :itemOffset a owl:DatatypeProperty .
+
+:search a owl:ObjectProperty;
+    owl:equivalentProperty hydra:search;
+    rdfs:domain :PartialCollectionView;
+    rdfs:range :SearchTemplate .
+
+:SearchTemplate a owl:Class;
+    rdfs:subClassOf hydra:IriTemplate .
+
+:mapping a owl:ObjectProperty;
+    owl:equivalentProperty hydra:mapping;
+    rdfs:domain :SearchTemplate;
+    rdfs:range :SearchMapping .
+
+:SearchMapping a owl:Class;
+    rdfs:subClassOf hydra:IriTemplateMapping .
+
+:variable a owl:DatatypeProperty;
+    owl:equivalentProperty hydra:variable;
+    rdfs:domain :SearchMapping;
+    rdfs:range xsd:string .
+
+:property a owl:ObjectProperty ;
+    owl:equivalentProperty hydra:property;
+    rdfs:domain :SearchMapping;
+    rdfs:range rdf:Property .
+
+:textQuery a owl:DatatypeProperty;
+    owl:equivalentProperty hydra:freetextQuery;
+    rdfs:label "freetext query"@en, "fritextsökning"@sv .
 
 
 ##
