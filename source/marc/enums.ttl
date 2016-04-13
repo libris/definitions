@@ -1,11 +1,13 @@
 @prefix : <https://id.kb.se/marc/> .
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
+@prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix v: <https://id.kb.se/vocab/> .
+@prefix void: <http://rdfs.org/ns/void#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -1944,7 +1946,7 @@
 
 :Exemplarinformation_finns_ej a :ItemInfoInRecordType ;
     owl:sameAs :ItemInfoInRecordType-n ;
-    skos:broadMatch schema:False ;
+    skos:broadMatch sdo:False ;
     skos:notation "n" ;
     skos:prefLabel "Exemplarinformation finns ej"@sv .
 
@@ -3873,7 +3875,7 @@
 
 :NoIndex a :IndexType ;
     owl:sameAs :IndexType-0 ;
-    skos:broadMatch schema:False ;
+    skos:broadMatch sdo:False ;
     skos:notation "0" ;
     skos:prefLabel "No index"@en,
         "Index saknas"@sv .
@@ -4007,21 +4009,21 @@
 
 :NotAConferencePublication a :ConferencePublicationType ;
     owl:sameAs :ConferencePublicationType-0 ;
-    skos:broadMatch schema:False ;
+    skos:broadMatch sdo:False ;
     skos:notation "0" ;
     skos:prefLabel "Not a conference publication"@en,
         "Nej, resursen härrör ej från konferens"@sv .
 
 :NotAFestschrift a :BooksFestschriftType ;
     owl:sameAs :BooksFestschriftType-0 ;
-    skos:broadMatch schema:False ;
+    skos:broadMatch sdo:False ;
     skos:notation "0" ;
     skos:prefLabel "Not a festschrift"@en,
         "Nej, resursen är inte festskrift"@sv .
 
 :NotAppropriate a :HeadingType ;
     owl:sameAs :HeadingType-b ;
-    skos:broadMatch schema:False ;
+    skos:broadMatch sdo:False ;
     skos:notation "b" ;
     skos:prefLabel "Not Appropriate"@en,
         "Kan inte användas som seriebiuppslag"@sv .
@@ -6695,98 +6697,98 @@
     skos:prefLabel "Zarzuelas"@sv .
 
 :acquisitionMethod a owl:ObjectProperty ;
-    schema:rangeIncludes :AcquisitionMethodType ;
+    sdo:rangeIncludes :AcquisitionMethodType ;
     skos:prefLabel "Method of Acquisition"@en,
         "Förvärvssätt"@sv .
 
 :acquisitionStatus a owl:ObjectProperty ;
-    schema:rangeIncludes :AcquisitionStatusType ;
+    sdo:rangeIncludes :AcquisitionStatusType ;
     skos:prefLabel "Receipt Status"@en,
         "Förvärvsstatus"@sv .
 
 :additionalCarrierType a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial,
+    sdo:domainIncludes v:Serial,
         v:Visual ;
-    schema:rangeIncludes :ItemType ;
+    sdo:rangeIncludes :ItemType ;
     skos:prefLabel "Form of Item"@en,
         "Form"@sv .
 
 :alphabet a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsAlphabetType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsAlphabetType ;
     skos:prefLabel "Alphabet"@en,
         "Alfabet/Skriftart"@sv .
 
 :audience a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :AudienceType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :AudienceType ;
     skos:prefLabel "Audience"@en,
         "Målgrupp"@sv .
 
 :bibLevel a owl:ObjectProperty ;
-    schema:rangeIncludes :BibLevelType ;
+    sdo:rangeIncludes :BibLevelType ;
     skos:prefLabel "Bibliographic Level"@en,
         "Bibliografisk nivå"@sv .
 
 :carrierType a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :VideoMaterialType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :VideoMaterialType ;
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning"@sv .
 
 :catForm a owl:ObjectProperty ;
-    schema:rangeIncludes :CatFormType ;
+    sdo:rangeIncludes :CatFormType ;
     skos:prefLabel "Cataloging Form"@en,
         "Regler för deskriptiv katalogisering"@sv .
 
 :catalogingRules a owl:ObjectProperty ;
-    schema:rangeIncludes :CatalogingRulesType ;
+    sdo:rangeIncludes :CatalogingRulesType ;
     skos:prefLabel "Cataloging Rules"@en,
         "Regler för deskriptiv katalogisering"@sv .
 
 :catalogingSource a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :AuthorityCatalogingSourceType,
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :AuthorityCatalogingSourceType,
         :CatalogingSourceType ;
     skos:prefLabel "Cataloging Source"@en,
         "Katalogiserande instans"@sv .
 
 :characterCoding a owl:ObjectProperty ;
-    schema:rangeIncludes :AuthorityCharacterCodingType,
+    sdo:rangeIncludes :AuthorityCharacterCodingType,
         :CharacterCodingType,
         :HoldingCharacterCodingType ;
     skos:prefLabel "Teckenuppsättning"@sv .
 
 :completeness a owl:ObjectProperty ;
-    schema:rangeIncludes :CompletenessType ;
+    sdo:rangeIncludes :CompletenessType ;
     skos:prefLabel "Completeness"@en,
         "Fullständighet"@sv .
 
 :composition a owl:ObjectProperty ;
-    schema:domainIncludes v:Audio ;
-    schema:rangeIncludes :MusicCompositionType ;
+    sdo:domainIncludes v:Audio ;
+    sdo:rangeIncludes :MusicCompositionType ;
     skos:prefLabel "Composition"@en,
         "Kompositionsform (används ej)"@sv .
 
 :confPub a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :Boolean,
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :Boolean,
         :ConferencePublicationType ;
     skos:prefLabel "Conf. Publication"@en,
         "Konferenspublikation"@sv .
 
 :contentType a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial,
+    sdo:domainIncludes v:Serial,
         v:Visual ;
-    schema:rangeIncludes :SerialsTypeOfSerialType,
+    sdo:rangeIncludes :SerialsTypeOfSerialType,
         :VisualMaterialType ;
     skos:prefLabel "Type of Continuing Resource"@en,
         "Type of Material"@en,
         "Typ"@sv .
 
 :contents a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsContentsType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsContentsType ;
     skos:prefLabel "Nature of Contents 1"@en,
         "Nature of Contents 2"@en,
         "Nature of Contents 3"@en,
@@ -6795,12 +6797,12 @@
         "Innehåll 3"@sv .
 
 :copyReport a owl:ObjectProperty ;
-    schema:rangeIncludes :CopyReportType ;
+    sdo:rangeIncludes :CopyReportType ;
     skos:prefLabel "Copy Report"@en,
         "Underlag för beståndsuppgift"@sv .
 
 :encLevel a owl:ObjectProperty ;
-    schema:rangeIncludes :AuthorityEncLevelType,
+    sdo:rangeIncludes :AuthorityEncLevelType,
         :EncLevelType,
         :HoldingEncLevelType ;
     skos:prefLabel "Encoding Level"@en,
@@ -6809,100 +6811,100 @@
         "Fullständighetsnivå för katalogiseringen"@sv .
 
 :entryMap a owl:ObjectProperty ;
-    schema:rangeIncludes :EntryMapType ;
+    sdo:rangeIncludes :EntryMapType ;
     skos:prefLabel "Entry map"@sv .
 
 :frequency a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsFrequencyType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsFrequencyType ;
     skos:prefLabel "Frequency"@en,
         "Frekvens"@sv .
 
 :govtAgency a owl:ObjectProperty ;
-    schema:rangeIncludes :GovtAgencyType ;
+    sdo:rangeIncludes :GovtAgencyType ;
     skos:prefLabel "Govt. Agency"@en,
         "Typ och nivå för officiellt organ"@sv .
 
 :govtPub a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial,
+    sdo:domainIncludes v:Serial,
         v:Visual ;
-    schema:rangeIncludes :GovernmentPublicationType ;
+    sdo:rangeIncludes :GovernmentPublicationType ;
     skos:prefLabel "Govt. Publication"@en,
         "Offentlig resurs"@sv .
 
 :headingMain a owl:ObjectProperty ;
-    schema:rangeIncludes :Boolean,
+    sdo:rangeIncludes :Boolean,
         :HeadingType ;
     skos:prefLabel "Heading Use - Main or Added Entry"@en .
 
 :headingSeries a owl:ObjectProperty ;
-    schema:rangeIncludes :Boolean,
+    sdo:rangeIncludes :Boolean,
         :HeadingType ;
     skos:prefLabel "Heading Use - Series Added Entry"@en,
         "Användningsområdeseriesökelement"@sv .
 
 :headingSubject a owl:ObjectProperty ;
-    schema:rangeIncludes :Boolean,
+    sdo:rangeIncludes :Boolean,
         :HeadingType ;
     skos:prefLabel "Heading Use - Subject Added Entry"@en .
 
 :holdingType a owl:ObjectProperty ;
-    schema:rangeIncludes :HoldingType ;
+    sdo:rangeIncludes :HoldingType ;
     skos:prefLabel "Type of Record"@en,
         "Posttyp"@sv .
 
 :iSSN a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsISSNType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsISSNType ;
     skos:prefLabel "ISSN Center (OBSOLETE)"@en,
         "Odefinierad (tidigare ISSN-central se 022 $2)"@sv .
 
 :imageBitDepth a owl:ObjectProperty ;
-    schema:domainIncludes v:Electronic ;
-    schema:rangeIncludes :ComputerImageBitDepthType ;
+    sdo:domainIncludes v:Electronic ;
+    sdo:rangeIncludes :ComputerImageBitDepthType ;
     skos:prefLabel "Image Bit Depth"@en,
         "Bit-djup i bildfiler"@sv .
 
 :index a owl:ObjectProperty ;
-    schema:domainIncludes v:Cartography ;
-    schema:rangeIncludes :Boolean,
+    sdo:domainIncludes v:Cartography ;
+    sdo:rangeIncludes :Boolean,
         :IndexType ;
     skos:prefLabel "Index"@en,
         "Index"@sv .
 
 :itemInfoInRecord a owl:ObjectProperty ;
-    schema:rangeIncludes :Boolean,
+    sdo:rangeIncludes :Boolean,
         :ItemInfoInRecordType ;
     skos:prefLabel "Exemplarinformation"@sv .
 
 :kindOfRecord a owl:ObjectProperty ;
-    schema:rangeIncludes :KindOfRecordType ;
+    sdo:rangeIncludes :KindOfRecordType ;
     skos:prefLabel "Kind of Record"@en,
         "Typ av auktoritetspost"@sv .
 
 :languageOfCatalog a owl:ObjectProperty ;
-    schema:rangeIncludes :LanguageOfCatalogType ;
+    sdo:rangeIncludes :LanguageOfCatalogType ;
     skos:prefLabel "Language of Catalog"@en,
         "Katalogiseringsspråk(endast engelska/franska)"@sv .
 
 :lendingPolicy a owl:ObjectProperty ;
-    schema:rangeIncludes :LendingPolicyType ;
+    sdo:rangeIncludes :LendingPolicyType ;
     skos:prefLabel "Lending Policy"@en,
         "Utlånepolicy"@sv .
 
 :level a owl:ObjectProperty ;
-    schema:rangeIncludes :LevelType ;
+    sdo:rangeIncludes :LevelType ;
     skos:prefLabel "Level of Establishment"@en,
         "Auktoritetskontrollnivå"@sv .
 
 :linked a owl:ObjectProperty ;
-    schema:rangeIncludes :LinkedType ;
+    sdo:rangeIncludes :LinkedType ;
     skos:prefLabel "Linked Record Requirement"@en,
         "Grad av beroende av sammanhörande post"@sv .
 
 :matter a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :VisualMatterType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :VisualMatterType ;
     skos:prefLabel "Accompanying Matter 1 (OBSOLETE)"@en,
         "Accompanying Matter 2 (OBSOLETE)"@en,
         "Accompanying Matter 3 (OBSOLETE)"@en,
@@ -6910,258 +6912,258 @@
         "Accompanying Matter 5 (OBSOLETE)"@en .
 
 :modified a owl:ObjectProperty ;
-    schema:rangeIncludes :ModifiedType ;
+    sdo:rangeIncludes :ModifiedType ;
     skos:prefLabel "Modified Record"@en,
         "Modifieringar"@sv .
 
 :modifiedRecord a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :ModifiedRecordType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :ModifiedRecordType ;
     skos:prefLabel "Modified Record"@en,
         "Modifieringar"@sv .
 
 :motionPicColorStock a owl:ObjectProperty ;
-    schema:domainIncludes v:MovingImage ;
-    schema:rangeIncludes :MotionPicColorStockType ;
+    sdo:domainIncludes v:MovingImage ;
+    sdo:rangeIncludes :MotionPicColorStockType ;
     skos:prefLabel "Color Stock or Print"@en,
         "Färgteknik (brukskopia)"@sv .
 
 :motionPicCompleteness a owl:ObjectProperty ;
-    schema:domainIncludes v:MovingImage ;
-    schema:rangeIncludes :MotionPicCompletenessType ;
+    sdo:domainIncludes v:MovingImage ;
+    sdo:rangeIncludes :MotionPicCompletenessType ;
     skos:prefLabel "Completeness"@en,
         "Fullständighet"@sv .
 
 :motionPicDeterioration a owl:ObjectProperty ;
-    schema:domainIncludes v:MovingImage ;
-    schema:rangeIncludes :MotionPicDeteriorationType ;
+    sdo:domainIncludes v:MovingImage ;
+    sdo:rangeIncludes :MotionPicDeteriorationType ;
     skos:prefLabel "Deterioration Stage"@en,
         "Konserveringsstatus"@sv .
 
 :nature a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsNatureType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsNatureType ;
     skos:prefLabel "Nature of Entire Work"@en,
         "Innehållsgenre (hela resursen)"@sv .
 
 :numberUnits a owl:ObjectProperty ;
-    schema:rangeIncludes :Number,
+    sdo:rangeIncludes :Number,
         :NumberUnitsType ;
     skos:prefLabel "Specific Retention Policy - Number of Units"@en .
 
 :numberedSeries a owl:ObjectProperty ;
-    schema:rangeIncludes :NumberedSeriesType ;
+    sdo:rangeIncludes :NumberedSeriesType ;
     skos:prefLabel "Numbered or Unnumbered Series"@en,
         "Numrering i serie"@sv .
 
 :originalItem a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsOriginalItemType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsOriginalItemType ;
     skos:prefLabel "Original Item"@en,
         "Form för den ursprungliga utgåvan"@sv .
 
 :personalName a owl:ObjectProperty ;
-    schema:rangeIncludes :PersonalNameType ;
+    sdo:rangeIncludes :PersonalNameType ;
     skos:prefLabel "Undifferentiated Personal Name"@en,
         "Differentiering av person"@sv .
 
 :projection a owl:ObjectProperty ;
-    schema:domainIncludes v:Cartography ;
-    schema:rangeIncludes :MapsProjectionType ;
+    sdo:domainIncludes v:Cartography ;
+    sdo:rangeIncludes :MapsProjectionType ;
     skos:prefLabel "Projection"@en,
         "Projektion"@sv .
 
 :publicationStatus a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :PublicationStatusType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :PublicationStatusType ;
     skos:prefLabel "Publication Status"@en,
         "Typ av utgivningssdatum"@sv .
 
 :recordUpdate a owl:ObjectProperty ;
-    schema:rangeIncludes :RecordUpdateType ;
+    sdo:rangeIncludes :RecordUpdateType ;
     skos:prefLabel "Record Update"@en,
         "Uppdatering av posten"@sv .
 
 :reference a owl:ObjectProperty ;
-    schema:rangeIncludes :ReferenceType ;
+    sdo:rangeIncludes :ReferenceType ;
     skos:prefLabel "Reference Evaluation"@en,
         "Formatering av icke auktoriserade sökelement"@sv .
 
 :regularity a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsRegularityType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsRegularityType ;
     skos:prefLabel "Regularity"@en,
         "Regelbundenhet"@sv .
 
 :remoteSensImageData a owl:ObjectProperty ;
-    schema:domainIncludes v:RemoteSensingImage ;
-    schema:rangeIncludes :RemoteSensImageDataType ;
+    sdo:domainIncludes v:RemoteSensingImage ;
+    sdo:rangeIncludes :RemoteSensImageDataType ;
     skos:prefLabel "Data Type"@en,
         "Typ av information"@sv .
 
 :reproductionPolicy a owl:ObjectProperty ;
-    schema:rangeIncludes :ReproductionPolicyType ;
+    sdo:rangeIncludes :ReproductionPolicyType ;
     skos:prefLabel "Reproduction Policy"@en,
         "Reproduktionspolicy"@sv .
 
 :retentionPolicy a owl:ObjectProperty ;
-    schema:rangeIncludes :RetentionPolicyType ;
+    sdo:rangeIncludes :RetentionPolicyType ;
     skos:prefLabel "General Retention Policy"@en,
         "Generell bevarandepolicy"@sv .
 
 :retentionPolicyUnitType a owl:ObjectProperty ;
-    schema:rangeIncludes :RetentionPolicyUnitType ;
+    sdo:rangeIncludes :RetentionPolicyUnitType ;
     skos:prefLabel "Specific Retention Policy - Unit Type"@en,
         "Längd av bevarad svitsort/delord"@sv .
 
 :romanization a owl:ObjectProperty ;
-    schema:rangeIncludes :RomanizationType ;
+    sdo:rangeIncludes :RomanizationType ;
     skos:prefLabel "Romanization Scheme"@en,
         "Translitterering"@sv .
 
 :runningTime a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :VisualRunningTimeType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :VisualRunningTimeType ;
     skos:prefLabel "Running Time"@en,
         "Speltid"@sv .
 
 :soundAspect a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :MapAspectType ;
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :MapAspectType ;
     skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
 
 :soundCapture a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :SoundCaptureType ;
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :SoundCaptureType ;
     skos:prefLabel "Capture & Storage Techniques"@en,
         "Inspelnings- och lagringsteknik"@sv .
 
 :soundKindOfCutting a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :SoundKindOfCuttingType ;
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :SoundKindOfCuttingType ;
     skos:prefLabel "Kind of Cutting"@en,
         "Spårskärning"@sv .
 
 :soundKindOfDisc a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :SoundKindOfDiscType ;
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :SoundKindOfDiscType ;
     skos:prefLabel "Kind of Disc"@en,
         "Typ eller generation"@sv .
 
 :soundKindOfMaterial a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :HoldingSoundKindOfMaterialType,
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :HoldingSoundKindOfMaterialType,
         :SoundKindOfMaterialType ;
     skos:prefLabel "Kind of Material"@en,
         "Material"@sv .
 
 :soundPlaybackCharacter a owl:ObjectProperty ;
-    schema:domainIncludes v:SoundRecording ;
-    schema:rangeIncludes :SoundPlaybackCharacterType ;
+    sdo:domainIncludes v:SoundRecording ;
+    sdo:rangeIncludes :SoundPlaybackCharacterType ;
     skos:prefLabel "Playback Characteristics"@en,
         "Inspelningskontroll"@sv,
         "Inspelningsprotokoll"@sv .
 
 :specificRetentionPolicy a owl:ObjectProperty ;
-    schema:rangeIncludes :SpecificRetentionPolicyType ;
+    sdo:rangeIncludes :SpecificRetentionPolicyType ;
     skos:prefLabel "Specific Retention Policy - Policy Type"@en,
         "Typ av bevarande"@sv .
 
 :statistics a owl:ObjectProperty ;
-    schema:rangeIncludes :StatisticsType ;
+    sdo:rangeIncludes :StatisticsType ;
     skos:prefLabel "Statistik/Produkter"@sv .
 
 :status a owl:ObjectProperty ;
-    schema:rangeIncludes :AuthorityStatusType,
+    sdo:rangeIncludes :AuthorityStatusType,
         :HoldingStatusType,
         :StatusType ;
     skos:prefLabel "Record Status"@en,
         "Poststatus"@sv .
 
 :subdivision a owl:ObjectProperty ;
-    schema:rangeIncludes :SubdivisionType ;
+    sdo:rangeIncludes :SubdivisionType ;
     skos:prefLabel "Subdivision"@en,
         "Geografisk precisering"@sv .
 
 :subjectHeading a owl:ObjectProperty ;
-    schema:rangeIncludes :SubjectHeadingType ;
+    sdo:rangeIncludes :SubjectHeadingType ;
     skos:prefLabel "Subject Heading System/Thesaurus"@en,
         "Ämnesordssystem / Thesaurus"@sv .
 
 :subjectSubdivision a owl:ObjectProperty ;
-    schema:rangeIncludes :SubjectSubdivisionType ;
+    sdo:rangeIncludes :SubjectSubdivisionType ;
     skos:prefLabel "Subject Subdivision"@en,
         "Typ av underindelning"@sv .
 
 :technique a owl:ObjectProperty ;
-    schema:domainIncludes v:Visual ;
-    schema:rangeIncludes :VisualTechniqueType ;
+    sdo:domainIncludes v:Visual ;
+    sdo:rangeIncludes :VisualTechniqueType ;
     skos:prefLabel "Technique"@en,
         "Teknik"@sv .
 
 :text a owl:ObjectProperty ;
-    schema:domainIncludes v:Audio ;
-    schema:rangeIncludes :MusicTextType ;
+    sdo:domainIncludes v:Audio ;
+    sdo:rangeIncludes :MusicTextType ;
     skos:prefLabel "Literary Text for Sound Recording 1"@en,
         "Literary Text for Sound Recording 2"@en,
         "Typ av genre för text till ljudupptagning (ej musik) 1"@sv,
         "Typ av genre för text till ljudupptagning (ej musik) 2"@sv .
 
 :typeOfControl a owl:ObjectProperty ;
-    schema:rangeIncludes :TypeOfControlType ;
+    sdo:rangeIncludes :TypeOfControlType ;
     skos:prefLabel "Type of Control"@en,
         "Kontrollkod för arkivmaterial"@sv .
 
 :typeOfEntry a owl:ObjectProperty ;
-    schema:domainIncludes v:Serial ;
-    schema:rangeIncludes :SerialsTypeOfEntryType ;
+    sdo:domainIncludes v:Serial ;
+    sdo:rangeIncludes :SerialsTypeOfEntryType ;
     skos:prefLabel "Entry Convention"@en,
         "Behandling vid titeländring"@sv .
 
 :typeOfRecord a owl:ObjectProperty ;
-    schema:rangeIncludes :TypeOfRecordType ;
+    sdo:rangeIncludes :TypeOfRecordType ;
     skos:prefLabel "Type of Record"@en,
         "Medietyp"@sv .
 
 :typeOfSeries a owl:ObjectProperty ;
-    schema:rangeIncludes :TypeOfSeriesType ;
+    sdo:rangeIncludes :TypeOfSeriesType ;
     skos:prefLabel "Type of Series"@en,
         "Typ av serie"@sv .
 
 :videoColor a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :VideoColorType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :VideoColorType ;
     skos:prefLabel "Color"@en,
         "Färg"@sv .
 
 :videoDimensions a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :VideoDimensionsType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :VideoDimensionsType ;
     skos:prefLabel "Dimensions"@en,
         "Filmbredd"@sv .
 
 :videoFormat a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :HoldingVideoFormatType,
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :HoldingVideoFormatType,
         :VideoFormatType ;
     skos:prefLabel "Format"@en,
         "Format"@sv .
 
 :videoMedium a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :MediumType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :MediumType ;
     skos:prefLabel "Medium for Sound"@en,
         "Ljudbärare"@sv .
 
 :videoPlayback a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :MotionPicConfigurationOrVideoPlaybackType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :MotionPicConfigurationOrVideoPlaybackType ;
     skos:prefLabel "Playback Channels"@en,
         "Ljudkonfigurtion"@sv .
 
 :videoSound a owl:ObjectProperty ;
-    schema:domainIncludes v:VideoRecording ;
-    schema:rangeIncludes :SoundType ;
+    sdo:domainIncludes v:VideoRecording ;
+    sdo:rangeIncludes :SoundType ;
     skos:prefLabel "Sound on Medium"@en,
         "Ljud och dess plats"@sv .
 
@@ -9015,6 +9017,6 @@
         skos:Collection .
 
 :EnumeratedTerm a owl:Class ;
-    rdfs:subClassOf schema:Enumeration,
+    rdfs:subClassOf sdo:Enumeration,
         skos:Concept .
 
