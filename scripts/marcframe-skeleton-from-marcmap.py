@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, print_function
 from collections import OrderedDict, namedtuple
+import re
 import json
 import sys
 
@@ -24,6 +25,8 @@ carrier_name_map = {
 }
 
 propname_map = {
+    'iSSN': 'issn',
+
     'item': 'additionalCarrierType',
     'format': 'additionalType',
     'type': 'holdingType',
@@ -32,6 +35,7 @@ propname_map = {
     'method': 'acquisitionMethod',
     'generalRetention': 'retentionPolicy',
     'policyType': 'specificRetentionPolicy',
+    'numberUnits': 'retentionPolicyNumberOfUnits',
     'unitType': 'retentionPolicyUnitType',
     'reproduction': 'reproductionPolicy',
 }
@@ -277,6 +281,9 @@ def _find_boolean_off_key(valuemap):
 
 def to_name(name):
     name = name[0].upper() + name[1:]
+
+    name = re.sub(r'(?<=[a-z])S(?=[A-Z])', 's', name) # SomeoneSName => SomeonesName
+
     #return name, None
     plural_name = None
 
