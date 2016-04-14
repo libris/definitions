@@ -773,11 +773,6 @@
     skos:prefLabel "Autonomous or semi-autonomous component of Malaysia"@en,
         "Autonoma områden"@sv .
 
-:Avtalspost a :BibLevelType ;
-    owl:sameAs :BibLevelType-9 ;
-    skos:notation "9" ;
-    skos:prefLabel "Avtalspost [administrativ post för licensbundna e-resurser]"@sv .
-
 :AzimuthalEquidistant a :MapsProjectionType ;
     owl:sameAs :MapsProjectionType-ae ;
     skos:notation "ae" ;
@@ -924,6 +919,12 @@
     skos:notation "f" ;
     skos:prefLabel "Biography of performer or history of ensemble"@en,
         "Biografi över exekutör(er)"@sv .
+
+:BitDepth a :ComputerImageBitDepthType ;
+    owl:sameAs <https://id.kb.se/marc/ComputerImageBitDepthType-001~999> ;
+    skos:notation "001~999" ;
+    skos:prefLabel "Bit depth (in digits)"@en,
+        "Exakt uppgift om bit-djup (siffror)"@sv .
 
 :Biweekly a :SerialsFrequencyType ;
     owl:sameAs :SerialsFrequencyType-e ;
@@ -1939,17 +1940,6 @@
     skos:prefLabel "Exchange"@en,
         "Byte"@sv .
 
-:Exemplarinformation a :ItemInfoInRecordType ;
-    owl:sameAs :ItemInfoInRecordType-i ;
-    skos:notation "i" ;
-    skos:prefLabel "Exemplarinformation"@sv .
-
-:Exemplarinformation_finns_ej a :ItemInfoInRecordType ;
-    owl:sameAs :ItemInfoInRecordType-n ;
-    skos:broadMatch sdo:False ;
-    skos:notation "n" ;
-    skos:prefLabel "Exemplarinformation finns ej"@sv .
-
 :ExtendedRoman a :SerialsAlphabetType ;
     owl:sameAs :SerialsAlphabetType-b ;
     skos:notation "b" ;
@@ -2719,6 +2709,12 @@
     skos:prefLabel "Issue(s) [Part]"@en,
         "Delar"@sv .
 
+:ItemInfoInRecord a :ItemInfoInRecordType ;
+    owl:sameAs :ItemInfoInRecordType-i ;
+    skos:notation "i" ;
+    skos:prefLabel "Item info in record"@en,
+        "Exemplarinformation"@sv .
+
 :ItemIsAMusicalSoundRecording a :MusicTextType ;
     owl:sameAs :MusicTextType-_ ;
     skos:notation "_" ;
@@ -2913,6 +2909,12 @@
         "Rättsfallsdiskussion"@sv,
         "Rättsfallsdsikussion"@sv .
 
+:LegalDeposit a :AcquisitionMethodType ;
+    owl:sameAs :AcquisitionMethodType-l ;
+    skos:notation "l" ;
+    skos:prefLabel "Legal deposit"@en,
+        "Pliktleverans"@sv .
+
 :Legislation a :BooksContentsType,
         :SerialsContentsType,
         :SerialsNatureType ;
@@ -2956,6 +2958,12 @@
     skos:notation "d" ;
     skos:prefLabel "Libretto or text"@en,
         "Libretto eller texthäfte"@sv .
+
+:LicenseAgreementBoundDescription a :BibLevelType ;
+    owl:sameAs :BibLevelType-9 ;
+    skos:notation "9" ;
+    skos:prefLabel "License agreement bound description"@en,
+        "Avtalspost [administrativ post för licensbundna e-resurser]"@sv .
 
 :LimitedLendingPolicy a :LendingPolicyType ;
     owl:sameAs :LendingPolicyType-l ;
@@ -3046,11 +3054,6 @@
     skos:notation "a" ;
     skos:prefLabel "Low reduction"@en,
         "Låg förminskning (- 16:1)"@sv .
-
-:Löpande_katalogisering_-_Odefinierat a :StatisticsType ;
-    owl:sameAs :StatisticsType-_ ;
-    skos:notation "_" ;
-    skos:prefLabel "Löpande katalogisering / Odefinierat"@sv .
 
 :MARC-8-VRLIN a :AuthorityCharacterCodingType,
         :HoldingCharacterCodingType ;
@@ -3880,6 +3883,13 @@
     skos:prefLabel "No index"@en,
         "Index saknas"@sv .
 
+:NoItemInfoInRecord a :ItemInfoInRecordType ;
+    owl:sameAs :ItemInfoInRecordType-n ;
+    skos:broadMatch sdo:False ;
+    skos:notation "n" ;
+    skos:prefLabel "No item info in record"@en,
+        "Exemplarinformation finns ej"@sv .
+
 :Nocturne a :MusicCompositionType ;
     owl:sameAs :MusicCompositionType-nc ;
     skos:notation "nc" ;
@@ -4548,11 +4558,6 @@
     skos:prefLabel "Playing cards"@en,
         "Kortlek"@sv .
 
-:Pliktleverans a :AcquisitionMethodType ;
-    owl:sameAs :AcquisitionMethodType-l ;
-    skos:notation "l" ;
-    skos:prefLabel "Pliktleverans"@sv .
-
 :Poetry a :BooksLiteraryFormType,
         :MusicTextType ;
     owl:sameAs :BooksLiteraryFormType-p,
@@ -5111,10 +5116,11 @@
     skos:prefLabel "Retained until replaced by microform"@en,
         "Ersätts av mikroform"@sv .
 
-:Retrospektiv_katalogisering a :StatisticsType ;
+:RetrospectiveCataloguing a :StatisticsType ;
     owl:sameAs :StatisticsType-r ;
     skos:notation "r" ;
-    skos:prefLabel "Retrospektiv katalogisering"@sv .
+    skos:prefLabel "Retrospective cataloguing"@en,
+        "Retrospektiv katalogisering"@sv .
 
 :Review a :BooksContentsType,
         :SerialsContentsType,
@@ -5167,6 +5173,12 @@
     skos:notation "rd" ;
     skos:prefLabel "Rondos"@en,
         "Rondo"@sv .
+
+:RunningCataloguingOrUndefined a :StatisticsType ;
+    owl:sameAs :StatisticsType-_ ;
+    skos:notation "_" ;
+    skos:prefLabel "Running cataloguing / Undefined"@en,
+        "Löpande katalogisering / Odefinierat"@sv .
 
 :RunningTime a :VisualRunningTimeType ;
     owl:sameAs <https://id.kb.se/marc/VisualRunningTimeType-001~999> ;
@@ -5856,6 +5868,12 @@
     skos:prefLabel "Supplement(s) [Part]"@en,
         "Supplement"@sv .
 
+:SuppressedInNewAquisitionsList a :StatisticsType ;
+    owl:sameAs :StatisticsType-o ;
+    skos:notation "o" ;
+    skos:prefLabel "Suppressed in new aquisitions list"@en,
+        "Undertrycks i nyförvärvslista"@sv .
+
 :Surface a :HoldingRemoteSensImageAltitudeType,
         :RemoteSensImageAltitudeType ;
     owl:sameAs :HoldingRemoteSensImageAltitudeType-a,
@@ -6332,11 +6350,6 @@
     skos:notation "a" ;
     skos:prefLabel "Uncontracted"@en,
         "Okontraherad (fullskrift)"@sv .
-
-:Undertrycks_i_nyförvärvslista a :StatisticsType ;
-    owl:sameAs :StatisticsType-o ;
-    skos:notation "o" ;
-    skos:prefLabel "Undertrycks i nyförvärvslista"@sv .
 
 :Undetermined2Color a :MotionPicCategoriesType ;
     owl:sameAs :MotionPicCategoriesType-c ;
@@ -7166,11 +7179,6 @@
     sdo:rangeIncludes :SoundType ;
     skos:prefLabel "Sound on Medium"@en,
         "Ljud och dess plats"@sv .
-
-<todo:value-in-digit> a :ComputerImageBitDepthType ;
-    owl:sameAs <https://id.kb.se/marc/ComputerImageBitDepthType-001~999> ;
-    skos:notation "001~999" ;
-    skos:prefLabel "Exakt uppgift om bit-djup (siffror)"@sv .
 
 :Aacr2 a :CatFormType ;
     owl:sameAs :CatFormType-a ;

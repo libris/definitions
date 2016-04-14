@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function
 from collections import OrderedDict, namedtuple
 import re
@@ -65,6 +66,26 @@ canonical_coll_id_map = {
     'RetentionPolicyUnitType': ['UnitType'],
     'ReproductionPolicyType': ['ReproductionType'],
 }
+
+enum_value_patches = {
+    'Avtalspost': {'id': 'LicenseAgreementBoundDescription',
+        'label_en': "License agreement bound description"},
+    'Exemplarinformation': {'id': 'ItemInfoInRecord',
+        'label_en': "Item info in record"},
+    'Exemplarinformation_finns_ej': {'id': 'NoItemInfoInRecord',
+        'label_en': "No item info in record"},
+    'Löpande_katalogisering_-_Odefinierat': {'id': 'RunningCataloguingOrUndefined',
+        'label_en': "Running cataloguing / Undefined"},
+    'Pliktleverans': {'id': 'LegalDeposit',
+        'label_en': "Legal deposit"},
+    'Retrospektiv_katalogisering': {'id': 'RetrospectiveCataloguing',
+        'label_en': "Retrospective cataloguing"},
+    'Undertrycks_i_nyförvärvslista': {'id': 'SuppressedInNewAquisitionsList',
+        'label_en': "Suppressed in new aquisitions list"},
+    'Exakt_uppgift_om_bit-djup-siffror': {'id': 'BitDepth',
+        'label_en': "Bit depth (in digits)"},
+}
+
 
 get_canonical_coll_id = {alias: key
     for key, aliases in canonical_coll_id_map.items()
@@ -227,8 +248,12 @@ def filtered_enum_values(valuemap):
     return OrderedDict(sorted(filtered()))
 
 def fixed_enum_value(key, dfn):
+
+    if dfn.get('id') == 'TODO:value-in-digits':
+        del dfn['id']
+
     if 'id' in dfn:
-        # TODO: move id generation from legwcy config code here (to fix at least "'s" => "S")?
+        # IMPROVE: move id generation from legacy config code to here...
         v = dfn['id']
         subname, plural_name = to_name(v)
     else:
@@ -258,6 +283,12 @@ def fixed_enum_value(key, dfn):
         enum_id = None
         #enum_id = 'Unknown'
     else:
+        if 'id' not in dfn and 'label_en' not in dfn:
+            patch = enum_value_patches.get(subname)
+            if patch:
+                dfn.update(patch)
+                subname = dfn['id']
+
         enum_id = subname
 
     if enum_id and enum_id.endswith('Obsolete') and len(enum_id) > 8 and enum_id[-9] not in ('/', '-'):
@@ -676,7 +707,7 @@ if __name__ == '__main__':
         import string
         terms = {
             "@base": "https://id.kb.se/marc/",
-            "v": "https://id.kb.se/vocab/",
+            "v": "https://id.kb.se/vocab/", # TODO: kbv
             #"inCollection": {"@reverse": "skos:member"},
             "inCollection": None,
             "prefLabel": {"@id": "skos:prefLabel", "@language": "sv"},
