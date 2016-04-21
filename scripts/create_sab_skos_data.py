@@ -8,7 +8,7 @@ import urllib
 
 
 SKOS = "http://www.w3.org/2004/02/skos/core#"
-SAB_BASE = "http://id.kb.se/def/scheme/sab/{0}"
+SAB_BASE = "https://id.kb.se/def/scheme/sab/{0}"
 DDC_BASE = "http://dewey.info/class/{0}/"
 LANG = 'sv'
 

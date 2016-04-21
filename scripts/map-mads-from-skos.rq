@@ -1,0 +1,21 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
+
+construct {
+
+    ?term owl:equivalentProperty ?madsterm .
+
+} where {
+
+    ?term owl:equivalentProperty ?skosterm .
+
+    FILTER(!strstarts(str(?term), str(skos:)))
+    FILTER(!strstarts(str(?term), str(madsrdf:)))
+
+    ?madsterm rdfs:subPropertyOf ?skosterm .
+    FILTER(!strstarts(str(?madsterm), str(skos:))
+            && strstarts(str(?skosterm), str(skos:)))
+
+}

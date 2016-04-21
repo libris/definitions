@@ -1,0 +1,139 @@
+# descriptions: documents, services
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+
+@prefix edtf: <http://id.loc.gov/datatypes/edtf/> .
+@prefix bf: <http://bibframe.org/vocab/> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix : <https://id.kb.se/vocab/> .
+
+
+: a owl:Ontology;
+    rdfs:label "KB Base Vocabulary"@en;
+    rdfs:label "KBs basvokabulär"@sv;
+    rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@sv;
+    rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
+    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf: .
+
+# Various sources beyond the linked defintions themselves:
+# - <http://bibframe.org/documentation/resource-types/#proposal>
+
+rdf:type a owl:ObjectProperty;
+    rdfs:label "type"@en, "typ"@sv .
+
+##
+# Extended Vocabulary Components
+
+:Class a owl:Class;
+    owl:equivalentClass owl:Class;
+    rdfs:label "Klass"@sv .
+
+:ObjectProperty a owl:Class;
+    owl:equivalentClass owl:ObjectProperty;
+    rdfs:label "Relation"@sv .
+
+:DatatypeProperty a owl:Class;
+    owl:equivalentClass owl:DatatypeProperty;
+    rdfs:range :Datatype;
+    rdfs:label "Egenskap"@sv .
+
+:Datatype a owl:Class;
+    owl:equivalentClass rdfs:Datatype;
+    rdfs:label "Datatyp"@sv .
+
+:StructuredProperty a owl:Class;
+    rdfs:subPropertyOf owl:ObjectProperty;
+    rdfs:range :StructuredValue;
+    rdfs:label "Strukturerad egenskap"@sv .
+
+:StructuredValue a owl:Class;
+    owl:equivalentClass sdo:StructuredValue;
+    skos:closeMatch rdfs:Datatype;
+    rdfs:label "Strukturerat värde"@sv .
+
+##
+# Common Properties
+
+# .. use rdfs:range rdf:langString where applicable?
+
+:label a owl:DatatypeProperty;
+    rdfs:label "label"@en, "etikett"@sv;
+    owl:equivalentProperty rdfs:label .
+:comment a owl:DatatypeProperty;
+    rdfs:label "kommentar"@sv;
+    owl:equivalentProperty rdfs:comment .
+:value a owl:DatatypeProperty;
+    rdfs:label "value"@en, "värde"@sv;
+    owl:equivalentProperty rdf:value .
+
+:seeAlso a owl:ObjectProperty;
+    rdfs:label "se även"@sv;
+    owl:equivalentProperty rdfs:seeAlso .
+
+:sameAs a owl:ObjectProperty;
+    rdfs:label "samma sak som"@sv;
+    owl:equivalentProperty owl:sameAs .
+
+:name a owl:DatatypeProperty;
+    rdfs:label "name"@en, "namn"@sv;
+    rdfs:subPropertyOf :label;
+    owl:equivalentProperty sdo:name .
+
+:Date a rdfs:Datatype;
+    owl:sameAs xsd:date .
+:Time a rdfs:Datatype;
+    owl:sameAs xsd:time .
+:DateTime a rdfs:Datatype;
+    owl:sameAs xsd:dateTime .
+:Year a rdfs:Datatype;
+    owl:sameAs xsd:gYear .
+:Month a rdfs:Datatype;
+    owl:sameAs xsd:gMonth .
+:Day a rdfs:Datatype;
+    owl:sameAs xsd:gDay .
+:YearMonth a rdfs:Datatype;
+    owl:sameAs xsd:gYearMonth .
+:MonthDay a rdfs:Datatype;
+    owl:sameAs xsd:gMonthDay .
+
+:AnyDateTime a rdfs:Datatype;
+    rdfs:comment "Used for dates, dates and times, and intervals."@en;
+    owl:equivalentClass edtf:EDTF-level0 .
+:ApproxDateTime a rdfs:Datatype;
+    rdfs:comment "Used for approximate or unspecified dates, dates and times, and intervals."@en;
+    owl:equivalentClass edtf:EDTF-level1 .
+:PartialDateTime a rdfs:Datatype;
+    rdfs:comment "Used for dates, dates and times, and intervals combining precise elements with uncertain, approximate, or unspecified parts. Also applicable for sets of dates."@en;
+    owl:equivalentClass edtf:EDTF-level2 .
+
+
+##
+# Ambiguity
+
+:Ambiguity a owl:Class;
+    rdfs:label "Ambiguity"@en, "Otydlighet"@sv;
+    rdfs:comment "An ambiguous group of things sharing similar characteristics."@en .
+
+:maybe a owl:ObjectProperty;
+    rdfs:domain :Ambiguity;
+    rdfs:range owl:Thing;
+    rdfs:label "may be"@en, "kan vara"@sv;
+    rdfs:comment "A thing that something ambiguous may be."@en .
+
+:disambiguates a owl:ObjectProperty;
+    owl:inverseOf :maybe;
+    rdfs:domain owl:Thing;
+    rdfs:range :Ambiguity;
+    rdfs:label "disambiguates"@en, "disambiguerar"@sv;
+    rdfs:comment "Something ambiguous that may be this distinct thing."@en .
+

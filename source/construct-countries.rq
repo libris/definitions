@@ -1,0 +1,32 @@
+prefix : <http://schema.org/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix dc: <http://purl.org/dc/terms/>
+
+construct {
+    ?s a :Country;
+        skos:exactMatch ?loc;
+        dc:isReplacedBy ?replacement;
+        skos:notation ?notation;
+        rdfs:comment ?comment;
+        skos:prefLabel ?label ;
+        skos:prefLabel ?prefLabel .
+} where {
+    graph <https://id.kb.se/dataset/countries> {
+        {
+            ?s skos:notation ?notation ; rdfs:label ?label .
+                optional { ?s rdfs:comment ?comment }
+            bind(strdt(?notation, xsd:string) as ?strnot)
+            optional {
+                graph <http://id.loc.gov/vocabulary/countries> {
+                    ?loc skos:notation ?strnot
+                    optional { ?loc skos:prefLabel ?prefLabel }
+                }
+            }
+        } union {
+            ?s dc:isReplacedBy ?replnot .
+            ?replacement skos:notation ?replnot .
+        }
+    }
+}

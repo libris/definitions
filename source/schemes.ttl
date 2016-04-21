@@ -1,0 +1,249 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@base <https://id.kb.se/term/> .
+
+#</term> a void:Dataset;
+#    void:class skos:ConceptScheme .
+
+# See also:
+# <http://www.kb.se/katalogisering/Formathandboken/kallorsystem/>
+# <http://www.loc.gov/standards/sourcelist/>, mainly:
+#   <http://www.loc.gov/standards/sourcelist/subject-category.html>
+#   <http://www.loc.gov/standards/sourcelist/subject.html>
+
+#{
+#    ?scheme <#usedWithProperty> ?property .
+#} => {
+#    [] a rdfs:subPropertyOf ?property;
+#        rdfs:range [ a owl:Restriction; owl:onProperty skos:inScheme; owl:hasValue ?scheme ] .
+#}
+
+# "ours"
+
+<sao> a skos:ConceptScheme;
+    skos:notation "SAO";
+    dc:title "Svenska ämnesord (SAO)"@sv;
+    dc:description """
+        Svenska ämnesord (SAO) är ett kontrollerat ämnesordssystem med nästan 38 000 termer från alla ämnesområden. Systemet har funnits sedan 2000 och används av de flesta högskole- och universitetsbibliotek och av många LIBRIS-bibliotek.
+
+        I Svenska ämnesord kan du hitta ämnesord för att söka i bibliotekskataloger och andra databaser, och för att indexera facklitteratur och annat material.
+
+        Svenska ämnesord används huvudsakligen inom ett brett humanistiskt och samhällsvetenskapligt område. För bibliotek som är specialiserade på medicin, naturvetenskap och teknik finns andra system som är lämpligare.
+
+        Svenska ämnesord följer IFLA:s  (International Federation of Library Associations and Institutions) principer och riktlinjer för ämnesord. De flesta termerna är hierarkiskt ordnade och de semantiska relationerna mellan termerna är angivna. De flesta ämnesorden har en klassifikationskod från SAB-systemet (Klassifikationssystem för svenska bibliotek). Från och med KB:s övergång till DDK (Dewey decimalklassifikation) i januari 2011 kompletteras ämnesorden istället med koder från DDK. Ämnesorden förses också med sina motsvarigheter i Library of Congress Subject Headings (LCSH).
+
+        Underhållet av Svenska ämnesord sköts av en redaktionskommitté vid Kungl. biblioteket.
+    """@sv;
+    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    void:inDataset </> .
+
+<saogf> a skos:ConceptScheme;
+    skos:notation "SAOGF";
+    dc:title "SAOGF - Genre och form"@sv;
+    dc:description """
+        Genre/formtermer kan användas som ett komplement till klassifikation och ämnesord.
+
+        Verk som kännetecknas av snarlika motiv, teman eller andra innehållsliga faktorer förs till samma genre. För tidskrifter beskriver genrebeteckningen oftast tidskriftens innehållskategori, eller annars dess målgrupp eller typ av utgivare. Samtidigt ingår nästan alltid ett tillägg för tidskriftens form: -tidskrifter, -tidningar eller -press.
+
+        Form talar om att verket har en särskild form och/eller särskilt syfte. Eftersom det ofta är svårt att skilja form från genre är de sammanförda till samma fasett.
+       """@sv;
+    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    void:inDataset </> .
+
+<barn> a skos:ConceptScheme;
+    skos:notation "Barn";
+    dc:title "Barnämnesord"@sv;
+    dc:description """
+        Barnämnesorden (Barn) är en lista med termer för indexering av litteratur för barn och ungdomar. Den innehåller cirka 1 500 godkända termer. Dessa finns i databasen Svenska ämnesord sedan 2005.
+
+        Nya ämnesord för barnlistan godkänns av Svenska barnboksinstitutets redaktion för barnämnesord och förs därefter in i databasen.
+    """@sv;
+    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    void:inDataset </> .
+
+<gmgpc> a skos:ConceptScheme;
+    owl:sameAs <gmgpc%2F%2Fswe>;
+    skos:notation "gmgpc//swe";
+    dc:title "Tesaurus för grafiskt material"@sv;
+    dc:description """
+        Tesaurus för grafiskt material (TGM) innehåller cirka 650 termer för form och genrer, framställningssätt och tekniker. De är avsedda att användas vid indexering av bilder, kartor och efemärt tryck.
+
+        TGM är en översättning av Library of Congress' Thesaurus for Graphic Materials II. Tesaurusen är hierarkiskt ordnad med de semantiska relationerna mellan termerna angivna. Listan infördes i databasen i oktober 2007.
+
+        Underhållet av TGM sköts av en redaktionskommitté vid Kungl. biblioteket tillsammans med bildexperter på biblioteket. Det finns också en referensgrupp för TGM med representanter för bibliotek, arkiv och museer.
+    """@sv;
+    void:inDataset </>;
+    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
+
+# TODO: <sao/fack>, <sao/skon>, ...?
+
+<subdivisions> a skos:Collection;
+    skos:notation "subdivisions";
+    dc:title "Underindelningar"@sv;
+    void:inDataset </> .
+
+<Fack> a skos:Collection;
+    skos:notation "Fack";
+    dc:title "Facktermer"@sv;
+    void:inDataset </> .
+
+<Skon> a skos:Collection;
+    skos:notation "Skon";
+    dc:title "Skönlitterära termer"@sv;
+    void:inDataset </> .
+
+<Musik> a skos:Collection;
+    owl:sameAs <musik>;
+    skos:notation "Musik";
+    dc:title "Musiktermer"@sv;
+    void:inDataset </> .
+
+<film> a skos:Collection;
+    skos:notation "film";
+    dc:title "Filmtermer"@sv;
+    void:inDataset </> .
+
+<NLT> a skos:Collection;
+    skos:notation "NLT";
+    dc:title "NLT (termer för Nya Lundstedt - tidskrifter)"@sv;
+    void:inDataset </> .
+
+<datorspel> a skos:Collection;
+    skos:notation "datorspel";
+    dc:title "Datorspelstermer"@sv;
+    void:inDataset </> .
+
+
+#<kaab/8> ?
+
+# "others"
+
+<albt> a skos:ConceptScheme;
+    skos:notation "albt//swe";
+    dc:title "Arbetslivsbibliotekets tesaurus"@sv .
+
+<kao> a skos:ConceptScheme;
+    skos:notation "kao";
+    dc:title "KVINNSAM"@sv;
+    dc:language "sv";
+    dc:hasVersion [
+        skos:notation "kao//eng";
+        dc:language "en"
+    ];
+    foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
+
+<prvt> a skos:ConceptScheme;
+    skos:notation "prvt";
+    dc:title "Patent- och registreringsverkets tesaurus"@sv;
+    dc:alternative "PRVT" .
+
+<sbiao> a skos:ConceptScheme;
+    skos:notation "sbiao";
+    dc:title "Svenska barnboksinstitutets ämnesordsindex för teoretisk litteratur"@sv;
+    foaf:homepage <http://www.sbi.kb.se/sv/Biblioteket/Soka/Amnesordsindex/Teoretiska-amnesord/> .
+
+<sfit> a skos:ConceptScheme;
+    skos:notation "sfit";
+    dc:title "Svenska filminstitutets tesaurus"@sv;
+    dc:alternative "SFIT" .
+
+<sgp> a skos:ConceptScheme;
+    skos:notation "sgp";
+    dc:title "Svenska genrebeteckningar för periodika"@sv;
+    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tidskrifter/> .
+
+<shbe> a skos:ConceptScheme;
+    skos:notation "shbe";
+    dc:title "Subject headings in business and economics"@en;
+    rdfs:comment "Handelshögskolans i Stockholm bibliotek"@sv .
+
+<kssb> a skos:ConceptScheme;
+    skos:notation "kssb";
+    dc:title "SAB-klassifikation"@sv .
+    # upplagor: 2, 5, 6, 7, 8, 9
+    # variant? (folkbibliotek, musikalier, musikinspelningar)
+    #<#usedWithProperty> dc:type .
+
+
+# Aliases for external schemes
+
+#@base <https://id.kb.se/ext/term/> . # ?
+
+<agrovoc> a skos:ConceptScheme;
+    dc:title "AgroVoc"@en;
+    skos:notation "agrovoc" .
+
+<bnb> a skos:ConceptScheme;
+    skos:notation "bnb";
+    dc:title "British National Bibliography"@en .
+
+<fao> a skos:ConceptScheme;
+    skos:notation "fao"; #, "agrissc"; #?
+    foaf:homepage <http://agris.fao.org/?InfoT=Subject&Language=EN> .
+
+<fiaf> a skos:ConceptScheme;
+    skos:notation "fiaf"; #"fiaf/2" #?
+    dc:title "International Federation of Film Archives"@en .
+
+<mipfesd> a skos:ConceptScheme;
+    skos:notation "mipfesd"; #"mipfesd/5"
+    dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en .
+
+<msc> a skos:ConceptScheme;
+    skos:notation "msc";
+    dc:title "Mathematical subject classification"@en;
+    rdfs:comment "Providence, RI: American Mathematical Society"@en .
+
+<mesh> a skos:ConceptScheme;
+    skos:notation "MeSH";
+    dc:title "Medical Subject Headings"@en;
+    dc:alternative "MeSH";
+    rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
+    foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
+
+<nlm> a skos:ConceptScheme;
+    skos:notation "NLM ";
+    dc:title "National Library of Medicine"@en .
+
+<rswk> a skos:ConceptScheme;
+    skos:notation "rswk";
+    dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)"@de;
+    foaf:homepage <http://deposit.ddb.de/ep/netpub/89/96/96/967969689/_data_stat/www.dbi-berlin.de/dbi_pub/einzelpu/regelw/rswk/rswk_00.htm> .
+
+<sipri> a skos:ConceptScheme;
+    skos:notation "sipri";
+    dc:title "SIPRI Library thesaurus"@en;
+    foaf:homepage <http://www.sipri.org/library/thesaurus/thesaurus.html/> .
+
+# LoC
+
+<http://id.loc.gov/authorities/subjects> a skos:ConceptScheme;
+    dc:title "Library of Congress Subject Headings"@en;
+    dc:alternative "LCSH";
+    skos:notation "lcsh" .
+<http://id.loc.gov/authorities/childrensSubjects> a skos:ConceptScheme .
+<http://id.loc.gov/authorities/genreForms> a skos:ConceptScheme .
+<http://id.loc.gov/vocabulary/graphicMaterials> a skos:ConceptScheme .
+
+<http://id.loc.gov/authorities/classification> a skos:ConceptScheme .
+
+# Other Public Schemes
+
+<http://dewey.info/scheme/ddc/> a skos:ConceptScheme;
+    skos:notation "DDC";
+    dc:alternative "DDK"@sv;
+    rdfs:label "Dewey decimalklassifikation"@sv .
+
+<http://udcdata.info/udc-schema> a skos:ConceptScheme;
+    skos:notation "UDC";
+    dc:alternative "UDK "@sv;
+    rdfs:label "Universell decimalklassifikation"@sv .
+

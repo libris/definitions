@@ -1,0 +1,14 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
+
+construct {
+    ?s a ?type;
+        skos:prefLabel ?label;
+        skos:notation ?not;
+        skos:exactMatch ?match .
+} where {
+    ?s a ?type;
+        madsrdf:code ?not;
+        madsrdf:authoritativeLabel ?label;
+        madsrdf:hasExactExternalAuthority ?match .
+}

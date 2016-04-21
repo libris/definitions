@@ -1,0 +1,73 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix : <https://id.kb.se/vocab/> .
+prefix faicon: <http://fortawesome.github.io/Font-Awesome/icon/>
+
+@base <http://id.kb.se/dataset/> .
+
+</> a sdo:DataCatalog;
+    dc:title "ID.KB.SE"@sv;
+    :itemList ( </docs/about> </marcframe> </vocab> ) .
+
+</about> xhv:alternate </about.sv>; :icon faicon:info-circle .
+</about.sv> dc:language </language/swe> .
+
+</marcframe> a sdo:Service; dc:title "MARC-mappningar"@sv; :icon faicon:exchange . 
+
+</vocab> dc:title "Basvokabulär"@sv; :icon faicon:book .
+
+</dataset> a void:Dataset;
+    owl:sameAs </.well-known/void>;
+    dc:publisher </resource/auth/121848>;
+    foaf:homepage </>;
+    void:classPartition <countries>;
+    void:classPartition <languages>;
+    void:classPartition <relators>;
+    void:classPartition <types>;
+    void:classPartition <schemes> .
+
+<nationalities> a void:Dataset .
+
+<countries> a void:Dataset;
+    void:class sdo:Country;
+    dc:source <http://id.loc.gov/vocabulary/countries> .
+
+<languages> a void:Dataset;
+    void:class sdo:Language;
+    dc:source <http://id.loc.gov/vocabulary/iso639-2> .
+
+<relators> a void:Dataset;
+    void:class owl:ObjectProperty;
+    void:vocabulary rdfs:, owl:, skos:, dc:;
+    dc:source <http://id.loc.gov/vocabulary/relators>;
+    dc:source <source/funktionskoder.tsv>;
+    #dc:source <relators/labels-sv.jsonld>;
+    #dc:source <relators/additional.jsonld>;
+    prov:hadGeneration <source/update-relators.rq>;
+    #:slugFrom (skos:notation skos:prefLabel "en");
+    void:uriSpace "/relator/" .
+
+<types> a void:Dataset; # work > form > carrier
+    void:class [ rdfs:subClassOf sdo:CreativeWork ] .
+
+<relators/labels-sv.jsonld>
+    dc:language "sv";
+    dc:format "application/ld+json" .
+
+# LoC Sources
+<http://id.loc.gov/vocabulary/countries> a skos:ConceptScheme .
+#<http://id.loc.gov/vocabulary/languages> a skos:ConceptScheme .
+# NOTE: dereference each concept in iso639-2 to get exactMatch for iso639-1/* and languages/*
+<http://id.loc.gov/vocabulary/iso639-2> a skos:ConceptScheme .
+<http://id.loc.gov/vocabulary/relators> a skos:ConceptScheme .
+
+# Candidate Sources
+#<http://www.lexvo.org/>

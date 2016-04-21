@@ -1,0 +1,25 @@
+@prefix : <https://id.kb.se/marc/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+:Tag a owl:Class ;
+    rdfs:subClassOf skos:Concept .
+
+:Code a owl:Class ;
+    rdfs:subClassOf skos:Concept .
+
+:RecordType a owl:Class ;
+    rdfs:subClassOf skos:Collection .
+
+:recordType a owl:ObjectProperty .
+
+:repeatable a owl:DatatypeProperty .
+
+:CollectionClass a owl:Class ;
+    rdfs:subClassOf owl:Class, skos:Collection .
+
+:EnumeratedTerm a owl:Class ;
+    rdfs:subClassOf schema:Enumeration, skos:Concept .
+
