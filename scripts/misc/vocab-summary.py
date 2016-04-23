@@ -1,22 +1,25 @@
+from __future__ import unicode_literals, print_function, division
 from rdflib import *
 
 
-BF = Namespace("http://bibframe.org/vocab/")
 ABS = Namespace("http://bibframe.org/model-abstract/")
 
-def print_bibframe(g):
-    g.namespace_manager.bind(None, BF)
+def print_vocab(g):
     global otherclasses, otherprops
-    otherclasses = set(g.subjects(RDF.type, RDFS.Class))
-    otherprops = set(g.subjects(RDF.type, ABS.BFProperty))
-    print_class(g.resource(BF.Resource))
-    #for c in sorted(otherclasses):
-    #    if not g.value(c, RDFS.subClassOf):
-    #        print_class(g.resource(c))
+    otherclasses = reduce(set.__or__, (set(g.subjects(RDF.type, t))
+        for t in [RDFS.Class, OWL.Class]))
+    otherprops = reduce(set.__or__, (set(g.subjects(RDF.type, t))
+        for t in [RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty]))
+    print_class(g.resource(RDFS.Resource))
     for c in sorted(otherclasses):
+        if any(o for o in g.objects(c, RDFS.subClassOf)
+                if o != RDFS.Resource
+                and not isinstance(o, BNode)
+                and not _ns(g, c) == _ns(g, o)):
+            continue
         print_class(g.resource(c))
     if otherprops:
-        print "#Other"
+        print("_:Other")
         for p in sorted(otherprops):
             print_propsum(g.resource(p), None, "   ")
 
@@ -26,28 +29,29 @@ def print_class(c, superclasses=set()):
     superclasses = superclasses | {c}
     otherclasses.discard(c.identifier)
     marc = c.value(ABS.marcField)
-    print indent + subnote + c.qname() + (" # " + marc if marc else "")
+    print(indent + subnote + c.qname() + (" # " + marc if marc else ""))
     props = sorted(c.subjects(RDFS.domain))
     for prop in props:
-        if any(prop.objects(RDFS.subPropertyOf)):
-            continue
+        #if any(prop.objects(RDFS.subPropertyOf)):
+        #    continue
         otherprops.discard(prop.identifier)
         lbl = prop.qname()
         ranges = tuple(prop.objects(RDFS.range))
         if ranges:
-            lbl += " => " + ", ".join(rc.qname() for rc in ranges)
+            lbl += " => " + ", ".join(_fix_bf_range(c.graph, rc).qname()
+                    for rc in ranges)
         marc = prop.value(ABS.marcField)
         if marc:
             lbl += " # " + marc
-        print indent + "    " + lbl
+        print(indent + "    " + lbl)
         print_subproperties(prop, c, indent + "       ")
     for subc in sorted(c.subjects(RDFS.subClassOf)):
         if subc in superclasses:
-            print indent, "<=", subc.qname()
+            print(indent, "<=", subc.qname())
             continue
         print_class(subc, superclasses)
     if props:
-        print
+        print()
 
 def print_subproperties(prop, domain, indent):
     for subprop in sorted(prop.subjects(RDFS.subPropertyOf)):
@@ -63,11 +67,20 @@ def print_propsum(subprop, domain, indent):
     marc = subprop.value(ABS.marcField)
     if marc:
         lbl += " # " + marc
-    print indent, lbl
+    print(indent, lbl)
+
+def _ns(g, o):
+    return g.qname(o).partition(':')
+
+def _fix_bf_range(g, rc):
+    if isinstance(rc, Literal):
+        return g.resource(rc.datatype)
+    return rc
 
 
 if __name__ == '__main__':
     from sys import argv
-    src = argv[1]
-    g = Graph().parse(src, format="turtle")
-    print_bibframe(g)
+    g = Graph()
+    for src in argv[1:]:
+        g.parse(src, format="turtle")
+    print_vocab(g)
