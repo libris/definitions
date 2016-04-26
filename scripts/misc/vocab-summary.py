@@ -13,7 +13,7 @@ def print_vocab(g):
     print_class(g.resource(RDFS.Resource))
     for c in sorted(otherclasses):
         if any(o for o in g.objects(c, RDFS.subClassOf)
-                if o != RDFS.Resource
+                if o not in {RDFS.Resource, OWL.Thing}
                 and not isinstance(o, BNode)
                 and not _ns(g, c) == _ns(g, o)):
             continue
@@ -21,7 +21,7 @@ def print_vocab(g):
     if otherprops:
         print("_:Other")
         for p in sorted(otherprops):
-            print_propsum(g.resource(p), None, "   ")
+            print_propsum("   ", g.resource(p), None)
 
 def print_class(c, superclasses=set()):
     indent = "    " * len(superclasses)
@@ -35,15 +35,8 @@ def print_class(c, superclasses=set()):
         #if any(prop.objects(RDFS.subPropertyOf)):
         #    continue
         otherprops.discard(prop.identifier)
-        lbl = prop.qname()
-        ranges = tuple(prop.objects(RDFS.range))
-        if ranges:
-            lbl += " => " + ", ".join(_fix_bf_range(c.graph, rc).qname()
-                    for rc in ranges)
-        marc = prop.value(ABS.marcField)
-        if marc:
-            lbl += " # " + marc
-        print(indent + "    " + lbl)
+        print_propsum(indent + "   ", prop)
+
         print_subproperties(prop, c, indent + "       ")
     for subc in sorted(c.subjects(RDFS.subClassOf)):
         if subc in superclasses:
@@ -56,17 +49,26 @@ def print_class(c, superclasses=set()):
 def print_subproperties(prop, domain, indent):
     for subprop in sorted(prop.subjects(RDFS.subPropertyOf)):
         otherprops.discard(subprop.identifier)
-        print_propsum(subprop, domain, indent)
+        print_propsum(indent, subprop, domain)
         print_subproperties(subprop, domain, indent + "    ")
 
-def print_propsum(subprop, domain, indent):
-    lbl = subprop.qname()
-    subpropdomains = sorted(subprop.objects(RDFS.domain))
-    if subpropdomains and subpropdomains != [domain]:
-        lbl += " of " + ", ".join(spd.qname() for spd in subpropdomains)
-    marc = subprop.value(ABS.marcField)
+def print_propsum(indent, prop, domain=None):
+    lbl = prop.qname()
+
+    if domain:
+        subpropdomains = sorted(prop.objects(RDFS.domain))
+        if subpropdomains and subpropdomains != [domain]:
+            lbl += " of " + ", ".join(spd.qname() for spd in subpropdomains)
+
+    ranges = tuple(prop.objects(RDFS.range))
+    if ranges:
+        lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
+                for rc in ranges)
+
+    marc = prop.value(ABS.marcField)
     if marc:
         lbl += " # " + marc
+
     print(indent, lbl)
 
 def _ns(g, o):
