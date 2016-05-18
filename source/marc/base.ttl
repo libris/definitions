@@ -1,14 +1,24 @@
-@prefix : <https://id.kb.se/marc/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix : <https://id.kb.se/marc/> .
 
-:Tag a owl:Class ;
+:Field a owl:Class ;
     rdfs:subClassOf skos:Concept .
 
-:Code a owl:Class ;
+:subField a rdf:Property ;
     rdfs:subClassOf skos:Concept .
+
+:data a owl:ObjectProperty;
+    rdfs:range rdf:List .
+
+:parts a owl:ObjectProperty .
+
+:value a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
 
 :RecordType a owl:Class ;
     rdfs:subClassOf skos:Collection .
@@ -22,4 +32,3 @@
 
 :EnumeratedTerm a owl:Class ;
     rdfs:subClassOf schema:Enumeration, skos:Concept .
-

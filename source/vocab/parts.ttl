@@ -10,7 +10,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
-@prefix bf2: <http://bibframe.org/vocab/> . # TODO: new URI?
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
@@ -22,6 +22,15 @@
 
 ##
 # Parts, Events, Relations
+
+:qualifyingNote a owl:DatatypeProperty;
+    rdfs:label "Särskiljande tillägg"@sv;
+    sdo:domainIncludes :Person, :Title .
+
+:typeNote a owl:DatatypeProperty;
+    rdfs:label "Typanmärkning"@sv;
+    owl:propertyChainAxiom (:type :note) .
+
 
 :Event a owl:Class;
     rdfs:label "Event"@en;
@@ -41,6 +50,7 @@
     rdfs:domain :Event;
     rdfs:range :Agent;
     rdfs:label "who"@en, "vem"@sv .
+
 
 :ProviderEvent a owl:Class;
     rdfs:label "Tillgängliggörande"@sv;
@@ -74,6 +84,12 @@
 :date a owl:DatatypeProperty;
     rdfs:label "datum"@sv;
     owl:equivalentProperty dc:date .
+
+:coverage a owl:DatatypeProperty;
+    rdfs:label "Täcknings- eller tillkomsttid"@sv;
+    owl:equivalentProperty dc:coverage ;
+    sdo:domainIncludes :Title .
+
 
 :identifier a owl:DatatypeProperty ;
     rdfs:label "identifier"@en, "identifikator"@sv;
@@ -112,20 +128,22 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "ISSN" .
 
+
 :title a owl:DatatypeProperty;
     rdfs:label "title"@en, "titel"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty bf:title, dc:title;
-    owl:propertyChainAxiom ( :qualifiedTitle :mainTitle ) .
+    owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
     rdfs:subPropertyOf :prefLabel, :title .
 
-:qualifiedTitle a owl:ObjectProperty;
-    owl:equivalentProperty bf:instanceTitle;
+:hasTitle a owl:ObjectProperty;
+    #owl:equivalentProperty bf:instanceTitle;
+    owl:equivalentProperty bf2:hasTitle;
     rdfs:range :Title;
-    rdfs:label "qualified title"@en, "specificerad titel"@sv;
+    rdfs:label "has title"@en, "has titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
@@ -135,11 +153,18 @@
 :keyTitle a owl:ObjectProperty ;
     rdfs:label "Nyckeltitel"@sv;
     owl:equivalentProperty bf:keyTitle;
-    rdfs:subPropertyOf :qualifiedTitle .
+    rdfs:subPropertyOf :hasTitle .
 
-:titleVariation a owl:ObjectProperty ;
+:hasTitleVariant a owl:ObjectProperty ;
     rdfs:label "Varianttitel"@sv;
     owl:equivalentProperty bf:titleVariation;
+    owl:propertyChainAxiom ( :hasTitle :hasVariant );
+    rdfs:range :Title .
+
+:hasVariant a owl:ObjectProperty ;
+    rdfs:label "Har variant"@sv;
+    owl:equivalentProperty bf2:hasVariant;
+    rdfs:range :Domain ;
     rdfs:range :Title .
 
 :Title a owl:Class;
@@ -147,43 +172,37 @@
     rdfs:label "Titel"@sv;
     owl:equivalentClass bf:Title .
 
-:CoverTitle  a owl:Class;
+:InstanceTitle  a owl:Class;
     rdfs:subClassOf :Title;
+    rdfs:label "Cover Title"@en, "Omslagstitel"@sv ;
+    rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
+
+:CoverTitle  a owl:Class;
+    rdfs:subClassOf :InstanceTitle;
     rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
 
 :TitlePage  a owl:Class;
-    rdfs:subClassOf :Title;
+    rdfs:subClassOf :InstanceTitle;
     rdfs:label "Title Page"@en, "Titelsida"@sv .
 
 :mainTitle a owl:DatatypeProperty;
-    rdfs:label "titelvärde"@sv;
-    rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv;
+    rdfs:label "huvudtitel"@sv;
     rdfs:subPropertyOf :value;
     owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
 
+:titleRemainder a owl:DatatypeProperty;
+    rdfs:label "Övrig titelinformation"@sv;
+    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    #owl:equivalentProperty remainderOfTitle
+    rdfs:domain :Title .
+
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "undertitel"@sv;
-    skos:hiddenLabel "Övrig titelinformation"@sv;
-    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    rdfs:subPropertyOf :titleRemainder;
     owl:equivalentProperty bf2:subTitle;
     rdfs:domain :Title .
 
-:titleDate a owl:DatatypeProperty;
-    rdfs:label "Täcknings- eller tillkomsttid"@sv;
-    rdfs:domain :Title .
-
-:titleQualifier a owl:DatatypeProperty;
-    rdfs:label "Särskiljande tillägg"@sv;
-    rdfs:domain :Title .
-
-:titleSource a owl:DatatypeProperty;
-    rdfs:label "Källa till förkortad titel"@sv;
-    rdfs:domain :Title .
-
-:titleType a owl:DatatypeProperty;
-    rdfs:label "Titelanmärkning"@sv;
-    rdfs:domain :Title .
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
@@ -212,6 +231,7 @@
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
+
 :contentsNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:contentsNote;
     rdfs:label "contents note"@en, "innehållsanmärkning"@sv .
@@ -219,6 +239,7 @@
 :illustrationNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:illustrationNote;
     rdfs:label "illustration note"@en, "illustrationsanmärkning"@sv .
+
 
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
@@ -282,6 +303,10 @@
 :source a owl:ObjectProperty;
     rdfs:label "källa"@sv;
     owl:equivalentProperty dc:source .
+
+:sourceNote a owl:DatatypeProperty;
+    rdfs:label "källinformation"@sv;
+    owl:propertyChainAxiom (:source :note) .
 
 :citation a owl:ObjectProperty;
     rdfs:label "citat"@sv;
