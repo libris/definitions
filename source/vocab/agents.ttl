@@ -88,15 +88,15 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:label "Familj"@sv;
     rdfs:subClassOf :Agent .
 
-:Event a owl:Class;
-    rdfs:label "Händelse"@sv;
-    owl:equivalentClass sdo:Event .
-
 :Meeting a owl:Class;
     rdfs:label "Möte"@sv;
     rdfs:comment "En formell sammankomst"@sv;
-    rdfs:subClassOf :Event;
+    rdfs:subClassOf :Agent; #:Event;
     owl:equivalentClass bf:Meeting, bibo:Conference .
+
+:Event a owl:Class;
+    rdfs:label "Händelse"@sv;
+    owl:equivalentClass sdo:Event .
 
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
