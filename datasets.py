@@ -69,7 +69,7 @@ def vocab():
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
     lib_context['@id'] = BASE + 'vocab/context'
 
-    data['@graph'].append(lib_context)
+    compiler.write(lib_context, 'vocab/context')
 
     return "/vocab", data
 
