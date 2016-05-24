@@ -54,7 +54,7 @@
 
 :ProviderEvent a owl:Class;
     rdfs:label "Tillgängliggörande"@sv;
-    owl:equivalentClass bf:Provider;
+    owl:equivalentClass bf2:ProvisionActivity;
     rdfs:subClassOf :Event .
 
 :creator a owl:ObjectProperty;
@@ -141,10 +141,11 @@
 
 :hasTitle a owl:ObjectProperty;
     #owl:equivalentProperty bf:instanceTitle;
-    owl:equivalentProperty bf2:hasTitle;
+    owl:equivalentProperty bf2:title;
     rdfs:range :Title;
     rdfs:label "has title"@en, "has titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
+    # TODO: move this definition to :InstanceTitle
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
