@@ -82,7 +82,8 @@ def _fix_bf_range(g, rc):
 
 if __name__ == '__main__':
     from sys import argv
+    from rdflib.util import guess_format as fmt
     g = Graph()
     for src in argv[1:]:
-        g.parse(src, format="turtle")
+        g.parse(src, format=fmt(src))
     print_vocab(g)
