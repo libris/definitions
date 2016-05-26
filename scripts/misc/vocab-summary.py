@@ -29,6 +29,8 @@ def print_class(c, superclasses=set()):
     superclasses = superclasses | {c}
     otherclasses.discard(c.identifier)
     marc = c.value(ABS.marcField)
+    if not isinstance(c.identifier, URIRef):
+        return
     print(indent + subnote + c.qname() + (" # " + marc if marc else ""))
     props = sorted(c.subjects(RDFS.domain))
     for prop in props:
@@ -63,7 +65,7 @@ def print_propsum(indent, prop, domain=None):
     ranges = tuple(prop.objects(RDFS.range))
     if ranges:
         lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
-                for rc in ranges)
+                for rc in ranges if isinstance(rc.identifier, URIRef))
 
     marc = prop.value(ABS.marcField)
     if marc:
