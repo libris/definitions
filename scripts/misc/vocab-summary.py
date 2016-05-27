@@ -6,11 +6,27 @@ ABS = Namespace("http://bibframe.org/model-abstract/")
 
 def print_vocab(g):
     global otherclasses, otherprops
+
     otherclasses = reduce(set.__or__, (set(g.subjects(RDF.type, t))
         for t in [RDFS.Class, OWL.Class]))
+
     otherprops = reduce(set.__or__, (set(g.subjects(RDF.type, t))
         for t in [RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty]))
+
+    # guessing primary namespace by picking first term with common prefix
+    for term in otherclasses:
+        if not isinstance(term, URIRef):
+            continue
+        pfx, name = g.qname(term).split(':')
+        if otherprops and not pfx == g.qname(next(iter(otherprops))).split(':')[0]:
+            continue
+        ns = unicode(term)[:-len(name)]
+        print("prefix %s: <%s>" % (pfx, ns))
+        break
+    print()
+
     print_class(g.resource(RDFS.Resource))
+
     for c in sorted(otherclasses):
         if any(o for o in g.objects(c, RDFS.subClassOf)
                 if o not in {RDFS.Resource, OWL.Thing}
@@ -18,6 +34,7 @@ def print_vocab(g):
                 and not _ns(g, c) == _ns(g, o)):
             continue
         print_class(g.resource(c))
+
     if otherprops:
         print("_:Other")
         for p in sorted(otherprops):
