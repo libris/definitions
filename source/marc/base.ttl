@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix schema: <http://schema.org/> .
 @prefix : <https://id.kb.se/marc/> .
 
@@ -32,3 +33,7 @@
 
 :EnumeratedTerm a owl:Class ;
     rdfs:subClassOf schema:Enumeration, skos:Concept .
+
+:MainEntry a owl:Class; rdfs:subClassOf bf2:Contribution .
+
+:AddedEntry a owl:Class; rdfs:subClassOf bf2:Contribution .
