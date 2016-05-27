@@ -13,16 +13,16 @@ def print_vocab(g):
     otherprops = reduce(set.__or__, (set(g.subjects(RDF.type, t))
         for t in [RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty]))
 
-    # guessing primary namespace by picking first term with common prefix
-    for term in otherclasses:
+    prefixes = set()
+    for term in otherclasses | otherprops:
         if not isinstance(term, URIRef):
             continue
         pfx, name = g.qname(term).split(':')
-        if otherprops and not pfx == g.qname(next(iter(otherprops))).split(':')[0]:
-            continue
         ns = unicode(term)[:-len(name)]
+        if pfx in prefixes:
+            continue
+        prefixes.add(pfx)
         print("prefix %s: <%s>" % (pfx, ns))
-        break
     print()
 
     print_class(g.resource(RDFS.Resource))
