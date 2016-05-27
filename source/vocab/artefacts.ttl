@@ -10,6 +10,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -29,12 +30,56 @@
 marc:typeOfRecord a skos:Collection;
     rdfs:label "Typ"@sv .
 
+# TODO: replace :inCollection marc:bibLevel with a :IssuanceType
 marc:bibLevel a skos:Collection;
     rdfs:label "Bibliografisk nivå"@sv .
+
+:ContentType owl:equivalentClass bf2:Content .
+:MediaType owl:equivalentClass bf2:Media .
+:CarrierType owl:equivalentClass bf2:Carrier .
+:IssuanceType owl:equivalentClass bf2:Issuance .
 
 
 ##
 # Creative Works
+
+:contentType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:content;
+    rdfs:subPropertyOf rdf:type .
+
+:mediaType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:media;
+    rdfs:subPropertyOf rdf:type .
+
+# TODO: a given value implies value for :media from base :MediaType
+:carrierType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:carrier;
+    rdfs:subPropertyOf rdf:type .
+
+:issuanceType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:issuance;
+    rdfs:subPropertyOf rdf:type .
+
+# Rules:
+
+# Vocab Macro:
+# INSERT {
+#    ?enumType rdfs:subClassOf [ a owl:Restriction;
+#            owl:onProperty bf:carrier; owl:hasSelf true ] .
+#} WHERE { ?enumType a bf:Carrier }
+# Rule Implementation:
+# INSERT {
+#     ?s ?enumProperty ?enumType
+# } WHERE {
+#     ?s rdf:type/rdfs:subClassOf* ?enumType .
+#     ?enumType rdfs:subClassOf [
+#             a owl:Restriction;
+#             owl:onProperty ?enumProperty;
+#             owl:hasSelf true
+#         ] .
+# }
+
+
 
 # Specificity Dimensions
 

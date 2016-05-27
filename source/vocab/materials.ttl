@@ -18,6 +18,22 @@
 @prefix marc: <https://id.kb.se/marc/> .
 
 
+# RDA Alignments
+
+:Unmediated a bf:Media;
+    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf:media; owl:hasSelf true ] .
+
+:Volume a owl:Class, bf:Carrier;
+    skos:exactMatch rdacarrier:1049; # "volume"
+    rdfs:subClassOf :Unmediated,
+        [ a owl:Restriction; owl:onProperty bf:carrier; owl:hasSelf true ] .
+
+# TODO: List top concepts to provide interfaces with:
+# - a set of starting points for e.g. navigation, creation
+# - a "roof" when finding base classes
+#: skos:hasTopConcept :Print .
+
+
 # Manifestation Dimensions
 
 :Digital a owl:Class;
@@ -117,8 +133,16 @@
 :Book a owl:Class;
     rdfs:label "Book"@en, "Bok"@sv;
     owl:equivalentClass bibo:Book;
-    rdfs:subClassOf :Text, :Monograph ;
-    skos:broadMatch rdacarrier:1049 . # "volume"
+    rdfs:subClassOf
+        :Text,
+        :Monograph,
+        :Volume,
+        :Print,
+        [ a owl:Restriction; owl:onProperty bf:instanceOf; owl:allValuesFrom bf:Text ] .
+        #[ a owl:Restriction; owl:onProperty :extent; owl:allValuesFrom :PageCount ] .
+
+:BookSeries a owl:Class;
+    rdfs:subClassOf :Text, :Serial .
 
 :ManuscriptCartography a owl:Class;
     rdfs:label "Kartmanuscript"@sv;
