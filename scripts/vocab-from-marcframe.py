@@ -58,11 +58,15 @@ def parse_resourcemap(dataset, part, marcframe):
 
     g = dataset.get_context(DATASET_BASE["marcframe/fixfields"])
 
-    for mapname, dfn in marcframe['tokenMaps'].items():
-        if mapname == 'typeOfRecord':
+    tokenmaps = reduce(lambda a, b: a.update(b) or a,
+            (d for d in marcframe['tokenMaps'] if isinstance(d, dict)), {})
+    for mapname, dfn in tokenmaps.items():
+        if mapname == 'TypeOfRecordType':
             for name in dfn.values():
+                if not name:
+                    continue
                 rtype = newclass(g, name, None, "typeOfRecord")
-        if mapname == 'bibLevel':
+        if mapname == 'BibLevelType':
             for name in dfn.values():
                 if not name:
                     continue
