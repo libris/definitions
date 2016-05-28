@@ -17,7 +17,10 @@ def print_vocab(g):
     for term in otherclasses | otherprops:
         if not isinstance(term, URIRef):
             continue
-        pfx, name = g.qname(term).split(':')
+        qname = g.qname(term)
+        if ':' not in qname:
+            qname = ':%s' % qname
+        pfx, name = qname.split(':')
         ns = unicode(term)[:-len(name)]
         if pfx in prefixes:
             continue
