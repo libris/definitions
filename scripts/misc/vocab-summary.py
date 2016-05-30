@@ -39,7 +39,7 @@ def print_vocab(g):
         print_class(g.resource(c))
 
     if otherprops:
-        print("_:Other")
+        print("# Any")
         for p in sorted(otherprops):
             print_propsum("   ", g.resource(p), None)
 
