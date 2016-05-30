@@ -1,0 +1,11 @@
+prefix reg: <http://metadataregistry.org/uri/profile/regap/>
+
+construct {
+    ?alias ?p ?bound_o
+} where {
+    ?s ?p ?o .
+    FILTER(?p != reg:lexicalAlias)
+    ?s reg:lexicalAlias ?alias .
+    OPTIONAL { ?o reg:lexicalAlias ?alias_o . }
+    BIND(COALESCE(?alias_o, ?o) as ?bound_o)
+}
