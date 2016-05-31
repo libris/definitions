@@ -1,21 +1,20 @@
 #!/usr/bin/env python
-from rdflib import *
+from rdflib import Graph
 from os import path as P
 import sys
 
+RDA_SOURCE_NAMES = ['a', 'c', 'w', 'e', 'm', 'i', 'z']
+
 g = Graph()
-for uri in """
-    http://rdaregistry.info/Elements/a.ttl
-    http://rdaregistry.info/Elements/c.ttl
-    http://rdaregistry.info/Elements/w.ttl
-    http://rdaregistry.info/Elements/e.ttl
-    http://rdaregistry.info/Elements/m.ttl
-    http://rdaregistry.info/Elements/i.ttl
-    http://rdaregistry.info/Elements/z.ttl
-    """.split():
-    g.parse(uri, format='turtle')
+
+for name in RDA_SOURCE_NAMES:
+    g.parse("http://rdaregistry.info/Elements/{}.ttl".format(name), format='turtle')
 
 with open(P.join(P.dirname(__file__), 'make-lexical-rda.rq')) as fp:
     res = g.query(fp)
 
-res.serialize(sys.stdout, format='turtle')
+for name in RDA_SOURCE_NAMES:
+    res.graph.namespace_manager.bind(name,
+            "http://rdaregistry.info/Elements/{}/".format(name))
+
+res.graph.serialize(sys.stdout, format='turtle')

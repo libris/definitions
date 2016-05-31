@@ -1,7 +1,8 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix reg: <http://metadataregistry.org/uri/profile/regap/>
 
 construct {
-    ?alias ?p ?bound_o
+    ?alias owl:sameAs ?s ; ?p ?bound_o .
 } where {
     ?s ?p ?o .
     FILTER(?p != reg:lexicalAlias)
