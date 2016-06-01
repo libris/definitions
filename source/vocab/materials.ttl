@@ -9,6 +9,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
@@ -20,13 +21,13 @@
 
 # RDA Alignments
 
-:Unmediated a bf:Media;
-    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf:media; owl:hasSelf true ] .
+:Unmediated a bf2:Media;
+    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasSelf true ] .
 
-:Volume a owl:Class, bf:Carrier;
+:Volume a owl:Class, bf2:Carrier;
     skos:exactMatch rdacarrier:1049; # "volume"
     rdfs:subClassOf :Unmediated,
-        [ a owl:Restriction; owl:onProperty bf:carrier; owl:hasSelf true ] .
+        [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasSelf true ] .
 
 # TODO: List top concepts to provide interfaces with:
 # - a set of starting points for e.g. navigation, creation
