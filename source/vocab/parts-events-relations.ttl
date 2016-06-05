@@ -17,6 +17,8 @@
 
 @prefix dbpo: <http://dbpedia.org/ontology/> .
 
+@prefix l: <http://w3id.org/libris/logic/> .
+
 @prefix : <https://id.kb.se/vocab/> .
 
 
@@ -33,62 +35,32 @@
 
 
 :Event a owl:Class;
-    rdfs:label "Event"@en;
-    owl:equivalentClass prov:Activity, sdo:Event .
+    rdfs:label "Event"@en, "Händelse"@sv;
+    owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
 
-:when a owl:DatatypeProperty ;
-    rdfs:domain :Event;
-    rdfs:range :AnyDateTime;
-    rdfs:label "when"@en, "när"@sv .
+:Place a owl:Class;
+    rdfs:label "Place"@en, "Plats"@sv;
+    owl:equivalentClass bf2:Place , prov:Location, sdo:Place .
 
-:where a owl:ObjectProperty ;
-    rdfs:domain :Event;
+:place a owl:ObjectProperty;
+    rdfs:label "Ort"@sv;
+    #rdfs:domain :Event;
     rdfs:range :Place;
-    rdfs:label "where"@en, "var"@sv .
+    rdfs:subPropertyOf l:object;
+    owl:equivalentProperty bf2:place, prov:atLocation .
 
-:who a owl:ObjectProperty ;
-    rdfs:domain :Event;
+:agent a owl:ObjectProperty;
+    rdfs:label "aktör"@sv;
+    rdfs:subPropertyOf l:object;
+    #rdfs:domain :Event;
     rdfs:range :Agent;
-    rdfs:label "who"@en, "vem"@sv .
-
-
-:ProviderEvent a owl:Class;
-    rdfs:label "Tillgängliggörande"@sv;
-    owl:equivalentClass bf2:ProvisionActivity;
-    rdfs:subClassOf :Event .
-
-:creator a owl:ObjectProperty;
-    skos:prefLabel "upphovsman"@sv;
-    rdfs:label "skapare"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty dc:creator .
-
-:publisher a owl:ObjectProperty;
-    rdfs:label "utgivare"@sv;
-    owl:equivalentProperty dc:publisher, bf:publisher .
-
-:license a owl:ObjectProperty;
-    rdfs:label "licens"@sv;
-    owl:equivalentProperty dc:license .
-
-:created a owl:DatatypeProperty;
-    rdfs:label "date created"@en, "skapad"@sv;
-    owl:equivalentProperty dc:created, sdo:dateCreated;
-    rdfs:range xsd:dateTime .
-
-:modified a owl:DatatypeProperty;
-    rdfs:label "modifierad"@sv;
-    owl:equivalentProperty dc:modified;
-    rdfs:range xsd:dateTime .
+    owl:equivalentProperty bf2:agent, prov:agent .
 
 :date a owl:DatatypeProperty;
+    #rdfs:domain :Event;
+    #rdfs:range :AnyDateTime;
     rdfs:label "datum"@sv;
-    owl:equivalentProperty dc:date .
-
-:coverage a owl:DatatypeProperty;
-    rdfs:label "Täcknings- eller tillkomsttid"@sv;
-    owl:equivalentProperty dc:coverage ;
-    sdo:domainIncludes :Title .
+    owl:equivalentProperty bf2:date, dc:date .
 
 
 :identifier a owl:DatatypeProperty ;
@@ -108,7 +80,7 @@
 
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "identified by"@en, "identifierad av"@sv;
-    rdfs:subPropertyOf bf2:identifiedBy;
+    owl:equivalentProperty bf2:identifiedBy;
     rdfs:range :Identifier .
 
 :Identifier a owl:Class ;
@@ -153,34 +125,46 @@
     #rdfs:label "instanstitel"@sv;
     dc:references [ skos:notation "RDA 1.7" ] .
 
-:keyTitle a owl:ObjectProperty ;
-    rdfs:label "Nyckeltitel"@sv;
-    owl:equivalentProperty bf:keyTitle;
-    rdfs:range bf2:KeyTitle;
-    rdfs:subPropertyOf :hasTitle .
-
-:hasTitleVariant a owl:ObjectProperty ;
-    rdfs:label "Varianttitel"@sv;
-    owl:equivalentProperty bf:titleVariation;
-    rdfs:range bf2:VariantTitle;
-    owl:propertyChainAxiom ( :hasTitle :hasVariant );
-    rdfs:range :Title .
-
-:hasVariant a owl:ObjectProperty ;
-    rdfs:label "Har variant"@sv;
-    owl:equivalentProperty bf2:hasVariant;
-    rdfs:range :Domain ;
-    rdfs:range :Title .
-
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Titel"@sv;
     owl:equivalentClass bf2:Title .
 
 :InstanceTitle  a owl:Class;
+    owl:equivalentClass bf2:InstanceTitle;
     rdfs:subClassOf :Title;
-    rdfs:label "Cover Title"@en, "Omslagstitel"@sv ;
+    rdfs:label "Instance Title"@en, "Instansens titel"@sv ;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
+
+:CoverTitle  a owl:Class;
+    rdfs:subClassOf :InstanceTitle;
+    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
+
+:WorkTitle  a owl:Class;
+    owl:equivalentClass bf2:WorkTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Work Title"@en, "Uniform titel"@sv .
+
+:VariantTitle  a owl:Class;
+    owl:equivalentClass bf2:VariantTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Variant Title"@en, "Variant titel"@sv .
+
+:KeyTitle a owl:Class ;
+    owl:equivalentClass bf2:KeyTitle ;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:label "Nyckeltitel"@sv .
+
+:keyTitle a owl:DatatypeProperty;
+    owl:equivalentProperty bf:keyTitle;
+    rdfs:subPropertyOf :title;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
+                :mainTitle ) .
+
+:VariantTitle a owl:Class ;
+    owl:equivalentClass bf2:VariantTitle;
+    rdfs:label "Varianttitel"@sv .
 
 :CoverTitle  a owl:Class;
     rdfs:subClassOf :InstanceTitle;
@@ -209,6 +193,33 @@
     rdfs:domain :Title .
 
 
+:ProvisionActivity a owl:Class;
+    rdfs:label "Tillgängliggörande"@sv;
+    owl:equivalentClass bf2:ProvisionActivity;
+    rdfs:subClassOf :Event .
+
+:provisionActivity a owl:ObjectProperty;
+    owl:equivalentProperty bf2:provisionActivity .
+
+:manufacture a owl:ObjectProperty;
+    owl:equivalentProperty bf:manufacture;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Manufacture .
+
+:publication a owl:ObjectProperty;
+    owl:equivalentProperty bf:publication;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Publication .
+
+:Manufacture a owl:Class;
+    owl:equivalentClass bf2:Manufacture;
+    rdfs:subClassOf :ProvisionActivity .
+
+:Publication a owl:Class;
+    owl:equivalentClass bf2:Publication;
+    rdfs:subClassOf :ProvisionActivity .
+
+
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
     skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
@@ -223,24 +234,18 @@
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :manufactureStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:subPropertyOf bf2:provisionActivityStatement;
     rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :publicationStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:subPropertyOf bf:provisionActivityStatement;
     rdfs:label "publication statement"@en, "utgivningsuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :noteOnPublicationStatement a owl:DatatypeProperty;
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
-
-:Manufacture a owl:Class;
-    owl:equivalentClass bf2:Manufacture .
-
-:Publication a owl:Class;
-    owl:equivalentClass bf2:Publication .
 
 :contentsNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:contentsNote;
@@ -250,6 +255,40 @@
     owl:equivalentProperty bf:illustrationNote;
     rdfs:label "illustration note"@en, "illustrationsanmärkning"@sv .
 
+
+:creator a owl:ObjectProperty;
+    skos:prefLabel "upphovsman"@sv;
+    rdfs:label "skapare"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty dc:creator .
+
+:contributor a owl:ObjectProperty;
+    rdfs:label "delaktig i skapandet"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:contributor, dc:contributor .
+
+:publisher a owl:ObjectProperty;
+    rdfs:label "utgivare"@sv;
+    owl:equivalentProperty dc:publisher, bf:publisher .
+
+:license a owl:ObjectProperty;
+    rdfs:label "licens"@sv;
+    owl:equivalentProperty dc:license .
+
+:created a owl:DatatypeProperty;
+    rdfs:label "date created"@en, "skapad"@sv;
+    owl:equivalentProperty dc:created, sdo:dateCreated;
+    rdfs:range xsd:dateTime .
+
+:modified a owl:DatatypeProperty;
+    rdfs:label "modifierad"@sv;
+    owl:equivalentProperty dc:modified;
+    rdfs:range xsd:dateTime .
+
+:coverage a owl:DatatypeProperty;
+    rdfs:label "Täcknings- eller tillkomsttid"@sv;
+    owl:equivalentProperty dc:coverage ;
+    sdo:domainIncludes :Title .
 
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
@@ -359,17 +398,32 @@
     owl:equivalentProperty bibo:contributorList;
     rdfs:range rdf:List .
 
+:classification a owl:ObjectProperty;
+    owl:equivalentProperty bf2:classification;
+    rdfs:label "classification"@en, "klassifikation"@sv .
+
 :genre a owl:ObjectProperty;
     rdfs:label "genre"@en, "genre"@sv;
-    owl:equivalentProperty bf:classification; # TODO: vs. bf:category and subprops thereof
+    owl:equivalentProperty bf2:genreForm;
+    #owl:equivalentProperty bf:classification; # TODO: vs. bf:category and subprops thereof
     rdfs:subPropertyOf dc:type, sdo:genre .
 
 :version a owl:ObjectProperty;
     rdfs:label "version"@sv;
     owl:equivalentProperty sdo:version .
 
+:translationOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:translationOf .
+
+:hasSeries a owl:ObjectProperty;
+    owl:equivalentProperty bf2:hasSeries .
+
 :isPrimaryTopicOf a owl:ObjectProperty;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
+
+:extent a rdf:Property;
+    owl:equivalentProperty bf2:extent;
+    rdfs:label "Omfång"@sv .
 
 :numberOfPages a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:numberOfPages;
@@ -384,6 +438,11 @@
 :Audience a owl:Class;
     rdfs:label "Målgrupp"@sv;
     owl:equivalentClass sdo:Audience .
+
+:dimensions a rdf:Property;
+    owl:equivalentProperty bf2:dimensions;
+    rdfs:label "dimensions"@en, "dimensioner"@sv;
+    skos:altLabel "Mått"@sv .
 
 :device a owl:ObjectProperty;
     rdfs:label "apparat"@sv;
