@@ -412,8 +412,12 @@
     rdfs:label "version"@sv;
     owl:equivalentProperty sdo:version .
 
+:accompaniedBy a owl:ObjectProperty;
+    owl:equivalentProperty bf2:accompaniedBy .
+
 :translationOf a owl:ObjectProperty;
-    owl:equivalentProperty bf2:translationOf .
+    owl:equivalentProperty bf2:translationOf;
+    rdfs:subPropertyOf :versionOf .
 
 :hasSeries a owl:ObjectProperty;
     owl:equivalentProperty bf2:hasSeries .
@@ -432,11 +436,12 @@
 
 :audience a owl:ObjectProperty;
     rdfs:label "audience"@en, "målgrupp"@sv;
-    rdfs:subPropertyOf sdo:audience;
-    rdfs:range :Concept .
+    owl:equivalentProperty sdo:audience;
+    rdfs:range :Audience .
 
 :Audience a owl:Class;
     rdfs:label "Målgrupp"@sv;
+    rdfs:subClassOf :Concept;
     owl:equivalentClass sdo:Audience .
 
 :dimensions a rdf:Property;
