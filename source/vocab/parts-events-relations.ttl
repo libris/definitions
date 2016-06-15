@@ -62,7 +62,6 @@
     rdfs:label "datum"@sv;
     owl:equivalentProperty bf2:date, dc:date .
 
-
 :identifier a owl:DatatypeProperty ;
     rdfs:label "identifier"@en, "identifikator"@sv;
     rdfs:subPropertyOf :label;
@@ -101,6 +100,19 @@
     owl:equivalentClass bf2:Issn;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISSN" .
+
+:LCCN a rdfs:Datatype;
+    owl:equivalentClass bf2:Lccn;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LCCN" .
+
+:Libris3Number a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LIBRIS-3-nummer"@sv .
+
+:LibrisControlNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LIBRIS-kod"@sv .
 
 
 :title a owl:DatatypeProperty;
@@ -148,7 +160,19 @@
 :VariantTitle  a owl:Class;
     owl:equivalentClass bf2:VariantTitle;
     rdfs:subClassOf :Title;
-    rdfs:label "Variant Title"@en, "Variant titel"@sv .
+    rdfs:label "Variant Title"@en, "Varianttitel"@sv .
+
+:AbbreviatedTitle  a owl:Class;
+    owl:equivalentClass bf2:AbbreviatedTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Abbreviated Title"@en, "Förkortad titel"@sv .
+
+:abbreviatedTitle a owl:DatatypeProperty;
+    owl:equivalentProperty bf:abbreviatedTitle;
+    rdfs:subPropertyOf :title;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :AbbreviatedTitle ]
+                :mainTitle ) .
 
 :KeyTitle a owl:Class ;
     owl:equivalentClass bf2:KeyTitle ;
@@ -335,9 +359,10 @@
     owl:inverseOf :references;
     owl:equivalentProperty dc:isReferencedBy .
 
-:relation a owl:ObjectProperty;
-    rdfs:label "relation"@sv;
-    owl:equivalentProperty dc:relation .
+:relatedTo a owl:ObjectProperty;
+    rdfs:label "relaterad till"@sv;
+    owl:equivalentProperty bf2:relatedTo;
+    rdfs:subPropertyOf dc:relation .
 
 :influentialRelation a owl:ObjectProperty;
     rdfs:subPropertyOf :influencedBy, dc:relation .
@@ -415,9 +440,23 @@
 :accompaniedBy a owl:ObjectProperty;
     owl:equivalentProperty bf2:accompaniedBy .
 
+:alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
+
+:otherPhysicalFormat a owl:ObjectProperty;
+    owl:equivalentProperty bf2:otherPhysicalFormat;
+    rdfs:label "Annat bärarformat"@sv .
+
 :translationOf a owl:ObjectProperty;
     owl:equivalentProperty bf2:translationOf;
     rdfs:subPropertyOf :versionOf .
+
+:expressionOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:expressionOf;
+    rdfs:subPropertyOf :versionOf .
+
+:precededBy a owl:ObjectProperty;
+    owl:equivalentProperty bf2:precededBy;
+    rdfs:subPropertyOf :relatedTo .
 
 :hasSeries a owl:ObjectProperty;
     owl:equivalentProperty bf2:hasSeries .
