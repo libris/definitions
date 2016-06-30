@@ -114,6 +114,15 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "LIBRIS-kod"@sv .
 
+:status a owl:ObjectProperty;
+    owl:equivalentProperty bf2:status;
+    #TODO: rdfs:range bf2:Status;
+    rdfs:label "status"@sv .
+
+:acquisitionTerms a rdf:Property;
+    owl:equivalentProperty bf2:acquisitionTerms;
+    rdfs:label "Anskaffningsvillkor"@sv .
+
 
 :title a owl:DatatypeProperty;
     rdfs:label "title"@en, "titel"@sv;
@@ -148,10 +157,6 @@
     rdfs:label "Instance Title"@en, "Instansens titel"@sv ;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
 
-:CoverTitle  a owl:Class;
-    rdfs:subClassOf :InstanceTitle;
-    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
-
 :WorkTitle  a owl:Class;
     owl:equivalentClass bf2:WorkTitle;
     rdfs:subClassOf :Title;
@@ -166,6 +171,10 @@
     owl:equivalentClass bf2:AbbreviatedTitle;
     rdfs:subClassOf :Title;
     rdfs:label "Abbreviated Title"@en, "Förkortad titel"@sv .
+
+:CoverTitle  a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
 
 :abbreviatedTitle a owl:DatatypeProperty;
     owl:equivalentProperty bf:abbreviatedTitle;
