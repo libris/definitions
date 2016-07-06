@@ -42,12 +42,11 @@ class TableHandler:
             self.handle_help_row(level, parts)
 
     def handle_main_row(self, level, parts):
-        node = self._make_node(parts)
-
-        code = node['code']
         current = self._stack[-1]
+        node = self._make_node(parts, current=current)
+        code = node['code']
 
-        if node['@type'] == 'Element':
+        if node['@type'].endswith('Element'):
             current.setdefault('element', []).append(node)
             return
         elif not level and not len(code) == 1:
@@ -71,26 +70,25 @@ class TableHandler:
                 self._stack.append(node)
 
     def handle_help_row(self, level, parts):
-        # 1. else skip
-        # A. GeographicElement
-        # B. ContentGenreElement
-        # C. TemporalElement
-        # D. MonographicElemet
-        # E. ContentFormElement
-        # F. LanguageElement
-        # G. MediaElement if startswith('/'); AudienceElement if startswith(',')
-        # H. 
-        pass
+        if not len(parts) > 1 or len(parts[0]) == 1 or parts[0][1] == '\xa0':
+            return
+
+        element_type = self._get_element_type(parts[0])
+        if not element_type:
+            return
+
+        elem = self._make_node(parts, element_type)
+        self.maintable.append(elem)
 
     def get_results(self):
         return self.maintable + self.helptable
 
-    def _make_node(self, parts):
+    def _make_node(self, parts, element_type=None, current=None):
         code = parts[0]
         label = parts[1]
 
         is_collection = '--' in code
-        is_element = not code[0].isalpha()
+        element_type = element_type or self._get_element_type(code)
 
         node = None # TODO: USE self._index.get(code) OR merge in final step
         if not node:
@@ -101,25 +99,60 @@ class TableHandler:
             assert node['label'] == label, "%r != %r" % (
                     (node['code'], node['label']), (code, label))
 
-        current = self._stack[-1]
-
         if is_collection:
             node['@type'] = 'Collection'
-        elif is_element:
-            node['@type'] = 'Element'
+        elif element_type:
+            node['@type'] = element_type
         else:
             node['@type'] = 'Classification'
-        node['@id'] = current['@id'] + code if is_element else "sab:%s" % code
+        # TODO: Really prefix element with code, or just relate to code...?
+        # ... determined by whether element codes are unique...
+        node['@id'] = current['@id'] + code if current and element_type \
+                else "sab:%s" % code
         node['code'] = code
         node['label'] = label
 
         if len(parts) > 2:
             node['comment'] = parts[2]
 
+        # TODO: Really create additional Elements, or add alias ID?
+        # (... Or only use in SAB-code parsing code?)
+        if not is_collection and len(code) > 1:
+
+            if re.match(r'^F[åb-z]\w*$', code): # Fb--Få
+                aux_elem = self._make_node(['=' + code[1:], parts[1]])
+                node.setdefault('related', []).append(aux_elem)
+
+            # TODO: if 'H', add relation to 'F' + code[1:] ?
+
+            elif code.startswith('N'):
+                aux_elem = self._make_node(['-' + code[1:], parts[1]])
+                node.setdefault('related', []).append(aux_elem)
+
+            # TODO: if 'J', 'K' or 'M', add relation to 'N' + code[1:] ?
+
         return node
+
+    def _get_element_type(self, code):
+        c = code[0]
+        if c.isalpha():
+            return None
+        code_type_map = {
+             '-': 'GeographicElement',
+             ':': 'ContentGenreElement', # can be any Classification code.lower()
+             '.': 'TemporalElement', # SpecialElement if code[1] == '0'
+             #'z': 'MonographicElemet',
+             '(': 'ContentFormElement',
+             '=': 'LanguageElement',
+             '/': 'MediaElement',
+             ',': 'AudienceElement',
+        }
+        return code_type_map.get(c)
 
 
 def error_correct(parts):
+    if parts[0] == '\u201c':
+        return
     if parts[0] == 'z':
         return
     if parts[0] == 'Macao':
@@ -129,6 +162,8 @@ def error_correct(parts):
     if parts[0:2] == ['H', 'Skönlitteratur: samlingar']:
         return
     if parts[0:2] == ['N', 'Geografi']:
+        return
+    if parts[0] == '1990' and parts[1] == " ":
         return
     if parts[0] == 'Hit' and parts[1].startswith(' '):
         return
@@ -254,5 +289,6 @@ if __name__ == '__main__':
     fpath = args.pop(0)
 
     results = extract_sab(get_doc(fpath), debug=debug)
+
     import json
     print(json.dumps(results, indent=2, ensure_ascii=False).encode('utf-8'))
