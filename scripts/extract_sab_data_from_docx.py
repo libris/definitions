@@ -70,7 +70,7 @@ class TableHandler:
                 self._stack.append(node)
 
     def handle_help_row(self, level, parts):
-        if not len(parts) > 1 or len(parts[0]) == 1 or parts[0][1] == '\xa0':
+        if not len(parts) > 1 or len(parts[0]) == 1:
             return
 
         element_type = self._get_element_type(parts[0])
@@ -153,11 +153,15 @@ class TableHandler:
 
 
 def error_correct(parts):
-    if parts[0] == '\u201c':
+    code = parts[0]
+
+    if code == '\u201c':
         return
-    if parts[0] == 'z':
+    if code == 'z':
         return
-    if parts[0] == 'Macao':
+    if code == 'Macao':
+        return
+    if len(code) > 1 and code[1] == '\xa0':
         return
     if parts[0:2] == ['D', 'Filosofi: allmänt']:
         return
@@ -165,47 +169,47 @@ def error_correct(parts):
         return
     if parts[0:2] == ['N', 'Geografi']:
         return
-    if parts[0] == '1990' and parts[1] == " ":
+    if code == '1990' and parts[1] == " ":
         return
-    if parts[0] == 'Hit' and parts[1].startswith(' '):
+    if code == 'Hit' and parts[1].startswith(' '):
         return
-    if parts[0] == 'Hi' and not parts[1].startswith('Italiensk'):
+    if code == 'Hi' and not parts[1].startswith('Italiensk'):
         return
-    if parts[0] in 'Ele' and parts[1].startswith('ctro '):
+    if code in 'Ele' and parts[1].startswith('ctro '):
         return
-    if parts[0] in 'Elec' and parts[1].startswith('tro '):
+    if code in 'Elec' and parts[1].startswith('tro '):
         return
-    if parts[0] == 'Ex' and parts[1].startswith(': '):
+    if code == 'Ex' and parts[1].startswith(': '):
         return
-    if parts[0] == 'Xxa' and parts[1].startswith(' används inte'):
+    if code == 'Xxa' and parts[1].startswith(' används inte'):
         return
     if parts[1].startswith(' kan'):
         return
-    if parts[0] == 'I' and parts[1] in ['nternet', 'nteractive whiteboards']:
+    if code == 'I' and parts[1] in ['nternet', 'nteractive whiteboards']:
         return
 
-    if parts[0] == ':' and re.match(r'^[a-z]+$', parts[1]):
-        return [parts[0] + parts[1]] + parts[2:]
+    if code == ':' and re.match(r'^[a-z]+$', parts[1]):
+        return [code + parts[1]] + parts[2:]
 
     if parts[1] == '--':
         first, rest = parts[2].split(' ', 1)
-        return [parts[0] + parts[1] + first, rest] + parts[3:]
+        return [code + parts[1] + first, rest] + parts[3:]
 
     if parts[0:2] == ['Ib.23', 'Ib.26']:
-        return ['%s--%s' % (parts[0], parts[1]), parts[2]]
+        return ['%s--%s' % (code, parts[1]), parts[2]]
 
     if parts[0:2] == ['K.23', 'K.26']:
-        return ['%s--%s' % (parts[0], parts[1]), parts[2]]
+        return ['%s--%s' % (code, parts[1]), parts[2]]
 
     if parts[0:2] == ['Uh', 'e'] and parts[2].startswith(('f ', 'g ')):
-        return [parts[0] + parts[1] + parts[2][0], parts[2][2:]]
+        return [code + parts[1] + parts[2][0], parts[2][2:]]
 
-    if re.match(r'[A-Z][a-z]*$', parts[0]) and \
+    if re.match(r'[A-Z][a-z]*$', code) and \
             re.match(r'[a-z][a-z0-9.]*$', parts[1]):
-        return [parts[0] + parts[1], parts[2]]
+        return [code + parts[1], parts[2]]
 
     if re.match(r'^[a-z]+--\w+$', parts[1]):
-        return [parts[0] + parts[1] + parts[2][0], parts[2][1:]]
+        return [code + parts[1] + parts[2][0], parts[2][1:]]
 
     return parts
 
