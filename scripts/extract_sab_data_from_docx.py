@@ -39,6 +39,7 @@ class TableHandler:
         self.helptable = []
         self._index = {}
         self._stack = [{'code': '', 'narrower': self.maintable}]
+        self._current_coll = None
 
     def handle_row(self, section, level, parts):
         if section == 'MAIN':
@@ -56,6 +57,18 @@ class TableHandler:
             return
         elif not level and not len(code) == 1:
             return
+
+        if node['@type'].endswith('Collection'):
+            self._current_coll = [ node['@id'] ] + node['code'].split('--')
+            # NOTE: we "incorrectly" link the collection to the parent
+            # classification, instead of:
+            #return
+        elif self._current_coll:
+            # FIXME: _current_coll needs to be like _stack ...
+            coll_id, coll_start, coll_end = self._current_coll
+            if (len(code) == len(coll_start) and
+                    code >= coll_start and code <= coll_end):
+                node['inCollection'] = {'@id': coll_id}
 
         if len(code) > len(current['code']):
             if code.startswith(current['code']):
@@ -110,17 +123,24 @@ class TableHandler:
             node['@type'] = element_type
         else:
             node['@type'] = 'Classification'
-        # TODO: Really prefix element with code, or just relate to code...?
-        # ... determined by whether element codes are unique...
-        node['@id'] = current['@id'] + code if current and element_type \
-                else "sab:%s" % code
+
+        node_id = "sab:%s" % code
+
+        # NOTE: Many local elements are similar to their top-level element, but
+        # far from all (and special '.0' elements are always locally unique).
+        if current and element_type:
+            if code[0:2] != '.0':
+                node['broader'] = node_id
+            node_id = current['@id'] + code
+
+        node['@id'] = node_id
         node['code'] = code
         node['label'] = label
 
         if len(parts) > 2:
             node['comment'] = parts[2]
 
-        # TODO: Really create additional Elements, or add alias ID?
+        # TODO: Really create additional Elements, or add alias ID and itemPortion?
         # (... Or only use in SAB-code parsing code?)
         if not is_collection and len(code) > 1:
 
