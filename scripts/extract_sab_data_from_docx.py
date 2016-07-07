@@ -137,10 +137,12 @@ class TableHandler:
         c = code[0]
         if c.isalpha():
             return None
+        if code[0:2] == '.0':
+            return 'Element'
         code_type_map = {
              '-': 'GeographicElement',
              ':': 'ContentGenreElement', # can be any Classification code.lower()
-             '.': 'TemporalElement', # SpecialElement if code[1] == '0'
+             '.': 'TemporalElement',
              #'z': 'MonographicElemet',
              '(': 'ContentFormElement',
              '=': 'LanguageElement',
