@@ -1,10 +1,15 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function, division
 __metaclass__ = type
+import sys
+if not sys.stdout.encoding:
+    import codecs
+    sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 from collections import OrderedDict
 import re
 from zipfile import ZipFile
+import json
 from lxml import etree
 
 
@@ -256,7 +261,7 @@ def extract_sab(doc, debug=False):
             assert not indent
             in_section = HEADING_MAP.get(parts[0], in_section)
             if debug:
-                print("#", parts[0].encode('utf-8'))
+                print("#", parts[0])
         else:
             if len(parts) > 2:
                 parts[2] = ' '.join(parts[2:])
@@ -273,15 +278,12 @@ def extract_sab(doc, debug=False):
 
             if debug:
                 print(indent, sep='', end='')
-                print(('%s =' % parts[0]).encode('utf-8'),
-                        *[s.encode('utf-8') for s in parts[1:]],
-                        sep='\t')
+                print(('%s =' % parts[0]), *parts[1:], sep='\t')
 
     return thandler.get_results()
 
 
 if __name__ == '__main__':
-    import sys
     args = sys.argv[:]
     script = args.pop(0)
     if not args:
@@ -296,5 +298,4 @@ if __name__ == '__main__':
 
     results = extract_sab(get_doc(fpath), debug=debug)
 
-    import json
-    print(json.dumps(results, indent=2, ensure_ascii=False).encode('utf-8'))
+    print(json.dumps(results, indent=2, ensure_ascii=False))
