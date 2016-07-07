@@ -168,6 +168,8 @@ def error_correct(parts):
         return
     if len(code) > 1 and code[1] == '\xa0':
         return
+    if code == '(' and parts[-1][-1] == ')':
+        return # IMPROVE: add as comment to previous node
     if parts[0:2] == ['D', 'Filosofi: allmänt']:
         return
     if parts[0:2] == ['H', 'Skönlitteratur: samlingar']:
@@ -193,6 +195,9 @@ def error_correct(parts):
     if code == 'I' and parts[1] in ['nternet', 'nteractive whiteboards']:
         return
 
+    if code == '(' and re.match(r'^[a-z]+$', parts[1]):
+        return [code + parts[1]] + parts[2:]
+
     if code == ':' and re.match(r'^[a-z]+$', parts[1]):
         return [code + parts[1]] + parts[2:]
 
@@ -209,12 +214,15 @@ def error_correct(parts):
     if parts[0:2] == ['Uh', 'e'] and parts[2].startswith(('f ', 'g ')):
         return [code + parts[1] + parts[2][0], parts[2][2:]]
 
-    if re.match(r'[A-Z][a-z]*$', code) and \
-            re.match(r'[a-z][a-z0-9.]*$', parts[1]):
+    if (re.match(r'[A-Z][a-z]*$', code) and
+            re.match(r'[a-z][a-z0-9.]*$', parts[1])):
         return [code + parts[1], parts[2]]
 
     if re.match(r'^[a-z]+--\w+$', parts[1]):
         return [code + parts[1] + parts[2][0], parts[2][1:]]
+
+    if parts[1] == ' ' and len(parts) > 2:
+        return [code] + parts[2:]
 
     return parts
 
