@@ -130,7 +130,7 @@ class TableHandler:
         # far from all (and special '.0' elements are always locally unique).
         if current and element_type:
             if code[0:2] != '.0':
-                node['broader'] = node_id
+                node['broader'] = {'@id': node_id}
             node_id = current['@id'] + code
 
         node['@id'] = node_id
