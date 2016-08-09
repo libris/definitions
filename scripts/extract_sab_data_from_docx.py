@@ -11,6 +11,7 @@ import re
 from zipfile import ZipFile
 import json
 from lxml import etree
+from urllib2 import quote
 
 
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
@@ -59,7 +60,7 @@ class TableHandler:
             return
 
         if node['@type'].endswith('Collection'):
-            self._current_coll = [ node['@id'] ] + node['code'].split('--')
+            self._current_coll = [ node['@id'] ] + code.split('--')
             # NOTE: we "incorrectly" link the collection to the parent
             # classification, instead of:
             #return
@@ -71,7 +72,10 @@ class TableHandler:
                 node['inCollection'] = {'@id': coll_id}
 
         if len(code) > len(current['code']):
-            if code.startswith(current['code']):
+            # "Deeper" Collection nodes got lost otherwise (see FIXME though)
+            if node['@type'].endswith('Collection'):
+                self.helptable.append(node)
+            elif code.startswith(current['code']):
                 current.setdefault('narrower', []).append(node)
                 self._stack.append(node)
         else:
@@ -124,7 +128,7 @@ class TableHandler:
         else:
             node['@type'] = 'Classification'
 
-        node_id = "sab:%s" % code
+        node_id = "sab:%s" % quote(code.encode('utf-8'), safe=b'')
 
         # NOTE: Many local elements are similar to their top-level element, but
         # far from all (and special '.0' elements are always locally unique).
@@ -239,7 +243,8 @@ def error_correct(parts):
         return [code + parts[1], parts[2]]
 
     if re.match(r'^[a-z]+--\w+$', parts[1]):
-        return [code + parts[1] + parts[2][0], parts[2][1:]]
+        last_part, text= parts[2].split(' ', 1)
+        return [code + parts[1] + last_part, text]
 
     if parts[1] == ' ' and len(parts) > 2:
         return [code] + parts[2:]
