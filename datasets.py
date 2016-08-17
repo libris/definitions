@@ -67,7 +67,7 @@ def vocab():
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
-    lib_context['@graph'] = {'@id': BASE + 'vocab/context'}
+    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
 
     compiler.write(lib_context, 'vocab/context')
 
