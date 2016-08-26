@@ -6,9 +6,17 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
+First, make sure you have `libpq-dev`, `libxml2-dev`, and
+`libxslt1-dev` installed (or the corresponding packages for your
+operating system).
+
 Install the Python-based dependencies (preferably within a virtualenv):
 
-    $ pip install -r requirements.txt
+```
+$ cd /path/to/definitions
+$ virtualenv .venv && source .venv/bin/activate
+$ pip install -r requirements.txt
+```
 
 ## Build Datasets
 
