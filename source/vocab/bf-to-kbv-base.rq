@@ -1,0 +1,61 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+prefix kbv: <https://id.kb.se/vocab/>
+
+construct {
+
+    ?kbvterm a ?type ;
+        ?maplink ?bfterm ;
+        rdfs:label ?kbvlabel_en ;
+        rdfs:subClassOf ?kbvbaseclass ;
+        rdfs:domain ?kbvdomain ;
+        rdfs:range ?kbvrange ;
+        rdfs:isDefinedBy kbv: .
+
+} where {
+
+    ?bfterm a ?type .
+    filter ((?bfterm != bf:) && strstarts(str(?bfterm), str(bf:)))
+    ?bfterm rdfs:label ?bflabel .
+
+    optional {
+        ?bfterm rdfs:domain ?domain
+        optional { ?mappeddomain owl:equivalentClass ?domain }
+        bind(coalesce(?mappeddomain,
+                    IRI(concat(replace(str(?domain), str(bf:), str(kbv:)))))
+                as ?kbvdomain)
+    }
+
+    optional {
+        ?bfterm rdfs:range ?range
+        optional { ?mappedrange owl:equivalentClass ?range }
+        bind(coalesce(?mappedrange,
+                    IRI(concat(replace(str(?range), str(bf:), str(kbv:)))))
+                as ?kbvrange)
+    }
+
+    optional {
+        ?bfterm rdfs:subClassOf ?baseclass
+        optional { ?mappedclass owl:equivalentClass ?baseclass }
+        bind(coalesce(?mappedclass,
+                    IRI(concat(replace(str(?baseclass), str(bf:), str(kbv:)))))
+                as ?kbvbaseclass)
+    }
+
+    bind(if(?type = owl:Class, owl:equivalentClass, owl:equivalentProperty) as ?maplink)
+
+    optional {
+        ?mappedterm ?maplink ?bfterm
+        optional {
+            ?mappedterm rdfs:label ?mappedlabel .
+            filter(langMatches(?mappedlabel, 'en'))
+        }
+    }
+
+    bind(coalesce(?mappedterm,
+                IRI(concat(replace(str(?bfterm), str(bf:), str(kbv:)))))
+            as ?kbvterm)
+
+    bind(coalesce(?mappedlabel, strlang(?bflabel, 'en')) as ?kbvlabel_en)
+}

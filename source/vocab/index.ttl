@@ -1,0 +1,20 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix : <https://id.kb.se/vocab/> .
+
+: rdfs:label "KBs vokabulär"@sv, "The KB Vocabulary"@en .
+
+:hasTitle owl:equivalentProperty bf2:title .
+
+:contentType owl:equivalentProperty bf2:content .
+:mediaType owl:equivalentProperty bf2:media .
+:carrierType owl:equivalentProperty bf2:carrier .
+:ContentType owl:equivalentClass bf2:Content .
+:MediaType owl:equivalentClass bf2:Media .
+:CarrierType owl:equivalentClass bf2:Carrier .
+
+:ISBN a rdfs:Datatype; owl:equivalentClass bf2:Isbn .
+:ISSN a rdfs:Datatype; owl:equivalentClass bf2:Issn .
+:LCCN a rdfs:Datatype; owl:equivalentClass bf2:Lccn .
