@@ -75,6 +75,9 @@ def print_subproperties(prop, domain, indent):
         print_subproperties(subprop, domain, indent + "    ")
 
 def print_propsum(indent, prop, domain=None):
+    if isinstance(prop.identifier, BNode):
+        return
+
     lbl = prop.qname()
 
     if domain:
