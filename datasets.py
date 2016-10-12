@@ -55,7 +55,14 @@ compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.l
 
 @compiler.dataset
 def vocab():
-    graph = Graph()
+    graph = construct(compiler.cached_rdf, sources=[
+            {
+                'source': Graph().parse(scriptpath('source/vocab/index.ttl'), format='turtle'),
+                'dataset': '?'
+            },
+            {"source": "http://id.loc.gov/ontologies/bibframe/"}
+        ],
+        query=scriptpath("source/vocab/bf-to-kbv-base.rq"))
 
     for part in (SCRIPT_DIR/'source/vocab').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
