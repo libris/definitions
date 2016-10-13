@@ -4,8 +4,10 @@ from rdflib import *
 
 ABS = Namespace("http://bibframe.org/model-abstract/")
 
-def print_vocab(g):
-    global otherclasses, otherprops
+
+def print_vocab(g, show_equivs=False):
+    global otherclasses, otherprops, SHOW_EQUIVS
+    SHOW_EQUIVS = show_equivs
 
     otherclasses = reduce(set.__or__, (set(g.subjects(RDF.type, t))
         for t in [RDFS.Class, OWL.Class]))
@@ -14,7 +16,14 @@ def print_vocab(g):
         for t in [RDF.Property, OWL.ObjectProperty, OWL.DatatypeProperty]))
 
     prefixes = set()
-    for term in otherclasses | otherprops:
+    terms = otherclasses | otherprops
+    if SHOW_EQUIVS:
+        for term in list(terms):
+            for equiv in g.objects(term,
+                    OWL.equivalentProperty | OWL.equivalentClass):
+                terms.add(equiv)
+
+    for term in terms:
         if not isinstance(term, URIRef):
             continue
         qname = g.qname(term)
@@ -43,15 +52,23 @@ def print_vocab(g):
         for p in sorted(otherprops):
             print_propsum("   ", g.resource(p), None)
 
+
 def print_class(c, superclasses=set()):
+    if not isinstance(c.identifier, URIRef):
+        return
+
     indent = "    " * len(superclasses)
     subnote = "/ " if superclasses else ""
     superclasses = superclasses | {c}
     otherclasses.discard(c.identifier)
-    marc = c.value(ABS.marcField)
-    if not isinstance(c.identifier, URIRef):
-        return
-    print(indent + subnote + c.qname() + (" # " + marc if marc else ""))
+    note = c.value(ABS.marcField) or ""
+    if SHOW_EQUIVS:
+        note += ", ".join(equiv.qname()
+                for equiv in c.objects(OWL.equivalentClass)
+                if isinstance(c.identifier, URIRef))
+
+    print(indent + subnote + c.qname() + (" # " + note if note else ""))
+
     props = sorted(c.subjects(RDFS.domain))
     for prop in props:
         #if any(prop.objects(RDFS.subPropertyOf)):
@@ -68,11 +85,13 @@ def print_class(c, superclasses=set()):
     if props:
         print()
 
+
 def print_subproperties(prop, domain, indent):
     for subprop in sorted(prop.subjects(RDFS.subPropertyOf)):
         otherprops.discard(subprop.identifier)
         print_propsum(indent, subprop, domain)
         print_subproperties(subprop, domain, indent + "    ")
+
 
 def print_propsum(indent, prop, domain=None):
     if isinstance(prop.identifier, BNode):
@@ -90,14 +109,20 @@ def print_propsum(indent, prop, domain=None):
         lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
                 for rc in ranges if isinstance(rc.identifier, URIRef))
 
-    marc = prop.value(ABS.marcField)
-    if marc:
-        lbl += " # " + marc
+    note = prop.value(ABS.marcField) or ""
+    if SHOW_EQUIVS:
+        note += ", ".join(equiv.qname()
+                for equiv in prop.objects(OWL.equivalentProperty)
+                if isinstance(prop.identifier, URIRef))
+    if note:
+        lbl += " # " + note
 
     print(indent, lbl)
 
+
 def _ns(g, o):
     return g.qname(o).partition(':')
+
 
 def _fix_bf_range(g, rc):
     if isinstance(rc, Literal):
@@ -106,9 +131,17 @@ def _fix_bf_range(g, rc):
 
 
 if __name__ == '__main__':
-    from sys import argv
-    from rdflib.util import guess_format as fmt
+    from rdflib.util import guess_format
+    import argparse
+
+    argp = argparse.ArgumentParser()
+    argp.add_argument('-v', '--show-equivalents', action='store_true', default=False)
+    argp.add_argument('sources', metavar='SOURCE', nargs='+')
+    args = argp.parse_args()
+
     g = Graph()
-    for src in argv[1:]:
-        g.parse(src, format=fmt(src))
-    print_vocab(g)
+    for src in args.sources:
+        fmt = 'json-ld' if src.endswith('.jsonld') else guess_format(src)
+        g.parse(src, format=fmt)
+
+    print_vocab(g, args.show_equivalents)
