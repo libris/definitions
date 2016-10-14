@@ -441,7 +441,8 @@ def process_marcmap(OUT, marc_type):
         subfields = field.get('subfield')
         subtypes = None
         if MAKE_VOCAB:
-            outf['@type'] = 'skos:Collection'
+            outf['@type'] = 'owl:Class'
+            outf['subClassOf'] = 'marc:Field'
             field_id = '%s-%s' % (marc_type, tag)
             outf['@id'] = field_id
             outf['notation'] = tag
@@ -512,6 +513,7 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
         #content_type = None
         orig_type_name = None
         type_name = None
+        field_id = '%s-%s' % (marc_type, tag)
         if len(fixmaps) > 1:
             if tag == '008':
                 pass #rt_bl_map = outf.setdefault('recTypeBibLevelMap', OrderedDict())
@@ -530,10 +532,15 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
             elif tag in ('007'):
                 type_name = carrier_name_map.get(type_name, type_name)
 
-            fm = outf[type_name] = OrderedDict()
+            fm = OrderedDict()
             if MAKE_VOCAB:
                 fm['@type'] = 'owl:Class'
                 add_labels(fixmap, fm)
+                field_id = fm['@id'] = '%s/%s/' % (field_id, type_name)
+                fm['mapCategory'] = {'@id': type_name}
+                outf['subMap'] = fm
+            else:
+                outf[type_name] = fm
 
             if tag == '008':
                 pass
@@ -591,7 +598,14 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
             else:
                 new_propname = None
 
-            fm[key] = col_dfn = OrderedDict()
+            col_dfn = OrderedDict()
+            if MAKE_VOCAB:
+                col_dfn['@id'] = "%s/%s" % (field_id,
+                        ('%s' % (off + 1)) if length == 1 else
+                        '%s-%s' % (off + 1, (off+length)))
+                fm.setdefault('column', {})[key] = col_dfn
+            else:
+                fm[key] = col_dfn
             propname = new_propname or dfn_ref_key or col.get('propId')
             if propname in propname_map:
                 propname = propname_map[propname]
@@ -660,10 +674,10 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     coll_dfn = ENUM_DEFS[enumcoll.id]
                     add_labels(col, coll_dfn)
                     if type_name:
-                        prop_dfn['sdo:domainIncludes'] = {'@id': 'v:' + type_name}
+                        prop_dfn['sdo:domainIncludes'] = {'@id': 'kbv:' + type_name}
                         # NOTE: means "enumeration only applicable if type of
                         # thing linking to it is of this type"
-                        coll_dfn.setdefault('broadMatch', []).append('v:' + type_name)
+                        coll_dfn.setdefault('broadMatch', []).append('kbv:' + type_name)
 
                     # TODO: represent broadMatch and
                     # domainIncludes+rangeIncludes combos as anonymous
@@ -671,10 +685,10 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                     #   :contentType a owl:ObjectProperty;
                     #       :combinations [
                     #               :prefLabel "Type of Continuing Resource"@en;
-                    #               rdfs:domain v:Serial; rdfs:range :SerialsTypeOfSerialType
+                    #               rdfs:domain kbv:Serial; rdfs:range :SerialsTypeOfSerialType
                     #           ], [
                     #               :prefLabel "Type of Material"@en;
-                    #               rdfs:domain v:Visual; rdfs:range :VisualMaterialType
+                    #               rdfs:domain kbv:Visual; rdfs:range :VisualMaterialType
                     #           ].
 
 
@@ -707,7 +721,8 @@ if __name__ == '__main__':
         import string
         terms = {
             "@base": "https://id.kb.se/marc/",
-            "v": "https://id.kb.se/vocab/", # TODO: kbv
+            "marc": "https://id.kb.se/marc/",
+            "kbv": "https://id.kb.se/vocab/", # TODO: kbv
             #"inCollection": {"@reverse": "skos:member"},
             "inCollection": None,
             "prefLabel": {"@id": "skos:prefLabel", "@language": "sv"},
@@ -722,18 +737,21 @@ if __name__ == '__main__':
             "auth": None if ONLYENUMS else {"@id": "@graph", "@container": "@index"},
             "hold": None if ONLYENUMS else {"@id": "@graph", "@container": "@index"},
             'uriTemplate': None,
-            #"tokenMap": None,
+            "tokenMap": None, # {"@type": "@id"} redundant, a range is given in the enum data
             "link": {"@id": "sameAs", "@type": "@vocab"},
             "addLink": {"@id": "sameAs", "@type": "@vocab"},
             "property": {"@id": "sameAs", "@type": "@vocab"},
             "addProperty": {"@id": "sameAs", "@type": "@vocab"},
-            "inScheme": {"@type": "@id"},
+            #"inScheme": {"@id": "skos:inScheme", "@type": "@id"},
+            "subMap": {"@reverse": "rdfs:subClassOf"},
+            "column": {"@reverse": "sdo:domainIncludes", "@container": "@index"},
+            "subfield": {"@reverse": "sdo:domainIncludes", "@type": "@id"},
             "marcType": {"@id": "inScheme", "@type": "@id"},
             "@vocab": "https://id.kb.se/marc/",
             #'i1': None,
             #'i2': None,
         }
-        terms.update({'$' + k: 'skos:member' for k in string.digits + string.ascii_lowercase})
+        terms.update({'$' + k: terms['subfield'] for k in string.digits + string.ascii_lowercase})
         OUT["@context"] = ["../sys/context/base.jsonld", terms]
         OUT['@graph'] = []
     #else:
