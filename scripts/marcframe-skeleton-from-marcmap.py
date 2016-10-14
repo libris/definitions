@@ -462,7 +462,23 @@ def process_marcmap(OUT, marc_type):
                     continue
                 ind_keys = sorted(k for k in ind if k != '_')
                 if ind_keys:
-                    outf[ind_key.replace('ind', 'i')] = {}
+                    outf[ind_key.replace('ind', 'i')] = i_data = {}
+                    if MAKE_VOCAB:
+                        i_data['@type'] = 'rdf:Property'
+                        i_data['@id'] = i_id =  '%s-%s-%s' % (marc_type, tag, ind_key)
+                        i_data['notation'] = ind_key
+                        i_data['repeatable'] = repeatable
+                        i_enum = []
+                        i_data['rdfs:range'] = {'owl:oneOf': {'@list': i_enum}}
+                        for ik in ind_keys:
+                            ind_val = ind[ik]
+                            i_val = {'@id': '%s#%s' % (i_id, ik)}
+                            if 'id' in ind_val:
+                                i_val['sameAs'] = {'@id': ind_val['id']}
+                            add_labels(ind_val, i_val)
+                            i_enum.append(i_val)
+                        add_labels(ind, i_data)
+                        pass # TODO: add indicator property and
             for code, subfield in subfields.items():
                 code = code.lower()
                 sid = subfield.get('id') or ""
@@ -496,7 +512,7 @@ def process_marcmap(OUT, marc_type):
             continue
         def hash_dict(d):
             return tuple((k, hash_dict(v) if isinstance(v, dict) else v)
-                    for k, v in d.items())
+                    for k, v in d.items() if k not in ('i1', 'i2'))
         fieldhash = hash_dict(field)
         if fieldhash in field_index:
             field.clear()
@@ -748,9 +764,9 @@ if __name__ == '__main__':
             "subfield": {"@reverse": "sdo:domainIncludes", "@type": "@id"},
             "marcType": {"@id": "inScheme", "@type": "@id"},
             "@vocab": "https://id.kb.se/marc/",
-            #'i1': None,
-            #'i2': None,
         }
+        terms['i1'] = terms['subfield']
+        terms['i2'] = terms['subfield']
         terms.update({'$' + k: terms['subfield'] for k in string.digits + string.ascii_lowercase})
         OUT["@context"] = ["../sys/context/base.jsonld", terms]
         OUT['@graph'] = []
