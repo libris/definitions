@@ -756,8 +756,8 @@ if __name__ == '__main__':
             "tokenMap": None, # {"@type": "@id"} redundant, a range is given in the enum data
             "link": {"@id": "sameAs", "@type": "@vocab"},
             "addLink": {"@id": "sameAs", "@type": "@vocab"},
-            "property": {"@id": "sameAs", "@type": "@vocab"},
-            "addProperty": {"@id": "sameAs", "@type": "@vocab"},
+            "property": {"@id": "equivalentProperty", "@type": "@vocab"},
+            "addProperty": {"@id": "equivalentProperty", "@type": "@vocab"},
             #"inScheme": {"@id": "skos:inScheme", "@type": "@id"},
             "subMap": {"@reverse": "rdfs:subClassOf"},
             "column": {"@reverse": "sdo:domainIncludes", "@container": "@index"},
