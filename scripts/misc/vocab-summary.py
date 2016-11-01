@@ -139,7 +139,7 @@ if __name__ == '__main__':
     argp.add_argument('sources', metavar='SOURCE', nargs='+')
     args = argp.parse_args()
 
-    g = Graph()
+    g = ConjunctiveGraph()
     for src in args.sources:
         fmt = 'json-ld' if src.endswith('.jsonld') else guess_format(src)
         g.parse(src, format=fmt)
