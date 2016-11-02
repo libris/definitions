@@ -7,6 +7,7 @@
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix sdo: <http://schema.org/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 
 @prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
@@ -24,7 +25,7 @@
 
 :Record a owl:Class;
     rdfs:label "Post"@sv;
-    rdfs:subClassOf foaf:Document .
+    rdfs:subClassOf bf2:AdminMetadata, foaf:Document .
 
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
@@ -34,13 +35,33 @@
 :meta a owl:ObjectProperty;
     rdfs:label "Metadata"@sv;
     owl:inverseOf :mainEntity;
-    owl:equivalentProperty iana:describedby, wdrs:describedby, xhv:meta;
+    owl:equivalentProperty bf2:adminMetadata, iana:describedby, wdrs:describedby, xhv:meta;
     rdfs:subPropertyOf foaf:isPrimaryTopicOf, sdo:mainEntityOfPage .
 
 :describedBy a owl:ObjectProperty;
     owl:sameAs :meta;
     rdfs:label "Beskriven av"@sv;
     rdfs:range :Record .
+
+# NOTE: additional data about automapped BF2 terms
+
+:creationDate a owl:DatatypeProperty;
+    rdfs:label "beskrivningens skapelsedatum"@sv;
+    owl:equivalentProperty bf2:creationDate ;
+    rdfs:subPropertyOf dc:created, sdo:dateCreated;
+    rdfs:range xsd:dateTime .
+
+:changeDate a owl:DatatypeProperty;
+    rdfs:label "beskrivningens ändringsdatum"@sv;
+    owl:equivalentProperty bf2:changeDate ;
+    rdfs:subPropertyOf dc:modified ;
+    rdfs:range xsd:dateTime .
+
+:descriptionLanguage a owl:ObjectProperty;
+    rdfs:label "beskrivningen språk"@sv;
+    owl:equivalentProperty bf2:descriptionLanguage;
+    rdfs:subPropertyOf :language;
+    rdfs:range :Language .
 
 :identifiedBy a owl:ObjectProperty;
     rdfs:label "identifierad av"@sv;
