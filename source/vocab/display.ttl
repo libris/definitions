@@ -1,0 +1,52 @@
+@prefix : <http://id.kb.se/vocab/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix fresnel: <http://www.w3.org/2004/09/fresnel#> .
+
+:showProperties rdfs:subPropertyOf fresnel:showProperties .
+
+:Resource
+  :topConceptOf : ;
+  :showProperties ( :prefLabel :label :name :code ) .
+
+:Record
+  :showProperties () .
+
+:Instance
+  :topConceptOf : ;
+  :showProperties ( :instanceOf :title :publicationYear :identifiedBy ) .
+
+:Work
+  :topConceptOf : ;
+  :showProperties ( :title :contribution ) .
+
+:Item
+  :topConceptOf : ;
+  :showProperties ( :itemOf :heldBy ) .
+
+:Title
+  :showProperties ( :mainTitle :subtitle :titleDate :partNumber :partTitle ) .
+
+:Identifier
+  :topConceptOf : ;
+  :showProperties ( :value ) .
+
+:Person
+  :topConceptOf : ;
+  :showProperties ( :name :familyName :givenName :birthYear :deathYear :notation :personTitle ) .
+
+:Library
+  :showProperties ( :sigel ) .
+
+:Concept
+  :topConceptOf : ;
+  :showProperties ( :prefLabel :notation :inScheme ) .
+
+:GenreForm
+  :topConceptOf : .
+
+:Subject
+  :topConceptOf : .
+
+:ConceptScheme
+  :showProperties ( :notation ) .
+
