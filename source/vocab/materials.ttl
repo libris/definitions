@@ -9,6 +9,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
@@ -16,6 +17,22 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+
+
+# RDA Alignments
+
+:Unmediated a bf2:Media;
+    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasSelf true ] .
+
+:Volume a owl:Class, bf2:Carrier;
+    skos:exactMatch rdacarrier:1049; # "volume"
+    rdfs:subClassOf :Unmediated,
+        [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasSelf true ] .
+
+# TODO: List top concepts to provide interfaces with:
+# - a set of starting points for e.g. navigation, creation
+# - a "roof" when finding base classes
+#: skos:hasTopConcept :Print .
 
 
 # Manifestation Dimensions
@@ -117,8 +134,16 @@
 :Book a owl:Class;
     rdfs:label "Book"@en, "Bok"@sv;
     owl:equivalentClass bibo:Book;
-    rdfs:subClassOf :Text, :Monograph ;
-    skos:broadMatch rdacarrier:1049 . # "volume"
+    rdfs:subClassOf
+        :Text,
+        :Monograph,
+        :Volume,
+        :Print,
+        [ a owl:Restriction; owl:onProperty bf:instanceOf; owl:allValuesFrom bf:Text ] .
+        #[ a owl:Restriction; owl:onProperty :extent; owl:allValuesFrom :PageCount ] .
+
+:BookSeries a owl:Class;
+    rdfs:subClassOf :Text, :Serial .
 
 :ManuscriptCartography a owl:Class;
     rdfs:label "Kartmanuscript"@sv;
@@ -164,7 +189,7 @@
             owl:hasValue :Unmediated
         ], [
             a owl:Restriction;
-            owl:onProperty :contentType;
+            owl:onProperty :carrierType;
             owl:hasValue :Volume
         ] .
 
@@ -183,10 +208,12 @@
 #Music
 #MusicCD
 
-# TODO: informative: <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
+# TODO: informative:
+# - <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
+# - <http://bibframe.org/documentation/resource-types/#aspects> # old (BF1)
 
 # TODO: missing rdacarrier mappings:
-#    skos:exactMatch rdacarrier:1001 ; # "Audio carriers"
+#    skos:exactMatch rdacarrier:1001 ; # "Audio carriers" # skos:closeMatch rdamedia:1001
 #    skos:exactMatch rdacarrier:1002 ; # "audio cartridge"
 #    skos:exactMatch rdacarrier:1003 ; # "audio cylinder"
 #    skos:exactMatch rdacarrier:1004 ; # "audio disc"
@@ -194,7 +221,8 @@
 #    skos:exactMatch rdacarrier:1006 ; # "audio roll"
 #    skos:exactMatch rdacarrier:1007 ; # "audiocassette"
 #    skos:exactMatch rdacarrier:1008 ; # "audiotape reel"
-#    skos:exactMatch rdacarrier:1010 ; # "Computer carriers"
+
+#    skos:exactMatch rdacarrier:1010 ; # "Computer carriers" # skos:closeMatch rdamedia:1003
 #    skos:exactMatch rdacarrier:1011 ; # "computer card"
 #    skos:exactMatch rdacarrier:1012 ; # "computer chip cartridge"
 #    skos:exactMatch rdacarrier:1013 ; # "computer disc"
@@ -203,7 +231,8 @@
 #    skos:exactMatch rdacarrier:1016 ; # "computer tape cassette"
 #    skos:exactMatch rdacarrier:1017 ; # "computer tape reel"
 #    skos:exactMatch rdacarrier:1018 ; # "online resource"
-#    skos:exactMatch rdacarrier:1020 ; # "Microform carriers"
+
+#    skos:exactMatch rdacarrier:1020 ; # "Microform carriers" # skos:closeMatch rdamedia:1002
 #    skos:exactMatch rdacarrier:1021 ; # "aperture card"
 #    skos:exactMatch rdacarrier:1022 ; # "microfiche"
 #    skos:exactMatch rdacarrier:1023 ; # "microfiche cassette"
@@ -212,9 +241,12 @@
 #    skos:exactMatch rdacarrier:1026 ; # "microfilm reel"
 #    skos:exactMatch rdacarrier:1027 ; # "microfilm slip"
 #    skos:exactMatch rdacarrier:1028 ; # "microopaque"
-#    skos:exactMatch rdacarrier:1029 ; # "Microscopic carriers"
+#    skos:exactMatch rdacarrier:1056 ; # "microfilm roll"
+
+#    skos:exactMatch rdacarrier:1029 ; # "Microscopic carriers" # skos:closeMatch rdamedia:1004
 #    skos:exactMatch rdacarrier:1030 ; # "microscope slide"
-#    skos:exactMatch rdacarrier:1031 ; # "Projected image carriers"
+
+#    skos:exactMatch rdacarrier:1031 ; # "Projected image carriers" # skos:closeMatch rdamedia:1005
 #    skos:exactMatch rdacarrier:1032 ; # "film cartridge"
 #    skos:exactMatch rdacarrier:1033 ; # "film cassette"
 #    skos:exactMatch rdacarrier:1034 ; # "film reel"
@@ -223,22 +255,23 @@
 #    skos:exactMatch rdacarrier:1037 ; # "filmstrip cartridge"
 #    skos:exactMatch rdacarrier:1039 ; # "overhead transparency"
 #    skos:exactMatch rdacarrier:1040 ; # "slide"
-#    skos:exactMatch rdacarrier:1041 ; # "Stereographic carriers"
+#    skos:exactMatch rdacarrier:1069 ; # "film roll"
+
+#    skos:exactMatch rdacarrier:1041 ; # "Stereographic carriers" # skos:closeMatch rdamedia:1006
 #    skos:exactMatch rdacarrier:1042 ; # "stereograph card"
 #    skos:exactMatch rdacarrier:1043 ; # "stereograph disc"
-#    skos:exactMatch rdacarrier:1044 ; # "Unmediated carriers"
+
+#    skos:exactMatch rdacarrier:1044 ; # "Unmediated carriers" # skos:closeMatch rdamedia:1007
 #    skos:exactMatch rdacarrier:1045 ; # "card"
 #    skos:exactMatch rdacarrier:1046 ; # "flipchart"
 #    skos:exactMatch rdacarrier:1047 ; # "roll"
 #    skos:exactMatch rdacarrier:1048 ; # "sheet"
 #    skos:exactMatch rdacarrier:1049 ; # "volume"
-#    skos:exactMatch rdacarrier:1050 ; # "Video carriers"
+#    skos:exactMatch rdacarrier:1059 ; # "object"
+
+#    skos:exactMatch rdacarrier:1050 ; # "Video carriers" # skos:closeMatch rdamedia:1008
 #    skos:exactMatch rdacarrier:1051 ; # "video cartridge"
 #    skos:exactMatch rdacarrier:1052 ; # "videocassette"
 #    skos:exactMatch rdacarrier:1053 ; # "videotape reel"
-#    skos:exactMatch rdacarrier:1056 ; # "microfilm roll"
-#    skos:exactMatch rdacarrier:1059 ; # "object"
 #    skos:exactMatch rdacarrier:1060 ; # "videodisc"
-#    skos:exactMatch rdacarrier:1069 ; # "film roll"
-
 

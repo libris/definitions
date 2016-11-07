@@ -10,6 +10,7 @@
 @prefix persona: <http://www.pipian.com/schemas/foaf/persona#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix l: <http://w3id.org/libris/logic/> .
@@ -58,17 +59,12 @@ l:object rdfs:subPropertyOf rdf:object .
 :qualifiedAttribution a owl:ObjectProperty;
     rdfs:label "Detaljerat huvuduppslag"@sv;
     rdfs:subPropertyOf l:hasStatement;
-    owl:equivalentProperty prov:qualifiedAttribution .
+    owl:equivalentProperty bf2:contribution, prov:qualifiedAttribution .
 
 :qualifiedInfluence a owl:ObjectProperty;
     rdfs:label "Detaljerat biuppslag"@sv;
     rdfs:subPropertyOf l:hasStatement;
     owl:equivalentProperty prov:qualifiedInfluence .
-
-:agent a owl:ObjectProperty;
-    rdfs:label "aktör"@sv;
-    rdfs:subPropertyOf l:object;
-    owl:equivalentProperty prov:agent .
 
 :role a owl:ObjectProperty;
     rdfs:label "roll"@sv;
@@ -77,34 +73,30 @@ l:object rdfs:subPropertyOf rdf:object .
 
 :Agent a owl:Class;
     rdfs:label "Aktör"@sv;
-    rdfs:subClassOf foaf:Agent, bf:Agent, prov:Agent .
+    owl:equivalentClass bf2:Agent, foaf:Agent, prov:Agent .
 
 :Person a owl:Class;
     rdfs:label "Person"@sv;
     rdfs:subClassOf :Agent;
-    owl:equivalentClass foaf:Person, sdo:Person .
+    owl:equivalentClass bf2:Person, foaf:Person, sdo:Person .
 
 :Family a owl:Class;
     rdfs:label "Familj"@sv;
-    rdfs:subClassOf :Agent .
-
-:Event a owl:Class;
-    rdfs:label "Händelse"@sv;
-    owl:equivalentClass sdo:Event .
+    rdfs:subClassOf :Agent;
+    owl:equivalentClass bf2:Family .
 
 :Meeting a owl:Class;
     rdfs:label "Möte"@sv;
     rdfs:comment "En formell sammankomst"@sv;
-    rdfs:subClassOf :Event;
-    owl:equivalentClass bf:Meeting, bibo:Conference .
+    rdfs:subClassOf :Agent; #:Event;
+    owl:equivalentClass bf2:Meeting, bibo:Conference .
+
+:Event a owl:Class;
+    rdfs:label "Händelse"@sv;
+    owl:equivalentClass bf2:Event, sdo:Event .
 
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
-
-#titlesAndOtherWordsAssociatedWithName / personTitle
-:personTitle a owl:DatatypeProperty;
-    rdfs:label "persontitel"@sv;
-    owl:equivalentProperty sdo:jobTitle, foaf:title .
 
 :familyName a owl:DatatypeProperty;
     rdfs:label "family name"@en, "familjenamn"@sv;
@@ -113,6 +105,20 @@ l:object rdfs:subPropertyOf rdf:object .
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "egennamn"@sv;
     owl:equivalentProperty sdo:givenName, foaf:givenName .
+
+#titlesAndOtherWordsAssociatedWithName
+:personTitle a owl:DatatypeProperty;
+    rdfs:label "persontitel"@sv;
+    rdfs:subPropertyOf :qualifyingNote;
+    owl:equivalentProperty sdo:jobTitle, foaf:title .
+
+:honorificPrefix a owl:DatatypeProperty;
+    rdfs:subPropertyOf :qualifyingNote;
+    owl:equivalentProperty sdo:honorificPrefix .
+
+:honorificSuffix a owl:DatatypeProperty;
+    rdfs:subPropertyOf :qualifyingNote;
+    owl:equivalentProperty sdo:honorificSuffix .
 
 :birthDate a owl:DatatypeProperty;
     rdfs:label "födelsedatum"@sv;

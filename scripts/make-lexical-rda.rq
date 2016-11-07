@@ -1,0 +1,12 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix reg: <http://metadataregistry.org/uri/profile/regap/>
+
+construct {
+    ?alias owl:sameAs ?s ; ?p ?bound_o .
+} where {
+    ?s ?p ?o .
+    FILTER(?p != reg:lexicalAlias)
+    ?s reg:lexicalAlias ?alias .
+    OPTIONAL { ?o reg:lexicalAlias ?alias_o . }
+    BIND(COALESCE(?alias_o, ?o) as ?bound_o)
+}

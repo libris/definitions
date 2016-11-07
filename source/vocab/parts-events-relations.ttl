@@ -10,12 +10,14 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
-@prefix bf2: <http://bibframe.org/vocab/> . # TODO: new URI?
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
 
 @prefix dbpo: <http://dbpedia.org/ontology/> .
+
+@prefix l: <http://w3id.org/libris/logic/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -23,57 +25,42 @@
 ##
 # Parts, Events, Relations
 
+:qualifyingNote a owl:DatatypeProperty;
+    rdfs:label "Särskiljande tillägg"@sv;
+    sdo:domainIncludes :Person, :Title .
+
+:typeNote a owl:DatatypeProperty;
+    rdfs:label "Typanmärkning"@sv;
+    owl:propertyChainAxiom (:type :note) .
+
+
 :Event a owl:Class;
-    rdfs:label "Event"@en;
-    owl:equivalentClass prov:Activity, sdo:Event .
+    rdfs:label "Event"@en, "Händelse"@sv;
+    owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
 
-:when a owl:DatatypeProperty ;
-    rdfs:domain :Event;
-    rdfs:range :AnyDateTime;
-    rdfs:label "when"@en, "när"@sv .
+:Place a owl:Class;
+    rdfs:label "Place"@en, "Plats"@sv;
+    owl:equivalentClass bf2:Place , prov:Location, sdo:Place .
 
-:where a owl:ObjectProperty ;
-    rdfs:domain :Event;
+:place a owl:ObjectProperty;
+    rdfs:label "Ort"@sv;
+    #rdfs:domain :Event;
     rdfs:range :Place;
-    rdfs:label "where"@en, "var"@sv .
+    rdfs:subPropertyOf l:object;
+    owl:equivalentProperty bf2:place, prov:atLocation .
 
-:who a owl:ObjectProperty ;
-    rdfs:domain :Event;
+:agent a owl:ObjectProperty;
+    rdfs:label "aktör"@sv;
+    rdfs:subPropertyOf l:object;
+    #rdfs:domain :Event;
     rdfs:range :Agent;
-    rdfs:label "who"@en, "vem"@sv .
-
-:ProviderEvent a owl:Class;
-    rdfs:label "Tillgängliggörande"@sv;
-    owl:equivalentClass bf:Provider;
-    rdfs:subClassOf :Event .
-
-:creator a owl:ObjectProperty;
-    skos:prefLabel "upphovsman"@sv;
-    rdfs:label "skapare"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty dc:creator .
-
-:publisher a owl:ObjectProperty;
-    rdfs:label "utgivare"@sv;
-    owl:equivalentProperty dc:publisher, bf:publisher .
-
-:license a owl:ObjectProperty;
-    rdfs:label "licens"@sv;
-    owl:equivalentProperty dc:license .
-
-:created a owl:DatatypeProperty;
-    rdfs:label "date created"@en, "skapad"@sv;
-    owl:equivalentProperty dc:created, sdo:dateCreated;
-    rdfs:range xsd:dateTime .
-
-:modified a owl:DatatypeProperty;
-    rdfs:label "modifierad"@sv;
-    owl:equivalentProperty dc:modified;
-    rdfs:range xsd:dateTime .
+    owl:equivalentProperty bf2:agent, prov:agent .
 
 :date a owl:DatatypeProperty;
+    #rdfs:domain :Event;
+    #rdfs:range :AnyDateTime;
     rdfs:label "datum"@sv;
-    owl:equivalentProperty dc:date .
+    owl:equivalentProperty bf2:date, dc:date .
 
 :identifier a owl:DatatypeProperty ;
     rdfs:label "identifier"@en, "identifikator"@sv;
@@ -92,15 +79,16 @@
 
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "identified by"@en, "identifierad av"@sv;
-    rdfs:subPropertyOf bf2:identifiedBy;
+    owl:equivalentProperty bf2:identifiedBy;
     rdfs:range :Identifier .
 
 :Identifier a owl:Class ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Identifikator"@sv;
-    owl:equivalentClass bf:Identifier .
+    owl:equivalentClass bf2:Identifier .
 
 :ISBN a rdfs:Datatype;
+    owl:equivalentClass bf2:Isbn;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISBN" .
 
@@ -109,81 +97,161 @@
     rdfs:label "ISBN-13" .
 
 :ISSN a rdfs:Datatype;
+    owl:equivalentClass bf2:Issn;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISSN" .
+
+:LCCN a rdfs:Datatype;
+    owl:equivalentClass bf2:Lccn;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LCCN" .
+
+:Libris3Number a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LIBRIS-3-nummer"@sv .
+
+:LibrisControlNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "LIBRIS-kod"@sv .
+
+:status a owl:ObjectProperty;
+    owl:equivalentProperty bf2:status;
+    #TODO: rdfs:range bf2:Status;
+    rdfs:label "status"@sv .
+
+:acquisitionTerms a rdf:Property;
+    owl:equivalentProperty bf2:acquisitionTerms;
+    rdfs:label "Anskaffningsvillkor"@sv .
+
 
 :title a owl:DatatypeProperty;
     rdfs:label "title"@en, "titel"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty bf:title, dc:title;
-    owl:propertyChainAxiom ( :qualifiedTitle :mainTitle ) .
+    owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
 
 :uniformTitle a owl:DatatypeProperty;
     rdfs:label "uniform titel"@sv;
     rdfs:subPropertyOf :prefLabel, :title .
 
-:qualifiedTitle a owl:ObjectProperty;
-    owl:equivalentProperty bf:instanceTitle;
+:hasTitle a owl:ObjectProperty;
+    #owl:equivalentProperty bf:instanceTitle;
+    owl:equivalentProperty bf2:title;
     rdfs:range :Title;
-    rdfs:label "qualified title"@en, "specificerad titel"@sv;
+    rdfs:label "has title"@en, "har titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
+    # TODO: move this definition to :InstanceTitle
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
     dc:references [ skos:notation "RDA 1.7" ] .
 
-:keyTitle a owl:ObjectProperty ;
-    rdfs:label "Nyckeltitel"@sv;
-    owl:equivalentProperty bf:keyTitle;
-    rdfs:subPropertyOf :qualifiedTitle .
-
-:titleVariation a owl:ObjectProperty ;
-    rdfs:label "Varianttitel"@sv;
-    owl:equivalentProperty bf:titleVariation;
-    rdfs:range :Title .
-
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Titel"@sv;
-    owl:equivalentClass bf:Title .
+    owl:equivalentClass bf2:Title .
+
+:InstanceTitle  a owl:Class;
+    owl:equivalentClass bf2:InstanceTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Instance Title"@en, "Instansens titel"@sv ;
+    rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
+
+:WorkTitle  a owl:Class;
+    owl:equivalentClass bf2:WorkTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Work Title"@en, "Uniform titel"@sv .
+
+:VariantTitle  a owl:Class;
+    owl:equivalentClass bf2:VariantTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Variant Title"@en, "Varianttitel"@sv .
+
+:AbbreviatedTitle  a owl:Class;
+    owl:equivalentClass bf2:AbbreviatedTitle;
+    rdfs:subClassOf :Title;
+    rdfs:label "Abbreviated Title"@en, "Förkortad titel"@sv .
 
 :CoverTitle  a owl:Class;
-    rdfs:subClassOf :Title;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
+
+:abbreviatedTitle a owl:DatatypeProperty;
+    owl:equivalentProperty bf:abbreviatedTitle;
+    rdfs:subPropertyOf :title;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :AbbreviatedTitle ]
+                :mainTitle ) .
+
+:KeyTitle a owl:Class ;
+    owl:equivalentClass bf2:KeyTitle ;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:label "Nyckeltitel"@sv .
+
+:keyTitle a owl:DatatypeProperty;
+    owl:equivalentProperty bf:keyTitle;
+    rdfs:subPropertyOf :title;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
+                :mainTitle ) .
+
+:VariantTitle a owl:Class ;
+    owl:equivalentClass bf2:VariantTitle;
+    rdfs:label "Varianttitel"@sv .
+
+:CoverTitle  a owl:Class;
+    rdfs:subClassOf :InstanceTitle;
     rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
 
 :TitlePage  a owl:Class;
-    rdfs:subClassOf :Title;
+    rdfs:subClassOf :InstanceTitle;
     rdfs:label "Title Page"@en, "Titelsida"@sv .
 
 :mainTitle a owl:DatatypeProperty;
-    rdfs:label "titelvärde"@sv;
-    rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv;
+    rdfs:label "huvudtitel"@sv;
     rdfs:subPropertyOf :value;
     owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
 
+:titleRemainder a owl:DatatypeProperty;
+    rdfs:label "Övrig titelinformation"@sv;
+    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    #owl:equivalentProperty remainderOfTitle
+    rdfs:domain :Title .
+
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "undertitel"@sv;
-    skos:hiddenLabel "Övrig titelinformation"@sv;
-    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    rdfs:subPropertyOf :titleRemainder;
     owl:equivalentProperty bf2:subTitle;
     rdfs:domain :Title .
 
-:titleDate a owl:DatatypeProperty;
-    rdfs:label "Täcknings- eller tillkomsttid"@sv;
-    rdfs:domain :Title .
 
-:titleQualifier a owl:DatatypeProperty;
-    rdfs:label "Särskiljande tillägg"@sv;
-    rdfs:domain :Title .
+:ProvisionActivity a owl:Class;
+    rdfs:label "Tillgängliggörande"@sv;
+    owl:equivalentClass bf2:ProvisionActivity;
+    rdfs:subClassOf :Event .
 
-:titleSource a owl:DatatypeProperty;
-    rdfs:label "Källa till förkortad titel"@sv;
-    rdfs:domain :Title .
+:provisionActivity a owl:ObjectProperty;
+    owl:equivalentProperty bf2:provisionActivity .
 
-:titleType a owl:DatatypeProperty;
-    rdfs:label "Titelanmärkning"@sv;
-    rdfs:domain :Title .
+:manufacture a owl:ObjectProperty;
+    owl:equivalentProperty bf:manufacture;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Manufacture .
+
+:publication a owl:ObjectProperty;
+    owl:equivalentProperty bf:publication;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Publication .
+
+:Manufacture a owl:Class;
+    owl:equivalentClass bf2:Manufacture;
+    rdfs:subClassOf :ProvisionActivity .
+
+:Publication a owl:Class;
+    owl:equivalentClass bf2:Publication;
+    rdfs:subClassOf :ProvisionActivity .
+
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
@@ -191,20 +259,20 @@
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
-    owl:equivalentProperty bf:responsibilityStatement, rdael:statementOfResponsibility .
+    owl:equivalentProperty bf2:responsibilityStatement, rdael:statementOfResponsibility .
 
 :editionStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:subPropertyOf bf2:editionStatement;
     rdfs:label "edition statement"@en, "utgåveuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :manufactureStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:subPropertyOf bf2:provisionActivityStatement;
     rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :publicationStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:providerStatement;
+    rdfs:subPropertyOf bf:provisionActivityStatement;
     rdfs:label "publication statement"@en, "utgivningsuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
@@ -220,10 +288,45 @@
     owl:equivalentProperty bf:illustrationNote;
     rdfs:label "illustration note"@en, "illustrationsanmärkning"@sv .
 
+
+:creator a owl:ObjectProperty;
+    skos:prefLabel "upphovsman"@sv;
+    rdfs:label "skapare"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty dc:creator .
+
+:contributor a owl:ObjectProperty;
+    rdfs:label "delaktig i skapandet"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:contributor, dc:contributor .
+
+:publisher a owl:ObjectProperty;
+    rdfs:label "utgivare"@sv;
+    owl:equivalentProperty dc:publisher, bf:publisher .
+
+:license a owl:ObjectProperty;
+    rdfs:label "licens"@sv;
+    owl:equivalentProperty dc:license .
+
+#:created a owl:DatatypeProperty;
+#    #:termGroup :mappings ;
+#    rdfs:label "date created"@en, "skapad"@sv;
+#    owl:equivalentProperty dc:created, sdo:dateCreated .
+
+#:modified a owl:DatatypeProperty;
+#    #:termGroup :mappings ;
+#    rdfs:label "modifierad"@sv;
+#    owl:equivalentProperty dc:modified .
+
+:coverage a owl:DatatypeProperty;
+    rdfs:label "Täcknings- eller tillkomsttid"@sv;
+    owl:equivalentProperty dc:coverage ;
+    sdo:domainIncludes :Title .
+
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
     rdfs:comment "Verkets språk"@sv;
-    owl:equivalentProperty bf:language;
+    owl:equivalentProperty bf2:language;
     rdfs:subPropertyOf dc:language;
     rdfs:range :Language .
 
@@ -265,9 +368,10 @@
     owl:inverseOf :references;
     owl:equivalentProperty dc:isReferencedBy .
 
-:relation a owl:ObjectProperty;
-    rdfs:label "relation"@sv;
-    owl:equivalentProperty dc:relation .
+:relatedTo a owl:ObjectProperty;
+    rdfs:label "relaterad till"@sv;
+    owl:equivalentProperty bf2:relatedTo;
+    rdfs:subPropertyOf dc:relation .
 
 :influentialRelation a owl:ObjectProperty;
     rdfs:subPropertyOf :influencedBy, dc:relation .
@@ -282,6 +386,10 @@
 :source a owl:ObjectProperty;
     rdfs:label "källa"@sv;
     owl:equivalentProperty dc:source .
+
+:sourceNote a owl:DatatypeProperty;
+    rdfs:label "källinformation"@sv;
+    owl:propertyChainAxiom (:source :note) .
 
 :citation a owl:ObjectProperty;
     rdfs:label "citat"@sv;
@@ -324,17 +432,50 @@
     owl:equivalentProperty bibo:contributorList;
     rdfs:range rdf:List .
 
+:classification a owl:ObjectProperty;
+    owl:equivalentProperty bf2:classification;
+    rdfs:label "classification"@en, "klassifikation"@sv .
+
 :genre a owl:ObjectProperty;
     rdfs:label "genre"@en, "genre"@sv;
-    owl:equivalentProperty bf:classification; # TODO: vs. bf:category and subprops thereof
+    owl:equivalentProperty bf2:genreForm;
+    #owl:equivalentProperty bf:classification; # TODO: vs. bf:category and subprops thereof
     rdfs:subPropertyOf dc:type, sdo:genre .
 
 :version a owl:ObjectProperty;
     rdfs:label "version"@sv;
     owl:equivalentProperty sdo:version .
 
+:accompaniedBy a owl:ObjectProperty;
+    owl:equivalentProperty bf2:accompaniedBy .
+
+:alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
+
+:otherPhysicalFormat a owl:ObjectProperty;
+    owl:equivalentProperty bf2:otherPhysicalFormat;
+    rdfs:label "Annat bärarformat"@sv .
+
+:translationOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:translationOf;
+    rdfs:subPropertyOf :versionOf .
+
+:expressionOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:expressionOf;
+    rdfs:subPropertyOf :versionOf .
+
+:precededBy a owl:ObjectProperty;
+    owl:equivalentProperty bf2:precededBy;
+    rdfs:subPropertyOf :relatedTo .
+
+:hasSeries a owl:ObjectProperty;
+    owl:equivalentProperty bf2:hasSeries .
+
 :isPrimaryTopicOf a owl:ObjectProperty;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
+
+:extent a rdf:Property;
+    owl:equivalentProperty bf2:extent;
+    rdfs:label "Omfång"@sv .
 
 :numberOfPages a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:numberOfPages;
@@ -343,12 +484,18 @@
 
 :audience a owl:ObjectProperty;
     rdfs:label "audience"@en, "målgrupp"@sv;
-    rdfs:subPropertyOf sdo:audience;
-    rdfs:range :Concept .
+    owl:equivalentProperty sdo:audience;
+    rdfs:range :Audience .
 
 :Audience a owl:Class;
     rdfs:label "Målgrupp"@sv;
+    rdfs:subClassOf :Concept;
     owl:equivalentClass sdo:Audience .
+
+:dimensions a rdf:Property;
+    owl:equivalentProperty bf2:dimensions;
+    rdfs:label "dimensions"@en, "dimensioner"@sv;
+    skos:altLabel "Mått"@sv .
 
 :device a owl:ObjectProperty;
     rdfs:label "apparat"@sv;
@@ -394,4 +541,3 @@
 
 :coverArtThumb a owl:ObjectProperty;
     rdfs:subPropertyOf bf:coverArtThumb .
-

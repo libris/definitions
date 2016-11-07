@@ -2,7 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix sdo: <http://schema.org/> .
 @prefix bf: <http://bibframe.org/vocab/> .
-@prefix bf2: <http://bibframe.org/vocab/2/> . # TODO: new URI?
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix holding: <http://purl.org/ontology/holding#> .
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -37,7 +37,7 @@
     rdfs:label "item of"@en, "exemplar av"@sv .
 
 :hasComponent a owl:ObjectProperty ;
-    owl:equivalentProperty bf2:hasComponent ;
+    rdfs:subPropertyOf bf2:hasPart ;
     #rdfs:subPropertyOf :moreSpecifically ;
     rdfs:domain :CompoundItem ;
     rdfs:range :Item ;
@@ -49,3 +49,37 @@
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
     rdfs:subPropertyOf sdo:exampleOfWork ;
     rdfs:label "component of"@en, "komponent av"@sv  .
+
+##
+# Older Schema/BF1 Holding Mappings
+
+:HeldMaterial a owl:Class;
+    rdfs:label "Beståndsmaterial"@sv;
+    rdfs:subClassOf bf:HeldMaterial, sdo:SomeProducts .
+
+:Offer a owl:Class;
+    rdfs:label "Offer"@en, "Erbjudande"@sv;
+    rdfs:subClassOf sdo:Offer .
+
+:holdingFor a owl:ObjectProperty;
+    rdfs:label "bestånd på"@sv;
+    rdfs:domain :HeldMaterial;
+    rdfs:range :CreativeWork;
+    #rdfs:subPropertyOf sdo:exampleOfWork;
+    owl:equivalentProperty bf:holdingFor .
+
+:heldBy a owl:ObjectProperty;
+    rdfs:label "beståndsinnehavare"@sv;
+    rdfs:domain :Offer;
+    rdfs:range :Organization;
+    rdfs:subPropertyOf sdo:seller, bf:heldBy .
+
+:callno rdfs:subPropertyOf :genre, bf:callno, sdo:sku;
+    rdfs:range :Holding .
+
+:price a owl:DatatypeProperty ;
+    owl:equivalentProperty sdo:price;
+    rdfs:label "price"@en, "pris"@sv .
+
+:seller a owl:ObjectProperty ;
+    rdfs:label "seller"@en, "försäljare"@sv .

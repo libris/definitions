@@ -1,11 +1,14 @@
+from __future__ import unicode_literals, print_function, division
+from collections import Counter
 import json
 
 
-def get_keywords(marcframe, ignore_speced=True):
-    keywords = set()
+def get_keywords(marcframe, ignore_speced=False):
+    keywords = Counter()
     speced = set()
-    for name in 'auth', 'bib', 'hold':
-        part = marcframe.get(name, {})
+    for key, part in marcframe.items():
+        if not isinstance(part, dict):
+            continue
         for field in part.values():
             if not field:
                 continue
@@ -14,27 +17,26 @@ def get_keywords(marcframe, ignore_speced=True):
                 #print "Skipping:", field
                 continue
             for kw, obj in field.items():
-                if 'NOTE:' in kw.upper() or 'TODO' in kw.upper():
-                    continue
-                if '$' in kw or kw[0].isupper():
+                if '$' in kw or kw in {'i1', 'i2'} or kw[0].isupper():
                     if obj:
                         if not isinstance(obj, dict):
                             continue
                         for subkw, subobj in obj.items():
                             if subkw.startswith('['):
-                                keywords |= set(subobj)
+                                keywords.update(subobj.keys())
                                 if is_speced:
                                     speced |= set(subobj)
                             else:
-                                keywords.add(subkw)
+                                keywords[subkw] += 1
                                 if is_speced:
                                     speced.add(kw)
                 elif not kw.startswith('['):
-                    keywords.add(kw)
+                    keywords[kw] += 1
                     if is_speced:
                         speced.add(kw)
     if ignore_speced:
-        return keywords - speced
+        for k in speced:
+            del keywords[k]
     return keywords
 
 
@@ -47,5 +49,7 @@ if __name__ == '__main__':
         marcframe = json.load(fp)
 
     keywords = get_keywords(marcframe)
-    for kw in sorted(keywords):
-        print kw
+    for kw, i in keywords.most_common():
+        if 'NOTE:' in kw.upper() or 'TODO' in kw.upper():
+            continue
+        print(kw, i)

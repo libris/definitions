@@ -6,4 +6,12 @@ insert {
 } where {
     ?term ?p ?o
     filter ((?term != :) && strstarts(str(?term), str(:)))
+};
+
+delete {
+    ?s ?p rdfs:Resource
+} where {
+    ?s ?p ?o
+    filter(?o != rdfs:Resource)
+    filter(?p in (rdfs:subClassOf, rdfs:domain, rdfs:range))
 }

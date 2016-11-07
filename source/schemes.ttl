@@ -68,8 +68,14 @@
     foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
     void:inDataset </> .
 
-<gmgpc> a skos:ConceptScheme;
-    owl:sameAs <gmgpc%2F%2Fswe>;
+<barngf> a skos:ConceptScheme;
+    skos:notation "BarnGF";
+    dc:title "Barn - Genre och form"@sv;
+    rdfs:seeAlso <barn>;
+    void:inDataset </> .
+
+<gmgpc%2F%2Fswe> a skos:ConceptScheme;
+    owl:sameAs <gmgpc>;
     skos:notation "gmgpc//swe";
     dc:title "Tesaurus för grafiskt material"@sv;
     dc:description """
@@ -133,11 +139,11 @@
 <kao> a skos:ConceptScheme;
     skos:notation "kao";
     dc:title "KVINNSAM"@sv;
-    dc:language "sv";
-    dc:hasVersion [
-        skos:notation "kao//eng";
-        dc:language "en"
-    ];
+    dc:language [ skos:notation "sv"];
+    #dc:hasVersion [
+    #    skos:notation "kao//eng";
+    #    dc:language [ skos:notation "en" ];
+    #];
     foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
 
 <prvt> a skos:ConceptScheme;

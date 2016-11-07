@@ -7,6 +7,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
@@ -154,6 +155,55 @@
     rdfs:domain :IndexTerm;
     rdfs:range :TermCollection;
     rdfs:label "Part of collection"@en, "Del av termsamling"@sv .
+
+# Classification Classes
+
+:Classification a owl:Class;
+    owl:equivalentClass bf2:Classification .
+
+:ClassificationDdc a owl:Class;
+    rdfs:subClassOf :Classification;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :inScheme;
+            owl:hasValue <http://dewey.info/scheme/ddc/> ] ;
+    owl:equivalentClass bf2:ClassificationDdc .
+
+:ClassificationLcc a owl:Class;
+    rdfs:subClassOf :Classification;
+    owl:equivalentClass bf2:ClassificationLcc .
+
+:ClassificationNlm a owl:Class;
+    rdfs:subClassOf :Classification;
+    owl:equivalentClass bf2:ClassificationNlm .
+
+:ClassificationUdc a owl:Class;
+    rdfs:subClassOf :Classification;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :inScheme;
+            owl:hasValue <http://udcdata.info/udc-schema> ] ;
+    owl:equivalentClass bf2:ClassificationUdc .
+
+:classificationPortion a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:classificationPortion .
+
+:edition a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:edition .
+
+:itemPortion a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:itemPortion .
+
+:schedulePart a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:schedulePart .
+
+:spanEnd a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:spanEnd .
+
+:table a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:table .
+
+:tableSeq a owl:DatatypeProperty;
+    owl:equivalentProperty bf2:tableSeq .
+
 
 # Domain Specific Term Classes
 

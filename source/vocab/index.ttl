@@ -1,0 +1,32 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix kbv: <https://id.kb.se/vocab/> .
+
+kbv: rdfs:label "KBs vokabulär"@sv, "The KB Vocabulary"@en .
+
+kbv:Endeavour a owl:Class; rdfs:subClassOf kbv:Creation .
+kbv:Creation a owl:Class; rdfs:subClassOf rdfs:Resource .
+kbv:Work rdfs:subClassOf kbv:Endeavour .
+kbv:Instance rdfs:subClassOf kbv:Endeavour .
+kbv:Item rdfs:subClassOf kbv:Creation .
+
+kbv:Record a owl:Class; rdfs:subClassOf rdfs:Resource .
+kbv:adminMetadata rdfs:domain kbv:Record .
+
+kbv:identifiedBy rdfs:domain kbv:Creation .
+kbv:language rdfs:domain kbv:Creation .
+
+kbv:hasTitle owl:equivalentProperty bf2:title .
+
+kbv:contentType owl:equivalentProperty bf2:content .
+kbv:mediaType owl:equivalentProperty bf2:media .
+kbv:carrierType owl:equivalentProperty bf2:carrier .
+kbv:ContentType owl:equivalentClass bf2:Content .
+kbv:MediaType owl:equivalentClass bf2:Media .
+kbv:CarrierType owl:equivalentClass bf2:Carrier .
+
+kbv:ISBN a rdfs:Datatype; owl:equivalentClass bf2:Isbn .
+kbv:ISSN a rdfs:Datatype; owl:equivalentClass bf2:Issn .
+kbv:LCCN a rdfs:Datatype; owl:equivalentClass bf2:Lccn .

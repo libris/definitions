@@ -8,6 +8,8 @@ from lxltools.graphcache import GraphCache, vocab_source_map
 
 SDO = Namespace("http://schema.org/")
 VANN = Namespace("http://purl.org/vocab/vann/")
+VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+
 
 BASE = "https://id.kb.se/"
 TERMS = Namespace(BASE + "vocab/")
@@ -58,11 +60,15 @@ def parse_resourcemap(dataset, part, marcframe):
 
     g = dataset.get_context(DATASET_BASE["marcframe/fixfields"])
 
-    for mapname, dfn in marcframe['tokenMaps'].items():
-        if mapname == 'typeOfRecord':
+    tokenmaps = reduce(lambda a, b: a.update(b) or a,
+            (d for d in marcframe['tokenMaps'] if isinstance(d, dict)), {})
+    for mapname, dfn in tokenmaps.items():
+        if mapname == 'TypeOfRecordType':
             for name in dfn.values():
+                if not name:
+                    continue
                 rtype = newclass(g, name, None, "typeOfRecord")
-        if mapname == 'bibLevel':
+        if mapname == 'BibLevelType':
             for name in dfn.values():
                 if not name:
                     continue
@@ -239,14 +245,19 @@ if __name__ == '__main__':
 
     parse_marcframe(dataset, marcframe)
 
-    termsgraph = Graph()
+    termsgraph = ConjunctiveGraph()
     if termspath:
         termsgraph.parse(termspath, format=guess_format(termspath))
 
     graphcache = GraphCache("cache/graph-cache")
 
-    for url in termsgraph.objects(None, OWL.imports):
-        refgraph = graphcache.load(vocab_source_map.get(str(url), url))
+    for vocab, url in termsgraph.subject_objects(OWL.imports):
+        termsgraph.namespace_manager.bind("", vocab)
+        try:
+            refgraph = graphcache.load(vocab_source_map.get(str(url), url))
+        except:
+            pass #print "Failed to load:", url # TODO: this is a problem
+        #print "loaded:", url, len(refgraph)
         destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
         add_equivalent(dataset, destgraph, refgraph, url, termsgraph)
 
@@ -254,6 +265,10 @@ if __name__ == '__main__':
         dataset -= termsgraph
         dataset.remove((None, VANN.termGroup, None))
         dataset.namespace_manager = termsgraph.namespace_manager
+
+        for s in dataset.subjects():
+            if (s, OWL.equivalentProperty|OWL.equivalentClass, None) not in termsgraph:
+                dataset.add((s, VS.term_status, Literal("unmapped")))
 
     for update_fpath in glob.glob(
             os.path.join(os.path.dirname(__file__), 'vocab-update-*.rq')):

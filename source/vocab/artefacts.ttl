@@ -10,6 +10,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -29,12 +30,56 @@
 marc:typeOfRecord a skos:Collection;
     rdfs:label "Typ"@sv .
 
+# TODO: replace :inCollection marc:bibLevel with a :IssuanceType
 marc:bibLevel a skos:Collection;
     rdfs:label "Bibliografisk nivå"@sv .
+
+:ContentType owl:equivalentClass bf2:Content .
+:MediaType owl:equivalentClass bf2:Media .
+:CarrierType owl:equivalentClass bf2:Carrier .
+:IssuanceType owl:equivalentClass bf2:Issuance .
 
 
 ##
 # Creative Works
+
+:contentType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:content;
+    rdfs:subPropertyOf rdf:type .
+
+:mediaType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:media;
+    rdfs:subPropertyOf rdf:type .
+
+# TODO: a given value implies value for :media from base :MediaType
+:carrierType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:carrier;
+    rdfs:subPropertyOf rdf:type .
+
+:issuanceType a owl:ObjectProperty;
+    owl:equivalentProperty bf2:issuance;
+    rdfs:subPropertyOf rdf:type .
+
+# Rules:
+
+# Vocab Macro:
+# INSERT {
+#    ?enumType rdfs:subClassOf [ a owl:Restriction;
+#            owl:onProperty bf:carrier; owl:hasSelf true ] .
+#} WHERE { ?enumType a bf:Carrier }
+# Rule Implementation:
+# INSERT {
+#     ?s ?enumProperty ?enumType
+# } WHERE {
+#     ?s rdf:type/rdfs:subClassOf* ?enumType .
+#     ?enumType rdfs:subClassOf [
+#             a owl:Restriction;
+#             owl:onProperty ?enumProperty;
+#             owl:hasSelf true
+#         ] .
+# }
+
+
 
 # Specificity Dimensions
 
@@ -44,16 +89,25 @@ marc:bibLevel a skos:Collection;
     owl:equivalentClass sdo:CreativeWork;
     rdfs:subClassOf dc:BibliographicResource  .
 
+:Work a owl:Class;
+    owl:equivalentClass bf2:Work;
+    rdfs:subClassOf :CreativeWork, sdo:ProductModel; #, rdfa:Pattern;
+    rdfs:label "Verk"@sv .
+
 :UniformWork a owl:Class;
-    rdfs:label "Uniformt verk"@sv;
-    rdfs:subClassOf :CreativeWork, bf:Work, sdo:ProductModel . #, rdfa:Pattern .
+    rdfs:subClassOf :Work; #, rdfa:Pattern, skos:Concept;
+    rdfs:label "Uniformt verk"@sv .
+
+:Instance a owl:Class;
+    rdfs:label "Instance"@en, "Instans"@sv;
+    owl:equivalentClass bf2:Instance .
 
 :Product a owl:Class;
     rdfs:label "Product"@en, "Produkt"@sv;
     skos:altLabel "Instance"@en, "Instans"@sv;
     skos:altLabel "Manifestation"@en, "Manifestation"@sv;
     ptg:abstract true;
-    rdfs:subClassOf sdo:Product, bf:Instance, rdaent:Manifestation .
+    rdfs:subClassOf :Instance, sdo:Product, rdaent:Manifestation .
 
 :contentType a owl:ObjectProperty;
     rdfs:label "content type"@en, "innehållstyp"@sv;
@@ -82,11 +136,10 @@ marc:bibLevel a skos:Collection;
     rdfs:subClassOf :CarrierType;
     rdfs:label "Book Format"@en, "Bokformat"@sv .
 
-:exampleOfWork a owl:ObjectProperty ;
+:instanceOf a owl:ObjectProperty ;
     rdfs:label "example of work"@en, "exemplifierar verk"@sv;
-    owl:equivalentProperty sdo:exampleOfWork;
-    rdfs:subPropertyOf bf:instanceOf;
-    rdfs:subPropertyOf rdfa:copy;
+    owl:equivalentProperty bf2:instanceOf;
+    rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
     sdo:rangeIncludes :UniformWork .
 
 :workExample a owl:ObjectProperty ;
@@ -111,47 +164,12 @@ marc:bibLevel a skos:Collection;
 :hasFormat a owl:ObjectProperty;
     rdfs:label "Format"@sv;
     rdfs:comment "Är på angivet format."@sv;
-    rdfs:subPropertyOf :exampleOfWork;
+    rdfs:subPropertyOf sdo:exampleOfWork;
     owl:equivalentProperty dc:hasFormat .
 
 :artform a owl:ObjectProperty ;
     owl:equivalentProperty sdo:artform;
     rdfs:label "artform"@en, "verksform"@sv .
-
-
-##
-# Holdings
-
-:HeldMaterial a owl:Class;
-    rdfs:label "Beståndsmaterial"@sv;
-    rdfs:subClassOf bf:HeldMaterial, sdo:SomeProducts .
-
-:Offer a owl:Class;
-    rdfs:label "Offer"@en, "Erbjudande"@sv;
-    rdfs:subClassOf sdo:Offer .
-
-:holdingFor a owl:ObjectProperty;
-    rdfs:label "bestånd på"@sv;
-    rdfs:domain :HeldMaterial;
-    rdfs:range :CreativeWork;
-    #rdfs:subPropertyOf sdo:exampleOfWork;
-    owl:equivalentProperty bf:holdingFor .
-
-:heldBy a owl:ObjectProperty;
-    rdfs:label "beståndsinnehavare"@sv;
-    rdfs:domain :Offer;
-    rdfs:range :Organization;
-    rdfs:subPropertyOf sdo:seller, bf:heldBy .
-
-:callno rdfs:subPropertyOf :genre, bf:callno, sdo:sku;
-    rdfs:range :Holding .
-
-:price a owl:DatatypeProperty ;
-    owl:equivalentProperty sdo:price;
-    rdfs:label "price"@en, "pris"@sv .
-
-:seller a owl:ObjectProperty ;
-    rdfs:label "seller"@en, "försäljare"@sv .
 
 
 # Common Content Types
