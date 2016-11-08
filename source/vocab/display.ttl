@@ -5,48 +5,63 @@
 :showProperties rdfs:subPropertyOf fresnel:showProperties .
 
 :Resource
-  :topConceptOf : ;
-  :showProperties ( :prefLabel :label :name :code :isPartOf :isDefinedBy ) .
+    :topConceptOf : ;
+    :showProperties ( :prefLabel :label :name :code :isPartOf :isDefinedBy ) .
 
 :Record
-  :showProperties ( :code :inDataset ) .
+    :showProperties ( :code :inDataset ) .
 
 :Instance
-  :topConceptOf : ;
-  :showProperties ( :instanceOf :title :publicationYear :identifiedBy ) .
+    :topConceptOf : ;
+    #:displayLens [
+    #        :category :chip ;
+    #        :showProperties ( :title :publishedYear :instanceOf )
+    #    ] , [
+    #        :category :card ;
+    #        :showProperties ( [ :inverseOf :itemOf ] )
+    #    ] ;
+    :showProperties ( :mediaType :carrierType :title :publicationYear :identifiedBy :instanceOf ) .
 
 :Work
-  :topConceptOf : ;
-  :showProperties ( :title :contribution ) .
+    :topConceptOf : ;
+    :showProperties ( :title :contribution ) .
 
 :Item
-  :topConceptOf : ;
-  :showProperties ( :itemOf :heldBy ) .
+    :topConceptOf : ;
+    :showProperties ( :itemOf :heldBy ) .
 
 :Title
-  :showProperties ( :mainTitle :subtitle :titleDate :partNumber :partTitle ) .
+    :showProperties ( :mainTitle :subtitle :titleDate :partNumber :partTitle ) .
 
 :Identifier
-  :topConceptOf : ;
-  :showProperties ( :value ) .
+    :topConceptOf : ;
+    :showProperties ( :value :note ) .
+
+:ProvisionActivity
+    :showProperties ( :date :agent :place ) .
 
 :Person
-  :topConceptOf : ;
-  :showProperties ( :name :familyName :givenName :birthYear :deathYear :notation :personTitle ) .
+    :topConceptOf : ;
+    :showProperties ( :name :familyName :givenName :birthYear :deathYear :notation :personTitle ) .
 
 :Library
-  :showProperties ( :sigel ) .
+    #:search [ :url "https://bibdb.libris.kb.se/search" ;
+    #            :mapping [ :predicate :sigel;
+    #                    :variable "sigel" ] ] ;
+    :showProperties ( :sigel ) .
 
 :Concept
-  :topConceptOf : ;
-  :showProperties ( :prefLabel :notation :inScheme :inCollection ) .
+    :topConceptOf : ;
+    :showProperties ( :prefLabel :notation :inScheme :inCollection ) .
 
 :GenreForm
-  :topConceptOf : .
+    :topConceptOf : .
 
 :Subject
-  :topConceptOf : .
+    :topConceptOf : .
 
 :ConceptScheme
-  :showProperties ( :notation ) .
+    :showProperties ( :notation ) .
 
+:Ontology
+    :showProperties ( :title [ :inverseOf :isDefinedBy ] ) .
