@@ -45,16 +45,16 @@
 
 # NOTE: additional data about automapped BF2 terms
 
-:creationDate a owl:DatatypeProperty;
+:created a owl:DatatypeProperty;
     rdfs:label "beskrivningens skapelsedatum"@sv;
     owl:equivalentProperty bf2:creationDate ;
     rdfs:subPropertyOf dc:created, sdo:dateCreated;
     rdfs:range xsd:dateTime .
 
-:changeDate a owl:DatatypeProperty;
+:modified a owl:DatatypeProperty;
     rdfs:label "beskrivningens ändringsdatum"@sv;
     owl:equivalentProperty bf2:changeDate ;
-    rdfs:subPropertyOf dc:modified ;
+    rdfs:subPropertyOf dc:modified, sdo:dateModified ;
     rdfs:range xsd:dateTime .
 
 :descriptionLanguage a owl:ObjectProperty;

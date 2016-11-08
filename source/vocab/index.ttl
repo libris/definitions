@@ -12,8 +12,11 @@ kbv:Work rdfs:subClassOf kbv:Endeavour .
 kbv:Instance rdfs:subClassOf kbv:Endeavour .
 kbv:Item rdfs:subClassOf kbv:Creation .
 
-kbv:Record a owl:Class; rdfs:subClassOf rdfs:Resource .
+kbv:Record a owl:Class; rdfs:subClassOf kbv:AdminMetadata .
 kbv:adminMetadata rdfs:domain kbv:Record .
+
+kbv:created owl:equivalentProperty bf2:creationDate .
+kbv:modified owl:equivalentProperty bf2:creationDate .
 
 kbv:identifiedBy rdfs:domain kbv:Creation .
 kbv:language rdfs:domain kbv:Creation .
