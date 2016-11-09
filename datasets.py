@@ -3,7 +3,7 @@ from __future__ import unicode_literals, print_function
 import re
 import zipfile
 from pathlib2 import Path
-from rdflib import Graph
+from rdflib import Graph, ConjunctiveGraph
 from lxltools.datacompiler import (Compiler, load_json, read_csv, decorate,
         construct, to_jsonld, to_rdf)
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
@@ -67,6 +67,10 @@ def vocab():
     for part in (SCRIPT_DIR/'source/vocab').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
 
+    #cg = ConjunctiveGraph()
+    #cg.parse(str(SCRIPT_DIR/'source/vocab/display.jsonld'), format='json-ld')
+    #graph += cg
+
     graph.update((SCRIPT_DIR/'source/vocab/update.rq').read_text())
 
     data = build_jsonld(graph)
@@ -77,6 +81,8 @@ def vocab():
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
 
     compiler.write(lib_context, 'vocab/context')
+
+    compiler.write(load_json(str(SCRIPT_DIR/'source/vocab/display.jsonld')), 'vocab/display')
 
     return "/vocab", data
 
