@@ -1,0 +1,104 @@
+{
+  "@context": [
+    {
+      "fresnel": "http://www.w3.org/2004/09/fresnel#",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "@base": "https://id.kb.se/vocab/display",
+      "@vocab": "https://id.kb.se/vocab/",
+      "lensGroups": {"@id": "@graph", "@container": "@index"},
+      "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
+      "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
+      "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"}
+    }
+  ],
+  "lensGroups": {
+    "chips": {
+      "@id": "chips",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Resource": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Resource",
+          "showProperties": [ "prefLabel", "label", "name", "code", "isPartOf", "isDefinedBy" ]
+        },
+        "Record": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Record",
+          "showProperties": [ "code", "inDataset" ]
+        },
+        "Instance": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Instance",
+          "showProperties": [ "title", "publishedYear", "instanceOf" ]
+        },
+        "Work": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [ "title", "contribution" ]
+        },
+        "Item": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Item",
+          "showProperties": [ "itemOf", "heldBy" ]
+        },
+        "Title": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Title",
+          "showProperties": [ "mainTitle", "subtitle", "titleDate", "partNumber", "partTitle" ]
+        },
+        "Identifier": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Identifier",
+          "showProperties": [ "value", "note" ]
+        },
+        "ProvisionActivity": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ProvisionActivity",
+          "showProperties": [ "date", "agent", "place" ]
+        },
+        "Person": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Person",
+          "showProperties": [ "name", "familyName", "givenName", "birthYear", "deathYear", "notation", "personTitle" ]
+        },
+        "Library": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Library",
+          "showProperties": [ "sigel" ]
+        },
+        "Concept": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
+          "showProperties": [ "prefLabel", "notation", "inScheme", "inCollection" ]
+        },
+        "ConceptScheme": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ConceptScheme",
+          "showProperties": [ "notation" ]
+        }
+      }
+    },
+    "cards": {
+      "@id": "cards",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Instance": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Instance",
+          "showProperties": [ "mediaType", "carrierType", "title", "publicationYear", "identifiedBy", "instanceOf", {"inverseOf": "itemOf"} ]
+        },
+        "Ontology": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Ontology",
+          "showProperties": [ "title", { "inverseOf": { "classLensDomain": "isDefinedBy" } } ]
+        }
+      }
+    },
+    "full": {
+      "@id": "full",
+      "@type": "fresnel:Group",
+      "lenses": {
+      }
+    }
+  }
+}
