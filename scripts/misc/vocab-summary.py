@@ -3,6 +3,7 @@ from rdflib import *
 
 
 ABS = Namespace("http://bibframe.org/model-abstract/")
+SCHEMA = Namespace("http://schema.org/")
 
 
 def print_vocab(g, show_equivs=False):
@@ -69,7 +70,7 @@ def print_class(c, superclasses=set()):
 
     print(indent + subnote + c.qname() + (" # " + note if note else ""))
 
-    props = sorted(c.subjects(RDFS.domain))
+    props = sorted(c.subjects(RDFS.domain|SCHEMA.domainIncludes))
     for prop in props:
         #if any(prop.objects(RDFS.subPropertyOf)):
         #    continue
@@ -100,11 +101,11 @@ def print_propsum(indent, prop, domain=None):
     lbl = prop.qname()
 
     if domain:
-        subpropdomains = sorted(prop.objects(RDFS.domain))
+        subpropdomains = sorted(prop.objects(RDFS.domain|SCHEMA.domainIncludes))
         if subpropdomains and subpropdomains != [domain]:
             lbl += " of " + ", ".join(spd.qname() for spd in subpropdomains)
 
-    ranges = tuple(prop.objects(RDFS.range))
+    ranges = tuple(prop.objects(RDFS.range|SCHEMA.rangeIncludes))
     if ranges:
         lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
                 for rc in ranges if isinstance(rc.identifier, URIRef))
