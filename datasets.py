@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function
+import os
 import re
 import zipfile
 from pathlib2 import Path
@@ -204,7 +205,10 @@ def docs():
     for fpath in (SCRIPT_DIR/'source/doc').glob('**/*.mkd'):
         text = fpath.read_text(encoding='utf-8')
         html = markdown.markdown(text)
-        doc_id = str(fpath).replace('source/', '').replace('.mkd', '')
+        doc_id = (str(fpath)
+                .replace(os.sep, '/')
+                .replace('source/', '')
+                .replace('.mkd', ''))
         doc_id, dot, lang = doc_id.partition('.')
         lang = lang or None
         h1end = html.find('</h1>')
