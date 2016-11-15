@@ -32,12 +32,14 @@
         "Instance": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
-          "showProperties": [ "hasTitle", "responsibilityStatement", "provisionActivity", "identifiedBy", "publishedYear", "instanceOf" ]
+          "showProperties": [ "hasTitle", "responsibilityStatement", "provisionActivity", "identifiedBy", "publishedYear", "instanceOf" ],
+          "hideProperties": [ "@id" ]
         },
         "Work": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ]
+          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ],
+          "hideProperties": [ "@id" ]
         },
         "Item": {
           "@type": "fresnel:Lens",
@@ -94,6 +96,11 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
           "showProperties": [ "mediaType", "carrierType", "hasTitle", "responsibilityStatement", "publicationYear", "identifiedBy", "issuance", "instanceOf", {"inverseOf": "itemOf"} ]
+        },
+        "Work": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ]
         },
         "Item": {
           "@type": "fresnel:Lens",
