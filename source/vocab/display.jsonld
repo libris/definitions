@@ -3,12 +3,14 @@
     {
       "fresnel": "http://www.w3.org/2004/09/fresnel#",
       "skos": "http://www.w3.org/2004/02/skos/core#",
+      "owl": "http://www.w3.org/2002/07/owl#",
       "@base": "https://id.kb.se/vocab/display",
       "@vocab": "https://id.kb.se/vocab/",
       "lensGroups": {"@id": "@graph", "@container": "@index"},
       "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
       "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
-      "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"}
+      "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"},
+      "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"}
     }
   ],
   "@graph": [{"@id": "https://id.kb.se/vocab/display"}],
@@ -30,12 +32,14 @@
         "Instance": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
-          "showProperties": [ "hasTitle", "responsibilityStatement", "provisionActivity", "identifiedBy", "publishedYear", "instanceOf" ]
+          "showProperties": [ "hasTitle", "responsibilityStatement", "provisionActivity", "identifiedBy", "publishedYear", "instanceOf" ],
+          "hideProperties": [ "@id" ]
         },
         "Work": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ]
+          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ],
+          "hideProperties": [ "@id" ]
         },
         "Item": {
           "@type": "fresnel:Lens",
@@ -91,7 +95,12 @@
         "Instance": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
-          "showProperties": [ "mediaType", "carrierType", "hasTitle", "responsibilityStatement", "publicationYear", "identifiedBy", "instanceOf", {"inverseOf": "itemOf"} ]
+          "showProperties": [ "mediaType", "carrierType", "hasTitle", "responsibilityStatement", "publicationYear", "identifiedBy", "issuance", "instanceOf", {"inverseOf": "itemOf"} ]
+        },
+        "Work": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [ "hasTitle", "contribution", "language", "classification", "genreForm", "subject" ]
         },
         "Item": {
           "@type": "fresnel:Lens",
@@ -101,7 +110,7 @@
         "Ontology": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Ontology",
-          "showProperties": [ "title", { "inverseOf": { "classLensDomain": "isDefinedBy" } } ]
+          "showProperties": [ "title", {"inverseOf": "isDefinedBy"} ]
         }
       }
     },
