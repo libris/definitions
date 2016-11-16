@@ -1,7 +1,6 @@
 {
-  "@context": [
-    {
-      "fresnel": "http://www.w3.org/2004/09/fresnel#",
+  "@context": {
+    "fresnel": "http://www.w3.org/2004/09/fresnel#",
       "skos": "http://www.w3.org/2004/02/skos/core#",
       "owl": "http://www.w3.org/2002/07/owl#",
       "@base": "https://id.kb.se/vocab/display",
@@ -10,9 +9,15 @@
       "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
       "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
       "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"},
-      "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"}
-    }
-  ],
+      "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"},
+      "labelByLang": {"@id": "label", "@container": "@language"},
+      "commentByLang": {"@id": "comment", "@container": "@language"},
+      "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
+      "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
+      "noteByLang": {"@id": "note", "@container": "@language"},
+      "titleByLang": {"@id": "title", "@container": "@language"},
+      "descriptionByLang": {"@id": "description", "@container": "@language"}
+  },
   "@graph": [{"@id": "https://id.kb.se/vocab/display"}],
   "lensGroups": {
     "chips": {
