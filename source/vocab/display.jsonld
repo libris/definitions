@@ -98,6 +98,7 @@
         },
         "Instance": {
           "@type": "fresnel:Lens",
+          "@id": "instance-card",
           "classLensDomain": "Instance",
           "showProperties": [ "mediaType", "carrierType", "hasTitle", "responsibilityStatement", "publicationYear", "identifiedBy", "issuance", "instanceOf", {"inverseOf": "itemOf"} ]
         },
@@ -114,7 +115,7 @@
         "Concept": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "label", "notation", "inScheme", "inCollection", "broader", "narrower" ]
+          "showProperties": [ "prefLabel", "label", "notation", "inScheme", "inCollection", "broader", {"inverseOf": "broader"}, "narrower" ]
         },
         "Ontology": {
           "@type": "fresnel:Lens",
@@ -127,6 +128,10 @@
       "@id": "full",
       "@type": "fresnel:Group",
       "lenses": {
+        "Instance": {
+          "fresnel:extends": {"@id": "instance-card"},
+          "showProperties": [ "fresnel:super", {"inverseOf": "itemOf"} ]
+        }
       }
     }
   }
