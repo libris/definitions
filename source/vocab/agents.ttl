@@ -57,14 +57,9 @@ l:role rdfs:subPropertyOf rdf:predicate .
 l:object rdfs:subPropertyOf rdf:object .
 
 :qualifiedAttribution a owl:ObjectProperty;
-    rdfs:label "Detaljerat huvuduppslag"@sv;
-    rdfs:subPropertyOf l:hasStatement;
-    owl:equivalentProperty bf2:contribution, prov:qualifiedAttribution .
-
-:qualifiedInfluence a owl:ObjectProperty;
-    rdfs:label "Detaljerat biuppslag"@sv;
-    rdfs:subPropertyOf l:hasStatement;
-    owl:equivalentProperty prov:qualifiedInfluence .
+    rdfs:label "Rolluppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement, prov:qualifiedAttribution;
+    owl:equivalentProperty bf2:contribution .
 
 :role a owl:ObjectProperty;
     rdfs:label "roll"@sv;
