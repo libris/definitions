@@ -59,7 +59,13 @@ l:object rdfs:subPropertyOf rdf:object .
 :qualifiedAttribution a owl:ObjectProperty;
     rdfs:label "Rolluppslag"@sv;
     rdfs:subPropertyOf l:hasStatement, prov:qualifiedAttribution;
-    owl:equivalentProperty bf2:contribution .
+    owl:equivalentProperty bf2:contribution;
+    rdfs:range :Contribution .
+
+:Contribution a owl:Class ;
+    rdfs:label "Rolluppslag"@sv ;
+    rdfs:subClassOf prov:Attribution ;
+    owl:equivalentClass bf2:Contribution .
 
 :role a owl:ObjectProperty;
     rdfs:label "roll"@sv;
