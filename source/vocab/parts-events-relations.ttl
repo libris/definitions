@@ -77,6 +77,14 @@
     rdfs:subPropertyOf :identifier ;
     rdfs:range :ISSN .
 
+:coden a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :CODEN .
+
+:standardTechnicalReportNumber a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :STRN .
+
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "identified by"@en, "identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
@@ -357,7 +365,7 @@
 
 :isPartOf a owl:ObjectProperty;
     rdfs:label "part of"@en, "del av"@sv;
-    owl:equivalentProperty dc:isPartOf .
+    owl:equivalentProperty bf2:partOf, dc:isPartOf .
 
 :partOfSeries a owl:ObjectProperty;
     rdfs:subPropertyOf :isPartOf;
