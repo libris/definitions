@@ -149,9 +149,6 @@
     rdfs:range :Title;
     rdfs:label "has title"@en, "har titel"@sv;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
-    # TODO: move this definition to :InstanceTitle
-    skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
-    rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     #rdfs:label "instanstitel"@sv;
     dc:references [ skos:notation "RDA 1.7" ] .
 
@@ -160,10 +157,30 @@
     rdfs:label "Titel"@sv;
     owl:equivalentClass bf2:Title .
 
+:mainTitle a owl:DatatypeProperty;
+    rdfs:label "huvudtitel"@sv;
+    rdfs:subPropertyOf :value;
+    owl:equivalentProperty bf2:mainTitle;
+    rdfs:domain :Title .
+
+:titleRemainder a owl:DatatypeProperty;
+    rdfs:label "Övrig titelinformation"@sv;
+    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
+    #owl:equivalentProperty remainderOfTitle
+    rdfs:domain :Title .
+
+:subtitle a owl:DatatypeProperty;
+    rdfs:label "subtitle"@en, "undertitel"@sv;
+    rdfs:subPropertyOf :titleRemainder;
+    owl:equivalentProperty bf2:subTitle;
+    rdfs:domain :Title .
+
 :InstanceTitle  a owl:Class;
     owl:equivalentClass bf2:InstanceTitle;
     rdfs:subClassOf :Title;
     rdfs:label "Instance Title"@en, "Instansens titel"@sv ;
+    skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
+    #rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
 
 :WorkTitle  a owl:Class;
@@ -180,10 +197,6 @@
     owl:equivalentClass bf2:AbbreviatedTitle;
     rdfs:subClassOf :Title;
     rdfs:label "Abbreviated Title"@en, "Förkortad titel"@sv .
-
-:CoverTitle  a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
-    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
 
 :abbreviatedTitle a owl:DatatypeProperty;
     owl:equivalentProperty bf:abbreviatedTitle;
@@ -209,30 +222,12 @@
     rdfs:label "Varianttitel"@sv .
 
 :CoverTitle  a owl:Class;
-    rdfs:subClassOf :InstanceTitle;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
     rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
 
 :TitlePage  a owl:Class;
     rdfs:subClassOf :InstanceTitle;
     rdfs:label "Title Page"@en, "Titelsida"@sv .
-
-:mainTitle a owl:DatatypeProperty;
-    rdfs:label "huvudtitel"@sv;
-    rdfs:subPropertyOf :value;
-    owl:equivalentProperty bf2:mainTitle;
-    rdfs:domain :Title .
-
-:titleRemainder a owl:DatatypeProperty;
-    rdfs:label "Övrig titelinformation"@sv;
-    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
-    #owl:equivalentProperty remainderOfTitle
-    rdfs:domain :Title .
-
-:subtitle a owl:DatatypeProperty;
-    rdfs:label "subtitle"@en, "undertitel"@sv;
-    rdfs:subPropertyOf :titleRemainder;
-    owl:equivalentProperty bf2:subTitle;
-    rdfs:domain :Title .
 
 
 :ProvisionActivity a owl:Class;
