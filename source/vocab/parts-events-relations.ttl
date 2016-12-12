@@ -25,6 +25,7 @@
 ##
 # Parts, Events, Relations
 
+
 :qualifyingNote a owl:DatatypeProperty;
     rdfs:label "Särskiljande tillägg"@sv;
     sdo:domainIncludes :Person, :Title .
@@ -559,3 +560,58 @@
 
 :coverArtThumb a owl:ObjectProperty;
     rdfs:subPropertyOf bf:coverArtThumb .
+
+
+# Qualified Forms of Attribution/Contribution
+
+# TODO: these constructs, used below, will yield inferred statements, which if
+# interpreted, will produce direct links using subject of hasStatement,
+# predicate(s) from role(s) and object from an object property. Like:
+#CONSTRUCT { ?s ?p ?o } WHERE {
+#    ?s [rdfs:subPropertyOf? l:hasStatement] [
+#            [rdfs:subPropertyOf? l:role] ?p;
+#            [rdfs:subPropertyOf? l:object] ?o ]
+#}
+l:hasStatement a owl:ObjectProperty;
+    rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
+    rdfs:range rdf:Statement .
+l:role rdfs:subPropertyOf rdf:predicate .
+l:object rdfs:subPropertyOf rdf:object .
+
+:attributedTo a owl:ObjectProperty;
+    owl:equivalentProperty prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :qualifiedAttribution :agent ) .
+
+:qualifiedAttribution a owl:ObjectProperty;
+    rdfs:label "Rolluppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement, prov:qualifiedAttribution;
+    owl:equivalentProperty bf2:contribution;
+    rdfs:range :Contribution .
+
+:Contribution a owl:Class ;
+    rdfs:label "Rolluppslag"@sv ;
+    rdfs:subClassOf prov:Attribution ;
+    owl:equivalentClass bf2:Contribution .
+
+:Principal a owl:Class ;
+    rdfs:label "Huvuduppslag"@sv ;
+    rdfs:comment "Ange namnet för först nämnda upphov här. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
+    rdfs:subClassOf :Contribution .
+
+:Additional a owl:Class ;
+    rdfs:label "Biuppslag"@sv ;
+    rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
+    rdfs:subClassOf :Contribution .
+
+:role a owl:ObjectProperty;
+    rdfs:label "roll"@sv;
+    rdfs:subPropertyOf l:role;
+    sdo:domainIncludes :Contribution;
+    owl:equivalentProperty prov:hadRole .
+
+:agent a owl:ObjectProperty;
+    rdfs:label "agent"@sv;
+    rdfs:subPropertyOf l:object ;
+    owl:equivalentProperty prov:agent ;
+    sdo:domainIncludes :Contribution;
+    rdfs:range :Agent .
