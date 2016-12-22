@@ -302,7 +302,10 @@
 :contributor a owl:ObjectProperty;
     rdfs:label "delaktig i skapandet"@sv;
     rdfs:range :Agent;
-    owl:equivalentProperty bf2:contributor, dc:contributor .
+    owl:equivalentProperty bf2:contributor, dc:contributor;
+    rdfs:subPropertyOf prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :contribution :agent ) .
+
 
 :publisher a owl:ObjectProperty;
     rdfs:label "utgivare"@sv;
@@ -573,14 +576,10 @@ l:hasStatement a owl:ObjectProperty;
 l:role rdfs:subPropertyOf rdf:predicate .
 l:object rdfs:subPropertyOf rdf:object .
 
-:attributedTo a owl:ObjectProperty;
-    owl:equivalentProperty prov:wasAttributedTo;
-    owl:propertyChainAxiom ( :qualifiedAttribution :agent ) .
-
-:qualifiedAttribution a owl:ObjectProperty;
+:contribution a owl:ObjectProperty;
     rdfs:label "Rolluppslag"@sv;
-    rdfs:subPropertyOf l:hasStatement, prov:qualifiedAttribution;
     owl:equivalentProperty bf2:contribution;
+    rdfs:subPropertyOf l:hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
 
 :Contribution a owl:Class ;
@@ -601,7 +600,7 @@ l:object rdfs:subPropertyOf rdf:object .
 :role a owl:ObjectProperty;
     rdfs:label "roll"@sv;
     rdfs:subPropertyOf l:role;
-    sdo:domainIncludes :Contribution;
+    sdo:domainIncludes :Contribution, :Composition;
     owl:equivalentProperty prov:hadRole .
 
 :agent a owl:ObjectProperty;
@@ -610,3 +609,22 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:equivalentProperty prov:agent ;
     sdo:domainIncludes :Contribution;
     rdfs:range :Agent .
+
+#:hasPart owl:propertyChainAxiom (:composition :entity) .
+
+:composition a owl:ObjectProperty;
+    rdfs:label "Rolluppslag"@sv;
+    rdfs:subPropertyOf l:hasStatement, prov:qualifiedPrimarySource;
+    rdfs:range :Composition .
+
+:Composition a owl:Class ;
+    rdfs:label "Rolluppslag"@sv ;
+    rdfs:subClassOf prov:PrimarySource ;
+    owl:equivalentClass bf2:Contribution .
+
+:entity a owl:ObjectProperty;
+    rdfs:label "entity"@en, "entitet"@sv;
+    rdfs:subPropertyOf l:object ;
+    owl:equivalentProperty prov:entity ;
+    sdo:domainIncludes :Composition;
+    sdo:rangeIncludes :UniformWork .
