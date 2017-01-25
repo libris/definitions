@@ -6,6 +6,17 @@ ABS = Namespace("http://bibframe.org/model-abstract/")
 SCHEMA = Namespace("http://schema.org/")
 
 
+# Monkey!
+_orig_qname = Graph.qname
+def _qname(self, uri):
+    try:
+        v = _orig_qname(self, uri)
+        return ':%s' % v if ':' not in v else v
+    except:
+        return uri.n3()
+Graph.qname = _qname
+
+
 def print_vocab(g, show_equivs=False):
     global otherclasses, otherprops, SHOW_EQUIVS
     SHOW_EQUIVS = show_equivs
