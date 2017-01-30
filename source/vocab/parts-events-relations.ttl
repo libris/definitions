@@ -217,9 +217,10 @@
                 [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
                 :mainTitle ) .
 
-:VariantTitle a owl:Class ;
-    owl:equivalentClass bf2:VariantTitle;
-    rdfs:label "Varianttitel"@sv .
+:ParallelTitle a owl:Class;
+    owl:equivalentClass bf2:ParallelTitle;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:label "Parallelltitel"@sv .
 
 :CoverTitle  a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
