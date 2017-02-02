@@ -11,7 +11,7 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 
 
 # TODO:
-# - explicitly link each record to it's parent dataset record
+# - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
 # - explicitly link each record to its logical source (or just the parent dataset record?)
 # - do not add 'quoted' here but in loader (see TODO below)
 
@@ -54,7 +54,7 @@ compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.l
 #           ext-libris/src/main/resources/marcframe.json build/vocab.ttl
 #           > build/vocab-generated-source-1.ttl
 
-@compiler.dataset
+@compiler.handler
 def vocab():
     graph = construct(compiler.cached_rdf, sources=[
             {
@@ -82,10 +82,8 @@ def vocab():
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
 
     compiler.write(lib_context, 'vocab/context')
-
     compiler.write(load_json(str(SCRIPT_DIR/'source/vocab/display.jsonld')), 'vocab/display')
-
-    return "/vocab", data
+    compiler.write(data, "vocab")
 
 
 @compiler.dataset
