@@ -242,21 +242,24 @@
 :manufacture a owl:ObjectProperty;
     owl:equivalentProperty bf:manufacture;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Manufacture .
+    rdfs:range :Manufacture;
+    rdfs:label "tillverkning"@sv .
 
 :publication a owl:ObjectProperty;
     owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Publication .
+    rdfs:range :Publication;
+    rdfs:label "utgivning"@sv .
 
 :Manufacture a owl:Class;
     owl:equivalentClass bf2:Manufacture;
-    rdfs:subClassOf :ProvisionActivity .
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Tillverkning"@sv .
 
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
-    rdfs:subClassOf :ProvisionActivity .
-
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Utgivning"@sv .
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
