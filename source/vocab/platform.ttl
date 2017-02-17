@@ -35,13 +35,13 @@
 :meta a owl:ObjectProperty;
     rdfs:label "Metadata"@sv;
     owl:inverseOf :mainEntity;
-    owl:equivalentProperty bf2:adminMetadata, iana:describedby, wdrs:describedby, xhv:meta;
-    rdfs:subPropertyOf foaf:isPrimaryTopicOf, sdo:mainEntityOfPage .
+    owl:equivalentProperty bf2:adminMetadata, foaf:isPrimaryTopicOf, sdo:mainEntityOfPage, xhv:meta ;
+    rdfs:subPropertyOf :describedBy ;
+    rdfs:range :Record .
 
 :describedBy a owl:ObjectProperty;
-    owl:sameAs :meta;
     rdfs:label "Beskriven av"@sv;
-    rdfs:range :Record .
+    owl:equivalentProperty iana:describedby, wdrs:describedby .
 
 # NOTE: additional data about automapped BF2 terms
 
