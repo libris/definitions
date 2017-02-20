@@ -75,6 +75,7 @@ def vocab():
     graph.update((SCRIPT_DIR/'source/vocab/update.rq').read_text())
 
     data = build_jsonld(graph)
+    del data['@context']
 
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
