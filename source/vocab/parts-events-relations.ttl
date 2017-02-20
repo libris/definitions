@@ -55,7 +55,8 @@
     rdfs:subPropertyOf l:object;
     #rdfs:domain :Event;
     rdfs:range :Agent;
-    owl:equivalentProperty bf2:agent, prov:agent .
+    owl:equivalentProperty bf2:agent, prov:agent;
+    sdo:domainIncludes :Contribution .
 
 :date a owl:DatatypeProperty;
     #rdfs:domain :Event;
@@ -607,10 +608,3 @@ l:object rdfs:subPropertyOf rdf:object .
     rdfs:subPropertyOf l:role;
     sdo:domainIncludes :Contribution;
     owl:equivalentProperty prov:hadRole .
-
-:agent a owl:ObjectProperty;
-    rdfs:label "agent"@sv;
-    rdfs:subPropertyOf l:object ;
-    owl:equivalentProperty prov:agent ;
-    sdo:domainIncludes :Contribution;
-    rdfs:range :Agent .
