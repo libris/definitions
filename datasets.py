@@ -39,7 +39,7 @@ def _get_zipped_graph(path, name):
 class WhelkCompiler(Compiler):
 
     def to_node_description(self, node, dataset=None, source=None, **kws):
-        # TODO: overhaul these?
+        # TODO: overhaul these? E.g. mainEntity with timestamp and 'datasource'.
         item = node.pop('mainEntity', None) # TODO: obsolete?
         if item:
             node['mainEntity'] = {'@id': item['@id']}
@@ -51,19 +51,6 @@ class WhelkCompiler(Compiler):
         items = [node]
         if item:
             items.append(item)
-
-        #quoted = {}
-        #for vs in node.values():
-        #    vs = vs if isinstance(vs, list) else [vs]
-        #    for v in vs:
-        #        if isinstance(v, dict) and '@id' in v:
-        #            qid = v['@id']
-        #            quoted[qid] = {'@graph': [{'@id': qid}]}
-        ## TODO: move addition of 'quoted' objects to (decorated) storage?
-        ## ... let storage accept a single resource or named graph
-        ## (with optional, "nested" quotes), and extract links (and sameAs)
-        #if quoted:
-        #    items += quoted.values()
 
         return {'@graph': items}
 
