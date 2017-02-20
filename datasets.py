@@ -36,7 +36,39 @@ def _get_zipped_graph(path, name):
         return Graph().parse(zipped.open(name), format='turtle')
 
 
-compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.lines')
+class WhelkCompiler(Compiler):
+
+    def to_node_description(self, node, dataset=None, source=None, **kws):
+        # TODO: overhaul these?
+        item = node.pop('mainEntity', None) # TODO: obsolete?
+        if item:
+            node['mainEntity'] = {'@id': item['@id']}
+        #if dataset:
+        #    node['inDataset'] = {'@id': dataset}
+        #if source:
+        #    node['wasDerivedFrom'] = {'@id': source}
+
+        items = [node]
+        if item:
+            items.append(item)
+
+        #quoted = {}
+        #for vs in node.values():
+        #    vs = vs if isinstance(vs, list) else [vs]
+        #    for v in vs:
+        #        if isinstance(v, dict) and '@id' in v:
+        #            qid = v['@id']
+        #            quoted[qid] = {'@graph': [{'@id': qid}]}
+        ## TODO: move addition of 'quoted' objects to (decorated) storage?
+        ## ... let storage accept a single resource or named graph
+        ## (with optional, "nested" quotes), and extract links (and sameAs)
+        #if quoted:
+        #    items += quoted.values()
+
+        return {'@graph': items}
+
+
+compiler = WhelkCompiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.lines')
 
 
 #@compiler.dataset
