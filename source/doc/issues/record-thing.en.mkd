@@ -44,4 +44,19 @@
                 Record (known-admin-parts-of)
 
 
+We *no longer* use:
 
+    GRAPH <record> {
+
+    <record>
+        :mainEntity <thing> .
+
+    <nominal>
+        :meta <record> ; # description
+        :focus <thing> . # concretization
+
+    <thing>
+        :meta <record> ;
+        :hasAuthority <nominal> . # abstraction
+
+    }

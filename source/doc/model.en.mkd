@@ -28,9 +28,7 @@ See [Standards](/doc/standards).
 
 We have opted to use one, single, unified namespace for our bibliographic descripions, agents, concepts, events, places and "intangible" terms (definitions). This core vocabulary has the IRI <https://id.kb.se/vocab/> and will be referred to as *KBV* from hereon. In examples, we will use the prefix `kbv:` for this purpose:
 
-```turtle
-prefix kbv: <https://id.kb.se/vocab/>
-```
+    prefix kbv: <https://id.kb.se/vocab/>
 
 This is an Umbrella Vocabulary, where concepts are equivalents to known models,
   - for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
@@ -48,23 +46,22 @@ This vocabulary *extends* BibFrame, which is used as the conceptual foundation f
 * extend where lacking
 * use RDA terms before inventing our own
 * then fall back to "sensible" schema.org, DC, PROV, RDA, MADSRDF (in that order)
-  - a quick analysis of schema.org (semi-ordered, rough consensus, "dirty")
 * legacy KB-MARC for "incomprehensible" stuff
 
 ### Basic Domain Types
 
-1. Administrativt skelett
+1. Administrative skeleton
 
-(men domänen smyger in redan här i form av export-logik... (Status på posten, instance <- item -> innehavande bibliotek...))
+(While the core Record structure is domain independent, certain fairly domain-depdentend details may appear here in the form of properties such as status, and provenance details such as modifying library, (data) sources and licensing.)
 
-2. Bibliografiska poster delas upp så här: ...
+2. Bibliographic records in the MARC sense are partitioned roughly like this in the new domain model:
 
-- instans
-- verk (på uttycksnivå, med ev. länk till expressionOf auth-Work)
+- Instance
+- Work (data at the Expression and Work levels in the FRBR sense, where we currently link to UniformWork:s using expressionOf (derived from Name+Title and Title Authority records).)
 
-3. Auktoritetsposter så här: ...
+3. Authority Data:
 
-- Work
+- UniformWork
 - Person
 - Organization
 - Meeting
@@ -74,20 +71,23 @@ This vocabulary *extends* BibFrame, which is used as the conceptual foundation f
 
 (Thesis: "real things". Complication: "which strings for display".)
 
-4. Vokabuläret, enumerationer, agenter och övriga termer/definitioner: ...
+4. Holding Data:
 
-det som i MARC är:
+- Item
 
-- fasta definitioner: "enumerationer"
-- listor på koder: språk, land, nationalitet
+5. The remaining data constitutes an extension of the old Authority notions. These items describe:
+- the Vocabulary, enumerations and remaining terms/definitions: ...
+
+In MARC, these items are represented by:
+
+- fixed definitions: "enumerations"
+- code lists: Language, County, Nationality and Relator.
 
 ---
 
-Av dessa är Item distinkta, och Bib kommer ur unionen av subklasser av Instance + instanceOf.
-- Dessa är del av libris.kb.se
+Number 2 and 4, and parts of 3 reside solely under libris.kb.se
 
-Auktoriteter är "resten", d.v.s. utökade med definitioner, enumerationer.
-- Dessa finns under id.kb.se
+Concepts from 3 and 5 are given identifiers under id.kb.se
 
 ---
 
@@ -119,6 +119,8 @@ Upon the Basic RDF structure, we have applied a couple of conventions and constr
 ### Language Tags
 
 The use of language tags has been kept to a minimum. We use them mainly for vocabulay terms and related "intangible" definitions.
+
+See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
 ### RDFS and OWL Semantics
 
@@ -163,15 +165,11 @@ The following designs are inspired by (and where applicably explicitly specializ
 
 #### Qualified Roles
 
-* Roles (c.f. Schema.org Roles, PROV qualified forms, RDF reification)
+This is an application of qualified forms (as also exemplified in [PROV qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) and [schema:Role](http://schema.org/Role).)
 
-.. As Reified Relations
+We can use owl:propertyChainAxiom to correlate these with simple links...
 
-.. specialized qualifications (avoiding conflating abstract roles with reified details?)
-
-- property-chain-axioms
-  - for qualified forms (PROV:qualified`*`; schema:Role, schema:QuantitativeValue)
-    - <https://www.w3.org/TR/prov-o/#description-qualified-terms>
+.. Also as Reified Relations? .. Those would be rather specialized qualifications (and we want to avoid conflating abstract roles with reified details, correct? (c.f. RDF reification.))
 
 #### Types/Aspects
 
@@ -187,32 +185,22 @@ For discussions about the merit of this, see [Content/Carrier Design Issue](/iss
 
 Used for our definitions (Vocabulary, Relators, Language, Country, Nationality).
 
-For discussions about of this, see [Concept/Thing Design Issue](/issues/concept-thing).
-
-#### Imperfect Realities (TODO: design issues)
-
-* "raw and partial" stuff, put into notes
-
-* qualifiedAttribution?
-
-See also [Mappings] for how to simplify these (and expand simple forms, respectively).
+For more thought on this, see [Concept/Thing Design Issue](/issues/concept-thing).
 
 ### Structured Values
 
+Base on [schema:StructuredValue](http://schema.org/StructuredValue).
+
 * Complex Structured Values (beyond using rdf:value, e.g. bf:mainTitle)
 
-schema:StructuredValue
-
-.. Shrink to Datatype Literals
-.. Error-correct untyped strings (vs. keeping differently cast terms in JSON-LD)
-.. Soft-match partial datatype values (dates...
-  .. turn into rdf:value + :year, :month, :day? (as "virtual" properties of a Datatype)
-.. Interpret Labels and Annotations
-
-- property-chain-axioms
+- Using property-chain-axioms to "shrink" these.
   - for granularity
 
 - datatypes/structured value folding (@value <-> rdf:value)
+
+For more thought on this, see [Concept/Thing Design Issue](/issues/concept-thing).
+
+See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
 #### Example: Annotated Identifiers (BF)
 
@@ -243,28 +231,25 @@ These are considered equivalent for value access:
 
 ### Record and mainEntity
 
-* define meta and mainEntity
+Structure:
 
-GRAPH <record> {
+    GRAPH <record> {
 
     <record>
         :mainEntity <thing> .
 
-    <nominal>
-        :meta <record> ; # description
-        :focus <thing> . # concretization
+    }
+
+In the search index, we promote the things, and use our inverse relation, `meta` to point to the record.
 
     <thing>
-        :meta <record> ;
-        :hasAuthority <nominal> . # abstraction
-
-}
+        :meta <record> .
 
 #### Records are Administrative Information Resources
 
 Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
 
-For discussions about of this, see [Concept/Thing Design Issue](/issues/concept-thing).
+For discussions about this, see [Concept/Thing Design Issue](/issues/concept-thing).
 
 ## Further Development
 

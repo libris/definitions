@@ -7,6 +7,7 @@ Detailed design issues have their own documents.
 * [Record/Thing](/doc/issues/record-thing) (solved)
 * [Concept/Thing](/doc/issues/concept-thing) (solved)
 * [Content/Carrier](/doc/issues/content-carrier) (open)
+* [Literal Structures](/doc/issues/literal-structures) (open)
 
 Following are sections of open discussions that we haven't yet formalized into specific issues.
 
@@ -42,6 +43,11 @@ How about replacing the various type-properties (ensembleType, instrumentalType,
 
 ### Notes and Statements
 
+Imperfect data... "raw and partial" stuff, put into notes...
+
+See also [Mappings] for how to simplify these (and expand simple forms, respectively).
+
+
 * Notes: typeNote vs. type/notes (and similar for all such divisions...; for presentation/edit: difference between linked entity and inlined description)
 * Are `*Statement` notes? No, they are "text values on source" (more like rdf:value). Also, reorganize into proper entity (:publicationStatement rdfs:domain :Publication)
 
@@ -64,10 +70,6 @@ and somehow with (the object of hasFormat in):
 
   @type: bibo:Book
   dc:hasFormat: {@type: sdo:EBook}
-
-### Extended Literals (SKOS-XL) as Structure Values
-
-To represent transliterated forms. To be decided.
 
 ### Value Corrections
 
