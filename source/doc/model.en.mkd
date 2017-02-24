@@ -1,0 +1,290 @@
+Data Model
+===========
+
+## Introduction
+
+This is a description of the data model chosen by The National Library of Sweden (KB). It has taken form during the construction of our new cataloguing system. The design is guided by various Linked Data principles and patterns, the foremost aspects of which are:
+
+* A Vocabulary defining the terms used for describing our business entities with this data model (their types, properties and relations).
+* A Core Data Structure based on [RDF][].
+* A Conversion Mechanism for turning data in MARC21 into the above structure and terms.
+
+## Requirements
+
+1. Open up for improvements including (but not limited to):
+
+   - reuse data succinctly, avoiding costly repetition
+   - extend classes, properties and definitions/terms/enumerations for new
+     content and carrier types ans use cases (e.g. accessibility)
+   - coordinate multiple identifiers to facilitate distributed collaboration
+
+2. Continue to provide MARC21 to member libraries of the LIBRIS collective, to ensure their business can continue uninterrupted.
+
+## Related Standards
+
+See [Standards](/doc/standards).
+
+## Domain Vocabulary
+
+We have opted to use one, single, unified namespace for our bibliographic descripions, agents, concepts, events, places and "intangible" terms (definitions). This core vocabulary has the IRI <https://id.kb.se/vocab/> and will be referred to as *KBV* from hereon. In examples, we will use the prefix `kbv:` for this purpose:
+
+```turtle
+prefix kbv: <https://id.kb.se/vocab/>
+```
+
+This is an Umbrella Vocabulary, where concepts are equivalents to known models,
+  - for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
+  - TODO:or marked as suggestions for inclusion? Or marked as "marc legacy"...
+
+This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping).
+
+(This is similar to the original design of schema.org. While the business case is quite (albeit not fundamentally) different, the scope of schema.org is vaster in scope (but not in depth). This precursor shows that lots of term can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
+
+(Also see LoC plans for a local vocabulary importing BF2...)
+
+### Vocabulary Design Process
+
+* base the vocabulary on BibFrame 2
+* extend where lacking
+* use RDA terms before inventing our own
+* then fall back to "sensible" schema.org, DC, PROV, RDA, MADSRDF (in that order)
+  - a quick analysis of schema.org (semi-ordered, rough consensus, "dirty")
+* legacy KB-MARC for "incomprehensible" stuff
+
+### Basic Domain Types
+
+1. Administrativt skelett
+
+(men domänen smyger in redan här i form av export-logik... (Status på posten, instance <- item -> innehavande bibliotek...))
+
+2. Bibliografiska poster delas upp så här: ...
+
+- instans
+- verk (på uttycksnivå, med ev. länk till expressionOf auth-Work)
+
+3. Auktoritetsposter så här: ...
+
+- Work
+- Person
+- Organization
+- Meeting
+- Event
+
+- GenreFormTerm, SubjectTerm, ...
+
+(Thesis: "real things". Complication: "which strings for display".)
+
+4. Vokabuläret, enumerationer, agenter och övriga termer/definitioner: ...
+
+det som i MARC är:
+
+- fasta definitioner: "enumerationer"
+- listor på koder: språk, land, nationalitet
+
+---
+
+Av dessa är Item distinkta, och Bib kommer ur unionen av subklasser av Instance + instanceOf.
+- Dessa är del av libris.kb.se
+
+Auktoriteter är "resten", d.v.s. utökade med definitioner, enumerationer.
+- Dessa finns under id.kb.se
+
+---
+
+Too any depth? Map/categorize classes belonging to the "managed" domain ("aligned with BF2 + RDA + mapped back to MARC")? (Alternatively marking the rest as :status :TermTesting).
+
+#### "FRBR"
+Work = Expression|Work = CreativeWork # Content
+Instance = Manifestation = (CreativeWork ProductModel) # Carrier
+Item = Product
+SomeItems = SomeProducts = (Collection Product)
+hasComponent = hasPart[Item]
+
+### Unstable and Legacy Terms
+
+NOTE: marc: legacy terms.
+
+### Core and Auxiliary Support Vocabularies
+
+Records
+Provenance
+Services
+
+## Design
+
+The foundation is RDF, upon which we apply usage patterns. Judicious use of RDF Schema and OWL is applied to formally document the properties, classes and their relationships.
+
+Upon the Basic RDF structure, we have applied a couple of conventions and constructs (design patterns) (see also [LD-Patterns][]).
+
+### Language Tags
+
+The use of language tags has been kept to a minimum. We use them mainly for vocabulay terms and related "intangible" definitions.
+
+### RDFS and OWL Semantics
+
+* "we use sameAs for..."
+
+### The Use of BNodes
+
+BNodes are used for Qualified Roles and Structured Values.
+
+We also (currently) use bnodes for locally described resources for which there is no authoritative URI... If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of somthing – and refering to that elsewhere – which turns out to be false).
+
+.. To be clear. the distinction between structured value bnodes (e.g. hasTitle, contribution) is determined by the class definition, not by the presence/absence of an @id.
+
+#### Distinct SubClasses
+
+Similar to common vocabularies like Schema.org and BibFrame. We do some more lavish subclassing to capture diversities seen in our data.
+
+#### Distinct SubProperties
+
+* Use distinct subproperties where it is apparently usable for interfaces (finding, understanding and editing descriptions).
+  Example: publication subPropertyOf provisionActivity.
+
+#### Reverse links
+
+Declare a preference of one direction (isPartOf vs hasPart) for certain types...
+
+* Using reverses as labels...
+
+#### Property Chain Axioms As Shorthand Forms
+
+owl:propertyChainAxiom is used for defining simple properties...
+
+* Using chains as labels...
+
+For example, connecting dcterms:publisher, dcterms:issued from a bf:provisionActivity sub-property with rdfs:range bf:Publication, chained to bf:agent and bf:date respectively.
+
+(The astute observer should notice that this is only formally permitted in an OWL Full Regime, since the rdfs:domain of owl:propertyChainAxiom is owl:ObjectProperty, and we readily apply this on owl:DatatypeProperty properties. Our application is admittedly novel, and as with most of our OWL usage, we use it primarily for structured documentation and custom implementations, and only in a theory do we consider the actual use of OWL reasoners for utilizing this information. We do on occasion test this model data with examples put through reasoners, but it is not part of our operations.)
+
+### Extended Design
+
+The following designs are inspired by (and where applicably explicitly specializations of) designs found in the PROV and Schema.org vocabularies. We found them palatable and pragmatic.
+
+#### Qualified Roles
+
+* Roles (c.f. Schema.org Roles, PROV qualified forms, RDF reification)
+
+.. As Reified Relations
+
+.. specialized qualifications (avoiding conflating abstract roles with reified details?)
+
+- property-chain-axioms
+  - for qualified forms (PROV:qualified`*`; schema:Role, schema:QuantitativeValue)
+    - <https://www.w3.org/TR/prov-o/#description-qualified-terms>
+
+#### Types/Aspects
+
+We avoid multiple types in the data we create (including data mapped from MARC21). We find the implementation of services and interfaces to be far more simple by doing so.
+
+Related to this, we put aspects of "type" into the distinct "RDA" properties. This is mainly due to the partitioning of type information in BibFrame into both an instrinsic type, and additional aspects given using bf:content (for bf:Work entities) and bf:media and bf:carrier (for bf:Instance entities).
+
+For discussions about the merit of this, see [Content/Carrier Design Issue](/issues/content-carrier).
+
+#### Typed Enumerations
+
+(c.f. Schema.org Enumeration and skos:Concept / skos:Collection)
+
+Used for our definitions (Vocabulary, Relators, Language, Country, Nationality).
+
+For discussions about of this, see [Concept/Thing Design Issue](/issues/concept-thing).
+
+#### Imperfect Realities (TODO: design issues)
+
+* "raw and partial" stuff, put into notes
+
+* qualifiedAttribution?
+
+See also [Mappings] for how to simplify these (and expand simple forms, respectively).
+
+### Structured Values
+
+* Complex Structured Values (beyond using rdf:value, e.g. bf:mainTitle)
+
+schema:StructuredValue
+
+.. Shrink to Datatype Literals
+.. Error-correct untyped strings (vs. keeping differently cast terms in JSON-LD)
+.. Soft-match partial datatype values (dates...
+  .. turn into rdf:value + :year, :month, :day? (as "virtual" properties of a Datatype)
+.. Interpret Labels and Annotations
+
+- property-chain-axioms
+  - for granularity
+
+- datatypes/structured value folding (@value <-> rdf:value)
+
+#### Example: Annotated Identifiers (BF)
+
+Given:
+
+    :identifiedBy a owl:ObjectProperty .
+
+    :isbn a owl:DatatypeProperty;
+        owl:propertyChainAxiom (
+            [ rdfs:subProperty of :identifiedBy; rdfs:range :ISBN ]
+            rdf:value
+          ) .
+
+These are considered equivalent for value access:
+
+    <> :identifiedBy [ a :ISBN ;
+                ns1:value "123-456-789-0" ;
+                :note "print" ] .
+
+    <> :isbn "123-456-789-0" .
+
+
+### Prototypical Inclusion
+
+- rdfs:subPropertyOf rdfa:copy
+.. rdfa:copy sdo:model sdo:exampleOfWork bf:instanceOf
+.... copying in is simple; splitting out requires differentiated domains
+
+### Record and mainEntity
+
+* define meta and mainEntity
+
+GRAPH <record> {
+
+    <record>
+        :mainEntity <thing> .
+
+    <nominal>
+        :meta <record> ; # description
+        :focus <thing> . # concretization
+
+    <thing>
+        :meta <record> ;
+        :hasAuthority <nominal> . # abstraction
+
+}
+
+#### Records are Administrative Information Resources
+
+Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
+
+For discussions about of this, see [Concept/Thing Design Issue](/issues/concept-thing).
+
+## Further Development
+
+We see the direction of BF as a gradual step towards utilizing RDF more effectively in the library industry. RDF is merely a tool (which at worst just exposes disconnectedness and arbitrary divisions hidden in isolated structures and patterns). It must be emphasised that future coordination, simplification and establishing of simpler patterns of expression has to happen, in order for this path to yield value both for usage, user experience and service, and for efficiency in cataloguing (in the widest sense).
+
+The only practical means for paving the path for such work that we can see, is to make certain mappings explicit, so that designs can converge. Depending on the discussions we have here, we can elaborate more on the list. Right now, interested parties should feel free to explore the ongoing construction of our [vocabulary](/vocab/).
+
+## Services
+
+This model is used to build our [services](/doc/services).
+
+## Design and Vocabulary Issues
+
+See [Issues](/doc/issues).
+
+<!-- References -->
+
+[RDF]: <https://www.w3.org/TR/rdf11-primer/> "RDF 1.1 Primer"
+[LD-Patterns]: <http://patterns.dataincubator.org/book/> "Linked Data Patterns"
+[BF-Analysis]: <https://docs.google.com/document/d/1dIy-FgQsH67Ay0T0O0ulhyRiKjpf_I0AVQ9v8FLmPNo/edit> "Analysis of the BibFrame model"
+[BF-Conventions]: <http://www.loc.gov/bibframe/docs/bibframe2-rdf-conventions.html> "BibFrame 2 RDF Conventions"
+[Getty-Vocab-Concept-Thing]: <http://vocab.getty.edu/doc/#Concept_vs_Thing_Duality> "Getty Vocabularies: Linked Open Data – Concept vs Thing Duality"
+[HaddocksEyes]: <http://www.haddockseyes.com/>
