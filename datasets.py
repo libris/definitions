@@ -35,6 +35,14 @@ def _get_zipped_graph(path, name):
     with zipfile.ZipFile(path, 'r') as zipped:
         return Graph().parse(zipped.open(name), format='turtle')
 
+def _get_repo_version():
+    try:
+        with os.popen(
+                '(cd {} && git describe --tags)'.format(SCRIPT_DIR)
+                ) as pipe:
+            return pipe.read().rstrip()
+    except:
+        return None
 
 class WhelkCompiler(Compiler):
 
@@ -95,6 +103,10 @@ def vocab():
 
     data = build_jsonld(graph)
     del data['@context']
+
+    version = _get_repo_version()
+    if version:
+        data['@graph'][0]['version'] = version
 
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
