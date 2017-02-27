@@ -1,11 +1,16 @@
 Philosophy
 ==========================================
 
+## Purpose
+
+Our goal is for bibliographic data to be usable and interlinkable across sources, applications and institutions. It doesn't have to be complete, but it should be possible to use with other descriptions, in order to form more complete pictures than the parts represent. RDF is an excellent common starting point for this, but the choice, development and practical interoperability of vocabularies are key to enabling these possibilities.
+
+Therefore, we want to use and build upon existing vocabularies as much as possible. If our data is understandable, and we can understand the data of others, if just to some degree of common ground, we have the ability to improve and integrate further.
+
+
 ## Requirements
 
 An effective vocabulary is used to capture distinct and commonly understood information about distinct and commonly understood (types of) things.
-
-Determining distinctness and understandability is a hard problem, commonly approached haphazardly [TODO: reference, to e.g. committee work without follow-up on use cases and requirements]. At least, it is often approached without taking multiple perspectives into account, both broad and narrow.
 
 To measure this, existing practise and needs have to be understood, and that understanding used to measure the effect of proposed pieces of description. It helps to focus on what is *really* sought after (such as the title of one of several variations of a conceptually distinct piece of content), rather than particular forms of description (e.g. "using MARC21 notation, type 246 and then supply pieces under a for the main title, b for the remainder, and so on"). To correlate with existing vocaburies (and abstract reference models) is also important (at least as long as these themselves represent a viable effort taking the above considerations into account).
 
@@ -28,13 +33,15 @@ Build a class hierarchy to explicitly reflect the chosen structure (using multip
 
 When determining their merits and applicability, we need to consider a number of questions. What are they used for? By whom? Where do they originate? How are they maintained? How do they correlate?
 
-#### Choice Guided By Usage
+## Choice Guided By Usage
+
+The primary way to measure the value of our data design is to actively use it. We need to include it in a concrete data and service infrastructure, which we develop iteratively by implementing real applications using it (such as import processes, export routines, navigation and editing interfaces). These determine the context(s) which we, and thus our data model, have to understand, convey and support.
 
 Any given slicing is an approximation and contextually dependent. Is the "core" type to partition on limited to: a) WEMI-level? B) content/media/carrier? C) Only Text, or Novel/Article/...? Put non-"core" in other prop? Like additionalType, genre? In principle: use a type if it brings possible new properties with it, or functions as a common significant distinguisher.
 
 May need a backing "exploded" model for weird MARC where folding isn't possible (multiple carriers, oddly repeated 006...). Don't put all format notes from fields into "hasFormat", but rather distinguish "extentNote" etc, and then fold all if there's not more than one of each...
 
-#### Levels of Ambition (Deciding the Domain)
+## Levels of Ambition (Deciding the Domain)
 
 How much of old/existing nomenclature/practise is preserved and discarded, respectively? (E.g. 100, 700, ...)
 

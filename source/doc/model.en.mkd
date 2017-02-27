@@ -13,10 +13,10 @@ This is a description of the data model chosen by The National Library of Sweden
 
 1. Open up for improvements including (but not limited to):
 
-   - reuse data succinctly, avoiding costly repetition
-   - extend classes, properties and definitions/terms/enumerations for new
-     content and carrier types ans use cases (e.g. accessibility)
-   - coordinate multiple identifiers to facilitate distributed collaboration
+    - reuse data succinctly, avoiding costly repetition
+    - extend classes, properties and definitions/terms/enumerations for new
+      content and carrier types ans use cases (e.g. accessibility)
+    - coordinate multiple identifiers to facilitate distributed collaboration
 
 2. Continue to provide MARC21 to member libraries of the LIBRIS collective, to ensure their business can continue uninterrupted.
 
@@ -26,27 +26,43 @@ See [Standards](/doc/standards).
 
 ## Domain Vocabulary
 
-We have opted to use one, single, unified namespace for our bibliographic descripions, agents, concepts, events, places and "intangible" terms (definitions). This core vocabulary has the IRI <https://id.kb.se/vocab/> and will be referred to as *KBV* from hereon. In examples, we will use the prefix `kbv:` for this purpose:
+We have opted to use one, single, unified namespace for our bibliographic descriptions, agents, concepts, events, places and "intangible" terms (definitions). This core vocabulary has the IRI <https://id.kb.se/vocab/> and will be referred to as *KBV* from hereon. In examples, we will use the prefix `kbv:` for this purpose:
 
     prefix kbv: <https://id.kb.se/vocab/>
 
 This is an Umbrella Vocabulary, where concepts are equivalents to known models,
-  - for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
-  - TODO:or marked as suggestions for inclusion? Or marked as "marc legacy"...
 
-This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping).
+* for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
+* or marked as suggestions for inclusion? Or marked as "legacy"...
 
-(This is similar to the original design of schema.org. While the business case is quite (albeit not fundamentally) different, the scope of schema.org is vaster in scope (but not in depth). This precursor shows that lots of term can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
+### Design Status
+
+This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping). We find that BibFrame in version 2.0 is quite close to the shapes we've been forming in our development. It is a bit lacking in certain details though, and maintains some idiosyncrasies which we still consider as [open issues](/doc/issues).
+
+(This is similar to the original design of Schema.org. While the business case is quite (albeit not fundamentally) different, the scope of Schema.org is vaster in scope (but not in depth). This precursor shows that lots of term can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
 
 (Also see LoC plans for a local vocabulary importing BF2...)
 
-### Vocabulary Design Process
+### Design Process
 
-* base the vocabulary on BibFrame 2
-* extend where lacking
-* use RDA terms before inventing our own
-* then fall back to "sensible" schema.org, DC, PROV, RDA, MADSRDF (in that order)
-* legacy KB-MARC for "incomprehensible" stuff
+Vi base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
+
+Where we need more generic or specialied terms, we carefully choose from sensible definitions that are in accordance with our general design, primarily in:
+
+* RDA terms in cases of linked value definitions (e.g. content/media/carrier; see http://www.rdaregistry.info/termList/)
+* [Schema.org](http://schema.org/)
+* [Dublin Core](http://www.rdaregistry.info/termList/)
+* [W3C PROV](http://www.w3.org/ns/prov#)
+* [RDA](http://www.rdaregistry.info/termList/)
+* [SKOS](http://www.w3.org/2004/02/skos/core#)
+* [MADSRDF](http://www.loc.gov/mads/rdf/v1#)
+
+For compatibility with common forms of published bibliographic linked data, we also strive to coordinate with:
+
+* [FOAF](http://xmlns.com/foaf/0.1/)
+* [BIBO](http://purl.org/ontology/bibo/)
+
+For cases in our MARC21 data where we cannot map to anything from above, we defined terms in our own "MARC vocabulary". This is done to preseve information we cannot readily discard. Our long-term ambition is to get away from those forms of expression.
 
 ### Basic Domain Types
 
@@ -56,49 +72,49 @@ This vocabulary *extends* BibFrame, which is used as the conceptual foundation f
 
 2. Bibliographic records in the MARC sense are partitioned roughly like this in the new domain model:
 
-- Instance
-- Work (data at the Expression and Work levels in the FRBR sense, where we currently link to UniformWork:s using expressionOf (derived from Name+Title and Title Authority records).)
+    - Instance
+    - Work (data at the Expression and Work levels in the FRBR sense, where we currently link to UniformWork:s using expressionOf (derived from Name+Title and Title Authority records).)
 
 3. Authority Data:
 
-  - UniformWork
-  - Person
-  - Organization
-  - Meeting
-  - Event
+    - UniformWork
+    - Person
+    - Organization
+    - Meeting
+    - Event
 
-  - GenreFormTerm, SubjectTerm, ...
+    - GenreFormTerm, SubjectTerm, ...
 
 (Thesis: "real things". Complication: "which strings for display".)
 
 4. Holding Data:
 
-  - Item
+    - Item
 
 5. The remaining data constitutes an extension of the old Authority notions. These items describe:
 - the Vocabulary, enumerations and remaining terms/definitions: ...
 
 In MARC, these items are represented by:
 
-  - fixed definitions: "enumerations"
-  - code lists: Language, Country, Nationality and Relator.
+- fixed definitions: "enumerations"
+- code lists: Language, Country, Nationality and Relator.
 
 ---
 
-Number 2 and 4, and parts of 3 reside solely under libris.kb.se
+Number 2 and 4, and parts of 3 reside solely under `libris.kb.se`
 
-Concepts from 3 and 5 are given identifiers under id.kb.se
+Concepts from 3 and 5 are given identifiers under `id.kb.se`
 
 ---
 
 Too any depth? Map/categorize classes belonging to the "managed" domain ("aligned with BF2 + RDA + mapped back to MARC")? (Alternatively marking the rest as :status :TermTesting).
 
 #### "FRBR"
-Work = Expression|Work = CreativeWork # Content
-Instance = Manifestation = (CreativeWork ProductModel) # Carrier
-Item = Product
-SomeItems = SomeProducts = (Collection Product)
-hasComponent = hasPart[Item]
+* Work = Expression|Work = CreativeWork # Content
+* Instance = Manifestation = (CreativeWork ProductModel) # Carrier
+* Item = Product
+* SomeItems = SomeProducts = (Collection Product)
+* hasComponent = hasPart[Item]
 
 ### Unstable and Legacy Terms
 
@@ -110,7 +126,7 @@ Records
 Provenance
 Services
 
-## Design
+## Data Design
 
 The foundation is RDF, upon which we apply usage patterns. Judicious use of RDF Schema and OWL is applied to formally document the properties, classes and their relationships.
 
@@ -118,7 +134,7 @@ Upon the Basic RDF structure, we have applied a couple of conventions and constr
 
 ### Language Tags
 
-The use of language tags has been kept to a minimum. We use them mainly for vocabulay terms and related "intangible" definitions.
+The use of language tags has been kept to a minimum. We use them mainly for vocabulary terms and related "intangible" definitions.
 
 See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
@@ -177,7 +193,7 @@ We avoid multiple types in the data we create (including data mapped from MARC21
 
 Related to this, we put aspects of "type" into the distinct "RDA" properties. This is mainly due to the partitioning of type information in BibFrame into both an instrinsic type, and additional aspects given using bf:content (for bf:Work entities) and bf:media and bf:carrier (for bf:Instance entities).
 
-For discussions about the merit of this, see [Content/Carrier Design Issue](/issues/content-carrier).
+For discussions about the merit of this, see [Content/Carrier Design Issue](/doc/issues/content-carrier).
 
 #### Typed Enumerations
 
@@ -185,7 +201,7 @@ For discussions about the merit of this, see [Content/Carrier Design Issue](/iss
 
 Used for our definitions (Vocabulary, Relators, Language, Country, Nationality).
 
-For more thought on this, see [Concept/Thing Design Issue](/issues/concept-thing).
+For more thought on this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
 
 ### Structured Values
 
@@ -198,7 +214,7 @@ Base on [schema:StructuredValue](http://schema.org/StructuredValue).
 
 - datatypes/structured value folding (@value <-> rdf:value)
 
-For more thought on this, see [Concept/Thing Design Issue](/issues/concept-thing).
+For more thought on this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
 
 See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
@@ -223,12 +239,6 @@ These are considered equivalent for value access:
     <> :isbn "123-456-789-0" .
 
 
-### Prototypical Inclusion
-
-- rdfs:subPropertyOf rdfa:copy
-.. rdfa:copy sdo:model sdo:exampleOfWork bf:instanceOf
-.... copying in is simple; splitting out requires differentiated domains
-
 ### Record and mainEntity
 
 Structure:
@@ -249,7 +259,7 @@ In the search index, we promote the things, and use our inverse relation, `meta`
 
 Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
 
-For discussions about this, see [Concept/Thing Design Issue](/issues/concept-thing).
+For discussions about this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
 
 ## Further Development
 
