@@ -3,26 +3,22 @@ Data Model
 
 ## Introduction
 
-This is a description of the data model chosen by The National Library of Sweden (KB). It has taken form during the construction of our new cataloguing system. The design is guided by various Linked Data principles and patterns, the foremost aspects of which are:
+This is a description of the data model for catalogues chosen by The [National Library of Sweden (KB)](http://www.kb.se/). It has taken form during the construction of our new cataloguing system. The design is guided by various [Linked Data](https://www.w3.org/wiki/LinkedData) principles and patterns, and is comprised of:
 
-* A Vocabulary defining the terms used for describing our business entities with this data model (their types, properties and relations).
-* A Core Data Structure based on [RDF][].
-* A Conversion Mechanism for turning data in MARC21 into the above structure and terms.
+* A *Data Structure* based on [RDF][].
+* A *Domain Vocabulary* defining the terms used for describing our business entities with this data model (their types, properties and relations). This is defined using [RDFS][] with some use of [OWL][].
+* A *Conversion Mechanism* for turning data in [MARC][] into the above structure and terms.
 
 ## Requirements
 
 1. Open up for improvements including (but not limited to):
 
-    - reuse data succinctly, avoiding costly repetition
+    - reuse data succinctly, avoiding costly repetition;
     - extend classes, properties and definitions/terms/enumerations for new
-      content and carrier types ans use cases (e.g. accessibility)
-    - coordinate multiple identifiers to facilitate distributed collaboration
+      content and carrier types ans use cases (e.g. accessibility);
+    - coordinate multiple identifiers to facilitate distributed collaboration.
 
 2. Continue to provide MARC21 to member libraries of the LIBRIS collective, to ensure their business can continue uninterrupted.
-
-## Related Standards
-
-See [Standards](/doc/standards).
 
 ## Domain Vocabulary
 
@@ -35,21 +31,25 @@ This is an Umbrella Vocabulary, where concepts are equivalents to known models,
 * for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
 * or marked as suggestions for inclusion? Or marked as "legacy"...
 
-### Design Status
+### Alignments
 
 This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping). We find that BibFrame in version 2.0 is quite close to the shapes we've been forming in our development. It is a bit lacking in certain details though, and maintains some idiosyncrasies which we still consider as [open issues](/doc/issues).
 
-(This is similar to the original design of Schema.org. While the business case is quite (albeit not fundamentally) different, the scope of Schema.org is vaster in scope (but not in depth). This precursor shows that lots of term can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
+(This is similar to the original design of Schema.org. While the business case is quite (albeit not fundamentally) different, the scope of Schema.org is vaster in scope (but not in depth). This approach shows that lots of terms can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
 
-(Also see LoC plans for a local vocabulary importing BF2...)
+(On the BibFrame mailing list, it seems that LoC themselves plan a similar approach:
+
+> Instead, LC will define an LC-specific ontology for our bibframe implementation, which will import the bibframe ontology as well as the relators.
+
+Source: <https://listserv.loc.gov/cgi-bin/wa?A2=BIBFRAME;da10a154.1612>.)
 
 ### Design Process
 
 Vi base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
 
-Where we need more generic or specialied terms, we carefully choose from sensible definitions that are in accordance with our general design, primarily in:
+Where we need more generic or specialized terms, we carefully choose from sensible definitions that are in accordance with our general design, primarily in:
 
-* RDA terms in cases of linked value definitions (e.g. content/media/carrier; see http://www.rdaregistry.info/termList/)
+* [RDA term lists](http://www.rdaregistry.info/termList/) to link value definitions (e.g. content/media/carrier)
 * [Schema.org](http://schema.org/)
 * [Dublin Core](http://www.rdaregistry.info/termList/)
 * [W3C PROV](http://www.w3.org/ns/prov#)
@@ -62,13 +62,15 @@ For compatibility with common forms of published bibliographic linked data, we a
 * [FOAF](http://xmlns.com/foaf/0.1/)
 * [BIBO](http://purl.org/ontology/bibo/)
 
-For cases in our MARC21 data where we cannot map to anything from above, we defined terms in our own "MARC vocabulary". This is done to preseve information we cannot readily discard. Our long-term ambition is to get away from those forms of expression.
+For cases in our MARC21 data where we cannot map to anything from above, we defined terms in our own "MARC vocabulary". This is done to preserve information we cannot readily discard. Our long-term ambition is to get away from those forms of expression.
 
-### Basic Domain Types
+It is possible that we also define new, unmapped terms we see need for in the main vocabulary. We may eventually work to standardize and promote these, preferably in BibFrame, if that remains viable long-term.
+
+### Domain Coverage
 
 1. Administrative skeleton
 
-(While the core Record structure is domain independent, certain fairly domain-depdentend details may appear here in the form of properties such as status, and provenance details such as modifying library, (data) sources and licensing.)
+    (While the core Record structure is domain independent, certain fairly domain-depdentend details may appear here in the form of properties such as status, and provenance details such as modifying library, (data) sources and licensing.)
 
 2. Bibliographic records in the MARC sense are partitioned roughly like this in the new domain model:
 
@@ -82,32 +84,28 @@ For cases in our MARC21 data where we cannot map to anything from above, we defi
     - Organization
     - Meeting
     - Event
-
-    - GenreFormTerm, SubjectTerm, ...
-
-(Thesis: "real things". Complication: "which strings for display".)
+    - GenreFormTerm, TopicalTerm, ...
 
 4. Holding Data:
 
     - Item
 
 5. The remaining data constitutes an extension of the old Authority notions. These items describe:
-- the Vocabulary, enumerations and remaining terms/definitions: ...
+
+    - the main vocabulary
+    - Support vocabularies, blending into...
+    - various enumerations 
+    - remaining terms/definitions: ...
 
 In MARC, these items are represented by:
 
 - fixed definitions: "enumerations"
 - code lists: Language, Country, Nationality and Relator.
 
----
+We currently mint URIs for these in the following spaces:
 
-Number 2 and 4, and parts of 3 reside solely under `libris.kb.se`
-
-Concepts from 3 and 5 are given identifiers under `id.kb.se`
-
----
-
-Too any depth? Map/categorize classes belonging to the "managed" domain ("aligned with BF2 + RDA + mapped back to MARC")? (Alternatively marking the rest as :status :TermTesting).
+* Number 2 and 4, and parts of 3 reside solely under <https://libris.kb.se/>.
+* Concept Terms from 3 and 5 are given identifiers under <https://id.kb.se/>.
 
 #### "FRBR"
 * Work = Expression|Work = CreativeWork # Content
@@ -126,7 +124,7 @@ Records
 Provenance
 Services
 
-## Data Design
+## Data Structure
 
 The foundation is RDF, upon which we apply usage patterns. Judicious use of RDF Schema and OWL is applied to formally document the properties, classes and their relationships.
 
@@ -142,7 +140,7 @@ See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
 BNodes are used for Qualified Roles and Structured Values.
 
-We also (currently) use bnodes for locally described resources for which there is no authoritative URI... If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of somthing – and refering to that elsewhere – which turns out to be false).
+We also (currently) use bnodes for locally described resources for which there is no authoritative URI... If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of something – and refering to that elsewhere – which turns out to be false).
 
 .. To be clear. the distinction between structured value bnodes (e.g. hasTitle, contribution) is determined by the class definition, not by the presence/absence of an @id.
 
@@ -191,7 +189,7 @@ We can use owl:propertyChainAxiom to correlate these with simple links...
 
 We avoid multiple types in the data we create (including data mapped from MARC21). We find the implementation of services and interfaces to be far more simple by doing so.
 
-Related to this, we put aspects of "type" into the distinct "RDA" properties. This is mainly due to the partitioning of type information in BibFrame into both an instrinsic type, and additional aspects given using bf:content (for bf:Work entities) and bf:media and bf:carrier (for bf:Instance entities).
+Related to this, we put aspects of "type" into the distinct "RDA" properties. This is mainly due to the partitioning of type information in BibFrame into both an intrinsic type, and additional aspects given using bf:content (for bf:Work entities) and bf:media and bf:carrier (for bf:Instance entities).
 
 For discussions about the merit of this, see [Content/Carrier Design Issue](/doc/issues/content-carrier).
 
@@ -259,25 +257,34 @@ In the search index, we promote the things, and use our inverse relation, `meta`
 
 Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
 
-For discussions about this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
+For discussions about this, see [Record/Thing Design Issue](/doc/issues/record-thing).
 
 ## Further Development
 
-We see the direction of BF as a gradual step towards utilizing RDF more effectively in the library industry. RDF is merely a tool (which at worst just exposes disconnectedness and arbitrary divisions hidden in isolated structures and patterns). It must be emphasised that future coordination, simplification and establishing of simpler patterns of expression has to happen, in order for this path to yield value both for usage, user experience and service, and for efficiency in cataloguing (in the widest sense).
+We see the direction of BibFrame as a gradual step towards utilizing RDF more effectively in the library industry. RDF is merely a tool (which at worst just exposes disconnectedness and arbitrary divisions hidden in isolated structures and patterns). It must be emphasised that future coordination, simplification and establishing of simpler patterns of expression has to happen, in order for this path to yield value both for usage, user experience and service, and for efficiency in cataloguing (in the widest sense).
 
 The only practical means for paving the path for such work that we can see, is to make certain mappings explicit, so that designs can converge. Depending on the discussions we have here, we can elaborate more on the list. Right now, interested parties should feel free to explore the ongoing construction of our [vocabulary](/vocab/).
 
-## Services
+## Further Reading
 
-This model is used to build our [services](/doc/services).
-
-## Design and Vocabulary Issues
+### Design and Vocabulary Issues
 
 See [Issues](/doc/issues).
+
+### Related Standards
+
+See [Standards](/doc/standards).
+
+### Services
+
+This model is used to build our [services](/doc/services).
 
 <!-- References -->
 
 [RDF]: <https://www.w3.org/TR/rdf11-primer/> "RDF 1.1 Primer"
+[RDFS]: <https://www.w3.org/TR/rdf-schema/> "RDF Schema 1.1"
+[OWL]: <https://www.w3.org/TR/owl2-overview/> "OWL 2 Web Ontology Language "
+[MARC]: <https://www.loc.gov/marc/>
 [LD-Patterns]: <http://patterns.dataincubator.org/book/> "Linked Data Patterns"
 [BF-Analysis]: <https://docs.google.com/document/d/1dIy-FgQsH67Ay0T0O0ulhyRiKjpf_I0AVQ9v8FLmPNo/edit> "Analysis of the BibFrame model"
 [BF-Conventions]: <http://www.loc.gov/bibframe/docs/bibframe2-rdf-conventions.html> "BibFrame 2 RDF Conventions"

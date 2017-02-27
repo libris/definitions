@@ -1,7 +1,5 @@
 # Record/Thing
 
-(See also Term/Focus.)
-
 * Some items are just documents; we still put their administrative metadata in a "record", but note that they are embedded?
 
 * for all other things, sparse records administrate the things (even vocab and skos terms)
@@ -10,39 +8,46 @@
 
 * Mostly(?), if a thing is given, it's the most interesting entity (possible conflict: AgentTerm and Agent...; from the library management POV, not for discovery...)
 
-    * SOURCE:
-        <1> [
-            {id: 1, a Record, mainEntity 1#term},
-            {id: 1#it, a Person}
-            {id: 1#term, a Term; focus 1#it}
-        ]
+    SOURCE:
 
-    FRAME-4-INDEX:
-        Term
-            focus
-                Person
-            meta
-                Record
+          <1> [
+              {id: 1, a Record, mainEntity 1#term},
+              {id: 1#it, a Person}
+              {id: 1#term, a Term; focus 1#it}
+          ]
 
-    * SOURCE:
-        <2> [
-            {id: 2, a Record, mainEntity 2#it},
-            {id: 2#it, a Person}
-        ]
-    FRAME-4-INDEX:
-        Person
-            meta
-                Record
+    INDEX:
 
-    * SOURCE:
-        <2> [
-            {id: 3, a Document}
-        ]
-    FRAME-4-INDEX:
-        Document
-            meta
-                Record (known-admin-parts-of)
+          Term
+              focus
+                  Person
+              meta
+                  Record
 
+    SOURCE:
+
+          <2> [
+              {id: 2, a Record, mainEntity 2#it},
+              {id: 2#it, a Person}
+          ]
+
+    INDEX:
+
+          Person
+              meta
+                  Record
+
+    SOURCE:
+
+          <2> [
+              {id: 3, a Document}
+          ]
+
+    INDEX:
+
+          Document
+              meta
+                  Record (known-admin-parts-of)
 
 We *no longer* use:
 
@@ -60,3 +65,5 @@ We *no longer* use:
         :hasAuthority <nominal> . # abstraction
 
     }
+
+(See also [Concept/Thing Design Issue](/doc/issues/concept-thing).)
