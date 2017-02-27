@@ -61,27 +61,27 @@ This vocabulary *extends* BibFrame, which is used as the conceptual foundation f
 
 3. Authority Data:
 
-- UniformWork
-- Person
-- Organization
-- Meeting
-- Event
+  - UniformWork
+  - Person
+  - Organization
+  - Meeting
+  - Event
 
-- GenreFormTerm, SubjectTerm, ...
+  - GenreFormTerm, SubjectTerm, ...
 
 (Thesis: "real things". Complication: "which strings for display".)
 
 4. Holding Data:
 
-- Item
+  - Item
 
 5. The remaining data constitutes an extension of the old Authority notions. These items describe:
 - the Vocabulary, enumerations and remaining terms/definitions: ...
 
 In MARC, these items are represented by:
 
-- fixed definitions: "enumerations"
-- code lists: Language, County, Nationality and Relator.
+  - fixed definitions: "enumerations"
+  - code lists: Language, Country, Nationality and Relator.
 
 ---
 
@@ -122,10 +122,6 @@ The use of language tags has been kept to a minimum. We use them mainly for voca
 
 See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
-### RDFS and OWL Semantics
-
-* "we use sameAs for..."
-
 ### The Use of BNodes
 
 BNodes are used for Qualified Roles and Structured Values.
@@ -133,6 +129,10 @@ BNodes are used for Qualified Roles and Structured Values.
 We also (currently) use bnodes for locally described resources for which there is no authoritative URI... If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of somthing – and refering to that elsewhere – which turns out to be false).
 
 .. To be clear. the distinction between structured value bnodes (e.g. hasTitle, contribution) is determined by the class definition, not by the presence/absence of an @id.
+
+### RDFS and OWL Semantics
+
+* "we use sameAs for..."
 
 #### Distinct SubClasses
 
@@ -157,7 +157,7 @@ owl:propertyChainAxiom is used for defining simple properties...
 
 For example, connecting dcterms:publisher, dcterms:issued from a bf:provisionActivity sub-property with rdfs:range bf:Publication, chained to bf:agent and bf:date respectively.
 
-(The astute observer should notice that this is only formally permitted in an OWL Full Regime, since the rdfs:domain of owl:propertyChainAxiom is owl:ObjectProperty, and we readily apply this on owl:DatatypeProperty properties. Our application is admittedly novel, and as with most of our OWL usage, we use it primarily for structured documentation and custom implementations, and only in a theory do we consider the actual use of OWL reasoners for utilizing this information. We do on occasion test this model data with examples put through reasoners, but it is not part of our operations.)
+(The astute observer should notice that this is only formally permitted in an OWL Full Regime, since the rdfs:domain of owl:propertyChainAxiom is owl:ObjectProperty, and we readily apply this on owl:DatatypeProperty properties. Our application is admittedly novel, and as with most of our OWL usage, we use it primarily for structured documentation and custom implementations, and only in theory do we consider the actual use of OWL reasoners for utilizing this information. We do on occasion test this model data with examples put through reasoners, but it is not part of our operations.)
 
 ### Extended Design
 
