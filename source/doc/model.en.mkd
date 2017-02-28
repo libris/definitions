@@ -98,7 +98,7 @@ It is possible that we also define new, unmapped terms we see need for in the ma
     - the main vocabulary
     - Support vocabularies, blending into...
     - various enumerations 
-    - remaining terms/definitions: ...
+    - remaining definitions of intangibles
 
 In MARC, these items are represented by:
 
@@ -145,9 +145,9 @@ See also [Literal Structures Design Issue](/doc/issues/literal-structures).
 
 BNodes are used for Qualified Roles and Structured Values.
 
-We also (currently) use bnodes for locally described resources for which there is no authoritative URI... If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of something – and refering to that elsewhere – which turns out to be false).
+We also (currently) use bnodes for locally described resources for which there is no authoritative URI. If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of something – and refering to that elsewhere – which turns out to be false).
 
-.. To be clear. the distinction between structured value bnodes (e.g. hasTitle, contribution) is determined by the class definition, not by the presence/absence of an @id.
+To be clear, the distinction between structured values and roles (e.g. hasTitle, contribution) is determined by nodes belonging to one of those classes (including subclaesses thereof), not by the presence/absence of an identifier on the node.
 
 ### RDFS and OWL Semantics
 
@@ -188,9 +188,11 @@ The following designs are inspired by (and where applicably explicitly specializ
 
 This is an application of qualified forms (as also exemplified in [PROV qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) and [schema:Role](http://schema.org/Role).)
 
-We can use owl:propertyChainAxiom to correlate these with simple links...
+We can use owl:propertyChainAxiom here to, to correlate these with simple links and properties.
 
+<!--
 .. Also as Reified Relations? .. Those would be rather specialized qualifications (and we want to avoid conflating abstract roles with reified details, correct? (c.f. RDF reification.))
+-->
 
 #### Types/Aspects
 
