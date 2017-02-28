@@ -26,10 +26,13 @@ We have opted to use one, single, unified namespace for our bibliographic descri
 
     prefix kbv: <https://id.kb.se/vocab/>
 
-This is an Umbrella Vocabulary, where concepts are equivalents to known models,
+This is an Umbrella Vocabulary, where concepts are equivalents to known models, tailed for our specfic application needs. These include:
 
-* for labelling and for idiomatic, usage-driven subclasses/domains/ranges (and e.g. lenses);
-* or marked as suggestions for inclusion? Or marked as "legacy"...
+* labelling,
+* restricted domains/ranges,
+* display lenses for ordered properties,
+* mappings for wider alignments,
+* legacy terms for interoperability with otherwise unmapped data.
 
 ### Alignments
 
@@ -107,6 +110,7 @@ We currently mint URIs for these in the following spaces:
 * Number 2 and 4, and parts of 3 reside solely under <https://libris.kb.se/>.
 * Concept Terms from 3 and 5 are given identifiers under <https://id.kb.se/>.
 
+<!--
 #### "FRBR"
 * Work = Expression|Work = CreativeWork # Content
 * Instance = Manifestation = (CreativeWork ProductModel) # Carrier
@@ -123,6 +127,7 @@ NOTE: marc: legacy terms.
 Records
 Provenance
 Services
+-->
 
 ## Data Structure
 
@@ -146,7 +151,7 @@ We also (currently) use bnodes for locally described resources for which there i
 
 ### RDFS and OWL Semantics
 
-* "we use sameAs for..."
+We use owl:sameAs pervasively to handle aliases and legacy IDs.
 
 #### Distinct SubClasses
 
@@ -157,17 +162,19 @@ Similar to common vocabularies like Schema.org and BibFrame. We do some more lav
 * Use distinct subproperties where it is apparently usable for interfaces (finding, understanding and editing descriptions).
   Example: publication subPropertyOf provisionActivity.
 
+<!--
 #### Reverse links
 
 Declare a preference of one direction (isPartOf vs hasPart) for certain types...
 
 * Using reverses as labels...
+-->
 
 #### Property Chain Axioms As Shorthand Forms
 
-owl:propertyChainAxiom is used for defining simple properties...
+owl:propertyChainAxiom is used for defining simple properties out of chained statements.
 
-* Using chains as labels...
+We also use them to be able to assign simple labels to such chains, for use in search, presentation and editing interfaces.
 
 For example, connecting dcterms:publisher, dcterms:issued from a bf:provisionActivity sub-property with rdfs:range bf:Publication, chained to bf:agent and bf:date respectively.
 
@@ -236,6 +243,14 @@ These are considered equivalent for value access:
 
     <> :isbn "123-456-789-0" .
 
+
+<!--
+### Prototypical Inclusion
+
+- rdfs:subPropertyOf rdfa:copy
+.. rdfa:copy sdo:model sdo:exampleOfWork bf:instanceOf
+.... copying in is simple; splitting out requires differentiated domains
+-->
 
 ### Record and mainEntity
 
