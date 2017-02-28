@@ -15,7 +15,7 @@ This is a description of the data model for catalogues chosen by The [National L
 
     - reuse data succinctly, avoiding costly repetition;
     - extend classes, properties and definitions/terms/enumerations for new
-      content and carrier types ans use cases (e.g. accessibility);
+      content and carrier types and use cases (e.g. accessibility);
     - coordinate multiple identifiers to facilitate distributed collaboration.
 
 2. Continue to provide MARC21 to member libraries of the LIBRIS collective, to ensure their business can continue uninterrupted.
@@ -26,7 +26,7 @@ We have opted to use one, single, unified namespace for our bibliographic descri
 
     prefix kbv: <https://id.kb.se/vocab/>
 
-This is an Umbrella Vocabulary, where concepts are equivalents to known models, tailed for our specfic application needs. These include:
+This is an Umbrella Vocabulary, where concepts are equivalent to known models, tailored for our specfic application needs. These include:
 
 * labelling,
 * restricted domains/ranges,
@@ -48,7 +48,7 @@ Source: <https://listserv.loc.gov/cgi-bin/wa?A2=BIBFRAME;da10a154.1612>.)
 
 ### Design Process
 
-Vi base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
+We base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
 
 Where we need more generic or specialized terms, we carefully choose from sensible definitions that are in accordance with our general design, primarily in:
 
@@ -97,7 +97,7 @@ It is possible that we also define new, unmapped terms we see need for in the ma
 
     - the main vocabulary
     - Support vocabularies, blending into...
-    - various enumerations 
+    - various enumerations
     - remaining definitions of intangibles
 
 In MARC, these items are represented by:
@@ -147,7 +147,7 @@ BNodes are used for Qualified Roles and Structured Values.
 
 We also (currently) use bnodes for locally described resources for which there is no authoritative URI. If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of something – and refering to that elsewhere – which turns out to be false).
 
-To be clear, the distinction between structured values and roles (e.g. hasTitle, contribution) is determined by nodes belonging to one of those classes (including subclaesses thereof), not by the presence/absence of an identifier on the node.
+To be clear, the distinction between structured values and roles (e.g. hasTitle, contribution) is determined by nodes belonging to one of those classes (including subclasses thereof), not by the presence/absence of an identifier on the node.
 
 ### RDFS and OWL Semantics
 
@@ -188,7 +188,7 @@ The following designs are inspired by (and where applicably explicitly specializ
 
 This is an application of qualified forms (as also exemplified in [PROV qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) and [schema:Role](http://schema.org/Role).)
 
-We can use owl:propertyChainAxiom here to, to correlate these with simple links and properties.
+We can use owl:propertyChainAxiom here too, to correlate these with simple links and properties.
 
 <!--
 .. Also as Reified Relations? .. Those would be rather specialized qualifications (and we want to avoid conflating abstract roles with reified details, correct? (c.f. RDF reification.))
@@ -272,7 +272,7 @@ In the search index, we promote the things, and use our inverse relation, `meta`
 
 #### Records are Administrative Information Resources
 
-Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
+Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.)
 
 For discussions about this, see [Record/Thing Design Issue](https://github.com/libris/definitions/tree/0.5.0/source/doc/issues/record-thing.en.mkd).
 
