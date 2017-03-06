@@ -15,7 +15,7 @@ This is a description of the data model for catalogues chosen by The [National L
 
     - reuse data succinctly, avoiding costly repetition;
     - extend classes, properties and definitions/terms/enumerations for new
-      content and carrier types ans use cases (e.g. accessibility);
+      content and carrier types and use cases (e.g. accessibility);
     - coordinate multiple identifiers to facilitate distributed collaboration.
 
 2. Continue to provide MARC21 to member libraries of the LIBRIS collective, to ensure their business can continue uninterrupted.
@@ -26,7 +26,7 @@ We have opted to use one, single, unified namespace for our bibliographic descri
 
     prefix kbv: <https://id.kb.se/vocab/>
 
-This is an Umbrella Vocabulary, where concepts are equivalents to known models, tailed for our specfic application needs. These include:
+This is an Umbrella Vocabulary, where concepts are equivalent to known models, tailored for our specfic application needs. These include:
 
 * labelling,
 * restricted domains/ranges,
@@ -36,7 +36,7 @@ This is an Umbrella Vocabulary, where concepts are equivalents to known models, 
 
 ### Alignments
 
-This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping). We find that BibFrame in version 2.0 is quite close to the shapes we've been forming in our development. It is a bit lacking in certain details though, and maintains some idiosyncrasies which we still consider as [open issues](/doc/issues).
+This vocabulary *extends* BibFrame, which is used as the conceptual foundation for the design. This gives us some leeway for changes (provided that we knowingly maintain this mapping). We find that BibFrame in version 2.0 is quite close to the shapes we've been forming in our development. It is a bit lacking in certain details though, and maintains some idiosyncrasies which we still consider as [open issues](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues).
 
 (This is similar to the original design of Schema.org. While the business case is quite (albeit not fundamentally) different, the scope of Schema.org is vaster in scope (but not in depth). This approach shows that lots of terms can, if judiciously named and coordinated, fit in one design. We have the possibility at any time to divide our namespace, if we encounter a limit somewhere down the line.)
 
@@ -48,13 +48,13 @@ Source: <https://listserv.loc.gov/cgi-bin/wa?A2=BIBFRAME;da10a154.1612>.)
 
 ### Design Process
 
-Vi base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
+We base our vocabulary explicitly on [BibFrame 2.0](http://id.loc.gov/ontologies/bibframe.html), by The Library of Congress.
 
 Where we need more generic or specialized terms, we carefully choose from sensible definitions that are in accordance with our general design, primarily in:
 
 * [RDA term lists](http://www.rdaregistry.info/termList/) to link value definitions (e.g. content/media/carrier)
 * [Schema.org](http://schema.org/)
-* [Dublin Core](http://www.rdaregistry.info/termList/)
+* [Dublin Core](http://dublincore.org/)
 * [W3C PROV](http://www.w3.org/ns/prov#)
 * [RDA](http://www.rdaregistry.info/termList/)
 * [SKOS](http://www.w3.org/2004/02/skos/core#)
@@ -97,7 +97,7 @@ It is possible that we also define new, unmapped terms we see need for in the ma
 
     - the main vocabulary
     - Support vocabularies, blending into...
-    - various enumerations 
+    - various enumerations
     - remaining definitions of intangibles
 
 In MARC, these items are represented by:
@@ -139,7 +139,7 @@ Upon the Basic RDF structure, we have applied a couple of conventions and constr
 
 The use of language tags has been kept to a minimum. We use them mainly for vocabulary terms and related "intangible" definitions.
 
-See also [Literal Structures Design Issue](/doc/issues/literal-structures).
+See also [Literal Structures Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/literal-structures.en.mkd).
 
 ### The Use of BNodes
 
@@ -147,7 +147,7 @@ BNodes are used for Qualified Roles and Structured Values.
 
 We also (currently) use bnodes for locally described resources for which there is no authoritative URI. If need arise, we might assign fragment identifiers for these, in order to allow linking and further description of these "unknowns". We do *not* recommend this use at this time though, since it might lead to misunderstandings (such as seemingly knowing the identity of something – and refering to that elsewhere – which turns out to be false).
 
-To be clear, the distinction between structured values and roles (e.g. hasTitle, contribution) is determined by nodes belonging to one of those classes (including subclaesses thereof), not by the presence/absence of an identifier on the node.
+To be clear, the distinction between structured values and roles (e.g. hasTitle, contribution) is determined by nodes belonging to one of those classes (including subclasses thereof), not by the presence/absence of an identifier on the node.
 
 ### RDFS and OWL Semantics
 
@@ -188,7 +188,7 @@ The following designs are inspired by (and where applicably explicitly specializ
 
 This is an application of qualified forms (as also exemplified in [PROV qualified terms](https://www.w3.org/TR/prov-o/#description-qualified-terms) and [schema:Role](http://schema.org/Role).)
 
-We can use owl:propertyChainAxiom here to, to correlate these with simple links and properties.
+We can use owl:propertyChainAxiom here too, to correlate these with simple links and properties.
 
 <!--
 .. Also as Reified Relations? .. Those would be rather specialized qualifications (and we want to avoid conflating abstract roles with reified details, correct? (c.f. RDF reification.))
@@ -200,7 +200,7 @@ We avoid multiple types in the data we create (including data mapped from MARC21
 
 Related to this, we put aspects of "type" into the distinct "RDA" properties. This is mainly due to the partitioning of type information in BibFrame into both an intrinsic type, and additional aspects given using bf:content (for bf:Work entities) and bf:media and bf:carrier (for bf:Instance entities).
 
-For discussions about the merit of this, see [Content/Carrier Design Issue](/doc/issues/content-carrier).
+For discussions about the merit of this, see [Content/Carrier Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/content-carrier.en.mkd).
 
 #### Typed Enumerations
 
@@ -208,7 +208,7 @@ For discussions about the merit of this, see [Content/Carrier Design Issue](/doc
 
 Used for our definitions (Vocabulary, Relators, Language, Country, Nationality).
 
-For more thought on this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
+For more thought on this, see [Concept/Thing Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/concept-thing.en.mkd).
 
 ### Structured Values
 
@@ -221,9 +221,9 @@ Base on [schema:StructuredValue](http://schema.org/StructuredValue).
 
 - datatypes/structured value folding (@value <-> rdf:value)
 
-For more thought on this, see [Concept/Thing Design Issue](/doc/issues/concept-thing).
+For more thought on this, see [Concept/Thing Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/concept-thing.en.mkd).
 
-See also [Literal Structures Design Issue](/doc/issues/literal-structures).
+See also [Literal Structures Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/literal-structures.en.mkd).
 
 #### Example: Annotated Identifiers (BF)
 
@@ -272,29 +272,29 @@ In the search index, we promote the things, and use our inverse relation, `meta`
 
 #### Records are Administrative Information Resources
 
-Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.) 
+Records only *carry* library business information. They are *not* skos:Concepts (the latter are just very abstract and/or naive notions of things.)
 
-For discussions about this, see [Record/Thing Design Issue](/doc/issues/record-thing).
+For discussions about this, see [Record/Thing Design Issue](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues/record-thing.en.mkd).
 
 ## Further Development
 
 We see the direction of BibFrame as a gradual step towards utilizing RDF more effectively in the library industry. RDF is merely a tool (which at worst just exposes disconnectedness and arbitrary divisions hidden in isolated structures and patterns). It must be emphasised that future coordination, simplification and establishing of simpler patterns of expression has to happen, in order for this path to yield value both for usage, user experience and service, and for efficiency in cataloguing (in the widest sense).
 
-The only practical means for paving the path for such work that we can see, is to make certain mappings explicit, so that designs can converge. Depending on the discussions we have here, we can elaborate more on the list. Right now, interested parties should feel free to explore the ongoing construction of our [vocabulary](/vocab/).
+The only practical means for paving the path for such work that we can see, is to make certain mappings explicit, so that designs can converge. Depending on the discussions we have here, we can elaborate more on the list. Right now, interested parties should feel free to explore the ongoing construction of our [vocabulary](https://id.kb.se/vocab/).
 
 ## Further Reading
 
 ### Design and Vocabulary Issues
 
-See [Issues](/doc/issues).
+See [Issues](https://github.com/libris/definitions/tree/0.5.2/source/doc/issues).
 
 ### Related Standards
 
-See [Standards](/doc/standards).
+See [Standards](https://github.com/libris/definitions/tree/0.5.2/source/doc/standards.en.mkd).
 
 ### Services
 
-This model is used to build our [services](/doc/services).
+This model is used to build our [services](https://github.com/libris/definitions/tree/0.5.2/source/doc/services.en.mkd).
 
 <!-- References -->
 
