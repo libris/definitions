@@ -16,6 +16,8 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix sindsearch: <http://sindice.com/vocab/search#> .
+@prefix opensearch: <> .
 
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -143,9 +145,11 @@
     rdfs:domain :PartialCollectionView;
     owl:equivalentProperty hydra:member .
 
-:itemsPerPage a owl:DatatypeProperty .
+:itemsPerPage a owl:DatatypeProperty ;
+    owl:equivalentProperty  opensearch:itemsPerPage, sindsearch:itemsPerPage .
 
-:itemOffset a owl:DatatypeProperty .
+:itemOffset a owl:DatatypeProperty ;
+    owl:equivalentProperty sindsearch:indexOffset .
 
 :search a owl:ObjectProperty;
     owl:equivalentProperty hydra:search;
