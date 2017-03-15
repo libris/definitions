@@ -20,11 +20,14 @@
 
 
 : a owl:Ontology;
+    owl:sameAs <https://id.kb.se/vocab> ;
     rdfs:label "KB Base Vocabulary"@en;
     rdfs:label "KBs basvokabulär"@sv;
     rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@sv;
     rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
-    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bf: .
+    dc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bf: ;
+    skos:hasTopConcept :Instance, :Work, :Item, :Agent, :IndexTerm .
 
 # Various sources beyond the linked defintions themselves:
 # - <http://bibframe.org/documentation/resource-types/#proposal>
@@ -61,6 +64,10 @@ rdf:type a owl:ObjectProperty;
     owl:equivalentClass sdo:StructuredValue;
     skos:closeMatch rdfs:Datatype;
     rdfs:label "Strukturerat värde"@sv .
+
+:QualifiedRole a owl:Class;
+    owl:equivalentClass sdo:Role;
+    rdfs:label "Kvalificerad roll"@sv .
 
 ##
 # Common Properties

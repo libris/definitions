@@ -12,8 +12,11 @@ kbv:Work rdfs:subClassOf kbv:Endeavour .
 kbv:Instance rdfs:subClassOf kbv:Endeavour .
 kbv:Item rdfs:subClassOf kbv:Creation .
 
-kbv:Record a owl:Class; rdfs:subClassOf rdfs:Resource .
+kbv:Record a owl:Class; rdfs:subClassOf kbv:AdminMetadata .
 kbv:adminMetadata rdfs:domain kbv:Record .
+
+kbv:created owl:equivalentProperty bf2:creationDate .
+kbv:modified owl:equivalentProperty bf2:changeDate .
 
 kbv:identifiedBy rdfs:domain kbv:Creation .
 kbv:language rdfs:domain kbv:Creation .
@@ -27,6 +30,16 @@ kbv:ContentType owl:equivalentClass bf2:Content .
 kbv:MediaType owl:equivalentClass bf2:Media .
 kbv:CarrierType owl:equivalentClass bf2:Carrier .
 
+kbv:issuanceType owl:equivalentProperty bf2:issuance .
+kbv:IssuanceType owl:equivalentClass bf2:Issuance .
+
+kbv:hasNotation owl:equivalentProperty bf2:notation .
+
+kbv:notation owl:equivalentProperty bf2:code .
+
 kbv:ISBN a rdfs:Datatype; owl:equivalentClass bf2:Isbn .
 kbv:ISSN a rdfs:Datatype; owl:equivalentClass bf2:Issn .
 kbv:LCCN a rdfs:Datatype; owl:equivalentClass bf2:Lccn .
+kbv:CODEN a rdfs:Datatype; owl:equivalentClass bf2:Coden .
+kbv:NBN a rdfs:Datatype; owl:equivalentClass bf2:Nbn .
+kbv:STRN a rdfs:Datatype; owl:equivalentClass bf2:Strn .

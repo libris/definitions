@@ -13,8 +13,6 @@
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
-@prefix l: <http://w3id.org/libris/logic/> .
-
 @prefix : <https://id.kb.se/vocab/> .
 
 
@@ -31,49 +29,10 @@
     owl:equivalentProperty sdo:additionalName;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
-:attributedTo a owl:ObjectProperty;
-    rdfs:label "Huvuduppslag"@sv;
-    rdfs:comment "Ange namnet för först nämnda upphov här, om det finns högst tre upphov. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
-    owl:equivalentProperty prov:wasAttributedTo;
-    owl:propertyChainAxiom ( :qualifiedAttribution :agent ) .
-
-:influencedBy a owl:ObjectProperty;
-    rdfs:label "Biuppslag"@sv;
-    rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
-    owl:equivalentProperty prov:wasInfluencedBy .
-
-# TODO: these constructs, used below, will yield inferred statements, which if
-# interpreted, will produce direct links using subject of hasStatement,
-# predicate(s) from role(s) and object from an object property. Like:
-#CONSTRUCT { ?s ?p ?o } WHERE {
-#    ?s [rdfs:subPropertyOf? l:hasStatement] [
-#            [rdfs:subPropertyOf? l:role] ?p;
-#            [rdfs:subPropertyOf? l:object] ?o ]
-#}
-l:hasStatement a owl:ObjectProperty;
-    rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
-    rdfs:range rdf:Statement .
-l:role rdfs:subPropertyOf rdf:predicate .
-l:object rdfs:subPropertyOf rdf:object .
-
-:qualifiedAttribution a owl:ObjectProperty;
-    rdfs:label "Detaljerat huvuduppslag"@sv;
-    rdfs:subPropertyOf l:hasStatement;
-    owl:equivalentProperty bf2:contribution, prov:qualifiedAttribution .
-
-:qualifiedInfluence a owl:ObjectProperty;
-    rdfs:label "Detaljerat biuppslag"@sv;
-    rdfs:subPropertyOf l:hasStatement;
-    owl:equivalentProperty prov:qualifiedInfluence .
-
-:role a owl:ObjectProperty;
-    rdfs:label "roll"@sv;
-    rdfs:subPropertyOf l:role;
-    owl:equivalentProperty prov:hadRole .
-
 :Agent a owl:Class;
     rdfs:label "Aktör"@sv;
-    owl:equivalentClass bf2:Agent, foaf:Agent, prov:Agent .
+    owl:equivalentClass bf2:Agent ;
+    rdfs:subClassOf rdfs:Resource, foaf:Agent, prov:Agent .
 
 :Person a owl:Class;
     rdfs:label "Person"@sv;
@@ -125,9 +84,7 @@ l:object rdfs:subPropertyOf rdf:object .
     owl:equivalentProperty sdo:birthDate .
 
 :birthYear a owl:DatatypeProperty;
-    #a l:ComputedProperty; l:sourceProperty :birthDate, l:apply xsd:gYear;
-    ## or
-    #owl:propertyChainAxiom (:birthDate :year); # if typed literal is a "virtual" resource
+    #owl:propertyChainAxiom (:birthDate :year); # given that :Year rdfs:Datatype is defined as a "virtual" resource...
     rdfs:subPropertyOf :birthDate;
     rdfs:range :Year;
     rdfs:label "birth year"@en, "födelseår"@sv .
@@ -163,9 +120,10 @@ l:object rdfs:subPropertyOf rdf:object .
 
 :Library a owl:Class;
     rdfs:label "Library"@en, "Bibliotek"@sv;
-    rdfs:subClassOf :Organisation;
+    rdfs:subClassOf :Organization;
     owl:equivalentClass sdo:Library .
 
-:sigel a owl:ObjectProperty;
+:sigel a owl:DatatypeProperty;
+    rdfs:label "Sigel"@sv ;
     rdfs:subPropertyOf skos:notation;
     rdfs:domain :Library .

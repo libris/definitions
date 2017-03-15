@@ -1,0 +1,104 @@
+# Design Issues
+
+We document our design as issues we want to or have resolved.
+
+Detailed design issues have their own documents.
+
+* [Record/Thing](/doc/issues/record-thing) (solved)
+* [Concept/Thing](/doc/issues/concept-thing) (solved)
+* [Content/Carrier](/doc/issues/content-carrier) (open)
+* [Literal Structures](/doc/issues/literal-structures) (open)
+
+Following are sections of open discussions that we haven't yet formalized into specific issues.
+
+## Prefer domainIncludes/rangeIncludes over Abstract Base Classes
+
+Schema.org defines the properties http://schema.org/domainIncludes and http://schema.org/rangeIncludes, which may be preferable to our current abstact Endeavor and Creation classes which groups Work, Instance and Item classes based on the "text only" definitions of these groups in BibFrame 2.
+
+## Categorize Classes For Various Uses
+
+Since we need to stay compatible with MARC21, but not fully restricted by it, we need to explain when data is fully compatible and when it extends beyond what (our mechanics for dealing with) MARC21 is capable of.
+
+We have yet to formally categorize classes belonging to e.g. a "managed" domain (those that we have aligned with BF2 and RDA value terms, which are also mappable from (and back to) MARC"). In doing so, in order to promote other valuable classes (i.e. those useful for covering specific forms of content and material which are missing in both BF2 and RDA), we need to mark unstable notions (`:status :TermTesting`).
+
+## BibFrame Assessment
+
+### Documentation:
+- English documentation literals should have language tags
+- some labels don't match the property (e.g. "Provider" for provisionActivity).
+- texts seem generated, which is fine and good, but "Unspecified" texts seem to be errors...
+- Pedantic:
+    - link to license (CC0 according to <https://www.loc.gov/bibframe/faqs/#q08>):
+      dc:license <http://creativecommons.org/publicdomain/zero/1.0/>
+    - link <term> rdfs:isDefinedBy <>
+
+### Domains and Ranges
+- Some domains and ranges should be given (e.g. :media -> :Media; music`*` of :Music...), at least with *hints* (schema:domainIncludes, schema:rangeIncludes)
+- use schema:domainIncludes instead of "Used with" (or define a common base class of Work nd Instance (and Item?)
+- Either a common base class, or make a hierarchy: Item < Instance < Work?
+
+### Serials
+- No more Serial. Could an instance/work also be a Collection? Should it be a subclass of Instance (BF1)? (Serial can be another "slice of general" than Item :moreGeneral Instance; i.e. Item :moreGeneral :Serial, where shared characteristics are based on "common over time", not "common over forms")
+  UPDATE: optional issuance with values being subclasses of Issuance, like Serial or Integrating?
+
+### provisionActivityStatement
+- It seems wise(? not necessarily for a single instance?) to be able to attach the transcribed provisionActivityStatement to the associated (derived) provisionActivity. Either put the statement as is in the entity (using rdfs:label?), or use a generic property (rdfs:label) to represent the string? Best to be able to say that it was transcribed (e.g. if implied when using the statement property, as opposed to a too generic one)
+
+### Types
+How about replacing the various type-properties (ensembleType, instrumentalType, voiceType, noteType, variantType) with either a pattern for using rdf:type with bnodes having rdfs:label, or a generic property for giving a type hint as a literal (possibly with owl:propertyChainAxiom (rdf:type rdfs:label))?
+
+### Notes and Statements
+
+Imperfect data... "raw and partial" stuff, put into notes...
+
+See also [Mappings] for how to simplify these (and expand simple forms, respectively).
+
+
+* Notes: typeNote vs. type/notes (and similar for all such divisions...; for presentation/edit: difference between linked entity and inlined description)
+* Are `*Statement` notes? No, they are "text values on source" (more like rdf:value). Also, reorganize into proper entity (:publicationStatement rdfs:domain :Publication)
+
+### Coordinate Sub-Type Forms using Fixed (Enumeration) Values
+
+Make:
+
+    <> a :EBook .
+  
+be isomorphic to:
+
+    <> a :Book ;
+      :format :EBook .
+
+and coordinated with:
+
+    <> a sdo:CreativeWork, sdo:Book ;
+        sdo:bookFormat sdo:EBook .
+
+and somehow with (the object of hasFormat in):
+
+    <> a bibo:Book ;
+      dc:hasFormat [ sdo:EBook ] .
+
+### Value Corrections
+
+Correlate (and "error correct") StructureValue and Datatyped Literals. Example:
+
+    <> :identifier [ a :ISBN ;
+                rdf1:value "123-456-789-0" ] .
+
+    <> :identifier "123-456-789-0"^^:ISBN .
+
+    <> :identifier "123-456-789-0" .
+
+### Link Corrections
+
+- strings as resource hints
+    - define tokens and coerce to URI
+    - error-correct
+    - search on label/value/notation ...
+    - coerce string and xsd:anyUri to URI *but never URI to string unless term is datatyped*
+
+- close target forms (like "match close sub-property" (e.g. Term.name =~ Concept.prefLabel); using "infer restricted domain form" or closeMatch...)
+
+### Other
+
+- magic properties (prefLabel from component properties (of the concept or its focus))

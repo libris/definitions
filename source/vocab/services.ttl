@@ -1,0 +1,7 @@
+@prefix : <https://id.kb.se/vocab/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+
+:Library hydra:search [
+        hydra:template "https://bibdb.libris.kb.se/api/library" ;
+        hydra:mapping [ hydra:property :sigel; hydra:variable "sigel" ]
+    ] .

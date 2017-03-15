@@ -22,9 +22,11 @@
 # RDA Alignments
 
 :Unmediated a bf2:Media;
+    rdfs:label "Omedierad"@sv;
     rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasSelf true ] .
 
 :Volume a owl:Class, bf2:Carrier;
+    rdfs:label "Volym"@sv;
     skos:exactMatch rdacarrier:1049; # "volume"
     rdfs:subClassOf :Unmediated,
         [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasSelf true ] .
@@ -45,7 +47,7 @@
     owl:equivalentClass bf:Electronic .
 
 :Manuscript a owl:Class;
-    rdfs:label "Manuscript"@sv;
+    rdfs:label "Manuskript"@sv;
     rdfs:subClassOf :Product;
     owl:equivalentClass bf:Manuscript, bibo:Manuscript .
 
@@ -146,17 +148,17 @@
     rdfs:subClassOf :Text, :Serial .
 
 :ManuscriptCartography a owl:Class;
-    rdfs:label "Kartmanuscript"@sv;
+    rdfs:label "Kartmanuskript"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Cartography, :Manuscript .
 
 :ManuscriptNotatedMusic a owl:Class;
-    rdfs:label "Musiknotmanuscript"@sv;
+    rdfs:label "Musiknotmanuskript"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :NotatedMusic, :Manuscript .
 
 :ManuscriptText a owl:Class;
-    rdfs:label "Textmanuscript"@sv;
+    rdfs:label "Textmanuskript"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Text, :Manuscript .
 
@@ -274,4 +276,3 @@
 #    skos:exactMatch rdacarrier:1052 ; # "videocassette"
 #    skos:exactMatch rdacarrier:1053 ; # "videotape reel"
 #    skos:exactMatch rdacarrier:1060 ; # "videodisc"
-

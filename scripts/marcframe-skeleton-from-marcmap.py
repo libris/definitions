@@ -554,7 +554,7 @@ def process_fixmaps(marc_type, tag, fixmaps, outf):
                 add_labels(fixmap, fm)
                 field_id = fm['@id'] = '%s/%s/' % (field_id, type_name)
                 fm['mapCategory'] = {'@id': type_name}
-                outf['subMap'] = fm
+                outf.setdefault('subMap', OrderedDict())[field_id] = fm
             else:
                 outf[type_name] = fm
 
@@ -759,7 +759,7 @@ if __name__ == '__main__':
             "property": {"@id": "subPropertyOf", "@type": "@vocab"},
             "addProperty": {"@id": "subPropertyOf", "@type": "@vocab"},
             #"inScheme": {"@id": "skos:inScheme", "@type": "@id"},
-            "subMap": {"@reverse": "rdfs:subClassOf"},
+            "subMap": {"@reverse": "rdfs:subClassOf", "@container": "@index"},
             "column": {"@reverse": "sdo:domainIncludes", "@container": "@index"},
             "subfield": {"@reverse": "domain", "@type": "@id"},
             "marcType": {"@id": "inScheme", "@type": "@id"},

@@ -1,0 +1,43 @@
+Data Standards
+==============
+
+### MARC
+
+Data in MARC is rather denormalized, contains a redundancy of information and local uses of code lists with little to no explicit dereferencability without access to out-of-band information which may sometimes be obscured by changes over time.
+
+At the same time, a lot of the concepts of bibliographic practise is oriented around practises in using MARC. Special needs, required by experts in certain domains, are often represented only through the use of specialized forms of description that have no formal definition outside of MARC.
+
+### RDF
+
+Being a standard model for the exchange of structured, linked data on the web, RDF may be seen as a given, especially in the library context. It must be emphasised though, that RDF is merely a tool. Without proper application, its potential will remain untapped. We have chosen it based on a number of merits.
+
+It constitutes a logical, representation independent data model. That lets us design concrete data structures without tying them to one serialization format.
+
+The triple representation, grounded in formal logic, makes for a structurally flat model upon which navigation and reasoning may be applied as needed. This makes for some key features:
+
+* A clear notion of entities with identities and explicit, open types.
+* Naturally mixable descriptions making (superficial) data integration technically simple.
+* Simple publication of and access to structured data and vocabularies using HTTP-URIs, independent of application and platform limitations.
+
+RDF has the *capacity* for structured extensions, correlation and semantic interoperability.
+
+It is structurally interoperable in itself, meaning that descriptions can be merged at will from disparate sources, with disparate semantics. This, however, places sometimes tremendous burden upon the consumer. This is not acceptable, and needs to be used to place requirements upon vocabulary designers and data producers (or providers).
+
+### RDA
+
+
+### BibFrame
+
+We are mapping (most of) the data we have in MARC21 into RDF descriptions. This is only the beginning of a more efficient form for bibliographic descriptions.
+
+We want to avoid inventing more vocabulary, and ensure our mappings works both ways (we have a fairly isomorphic two-way MARC/BF2 conversion in place). For this, BF2 is the best fit so far. That is to say, best from a conversion perspective, and *probably* for supporting the mindset set by cataloguing rules (not the least of which is RDA). From a usability perspective and a theoretical modeling perspective, we cannot say the resulting forms are optimal. But we do believe that there is possibility of consolidation if we do this, and that the worst shackles of MARC21 can be broken.
+
+From this we can start to fill in blanks and improve descriptions of new forms of material. Thus we have a practical path forward with BF right now. This is in part due to the closeness to some prevalent MARC21 idioms. No matter how convoluted they might be (title entities, provision entities and such), at least getting rid of string codes in favour of links to defined terms, and enabling the linking of entities over shuffling intricate bundles of strings around is a major improvement for systems design, discovery and comprehensibility.
+
+We are currently adapting our target vocabulary to BibFrame 2 where possible. Ideally, we would have no vocabulary of our own. But given the state of stability and consensus in the library world regarding these matters, we have no choice but to map and adapt as we go. The change from BibFrame 1 to 2 seemed to us a good step in our own direction.
+
+We would be happy to participate in its stabilization as much as possible (given our limited staff and present workload).
+
+### Schema.org
+
+A quick analysis: semi-ordered, rough consensus, "dirty" but usable. Not a formal model, but it has some good parts to relate to.

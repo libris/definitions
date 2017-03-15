@@ -12,6 +12,6 @@ delete {
     ?s ?p rdfs:Resource
 } where {
     ?s ?p ?o
-    filter(?o != rdfs:Resource)
+    filter(?o != rdfs:Resource && strstarts(str(?o), str(:)))
     filter(?p in (rdfs:subClassOf, rdfs:domain, rdfs:range))
 }

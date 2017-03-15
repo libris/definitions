@@ -1,16 +1,17 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function
+import os
 import re
 import zipfile
 from pathlib2 import Path
-from rdflib import Graph
+from rdflib import Graph, ConjunctiveGraph
 from lxltools.datacompiler import (Compiler, load_json, read_csv, decorate,
         construct, to_jsonld, to_rdf)
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 
 
 # TODO:
-# - explicitly link each record to it's parent dataset record
+# - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
 # - explicitly link each record to its logical source (or just the parent dataset record?)
 # - do not add 'quoted' here but in loader (see TODO below)
 
@@ -34,8 +35,35 @@ def _get_zipped_graph(path, name):
     with zipfile.ZipFile(path, 'r') as zipped:
         return Graph().parse(zipped.open(name), format='turtle')
 
+def _get_repo_version():
+    try:
+        with os.popen(
+                '(cd {} && git describe --tags)'.format(SCRIPT_DIR)
+                ) as pipe:
+            return pipe.read().rstrip()
+    except:
+        return None
 
-compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.lines')
+class WhelkCompiler(Compiler):
+
+    def to_node_description(self, node, dataset=None, source=None, **kws):
+        # TODO: overhaul these? E.g. mainEntity with timestamp and 'datasource'.
+        item = node.pop('mainEntity', None) # TODO: obsolete?
+        if item:
+            node['mainEntity'] = {'@id': item['@id']}
+        #if dataset:
+        #    node['inDataset'] = {'@id': dataset}
+        #if source:
+        #    node['wasDerivedFrom'] = {'@id': source}
+
+        items = [node]
+        if item:
+            items.append(item)
+
+        return {'@graph': items}
+
+
+compiler = WhelkCompiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.lines')
 
 
 #@compiler.dataset
@@ -53,11 +81,11 @@ compiler = Compiler(dataset_id=BASE + 'definitions', union='definitions.jsonld.l
 #           ext-libris/src/main/resources/marcframe.json build/vocab.ttl
 #           > build/vocab-generated-source-1.ttl
 
-@compiler.dataset
+@compiler.handler
 def vocab():
     graph = construct(compiler.cached_rdf, sources=[
             {
-                'source': Graph().parse(scriptpath('source/vocab/index.ttl'), format='turtle'),
+                'source': Graph().parse(scriptpath('source/vocab/bf-map.ttl'), format='turtle'),
                 'dataset': '?'
             },
             {"source": "http://id.loc.gov/ontologies/bibframe/"}
@@ -67,9 +95,18 @@ def vocab():
     for part in (SCRIPT_DIR/'source/vocab').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
 
+    #cg = ConjunctiveGraph()
+    #cg.parse(str(SCRIPT_DIR/'source/vocab/display.jsonld'), format='json-ld')
+    #graph += cg
+
     graph.update((SCRIPT_DIR/'source/vocab/update.rq').read_text())
 
     data = build_jsonld(graph)
+    del data['@context']
+
+    version = _get_repo_version()
+    if version:
+        data['@graph'][0]['version'] = version
 
     lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
@@ -77,8 +114,8 @@ def vocab():
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
 
     compiler.write(lib_context, 'vocab/context')
-
-    return "/vocab", data
+    compiler.write(load_json(str(SCRIPT_DIR/'source/vocab/display.jsonld')), 'vocab/display')
+    compiler.write(data, "vocab")
 
 
 @compiler.dataset
@@ -198,20 +235,21 @@ def docs():
     for fpath in (SCRIPT_DIR/'source/doc').glob('**/*.mkd'):
         text = fpath.read_text(encoding='utf-8')
         html = markdown.markdown(text)
-        doc_id = str(fpath).replace('source/', '').replace('.mkd', '')
+        doc_id = (str(fpath)
+                  .replace(os.sep, '/')
+                  .replace('source/', '')
+                  .replace('.mkd', ''))
         doc_id, dot, lang = doc_id.partition('.')
-        lang = lang or None
-        h1end = html.find('</h1>')
-        if h1end > -1:
-            title = html[len('<h1>'):h1end]
         doc = {
             "@type": "Article",
             "@id": BASE + doc_id,
-            "title": title,
             "articleBody": html
         }
+        h1end = html.find('</h1>')
+        if h1end > -1:
+            doc['title'] = html[len('<h1>'):h1end]
         if lang:
-            doc["language"] = {"langTag": lang},
+            doc['language'] = {"langTag": lang},
         docs.append(doc)
 
     return "/doc", {

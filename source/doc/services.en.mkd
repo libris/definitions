@@ -1,0 +1,114 @@
+Services
+===========
+
+We focus on a stable core to build services upon, grounded in the data model.
+
+There will be details in flux, primarily related to the domain vocabulary, that need to be configurable/generalizable to let services catch up with ongoing changes to the data (as we continue to understand and evaluate its shapes in relation to explicit use cases).
+
+## REST APIs
+
+We use JSON-LD as our primary format for services.
+
+.. Read API
+  - conneg
+  - views
+.. Search API
+.. Write API
+
+### Searching
+
+</find?_limit=50&q=*&about.@type=Person>
+</find?_limit=50&q=*&@type=GenreFormTerm%inScheme.@id=kssb>
+</find?_limit=50&q=*&@type=PersonTerm&prefLabel=Body,+Some>
+</find?_sort=-meta.modified>
+
+## Access
+
+### Identifiers
+
+Same As, redirects...
+
+### Records and Graphs
+
+Named Graphs: default graph plus quotes as partial named graphs
+
+.. different Views for mappings/alignments? (E.g. schema.org from BF2.)
+
+#### Organizing (Quoting and Refactoring) Descriptions
+
+For inlined description: differ between "unknown" and quoted (the latter either has @id or (perhaps better, until properly refactored?) sameAs (also, if refactored (as in extracted to own record) still better to keep sameAs (it will have an @id, within our system)).
+
+#### System Partitioning of descriptions, delegation and indirection
+
+Of interest:
+
+* owning a resource vs. owning a description
+* minting in abcence of URI stewardship
+* maintaining mappings over time
+* rewriting core data vs. expanding when publishing
+
+### Views: Cards and Chips
+
+- required: chips and cards for search/navigation/context
+
+Select parts of full descriptions. Used for interface design, through our data APIs and search mechanics.
+
+Defined using display descriptions for selected classes, based on a small subset of the FRESNEL terminology...
+
+### Embellished Data
+
+- linked resources as cards and chips
+- additional: incoming links for discovery (we have holdings, cover images, local copies, additional metadata, external reviews...)
+
+- vocab expansions/shedding, alignments...)
+
+### Using Mappings
+
+.. explain framing, embellish, folding paths as simple properties, rdfa:copy, ...
+
+Variants of similar notions, as in terms and shapes of expression. Preferably one shape, in practise lots of variation due to limited knowledge, understanding, interest or time.
+
+Usage thereof ranges from the simple needs to detailed access. Quick detection (pick for display then scanning surface for context). Detailed filtering, picking "angle" ("classified using notion X", "filtered on given dates on material", "relation to group of creators"...).
+
+* Specialized Mappings:
+  - for (es-)indexing
+  - "casual" usage/presentation
+  - for editing: e.g. "new Book -> contentText, carrier Volume, bookFormat ..."
+
+* Generalized Mappings (RDA<->BF, new methods for import/export)
+
+### Mapping Identities
+
+.. sameAs, closeMatch, broadMatch (and where it comes in play for import/export (including MARC)).
+
+Smushing – merging two linked entities into one.
+
+### Mapping Shapes
+
+StructuredValue & Role
+
+- expansions and foldings (all supertypes, simple properties from chains)
+
+Define paths to/between shapes. Select target shape and reshape input. Access expanded shape using simplified "lenses" selected at runtime ("get me some label for X").
+
+Form:
+* Things: generalize/specialize, abstract/concrete
+* Records (descriptions): properly meta, "outside"
+
+Details:
+* Structured Values
+* Reified Values
+
+Access:
+* compute (label) properties
+* get summary chips (get intrinsic properties and relations (owl:key? fresnel?); use folded forms)
+
+Pre-index:
+* embellish: combine folded and expanded ("all the variants")
+
+### Mapping Vocabularies
+
+Simplest mapping is a regular JSON-LD context.
+
+Use ld-context (generation) to unify superficial vocab term name differences.
+

@@ -17,6 +17,7 @@
 @prefix rdael: <http://rdvocab.info/Elements/> .
 @prefix rdacontent: <http://rdvocab.info/termList/RDAContentType/> .
 @prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 
@@ -27,12 +28,9 @@
 ##
 # Enumeration Groups
 
-marc:typeOfRecord a skos:Collection;
-    rdfs:label "Typ"@sv .
-
-# TODO: replace :inCollection marc:bibLevel with a :IssuanceType
-marc:bibLevel a skos:Collection;
-    rdfs:label "Bibliografisk nivå"@sv .
+# TODO: replace :inCollection marc:* with a :IssuanceType
+#marc:typeOfRecord a skos:Collection; rdfs:label "Typ"@sv .
+#marc:bibLevel a skos:Collection; rdfs:label "Bibliografisk nivå"@sv .
 
 :ContentType owl:equivalentClass bf2:Content .
 :MediaType owl:equivalentClass bf2:Media .
@@ -56,9 +54,12 @@ marc:bibLevel a skos:Collection;
     owl:equivalentProperty bf2:carrier;
     rdfs:subPropertyOf rdf:type .
 
+# TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
+# alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
 :issuanceType a owl:ObjectProperty;
+    rdfs:label "utgivningssätt"@sv;   
     owl:equivalentProperty bf2:issuance;
-    rdfs:subPropertyOf rdf:type .
+    rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
 
 # Rules:
 
@@ -388,7 +389,7 @@ marc:bibLevel a skos:Collection;
     rdfs:subClassOf :Aggregate .
 
 :MultipartMonograph a owl:Class;
-    rdfs:label "Multipel del av monograf"@sv;
+    rdfs:label "Flerbandsverk"@sv;
     rdfs:subClassOf :Multipart, :Monograph;
     owl:equivalentClass bf:MultipartMonograph .
 
@@ -415,4 +416,3 @@ marc:bibLevel a skos:Collection;
     owl:deprecated true;
     :inCollection marc:bibLevel;
     rdfs:subClassOf :Aggregate .
-
