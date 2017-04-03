@@ -1,0 +1,43 @@
+# Concept/Thing Design Issue
+
+We have opted out of the previous LIBRIS design of using Concepts as nominal entities with a "real world" thing focus. The reason for this is long-winded and discussions border on the absurd, but the gist of it is: focus on the thing. While the description may be skewed, biased or even conflated with local business practise, hiding that behind a nominal entity for the "term" makes it even harder to discuss these differences and why they have come to be. Furthermore, attempts to isolate the Concept from the thing leads to a "parallell" representation of facts about the thing, indirected via abstract relations such as "broaderPartitive", where a more concrete modeling more effectively deals with the actual relation that's being modeled.
+
+With that said, we do allow for "nominal" skos:Concept structures *in place* of real-world entities, since sometimes skeleton concepts is all that a particular working group can produce (e.g. flat genre thesauri in place of a full ontology about expressions, their meanings and forms).
+
+See also:
+- [Getty-Vocab-Concept-Thing][].
+- Use/Mention distinction
+- Sign/Signified
+- An amusing, related example of going way too far on the nominal side of thing,s see [HaddocksEyes][].
+
+## Naive vs Nominal
+
+Naive Realism vs nominalism.
+
+Is Nominal also Naive?
+
+Names versus Thing
+
+Name?  "Nomen" in e.g. Library Reference Model (in turn from FRSAD, c.f. FRAD Name/Controlled Access Point)? rdfs:label? schema:name? skos:prefLabel?? rdfs:label? schema:name? skos:prefLabel?
+
+There are no things without names. So we're inescapably using language to paint reality.
+
+Design Goal: keep things simple and understandable. Ground controlled structures of description in "naive" concepts.
+
+## Design Decision: Topic Items versus Computed "Chips"
+
+A *very* normalized and unified shape is the notion of a nominal "topic", which is akin to skos:Concept, and also to atom:Entry. It is a simplified digest of an entity, an outline, sketch or silhouette which only hints, nor describes in detail.
+
+Forcing descriptions into such a package results in data loss and sometime skewed data. But it can be effective for simple listings and navigation, and to some extent (textual) search.
+
+Is this "summary" a distinct entity, separate from the record and the focus? Can it be defined by the things that are part of a templated skos:prefLabel, in conjunction with its distinctive type, and its distinctive (main source and/or dataset?) "membership" related using skos:inScheme (what of madsrdf:inCollection - reasonably part of the "type" here)? Or is this too awkward to model and maintain? Is it actually just a conceptual specification, to which concrete abbreviated forms should roughly adhere? (But then again, is the abbreviated form a distinct notion...?)
+
+See:
+- https://www.google.se/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=skos+concept+%22library+business+object%22
+- https://lists.w3.org/Archives/Public/public-esw-thes/2012Nov/0011.html
+- https://lists.w3.org/Archives/Public/public-esw-thes/2009Nov/0063.html
+
+(See also bibframe 1 lightweight abstractions and authorities...?)
+
+"Solution"(?): allow crossing the abstraction/concretization barrier, as in linking to the abstraction, or moving properties in the abstraction into the concretization... (making search simpler, apart from how to fuse their types (suggestion: keep concretization only))
+

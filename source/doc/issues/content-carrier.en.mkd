@@ -1,0 +1,104 @@
+# Content/Carrier Design Issue
+
+Works, Instances versus Content, Media, Carrier.
+
+- Basic issue: how to describe stuff not covered by the W/I sublasses
+- Extended issue: how to coordinate the subclasses with RDA, and how we can complete the picture (normalize/extend BF to make sense for us).
+
+## Background
+
+In assessing the state of BF, we find that certain needs seem only partially covered, unnecessarily separated, or arbitrarily restricted. We see clear signs of correlation to fixed fields in MARC, and implicit delegation to the RDA lists of terms (http://www.rdaregistry.info/termList/) where BF falls short (e.g. "completing" bib 007/01 with rdamedia).
+
+We would find it very useful to spell these out explicitly, and to outline eventual compromises in design. To clarify this, intended usage patterns need to be established (simple examples would do well here).
+
+We can appreciate not deviating from notions and categorizations for which there is no viable conceptual alternative (and that have been carried forth from MARC21 into RDA). But the combination of existing bf:Work and bf:Instance subclasses with the closed lists in RDA for e.g. content and carrier forms (which appear at arbitrary levels of abstraction for many experts), does not sit quite right with us.
+
+(As far as we have seen, the RDA term lists are more like adjustments and cleanup of the outdated MARC21 lists than a structured and extensible forage into the richness that controlled terms in RDF enables (either using the SKOS pattern or the richly typed enum pattern of e.g. schema.org (http://schema.org/Enumeration)). We have obvious needs to align with these for the sake of interoperability, but we do think that BF has the opportunity to overcome the obvious limitations that they represent.)
+
+## Possible Merits of Type Aspects
+
+We separate "type aspects" from rdf:type into distinct properties. That is, "aspects" of one entity, given as categories and subproperties of rdf:type.
+
+This is used for searching and faceting on domain-specific type aspects.
+* contentType as separate from core Work (sub-)class
+* carrierType as separate from mediaType(?), as separate from core Instance (sub-)class
+* issuanceType
+
+The aspect might be further compartmentalized into sources of the definitions (BF2 Core, RDA, MARC21, SDO, KB, ...). But we won't model that as distinct properties (we had to draw the line here since it's getting to complex already). 
+
+## Instance vs Carrier
+
+In BF 2.0 there are five subclasses to Instance:
+
+* bf:Print (Resource that is printed)
+* bf:Manuscript (Resource that is written in handwriting or typescript. These are generally unique resources.)
+* bf:Archival (Resources organically created, accumulated, and/or used by a person, family, or organization in the course of conduct of affairs and preserved because of their continuing value.)
+* Bf:Tactile (Resource that is intended to be perceived by touch.)
+* Bf:Electronic (Resource that is intended for manipulation by a computer, accessed either directly or remotely.)
+
+We find these somewhat lacking in coverage. We see a correlation to the enumerated list of Bib Leader/06 in MARC21, but wonder if that is it?
+
+Are the (growing) set of specific carrier formats (eg. video cassette, vinyl record, magnetic audio tape and optic film) supposed to be further expressed using bf:content, bf:media and bf:carrier? If so, is the sole reason for subclassing bf:Instance to be able to fit MARC21 into the "core" set of types?
+
+It makes for some discrepancies in uniformity when data described using BF fails to fit into the existing five sublclasses, and you're left with another relation (bf:carrier) to fill in the gap.
+
+Specific problems:
+
+* There seem to be no appropriate subclass of bf:Instance for LP and CD albums. Unless bf:Print is applicable for more than stuff printed on paper?
+* Is a drawing done by hand just a bf:Instance, and a drawing made in a computer program a bf:Electronic resource? (Both presumably being bf:instanceOf [ a bf:StillImage ] .)
+
+This also make us wonder how the subclasses of bf:Instance relate to the expected values of bf:media and bf:carrier? We see it as sound and beneficial to allow for specific subclasses of bf:Instance to provide the information currently given with a bf:carrier link to (presumably) an RDA carrier term (from http://www.rdaregistry.info/termList/RDACarrierType/). (And similarly to "fold" bf:content into bf:Work.) When a cataloguer or user is confronted with an instance, its primary substance should be captured as a type, and not immediately be subjected to a fine-grained analysis of various type aspects. Unless there is some logically sound and intuitively explainable reason to do so. Is there?
+
+(Note that the same questioning applies to the correlation of bf:Work and bf:Content...)
+
+## Correlation of Media And Carrier
+
+It seems to us that when given a value for bf:carrier, the value for bf:media can be inferred. Of course, that hinges on the notion of media being a less specific superset of the notion of carrier. As this is the domain of RDA, we can understand that BF is agnostic about such coordination. Still, given the questions about the possible correlation between bf:Instance and bf:Carrier, this seems to be an area where BF can eliminate a bit of redundancy.
+
+## Multiple Types 
+
+Also, we presume that Bibframe won't generally recommended to use more than one primary type in describing an item? Would we then have to use bf:Instance for a tactile book with printed text instead of using two subclasses – bf:Tactile and bf:Print?
+
+## Mode of Issuance or Typed As Serial
+
+In BF1, bf1:Serial and bf1:Collection were both defined as subclasses of bf1:Instance. In BF2, bf:Collection is not subclassed to anything, and there is no Serial class defined. It seems that a description of a serial resource should use bf:issuance instead, presumably with one of values of RDA mode of issuance (http://www.rdaregistry.info/termList/ModeIssue/)). Like:
+
+```turtle
+</some/magazine> a bf:Text;
+    bf:issuance rdami:1003; # "serial"
+    bf:frequency [ a bf:Frequency; rdfs:label "2 times per year"@en ] .
+```
+
+## Class-subclasses and Type-subproperties
+
+Are the instances of Content, Media and Carrier supposed to be the specific aspects, or classifications? This makes the types Content, Media and Carrier into a enumerations of a kind (c.f. http://schema.org/BookFormatType).
+
+We see the same kind of pattern applied for bf:Issuance... (Search for "Categorization reflecting" in the BF vocabulary...)
+
+- How many "subproperties of type" are there? What's the rule of thumb here?
+    - bf:content, bf:media and bf:carrier
+    - bf:issuance?
+    - bf:bookFormat, bf:musicFormat
+    - bf:genreForm / bf:classification?
+
+There seems to be a division here of the "type" of a thing (usually a rather wide definition) into specific subclasses of owl:Class, linked to with specific subproperties of rdf:type. When the abstraction breaks down further, a new distinct entity is conceived, with a unique identity. Whether this is a detailed description local to the resource, or a distinct aspect for which we can use predefined (enumerated) resources in many or all cases need to be explored and a practise established (based on existing ones where possible).
+
+```turtle
+prefix : <http://id.loc.gov/ontologies/bibframe/>
+prefix ext: <http://id.example.org/terms/>
+base <http://library.example.org/>
+
+</product/tfotr> a ext:Paperback; # :Print
+    #(:carrier|:bookFormat) ext:Paperback;
+    :provisionActivity [ a :Publication; :date "1956" ];
+    :instanceOf </novel/tfotr> .
+
+</novel/tfotr> a ext:Novel; # :Text
+    :name "Fellowship of the Ring"@en;
+    :content ext:Fiction, ext:Fantasy;
+    :author <http://dbpedia.org/resource/J._R._R._Tolkien> .
+
+<http://dbpedia.org/resource/J._R._R._Tolkien> a :Person;
+    :name "J. R. R. Tolkien", "Tolkien" .
+```
+

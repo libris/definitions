@@ -5,8 +5,10 @@
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix holding: <http://purl.org/ontology/holding#> .
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 :Item a owl:Class ;
+    :category marc:hold ;
     owl:equivalentClass bf2:Item, sdo:Product, holding:Item ;
     #owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
     rdfs:label "item"@en, "exemplar"@sv .

@@ -2,97 +2,62 @@
 
 ## Inledning
 
-id.kb.se är en tjänst under utveckling som tillgängliggör de grundstenar
-Kungliga biblioteket använder för att publicera strukturerad, länkad data.
-Tjänsten innehåller en samling gemensamma definitioner och begrepp som hjälper
-till att samordna beskrivningar av vårt material. **I första versionen av
-id.kb.se** har vi lagt ut **Svenska ämnesord**, **barnämnesord** och
-**genre/formtermer**, som utgör viktiga byggstenar för denna samordning. I
-grunden finns ett basvokabulär med gemensamma egenskaper och typer. I
-möjligaste mån länkar alla definitioner till internationella, välkända
-motsvarigheter.
+**id.kb.se** är en tjänst under utveckling som tillgängliggör de grundstenar Kungliga biblioteket använder för att publicera strukturerad, [länkad data](https://sv.wikipedia.org/wiki/L%C3%A4nkad_data). Här finns gemensamma definitioner och begrepp som hjälper till att samordna beskrivningar av vårt material. Dessa utgår från och länkar till internationella, välkända motsvarigheter i möjligaste mån.
+
+## Vad är nytt sedan förra versionen?
+
+I denna version av id.kb.se har vi lagt ut release 0 av formatet. Under flikarna [Basvokabulär](/vocab/) och [MARC-mappningar](/marcframe) visas formatet utifrån olika perspektiv. Vi har även lagt ut en artikel (på engelska) om den underliggande [datamodellen](/doc/model). Både vokabulären och mappningen mot MARC kommer att att utökas och förbättras i kommande versioner.
+
+Den tidigare versionen 0.1, då vi fokuserat på **Svenska ämnesord**, **barnämnesord** och **genre/formtermer** har inte uppdaterats. Tjänsten kommer att utökas med fler termlistor och vokabulärer allt eftersom.
 
 ## Länkad data
 
-Länkad data är en metod för att publicera strukturerad data på ett sätt som gör
-det möjligt för maskiner att skapa kopplingar mellan olika informationsobjekt
-och datakällor. Läs mer om
-[länkad data](https://sv.wikipedia.org/wiki/Länkad_data)
-på svenska Wikipedia. På KB finns mycket data som kan länkas samman med och
-berika annan data på Internet. Ett exempel är Svenska ämnesord som skulle kunna
-laddas ner och användas av andra tjänster utanför Libris och därmed öka
-tillgången till information i ett visst ämne. Ett annat är auktoritetsdata
-över personer, t.ex. författare som Astrid Lindgren och August Strindberg, som
-skulle kunna länkas till Wikipedias artiklar om samma författare.
+Länkad data är en metod för att publicera strukturerad data på ett sätt som gör det möjligt för maskiner att skapa kopplingar mellan olika informationsobjekt och datakällor. Läs mer om [länkad data på svenska Wikipedia](https://sv.wikipedia.org/wiki/Länkad_data).
+
+På KB finns mycket data som kan länkas samman med och berika annan data på Internet. Ett exempel är Svenska ämnesord som skulle kunna laddas ner och användas av andra tjänster utanför Libris och därmed öka tillgången till information i ett visst ämne. Ett annat är auktoritetsdata över personer, t.ex. författare som Astrid Lindgren och August Strindberg, som skulle kunna länkas till Wikipedias artiklar om samma författare.
 
 ## Identifikatorer
 
-Varje begrepp, som t.ex. ett ämnesord, identifieras med hjälp av en HTTP-URI.
-URI:n består av en adress och en textsträng som tillsammans utgör begreppets
-unika identifikator. Exempel: `https://libris.kb.se/86lnrdxs0h826ss`.
+Varje begrepp, som t.ex. ett ämnesord, identifieras med hjälp av en HTTP-URI. URI:n består av en adress och en textsträng som tillsammans utgör begreppets unika identifikator. Exempel: `https://libris.kb.se/86lnrdxs0h826ss`.
 
-Du som använder begreppen i egna system bör lagra de kompletta strängarna
-(`https://...`) i din databas.
+Du som använder begreppen i egna system bör lagra de kompletta strängarna (`https://...`) i din databas.
 
-Vissa begrepp får även en mer "läsbar" identifikator baserat på etiketten för
-begreppet. Exemplet ovan, som identifierar ämnesordet "Skidåkning", har fått
-den alternativa identifikatorn: `https://id.kb.se/term/barn/Skid%C3%A5kning`. Men
-du bör använda formen `https://libris.kb.se/86lnrdxs0h826ss` när du lagrar den
-lokalt i ditt system.
+Vissa begrepp får även en mer "läsbar" identifikator baserat på etiketten för begreppet. Exemplet ovan, som identifierar ämnesordet "Skidåkning", har fått den alternativa identifikatorn: `https://id.kb.se/term/barn/Skid%C3%A5kning`. Men du bör använda formen `https://libris.kb.se/86lnrdxs0h826ss` när du lagrar den lokalt i ditt system.
 
-## Metadata - syntax och vokabulär
+## Metadataformat
 
 Bakomliggande metadata presenteras för närvarande i 3 olika syntaxer:
 
 * [JSON-LD](http://json-ld.org/) (JavaScript Object Notation for Linked Data)
-* [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/),
-  ett format för att uttrycka RDF (Resource Description Framework) i XML.
-* [Turtle](http://www.w3.org/TR/turtle/) (Terse RDF Triple Language),
-  ett format för att uttrycka RDF i en syntax som liknar SPARQL.
+* [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/), ett format för att uttrycka RDF (Resource Description Framework) i XML.
+* [Turtle](http://www.w3.org/TR/turtle/) (Terse RDF Triple Language), ett format för att uttrycka RDF i en syntax som liknar SPARQL.
 
-Våra metadata uttrycks för närvarande med ett urval vokabulärer, till exempel
-med etablerade standarder som
+Våra metadata uttrycks för närvarande med ett format baserat på [BIBFRAME 2.0](http://www.loc.gov/bibframe/docs/index.html), kompletterat med etablerade standarder, bl.a.
 [Dublin Core](http://purl.org/dc/terms/),
-[SKOS](http://www.w3.org/2004/02/skos/core#),
+[SKOS](http://www.w3.org/2004/02/skos/core#) och
 [MADS/RDF](http://www.loc.gov/mads/rdf/v1#).
-Dessa urskiljs i metadata med olika prefix som `dc:`, `skos:`, och `madsrdf:`,
-med flera.  En del information som är av mer administrativ karaktär och där vi
-ännu inte funnit motsvarande standardvokabulär har getts "lokala" prefix som
-`marc:` och `kbv:`.
 
-De flesta vokabulären är mappade så att vill man t.ex. få ut data i SKOS där vi
-har valt MADS/RDF så ska det vara möjligt. För frågor kring detta kontakta
-Libris kundtjänst på <libris@kb.se>.
+Dessa urskiljs i metadata med olika prefix som `bf`, `dc:`, `skos:`, och `madsrdf:`, med flera.  En del information som är av mer administrativ karaktär och där vi ännu inte funnit motsvarande standardvokabulär har getts "lokala" prefix som `marc:` och `kbv:`.
 
-## Om version 0.1
+De flesta vokabulären är mappade så att vill man t.ex. få ut data i SKOS där vi har valt MADS/RDF så ska det vara möjligt. För frågor kring detta kontakta Libris kundtjänst på <libris@kb.se>.
 
-Version 0.1 innehåller **Svenska ämnesord**, **barnämnesord** och
-**genre/formtermer**. Tjänsten kommer att utökas med fler termlistor och
-vokabulärer allt eftersom.
+För detaljer kring den datamodell vi använder, se artikeln [Data Model (på engelska)](/doc/model).
 
-Vi har några frågor som vi kommer att arbeta vidare med och införa i kommande
-versioner:
+## Vad kommer framöver?
+
+Vi har några frågor som vi kommer att arbeta vidare med och införa i kommande versioner:
 
 * Fler standarder för hämtning av data.
 
-* Sammansatta termer, exempelvis *Karies—prevention*, kan uttryckas på olika sätt
-  som länkad data. Vi testar en metod och kommer att utvärdera hur det
-  fungerar.
+* Sammansatta termer, exempelvis *Karies—prevention*, kan uttryckas på olika sätt som länkad data. Vi testar en metod och kommer att utvärdera hur det fungerar.
 
-* Vår ambition är att ange språk på alla strängar. Då skulle till exempel
-  svenska ämnesord få språktaggen `@sv` och Library of Congress Subject Headings
-  få `@en`. Exempel:
+* Vår ambition är att ange språk på alla strängar. Då skulle till exempel svenska ämnesord få språktaggen `@sv` och Library of Congress Subject Headings få `@en`. Exempel:
 
         madrdf:authoritativeLabel "Skidåkning"@sv
         madsrdf:hasCloseExternalAuthority "Skis and skiing"@en
 
-* För ämnesord som fått ny föredragen term önskar vi kunna särskilja den
-  tidigare termen från andra varianter. Vi undersöker om det kan göras med
-  `madsrdf:hasEarlierEstablishedForm` eller på annat sätt.
+* För ämnesord som fått ny föredragen term önskar vi kunna särskilja den tidigare termen från andra varianter. Vi undersöker om det kan göras med `madsrdf:hasEarlierEstablishedForm` eller på annat sätt.
 
-* Mappning till MARC för `madsrdf:hiddenLabel` behöver rättas. Det är en term som
-  inte används av Svenska ämnesordsredaktionen, men kan behövas för andra typer
-  av data.
+* Mappning till MARC för `madsrdf:hiddenLabel` behöver rättas. Det är en term som inte används av Svenska ämnesordsredaktionen, men kan behövas för andra typer av data.
 
 * Mappning till MARC för `madsrdf:scopeNote` behöver ändras.
-

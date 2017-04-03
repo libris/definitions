@@ -44,7 +44,7 @@
     owl:equivalentClass bf2:Place , prov:Location, sdo:Place .
 
 :place a owl:ObjectProperty;
-    rdfs:label "Ort"@sv;
+    rdfs:label "plats"@sv;
     #rdfs:domain :Event;
     rdfs:range :Place;
     rdfs:subPropertyOf l:object;
@@ -55,7 +55,8 @@
     rdfs:subPropertyOf l:object;
     #rdfs:domain :Event;
     rdfs:range :Agent;
-    owl:equivalentProperty bf2:agent, prov:agent .
+    owl:equivalentProperty bf2:agent, prov:agent;
+    sdo:domainIncludes :Contribution .
 
 :date a owl:DatatypeProperty;
     #rdfs:domain :Event;
@@ -178,7 +179,7 @@
 :InstanceTitle  a owl:Class;
     owl:equivalentClass bf2:InstanceTitle;
     rdfs:subClassOf :Title;
-    rdfs:label "Instance Title"@en, "Instansens titel"@sv ;
+    rdfs:label "Instance Title"@en, "Instanstitel"@sv ;
     skos:definition "Titeln överförs exakt som i den föredragna källan, oftast titelsidan."@sv;
     #rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
@@ -217,9 +218,10 @@
                 [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
                 :mainTitle ) .
 
-:VariantTitle a owl:Class ;
-    owl:equivalentClass bf2:VariantTitle;
-    rdfs:label "Varianttitel"@sv .
+:ParallelTitle a owl:Class;
+    owl:equivalentClass bf2:ParallelTitle;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:label "Parallelltitel"@sv .
 
 :CoverTitle  a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
@@ -232,7 +234,7 @@
 
 :ProvisionActivity a owl:Class;
     rdfs:label "Tillgängliggörande"@sv;
-    owl:equivalentClass bf2:ProvisionActivity;
+    owl:equivalentClass bf2:ProvisionActivity, :QualifiedRole;
     rdfs:subClassOf :Event .
 
 :provisionActivity a owl:ObjectProperty;
@@ -241,21 +243,24 @@
 :manufacture a owl:ObjectProperty;
     owl:equivalentProperty bf:manufacture;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Manufacture .
+    rdfs:range :Manufacture;
+    rdfs:label "tillverkning"@sv .
 
 :publication a owl:ObjectProperty;
     owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Publication .
+    rdfs:range :Publication;
+    rdfs:label "utgivning"@sv .
 
 :Manufacture a owl:Class;
     owl:equivalentClass bf2:Manufacture;
-    rdfs:subClassOf :ProvisionActivity .
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Tillverkning"@sv .
 
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
-    rdfs:subClassOf :ProvisionActivity .
-
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Utgivning"@sv .
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
@@ -584,7 +589,7 @@ l:object rdfs:subPropertyOf rdf:object .
 
 :Contribution a owl:Class ;
     rdfs:label "Rolluppslag"@sv ;
-    rdfs:subClassOf prov:Attribution ;
+    rdfs:subClassOf prov:Attribution, :QualifiedRole ;
     owl:equivalentClass bf2:Contribution .
 
 :Principal a owl:Class ;

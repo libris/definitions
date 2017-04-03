@@ -28,12 +28,9 @@
 ##
 # Enumeration Groups
 
-marc:typeOfRecord a skos:Collection;
-    rdfs:label "Typ"@sv .
-
-# TODO: replace :inCollection marc:bibLevel with a :IssuanceType
-marc:bibLevel a skos:Collection;
-    rdfs:label "Bibliografisk nivå"@sv .
+# TODO: replace :inCollection marc:* with a :IssuanceType
+#marc:typeOfRecord a skos:Collection; rdfs:label "Typ"@sv .
+#marc:bibLevel a skos:Collection; rdfs:label "Bibliografisk nivå"@sv .
 
 :ContentType owl:equivalentClass bf2:Content .
 :MediaType owl:equivalentClass bf2:Media .
@@ -103,6 +100,7 @@ marc:bibLevel a skos:Collection;
     rdfs:label "Uniformt verk"@sv .
 
 :Instance a owl:Class;
+    :category marc:bib ;
     rdfs:label "Instance"@en, "Instans"@sv;
     owl:equivalentClass bf2:Instance .
 
@@ -118,7 +116,7 @@ marc:bibLevel a skos:Collection;
     rdfs:subPropertyOf rdael:contentType, dc:type, sdo:additionalType .
 
 :mediaType a owl:ObjectProperty;
-    rdfs:label "media type"@en, "mediatyp"@sv;
+    rdfs:label "media type"@en, "medietyp"@sv;
     rdfs:range :MediaType;
     rdfs:subPropertyOf rdael:mediaType .
 
@@ -128,7 +126,7 @@ marc:bibLevel a skos:Collection;
     rdfs:subPropertyOf rdael:carrierType, dc:format, sdo:additionalType .
 
 :MediaType a owl:Class;
-    rdfs:label "Mediatyp"@sv;
+    rdfs:label "Medietyp"@sv;
     owl:equivalentClass dc:MediaType .
 
 :CarrierType a owl:Class;
