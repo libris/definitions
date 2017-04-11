@@ -37,6 +37,17 @@
 #: skos:hasTopConcept :Print .
 
 
+# TODO: add all combos from 007
+:Map rdfs:subClassOf [ a owl:Restriction;
+        owl:onProperty :carrierType;
+        owl:someValuesFrom marc:MapMaterialType ] .
+
+# TODO: add all combos from 008
+:Text rdfs:subClassOf [ a owl:Restriction;
+        owl:onProperty :contentType;
+        owl:someValuesFrom marc:BooksContentsType ] .
+
+
 # Manifestation Dimensions
 
 :Digital a owl:Class;
