@@ -538,15 +538,16 @@
     rdfs:subPropertyOf :extent;
     rdfs:label "number of pages"@en, "sidantal"@sv .
 
-:audience a owl:ObjectProperty;
+:intendedAudience a owl:ObjectProperty;
     rdfs:label "audience"@en, "målgrupp"@sv;
-    owl:equivalentProperty sdo:audience;
+    rdfs:subPropertyOf sdo:audience;
+    owl:equivalentProperty bf2:intendedAudience;
     rdfs:range :Audience .
 
-:Audience a owl:Class;
+:IntendedAudience a owl:Class;
     rdfs:label "Målgrupp"@sv;
-    rdfs:subClassOf :Concept;
-    owl:equivalentClass sdo:Audience .
+    rdfs:subClassOf :Concept, sdo:Audience;
+    owl:equivalentClass bf2:IntendedAudience .
 
 :dimensions a rdf:Property;
     owl:equivalentProperty bf2:dimensions;
