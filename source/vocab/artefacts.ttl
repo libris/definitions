@@ -51,8 +51,10 @@
 
 # TODO: a given value implies value for :media from base :MediaType
 :carrierType a owl:ObjectProperty;
-    owl:equivalentProperty bf2:carrier;
-    rdfs:subPropertyOf rdf:type .
+    rdfs:label "bärartyp"@sv;
+    rdfs:range :CarrierType;
+    owl:equivalentProperty bf2:carrier .
+#    rdfs:subPropertyOf rdael:carrierType, dc:format, sdo:additionalType, rdf:type .
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
 # alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
@@ -116,11 +118,6 @@
     rdfs:label "media type"@en, "medietyp"@sv;
     rdfs:range :MediaType;
     rdfs:subPropertyOf rdael:mediaType .
-
-:carrierType a owl:ObjectProperty;
-    rdfs:label "bärartyp"@sv;
-    rdfs:range :CarrierType;
-    rdfs:subPropertyOf rdael:carrierType, dc:format, sdo:additionalType .
 
 :MediaType a owl:Class;
     rdfs:label "Medietyp"@sv;
