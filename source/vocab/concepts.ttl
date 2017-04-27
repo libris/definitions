@@ -142,6 +142,15 @@
     rdfs:subPropertyOf :identifiedBy, bf:hasAuthority;
     owl:inverseOf :focus .
 
+:Frequency a owl:Class;
+    rdfs:label "Frekvens"@sv, "Frequency"@en;
+    owl:equivalentClass bf:Frequency .
+
+:frequency a owl:ObjectProperty;
+    rdfs:label "frekvens"@sv, "frequency"@en;
+    owl:euivalentProperty bf:frequency;
+    rdfs:range :Frequency .
+
 :collectionItem a owl:ObjectProperty;
     owl:equivalentProperty skos:member;
     rdfs:domain :TermCollection ;
