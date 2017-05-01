@@ -191,6 +191,15 @@
     rdfs:subClassOf :CreativeWork;
     owl:equivalentClass dctype:Dataset, bf:Dataset, sdo:Dataset .
 
+:Illustration a owl:Class;
+    rdfs:label "Illustration"@sv, "Illustrative content"@en;
+    owl:equivalentClass bf:Illustration .
+
+:illustrativeContent a owl:ObjectProperty;
+    rdfs:label "Illustrationer i resursen"@sv, "Illustrative content information"@en;
+    rdfs:range :Illustration;
+    owl:eqivalentProperty bf:illustrativeContent .
+
 :Image a owl:Class; # Visual
     rdfs:label "Bild"@sv;
     rdfs:subClassOf :CreativeWork;
