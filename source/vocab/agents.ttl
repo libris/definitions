@@ -14,6 +14,7 @@
 @prefix sdo: <http://schema.org/> .
 
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 
 ##
@@ -30,6 +31,7 @@
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
 :Agent a owl:Class;
+    :category marc:auth ;
     rdfs:label "Aktör"@sv;
     owl:equivalentClass bf2:Agent ;
     rdfs:subClassOf rdfs:Resource, foaf:Agent, prov:Agent .
