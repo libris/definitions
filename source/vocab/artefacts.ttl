@@ -134,7 +134,7 @@
 
 :MusicFormat a owl:Class;
     owl:euivalentClass bf2:MusicFormat;
-    rdfs:label "Notated music format"@en, "Format för musikalisk instans"@sv .
+    rdfs:label "Notated music format"@en, "Format för musikalisk resurs"@sv .
 
 :instanceOf a owl:ObjectProperty ;
     rdfs:label "instance of work"@en, "instans av verk"@sv;
@@ -160,8 +160,8 @@
 :musicFormat a owl:ObjectProperty ;
 #    rdfs:subPropertyOf :format;
     owl:equivalentProperty bf2:musicFormat;
-    rdfs:range bf2:MusicFormat;
-    rdfs:label "notated music format"@en, "format för musikalisk instans"@sv .
+    rdfs:range :MusicFormat;
+    rdfs:label "notated music format"@en, "format för musikalisk resurs"@sv .
 
 :formatOf a owl:ObjectProperty;
     rdfs:label "är format på"@sv;
