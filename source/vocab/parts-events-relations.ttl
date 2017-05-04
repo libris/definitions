@@ -254,9 +254,10 @@
     rdfs:range :Publication;
     rdfs:label "utgivning"@sv .
 
-:distribution a owl:Class;
-    owl:equivalentClass bf2:Distribution;
-    rdfs:subClassOf :ProvisionActivity;
+:distribution a owl:ObjectProperty;
+    owl:equivalentProperty bf:distribution;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Distribution;
     rdfs:label "distribution"@sv .
 
 :manufacture a owl:ObjectProperty;
