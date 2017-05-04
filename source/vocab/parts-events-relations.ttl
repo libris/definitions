@@ -242,11 +242,11 @@
 :provisionActivity a owl:ObjectProperty;
     owl:equivalentProperty bf2:provisionActivity .
 
-:manufacture a owl:ObjectProperty;
-    owl:equivalentProperty bf:manufacture;
+:production a owl:ObjectProperty;
+    owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Manufacture;
-    rdfs:label "tillverkning"@sv .
+    rdfs:range :Production;
+    rdfs:label "produktion"@sv .
 
 :publication a owl:ObjectProperty;
     owl:equivalentProperty bf:publication;
@@ -254,15 +254,36 @@
     rdfs:range :Publication;
     rdfs:label "utgivning"@sv .
 
-:Manufacture a owl:Class;
-    owl:equivalentClass bf2:Manufacture;
+:distribution a owl:Class;
+    owl:equivalentClass bf2:Distribution;
     rdfs:subClassOf :ProvisionActivity;
-    rdfs:label "Tillverkning"@sv .
+    rdfs:label "distribution"@sv .
+
+:manufacture a owl:ObjectProperty;
+    owl:equivalentProperty bf:manufacture;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :Manufacture;
+    rdfs:label "tillverkning"@sv .
+
+:Production a owl:Class;
+    owl:equivalentClass bf2:Production;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Produktion"@sv .
 
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
     rdfs:subClassOf :ProvisionActivity;
     rdfs:label "Utgivning"@sv .
+
+:Distribution a owl:Class;
+    owl:equivalentClass bf2:Distribution;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Distribution"@sv .
+
+:Manufacture a owl:Class;
+    owl:equivalentClass bf2:Manufacture;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Tillverkning"@sv .
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
