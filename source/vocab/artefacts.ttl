@@ -177,6 +177,12 @@
     owl:equivalentProperty sdo:artform;
     rdfs:label "artform"@en, "verksform"@sv .
 
+:cartographicAttributes a owl:ObjectProperty;
+    owl:equivalentProperty bf2:cartographicAttributes;
+    rdfs:range :Cartographic;
+    rdfs:label "Cartographic data"@en, "kartografisk data för resursen"@sv .
+
+
 
 # Common Content Types
 
@@ -293,6 +299,12 @@
     :inCollection marc:typeOfRecord .
 
 # Combined Content Types
+
+
+:Cartographic a owl:Class;
+    rdfs:label "Kartografisk information"@sv, "Cartographic information"@en;
+    owl:equvialentClass bf2:Cartographic;
+    rdfs:subClassOf :Cartography .
 
 :CartographicDataset a owl:Class;
     rdfs:label "Kartografisk bild"@sv;
