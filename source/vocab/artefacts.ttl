@@ -132,6 +132,10 @@
     rdfs:subClassOf :CarrierType;
     rdfs:label "Book Format"@en, "Bokformat"@sv .
 
+:BaseMaterial a owl:Class;
+    owl:equivalentClass bf2:BaseMaterial;
+    rdfs:label "Materialtyp"@sv, "Base material"@en .
+
 :MusicFormat a owl:Class;
     owl:euivalentClass bf2:MusicFormat;
     rdfs:label "Notated music format"@en, "Format för musikalisk resurs"@sv .
@@ -182,6 +186,31 @@
     rdfs:range :Cartographic;
     rdfs:label "Cartographic data"@en, "kartografisk data för resursen"@sv .
 
+:projection a owl:ObjectProperty;
+    rdfs:range :Cartographic;
+    rdfs:label "Projection"@en, "Projektion"@sv .
+
+:baseMaterial a owl:ObjectProperty;
+    rdfs:range :BaseMaterial;
+    rdfs:label "Typ av material"@sv, "Base material"@en;
+    rdfs:domain :Instance;
+    owl:equivalentProperty bf2:baseMaterial .
+
+:colorContent a owl:ObjectProperty;
+    rdfs:range :ColorContent;
+    rdfs:label "Color content"@en, "färgrepresentation"@sv;
+    owl:equivalentProperty bf2:colorContent .
+
+:supplementaryContent a owl:ObjectProperty ;
+    rdfs:label "supplementerande innehåll"@sv;
+    rdfs:range :SupplementaryContent;
+    owl:equivalentProperty bf2:supplementaryContent .
+
+:generation a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Generation;
+    rdfs:label "generation"@sv, "generation"@en;
+    owl:equivalentProperty bf2:generation .
 
 
 # Common Content Types
@@ -341,6 +370,14 @@
     skos:exactMatch rdacontent:1007 ; # "computer dataset"
     rdfs:subClassOf :Digital, :Dataset .
 
+:ColorContent a owl:Class;
+    rdfs:label "Färguppsättning"@sv, "Color content"@en;
+    owl:equivalentClass bf2:ColorContent .
+
+:Generation a owl:Class;
+    rdfs:label "Generation"@sv, "Generation"@en;
+    owl:equivalentClass bf2:Generation .
+
 # TODO: missing rdacontent mappings:
 #    skos:exactMatch rdacontent:1008 ; # "computer program"
 #    skos:exactMatch rdacontent:1011 ; # "performed music"
@@ -446,8 +483,3 @@
 :SupplementaryContent a owl:Class ;
     rdfs:label "Supplementerande innehåll"@sv;
     owl:equivalentClass bf2:SupplementaryContent .
-
-:supplementaryContent a owl:ObjectProperty ;
-    rdfs:label "supplementerande innehåll"@sv;
-    rdfs:range :SupplementaryContent;
-    owl:equivalentProperty bf2:supplementaryContent .
