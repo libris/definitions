@@ -235,11 +235,12 @@
 
 
 :ProvisionActivity a owl:Class;
-    rdfs:label "Tillgängliggörande"@sv;
+    rdfs:label "Utgivning"@sv;
     owl:equivalentClass bf2:ProvisionActivity, :QualifiedRole;
     rdfs:subClassOf :Event .
 
 :provisionActivity a owl:ObjectProperty;
+    rdfs:label "utgivning"@sv;
     owl:equivalentProperty bf2:provisionActivity .
 
 :production a owl:ObjectProperty;
@@ -252,7 +253,7 @@
     owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:range :Publication;
-    rdfs:label "utgivning"@sv .
+    rdfs:label "publicering"@sv .
 
 :distribution a owl:ObjectProperty;
     owl:equivalentProperty bf:distribution;
@@ -274,7 +275,7 @@
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
     rdfs:subClassOf :ProvisionActivity;
-    rdfs:label "Utgivning"@sv .
+    rdfs:label "Publicering"@sv .
 
 :Distribution a owl:Class;
     owl:equivalentClass bf2:Distribution;
