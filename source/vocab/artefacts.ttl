@@ -212,6 +212,17 @@
     rdfs:label "generation"@sv, "generation"@en;
     owl:equivalentProperty bf2:generation .
 
+:dimensions a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:label "Dimensioner"@sv, "Dimensions"@en;
+    #TODO: what range shall we map to? bf2 maps to Literal.
+    owl:equivalentProperty bf2:dimensions .
+
+:soundContent a owl:ObjectProperty;
+    rdfs:range :SoundContent;
+    rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
+    owl:equivalentProperty bf2:soundContent .
+
 
 # Common Content Types
 
@@ -377,6 +388,10 @@
 :Generation a owl:Class;
     rdfs:label "Generation"@sv, "Generation"@en;
     owl:equivalentClass bf2:Generation .
+
+:SoundContent a owl:Class;
+    rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
+    owl:equivalentClass bf2:SoundContent .
 
 # TODO: missing rdacontent mappings:
 #    skos:exactMatch rdacontent:1008 ; # "computer program"
