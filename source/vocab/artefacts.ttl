@@ -18,6 +18,7 @@
 @prefix rdacontent: <http://rdvocab.info/termList/RDAContentType/> .
 @prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix rdam: <http://rdaregistry.info/Elements/m/> .
 
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 
@@ -223,6 +224,24 @@
     rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
     owl:equivalentProperty bf2:soundContent .
 
+:layout a owl:ObjectProperty;
+    rdfs:range :Layout;
+    rdfs:domain :Instance;
+    rdfs:label "layout"@sv, "layout"@en;
+    owl:equivalentProperty bf2:layout .
+
+:notation a owl:ObjectProperty;
+    rdfs:range :Notation;
+    rdfs:label "Notationssystem"@sv, "Notation system"@en;
+    owl:equivalentProperty bf2:notation .
+
+:soundCharacteristic a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :SoundCharacteristic;
+    rdfs:label "har ljudkaraktäristika"@sv, "Sound characteristic"@en;
+    skos:closeMatch rdam:P30125;
+    owl:equivalentProperty bf2:soundCharacteristic .
+
 
 # Common Content Types
 
@@ -291,6 +310,21 @@
     rdfs:subClassOf :CreativeWork;
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:NotatedMusic .
+
+:Notation a owl:Class;
+    rdfs:label "Notation"@sv, "Notation"@en;
+    owl:equivalentClass bf2:Notation .
+
+:MusicNotation a owl:Class;
+    rdfs:label "Format för musiknoter"@sv, "Music notation used"@en;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:MusicNotation .
+
+:TactileNotation a owl:Class;
+    rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:TactileNotation .
+
 
 :Audio a owl:Class;
     rdfs:subClassOf :CreativeWork;
@@ -392,6 +426,20 @@
 :SoundContent a owl:Class;
     rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
     owl:equivalentClass bf2:SoundContent .
+
+:Layout a owl:Class;
+    rdfs:label "Layout"@sv, "Layout"@en;
+    owl:equivalentClass bf2:Layout .
+
+:SoundCharacteristic a owl:Class;
+    rdfs:label "Ljudkaraktäristika"@sv, "Sound characteristic"@en;
+    owl:equivalentClass bf2:SoundCharacteristic .
+
+:RecordingMedium a owl:Class;
+    rdfs:subClassOf :SoundCharacteristic;
+    rdfs:label "Ljudbärare"@sv, "Recording medium"@en;
+    owl:equivalentClass bf2:RecordingMedium .
+
 
 # TODO: missing rdacontent mappings:
 #    skos:exactMatch rdacontent:1008 ; # "computer program"
