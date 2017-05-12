@@ -93,12 +93,8 @@
 :Work a owl:Class;
     :category marc:auth ;
     owl:equivalentClass bf2:Work;
-    rdfs:subClassOf :CreativeWork, sdo:ProductModel; #, rdfa:Pattern;
+    rdfs:subClassOf :CreativeWork, sdo:ProductModel; #, rdfa:Pattern, skos:Concept;
     rdfs:label "Verk"@sv .
-
-:UniformWork a owl:Class;
-    rdfs:subClassOf :Work; #, rdfa:Pattern, skos:Concept;
-    rdfs:label "Uniformt verk"@sv .
 
 :Instance a owl:Class;
     :category marc:bib ;
@@ -140,10 +136,10 @@
     rdfs:label "Book Format"@en, "Bokformat"@sv .
 
 :instanceOf a owl:ObjectProperty ;
-    rdfs:label "example of work"@en, "exemplifierar verk"@sv;
+    rdfs:label "instance of work"@en, "instans av verk"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
-    sdo:rangeIncludes :UniformWork .
+    sdo:rangeIncludes :Work .
 
 :workExample a owl:ObjectProperty ;
     rdfs:label "work example"@en, "verksexempel"@sv;
