@@ -23,18 +23,20 @@
 
 :Unmediated a bf2:Media;
     rdfs:label "Omedierad"@sv;
-    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasSelf true ] .
+    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasValue :Unmediated ] .
 
 :Volume a owl:Class, bf2:Carrier;
     rdfs:label "Volym"@sv;
     skos:exactMatch rdacarrier:1049; # "volume"
     rdfs:subClassOf :Unmediated,
-        [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasSelf true ] .
+        [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasValue :Volume ] .
 
 # TODO: List top concepts to provide interfaces with:
 # - a set of starting points for e.g. navigation, creation
 # - a "roof" when finding base classes
-#: skos:hasTopConcept :Print .
+#: skos:hasTopConcept :Work .
+#: skos:hasTopConcept :Instance .
+##: skos:hasTopConcept :Print .
 
 
 # TODO: add all combos from 007
@@ -72,6 +74,11 @@
     skos:exactMatch rdamedia:1003 ; # "computer"
     rdfs:subClassOf :Digital, :Product .
 
+:Microform a owl:Class;
+    rdfs:label "Mikroform"@sv;
+    skos:exactMatch rdamedia:1002 ; # "microform"
+    rdfs:subClassOf :Product .
+
 :Tactile a owl:Class;
     rdfs:label "Taktil resurs"@sv;
     rdfs:subClassOf :Product;
@@ -101,6 +108,31 @@
 #    skos:exactMatch rdamedia:1008 ; # "video"
 
 
+# Combined Work/Instance Types in MARC
+
+:ManuscriptCartography a owl:Class;
+    rdfs:label "Kartmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf [ a owl:Restriction; 
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :Cartography
+        ],
+        :Manuscript .
+
+:ManuscriptNotatedMusic a owl:Class;
+    rdfs:label "Musiknotmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf [ a owl:Restriction; 
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :NotatedMusic
+        ],
+        :Manuscript .
+
+:ManuscriptText a owl:Class;
+    rdfs:label "Textmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Text, :Manuscript .
+
 # Common Carrier Types
 
 #:Disc
@@ -109,117 +141,99 @@
 
 # Concrete Types (can grow a lot, be combined with e.g. productontology...)
 
-:Globe a owl:Class;
-    rdfs:label "Kartglob"@sv;
-    rdfs:subClassOf :Cartography, :Realia .
+## Candidates for interface-enhanced types (easier to comprehend, combines multiple settings).
+# TODO: some classes here still conflate Work/Instance!
 
-:Map a owl:Class;
-    rdfs:label "Karta"@sv;
-    rdfs:subClassOf :Cartography;
-    owl:equivalentClass bibo:Map .
-
-:Microform a owl:Class;
-    rdfs:label "Mikroform"@sv;
-    skos:exactMatch rdamedia:1002 ; # "microform"
-    rdfs:subClassOf :Product .
-
-:RemoteSensingImage a owl:Class;
-    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
-    rdfs:subClassOf :Product, :Cartography .
-
-:SoundRecording a owl:Class;
-    rdfs:label "Ljudinspelning"@sv;
-    rdfs:subClassOf :Product, :Audio .
-
-:VideoRecording a owl:Class;
-    rdfs:label "Videoinspelning"@sv;
-    rdfs:subClassOf :Product, :MovingImage .
-
-:Database a owl:Class;
-    rdfs:label "Databas"@sv;
-    rdfs:subClassOf :Integrating, :Digital, :Dataset .
-
-:Website a owl:Class;
-    rdfs:label "Webbplats"@sv;
-    rdfs:subClassOf :Integrating, :Digital, :Text;
-    owl:equivalentClass bibo:Website .
-
-:Book a owl:Class;
-    rdfs:label "Book"@en, "Bok"@sv;
-    owl:equivalentClass bibo:Book;
-    rdfs:subClassOf
-        :Text,
-        :Monograph,
-        :Volume,
-        :Print,
-        [ a owl:Restriction; owl:onProperty bf:instanceOf; owl:allValuesFrom bf:Text ] .
-        #[ a owl:Restriction; owl:onProperty :extent; owl:allValuesFrom :PageCount ] .
-
-:BookSeries a owl:Class;
-    rdfs:subClassOf :Text, :Serial .
-
-:ManuscriptCartography a owl:Class;
-    rdfs:label "Kartmanuskript"@sv;
-    :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :Cartography, :Manuscript .
-
-:ManuscriptNotatedMusic a owl:Class;
-    rdfs:label "Musiknotmanuskript"@sv;
-    :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :NotatedMusic, :Manuscript .
-
-:ManuscriptText a owl:Class;
-    rdfs:label "Textmanuskript"@sv;
-    :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :Text, :Manuscript .
-
-:MultiVolumeBook a owl:Class;
-    rdfs:label "Multipart Book"@en, "Bokverk"@sv;
-    skos:altLabel "Flervolymsbok"@sv;
-    rdfs:subClassOf :Book, :MultipartMonograph;
-    owl:equivalentClass bibo:MultiVolumeBook .
-
-:BookVolume a owl:Class;
-    rdfs:label "Book Volume"@en, "Bokband"@sv ;
-    skos:altLabel "Band"@sv, "Volym"@sv ;
-    rdfs:subClassOf :Book,
-        :PublicationVolume .
-
-:PrintedText a owl:Class;
-    rdfs:label "Tryckt text"@sv;
-    rdfs:subClassOf :Text, :Print .
-
-:PrintedBook a owl:Class;
-    rdfs:label "Printed Book"@en, "Tryckt bok"@sv;
-    rdfs:subClassOf :Book, :PrintedText;
-    rdfs:subClassOf [
-            a owl:Restriction;
-            owl:onProperty :contentType;
-            owl:hasValue :Text
-        ], [
-            a owl:Restriction;
-            owl:onProperty :mediaType;
-            owl:hasValue :Unmediated
-        ], [
-            a owl:Restriction;
-            owl:onProperty :carrierType;
-            owl:hasValue :Volume
-        ] .
-
-:EBook a owl:Class;
-    rdfs:label "E-bok"@sv;
-    rdfs:subClassOf :Book, :Digital .
-
-:Audiobook a owl:Class;
-    rdfs:label "Ljudbok"@sv;
-    #owl:equivalentClass bibo:AudioDocument;
-    rdfs:subClassOf :Book, :Audio, bibo:AudioDocument .
+#:Globe a owl:Class;
+#    rdfs:label "Kartglob"@sv;
+#    rdfs:subClassOf :Cartography, :Realia .
+#
+#:Map a owl:Class;
+#    rdfs:label "Karta"@sv;
+#    rdfs:subClassOf :Cartography;
+#    owl:equivalentClass bibo:Map .
+#
+#:RemoteSensingImage a owl:Class;
+#    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
+#    rdfs:subClassOf :Product, :Cartography .
+#
+#:SoundRecording a owl:Class;
+#    rdfs:label "Ljudinspelning"@sv;
+#    rdfs:subClassOf :Product, :Audio .
+#
+#:VideoRecording a owl:Class;
+#    rdfs:label "Videoinspelning"@sv;
+#    rdfs:subClassOf :Product, :MovingImage .
+#
+#:Database a owl:Class;
+#    rdfs:label "Databas"@sv;
+#    rdfs:subClassOf :Integrating, :Digital, :Dataset .
+#
+#:Website a owl:Class;
+#    rdfs:label "Webbplats"@sv;
+#    rdfs:subClassOf :Integrating, :Digital, :Text;
+#    owl:equivalentClass bibo:Website .
+#
+#:Book a owl:Class;
+#    rdfs:label "Book"@en, "Bok"@sv;
+#    owl:equivalentClass bibo:Book;
+#    rdfs:subClassOf
+#        :Print,
+#        [ a owl:Restriction; owl:onProperty :instanceOf; owl:allValuesFrom :Text ] .
+#        [ a owl:Restriction; owl:onProperty :issuanceType; owl:hasValue :Monograph ] .
+#        #[ a owl:Restriction; owl:onProperty :extent; owl:allValuesFrom :PageCount ] .
+#
+#:BookSeries a owl:Class;
+#    rdfs:subClassOf :Text, :Serial .
+#
+#:MultiVolumeBook a owl:Class;
+#    rdfs:label "Multipart Book"@en, "Bokverk"@sv;
+#    skos:altLabel "Flervolymsbok"@sv;
+#    rdfs:subClassOf :Book, :MultipartMonograph;
+#    owl:equivalentClass bibo:MultiVolumeBook .
+#
+#:BookVolume a owl:Class;
+#    rdfs:label "Book Volume"@en, "Bokband"@sv ;
+#    skos:altLabel "Band"@sv, "Volym"@sv ;
+#    rdfs:subClassOf :Book,
+#        :PublicationVolume .
+#
+#:PrintedText a owl:Class;
+#    rdfs:label "Tryckt text"@sv;
+#    rdfs:subClassOf :Text, :Print .
+#
+#:PrintedBook a owl:Class;
+#    rdfs:label "Printed Book"@en, "Tryckt bok"@sv;
+#    rdfs:subClassOf :Book, :PrintedText;
+#    rdfs:subClassOf [
+#            a owl:Restriction;
+#            owl:onProperty :contentType;
+#            owl:hasValue :Text
+#        ], [
+#            a owl:Restriction;
+#            owl:onProperty :mediaType;
+#            owl:hasValue :Unmediated
+#        ], [
+#            a owl:Restriction;
+#            owl:onProperty :carrierType;
+#            owl:hasValue :Volume
+#        ] .
+#
+#:EBook a owl:Class;
+#    rdfs:label "E-bok"@sv;
+#    rdfs:subClassOf :Book, :Digital .
+#
+#:Audiobook a owl:Class;
+#    rdfs:label "Ljudbok"@sv;
+#    #owl:equivalentClass bibo:AudioDocument;
+#    rdfs:subClassOf :Book, :Audio, bibo:AudioDocument .
 
 #CDBook
 #CDMap
 #ESerial
 #Music
 #MusicCD
+
 
 # TODO: informative:
 # - <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
