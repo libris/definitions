@@ -558,10 +558,12 @@
     rdfs:subClassOf :Concept, sdo:Audience;
     owl:equivalentClass bf2:IntendedAudience .
 
-:dimensions a rdf:Property;
-    owl:equivalentProperty bf2:dimensions;
-    rdfs:label "dimensions"@en, "mått"@sv;
-    skos:altLabel "Dimensioner"@sv .
+:dimensions a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:label "mått"@sv, "dimensions"@en;
+    #TODO: what range shall we map to? bf2 maps to Literal
+    #skos:altLabel "Dimensioner"@sv;
+    owl:equivalentProperty bf2:dimensions .
 
 :device a owl:ObjectProperty;
     rdfs:label "apparat"@sv;
@@ -571,6 +573,68 @@
 :Device a owl:Class;
     rdfs:label "Apparat"@sv;
     owl:equivalentClass dbpo:Device .
+
+:mount a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Mount;
+    rdfs:label "Monteringsmaterial"@sv, "Mount material"@en;
+    owl:equivalentProperty bf2:mount .
+
+:Mount a owl:Class;
+    rdfs:label "Montering"@sv, "Mount"@en;
+    owl:equivalentClass bf2:Mount .
+
+:polarity a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Polarity;
+    rdfs:label "Polaritet"@sv, "Polarity"@en;
+    owl:equivalentProperty bf2:polarity .
+
+:Polarity a owl:Class;
+    rdfs:label "Polaritet"@sv, "Polarity"@en;
+    owl:equivalentClass bf2:Polarity .
+
+:reductionRatio a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :ReductionRatio;
+    rdfs:label "förminskningsgrad"@sv, "reduction ratio"@en;
+    owl:equivalentProperty bf2:reductionRatio .
+
+:ReductionRatio a owl:Class;
+    rdfs:label "Förminskningsgrad"@sv, "Reduction ratio"@en;
+    owl:equivalentClass bf2:ReductionRatio .
+
+:emulsion a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Emulsion;
+    rdfs:label "emulsion"@sv, "emulsion"@en;
+    owl:equivalentProperty bf2:emulsion .
+
+:Emulsion a owl:ObjectClass;
+    rdfs:label "Emulsion"@sv, "Emulsion"@en;
+    owl:equivalentClass bf2:Emulsion .
+
+:generation a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Generation;
+    rdfs:label "generation"@sv, "generation"@en;
+    owl:equivalentProperty bf2:generation .
+
+:Generation a owl:Class;
+    rdfs:label "Generation"@sv, "Generation"@en;
+    owl:equivalentClass bf2:Generation .
+
+:baseMaterial a owl:ObjectProperty;
+    rdfs:range :BaseMaterial;
+    rdfs:label "Typ av material"@sv, "Base material"@en;
+    rdfs:domain :Instance;
+    owl:equivalentProperty bf2:baseMaterial .
+
+:BaseMaterial a owl:Class;
+    owl:equivalentClass bf2:BaseMaterial;
+    rdfs:label "Materialtyp"@sv, "Base material"@en .
+
+
 
 ##
 # Specific properties

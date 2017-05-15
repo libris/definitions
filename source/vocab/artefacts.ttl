@@ -133,10 +133,6 @@
     rdfs:subClassOf :CarrierType;
     rdfs:label "Book Format"@en, "Bokformat"@sv .
 
-:BaseMaterial a owl:Class;
-    owl:equivalentClass bf2:BaseMaterial;
-    rdfs:label "Materialtyp"@sv, "Base material"@en .
-
 :MusicFormat a owl:Class;
     owl:euivalentClass bf2:MusicFormat;
     rdfs:label "Notated music format"@en, "Format för musikalisk resurs"@sv .
@@ -191,12 +187,6 @@
     rdfs:range :Cartographic;
     rdfs:label "Projection"@en, "Projektion"@sv .
 
-:baseMaterial a owl:ObjectProperty;
-    rdfs:range :BaseMaterial;
-    rdfs:label "Typ av material"@sv, "Base material"@en;
-    rdfs:domain :Instance;
-    owl:equivalentProperty bf2:baseMaterial .
-
 :colorContent a owl:ObjectProperty;
     rdfs:range :ColorContent;
     rdfs:label "Color content"@en, "färgrepresentation"@sv;
@@ -206,18 +196,6 @@
     rdfs:label "supplementerande innehåll"@sv;
     rdfs:range :SupplementaryContent;
     owl:equivalentProperty bf2:supplementaryContent .
-
-:generation a owl:ObjectProperty;
-    rdfs:domain :Instance;
-    rdfs:range :Generation;
-    rdfs:label "generation"@sv, "generation"@en;
-    owl:equivalentProperty bf2:generation .
-
-:dimensions a owl:ObjectProperty;
-    rdfs:domain :Instance;
-    rdfs:label "Dimensioner"@sv, "Dimensions"@en;
-    #TODO: what range shall we map to? bf2 maps to Literal.
-    owl:equivalentProperty bf2:dimensions .
 
 :soundContent a owl:ObjectProperty;
     rdfs:range :SoundContent;
@@ -418,10 +396,6 @@
 :ColorContent a owl:Class;
     rdfs:label "Färguppsättning"@sv, "Color content"@en;
     owl:equivalentClass bf2:ColorContent .
-
-:Generation a owl:Class;
-    rdfs:label "Generation"@sv, "Generation"@en;
-    owl:equivalentClass bf2:Generation .
 
 :SoundContent a owl:Class;
     rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
