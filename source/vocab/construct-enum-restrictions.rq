@@ -1,0 +1,94 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+
+construct {
+    ?class rdfs:subClassOf [ # a owl:Restriction ;
+            owl:onProperty ?property ;
+            owl:someValuesFrom ?enumclass ] .
+} where {
+
+    values (?property ?enumclass ?class) {
+
+        (:baseMaterial :GlobeMediumType :Globe)
+        (:baseMaterial :MapMediumType :Map)
+        (:baseMaterial :ProjGraphEmulsionType :ProjectedImage)
+        (:baseMaterial :FilmBaseType :Microform)
+        (:baseMaterial :FilmBaseType  :MovingImage)
+        (:baseMaterial :NonProjectedType :StillImage)
+        (:baseMaterial :VideoColorType :VideoRecording)
+
+        (:carrierType :BooksItemType :Text)
+        (:carrierType :ComputerItemType :Digital)
+        (:carrierType :ItemType :Audio)
+        (:carrierType :ItemType :Cartography)
+        (:carrierType :ItemType :Visual)
+        (:carrierType :ItemType :Mixed)
+        (:carrierType :ItemType :Serial)
+
+        (:colorContent :MapColorType :Map)
+        (:colorContent :MapColorType :Globe)
+        (:colorContent :ComputerColorType :Electronic)
+        (:colorContent :ColorType :ProjectedImage)
+        (:colorContent :ColorType :StillImage)
+        (:colorContent :MicroformColorType :Microform)
+
+        (:dimensions :ComputerDimensionsType :Electronic)
+        (:dimensions :ProjGraphDimensionsType :ProjectedImage)
+        (:dimensions :MicroformDimensionsType :Microform)
+        (:dimensions :SoundDimensionsType :SoundRecording)
+        (:dimensions :SoundTapeWidthType :SoundRecording)
+        (:dimensions :VideoDimensionsType :VideoRecording)
+
+        (:generation :MicroformGenerationType :Microform)
+        (:generation :SoundKindOfDiscType :SoundRecording)
+
+        (:genreForm :BooksLiteraryFormType :Text)
+        (:genreForm :BooksBiographyType :Text)
+        (:genreForm :ComputerTypeOfFileType :Digital)
+        (:genreForm :GlobeMaterialType :Globe)
+        (:genreForm :GovernmentPublicationType :Text)
+        (:genreForm :GovernmentPublicationType :Digital)
+        (:genreForm :GovernmentPublicationType :Cartography)
+        (:genreForm :GovernmentPublicationType :Serial)
+        (:genreForm :GovernmentPublicationType :Visual)
+        (:genreForm :MapMaterialType :Map)
+        (:genreForm :MusicCompositionType :Audio)
+        (:genreForm :MusicFormatType :Audio)
+        (:genreForm :MusicTextType :Audio)
+        (:genreForm :NonProjMaterialType :StillImage)
+        (:genreForm :SerialsContentsType :Serial)
+        (:genreForm :SerialsNatureType :Serial)
+        (:genreForm :SerialsTypeOfSerialType :Serial)
+        (:genreForm :VisualMaterialType :Visual)
+
+        (:mount :ProjGraphSupportType :ProjectedImage)
+        (:mount :NonProjectedType :StillImage)
+
+        (:soundCharacteristic :MediumType :ProjectedImage)
+        (:soundCharacteristic :MediumType :MovingImage) # resourceType: RecordingMedium
+        (:soundCharacteristic :MediumType :VideoRecording) # resourceType: RecordingMedium
+        (:soundCharacteristic :MediumType :Map) # resourceType: RecordingMedium
+        (:soundCharacteristic :MediumType :Globe) # resourceType: RecordingMedium
+        (:soundCharacteristic :SoundSpeedType :SoundRecording) # resourceType: PlayingSpeed
+        (:soundCharacteristic :SoundPlaybackChannelType :SoundRecording) # resourceType: PlaybackChannels
+        (:soundCharacteristic :SoundGrooveType :SoundRecording) # resourceType: GrooveCharacteristic
+        (:soundCharacteristic :SoundTapeConfigurationType :SoundRecording) # resourceType: TapeConfig
+        (:soundCharacteristic :SoundKindOfCuttingType :SoundRecording) # resourceType: GrooveCharacteristic
+        (:soundCharacteristic :SoundPlaybackCharacterType :SoundRecording) # resourceType: PlaybackCharacteristic
+        (:soundCharacteristic :MotionPicConfigurationOrVideoPlaybackType :VideoRecording) # resourceType: PlaybackChannels
+        (:soundCharacteristic :MotionPicConfigurationOrVideoPlaybackType :MovingImage) # resourceType: PlaybackChannels
+
+        (:soundContent :ComputerSoundType :Electronic)
+        (:soundContent :SoundType :ProjectedImage)
+        (:soundContent :SoundType :MovingImage)
+        (:soundContent :SoundType :VideoRecording)
+
+        (:supplementaryContent :MusicMatterType :Audio)
+        (:supplementaryContent :IndexType :Text)
+        (:supplementaryContent :IndexType :Cartography)
+
+    }
+
+}
