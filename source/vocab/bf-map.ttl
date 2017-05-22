@@ -1,19 +1,9 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 
-kbv: rdfs:label "KBs vokabulär"@sv, "The KB Vocabulary"@en .
-
-kbv:Endeavour a owl:Class; rdfs:subClassOf kbv:Creation .
-kbv:Creation a owl:Class; rdfs:subClassOf rdfs:Resource .
-kbv:Work rdfs:subClassOf kbv:Endeavour .
-kbv:Instance rdfs:subClassOf kbv:Endeavour .
-kbv:Item rdfs:subClassOf kbv:Creation .
-
-kbv:Record a owl:Class; rdfs:subClassOf kbv:AdminMetadata .
-kbv:adminMetadata rdfs:domain kbv:Record .
+#kbv:Record owl:equivalentClass kbv:AdminMetadata .
 
 kbv:created owl:equivalentProperty bf2:creationDate .
 kbv:modified owl:equivalentProperty bf2:changeDate .

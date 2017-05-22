@@ -1,9 +1,8 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 
-@prefix dc: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
@@ -16,13 +15,17 @@
 
 
 :Place a owl:Class;
-    rdfs:label "Plats"@sv;
-    owl:equivalentClass sdo:Place, madsrdf:Geographic .
+    rdfs:label "Place"@en, "Plats"@sv;
+    owl:equivalentClass bf2:Place, prov:Location, sdo:Place, madsrdf:Geographic .
 
 :Country a owl:Class;
     rdfs:label "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
     rdfs:subClassOf :Place .
+
+:Event a owl:Class;
+    rdfs:label "Event"@en, "Händelse"@sv;
+    owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
 
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;

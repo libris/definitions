@@ -1,0 +1,247 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
+
+@prefix : <https://id.kb.se/vocab/> .
+
+
+:creator a owl:ObjectProperty;
+    skos:prefLabel "upphovsman"@sv;
+    rdfs:label "skapare"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty dc:creator .
+
+:contributor a owl:ObjectProperty;
+    rdfs:label "delaktig i skapandet"@sv;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:contributor, dc:contributor;
+    rdfs:subPropertyOf prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :contribution :agent ) .
+
+
+:author a owl:ObjectProperty ;
+    owl:equivalentProperty sdo:author;
+    rdfs:subPropertyOf :creator;
+    rdfs:label "author"@en, "författare"@sv .
+
+:translator a owl:ObjectProperty;
+    owl:equivalentProperty sdo:translator;
+    rdfs:label "translator"@en, "översättare"@sv .
+
+:authorList a owl:ObjectProperty;
+    owl:equivalentProperty bibo:authorList;
+    rdfs:range rdf:List .
+
+:contributorList a owl:ObjectProperty;
+    owl:equivalentProperty bibo:contributorList;
+    rdfs:range rdf:List .
+
+
+:publisher a owl:ObjectProperty;
+    rdfs:label "utgivare"@sv;
+    owl:equivalentProperty dc:publisher, bf:publisher .
+
+:license a owl:ObjectProperty;
+    rdfs:label "licens"@sv;
+    owl:equivalentProperty dc:license .
+
+
+:versionOf a owl:ObjectProperty;
+    rdfs:label "version av"@sv;
+    owl:equivalentProperty dc:isVersionOf .
+
+:hasVersion a owl:ObjectProperty;
+    rdfs:label "har version"@sv;
+    owl:equivalentProperty dc:hasVersion;
+    rdfs:subPropertyOf :exampleOfWork .
+
+:hasPart a owl:ObjectProperty;
+    rdfs:label "has part"@en, "har del"@sv;
+    owl:equivalentProperty dc:hasPart .
+
+:isPartOf a owl:ObjectProperty;
+    rdfs:label "part of"@en, "del av"@sv;
+    owl:equivalentProperty bf2:partOf, dc:isPartOf .
+
+:partOfSeries a owl:ObjectProperty;
+    rdfs:subPropertyOf :isPartOf;
+    rdfs:label "part of series"@en, "del av serie"@sv .
+
+:references a owl:ObjectProperty;
+    rdfs:label "hänvisar till"@sv;
+    owl:equivalentProperty dc:references .
+
+:referencedBy a owl:ObjectProperty;
+    rdfs:label "hänvisad till av"@sv;
+    owl:inverseOf :references;
+    owl:equivalentProperty dc:isReferencedBy .
+
+:relatedTo a owl:ObjectProperty;
+    rdfs:label "relaterad till"@sv;
+    owl:equivalentProperty bf2:relatedTo;
+    rdfs:subPropertyOf dc:relation .
+
+:influentialRelation a owl:ObjectProperty;
+    rdfs:subPropertyOf :influencedBy, dc:relation .
+
+:influentialPart a owl:ObjectProperty;
+    rdfs:subPropertyOf :influencedBy, dc:hasPart .
+
+
+:accompaniedBy a owl:ObjectProperty;
+    rdfs:label "tillsammans med"@sv;
+    owl:equivalentProperty bf2:accompaniedBy .
+
+:alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
+
+:otherPhysicalFormat a owl:ObjectProperty;
+    owl:equivalentProperty bf2:otherPhysicalFormat;
+    rdfs:label "Annat bärarformat"@sv .
+
+:translationOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:translationOf;
+    rdfs:subPropertyOf :versionOf;
+    rdfs:label "översättning av"@sv .
+
+:expressionOf a owl:ObjectProperty;
+    owl:equivalentProperty bf2:expressionOf;
+    rdfs:subPropertyOf :versionOf;
+    rdfs:label "uttryck av"@sv .
+
+:precededBy a owl:ObjectProperty;
+    owl:equivalentProperty bf2:precededBy;
+    rdfs:subPropertyOf :relatedTo;
+    rdfs:label "föregången av"@sv .
+
+:hasSeries a owl:ObjectProperty;
+    owl:equivalentProperty bf2:hasSeries;
+    rdfs:label "har serie"@sv .
+
+:isPrimaryTopicOf a owl:ObjectProperty;
+    owl:equivalentProperty foaf:isPrimaryTopicOf .
+
+
+:language a owl:ObjectProperty;
+    rdfs:label "language"@en, "språk"@sv;
+    rdfs:comment "Verkets språk"@sv;
+    owl:equivalentProperty bf2:language;
+    rdfs:subPropertyOf dc:language;
+    rdfs:range :Language .
+
+:languageNote a owl:DatatypeProperty;
+    rdfs:label "språkanmärkning"@sv;
+    owl:equivalentProperty bf:languageNote .
+
+:country a owl:ObjectProperty ;
+    rdfs:range :Country;
+    rdfs:label "country"@en, "land"@sv .
+
+:replaces a owl:ObjectProperty;
+    rdfs:label "ersätter"@sv;
+    owl:equivalentProperty dc:replaces .
+
+:source a owl:ObjectProperty;
+    rdfs:label "källa"@sv;
+    owl:equivalentProperty dc:source .
+
+:sourceNote a owl:DatatypeProperty;
+    rdfs:label "källinformation"@sv;
+    owl:propertyChainAxiom (:source :note) .
+
+:citation a owl:ObjectProperty;
+    rdfs:label "citat"@sv;
+    owl:equivalentProperty sdo:citation .
+
+#:about a owl:ObjectProperty;
+#    rdfs:label "handlar om"@sv;
+#    owl:equivalentProperty sdo:about .
+#
+:subject a owl:ObjectProperty;
+    rdfs:label "subject"@en, "ämne"@sv;
+    rdfs:subPropertyOf sdo:about;
+    owl:equivalentProperty dc:subject ;
+    sdo:rangeIncludes :Concept, :Agent, :Work .
+
+#:artform a owl:ObjectProperty ;
+#    owl:equivalentProperty sdo:artform;
+#    rdfs:label "artform"@en, "verksform"@sv .
+
+
+# Qualified Forms of Contribution and Relationship
+
+:role a owl:ObjectProperty;
+    rdfs:label "roll"@sv;
+    rdfs:subPropertyOf :predicate;
+    #ptg:abstract true ;
+    rdfs:domain :Contribution;
+    owl:equivalentProperty prov:hadRole .
+
+:contribution a owl:ObjectProperty;
+    rdfs:label "Uppslag"@sv;
+    skos:altLabel "Upphov"@sv;
+    owl:equivalentProperty bf2:contribution;
+    rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
+    rdfs:range :Contribution .
+
+:Contribution a owl:Class ;
+    rdfs:label "Uppslag"@sv ;
+    rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
+    rdfs:subClassOf prov:Attribution, :QualifiedRole ;
+    owl:equivalentClass bf2:Contribution .
+
+:PrimaryContribution a owl:Class ;
+    rdfs:label "Huvuduppslag"@sv ;
+    rdfs:comment "Ange namnet för först nämnda upphov här. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
+    rdfs:subClassOf :Contribution ;
+    owl:equivalentClass bflc:PrimaryContribution .
+
+:agent a owl:ObjectProperty;
+    rdfs:label "aktör"@sv;
+    #rdfs:label "agent"@sv;
+    rdfs:subPropertyOf :object ;
+    owl:equivalentProperty bf2:agent, prov:agent;
+    sdo:domainIncludes :Contribution, :Event;
+    rdfs:range :Agent .
+
+:relationship a owl:ObjectProperty;
+    rdfs:label "Relation"@sv;
+    owl:equivalentProperty bflc:relationship ;
+    rdfs:subPropertyOf :hasStatement, prov:qualifiedPrimarySource ;
+    rdfs:domain :Creation ;
+    rdfs:range :Relationship .
+
+:relation a owl:ObjectProperty;
+    rdfs:label "Relation"@sv;
+    rdfs:subPropertyOf :role;
+    rdfs:domain :Relationship;
+    owl:equivalentProperty prov:hadRole, bflc:relation .
+
+:Relationship a owl:Class ;
+    rdfs:label "Relation"@sv ;
+    rdfs:subClassOf prov:PrimarySource ;
+    owl:equivalentClass bflc:Relationship .
+
+:PartitiveRelationship a owl:Class ;
+    rdfs:label "Relation till del"@sv ;
+    rdfs:subClassOf :Relationship ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :relation ;
+            owl:someValuesFrom :hasPart ] .
+
+:entity a owl:ObjectProperty;
+    rdfs:label "entity"@en, "entitet"@sv;
+    rdfs:subPropertyOf :object ;
+    owl:equivalentProperty prov:entity ;
+    rdfs:domain :Relationship;
+    sdo:rangeIncludes :Work .

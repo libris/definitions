@@ -17,6 +17,8 @@
 @prefix rdael: <http://rdvocab.info/Elements/> .
 @prefix rdacontent: <http://rdvocab.info/termList/RDAContentType/> .
 @prefix rdamedia: <http://rdvocab.info/termList/RDAMediaType/> .
+@prefix rdacarrier: <http://rdvocab.info/termList/RDACarrierType/> .
+@prefix rdami: <http://rdvocab.info/termList/ModeIssue/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
@@ -25,66 +27,22 @@
 @prefix marc: <https://id.kb.se/marc/> .
 
 
-##
-# Enumeration Groups
-
-# TODO: replace :inCollection marc:* with a :IssuanceType
-#marc:typeOfRecord a skos:Collection; rdfs:label "Typ"@sv .
-#marc:bibLevel a skos:Collection; rdfs:label "Bibliografisk nivå"@sv .
-
-:ContentType owl:equivalentClass bf2:Content .
-:MediaType owl:equivalentClass bf2:Media .
-:CarrierType owl:equivalentClass bf2:Carrier .
-:IssuanceType owl:equivalentClass bf2:Issuance .
+# TODO: List top concepts to provide interfaces with:
+# - a set of starting points for e.g. navigation, creation
+# - a "roof" when finding base classes
+#: skos:hasTopConcept :Work .
+#: skos:hasTopConcept :Instance .
+##: skos:hasTopConcept :Print .
 
 
 ##
 # Creative Works
 
-:contentType a owl:ObjectProperty;
-    owl:equivalentProperty bf2:content;
-    rdfs:subPropertyOf rdf:type .
-
-:mediaType a owl:ObjectProperty;
-    owl:equivalentProperty bf2:media;
-    rdfs:subPropertyOf rdf:type .
-
-# TODO: a given value implies value for :media from base :MediaType
-:carrierType a owl:ObjectProperty;
-    rdfs:label "bärartyp"@sv;
-    rdfs:range :CarrierType;
-    owl:equivalentProperty bf2:carrier .
-#    rdfs:subPropertyOf rdael:carrierType, dc:format, sdo:additionalType, rdf:type .
-
-# TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
-# alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
-:issuanceType a owl:ObjectProperty;
-    rdfs:label "utgivningssätt"@sv;   
-    owl:equivalentProperty bf2:issuance;
-    rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
-
-# Rules:
-
-# Vocab Macro:
-# INSERT {
-#    ?enumType rdfs:subClassOf [ a owl:Restriction;
-#            owl:onProperty bf:carrier; owl:hasSelf true ] .
-#} WHERE { ?enumType a bf:Carrier }
-# Rule Implementation:
-# INSERT {
-#     ?s ?enumProperty ?enumType
-# } WHERE {
-#     ?s rdf:type/rdfs:subClassOf* ?enumType .
-#     ?enumType rdfs:subClassOf [
-#             a owl:Restriction;
-#             owl:onProperty ?enumProperty;
-#             owl:hasSelf true
-#         ] .
-# }
-
-
-
-# Specificity Dimensions
+:Endeavour a owl:Class; rdfs:subClassOf :Creation .
+:Creation a owl:Class; rdfs:subClassOf rdfs:Resource .
+:Work rdfs:subClassOf :Endeavour .
+:Instance rdfs:subClassOf :Endeavour .
+:Item rdfs:subClassOf :Creation .
 
 :CreativeWork a owl:Class;
     rdfs:label "Kreativt verk"@sv;
@@ -110,58 +68,117 @@
     ptg:abstract true;
     rdfs:subClassOf :Instance, sdo:Product, rdaent:Manifestation .
 
-:contentType a owl:ObjectProperty;
-    rdfs:label "content type"@en, "innehållstyp"@sv;
-    rdfs:subPropertyOf rdael:contentType, dc:type, sdo:additionalType .
-
-:mediaType a owl:ObjectProperty;
-    rdfs:label "media type"@en, "medietyp"@sv;
-    rdfs:range :MediaType;
-    rdfs:subPropertyOf rdael:mediaType .
-
-:MediaType a owl:Class;
-    rdfs:label "Medietyp"@sv;
-    owl:equivalentClass dc:MediaType .
-
-:CarrierType a owl:Class;
-    rdfs:label "Bärartyp"@sv;
-    rdfs:subClassOf :MediaType .
-
-:BookFormat a owl:Class;
-    owl:equivalentClass sdo:BookFormat;
-    rdfs:subClassOf :CarrierType;
-    rdfs:label "Book Format"@en, "Bokformat"@sv .
-
-:MusicFormat a owl:Class;
-    owl:euivalentClass bf2:MusicFormat;
-    rdfs:label "Notated music format"@en, "Format för musikalisk resurs"@sv .
-
 :instanceOf a owl:ObjectProperty ;
     rdfs:label "instance of work"@en, "instans av verk"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
     sdo:rangeIncludes :Work .
 
-:workExample a owl:ObjectProperty ;
-    rdfs:label "work example"@en, "verksexempel"@sv;
-    #rdfs:label "exempel på detta verk"@sv;
-    owl:equivalentProperty sdo:workExample;
-    sdo:rangeIncludes :CreativeWork, :Product .
+#:workExample a owl:ObjectProperty ;
+#    rdfs:label "work example"@en, "verksexempel"@sv;
+#    #rdfs:label "exempel på detta verk"@sv;
+#    rdfs:subClassOf bf2:hasInstance ;
+#    owl:equivalentProperty sdo:workExample;
+#    sdo:rangeIncludes :CreativeWork, :Product .
 
-:format a owl:ObjectProperty;
-    rdfs:label "format"@en, "format"@sv;
-    owl:equivalentProperty dc:format .
 
-:bookFormat a owl:ObjectProperty ;
-    owl:equivalentProperty sdo:bookFormat;
-    rdfs:subPropertyOf :format;
-    rdfs:label "book format"@en, "bokformat"@sv .
+##
+# Type-like Enumerations
 
-:musicFormat a owl:ObjectProperty ;
-#    rdfs:subPropertyOf :format;
-    owl:equivalentProperty bf2:musicFormat;
-    rdfs:range :MusicFormat;
-    rdfs:label "notated music format"@en, "format för musikalisk resurs"@sv .
+:additionalType a owl:ObjectProperty ;
+    owl:equivalentProperty sdo:additionalType ;
+    rdfs:subPropertyOf rdf:type .
+
+:contentType a owl:ObjectProperty;
+    rdfs:label "content type"@en, "innehållstyp"@sv ;
+    rdfs:range :ContentType ;
+    owl:equivalentProperty bf2:content ;
+    rdfs:subPropertyOf :additionalType, rdael:contentType, dc:type .
+
+:mediaType a owl:ObjectProperty;
+    rdfs:label "media type"@en, "medietyp"@sv ;
+    rdfs:range :MediaType ;
+    owl:equivalentProperty bf2:media ;
+    rdfs:subPropertyOf rdael:mediaType ;
+    rdfs:subPropertyOf rdf:type .
+
+# TODO: a given value implies value for :media from base :MediaType
+:carrierType a owl:ObjectProperty;
+    rdfs:label "bärartyp"@sv ;
+    rdfs:range :CarrierType ;
+    owl:equivalentProperty bf2:carrier ;
+    rdfs:subPropertyOf :additionalType, rdael:carrierType, dc:format .
+
+# TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
+# alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
+:issuanceType a owl:ObjectProperty;
+    rdfs:label "utgivningssätt"@sv;   
+    owl:equivalentProperty bf2:issuance;
+    rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
+
+:genreForm a owl:ObjectProperty;
+    rdfs:label "genre/form"@en, "genre/form"@sv;
+    rdfs:range :GenreForm;
+    rdfs:subPropertyOf :additionalType, dc:type, sdo:genre ;
+    owl:equivalentProperty bf2:genreForm .
+
+:ContentType owl:equivalentClass bf2:Content .
+
+:MediaType a owl:Class;
+    rdfs:label "Medietyp"@sv;
+    owl:equivalentClass bf2:Media, dc:MediaType .
+
+:CarrierType a owl:Class; # a :MediaType ?
+    rdfs:label "Bärartyp"@sv;
+    rdfs:subClassOf :MediaType ;
+    owl:equivalentClass bf2:Carrier .
+
+:IssuanceType owl:equivalentClass bf2:Issuance .
+
+:GenreForm a owl:ObjectClass;
+    rdfs:label "Genre/Form"@en, "Genre/Form"@sv;
+    owl:equivalentClass bf2:GenreForm .
+
+
+# Generation Rules for Alignment Mappings:
+
+# Vocab Macro:
+# INSERT {
+#    ?enumType rdfs:subClassOf [ a owl:Restriction;
+#            owl:onProperty bf:carrier; owl:hasValue ?enumType ] .
+#} WHERE {
+#    ?enumProp rdfs:subPropertyOf rdf:type ;
+#        rdfs:range ?metaType .
+#    ?enumType a ?metaType .
+#}
+
+
+# MARC Aligments for Editing
+
+# TODO: Use <./construct-enum-restrictions.rq>! (Was: add all combos from 007 and 008)
+:Map rdfs:subClassOf [ a owl:Restriction;
+        owl:onProperty :carrierType;
+        owl:someValuesFrom marc:MapMaterialType ] .
+:Text rdfs:subClassOf [ a owl:Restriction;
+        owl:onProperty :contentType;
+        owl:someValuesFrom marc:BooksContentsType ] .
+
+
+# RDA Alignments (some draft examples...)
+
+:Unmediated a bf2:Media;
+    skos:exactMatch rdamedia:1007 ; # "unmediated" ("text", "non-projected graphic")
+    rdfs:label "Omedierad"@sv;
+    rdfs:subClassOf [ a owl:Restriction; owl:onProperty bf2:media; owl:hasValue :Unmediated ] .
+
+:Volume a owl:Class, bf2:Carrier;
+    rdfs:label "Volym"@sv;
+    skos:exactMatch rdacarrier:1049; # "volume"
+    rdfs:subClassOf :Unmediated,
+        [ a owl:Restriction; owl:onProperty bf2:carrier; owl:hasValue :Volume ] .
+
+
+# Detailed Carrier Enumeration Properties and Types
 
 :formatOf a owl:ObjectProperty;
     rdfs:label "är format på"@sv;
@@ -173,39 +190,40 @@
     rdfs:subPropertyOf sdo:exampleOfWork;
     owl:equivalentProperty dc:hasFormat .
 
-:artform a owl:ObjectProperty ;
-    owl:equivalentProperty sdo:artform;
-    rdfs:label "artform"@en, "verksform"@sv .
+:format a owl:ObjectProperty;
+    rdfs:label "format"@en, "format"@sv;
+    ptg:abstract true ;
+    owl:equivalentProperty dc:format .
 
-:cartographicAttributes a owl:ObjectProperty;
-    owl:equivalentProperty bf2:cartographicAttributes;
-    rdfs:range :Cartographic;
-    rdfs:label "Cartographic data"@en, "kartografisk data för resursen"@sv .
+:bookFormat a owl:ObjectProperty ; # TODO: =~ marc:BooksItemType (?)
+    owl:equivalentProperty sdo:bookFormat;
+    rdfs:subPropertyOf :format;
+    rdfs:label "book format"@en, "bokformat"@sv .
 
-:projection a owl:ObjectProperty;
-    rdfs:range :Cartographic;
-    rdfs:label "Projection"@en, "Projektion"@sv .
+:BookFormat a owl:Class;
+    owl:equivalentClass sdo:BookFormat;
+    rdfs:subClassOf :CarrierType;
+    rdfs:label "Book Format"@en, "Bokformat"@sv .
 
-:colorContent a owl:ObjectProperty;
-    rdfs:range :ColorContent;
-    rdfs:label "Color content"@en, "färgrepresentation"@sv;
-    owl:equivalentProperty bf2:colorContent .
+:musicFormat a owl:ObjectProperty ;
+    rdfs:subPropertyOf :format;
+    owl:equivalentProperty bf2:musicFormat;
+    rdfs:range :MusicFormat;
+    rdfs:label "notated music format"@en, "format för musikalisk resurs"@sv .
 
-:supplementaryContent a owl:ObjectProperty ;
-    rdfs:label "supplementerande innehåll"@sv;
-    rdfs:range :SupplementaryContent;
-    owl:equivalentProperty bf2:supplementaryContent .
+:MusicFormat a owl:Class; # TODO: =~ marc:MusicFormatType (?)
+    owl:euivalentClass bf2:MusicFormat;
+    rdfs:label "Notated music format"@en, "Format för musikalisk resurs"@sv .
 
-:layout a owl:ObjectProperty;
-    rdfs:range :Layout;
-    rdfs:domain :Instance;
-    rdfs:label "layout"@sv, "layout"@en;
-    owl:equivalentProperty bf2:layout .
 
-:notation a owl:ObjectProperty;
-    rdfs:range :Notation;
-    rdfs:label "Notationssystem"@sv, "Notation system"@en;
-    owl:equivalentProperty bf2:notation .
+##
+# Subclasses and Enum Values
+
+# TODO: remove :inCollection where we have:
+# - a "stable" :Work subclass (instead of marc:typeOfRecord)
+# - a :IssuanceType (instead of marc:bibLevel)
+#marc:typeOfRecord a skos:Collection; rdfs:label "Typ"@sv .
+#marc:bibLevel a skos:Collection; rdfs:label "Bibliografisk nivå"@sv .
 
 
 # Common Content Types
@@ -214,21 +232,12 @@
     rdfs:label "Kartmaterial"@sv;
     rdfs:subClassOf :CreativeWork;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:Cartography .
+    owl:equivalentClass bf2:Cartography .
 
 :Dataset a owl:Class;
     rdfs:label "Dataset"@sv;
     rdfs:subClassOf :CreativeWork;
     owl:equivalentClass dctype:Dataset, bf:Dataset, sdo:Dataset .
-
-:Illustration a owl:Class;
-    rdfs:label "Illustration"@sv, "Illustrative content"@en;
-    owl:equivalentClass bf:Illustration .
-
-:illustrativeContent a owl:ObjectProperty;
-    rdfs:label "Illustrationer i resursen"@sv, "Illustrative content information"@en;
-    rdfs:range :Illustration;
-    owl:eqivalentProperty bf:illustrativeContent .
 
 :Image a owl:Class; # Visual
     rdfs:label "Bild"@sv;
@@ -275,20 +284,6 @@
     rdfs:subClassOf :CreativeWork;
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf:NotatedMusic .
-
-:Notation a owl:Class;
-    rdfs:label "Notation"@sv, "Notation"@en;
-    owl:equivalentClass bf2:Notation .
-
-:MusicNotation a owl:Class;
-    rdfs:label "Format för musiknoter"@sv, "Music notation used"@en;
-    rdfs:subClassOf :Notation;
-    owl:equivalentClass bf2:MusicNotation .
-
-:TactileNotation a owl:Class;
-    rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
-    rdfs:subClassOf :Notation;
-    owl:equivalentClass bf2:TactileNotation .
 
 
 :Audio a owl:Class;
@@ -339,12 +334,6 @@
 
 # Combined Content Types
 
-
-:Cartographic a owl:Class;
-    rdfs:label "Kartografisk information"@sv, "Cartographic information"@en;
-    owl:equvialentClass bf2:Cartographic;
-    rdfs:subClassOf :Cartography .
-
 :CartographicDataset a owl:Class;
     rdfs:label "Kartografisk bild"@sv;
     skos:exactMatch rdacontent:1001 ; # "cartographic dataset"
@@ -380,14 +369,6 @@
     skos:exactMatch rdacontent:1007 ; # "computer dataset"
     rdfs:subClassOf :Digital, :Dataset .
 
-:ColorContent a owl:Class;
-    rdfs:label "Färguppsättning"@sv, "Color content"@en;
-    owl:equivalentClass bf2:ColorContent .
-
-:Layout a owl:Class;
-    rdfs:label "Layout"@sv, "Layout"@en;
-    owl:equivalentClass bf2:Layout .
-
 
 # TODO: missing rdacontent mappings:
 #    skos:exactMatch rdacontent:1008 ; # "computer program"
@@ -401,20 +382,21 @@
 #    skos:exactMatch rdacontent:1019 ; # "tactile three-dimensional form"
 
 
-# Mereological (Compositional) Dimensions
+# Mereological Dimensions (Issuance / Composition)
 
-:Monograph a owl:Class;
+:Monograph a owl:Class, :IssuanceType;
     rdfs:label "Monografisk resurs"@sv;
-    :inCollection marc:bibLevel;
+    skos:exactMatch rdami:1001 ; # "single unit"@en
+    #:inCollection marc:bibLevel;
     owl:equivalentClass bf:Monograph .
 
 :Part a owl:Class;
     rdfs:label "Del av resurs"@sv;
     ptg:abstract true .
 
-:ComponentPart a owl:Class;
+:ComponentPart a owl:Class, :IssuanceType;
     rdfs:label "Del av sammansatt resurs"@sv;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     rdfs:subClassOf :Part .
 
 :Aggregate a owl:Class;
@@ -426,26 +408,27 @@
     ptg:abstract true;
     rdfs:subClassOf :Aggregate .
 
-:Archival a owl:Class;
-    rdfs:label "Arkiv"@sv;
-    rdfs:subClassOf :Aggregate;
-    owl:equivalentClass bf:Archival .
+#:Archival a owl:Class;
+#    rdfs:label "Arkiv"@sv;
+#    rdfs:subClassOf :Aggregate;
+#    owl:equivalentClass bf:Archival .
 
-:Collection a owl:Class;
+:Collection a owl:Class, :IssuanceType;
     rdfs:label "Samling"@sv;
     rdfs:subClassOf :Aggregate;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     owl:equivalentClass dctype:Collection, bf:Collection .
 
-:SubCollection a owl:Class;
+:SubCollection a owl:Class, :IssuanceType;
     rdfs:label "Delsamling"@sv;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     rdfs:subClassOf :Collection, :Part .
 
-:Integrating a owl:Class;
+:Integrating a owl:Class, :IssuanceType;
     rdfs:label "Integrerande resurs"@sv;
+    skos:exactMatch rdami:1004 ; # "integrating resource"@en
     rdfs:subClassOf :Continuing;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     owl:equivalentClass bf:Integrating .
 
 :MonographicComponentPart a owl:Class;
@@ -453,9 +436,9 @@
     owl:equivalentClass bibo:DocumentPart;
     rdfs:subClassOf :Monograph, :ComponentPart .
 
-:SerialComponentPart a owl:Class;
+:SerialComponentPart a owl:Class, :IssuanceType;
     rdfs:label "Del av sammansatt seriell resurs"@sv;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     rdfs:subClassOf :Serial, :ComponentPart  .
 
 :Multipart a owl:Class;
@@ -464,33 +447,288 @@
 
 :MultipartMonograph a owl:Class;
     rdfs:label "Flerbandsverk"@sv;
+    skos:exactMatch rdami:1002 ; # "multipart monograph"@en
     rdfs:subClassOf :Multipart, :Monograph;
     owl:equivalentClass bf:MultipartMonograph .
 
-:Serial a owl:Class;
+:Serial a owl:Class, :IssuanceType;
     rdfs:label "Seriell resurs"@sv;
+    skos:exactMatch rdami:1003 ; # "serial" @en
     rdfs:subClassOf :Continuing;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     owl:equivalentClass bf:Serial .
 
-:Periodical a owl:Class;
+:Periodical a owl:Class, :IssuanceType;
     rdfs:label "Periodical"@en, "Periodika"@sv;
     skos:altLabel "Periodisk resurs"@sv;
     rdfs:comment "Samma sak som seriell resurs."@sv;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     owl:equivalentClass bf:Serial .
 
-:CreativeWorkSeries a owl:Class;
-    owl:equivalentClass sdo:CreativeWorkSeries;
-    rdfs:subClassOf :Serial;
-    rdfs:label "Creative Work Series"@en, "Utgivningsserie"@sv .
+#:CreativeWorkSeries a owl:Class;
+#    owl:equivalentClass sdo:CreativeWorkSeries;
+#    rdfs:subClassOf :Serial;
+#    rdfs:label "Creative Work Series"@en, "Utgivningsserie"@sv .
 
-:LicenseAgreementBoundDescription a owl:Class ;
+:LicenseAgreementBoundDescription a owl:Class, :IssuanceType ;
     rdfs:label "Licensavtalsbunden beskrivning"@sv;
     owl:deprecated true;
-    :inCollection marc:bibLevel;
+    #:inCollection marc:bibLevel;
     rdfs:subClassOf :Aggregate .
 
-:SupplementaryContent a owl:Class ;
-    rdfs:label "Supplementerande innehåll"@sv;
-    owl:equivalentClass bf2:SupplementaryContent .
+
+# Manifestation Dimensions
+
+:Archival a owl:Class;
+    rdfs:label "Arkiv"@sv;
+    rdfs:subClassOf :Instance;
+    owl:equivalentClass bf2:Archival .
+
+:Digital a owl:Class;
+    ptg:abstract true;
+    rdfs:label "Digital resurs"@sv;
+    #rdfs:subClassOf [ owl:unionOf (dctype:InteractiveResource dctype:Software) ]
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Electronic .
+
+:Manuscript a owl:Class;
+    rdfs:label "Manuskript"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Manuscript, bibo:Manuscript .
+
+:Print a owl:Class;
+    rdfs:label "Tryck"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Print .
+
+:Electronic a owl:Class;
+    rdfs:label "Elektronisk"@sv;
+    skos:exactMatch rdamedia:1003 ; # "computer"
+    rdfs:subClassOf :Digital, :Product .
+
+:Microform a owl:Class;
+    rdfs:label "Mikroform"@sv;
+    skos:exactMatch rdamedia:1002 ; # "microform"
+    rdfs:subClassOf :Product .
+
+:Tactile a owl:Class;
+    rdfs:label "Taktil resurs"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass bf:Tactile .
+
+:ProjectedImage a owl:Class;
+    rdfs:label "Projicerad bild"@sv;
+    skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Image .
+
+:PhysicalObject a owl:Class;
+    rdfs:label "Föremål"@sv;
+    skos:altLabel "Realia"@sv;
+    rdfs:subClassOf :Product;
+    owl:equivalentClass dctype:PhysicalObject .
+
+:Software a owl:Class;
+    rdfs:label "Mjukvara"@sv;
+    rdfs:subClassOf :Digital;
+    owl:equivalentClass dctype:Software, sdo:SoftwareApplication .
+
+# TODO: missing rdamedia mappings:
+#    skos:exactMatch rdamedia:1004 ; # "microscopic"
+#    skos:exactMatch rdamedia:1006 ; # "stereographic"
+#    skos:exactMatch rdamedia:1008 ; # "video"
+
+
+# Combined Work/Instance Types in MARC
+
+:ManuscriptCartography a owl:Class;
+    rdfs:label "Kartmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf [ a owl:Restriction; 
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :Cartography
+        ],
+        :Manuscript .
+
+:ManuscriptNotatedMusic a owl:Class;
+    rdfs:label "Musiknotmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf [ a owl:Restriction; 
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :NotatedMusic
+        ],
+        :Manuscript .
+
+:ManuscriptText a owl:Class;
+    rdfs:label "Textmanuskript"@sv;
+    :inCollection marc:typeOfRecord;
+    rdfs:subClassOf :Text, :Manuscript .
+
+# Common Carrier Types
+
+#:Disc
+#:CD
+#:DVD
+
+# Concrete Types (can grow a lot, be combined with e.g. productontology...)
+
+## Candidates for interface-enhanced types (easier to comprehend, combines multiple settings).
+# TODO: some classes here still conflate Work/Instance!
+
+#:Globe a owl:Class;
+#    rdfs:label "Kartglob"@sv;
+#    rdfs:subClassOf :Cartography, :Realia .
+#
+#:Map a owl:Class;
+#    rdfs:label "Karta"@sv;
+#    rdfs:subClassOf :Cartography;
+#    owl:equivalentClass bibo:Map .
+#
+#:RemoteSensingImage a owl:Class;
+#    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
+#    rdfs:subClassOf :Product, :Cartography .
+#
+#:SoundRecording a owl:Class;
+#    rdfs:label "Ljudinspelning"@sv;
+#    rdfs:subClassOf :Product, :Audio .
+#
+#:VideoRecording a owl:Class;
+#    rdfs:label "Videoinspelning"@sv;
+#    rdfs:subClassOf :Product, :MovingImage .
+#
+#:Database a owl:Class;
+#    rdfs:label "Databas"@sv;
+#    rdfs:subClassOf :Integrating, :Digital, :Dataset .
+#
+#:Website a owl:Class;
+#    rdfs:label "Webbplats"@sv;
+#    rdfs:subClassOf :Integrating, :Digital, :Text;
+#    owl:equivalentClass bibo:Website .
+#
+#:Book a owl:Class;
+#    rdfs:label "Book"@en, "Bok"@sv;
+#    owl:equivalentClass bibo:Book;
+#    rdfs:subClassOf
+#        :Print,
+#        [ a owl:Restriction; owl:onProperty :instanceOf; owl:allValuesFrom :Text ] .
+#        [ a owl:Restriction; owl:onProperty :issuanceType; owl:hasValue :Monograph ] .
+#        #[ a owl:Restriction; owl:onProperty :extent; owl:allValuesFrom :PageCount ] .
+#
+#:BookSeries a owl:Class;
+#    rdfs:subClassOf :Text, :Serial .
+#
+#:MultiVolumeBook a owl:Class;
+#    rdfs:label "Multipart Book"@en, "Bokverk"@sv;
+#    skos:altLabel "Flervolymsbok"@sv;
+#    rdfs:subClassOf :Book, :MultipartMonograph;
+#    owl:equivalentClass bibo:MultiVolumeBook .
+#
+#:BookVolume a owl:Class;
+#    rdfs:label "Book Volume"@en, "Bokband"@sv ;
+#    skos:altLabel "Band"@sv, "Volym"@sv ;
+#    rdfs:subClassOf :Book,
+#        :PublicationVolume .
+#
+#:PrintedText a owl:Class;
+#    rdfs:label "Tryckt text"@sv;
+#    rdfs:subClassOf :Text, :Print .
+#
+#:PrintedBook a owl:Class;
+#    rdfs:label "Printed Book"@en, "Tryckt bok"@sv;
+#    rdfs:subClassOf :Book, :PrintedText;
+#    rdfs:subClassOf [
+#            a owl:Restriction;
+#            owl:onProperty :contentType;
+#            owl:hasValue :Text
+#        ], [
+#            a owl:Restriction;
+#            owl:onProperty :mediaType;
+#            owl:hasValue :Unmediated
+#        ], [
+#            a owl:Restriction;
+#            owl:onProperty :carrierType;
+#            owl:hasValue :Volume
+#        ] .
+#
+#:EBook a owl:Class;
+#    rdfs:label "E-bok"@sv;
+#    rdfs:subClassOf :Book, :Digital .
+#
+#:Audiobook a owl:Class;
+#    rdfs:label "Ljudbok"@sv;
+#    #owl:equivalentClass bibo:AudioDocument;
+#    rdfs:subClassOf :Book, :Audio, bibo:AudioDocument .
+
+#CDBook
+#CDMap
+#ESerial
+#Music
+#MusicCD
+
+
+# TODO: informative:
+# - <http://faculty.washington.edu/kiegel/ld/rda-core-to-bibframe.pdf>
+# - <http://bibframe.org/documentation/resource-types/#aspects> # old (BF1)
+
+# TODO: missing rdacarrier mappings:
+#    skos:exactMatch rdacarrier:1001 ; # "Audio carriers" # skos:closeMatch rdamedia:1001
+#    skos:exactMatch rdacarrier:1002 ; # "audio cartridge"
+#    skos:exactMatch rdacarrier:1003 ; # "audio cylinder"
+#    skos:exactMatch rdacarrier:1004 ; # "audio disc"
+#    skos:exactMatch rdacarrier:1005 ; # "sound-track reel"
+#    skos:exactMatch rdacarrier:1006 ; # "audio roll"
+#    skos:exactMatch rdacarrier:1007 ; # "audiocassette"
+#    skos:exactMatch rdacarrier:1008 ; # "audiotape reel"
+
+#    skos:exactMatch rdacarrier:1010 ; # "Computer carriers" # skos:closeMatch rdamedia:1003
+#    skos:exactMatch rdacarrier:1011 ; # "computer card"
+#    skos:exactMatch rdacarrier:1012 ; # "computer chip cartridge"
+#    skos:exactMatch rdacarrier:1013 ; # "computer disc"
+#    skos:exactMatch rdacarrier:1014 ; # "computer disc cartridge"
+#    skos:exactMatch rdacarrier:1015 ; # "computer tape cartridge"
+#    skos:exactMatch rdacarrier:1016 ; # "computer tape cassette"
+#    skos:exactMatch rdacarrier:1017 ; # "computer tape reel"
+#    skos:exactMatch rdacarrier:1018 ; # "online resource"
+
+#    skos:exactMatch rdacarrier:1020 ; # "Microform carriers" # skos:closeMatch rdamedia:1002
+#    skos:exactMatch rdacarrier:1021 ; # "aperture card"
+#    skos:exactMatch rdacarrier:1022 ; # "microfiche"
+#    skos:exactMatch rdacarrier:1023 ; # "microfiche cassette"
+#    skos:exactMatch rdacarrier:1024 ; # "microfilm cartridge"
+#    skos:exactMatch rdacarrier:1025 ; # "microfilm cassette"
+#    skos:exactMatch rdacarrier:1026 ; # "microfilm reel"
+#    skos:exactMatch rdacarrier:1027 ; # "microfilm slip"
+#    skos:exactMatch rdacarrier:1028 ; # "microopaque"
+#    skos:exactMatch rdacarrier:1056 ; # "microfilm roll"
+
+#    skos:exactMatch rdacarrier:1029 ; # "Microscopic carriers" # skos:closeMatch rdamedia:1004
+#    skos:exactMatch rdacarrier:1030 ; # "microscope slide"
+
+#    skos:exactMatch rdacarrier:1031 ; # "Projected image carriers" # skos:closeMatch rdamedia:1005
+#    skos:exactMatch rdacarrier:1032 ; # "film cartridge"
+#    skos:exactMatch rdacarrier:1033 ; # "film cassette"
+#    skos:exactMatch rdacarrier:1034 ; # "film reel"
+#    skos:exactMatch rdacarrier:1035 ; # "filmslip"
+#    skos:exactMatch rdacarrier:1036 ; # "filmstrip"
+#    skos:exactMatch rdacarrier:1037 ; # "filmstrip cartridge"
+#    skos:exactMatch rdacarrier:1039 ; # "overhead transparency"
+#    skos:exactMatch rdacarrier:1040 ; # "slide"
+#    skos:exactMatch rdacarrier:1069 ; # "film roll"
+
+#    skos:exactMatch rdacarrier:1041 ; # "Stereographic carriers" # skos:closeMatch rdamedia:1006
+#    skos:exactMatch rdacarrier:1042 ; # "stereograph card"
+#    skos:exactMatch rdacarrier:1043 ; # "stereograph disc"
+
+#    skos:exactMatch rdacarrier:1044 ; # "Unmediated carriers" # skos:closeMatch rdamedia:1007
+#    skos:exactMatch rdacarrier:1045 ; # "card"
+#    skos:exactMatch rdacarrier:1046 ; # "flipchart"
+#    skos:exactMatch rdacarrier:1047 ; # "roll"
+#    skos:exactMatch rdacarrier:1048 ; # "sheet"
+#    skos:exactMatch rdacarrier:1049 ; # "volume"
+#    skos:exactMatch rdacarrier:1059 ; # "object"
+
+#    skos:exactMatch rdacarrier:1050 ; # "Video carriers" # skos:closeMatch rdamedia:1008
+#    skos:exactMatch rdacarrier:1051 ; # "video cartridge"
+#    skos:exactMatch rdacarrier:1052 ; # "videocassette"
+#    skos:exactMatch rdacarrier:1053 ; # "videotape reel"
+#    skos:exactMatch rdacarrier:1060 ; # "videodisc"
