@@ -4,9 +4,13 @@ prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
 construct {
-    ?class rdfs:subClassOf [ # a owl:Restriction ;
-            owl:onProperty ?property ;
-            owl:someValuesFrom ?enumclass ] .
+
+    ?class rdfs:subClassOf ?restriction .
+
+    ?restriction a owl:Restriction ;
+        owl:onProperty ?property ;
+        owl:someValuesFrom ?enumclass .
+
 } where {
 
     values (?property ?enumclass ?class) {
@@ -90,5 +94,7 @@ construct {
         (:supplementaryContent :IndexType :Cartography)
 
     }
+
+    bind(bnode(concat(str(?class), str(?property))) as ?restriction)
 
 }
