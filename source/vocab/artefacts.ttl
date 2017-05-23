@@ -1,15 +1,15 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
-@prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 
@@ -38,35 +38,30 @@
 ##
 # Creative Works
 
-:Endeavour a owl:Class; rdfs:subClassOf rdfs:Resource .
-:Creation a owl:Class; rdfs:subClassOf :Endeavour .
-:Work rdfs:subClassOf :Creation .
-:Instance rdfs:subClassOf :Creation .
-:Item rdfs:subClassOf :Endeavour .
-
-:CreativeWork a owl:Class;
-    rdfs:label "Kreativt verk"@sv;
+:Endeavour a owl:Class ;
     ptg:abstract true;
-    owl:equivalentClass sdo:CreativeWork;
-    rdfs:subClassOf dc:BibliographicResource  .
+    #skos:closeMatch frbr:Endeavour ;
+    rdfs:subClassOf rdfs:Resource .
 
-:Work a owl:Class;
+:Creation a owl:Class ;
+    ptg:abstract true;
+    rdfs:subClassOf :Endeavour ;
+    rdfs:subClassOf sdo:CreativeWork, dc:BibliographicResource .
+
+:Work a owl:Class ;
     :category marc:auth ;
     owl:equivalentClass bf2:Work;
-    rdfs:subClassOf :CreativeWork, sdo:ProductModel; #, rdfa:Pattern, skos:Concept;
+    rdfs:subClassOf :Creation ;
+    rdfs:subClassOf sdo:CreativeWork, sdo:ProductModel ; #, rdfa:Pattern, skos:Concept;
+    skos:narrowMatch rdaent:Work, rdaent:Expression ;
     rdfs:label "Verk"@sv .
 
-:Instance a owl:Class;
+:Instance a owl:Class ;
     :category marc:bib ;
     rdfs:label "Instance"@en, "Instans"@sv;
-    owl:equivalentClass bf2:Instance .
-
-:Product a owl:Class;
-    rdfs:label "Product"@en, "Produkt"@sv;
-    skos:altLabel "Instance"@en, "Instans"@sv;
-    skos:altLabel "Manifestation"@en, "Manifestation"@sv;
-    ptg:abstract true;
-    rdfs:subClassOf :Instance, sdo:Product, rdaent:Manifestation .
+    rdfs:subClassOf :Creation ;
+    owl:equivalentClass bf2:Instance ;
+    skos:closeMatch sdo:Product, rdaent:Manifestation .
 
 :instanceOf a owl:ObjectProperty ;
     rdfs:label "instance of work"@en, "instans av verk"@sv;
@@ -74,12 +69,12 @@
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
     sdo:rangeIncludes :Work .
 
-#:workExample a owl:ObjectProperty ;
-#    rdfs:label "work example"@en, "verksexempel"@sv;
-#    #rdfs:label "exempel på detta verk"@sv;
-#    rdfs:subClassOf bf2:hasInstance ;
-#    owl:equivalentProperty sdo:workExample;
-#    sdo:rangeIncludes :CreativeWork, :Product .
+:hasInstance a owl:ObjectProperty ;
+    rdfs:label "has instance"@en, "har instans"@sv;
+    owl:equivalentProperty bf2:hasInstance;
+    rdfs:subClassOf sdo:workExample;
+    rdfs:domain :Work ;
+    rdfs:range :Instance .
 
 
 ##
@@ -145,7 +140,7 @@
 # Vocab Macro:
 # INSERT {
 #    ?enumType rdfs:subClassOf [ a owl:Restriction;
-#            owl:onProperty bf:carrier; owl:hasValue ?enumType ] .
+#            owl:onProperty bf2:carrier; owl:hasValue ?enumType ] .
 #} WHERE {
 #    ?enumProp rdfs:subPropertyOf rdf:type ;
 #        rdfs:range ?metaType .
@@ -230,18 +225,18 @@
 
 :Cartography a owl:Class;
     rdfs:label "Kartmaterial"@sv;
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf2:Cartography .
 
 :Dataset a owl:Class;
     rdfs:label "Dataset"@sv;
-    rdfs:subClassOf :CreativeWork;
-    owl:equivalentClass dctype:Dataset, bf:Dataset, sdo:Dataset .
+    rdfs:subClassOf :Work;
+    owl:equivalentClass dctype:Dataset, bf2:Dataset, sdo:Dataset .
 
 :Image a owl:Class; # Visual
     rdfs:label "Bild"@sv;
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     owl:equivalentClass dctype:Image, foaf:Image .
 
 :VisualArtwork a owl:Class;
@@ -251,15 +246,15 @@
 
 :MixedMaterial a owl:Class;
     rdfs:label "Blandat material"@sv;
-    rdfs:subClassOf :CreativeWork, :Aggregate;
+    rdfs:subClassOf :Work, :Aggregate;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:MixedMaterial .
+    owl:equivalentClass bf2:MixedMaterial .
 
 :MovingImage a owl:Class; # Film, Video
     rdfs:label "Rörlig bild"@sv;
     skos:exactMatch rdacontent:1023 ; # "two-dimensional moving image"
     rdfs:subClassOf :Image;
-    owl:equivalentClass bf:MovingImage, dctype:MovingImage .
+    owl:equivalentClass bf2:MovingImage, dctype:MovingImage .
 
 :Moving3DImage a owl:Class;
     rdfs:label "Rörlig tredimensionell bild"@sv;
@@ -268,30 +263,30 @@
 
 :Multimedia a owl:Class;
     rdfs:label "Multimedia"@sv;
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:Multimedia .
+    owl:equivalentClass bf2:Multimedia .
 
 :NotatedMovement a owl:Class;
     rdfs:label "Dansnoter"@sv;
     skos:exactMatch rdacontent:1009 ; # "notated movement"
-    rdfs:subClassOf :CreativeWork;
-    owl:equivalentClass bf:NotatedMovement .
+    rdfs:subClassOf :Work;
+    owl:equivalentClass bf2:NotatedMovement .
 
 :NotatedMusic a owl:Class;
     rdfs:label "Musiknoter"@sv;
     skos:exactMatch rdacontent:1010 ; # "notated music"
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:NotatedMusic .
+    owl:equivalentClass bf2:NotatedMusic .
 
 
 :Audio a owl:Class;
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     rdfs:label "Ljudmaterial"@sv;
     skos:exactMatch rdamedia:1001 ; # "audio"
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass dctype:Sound, bf:Audio .
+    owl:equivalentClass dctype:Sound, bf2:Audio .
 
 :Music a owl:Class;
     rdfs:label "Musik"@sv;
@@ -302,30 +297,30 @@
     skos:exactMatch rdacontent:1014 ; # "still image"
     rdfs:subClassOf :Image;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:StillImage, dctype:StillImage .
+    owl:equivalentClass bf2:StillImage, dctype:StillImage .
 
 :Text a owl:Class;
     rdfs:label "Text"@sv;
     skos:exactMatch rdacontent:1020 ; # "text"
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass dctype:Text, bf:Text .
+    owl:equivalentClass dctype:Text, bf2:Text .
 
-:Realia a owl:Class;
-    rdfs:label "Realia"@sv;
+:Object a owl:Class;
+    rdfs:label "Objekt"@sv;
     skos:exactMatch rdacontent:1021 ; # "three-dimensional form"
     :inCollection marc:typeOfRecord;
-    owl:equivalentClass bf:ThreeDimensionalObject .
+    owl:equivalentClass bf2:Object, bf1:ThreeDimensionalObject .
 
 :InteractiveResource a owl:Class;
     rdfs:label "Interaktiv resurs"@sv;
-    rdfs:subClassOf :CreativeWork;
+    rdfs:subClassOf :Work;
     rdfs:subClassOf dctype:InteractiveResource .
 
 :Kit a owl:Class; # TODO: equivalentClass ?
     rdfs:label "Kit"@sv;
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :CreativeWork .
+    rdfs:subClassOf :Work .
 
 :ArchivalUnit a owl:Class;
     rdfs:label "Arkivenhet"@sv;
@@ -388,7 +383,7 @@
     rdfs:label "Monografisk resurs"@sv;
     skos:exactMatch rdami:1001 ; # "single unit"@en
     #:inCollection marc:bibLevel;
-    owl:equivalentClass bf:Monograph .
+    owl:equivalentClass bf1:Monograph .
 
 :Part a owl:Class;
     rdfs:label "Del av resurs"@sv;
@@ -411,13 +406,13 @@
 #:Archival a owl:Class;
 #    rdfs:label "Arkiv"@sv;
 #    rdfs:subClassOf :Aggregate;
-#    owl:equivalentClass bf:Archival .
+#    owl:equivalentClass bf1:Archival .
 
 :Collection a owl:Class, :IssuanceType;
     rdfs:label "Samling"@sv;
     rdfs:subClassOf :Aggregate;
     #:inCollection marc:bibLevel;
-    owl:equivalentClass dctype:Collection, bf:Collection .
+    owl:equivalentClass dctype:Collection, bf1:Collection .
 
 :SubCollection a owl:Class, :IssuanceType;
     rdfs:label "Delsamling"@sv;
@@ -429,7 +424,7 @@
     skos:exactMatch rdami:1004 ; # "integrating resource"@en
     rdfs:subClassOf :Continuing;
     #:inCollection marc:bibLevel;
-    owl:equivalentClass bf:Integrating .
+    owl:equivalentClass bf1:Integrating .
 
 :MonographicComponentPart a owl:Class;
     rdfs:label "Del av sammansatt monografisk resurs"@sv;
@@ -449,21 +444,21 @@
     rdfs:label "Flerbandsverk"@sv;
     skos:exactMatch rdami:1002 ; # "multipart monograph"@en
     rdfs:subClassOf :Multipart, :Monograph;
-    owl:equivalentClass bf:MultipartMonograph .
+    owl:equivalentClass bf1:MultipartMonograph .
 
 :Serial a owl:Class, :IssuanceType;
     rdfs:label "Seriell resurs"@sv;
     skos:exactMatch rdami:1003 ; # "serial" @en
     rdfs:subClassOf :Continuing;
     #:inCollection marc:bibLevel;
-    owl:equivalentClass bf:Serial .
+    owl:equivalentClass bf1:Serial .
 
 :Periodical a owl:Class, :IssuanceType;
     rdfs:label "Periodical"@en, "Periodika"@sv;
     skos:altLabel "Periodisk resurs"@sv;
     rdfs:comment "Samma sak som seriell resurs."@sv;
     #:inCollection marc:bibLevel;
-    owl:equivalentClass bf:Serial .
+    owl:equivalentClass bf1:Serial .
 
 #:CreativeWorkSeries a owl:Class;
 #    owl:equivalentClass sdo:CreativeWorkSeries;
@@ -488,33 +483,33 @@
     ptg:abstract true;
     rdfs:label "Digital resurs"@sv;
     #rdfs:subClassOf [ owl:unionOf (dctype:InteractiveResource dctype:Software) ]
-    rdfs:subClassOf :Product;
-    owl:equivalentClass bf:Electronic .
+    rdfs:subClassOf :Instance;
+    owl:equivalentClass bf2:Electronic .
 
 :Manuscript a owl:Class;
     rdfs:label "Manuskript"@sv;
-    rdfs:subClassOf :Product;
-    owl:equivalentClass bf:Manuscript, bibo:Manuscript .
+    rdfs:subClassOf :Instance;
+    owl:equivalentClass bf2:Manuscript, bibo:Manuscript .
 
 :Print a owl:Class;
     rdfs:label "Tryck"@sv;
-    rdfs:subClassOf :Product;
-    owl:equivalentClass bf:Print .
+    rdfs:subClassOf :Instance;
+    owl:equivalentClass bf2:Print .
 
 :Electronic a owl:Class;
     rdfs:label "Elektronisk"@sv;
     skos:exactMatch rdamedia:1003 ; # "computer"
-    rdfs:subClassOf :Digital, :Product .
+    rdfs:subClassOf :Digital, :Instance .
 
 :Microform a owl:Class;
     rdfs:label "Mikroform"@sv;
     skos:exactMatch rdamedia:1002 ; # "microform"
-    rdfs:subClassOf :Product .
+    rdfs:subClassOf :Instance .
 
 :Tactile a owl:Class;
     rdfs:label "Taktil resurs"@sv;
-    rdfs:subClassOf :Product;
-    owl:equivalentClass bf:Tactile .
+    rdfs:subClassOf :Instance;
+    owl:equivalentClass bf2:Tactile .
 
 :ProjectedImage a owl:Class;
     rdfs:label "Projicerad bild"@sv;
@@ -525,7 +520,7 @@
 :PhysicalObject a owl:Class;
     rdfs:label "Föremål"@sv;
     skos:altLabel "Realia"@sv;
-    rdfs:subClassOf :Product;
+    rdfs:subClassOf :Instance;
     owl:equivalentClass dctype:PhysicalObject .
 
 :Software a owl:Class;
@@ -584,18 +579,31 @@
 #    rdfs:subClassOf :Cartography;
 #    owl:equivalentClass bibo:Map .
 #
-#:RemoteSensingImage a owl:Class;
-#    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
-#    rdfs:subClassOf :Product, :Cartography .
-#
-#:SoundRecording a owl:Class;
-#    rdfs:label "Ljudinspelning"@sv;
-#    rdfs:subClassOf :Product, :Audio .
-#
-#:VideoRecording a owl:Class;
-#    rdfs:label "Videoinspelning"@sv;
-#    rdfs:subClassOf :Product, :MovingImage .
-#
+
+:RemoteSensingImage a owl:Class;
+    rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :instanceOf ;
+            owl:allValuesFrom :Cartography
+        ] .
+
+:SoundRecording a owl:Class;
+    rdfs:label "Ljudinspelning"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :instanceOf ;
+            owl:allValuesFrom :Audio
+        ] .
+
+:VideoRecording a owl:Class;
+    rdfs:label "Videoinspelning"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :instanceOf ;
+            owl:allValuesFrom :MovingImage
+        ] .
+
 #:Database a owl:Class;
 #    rdfs:label "Databas"@sv;
 #    rdfs:subClassOf :Integrating, :Digital, :Dataset .
