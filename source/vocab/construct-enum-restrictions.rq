@@ -13,85 +13,85 @@ construct {
 
 } where {
 
-    values (?property ?enumclass ?class) {
+    values (?property ?class ?enumclass) {
 
-        (:baseMaterial :GlobeMediumType :Globe)
-        (:baseMaterial :MapMediumType :Map)
-        (:baseMaterial :ProjGraphEmulsionType :ProjectedImage)
-        (:baseMaterial :FilmBaseType :Microform)
-        (:baseMaterial :FilmBaseType  :MovingImage)
-        (:baseMaterial :NonProjectedType :StillImage)
-        (:baseMaterial :VideoColorType :VideoRecording)
+        (:baseMaterial :Globe marc:GlobeMediumType)
+        (:baseMaterial :Map marc:MapMediumType)
+        (:baseMaterial :ProjectedImage marc:ProjGraphEmulsionType)
+        (:baseMaterial :Microform marc:FilmBaseType)
+        (:baseMaterial :MovingImage marc:FilmBaseType)
+        (:baseMaterial :StillImage marc:NonProjectedType)
+        (:baseMaterial :VideoRecording marc:VideoColorType)
 
-        (:carrierType :BooksItemType :Text)
-        (:carrierType :ComputerItemType :Digital)
-        (:carrierType :ItemType :Audio)
-        (:carrierType :ItemType :Cartography)
-        (:carrierType :ItemType :Visual)
-        (:carrierType :ItemType :Mixed)
-        (:carrierType :ItemType :Serial)
+        (:carrierType :Text marc:BooksItemType)
+        (:carrierType :Digital marc:ComputerItemType)
+        (:carrierType :Audio marc:ItemType)
+        (:carrierType :Cartography marc:ItemType)
+        (:carrierType :Visual marc:ItemType)
+        (:carrierType :Mixed marc:ItemType)
+        (:carrierType :Serial marc:ItemType)
 
-        (:colorContent :MapColorType :Map)
-        (:colorContent :MapColorType :Globe)
-        (:colorContent :ComputerColorType :Electronic)
-        (:colorContent :ColorType :ProjectedImage)
-        (:colorContent :ColorType :StillImage)
-        (:colorContent :MicroformColorType :Microform)
+        (:colorContent :Map marc:MapColorType)
+        (:colorContent :Globe marc:MapColorType)
+        (:colorContent :Electronic marc:ComputerColorType)
+        (:colorContent :ProjectedImage marc:ColorType)
+        (:colorContent :StillImage marc:ColorType)
+        (:colorContent :Microform marc:MicroformColorType)
 
-        (:dimensions :ComputerDimensionsType :Electronic)
-        (:dimensions :ProjGraphDimensionsType :ProjectedImage)
-        (:dimensions :MicroformDimensionsType :Microform)
-        (:dimensions :SoundDimensionsType :SoundRecording)
-        (:dimensions :SoundTapeWidthType :SoundRecording)
-        (:dimensions :VideoDimensionsType :VideoRecording)
+        (:dimensions :Electronic marc:ComputerDimensionsType)
+        (:dimensions :ProjectedImage marc:ProjGraphDimensionsType)
+        (:dimensions :Microform marc:MicroformDimensionsType)
+        (:dimensions :SoundRecording marc:SoundDimensionsType)
+        (:dimensions :SoundRecording marc:SoundTapeWidthType)
+        (:dimensions :VideoRecording marc:VideoDimensionsType)
 
-        (:generation :MicroformGenerationType :Microform)
-        (:generation :SoundKindOfDiscType :SoundRecording)
+        (:generation :Microform marc:MicroformGenerationType)
+        (:generation :SoundRecording marc:SoundKindOfDiscType)
 
-        (:genreForm :BooksLiteraryFormType :Text)
-        (:genreForm :BooksBiographyType :Text)
-        (:genreForm :ComputerTypeOfFileType :Digital)
-        (:genreForm :GlobeMaterialType :Globe)
-        (:genreForm :GovernmentPublicationType :Text)
-        (:genreForm :GovernmentPublicationType :Digital)
-        (:genreForm :GovernmentPublicationType :Cartography)
-        (:genreForm :GovernmentPublicationType :Serial)
-        (:genreForm :GovernmentPublicationType :Visual)
-        (:genreForm :MapMaterialType :Map)
-        (:genreForm :MusicCompositionType :Audio)
-        (:genreForm :MusicFormatType :Audio)
-        (:genreForm :MusicTextType :Audio)
-        (:genreForm :NonProjMaterialType :StillImage)
-        (:genreForm :SerialsContentsType :Serial)
-        (:genreForm :SerialsNatureType :Serial)
-        (:genreForm :SerialsTypeOfSerialType :Serial)
-        (:genreForm :VisualMaterialType :Visual)
+        (:genreForm :Text marc:BooksLiteraryFormType)
+        (:genreForm :Text marc:BooksBiographyType)
+        (:genreForm :Text marc:GovernmentPublicationType)
+        (:genreForm :Digital marc:ComputerTypeOfFileType)
+        (:genreForm :Digital marc:GovernmentPublicationType)
+        (:genreForm :Globe marc:GlobeMaterialType)
+        (:genreForm :Cartography marc:GovernmentPublicationType)
+        (:genreForm :Map marc:MapMaterialType)
+        (:genreForm :Audio marc:MusicCompositionType)
+        (:genreForm :Audio marc:MusicFormatType)
+        (:genreForm :Audio marc:MusicTextType)
+        (:genreForm :StillImage marc:NonProjMaterialType)
+        (:genreForm :Serial marc:SerialsContentsType)
+        (:genreForm :Serial marc:SerialsNatureType)
+        (:genreForm :Serial marc:SerialsTypeOfSerialType)
+        (:genreForm :Serial marc:GovernmentPublicationType)
+        (:genreForm :Visual marc:GovernmentPublicationType)
+        (:genreForm :Visual marc:VisualMaterialType)
 
-        (:mount :ProjGraphSupportType :ProjectedImage)
-        (:mount :NonProjectedType :StillImage)
+        (:mount :ProjectedImage marc:ProjGraphSupportType)
+        (:mount :StillImage marc:NonProjectedType)
 
-        (:soundCharacteristic :MediumType :ProjectedImage)
-        (:soundCharacteristic :MediumType :MovingImage) # resourceType: RecordingMedium
-        (:soundCharacteristic :MediumType :VideoRecording) # resourceType: RecordingMedium
-        (:soundCharacteristic :MediumType :Map) # resourceType: RecordingMedium
-        (:soundCharacteristic :MediumType :Globe) # resourceType: RecordingMedium
-        (:soundCharacteristic :SoundSpeedType :SoundRecording) # resourceType: PlayingSpeed
-        (:soundCharacteristic :SoundPlaybackChannelType :SoundRecording) # resourceType: PlaybackChannels
-        (:soundCharacteristic :SoundGrooveType :SoundRecording) # resourceType: GrooveCharacteristic
-        (:soundCharacteristic :SoundTapeConfigurationType :SoundRecording) # resourceType: TapeConfig
-        (:soundCharacteristic :SoundKindOfCuttingType :SoundRecording) # resourceType: GrooveCharacteristic
-        (:soundCharacteristic :SoundPlaybackCharacterType :SoundRecording) # resourceType: PlaybackCharacteristic
-        (:soundCharacteristic :MotionPicConfigurationOrVideoPlaybackType :VideoRecording) # resourceType: PlaybackChannels
-        (:soundCharacteristic :MotionPicConfigurationOrVideoPlaybackType :MovingImage) # resourceType: PlaybackChannels
+        (:soundCharacteristic :Map marc:MediumType) # resourceType: RecordingMedium
+        (:soundCharacteristic :Globe marc:MediumType) # resourceType: RecordingMedium
+        (:soundCharacteristic :ProjectedImage marc:MediumType)
+        (:soundCharacteristic :MovingImage marc:MediumType) # resourceType: RecordingMedium
+        (:soundCharacteristic :MovingImage marc:MotionPicConfigurationOrVideoPlaybackType) # resourceType: PlaybackChannels
+        (:soundCharacteristic :VideoRecording marc:MediumType) # resourceType: RecordingMedium
+        (:soundCharacteristic :VideoRecording marc:MotionPicConfigurationOrVideoPlaybackType) # resourceType: PlaybackChannels
+        (:soundCharacteristic :SoundRecording marc:SoundSpeedType) # resourceType: PlayingSpeed
+        (:soundCharacteristic :SoundRecording marc:SoundPlaybackChannelType) # resourceType: PlaybackChannels
+        (:soundCharacteristic :SoundRecording marc:SoundGrooveType) # resourceType: GrooveCharacteristic
+        (:soundCharacteristic :SoundRecording marc:SoundTapeConfigurationType) # resourceType: TapeConfig
+        (:soundCharacteristic :SoundRecording marc:SoundKindOfCuttingType) # resourceType: GrooveCharacteristic
+        (:soundCharacteristic :SoundRecording marc:SoundPlaybackCharacterType) # resourceType: PlaybackCharacteristic
 
-        (:soundContent :ComputerSoundType :Electronic)
-        (:soundContent :SoundType :ProjectedImage)
-        (:soundContent :SoundType :MovingImage)
-        (:soundContent :SoundType :VideoRecording)
+        (:soundContent :Electronic marc:ComputerSoundType)
+        (:soundContent :ProjectedImage marc:SoundType)
+        (:soundContent :MovingImage marc:SoundType)
+        (:soundContent :VideoRecording marc:SoundType)
 
-        (:supplementaryContent :MusicMatterType :Audio)
-        (:supplementaryContent :IndexType :Text)
-        (:supplementaryContent :IndexType :Cartography)
+        (:supplementaryContent :Audio marc:MusicMatterType)
+        (:supplementaryContent :Text marc:IndexType)
+        (:supplementaryContent :Cartography marc:IndexType)
 
     }
 
