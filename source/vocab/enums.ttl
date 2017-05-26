@@ -39,6 +39,10 @@
     rdfs:range :Projection ;
     rdfs:label "Projection"@en, "Projektion"@sv .
 
+:Projection a owl:ObjectClass;
+    rdfs:label "Projection"@en, "Projektion"@sv;
+    owl:equivalentClass bf2:Projection .
+
 :illustrativeContent a owl:ObjectProperty;
     rdfs:label "Illustrationer i resursen"@sv, "Illustrative content information"@en;
     rdfs:range :Illustration;
@@ -174,6 +178,72 @@
 :BaseMaterial a owl:Class;
     owl:equivalentClass bf2:BaseMaterial;
     rdfs:label "Materialtyp"@sv, "Base material"@en .
+
+:scale a owl:ObjectProperty;
+    rdfs:range :Scale;
+    owl:equivalentProperty bf2:scale;
+    rdfs:label "scale"@en, "skala"@sv .
+
+:Scale a owl:ObjectClass;
+    owl:equivalentClass bf2:Scale;
+    rdfs:label "Scale"@en, "Skala"@sv .
+
+:coordinates a owl:DatatypeProperty;
+    rdfs:domain :Cartographic;
+    #TODO: Literal/string as range?
+    rdfs:label "Cartographic coordinates"@en, "Kartografiska koordinater"@sv;
+    owl:equivalentProperty bf2:coordinates .
+
+:ascensionAndDeclination a owl:DatatypeProperty;
+    rdfs:domain :Cartographic;
+    #TODO: Literal/string as range?
+    rdfs:label "Cartographic ascension and declination"@en, "Zon"@sv;
+    owl:equivalentProperty bf2:ascensionAndDeclination .
+
+:equinox a owl:DatatypeProperty;
+    rdfs:domain :Cartographic;
+    #TODO: Literal/string as range?
+    rdfs:label "Cartographic equinox"@en, "Ekvinoktium"@sv;
+    owl:equivalentProperty bf2:equinox .
+
+:outerGRing a owl:DatatypeProperty;
+    rdfs:domain :Cartographic;
+    #TODO: Literal/string as range?
+    rdfs:label "Cartographic outer G ring area covered"@en, "Koordinatpar för yttre G-ring"@sv;
+    owl:equivalentProperty bf2:outerGRing .
+
+:exclusionGRing a owl:DatatypeProperty;
+    rdfs:domain :Cartographic;
+    #TODO: Literal/string as range?
+    rdfs:label "Cartographic G ring area excluded"@en, "Koordinatpar för exkluderande G-ring"@sv;
+    owl:equivalentProperty bf2:exclusionGRing .
+
+:digitalCharacteristic a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :DigitalCharacteristic;
+    rdfs:label "Digital characteristic"@en, "har digitalkaraktäristika"@sv;
+    owl:equivalentClass bf2:digitalCharacteristic .
+
+:DigitalCharacteristic a owl:Class;
+    rdfs:label "Digital characteristic"@en, "Digital karaktäristika"@sv;
+    owl:equivalentClass bf2:DigitalCharacteristic .
+
+:CartographicDataType a owl:Class;
+    #TODO: Should this be defined in things.ttl instead?
+    rdfs:label "Digital cartographic data type"@en, "Digital kartografisk datatyp"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bf2:CartographicDataType .
+
+:CartographicObjectType a owl:Class;
+    #TODO: Should this be defined in things.ttl instead?
+    rdfs:label "Digital cartographic object type"@en, "Digtal kartografisk objekttyp";
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bf2:CartographicObjectType .
+
+:EncodingFormat a owl:Class;
+    rdfs:label "Encoding format"@en, "Kodningsformat"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bf2:EncodingFormat .
 
 :soundCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
