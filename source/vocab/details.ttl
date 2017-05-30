@@ -289,6 +289,11 @@
     rdfs:subClassOf :ProvisionActivity;
     rdfs:label "Tillverkning"@sv .
 
+:editionEnumeration a owl:DatatypeProperty;
+    rdfs:domain :Instance;
+    rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
+    owl:equivalentProperty :editionEnumeration .
+
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
     skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
@@ -369,12 +374,17 @@
     rdfs:subPropertyOf :extent;
     rdfs:label "number of pages"@en, "sidantal"@sv .
 
-:dimensions a owl:ObjectProperty;
+:dimensions a owl:DatatypeProperty;
     rdfs:domain :Instance;
     rdfs:label "mått"@sv, "dimensions"@en;
     #TODO: what range shall we map to? bf2 maps to Literal
     #skos:altLabel "Dimensioner"@sv;
     owl:equivalentProperty bf2:dimensions .
+
+:tableOfContents a owl:ObjectProperty;
+    rdfs:range :TableOfContents;
+    rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
+    owl:equivalentProperty bf2:tableOfContents .
 
 
 # Annotations
@@ -402,3 +412,7 @@
 
 :coverArtThumb a owl:ObjectProperty;
     rdfs:subPropertyOf bf:coverArtThumb .
+
+:TableOfContents a owl:ObjectClass;
+    rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
+    owl:equivalentClass bf2:TableOfContents .

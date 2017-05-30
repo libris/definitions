@@ -152,8 +152,9 @@
     owl:equivalentProperty dc:replaces .
 
 :source a owl:ObjectProperty;
-    rdfs:label "källa"@sv;
-    owl:equivalentProperty dc:source .
+    rdfs:label "källa"@sv, "source"@en;
+    rdfs:range :Source;
+    owl:equivalentProperty dc:source, bf2:source .
 
 :sourceNote a owl:DatatypeProperty;
     rdfs:label "källinformation"@sv;
@@ -238,6 +239,10 @@
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :relation ;
             owl:someValuesFrom :hasPart ] .
+
+:Source a owl:Class;
+    rdfs:label "Source"@en, "Källa"@sv;
+    owl:equivalentClass bf2:Source .
 
 :entity a owl:ObjectProperty;
     rdfs:label "entity"@en, "entitet"@sv;

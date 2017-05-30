@@ -184,6 +184,14 @@
     owl:equivalentClass bf2:Scale;
     rdfs:label "Scale"@en, "Skala"@sv .
 
+:LinearScale a owl:ObjectClass;
+    rdfs:subClassOf :Scale;
+    rdfs:label "Linjär skala"@sv, "Linear scale"@en .
+
+:AngularScale a owl:ObjectClass;
+    rdfs:subClassOf :Scale;
+    rdfs:label "Vinkelskala"@sv, "Angular scale"@en . #stjärnkartor
+
 :coordinates a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?

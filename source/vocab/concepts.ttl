@@ -114,9 +114,10 @@
     owl:equivalentProperty skos:notation ;
     owl:equivalentProperty madsrdf:code .
 
-:note a owl:DatatypeProperty;
-    rdfs:label "anmärkning"@sv;
-    owl:equivalentProperty skos:note .
+:note a owl:ObjectProperty;
+    rdfs:label "anmärkning"@sv, "Note"@en;
+    rdfs:range bf2:Note;
+    owl:equivalentProperty bf2:note, skos:note .
 
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen etikett"@sv;
@@ -295,4 +296,8 @@
 :GeographicalSubdivision a owl:Class ;
     rdfs:subClassOf :Subdivision, :Geographic;
     rdfs:label "Underindelning för geografisk term"@sv .
+
+:Note a owl:Class;
+    rdfs:label "Note"@en, "Anmärkning"@sv;
+    owl:equivalentClass bf2:Note .
 
