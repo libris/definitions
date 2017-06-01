@@ -175,6 +175,36 @@
     owl:equivalentClass bf2:BaseMaterial;
     rdfs:label "Materialtyp"@sv, "Base material"@en .
 
+:appliedMaterial a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :AppliedMaterial;
+    rdfs:label "Applied material"@en, "har applicerat material"@sv;
+    owl:equivalentProperty bf2:appliedMaterial .
+
+:AppliedMaterial a owl:Class;
+    rdfs:label "Applied material"@en, "Applicerat material"@sv;
+    owl:equivalentClass bf2:AppliedMaterial .
+
+:productionMethod a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :ProductionMethod;
+    rdfs:label "Production method"@en, "produktionsteknik"@sv;
+    owl:equivalentProperty bf2:productionMethod .
+
+:ProductionMethod a owl:Class;
+    rdfs:label "Production method"@en, "Produktionsteknik"@sv;
+    owl:equivalentClass bf2:ProductionMethod .
+
+:fontSize a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :FontSize;
+    rdfs:label "Font size"@en, "har typsnittsstorlek"@sv;
+    owl:equivalentProperty bf2:fontSize .
+
+:FontSize a owl:Class;
+    rdfs:label "Font size"@en, "Typsnittsstorlek"@sv;
+    owl:equivalentClass bf2:FontSize .
+
 :scale a owl:ObjectProperty;
     rdfs:range :Scale;
     owl:equivalentProperty bf2:scale;
@@ -195,30 +225,35 @@
 :coordinates a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?
+    rdfs:range rdfs:Literal;
     rdfs:label "Cartographic coordinates"@en, "Kartografiska koordinater"@sv;
     owl:equivalentProperty bf2:coordinates .
 
 :ascensionAndDeclination a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?
+    rdfs:range rdfs:Literal;
     rdfs:label "Cartographic ascension and declination"@en, "Zon"@sv;
     owl:equivalentProperty bf2:ascensionAndDeclination .
 
 :equinox a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?
+    rdfs:range rdfs:Literal;
     rdfs:label "Cartographic equinox"@en, "Ekvinoktium"@sv;
     owl:equivalentProperty bf2:equinox .
 
 :outerGRing a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?
+    rdfs:range rdfs:Literal;
     rdfs:label "Cartographic outer G ring area covered"@en, "Koordinatpar för yttre G-ring"@sv;
     owl:equivalentProperty bf2:outerGRing .
 
 :exclusionGRing a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     #TODO: Literal/string as range?
+    rdfs:range rdfs:Literal;
     rdfs:label "Cartographic G ring area excluded"@en, "Koordinatpar för exkluderande G-ring"@sv;
     owl:equivalentProperty bf2:exclusionGRing .
 

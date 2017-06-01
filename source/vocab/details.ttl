@@ -376,8 +376,9 @@
 
 :dimensions a owl:DatatypeProperty;
     rdfs:domain :Instance;
-    rdfs:label "mått"@sv, "dimensions"@en;
     #TODO: what range shall we map to? bf2 maps to Literal
+    rdfs:range rdf:Literal;
+    rdfs:label "mått"@sv, "dimensions"@en;
     #skos:altLabel "Dimensioner"@sv;
     owl:equivalentProperty bf2:dimensions .
 
@@ -402,10 +403,14 @@
     rdfs:subPropertyOf bf:annotates .
 
 :Summary a owl:Class;
-    rdfs:subClassOf bf:CoverArt .
+    rdfs:label "Summary"@en, "Sammanfattning"@sv;
+    # rdfs:subClassOf bf:CoverArt ???
+    owl:equivalentClass bf2:Summary .
 
 :summary a owl:ObjectProperty;
-    rdfs:subPropertyOf bf:summary .
+    rdfs:range :Summary;
+    rdfs:label "Summary content"@en, "sammanfattande innehåll"@sv;
+    owl:equivalentProperty bf2:summary .
 
 :coverArt a owl:ObjectProperty;
     rdfs:subPropertyOf bf:coverArt .
