@@ -114,11 +114,6 @@
     owl:equivalentProperty skos:notation ;
     owl:equivalentProperty madsrdf:code .
 
-:note a owl:ObjectProperty;
-    rdfs:label "anmärkning"@sv, "Note"@en;
-    rdfs:range bf2:Note;
-    owl:equivalentProperty bf2:note, skos:note .
-
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen etikett"@sv;
     rdfs:subPropertyOf :label;
@@ -144,7 +139,7 @@
 
 :focusOf a owl:ObjectProperty;
     rdfs:label "fokus för"@sv;
-    rdfs:subPropertyOf :identifiedBy, bf:hasAuthority;
+    rdfs:subPropertyOf :identifiedBy, bf1:hasAuthority;
     owl:inverseOf :focus .
 
 :Frequency a owl:Class;
@@ -298,7 +293,4 @@
     rdfs:subClassOf :Subdivision, :Geographic;
     rdfs:label "Underindelning för geografisk term"@sv .
 
-:Note a owl:Class;
-    rdfs:label "Note"@en, "Anmärkning"@sv;
-    owl:equivalentClass bf2:Note .
 

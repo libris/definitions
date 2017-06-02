@@ -321,6 +321,19 @@
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
+:note a owl:DatatypeProperty;
+    rdfs:label "anmärkning"@sv, "note"@en;
+    owl:equivalentProperty skos:note .
+
+:hasNote a owl:ObjectProperty;
+    rdfs:range :Note;
+    rdfs:label "anmärkning"@sv;
+    owl:equivalentProperty bf2:note .
+
+:Note a owl:Class;
+    rdfs:label "Note"@en, "Anmärkning"@sv;
+    owl:equivalentClass bf2:Note .
+
 :contentsNote a owl:DatatypeProperty;
     owl:equivalentProperty bf:contentsNote;
     rdfs:label "contents note"@en, "innehållsanmärkning"@sv .
