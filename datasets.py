@@ -83,6 +83,8 @@ compiler = WhelkCompiler(dataset_id=BASE + 'definitions', union='definitions.jso
 
 @compiler.handler
 def vocab():
+    vocab_base = BASE + 'vocab/'
+
     graph = construct(compiler.cached_rdf, sources=[
             {
                 'source': Graph().parse(scriptpath('source/vocab/bf-map.ttl'), format='turtle'),
@@ -101,14 +103,24 @@ def vocab():
 
     graph.update((SCRIPT_DIR/'source/vocab/update.rq').read_text())
 
+    with open(scriptpath('source/vocab/construct-enum-restrictions.rq')) as f:
+        graph += Graph().query(f.read()).graph
+
+    for part in (SCRIPT_DIR/'source/marc').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
+
     data = build_jsonld(graph)
     del data['@context']
+
+    # Put /vocab/* first (ensures that /marc/* comes after)
+    data['@graph'] = sorted(data['@graph'], key=lambda node:
+            (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
     version = _get_repo_version()
     if version:
         data['@graph'][0]['version'] = version
 
-    lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
+    lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, load_json(scriptpath('sys/context/base.jsonld')))
     add_overlay(lib_context, load_json(scriptpath('source/vocab-overlay.jsonld')))
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
@@ -120,10 +132,13 @@ def vocab():
 
 @compiler.dataset
 def enums():
-    #data = load_json(scriptpath('source/enums.jsonld'))
-    #data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
-    #return "/enum/", data
-    graph = Graph().parse(scriptpath('source/marc/enums.ttl'), format='turtle')
+    graph = Graph()
+    # These definitions are now included in the vocab package
+    #graph.parse(scriptpath('source/marc/enums.ttl'), format='turtle')
+
+    with open(scriptpath('source/marc/construct-enums.rq')) as f:
+        graph += Graph().query(f.read()).graph
+
     return "/marc/", build_jsonld(graph)
 
 
