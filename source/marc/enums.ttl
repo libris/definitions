@@ -1520,6 +1520,11 @@
     skos:prefLabel "Copy Report"@en,
         "Underlag för beståndsuppgift"@sv .
 
+:directReferenceMethod a owl:ObjectProperty ;
+    # TODO: domain and range
+    skos:prefLabel "Direct reference method"@en,
+         "Direkt referensmetod"@sv .
+
 :encLevel a owl:ObjectProperty ;
     sdo:rangeIncludes :AuthorityEncLevelType,
         :EncLevelType,
@@ -1532,6 +1537,15 @@
 :entryMap a owl:ObjectProperty ;
     sdo:rangeIncludes :EntryMapType ;
     skos:prefLabel "Entry map"@sv .
+
+:extent a owl:ObjectProperty ;
+     # TODO: range and domain
+     skos:prefLabel "Extent"@en, "Omfång"@sv .
+
+:formatOfTheDigitalImage a owl:ObjectProperty ;
+   # TODO: domain and range
+   skos:prefLabel "Format of the digital image"@en,
+        "Format"@sv .
 
 :frequency a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Serial ;
@@ -1670,11 +1684,26 @@
     skos:prefLabel "Numbered or Unnumbered Series"@en,
         "Numrering i serie"@sv .
 
+:objectCount a owl:ObjectProperty ;
+    # TODO: domain and range
+    skos:prefLabel "Object count"@en,
+         "Objekträkning"@sv .
+
+:objectType a owl:ObjectProperty ;
+    # TODO: domain and range
+    skos:prefLabel "Object type"@en,
+         "Objekttyp"@sv .
+
 :originalItem a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Serial ;
     sdo:rangeIncludes :SerialsOriginalItemType ;
     skos:prefLabel "Original Item"@en,
         "Form för den ursprungliga utgåvan"@sv .
+
+:otherPhysicalDetails a owl:ObjectProperty ;
+   # TODO: domain and range
+   skos:prefLabel "Other physical details"@en,
+        "Övriga fysiska detaljer"@sv .
 
 :personalName a owl:ObjectProperty ;
     sdo:rangeIncludes :PersonalNameType ;
@@ -1745,6 +1774,10 @@
     sdo:rangeIncludes :VisualRunningTimeType ;
     skos:prefLabel "Running Time"@en,
         "Speltid"@sv .
+:sizeOfUnit a owl:ObjectProperty ;
+    # TODO: domain and range
+    skos:prefLabel "Size of unit"@en,
+         "Storlek på fysisk enhet"@sv .
 
 :soundAspect a owl:ObjectProperty ;
     sdo:domainIncludes kbv:SoundRecording ;
@@ -1814,6 +1847,10 @@
     skos:prefLabel "Subject Subdivision"@en,
         "Typ av underindelning"@sv .
 
+:systemDetailsNote a owl:ObjectProperty ;
+   # TODO: range and domain
+   skos:prefLabel "System details note"@en, "Anmärkningstext"@sv .
+
 :technique a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Visual ;
     sdo:rangeIncludes :VisualTechniqueType ;
@@ -1848,6 +1885,16 @@
     sdo:rangeIncludes :TypeOfSeriesType ;
     skos:prefLabel "Type of Series"@en,
         "Typ av serie"@sv .
+
+:typeOfUnit a owl:ObjectProperty ;
+   # TODO: domain and range
+   skos:prefLabel "Type of unit"@en,
+        "Typ av fysisk enhet"@sv .
+
+:uniformResourceIdentifier a owl:ObjectProperty ;
+   # TODO: domain and range
+   skos:prefLabel "Uniform Resource Identifer"@en,
+        "Uniform Resource Identifer (URI)"@sv .
 
 :videoColor a owl:ObjectProperty ;
     sdo:domainIncludes kbv:VideoRecording ;
