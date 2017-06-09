@@ -11,6 +11,7 @@
 
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
 
@@ -213,6 +214,11 @@
     rdfs:subPropertyOf dc:subject;
     rdfs:range xsd:string .
 
+:appliesTo a owl:ObjectProperty ;
+    skos:closeMatch bf2:part ;
+    owl:equivalentProperty bflc:appliesTo ;
+    rdfs:label "Applies to"@en, "Del av materialet som avses"@sv ;
+    rdfs:range :Part .
 
 # TODO: events? provenance?
 
