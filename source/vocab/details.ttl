@@ -403,6 +403,11 @@
     #skos:altLabel "Dimensioner"@sv;
     owl:equivalentProperty bf2:dimensions .
 
+:hasDimensions a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Dimensions;
+    rdfs:label "har mått"@sv, "dimensions"@en .
+
 :tableOfContents a owl:ObjectProperty;
     rdfs:range :TableOfContents;
     rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
@@ -419,6 +424,9 @@
 
 :CoverArt a owl:Class;
     rdfs:subClassOf bf:Summary .
+
+:Dimensions a owl:Class;
+    rdfs:label "Mått"@sv, "Dimensions"@en .
 
 :annotates a owl:ObjectProperty;
     rdfs:subPropertyOf bf:annotates .
