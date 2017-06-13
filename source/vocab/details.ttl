@@ -397,10 +397,10 @@
 
 :dimensions a owl:DatatypeProperty;
     rdfs:domain :Instance;
-    #TODO: what range shall we map to? bf2 maps to Literal
     rdfs:range rdf:Literal;
     rdfs:label "mått"@sv, "dimensions"@en;
     #skos:altLabel "Dimensioner"@sv;
+    owl:propertyChainAxiom (:hasDimensions :label) ;
     owl:equivalentProperty bf2:dimensions .
 
 :hasDimensions a owl:ObjectProperty;
