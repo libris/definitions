@@ -71,6 +71,8 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
 
 @compiler.handler
 def vocab():
+    vocab_base = BASE + 'vocab/'
+
     graph = compiler.construct(sources=[
             {
                 'source': Graph().parse(str(compiler.path('source/vocab/bf-map.ttl')), format='turtle'),
@@ -89,14 +91,24 @@ def vocab():
 
     graph.update(compiler.path('source/vocab/update.rq').read_text())
 
+    rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text()
+    graph += Graph().query(rq).graph
+
+    for part in compiler.path('source/marc').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
+
     data = compiler.to_jsonld(graph)
     del data['@context']
+
+    # Put /vocab/* first (ensures that /marc/* comes after)
+    data['@graph'] = sorted(data['@graph'], key=lambda node:
+            (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
     version = _get_repo_version()
     if version:
         data['@graph'][0]['version'] = version
 
-    lib_context = make_context(graph, BASE + 'vocab/', DEFAULT_NS_PREF_ORDER)
+    lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
@@ -111,7 +123,13 @@ def enums():
     #data = compiler.load_json('source/enums.jsonld')
     #data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
     #return "/enum/", data
-    graph = Graph().parse(str(compiler.path('source/marc/enums.ttl')), format='turtle')
+    graph = Graph()
+    # These definitions are now included in the vocab package
+    #graph.parse(str(compiler.path('source/marc/enums.ttl')), format='turtle')
+
+    rq = compiler.path('source/marc/construct-enums.rq').read_text()
+    graph += Graph().query(rq).graph
+
     return "/marc/", "2014-01-23T11:34:17.981Z", graph
 
 

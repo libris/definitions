@@ -1,37 +1,41 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
-@prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
 @prefix holding: <http://purl.org/ontology/holding#> .
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 
 :Item a owl:Class ;
     :category marc:hold ;
+    rdfs:subClassOf :Endeavour ;
     owl:equivalentClass bf2:Item, sdo:Product, holding:Item ;
+    skos:closeMatch rdaent:Item ;
     #owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
-    rdfs:label "item"@en, "exemplar"@sv .
+    rdfs:label "item"@en, "Exemplar"@sv .
 
 :SomeItems a owl:Class ;
     rdfs:subClassOf :Item ;
-    owl:equivalentClass bf:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
+    owl:equivalentClass bf1:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
     rdfs:label "some items"@en, "några exemplar"@sv .
 
 :IndividualItem a owl:Class ;
     rdfs:subClassOf :Item ;
-    owl:equivalentClass bf:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
+    owl:equivalentClass bf1:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
     rdfs:label "individual item"@en, "enskilt exemplar"@sv .
 
 :heldBy a owl:ObjectProperty ;
-    owl:equivalentProperty bf:heldBy, holding:heldBy ;
+    owl:equivalentProperty bf1:heldBy, holding:heldBy ;
     #rdfs:subPropertyOf sdo:offeredBy, sdo:seller ;
     rdfs:domain :Item ;
     rdfs:range :Agent ;
     rdfs:label "held by"@en, "hållen av"@sv .
 
 :itemOf a owl:ObjectProperty ;
-    owl:equivalentProperty bf:holdingFor, bf2:itemOf, holding:examplarOf ;
+    owl:equivalentProperty bf1:holdingFor, bf2:itemOf, holding:examplarOf ;
     rdfs:subPropertyOf sdo:exampleOfWork ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
     rdfs:domain :Item ;
@@ -47,7 +51,7 @@
 
 :componentOf a owl:ObjectProperty ;
     owl:inverseOf :hasComponent ;
-    owl:equivalentProperty bf:componentOf ;
+    owl:equivalentProperty bf1:componentOf ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
     rdfs:subPropertyOf sdo:exampleOfWork ;
     rdfs:label "component of"@en, "komponent av"@sv  .
@@ -57,7 +61,7 @@
 
 :HeldMaterial a owl:Class;
     rdfs:label "Beståndsmaterial"@sv;
-    rdfs:subClassOf bf:HeldMaterial, sdo:SomeProducts .
+    rdfs:subClassOf bf1:HeldMaterial, sdo:SomeProducts .
 
 :Offer a owl:Class;
     rdfs:label "Offer"@en, "Erbjudande"@sv;
@@ -68,15 +72,15 @@
     rdfs:domain :HeldMaterial;
     rdfs:range :CreativeWork;
     #rdfs:subPropertyOf sdo:exampleOfWork;
-    owl:equivalentProperty bf:holdingFor .
+    owl:equivalentProperty bf1:holdingFor .
 
 #:heldBy a owl:ObjectProperty;
 #    rdfs:label "beståndsinnehavare"@sv;
 #    rdfs:domain :Offer;
 #    rdfs:range :Organization;
-#    rdfs:subPropertyOf sdo:seller, bf:heldBy .
+#    rdfs:subPropertyOf sdo:seller, bf1:heldBy .
 
-:callno rdfs:subPropertyOf :genre, bf:callno, sdo:sku;
+:callno rdfs:subPropertyOf :genre, bf1:callno, sdo:sku;
     rdfs:range :Holding .
 
 :price a owl:DatatypeProperty ;
