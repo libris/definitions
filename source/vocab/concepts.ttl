@@ -1,12 +1,11 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 
-@prefix dc: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
@@ -16,17 +15,21 @@
 
 
 :Place a owl:Class;
-    rdfs:label "Plats"@sv;
-    owl:equivalentClass sdo:Place, madsrdf:Geographic .
+    rdfs:label "Place"@en, "Plats"@sv;
+    owl:equivalentClass bf2:Place, prov:Location, sdo:Place, madsrdf:Geographic .
 
 :Country a owl:Class;
     rdfs:label "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
     rdfs:subClassOf :Place .
 
+:Event a owl:Class;
+    rdfs:label "Event"@en, "Händelse"@sv;
+    owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
+
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
-    owl:equivalentClass bf:Language, madsrdf:Language,
+    owl:equivalentClass bf2:Language, madsrdf:Language,
         sdo:Language .
 
 :Nationality a owl:Class ;
@@ -34,7 +37,7 @@
 
 :controlledLabel a owl:DatatypeProperty;
     rdfs:label "kontrollerad etikett"@sv;
-    owl:equivalentProperty bf:authorizedAccessPoint, madsrdf:authoritativeLabel;
+    owl:equivalentProperty bf1:authorizedAccessPoint, madsrdf:authoritativeLabel;
     rdfs:subPropertyOf :prefLabel .
     #owl:propertyChainAxiom ( [owl:inverseOf foaf:focus] skos:prefLabel ) .
 
@@ -111,10 +114,6 @@
     owl:equivalentProperty skos:notation ;
     owl:equivalentProperty madsrdf:code .
 
-:note a owl:DatatypeProperty;
-    rdfs:label "anmärkning"@sv;
-    owl:equivalentProperty skos:note .
-
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen etikett"@sv;
     rdfs:subPropertyOf :label;
@@ -140,8 +139,17 @@
 
 :focusOf a owl:ObjectProperty;
     rdfs:label "fokus för"@sv;
-    rdfs:subPropertyOf :identifiedBy, bf:hasAuthority;
+    rdfs:subPropertyOf :identifiedBy, bf1:hasAuthority;
     owl:inverseOf :focus .
+
+:Frequency a owl:Class;
+    rdfs:label "Frekvens"@sv, "Frequency"@en;
+    owl:equivalentClass bf2:Frequency .
+
+:frequency a owl:ObjectProperty;
+    rdfs:label "frekvens"@sv, "frequency"@en;
+    owl:euivalentProperty bf2:frequency;
+    rdfs:range :Frequency .
 
 :collectionItem a owl:ObjectProperty;
     owl:equivalentProperty skos:member;
@@ -157,6 +165,12 @@
     rdfs:label "Part of collection"@en, "Del av termsamling"@sv .
 
 # Classification Classes
+
+:classification a owl:ObjectProperty;
+    owl:equivalentProperty bf2:classification;
+    rdfs:domain :Endeavour ;
+    rdfs:range :Classification ;
+    rdfs:label "classification"@en, "klassifikation"@sv .
 
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
@@ -185,24 +199,31 @@
     owl:equivalentClass bf2:ClassificationUdc .
 
 :classificationPortion a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:classificationPortion .
 
 :edition a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:edition .
 
 :itemPortion a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:itemPortion .
 
 :schedulePart a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:schedulePart .
 
 :spanEnd a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:spanEnd .
 
 :table a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:table .
 
 :tableSeq a owl:DatatypeProperty;
+    rdfs:domain :Classification ;
     owl:equivalentProperty bf2:tableSeq .
 
 
@@ -271,4 +292,5 @@
 :GeographicalSubdivision a owl:Class ;
     rdfs:subClassOf :Subdivision, :Geographic;
     rdfs:label "Underindelning för geografisk term"@sv .
+
 

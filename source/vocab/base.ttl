@@ -3,6 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -65,22 +66,45 @@ rdf:type a owl:ObjectProperty;
     skos:closeMatch rdfs:Datatype;
     rdfs:label "Strukturerat värde"@sv .
 
+
+# NOTE: these constructs, used below, will yield inferred statements, which if
+# interpreted, will produce direct links using subject of hasStatement,
+# predicate(s) from role(s) and object from an object property. Like:
+#CONSTRUCT { ?s ?p ?o } WHERE {
+#    ?s [rdfs:subPropertyOf? :hasStatement] [
+#            [rdfs:subPropertyOf? :predicate] ?p;
+#            [rdfs:subPropertyOf? :object] ?o ]
+#}
+
 :QualifiedRole a owl:Class;
+    rdfs:subClassOf rdf:Statement ;
+    ptg:abstract true ;
     owl:equivalentClass sdo:Role;
     rdfs:label "Kvalificerad roll"@sv .
 
-:category a owl:ObjectProperty;
-    rdfs:label "kategori"@sv;
-    owl:equivalentProperty sdo:category .
+:hasStatement a owl:ObjectProperty;
+    ptg:abstract true;
+    rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
+    rdfs:range rdf:Statement .
+
+:predicate rdfs:subPropertyOf rdf:predicate; ptg:abstract true .
+
+:object rdfs:subPropertyOf rdf:object; ptg:abstract true .
+
 
 ##
 # Common Properties
 
 # .. use rdfs:range rdf:langString where applicable?
 
+:category a owl:ObjectProperty;
+    rdfs:label "kategori"@sv;
+    owl:equivalentProperty sdo:category .
+
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "etikett"@sv;
-    owl:equivalentProperty rdfs:label .
+    owl:equivalentProperty rdfs:label, sdo:name .
+
 :comment a owl:DatatypeProperty;
     rdfs:label "kommentar"@sv;
     owl:equivalentProperty rdfs:comment .
@@ -96,10 +120,10 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "samma sak som"@sv;
     owl:equivalentProperty owl:sameAs .
 
-:name a owl:DatatypeProperty;
-    rdfs:label "name"@en, "namn"@sv;
-    rdfs:subPropertyOf :label;
-    owl:equivalentProperty sdo:name .
+#:name a owl:DatatypeProperty;
+#    rdfs:label "name"@en, "namn"@sv;
+#    rdfs:subPropertyOf :label;
+#    owl:equivalentProperty sdo:name .
 
 :Date a rdfs:Datatype;
     owl:sameAs xsd:date .
@@ -130,7 +154,7 @@ rdf:type a owl:ObjectProperty;
 
 
 ##
-# Ambiguity
+# Ambiguity (See what we do here? Reifying the unbound? Really? Proceed with care.)
 
 :Ambiguity a owl:Class;
     rdfs:label "Ambiguity"@en, "Otydlighet"@sv;
@@ -148,4 +172,3 @@ rdf:type a owl:ObjectProperty;
     rdfs:range :Ambiguity;
     rdfs:label "disambiguates"@en, "disambiguerar"@sv;
     rdfs:comment "Something ambiguous that may be this distinct thing."@en .
-

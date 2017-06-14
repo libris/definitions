@@ -3,7 +3,7 @@ from urlparse import urljoin
 from rdflib import *
 from rdflib.namespace import *
 from rdflib.util import guess_format
-from lxltools.graphcache import GraphCache, vocab_source_map
+#from lxltools.graphcache import GraphCache, vocab_source_map
 
 
 SDO = Namespace("http://schema.org/")
@@ -13,6 +13,7 @@ VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 
 BASE = "https://id.kb.se/"
 TERMS = Namespace(BASE + "vocab/")
+MARC = Namespace(BASE + "marc/")
 DATASET_BASE = Namespace(BASE + "dataset/")
 ENUM_BASEPATH = "/marc/"
 
@@ -21,14 +22,14 @@ SKIP = ('Other', 'Unspecified', 'Unknown')
 
 def parse_marcframe(dataset, marcframe):
 
-    for part in ['bib', 'auth', 'hold']:
+    for part in ['patterns', 'bib', 'auth', 'hold']:
         parse_resourcemap(dataset, part, marcframe)
 
         g = dataset.get_context(DATASET_BASE["marcframe/fields"])
         for tag, field in marcframe[part].items():
             if not isinstance(field, dict):
                 continue
-            marc_source = "%s %s" % (part, tag)
+            marc_source = "%s/%s" % (part, tag)
             add_terms(g, marc_source, field)
 
     return g
@@ -107,8 +108,8 @@ def add_terms(g, marc_source, dfn, parentdomain=None):
                 newprop(g, dp, {RDF.Property})
             continue
 
-        if k in ('match-i1', 'match-i2', 'match-code'):
-            for matchdfn in v.values():
+        if k == 'match':
+            for matchdfn in v:
                 matchdfn = matchdfn.copy()
                 matchdfn.update({dk: dfn[dk] for dk in dfn
                         if dk not in matchdfn
@@ -152,11 +153,11 @@ def add_terms(g, marc_source, dfn, parentdomain=None):
 
         marc_source_path = marc_source
         if k.startswith('$'):
-            marc_source_path = "%s.%s" % (marc_source, k[1:])
+            marc_source_path = "%s-%s" % (marc_source, k[1:])
         elif k.startswith('['):
             marc_source_path = marc_source + k
         elif k in ('i1', 'i2'):
-            marc_source_path = "%s.%s" % (marc_source, k)
+            marc_source_path = "%s-%s" % (marc_source, k)
 
         if not rtypes:
             if not isinstance(v, list):
@@ -205,7 +206,7 @@ def newprop(g, name, rtypes, domainname=None, rangename=None, marc_source=None):
     if rangename:
         rprop.add(SDO.rangeIncludes, TERMS[rangename])
     if marc_source:
-        rprop.add(SKOS.note, Literal("MARC "+ marc_source))
+        rprop.add(SKOS.closeMatch, MARC[marc_source])
     return rprop
 
 
@@ -239,6 +240,10 @@ if __name__ == '__main__':
     termspath = args.pop(0) if args else None
 
     dataset = ConjunctiveGraph()
+    dataset.namespace_manager.bind("owl", OWL)
+    dataset.namespace_manager.bind("skos", SKOS)
+    dataset.namespace_manager.bind("sdo", SDO)
+    dataset.namespace_manager.bind("", TERMS)
 
     with open(source) as fp:
         marcframe = json.load(fp)
@@ -249,30 +254,30 @@ if __name__ == '__main__':
     if termspath:
         termsgraph.parse(termspath, format=guess_format(termspath))
 
-    graphcache = GraphCache("cache/graph-cache")
-
-    for vocab, url in termsgraph.subject_objects(OWL.imports):
-        termsgraph.namespace_manager.bind("", vocab)
-        try:
-            refgraph = graphcache.load(vocab_source_map.get(str(url), url))
-        except:
-            pass #print "Failed to load:", url # TODO: this is a problem
-        #print "loaded:", url, len(refgraph)
-        destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
-        add_equivalent(dataset, destgraph, refgraph, url, termsgraph)
+    #graphcache = GraphCache("cache/graph-cache")
+    #
+    #for vocab, url in termsgraph.subject_objects(OWL.imports):
+    #    termsgraph.namespace_manager.bind("", vocab)
+    #    try:
+    #        refgraph = graphcache.load(vocab_source_map.get(str(url), url))
+    #    except:
+    #        pass #print "Failed to load:", url # TODO: this is a problem
+    #    #print "loaded:", url, len(refgraph)
+    #    destgraph = dataset.get_context(DATASET_BASE["ext?source=%s" % url])
+    #    add_equivalent(dataset, destgraph, refgraph, url, termsgraph)
 
     if termsgraph:
         dataset -= termsgraph
         dataset.remove((None, VANN.termGroup, None))
-        dataset.namespace_manager = termsgraph.namespace_manager
+        #dataset.namespace_manager = termsgraph.namespace_manager
 
-        for s in dataset.subjects():
-            if (s, OWL.equivalentProperty|OWL.equivalentClass, None) not in termsgraph:
-                dataset.add((s, VS.term_status, Literal("unmapped")))
+        #for s in dataset.subjects():
+        #    if (s, OWL.equivalentProperty|OWL.equivalentClass, None) not in termsgraph:
+        #        dataset.add((s, VS.term_status, Literal("unmapped")))
 
-    for update_fpath in glob.glob(
-            os.path.join(os.path.dirname(__file__), 'vocab-update-*.rq')):
-        with open(update_fpath) as fp:
-            dataset.update(fp.read())
+    #for update_fpath in glob.glob(
+    #        os.path.join(os.path.dirname(__file__), 'vocab-update-*.rq')):
+    #    with open(update_fpath) as fp:
+    #        dataset.update(fp.read())
 
     dataset.serialize(sys.stdout, format=fmt)
