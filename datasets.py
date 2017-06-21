@@ -50,7 +50,7 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     dataset_id=BASE + 'definitions',
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
-                    system_iri_base="https://libris.kb.se/",
+                    system_base_iri="",
                     union='definitions.jsonld.lines')
 
 
@@ -104,18 +104,33 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
+    def add_record_system_id(record):
+        record_id = record['@id']
+        record.setdefault('sameAs', []).append(
+                {'@id': compiler.generate_record_id(vocab_created_ms, record_id)})
+
+    vocab_record = data['@graph'][0]
+    vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
+    #assert vocab_record['@id'] == vocab_base
+    add_record_system_id(vocab_record)
+
     version = _get_repo_version()
     if version:
-        data['@graph'][0]['version'] = version
+        vocab_record['version'] = version
 
     lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
-    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    faux_record = {'@id': BASE + 'vocab/context'}
+    add_record_system_id(faux_record)
+    lib_context['@graph'] = [faux_record]
 
-    compiler.write(lib_context, 'vocab/context')
-    compiler.write(compiler.load_json('source/vocab/display.jsonld'), 'vocab/display')
+    display = compiler.load_json('source/vocab/display.jsonld')
+    add_record_system_id(display['@graph'][0])
+
     compiler.write(data, "vocab")
+    compiler.write(lib_context, 'vocab/context')
+    compiler.write(display, 'vocab/display')
 
 
 @compiler.dataset
