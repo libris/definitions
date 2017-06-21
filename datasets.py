@@ -3,7 +3,7 @@ from __future__ import unicode_literals, print_function
 import os
 import re
 import zipfile
-from rdflib import Graph, ConjunctiveGraph
+from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
 from lxltools.datacompiler import Compiler
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 
@@ -12,6 +12,8 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 # - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
 # - explicitly link each record to its logical source (or just the parent dataset record?)
 
+
+SCRA = Namespace("http://purl.org/net/schemarama#")
 
 BASE = "https://id.kb.se/"
 
@@ -93,6 +95,15 @@ def vocab():
 
     rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text()
     graph += Graph().query(rq).graph
+
+    rq = compiler.path('source/vocab/check-bases.rq').read_text()
+    checks = graph.query(rq).graph
+    for check, msg in checks.subject_objects(SCRA.message):
+        print("{}: {}".format(
+            graph.qname(checks.value(check, RDF.type)).split(':')[-1],
+            msg.format(*[imp.n3() for imp in
+                checks.collection(checks.value(check, SCRA.implicated))])
+            ))
 
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
