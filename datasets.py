@@ -117,8 +117,9 @@ def vocab():
 
     def add_record_system_id(record):
         record_id = record['@id']
+        record['@id'] = compiler.generate_record_id(vocab_created_ms, record_id)
         record.setdefault('sameAs', []).append(
-                {'@id': compiler.generate_record_id(vocab_created_ms, record_id)})
+                {'@id': record_id})
 
     vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
