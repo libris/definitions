@@ -130,7 +130,7 @@
 
 :IssuanceType owl:equivalentClass bf2:Issuance .
 
-:GenreForm a owl:ObjectClass;
+:GenreForm a owl:Class;
     rdfs:label "Genre/Form"@en, "Genre/Form"@sv;
     owl:equivalentClass bf2:GenreForm .
 
@@ -265,6 +265,7 @@
     rdfs:label "Multimedia"@sv;
     rdfs:subClassOf :Work;
     :inCollection marc:typeOfRecord;
+    #rdfs:subClassOf [ owl:unionOf (dctype:InteractiveResource dctype:Software) ]
     owl:equivalentClass bf2:Multimedia .
 
 :NotatedMovement a owl:Class;
@@ -352,17 +353,17 @@
 :CartographicObject a owl:Class;
     rdfs:label "Kartografiskt objekt"@sv;
     skos:exactMatch rdacontent:1006 ; # "cartographic three-dimensional form"
-    rdfs:subClassOf :Cartography, :Realia .
+    rdfs:subClassOf :Cartography, :Object .
 
 :CartographicTactileObject a owl:Class;
     rdfs:label "Kartografiskt taktilt objekt"@sv;
     skos:exactMatch rdacontent:1005 ; # "cartographic tactile three-dimensional form"
-    rdfs:subClassOf :Cartography, :Realia, :Tactile .
+    rdfs:subClassOf :Cartography, :Object, :Tactile .
 
-:DigitalDataset a owl:Class;
+:MultimediaDataset a owl:Class;
     rdfs:label "Digitalt dataset"@sv;
     skos:exactMatch rdacontent:1007 ; # "computer dataset"
-    rdfs:subClassOf :Digital, :Dataset .
+    rdfs:subClassOf :Multimedia, :Dataset .
 
 
 # TODO: missing rdacontent mappings:
@@ -479,13 +480,6 @@
     rdfs:subClassOf :Instance;
     owl:equivalentClass bf2:Archival .
 
-:Digital a owl:Class;
-    ptg:abstract true;
-    rdfs:label "Digital resurs"@sv;
-    #rdfs:subClassOf [ owl:unionOf (dctype:InteractiveResource dctype:Software) ]
-    rdfs:subClassOf :Instance;
-    owl:equivalentClass bf2:Electronic .
-
 :Manuscript a owl:Class;
     rdfs:label "Manuskript"@sv;
     rdfs:subClassOf :Instance;
@@ -498,8 +492,9 @@
 
 :Electronic a owl:Class;
     rdfs:label "Elektronisk"@sv;
+    rdfs:subClassOf :Instance;
     skos:exactMatch rdamedia:1003 ; # "computer"
-    rdfs:subClassOf :Digital, :Instance .
+    owl:equivalentClass bf2:Electronic .
 
 :Microform a owl:Class;
     rdfs:label "Mikroform"@sv;
@@ -525,7 +520,7 @@
 
 :Software a owl:Class;
     rdfs:label "Mjukvara"@sv;
-    rdfs:subClassOf :Digital;
+    rdfs:subClassOf :Electronic;
     owl:equivalentClass dctype:Software, sdo:SoftwareApplication .
 
 # TODO: missing rdamedia mappings:
@@ -572,7 +567,7 @@
 
 #:Globe a owl:Class;
 #    rdfs:label "Kartglob"@sv;
-#    rdfs:subClassOf :Cartography, :Realia .
+#    rdfs:subClassOf :Cartography, :Object .
 #
 #:Map a owl:Class;
 #    rdfs:label "Karta"@sv;
@@ -606,11 +601,11 @@
 
 #:Database a owl:Class;
 #    rdfs:label "Databas"@sv;
-#    rdfs:subClassOf :Integrating, :Digital, :Dataset .
+#    rdfs:subClassOf :Integrating, :Electronic, :Dataset .
 #
 #:Website a owl:Class;
 #    rdfs:label "Webbplats"@sv;
-#    rdfs:subClassOf :Integrating, :Digital, :Text;
+#    rdfs:subClassOf :Integrating, :Multimedia, :Text;
 #    owl:equivalentClass bibo:Website .
 #
 #:Book a owl:Class;
@@ -660,7 +655,7 @@
 #
 #:EBook a owl:Class;
 #    rdfs:label "E-bok"@sv;
-#    rdfs:subClassOf :Book, :Digital .
+#    rdfs:subClassOf :Book, :Electronic .
 #
 #:Audiobook a owl:Class;
 #    rdfs:label "Ljudbok"@sv;

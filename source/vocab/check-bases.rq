@@ -1,0 +1,49 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl:  <http://www.w3.org/2002/07/owl#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix sdo: <http://schema.org/>
+prefix : <http://purl.org/net/schemarama#>
+
+construct {
+
+    ?check a :Warning; :message ?msg; :implicated (?base ?term) .
+
+} where {
+
+    {
+        ?term (rdfs:subClassOf|owl:equivalentClass) ?base .
+        filter not exists {
+            { ?base a rdfs:Class } union { ?base a owl:Class }
+        }
+        bind("Unknown base class {} for term {}"@en as ?msg)
+
+    } union {
+        ?term (rdfs:subPropertyOf|owl:equivalentProperty) ?base .
+        filter not exists {
+            { ?base a rdf:Property }
+            union { ?base a owl:ObjectProperty }
+            union { ?base a owl:DatatypeProperty }
+        }
+        bind("Unknown base property {} for term {}"@en as ?msg)
+
+    } union {
+        ?term (rdfs:domain|sdo:domainIncludes) ?base .
+        filter not exists {
+            { ?base a rdfs:Class } union { ?base a owl:Class }
+        }
+        bind("Unknown domain {} for term {}"@en as ?msg)
+
+    } union {
+        ?term (rdfs:range|sdo:rangeIncludes) ?base .
+        filter not exists {
+            { ?base a rdfs:Class } union { ?base a owl:Class }
+        }
+        bind("Unknown range {} for term {}"@en as ?msg)
+    }
+
+    bind(bnode(str(?base)) as ?check)
+
+    filter(isIRI(?term) && isIRI(?base)
+        && strStarts(str(?base), replace(str(?term), '[^#/:]+$', '')))
+
+}
