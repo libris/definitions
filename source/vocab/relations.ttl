@@ -68,10 +68,14 @@
 
 :hasPart a owl:ObjectProperty;
     rdfs:label "has part"@en, "har del"@sv;
-    owl:equivalentProperty dc:hasPart .
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :isPartOf;
+    owl:equivalentProperty bf2:hasPart, dc:hasPart .
 
 :isPartOf a owl:ObjectProperty;
-    rdfs:label "part of"@en, "del av"@sv;
+    rdfs:label "is part of"@en, "är del av"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :hasPart;
     owl:equivalentProperty bf2:partOf, dc:isPartOf .
 
 :partOfSeries a owl:ObjectProperty;
@@ -98,10 +102,65 @@
 :influentialPart a owl:ObjectProperty;
     rdfs:subPropertyOf :influencedBy, dc:hasPart .
 
+:absorbed a owl:ObjectProperty;
+    rdfs:label "Absorption of"@en, "har införlivat"@sv;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :absorbedBy;
+    owl:equivalentProperty bf2:absorbed .
+
+:absorbedBy a owl:ObjectProperty;
+    rdfs:label "Absorbed by"@en, "har uppgått i"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    owl:inverseOf :absorbed;
+    owl:equivalentProperty bf2:absorbedBy .
+
+:accompanies a owl:ObjectProperty;
+    rdfs:label "medföljer"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :accompaniedBy;
+    owl:equivalentProperty bf2:accompanies .
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :accompanies;
     owl:equivalentProperty bf2:accompaniedBy .
+
+:continuedBy a owl:ObjectProperty;
+    rdfs:label "fortsättes av"@sv, "continued by"@en;
+    rdfs:subPropertyOf :succeededBy;
+    owl:inverseOf :continues;
+    owl:equivalentProperty bf2:continuedBy .
+
+:continuedInPart a owl:ObjectProperty;
+    rdfs:label "fortsättes delvis av"@sv, "continuation in part of"@en;
+    rdfs:subPropertyOf :succeededBy;
+    owl:inverseOf :separatedFrom;
+    owl:equivalentProperty bf2:continuedInPart .
+
+:continues a owl:ObjectProperty;
+    rdfs:label "fortsätter"@sv, "continuation of"@en;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :continuedBy;
+    owl:equivalentProperty bf2:continues .
+
+:continuesInPart a owl:ObjectProperty;
+    rdfs:label "fortsätter delvis"@sv, "continuation in part of"@en;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :splitInto;
+    owl:equivalentProperty bf2:continuesInPart .
+
+:mergerOf a owl:ObjectProperty;
+    rdfs:label "sammanslagen med"@sv, "merger of"@en;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :mergedToForm;
+    owl:equivalentProperty bf2:mergerOf .
+
+:mergedToForm a owl:ObjectProperty;
+    rdfs:label "sammanslagen till"@sv, "merged to form"@en;
+    rdfs:subPropertyOf :succeededBy;
+    owl:inverseOf :mergerOf;
+    owl:equivalentProperty bf2:mergedToForm .
 
 :alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
 
@@ -120,9 +179,16 @@
     rdfs:label "uttryck av"@sv .
 
 :precededBy a owl:ObjectProperty;
+    rdfs:label "föregången av"@sv;
     owl:equivalentProperty bf2:precededBy;
     rdfs:subPropertyOf :relatedTo;
-    rdfs:label "föregången av"@sv .
+    owl:inverseOf :succeededBy .
+
+:succeededBy a owl:ObjectProperty;
+    rdfs:label "efterföljande verk"@sv;
+    owl:equivalentProperty bf2:succeededBy;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :precededBy .
 
 :hasSeries a owl:ObjectProperty;
     owl:equivalentProperty bf2:hasSeries;
