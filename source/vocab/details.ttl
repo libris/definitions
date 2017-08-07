@@ -423,8 +423,9 @@
     rdfs:subPropertyOf bf:annotationSource .
 
 :CoverArt a owl:Class;
-    rdfs:subClassOf bf:Summary .
-
+    rdfs:subClassOf bf:Summary;
+    rdfs:label "Omslagsbild"@sv, "Cover art"@en .
+    
 :Dimensions a owl:Class;
     rdfs:label "Mått"@sv, "Dimensions"@en .
 
@@ -442,7 +443,8 @@
     owl:equivalentProperty bf2:summary .
 
 :coverArt a owl:ObjectProperty;
-    rdfs:subPropertyOf bf:coverArt .
+    rdfs:subPropertyOf bf:coverArt;
+    rdfs:label "omslagsbild"@sv, "cover art"@en .
 
 :coverArtThumb a owl:ObjectProperty;
     rdfs:subPropertyOf bf:coverArtThumb .
