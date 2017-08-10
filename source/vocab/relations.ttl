@@ -66,6 +66,18 @@
     owl:equivalentProperty dc:hasVersion;
     rdfs:subPropertyOf :exampleOfWork .
 
+:hasDerivative a owl:ObjectProperty;
+    rdfs:label "has derivative"@en, "har bearbetning"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :derivativeOf;
+    owl:equivalentProperty bf2:hasDerivative .
+
+:derivativeOf a owl:ObjectProperty;
+    rdfs:label "is derivative of"@en, "är bearbetning av"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :hasDerivative;
+    owl:equivalentProperty bf2:derivativeOf .
+
 :hasPart a owl:ObjectProperty;
     rdfs:label "has part"@en, "har del"@sv;
     rdfs:subPropertyOf :relatedTo;
@@ -162,7 +174,10 @@
     owl:inverseOf :mergerOf;
     owl:equivalentProperty bf2:mergedToForm .
 
-:alternateEdition a rdf:Property; rdfs:label "Annan utgåva"@sv .
+:otherEdition a owl:ObjectProperty;
+  rdfs:label "other edition"@en, "annan utgåva"@sv;
+  rdfs:subPropertyOf :derivativeOf;
+  owl:equivalentProperty bf2:otherEdition .
 
 :otherPhysicalFormat a owl:ObjectProperty;
     owl:equivalentProperty bf2:otherPhysicalFormat;
@@ -179,13 +194,13 @@
     rdfs:label "uttryck av"@sv .
 
 :precededBy a owl:ObjectProperty;
-    rdfs:label "föregången av"@sv;
+    rdfs:label "föregående"@sv;
     owl:equivalentProperty bf2:precededBy;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :succeededBy .
 
 :succeededBy a owl:ObjectProperty;
-    rdfs:label "efterföljande verk"@sv;
+    rdfs:label "efterföljande"@sv;
     owl:equivalentProperty bf2:succeededBy;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :precededBy .
