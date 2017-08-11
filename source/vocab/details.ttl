@@ -389,6 +389,27 @@
     rdfs:label "version"@sv;
     owl:equivalentProperty sdo:version .
 
+:aspectRatio a owl:ObjectProperty;
+    rdfs:range :AspectRatio;
+    owl:equivalentProperty bf2:aspectRatio;
+    rdfs:label "aspect ratio"@en, "bildförhållande"@sv .
+
+:AspectRatio a owl:Class;
+    owl:equivalentClass bf2:AspectRatio;
+    rdfs:label "Aspect ratio"@en, "Bildförhållande"@sv .
+
+:capture a owl:ObjectProperty;
+    rdfs:range :Capture;
+    owl:equivalentProperty bf2:capture;
+    rdfs:label "capture of content"@en, "inspelning"@sv .
+
+:Capture a owl:Class;
+    owl:equivalentClass bf2:Capture;
+    rdfs:label "Capture of content"@en, "Inspelning"@sv .
+
+:duration a owl:DatatypeProperty;
+    rdfs:label "duration"@en, "speltid"@sv;
+    owl:equivalentProperty bf2:duration .
 
 :extent a owl:ObjectProperty;
     rdfs:domain :Instance ;
@@ -399,6 +420,7 @@
 :Extent a owl:Class;
     owl:equivalentClass bf2:Extent;
     rdfs:label "Omfång"@sv .
+
 
 :numberOfPages a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:numberOfPages;
@@ -423,6 +445,10 @@
     rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
     owl:equivalentProperty bf2:tableOfContents .
 
+:natureOfContent a owl:DatatypeProperty;
+    rdfs:range rdf:Literal;
+    rdfs:label "content nature"@en, "innehållets karaktär"@sv ;
+    owl:equivalentProperty bf2:natureOfContent .
 
 # Annotations
 

@@ -162,6 +162,30 @@
     owl:inverseOf :splitInto;
     owl:equivalentProperty bf2:continuesInPart .
 
+:findingAid a owl:ObjectProperty;
+    rdfs:label "finding aid"@en, "arkivförteckning"@sv;
+    rdfs:subPropertyOf :accompaniedBy;
+    owl:inverseOf :findingAidOf;
+    owl:equivalentProperty bf2:findingAid .
+
+:findingAidOf a owl:ObjectProperty;
+    rdfs:label "finding aid for"@en, "arkivförteckning för"@sv;
+    rdfs:subPropertyOf :accompanies;
+    owl:inverseOf :findingAid;
+    owl:equivalentProperty bf2:findingAidOf .
+
+:index a owl:ObjectProperty;
+    rdfs:label "has index"@en, "register"@sv;
+    rdfs:subPropertyOf :accompaniedBy;
+    owl:inverseOf :indexOf;
+    owl:equivalentProperty bf2:index .
+
+:indexOf a owl:ObjectProperty;
+    rdfs:label "index to"@en, "register till"@sv;
+    rdfs:subPropertyOf :accompanies;
+    owl:inverseOf :index;
+    owl:equivalentProperty bf2:indexOf .
+
 :mergerOf a owl:ObjectProperty;
     rdfs:label "sammanslagen med"@sv, "merger of"@en;
     rdfs:subPropertyOf :precededBy;
@@ -211,7 +235,6 @@
 
 :isPrimaryTopicOf a owl:ObjectProperty;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
-
 
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
