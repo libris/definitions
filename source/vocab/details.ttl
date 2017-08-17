@@ -63,6 +63,18 @@
     owl:equivalentProperty bf2:subTitle;
     rdfs:domain :Title .
 
+:partName a owl:DatatypeProperty;
+    rdfs:label "part title"@en, "del av titel"@sv;
+    rdfs:range rdf:literal;
+    owl:equivalentProperty bf2:partName;
+    rdfs:domain :Title .
+
+:partNumber a owl:DatatypeProperty;
+    rdfs:label "part number"@en, "delbeteckning"@sv;
+    rdfs:range rdf:literal;
+    owl:equivalentProperty bf2:partNumber;
+    rdfs:domain :Title .
+
 :InstanceTitle  a owl:Class;
     owl:equivalentClass bf2:InstanceTitle;
     rdfs:subClassOf :Title;
