@@ -47,6 +47,7 @@
 
 :mainTitle a owl:DatatypeProperty;
     rdfs:label "huvudtitel"@sv;
+    rdfs:comment "Återge huvudtiteln från titelsidan eller annan föredragen källa så som den förekommer i källan (se RDA 1.7)."@sv;
     rdfs:subPropertyOf :value;
     owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
@@ -448,6 +449,7 @@
     rdfs:domain :Instance;
     rdfs:range rdf:Literal;
     rdfs:label "mått"@sv, "dimensions"@en;
+    rdfs:comment "Enligt Librispraxis är det inte obligatoriskt att ange mått. Mått som är standard för bäraren anges inte."@sv ;
     #skos:altLabel "Dimensioner"@sv;
     owl:propertyChainAxiom (:hasDimensions :label) ;
     owl:equivalentProperty bf2:dimensions .
