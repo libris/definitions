@@ -207,10 +207,17 @@
     owl:equivalentProperty bf2:otherPhysicalFormat;
     rdfs:label "Annat bärarformat"@sv .
 
+:translation a owl:ObjectProperty;
+    rdfs:label "översatt till"@sv;
+    owl:equivalentProperty bf2:translation;
+    rdfs:subPropertyOf :hasDerivative;
+    owl:inverseOf :translationOf .
+
 :translationOf a owl:ObjectProperty;
+    rdfs:label "översättning av"@sv;
     owl:equivalentProperty bf2:translationOf;
-    rdfs:subPropertyOf :versionOf;
-    rdfs:label "översättning av"@sv .
+    rdfs:subPropertyOf :derivativeOf;
+    owl:inverseOf :translation .
 
 :expressionOf a owl:ObjectProperty;
     owl:equivalentProperty bf2:expressionOf;
@@ -228,6 +235,18 @@
     owl:equivalentProperty bf2:succeededBy;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :precededBy .
+
+:supplement a owl:ObjectProperty;
+  rdfs:label "supplement"@sv;
+  owl:equivalentProperty bf2:supplement;
+  rdfs:subPropertyOf :accompaniedBy;
+  owl:inverseOf :supplementTo .
+
+:supplementTo a owl:ObjectProperty;
+  rdfs:label "supplement till"@sv;
+  owl:equivalentProperty bf2:supplementTo;
+  rdfs:subPropertyOf :accompanies;
+  owl:inverseOf :supplement .
 
 :hasSeries a owl:ObjectProperty;
     owl:equivalentProperty bf2:hasSeries;
