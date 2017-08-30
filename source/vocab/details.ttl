@@ -66,13 +66,13 @@
 
 :partName a owl:DatatypeProperty;
     rdfs:label "part title"@en, "del av titel"@sv;
-    rdfs:range rdf:literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partName;
     rdfs:domain :Title .
 
 :partNumber a owl:DatatypeProperty;
     rdfs:label "part number"@en, "delbeteckning"@sv;
-    rdfs:range rdf:literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partNumber;
     rdfs:domain :Title .
 
@@ -362,7 +362,7 @@
     
 :creditsNote a owl:DatatypeProperty;
     rdfs:label "credits note"@en, "upphovsanmärkning"@sv;
-    rdfs:range rdf:Literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentClass bf2:credits .
 
 :contentsNote a owl:DatatypeProperty;
@@ -371,7 +371,7 @@
 
 :custodialHistory a owl:DatatypeProperty;
     rdfs:label "custodial history"@en, "ägarhistorik"@sv;
-    rdfs:range rdf:Literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:custodialHistory .
 
 :illustrationNote a owl:DatatypeProperty;
@@ -447,7 +447,7 @@
 
 :dimensions a owl:DatatypeProperty;
     rdfs:domain :Instance;
-    rdfs:range rdf:Literal;
+    rdfs:range rdfs:Literal;
     rdfs:label "mått"@sv, "dimensions"@en;
     rdfs:comment "Enligt Librispraxis är det inte obligatoriskt att ange mått. Mått som är standard för bäraren anges inte."@sv ;
     #skos:altLabel "Dimensioner"@sv;
@@ -465,7 +465,7 @@
     owl:equivalentProperty bf2:tableOfContents .
 
 :natureOfContent a owl:DatatypeProperty;
-    rdfs:range rdf:Literal;
+    rdfs:range rdfs:Literal;
     rdfs:label "content nature"@en, "innehållets karaktär"@sv ;
     owl:equivalentProperty bf2:natureOfContent .
 
