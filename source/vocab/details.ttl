@@ -159,6 +159,10 @@
     rdfs:subPropertyOf :identifier ;
     rdfs:range :CODEN .
 
+:ean a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :EAN .
+
 :standardTechnicalReportNumber a owl:DatatypeProperty ;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :STRN .
@@ -350,12 +354,14 @@
 :seriesStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:seriesStatement;
     rdfs:range rdfs:Literal;
+    rdfs:domain :Instance;
     rdfs:label "series statement"@en, "serieuppgift"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :subseriesStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:subseriesStatement;
     rdfs:range rdfs:Literal;
+    rdfs:domain :Instance;
     rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
