@@ -163,6 +163,10 @@
     rdfs:subPropertyOf :identifier ;
     rdfs:range :EAN .
 
+:upc a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :UPC .
+
 :standardTechnicalReportNumber a owl:DatatypeProperty ;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :STRN .
@@ -181,6 +185,11 @@
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
+
+:UPC a rdfs:Datatype;
+    owl:equivalentClass bf2:Upc;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "UPC" .
 
 :ISBN a rdfs:Datatype;
     owl:equivalentClass bf2:Isbn;
