@@ -207,6 +207,18 @@
     owl:equivalentProperty bf2:otherPhysicalFormat;
     rdfs:label "Annat bärarformat"@sv .
 
+:hasSubseries a owl:ObjectProperty;
+        rdfs:label "Underserie"@sv;
+        owl:equivalentProperty bf2:hasSubseries;
+        rdfs:subPropertyOf :partOf;
+        owl:inverseOf :subseriesOf .
+
+:subseriesOf a owl:ObjectProperty;
+        rdfs:label "Underserie av"@sv;
+        owl:equivalentProperty bf2:subseriesOf;
+        rdfs:subPropertyOf :hasPart;
+        owl:inverseOf :hasSubseries .    
+
 :translation a owl:ObjectProperty;
     rdfs:label "översatt till"@sv;
     owl:equivalentProperty bf2:translation;
