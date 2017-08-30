@@ -347,6 +347,18 @@
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
+:seriesStatement a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:seriesStatement;
+    rdfs:range rdfs:Literal;
+    rdfs:label "series statement"@en, "serieuppgift"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
+
+:subseriesStatement a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:subseriesStatement;
+    rdfs:range rdfs:Literal;
+    rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
+
 :note a owl:DatatypeProperty;
     rdfs:label "anmärkning"@sv, "note"@en;
     owl:equivalentProperty skos:note .
@@ -439,11 +451,15 @@
     owl:equivalentClass bf2:Extent;
     rdfs:label "Omfång"@sv .
 
-
 :numberOfPages a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:numberOfPages;
     rdfs:subPropertyOf :extent;
     rdfs:label "number of pages"@en, "sidantal"@sv .
+
+:preferredCitation a owl:DatatypeProperty;
+    rdfs:label "föredragen referensform"@sv;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:preferredCitation .
 
 :dimensions a owl:DatatypeProperty;
     rdfs:domain :Instance;
