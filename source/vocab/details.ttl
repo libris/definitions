@@ -342,6 +342,12 @@
     rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
     owl:equivalentProperty :editionEnumeration .
 
+:seriesEnumeration a owl:DatatypeProperty;
+    rdfs:label "Series enumeration"@en, "Numrering inom serie"@sv;
+    rdfs:domain :Instance;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:seriesEnumeration .
+
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
     skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
