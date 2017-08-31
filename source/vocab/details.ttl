@@ -239,6 +239,15 @@
     owl:equivalentProperty bf2:acquisitionTerms;
     rdfs:label "Anskaffningsvillkor"@sv .
 
+:AcquisitionSource a owl:Class;
+    rdfs:label "Acquisition source"@en, "Förvärvskälla"@en;
+    owl:equivalentClass bf2:AcquisitionSource .
+
+:acquisitionSource a owl:ObjectProperty;
+    rdfs:label "source of acquisition"@en, "förvärvskälla"@en;  
+    rdfs:range :AcquisitionSource;
+    owl:equivalentProperty bf2:acquisitionSource .
+
 :keyword a owl:ObjectProperty;
     rdfs:label "nyckelord"@sv;
     owl:equivalentProperty sdo:keywords;
