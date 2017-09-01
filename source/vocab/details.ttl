@@ -181,6 +181,11 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
+:CopyrightNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Copyright-legal deposit number"@en, "Copyright- eller pliktexemplarsnummer"@sv;
+    owl:equivalentClass bf2:CopyrightNumber .
+
 :EAN a rdfs:Datatype;
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
@@ -444,6 +449,17 @@
     #rdfs:range :AnyDateTime;
     rdfs:label "datum"@sv;
     owl:equivalentProperty bf2:date, dc:date .
+
+:copyrightDate a owl:DatatypeProperty;
+    rdfs:label "Copyright date"@en, "Datum för copyright"@sv;
+    rdfs:range rdfs:Literal;
+    rdfs:subPropertyOf bf2:date;
+    owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted .
+
+:copyrightYear a owl:DatatypeProperty;
+    rdfs:label "Copyright year"@en, "Copyrightår"@sv;
+    rdfs:subPropertyOf :copyrightDate;
+    owl:equivalentProperty sdo:copyrightYear . 
 
 :version a owl:ObjectProperty;
     rdfs:label "version"@sv;
