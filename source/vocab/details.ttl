@@ -179,6 +179,7 @@
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "identified by"@en, "identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
+    rdfs:comment "Identifikator för manifestationen är ett kärnelement. Identifikatorn är en teckensträng som är knuten till manifestationen, till exempel ISBN. Hämta uppgift om identifikator från valfri källa."@sv;
     rdfs:range :Identifier .
 
 :Identifier a owl:Class ;
@@ -301,7 +302,8 @@
     rdfs:label "utgivning"@sv, "Provision activity"@en;
     rdfs:domain :Instance;
     rdfs:range :ProvisionActivity;
-    owl:equivalentProperty bf2:provisionActivity .
+    owl:equivalentProperty bf2:provisionActivity;
+    rdfs:comment "Utgivningsort, utgivarnamn och utgivningstid är kärnelement."@sv .
 
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
@@ -361,6 +363,7 @@
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
     skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
+    rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln är ett kärnelement. Om det finns mer än en, är endast den första kärnelement. Hämta upphovsuppgift som hänför sig till huvudtiteln från följande källor (i denna ordning): samma källa som huvudtiteln, en annan källa inom resursen, en annan av de källor som specificeras i RDA 2.2.4. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
@@ -369,7 +372,8 @@
 :editionStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf2:editionStatement;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
+    skos:definition "Ange uppgiften som den står i objektet."@sv;
+    rdfs:comment "Upplagebeteckning och påföljande upplagebeteckning är kärnelement. Övriga underelement är valfria. Återge upplageuppgiften så som den förekommer i resursen, dock inte nödvändigtvis när det gäller stora och små bokstäver eller interpunktion, se dokumentet 'Transcription' - RDA 1.7. Förkortningar används endast om de förekommer i källan som uppgiften hämtas från."@sv .
 
 :manufactureStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf2:provisionActivityStatement;
