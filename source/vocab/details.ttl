@@ -128,9 +128,14 @@
     rdfs:subClassOf :VariantTitle;
     rdfs:label "Collective title"@en, "Samlingstitel"@sv .
 
-:CoverTitle  a owl:Class;
+:CoverTitle a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
     rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
+
+:SpineTitle a owl:Class;
+    rdfs:label "Spine Title"@en, "Ryggtitel"@sv;
+    # rdfs:domain :Instance or propertyChainAxiom?
+    rdfs:subClassOf :VariantTitle .
 
 :TitlePage  a owl:Class;
     rdfs:subClassOf :InstanceTitle;
