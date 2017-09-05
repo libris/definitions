@@ -180,6 +180,7 @@
     rdfs:label "identified by"@en, "identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
     rdfs:comment "Identifikator för manifestationen är ett kärnelement. Identifikatorn är en teckensträng som är knuten till manifestationen, till exempel ISBN. Hämta uppgift om identifikator från valfri källa."@sv;
+    skos:definition "	Character string associated with a resource that serves to differentiate that resource from other resources, i.e., that uniquely identifies an entity."@en;
     rdfs:range :Identifier .
 
 :Identifier a owl:Class ;
@@ -349,16 +350,8 @@
     rdfs:subClassOf :ProvisionActivity;
     rdfs:label "Tillverkning"@sv .
 
-:editionEnumeration a owl:DatatypeProperty;
-    rdfs:domain :Instance;
-    rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
-    owl:equivalentProperty :editionEnumeration .
-
-:seriesEnumeration a owl:DatatypeProperty;
-    rdfs:label "Series enumeration"@en, "Numrering inom serie"@sv;
-    rdfs:domain :Instance;
-    rdfs:range rdfs:Literal;
-    owl:equivalentProperty bf2:seriesEnumeration .
+##
+#Instance Description Statements
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
@@ -375,6 +368,45 @@
     skos:definition "Ange uppgiften som den står i objektet."@sv;
     rdfs:comment "Upplagebeteckning och påföljande upplagebeteckning är kärnelement. Övriga underelement är valfria. Återge upplageuppgiften så som den förekommer i resursen, dock inte nödvändigtvis när det gäller stora och små bokstäver eller interpunktion, se dokumentet 'Transcription' - RDA 1.7. Förkortningar används endast om de förekommer i källan som uppgiften hämtas från."@sv .
 
+:editionEnumeration a owl:DatatypeProperty;
+    rdfs:domain :Instance;
+    rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
+    owl:equivalentProperty :editionEnumeration .
+
+:provisionActivityStatement a owl:DatatypeProperty;
+    rdfs:label "Provider statement"@en, "Uppgift om produktion, utgivning, distribution, tillverkning och/eller copyright"@sv;
+    rdfs:domain :Instance;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:provisionActivityStatement .
+
+:seriesStatement a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:seriesStatement;
+    rdfs:range rdfs:Literal;
+    rdfs:domain :Instance;
+    rdfs:label "series statement"@en, "serieuppgift"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
+
+:seriesEnumeration a owl:DatatypeProperty;
+    rdfs:label "Series enumeration"@en, "Numrering inom serie"@sv;
+    rdfs:domain :Instance;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:seriesEnumeration .
+
+:subseriesStatement a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:subseriesStatement;
+    rdfs:range rdfs:Literal;
+    rdfs:domain :Instance;
+    rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
+    skos:definition "Ange uppgiften som den står i objektet."@sv .
+
+:subseriesEnumeration a owl:DatatypeProperty ;
+    rdfs:subPropertyOf bf:subseriesEnumeration;
+    rdfs:range rdfs:Literal;
+    rdfs:domain :Instance;
+    rdfs:label "Subseries enumeration"@en, "Numrering inom underserie"@sv .
+
+# Additional kbv statements
+
 :manufactureStatement a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf2:provisionActivityStatement;
     rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv;
@@ -389,19 +421,7 @@
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
-:seriesStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:seriesStatement;
-    rdfs:range rdfs:Literal;
-    rdfs:domain :Instance;
-    rdfs:label "series statement"@en, "serieuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
-
-:subseriesStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:subseriesStatement;
-    rdfs:range rdfs:Literal;
-    rdfs:domain :Instance;
-    rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
+# Notes
 
 :note a owl:DatatypeProperty;
     rdfs:label "anmärkning"@sv, "note"@en;
