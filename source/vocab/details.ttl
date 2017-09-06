@@ -36,6 +36,7 @@
     owl:equivalentProperty bf2:title;
     rdfs:range :Title;
     rdfs:label "has title"@en, "har titel"@sv;
+    rdfs:comment "Titelelement relaterade till en resurs"@av;
     skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
     #rdfs:label "instanstitel"@sv;
     dc:references [ skos:notation "RDA 1.7" ] .
@@ -306,6 +307,10 @@
     owl:equivalentProperty bf2:provisionActivity;
     rdfs:comment "Utgivningsort, utgivarnamn och utgivningstid är kärnelement."@sv .
 
+#:publicationlocation a owl:ObjectProperty;
+#    rdfs:label "Utgivningsort"@sv;
+#    owl:propertyChainAxiom (:publication :place) .
+
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
@@ -520,6 +525,7 @@
     rdfs:domain :Instance ;
     rdfs:range :Extent ;
     owl:equivalentProperty bf2:extent;
+    rdfs:comment "Omfång är ett kärnelement om resursen är komplett eller om det totala antalet fysiska enheter är känt. Omfång är antalet och typen av enheter (t.ex. volym) och underenheter (t.ex. sidor) en resurs består av"@sv;
     rdfs:label "omfång"@sv .
 
 :Extent a owl:Class;

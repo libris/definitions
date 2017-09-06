@@ -67,6 +67,7 @@
     rdfs:label "instance of work"@en, "instans av verk"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
+    rdfs:comment "Verk som den beskrivna instansen manifesterar eller instansierar. Används för att koppla ihop instanser med Verk i en BIBFRAME struktur."@sv;
     sdo:rangeIncludes :Work .
 
 :hasInstance a owl:ObjectProperty ;
@@ -103,7 +104,7 @@
     rdfs:label "bärartyp"@sv ;
     rdfs:range :CarrierType ;
     owl:equivalentProperty bf2:carrier ;
-    rdfs:comment "ärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. Bärartyperna korrelerar till medietyperna och kan ses som underindelningar till dessa."@sv;
+    rdfs:comment "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. Bärartyperna korrelerar till medietyperna och kan ses som underindelningar till dessa."@sv;
     rdfs:subPropertyOf :additionalType, rdael:carrierType, dc:format .
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
@@ -111,6 +112,7 @@
 :issuanceType a owl:ObjectProperty;
     rdfs:label "utgivningssätt"@sv;   
     owl:equivalentProperty bf2:issuance;
+    rdfs:comment "Kategorisering som reflekterar om en resurs är utgiven i en eller flera delar, på vilket sätt den uppdateras, och dess tänkta avslutning."@sv;
     rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
 
 :genreForm a owl:ObjectProperty;
