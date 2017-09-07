@@ -34,7 +34,7 @@ def to_camel_case(label):
 
 
 def _get_zipped_graph(path, name):
-    with zipfile.ZipFile(path, 'r') as zipped:
+    with zipfile.ZipFile(str(path), 'r') as zipped:
         return Graph().parse(zipped.open(name), format='turtle')
 
 
