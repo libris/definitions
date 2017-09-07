@@ -295,6 +295,12 @@
     rdfs:comment "Resurs i vilken delen har blivit utgiven; titel av den större resursen syns i delen."@sv;
     rdfs:label "har serie"@sv .
 
+:seriesOf a owl:ObjectProperty;
+    rdfs:label "Series container of"@en, "Ingående seriedel"@sv;
+    rdfs:subPropertyOf :hasPart;
+    owl:inverseOf :hasSeries;
+    owl:equivalentProperty bf2:seriesOf .
+
 :isPrimaryTopicOf a owl:ObjectProperty;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
