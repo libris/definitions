@@ -284,6 +284,16 @@
     rdfs:label "Applies to"@en, "Del av materialet som avses"@sv ;
     rdfs:range :Part .
 
+:Review a owl:Class;
+    rdfs:label "Recension"@sv;
+    owl:equivalentClass bf2:Review .
+
+:review a owl:ObjectProperty;
+    rdfs:label "Review content"@en, "recension"@sv;
+    rdfs:range :Review;
+    owl:equivalentProperty bf2:review .
+
+
 # TODO: events? provenance?
 
 #:created a owl:DatatypeProperty;
