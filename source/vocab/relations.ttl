@@ -138,6 +138,13 @@
     owl:inverseOf :accompanies;
     owl:equivalentProperty bf2:accompaniedBy .
 
+:issuedWith a owl:SymmetricProperty;
+    rdfs:label "Issued with"@en, "utgiven med"@sv;
+    rdfs:domain :Instance;
+    rdfs:range :Instance;
+    rdfs:subPropertyOf :accompanies;
+    owl:equivalentProperty bf2:issuedWith .
+
 :continuedBy a owl:ObjectProperty;
     rdfs:label "fortsättes av"@sv, "continued by"@en;
     rdfs:subPropertyOf :succeededBy;
