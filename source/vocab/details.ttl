@@ -564,10 +564,21 @@
     rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
     owl:equivalentProperty bf2:tableOfContents .
 
+# Work description information
+
 :natureOfContent a owl:DatatypeProperty;
     rdfs:range rdfs:Literal;
     rdfs:label "content nature"@en, "innehållets karaktär"@sv ;
     owl:equivalentProperty bf2:natureOfContent .
+
+:Dissertation a owl:Class;
+    rdfs:label "Dissertation information"@en, "Anmärkning om akademisk avhandling"@sv;
+    owl:equivalentClass bf2:Dissertation .
+
+:dissertation a owl:ObjectProperty;
+    rdfs:label "Dissertation Information"@en, "Anmärkning om akademisk avhandling"@sv;
+    rdfs:range :Dissertation;
+    owl:equivalentProperty bf2:dissertation .
 
 # Annotations
 
