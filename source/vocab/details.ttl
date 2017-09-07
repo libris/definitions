@@ -200,6 +200,11 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
+:Local a owl:Class ;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Lokal identifikator"@sv;
+    owl:equivalentClass bf2:Local .
+
 :CopyrightNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
     rdfs:label "Copyright-legal deposit number"@en, "Copyright- eller pliktexemplarsnummer"@sv;
@@ -235,12 +240,16 @@
     rdfs:label "LCCN" .
 
 :Libris3Number a rdfs:Datatype;
-    rdfs:subClassOf :Identifier;
+    rdfs:subClassOf :Local;
     rdfs:label "LIBRIS-3-nummer"@sv .
 
 :LibrisControlNumber a rdfs:Datatype;
-    rdfs:subClassOf :Identifier;
+    rdfs:subClassOf :Local;
     rdfs:label "LIBRIS-kod"@sv .
+
+:SystemNumber a rdfs:Datatype;
+    rdfs:subClassOf :Local;
+    rdfs:label "Systemnummer"@sv .
 
 :AudioIssueNumber a rdfs:Datatype;
     owl:equivalentClass bf2:AudioIssueNumber;
