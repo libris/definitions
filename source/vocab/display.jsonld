@@ -70,6 +70,11 @@
           "classLensDomain": "Person",
           "showProperties": [ "name", "familyName", "givenName", "numeration", "birthYear", "deathYear", "qualifyingNote", "notation", "personTitle" ]
         },
+        "Organization": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Organization",
+          "showProperties": [ "name" ]
+        },        
         "Library": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
@@ -137,10 +142,15 @@
           "classLensDomain": "Person",
           "showProperties": [ "name", "familyName", "givenName", "numeration", "birthYear", "deathYear", "qualifyingNote", "notation", "personTitle", "note" ]
         },
+        "Organization": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Organization",
+          "showProperties": [ "name", "note" ]
+        },     
         "Concept": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "label", "notation", "inScheme", "inCollection", "broader", {"inverseOf": "broader"} ]
+          "showProperties": [ "prefLabel", "label", "notation", "inScheme", "inCollection", "broader", {"inverseOf": "broader"}, "note" ]
         },
         "Contribution": {
           "@type": "fresnel:Lens",
