@@ -204,10 +204,10 @@ def languages():
         cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text()
         loclanggraph += _get_zipped_graph(
                 compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
-                'iso6391.ttl').query(cherry_pick_loc_lang_data)
+                'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph += _get_zipped_graph(
                 compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-2.ttl.zip'),
-                'iso6392.ttl').query(cherry_pick_loc_lang_data)
+                'vocabularyiso639-2.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph.serialize(str(loclangpath), format=fmt)
     else:
         loclanggraph.parse(str(loclangpath), format=fmt)
