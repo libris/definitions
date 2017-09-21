@@ -80,6 +80,17 @@
 #    rdfs:range :Organization;
 #    rdfs:subPropertyOf sdo:seller, bf1:heldBy .
 
+:ShelfMark a owl:Class;
+    rdfs:label "Shelf location"@en, "Hyllsignum"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:ShelfMark .
+
+:shelfMark a owl:ObjectProperty;
+    rdfs:label "Shelf mark"@en, "Hyllsignum"@en; 
+    rdfs:domain :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentProperty bf2:shelfMark .
+
 :callno rdfs:subPropertyOf :genre, bf1:callno, sdo:sku;
     rdfs:range :Holding .
 
