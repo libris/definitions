@@ -91,6 +91,31 @@
     rdfs:range :ShelfMark;
     owl:equivalentProperty bf2:shelfMark .
 
+# Shelfmark call numbers not mapped in BF2 2017-09-22 but probable indicators for 852.
+
+:ShelfMarkDdc a owl:Class;
+    rdfs:label "DDC call number"@en;
+    rdfs:subClassOf :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkDdc .
+
+:ShelfMarkLcc a owl:Class;
+    rdfs:label "LCC call number"@en;
+    rdfs:subClassOf :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkLcc .
+
+:ShelfMarkUdc a owl:Class;
+    rdfs:label "UDC call number"@en;
+    rdfs:subClassOf :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkUdc .
+
+:ShelfMarkNlm a owl:Class;
+    rdfs:label "NLM call number"@en;
+    rdfs:subClassOf :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkNlm .
+
+##
+#
+
 :callno rdfs:subPropertyOf :genre, bf1:callno, sdo:sku;
     rdfs:range :Holding .
 
