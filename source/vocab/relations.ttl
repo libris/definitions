@@ -157,6 +157,12 @@
     owl:inverseOf :separatedFrom;
     owl:equivalentProperty bf2:continuedInPartBy .
 
+:separatedFrom a owl:ObjectProperty;
+    rdfs:label "Separated from"@en, "Separat från"@sv;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :continuedInPartBy;
+    owl:equivalentProperty bf2:separatedFrom .
+
 :continues a owl:ObjectProperty;
     rdfs:label "fortsätter"@sv, "continuation of"@en;
     rdfs:subPropertyOf :precededBy;
@@ -204,6 +210,11 @@
     owl:inverseOf :index;
     owl:equivalentProperty bf2:indexOf .
 
+:hasEquivalent a owl:SymmetricProperty;
+    rdfs:label "Equivalence"@en, "Likvärdighet"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    owl:equivalentProperty bf2:hasEquivalent .
+
 :mergerOf a owl:ObjectProperty;
     rdfs:label "sammanslagen med"@sv, "merger of"@en;
     rdfs:subPropertyOf :precededBy;
@@ -216,6 +227,18 @@
     owl:inverseOf :mergerOf;
     owl:equivalentProperty bf2:mergedToForm .
 
+:originalVersion a owl:ObjectProperty;
+    rdfs:label "Original version"@en, "Originalversion"@sv;
+    rdfs:subPropertyOf :derivativeOf;
+    owl:inverseOf :originalVersionOf;
+    owl:equivalentProperty bf2:originalVersion .
+
+:originalVersionOf a owl:ObjectProperty;
+    rdfs:label "Original version of"@en, "Originalversion av"@sv;
+    rdfs:subPropertyOf :derivativeOf;
+    owl:inverseOf :originalVersion;
+    owl:equivalentProperty bf2:originalVersionOf .
+
 :otherEdition a owl:ObjectProperty;
   rdfs:label "other edition"@en, "annan utgåva"@sv;
   rdfs:subPropertyOf :derivativeOf;
@@ -226,16 +249,16 @@
     rdfs:label "Annat bärarformat"@sv .
 
 :hasSubseries a owl:ObjectProperty;
-        rdfs:label "Underserie"@sv;
-        owl:equivalentProperty bf2:hasSubseries;
-        rdfs:subPropertyOf :partOf;
-        owl:inverseOf :subseriesOf .
+    rdfs:label "Underserie"@sv;
+    owl:equivalentProperty bf2:hasSubseries;
+    rdfs:subPropertyOf :partOf;
+    owl:inverseOf :subseriesOf .
 
 :subseriesOf a owl:ObjectProperty;
-        rdfs:label "Underserie av"@sv;
-        owl:equivalentProperty bf2:subseriesOf;
-        rdfs:subPropertyOf :hasPart;
-        owl:inverseOf :hasSubseries .    
+    rdfs:label "Underserie av"@sv;
+    owl:equivalentProperty bf2:subseriesOf;
+    rdfs:subPropertyOf :hasPart;
+    owl:inverseOf :hasSubseries .
 
 :translation a owl:ObjectProperty;
     rdfs:label "översättning till"@sv;
@@ -295,21 +318,21 @@
     owl:inverseOf :hasReproduction .
 
 :supplement a owl:ObjectProperty;
-  rdfs:label "supplement"@sv;
-  owl:equivalentProperty bf2:supplement;
-  rdfs:subPropertyOf :accompaniedBy;
-  owl:inverseOf :supplementTo .
+    rdfs:label "supplement"@sv;
+    owl:equivalentProperty bf2:supplement;
+    rdfs:subPropertyOf :accompaniedBy;
+    owl:inverseOf :supplementTo .
 
 :supplementTo a owl:ObjectProperty;
-  rdfs:label "supplement till"@sv;
-  owl:equivalentProperty bf2:supplementTo;
-  rdfs:subPropertyOf :accompanies;
-  owl:inverseOf :supplement .
+    rdfs:label "supplement till"@sv;
+    owl:equivalentProperty bf2:supplementTo;
+    rdfs:subPropertyOf :accompanies;
+    owl:inverseOf :supplement .
 
 :hasSeries a owl:ObjectProperty;
-    owl:equivalentProperty bf2:hasSeries;
+    rdfs:label "har serie"@sv;
     rdfs:comment "Resurs i vilken delen har blivit utgiven; titel av den större resursen syns i delen."@sv;
-    rdfs:label "har serie"@sv .
+    owl:equivalentProperty bf2:hasSeries .
 
 :seriesOf a owl:ObjectProperty;
     rdfs:label "Series container of"@en, "Ingående seriedel"@sv;
