@@ -511,15 +511,39 @@
 :Note a owl:Class;
     rdfs:label "Note"@en, "Anmärkning"@sv;
     owl:equivalentClass bf2:Note .
-    
+
+:awardsNote a owl:DatatypeProperty;
+    rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
+    rdfs:range rdfs:Literal;
+    rdfs:comment "Används normalt ej"@sv;
+    owl:equivalentProperty bf2:awards .
+  
 :creditsNote a owl:DatatypeProperty;
     rdfs:label "credits note"@en, "upphovsanmärkning"@sv;
     rdfs:range rdfs:Literal;
-    owl:equivalentClass bf2:credits .
+    owl:equivalentProperty bf2:credits .
 
 :contentsNote a owl:DatatypeProperty;
-    owl:equivalentProperty bf:contentsNote;
-    rdfs:label "contents note"@en, "innehållsanmärkning"@sv .
+    rdfs:label "contents note"@en, "Anmärkning om innehåll"@sv;
+    owl:equivalentProperty bf:contentsNote .
+    
+:ContentAccessibility a owl:Class;
+    rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
+    owl:equivalentClass bf2:ContentAccessibility .
+
+:contentAccessibility a owl:ObjectProperty;
+    rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
+    rdfs:range :ContentAccessibility;
+    owl:equivalentProperty bf2:contentAccessibility .
+
+:CopyrightRegistration a owl:Class;
+    rdfs:label "Copyright or Legal Deposit registration information"@en;
+    owl:equivalentClass bf2:CopyrightRegistration .
+
+:copyrightRegistration a owl:ObjectProperty;
+    rdfs:label "Copyright registration information"@en, "Anmärkning om registrering av copyright"@sv;
+    rdfs:range :CopyrightRegistration;
+    owl:equivalentProperty bf2:copyrightRegistration .
 
 :custodialHistory a owl:DatatypeProperty;
     rdfs:label "custodial history"@en, "ägarhistorik"@sv;
