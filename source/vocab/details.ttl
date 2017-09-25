@@ -23,6 +23,7 @@
 ## Stuff?
 ## Instance Description Statements
 ## Additional kbv Statements
+## Arrangement and Organization
 ## Notes
 ## Content description information
 ## Annotations
@@ -466,6 +467,36 @@
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
     skos:definition "Ange uppgiften som den står i objektet."@sv .
 
+# Arrangement and Organization
+
+:Arrangement a owl:Class;
+    rdfs:label "Organization of materials information"@en, "Information om ordning och sorteringsprinciper"@sv;
+    owl:equivalentClass bf2:Arrangement .
+
+:arrangement a owl:ObjectProperty;
+    rdfs:label "Organization and arrangement"@en, "Ordning och sorteringsprinciper"@sv;
+    rdfs:range :Arrangement;
+    owl:equivalentProperty bf2:arrangement .
+
+:pattern a owl:DatatypeProperty;
+    rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
+    rdfs:domain :Arrangement;
+    rdfs:range :Literal;
+    owl:equivalentProperty bf2:pattern .
+
+:hierarchicalLevel a owl:DatatypeProperty;
+    rdfs:label "Hierarchical level of material"@en, "Hierarkisk nivå"@sv;
+    rdfs:domain :Arrangement;
+    rdfs:range :Literal;
+    owl:equivalentProperty bf2:hierarchicalLevel .
+
+:organization a owl:DatatypeProperty;
+    rdfs:label "Organization of material"@en, "Ordning av material"@sv;
+    rdfs:domain :Arrangement;
+    rdfs:range :Literal;
+    owl:equivalentProperty bf2:organization .
+
+#
 # Notes
 
 :note a owl:DatatypeProperty;
