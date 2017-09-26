@@ -104,7 +104,7 @@
     rdfs:label "bärartyp"@sv ;
     rdfs:range :CarrierType ;
     owl:equivalentProperty bf2:carrier ;
-    rdfs:comment "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. Bärartyperna korrelerar till medietyperna och kan ses som underindelningar till dessa."@sv;
+    rdfs:comment "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. "@sv;
     rdfs:subPropertyOf :additionalType, rdael:carrierType, dc:format .
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
@@ -393,7 +393,7 @@
     owl:equivalentClass bf1:Monograph .
 
 :Part a owl:Class;
-    rdfs:label "Del av resurs"@sv;
+    rdfs:label "Part"@en, "Del av resurs"@sv;
     ptg:abstract true .
 
 :ComponentPart a owl:Class, :IssuanceType;
@@ -402,7 +402,7 @@
     rdfs:subClassOf :Part .
 
 :Aggregate a owl:Class;
-    rdfs:label "Aggregat"@sv;
+    rdfs:label "Aggregate"@en, "Aggregat"@sv;
     ptg:abstract true .
 
 :Continuing a owl:Class;
@@ -416,7 +416,7 @@
 #    owl:equivalentClass bf1:Archival .
 
 :Collection a owl:Class, :IssuanceType;
-    rdfs:label "Samling"@sv;
+    rdfs:label "Collection"@en, "Samling"@sv;
     rdfs:subClassOf :Aggregate;
     #:inCollection marc:bibLevel;
     owl:equivalentClass dctype:Collection, bf1:Collection .

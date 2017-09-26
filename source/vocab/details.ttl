@@ -192,9 +192,16 @@
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "identified by"@en, "identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
-    rdfs:comment "Identifikator för manifestationen är ett kärnelement. Identifikatorn är en teckensträng som är knuten till manifestationen, till exempel ISBN. Hämta uppgift om identifikator från valfri källa."@sv;
-    skos:definition "	Character string associated with a resource that serves to differentiate that resource from other resources, i.e., that uniquely identifies an entity."@en;
-    rdfs:range :Identifier .
+    owl:inverseOf :identifies;
+    rdfs:comment "Identifikatorn är en teckensträng knuten till en resurs som ska användas för att unikt särskilja resursen från andra."@sv;
+    #skos:definition "	Character string associated with a resource that serves to differentiate that resource from other resources, i.e., that uniquely identifies an entity."@en;
+    rdfs:range bf2:Identifier .
+
+:identifies a owl:ObjectProperty;
+    rdfs:label "Resource identified"@en; # Corrected english label from bf2.
+    rdfs:domain :Identifier;
+    owl:inverseOf :identifiedBy;
+    owl:equivalentProperty bf2:identifies .
 
 :Identifier a owl:Class ;
     rdfs:subClassOf :StructuredValue;
@@ -242,10 +249,12 @@
 
 :Libris3Number a rdfs:Datatype;
     rdfs:subClassOf :Local;
+    rdfs:comment: "Libris ID tilldelat i LIBRISIII stordatormiljö."@sv;
     rdfs:label "LIBRIS-3-nummer"@sv .
 
 :LibrisControlNumber a rdfs:Datatype;
     rdfs:subClassOf :Local;
+    rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
 :SystemNumber a rdfs:Datatype;
@@ -264,10 +273,14 @@
 ##
 # Stuff
 
+:Status a owl:Class;
+    rdfs:label "Status"@sv;
+    owl:equivalentClass bf2:Status .
+
 :status a owl:ObjectProperty;
-    owl:equivalentProperty bf2:status;
-    #TODO: rdfs:range bf2:Status;
-    rdfs:label "status"@sv .
+    rdfs:label "status"@sv;
+    rdfs:range bf2:Status;
+    owl:equivalentProperty bf2:status .
 
 :acquisitionTerms a rdf:Property;
     owl:equivalentProperty bf2:acquisitionTerms;
@@ -407,19 +420,23 @@
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
-    skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
-    rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln är ett kärnelement. Om det finns mer än en, är endast den första kärnelement. Hämta upphovsuppgift som hänför sig till huvudtiteln från följande källor (i denna ordning): samma källa som huvudtiteln, en annan källa inom resursen, en annan av de källor som specificeras i RDA 2.2.4. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
+    rdfs:comment "Uppgift som anger aktörer som är ansvariga för, eller som bidragit till, förverkligandet av resursens intellektuella eller konstnärliga innehåll."@sv;
+    #skos:definition "Ange upphov som det står i objektet. Uppgiften beskriver hur upphov anges i publikationen och kan skilja sig från kontrollerade namnformer."@sv;
+    #rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln är ett kärnelement. Om det finns mer än en, är endast den första kärnelement. Hämta upphovsuppgift som hänför sig till huvudtiteln från följande källor (i denna ordning): samma källa som huvudtiteln, en annan källa inom resursen, en annan av de källor som specificeras i RDA 2.2.4. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
     owl:equivalentProperty bf2:responsibilityStatement, rdael:statementOfResponsibility .
 
 :editionStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf2:editionStatement;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv;
-    rdfs:comment "Upplagebeteckning och påföljande upplagebeteckning är kärnelement. Övriga underelement är valfria. Återge upplageuppgiften så som den förekommer i resursen, dock inte nödvändigtvis när det gäller stora och små bokstäver eller interpunktion, se dokumentet 'Transcription' - RDA 1.7. Förkortningar används endast om de förekommer i källan som uppgiften hämtas från."@sv .
+    rdfs:comment "En uppgift som identifierar den upplaga eller version (opublicerade resurser) till vilken en resurs hör samt upplagespecifika upphovsuppgifter."@sv;
+    rdfs:equivalentProperty bf2:editionStatement .
 
+:editionStatementRemainder a owl:DatatypeProperty;
+    rdfs:label "edition statement remainder"@en, "upplageuppgift (återstående)"@sv;
+    rdfs:subPropertyOf bf2:editionStatement .
+    
 :editionEnumeration a owl:DatatypeProperty;
     rdfs:domain :Instance;
     rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
@@ -621,7 +638,7 @@
     rdfs:domain :Instance ;
     rdfs:range :Extent ;
     owl:equivalentProperty bf2:extent;
-    rdfs:comment "Omfång är ett kärnelement om resursen är komplett eller om det totala antalet fysiska enheter är känt. Omfång är antalet och typen av enheter (t.ex. volym) och underenheter (t.ex. sidor) en resurs består av"@sv;
+    rdfs:comment "Antal och typ av enheter och underenheter en resurs består av."@sv;
     rdfs:label "omfång"@sv .
 
 :Extent a owl:Class;
@@ -645,7 +662,6 @@
     rdfs:domain :Instance;
     rdfs:range rdfs:Literal;
     rdfs:label "mått"@sv, "dimensions"@en;
-    rdfs:comment "Enligt Librispraxis är det inte obligatoriskt att ange mått. Mått som är standard för bäraren anges inte."@sv ;
     #skos:altLabel "Dimensioner"@sv;
     owl:propertyChainAxiom (:hasDimensions :label) ;
     owl:equivalentProperty bf2:dimensions .
@@ -653,6 +669,7 @@
 :hasDimensions a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Dimensions;
+    rdfs:comment "Mått på resursens bärare eller behållare."@sv;
     rdfs:label "har mått"@sv, "dimensions"@en .
 
 :tableOfContents a owl:ObjectProperty;
