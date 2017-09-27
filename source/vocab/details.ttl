@@ -598,9 +598,13 @@
 
 :date a owl:DatatypeProperty;
     #rdfs:domain :Event;
-    #rdfs:range :AnyDateTime;
     rdfs:label "datum"@sv;
     owl:equivalentProperty bf2:date, dc:date .
+
+:originDate a owl:DatatypeProperty;
+    rdfs:domain :Work;
+    rdfs:subPropertyOf :date;
+    owl:equivalentProperty bf2:originDate .
 
 :copyrightDate a owl:DatatypeProperty;
     rdfs:label "Copyright date"@en, "Copyrightår"@sv;
@@ -608,9 +612,9 @@
     rdfs:subPropertyOf bf2:date;
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear .
 
-:version a owl:ObjectProperty;
-    rdfs:label "version"@sv;
-    owl:equivalentProperty sdo:version .
+:version a owl:DatatypeProperty;
+    rdfs:domain :Work;
+    owl:equivalentProperty bf2:version .
 
 :aspectRatio a owl:ObjectProperty;
     rdfs:range :AspectRatio;
@@ -692,6 +696,19 @@
     rdfs:label "Dissertation Information"@en, "Anmärkning om akademisk avhandling"@sv;
     rdfs:range :Dissertation;
     owl:equivalentProperty bf2:dissertation .
+
+:musicMedium a owl:ObjectProperty;
+    rdfs:domain :Work;
+    rdfs:range :MusicMedium;
+    owl:equivalentProperty bf2:musicMedium .
+
+:MusicMedium a owl:Class;
+    owl:equivalentClass bf2:MusicMedium .
+
+:musicKey a owl:DatatypeProperty;
+    rdfs:domain :Work;
+    #rdfs:label "Tonart"@sv;
+    owl:equivalentProperty bf2:musicKey .
 
 # Annotations
 
