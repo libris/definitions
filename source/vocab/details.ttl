@@ -596,15 +596,28 @@
     rdfs:range :Place;
     owl:equivalentProperty bf2:place, prov:atLocation .
 
+:originPlace a owl:ObjectProperty;
+    rdfs:label "Ursprungsort för verket"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Place;
+    rdfs:subPropertyOf :place;
+    owl:equivalentProperty bf2:originPlace .
+
 :date a owl:DatatypeProperty;
     #rdfs:domain :Event;
     rdfs:label "datum"@sv;
     owl:equivalentProperty bf2:date, dc:date .
 
 :originDate a owl:DatatypeProperty;
+    rdfs:label "Associated title date"@en, "Tid för verket"@sv;
     rdfs:domain :Work;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:originDate .
+
+:historyOfWork a owl:DatatypeProperty;
+    rdfs:label "History of the work"@en, "Verkets historia"@sv;
+    rdfs:domain :Work;
+    owl:equivalentProperty bf2:historyOfWork .
 
 :copyrightDate a owl:DatatypeProperty;
     rdfs:label "Copyright date"@en, "Copyrightår"@sv;
@@ -613,6 +626,7 @@
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear .
 
 :version a owl:DatatypeProperty;
+    rdfs:label "Version"@en, "Version"@sv;
     rdfs:domain :Work;
     owl:equivalentProperty bf2:version .
 
@@ -649,10 +663,11 @@
     owl:equivalentClass bf2:Extent;
     rdfs:label "Omfång"@sv .
 
-:numberOfPages a owl:DatatypeProperty ;
-    owl:equivalentProperty sdo:numberOfPages;
-    rdfs:subPropertyOf :extent;
-    rdfs:label "number of pages"@en, "sidantal"@sv .
+# NOTE: SDO-experimental mapping.
+#:numberOfPages a owl:DatatypeProperty ;
+#    owl:equivalentProperty sdo:numberOfPages;
+#    rdfs:subPropertyOf :extent;
+#    rdfs:label "number of pages"@en, "sidantal"@sv .
 
 :preferredCitation a owl:DatatypeProperty;
     rdfs:label "föredragen referensform"@sv;
@@ -676,6 +691,10 @@
     rdfs:comment "Mått på resursens bärare eller behållare."@sv;
     rdfs:label "har mått"@sv, "dimensions"@en .
 
+:TableOfContents a owl:Class;
+    rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
+    owl:equivalentClass bf2:TableOfContents .
+
 :tableOfContents a owl:ObjectProperty;
     rdfs:range :TableOfContents;
     rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
@@ -697,20 +716,22 @@
     rdfs:range :Dissertation;
     owl:equivalentProperty bf2:dissertation .
 
+:MusicMedium a owl:Class;
+    owl:equivalentClass bf2:MusicMedium .
+
 :musicMedium a owl:ObjectProperty;
     rdfs:domain :Work;
     rdfs:range :MusicMedium;
     owl:equivalentProperty bf2:musicMedium .
 
-:MusicMedium a owl:Class;
-    owl:equivalentClass bf2:MusicMedium .
-
 :musicKey a owl:DatatypeProperty;
+    rdfs:label "Tonart"@sv;
     rdfs:domain :Work;
-    #rdfs:label "Tonart"@sv;
     owl:equivalentProperty bf2:musicKey .
 
 # Annotations
+
+# NOTE: bf1 mapping remain?
 
 :Annotation a owl:Class;
     rdfs:subClassOf bf:Annotation .
@@ -718,12 +739,21 @@
 :annotationSource a owl:ObjectProperty;
     rdfs:subPropertyOf bf:annotationSource .
 
+:annotates a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:annotates .
+
 :CoverArt a owl:Class;
     rdfs:subClassOf bf:Summary;
     rdfs:label "Omslagsbild"@sv, "Cover art"@en .
 
-:annotates a owl:ObjectProperty;
-    rdfs:subPropertyOf bf:annotates .
+:coverArt a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:coverArt;
+    rdfs:label "omslagsbild"@sv, "cover art"@en .
+
+:coverArtThumb a owl:ObjectProperty;
+    rdfs:subPropertyOf bf:coverArtThumb .
+
+##
 
 :Summary a owl:Class;
     rdfs:label "Summary"@en, "Sammanfattning"@sv;
@@ -745,22 +775,11 @@
     rdfs:label "equipment or system requirements"@en, "systemkrav"@sv;
     owl:equivalentProperty bf2:systemRequirement .
 
-:usageAndAccessPolicy a owl:ObjectProperty;
-    rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
-    rdfs:range :UsageAndAccessPolicy;
-    owl:equivalentProperty bf2:usageAndAccessPolicy .
-
 :UsageAndAccessPolicy a owl:Class;
     rdfs:label "Use and access conditions"@en, "Villkor för användning och åtkomst"@sv;
     owl:equivalentClass bf2:UsageAndAccessPolicy .
 
-:coverArt a owl:ObjectProperty;
-    rdfs:subPropertyOf bf:coverArt;
-    rdfs:label "omslagsbild"@sv, "cover art"@en .
-
-:coverArtThumb a owl:ObjectProperty;
-    rdfs:subPropertyOf bf:coverArtThumb .
-
-:TableOfContents a owl:Class;
-    rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
-    owl:equivalentClass bf2:TableOfContents .
+:usageAndAccessPolicy a owl:ObjectProperty;
+    rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
+    rdfs:range :UsageAndAccessPolicy;
+    owl:equivalentProperty bf2:usageAndAccessPolicy .
