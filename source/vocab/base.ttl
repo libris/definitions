@@ -118,6 +118,15 @@ rdf:type a owl:ObjectProperty;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:count .
 
+:Unit a owl:Class;
+    rdfs:label "Unit"@en, "Enhet"@sv;
+    owl:equivalentClass bf2:Unit .
+
+:unit a owl:ObjectProperty;
+    rdfs:label "Type of unit"@en, "Typ av enhet"@sv;
+    rdfs:range :Unit;
+    owl:equivalentProperty bf2:unit .
+
 :value a owl:DatatypeProperty;
     rdfs:label "value"@en, "värde"@sv;
     owl:equivalentProperty rdf:value .
