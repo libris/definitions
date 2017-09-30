@@ -196,15 +196,17 @@
     ptg:abstract true ;
     owl:equivalentProperty dc:format .
 
-:bookFormat a owl:ObjectProperty ; # TODO: =~ marc:BooksItemType (?)
-    owl:equivalentProperty sdo:bookFormat;
-    rdfs:subPropertyOf :format;
-    rdfs:label "book format"@en, "bokformat"@sv .
-
 :BookFormat a owl:Class;
-    owl:equivalentClass sdo:BookFormat;
+    rdfs:label "Book format"@en, "Bokformat"@sv;
     rdfs:subClassOf :CarrierType;
-    rdfs:label "Book Format"@en, "Bokformat"@sv .
+    owl:equivalentClass bf2:BookFormat, sdo:BookFormat .
+
+:bookFormat a owl:ObjectProperty ; # TODO: =~ marc:BooksItemType (?)
+    rdfs:label "Book format"@en, "bokformat"@sv;
+    rdfs:domain :Instance;
+    rdfs:range :BookFormat;
+    rdfs:subPropertyOf :format;
+    owl:equivalentProperty bf2:bookFormat, sdo:bookFormat .
 
 :musicFormat a owl:ObjectProperty ;
     rdfs:subPropertyOf :format;
