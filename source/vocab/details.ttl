@@ -190,7 +190,7 @@
     rdfs:range :STRN .
 
 :identifiedBy a owl:ObjectProperty ;
-    rdfs:label "identified by"@en, "identifierad av"@sv;
+    rdfs:label "Identifier"@en, "identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
     owl:inverseOf :identifies;
     rdfs:comment "Identifikatorn är en teckensträng knuten till en resurs som ska användas för att unikt särskilja resursen från andra."@sv;
@@ -430,11 +430,15 @@
 
 :editionStatement a owl:DatatypeProperty ;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
+    rdfs:domain :Instance;
+    rdfs:range rdfs:Literal;
     rdfs:comment "En uppgift som identifierar den upplaga eller version (opublicerade resurser) till vilken en resurs hör samt upplagespecifika upphovsuppgifter."@sv;
     rdfs:equivalentProperty bf2:editionStatement .
 
 :editionStatementRemainder a owl:DatatypeProperty;
     rdfs:label "edition statement remainder"@en, "upplageuppgift (återstående)"@sv;
+    rdfs:domain :Instance;
+    rdfs:range rdfs:Literal;
     rdfs:subPropertyOf bf2:editionStatement .
     
 :editionEnumeration a owl:DatatypeProperty;
@@ -504,19 +508,19 @@
 :pattern a owl:DatatypeProperty;
     rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
     rdfs:domain :Arrangement;
-    rdfs:range :Literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:pattern .
 
 :hierarchicalLevel a owl:DatatypeProperty;
     rdfs:label "Hierarchical level of material"@en, "Hierarkisk nivå"@sv;
     rdfs:domain :Arrangement;
-    rdfs:range :Literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:hierarchicalLevel .
 
 :organization a owl:DatatypeProperty;
     rdfs:label "Organization of material"@en, "Ordning av material"@sv;
     rdfs:domain :Arrangement;
-    rdfs:range :Literal;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:organization .
 
 #
@@ -716,18 +720,117 @@
     rdfs:range :Dissertation;
     owl:equivalentProperty bf2:dissertation .
 
+:GeographicCoverage a owl:Class;
+    rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
+    owl:equivalentClass bf2:GeographicCoverage .
+
+:geographicCoverage a owl:ObjectProperty;
+    rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
+    rdfs:domain :Work;
+    rdfs:range :GeographicCoverage .
+
+:temporalCoverage a owl:DatatypeProperty;
+    rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:temporalCoverage .
+
 :MusicMedium a owl:Class;
+    rdfs:label "Music medium information"@en, "Besättning"@sv;
     owl:equivalentClass bf2:MusicMedium .
 
 :musicMedium a owl:ObjectProperty;
+    rdfs:label "Music medium of performance"@en, "Besättning"@sv;
     rdfs:domain :Work;
     rdfs:range :MusicMedium;
     owl:equivalentProperty bf2:musicMedium .
 
-:musicKey a owl:DatatypeProperty;
-    rdfs:label "Tonart"@sv;
+:MusicVoice a owl:Class;
+    rdfs:label "Music voice"@en, "Röst"@sv;
+    owl:equivalentClass bf2:MusicVoice .
+
+:voice a owl:ObjectProperty;
+    rdfs:label "Voice"@en, "Röst"@sv;
     rdfs:domain :Work;
+    rdfs:range rdfs:MusicVoice;
+    owl:equivalentProperty bf2:voice .
+
+:voiceType a owl:DatatypeProperty;
+    rdfs:label "Type of voice"@en, "Rösttyp"@sv;
+    rdfs:domain :MusicVoice;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:voiceType .
+
+:MusicInstrument a owl:Class;
+    rdfs:label "Musical instrument"@en, "Musikinstrument"@sv;
+    owl:equivalentClass bf2:MusicInstrument .
+
+:instrument a owl:ObjectProperty;
+    rdfs:label "Instrument"@en, "Instrument"@sv;
+    rdfs:domain :Work;
+    rdfs:range :MusicInstrument;
+    owl:equivalentProperty bf2:instrument .
+
+:instrumentalType a owl:DatatypeProperty;
+    rdfs:label "Instrument role"@en, "Instrumentroll"@sv;
+    rdfs:domain :MusicInstrument;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:instrumentalType .
+
+:MusicEnsemble a owl:Class;
+    rdfs:label "Music ensemble"@en, "Musikensemble"@sv;
+    owl:equivalentClass bf2:MusicEnsemble .
+
+:ensemble a owl:ObjectProperty;
+    rdfs:label "Ensemble"@en, "Ensemble"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:MusicEnsemble;
+    owl:equivalentProperty bf2:ensemble .
+
+:ensembleType a owl:DatatypeProperty;
+    rdfs:label "Ensemble Type"@en, "Ensembletyp"@sv;
+    rdfs:domain :MusicEnsemble;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:ensembleType .
+    
+:musicSerialNumber a owl:DatatypeProperty;
+    rdfs:label "Music serial number"@en;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:musicSerialNumber .
+
+:musicOpusNumber a owl:DatatypeProperty;
+    rdfs:label "Music opus number"@en, "Opusnummer"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:musicOpusNumber .
+
+:musicThematicNumber a owl:DatatypeProperty;
+    rdfs:label "Music thematic number"@en, "Verkförteckningsnummer"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:musicThematicNumber .
+
+:musicKey a owl:DatatypeProperty;
+    rdfs:label "Music key"@en, "Tonart"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:musicKey .
+
+:legalDate a owl:DatatypeProperty;
+    rdfs:label "Date of legal work"@sv, "Tid för rättsligt verk"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    rdfs:subPropertyOf :date;
+    owl:equivalentProperty bf2:legalDate .
+
+:version a owl:DatatypeProperty;
+    rdfs:label "Version"@en, "Version"@sv;
+    rdfs:domain :Work;
+    rdfs:range rdfs:Literal;
+    rdfs:subPropertyOf :date;
+    owl:equivalentProperty bf2:version .
+
 
 # Annotations
 
