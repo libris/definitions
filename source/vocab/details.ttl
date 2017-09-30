@@ -342,7 +342,7 @@
 # Provision Activity
 
 :ProvisionActivity a owl:Class;
-    rdfs:label "Utgivning"@sv;
+    rdfs:label "Provider entity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
     owl:equivalentClass bf2:ProvisionActivity, :QualifiedRole;
     rdfs:subClassOf :Event .
 
@@ -373,7 +373,7 @@
     owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:range :Publication;
-    rdfs:label "publicering"@sv .
+    rdfs:label "utgivning"@sv .
 
 :distribution a owl:ObjectProperty;
     owl:equivalentProperty bf:distribution;
@@ -395,7 +395,7 @@
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
     rdfs:subClassOf :ProvisionActivity;
-    rdfs:label "Publicering"@sv .
+    rdfs:label "Utgivning"@sv .
 
 :Distribution a owl:Class;
     owl:equivalentClass bf2:Distribution;
@@ -447,7 +447,7 @@
     owl:equivalentProperty :editionEnumeration .
 
 :provisionActivityStatement a owl:DatatypeProperty;
-    rdfs:label "Provider statement"@en, "Uppgift om produktion, utgivning, distribution, tillverkning och/eller copyright"@sv;
+    rdfs:label "Provider statement"@en, "Uppgift om produktion, utgivning, distribution och/eller tillverkning"@sv;
     rdfs:domain :Instance;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:provisionActivityStatement .
@@ -791,8 +791,10 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:instrumentalType .
 
+# also in agent
 :MusicEnsemble a owl:Class;
     rdfs:label "Music ensemble"@en, "Musikensemble"@sv;
+    rdfs:subClassOf :Agent;
     owl:equivalentClass bf2:MusicEnsemble .
 
 :ensemble a owl:ObjectProperty;
