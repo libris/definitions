@@ -436,7 +436,7 @@
     rdfs:equivalentProperty bf2:editionStatement .
 
 :editionStatementRemainder a owl:DatatypeProperty;
-    rdfs:label "edition statement remainder"@en, "upplageuppgift (återstående)"@sv;
+    rdfs:label "edition statement remainder"@en, "Påföljande upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf bf2:editionStatement .
@@ -496,6 +496,7 @@
 
 # Arrangement and Organization
 
+## TODO: map in marcframe (351&880)
 :Arrangement a owl:Class;
     rdfs:label "Organization of materials information"@en, "Information om ordning och sorteringsprinciper"@sv;
     owl:equivalentClass bf2:Arrangement .
@@ -517,13 +518,13 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:hierarchicalLevel .
 
-:organization a owl:DatatypeProperty;
+:organizationOfMaterial a owl:DatatypeProperty;
     rdfs:label "Organization of material"@en, "Ordning av material"@sv;
     rdfs:domain :Arrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:organization .
+##
 
-#
 # Notes
 
 :note a owl:DatatypeProperty;
@@ -720,6 +721,19 @@
     rdfs:range :Dissertation;
     owl:equivalentProperty bf2:dissertation .
 
+:degree a owl:DatatypeProperty;
+    rdfs:label "Degree"@en, "Examen"@sv;
+    rdfs:domain :Dissertation;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:degree .
+
+# TODO: Awaiting swedish translation
+:grantingInstitution a owl:ObjectProperty;
+    rdfs:label "Degree issuing institution"@en;
+    rdfs:domain :Dissertation;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:grantingInstitution .
+
 :GeographicCoverage a owl:Class;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
     owl:equivalentClass bf2:GeographicCoverage .
@@ -830,6 +844,9 @@
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:version .
+
+
+
 
 
 # Annotations
