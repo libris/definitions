@@ -540,6 +540,10 @@
     rdfs:label "Note"@en, "Anmärkning"@sv;
     owl:equivalentClass bf2:Note .
 
+:BibliographyNote a owl:Class;
+    rdfs:label "Bibliography note"@en, "Bibliografisk anmärkning"@sv;
+    rdfs:subClassOf bf2:Note .
+
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
     rdfs:range rdfs:Literal;
@@ -741,7 +745,8 @@
 :geographicCoverage a owl:ObjectProperty;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
     rdfs:domain :Work;
-    rdfs:range :GeographicCoverage .
+    rdfs:range :GeographicCoverage;
+    owl:equivalentProperty bf2:geographicCoverage .
 
 :temporalCoverage a owl:DatatypeProperty;
     rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
