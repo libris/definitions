@@ -542,7 +542,11 @@
 
 :BibliographyNote a owl:Class;
     rdfs:label "Bibliography note"@en, "Bibliografisk anmärkning"@sv;
-    rdfs:subClassOf bf2:Note .
+    rdfs:subClassOf :Note .
+
+:IssuanceInformationNote a owl:Class;
+    rdfs:label "Issuance information"@en, "Anmärkning om numrering och utgivning "@sv;
+    rdfs:subClassOf :Note .
 
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
@@ -917,6 +921,11 @@
 :UsageAndAccessPolicy a owl:Class;
     rdfs:label "Use and access conditions"@en, "Villkor för användning och åtkomst"@sv;
     owl:equivalentClass bf2:UsageAndAccessPolicy .
+
+:UsePolicy a owl:Class;
+    rdfs:label "Use policy"@en, "Användningsvillkor"@sv;
+    rdfs:subClassOf :UsageAndAccessPolicy;
+    owl:equivalentClass bf2:UsePolicy .
 
 :usageAndAccessPolicy a owl:ObjectProperty;
     rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
