@@ -96,7 +96,7 @@
     rdfs:range :MediaType ;
     owl:equivalentProperty bf2:media ;
     rdfs:subPropertyOf rdael:mediaType ;
-    rdfs:comment "Medietyp anger vilken typ av enhet som behövs för att se, spela eller visa innehållet i resursen."@sv;
+    skos:definition "Medietyp anger vilken typ av enhet som behövs för att se, spela eller visa innehållet i resursen."@sv;
     rdfs:subPropertyOf rdf:type .
 
 # TODO: a given value implies value for :media from base :MediaType
@@ -104,7 +104,7 @@
     rdfs:label "bärartyp"@sv ;
     rdfs:range :CarrierType ;
     owl:equivalentProperty bf2:carrier ;
-    rdfs:comment "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. "@sv;
+    skos:definition "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. "@sv;
     rdfs:subPropertyOf :additionalType, rdael:carrierType, dc:format .
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
@@ -112,9 +112,10 @@
 :issuanceType a owl:ObjectProperty;
     rdfs:label "Mode of issuance"@en, "utgivningssätt"@sv;   
     owl:equivalentProperty bf2:issuance;
-    rdfs:comment "Kategorisering som reflekterar om en resurs är utgiven i en eller flera delar, på vilket sätt den uppdateras, och dess tänkta avslutning."@sv;
+    skos:definition "Kategorisering som reflekterar om en resurs är utgiven i en eller flera delar, på vilket sätt den uppdateras, och dess tänkta avslutning."@sv;
     rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
 
+#TODO align with genreform in concepts.ttl?
 :genreForm a owl:ObjectProperty;
     rdfs:label "genre/form"@en, "genre/form"@sv;
     rdfs:range :GenreForm;
