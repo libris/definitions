@@ -165,6 +165,9 @@
     owl:equivalentProperty dc:identifier, bibo:identifier;
     owl:propertyChainAxiom ( :identifiedBy :value ) .
 
+:audioMatrixNumber a owl:DatatypeProperty;
+    owl:equivalentProperty bf:matrixNumber .
+
 :isbn a owl:DatatypeProperty ;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :ISBN .
@@ -214,6 +217,27 @@
     rdfs:label "Lokal identifikator"@sv;
     owl:equivalentClass bf2:Local .
 
+:Ansi a owl:Datatype;
+    rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
+    rdfs:subClassOf :Identifier;
+    skos:definition "Identifikator för den amerikanska standardiseringsorganisationen American National Standards Institute"@sv;
+    owl:equivalentClass bf2:Ansi .
+
+:AudioIssueNumber a rdfs:Datatype;
+    owl:equivalentClass bf2:AudioIssueNumber;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Utgivningsnummer för ljudinspelning"@sv .
+
+:AudioTake a owl:Class ;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Audio recording take"@en, "Tagning (Ljudinspelning)"@sv;
+    owl:equivalentClass bf2:AudioTake .
+
+:CODEN a rdfs:Datatype;
+    owl:equivalentClass bf2:Coden;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "CODEN" .
+
 :CopyrightNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
     rdfs:label "Copyright-legal deposit number"@en, "Copyright- eller pliktexemplarsnummer"@sv;
@@ -223,11 +247,6 @@
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
-
-:UPC a rdfs:Datatype;
-    owl:equivalentClass bf2:Upc;
-    rdfs:subClassOf :Identifier;
-    rdfs:label "UPC" .
 
 :ISBN a rdfs:Datatype;
     owl:equivalentClass bf2:Isbn;
@@ -258,17 +277,24 @@
     rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
+:NBN a rdfs:Datatype;
+    owl:equivalentClass bf2:Nbn;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "NBN" .
+
 :SystemNumber a rdfs:Datatype;
     rdfs:subClassOf :Local;
     rdfs:label "Systemnummer"@sv .
 
-:AudioIssueNumber a rdfs:Datatype;
-    owl:equivalentClass bf2:AudioIssueNumber;
+:UPC a rdfs:Datatype;
+    owl:equivalentClass bf2:Upc;
     rdfs:subClassOf :Identifier;
-    rdfs:label "Audio issue number"@en .
+    rdfs:label "UPC" .
 
-:audioMatrixNumber a owl:DatatypeProperty;
-    owl:equivalentProperty bf:matrixNumber .
+:URN a rdfs:Datatype;
+    owl:equivalentClass bf2:Urn;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "URN" .
 
 
 ##
@@ -750,7 +776,7 @@
 
 # TODO: Awaiting swedish translation
 :grantingInstitution a owl:ObjectProperty;
-    rdfs:label "Degree issuing institution"@en;
+    rdfs:label "Degree issuing institution"@en, "Lärosäte som utfärdat examen"@sv;
     rdfs:domain :Dissertation;
     rdfs:range :Agent;
     owl:equivalentProperty bf2:grantingInstitution .
