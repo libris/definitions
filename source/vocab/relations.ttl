@@ -392,23 +392,30 @@
 
 # Qualified Forms of Contribution and Relationship
 
+:Role a owl:Class;
+    rdfs:label "Funktion"@sv;
+    owl:equivalentClass bf2:Role .
+
 :role a owl:ObjectProperty;
-    rdfs:label "roll"@sv;
+    rdfs:label "funktion"@sv;
     rdfs:subPropertyOf :predicate;
     #ptg:abstract true ;
+    skos:definition "Funktion för medverkande, t.ex. författare, illustratör, etc."@sv;
     rdfs:domain :Contribution;
-    owl:equivalentProperty prov:hadRole .
+    rdfs:range :Role;
+    owl:equivalentProperty bf2:role, prov:hadRole .
 
 :contribution a owl:ObjectProperty;
-    rdfs:label "Uppslag"@sv;
+    rdfs:label "Medverkande och funktion"@sv;
     skos:altLabel "Upphov"@sv;
+    skos:definition "Agent och funktion i förhållande till den beskrivna resursen."@sv;
     owl:equivalentProperty bf2:contribution;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
 
 :Contribution a owl:Class ;
-    rdfs:label "Uppslag"@sv ;
-    rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
+    rdfs:label "Medverkande"@sv ;
+    #rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
     rdfs:subClassOf prov:Attribution, :QualifiedRole ;
     owl:equivalentClass bf2:Contribution .
 
