@@ -15,7 +15,7 @@ content_name_map = {
     'Map': 'Cartography',
     'Music': 'Audio',
     'Serials': 'Serial',
-    'Computer': 'Digital'
+    'Computer': 'Multimedia'
 }
 
 carrier_name_map = {
@@ -456,6 +456,11 @@ def process_marcmap(OUT, marc_type):
             outf['addProperty'] = prep_propname(field['id'])
 
         else:
+
+            key = _make_type_key(field.get('label_en')) or marc_type.title() + tag
+            outf['addLink'] = prep_propname('has' + key)
+            outf['resourceType'] = prep_propname(key)
+
             for ind_key in ('ind1', 'ind2'):
                 ind = field.get(ind_key)
                 if not ind:
@@ -519,6 +524,13 @@ def process_marcmap(OUT, marc_type):
             field['inherits'] = field_index[fieldhash]
         else:
             field_index[fieldhash] = tag
+
+
+def _make_type_key(label):
+    if not label:
+        return None
+    key = re.sub(r"\W", "", label)
+    return key[0].upper() + key[1:]
 
 
 def process_fixmaps(marc_type, tag, fixmaps, outf):
