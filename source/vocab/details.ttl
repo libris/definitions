@@ -248,24 +248,80 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
 
+:ISAN a rdfs:Datatype;
+    owl:equivalentClass bf2:Isan;
+    rdfs:comment "International Standard Audiovisual Number.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISAN" .
+
 :ISBN a rdfs:Datatype;
     owl:equivalentClass bf2:Isbn;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "International Standard Book Number.";
     rdfs:label "ISBN" .
 
 :ISBN13 a rdfs:Datatype;
     rdfs:subClassOf :ISBN;
     rdfs:label "ISBN-13" .
 
+:ISMN a rdfs:Datatype;
+    owl:equivalentClass bf2:Ismn;
+    rdfs:comment "International Standard Music Number.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISMN" .
+
+:ISNI a rdfs:Datatype;
+    owl:equivalentClass bf2:Isni;
+    rdfs:comment "International Standard Name Identifier.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISNI" .
+
+:ISO a rdfs:Datatype;
+    owl:equivalentClass bf2:Iso;
+    rdfs:comment "International Organization for Standardization standard number.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISO" .
+
+:ISRC a rdfs:Datatype;
+    owl:equivalentClass bf2:Isrc;
+    rdfs:comment "International Standard Recording Code.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISRC" .
+
 :ISSN a rdfs:Datatype;
     owl:equivalentClass bf2:Issn;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "International Standard Serial Number.";
     rdfs:label "ISSN" .
+
+:ISSNL a rdfs:Datatype;
+    owl:equivalentClass bf2:IssnL;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISSN-L" .
+
+:ISTC a rdfs:Datatype;
+    owl:equivalentClass bf2:Istc;
+    rdfs:comment "International Standard Text Code.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISTC" .
+
+:ISWC a rdfs:Datatype;
+    owl:equivalentClass bf2:Iswc;
+    rdfs:comment "International Standard Musical Work Code.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "ISWC" .
 
 :LCCN a rdfs:Datatype;
     owl:equivalentClass bf2:Lccn;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "LC-nummer (Library of Congress). Används normalt ej i Libris."@sv;
+    rdfs:comment "Library of Congress Control Number.";
     rdfs:label "LCCN" .
+
+:LcOverseasAcq a rdfs:Datatype;
+    rdfs:label "LC acquisition program"@en, "LC:s förvärvsprogram"@sv;
+    rdfs:subclassOf :Identifier;
+    owl:equivalentClass bf2:LcOverseasAcq .
 
 :Libris3Number a rdfs:Datatype;
     rdfs:subClassOf :Local;
@@ -277,10 +333,45 @@
     rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
+
+:MatrixNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Matrix number"@en, "Matrisnummer"@en;
+    owl:equivalentClass bf2:MusicDistributorNumber .
+
+
+:MusicDistributorNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Music distributor number"@en;
+    owl:equivalentClass bf2:MusicDistributorNumber .
+
+:MusicPlate a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Music plate number"@en, "Plåtnummer"@sv;
+    owl:equivalentClass bf2:MusicPlate .
+
+:MusicPublisherNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Music publisher number"@en, "Utgivarnummer (musikalier)"@sv;
+    owl:equivalentClass bf2:MusicPublisherNumber .
+
 :NBN a rdfs:Datatype;
     owl:equivalentClass bf2:Nbn;
     rdfs:subClassOf :Identifier;
+    rdfs:comment: "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
     rdfs:label "NBN" .
+
+:SICI a rdfs:Datatype;
+    owl:equivalentClass bf2:Sici;
+    rdfs:subClassOf :Identifier;
+    rdfs:comment "Serial Item and Contribution Identifier.";
+    rdfs:label "SICI" .
+
+:STRN a rdfs:Datatype;
+    owl:equivalentClass bf2:Strn;
+    rdfs:subClassOf :Identifier;
+    rdfs:comment "Serial Item and Contribution Identifier.";
+    rdfs:label "STRN" .
 
 :SystemNumber a rdfs:Datatype;
     rdfs:subClassOf :Local;
@@ -289,13 +380,19 @@
 :UPC a rdfs:Datatype;
     owl:equivalentClass bf2:Upc;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "Universal Product Code.";
     rdfs:label "UPC" .
 
 :URN a rdfs:Datatype;
     owl:equivalentClass bf2:Urn;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "Uniform Resource Number.";
     rdfs:label "URN" .
 
+:VideoRecordingNumber a rdfs:Datatype;
+    rdfs:label "Video recording number"@en, "Utgivarnummer (videoinspelningar)"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:VideoRecordingNumber .
 
 ##
 # Stuff
