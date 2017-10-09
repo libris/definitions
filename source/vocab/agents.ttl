@@ -11,6 +11,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -111,6 +112,20 @@
     rdfs:label "har persona"@sv;
     rdfs:subPropertyOf rdfs:seeAlso;
     owl:equivalentProperty persona:hasPersona .
+
+:gender a owl:DatatypeProperty;
+    rdfs:label "gender"@en, "kön"@sv;
+    rdfs:domain :Person; #domain madsrdf:RWO
+    owl:equivalentProperty sdo:gender, madsrdf:gender .
+
+:Occupation a owl:Class;
+    rdfs:label "Occupation"@en, "Yrke/titel"@sv;
+    owl:equivalentClass sdo:Occupation, madsrdf:Occupation .
+
+:hasOccupation a owl:ObjectProperty;
+    rdfs:label "has occupation"@en, "har yrke/titel"@sv;
+    rdfs:domain :Occupation;
+    owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation .
 
 :Organization a owl:Class;
     rdfs:label "Organization"@en, "Organisation"@sv;
