@@ -216,11 +216,6 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
-:Local a owl:Class ;
-    rdfs:subClassOf :Identifier;
-    rdfs:label "Lokal identifikator"@sv;
-    owl:equivalentClass bf2:Local .
-
 :Ansi a owl:Datatype;
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
@@ -268,8 +263,6 @@
     rdfs:subClassOf :Identifier;
     rdfs:comment: "Används normalt ej"@sv;
     rdfs:label "Fingerprint identifier"@en . #NOTE: ingen svensk motsvarighet
-
-
 
 :GTIN14 a rdfs:Datatype;
     owl:equivalentClass bf2:Gtin14Number;
@@ -368,6 +361,11 @@
     rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
+:Local a owl:Class ; #TODO LocalIdentifer?
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Lokal identifikator"@sv;
+    owl:equivalentClass bf2:Local .
+
 :MatrixNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
     rdfs:label "Matrix number"@en, "Matrisnummer"@en;
@@ -419,7 +417,7 @@
 :STRN a rdfs:Datatype;
     owl:equivalentClass bf2:Strn;
     rdfs:subClassOf :Identifier;
-    rdfs:comment "Serial Item and Contribution Identifier.";
+    rdfs:comment "Standard Technical Report Number.";
     rdfs:label "STRN" .
 
 :StudyNumber a rdfs:Datatype;
@@ -429,7 +427,7 @@
 
 :SystemNumber a rdfs:Datatype;
     rdfs:subClassOf :Local;
-    rdfs:label "Systemnummer"@sv .
+    rdfs:label "System Number"@en, "Systemnummer"@sv .
 
 :UPC a rdfs:Datatype;
     owl:equivalentClass bf2:Upc;
