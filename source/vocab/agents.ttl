@@ -22,7 +22,7 @@
 
 :name a owl:DatatypeProperty;
     rdfs:label "name"@en, "namn"@sv;
-    rdfs:comment "Agentens namn"@sv;
+    rdfs:comment "Namn i rak följd"@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty foaf:name .
 
@@ -42,7 +42,7 @@
     owl:equivalentClass bf2:Person, foaf:Person, sdo:Person .
 
 :Family a owl:Class;
-    rdfs:label "Familj"@sv;
+    rdfs:label "Släkt"@sv;
     rdfs:subClassOf :Agent;
     owl:equivalentClass bf2:Family .
 
@@ -70,7 +70,7 @@
 
 #titlesAndOtherWordsAssociatedWithName
 :personTitle a owl:DatatypeProperty;
-    rdfs:label "persontitel"@sv;
+    rdfs:label "person title"@en, "persontitel"@sv;
     rdfs:subPropertyOf :qualifyingNote;
     owl:equivalentProperty sdo:jobTitle, foaf:title .
 
@@ -124,7 +124,7 @@
 
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "har yrke/titel"@sv;
-    rdfs:domain :Occupation;
+    rdfs:domain :Person;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation .
 
 :Organization a owl:Class;
