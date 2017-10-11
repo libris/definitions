@@ -165,7 +165,7 @@
     owl:equivalentProperty dc:identifier, bibo:identifier;
     owl:propertyChainAxiom ( :identifiedBy :value ) .
 
-:audioMatrixNumber a owl:DatatypeProperty;
+:matrixNumber a owl:DatatypeProperty;
     owl:equivalentProperty bf:matrixNumber .
 
 :isbn a owl:DatatypeProperty ;
@@ -179,6 +179,10 @@
 :coden a owl:DatatypeProperty ;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :CODEN .
+
+:doi a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :DOI .
 
 :ean a owl:DatatypeProperty ;
     rdfs:subPropertyOf :identifier ;
@@ -202,7 +206,7 @@
     rdfs:range bf2:Identifier .
 
 :identifies a owl:ObjectProperty;
-    rdfs:label "Resource identified"@en; # Corrected english label from bf2.
+    rdfs:label "Identifierad resurs"@sv; #english bflabel misspelled
     rdfs:domain :Identifier;
     owl:inverseOf :identifiedBy;
     owl:equivalentProperty bf2:identifies .
@@ -226,11 +230,11 @@
 :AudioIssueNumber a rdfs:Datatype;
     owl:equivalentClass bf2:AudioIssueNumber;
     rdfs:subClassOf :Identifier;
-    rdfs:label "Utgivningsnummer för ljudinspelning"@sv .
+    rdfs:label "Utgivningsnummer (ljudinspelning)"@sv .
 
 :AudioTake a owl:Class ;
     rdfs:subClassOf :Identifier;
-    rdfs:label "Audio recording take"@en, "Tagning (Ljudinspelning)"@sv;
+    rdfs:label "Audio recording take"@en, "Tagning (ljudinspelning)"@sv;
     owl:equivalentClass bf2:AudioTake .
 
 :CODEN a rdfs:Datatype;
@@ -243,10 +247,40 @@
     rdfs:label "Copyright-legal deposit number"@en, "Copyright- eller pliktexemplarsnummer"@sv;
     owl:equivalentClass bf2:CopyrightNumber .
 
+:DissertationIdentifier a rdfs:Datatype;
+    owl:equivalentClass bf2:DissertationIdentifier;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Dissertations identifikator"@sv .
+
+:DOI a rdfs:Datatype;
+    owl:equivalentClass bf2:Doi;
+    rdfs:comment "Digital Object Identifier.";
+    rdfs:subClassOf :Identifier;
+    rdfs:label "DOI" .
+
 :EAN a rdfs:Datatype;
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
+
+:Fingerprint a rdfs:Datatype;
+    owl:equivalentClass bf2:Fingerprint;
+    rdfs:subClassOf :Identifier;
+    rdfs:comment: "Används normalt ej"@sv;
+    rdfs:label "Fingerprint identifier"@en . #NOTE: ingen svensk motsvarighet
+
+
+
+:GTIN14 a rdfs:Datatype;
+    owl:equivalentClass bf2:Gtin14Number;
+    rdfs:subClassOf :Identifier;
+    rdfs:comment "Global Trade Item Number 14.";
+    rdfs:label "GTIN-14" .
+
+:Hdl a rdfs:Datatype;
+    owl:equivalentClass bf2:Hdl;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Handle" .
 
 :ISAN a rdfs:Datatype;
     owl:equivalentClass bf2:Isan;
@@ -321,6 +355,7 @@
 :LcOverseasAcq a rdfs:Datatype;
     rdfs:label "LC acquisition program"@en, "LC:s förvärvsprogram"@sv;
     rdfs:subclassOf :Identifier;
+    rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:LcOverseasAcq .
 
 :Libris3Number a rdfs:Datatype;
@@ -333,12 +368,10 @@
     rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
-
 :MatrixNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
     rdfs:label "Matrix number"@en, "Matrisnummer"@en;
     owl:equivalentClass bf2:MusicDistributorNumber .
-
 
 :MusicDistributorNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
@@ -352,7 +385,7 @@
 
 :MusicPublisherNumber a rdfs:Datatype;
     rdfs:subClassOf :Identifier;
-    rdfs:label "Music publisher number"@en, "Utgivarnummer (musikalier)"@sv;
+    rdfs:label "Music publisher number"@en, "Editionsnummer"@sv;
     owl:equivalentClass bf2:MusicPublisherNumber .
 
 :NBN a rdfs:Datatype;
@@ -360,6 +393,22 @@
     rdfs:subClassOf :Identifier;
     rdfs:comment: "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
     rdfs:label "NBN" .
+
+:PublisherNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Other publisher number"@en, "Utgivningsnummer (annat)"@sv;
+    owl:equivalentClass bf2:PublisherNumber .
+
+:PostalRegistration a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Postal registration number"@en, "Registreringsnummer för postal behandling av publikationen"@sv;
+    rdfs:comment "Används normalt ej"@sv;
+    owl:equivalentClass bf2:PostalRegistration .
+
+:ReportNumber a rdfs:Datatype;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Technical report number"@en, "Rapportnummer"@sv;
+    owl:equivalentClass bf2:ReportNumber .
 
 :SICI a rdfs:Datatype;
     owl:equivalentClass bf2:Sici;
@@ -372,6 +421,11 @@
     rdfs:subClassOf :Identifier;
     rdfs:comment "Serial Item and Contribution Identifier.";
     rdfs:label "STRN" .
+
+:StudyNumber a rdfs:Datatype;
+    rdfs:label "Study number"@en, "Registreringsnummer för datafiler"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:StudyNumber .
 
 :SystemNumber a rdfs:Datatype;
     rdfs:subClassOf :Local;
@@ -663,6 +717,11 @@
     rdfs:label "Note"@en, "Anmärkning"@sv;
     owl:equivalentClass bf2:Note .
 
+:noteType a owl:DatatypeProperty;
+    rdfs:label "Note type"@en, "Typ av anmärkning"@sv;
+    rdfs:domain :Note;
+    owl:equivalentProperty bf2:noteType .
+
 :BibliographyNote a owl:Class;
     rdfs:label "Bibliography note"@en, "Bibliografisk anmärkning"@sv;
     rdfs:subClassOf :Note .
@@ -718,6 +777,7 @@
     skos:closeMatch skos:editorialNote;
     owl:equivalentProperty rdael:cataloguersNote .
 
+#TODO any different from qualifier?
 :qualifyingNote a owl:DatatypeProperty;
     rdfs:label "Särskiljande tillägg"@sv;
     sdo:domainIncludes :Person, :Title .

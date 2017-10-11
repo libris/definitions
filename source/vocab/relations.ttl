@@ -273,9 +273,20 @@
     owl:inverseOf :translation .
 
 :expressionOf a owl:ObjectProperty;
-    owl:equivalentProperty bf2:expressionOf;
+    rdfs:label "uttryck av"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
     rdfs:subPropertyOf :versionOf;
-    rdfs:label "uttryck av"@sv .
+    owl:inverseOf :hasExpression;
+    owl:equivalentProperty bf2:expressionOf .
+
+:hasExpression a owl:ObjectProperty;
+    rdfs:label "uttryck av"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :versionOf;
+    owl:inverseOf :expressionOf;
+    owl:equivalentProperty bf2:hasExpression .
 
 :precededBy a owl:ObjectProperty;
     rdfs:label "föregående"@sv;
@@ -392,6 +403,11 @@
 
 # Qualified Forms of Contribution and Relationship
 
+
+:qualifier a owl:DatatypeProperty;
+    rdfs:label "Qualifier"@en, "Särskiljande tillägg"@sv;
+    owl:equivalentProperty: bf2:qualifier .
+
 :Role a owl:Class;
     rdfs:label "Funktion"@sv;
     owl:equivalentClass bf2:Role .
@@ -406,21 +422,21 @@
     owl:equivalentProperty bf2:role, prov:hadRole .
 
 :contribution a owl:ObjectProperty;
-    rdfs:label "Medverkande och funktion"@sv;
+    rdfs:label "Medverkan och funktion"@sv;
     skos:altLabel "Upphov"@sv;
-    skos:definition "Agent och funktion i förhållande till den beskrivna resursen."@sv;
+    skos:definition "Agent och funktion i relation till den beskrivna resursen."@sv;
     owl:equivalentProperty bf2:contribution;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
 
 :Contribution a owl:Class ;
-    rdfs:label "Medverkande"@sv ;
+    rdfs:label "Medverkan"@sv ;
     #rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
     rdfs:subClassOf prov:Attribution, :QualifiedRole ;
     owl:equivalentClass bf2:Contribution .
 
 :PrimaryContribution a owl:Class ;
-    rdfs:label "Huvuduppslag"@sv ;
+    rdfs:label "Primär medverkan"@sv ;
     rdfs:comment "Ange namnet för först nämnda upphov här. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs."@sv;
     rdfs:subClassOf :Contribution ;
     owl:equivalentClass bflc:PrimaryContribution .

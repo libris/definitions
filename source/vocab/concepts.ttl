@@ -36,7 +36,7 @@
     rdfs:label "Nationalitet"@sv .
 
 :controlledLabel a owl:DatatypeProperty;
-    rdfs:label "kontrollerad etikett"@sv;
+    rdfs:label "kontrollerad benämning"@sv; #NOTE: kontrollerad term inom concept
     owl:equivalentProperty bf1:authorizedAccessPoint, madsrdf:authoritativeLabel;
     rdfs:subPropertyOf :prefLabel .
     #owl:propertyChainAxiom ( [owl:inverseOf foaf:focus] skos:prefLabel ) .
@@ -61,7 +61,7 @@
     #owl:hasKey (:notation) .
 
 :altLabel a owl:DatatypeProperty;
-    rdfs:label "alternativ term"@sv;
+    rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
     rdfs:comment "Används som se-hänvisning";
     owl:equivalentProperty skos:altLabel .
 
@@ -86,7 +86,7 @@
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
 
 :hiddenLabel a owl:DatatypeProperty;
-    rdfs:label "dold etikett"@sv;
+    rdfs:label "dold benämning"@sv; #NOTE: dold term inom concept
     owl:equivalentProperty skos:hiddenLabel ;
     owl:equivalentProperty madsrdf:deprecatedLabel .
 
@@ -116,7 +116,7 @@
     owl:equivalentProperty madsrdf:code .
 
 :prefLabel a owl:DatatypeProperty;
-    rdfs:label "föredragen term"@sv;
+    rdfs:label "föredragen benämning"@sv; #NOTE: föredragen term inom concept
     rdfs:subPropertyOf :label;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
