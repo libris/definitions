@@ -53,66 +53,79 @@
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
     rdfs:label "Concept scheme"@en, "Termlista"@sv;
     #owl:equivalentClass madsrdf:MADSScheme;
+    sdo:domainIncludes :Concept ;
     owl:equivalentClass skos:ConceptScheme .
     #owl:hasKey (:notation) .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
     rdfs:comment "Används som se-hänvisning";
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:altLabel .
 
 :broader a owl:ObjectProperty;
     rdfs:label "bredare"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:broader ;
     owl:equivalentProperty madsrdf:hasBroaderAuthority .
 
 :broadMatch a owl:ObjectProperty;
     rdfs:label "bredare match"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:broadMatch ;
     owl:equivalentProperty madsrdf:hasBroaderExternalAuthority .
 
 :closeMatch a owl:ObjectProperty;
     rdfs:label "nära match"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:closeMatch ;
     owl:equivalentProperty madsrdf:hasCloseExternalAuthority .
 
 :exactMatch a owl:ObjectProperty;
     rdfs:label "exakt match"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:exactMatch ;
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
 
 :hiddenLabel a owl:DatatypeProperty;
     rdfs:label "dold benämning"@sv; #NOTE: dold term inom concept
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:hiddenLabel ;
     owl:equivalentProperty madsrdf:deprecatedLabel .
 
 :historyNote a owl:DatatypeProperty;
     rdfs:label "historikanmärkning"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
     rdfs:label "termlista"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:narrower ;
     owl:equivalentProperty madsrdf:hasNarrowerAuthority .
 
 :narrowMatch a owl:ObjectProperty;
     rdfs:label "smalare match"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:narrowMatch ;
     owl:equivalentProperty madsrdf:hasNarrowerExternalAuthority .
 
 :notation a owl:DatatypeProperty;
     rdfs:label "notation"@sv;
     rdfs:subPropertyOf :label;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:notation ;
     owl:equivalentProperty madsrdf:code .
 
@@ -125,15 +138,18 @@
 
 :related a owl:ObjectProperty;
     rdfs:label "relaterad"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
 
 :scopeNote a owl:DatatypeProperty;
-    rdfs:label "omfattningsanmärkning"@sv;
+    rdfs:label "användningsanmärkning"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:scopeNote .
 
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "redaktionell anmärkning"@sv;
+    sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:editorialNote .
 
 :focus a owl:ObjectProperty;
