@@ -143,10 +143,10 @@
 
 :CoverTitle a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
-    rdfs:label "Cover Title"@en, "Omslagstitel"@sv .
+    rdfs:label "Cover title"@en, "Omslagstitel"@sv .
 
 :SpineTitle a owl:Class;
-    rdfs:label "Spine Title"@en, "Ryggtitel"@sv;
+    rdfs:label "Spine title"@en, "Ryggtitel"@sv;
     # rdfs:domain :Instance or propertyChainAxiom?
     rdfs:subClassOf :VariantTitle .
 
@@ -1096,6 +1096,7 @@
 
 :SystemRequirement a owl:Class;
     rdfs:label "System Requirement"@en, "Systemkrav"@sv;
+    rdfs:subClassOf :QualifiedRole ;
     owl:equivalentClass bf2:SystemRequirement .
 
 :systemRequirement a owl:ObjectProperty;
