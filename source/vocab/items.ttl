@@ -125,3 +125,41 @@
 
 :seller a owl:ObjectProperty ;
     rdfs:label "seller"@en, "försäljare"@sv .
+
+## From unstable, go through.
+    
+:availability a rdf:Property;
+    owl:equivalentProperty sdo:availability;
+    rdfs:label "Exemplarstatus"@sv;
+    rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
+    skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
+
+:url a rdf:Property;
+    owl:equivalentProperty sdo:url;
+    rdfs:label "URL"@sv .
+
+:classificationPart a rdf:Property;
+    # TODO: rename to shelfMark? rdfs:subPropertyOf bf:shelfMark ?
+    rdfs:label "Hyllsignum: Klassifikation"@sv;
+    rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
+    skos:example "Hc", "Hc Lagerlöf" .
+
+:copyNumber a rdf:Property;
+    rdfs:label "Exemplarnummer"@sv;
+    rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
+    skos:example "A-C", "5" .
+
+:shelfControlNumber a rdf:Property;
+    rdfs:label "Hyllsignum: Löpnummer"@sv;
+    rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord."@sv;
+    skos:note "Kan även kombineras med ytterligare placeringsuppgifter."@sv;
+    skos:example "96-3899" .
+
+:shelfLabel a rdf:Property;
+    rdfs:label "Hyllsignum: Uppställningsord"@sv;
+    rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
+    skos:example "Deckare", "Lagerlöf" .
+
+:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv;
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi" .
