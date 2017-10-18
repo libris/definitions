@@ -524,7 +524,7 @@
     rdfs:subClassOf :Event .
 
 :provisionActivity a owl:ObjectProperty;
-    rdfs:label "utgivning"@sv, "Provision activity"@en;
+    rdfs:label "Provision activity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
     rdfs:domain :Instance;
     rdfs:range :ProvisionActivity;
     owl:equivalentProperty bf2:provisionActivity;
@@ -543,25 +543,29 @@
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Instance;
+    rdfs:domain :Instance;
+    rdfs:range :Production;
     rdfs:label "produktion"@sv .
 
 :publication a owl:ObjectProperty;
     owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Instance;
+    rdfs:domain :Instance;
+    rdfs:range :Publication;
     rdfs:label "utgivning"@sv .
 
 :distribution a owl:ObjectProperty;
     owl:equivalentProperty bf:distribution;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Instance;
+    rdfs:domain :Instance;
+    rdfs:range :Distribution;
     rdfs:label "distribution"@sv .
 
 :manufacture a owl:ObjectProperty;
     owl:equivalentProperty bf:manufacture;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :Instance;
+    rdfs:domain :Instance;
+    rdfs:range :Manufacture;
     rdfs:label "tillverkning"@sv .
 
 :Production a owl:Class;
