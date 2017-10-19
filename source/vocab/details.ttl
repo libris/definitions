@@ -48,10 +48,8 @@
     owl:equivalentProperty bf2:title;
     rdfs:range :Title;
     rdfs:label "has title"@en, "har titel"@sv;
-    rdfs:comment "Titelelement relaterade till en resurs"@av;
-    skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv;
-    #rdfs:label "instanstitel"@sv;
-    dc:references [ skos:notation "RDA 1.7" ] .
+    #rdfs:comment "Titelelement relaterade till en resurs"@sv;
+    skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv .
 
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
@@ -60,7 +58,7 @@
 
 :mainTitle a owl:DatatypeProperty;
     rdfs:label "huvudtitel"@sv;
-    rdfs:comment "Återge huvudtiteln från titelsidan eller annan föredragen källa så som den förekommer i källan (se RDA 1.7)."@sv;
+    rdfs:comment "Huvudsaklig titelkomponent"@sv;
     rdfs:subPropertyOf :value;
     owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
@@ -68,11 +66,11 @@
 :titleRemainder a owl:DatatypeProperty;
     rdfs:label "Övrig titelinformation"@sv;
     rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
-    #owl:equivalentProperty remainderOfTitle
     rdfs:domain :Title .
 
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "undertitel"@sv;
+    rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel. Möjlig som titelkomponent"@sv;
     rdfs:subPropertyOf :titleRemainder;
     owl:equivalentProperty bf2:subTitle;
     rdfs:domain :Title .
@@ -353,12 +351,10 @@
     owl:equivalentClass bf2:LcOverseasAcq .
 
 :Libris3Number a rdfs:Datatype;
-    rdfs:subClassOf :Local;
-    rdfs:comment: "Libris ID tilldelat i LIBRISIII stordatormiljö."@sv;
-    rdfs:label "LIBRIS-3-nummer"@sv .
+    rdfs:comment: "Libris-ID tilldelat i LIBRISIII stordatormiljö."@sv;
+    rdfs:label "LIBRISIII-nummer"@sv .
 
-:LibrisControlNumber a rdfs:Datatype;
-    rdfs:subClassOf :Local;
+:ontrolNumber a rdfs:Datatype;
     rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
     rdfs:label "LIBRIS-kod"@sv .
 
@@ -820,7 +816,7 @@
     owl:equivalentProperty bf2:historyOfWork .
 
 :copyrightDate a owl:DatatypeProperty;
-    rdfs:label "Copyright date"@en, "Copyrightår"@sv;
+    rdfs:label "Copyright date"@en, "Copyrightdatum"@sv;
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf bf2:date;
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear .
@@ -869,7 +865,7 @@
     rdfs:range :Extent ;
     owl:equivalentProperty bf2:extent;
     skos:definition "Antal och typ av enheter och underenheter en resurs består av."@sv;
-    rdfs:comment "Omfång är ett kärnelement om resursen är komplett eller om det totala antalet fysiska enheter är känt."@sv;
+    #rdfs:comment "Omfång är ett kärnelement om resursen är komplett eller om det totala antalet fysiska enheter är känt."@sv;
     rdfs:label "omfång"@sv .
 
 :Extent a owl:Class;
