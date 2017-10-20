@@ -151,7 +151,7 @@
 
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "redaktionell anmärkning"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Concept, :Record ;
     skos:definition "Information avsedd för redaktör, översättare elleter förvaltare av begreppsmodellen."@sv;
     owl:equivalentProperty skos:editorialNote .
 
@@ -262,9 +262,10 @@
     rdfs:subClassOf :Concept .
 
 :GenreForm a owl:Class;
-    rdfs:label "Genre/form"@sv;
+    rdfs:label "Genre/Form"@en, "Genre/form"@sv;
+    rdfs:subClassOf :Concept;
     owl:equivalentClass madsrdf:GenreForm;
-    rdfs:subClassOf :Concept .
+    owl:equivalentClass bf2:GenreForm . # added after merge of Class with same name from things.ttl
 
 :Temporal a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;

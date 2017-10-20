@@ -76,7 +76,7 @@
     rdfs:domain :Title .
 
 :partName a owl:DatatypeProperty;
-    rdfs:label "part title"@en, "del av titel"@sv;
+    rdfs:label "part title"@en, "deltitel"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partName;
     rdfs:domain :Title .
@@ -354,9 +354,10 @@
     rdfs:comment: "Libris-ID tilldelat i LIBRISIII stordatormiljö."@sv;
     rdfs:label "LIBRISIII-nummer"@sv .
 
-:ontrolNumber a rdfs:Datatype;
-    rdfs:comment: "Libris ID tilldelat i Voyager."@sv;
-    rdfs:label "LIBRIS-kod"@sv .
+:controlNumber a rdfs:Datatype;
+    rdfs:comment: "Libris-ID tilldelat i Voyager."@sv;
+    rdfs:label: "Kontrollnummer"@sv;
+    skos:altlabel "Libris-ID"@sv .
 
 :Local a owl:Class ; #TODO LocalIdentifer?
     rdfs:subClassOf :Identifier;
@@ -439,7 +440,7 @@
     rdfs:label "URN" .
 
 :VideoRecordingNumber a rdfs:Datatype;
-    rdfs:label "Video recording number"@en, "Utgivarnummer (videoinspelningar)"@sv;
+    rdfs:label "Video recording number"@en, "Utgivningsnummer (videoinspelning)"@sv;
     rdfs:subClassOf :Identifier;
     owl:equivalentClass bf2:VideoRecordingNumber .
 
@@ -793,7 +794,7 @@
     owl:equivalentProperty bf2:place, prov:atLocation .
 
 :originPlace a owl:ObjectProperty;
-    rdfs:label "Ursprungsort för verket"@sv;
+    rdfs:label "Ursprungsplats för verket"@sv;
     rdfs:domain :Work;
     rdfs:range :Place;
     rdfs:subPropertyOf :place;

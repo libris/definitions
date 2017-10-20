@@ -64,14 +64,15 @@
     skos:closeMatch sdo:Product, rdaent:Manifestation .
 
 :instanceOf a owl:ObjectProperty ;
-    rdfs:label "instance of work"@en, "instans av verk"@sv;
+    rdfs:label "Instance of"@en, "instans av"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
     rdfs:comment "Verk som den beskrivna instansen manifesterar eller instansierar. Används för att koppla ihop instanser med Verk i en BIBFRAME struktur."@sv;
     sdo:rangeIncludes :Work .
 
 :hasInstance a owl:ObjectProperty ;
-    rdfs:label "has instance"@en, "har instans"@sv;
+    rdfs:label "har instans"@sv;
+    #felaktig engelsk etikett i bf2.
     owl:equivalentProperty bf2:hasInstance;
     rdfs:subClassOf sdo:workExample;
     rdfs:domain :Work ;
@@ -115,7 +116,7 @@
     skos:definition "Kategorisering som reflekterar om en resurs är utgiven i en eller flera delar, på vilket sätt den uppdateras, och dess tänkta avslutning."@sv;
     rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
 
-#TODO align with genreform in concepts.ttl?
+#TODO move to concepts.ttl?
 :genreForm a owl:ObjectProperty;
     rdfs:label "genre/form"@en, "genre/form"@sv;
     rdfs:range :GenreForm;
@@ -134,10 +135,6 @@
     owl:equivalentClass bf2:Carrier .
 
 :IssuanceType owl:equivalentClass bf2:Issuance .
-
-:GenreForm a owl:Class; #also in concepts.ttl
-    rdfs:label "Genre/Form"@en, "Genre/Form"@sv;
-    owl:equivalentClass bf2:GenreForm .
 
 :termGroup a owl:DatatypeProperty;
   rdfs:label "Termgroup"@en, "Termgrupp"@sv .
