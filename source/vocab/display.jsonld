@@ -83,7 +83,17 @@
         "Person": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
-          "showProperties": [ "name", "familyName", "givenName", "numeration", "birthYear", "deathYear", "qualifyingNote", "notation", "personTitle" ]
+          "showProperties": [ "name", "familyName", "givenName", "numeration", "lifeSpan", "qualifyingNote", "notation", "personTitle" ]
+        },
+        "Family": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Family",
+          "showProperties": [ "name" ]
+        },
+        "Jurisdiction": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Jurisdiction",
+          "showProperties": [ "name" ]
         },
         "Meeting": {
           "@type": "fresnel:Lens",
@@ -104,6 +114,11 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
           "showProperties": [ "prefLabel", "label", "notation", "inScheme", "inCollection" ]
+        },
+        "Classification": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Classification",
+          "showProperties": [ "code", "inScheme" ]
         },
         "Contribution": {
           "@type": "fresnel:Lens",
@@ -172,16 +187,26 @@
           "classLensDomain": "Person",
           "showProperties": [ "name", "familyName", "givenName", "numeration", "birthYear", "deathYear", "qualifyingNote", "notation", "personTitle", "note" ]
         },
+        "Family": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Family",
+          "showProperties": [ "name", "note" ]
+        },
+        "Jurisdiction": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Jurisdiction",
+          "showProperties": [ "name", "note" ]
+        },
         "Meeting": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Meeting",
-          "showProperties": [ "name", "date" ]
-        },  
+          "showProperties": [ "name", "date", "note" ]
+        },
         "Organization": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Organization",
           "showProperties": [ "name", "note" ]
-        },     
+        },
         "Concept": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
