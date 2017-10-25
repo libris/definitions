@@ -569,25 +569,39 @@
 :Production a owl:Class;
     owl:equivalentClass bf2:Production;
     rdfs:subClassOf :ProvisionActivity;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Production ];
     rdfs:label "Produktion"@sv .
+
+# NOTE: alternative to the hasPart Restriction:
+#:hasProductionPart a owl:ObjectProperty;
+#    rdfs:subPropertyOf :hasPart; rdfs:domain :Production; rdfs:range :Production .
 
 :Publication a owl:Class;
     owl:equivalentClass bf2:Publication;
     rdfs:subClassOf :ProvisionActivity;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Publication ];
     rdfs:label "Utgivning"@sv .
 
 :Distribution a owl:Class;
     owl:equivalentClass bf2:Distribution;
     rdfs:subClassOf :ProvisionActivity;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Distribution ];
     rdfs:label "Distribution"@sv .
 
 :Manufacture a owl:Class;
     owl:equivalentClass bf2:Manufacture;
     rdfs:subClassOf :ProvisionActivity;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Manufacture ];
     rdfs:label "Tillverkning"@sv .
 
 :Copyright a owl:Class;
     rdfs:subClassOf :ProvisionActivity;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Copyright ];
     rdfs:label "Copyright"@sv .
 
 :firstIssue a owl:DatatypeProperty;
