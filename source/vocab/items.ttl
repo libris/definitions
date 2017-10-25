@@ -118,8 +118,9 @@
 ##
 #
 
-:callno rdfs:subPropertyOf :genre, bf1:callno, sdo:sku;
-    rdfs:range :Holding .
+:callno rdfs:subPropertyOf :identifier, bf1:callno, sdo:sku;
+    rdfs:domain :Item ;
+    rdfs:range :Identifier .
 
 :price a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:price;
