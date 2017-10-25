@@ -114,11 +114,21 @@
 
 :itemOf a owl:ObjectProperty ;
     owl:equivalentProperty bf1:holdingFor, bf2:itemOf, holding:examplarOf ;
-    rdfs:subPropertyOf sdo:exampleOfWork ;
+    owl:inverseOf :hasItem;
+    #rdfs:subPropertyOf sdo:exampleOfWork ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
+    #rdfs:range :CreativeWork ;
     rdfs:domain :Item ;
-    rdfs:range :CreativeWork ;
-    rdfs:label "item of"@en, "exemplar av"@sv .
+    rdfs:range :Instance;
+    rdfs:subPropertyOf :relatedTo;
+    rdfs:label "Holding for"@en, "bestånd på"@sv .
+
+:hasItem a owl:ObjectProperty;
+    rdfs:label "Has holding"@en, "Har bestånd"@sv;
+    rdfs:domain :Instance;
+    rdfs:range :Item;
+    rdfs:subPropertyOf :relatedTo;
+    owl:equivalentProperty bf2:hasItem .
 
 :hasComponent a owl:ObjectProperty ;
     rdfs:subPropertyOf bf2:hasPart ;
