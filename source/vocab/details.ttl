@@ -134,6 +134,10 @@
     rdfs:subClassOf :VariantTitle;
     rdfs:label "Parallelltitel"@sv .
 
+:CaptionTitle a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Caption title"@en, "Rubriktitel (Förtitel)"@sv .
+
 :CollectiveTitle a owl:Class;
     owl:equivalentClass bf2:CollectiveTitle;
     rdfs:subClassOf :VariantTitle;
@@ -143,14 +147,26 @@
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
     rdfs:label "Cover title"@en, "Omslagstitel"@sv .
 
+:DistinctiveTitle a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Distinctive title"@en, "Titelvariant"@sv .
+
+:RunningTitle a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Running title"@en, "Kolumntitel"@sv .
+
 :SpineTitle a owl:Class;
     rdfs:label "Spine title"@en, "Ryggtitel"@sv;
     # rdfs:domain :Instance or propertyChainAxiom?
     rdfs:subClassOf :VariantTitle .
 
-:TitlePage  a owl:Class;
-    rdfs:subClassOf :InstanceTitle;
+:TitlePage a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
     rdfs:label "Title Page"@en, "Titelsida"@sv .
+
+:TitlePart a owl:Class;
+    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:label "Title part"@en, "Del av huvudtitel"@sv .
 
 
 ##
@@ -797,10 +813,10 @@
     skos:closeMatch skos:editorialNote;
     owl:equivalentProperty rdael:cataloguersNote .
 
-#TODO any different from qualifier?
-:qualifyingNote a owl:DatatypeProperty;
-    rdfs:label "Särskiljande tillägg"@sv;
-    sdo:domainIncludes :Person, :Title .
+:qualifier a owl:DatatypeProperty;
+    rdfs:label "Qualifier"@en, "Särskiljande tillägg"@sv;
+    owl:equivalentProperty: bf2:qualifier;
+    sdo:domainIncludes :Creation, :Person, :Title .
 
 :typeNote a owl:DatatypeProperty;
     rdfs:label "Typanmärkning"@sv;
