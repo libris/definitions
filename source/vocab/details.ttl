@@ -560,6 +560,12 @@
     rdfs:range :Manufacture;
     rdfs:label "tillverkning"@sv .
 
+:copyright a owl:ObjectProperty;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:domain :Instance;
+    rdfs:range :Copyright;
+    rdfs:label "copyright"@sv .
+
 :Production a owl:Class;
     owl:equivalentClass bf2:Production;
     rdfs:subClassOf :ProvisionActivity;
@@ -579,6 +585,10 @@
     owl:equivalentClass bf2:Manufacture;
     rdfs:subClassOf :ProvisionActivity;
     rdfs:label "Tillverkning"@sv .
+
+:Copyright a owl:Class;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Copyright"@sv .
 
 :firstIssue a owl:DatatypeProperty;
     rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
@@ -815,7 +825,8 @@
     rdfs:label "Copyright date"@en, "Copyrightdatum"@sv;
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf bf2:date;
-    owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear .
+    owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear;
+    owl:propertyChainAxiom (:copyright :date) .
 
 :version a owl:DatatypeProperty;
     rdfs:label "Version"@en, "Version"@sv;
