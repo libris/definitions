@@ -12,6 +12,7 @@
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -60,6 +61,8 @@
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
 
+# Person properties
+
 :familyName a owl:DatatypeProperty;
     rdfs:label "family name"@en, "familjenamn"@sv;
     owl:equivalentProperty sdo:familyName, foaf:familyName .
@@ -67,6 +70,10 @@
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "egennamn"@sv;
     owl:equivalentProperty sdo:givenName, foaf:givenName .
+
+:hasBiographicalInformation a owl:DatatypeProperty;
+    rdfs:label "has biographical information", "biografisk information";
+    owl:equivalentProperty rdau:P60492 .
 
 #titlesAndOtherWordsAssociatedWithName
 :personTitle a owl:DatatypeProperty;
@@ -108,6 +115,7 @@
     rdfs:subClassOf :Person;
     owl:equivalentClass persona:Persona .
 
+# use "has alternate identity"
 :hasPersona a owl:ObjectProperty;
     rdfs:label "har persona"@sv;
     rdfs:subPropertyOf rdfs:seeAlso;
@@ -117,15 +125,22 @@
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
     rdfs:range :FieldOfActivity;
-    owl:equivalentProperty madsrdf:fieldOfActivity .
+    owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089 .
 
 :FieldOfActivity a owl:Class;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
 
+:numeration a owl:DatatypeProperty;
+    rdfs:label "Numeration"@en, "Ordningstal"@sv;
+    rdfs:domain :Person .
+
+:nationality a owl:DatatypeProperty;
+    rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv .
+
 :gender a owl:DatatypeProperty;
     rdfs:label "gender"@en, "kön"@sv;
-    rdfs:domain :Person; #domain madsrdf:RWO
-    owl:equivalentProperty sdo:gender, madsrdf:gender .
+    rdfs:domain :Person;
+    owl:equivalentProperty sdo:gender, madsrdf:gender, rdau:P60531 .
 
 :Occupation a owl:Class;
     rdfs:label "Occupation"@en, "Yrke/titel"@sv;
@@ -134,7 +149,10 @@
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "har yrke/titel"@sv;
     rdfs:domain :Person;
-    owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation .
+    rdfs:range :Concept;
+    owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .
+
+# Organization properties
 
 :Organization a owl:Class;
     rdfs:label "Organization"@en, "Organisation"@sv;
