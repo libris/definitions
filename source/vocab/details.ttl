@@ -111,6 +111,7 @@
     rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv .
 
 :abbreviatedTitle a owl:DatatypeProperty;
+    rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv;
     owl:equivalentProperty bf:abbreviatedTitle;
     rdfs:subPropertyOf :title;
     owl:propertyChainAxiom (
@@ -123,6 +124,7 @@
     rdfs:label "Nyckeltitel"@sv .
 
 :keyTitle a owl:DatatypeProperty;
+    rdfs:label "Key title"@en, "Nyckeltitel"@sv;
     owl:equivalentProperty bf:keyTitle;
     rdfs:subPropertyOf :title;
     owl:propertyChainAxiom (
@@ -941,6 +943,7 @@
 
 :TableOfContents a owl:Class;
     rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
+    rdfs:subClassOf :StructuredValue;
     owl:equivalentClass bf2:TableOfContents .
 
 :tableOfContents a owl:ObjectProperty;
