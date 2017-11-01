@@ -35,8 +35,7 @@
 ### ITEM PROPERTIES AND CLASSES ###
 
 :electronicLocator a owl:ObjectProperty;
-    rdfs:label "Electronic location"@en, "Elektronisk sökväg"@sv;
-    rdfs:comment "Elektronisk sökväg där resursen är tillgänglig.";
+    rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
     rdfs:domain :Item;
     owl:equivalentProperty bf2:electronicLocator .
 
@@ -44,19 +43,18 @@
     rdfs:label "Organizational unit"@en, "Underordnad organisation/enhet"@sv;
     rdfs:domain :Item .
 
-# bf:electronicLocator
 :url a rdf:Property;
     owl:equivalentProperty sdo:url;
     rdfs:label "URL"@sv .
 
 :heldBy a owl:ObjectProperty ;
-    rdfs:label "held by"@en, "hållen av"@sv;
+    rdfs:label "held by"@en, "innehas av"@sv;
     rdfs:domain :Item;
     rdfs:range :Agent;
     owl:equivalentProperty bf2:heldBy, holding:heldBy .
 
 :physicalLocation a owl:DatatypeProperty;
-    rdfs:label "Storing or shelving location"@en;
+    rdfs:label "Storing or shelving location"@en, "Hyllplacering"@sv;
     rdfs:domain :Item;
     owl:equivalentProperty bf2:physicalLocation .
 
