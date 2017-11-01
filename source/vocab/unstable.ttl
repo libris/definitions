@@ -11,8 +11,25 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 
+@prefix marc: <https://id.kb.se/marc/> .
 
 # MARC terms, unstable enums...
+
+marc:mediaTerm a owl:DatatypeProperty;
+    rdfs:label "Medieterm"@sv;
+    rdfs:comment "AACR2 term som motsvarar 245#h i MARC21, används ej i RDA"@sv;
+    rdfs:domain :Title .
+
+marc:nonfilingChars a owl:DatatypeProperty;
+    rdfs:label "Fileringsvärde"@sv;
+    rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
+    rdfs:domainIncludes :Title, :KeyTitle .
+
+:technicalNote a owl:DatatypeProperty;
+    rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
+
+:copyNote a owl:DatatypeProperty;
+    rdfs:label "Publik anmärkning"@sv .
 
 # TODO: work-in-progress
 
@@ -34,7 +51,6 @@
 
 #:containedIn rdfs:label "contained in"@en, "belägen i"@sv .
 #:description rdfs:label "description"@en, "beskrivning"@sv .
-#:medium a rdf:Property; rdfs:label "Medieterm"@sv .
 #:musicArrangement a rdf:Property; rdfs:label "Arrangemang (musik)"@sv .
 #:musicPerformanceMedium a rdf:Property; rdfs:label "Besättning (musik)"@sv .
 #:previousTitle a rdf:Property; rdfs:label "Tidigare titel"@sv .
@@ -80,11 +96,11 @@
 #:extraterrestrialBody a rdf:Property; rdfs:label "himlakropp"@sv .
 #:relatedTitles a rdf:Property; rdfs:label "Sammanhörande titlar"@sv .
 #:summary a rdf:Property; rdfs:label "sammanfattning"@sv .
-#:technicalNote a rdf:Property; rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
+
 #:listOfContents a rdf:Property; rdfs:label "Formaterad innehållsförteckning"@sv .
 #:performerNote a rdf:Property; rdfs:label "Medverkande"@sv .
 #:isPrimaryTopicOf a rdf:Property; rdfs:label "Är huvudämne för"@sv .
-#:copyNote a rdf:Property; rdfs:label "Publik anmärkning"@sv .
+
 #:hasAnnotation a rdf:Property; rdfs:label "Annotering"@sv .
 #:degree a rdf:Property; rdfs:label "Akademisk examen"@sv .
 #:alphabet a rdf:Property; rdfs:label "Alfabet/Skriftart"@sv .

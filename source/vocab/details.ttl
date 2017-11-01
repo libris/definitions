@@ -63,13 +63,12 @@
     owl:equivalentProperty bf2:mainTitle;
     rdfs:domain :Title .
 
-:titleRemainder a owl:DatatypeProperty;
-    rdfs:label "Övrig titelinformation"@sv;
-    rdfs:comment "Ange övrig titelinformation (undertitel, parallelltitel) som den står i objektet. Om undertitel står på annan plats än primärkällan (ofta titelsidan), lägg den inom klammer. Exempel: [recept och guide till 47 caféer]"@sv;
-    rdfs:domain :Title .
+:titleRemainder a owl:DatatypeProperty .
+    #catchup for unmapped 245b things
 
 :subtitle a owl:DatatypeProperty;
-    rdfs:label "subtitle"@en, "undertitel"@sv;
+    rdfs:label "subtitle"@en, "övrig titelinformation"@sv;
+    skos:altlabel "Undertitel"@sv;
     rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel. Möjlig som titelkomponent"@sv;
     rdfs:subPropertyOf :titleRemainder;
     owl:equivalentProperty bf2:subTitle;
@@ -233,10 +232,16 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
+:Barcode a owl:Datatype;
+    rdfs:label "Barcode"@en, "Streckkod"@sv;
+    rdfs:subClassOf :Identifier;
+    skos:definition "Optiskt Maskinläsbar representation av data."@sv;
+    owl:equivalentClass bf2:Barcode .
+
 :Ansi a owl:Datatype;
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
-    skos:definition "Identifikator för den amerikanska standardiseringsorganisationen American National Standards Institute"@sv;
+    skos:definition "Identifikator för den amerikanska standardiseringsorganisationen American National Standards Institute."@sv;
     owl:equivalentClass bf2:Ansi .
 
 :AudioIssueNumber a rdfs:Datatype;
