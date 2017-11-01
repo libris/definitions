@@ -125,12 +125,46 @@
 :FieldOfActivity a owl:Class;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
 
+:hasAffiliation a owl:ObjectProperty;
+    rdfs:label "Has affiliation"@en, "Organisatorisk tillhörighet"@sv;
+    rdfs:domain :Agent;
+    rdfs:range :Affiliation; 
+    owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095 .
+
+:Affiliation a owl:Class;
+    rdfs:label "Affiliation"@en, "Organisatorisk tillhörighet"@sv;
+    owl:equivalentClass madsrdf:Affiliation .
+
+:associatedLanguage a owl:ObjectProperty;
+    rdfs:label "Associated language"@en, "Språk"@sv;
+    rdfs:domain :Agent;
+    rdfs:range :Language;
+    owl:equivalentProperty madsrdf:associatedLanguage .
+
+:associatedLocale a owl:ObjectProperty;
+    rdfs:label "Associated place"@en, "Förknippad plats"@sv;
+    rdfs:domain :Agent;
+    rdfs:range :Place;
+    #rdfs:range madsrdf:Geographic?
+    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325 .
+
 :numeration a owl:DatatypeProperty;
     rdfs:label "Numeration"@en, "Ordningstal"@sv;
     rdfs:domain :Person .
 
-:nationality a owl:DatatypeProperty;
-    rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv .
+:nationality a owl:ObjectProperty;
+    rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
+    rdfs:domain :Agent .
+
+:lifeSpan a owl:DatatypeProperty;
+    rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
+    rdfs:domain :Agent;
+    rdfs:range :Agent .
+
+:prominentFamilyMember a owl:DatatypeProperty;
+    rdfs:label "Prominent Family Member"@en, "Välkänd medlem av släkten"@en;
+    rdfs:domain :Agent;
+    owl:equivalentProperty madsrdf:prominentFamilyMember .
 
 :gender a owl:DatatypeProperty;
     rdfs:label "gender"@en, "kön"@sv;
