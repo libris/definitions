@@ -23,7 +23,11 @@ marc:mediaTerm a owl:DatatypeProperty;
 marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:label "Fileringsvärde"@sv;
     rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
-    rdfs:domainIncludes :Title, :KeyTitle .
+    rdfs:domainIncludes :Title .
+
+marc:searchElement a owl:DatatypeProperty;
+    rdfs:label "Titeln är sökelement"@sv;
+    rdfs:comment "Indikatorvärde saknar betydelse i LIBRIS-tillämpningen."@av .
 
 :technicalNote a owl:DatatypeProperty;
     rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
