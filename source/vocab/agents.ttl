@@ -23,7 +23,8 @@
 
 :name a owl:DatatypeProperty;
     rdfs:label "name"@en, "namn"@sv;
-    rdf:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
+    rdf:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
+    # hur tala om: Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. 
     rdfs:subPropertyOf :label;
     owl:equivalentProperty foaf:name .
 
@@ -61,12 +62,14 @@
 
 :familyName a owl:DatatypeProperty;
     rdfs:label "family name"@en, "familjenamn"@sv;
-    rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)"@sv;
+    rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd"@sv;
+    # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
     owl:equivalentProperty sdo:familyName, foaf:familyName .
 
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "förnamn"@sv;
-    rdfs:comment "Förnamn, kan ej kombineras med egenskapen 'namn' som har rak ordföljd. (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)"@sv;
+    rdfs:comment "Förnamn, kan ej kombineras med egenskapen 'namn' som har rak ordföljd."@sv;
+    # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
     owl:equivalentProperty sdo:givenName, foaf:givenName .
 
 :hasBiographicalInformation a owl:DatatypeProperty;
