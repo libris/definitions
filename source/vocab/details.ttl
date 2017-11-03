@@ -48,8 +48,7 @@
     owl:equivalentProperty bf2:title;
     rdfs:range :Title;
     rdfs:label "has title"@en, "har titel"@sv;
-    #rdfs:comment "Titelelement relaterade till en resurs"@sv;
-    skos:hiddenLabel "Huvudtitel"@sv, "Källans titel"@sv .
+    rdfs:comment "Innehåller titelelement"@sv .
 
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
@@ -161,9 +160,9 @@
     # rdfs:domain :Instance or propertyChainAxiom?
     rdfs:subClassOf :VariantTitle .
 
-:TitlePage a owl:Class;
+:AddedTitlePageTitle a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
-    rdfs:label "Title Page"@en, "Titelsida"@sv .
+    rdfs:label "Added title page title"@en, "Förtitel"@sv .
 
 :TitlePart a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
@@ -219,12 +218,11 @@
     owl:inverseOf :identifies;
     skos:definition "Identifikatorn är en teckensträng knuten till en resurs och användas för att unikt särskilja resursen från andra."@sv;
     rdfs:comment "Hämta uppgift om identifikator från valfri källa."@sv;
-    #skos:definition "	Character string associated with a resource that serves to differentiate that resource from other resources, i.e., that uniquely identifies an entity."@en;
     rdfs:range :Identifier .
 
 :identifies a owl:ObjectProperty;
     rdfs:label "Identifierad resurs"@sv; #english bflabel misspelled
-    rdfs:domain :Identifier;
+    #rdfs:domain :Identifier;
     owl:inverseOf :identifiedBy;
     owl:equivalentProperty bf2:identifies .
 
@@ -643,7 +641,7 @@
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
     skos:definition "Uppgift som härrör agenter som är ansvariga för, eller som bidragit till, förverkligandet av resursens intellektuella eller konstnärliga innehåll."@sv;
-    #rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln är ett kärnelement. Om det finns mer än en, är endast den första kärnelement. Hämta upphovsuppgift som hänför sig till huvudtiteln från följande källor (i denna ordning): samma källa som huvudtiteln, en annan källa inom resursen, en annan av de källor som specificeras i RDA 2.2.4. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
+    rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
@@ -653,7 +651,7 @@
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:range rdfs:Literal;
-    skos:definition "En uppgift som identifierar den upplaga eller version (opublicerade resurser) till vilken en resurs hör samt upplagespecifika upphovsuppgifter."@sv;
+    rdfs:comment "En uppgift som identifierar den upplaga eller version (opublicerade resurser) till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
     rdfs:equivalentProperty bf2:editionStatement .
 
 :editionStatementRemainder a owl:DatatypeProperty;
@@ -678,7 +676,7 @@
     rdfs:range rdfs:Literal;
     rdfs:domain :Instance;
     rdfs:label "series statement"@en, "serieuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
+    rdfs:comment "Ange uppgiften som den står i objektet."@sv .
 
 :seriesEnumeration a owl:DatatypeProperty;
     rdfs:label "Series enumeration"@en, "Numrering inom serie"@sv;
@@ -691,7 +689,7 @@
     rdfs:range rdfs:Literal;
     rdfs:domain :Instance;
     rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
+    rdfs:comment "Ange uppgiften som den står i objektet."@sv .
 
 :subseriesEnumeration a owl:DatatypeProperty ;
     rdfs:subPropertyOf bf:subseriesEnumeration;
@@ -700,16 +698,6 @@
     rdfs:label "Subseries enumeration"@en, "Numrering inom underserie"@sv .
 
 # Additional kbv statements
-
-:manufactureStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf2:provisionActivityStatement;
-    rdfs:label "manufacture statement"@en, "tillverkningsuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
-
-:publicationStatement a owl:DatatypeProperty ;
-    rdfs:subPropertyOf bf:provisionActivityStatement;
-    rdfs:label "publication statement"@en, "utgivningsuppgift"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 :noteOnPublicationStatement a owl:DatatypeProperty;
     rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
@@ -915,7 +903,7 @@
     rdfs:domain :Instance ;
     rdfs:range :Extent ;
     owl:equivalentProperty bf2:extent;
-    skos:definition "Antal och typ av enheter och underenheter en resurs består av."@sv;
+    rdfs:comment "Antal och typ av enheter och underenheter en resurs består av."@sv;
     #rdfs:comment "Omfång är ett kärnelement om resursen är komplett eller om det totala antalet fysiska enheter är känt."@sv;
     rdfs:label "omfång"@sv .
 
@@ -950,8 +938,8 @@
 :hasDimensions a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Dimensions;
-    skos:definition "Mått på resursens bärare eller behållare."@sv;
-    rdfs:label "har mått"@sv, "dimensions"@en .
+    rdfs:comment "Mått på resursens bärare eller behållare."@sv;
+    rdfs:label "Mått"@sv, "dimensions"@en .
 
 :TableOfContents a owl:Class;
     rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
