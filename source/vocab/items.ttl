@@ -12,6 +12,14 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 
+# ITEMS
+# ITEM PROPERTIES AND CLASSES
+# ENUMERATION AND CHRONOLOGY
+# SHELFMARKS
+# OLD BF1 MAPPINGS
+# LOCAL LIBRIS HOLDING TERMS
+
+
 ### ITEMS ###
 
 :Item a owl:Class ;
@@ -54,10 +62,27 @@
     owl:equivalentProperty bf2:heldBy, holding:heldBy .
 
 :physicalLocation a owl:DatatypeProperty;
-    rdfs:label "Storing or shelving location"@en, "Hyllplacering"@sv;
+    rdfs:label "Storing or shelving location"@en, "Hyllplacering (Avdelning, samling)"@sv;
     rdfs:domain :Item;
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
     owl:equivalentProperty bf2:physicalLocation .
 
+### ENUMERATION AND CHRONOLOGY ###
+
+:EnumerationAndChronology a owl:Class;
+    rdfs:label "Enumeration and chronology"@en;
+    owl:equivalentProperty bf2:EnumerationAndChronology .
+
+:Enumeration a owl:Class;
+    rdfs:label "Enumeration"@en;
+    rdfs:subClassOf :EnumerationAndChronology;
+    owl:equivalentClass bf2:EnumerationAndChronology .
+
+:Chronology a owl:Class;
+    rdfs:label "Chronology"@en;
+    rdfs:subClassOf :EnumerationAndChronology;
+    owl:equivalentClass bf2:EnumerationAndChronology .
 
 ### SHELFMARKS ###
 
@@ -127,6 +152,7 @@
 
 :hasItem a owl:ObjectProperty;
     rdfs:label "Has holding"@en, "Har bestånd"@sv;
+    owl:inverseOf :itemOf;
     rdfs:domain :Instance;
     rdfs:range :Item;
     rdfs:subPropertyOf :relatedTo;
@@ -182,7 +208,7 @@
     rdfs:label "seller"@en, "försäljare"@sv .
 
 
-## From unstable, go through.
+### LOCAL LIBRIS HOLDING TERMS ###
     
 :availability a rdf:Property;
     owl:equivalentProperty sdo:availability;
@@ -195,20 +221,6 @@
     rdfs:label "Hyllsignum: Klassifikation"@sv;
     rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
     skos:example "Hc", "Hc Lagerlöf" .
-
-:EnumerationAndChronology a owl:Class;
-    rdfs:label "Enumeration and chronology"@en;
-    owl:equivalentProperty bf2:EnumerationAndChronology .
-
-:Enumeration a owl:Class;
-    rdfs:label "Enumeration"@en, "Enumeration"@sv;
-    rdfs:subClassOf :EnumerationAndChronology;
-    owl:equivalentClass bf2:EnumerationAndChronology .
-
-:Chronology a owl:Class;
-    rdfs:label "Chronology"@en, "Kronologi"@sv;
-    rdfs:subClassOf :EnumerationAndChronology;
-    owl:equivalentClass bf2:EnumerationAndChronology .
 
 :copyNumber a rdf:Property;
     #	bf:enumerationAndChronology  
