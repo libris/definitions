@@ -53,7 +53,7 @@
         "Title": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "showProperties": [ "mainTitle", "titleRemainder", "subtitle", "partNumber", "partTitle" ]
+          "showProperties": [ "mainTitle", "subtitle", "partNumber", "partTitle", "hasPart" ]
         },
         "Identifier": {
           "@type": "fresnel:Lens",
@@ -99,12 +99,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Meeting",
           "showProperties": [ "name", "date" ]
-        },  
+        },
         "Organization": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Organization",
           "showProperties": [ "name" ]
-        },        
+        },
         "Library": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
@@ -145,7 +145,7 @@
           "@type": "fresnel:Lens",
           "@id": "instance-card",
           "classLensDomain": "Instance",
-          "showProperties": [ "issuanceType", "hasTitle", "responsibilityStatement", "identifiedBy", "editionStatement", "editionStatementRemainder", "publication", "publicationCountry", "marc:publishedYear",  "manufacture", "production", "distribution", "copyright", "mediaType", "carrierType", "extent", "dimensions", "marc:otherPhysicalDetails", {"inverseOf": "itemOf"} ]
+          "showProperties": [ "issuanceType", "hasTitle", "responsibilityStatement", "identifiedBy", "editionStatement", "editionStatementRemainder", "publication", "publicationCountry", "marc:publishedYear",  "production", "manufacture", "distribution", "copyrightDate", "mediaType", "carrierType", "extent", "hasDimensions", "marc:otherPhysicalDetails", {"inverseOf": "itemOf"} ]
         },
         "Work": {
           "@type": "fresnel:Lens",
@@ -185,7 +185,7 @@
         "Person": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
-          "showProperties": [ "name", "familyName", "givenName", "numeration", "birthYear", "deathYear", "qualifyingNote", "notation", "personTitle", "note" ]
+          "showProperties": [ "name", "familyName", "givenName", "numeration", "lifeSpan", "qualifyingNote", "notation", "personTitle", "note" ]
         },
         "Family": {
           "@type": "fresnel:Lens",
