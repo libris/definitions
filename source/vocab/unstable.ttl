@@ -15,6 +15,8 @@
 
 # MARC terms, unstable enums...
 
+
+#TITLE
 marc:mediaTerm a owl:DatatypeProperty;
     rdfs:label "Medieterm"@sv;
     rdfs:comment "Medieterm som är del av titel i en MARC21 struktur. används ej i RDA"@sv;
@@ -32,6 +34,7 @@ marc:searchElement a owl:DatatypeProperty;
 marc:searchControl a owl:ObjectProperty;
     rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv .
 
+#IDENTIFIERS
 marc:hiddenValue a owl:DatatypeProperty;
     rdfs:label "Ogiltigt värde"@sv;
     rdfs:domain :Identifier .
@@ -39,11 +42,18 @@ marc:hiddenValue a owl:DatatypeProperty;
 :Uri a owl:DatatypeProperty;
     rdfs:label "URI"@sv .
 
+#NOTE
 :technicalNote a owl:DatatypeProperty;
     rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
 
 :copyNote a owl:DatatypeProperty;
     rdfs:label "Publik anmärkning"@sv .
+
+#AGENT
+
+marc:titleOther a owl:DatatypeProperty;
+    rdfs:label "Titel eller övrig beteckning"@sv;
+    rdfs:domain :Agent .
 
 # TODO: work-in-progress
 
