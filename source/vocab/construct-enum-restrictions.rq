@@ -1,0 +1,162 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+
+construct {
+
+    ?class rdfs:subClassOf ?restriction .
+
+    ?restriction a owl:Restriction ;
+        owl:onProperty ?property ;
+        owl:someValuesFrom ?enumclass .
+
+    ?enumclass rdfs:subClassOf ?enumbaseclass .
+
+} where {
+
+    values (?property ?enumbaseclass ?class ?enumclass) {
+
+(:additionalType	UNDEF	:Cartography	marc:MapsFormatType) # TODO: just make the MapsFormatType instances subclasses of Cartography?
+
+(:baseMaterial	:BaseMaterial	:Globe	marc:GlobeMediumType)
+(:baseMaterial	:BaseMaterial	:Map	marc:MapMediumType)
+(:baseMaterial	:BaseMaterial	:Microform	marc:FilmBaseType)
+(:baseMaterial	:BaseMaterial	:MovingImage	marc:FilmBaseType)
+(:baseMaterial	:BaseMaterial	:ProjectedImage	marc:ProjGraphEmulsionType)
+(:baseMaterial	:BaseMaterial	:StillImage	marc:NonProjectedType)
+
+(:carrierType	:CarrierType	:Audio	marc:ItemType)
+(:carrierType	:CarrierType	:Cartography	marc:ItemType)
+(:carrierType	:CarrierType	:Multimedia	marc:ComputerItemType)
+(:carrierType	:CarrierType	:Electronic	marc:ComputerMaterialType)
+(:carrierType	:CarrierType	:Kit	marc:KitMaterialType)
+(:carrierType	:CarrierType	:Microform	marc:MicroformMaterialType)
+(:carrierType	:CarrierType	:Mixed	marc:ItemType)
+(:carrierType	:CarrierType	:MovingImage	marc:MotionPicMaterialType)
+(:carrierType	:CarrierType	:NotatedMusic	marc:KitMaterialType)
+(:carrierType	:CarrierType	:ProjectedImage	marc:ProjGraphMaterialType)
+(:carrierType	:CarrierType	:RemoteSensingImage	marc:KitMaterialType)
+(:carrierType	:CarrierType	:Serial	marc:ItemType)
+(:carrierType	:CarrierType	:SoundRecording	marc:SoundMaterialType)
+(:carrierType	:CarrierType	:Text	marc:BooksItemType)
+(:carrierType	:CarrierType	:Text	marc:TextMaterialType)
+(:carrierType	:CarrierType	:VideoRecording	marc:VideoMaterialType)
+(:carrierType	:CarrierType	:Visual	marc:ItemType)
+#(marc:additionalCarrierType	:CarrierType	:Text	marc:BooksItemType)
+#(marc:additionalCarrierType	:CarrierType	UNDEF	marc:ItemType)
+
+(:cartographicAttributes	:Cartographic	:Cartography	marc:MapsReliefType)
+
+(:colorContent	:ColorContent	:Electronic	marc:ComputerColorType)
+(:colorContent	:ColorContent	:Globe	marc:MapColorType)
+(:colorContent	:ColorContent	:Map	marc:MapColorType)
+(:colorContent	:ColorContent	:Microform	marc:MicroformColorType)
+(:colorContent	:ColorContent	:MovingImage	marc:MotionPicColorType)
+(:colorContent	:ColorContent	:ProjectedImage	marc:ColorType)
+(:colorContent	:ColorContent	:StillImage	marc:ColorType)
+(:colorContent	:ColorContent	:VideoRecording	marc:VideoColorType)
+
+(:contentType	:ContentType	:Multimedia	marc:ComputerTypeOfFileType)
+(:contentType	:ContentType	:Serial	marc:SerialsTypeOfSerialType)
+(:contentType	:ContentType	:Text	marc:BooksContentsType)
+(:contentType	:ContentType	:Visual	marc:VisualMaterialType)
+
+(:descriptionConventions	:DescriptionConventions	:Record	marc:CatFormType)
+(:descriptionConventions	:DescriptionConventions	:Record	marc:CatalogingRulesType)
+
+(:dimensions	:Dimensions	:Electronic	marc:ComputerDimensionsType)
+(:dimensions	:Dimensions	:Microform	marc:MicroformDimensionsType)
+(:dimensions	:Dimensions	:MovingImage	marc:MotionPicDimensionsType)
+(:dimensions	:Dimensions	:ProjectedImage	marc:ProjGraphDimensionsType)
+(:dimensions	:Dimensions	:SoundRecording	marc:SoundDimensionsType)
+(:dimensions	:Dimensions	:SoundRecording	marc:SoundTapeWidthType)
+(:dimensions	:Dimensions	:VideoRecording	marc:VideoDimensionsType)
+
+(:emulsion	:Emulsion	:Microform	marc:MicroformEmulsionType)
+
+(:frequency	:Frequency	:Serial	marc:SerialsFrequencyType)
+(:frequency	:Frequency	:Serial	marc:SerialsRegularityType)
+
+(:generation	:Generation	:Microform	marc:MicroformGenerationType)
+(:generation	:Generation	:MovingImage	marc:MotionPicGenerationType)
+(:generation	:Generation	:SoundRecording	marc:SoundKindOfDiscType)
+
+(:genreForm	:GenreForm	:Audio	marc:MusicCompositionType)
+(:genreForm	:GenreForm	:Audio	marc:MusicTextType)
+(:genreForm	:GenreForm	:Cartography	marc:GovernmentPublicationType)
+(:genreForm	:GenreForm	:Multimedia	marc:ComputerTypeOfFileType)
+(:genreForm	:GenreForm	:Multimedia	marc:GovernmentPublicationType)
+(:genreForm	:GenreForm	:Globe	marc:GlobeMaterialType)
+(:genreForm	:GenreForm	:Map	marc:MapMaterialType)
+(:genreForm	:GenreForm	:MovingImage	marc:MotionPicElementsType)
+(:genreForm	:GenreForm	:Serial	marc:GovernmentPublicationType)
+(:genreForm	:GenreForm	:Serial	marc:SerialsContentsType)
+(:genreForm	:GenreForm	:Serial	marc:SerialsNatureType)
+(:genreForm	:GenreForm	:Serial	marc:SerialsTypeOfSerialType)
+(:genreForm	:GenreForm	:StillImage	marc:NonProjMaterialType)
+(:genreForm	:GenreForm	:Text	marc:BooksBiographyType)
+(:genreForm	:GenreForm	:Text	marc:BooksFestschriftType)
+(:genreForm	:GenreForm	:Text	marc:BooksLiteraryFormType)
+(:genreForm	:GenreForm	:Text	marc:ConferencePublicationType)
+(:genreForm	:GenreForm	:Text	marc:GovernmentPublicationType)
+(:genreForm	:GenreForm	:Visual	marc:GovernmentPublicationType)
+(:genreForm	:GenreForm	:Visual	marc:VisualMaterialType)
+
+(:illustrativeContent	:IllustrativeContent	:Text	marc:BooksIllustrationsType)
+
+(:intendedAudience	:IntendedAudience	:Audio	marc:AudienceType)
+(:intendedAudience	:IntendedAudience	:Multimedia	marc:AudienceType)
+(:intendedAudience	:IntendedAudience	:Text	marc:AudienceType)
+(:intendedAudience	:IntendedAudience	:Visual	marc:AudienceType)
+
+(:layout	:Layout	:Tactile	marc:TacBrailleWritingType)
+(:layout	:Layout	:Tactile	marc:TacContractionType)
+(:layout	:Layout	:Tactile	marc:TacMaterialType)
+
+(:mount	:Mount	:ProjectedImage	marc:ProjGraphSupportType)
+(:mount	:Mount	:StillImage	marc:NonProjectedType)
+
+(:musicFormat	:MusicFormat	:Audio	marc:MusicFormatType)
+
+(:notation	:MusicNotation	:Tactile	marc:TacBrailleMusicType)
+(:notation	:TactileNotation	:Tactile	marc:TacSpecPhysicalCharType)
+
+(:polarity	:Polarity	:Microform	marc:PolarityType)
+(:polarity	:Polarity	:MovingImage	marc:MotionPicPosNegType)
+
+(:projection	:Projection	:Cartography	marc:MapsProjectionType)
+
+(:projectionCharacteristic	:ProjectionCharacteristic	:Cartography	marc:MapsProjectionType)
+(:projectionCharacteristic	:ProjectionCharacteristic	:MovingImage	marc:MotionPicFormatType)
+
+(:reductionRatio	:ReductionRatio	:Microform	marc:MicroformRangeType)
+
+(:soundCharacteristic	:RecordingMedium	:MovingImage	marc:MediumType)
+(:soundCharacteristic	:PlaybackChannels	:MovingImage	marc:MotionPicConfigurationOrVideoPlaybackType)
+(:soundCharacteristic	:RecordingMedium	:ProjectedImage	marc:MediumType)
+(:soundCharacteristic	:GrooveCharacteristic	:SoundRecording	marc:SoundGrooveType)
+(:soundCharacteristic	:GrooveCharacteristic	:SoundRecording	marc:SoundKindOfCuttingType)
+(:soundCharacteristic	:PlaybackChannels	:SoundRecording	marc:SoundPlaybackChannelType)
+(:soundCharacteristic	:PlaybackCharacteristic	:SoundRecording	marc:SoundPlaybackCharacterType)
+(:soundCharacteristic	:PlayingSpeed	:SoundRecording	marc:SoundSpeedType)
+(:soundCharacteristic	:TapeConfig	:SoundRecording	marc:SoundTapeConfigurationType)
+(:soundCharacteristic	:RecordingMedium	:VideoRecording	marc:MediumType)
+(:soundCharacteristic	:PlaybackChannels	:VideoRecording	marc:MotionPicConfigurationOrVideoPlaybackType)
+
+(:soundContent	:SoundContent	:Electronic	marc:ComputerSoundType)
+(:soundContent	:SoundContent	:MovingImage	marc:SoundType)
+(:soundContent	:SoundContent	:ProjectedImage	marc:SoundType)
+(:soundContent	:SoundContent	:VideoRecording	marc:SoundType)
+
+(:supplementaryContent	:SupplementaryContent	:Audio	marc:MusicMatterType)
+(:supplementaryContent	:SupplementaryContent	:Cartography	marc:IndexType)
+(:supplementaryContent	:SupplementaryContent	:Text	marc:IndexType)
+
+(:videoCharacteristic	:VideoFormat	:VideoRecording	marc:VideoFormatType)
+
+    }
+
+    bind(bnode(concat(str(?class), str(?property))) as ?restriction)
+
+}

@@ -1,40 +1,162 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
-@prefix bf: <http://bibframe.org/vocab/> .
+@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
 @prefix holding: <http://purl.org/ontology/holding#> .
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+# ITEMS
+# ITEM PROPERTIES AND CLASSES
+# ENUMERATION AND CHRONOLOGY
+# SHELFMARKS
+# OLD BF1 MAPPINGS
+# LOCAL LIBRIS HOLDING TERMS
+
+
+### ITEMS ###
 
 :Item a owl:Class ;
+    :category marc:hold ;
+    rdfs:subClassOf :Endeavour ;
     owl:equivalentClass bf2:Item, sdo:Product, holding:Item ;
+    skos:closeMatch rdaent:Item ;
     #owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
-    rdfs:label "item"@en, "exemplar"@sv .
+    rdfs:label "item"@en, "Bestånd"@sv .
 
 :SomeItems a owl:Class ;
     rdfs:subClassOf :Item ;
-    owl:equivalentClass bf:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
+    owl:equivalentClass bf1:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
     rdfs:label "some items"@en, "några exemplar"@sv .
 
 :IndividualItem a owl:Class ;
     rdfs:subClassOf :Item ;
-    owl:equivalentClass bf:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
+    owl:equivalentClass bf1:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
     rdfs:label "individual item"@en, "enskilt exemplar"@sv .
 
+### ITEM PROPERTIES AND CLASSES ###
+
+:electronicLocator a owl:ObjectProperty;
+    rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
+    rdfs:domain :Item;
+    owl:equivalentProperty bf2:electronicLocator .
+
+:organizationalUnit a owl:DatatypeProperty;
+    rdfs:label "Organizational unit"@en, "Underordnad organisation/enhet"@sv;
+    rdfs:domain :Item .
+
+:url a rdf:Property;
+    owl:equivalentProperty sdo:url;
+    rdfs:label "URL"@sv .
+
 :heldBy a owl:ObjectProperty ;
-    owl:equivalentProperty bf:heldBy, holding:heldBy ;
-    #rdfs:subPropertyOf sdo:offeredBy, sdo:seller ;
-    rdfs:domain :Item ;
-    rdfs:range :Agent ;
-    rdfs:label "held by"@en, "hållen av"@sv .
+    rdfs:label "held by"@en, "innehas av"@sv;
+    rdfs:domain :Item;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:heldBy, holding:heldBy .
+
+:physicalLocation a owl:DatatypeProperty;
+    rdfs:label "Storing or shelving location"@en, "Hyllplacering (Avdelning, samling)"@sv;
+    rdfs:domain :Item;
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
+    owl:equivalentProperty bf2:physicalLocation .
+
+### ENUMERATION AND CHRONOLOGY ###
+
+:EnumerationAndChronology a owl:Class;
+    rdfs:label "Enumeration and chronology"@en;
+    owl:equivalentProperty bf2:EnumerationAndChronology .
+
+:Enumeration a owl:Class;
+    rdfs:label "Enumeration"@en;
+    rdfs:subClassOf :EnumerationAndChronology;
+    owl:equivalentClass bf2:EnumerationAndChronology .
+
+:Chronology a owl:Class;
+    rdfs:label "Chronology"@en;
+    rdfs:subClassOf :EnumerationAndChronology;
+    owl:equivalentClass bf2:EnumerationAndChronology .
+
+### SHELFMARKS ###
+
+:ShelfMark a owl:Class;
+    rdfs:label "Shelf location"@en, "Hyllkod"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:ShelfMark .
+
+:shelfMark a owl:ObjectProperty;
+    rdfs:label "Shelf mark"@en, "Hyllkod"@sv; 
+    rdfs:domain :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentProperty bf2:shelfMark .
+
+:ShelfMarkDdc a owl:Class;
+    rdfs:label "DDC call number"@en, "Hyllkod DDK"@sv;
+    rdfs:subClassOf :ShelfMark;
+    rdfs:domain: :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkDdc .
+
+:ShelfMarkLcc a owl:Class;
+    rdfs:label "LCC call number"@en, "Hyllkod LCC"@sv;
+    rdfs:subClassOf :ShelfMark;
+    rdfs:domain: :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkLcc .
+
+:ShelfMarkUdc a owl:Class;
+    rdfs:label "UDC call number"@en, "Hyllkod UDK"@sv;
+    rdfs:subClassOf :ShelfMark;
+    rdfs:domain: :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkUdc .
+
+:ShelfMarkNlm a owl:Class;
+    rdfs:label "NLM call number"@en, "Hyllkod NLM"@sv;
+    rdfs:subClassOf :ShelfMark;
+    rdfs:domain: :Item;
+    rdfs:range :ShelfMark;
+    owl:equivalentClass bf2:ShelfMarkNlm .
+
+:Sublocation a owl:Class;
+    rdfs:label "Sublocation"@en, "Sigelkod"@sv;
+    owl:equivalentClass bf2:Sublocation .
+
+:immediateAcquisition a owl:ObjectProperty;
+    rdfs:label "Immediate acquisition"@en, "Förvärvsuppgifter"@sv;
+    rdfs:domain :Item;
+    rdfs:range :ImmediateAcquisition;
+    owl:equivalentClass bf2:immediateAcquisition .
+
+:ImmediateAcquisition a owl:Class;
+    rdfs:label "Immediate acquisition"@en, "Förvärvsuppgifter"@sv;
+    owl:equivalentClass bf2:ImmediateAcquisition .
 
 :itemOf a owl:ObjectProperty ;
-    owl:equivalentProperty bf:holdingFor, bf2:itemOf, holding:examplarOf ;
-    rdfs:subPropertyOf sdo:exampleOfWork ;
+    owl:equivalentProperty bf1:holdingFor, bf2:itemOf, holding:examplarOf ;
+    owl:inverseOf :hasItem;
+    #rdfs:subPropertyOf sdo:exampleOfWork ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
+    #rdfs:range :CreativeWork ;
     rdfs:domain :Item ;
-    rdfs:range :CreativeWork ;
-    rdfs:label "item of"@en, "exemplar av"@sv .
+    rdfs:range :Instance;
+    rdfs:subPropertyOf :relatedTo;
+    rdfs:label "Holding for"@en, "bestånd på"@sv .
+
+:hasItem a owl:ObjectProperty;
+    rdfs:label "Has holding"@en, "Har bestånd"@sv;
+    owl:inverseOf :itemOf;
+    rdfs:domain :Instance;
+    rdfs:range :Item;
+    rdfs:subPropertyOf :relatedTo;
+    owl:equivalentProperty bf2:hasItem .
 
 :hasComponent a owl:ObjectProperty ;
     rdfs:subPropertyOf bf2:hasPart ;
@@ -45,7 +167,7 @@
 
 :componentOf a owl:ObjectProperty ;
     owl:inverseOf :hasComponent ;
-    owl:equivalentProperty bf:componentOf ;
+    owl:equivalentProperty bf1:componentOf ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
     rdfs:subPropertyOf sdo:exampleOfWork ;
     rdfs:label "component of"@en, "komponent av"@sv  .
@@ -55,27 +177,28 @@
 
 :HeldMaterial a owl:Class;
     rdfs:label "Beståndsmaterial"@sv;
-    rdfs:subClassOf bf:HeldMaterial, sdo:SomeProducts .
-
-:Offer a owl:Class;
-    rdfs:label "Offer"@en, "Erbjudande"@sv;
-    rdfs:subClassOf sdo:Offer .
+    rdfs:subClassOf bf1:HeldMaterial, sdo:SomeProducts .
 
 :holdingFor a owl:ObjectProperty;
-    rdfs:label "bestånd på"@sv;
+    rdfs:label "bestånd"@sv;
     rdfs:domain :HeldMaterial;
     rdfs:range :CreativeWork;
     #rdfs:subPropertyOf sdo:exampleOfWork;
-    owl:equivalentProperty bf:holdingFor .
+    owl:equivalentProperty bf1:holdingFor .
 
 #:heldBy a owl:ObjectProperty;
 #    rdfs:label "beståndsinnehavare"@sv;
 #    rdfs:domain :Offer;
 #    rdfs:range :Organization;
-#    rdfs:subPropertyOf sdo:seller, bf:heldBy .
+#    rdfs:subPropertyOf sdo:seller, bf1:heldBy .
 
-:callno rdfs:subPropertyOf :genre, bf:callno, sdo:sku;
-    rdfs:range :Holding .
+
+##
+#
+
+:callno rdfs:subPropertyOf :identifier, bf1:callno, sdo:sku;
+    rdfs:domain :Item ;
+    rdfs:range :Identifier .
 
 :price a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:price;
@@ -83,3 +206,43 @@
 
 :seller a owl:ObjectProperty ;
     rdfs:label "seller"@en, "försäljare"@sv .
+
+
+### LOCAL LIBRIS HOLDING TERMS ###
+    
+:availability a rdf:Property;
+    owl:equivalentProperty sdo:availability;
+    rdfs:label "Exemplarstatus"@sv;
+    rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
+    skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
+
+:classificationPart a rdf:Property;
+    # TODO: rename to shelfMark? rdfs:subPropertyOf bf:shelfMark ?
+    rdfs:label "Hyllsignum: Klassifikation"@sv;
+    rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
+    skos:example "Hc", "Hc Lagerlöf" .
+
+:copyNumber a rdf:Property;
+    #	bf:enumerationAndChronology  
+    rdfs:label "Exemplarnummer"@sv;
+    rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
+    skos:example "A-C", "5" .
+
+:shelfControlNumber a rdf:Property;
+    #bf:shelfMark (see above)
+    rdfs:label "Hyllsignum: Löpnummer"@sv;
+    rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord."@sv;
+    skos:note "Kan även kombineras med ytterligare placeringsuppgifter."@sv;
+    skos:example "96-3899" .
+
+:shelfLabel a rdf:Property;
+    #bf:shelfMark (see above)
+    rdfs:label "Hyllsignum: Uppställningsord"@sv;
+    rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
+    skos:example "Deckare", "Lagerlöf" .
+
+:shelfLocation a rdf:Property; rdfs:label "Avdelning, samling"@sv;
+    #bf:physicalLocation?
+    rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
+    skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi" .
+    

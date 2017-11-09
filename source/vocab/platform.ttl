@@ -8,6 +8,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
@@ -16,8 +17,20 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix sindsearch: <http://sindice.com/vocab/search#> .
+@prefix opensearch: <http://a9.com/-/spec/opensearch/1.1/> .
 
 @prefix : <https://id.kb.se/vocab/> .
+
+
+#:platform a :Category ; rdfs:comment " ... "@en .
+############################################################################
+# Platform - Terms Related To Platform and Infrastructure (Not The Domain) #
+############################################################################
+
+# TODO: For comprehension, add equivalencies to AS 2.0:
+# <https://www.w3.org/TR/activitystreams-core/#collections>
+# (which, unlike Hydra, is a REC as of 2017-05-23).
 
 
 ##
@@ -45,38 +58,119 @@
 
 # NOTE: additional data about automapped BF2 terms
 
+:AdminMetadata a owl:Class;
+    rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
+    owl:equivalentClass bf2:AdminMetadata .
+
+:adminMetadata a owl:ObjectProperty;
+    rdfs:range :AdminMetadata;
+    rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
+    owl:equivalentProperty bf2:adminMetadata .
+
 :assigner a owl:ObjectProperty;
-    rdfs:label "Assigner"@en, "Tilldelare"@sv;
-    owl:equivalentProperty bf2:assigner ;
-    rdfs:range :Agent . 
-    
+    rdfs:label "Assigner"@en, "Tilldelad av"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :Agent;
+    owl:equivalentProperty bf2:assigner .
+
 :descriptionModifier a owl:ObjectProperty;
-    rdfs:label "Description modifier"@en, "Beskrivningens modifierare"@sv ;
+    rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
+    rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
     rdfs:range :Agent .
 
 :created a owl:DatatypeProperty;
-    rdfs:label "beskrivningens skapelsedatum"@sv;
+    rdfs:label "Skapad"@sv;
     owl:equivalentProperty bf2:creationDate ;
     rdfs:subPropertyOf dc:created, sdo:dateCreated;
     rdfs:range xsd:dateTime .
 
 :modified a owl:DatatypeProperty;
-    rdfs:label "beskrivningens ändringsdatum"@sv;
+    rdfs:label "Ändrad"@sv;
     owl:equivalentProperty bf2:changeDate ;
     rdfs:subPropertyOf dc:modified, sdo:dateModified ;
     rdfs:range xsd:dateTime .
 
 :descriptionLanguage a owl:ObjectProperty;
-    rdfs:label "beskrivningens språk"@sv;
-    owl:equivalentProperty bf2:descriptionLanguage;
+    rdfs:label "Katalogiseringsspråk"@sv;
+    rdfs:comment "Språk använt för att beskriva resursen."@sv;
+    rdfs:domain :AdminMetadata;
     rdfs:subPropertyOf :language;
-    rdfs:range :Language .
+    rdfs:range :Language;
+    owl:equivalentProperty bf2:descriptionLanguage .
 
-:identifiedBy a owl:ObjectProperty;
-    rdfs:label "identifierad av"@sv;
-    rdfs:subPropertyOf :describedBy;
-    owl:equivalentProperty sdo:sameAs .
+:DescriptionConventions a owl:Class;
+    rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
+    rdfs:subClassOf :AdminMetadata;
+    owl:equivalentClass bf2:DescriptionConventions .
+
+:descriptionConventions a owl:ObjectProperty;
+    rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :DescriptionConventions;
+    owl:ObjectProperty bf2:descriptionConventions .
+
+:derivedFrom a owl:DatatypeProperty;
+    rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
+    rdfs:comment "Länk till metadata som var källan för resursen"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range rdfs:Literal;
+    owl:equivalentProperty bf2:derivedFrom .
+
+:GenerationProcess a owl:Class;
+    rdfs:label "Generation process"@en, "Beskrivningsprocess"@sv;
+    rdfs:comment "Indikation på program eller process använt för att generera beskrivningen eller specifik konvertering."@sv;
+    rdfs:subClassOf :AdminMetadata;
+    owl:equivalentClass bf2:GenerationProcess .
+
+:generationProcess a owl:ObjectProperty;
+    rdfs:label "Generation process"@en, "Beskrivningsprocess"@sv;
+    rdfs:comment "Indikation på program eller process använt för att generera beskrivningen eller specifik konvertering."@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :GenerationProcess;
+    owl:equivalentProperty bf2:generationProcess .
+
+:generationDate a owl:DatatypeProperty;
+    rdfs:label "Date generated"@en, "Konverteringsdatum"@sv;
+    rdfs:comment "Datum för konvertering"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range rdfs:Literal;
+    rdfs:subPropertyOf :date;
+    owl:equivalentProperty bf2:generationDate .
+
+:DescriptionAuthentication a owl:Class;
+    rdfs:label "Description authentication"@en, "Beskrivningskontroll"@sv;
+    rdfs:subClassOf :AdminMetadata;
+    owl:equivalentClass bf2:DescriptionAuthentication .
+
+:descriptionAuthentication a owl:ObjectProperty;
+    rdfs:label "Description authentication"@en, "Beskrivningskontroll"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :DescriptionAuthentication;
+    owl:equivalentProperty bf2:descriptionAuthentication .
+
+:MetadataLicensor a owl:Class;
+    rdfs:label "Metadata licensor"@en, "Licensgivare för metadata"@sv;
+    rdfs:subClassOf :Agent;
+    owl:equivalentClass bflc:MetadataLicensor .
+
+:metadataLicensor a owl:ObjectProperty;
+    rdfs:label "Metadata licensor"@en, "Licensgivare för metadata"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :MetadataLicensor;
+    owl:equivalentProperty bflc:metadataLicensor .
+
+:EncodingLevel a owl:Class;
+    rdfs:label "Encoding level"@en, "Beskrivningsnivå"@sv;
+    owl:equivalentClass bflc:EncodingLevel .
+
+:encodingLevel a owl:ObjectProperty;
+    rdfs:label "Encoding level"@en, "Beskrivningsnivå"@sv;
+    rdfs:domain :AdminMetadata;
+    rdfs:range :EncodingLevel;
+    owl:equivalentProperty bflc:encodingLevel .
+
+:identifiedBy rdfs:subPropertyOf :describedBy; owl:equivalentProperty sdo:sameAs .
 
 :controlNumber a owl:DatatypeProperty;
     rdfs:label "kontrollnummer"@sv;
@@ -143,9 +237,11 @@
     rdfs:domain :PartialCollectionView;
     owl:equivalentProperty hydra:member .
 
-:itemsPerPage a owl:DatatypeProperty .
+:itemsPerPage a owl:DatatypeProperty ;
+    owl:equivalentProperty  opensearch:itemsPerPage, sindsearch:itemsPerPage .
 
-:itemOffset a owl:DatatypeProperty .
+:itemOffset a owl:DatatypeProperty ;
+    owl:equivalentProperty sindsearch:indexOffset .
 
 :search a owl:ObjectProperty;
     owl:equivalentProperty hydra:search;

@@ -7,6 +7,11 @@
 @prefix schema: <http://schema.org/> .
 @prefix : <https://id.kb.se/marc/> .
 
+# Use these to define which MARC category a class belongs to.
+:auth a skos:Collection ; :code "auth" .
+:bib a skos:Collection ; :code "bib" .
+:hold a skos:Collection ; :code "hold" .
+
 skos:Concept rdfs:subClassOf rdfs:Resource .
 
 :Field a owl:Class ;
@@ -35,6 +40,9 @@ skos:Concept rdfs:subClassOf rdfs:Resource .
 
 :EnumeratedTerm a owl:Class ;
     rdfs:subClassOf schema:Enumeration, skos:Concept .
+
+:EnumeratedClass a owl:Class ;
+    rdfs:subClassOf :EnumeratedTerm, owl:Class .
 
 :MainEntry a owl:Class; rdfs:subClassOf bf2:Contribution .
 

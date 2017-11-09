@@ -153,6 +153,7 @@ def parse_configs(confdir, lang, tokenmap):
                         if prop_id not in fixprops:
                             fixprops[prop_id] = fixprop = odict()
                             for k, v in fix_cfg.items(enumkey):
+                                assert v, "Missing value for %s in %s-%s" % (k, block_key, tagcode)
                                 propdfn = labelled(v.decode(ENC), lang)
                                 fixprop[k] = propdfn
                                 fixpropmap = tokenmap['fixprops'].get(prop_id)

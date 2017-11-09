@@ -63,11 +63,11 @@ construct {
     }
     optional {
         filter exists { ?bfterm rdfs:comment "Used with Work, Instance or Item" }
-        bind(kbv:Creation as ?kbvdomain)
+        bind(kbv:Endeavour as ?kbvdomain)
     }
     optional {
         filter exists { ?bfterm rdfs:comment "Used with Work or Instance" }
-        bind(kbv:Endeavour as ?kbvdomain)
+        bind(kbv:Creation as ?kbvdomain)
     }
     optional {
         filter exists { ?bfterm rdfs:comment "Used with Unspecified" }
@@ -83,11 +83,11 @@ construct {
     }
     optional {
         filter exists { ?bfterm rdfs:comment "Expected value Work, Instance or Item" }
-        bind(kbv:Creation as ?kbvrange)
+        bind(kbv:Endeavour as ?kbvrange)
     }
     optional {
         filter exists { ?bfterm rdfs:comment "Expected value Work or Instance" }
-        bind(kbv:Endeavour as ?kbvrange)
+        bind(kbv:Creation as ?kbvrange)
     }
 
 }

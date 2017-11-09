@@ -4916,18 +4916,19 @@
           "label_en": "Record content licensor", 
           "entity": "Record"
         }, 
+        "6": {
+          "id": "linkage", 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false, 
+          "label_en": "Linkage", 
+          "entity": "Field"
+        }, 
         "8": {
           "id": "fieldLinkAndSequenceNumber", 
           "label_sv": "L\u00e4nk- och sekvensnummer", 
           "repeatable": true, 
           "label_en": "Field link and sequence number", 
           "entity": "Segment"
-        }, 
-        "6": {
-          "id": "linkage", 
-          "label_en": "Linkage", 
-          "repeatable": false, 
-          "entity": "Field"
         }
       }, 
       "label_en": "Record Content Licensor"
@@ -5911,18 +5912,19 @@
           "label_en": "Source of call/class number", 
           "entity": "DataElement"
         }, 
+        "6": {
+          "id": "linkage", 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false, 
+          "label_en": "Linkage", 
+          "entity": "Field"
+        }, 
         "8": {
           "id": "fieldLinkAndSequenceNumber", 
           "label_sv": "L\u00e4nk- och sekvensnummer", 
           "repeatable": true, 
           "label_en": "Field link and sequence number", 
           "entity": "Segment"
-        }, 
-        "6": {
-          "id": "linkage", 
-          "label_en": "Linkage", 
-          "repeatable": false, 
-          "entity": "Field"
         }
       }, 
       "label_en": "Classification Numbers Assigned In Canada", 
@@ -6906,7 +6908,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "j": {
@@ -7044,7 +7046,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -7065,7 +7067,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "n": {
@@ -7183,7 +7185,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -7204,7 +7206,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "j": {
@@ -7383,7 +7385,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -7748,7 +7750,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -8080,7 +8082,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -8432,7 +8434,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -8540,7 +8542,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -10011,7 +10013,7 @@
         }, 
         "d": {
           "id": "informationRecordingTechnique", 
-          "label_sv": "Registreringsteknik", 
+          "label_sv": "Produktionsteknik", 
           "repeatable": true, 
           "label_en": "Information recording technique", 
           "entity": "Manifestation"
@@ -10042,6 +10044,11 @@
           "label_sv": "Krav p\u00e5 teknisk utrustning", 
           "repeatable": true, 
           "label_en": "Technical specifications of medium"
+        }, 
+        "j": {
+          "id": null, 
+          "label_sv": "Generation", 
+          "repeatable": true
         }, 
         "k": {
           "id": null, 
@@ -10653,7 +10660,7 @@
         }, 
         "f": {
           "id": null, 
-          "label_sv": "\u00d6verf\u00f6ringshastighet", 
+          "label_sv": "\u00d6verf\u00f6ringskapacitet (bitrate)", 
           "repeatable": true
         }, 
         "2": {
@@ -11497,6 +11504,78 @@
       }, 
       "label_en": "Trade Availability Information"
     }, 
+    "370": {
+      "id": null, 
+      "label_sv": "Associerad plats/ort", 
+      "repeatable": true, 
+      "ind1": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "ind2": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "subfield": {
+        "c": {
+          "id": null, 
+          "label_sv": "Associerat land", 
+          "repeatable": true
+        }, 
+        "f": {
+          "id": null, 
+          "label_sv": "Annan associerad plats/ort", 
+          "repeatable": true
+        }, 
+        "g": {
+          "id": null, 
+          "label_sv": "Ursprungs- eller tillkomstort f\u00f6r verk/uttryck", 
+          "repeatable": true
+        }, 
+        "s": {
+          "id": null, 
+          "label_sv": "Start\u00e5r/-datum", 
+          "repeatable": false
+        }, 
+        "t": {
+          "id": null, 
+          "label_sv": "Slut\u00e5r/-datum", 
+          "repeatable": false
+        }, 
+        "u": {
+          "id": null, 
+          "label_sv": "Uniform Resource Identifier (URI)", 
+          "repeatable": true
+        }, 
+        "v": {
+          "id": null, 
+          "label_sv": "Informationen belagd i (k\u00e4lla)", 
+          "repeatable": true
+        }, 
+        "0": {
+          "id": null, 
+          "label_sv": "ID-nummer f\u00f6r sammanh\u00f6rande auktoritetspost", 
+          "repeatable": true
+        }, 
+        "2": {
+          "id": null, 
+          "label_sv": "Kod f\u00f6r kontrollerad vokabul\u00e4r", 
+          "repeatable": false
+        }, 
+        "6": {
+          "id": null, 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false
+        }, 
+        "8": {
+          "id": null, 
+          "label_sv": "L\u00e4nk- och sekvensnummer", 
+          "repeatable": true
+        }
+      }
+    }, 
     "377": {
       "id": null, 
       "label_sv": "Associerat spr\u00e5k", 
@@ -11894,6 +11973,59 @@
         "2": {
           "id": null, 
           "label_sv": "Kod f\u00f6r kategorischema", 
+          "repeatable": false
+        }, 
+        "3": {
+          "id": null, 
+          "label_sv": "Del av materialet som avses", 
+          "repeatable": false
+        }, 
+        "6": {
+          "id": null, 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false
+        }, 
+        "8": {
+          "id": null, 
+          "label_sv": "L\u00e4nk- och sekvensnummer", 
+          "repeatable": true
+        }
+      }
+    }, 
+    "388": {
+      "id": null, 
+      "label_sv": "Tidsperiod under vilken verket/uttrycket ursprungligen skapades", 
+      "repeatable": true, 
+      "ind1": {
+        "_": {
+          "label_sv": "Uppgift saknas"
+        }, 
+        "1": {
+          "label_sv": "Skapande av verk"
+        }, 
+        "2": {
+          "label_sv": "Skapande av aggregerat verk"
+        }
+      }, 
+      "ind2": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "subfield": {
+        "a": {
+          "id": null, 
+          "label_sv": "Tidsperiod", 
+          "repeatable": true
+        }, 
+        "0": {
+          "id": null, 
+          "label_sv": "ID-nummer f\u00f6r sammanh\u00f6rande auktoritetspost", 
+          "repeatable": true
+        }, 
+        "2": {
+          "id": null, 
+          "label_sv": "Kod f\u00f6r kontrollerad vokabul\u00e4r", 
           "repeatable": false
         }, 
         "3": {
@@ -14838,23 +14970,26 @@
       "id": "informationRelatingToCopyrightStatus", 
       "label_sv": "Anm\u00e4rkning: Copyright", 
       "repeatable": true, 
-      "label_en": "Information Relating to Copyright Status", 
       "ind1": {
         "_": {
+          "label_sv": "Uppgift saknas (normalv\u00e4rde)", 
           "id": "noInformationProvided", 
           "label_en": "No information provided"
         }, 
         "0": {
+          "label_sv": "Sekretessbelagd information", 
           "id": "private", 
           "label_en": "Private"
         }, 
         "1": {
+          "label_sv": "Ej sekretessbelagd information", 
           "id": "notPrivate", 
           "label_en": "Not private"
         }
       }, 
       "ind2": {
         "_": {
+          "label_sv": "odefinierad", 
           "id": "undefined", 
           "label_en": "Undefined"
         }
@@ -14862,120 +14997,148 @@
       "subfield": {
         "a": {
           "id": "personalCreator", 
-          "label_en": "Personal creator", 
-          "repeatable": false
+          "label_sv": "Personlig upphovsman", 
+          "repeatable": false, 
+          "label_en": "Personal creator"
         }, 
         "b": {
           "id": "personalCreatorDeathDate", 
-          "label_en": "Personal creator death date", 
-          "repeatable": false
+          "label_sv": "D\u00f6dsdatum f\u00f6r personlig upphovsman", 
+          "repeatable": false, 
+          "label_en": "Personal creator death date"
         }, 
         "c": {
           "id": "corporateCreator", 
-          "label_en": "Corporate creator", 
-          "repeatable": true
+          "label_sv": "Institutionell upphovsman", 
+          "repeatable": true, 
+          "label_en": "Corporate creator"
         }, 
         "d": {
           "id": "copyrightHolder", 
-          "label_en": "Copyright holder", 
-          "repeatable": true
+          "label_sv": "Copyrighth\u00e5llare", 
+          "repeatable": true, 
+          "label_en": "Copyright holder"
         }, 
         "e": {
           "id": "copyrightHolderContactInformation", 
-          "label_en": "Copyright holder contact information", 
-          "repeatable": true
+          "label_sv": "Kontaktinformation f\u00f6r copyrighth\u00e5llare", 
+          "repeatable": true, 
+          "label_en": "Copyright holder contact information"
         }, 
         "f": {
           "id": "copyrightStatement", 
-          "label_en": "copyright statement", 
-          "repeatable": true
+          "label_sv": "Copyrightuppgift", 
+          "repeatable": true, 
+          "label_en": "copyright statement"
         }, 
         "g": {
           "id": "copyrightDate", 
-          "label_en": "Copyright date", 
-          "repeatable": false
+          "label_sv": "Copyrightdatum", 
+          "repeatable": false, 
+          "label_en": "Copyright date"
         }, 
         "h": {
           "id": "copyrightRenewalDate", 
-          "label_en": "Copyright renewal date", 
-          "repeatable": true
+          "label_sv": "Datum f\u00f6r f\u00f6rnyad copyrightuppgift", 
+          "repeatable": true, 
+          "label_en": "Copyright renewal date"
         }, 
         "i": {
           "id": "publicationDate", 
-          "label_en": "Publication date", 
-          "repeatable": false
+          "label_sv": "Publikations-/utgivnings\u00e5r", 
+          "repeatable": false, 
+          "label_en": "Publication date"
         }, 
         "j": {
           "id": "creationDate", 
-          "label_en": "Creation date", 
-          "repeatable": false
+          "label_sv": "Tillkomst\u00e5r", 
+          "repeatable": false, 
+          "label_en": "Creation date"
         }, 
         "k": {
           "id": "publisher", 
-          "label_en": "Publisher", 
-          "repeatable": true
+          "label_sv": "F\u00f6rlag, utgivare", 
+          "repeatable": true, 
+          "label_en": "Publisher"
         }, 
         "l": {
           "id": "copyrightStatus", 
-          "label_en": "Copyright status", 
-          "repeatable": false
+          "label_sv": "Copyrightstatus", 
+          "repeatable": false, 
+          "label_en": "Copyright status"
         }, 
         "m": {
           "id": "publicationStatus", 
-          "label_en": "Publication status", 
-          "repeatable": false
+          "label_sv": "Publikationssstatus", 
+          "repeatable": false, 
+          "label_en": "Publication status"
         }, 
         "n": {
           "id": "note", 
-          "label_en": "Note", 
-          "repeatable": true
+          "label_sv": "Anm\u00e4rkning", 
+          "repeatable": true, 
+          "label_en": "Note"
         }, 
         "o": {
           "id": "researchDate", 
-          "label_en": "Research Date", 
-          "repeatable": false
+          "label_sv": "Datum f\u00f6r fastst\u00e4llande av copyright", 
+          "repeatable": false, 
+          "label_en": "Research Date"
         }, 
         "p": {
           "id": "countryOfPublicationOrCreation", 
-          "label_en": "Country of publication or creation", 
-          "repeatable": true
+          "label_sv": null, 
+          "repeatable": true, 
+          "label_en": "Country of publication or creation"
         }, 
         "q": {
           "id": "assigningAgency", 
-          "label_en": "Assigning agency", 
-          "repeatable": false
+          "label_sv": "Institution som f\u00f6rmedlat informationen", 
+          "repeatable": false, 
+          "label_en": "Assigning agency"
         }, 
         "r": {
           "id": "jurisdictionOfCopyrightAssessment", 
-          "label_en": "Jurisdiction of copyright assessment", 
-          "repeatable": false
+          "label_sv": "Land/jurisdiktion f\u00f6r copyright", 
+          "repeatable": false, 
+          "label_en": "Jurisdiction of copyright assessment"
         }, 
         "s": {
           "id": "sourceOfInformation", 
-          "label_en": "Source of information", 
-          "repeatable": false
+          "label_sv": "K\u00e4lla", 
+          "repeatable": false, 
+          "label_en": "Source of information"
         }, 
         "u": {
           "id": "uniformResourceIdentifier", 
-          "label_en": "Uniform Resource Identifier", 
-          "repeatable": true
+          "label_sv": "Uniform Resource Identifier (URI)", 
+          "repeatable": true, 
+          "label_en": "Uniform Resource Identifier"
         }, 
         "3": {
           "id": "materialsSpecified", 
-          "label_en": "Materials specified", 
+          "label_sv": "Del av materialet som avses", 
+          "repeatable": false, 
+          "label_en": "Materials specified"
+        }, 
+        "6": {
+          "id": null, 
+          "label_sv": "L\u00e4nkning", 
           "repeatable": false
+        }, 
+        "8": {
+          "id": "fieldLinkAndSequenceNumber", 
+          "label_sv": "L\u00e4nk- och sekvensnummer", 
+          "repeatable": true, 
+          "label_en": "Field link and sequence number"
         }, 
         "9": {
           "id": null, 
           "label_en": null, 
           "repeatable": false
-        }, 
-        "8": {
-          "id": "fieldLinkAndSequenceNumber", 
-          "label_en": "Field link and sequence number", 
-          "repeatable": true
         }
-      }
+      }, 
+      "label_en": "Information Relating to Copyright Status"
     }, 
     "544": {
       "id": "locationOfOtherArchivalMaterialsNote", 
@@ -16426,7 +16589,13 @@
       "repeatable": true, 
       "ind1": {
         "_": {
-          "label_sv": "odefinierad"
+          "label_sv": "Uppgift saknas"
+        }, 
+        "0": {
+          "label_sv": "Katalogiseringsk\u00e4lla"
+        }, 
+        "1": {
+          "label_sv": "Senaste utg\u00e5va"
         }
       }, 
       "ind2": {
@@ -16599,7 +16768,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -16844,7 +17013,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -16872,7 +17041,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -17101,7 +17270,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -17129,7 +17298,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -17410,7 +17579,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -17563,15 +17732,15 @@
       "repeatable": true, 
       "ind1": {
         "_": {
-          "label_sv": "Uppgift saknas", 
+          "label_sv": "odefinierad", 
           "id": "undefined", 
           "label_en": "Undefined"
         }, 
         "0": {
-          "label_sv": "Period som resursen t\u00e4cker eller avbildar"
+          "label_sv": "Period som resursen t\u00e4cker eller avbildar (OBSOLET)"
         }, 
         "1": {
-          "label_sv": "Period f\u00f6r resursens skapande eller ursprung"
+          "label_sv": "Period f\u00f6r resursens skapande eller ursprung (OBSOLET)"
         }
       }, 
       "ind2": {
@@ -17795,6 +17964,11 @@
           "repeatable": false, 
           "label_en": "Relator term"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -17941,6 +18115,11 @@
           "repeatable": true, 
           "label_en": "Relator term", 
           "entity": "Work"
+        }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
         }, 
         "v": {
           "id": "formSubdivision", 
@@ -18849,7 +19028,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -19052,7 +19231,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -19080,7 +19259,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -19262,7 +19441,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -19290,7 +19469,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -19587,7 +19766,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -23165,7 +23344,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -23371,7 +23550,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -23399,7 +23578,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -23584,7 +23763,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting", 
           "entity": "CorporateBody"
         }, 
@@ -23612,7 +23791,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -23842,7 +24021,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -25007,6 +25186,12 @@
           "label_sv": "SAB-klassifikation", 
           "repeatable": false
         }, 
+        "b": {
+          "id": null, 
+          "label_sv": "SAB-rubrik", 
+          "repeatable": false, 
+          "mandatory": true
+        }, 
         "6": {
           "id": null, 
           "label_sv": "L\u00e4nkning", 
@@ -25186,7 +25371,7 @@
       }, 
       "encLevel": {
         "_": {
-          "label_sv": "Nationalbibliografisk niv\u00e5 (jfr KRS 1.0D3)", 
+          "label_sv": "Nationalbibliografisk/fullst\u00e4ndig niv\u00e5 (jfr KRS 1.0D3)", 
           "id": "fullLevel", 
           "label_en": "Full level"
         }, 
@@ -25406,22 +25591,22 @@
           "label_en": "Unknown or not specified"
         }, 
         "a": {
-          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r)", 
+          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "preschool", 
           "label_en": "Preschool"
         }, 
         "b": {
-          "label_sv": "Barn(ca 6-9 \u00e5r)", 
+          "label_sv": "Barn(ca 6-9 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "primary", 
           "label_en": "Primary"
         }, 
         "c": {
-          "label_sv": "Barn (ca 10-12 \u00e5r) / L\u00e4romedel", 
+          "label_sv": "L\u00e4romedel", 
           "id": "preAdolescent", 
           "label_en": "Pre-adolescent"
         }, 
         "d": {
-          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r)", 
+          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "adolescent", 
           "label_en": "Adolescent"
         }, 
@@ -26351,22 +26536,22 @@
           "label_en": "Unknown or not specified"
         }, 
         "a": {
-          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r)", 
+          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "preschool", 
           "label_en": "Preschool"
         }, 
         "b": {
-          "label_sv": "Barn (ca 6-9 \u00e5r)", 
+          "label_sv": "Barn(ca 6-9 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "primary", 
           "label_en": "Primary"
         }, 
         "c": {
-          "label_sv": "Barn (ca 10-12 \u00e5r) / L\u00e4romedel", 
+          "label_sv": "L\u00e4romedel", 
           "id": "preAdolescent", 
           "label_en": "Pre-adolescent"
         }, 
         "d": {
-          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r)", 
+          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "adolescent", 
           "label_en": "Adolescent"
         }, 
@@ -27266,22 +27451,22 @@
           "label_en": "Unknown or not specified"
         }, 
         "a": {
-          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r)", 
+          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "preschool", 
           "label_en": "Preschool"
         }, 
         "b": {
-          "label_sv": "Barn (ca 6-9 \u00e5r)", 
+          "label_sv": "Barn(ca 6-9 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "primary", 
           "label_en": "Primary"
         }, 
         "c": {
-          "label_sv": "Barn (ca 10-12 \u00e5r) / L\u00e4romedel", 
+          "label_sv": "L\u00e4romedel", 
           "id": "preAdolescent", 
           "label_en": "Pre-adolescent"
         }, 
         "d": {
-          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r)", 
+          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "adolescent", 
           "label_en": "Adolescent"
         }, 
@@ -27579,22 +27764,22 @@
           "label_en": "Unknown or not specified"
         }, 
         "a": {
-          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r)", 
+          "label_sv": "Sm\u00e5barn (ca 0-5 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "preschool", 
           "label_en": "Preschool"
         }, 
         "b": {
-          "label_sv": "Barn (ca 6-9 \u00e5r)", 
+          "label_sv": "Barn(ca 6-9 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "primary", 
           "label_en": "Primary"
         }, 
         "c": {
-          "label_sv": "Barn (ca 10-12 \u00e5r) / L\u00e4romedel", 
+          "label_sv": "L\u00e4romedel", 
           "id": "preAdolescent", 
           "label_en": "Pre-adolescent"
         }, 
         "d": {
-          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r)", 
+          "label_sv": "Ton\u00e5r inkl. gymnasial utbildningsniv\u00e5 (ca 13-16 \u00e5r) (anv\u00e4nds f.n. ej)", 
           "id": "adolescent", 
           "label_en": "Adolescent"
         }, 
@@ -32111,7 +32296,7 @@
           "label_en": "Monaural"
         }, 
         "q": {
-          "label_sv": "Fyrkanaligt ljud", 
+          "label_sv": "Fyr- eller flerkanaligt ljud", 
           "id": "quadraphonic", 
           "label_en": "Quadraphonic"
         }, 
@@ -38493,7 +38678,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -38653,7 +38838,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -38677,7 +38862,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -38819,7 +39004,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -38843,7 +39028,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -39030,7 +39215,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -39117,16 +39302,17 @@
           "repeatable": true, 
           "label_en": "Geographic subdivision"
         }, 
+        "6": {
+          "id": "linkage", 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false, 
+          "label_en": "Linkage"
+        }, 
         "8": {
           "id": "fieldLinkAndSequenceNumber", 
           "label_sv": "L\u00e4nk- och sekvensnummer", 
           "repeatable": true, 
           "label_en": "Field link and sequence number"
-        }, 
-        "6": {
-          "id": "linkage", 
-          "label_en": "Linkage", 
-          "repeatable": false
         }
       }, 
       "label_en": "Heading-Uniform Title"
@@ -39230,6 +39416,11 @@
           "repeatable": false, 
           "label_en": "Topical term following geographic name entry element"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -39300,6 +39491,11 @@
           "repeatable": false, 
           "mandatory": true, 
           "label_en": "Geographic name"
+        }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
         }, 
         "v": {
           "id": "formSubdivision", 
@@ -39929,12 +40125,12 @@
         "a": {
           "id": null, 
           "label_sv": "F\u00f6delseort", 
-          "repeatable": true
+          "repeatable": false
         }, 
         "b": {
           "id": null, 
           "label_sv": "D\u00f6dsort", 
-          "repeatable": true
+          "repeatable": false
         }, 
         "c": {
           "id": null, 
@@ -40626,7 +40822,7 @@
         "s": {
           "id": null, 
           "label_sv": "Totalt antal bes\u00e4ttningsmedlemmar", 
-          "repeatable": true
+          "repeatable": false
         }, 
         "v": {
           "id": null, 
@@ -40868,6 +41064,59 @@
         }
       }
     }, 
+    "388": {
+      "id": null, 
+      "label_sv": "Tidsperiod under vilken verket/uttrycket ursprungligen skapades", 
+      "repeatable": true, 
+      "ind1": {
+        "_": {
+          "label_sv": "Uppgift saknas"
+        }, 
+        "1": {
+          "label_sv": "Skapande av verk"
+        }, 
+        "2": {
+          "label_sv": "Skapande av aggregerat verk"
+        }
+      }, 
+      "ind2": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "subfield": {
+        "a": {
+          "id": null, 
+          "label_sv": "Tidsperiod", 
+          "repeatable": true
+        }, 
+        "0": {
+          "id": null, 
+          "label_sv": "ID-nummer f\u00f6r sammanh\u00f6rande auktoritetspost", 
+          "repeatable": true
+        }, 
+        "2": {
+          "id": null, 
+          "label_sv": "Kod f\u00f6r kontrollerad vokabul\u00e4r", 
+          "repeatable": false
+        }, 
+        "3": {
+          "id": null, 
+          "label_sv": "Del av materialet som avses", 
+          "repeatable": false
+        }, 
+        "6": {
+          "id": null, 
+          "label_sv": "L\u00e4nkning", 
+          "repeatable": false
+        }, 
+        "8": {
+          "id": null, 
+          "label_sv": "L\u00e4nk- och sekvensnummer", 
+          "repeatable": true
+        }
+      }
+    }, 
     "400": {
       "id": "seeFromTracingPersonalName", 
       "label_sv": "Se-h\u00e4nvisning - Personnamn", 
@@ -40937,7 +41186,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -41119,7 +41368,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -41143,7 +41392,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -41307,7 +41556,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -41331,7 +41580,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -41540,7 +41789,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -41785,6 +42034,11 @@
           "repeatable": false, 
           "label_en": "Topical term following geographic name entry element"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "i": {
           "id": "referenceInstructionPhrase", 
           "label_sv": "Relationsbeteckning/-fras", 
@@ -41877,6 +42131,11 @@
           "repeatable": false, 
           "mandatory": true, 
           "label_en": "Geographic name"
+        }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
         }, 
         "i": {
           "id": "referenceInstructionPhrase", 
@@ -42468,7 +42727,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -42656,7 +42915,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -42680,7 +42939,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -42850,7 +43109,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -42874,7 +43133,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -43089,7 +43348,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -43346,6 +43605,11 @@
           "repeatable": false, 
           "label_en": "Topical term following geographic name entry element"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "i": {
           "id": "referenceInstructionPhrase", 
           "label_sv": "Relationsbeteckning/-fras", 
@@ -43444,6 +43708,11 @@
           "repeatable": false, 
           "mandatory": true, 
           "label_en": "Geographic name"
+        }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
         }, 
         "i": {
           "id": "referenceInstructionPhrase", 
@@ -45246,7 +45515,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -45254,6 +45523,11 @@
           "label_sv": "Medieterm f\u00f6r verk", 
           "repeatable": false, 
           "label_en": "Medium"
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
         }, 
         "j": {
           "id": "attributionQualifier", 
@@ -45363,6 +45637,11 @@
           "repeatable": false, 
           "label_en": "Source of heading or term"
         }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
+        }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
           "label_sv": "Institution f\u00f6r vilken f\u00e4ltet g\u00e4ller", 
@@ -45469,7 +45748,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -45493,7 +45772,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -45501,6 +45780,11 @@
           "label_sv": "Medieterm f\u00f6r verk", 
           "repeatable": false, 
           "label_en": "Medium"
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
         }, 
         "k": {
           "id": "formSubheading", 
@@ -45597,6 +45881,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -45698,7 +45987,7 @@
         "c": {
           "id": "locationOfMeeting", 
           "label_sv": "Konferensort", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Location of meeting"
         }, 
         "d": {
@@ -45722,7 +46011,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -45730,6 +46019,11 @@
           "label_sv": "Medieterm f\u00f6r verk", 
           "repeatable": false, 
           "label_en": "Medium"
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
         }, 
         "j": {
           "id": "relatorTerm", 
@@ -45820,6 +46114,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -45923,7 +46222,7 @@
         "g": {
           "id": "miscellaneousInformation", 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false, 
+          "repeatable": true, 
           "label_en": "Miscellaneous information"
         }, 
         "h": {
@@ -45931,6 +46230,11 @@
           "label_sv": "Medieterm", 
           "repeatable": false, 
           "label_en": "Medium"
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
         }, 
         "k": {
           "id": "formSubheading", 
@@ -46028,6 +46332,11 @@
           "repeatable": false, 
           "label_en": "Source of heading or term"
         }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
+        }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
           "label_sv": "Institution f\u00f6r vilken f\u00e4ltet g\u00e4ller", 
@@ -46103,6 +46412,11 @@
           "mandatory": true, 
           "label_en": "Chronological term"
         }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46144,6 +46458,11 @@
           "label_sv": "System f\u00f6r kod eller term", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46238,6 +46557,16 @@
           "repeatable": false, 
           "label_en": "Topical term following geographic name entry element"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46279,6 +46608,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46367,6 +46701,16 @@
           "mandatory": true, 
           "label_en": "Geographic name"
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46408,6 +46752,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46496,6 +46845,11 @@
           "mandatory": true, 
           "label_en": "Genre/form term as entry element"
         }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46537,6 +46891,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46606,6 +46965,11 @@
           "repeatable": false, 
           "mandatory": true
         }, 
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "w": {
           "id": null, 
           "label_sv": "Kontrollkoder f\u00f6r h\u00e4nvisningen", 
@@ -46619,6 +46983,11 @@
         "2": {
           "id": null, 
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
+          "repeatable": true
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
           "repeatable": true
         }, 
         "5": {
@@ -46697,6 +47066,11 @@
         }
       }, 
       "subfield": {
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46739,6 +47113,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46820,6 +47199,11 @@
         }
       }, 
       "subfield": {
+        "1": {
+          "id": null, 
+          "label_sv": null, 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46862,6 +47246,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -46943,6 +47332,11 @@
         }
       }, 
       "subfield": {
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -46985,6 +47379,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -47066,6 +47465,11 @@
         }
       }, 
       "subfield": {
+        "i": {
+          "id": null, 
+          "label_sv": "Relationsbeteckning/-fras", 
+          "repeatable": true
+        }, 
         "v": {
           "id": "formSubdivision", 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -47108,6 +47512,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -47206,6 +47615,11 @@
           "label_sv": "Kod f\u00f6r \u00e4mnesordssystem/thesaurus", 
           "repeatable": false, 
           "label_en": "Source of heading or term"
+        }, 
+        "4": {
+          "id": null, 
+          "label_sv": "Relationskod", 
+          "repeatable": true
         }, 
         "5": {
           "id": "institutionToWhichFieldApplies", 
@@ -48074,6 +48488,33 @@
           "id": null, 
           "label_sv": "Delf\u00e4ltskod i annat MARC-format", 
           "repeatable": true
+        }
+      }
+    }, 
+    "887": {
+      "id": null, 
+      "label_sv": "Maskinellt genererad information fr\u00e5n LIBRIS XL", 
+      "repeatable": true, 
+      "ind1": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "ind2": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "subfield": {
+        "a": {
+          "id": null, 
+          "label_sv": "Inneh\u00e5ll i f\u00e4ltet", 
+          "repeatable": false
+        }, 
+        "2": {
+          "id": null, 
+          "label_sv": "Kod f\u00f6r ursprungsformat", 
+          "repeatable": false
         }
       }
     }, 
@@ -50850,14 +51291,19 @@
           "label_sv": "Ordningselement f\u00f6r uppst\u00e4llningen", 
           "repeatable": false
         }, 
-        "6": {
+        "q": {
           "id": null, 
-          "label_sv": "L\u00e4nkning", 
+          "label_sv": "Instans som tilldelat klassifikationskoden", 
           "repeatable": false
         }, 
         "2": {
           "id": null, 
           "label_sv": "Kod f\u00f6r klassifikationssystem (SAB, anv\u00e4nd \"kssb/<uppl.nummer>\")", 
+          "repeatable": false
+        }, 
+        "6": {
+          "id": null, 
+          "label_sv": "L\u00e4nkning", 
           "repeatable": false
         }, 
         "8": {
@@ -51093,7 +51539,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -51262,7 +51708,7 @@
         "c": {
           "id": null, 
           "label_sv": "Konferensort", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "d": {
           "id": null, 
@@ -51282,7 +51728,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -51442,7 +51888,7 @@
         "c": {
           "id": null, 
           "label_sv": "Konferensort", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "d": {
           "id": null, 
@@ -51462,7 +51908,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -51642,7 +52088,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -51890,6 +52336,11 @@
           "label_sv": "Funktionsterm", 
           "repeatable": false
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "v": {
           "id": null, 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -51973,6 +52424,11 @@
           "label_sv": "Geografiskt namn", 
           "repeatable": false
         }, 
+        "g": {
+          "id": null, 
+          "label_sv": "\u00d6vrig information", 
+          "repeatable": true
+        }, 
         "v": {
           "id": null, 
           "label_sv": "Underindelning - form\u00e4mnesord", 
@@ -52038,7 +52494,7 @@
           "label_sv": "Uppgift saknas"
         }, 
         "0": {
-          "label_sv": "Allm\u00e4n indexter"
+          "label_sv": "Allm\u00e4n indexterm"
         }, 
         "1": {
           "label_sv": "Personnamn"
@@ -52269,7 +52725,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -52405,7 +52861,7 @@
         "c": {
           "id": null, 
           "label_sv": "Konferensort", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "d": {
           "id": null, 
@@ -52425,7 +52881,7 @@
         "g": {
           "id": null, 
           "label_sv": "\u00d6vrig information", 
-          "repeatable": false
+          "repeatable": true
         }, 
         "h": {
           "id": null, 
@@ -53760,6 +54216,12 @@
           "repeatable": true, 
           "label_en": "Type of index"
         }, 
+        "p": {
+          "id": "numberOfPiecesPerIssuance", 
+          "label_sv": "Antal delar per utg\u00e5va (d\u00e5 fekvenskod i $w beh\u00f6ver specifieceras)", 
+          "repeatable": false, 
+          "label_en": "Number of pieces per issuance"
+        }, 
         "t": {
           "id": "copy", 
           "label_sv": "Exemplar", 
@@ -53829,11 +54291,6 @@
           "id": null, 
           "label_sv": "Underordnad institution/enhet (d\u00e5 852$b inneh\u00e5ller samlingssigel)", 
           "repeatable": true
-        }, 
-        "p": {
-          "id": "numberOfPiecesPerIssuance", 
-          "label_en": "Number of pieces per issuance", 
-          "repeatable": false
         }
       }, 
       "label_en": "Captions And Pattern-Indexes"
@@ -55933,6 +56390,33 @@
           "id": null, 
           "label_sv": "Delf\u00e4ltskod i annat MARC-format", 
           "repeatable": true
+        }
+      }
+    }, 
+    "887": {
+      "id": null, 
+      "label_sv": "Maskinellt genererad information fr\u00e5n LIBRIS XL", 
+      "repeatable": true, 
+      "ind1": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "ind2": {
+        "_": {
+          "label_sv": "odefinierad"
+        }
+      }, 
+      "subfield": {
+        "a": {
+          "id": null, 
+          "label_sv": "Inneh\u00e5ll i f\u00e4ltet", 
+          "repeatable": false
+        }, 
+        "2": {
+          "id": null, 
+          "label_sv": "Kod f\u00f6r ursprungsformat", 
+          "repeatable": false
         }
       }
     }, 
@@ -60698,7 +61182,7 @@
           "label_en": "Monaural"
         }, 
         "q": {
-          "label_sv": "Fyrkanaligt ljud", 
+          "label_sv": "Fyr- eller flerkanaligt ljud", 
           "id": "quadraphonic", 
           "label_en": "Quadraphonic"
         }, 

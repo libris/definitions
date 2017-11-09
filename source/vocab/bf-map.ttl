@@ -1,19 +1,9 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 
-kbv: rdfs:label "KBs vokabulär"@sv, "The KB Vocabulary"@en .
-
-kbv:Endeavour a owl:Class; rdfs:subClassOf kbv:Creation .
-kbv:Creation a owl:Class; rdfs:subClassOf rdfs:Resource .
-kbv:Work rdfs:subClassOf kbv:Endeavour .
-kbv:Instance rdfs:subClassOf kbv:Endeavour .
-kbv:Item rdfs:subClassOf kbv:Creation .
-
-kbv:Record a owl:Class; rdfs:subClassOf kbv:AdminMetadata .
-kbv:adminMetadata rdfs:domain kbv:Record .
+#kbv:Record owl:equivalentClass kbv:AdminMetadata .
 
 kbv:created owl:equivalentProperty bf2:creationDate .
 kbv:modified owl:equivalentProperty bf2:changeDate .
@@ -35,11 +25,31 @@ kbv:IssuanceType owl:equivalentClass bf2:Issuance .
 
 kbv:hasNotation owl:equivalentProperty bf2:notation .
 
+kbv:creditsNote owl:equivalentProperty bf2:credits .
+kbv:awardsNote owl:equivalentProperty bf2:awards .
+kbv:isPartOf owl:equivalentProperty bf2:partOf .
+
 kbv:notation owl:equivalentProperty bf2:code .
 
-kbv:ISBN a rdfs:Datatype; owl:equivalentClass bf2:Isbn .
-kbv:ISSN a rdfs:Datatype; owl:equivalentClass bf2:Issn .
-kbv:LCCN a rdfs:Datatype; owl:equivalentClass bf2:Lccn .
+kbv:organizationOfMaterial owl:equivalentProperty bf2:organization .
+
 kbv:CODEN a rdfs:Datatype; owl:equivalentClass bf2:Coden .
+kbv:DOI a rdfs:Datatype; owl:equivalentClass bf2:Doi .
+kbv:EAN a rdfs:Datatype; owl:equivalentClass bf2:Ean .
+kbv:GTIN14 a rdfs:Datatype; owl:equivalentClass bf2:Gtin14Number .
+kbv:ISAN a rdfs:Datatype; owl:equivalentClass bf2:Isan .
+kbv:ISBN a rdfs:Datatype; owl:equivalentClass bf2:Isbn .
+kbv:ISMN a rdfs:Datatype; owl:equivalentClass bf2:Ismn .
+kbv:ISNI a rdfs:Datatype; owl:equivalentClass bf2:Isni .
+kbv:ISO a rdfs:Datatype; owl:equivalentClass bf2:Iso .
+kbv:ISRC a rdfs:Datatype; owl:equivalentClass bf2:Isrc .
+kbv:ISSN a rdfs:Datatype; owl:equivalentClass bf2:Issn .
+kbv:ISSNL a rdfs:Datatype; owl:equivalentClass bf2:IssnL .
+kbv:ISTC a rdfs:Datatype; owl:equivalentClass bf2:Istc .
+kbv:ISWC a rdfs:Datatype; owl:equivalentClass bf2:Iswc .
+kbv:LCCN a rdfs:Datatype; owl:equivalentClass bf2:Lccn .
 kbv:NBN a rdfs:Datatype; owl:equivalentClass bf2:Nbn .
+kbv:SICI a rdfs:Datatype; owl:equivalentClass bf2:Sici .
 kbv:STRN a rdfs:Datatype; owl:equivalentClass bf2:Strn .
+kbv:UPC a rdfs:Datatype; owl:equivalentClass bf2:Upc .
+kbv:URN a rdfs:Datatype; owl:equivalentClass bf2:Urn .
