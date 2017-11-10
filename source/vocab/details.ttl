@@ -774,14 +774,18 @@
     owl:equivalentProperty bf2:awards .
   
 :creditsNote a owl:DatatypeProperty;
-    rdfs:label "credits note"@en, "upphovsanmärkning"@sv;
+    rdfs:label "credits note"@en, "Anmärkning om upphov"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:credits .
 
 :contentsNote a owl:DatatypeProperty;
     rdfs:label "contents note"@en, "Anmärkning om innehåll"@sv;
     owl:equivalentProperty bf:contentsNote .
-    
+
+:participantNote a owl:DatatypeProperty;
+    rdfs:label "Anmärkning om medverkan"@sv;
+    rdfs:domain :Note .
+
 :ContentAccessibility a owl:Class;
     rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
     owl:equivalentClass bf2:ContentAccessibility .
