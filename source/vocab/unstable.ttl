@@ -51,6 +51,12 @@ marc:hiddenValue a owl:DatatypeProperty;
 
 #AGENT
 
+marc:numeration a owl:DatatypeProperty;
+    rdfs:label "Numeration"@en, "Ordningstal"@sv;
+    rdfs:comment "Förekommer endast för namn i rak följd. Ange ordningstal för regenter med romerska siffror."@sv;
+    rdfs:range :Literal;
+    rdfs:domain :Person .
+
 marc:titleOther a owl:DatatypeProperty;
     rdfs:label "Titel eller övrig beteckning"@sv;
     rdfs:domain :Agent .
