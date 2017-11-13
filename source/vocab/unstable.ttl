@@ -16,6 +16,20 @@
 # MARC terms, unstable enums...
 
 
+#RECORD
+
+marc:hasSourceDataNotFound a owl:ObjectProperty;
+    rdfs:label "Source Data Not Found"@en, "Källa vid ej belagd namnform"@sv;
+    rdfs:range marc:SourceDataNotFound;
+    rdfs:domain :Record .
+
+marc:SourceDataNotFound a owl:Class;
+    rdfs:label "Source Data Not Found"@en, "Källa vid ej belagd namnform"@sv .
+
+:citationSource a owl:DatatypeProperty;
+    rdfs:label "Källa"@sv;
+    rdfs:domain marc:SourceDataNotFound .
+
 #TITLE
 marc:mediaTerm a owl:DatatypeProperty;
     rdfs:label "Medieterm"@sv;
@@ -54,16 +68,32 @@ marc:hiddenValue a owl:DatatypeProperty;
 marc:numeration a owl:DatatypeProperty;
     rdfs:label "Numeration"@en, "Ordningstal"@sv;
     rdfs:comment "Förekommer endast för namn i rak följd. Ange ordningstal för regenter med romerska siffror."@sv;
-    rdfs:range :Literal;
     rdfs:domain :Person .
 
 marc:titleOther a owl:DatatypeProperty;
     rdfs:label "Titel eller övrig beteckning"@sv;
     rdfs:domain :Agent .
 
+marc:fullerFormName a owl:DatatypeProperty;
+    rdfs:label: "Fuller form of name"@en, "Fullständigare namnform"@sv ;
+    rdfs:domain :Agent .
+
 marc:BiographicalOrHistoricalData a owl:Class;
     rdfs:label "Biografisk information"@sv .
 
+marc:hasAuth368 a owl:ObjectProperty;
+    rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
+    rdfs:domain :Agent .
+
+marc:Auth368 a owl:Class;
+    rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
+
+marc:hasAuth370 a owl:ObjectProperty;
+    rdfs:label "Associerad plats"@sv;
+    rdfs:domain :Agent .
+
+marc:Auth370 a owl:Class;
+    rdfs:label "Associerad plats"@sv .
 
 # TODO: work-in-progress
 
