@@ -99,22 +99,24 @@
     rdfs:domain :Person;
     owl:equivalentProperty sdo:birthDate .
 
-:birthYear a owl:DatatypeProperty;
-    #owl:propertyChainAxiom (:birthDate :year); # given that :Year rdfs:Datatype is defined as a "virtual" resource...
-    rdfs:subPropertyOf :birthDate;
-    rdfs:range :Year;
-    rdfs:label "birth year"@en, "födelseår"@sv .
+# in favor of lifeSpan.
+#:birthYear a owl:DatatypeProperty;
+#    #owl:propertyChainAxiom (:birthDate :year); # given that :Year rdfs:Datatype is defined as a "virtual" resource...
+#    rdfs:subPropertyOf :birthDate;
+#    rdfs:range :Year;
+#    rdfs:label "birth year"@en, "födelseår"@sv .
 
 :deathDate a owl:DatatypeProperty;
     rdfs:label "dödsdatum"@sv;
     rdfs:domain :Person;
     owl:equivalentProperty sdo:deathDate .
 
-:deathYear a owl:DatatypeProperty;
-    rdfs:subPropertyOf :deathDate;
-    rdfs:range :Year;
-    owl:equivalentProperty sdo:deathYear;
-    rdfs:label "death year"@en, "dödsår"@sv .
+# in favor of lifeSpan.
+#:deathYear a owl:DatatypeProperty;
+#    rdfs:subPropertyOf :deathDate;
+#    rdfs:range :Year;
+#    owl:equivalentProperty sdo:deathYear;
+#    rdfs:label "death year"@en, "dödsår"@sv .
 
 :Persona a owl:Class;
     rdfs:label "Persona"@sv;
