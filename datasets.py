@@ -108,6 +108,18 @@ def vocab():
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
 
+    # Clean up generated prefixes
+    preferred = {}
+    defaulted = {}
+    for pfx, uri in graph.store.namespaces():
+        if pfx.startswith('default'):
+            defaulted[uri] = pfx
+        else:
+            preferred[uri] = pfx
+    for default_pfx, uri in defaulted.items():
+        if uri in preferred:
+            graph.namespace_manager.bind(preferred[uri], uri, override=True)
+
     data = compiler.to_jsonld(graph)
     del data['@context']
 
