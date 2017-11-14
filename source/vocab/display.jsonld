@@ -184,6 +184,7 @@
         },
         "Person": {
           "@type": "fresnel:Lens",
+          "@id": "person-card",
           "classLensDomain": "Person",
           "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titleOther", "marc:fullerFormName", "lifeSpan", "marc:attributionQualifier", "notation", "personTitle", "note" ]
         },
@@ -231,6 +232,10 @@
         "Instance": {
           "fresnel:extends": {"@id": "instance-card"},
           "showProperties": [ "fresnel:super", {"inverseOf": "itemOf"} ]
+        },
+        "Person": {
+          "fresnel:extends": {"@id": "person-card"},
+          "showProperties": [ "fresnel:super", "birthDate", "deathDate" ]
         }
       }
     }
