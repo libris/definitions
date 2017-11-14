@@ -1,6 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -265,7 +266,7 @@
 :Topic a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
     owl:equivalentClass bf2:Topic, madsrdf:Topic;
-    rdfs:subClassOf :Concept .
+    rdfs:subClassOf :Subject .
 
 :GenreForm a owl:Class;
     rdfs:label "Genre/Form"@en, "Genre/form"@sv;
@@ -276,7 +277,7 @@
 :Temporal a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
     owl:equivalentClass bf2:Temporal, madsrdf:Temporal;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :Subject;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Event ] .
@@ -284,24 +285,25 @@
 :Geographic a owl:Class;
     rdfs:label "Geografiskt ämnesord"@sv;
     owl:equivalentClass madsrdf:Geographic;
-    rdfs:subClassOf :Concept, bf2:Place .
+    rdfs:subClassOf :Subject, bf2:Place .
 
 :TermCollection a owl:Class;
     rdfs:label "Term Collection"@en, "Termsamling"@sv;
     rdfs:subClassOf :ConceptCollection;
     owl:equivalentClass madsrdf:MADSCollection .
 
-:IndexTerm a owl:Class;
+:Subject a owl:Class;
     :category marc:auth ;
-    rdfs:label "Index Term"@en, "Indexterm"@sv;
+    ptg:abstract true;
+    rdfs:label "Subject"@en, "Ämne"@sv;
     owl:equivalentClass madsrdf:MADSType;
     rdfs:subClassOf :Concept;
     foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
 
-:ComplexTerm a owl:Class;
-    rdfs:subClassOf :IndexTerm;
+:ComplexSubject a owl:Class;
+    rdfs:subClassOf :Subject;
     owl:equivalentClass madsrdf:ComplexSubject;
-    rdfs:label "Complex Term"@en, "Sammansatt term"@sv .
+    rdfs:label "Complex Subject"@en, "Sammansatt term"@sv .
 
 :termComponentList a owl:ObjectProperty;
     owl:equivalentProperty madsrdf:componentList;
@@ -313,7 +315,7 @@
 
 :Subdivision a owl:Class;
     rdfs:label "Underindelning"@sv;
-    rdfs:subClassOf :Concept .
+    rdfs:subClassOf :Subject .
 
 :ChronologicalSubdivision a owl:Class ;
     rdfs:subClassOf :Subdivision, :ChronologicalTerm;
