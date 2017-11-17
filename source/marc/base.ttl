@@ -5,6 +5,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix schema: <http://schema.org/> .
+@prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 @prefix : <https://id.kb.se/marc/> .
 
@@ -13,13 +14,11 @@
 :bib a skos:Collection ; :code "bib" .
 :hold a skos:Collection ; :code "hold" .
 
-skos:Concept rdfs:subClassOf rdfs:Resource .
-
 :Field a owl:Class ;
-    rdfs:subClassOf skos:Concept .
+    rdfs:subClassOf rdfs:Resource .
 
 :subField a rdf:Property ;
-    rdfs:subClassOf skos:Concept .
+    rdfs:domain :Field .
 
 :data a owl:ObjectProperty;
     rdfs:range rdf:List .
@@ -40,7 +39,7 @@ skos:Concept rdfs:subClassOf rdfs:Resource .
     rdfs:subClassOf owl:Class, skos:Collection .
 
 :EnumeratedTerm a owl:Class ;
-    rdfs:subClassOf schema:Enumeration, skos:Concept .
+    rdfs:subClassOf schema:Enumeration, kbv:Concept .
 
 :EnumeratedClass a owl:Class ;
     rdfs:subClassOf :EnumeratedTerm, owl:Class .
