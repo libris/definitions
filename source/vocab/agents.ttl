@@ -134,16 +134,37 @@
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
     rdfs:range :FieldOfActivity;
-    owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089 .
+    owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
 
 :FieldOfActivity a owl:Class;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
 
+:adress a owl:DatatypeProperty;
+    rdfs:label "Address"@en, "Adress"@sv;
+    sdo:domainIncludes :Person, :Organization;
+    owl:equivalentProperty sdo:adress .
+
+:birthPlace a owl:ObjectProperty;
+    rdfs:label "Birthplace"@en,"Födelseplats"@sv;
+    owl:equivalentProperty sdo:birthPlace, madsrdf:birthPlace, rdau:P60593, rdau:placeOfBirth.en .
+
+:deathPlace a owl:ObjectProperty;
+    rdfs:label "Deathplace"@en,"Dödsplats"@sv;
+    owl:equivalentProperty sdo:deathPlace, madsrdf:deathPlace, rdau:P60592, rdau:placeOfDeath.en .
+
+:startDate a owl:DatatypeProperty;
+    rdfs:label "Start date"@en, "Startdatum"@sv;
+    owl:equivalentProperty sdo:startDate, madsrdf:activityStartDate .
+
+:endDate a owl:DatatypeProperty;
+    rdfs:label "End date"@en, "Slutdatum"@sv;
+    owl:equivalentProperty sdo:endDate, madsrdf:activityEndDate .
+
 :hasAffiliation a owl:ObjectProperty;
     rdfs:label "Has affiliation"@en, "Organisatorisk tillhörighet"@sv;
     rdfs:domain :Agent;
-    rdfs:range :Affiliation; 
-    owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095 .
+    rdfs:rangeIncludes :Affiliation;
+    owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095, rdau:affiliation.en .
 
 :Affiliation a owl:Class;
     rdfs:label "Affiliation"@en, "Organisatorisk tillhörighet"@sv;
