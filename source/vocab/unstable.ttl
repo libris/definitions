@@ -97,11 +97,12 @@ marc:attributionQualifier a owl:DatatypeProperty;
 marc:BiographicalOrHistoricalData a owl:Class;
     rdfs:label "Biografisk information"@sv .
 
-marc:hasAuth368 a owl:ObjectProperty;
+marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
-    rdfs:domain :Agent .
+    rdfs:domain :Agent;
+    rdfs:range marc:OtherAttributes .
 
-marc:Auth368 a owl:Class;
+marc:OtherAttributes a owl:Class;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
 
 marc:hasAuth370 a owl:ObjectProperty;
