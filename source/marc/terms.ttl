@@ -1,10 +1,14 @@
-@prefix : <https://id.kb.se/marc/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix kbv: <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
-:OtherTitle a owl:Class;
+marc:OtherTitle a owl:Class ;
     rdfs:subClassOf kbv:VariantTitle, kbv:InstanceTitle;
     rdfs:label "Other title"@en, "Även med titel"@sv .
+
+marc:relatedAs a owl:ObjectProperty ;
+    sdo:domainIncludes kbv:Work, kbv:Agent ;
+    rdfs:range kbv:Role .
