@@ -73,6 +73,7 @@
 :hasInstance a owl:ObjectProperty ;
     rdfs:label "har instans"@sv;
     #felaktig engelsk etikett i bf2.
+    owl:inverseOf :instanceOf ;
     owl:equivalentProperty bf2:hasInstance;
     rdfs:subClassOf sdo:workExample;
     rdfs:domain :Work ;
@@ -156,13 +157,14 @@
 
 # MARC Aligments for Editing
 
-# TODO: Use <./construct-enum-restrictions.rq>! (Was: add all combos from 007 and 008)
-:Map rdfs:subClassOf [ a owl:Restriction;
-        owl:onProperty :carrierType;
-        owl:someValuesFrom marc:MapMaterialType ] .
-:Text rdfs:subClassOf [ a owl:Restriction;
-        owl:onProperty :contentType;
-        owl:someValuesFrom marc:BooksContentsType ] .
+# DONE?
+## TODO: Use <./construct-enum-restrictions.rq>! (Was: add all combos from 007 and 008)
+#:Map rdfs:subClassOf [ a owl:Restriction;
+#        owl:onProperty :carrierType;
+#        owl:someValuesFrom marc:MapMaterialType ] .
+#:Text rdfs:subClassOf [ a owl:Restriction;
+#        owl:onProperty :contentType;
+#        owl:someValuesFrom marc:BooksContentsType ] .
 
 
 # RDA Alignments (some draft examples...)
@@ -331,7 +333,8 @@
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Work .
 
-:ArchivalUnit a owl:Class;
+:ArchivalUnit a owl:Class; # TOWO: :ArchivalWork ?
+    rdfs:subClassOf :Work ;
     rdfs:label "Arkivenhet"@sv;
     owl:deprecated true;
     :inCollection marc:typeOfRecord .
@@ -537,30 +540,78 @@
 #    skos:exactMatch rdamedia:1008 ; # "video"
 
 
-# Combined Work/Instance Types in MARC
+# Combined "Instance with restricted Work" types from MARC (007)
+
+:StillImageInstance a owl:Class;
+    rdfs:label "Instans av stillbild"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :
+        ] .
+
+:MovingImageInstance a owl:Class;
+    rdfs:label "Instans av rörlig bild"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :MovingImage
+        ] .
+
+:KitInstance a owl:Class;
+    rdfs:label "Instans av paket"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :Kit
+        ] .
+
+:NotatedMusicInstance a owl:Class;
+    rdfs:label "Instans av musiknoter"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :NotatedMusic
+        ] .
+
+:TextInstance a owl:Class;
+    rdfs:label "Instans av text"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :Text
+        ] .
+
+
+# Combined "Work with restricted Instance" types from MARC (000 typeOfRecord)
 
 :ManuscriptCartography a owl:Class;
     rdfs:label "Karthandskrift"@sv;
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf [ a owl:Restriction; 
-            owl:onProperty :instanceOf;
-            owl:allValuesFrom :Cartography
-        ],
-        :Manuscript .
+    rdfs:subClassOf :Cartography ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasInstance;
+            owl:allValuesFrom :Manuscript
+        ] .
 
 :ManuscriptNotatedMusic a owl:Class;
     rdfs:label "Musikhandskrift"@sv;
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf [ a owl:Restriction; 
-            owl:onProperty :instanceOf;
-            owl:allValuesFrom :NotatedMusic
-        ],
-        :Manuscript .
+    rdfs:subClassOf :NotatedMusic ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasInstance;
+            owl:allValuesFrom :Manuscript
+        ] .
 
 :ManuscriptText a owl:Class;
     rdfs:label "Texthandskrift"@sv;
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :Text, :Manuscript .
+    rdfs:subClassOf :Text ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasInstance;
+            owl:allValuesFrom :Manuscript
+        ] .
+
 
 # Common Carrier Types
 
