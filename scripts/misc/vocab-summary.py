@@ -149,11 +149,15 @@ if __name__ == '__main__':
     argp = argparse.ArgumentParser()
     argp.add_argument('-v', '--show-equivalents', action='store_true', default=False)
     argp.add_argument('sources', metavar='SOURCE', nargs='+')
+    argp.add_argument('-c', '--context', metavar='CONTEXT')
     args = argp.parse_args()
 
     g = ConjunctiveGraph()
     for src in args.sources:
         fmt = 'json-ld' if src.endswith('.jsonld') else guess_format(src)
-        g.parse(src, format=fmt)
+        if args.context:
+            g.parse(src, format=fmt, context=args.context)
+        else:
+            g.parse(src, format=fmt)
 
     print_vocab(g, args.show_equivalents)
