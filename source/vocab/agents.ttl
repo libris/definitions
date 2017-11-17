@@ -159,7 +159,21 @@
     rdfs:domain :Agent;
     rdfs:range :Place;
     #rdfs:range madsrdf:Geographic?
-    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325 .
+    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325, rdau:placeAssociatedWithTheAgent.en .
+
+:hasTypeOfFamily a owl:ObjectProperty;
+    rdfs:label "Has type of family"@en, "Har typ av släkt"@en;
+    rdfs:domain :Family;
+    owl:equivalentProperty rdaa:P50051, rdaa:typeOfFamily.en .
+
+:TypeOfFamily a owl:Class;
+    rdfs:label "Type of family"@en, "Typ av familj"@en .
+
+:hasProminentFamilyMember a owl:ObjectProperty;
+    rdfs:label "has prominent member"@en, "har välkänd släktmedlem"@sv;
+    rdfs:domain :Family;
+    rdfs:Range :Person;
+    owl:equivalentProperty rdaa:P50060, rdaa:prominentMemberOfFamily.en .
 
 :nationality a owl:ObjectProperty;
     rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
