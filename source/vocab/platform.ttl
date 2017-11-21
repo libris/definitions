@@ -21,6 +21,7 @@
 @prefix opensearch: <http://a9.com/-/spec/opensearch/1.1/> .
 
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -55,6 +56,12 @@
 :describedBy a owl:ObjectProperty;
     rdfs:label "Beskriven av"@sv;
     owl:equivalentProperty iana:describedby, wdrs:describedby .
+
+:recordStatus a owl:ObjectProperty;
+    rdfs:subPropertyOf :status;
+    rdfs:label "Poststatus"@sv;
+    rdfs:domain :Record;
+    sdo:rangeIncludes marc:StatusType .
 
 # NOTE: additional data about automapped BF2 terms
 
