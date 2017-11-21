@@ -195,6 +195,13 @@
     rdfs:range :Classification ;
     rdfs:label "Classification"@en, "klassifikation"@sv .
 
+:additionalClassificationDdc a owl:ObjectProperty;
+    rdfs:subClassOf :classification;
+    rdfs:domain :Endeavour ;
+    rdfs:range :ClassificationDdc ;
+    rdfs:comment "Kompletterande klassifikationskod, kan användas som ämnesingång tillsammans med den primära klassifikationen"@sv;
+    rdfs:label "Additional DDC Classification"@en, "DDK-klassifikation (Sekundär)"@sv .
+
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
     owl:equivalentClass bf2:Classification;
