@@ -436,7 +436,7 @@
         "Produktionsfakta"@sv .
 
 :MotionPicFormatType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:PresentationFormat ;
     skos:broadMatch kbv:MovingImage ;
     skos:notation "MotionPicFormatType" ;
     skos:prefLabel "Presentation Format"@en,
@@ -639,7 +639,7 @@
         "Storlek (diameter längd x bredd)"@sv .
 
 :SoundGrooveType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:GrooveCharacteristic ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundGrooveType" ;
     skos:prefLabel "Groove Width/Groove Pitch"@en,
@@ -653,21 +653,21 @@
         "Särskild bärarbeteckning"@sv .
 
 :SoundPlaybackChannelType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:PlaybackChannels ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundPlaybackChannelType" ;
     skos:prefLabel "Playback Channel"@en,
         "Ljudkonfiguration"@sv .
 
 :SoundSpeedType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:PlayingSpeed ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundSpeedType" ;
     skos:prefLabel "Speed"@en,
         "Hastighet"@sv .
 
 :SoundTapeConfigurationType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:TapeConfig ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundTapeConfigurationType" ;
     skos:prefLabel "Tape Configuration"@en,
@@ -681,7 +681,7 @@
         "Magnetbandets bredd"@sv .
 
 :TacBrailleMusicType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:MusicNotation ;
     skos:broadMatch kbv:TactileMaterial ;
     skos:notation "TacBrailleMusicType" ;
     skos:prefLabel "Braille Music 1"@en,
@@ -715,7 +715,7 @@
         "Särskild bärarbeteckning"@sv .
 
 :TacSpecPhysicalCharType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:TactileNotation ;
     skos:broadMatch kbv:TactileMaterial ;
     skos:notation "TacSpecPhysicalCharType" ;
     skos:prefLabel "Specific Physical Characteristics"@en,
@@ -995,14 +995,14 @@
     skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
 
 :MapsProjectionType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:Projection ;
     skos:broadMatch kbv:Cartography ;
     skos:notation "MapsProjectionType" ;
     skos:prefLabel "Projection"@en,
         "Projektion"@sv .
 
 :MediumType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:RecordingMedium ;
     owl:equivalentClass :MotionPicMediumType,
         :ProjGraphMediumType,
         :VideoMediumType ;
@@ -1047,7 +1047,7 @@
         "Fullständighet"@sv .
 
 :MotionPicConfigurationOrVideoPlaybackType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:PlaybackChannels ;
     owl:equivalentClass :MotionPicConfigurationType,
         :VideoPlaybackType ;
     skos:broadMatch kbv:MovingImage,
@@ -1237,7 +1237,7 @@
         "Inspelnings- och lagringsteknik"@sv .
 
 :SoundKindOfCuttingType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:GrooveCharacteristic ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundKindOfCuttingType" ;
     skos:prefLabel "Kind of Cutting"@en,
@@ -1258,7 +1258,7 @@
         "Material"@sv .
 
 :SoundPlaybackCharacterType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:PlaybackCharacteristic ;
     skos:broadMatch kbv:SoundRecording ;
     skos:notation "SoundPlaybackCharacterType" ;
     skos:prefLabel "Playback Characteristics"@en,
@@ -1345,7 +1345,7 @@
         "Filmbredd"@sv .
 
 :VideoFormatType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:VideoFormat ;
     skos:broadMatch kbv:VideoRecording ;
     skos:notation "VideoFormatType" ;
     skos:prefLabel "Format"@en,
