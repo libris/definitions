@@ -533,8 +533,8 @@
 
 :ProvisionActivity a owl:Class;
     rdfs:label "Provider entity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
-    owl:equivalentClass bf2:ProvisionActivity, :QualifiedRole;
-    rdfs:subClassOf :Event .
+    owl:equivalentClass bf2:ProvisionActivity;
+    rdfs:subClassOf :Event, :QualifiedRole .
 
 :provisionActivity a owl:ObjectProperty;
     rdfs:label "Provision activity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
@@ -1142,7 +1142,7 @@
 
 :SystemRequirement a owl:Class;
     rdfs:label "System Requirement"@en, "Systemkrav"@sv;
-    rdfs:subClassOf :QualifiedRole ;
+    rdfs:subClassOf :StructuredValue ;
     owl:equivalentClass bf2:SystemRequirement .
 
 :systemRequirement a owl:ObjectProperty;
