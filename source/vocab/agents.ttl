@@ -184,18 +184,24 @@
     owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325, rdau:placeAssociatedWithTheAgent.en .
 
 :hasTypeOfFamily a owl:ObjectProperty;
-    rdfs:label "Has type of family"@en, "Har typ av släkt"@en;
+    rdfs:label "Has type of family"@en, "Typ av släkt"@sv;
     rdfs:domain :Family;
     owl:equivalentProperty rdaa:P50051, rdaa:typeOfFamily.en .
 
 :TypeOfFamily a owl:Class;
-    rdfs:label "Type of family"@en, "Typ av familj"@en .
+    rdfs:label "Type of family"@en, "Typ av släkt"@sv .
 
 :hasProminentFamilyMember a owl:ObjectProperty;
-    rdfs:label "has prominent member"@en, "har välkänd släktmedlem"@sv;
+    rdfs:label "Has Prominent Familymember"@en, "Har välkänd släktmedlem"@sv;
     rdfs:domain :Family;
     rdfs:Range :Person;
     owl:equivalentProperty rdaa:P50060, rdaa:prominentMemberOfFamily.en .
+
+:prominentFamilyMember a owl:DatatypeProperty;
+    ptg:abstract true;
+    rdfs:label "Prominent Family Member"@en, "Välkänd släktmedlem"@sv;
+    owl:equivalentProperty madsrdf:prominentFamilyMember;
+    owl:propertyChainAxiom ( :hasProminentFamilyMember :prefLabel ) .
 
 :nationality a owl:ObjectProperty;
     rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
@@ -204,12 +210,6 @@
 :lifeSpan a owl:DatatypeProperty;
     rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
     rdfs:domain :Agent.
-
-:prominentFamilyMember a owl:DatatypeProperty;
-    rdfs:label "Prominent Family Member"@en, "Välkänd medlem av släkten"@en;
-    rdfs:domain :Family;
-    rdfs:range :Person;
-    owl:equivalentProperty madsrdf:prominentFamilyMember .
 
 :gender a owl:DatatypeProperty;
     rdfs:label "gender"@en, "kön"@sv;
