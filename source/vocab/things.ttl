@@ -157,16 +157,6 @@
 
 # MARC Aligments for Editing
 
-# DONE?
-## TODO: Use <./construct-enum-restrictions.rq>! (Was: add all combos from 007 and 008)
-#:Map rdfs:subClassOf [ a owl:Restriction;
-#        owl:onProperty :carrierType;
-#        owl:someValuesFrom marc:MapMaterialType ] .
-#:Text rdfs:subClassOf [ a owl:Restriction;
-#        owl:onProperty :contentType;
-#        owl:someValuesFrom marc:BooksContentsType ] .
-
-
 # RDA Alignments (some draft examples...)
 
 :Unmediated a bf2:Media;
@@ -583,6 +573,15 @@
         ] .
 
 
+:ProjectedImageInstance a owl:Class;
+    rdfs:label "Instans av projicerad bild"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :instanceOf;
+            owl:allValuesFrom :ProjectedImage
+        ] .
+
+
 # Combined "Work with restricted Instance" types from MARC (000 typeOfRecord)
 
 :ManuscriptCartography a owl:Class;
@@ -624,15 +623,22 @@
 ## Candidates for interface-enhanced types (easier to comprehend, combines multiple settings).
 # TODO: some classes here still conflate Work/Instance!
 
-#:Globe a owl:Class;
-#    rdfs:label "Kartglob"@sv;
-#    rdfs:subClassOf :Cartography, :Object .
-#
-#:Map a owl:Class;
-#    rdfs:label "Karta"@sv;
-#    rdfs:subClassOf :Cartography;
-#    owl:equivalentClass bibo:Map .
-#
+:Globe a owl:Class;
+    rdfs:label "Kartglob"@sv;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :instanceOf ;
+            owl:allValuesFrom :Cartography
+        ] .
+
+:Map a owl:Class;
+    rdfs:label "Karta"@sv;
+    owl:equivalentClass bibo:Map ;
+    rdfs:subClassOf :Instance ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :instanceOf ;
+            owl:allValuesFrom :Cartography
+        ] .
 
 :RemoteSensingImage a owl:Class;
     rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
