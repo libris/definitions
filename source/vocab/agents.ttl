@@ -67,14 +67,14 @@
     rdfs:domain :Person;
     rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd"@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
-    owl:equivalentProperty sdo:familyName, foaf:familyName .
+    owl:equivalentProperty sdo:familyName, foaf:familyName, rdaa:P50291, rdaa:surname.en .
 
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "förnamn"@sv;
     rdfs:domain :Person;
     rdfs:comment "Förnamn, kan ej kombineras med egenskapen 'namn' som har rak ordföljd."@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
-    owl:equivalentProperty sdo:givenName, foaf:givenName .
+    owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
 
 :hasBiographicalInformation a owl:DatatypeProperty;
     rdfs:label "has biographical information", "biografisk information";
@@ -98,7 +98,7 @@
 :birthDate a owl:DatatypeProperty;
     rdfs:label "födelsedatum"@sv;
     rdfs:domain :Person;
-    owl:equivalentProperty sdo:birthDate .
+    owl:equivalentProperty sdo:birthDate, madsrdf:birthDate  .
 
 # in favor of lifeSpan.
 #:birthYear a owl:DatatypeProperty;
@@ -110,7 +110,7 @@
 :deathDate a owl:DatatypeProperty;
     rdfs:label "dödsdatum"@sv;
     rdfs:domain :Person;
-    owl:equivalentProperty sdo:deathDate .
+    owl:equivalentProperty sdo:deathDate, madsrdf:deathDate .
 
 # in favor of lifeSpan.
 #:deathYear a owl:DatatypeProperty;
