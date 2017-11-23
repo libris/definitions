@@ -12,3 +12,28 @@ marc:OtherTitle a owl:Class ;
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
     rdfs:range kbv:Role .
+
+marc:electronicLocatorType a owl:DatatypeProperty ;
+    rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
+
+# 546:
+
+marc:hasLanguageNote a owl:ObjectProperty ;
+    rdfs:label "Language note"@en, "Preciserande språkanmärkning"@sv;
+    rdfs:domain kbv:Work;
+    rdfs:range kbv:LanguageNote .
+
+marc:LanguageNote a owl:Class ;
+    rdfs:label "Language note"@en, "Anmärkning: Språk"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+    
+# 550:
+
+marc:hasIssuingBodyNote a owl:ObjectProperty ;
+    rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution (fortlöpande resurser)"@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range kbv:IssuingBodyNote .
+
+marc:IssuingBodyNote a owl:Class ;
+    rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
