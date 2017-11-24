@@ -37,3 +37,14 @@ marc:hasIssuingBodyNote a owl:ObjectProperty ;
 marc:IssuingBodyNote a owl:Class ;
     rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution"@sv ;
     rdfs:subClassOf sdo:StructuredValue .
+
+# 698
+
+marc:hasLocalSubjectAndHeading a owl:ObjectProperty ;
+    rdfs:label "Local subjects/headings"@en, "Lokala ämnesord/rubriker (övriga)"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range kbv:LocalSubjectAndHeading .
+
+marc:LocalSubjectAndHeading a owl:Class ;
+    rdfs:label "Local subjects/headings"@en, "Lokala ämnesord/rubriker (övriga)"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
