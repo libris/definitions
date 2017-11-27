@@ -50,6 +50,40 @@ marc:BibliographyEtcNote a owl:Class;
     rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv;
     rdfs:subClassOf sdo:StructuredValue .
 
+# 508:
+
+marc:hasCreationProductionCreditsNote a owl:ObjectProperty;
+    rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
+    rdfs:domain kbv:Work;
+    rdfs:range marc:CreationProductionCreditsNote .
+
+marc:CreationProductionCreditsNote a owl:Class;
+    rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+# 511:
+
+marc:hasParticipantOrPerformerNote a owl:ObjectProperty;
+    rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
+    rdfs:domain kbv:Work;
+    rdfs:range marc:ParticipantOrPerformerNote .
+
+marc:ParticipantOrPerformerNote a owl:Class;
+    rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+# 513:
+
+marc:hasTypeOfReportAndPeriodCoveredNote a owl:ObjectProperty ;
+    rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range marc:TypeOfReportAndPeriodCoveredNote .
+
+marc:TypeOfReportAndPeriodCoveredNote a owl:Class ;
+    rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+
 # 546:
 
 marc:hasLanguageNote a owl:ObjectProperty ;
