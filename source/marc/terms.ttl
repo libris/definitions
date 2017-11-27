@@ -16,6 +16,40 @@ marc:relatedAs a owl:ObjectProperty ;
 marc:electronicLocatorType a owl:DatatypeProperty ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
 
+#RECORD
+
+marc:hasSourceDataNotFound a owl:ObjectProperty;
+    rdfs:label "Source Data Not Found"@en, "Källa vid ej belagd namnform"@sv;
+    rdfs:range marc:SourceDataNotFound;
+    rdfs:domain kbv:Record .
+
+marc:SourceDataNotFound a owl:Class;
+    rdfs:label "Source Data Not Found"@en, "Källa vid ej belagd namnform"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+# 501:
+
+marc:hasWithNote a owl:ObjectProperty;
+    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range marc:WithNote .
+
+marc:WithNote a owl:Class;
+    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv;
+    rdfs:subClassOf sdo:StructuredValue .
+
+# 504:
+
+marc:hasBibliographyEtcNote a owl:ObjectProperty;
+    rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range marc:BibliographyEtcNote .
+
+
+marc:BibliographyEtcNote a owl:Class;
+    rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv;
+    rdfs:subClassOf sdo:StructuredValue .
+
 # 546:
 
 marc:hasLanguageNote a owl:ObjectProperty ;
