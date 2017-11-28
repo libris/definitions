@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
@@ -39,7 +40,7 @@
 
 :Record a owl:Class;
     rdfs:label "Post"@sv;
-    rdfs:subClassOf bf2:AdminMetadata, foaf:Document .
+    rdfs:subClassOf :AdminMetadata, foaf:Document .
 
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
@@ -81,19 +82,40 @@
     owl:equivalentProperty bf2:assigner .
 
 :descriptionModifier a owl:ObjectProperty;
+    ptg:abstract true;
     rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
     rdfs:range :Agent .
 
+:descriptionCreator a owl:ObjectProperty;
+    rdfs:label "Description creator"@en, "Skapad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
+:descriptionUpgrader a owl:ObjectProperty;
+    rdfs:label "Description upgrader"@en, "Uppgraderad eller importerad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
+:descriptionLastModifier a owl:ObjectProperty;
+    rdfs:label "Description last modifier"@en, "Senast ändrad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
 :created a owl:DatatypeProperty;
     rdfs:label "Skapad"@sv;
+    rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:creationDate ;
     rdfs:subPropertyOf dc:created, sdo:dateCreated;
     rdfs:range xsd:dateTime .
 
 :modified a owl:DatatypeProperty;
     rdfs:label "Ändrad"@sv;
+    rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:changeDate ;
     rdfs:subPropertyOf dc:modified, sdo:dateModified ;
     rdfs:range xsd:dateTime .
