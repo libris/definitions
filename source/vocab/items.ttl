@@ -30,15 +30,16 @@
     #owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
     rdfs:label "item"@en, "Bestånd"@sv .
 
-:SomeItems a owl:Class ;
-    rdfs:subClassOf :Item ;
-    owl:equivalentClass bf1:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
-    rdfs:label "some items"@en, "några exemplar"@sv .
+# Remove temporarily and only use :Item
+# :SomeItems a owl:Class ;
+#     rdfs:subClassOf :Item ;
+#     owl:equivalentClass bf1:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
+#     rdfs:label "some items"@en, "några exemplar"@sv .
 
-:IndividualItem a owl:Class ;
-    rdfs:subClassOf :Item ;
-    owl:equivalentClass bf1:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
-    rdfs:label "individual item"@en, "enskilt exemplar"@sv .
+# :IndividualItem a owl:Class ;
+#     rdfs:subClassOf :Item ;
+#     owl:equivalentClass bf1:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
+#     rdfs:label "individual item"@en, "enskilt exemplar"@sv .
 
 ### ITEM PROPERTIES AND CLASSES ###
 
@@ -161,7 +162,8 @@
 :hasComponent a owl:ObjectProperty ;
     rdfs:subPropertyOf bf2:hasPart ;
     #rdfs:subPropertyOf :moreSpecifically ;
-    rdfs:domain :SomeItems ;
+    rdfs:domain :Item ;
+    # TODO: rdfs:domain :SomeItems ;
     rdfs:range :Item ;
     rdfs:label "has component"@en, "har komponent"@sv .
 
