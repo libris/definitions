@@ -132,6 +132,12 @@
     owl:inverseOf :accompaniedBy;
     owl:equivalentProperty bf2:accompanies .
 
+:associatedMedia a owl:ObjectProperty;
+    #TODO: More specifically sdo:domainIncludes :Item, :Instance;
+    rdfs:domain :Endeavour;
+    rdfs:range :MediaObject;
+    rdfs:label "associated media"@en, "tillhörande media"@sv .
+
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
     rdfs:subPropertyOf :relatedTo;
@@ -246,6 +252,9 @@
 
 :otherPhysicalFormat a owl:ObjectProperty;
     owl:equivalentProperty bf2:otherPhysicalFormat;
+    rdfs:domain :Instance;
+    rdfs:range :Instance;
+    rdfs:subPropertyOf :hasEquivalent;
     rdfs:label "Annat bärarformat"@sv .
 
 :hasSubseries a owl:ObjectProperty;
