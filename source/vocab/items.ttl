@@ -89,8 +89,9 @@
     skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
     owl:equivalentProperty bf2:physicalLocation .
 
-:url a rdf:Property;
+:url a owl:DatatypeProperty;
     owl:equivalentProperty sdo:url;
+    rdfs:domain :Item;
     rdfs:label "URL"@sv .
 
 
@@ -237,27 +238,27 @@
 
 ### LOCAL LIBRIS HOLDING TERMS ###
     
-:availability a rdf:Property;
+:availability a owl:DatatypeProperty;
     owl:equivalentProperty sdo:availability;
     rdfs:label "Exemplarstatus"@sv;
     rdfs:domain :Item;
     rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
     skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
 
-:classificationPart a rdf:Property;
+:classificationPart a owl:DatatypeProperty;
     # TODO: rename to shelfMark? rdfs:subPropertyOf bf:shelfMark ?
     rdfs:label "Hyllsignum: Klassifikation"@sv;
     rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
     skos:example "Hc", "Hc Lagerlöf" .
 
-:copyNumber a rdf:Property;
+:copyNumber a owl:DatatypeProperty;
     #	bf:enumerationAndChronology  
     rdfs:label "Exemplarnummer"@sv;
     rdfs:domain :Item;
     rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
     skos:example "A-C", "5" .
 
-:shelfControlNumber a rdf:Property;
+:shelfControlNumber a owl:DatatypeProperty;
     #bf:shelfMark (see above)
     rdfs:label "Hyllsignum: Löpnummer"@sv;
     rdfs:domain :Item;
@@ -265,7 +266,7 @@
     skos:note "Kan även kombineras med ytterligare placeringsuppgifter."@sv;
     skos:example "96-3899" .
 
-:shelfLabel a rdf:Property;
+:shelfLabel a owl:DatatypeProperty;
     #bf:shelfMark (see above)
     rdfs:label "Hyllsignum: Uppställningsord"@sv;
     rdfs:domain :Item;
