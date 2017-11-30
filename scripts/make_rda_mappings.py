@@ -71,24 +71,31 @@ carrier_g = make_mappings(RDACarrierType, LCCarrierType, BF2.Carrier)
 for top in carrier_g.objects(RDACarrierType, SKOS.hasTopConcept):
     for top_id in g2.subjects(OWL.sameAs, top):
         break
-
     assert unicode(top_id).endswith('Carriers(Deprecated)'), top_id
-
+    g2.remove((top_id, None, None))
+    # Redundant now; see comment just below.
     media_id = URIRef(unicode(top_id).replace('Carriers(Deprecated)', ''))
     if unicode(media_id).endswith('ProjectedImage') and (media_id, None, None) not in g2:
         media_id = URIRef(unicode(media_id).replace('ProjectedImage', 'Projected'))
-    g2.add((top_id, OWL.sameAs, media_id))
-
-    # TODO: Before deprecation in RDA, it was possible to follow broader links
+    #g2.add((top_id, OWL.sameAs, media_id))
+    # NOTE: Before deprecation in RDA, it was possible to follow broader links
     # from specific carriers to base carrier terms which were equatable to one
-    # of the media terms. These broader links are now missing. The code below
-    # is thus doesn't execute anymore (no broader link is present in the RDA
+    # of the media terms. These broader links are now missing. The loop below
+    # thus doesn't execute anymore (no broader link is present in the RDA
     # source data.)
     # (e.g. kbrda:ComputerChipCartridge rdfs:subClassOf kbrda:Computer .)
     if (media_id, None, None) in g2:
         for narrower in carrier_g.subjects(SKOS.broader, top):
             for specific_carrier in g2.subjects(OWL.sameAs, narrower):
                 g2.add((specific_carrier, RDFS.subClassOf, media_id))
+
+# Just a crude string matching to get the carrier < media relations...
+carriers = set(g2.subjects(RDF.type, BF2.Carrier))
+medias = set(unicode(media) for media in g2.subjects(RDF.type, BF2.Media))
+for media in medias:
+    for carrier in carriers:
+        if unicode(carrier).startswith(media):
+            g2.add((carrier, RDFS.subClassOf, URIRef(media)))
 
 make_mappings(RDAIssuanceType, LCIssuanceType, BF2.Issuance)
 
