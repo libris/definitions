@@ -403,7 +403,9 @@
     rdfs:label "subject"@en, "ämne"@sv;
     rdfs:subPropertyOf sdo:about;
     owl:equivalentProperty dc:subject ;
-    sdo:rangeIncludes :Person, :Organisation, :Subject .
+    # FIXME: Could use baseclass :Agent as rangeIncludes, but need to exclude :MetadataLicensor
+    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject .
+
 
 #:artform a owl:ObjectProperty ;
 #    owl:equivalentProperty sdo:artform;
