@@ -146,19 +146,33 @@
 
 :birthPlace a owl:ObjectProperty;
     rdfs:label "Birthplace"@en,"Födelseplats"@sv;
+    rdfs:domain :Person;
     owl:equivalentProperty sdo:birthPlace, madsrdf:birthPlace, rdau:P60593, rdau:placeOfBirth.en .
 
 :deathPlace a owl:ObjectProperty;
     rdfs:label "Deathplace"@en,"Dödsplats"@sv;
+    rdfs:domain :Person;
     owl:equivalentProperty sdo:deathPlace, madsrdf:deathPlace, rdau:P60592, rdau:placeOfDeath.en .
 
-:startDate a owl:DatatypeProperty;
-    rdfs:label "Start date"@en, "Startdatum"@sv;
-    owl:equivalentProperty sdo:startDate, madsrdf:activityStartDate .
+:activityStartDate a owl:DatatypeProperty;
+    rdfs:label "Start date"@en, "Startdatum för aktivitetsperiod"@sv;
+    rdfs:domain :Agent;
+    owl:equivalentProperty madsrdf:activityStartDate .
 
-:endDate a owl:DatatypeProperty;
-    rdfs:label "End date"@en, "Slutdatum"@sv;
-    owl:equivalentProperty sdo:endDate, madsrdf:activityEndDate .
+:activityEndDate a owl:DatatypeProperty;
+    rdfs:label "End date"@en, "Slutdatum för aktivitetsperiod"@sv;
+    rdfs:domain :Agent;
+    owl:equivalentProperty madsrdf:activityEndDate .
+
+:establishDate a owl:DatatypeProperty;
+    rdfs:label "Established  "@en, "Startdatum"@sv;
+    rdfs:domain :Organization;
+    owl:equivalentProperty madsrdf:establishDate .
+
+:terminateDate a owl:DatatypeProperty;
+    rdfs:label "Terminated"@en, "Slutdatum"@sv;
+    rdfs:domain :Organization;
+    owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;
     rdfs:label "Has affiliation"@en, "Organisatorisk tillhörighet"@sv;
