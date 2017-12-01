@@ -77,24 +77,24 @@
     owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
 
 :hasBiographicalInformation a owl:objectProperty;
-    rdfs:label "has biographical information", "Biografiska uppgifter";
+    rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
     sdo:domainIncludes :Person, :Instance;
     # separate instance and agent properties?
     rdfs:range :BiographicalDataNote;
     owl:equivalentProperty rdau:P60492 .
 
 :BiographicalNote a owl:Class;
-    rdfs:label "has biographical information", "Anmärkning om biografiska uppgifter" .
+    rdfs:label "Biographical Note"@en, "Anmärkning om biografiska uppgifter"@sv .
 
 :hasHistoricalData a owl:objectProperty;
-    rdfs:label "has historical data", "Administrativ historik";
+    rdfs:label "has historical data"@en, "Administrativ historik"@sv;
     sdo:domainIncludes :Organization, :Instance;
     # separate instance and agent properties?
-    rdfs:range :HistoricalData;
+    rdfs:range :AdministrativeHistoryNote;
     owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
 
 :AdministrativeHistoryNote a owl:Class;
-    rdfs:label "Administrative history note", "Anmärkning om administrativ historik" .
+    rdfs:label "Administrative history note"@en, "Anmärkning om administrativ historik"@sv .
 
 #titlesAndOtherWordsAssociatedWithName
 :personTitle a owl:DatatypeProperty;
