@@ -1163,6 +1163,16 @@
     rdfs:label "Use and access conditions"@en, "Villkor för användning och åtkomst"@sv;
     owl:equivalentClass bf2:UsageAndAccessPolicy .
 
+:AccessPolicy a owl:Class;
+    rdfs:label "Access policy"@en, "Villkor för åtkomst"@sv;
+    rdfs:subbClassOf :UsageAndAccessPolicy;
+    owl:equivalentClass bf2:AccessPolicy .
+
+:RetentionPolicy a owl:Class;
+    rdfs:label "Retention policy"@en, "Villkor för bibehållande"@sv;
+    rdfs:subbClassOf :UsageAndAccessPolicy;
+    owl:equivalentClass bf2:RetentionPolicy .
+
 :UsePolicy a owl:Class;
     rdfs:label "Use policy"@en, "Användningsvillkor"@sv;
     rdfs:subClassOf :UsageAndAccessPolicy;
