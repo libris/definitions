@@ -97,6 +97,17 @@ marc::expansionOfSummaryNote a owl:DatatypeProperty ;
 
 # 546:
 
+marc:hasBiographicalOrHistoricalData a owl:ObjectProperty ;
+    rdfs:label "Has Biographical Or Historical Data"@en, "Anmärkning om biografiska eller historiska uppgifter"@sv;
+    sdo:domainIncludes kbv:Instance, kbv:Agent;
+    rdfs:range marc:BiographicalOrHistoricalData .
+
+marc:BiographicalOrHistoricalData a owl:Class;
+    rdfs:label "Biographical Or Historical Data", "Biografiska eller historiska uppgifter"@sv;
+    rdfs:subClassOf sdo:StructuredValue .
+
+# 546:
+
 marc:hasLanguageNote a owl:ObjectProperty ;
     rdfs:label "Language note"@en, "Preciserande språkanmärkning"@sv;
     rdfs:domain kbv:Work;
