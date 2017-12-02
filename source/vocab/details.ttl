@@ -376,9 +376,9 @@
     rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:LcOverseasAcq .
 
-:LibrisIIINumber a rdfs:Datatype;
-    rdfs:domain :Record;
-    rdfs:comment: "Libris-ID tilldelat i LIBRISIII stordatormiljö."@sv;
+:librisIIINumber a owl:DatatypeProperty;
+    rdfs:comment: "[FÅR EJ MAKULERAS] Åtta- eller tioställigt identifikationsnummer på LIBRIS-poster som konverterats från ett ursprungligt LIBRISIII-format (ISBN, ISSN eller ett tioställigt nummer som inleds med siffrorna '99'). Avser postens unika identitet i det gamla LIBRIS-systemet."@sv;
+    rdfs:subPropertyOf :controlNumber;
     rdfs:label "LIBRISIII-nummer"@sv .
 
 :Local a owl:Class ; #TODO LocalIdentifer?
