@@ -53,8 +53,13 @@ marc:hiddenValue a owl:DatatypeProperty;
     rdfs:domain :Identifier .
 
 #NOTE
-:technicalNote a owl:DatatypeProperty;
-    rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
+:technicalNote a owl:ObjectProperty;
+    rdfs:subClassOf :hasNote;
+    rdfs:label "Systemteknisk anmärkning"@sv .
+
+:TechnicalNote a owl:Class;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Systemteknisk anmärkning"@sv .
 
 marc:numberOfReferences a owl:DatatypeProperty;
     rdfs:label "Number of references"@en, "Antal referenser"@sv ;
