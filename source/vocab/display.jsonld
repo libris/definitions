@@ -190,6 +190,7 @@
         },
         "Family": {
           "@type": "fresnel:Lens",
+          "@id": "family-card",
           "classLensDomain": "Family",
           "showProperties": [ "name", "marc:titleOther", "lifeSpan", "hasTypeOfFamily", "note" ]
         },
@@ -205,6 +206,7 @@
         },
         "Organization": {
           "@type": "fresnel:Lens",
+          "@id": "organization-card",
           "classLensDomain": "Organization",
           "showProperties": [ "name", "note" ]
         },
@@ -232,6 +234,10 @@
         "Instance": {
           "fresnel:extends": {"@id": "instance-card"},
           "showProperties": [ "fresnel:super", {"inverseOf": "itemOf"} ]
+        },
+        "Family": {
+          "fresnel:extends": {"@id": "family-card"},
+          "showProperties": [ "fresnel:super", "hasTypeOfFamily", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
         },
         "Person": {
           "fresnel:extends": {"@id": "person-card"},
