@@ -27,6 +27,26 @@ marc:SourceDataNotFound a owl:Class;
     rdfs:label "Source Data Not Found"@en, "Källa vid ej belagd namnform"@sv ;
     rdfs:subClassOf sdo:StructuredValue .
 
+# AGENT
+
+marc:numeration a owl:DatatypeProperty;
+    rdfs:label "Numeration"@en, "Ordningstal"@sv;
+    rdfs:comment "Förekommer endast för namn i rak följd. Ange ordningstal för regenter med romerska siffror."@sv;
+    rdfs:domain kbv:Person .
+
+marc:titleOther a owl:DatatypeProperty;
+    rdfs:label "Titel eller övrig beteckning"@sv;
+    rdfs:domain kbv:Agent .
+
+marc:attributionQualifier a owl:DatatypeProperty;
+    rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv;
+    rdfs:domain kbv:Agent .
+
+marc:fullerFormName a owl:DatatypeProperty;
+    rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
+    rdfs:domain kbv:Agent .
+
+
 # 501:
 
 marc:hasWithNote a owl:ObjectProperty;
