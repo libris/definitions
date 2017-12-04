@@ -139,6 +139,102 @@ marc:LocalSubjectAndHeading a owl:Class ;
     rdfs:label "Local subjects/headings"@en, "Lokala ämnesord/rubriker (övriga)"@sv ;
     rdfs:subClassOf sdo:StructuredValue .
 
+# 752
+
+marc:hasAddedEntryHierarchicalPlaceName a owl:ObjectProperty ;
+    rdfs:label "har exemplarspecifikt biuppslag  - Namn på orter och territrorier (hierarkisk uppställning)"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:AddedEntryHierarchicalPlaceName .
+
+marc:AddedEntryHierarchicalPlaceName a owl:Class ;
+    rdfs:label "Exemplarspecifikt biuppslag  - Namn på orter och territrorier (hierarkisk uppställning)"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+marc:countryOrLargerEntity a owl:DatatypeProperty ;
+    rdfs:label "Land / Överordnat territorium"@sv ;
+    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:city a owl:DatatypeProperty ;
+    rdfs:label "Stad, kommun"@sv ;
+    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:relatorCode a owl:DatatypeProperty ;
+    # TODO? Change to role with property code?
+    rdfs:label "Funktionskod"@sv ;
+    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+# 876 and 877
+marc:hasItemInformationBasicBibliographicUnit a owl:ObjectProperty ;
+    rdfs:label "har exemplarinformation - Huvudpublikation"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:ItemInformationBasicBibliographicUnit .
+
+marc:ItemInformationBasicBibliographicUnit a owl:Class ;
+    rdfs:label "Exemplarinformation - Huvudpublikation"@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+marc:hasItemInformationSupplementaryMaterial a owl:ObjectProperty ;
+    rdfs:label "har exemplarinformation - Bihang etc."@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:ItemInformationSupplementaryMaterial .
+
+marc:ItemInformationSupplementaryMaterial a owl:Class ;
+    rdfs:label "Exemplarinformation - Bihang etc."@sv ;
+    rdfs:subClassOf sdo:StructuredValue .
+
+marc:internalItemNumber a owl:DatatypeProperty ;
+    rdfs:label "Internt exemplarnummer"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:invalidOrCanceledInternalItemNumber a owl:DatatypeProperty ;
+    rdfs:label "Ogiltigt/Makulerat internt exemplarnummer"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:cost a owl:DatatypeProperty ;
+    rdfs:label "Förvärvspris"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:dateAcquired a owl:DatatypeProperty ;
+    rdfs:label "Förvärvsdatum"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:sourceOfAcquisition a owl:DatatypeProperty ;
+    rdfs:label "Förvärvskälla"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:useRestrictions a owl:DatatypeProperty ;
+    rdfs:label "Medieterm för verk"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:temporaryLocation a owl:DatatypeProperty ;
+    rdfs:label "Tillfällig placering"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:pieceDesignation a owl:DatatypeProperty ;
+    rdfs:label "Unik exemplarbeteckning (streckkod)"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:invalidOrCanceledPieceDesignation a owl:DatatypeProperty ;
+    rdfs:label "Ogiltig/makulerad exemplarbeteckning"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:copyNumber a owl:DatatypeProperty ;
+    rdfs:label "Exemplarnummer"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:nonpublicNote a owl:DatatypeProperty ;
+    rdfs:label "Intern anmärkning"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:publicNote a owl:DatatypeProperty ;
+    rdfs:label "Offentlig anmärkning"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+marc:materialsSpecified a owl:DatatypeProperty ;
+    rdfs:label "Del av materialet som avses"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
+
+
 # Locally defined holding fields 9XX - objectProperties and Classes
 
 marc:hasHold948 a owl:ObjectProperty ;
