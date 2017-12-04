@@ -417,6 +417,11 @@
 
 :Role a owl:Class;
     rdfs:label "Funktion"@sv;
+    rdfs:subClassOf owl:ObjectProperty ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty rdfs:range ;
+            owl:allValuesFrom :Agent
+        ] ;
     owl:equivalentClass bf2:Role .
 
 :role a owl:ObjectProperty;
@@ -467,7 +472,13 @@
     rdfs:label "Relation"@sv;
     rdfs:subPropertyOf :role;
     rdfs:domain :Relationship;
+    rdfs:range :Relation ;
     owl:equivalentProperty prov:hadRole, bflc:relation .
+
+:Relation a owl:Class;
+    rdfs:label "Relation"@sv;
+    rdfs:subClassOf owl:ObjectProperty ;
+    owl:equivalentClass bflc:Relation .
 
 :Relationship a owl:Class ;
     rdfs:label "Relation"@sv ;
