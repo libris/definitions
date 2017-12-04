@@ -182,10 +182,17 @@ marc:city a owl:DatatypeProperty ;
     rdfs:label "Stad, kommun"@sv ;
     rdfs:domain marc:AddedEntryHierarchicalPlaceName .
 
-marc:relatorCode a owl:DatatypeProperty ;
-    # TODO? Change to role with property code?
-    rdfs:label "Funktionskod"@sv ;
-    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+# 866
+
+marc:qualifiedBasicUnitNote a owl:ObjectProperty ;
+    rdfs:label "Textual Holdings - Basic Bibliographic Unit"@en, "Oformaterad beståndsuppgift - Huvudpublikation"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range kbv:Note .
+
+marc:sourceOfNotation a owl:DatatypeProperty ;
+    rdfs:label "System för beståndsuppgift"@sv ;
+    rdfs:domain kbv:Note .
+
 
 # 876 and 877
 marc:hasItemInformationBasicBibliographicUnit a owl:ObjectProperty ;
