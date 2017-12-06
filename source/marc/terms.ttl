@@ -50,6 +50,10 @@ marc:affiliation a owl:DatatypeProperty;
     rdfs:label "Affiliering"@sv;
     rdfs:domain kbv:Agent .
 
+marc:subordinateUnit a owl:DatatypeProperty;
+    rdfs:label "Namn på underordnad enhet"@sv;
+    rdfs:domain kbv:Agent .
+
 
 # Used with several types
 
@@ -280,6 +284,14 @@ marc:AddedEntryHierarchicalPlaceName a owl:Class ;
 
 marc:countryOrLargerEntity a owl:DatatypeProperty ;
     rdfs:label "Land / Överordnat territorium"@sv ;
+    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:firstOrderPoliticalJurisdiction a owl:DatatypeProperty ;
+    rdfs:label "Delstat, provins, län eller motsvarande"@sv ;
+    rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:intermediatePoliticalJurisdiction a owl:DatatypeProperty ;
+    rdfs:label "Landskap, region eller motsvarande"@sv ;
     rdfs:domain marc:AddedEntryHierarchicalPlaceName .
 
 marc:city a owl:DatatypeProperty ;
