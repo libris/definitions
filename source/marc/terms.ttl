@@ -93,8 +93,25 @@ marc:BibliographyEtcNote a owl:Class;
 # 506:
 
 marc:jurisdiction a owl:DatatypeProperty ;
-    sdo:domainIncludes kbv:Instance, marc:TermsGoverningUseAndReproductionNote ;
+    sdo:domainIncludes kbv:Instance, kbv:UsageAndAccessPolicy, marc:TermsGoverningUseAndReproductionNote ;
     rdfs:label "jurisdiction"@en, "tillståndsgivare"@sv .
+
+marc:physicalAccessProvisions a owl:DatatypeProperty ;
+    rdfs:domain kbv:UsageAndAccessPolicy ;
+    rdfs:label "Fysiska omständigheter"@sv .
+
+marc:authorizedUsers a owl:DatatypeProperty ;
+    rdfs:domain kbv:UsageAndAccessPolicy ;
+    rdfs:label "Godkända användare"@sv .
+
+marc:authorization a owl:DatatypeProperty ;
+    rdfs:domain kbv:UsageAndAccessPolicy ;
+    rdfs:label "Laglig grund för restriktion"@sv .
+
+marc:standardizedTerminologyForAccessRestriction a owl:DatatypeProperty ;
+    rdfs:domain kbv:UsageAndAccessPolicy ;
+    rdfs:label "Standardized terminology for access restriction"@en, "Standardiserad terminologi för åtkomstbegränsning"@sv .
+
 
 # 508:
 
