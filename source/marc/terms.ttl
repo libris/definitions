@@ -279,6 +279,17 @@ marc:inventoryLevel a owl:DatatypeProperty ;
     rdfs:label "Antal exemplar"@sv ;
     rdfs:domain marc:ItemInformationNote .
 
+# 563 (hold)
+
+marc:hasBindingInformation a owl:ObjectProperty ;
+    rdfs:label "har anmärkning: Bokband"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:BindingInformationNote .
+
+marc:BindingInformationNote a owl:Class ;
+    rdfs:label "Anmärkning: Bokband"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
 # 698
 
 marc:hasLocalSubjectAndHeading a owl:ObjectProperty ;
