@@ -56,7 +56,7 @@ marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:domain kbv:Agent .
 
 
-# Used with several types
+# USED WITH MULTIPLE TYPES:
 
 # TODO: materialsSpecified, should be kbv:appliesTo (when removing marc prefix)
 marc:materialsSpecified a owl:DatatypeProperty ;
@@ -70,6 +70,24 @@ marc:sourceOfAcquisition a owl:DatatypeProperty ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
                        kbv:ImmediateAcquisition .
+
+marc:organizationalUnit a owl:DatatypeProperty ;
+    rdfs:label "Underordnad institution/enhet"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
+                       marc:ItemInformationSupplementaryMaterial,
+                       marc:TextualHoldingsBasicBibliographicUnit .
+
+marc:cataloguersNote a owl:DatatypeProperty ;
+    rdfs:label "Intern anmärkning"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
+                       marc:ItemInformationSupplementaryMaterial,
+                       marc:TextualHoldingsBasicBibliographicUnit .
+
+marc:copyNote a owl:DatatypeProperty ;
+    rdfs:label "Offentlig anmärkning"@sv ;
+    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
+                       marc:ItemInformationSupplementaryMaterial,
+                       marc:TextualHoldingsBasicBibliographicUnit .
 
 
 # 501:
@@ -301,14 +319,18 @@ marc:city a owl:DatatypeProperty ;
 
 # 866
 
-marc:qualifiedBasicUnitNote a owl:ObjectProperty ;
+marc:hasTextualHoldingsBasicBibliographicUnit a owl:ObjectProperty ;
     rdfs:label "Textual Holdings - Basic Bibliographic Unit"@en, "Oformaterad beståndsuppgift - Huvudpublikation"@sv ;
     rdfs:domain kbv:Item;
-    rdfs:range kbv:Note .
+    rdfs:range marc:TextualHoldingsBasicBibliographicUnit .
+
+marc:textualString a owl:DatatypeProperty ;
+    rdfs:label "Beståndsuppgift"@sv ;
+    rdfs:domain marc:TextualHoldingsBasicBibliographicUnit .
 
 marc:sourceOfNotation a owl:DatatypeProperty ;
     rdfs:label "System för beståndsuppgift"@sv ;
-    rdfs:domain kbv:Note .
+    rdfs:domain marc:TextualHoldingsBasicBibliographicUnit .
 
 
 # 876 and 877
@@ -364,18 +386,6 @@ marc:invalidOrCanceledPieceDesignation a owl:DatatypeProperty ;
 
 marc:copyNumber a owl:DatatypeProperty ;
     rdfs:label "Exemplarnummer"@sv ;
-    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
-
-marc:nonpublicNote a owl:DatatypeProperty ;
-    rdfs:label "Intern anmärkning"@sv ;
-    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
-
-marc:publicNote a owl:DatatypeProperty ;
-    rdfs:label "Offentlig anmärkning"@sv ;
-    sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
-
-marc:organizationalUnit a owl:DatatypeProperty ;
-    rdfs:label "Underordnad institution/enhet"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit, marc:ItemInformationSupplementaryMaterial .
 
 
