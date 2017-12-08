@@ -43,16 +43,25 @@ marc:attributionQualifier a owl:DatatypeProperty;
     rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv;
     rdfs:domain kbv:Agent .
 
-marc:fullerFormName a owl:DatatypeProperty;
-    rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
-    rdfs:domain kbv:Agent .
-
 marc:affiliation a owl:DatatypeProperty;
     rdfs:label "Affiliering"@sv;
     rdfs:domain kbv:Agent .
 
 marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:label "Namn på underordnad enhet"@sv;
+    rdfs:domain kbv:Agent .
+
+marc:hasAuth378;
+    rdfs:label "Fullständigare namnform - Personnamn"@sv ;
+    rdfs:domain kbv:Person;
+    rdfs:range marc:Auth-378 .
+
+marc:Auth378 a owl:Class;
+    rdfs:label "Fullständigare namnform - Personnamn"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
+marc:fullerFormOfPersonalName a owl:DatatypeProperty;
+    rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
     rdfs:domain kbv:Agent .
 
 # 045 BIB & AUTH
