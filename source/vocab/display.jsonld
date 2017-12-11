@@ -148,7 +148,7 @@
         },
         "Instance": {
           "@type": "fresnel:Lens",
-          "@id": "instance-card",
+          "@id": "Instance-cards",
           "classLensDomain": "Instance",
           "showProperties": [ "issuanceType", "hasTitle", "responsibilityStatement", "identifiedBy", "editionStatement", "editionStatementRemainder", "publication", "publicationCountry", "marc:publishedYear",  "production", "manufacture", "distribution", "copyrightDate", "mediaType", "carrierType", "extent", "hasDimensions", "marc:otherPhysicalDetails", {"inverseOf": "itemOf"} ]
         },
@@ -189,13 +189,13 @@
         },
         "Person": {
           "@type": "fresnel:Lens",
-          "@id": "person-card",
+          "@id": "Person-cards",
           "classLensDomain": "Person",
           "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titlesAndOtherWordsAssociatedWithAName", "marc:fullerFormName", "lifeSpan", "marc:attributionQualifier", "notation", "personTitle", "note" ]
         },
         "Family": {
           "@type": "fresnel:Lens",
-          "@id": "family-card",
+          "@id": "Family-cards",
           "classLensDomain": "Family",
           "showProperties": [ "name", "marc:titlesAndOtherWordsAssociatedWithAName", "lifeSpan", "hasTypeOfFamily", "note" ]
         },
@@ -211,7 +211,7 @@
         },
         "Organization": {
           "@type": "fresnel:Lens",
-          "@id": "organization-card",
+          "@id": "Organization-cards",
           "classLensDomain": "Organization",
           "showProperties": [ "name", "note" ]
         },
@@ -237,19 +237,19 @@
       "@type": "fresnel:Group",
       "lenses": {
         "Instance": {
-          "fresnel:extends": {"@id": "instance-card"},
+          "fresnel:extends": {"@id": "Instance-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "itemOf"} ]
         },
         "Family": {
-          "fresnel:extends": {"@id": "family-card"},
+          "fresnel:extends": {"@id": "Family-cards"},
           "showProperties": [ "fresnel:super", "hasTypeOfFamily", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
         },
         "Person": {
-          "fresnel:extends": {"@id": "person-card"},
+          "fresnel:extends": {"@id": "Person-cards"},
           "showProperties": [ "fresnel:super", "birthDate", "deathDate" ]
         },
         "Organization": {
-          "fresnel:extends": {"@id": "organization-card"},
+          "fresnel:extends": {"@id": "Organization-cards"},
           "showProperties": [ "fresnel:super", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
         }
       }
