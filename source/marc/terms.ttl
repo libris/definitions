@@ -64,6 +64,22 @@ marc:fullerFormOfPersonalName a owl:DatatypeProperty;
     rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
     rdfs:domain kbv:Agent .
 
+# 044
+
+marc::hasCountryOfPublishingProducingEntityCode a owl:ObjectProperty;
+    rdfs:label "Country Of Publishing/Producing Entity Code"@en, "Landkod för utgivande/producerande enhet"@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range marc:CountryOfPublishingProducingEntityCode .
+    
+marc:CountryOfPublishingProducingEntityCode a owl:Class;
+    rdfs:label "Country Of Publishing/Producing Entity Code"@en, "Landkod för utgivande/producerande enhet"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
+marc:isoCountryCode a owl:DatatypeProperty;
+    rdfs:label "ISO country code"@en, "Landkod enligt ISO 3166"@sv ;
+    rdfs:subPropertyOf marc:isoCountryCode ;
+    rdfs:domain marc:CountryOfPublishingProducingEntityCode .
+
 # 045 BIB & AUTH
 
 marc:hasTimePeriodOfContent a owl:ObjectProperty;
