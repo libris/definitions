@@ -95,7 +95,26 @@ marc:formattedPre9999BCTimePeriod a owl:DatatypeProperty;
 marc:typeOfTimePeriod a owl:DatatypeProperty;
     rdfs:label "typeOfTimePeriod"@en, "Typ av tidsperiod"@sv;
     rdfs:domain marc:TimePeriodOfContent .
-    
+
+#TITLE
+
+marc:mediaTerm a owl:DatatypeProperty;
+    rdfs:label "Medieterm"@sv;
+    rdfs:comment "Medieterm som är del av titel i en MARC21 struktur. används ej i RDA"@sv;
+    rdfs:domain :Instance .
+
+marc:searchElement a owl:DatatypeProperty;
+    rdfs:label "Titeln är sökelement"@sv;
+    rdfs:comment "Indikatorvärde saknar betydelse i LIBRIS-tillämpningen."@av .
+
+marc:searchControl a owl:ObjectProperty;
+    rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv .
+
+marc:nonfilingChars a owl:DatatypeProperty;
+    rdfs:label "Fileringsvärde"@sv;
+    rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
+    rdfs:domain :Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
+
 # USED WITH MULTIPLE TYPES:
 
 # TODO: materialsSpecified, should be kbv:appliesTo (when removing marc prefix)
