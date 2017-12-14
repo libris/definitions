@@ -299,7 +299,7 @@ marc:BiographicalOrHistoricalData a owl:Class;
 marc:hasLanguageNote a owl:ObjectProperty ;
     rdfs:label "Language note"@en, "Preciserande språkanmärkning"@sv;
     rdfs:domain kbv:Work;
-    rdfs:range kbv:LanguageNote .
+    rdfs:range marc:LanguageNote .
 
 marc:LanguageNote a owl:Class ;
     rdfs:label "Language note"@en, "Anmärkning: Språk"@sv ;
@@ -386,6 +386,12 @@ marc:intermediatePoliticalJurisdiction a owl:DatatypeProperty ;
 marc:city a owl:DatatypeProperty ;
     rdfs:label "Stad, kommun"@sv ;
     rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+# 856:
+
+marc:linkText a owl:DatatypeProperty ;
+    rdfs:label "Länktext"@sv ;
+    rdfs:domain kbv:Note .
 
 # 866
 
