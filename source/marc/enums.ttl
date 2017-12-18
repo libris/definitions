@@ -845,6 +845,112 @@
     skos:prefLabel "Encoding Level"@en,
         "Fullständighetsnivå för katalogiseringen"@sv .
 
+## ENCLEVELTYPES
+
+# CATEGORY: BIB
+
+:FullLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-_ ;
+    skos:notation "_" ;
+    skos:prefLabel "Full level"@en,
+        "Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv .
+
+:FullLevelMaterialNotExamined a :EncLevelType ;
+    owl:sameAs :EncLevelType-1 ;
+    skos:notation "1" ;
+    skos:prefLabel "Full level, material not examined"@en,
+        "Retrospektiv nivå: omkatalogisering"@sv .
+
+:LessThanFullLevelMaterialNotExamined a :EncLevelType ;
+    owl:sameAs :EncLevelType-2 ;
+    skos:notation "2" ;
+    skos:prefLabel "Less-than-full level, material not examined"@en,
+        "Retrospektiv nivå: enligt katalogkort e.d."@sv .
+
+:AbbreviatedLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-3 ;
+    skos:notation "3" ;
+    skos:prefLabel "Abbreviated level"@en,
+        "Miniminivå (jfr KRS 1.0D1)"@sv .
+
+:CoreLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-4 ;
+    skos:notation "4" ;
+    skos:prefLabel "Core level"@en,
+        "Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv .
+
+:PartialPreliminaryLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-5 ;
+    skos:notation "5" ;
+    skos:prefLabel "Partial (preliminary) level"@en,
+        "Preliminär post (hit beställningsposter)"@sv .
+
+:MinimalLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-7 ;
+    skos:notation "7" ;
+    skos:prefLabel "Minimal level"@en,
+        "Biblioteksnivå (jfr KRS 1.0D2)"@sv .
+
+:PrepublicationLevel a :EncLevelType ;
+    owl:sameAs :EncLevelType-8 ;
+    skos:notation "8" ;
+    skos:prefLabel "Prepublication level"@en,
+        "CIP-post"@sv .
+
+# CATEGORY AUTH:
+
+:IncompleteAuthorityRecord a :AuthorityEncLevelType ;
+    owl:sameAs :AuthorityEncLevelType-o ;
+    skos:notation "o" ;
+    skos:prefLabel "Incomplete authority record"@en,
+        "Ofullständig"@sv .
+
+:CompleteAuthorityRecord a :AuthorityEncLevelType ;
+    owl:sameAs :AuthorityEncLevelType-n ;
+    skos:notation "n" ;
+    skos:prefLabel "Complete authority record"@en,
+        "Fullständig"@sv .
+
+# CATEGORY HOLD:
+
+:HoldingsLevel1 a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-1 ;
+    skos:notation "1" ;
+    skos:prefLabel "Holdings level 1"@en,
+        "Grundnivå (endast 852)"@sv .
+
+:HoldingsLevel2 a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-2 ;
+    skos:notation "2" ;
+    skos:prefLabel "Holdings level 2"@en,
+        "Nivå 2 (används t.v. ej)"@sv .
+
+:HoldingsLevel3 a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-3 ;
+    skos:notation "3" ;
+    skos:prefLabel "Holdings level 3"@en,
+        "Nivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
+
+:HoldingsLevel4 a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-4 ;
+    skos:notation "4" ;
+    skos:prefLabel "Holdings level 4"@en,
+        "Nivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
+
+:HoldingsLevel4WithPieceDesignation a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-5 ;
+    skos:notation "5" ;
+    skos:prefLabel "Holdings level 4 with piece designation"@en,
+        "Nivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
+
+:OtherLevel a :HoldingEncLevelType ;
+    owl:sameAs :HoldingEncLevelType-z ;
+    skos:notation "z" ;
+    skos:prefLabel "Other level"@en,
+        "Annan nivå"@sv .
+
+##
+
 :EntryMapType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "EntryMapType" ;
@@ -1293,6 +1399,72 @@
     skos:notation "StatusType" ;
     skos:prefLabel "Record Status"@en,
         "Poststatus"@sv .
+
+# STATUSTYPES FOR RECORD
+
+:CorrectedOrRevised a :AuthorityStatusType,
+        :HoldingStatusType,
+        :StatusType ;
+    owl:sameAs :AuthorityStatusType-c,
+        :HoldingStatusType-c,
+        :StatusType-c ;
+    skos:notation "c" ;
+    skos:prefLabel "Corrected or revised"@en,
+        "Rättad eller reviderad post (sätts maskinellt)"@sv .
+
+:Deleted a :AuthorityStatusType,
+        :HoldingStatusType,
+        :StatusType ;
+    owl:sameAs :AuthorityStatusType-d,
+        :HoldingStatusType-d,
+        :StatusType-d ;
+    skos:notation "d" ;
+    skos:prefLabel "Deleted"@en,
+        "Borttagen post (används ej)"@sv .
+
+:IncreaseInEncodingLevel a :AuthorityStatusType,
+        :StatusType ;
+    owl:sameAs :AuthorityStatusType-a,
+        :StatusType-a ;
+    skos:notation "a" ;
+    skos:prefLabel "Increase in encoding level"@en,
+        "Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv .
+
+:IncreaseInEncodingLevelFromPrepublication a :StatusType ;
+    owl:sameAs :StatusType-p ;
+    skos:notation "p" ;
+    skos:prefLabel "Increase in encoding level from prepublication"@en,
+        "Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv .
+
+:New a :AuthorityStatusType,
+        :HoldingStatusType,
+        :StatusType ;
+    owl:sameAs :AuthorityStatusType-n,
+        :HoldingStatusType-n,
+        :StatusType-n ;
+    skos:notation "n" ;
+    skos:prefLabel "New"@en,
+        "Ny post"@sv .
+
+:Obsolete a :AuthorityStatusType ;
+    owl:sameAs :AuthorityStatusType-o ;
+    skos:notation "o" ;
+    skos:prefLabel "Obsolete"@en,
+        "Obsolet"@sv .
+
+:DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType ;
+    owl:sameAs :AuthorityStatusType-x ;
+    skos:notation "x" ;
+    skos:prefLabel "Deleted, heading replaced by another heading"@en,
+        "Makulerad: ersatt av en annat sökelement"@sv .
+
+:DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType ;
+    owl:sameAs :AuthorityStatusType-s ;
+    skos:notation "s" ;
+    skos:prefLabel "Deleted, heading split into two or more headings"@en,
+        "Makulerad: uppdelat på två/flera andra sökelement"@sv .
+
+##
 
 :SubdivisionType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;

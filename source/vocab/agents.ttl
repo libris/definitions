@@ -38,7 +38,7 @@
     :category marc:auth ;
     rdfs:label "Agent"@sv;
     owl:equivalentClass bf2:Agent ;
-    rdfs:subClassOf rdfs:Resource, foaf:Agent, prov:Agent .
+    rdfs:subClassOf :Resource, foaf:Agent, prov:Agent .
 
 :Person a owl:Class;
     rdfs:label "Person"@sv;
@@ -237,16 +237,13 @@
 
 :nationality a owl:ObjectProperty;
     rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
+    rdfs:range :Nationality;
     rdfs:domain :Agent .
 
 :lifeSpan a owl:DatatypeProperty;
     rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
+    rdfs:comment "Associerade datum som kan agera särskiljande för namn på agent. Exempel: '1854-1932' eller '1963-'."@sv;
     rdfs:domain :Agent.
-
-:gender a owl:DatatypeProperty;
-    rdfs:label "gender"@en, "kön"@sv;
-    rdfs:domain :Person;
-    owl:equivalentProperty sdo:gender, madsrdf:gender, rdau:P60531 .
 
 :Occupation a owl:Class;
     rdfs:label "Occupation"@en, "Yrke eller sysselsättning"@sv;

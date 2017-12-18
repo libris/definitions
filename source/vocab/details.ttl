@@ -8,13 +8,14 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
-
+@prefix rdaz: <http://rdaregistry.info/Elements/z/> .
 @prefix : <https://id.kb.se/vocab/> .
 
 ##--------------------------------#
@@ -136,7 +137,7 @@
 
 :CaptionTitle a owl:Class;
     rdfs:subClassOf :VariantTitle, :InstanceTitle;
-    rdfs:label "Caption title"@en, "Rubriktitel (Förtitel)"@sv .
+    rdfs:label "Caption title"@en, "Rubriktitel"@sv .
 
 :CollectiveTitle a owl:Class;
     owl:equivalentClass bf2:CollectiveTitle;
@@ -209,7 +210,7 @@
     rdfs:range :UPC .
 
 :uri a owl:DatatypeProperty;
-    rdfs:domain :Endeavour ;
+    sdo:domainIncludes :Endeavour, :UsageAndAccessPolicy ;
     rdfs:label "URI"@sv .
 
 :standardTechnicalReportNumber a owl:DatatypeProperty ;
@@ -531,6 +532,34 @@
     owl:equivalentProperty dc:coverage ;
     sdo:domainIncludes :Title .
 
+:sourceConsulted a owl:ObjectProperty;
+    rdfs:label "Konsulterad källa"@sv;
+    skos:definition 
+      "Relates data to a resource used in determining a name, title, or other identifying attributes of an entity, or in determining a relationship between entities."@en,
+      "En konsulterad källa är en resurs som använts för att bestämma namn, titel eller andra identifierande attribut för en person eller annan entitet"@sv;
+    #rdfs:subPropertyOf dc:source;
+    sdo:domainIncludes :Record; # Possibly :Resource later, :Record for sake of MARC21 reconversion, even though not for bib or hold.
+    rdfs:range :SourceData;
+    owl:equivalentProperty madsrdf:hasSource, rdaz:P60001, rdaz:sourceConsulted.en .
+
+:SourceData a owl:Class;
+    rdfs:label "Källa vid belagd uppgift"@sv;
+    rdfs:subClassOf madsrdf:Source, :QualifiedRole .
+
+:SourceDataNotFound a owl:Class;
+    rdfs:label "Källa vid icke-belagd uppgift"@sv;
+    rdfs:subClassOf :SourceData .
+
+:citationSource a owl:DatatypeProperty;
+    rdfs:label "Citation Source"@en, "Källa"@sv;
+    rdfs:domain :SourceData;
+    owl:equivalentProperty madsrdf:citationSource .
+
+:citationNote a owl:DatatypeProperty;
+    rdfs:label "Citation Note"@en, "Uppgift från källa"@sv;
+    rdfs:domain :SourceData;
+    owl:equivalentProperty madsrdf:citationNote .
+
 # Provision Activity
 
 :ProvisionActivity a owl:Class;
@@ -743,6 +772,7 @@
 
 :hasNote a owl:ObjectProperty;
     rdfs:range :Note;
+    rdfs:domain :Resource;
     rdfs:label "anmärkning"@sv;
     owl:equivalentProperty bf2:note .
 
@@ -760,19 +790,6 @@
     rdfs:label "description"@en, "beskrivning"@sv;
     rdfs:comment "A description of the item."@en, "En beskrivning av resursen";
     owl:equivalentProperty sdo:description .
-
-:ActionNote a owl:Class;
-    rdfs:label "Action note"@en, "Anmärkning om åtgärd"@sv;
-    rdfs:domain :Item;
-    rdfs:subClassOf :Note .
-
-:BibliographyNote a owl:Class;
-    rdfs:label "Bibliography note"@en, "Bibliografisk anmärkning"@sv;
-    rdfs:subClassOf :Note .
-
-:IssuanceInformationNote a owl:Class;
-    rdfs:label "Issuance information"@en, "Anmärkning om numrering och utgivning "@sv;
-    rdfs:subClassOf :Note .
 
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
@@ -1140,7 +1157,7 @@
 
 :summary a owl:ObjectProperty;
     rdfs:range :Summary;
-    rdfs:label "Summary content"@en, "sammanfattande innehåll"@sv;
+    rdfs:label "Summary content"@en, "sammanfattning av innehåll"@sv;
     owl:equivalentProperty bf2:summary .
 
 :SystemRequirement a owl:Class;

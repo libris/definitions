@@ -41,7 +41,7 @@
 :Endeavour a owl:Class ;
     ptg:abstract true;
     #skos:closeMatch frbr:Endeavour ;
-    rdfs:subClassOf rdfs:Resource .
+    rdfs:subClassOf :Resource .
 
 :Creation a owl:Class ;
     ptg:abstract true;
@@ -455,12 +455,13 @@
     #:inCollection marc:bibLevel;
     owl:equivalentClass bf1:Serial .
 
-:Periodical a owl:Class, :IssuanceType;
-    rdfs:label "Periodical"@en, "Periodika"@sv;
-    skos:altLabel "Periodisk resurs"@sv;
-    rdfs:comment "Samma sak som seriell resurs."@sv;
-    #:inCollection marc:bibLevel;
-    owl:equivalentClass bf1:Serial .
+# OBSOLOTE CHOICE should use serial instead.
+#:Periodical a owl:Class, :IssuanceType;
+#    rdfs:label "Periodical"@en, "Periodika"@sv;
+#    skos:altLabel "Periodisk resurs"@sv;
+#    rdfs:comment "Samma sak som seriell resurs."@sv;
+#    #:inCollection marc:bibLevel;
+#    owl:equivalentClass bf1:Serial .
 
 #:CreativeWorkSeries a owl:Class;
 #    owl:equivalentClass sdo:CreativeWorkSeries;
@@ -537,7 +538,7 @@
     rdfs:subClassOf :Instance ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
-            owl:allValuesFrom :
+            owl:allValuesFrom :StillImage
         ] .
 
 :MovingImageInstance a owl:Class;
