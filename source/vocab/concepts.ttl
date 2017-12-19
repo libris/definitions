@@ -317,21 +317,30 @@
     rdfs:subPropertyOf :label, :hasPart;
     skos:related :broader;
     rdfs:domain :Concept;
+    sdo:rangeIncludes :Subject, :Subdivision ;
     rdfs:label "Term components"@en, "Termkomponenter"@sv;
     rdfs:comment "En ordnad lista på de komponenter som termen består av."@sv .
 
 :Subdivision a owl:Class;
     rdfs:label "Underindelning"@sv;
-    rdfs:subClassOf :Subject .
+    rdfs:subClassOf :Concept .
 
-:ChronologicalSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :ChronologicalTerm;
+:TopicSubdivision a owl:Class ;
+    skos:broader :Topic;
+    rdfs:subClassOf :Subdivision;
+    rdfs:label "Underindelning för allmänt ämnesord"@sv .
+
+:TemporalSubdivision a owl:Class ;
+    skos:broader :Temporal;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för kronologisk term"@sv .
 
 :GenreSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :GenreForm;
+    skos:broader :GenreForm;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för genre/form"@sv .
 
 :GeographicalSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :Geographic;
+    skos:broader :Geographic;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för geografisk term"@sv .
