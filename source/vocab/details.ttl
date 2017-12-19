@@ -41,10 +41,6 @@
     owl:equivalentProperty bf:title, dc:title;
     owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
 
-:uniformTitle a owl:DatatypeProperty;
-    rdfs:label "uniform titel"@sv;
-    rdfs:subPropertyOf :prefLabel, :title .
-
 :hasTitle a owl:ObjectProperty;
     #owl:equivalentProperty bf:instanceTitle;
     owl:equivalentProperty bf2:title;
@@ -95,10 +91,10 @@
     #rdfs:comment "Rätta inte felaktigheter, skriv som det står."@sv;
     rdfs:comment "Ange titel som den står i objektet. Skriv första ordet i titeln med stor bokstav och resten av titeln med små bokstäver. Skriv egennamn med stor bokstav i början."@sv .
 
-:WorkTitle  a owl:Class;
-    owl:equivalentClass bf2:WorkTitle;
-    rdfs:subClassOf :Title;
-    rdfs:label "Work Title"@en, "Uniform titel"@sv .
+#:WorkTitle  a owl:Class;
+#    owl:equivalentClass bf2:WorkTitle;
+#    rdfs:subClassOf :Title;
+#    rdfs:label "Work Title"@en, "Uniform titel"@sv .
 
 :VariantTitle  a owl:Class;
     owl:equivalentClass bf2:VariantTitle;
