@@ -114,6 +114,12 @@ marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
+#240-k
+
+marc:formSubheading a owl:DatatypeProperty;
+    rdfs:label "Form subheading"@en, "Specificering i form av grupptitel"@sv ;
+    rdfs:domain kbv:Title . 
+
 # USED WITH MULTIPLE TYPES:
 
 # TODO: materialsSpecified, should be kbv:appliesTo (when removing marc prefix)
