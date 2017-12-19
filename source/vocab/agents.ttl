@@ -34,6 +34,11 @@
     owl:equivalentProperty sdo:additionalName;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
+:fullerFormOfName a owl:DatatypeProperty; 
+    rdfs:label "has fuller form of name"@en, "fullständigare namnform"@sv; 
+    rdfs:domain :Person; 
+    owl:equivalentProperty rdau:P60530, rdau:fullerFormOfName.en . 
+
 :Agent a owl:Class;
     :category marc:auth ;
     rdfs:label "Agent"@sv;
