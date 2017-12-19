@@ -16,6 +16,7 @@
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
 @prefix rdaz: <http://rdaregistry.info/Elements/z/> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
 @prefix : <https://id.kb.se/vocab/> .
 
 ##--------------------------------#
@@ -532,10 +533,15 @@
     owl:equivalentProperty dc:coverage ;
     sdo:domainIncludes :Title .
 
-:issueNumber a owl:DatatypeProperty;
-    rdfs:label "Volymbeteckning"@sv;
+:hasNumberingOfSerials a owl:DatatypeProperty;
+    rdfs:label "has numbering of serials"@en, "har numrering av seriella resurser"@sv;
     rdfs:comment "Alfanumeriska och/eller kronologiska volymbeteckningar"@sv;
-    rdfs:domain :Instance .
+    rdfs:domain :Instance;
+    rdfs:range :NumberingOfSerials;
+    owl:equivalentProperty rdau:P60533, rdau:numberingOfSerials.en .
+
+:NumberingOfSerials a owl:Class;
+    rdfs:subClassOf :StructuredValue .
 
 :sourceConsulted a owl:ObjectProperty;
     rdfs:label "Konsulterad källa"@sv;
@@ -664,10 +670,12 @@
 
 :firstIssue a owl:DatatypeProperty;
     rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
+    rdfs:comment "Används för närvarande ej i Libris."@sv;
     owl:equivalentProperty bf2:firstIssue .
 
 :lastIssue a owl:DatatypeProperty;
     rdfs:label "Multipart last issue"@en, "Numrering av seriella resurser (sista)"@sv;
+    rdfs:comment "Används för närvarande ej i Libris."@sv;
     owl:equivalentProperty bf2:lastIssue .
 
 ##
