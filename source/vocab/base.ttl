@@ -16,6 +16,7 @@
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -117,7 +118,10 @@ rdf:type a owl:ObjectProperty;
 
 :code a owl:DatatypeProperty;
     rdfs:label "kod"@sv;
-    owl:equivalentProperty bf2:code .
+    skos:altLabel "notation"@sv;
+    rdfs:subPropertyOf :label;
+    sdo:domainIncludes :Concept ;
+    owl:equivalentProperty bf2:code, skos:notation, madsrdf:code .
 
 :count a owl:DatatypeProperty;
     rdfs:label "Number of units"@en, "Antal enheter"@sv;
