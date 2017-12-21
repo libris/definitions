@@ -159,16 +159,9 @@ def vocab():
 
 @compiler.dataset
 def enums():
-    #data = compiler.load_json('source/enums.jsonld')
-    #data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
-    #return "/enum/", data
     graph = Graph()
-    # These definitions are now included in the vocab package
-    #graph.parse(str(compiler.path('source/marc/enums.ttl')), format='turtle')
-
     rq = compiler.path('source/marc/construct-enums.rq').read_text()
     graph += Graph().query(rq).graph
-
     return "/marc/", "2014-01-23T11:34:17.981Z", graph
 
 
