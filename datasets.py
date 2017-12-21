@@ -162,12 +162,14 @@ def enums():
     graph = Graph()
     rq = compiler.path('source/marc/construct-enums.rq').read_text()
     graph += Graph().query(rq).graph
+
     return "/marc/", "2014-01-23T11:34:17.981Z", graph
 
 
 @compiler.dataset
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
+
     return "/term/", "2014-02-01T21:00:01.766Z", graph
 
 
@@ -197,6 +199,7 @@ def relators():
             }
         ],
         query="source/construct-relators.rq")
+
     return "/relator/", "2014-02-01T17:29:12.378Z", graph
 
 
@@ -251,6 +254,7 @@ def countries():
             }
         ],
         query="source/construct-countries.rq")
+
     return "/country/", "2014-02-01T13:21:14.008Z", graph
 
 
