@@ -529,8 +529,10 @@
 #    owl:equivalentProperty dc:modified .
 
 :coverage a owl:DatatypeProperty;
-    rdfs:label "Täcknings- eller tillkomsttid"@sv;
-    owl:equivalentProperty dc:coverage ;
+    rdfs:label "Täckning eller tillkomst"@sv;
+    rdfs:subPropertyOf dc:coverage ;
+    skos:narrowMatch bf2:date ;
+    #rdfs:seeAlso <http://web.archive.org/web/20070606222636/http:/www.kb.se/Metadata/dcmes/default.htm> ;
     sdo:domainIncludes :Title .
 
 :hasNumberingOfSerials a owl:ObjectProperty;
