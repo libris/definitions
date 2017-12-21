@@ -5,7 +5,8 @@ from rdflib.namespace import *
 BF2 = Namespace('http://id.loc.gov/ontologies/bibframe/')
 MADSRDF = Namespace('http://www.loc.gov/mads/rdf/v1#')
 
-ID = Namespace('https://id.kb.se/rda/')
+KBRDA = Namespace('https://id.kb.se/rda/')
+KBV = Namespace('https://id.kb.se/vocab/')
 
 RDAContentType = URIRef('http://rdaregistry.info/termList/RDAContentType')
 LCContentType = URIRef('http://id.loc.gov/vocabulary/contentTypes')
@@ -21,6 +22,12 @@ LCIssuanceType = URIRef('http://id.loc.gov/vocabulary/issuance')
 
 LANGS = ('en', 'sv')
 
+PROP_MAP = {
+    SKOS.definition: KBV.definition,
+    SKOS.prefLabel: KBV.prefLabel,
+    SKOS.scopeNote: KBV.scopeNote
+}
+
 
 def make_rda_mappings():
     g2 = Graph()
@@ -30,13 +37,14 @@ def make_rda_mappings():
     g2.namespace_manager.bind('rdamedia', RDAMediaType)
     g2.namespace_manager.bind('rdacarrier', RDACarrierType)
     g2.namespace_manager.bind('rdaissuance', RDAIssuanceType)
-    g2.namespace_manager.bind('kbrda', ID)
+    g2.namespace_manager.bind('kbrda', KBRDA)
+    g2.namespace_manager.bind('kbv', KBV)
 
-    content_g = _make_mappings(g2, RDAContentType, LCContentType, BF2.Content)
+    _make_mappings(g2, RDAContentType, LCContentType, KBV.ContentType)
 
-    media_g = _make_mappings(g2, RDAMediaType, LCMediaType, BF2.Media)
+    _make_mappings(g2, RDAMediaType, LCMediaType, KBV.MediaType)
 
-    carrier_g = _make_mappings(g2, RDACarrierType, LCCarrierType, BF2.Carrier)
+    carrier_g = _make_mappings(g2, RDACarrierType, LCCarrierType, KBV.CarrierType)
 
     for top in carrier_g.objects(RDACarrierType, SKOS.hasTopConcept):
         for top_id in g2.subjects(OWL.sameAs, top):
@@ -60,14 +68,14 @@ def make_rda_mappings():
                     g2.add((specific_carrier, RDFS.subClassOf, media_id))
 
     # Just a crude string matching to get the carrier < media relations...
-    carriers = set(g2.subjects(RDF.type, BF2.Carrier))
-    medias = set(unicode(media) for media in g2.subjects(RDF.type, BF2.Media))
+    carriers = set(g2.subjects(RDF.type, KBV.CarrierType))
+    medias = set(unicode(media) for media in g2.subjects(RDF.type, KBV.MediaType))
     for media in medias:
         for carrier in carriers:
             if unicode(carrier).startswith(media):
                 g2.add((carrier, RDFS.subClassOf, URIRef(media)))
 
-    _make_mappings(g2, RDAIssuanceType, LCIssuanceType, BF2.Issuance)
+    _make_mappings(g2, RDAIssuanceType, LCIssuanceType, KBV.IssuanceType)
 
     return g2
 
@@ -80,7 +88,7 @@ def _make_mappings(g2, rda_type_scheme, lc_type_scheme, rtype):
         for p, preflabel_en in g.preferredLabel(s, 'en'):
             symbol = preflabel_en.title().replace(' ', '')
 
-            uri = ID[symbol]
+            uri = KBRDA[symbol]
             g2.add((uri, RDF.type, OWL.Class))
             g2.add((uri, RDF.type, rtype))
 
@@ -91,12 +99,12 @@ def _make_mappings(g2, rda_type_scheme, lc_type_scheme, rtype):
             for p2 in (SKOS.definition, SKOS.prefLabel, SKOS.scopeNote):
                 for l in g.objects(s, p2):
                     if l.language in LANGS:
-                        g2.add((uri, p2, l))
+                        g2.add((uri, PROP_MAP[p2], l))
 
             for lc_def in g.subjects(SKOS.prefLabel, Literal(unicode(preflabel_en))):
                 if (lc_def, RDF.type, MADSRDF.Authority) in g:
                     lc_code = unicode(lc_def).rsplit('/', 1)[-1]
-                    g2.add((uri, BF2.code, Literal(lc_code)))
+                    g2.add((uri, KBV.code, Literal(lc_code)))
                     g2.add((uri, OWL.sameAs, lc_def))
 
     return g
