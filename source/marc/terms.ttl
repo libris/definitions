@@ -16,6 +16,14 @@ marc:relatedAs a owl:ObjectProperty ;
 marc:electronicLocatorType a owl:DatatypeProperty ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
 
+marc:NationalIssnCentre a owl:Class;
+    rdfs:subClassOf kbv:Source, kbv:Organization;
+    rdfs:label "Nationellt ISSN-center"@sv, "National ISSN Centre"@en .
+
+# Extending kbv:ISSN which is defined in kbv:
+kbv:ISSN rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty kbv:source; owl:someValuesFrom marc:NationalIssnCentre ] .
+
 # AGENT
 
 marc:numeration a owl:DatatypeProperty;
