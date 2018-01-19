@@ -110,6 +110,7 @@ rdf:type a owl:ObjectProperty;
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
+    rdfs:domain :Resource ;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
@@ -121,7 +122,8 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "kod"@sv;
     skos:altLabel "notation"@sv;
     rdfs:subPropertyOf :label;
-    sdo:domainIncludes :Concept ;
+    # sdo:domainIncludes :Concept ;
+    rdfs:domain :Resource;
     owl:equivalentProperty bf2:code, skos:notation, madsrdf:code .
 
 :count a owl:DatatypeProperty;
@@ -140,6 +142,7 @@ rdf:type a owl:ObjectProperty;
 
 :value a owl:DatatypeProperty;
     rdfs:label "value"@en, "värde"@sv;
+    rdfs:domain :Resource;
     owl:equivalentProperty rdf:value .
 
 :seeAlso a owl:ObjectProperty;
