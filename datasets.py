@@ -91,12 +91,12 @@ def vocab():
     #cg.parse(str(compiler.path('source/vocab/display.jsonld')), format='json-ld')
     #graph += cg
 
-    graph.update(compiler.path('source/vocab/update.rq').read_text())
+    graph.update(compiler.path('source/vocab/update.rq').read_text('utf-8'))
 
-    rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text()
+    rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
-    rq = compiler.path('source/vocab/check-bases.rq').read_text()
+    rq = compiler.path('source/vocab/check-bases.rq').read_text('utf-8')
     checks = graph.query(rq).graph
     for check, msg in checks.subject_objects(SCRA.message):
         print("{}: {}".format(
@@ -160,7 +160,7 @@ def vocab():
 @compiler.dataset
 def enums():
     graph = Graph()
-    rq = compiler.path('source/marc/construct-enums.rq').read_text()
+    rq = compiler.path('source/marc/construct-enums.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
     return "/marc/", "2014-01-23T11:34:17.981Z", graph
@@ -209,7 +209,7 @@ def languages():
     loclanggraph = Graph()
     if not loclangpath.exists():
         # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
-        cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text()
+        cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text('utf-8')
         loclanggraph += _get_zipped_graph(
                 compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
                 'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
@@ -276,7 +276,7 @@ def docs():
     import markdown
     docs = []
     for fpath in compiler.path('source/doc').glob('**/*.mkd'):
-        text = fpath.read_text(encoding='utf-8')
+        text = fpath.read_text('utf-8')
         html = markdown.markdown(text)
         doc_id = (str(fpath)
                   .replace(os.sep, '/')
