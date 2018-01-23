@@ -330,36 +330,43 @@ marc:IssuingBodyNote a owl:Class ;
 
 # 562 (bib and hold):
 
+marc:hasCopyAndVersionIdentificationNote a owl:ObjecteProperty ;
+    rdfs:label "har lokal anmärkning: Identifiering av exemplar, kopia eller version"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:CopyAndVersionIdentificationNote .
+
+marc:CopyAndVersionIdentificationNote a owl:Class ;
+    rdfs:label "Lokal anmärkning: Identifiering av exemplar, kopia eller version"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
 marc:itemCondition a owl:DatatypeProperty ;
     rdfs:label "Igenkänningstecken"@sv ;
-    rdfs:domain marc:ItemInformationNote .
+    sdo:domainIncludes kbv:Item, marc:CopyAndVersionIdentificationNote .
 
-marc:copyIdentification a owl:DatatypeProperty ;
-    rdfs:label "Identifiering av exemplar"@sv ;
-    rdfs:domain marc:ItemInformationNote .
-
-marc:versionIdentification a owl:DatatypeProperty ;
-    rdfs:label "Identifiering av version"@sv ;
-    rdfs:domain marc:ItemInformationNote .
-
-marc:versionIdentification a owl:DatatypeProperty ;
-    rdfs:label "Presentationsformat"@sv ;
-    rdfs:domain marc:ItemInformationNote .
-
-marc:inventoryLevel a owl:DatatypeProperty ;
-    rdfs:label "Antal exemplar"@sv ;
-    rdfs:domain marc:ItemInformationNote .
 
 # 563 (hold)
 
 marc:hasBindingInformation a owl:ObjectProperty ;
-    rdfs:label "har anmärkning: Bokband"@sv ;
+    rdfs:label "har lokal anmärkning: Bokband"@sv ;
     rdfs:domain kbv:Item;
     rdfs:range marc:BindingInformationNote .
 
 marc:BindingInformationNote a owl:Class ;
-    rdfs:label "Anmärkning: Bokband"@sv ;
+    rdfs:label "Lokal anmärkning: Bokband"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
+
+
+# 583 (hold)
+
+marc:hasActionNote a owl:ObjectProperty ;
+    rdfs:label "har lokal anmärkning: Åtgärd"@sv ;
+    rdfs:domain kbv:Item;
+    rdfs:range marc:ActionNote .
+
+marc:ActionNote a owl:Class ;
+    rdfs:label "Lokal anmärkning: Åtgärd"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
 
 # 698
 
