@@ -35,10 +35,6 @@
     rdfs:subPropertyOf :creator;
     rdfs:label "author"@en, "författare"@sv .
 
-:translator a owl:ObjectProperty;
-    owl:equivalentProperty sdo:translator;
-    rdfs:label "translator"@en, "översättare"@sv .
-
 :authorList a owl:ObjectProperty;
     owl:equivalentProperty bibo:authorList;
     rdfs:range rdf:List .
@@ -50,7 +46,6 @@
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
     owl:equivalentProperty dc:license .
-
 
 :versionOf a owl:ObjectProperty;
     rdfs:label "version av"@sv;
@@ -454,7 +449,6 @@
 
 :agent a owl:ObjectProperty;
     rdfs:label "agent"@sv;
-    #rdfs:label "agent"@sv;
     rdfs:subPropertyOf :object ;
     owl:equivalentProperty bf2:agent, prov:agent;
     sdo:domainIncludes :Contribution, :Event;
