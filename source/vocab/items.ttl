@@ -239,20 +239,20 @@
     skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
 
 :classificationPart a owl:DatatypeProperty;
-    # TODO: rename to shelfMark? rdfs:subPropertyOf bf:shelfMark ?
+    # TODO: rename to shelfMark? rdfs:subPropertyOf bf2:shelfMark ?
     rdfs:label "Hyllsignum: Klassifikation"@sv;
     rdfs:comment "Om materialet ställs upp efter klassifikation, ange tillämplig kod, normalt en förkortad Dewey- eller SAB-kod."@sv;
     skos:example "Hc", "Hc Lagerlöf" .
 
 :copyNumber a owl:DatatypeProperty;
-    #	bf:enumerationAndChronology  
+    # bf2:enumerationAndChronology  
     rdfs:label "Exemplarnummer"@sv;
     rdfs:domain :Item;
     rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
     skos:example "A-C", "5" .
 
 :shelfControlNumber a owl:DatatypeProperty;
-    #bf:shelfMark (see above)
+    # bf2:shelfMark (see above)
     rdfs:label "Hyllsignum: Löpnummer"@sv;
     rdfs:domain :Item;
     rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord."@sv;
@@ -260,7 +260,7 @@
     skos:example "96-3899" .
 
 :shelfLabel a owl:DatatypeProperty;
-    #bf:shelfMark (see above)
+    # bf2:shelfMark (see above)
     rdfs:label "Hyllsignum: Uppställningsord"@sv;
     rdfs:domain :Item;
     rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
