@@ -243,8 +243,12 @@ marc:otherEventInformation a owl:DatatypeProperty ;
 # 520
 
 marc:expansionOfSummaryNote a owl:DatatypeProperty ;
-    sdo:domainIncludes kbv:Instance, kbv:Item, kbv:Summary ;
+    rdfs:domain kbv:Summary ;
     rdfs:label "Detailed summary note"@en, "Utförligare anmärkningstext"@sv .
+
+marc:assigningSource a owl:DatatypeProperty ;
+    rdfs:domain kbv:Summary ;
+    rdfs:label "Assigning source"@en, "Instans som åsatt anmärkning/etikett "@sv .
 
 # 538 (bib and hold)
 
