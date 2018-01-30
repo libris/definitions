@@ -37,6 +37,8 @@ marc:hiddenValue a owl:DatatypeProperty;
 #NOTE
 :technicalNote a owl:ObjectProperty;
     rdfs:subClassOf :hasNote;
+    rdfs:domain :Record;
+    rdfs:range :TechnicalNote;
     rdfs:label "Systemteknisk anmärkning"@sv .
 
 :TechnicalNote a owl:Class;
@@ -148,4 +150,3 @@ marc:ReproductionNote a owl:Class;
 #    rdfs:label "person title"@en, "persontitel"@sv;
 #    rdfs:subPropertyOf :qualifyingNote;
 #    owl:equivalentProperty sdo:jobTitle, foaf:title .
-
