@@ -14,6 +14,7 @@
 @prefix marc: <https://id.kb.se/marc/> .
 
 
+
 # AGENT
 
 :citationSource a owl:DatatypeProperty;
@@ -32,6 +33,37 @@
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Systemteknisk anmärkning"@sv .
 
+
+    
+# REMOVED FROM RELATIONS.TTL 2018-01-31, not in marcframe.
+# contributor property has been deleted from BF2.
+#
+#:creator a owl:ObjectProperty;
+#    skos:prefLabel "upphovsman"@sv;
+#    rdfs:label "skapare"@sv;
+#    rdfs:range :Agent;
+#    owl:equivalentProperty dc:creator .
+#
+#:contributor a owl:ObjectProperty;
+#    rdfs:label "delaktig i skapandet"@sv;
+#    rdfs:range :Agent;
+#    owl:equivalentProperty dc:contributor;
+#    rdfs:subPropertyOf prov:wasAttributedTo;
+#    owl:propertyChainAxiom ( :contribution :agent ) .
+#
+#:author a owl:ObjectProperty ;
+#    owl:equivalentProperty sdo:author;
+#    rdfs:subPropertyOf :creator;
+#    rdfs:label "author"@en, "författare"@sv .
+#
+#:authorList a owl:ObjectProperty;
+#    owl:equivalentProperty bibo:authorList;
+#    rdfs:range rdf:List .
+#
+#:contributorList a owl:ObjectProperty;
+#    owl:equivalentProperty bibo:contributorList;
+#    rdfs:range rdf:List .
+##
 
 # TODO: work-in-progress
 

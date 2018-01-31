@@ -16,32 +16,6 @@
 @prefix : <https://id.kb.se/vocab/> .
 
 
-:creator a owl:ObjectProperty;
-    skos:prefLabel "upphovsman"@sv;
-    rdfs:label "skapare"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty dc:creator .
-
-:contributor a owl:ObjectProperty;
-    rdfs:label "delaktig i skapandet"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty bf2:contributor, dc:contributor;
-    rdfs:subPropertyOf prov:wasAttributedTo;
-    owl:propertyChainAxiom ( :contribution :agent ) .
-
-
-:author a owl:ObjectProperty ;
-    owl:equivalentProperty sdo:author;
-    rdfs:subPropertyOf :creator;
-    rdfs:label "author"@en, "författare"@sv .
-
-:authorList a owl:ObjectProperty;
-    owl:equivalentProperty bibo:authorList;
-    rdfs:range rdf:List .
-
-:contributorList a owl:ObjectProperty;
-    owl:equivalentProperty bibo:contributorList;
-    rdfs:range rdf:List .
 
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
