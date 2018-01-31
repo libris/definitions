@@ -55,6 +55,8 @@
     rdfs:range :Record .
 
 :describedBy a owl:ObjectProperty;
+    rdfs:domain :Work;
+    rdfs:range :Record;
     rdfs:label "Beskriven av"@sv;
     owl:equivalentProperty iana:describedby, wdrs:describedby .
 
@@ -202,6 +204,7 @@
 :identifiedBy rdfs:subPropertyOf :describedBy; owl:equivalentProperty sdo:sameAs .
 
 :controlNumber a owl:DatatypeProperty;
+    rdfs:domain :Record;
     rdfs:label "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
 
