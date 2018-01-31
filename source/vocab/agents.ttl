@@ -279,9 +279,11 @@
     rdfs:subClassOf :Organization;
     owl:equivalentClass sdo:Library .
 
-:bibliography a owl:ObjectProperty;
-  rdfs:label "bibliografi"@sv .
-  #rdfs:subPropertyOf :Collection?
+:bibliography a owl:ObjectProperty ;
+    rdfs:domain :Record ;
+    rdfs:range :Library ;
+    rdfs:label "bibliografi"@sv .
+    #rdfs:subPropertyOf :Collection?
 
 :sigel a owl:DatatypeProperty;
     rdfs:label "Sigel"@sv ;
