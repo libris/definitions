@@ -5,9 +5,20 @@
 @prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 
-marc:OtherTitle a owl:Class ;
-    rdfs:subClassOf kbv:VariantTitle, kbv:InstanceTitle;
-    rdfs:label "Other title"@en, "Även med titel"@sv .
+# Terms in KBV which are not promoted to real properties or forms, mostly used for MARC21 compatibility.
+# These should when we understand more about their usage be phased out or replaced by proper vocabulary terms.
+
+# GENERAL PROPERTIES
+
+marc:fieldref a owl:DatatypeProperty;
+    rdfs:label "Länkning"@sv;
+    rdfs:domain kbv:Resource;
+    skos:definition "$6 i MARC21"@sv .
+
+marc:groupid a owl:DatatypeProperty;
+    rdfs:label "Länk- och sekvensnummer"@sv;
+    rdfs:domain kbv:Resource;
+    skos:definition "$8 i MARC21"@sv .
 
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
@@ -15,6 +26,18 @@ marc:relatedAs a owl:ObjectProperty ;
 
 marc:electronicLocatorType a owl:DatatypeProperty ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
+
+marc:linkText  a owl:DatatypeProperty;
+    rdfs:label "Link text"@en, "Länktext"@sv ;
+    rdfs:domain kbv:Endeavour .
+            
+
+# IDENTIFIERS
+
+marc:hiddenValue a owl:DatatypeProperty;
+    rdfs:label "Ogiltigt värde"@sv;
+    skos:definition "$z i MARC21 identifiers.";
+    rdfs:domain kbv:Identifier .
 
 marc:NationalIssnCentre a owl:Class;
     rdfs:subClassOf kbv:Source, kbv:Organization;
@@ -60,6 +83,23 @@ marc:Auth378 a owl:Class;
 marc:fullerFormOfPersonalName a owl:DatatypeProperty;
     rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
     rdfs:domain kbv:Agent .
+
+marc:hasOtherAttributes a owl:ObjectProperty;
+    rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
+    rdfs:domain kbv:Agent;
+    rdfs:range marc:OtherAttributes .
+
+marc:OtherAttributes a owl:Class;
+    rdfs:label "Fysisk beskrivning i textform"@sv .
+
+# ITEM
+
+marc:TextualPhysicalFormDesignator a owl:Class;
+    rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
+
+marc:ReproductionNote a owl:Class;
+    rdfs:label "Lokal anmärkning: Reproduktion"@sv .
+
 
 # 044
 
@@ -122,6 +162,10 @@ marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
+marc:OtherTitle a owl:Class ;
+    rdfs:subClassOf kbv:VariantTitle, kbv:InstanceTitle;
+    rdfs:label "Other title"@en, "Även med titel"@sv .
+
 #240-k
 
 marc:formSubheading a owl:DatatypeProperty;
@@ -173,6 +217,9 @@ marc:hasBibliographyEtcNote a owl:ObjectProperty;
     rdfs:domain kbv:Instance;
     rdfs:range marc:BibliographyEtcNote .
 
+marc:numberOfReferences a owl:DatatypeProperty;
+    rdfs:label "Number of references"@en, "Antal referenser"@sv ;
+    rdfs:domain marc:BibliographyEtcNote .
 
 marc:BibliographyEtcNote a owl:Class;
     rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv;
@@ -1033,4 +1080,3 @@ marc:hasHold949-8 a owl:DatatypeProperty ;
 marc:hasHold949-9 a owl:DatatypeProperty ;
     rdfs:label "holding 949, subfield 9"@en, "beståndsfält 949, delfält 9"@sv ;
     rdfs:domain marc:Hold949 .
-
