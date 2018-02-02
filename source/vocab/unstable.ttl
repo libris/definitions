@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
@@ -21,7 +22,7 @@
     rdfs:label "Källa"@sv;
     rdfs:domain marc:SourceDataNotFound .
 
-#NOTE
+# NOTE
 
 :technicalNote a owl:ObjectProperty;
     rdfs:subClassOf :hasNote;
@@ -33,6 +34,16 @@
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Systemteknisk anmärkning"@sv .
 
+# THINGS
+
+:device a owl:ObjectProperty;
+    rdfs:label "apparat"@sv;
+    rdfs:subPropertyOf sdo:device;
+    rdfs:range :Device .
+
+:Device a owl:Class;
+    rdfs:label "Apparat"@sv;
+    owl:equivalentClass dbpo:Device .
 
     
 # REMOVED FROM RELATIONS.TTL 2018-01-31, not in marcframe.
