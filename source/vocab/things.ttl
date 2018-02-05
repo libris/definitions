@@ -236,9 +236,12 @@
     rdfs:subClassOf :Work;
     owl:equivalentClass dctype:Dataset, bf2:Dataset, sdo:Dataset .
 
-:Image a owl:Class; # Visual
-    rdfs:label "Bild"@sv;
-    rdfs:subClassOf :Work;
+:Visual a owl:Class;
+    owl:sameAs :Image ;
+    #ptg:abstract true ;
+    rdfs:label "Visuell resurs"@sv ;
+    skos:altLabel "Bild"@sv ;
+    rdfs:subClassOf :Work ;
     owl:equivalentClass dctype:Image .
 
 :VisualArtwork a owl:Class;
@@ -255,7 +258,7 @@
 :MovingImage a owl:Class; # Film, Video
     rdfs:label "Rörlig bild"@sv;
     skos:exactMatch rdacontent:1023 ; # "two-dimensional moving image"
-    rdfs:subClassOf :Image;
+    rdfs:subClassOf :Visual ;
     owl:equivalentClass bf2:MovingImage, dctype:MovingImage .
 
 :Moving3DImage a owl:Class;
@@ -298,7 +301,7 @@
 :StillImage a owl:Class;
     rdfs:label "Stillbild"@sv;
     skos:exactMatch rdacontent:1014 ; # "still image"
-    rdfs:subClassOf :Image;
+    rdfs:subClassOf :Visual ;
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf2:StillImage, dctype:StillImage .
 
@@ -341,7 +344,7 @@
 :CartographicImage a owl:Class;
     rdfs:label "Kartografisk bild"@sv;
     skos:exactMatch rdacontent:1002 ; # "cartographic image"
-    rdfs:subClassOf :Cartography, :Image .
+    rdfs:subClassOf :Cartography, :Visual  .
 
 :CartographicMovingImage a owl:Class;
     rdfs:label "Kartografisk rörlig bild"@sv;
@@ -351,7 +354,7 @@
 :CartographicTactileImage a owl:Class;
     rdfs:label "Kartografisk taktil bild"@sv;
     skos:exactMatch rdacontent:1004 ; # "cartographic tactile image"
-    rdfs:subClassOf :Cartography, :Tactile, :Image .
+    rdfs:subClassOf :Cartography, :Tactile, :Visual  .
 
 :CartographicObject a owl:Class;
     rdfs:label "Kartografiskt objekt"@sv;
@@ -514,7 +517,7 @@
     rdfs:label "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :Image .
+    rdfs:subClassOf :Visual  .
 
 :PhysicalObject a owl:Class;
     rdfs:label "Föremål"@sv;
