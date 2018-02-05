@@ -43,6 +43,10 @@ marc:NationalIssnCentre a owl:Class;
     rdfs:subClassOf kbv:Source, kbv:Organization;
     rdfs:label "Nationellt ISSN-center"@sv, "National ISSN Centre"@en .
 
+marc:internationalInterest a owl:DatatypeProperty;
+    rdfs:label "International interest"@en, "Internationellt intresse"@sv;
+    rdfs:domain kbv:ISSN .
+
 # Extending kbv:ISSN which is defined in kbv:
 kbv:ISSN rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty kbv:source; owl:someValuesFrom marc:NationalIssnCentre ] .
