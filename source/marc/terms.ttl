@@ -104,6 +104,16 @@ marc:TextualPhysicalFormDesignator a owl:Class;
 marc:ReproductionNote a owl:Class;
     rdfs:label "Lokal anmärkning: Reproduktion"@sv .
 
+# 043
+
+marc:hasGeographicAreaCode a owl:ObjectProperty;
+    skos:notation "043" ;
+    rdfs:label "Geographic Area Code"@en, "Kod för geografiskt område"@sv ;
+    rdfs:domain kbv:Instance;
+    rdfs:range marc:GeographicAreaCode .
+
+marc:GeographicAreaCode a owl:Class;
+    rdfs:label "Geographic Area Code"@en, "Kod för geografiskt område"@sv .
 
 # 044
 
@@ -212,29 +222,30 @@ marc:sizeOfUnit a owl:DatatypeProperty ;
 
 # 501:
 
-marc:hasWithNote a owl:ObjectProperty;
-    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv ;
-    rdfs:domain kbv:Instance;
-    rdfs:range marc:WithNote .
+# uses hasNote
+#marc:hasWithNote a owl:ObjectProperty;
+#    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv ;
+#    rdfs:domain kbv:Instance;
+#    rdfs:range marc:WithNote .
 
 marc:WithNote a owl:Class;
     rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv;
     rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Instance.
 
 # 504:
 
-marc:hasBibliographyEtcNote a owl:ObjectProperty;
-    rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv ;
-    rdfs:domain kbv:Instance;
-    rdfs:range marc:BibliographyEtcNote .
-
-marc:numberOfReferences a owl:DatatypeProperty;
-    rdfs:label "Number of references"@en, "Antal referenser"@sv ;
-    rdfs:domain marc:BibliographyEtcNote .
+# uses hasNote
+#marc:hasBibliographyEtcNote a owl:ObjectProperty;
+#    rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv ;
+#    rdfs:domain kbv:Instance;
+#    rdfs:range marc:BibliographyEtcNote .
 
 marc:BibliographyEtcNote a owl:Class;
     rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv;
     rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Instance.
+
 
 # 506:
 
@@ -260,11 +271,11 @@ marc:standardizedTerminologyForAccessRestriction a owl:DatatypeProperty ;
 
 
 # 508:
-
-marc:hasCreationProductionCreditsNote a owl:ObjectProperty;
-    rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
-    rdfs:domain kbv:Work;
-    rdfs:range marc:CreationProductionCreditsNote .
+# uses hasNote
+#marc:hasCreationProductionCreditsNote a owl:ObjectProperty;
+#    rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
+#    rdfs:domain kbv:Work;
+#    rdfs:range marc:CreationProductionCreditsNote .
 
 marc:CreationProductionCreditsNote a owl:Class;
     rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
@@ -272,10 +283,11 @@ marc:CreationProductionCreditsNote a owl:Class;
 
 # 511:
 
-marc:hasParticipantOrPerformerNote a owl:ObjectProperty;
-    rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
-    rdfs:domain kbv:Work;
-    rdfs:range marc:ParticipantOrPerformerNote .
+# uses hasNote
+#marc:hasParticipantOrPerformerNote a owl:ObjectProperty;
+#    rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
+#    rdfs:domain kbv:Work;
+#    rdfs:range marc:ParticipantOrPerformerNote .
 
 marc:ParticipantOrPerformerNote a owl:Class;
     rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
@@ -283,10 +295,11 @@ marc:ParticipantOrPerformerNote a owl:Class;
 
 # 513:
 
-marc:hasTypeOfReportAndPeriodCoveredNote a owl:ObjectProperty ;
-    rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
-    rdfs:domain kbv:Instance;
-    rdfs:range marc:TypeOfReportAndPeriodCoveredNote .
+# uses hasNote
+#marc:hasTypeOfReportAndPeriodCoveredNote a owl:ObjectProperty ;
+#    rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
+#    rdfs:domain kbv:Instance;
+#    rdfs:range marc:TypeOfReportAndPeriodCoveredNote .
 
 marc:TypeOfReportAndPeriodCoveredNote a owl:Class ;
     rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
@@ -374,10 +387,11 @@ marc:BiographicalOrHistoricalData a owl:Class;
 
 # 546:
 
-marc:hasLanguageNote a owl:ObjectProperty ;
-    rdfs:label "Language note"@en, "Preciserande språkanmärkning"@sv;
-    rdfs:domain kbv:Work;
-    rdfs:range marc:LanguageNote .
+# uses hasNote
+#marc:hasLanguageNote a owl:ObjectProperty ;
+#    rdfs:label "Language note"@en, "Preciserande språkanmärkning"@sv;
+#    rdfs:domain kbv:Work;
+#    rdfs:range marc:LanguageNote .
 
 marc:LanguageNote a owl:Class ;
     rdfs:label "Language note"@en, "Anmärkning: Språk"@sv ;
@@ -385,10 +399,11 @@ marc:LanguageNote a owl:Class ;
     
 # 550:
 
-marc:hasIssuingBodyNote a owl:ObjectProperty ;
-    rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution (fortlöpande resurser)"@sv ;
-    rdfs:domain kbv:Instance;
-    rdfs:range kbv:IssuingBodyNote .
+# uses hasNote
+#marc:hasIssuingBodyNote a owl:ObjectProperty ;
+#    rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution (fortlöpande resurser)"@sv ;
+#    rdfs:domain kbv:Instance;
+#    rdfs:range kbv:IssuingBodyNote .
 
 marc:IssuingBodyNote a owl:Class ;
     rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution"@sv ;
