@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -578,11 +579,13 @@
 # Provision Activity
 
 :ProvisionActivity a owl:Class;
+    ptg:abstract true;
     rdfs:label "Provider entity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
     owl:equivalentClass bf2:ProvisionActivity;
     rdfs:subClassOf :Event, :QualifiedRole .
 
 :provisionActivity a owl:ObjectProperty;
+    ptg:abstract true;
     rdfs:label "Provision activity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
     rdfs:domain :Instance;
     rdfs:range :ProvisionActivity;
