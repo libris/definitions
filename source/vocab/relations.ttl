@@ -104,7 +104,12 @@
     #TODO: More specifically sdo:domainIncludes :Item, :Instance;
     rdfs:domain :Endeavour;
     rdfs:range :MediaObject;
-    rdfs:label "associated media"@en, "tillhörande media"@sv .
+    rdfs:label "associated media"@en, "tillhörande media"@sv;
+    owl:equivalentProperty sdo:associatedMedia .
+
+:MediaObject a owl:Class;
+    rdfs:label "Media object"@en, "Mediaobjekt"@sv;
+    owl:equivalentClass sdo:MediaObject .
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
