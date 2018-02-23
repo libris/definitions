@@ -99,9 +99,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
     rdfs:range rdf:Statement .
 
-:predicate rdfs:subPropertyOf rdf:predicate; ptg:abstract true .
+:predicate a owl:ObjectProperty;
+    rdfs:subPropertyOf rdf:predicate; ptg:abstract true .
 
-:object rdfs:subPropertyOf rdf:object; ptg:abstract true .
+:object a owl:ObjectProperty;
+    rdfs:subPropertyOf rdf:object; ptg:abstract true .
 
 
 ##
