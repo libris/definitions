@@ -55,10 +55,12 @@ marc:canceledIssnL a owl:DatatypeProperty;
 
 marc:incorrectIssn a owl:DatatypeProperty;
     rdfs:label "Incorrect ISSN"@en, "Felaktigt ISSN"@sv;
+    rdfs:subClassOf marc:hiddenValue;
     rdfs:domain kbv:ISSN .
 
 marc:canceledIssn a owl:DatatypeProperty;
     rdfs:label "Canceled ISSN"@en, "Annullerat iSSN"@sv;
+    rdfs:subClassOf marc:hiddenValue;
     rdfs:domain kbv:ISSN .
 
 # Extending kbv:ISSN which is defined in kbv:
