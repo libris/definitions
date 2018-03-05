@@ -92,6 +92,7 @@ def vocab():
     #graph += cg
 
     graph.update(compiler.path('source/vocab/update.rq').read_text('utf-8'))
+    graph.update(compiler.path('source/vocab/updateResource.rq').read_text('utf-8'))
 
     rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text('utf-8')
     graph += Graph().query(rq).graph

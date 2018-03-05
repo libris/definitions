@@ -1,0 +1,22 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix : <https://id.kb.se/vocab/>
+
+insert {
+    ?term rdfs:subClassOf :Resource
+
+} where {
+    ?term a owl:Class
+
+    # Add Resource where subClassOf is missing (Is this part redundant? Enough with the minus clause?)
+    optional {?term rdfs:subClassOf ?subClassOf}
+    filter(!bound(?subClassOf))
+
+    # Don't add subClassOf if term already is :Resource
+    filter(?term != :Resource)
+
+    # Don't add if ?subClassOf contains refs that starts with <https://id.kb.se/vocab/>
+    MINUS {
+        ?term rdfs:subClassOf ?baseClassUri
+        filter ((?baseClassUri != :) && strstarts(str(?baseClassUri), str(:)))
+    }
+}
