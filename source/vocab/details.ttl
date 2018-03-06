@@ -1152,6 +1152,21 @@
     rdfs:label "equipment or system requirements"@en, "systemkrav"@sv;
     owl:equivalentProperty bf2:systemRequirement .
 
+:MachineModel a owl:Class;
+    rdfs:label "Model"@en, "Modell"@sv;
+    rdfs:subClassOf :SystemRequirement;
+    owl:equivalentClass bflc:MachineModel .
+
+:ProgrammingLanguage a owl:Class;
+    rdfs:label "Programming language"@en, "Programspråk"@sv;
+    rdfs:subClassOf :SystemRequirement;
+    owl:equivalentClass bflc:ProgrammingLanguage .
+
+:OperatingSystem a owl:Class;
+    rdfs:label "Operating system"@en, "Operativsystem"@sv;
+    rdfs:subClassOf :SystemRequirement;
+    owl:equivalentClass bflc:OperatingSystem .
+
 :UsageAndAccessPolicy a owl:Class;
     rdfs:label "Use and access conditions"@en, "Villkor för användning och åtkomst"@sv;
     owl:equivalentClass bf2:UsageAndAccessPolicy .
