@@ -896,6 +896,12 @@
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear;
     owl:propertyChainAxiom (:copyright :date) .
 
+:projectedProvisionDate a owl:DatatypeProperty;
+    rdfs:label "Projected publication date"@en, "Förväntad utgivningstid"@sv;
+    rdfs:subPropertyOf :date;
+    rdfs:domain :Instance;
+    owl:equivalentProperty bflc:projectedProvisionDate .
+
 :version a owl:DatatypeProperty;
     rdfs:label "Version"@en, "Version"@sv;
     rdfs:domain :Work;
