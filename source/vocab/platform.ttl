@@ -35,12 +35,16 @@
 # (which, unlike Hydra, is a REC as of 2017-05-23).
 
 
+:Document a owl:Class;
+    rdfs:label "Dokument"@sv;
+    owl:equivalentClass foaf:Document .
+
 ##
 # Records
 
 :Record a owl:Class;
     rdfs:label "Post"@sv;
-    rdfs:subClassOf :AdminMetadata, foaf:Document .
+    rdfs:subClassOf :AdminMetadata .
 
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
@@ -70,6 +74,7 @@
 
 :AdminMetadata a owl:Class;
     rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
+    rdfs:subClassOf :Document ;
     owl:equivalentClass bf2:AdminMetadata .
 
 :adminMetadata a owl:ObjectProperty;
