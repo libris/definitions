@@ -329,6 +329,26 @@
     owl:inverseOf :hasSeries;
     owl:equivalentProperty bf2:seriesOf .
 
+:seriesMembership a owl:ObjectProperty ;
+    sdo:domainIncludes :Instance ;
+    rdfs:subPropertyOf :hasStatement ;
+    rdfs:range :SeriesMembership ;
+    rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
+
+:inSeries a owl:ObjectProperty ;
+    rdfs:domain :SeriesMembership ;
+    rdfs:subPropertyOf :object ;
+    sdo:rangeIncludes :Instance ;
+    rdfs:label "in series"@en, "ingår i serie"@sv .
+
+:SeriesMembership a owl:Class ;
+    rdfs:subClassOf :PartitiveRelationship ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :predicate ;
+            owl:hasValue :hasSeries
+        ] ;
+    rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
+
 :isPrimaryTopicOf a owl:ObjectProperty;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
@@ -451,7 +471,7 @@
 
 :Relationship a owl:Class ;
     rdfs:label "Relation"@sv ;
-    rdfs:subClassOf prov:PrimarySource ;
+    rdfs:subClassOf prov:PrimarySource, :QualifiedRole ;
     owl:equivalentClass bflc:Relationship .
 
 :PartitiveRelationship a owl:Class ;
