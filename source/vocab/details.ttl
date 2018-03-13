@@ -43,7 +43,6 @@
     owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
 
 :hasTitle a owl:ObjectProperty;
-    #owl:equivalentProperty bf:instanceTitle;
     owl:equivalentProperty bf2:title;
     rdfs:range :Title;
     rdfs:label "has title"@en, "har titel"@sv;
@@ -84,11 +83,6 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partNumber;
     rdfs:domain :Title .
-
-:InstanceTitle  a owl:Class;
-    ptg:abstract true;
-    rdfs:subClassOf :Title;
-    rdfs:label "Instance Title"@en, "Instanstitel"@sv .
 
 #:WorkTitle  a owl:Class;
 #    owl:equivalentClass bf2:WorkTitle;
@@ -133,7 +127,7 @@
     rdfs:label "Parallelltitel"@sv .
 
 :CaptionTitle a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Caption title"@en, "Rubriktitel"@sv .
 
 :CollectiveTitle a owl:Class;
@@ -142,28 +136,28 @@
     rdfs:label "Collective title"@en, "Samlingstitel"@sv .
 
 :CoverTitle a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Cover title"@en, "Omslagstitel"@sv .
 
 :DistinctiveTitle a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Distinctive title"@en, "Titelvariant"@sv .
 
 :RunningTitle a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Running title"@en, "Kolumntitel"@sv .
 
 :SpineTitle a owl:Class;
-    rdfs:label "Spine title"@en, "Ryggtitel"@sv;
+    rdfs:label "Spine title"@en;
     # rdfs:domain :Instance or propertyChainAxiom?
     rdfs:subClassOf :VariantTitle .
 
 :AddedTitlePageTitle a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Added title page title"@en, "Förtitel"@sv .
     
 :TitlePortion a owl:Class;
-    rdfs:subClassOf :VariantTitle, :InstanceTitle;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Title portion"@en, "Del av huvudtitel"@sv .
         
 :TitlePart a owl:Class;
