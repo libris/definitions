@@ -266,13 +266,17 @@
 
 :Organization a owl:Class;
     rdfs:label "Organization"@en, "Organisation"@sv;
+    owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization ;
     rdfs:subClassOf :Agent;
-    owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization  .
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Organization ] .
 
 :Jurisdiction a owl:Class;
     rdfs:label "Jurisdiktion"@sv;
+    owl:equivalentClass bf2:Jurisdiction ;
     rdfs:subClassOf :Agent;
-    owl:equivalentClass bf2:Jurisdiction .
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Jurisdiction ] .
 
 :Library a owl:Class;
     rdfs:label "Library"@en, "Bibliotek"@sv;
