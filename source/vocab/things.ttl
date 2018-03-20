@@ -41,7 +41,11 @@
 :Endeavour a owl:Class ;
     ptg:abstract true;
     #skos:closeMatch frbr:Endeavour ;
-    rdfs:subClassOf :Document .
+    rdfs:subClassOf :Document ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :relatedTo;
+            owl:allValuesFrom :Endeavour
+        ] .
 
 :Creation a owl:Class ;
     ptg:abstract true;

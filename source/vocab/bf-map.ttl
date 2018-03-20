@@ -1,5 +1,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 
@@ -35,9 +36,18 @@ kbv:hasNote owl:equivalentProperty bf2:note .
 
 kbv:creditsNote owl:equivalentProperty bf2:credits .
 kbv:awardsNote owl:equivalentProperty bf2:awards .
-kbv:isPartOf owl:equivalentProperty bf2:partOf .
 
 kbv:organizationOfMaterial owl:equivalentProperty bf2:organization .
+
+kbv:isPartOf owl:equivalentProperty bf2:partOf .
+
+kbv:hasPart owl:equivalentProperty bf2:hasPart ;
+    rdfs:domain kbv:Resource ; # NOTE: loosens implied bf2 domain
+    rdfs:range kbv:Resource . # NOTE: loosens implied bf2 range
+
+kbv:relatedTo owl:equivalentProperty bf2:relatedTo ;
+    rdfs:domain kbv:Resource ; # NOTE: loosens implied bf2 domain
+    rdfs:range kbv:Resource . # NOTE: loosens implied bf2 range
 
 kbv:CODEN a rdfs:Datatype; owl:equivalentClass bf2:Coden .
 kbv:DOI a rdfs:Datatype; owl:equivalentClass bf2:Doi .
