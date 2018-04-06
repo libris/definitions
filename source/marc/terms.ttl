@@ -22,7 +22,7 @@ marc:groupid a owl:DatatypeProperty;
 
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
-    rdfs:range owl:ObjectProperty .
+    rdfs:range kbv:ObjectProperty .
 
 marc:electronicLocatorType a owl:DatatypeProperty ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
@@ -76,7 +76,7 @@ kbv:ISSN rdfs:subClassOf [ a owl:Restriction;
 marc:numeration a owl:DatatypeProperty;
     rdfs:label "Numeration"@en, "Ordningstal"@sv;
     rdfs:comment "Förekommer endast för namn i rak följd. Ange ordningstal för regenter med romerska siffror."@sv;
-    rdfs:domain kbv:Person .
+    rdfs:domain kbv:Agent .
 
 marc:titlesAndOtherWordsAssociatedWithAName a owl:DatatypeProperty;
     rdfs:label "Titel eller övrig beteckning"@sv;
