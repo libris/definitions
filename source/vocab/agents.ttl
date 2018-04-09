@@ -7,7 +7,6 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix persona: <http://www.pipian.com/schemas/foaf/persona#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
@@ -138,18 +137,6 @@
 #    rdfs:range :Year;
 #    owl:equivalentProperty sdo:deathYear;
 #    rdfs:label "death year"@en, "dödsår"@sv .
-
-:Persona a owl:Class;
-    rdfs:label "Persona"@sv;
-    rdfs:subClassOf :Person;
-    owl:equivalentClass persona:Persona .
-
-# use "has alternate identity"
-:hasPersona a owl:ObjectProperty;
-    rdfs:domain :Person;
-    rdfs:label "har persona"@sv;
-    rdfs:subPropertyOf rdfs:seeAlso;
-    owl:equivalentProperty persona:hasPersona .
 
 :fieldOfActivity a owl:ObjectProperty;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;

@@ -109,7 +109,7 @@
 
 :inScheme a owl:ObjectProperty;
     rdfs:label "termlista"@sv;
-    sdo:domainIncludes :Concept, :Classification, :Agent, :Work, :Subject ;
+    sdo:domainIncludes :Concept, :Agent, :Work ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
@@ -140,6 +140,23 @@
     rdfs:range :Concept;
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
+
+:hasVariant a owl:ObjectProperty;
+    rdfs:label "relaterad"@sv;
+    sdo:domainIncludes :Concept, :Agent, :Work ;
+    rdfs:range :Concept;
+    rdfs:subPropertyOf skos:related ;
+    owl:equivalentProperty madsrdf:hasVariant .
+# Range restrictions:
+:Concept rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Concept ] .
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Agent ] .
+:Work rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Work ] .
 
 :scopeNote a owl:DatatypeProperty;
     rdfs:label "anmärkning om användning"@sv;
