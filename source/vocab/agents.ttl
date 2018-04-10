@@ -141,9 +141,10 @@
 :fieldOfActivity a owl:ObjectProperty;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
-    rdfs:range :FieldOfActivity;
+    sdo:rangeIncludes :FieldOfActivity, :Concept;
     owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
 
+# NOTE: We would like to upgrade relevant SAO concepts to Instances of this Class in the future...
 :FieldOfActivity a owl:Class;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
 
@@ -247,7 +248,7 @@
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "Har yrke eller sysselsättning"@sv;
     rdfs:domain :Person;
-    rdfs:range :Concept;
+    sdo:rangeIncludes :Occupation, :Concept;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .
 
 # Organization properties
