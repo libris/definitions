@@ -142,11 +142,12 @@
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
 
 :hasVariant a owl:ObjectProperty;
-    rdfs:label "relaterad"@sv;
+    rdfs:label "variant"@sv;
     sdo:domainIncludes :Concept, :Agent, :Work ;
     rdfs:range :Concept;
     rdfs:subPropertyOf skos:related ;
-    owl:equivalentProperty madsrdf:hasVariant .
+    skos:closeMatch skos:exactMatch ;
+    owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
 # Range restrictions:
 :Concept rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasVariant;
