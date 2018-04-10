@@ -156,7 +156,18 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "se även"@sv;
     rdfs:domain :Resource;
     rdfs:range :Resource;
-    owl:equivalentProperty rdfs:seeAlso .
+    rdfs:subPropertyOf rdfs:seeAlso ;
+    owl:equivalentProperty madsrdf:see .
+# Range restrictions:
+:Concept rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Concept ] .
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Agent ] .
+:Work rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Work ] .
 
 :sameAs a owl:ObjectProperty;
     rdfs:label "samma sak som"@sv;
