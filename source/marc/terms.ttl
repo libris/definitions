@@ -95,18 +95,9 @@ marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:label "Namn på underordnad enhet"@sv;
     sdo:domainIncludes kbv:Jurisdiction, kbv:Organization, kbv:Meeting .
 
-marc:hasAuth378;
-    rdfs:label "Fullständigare namnform - Personnamn"@sv ;
-    rdfs:domain kbv:Person;
-    rdfs:range marc:Auth-378 .
-
-marc:Auth378 a owl:Class;
-    rdfs:label "Fullständigare namnform - Personnamn"@sv ;
-    rdfs:subClassOf kbv:StructuredValue .
-
 marc:fullerFormOfPersonalName a owl:DatatypeProperty;
-    rdfs:label "Fuller form of name"@en, "Fullständigare namnform"@sv;
-    rdfs:domain kbv:Agent .
+    rdfs:label "Fuller form of personal name"@en, "Fullständigare namnform - Personnamn"@sv;
+    rdfs:domain kbv:Person .
 
 marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
