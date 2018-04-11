@@ -50,13 +50,26 @@ In  these files are special:
   technical terms to public vocabularies.
 
 * `source/vocab/enums.ttl`, `source/vocab/construct-enum-restrictions.rq`,
-  `source/marc/enums.ttl` and `source/marc/construct-enums.rq` combine to
-  create all possible "enumerable" values, stemming from controlled values for
-  columns in fixed fields in MARC21.
+  and `source/marc/enums.ttl` define the terms (properties and classes) for
+  controlled, "enumerable" values. A lot of these stem from controlled values
+  for columns in fixed fields in MARC21. Some come from RDA, and some from
+  cleaned up defintions in BibFrame 2, or our own vocabulary. (See links in the
+  data for references.)
 
-**Note:** the file `source/vocab/check-bases.rq` is used to check som sanity in
-the generated structures. It is adviced to heed any warnings by correcting the
-relevant sources.
+  These files also contain certain *instances* of these classes. Specifically,
+  these correspond to the domain of the properties defined as `@type: @vocab`
+  in `source/vocab-overlay.jsonld`. These are special values defined within the
+  vocabulary (often because they are very "type-like"). A prime example is
+  `IssuanceType`, whose values are kept together with the vocabulary itself.
+
+* `source/marc/construct-enums.rq` combine to create all other "enumerable"
+  values, which may or may not become merged with other controlled lists in the
+  future. (When that is done, the definition here must be removed and its URI
+  be places in a `sameAs` relation in whatever term that is replacing it.
+
+**Note:** the file `source/vocab/check-bases.rq` is used to check some sanity
+in the generated structures. It is advised to heed any warnings by correcting
+the relevant sources.
 
 ## Maintenance
 
