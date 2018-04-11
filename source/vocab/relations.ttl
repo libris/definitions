@@ -1,6 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -16,18 +17,19 @@
 @prefix : <https://id.kb.se/vocab/> .
 
 
-
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
     owl:equivalentProperty dc:license .
 
 :versionOf a owl:ObjectProperty;
+    ptg:abstract true;
     rdfs:label "version av"@sv;
     owl:equivalentProperty dc:isVersionOf .
 
 :hasVersion a owl:ObjectProperty;
-    rdfs:domain :Concept;
-    rdfs:range :Work;
+    ptg:abstract true;
+    rdfs:domain :Endeavour;
+    rdfs:range :Endeavour;
     rdfs:label "har version"@sv;
     owl:equivalentProperty dc:hasVersion;
     rdfs:subPropertyOf sdo:exampleOfWork .
@@ -260,7 +262,7 @@
     rdfs:label "har uttryck"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
-    rdfs:subPropertyOf :versionOf;
+    rdfs:subPropertyOf :hasVersion;
     owl:inverseOf :expressionOf;
     owl:equivalentProperty bf2:hasExpression .
 
