@@ -38,11 +38,22 @@
 
 
 ##
+# Abstract Base Identity
+
+:Identity a owl:Class;
+    ptg:abstract true ;
+    :category marc:auth ;
+    rdfs:subClassOf :Resource;
+    rdfs:label "Identity"@en, "Identitet"@sv;
+    rdfs:comment "A distinguished identity (in a bibliographic sense)."@en .
+
+
+##
 # Topics / Concept Codes / Subject Headings
 
 :Concept a owl:Class;
-    :category marc:auth ;
     rdfs:label "Concept"@en, "Koncept"@sv;
+    rdfs:subClassOf :Identity;
     owl:equivalentClass skos:Concept;
     owl:hasKey (:notation :prefLabel :inScheme) .
 
@@ -103,7 +114,7 @@
 
 :inScheme a owl:ObjectProperty;
     rdfs:label "termlista"@sv;
-    sdo:domainIncludes :Concept, :Agent, :Work ;
+    rdfs:domain :Identity ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
@@ -137,8 +148,8 @@
 
 :hasVariant a owl:ObjectProperty;
     rdfs:label "variant"@sv;
-    sdo:domainIncludes :Concept, :Agent, :Work ;
-    rdfs:range :Concept;
+    rdfs:domain :Identity ;
+    rdfs:range :Identity;
     rdfs:subPropertyOf skos:related ;
     skos:closeMatch skos:exactMatch ;
     owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
