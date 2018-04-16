@@ -69,7 +69,8 @@
 # Person properties
 
 :familyName a owl:DatatypeProperty;
-    rdfs:label "family name"@en, "familjenamn"@sv;
+    rdfs:label "family name"@en, "efternamn"@sv;
+    skos:altLabel "familjenamn"@sv;
     rdfs:domain :Person;
     rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd"@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
@@ -169,22 +170,22 @@
     owl:equivalentProperty sdo:deathPlace, madsrdf:deathPlace, rdau:P60592, rdau:placeOfDeath.en .
 
 :activityStartDate a owl:DatatypeProperty;
-    rdfs:label "Start date"@en, "Startdatum för aktivitetsperiod"@sv;
+    rdfs:label "Start date"@en, "Verksamhetens starttid"@sv;
     rdfs:domain :Agent;
     owl:equivalentProperty madsrdf:activityStartDate .
 
 :activityEndDate a owl:DatatypeProperty;
-    rdfs:label "End date"@en, "Slutdatum för aktivitetsperiod"@sv;
+    rdfs:label "End date"@en, "Verksamhetens sluttid"@sv;
     rdfs:domain :Agent;
     owl:equivalentProperty madsrdf:activityEndDate .
 
 :establishDate a owl:DatatypeProperty;
-    rdfs:label "Established  "@en, "Startdatum"@sv;
+    rdfs:label "Established"@en, "Tid för grundande"@sv;
     rdfs:domain :Organization;
     owl:equivalentProperty madsrdf:establishDate .
 
 :terminateDate a owl:DatatypeProperty;
-    rdfs:label "Terminated"@en, "Slutdatum"@sv;
+    rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
     rdfs:domain :Organization;
     owl:equivalentProperty madsrdf:terminateDate .
 
