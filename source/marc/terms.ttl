@@ -102,14 +102,6 @@ marc:fullerFormOfPersonalName a owl:DatatypeProperty;
     rdfs:label "Fuller form of personal name"@en, "Fullständigare namnform - Personnamn"@sv;
     rdfs:domain kbv:Person .
 
-marc:hasOtherAttributes a owl:ObjectProperty;
-    rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
-    rdfs:domain kbv:Agent;
-    rdfs:range marc:OtherAttributes .
-
-marc:OtherAttributes a owl:Class;
-    rdfs:label "Fysisk beskrivning i textform"@sv .
-
 # ITEM
 
 marc:TextualPhysicalFormDesignator a owl:Class;
@@ -239,6 +231,32 @@ marc:copyNote a owl:DatatypeProperty ;
 marc:sizeOfUnit a owl:DatatypeProperty ;
     rdfs:domain kbv:Extent ;
     rdfs:label "Size of unit"@en, "Storlek på fysisk enhet"@sv .
+
+# AUTH 368
+
+marc:hasOtherAttributes a owl:ObjectProperty;
+    rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
+    rdfs:domain kbv:Agent;
+    rdfs:range marc:OtherAttributes .
+
+marc:OtherAttributes a owl:Class;
+    rdfs:label "Fysisk beskrivning i textform"@sv .
+
+marc:typeOfCorporateBody a owl:DatatypeProperty;
+    rdfs:domain marc:OtherAttributes;
+    rdfs:label "Typ av organisation etc."@sv .
+    
+marc:otherDesignation a owl:DatatypeProperty;
+    rdfs:domain marc:OtherAttributes;
+    rdfs:label "Annan beteckning"@sv .
+
+marc:titleOfPerson a owl:DatatypeProperty;
+    rdfs:domain marc:OtherAttributes;
+    rdfs:label "Titel/officiell rang för kunglig, adlig eller religiös person (R)"@sv .
+
+marc:source a owl:DatatypeProperty;
+    rdfs:domain marc:OtherAttributes;
+    rdfs:label "Kod för kontrollerad vokabulär"@sv .
 
 # AUTH 370
 
