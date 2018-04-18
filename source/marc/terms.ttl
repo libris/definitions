@@ -4,6 +4,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Terms in KBV which are not promoted to real properties or forms, mostly used for MARC21 compatibility.
 # These should when we understand more about their usage be phased out or replaced by proper vocabulary terms.
@@ -49,8 +50,10 @@ marc:issnL a owl:DatatypeProperty;
     rdfs:label "ISSN-L"@en, "ISSN-L"@sv;
     rdfs:domain kbv:ISSN .
 
+# TODO: Make this term a kbv term instead of marc, since it's a important term for the ISSN central
 marc:internationalInterest a owl:DatatypeProperty;
     rdfs:label "International interest"@en, "Internationellt intresse"@sv;
+    rdfs:range xsd:boolean;
     rdfs:domain kbv:ISSN .
 
 marc:canceledIssnL a owl:DatatypeProperty;
@@ -126,9 +129,10 @@ marc:hasGeographicAreaCode a owl:ObjectProperty;
 marc:GeographicAreaCode a owl:Class;
     rdfs:label "Geographic Area Code"@en, "Kod för geografiskt område"@sv .
 
+
 # 044
 
-marc::hasCountryOfPublishingProducingEntityCode a owl:ObjectProperty;
+marc:hasCountryOfPublishingProducingEntityCode a owl:ObjectProperty;
     rdfs:label "Country Of Publishing/Producing Entity Code"@en, "Landkod för utgivande/producerande enhet"@sv ;
     rdfs:domain kbv:Instance;
     rdfs:range marc:CountryOfPublishingProducingEntityCode .
