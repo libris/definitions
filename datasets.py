@@ -33,6 +33,20 @@ def to_camel_case(label):
             for (i, s) in enumerate(re.split(r'[\s,.-]', label)) if s)
 
 
+def expand_ids(obj, pfx_map):
+    if isinstance(obj, list):
+        for item in obj:
+            expand_ids(item, pfx_map)
+    elif isinstance(obj, dict):
+        node_id = obj.get('@id')
+        if node_id:
+            pfx, colon, leaf = node_id.partition(':')
+            ns = pfx_map.get(pfx)
+            if ns:
+                obj['@id'] = node_id.replace(pfx + ':', ns, 1)
+        for value in obj.values():
+            expand_ids(value, pfx_map)
+
 def _get_zipped_graph(path, name):
     with zipfile.ZipFile(str(path), 'r') as zipped:
         return Graph().parse(zipped.open(name), format='turtle')
@@ -124,6 +138,11 @@ def vocab():
     data = compiler.to_jsonld(graph)
     del data['@context']
 
+    base_ctx = compiler.load_json('sys/context/base.jsonld')
+
+    # ensue @id values are in expanded form (i.e. full URIs)
+    expand_ids(data['@graph'], base_ctx['@context'])
+
     # Put /vocab/* first (ensures that /marc/* comes after)
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
@@ -136,7 +155,6 @@ def vocab():
 
     vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    #assert vocab_record['@id'] == vocab_base
     add_record_system_id(vocab_record)
 
     version = _get_repo_version()
@@ -144,7 +162,7 @@ def vocab():
         vocab_record['version'] = version
 
     lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
-    add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
+    add_overlay(lib_context, base_ctx)
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
     faux_record = {'@id': BASE + 'vocab/context'}
     add_record_system_id(faux_record)
