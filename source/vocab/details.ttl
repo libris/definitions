@@ -590,13 +590,13 @@
     owl:equivalentProperty bf2:provisionActivity;
     rdfs:comment "Utgivningsort, utgivarnamn och utgivningstid är kärnelement."@sv .
 
-:publicationCountry a rdf:Property;
-    rdfs:label "Utgivningsland"@sv ;
-    #TODO: rdfs:domain :ProvisionActivity;
-    rdfs:domain :Instance;
-    rdfs:range :Country .
+# NOTE: Use :PrimaryPublication with :country instead.
+#:publicationCountry a rdf:Property;
+#    rdfs:label "Utgivningsland"@sv ;
+#    #TODO: rdfs:domain :ProvisionActivity;
+#    rdfs:domain :Instance;
+#    rdfs:range :Country .
 
-    
 #:publicationlocation a owl:ObjectProperty;
 #    rdfs:label "Utgivningsort"@sv;
 #    owl:propertyChainAxiom (:publication :place) .
@@ -672,6 +672,56 @@
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Copyright ];
     rdfs:label "Copyright"@sv .
+
+:PrimaryProvisionActivity a owl:Class;
+    ptg:abstract true;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Primärt tillgängliggörande"@sv .
+
+:PrimaryPublication a owl:Class;
+    rdfs:subClassOf :Publication, :PrimaryProvisionActivity;
+    rdfs:label "Primär utgivning"@sv .
+
+:PrimaryProduction a owl:Class;
+    rdfs:subClassOf :Production, :PrimaryProvisionActivity;
+    rdfs:label "Primär produktion"@sv .
+
+:PrimaryBulkProduction a owl:Class;
+    rdfs:subClassOf :PrimaryProduction;
+    rdfs:label "Primär bulkproduktion"@sv .
+
+:PublicationPeriod a owl:Class;
+    rdfs:subClassOf :PrimaryPublication;
+    rdfs:label "Primär utgivningsperiod"@sv .
+
+:CurrentPublicationPeriod a owl:Class;
+    rdfs:subClassOf :PublicationPeriod;
+    rdfs:label "Nuvarande utgivningsperiod"@sv .
+
+:CeasedPublicationPeriod a owl:Class;
+    rdfs:subClassOf :PublicationPeriod;
+    rdfs:label "Avslutad utgivningsperiod"@sv .
+
+:otherDate a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryProvisionActivity ;
+    rdfs:label "kompletterande datum"@sv;
+    rdfs:subPropertyOf :date .
+
+:startDate a owl:DatatypeProperty;
+    sdo:domainIncludes :PublicationPeriod ;
+    rdfs:label "startdatum"@sv;
+    rdfs:subPropertyOf :date .
+
+:endDate a owl:DatatypeProperty;
+    sdo:domainIncludes :PublicationPeriod ;
+    rdfs:label "slutdatum"@sv;
+    rdfs:subPropertyOf :date .
+
+:country a owl:ObjectProperty;
+    rdfs:label "land"@sv;
+    sdo:domainIncludes :PrimaryProvisionActivity;
+    rdfs:subPropertyOf :place ;
+    rdfs:range :Country .
 
 :firstIssue a owl:DatatypeProperty;
     rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
@@ -886,6 +936,7 @@
     owl:equivalentProperty bf2:historyOfWork .
 
 :copyrightDate a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryPublication, :Instance;
     rdfs:label "Copyright date"@en, "Copyrightdatum"@sv;
     rdfs:range rdfs:Literal;
     rdfs:comment "Används för närvarande ej."@sv;

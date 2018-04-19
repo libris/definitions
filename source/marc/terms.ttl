@@ -35,6 +35,23 @@ marc:linkText  a owl:DatatypeProperty;
 marc:toDisplayNote a owl:DatatypeProperty;
     rdfs:label "Display note"@en, "Visa anmärkning"@sv .
 
+# bib 008
+
+marc:DistributionAndProduction a owl:Class;
+    rdfs:subclassOf kbv:PrimaryProvisionActivity;
+    rdfs:label "Distribution och produktion"@sv .
+
+marc:productionDate a owl:DatatypeProperty;
+    sdo:domainIncludes marc:DistributionAndProduction ;
+    rdfs:label "produktionsdatum"@sv;
+    rdfs:subPropertyOf kbv:date .
+
+marc:distributionDate a owl:DatatypeProperty;
+    sdo:domainIncludes marc:DistributionAndProduction ;
+    rdfs:label "distributionsdatum"@sv;
+    rdfs:subPropertyOf kbv:date .
+
+
 # IDENTIFIERS
 
 marc:hiddenValue a owl:DatatypeProperty;
