@@ -1,6 +1,17 @@
 from rdflib import *
 from rdflib.namespace import *
 
+# Monkey-patching RDFLib
+# Borks on XML Literals where a declares xmlns is *also* declared as default xmlns.
+from rdflib.plugins.parsers.rdfxml import RDFXMLHandler
+RDFXMLHandler_startPrefixMapping = RDFXMLHandler.startPrefixMapping
+def patched_startPrefixMapping(self, prefix, namespace):
+    current_prefix = self._current_context.get(namespace)
+    if prefix is None and current_prefix:
+        return
+    return RDFXMLHandler_startPrefixMapping(self, prefix, namespace)
+RDFXMLHandler.startPrefixMapping = patched_startPrefixMapping
+
 
 BF2 = Namespace('http://id.loc.gov/ontologies/bibframe/')
 MADSRDF = Namespace('http://www.loc.gov/mads/rdf/v1#')
@@ -46,6 +57,8 @@ def make_rda_mappings():
 
     carrier_g = _make_mappings(g2, RDACarrierType, LCCarrierType, KBV.CarrierType)
 
+    hack_media_id_by_chopped_top_carrier = {}
+
     for top in carrier_g.objects(RDACarrierType, SKOS.hasTopConcept):
         for top_id in g2.subjects(OWL.sameAs, top):
             break
@@ -66,14 +79,29 @@ def make_rda_mappings():
             for narrower in carrier_g.subjects(SKOS.broader, top):
                 for specific_carrier in g2.subjects(OWL.sameAs, narrower):
                     g2.add((specific_carrier, RDFS.subClassOf, media_id))
+        # HACK instead:
+        hack_media_id_by_chopped_top_carrier[unicode(top)[:-1]] = media_id
 
-    # Just a crude string matching to get the carrier < media relations...
+    # HACK to get the carrier media subclass relations...
+    # 1. Match toplevel(Deprecated) and find carrier URIs starting with their iri[:-1]
+    for carrier in g2.subjects(RDF.type, KBV.CarrierType):
+        if carrier == KBRDA.MicroscopeSlide:
+            continue
+        for sameas in g2.objects(carrier, OWL.sameAs):
+            media_id = hack_media_id_by_chopped_top_carrier.get(unicode(sameas[:-1]))
+            if media_id:
+                g2.add((carrier, RDFS.subClassOf, media_id))
+                break
+    # 2. Complement by a crude string matching
     carriers = set(g2.subjects(RDF.type, KBV.CarrierType))
     medias = set(unicode(media) for media in g2.subjects(RDF.type, KBV.MediaType))
     for media in medias:
         for carrier in carriers:
             if unicode(carrier).startswith(media):
                 g2.add((carrier, RDFS.subClassOf, URIRef(media)))
+    # 3. Add remaining manually
+    g2.add((KBRDA.MicroscopeSlide, RDFS.subClassOf, KBRDA.Microscopic))
+    g2.add((KBRDA.FilmRoll, RDFS.subClassOf, KBRDA.Projected))
 
     _make_mappings(g2, RDAIssuanceType, LCIssuanceType, KBV.IssuanceType)
 
@@ -86,7 +114,7 @@ def _make_mappings(g2, rda_type_scheme, lc_type_scheme, rtype):
     g.parse(lc_type_scheme)
     for s in g.subjects(SKOS.inScheme, rda_type_scheme):
         for p, preflabel_en in g.preferredLabel(s, 'en'):
-            symbol = preflabel_en.title().replace(' ', '')
+            symbol = preflabel_en.title().replace(' ', '').replace('-', '')
 
             uri = KBRDA[symbol]
             g2.add((uri, RDF.type, OWL.Class))
