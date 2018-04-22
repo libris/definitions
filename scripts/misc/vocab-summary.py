@@ -1,11 +1,6 @@
 from __future__ import unicode_literals, print_function, division
 from rdflib import *
 
-
-ABS = Namespace("http://bibframe.org/model-abstract/")
-SCHEMA = Namespace("http://schema.org/")
-
-
 # Monkey!
 _orig_qname = Graph.qname
 def _qname(self, uri):
@@ -15,6 +10,11 @@ def _qname(self, uri):
     except:
         return uri.n3()
 Graph.qname = _qname
+
+
+ABS = Namespace("http://bibframe.org/model-abstract/")
+SCHEMA = Namespace("http://schema.org/")
+PTG = Namespace("http://protege.stanford.edu/plugins/owl/protege#")
 
 
 def print_vocab(g, show_equivs=False):
@@ -74,13 +74,25 @@ def print_class(c, superclasses=set()):
     superclasses = superclasses | {c}
     otherclasses.discard(c.identifier)
     note = c.value(ABS.marcField) or ""
+
+    if c.value(PTG.abstract):
+        note += (" " if note else "") + "[ABSTRACT]"
+
     if SHOW_EQUIVS:
-        note += ", ".join(equiv.qname()
+        equivs = ", ".join(equiv.qname()
                 for equiv in c.objects(OWL.equivalentClass)
                 if isinstance(c.identifier, URIRef))
+        if equivs:
+            note += (" " if note else "") + "== " + equivs
 
-    print(indent + subnote + c.qname() + (" # " + note if note else ""))
+    other_types = [other.qname() for other in c.objects(RDF.type)
+                   if other.identifier not in {OWL.Class, RDFS.Class}]
 
+    other_type_decl = (" a " + ", ".join(other_types)) if other_types else ""
+    note_comment = " # " + note if note else ""
+    print(indent + subnote + c.qname() + other_type_decl + note_comment)
+
+    # Properties
     props = sorted(c.subjects(RDFS.domain|SCHEMA.domainIncludes))
     for prop in props:
         #if any(prop.objects(RDFS.subPropertyOf)):
@@ -89,11 +101,31 @@ def print_class(c, superclasses=set()):
         print_propsum(indent + "   ", prop)
 
         print_subproperties(prop, c, indent + "       ")
+
+    # Restrictions
+    for subc in sorted(c.objects(RDFS.subClassOf)):
+        if any(t for t in subc.objects(RDF.type) if t.identifier == OWL.Restriction):
+            print(indent + "   ", "@",
+                    subc.value(OWL.onProperty).qname(),
+                    "=>",
+                    ", ".join("All(%s)" % rc.qname() for rc in
+                        subc.objects(OWL.allValuesFrom)) +
+                    ", ".join("Some(%s)" % rc.qname() for rc in
+                        subc.objects(OWL.someValuesFrom))
+                    )
+
+    # Instances
+    for inst in sorted(c.subjects(RDF.type)):
+        if isinstance(inst.identifier, URIRef):
+            print(indent + "   ", "::", inst.qname())
+
+    # Subclass Tree
     for subc in sorted(c.subjects(RDFS.subClassOf)):
         if subc in superclasses:
             print(indent, "<=", subc.qname())
             continue
         print_class(subc, superclasses)
+
     if props:
         print()
 
@@ -123,9 +155,11 @@ def print_propsum(indent, prop, domain=None):
 
     note = prop.value(ABS.marcField) or ""
     if SHOW_EQUIVS:
-        note += ", ".join(equiv.qname()
+        equivs = ", ".join(equiv.qname()
                 for equiv in prop.objects(OWL.equivalentProperty)
                 if isinstance(prop.identifier, URIRef))
+        if equivs:
+            note += (" " if note else "") + "== " + equivs
     if note:
         lbl += " # " + note
 
@@ -154,10 +188,9 @@ if __name__ == '__main__':
 
     g = ConjunctiveGraph()
     for src in args.sources:
-        fmt = 'json-ld' if src.endswith('.jsonld') else guess_format(src)
-        if args.context:
-            g.parse(src, format=fmt, context=args.context)
+        if src.endswith('.jsonld'):
+            g.parse(src, format='json-ld', context=args.context)
         else:
-            g.parse(src, format=fmt)
+            g.parse(src, format=guess_format(src))
 
     print_vocab(g, args.show_equivalents)
