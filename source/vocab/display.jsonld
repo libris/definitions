@@ -258,18 +258,18 @@
         "Jurisdiction": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Jurisdiction",
-          "showProperties": [ "name", "note" ]
+          "showProperties": [ "name", {"isPartOf": "name"}, "marc:subordinateUnit", "note" ]
         },
         "Meeting": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Meeting",
-          "showProperties": [ "name", "date", "note" ]
+          "showProperties": [ "name", "marc:subordinateUnit", "date", "note" ]
         },
         "Organization": {
           "@type": "fresnel:Lens",
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
-          "showProperties": [ "name", "note" ]
+          "showProperties": [ "name", {"isPartOf": "name"}, "marc:subordinateUnit", "note" ]
         },
         "Concept": {
           "@type": "fresnel:Lens",
