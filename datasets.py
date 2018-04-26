@@ -167,6 +167,13 @@ def enums():
 
 
 @compiler.dataset
+def generators():
+    graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
+
+    return "/generator/", "2018-04-25T20:55:14.723Z", graph
+
+
+@compiler.dataset
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
