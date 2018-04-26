@@ -601,6 +601,12 @@
 #    rdfs:label "Utgivningsort"@sv;
 #    owl:propertyChainAxiom (:publication :place) .
 
+:primaryProvisionActivity a owl:ObjectProperty;
+    ptg:abstract true;
+    rdfs:subPropertyOf :provisionActivity;
+    rdfs:range :PrimaryProvisionActivity;
+    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
