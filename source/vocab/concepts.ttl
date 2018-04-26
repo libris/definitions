@@ -55,7 +55,7 @@
     rdfs:label "Concept"@en, "Koncept"@sv;
     rdfs:subClassOf :Identity;
     owl:equivalentClass skos:Concept;
-    owl:hasKey (:notation :prefLabel :inScheme) .
+    owl:hasKey (:code :prefLabel :inScheme) .
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
@@ -66,7 +66,7 @@
     #owl:equivalentClass madsrdf:MADSScheme;
     rdfs:subClassOf :Source;
     owl:equivalentClass skos:ConceptScheme .
-    #owl:hasKey (:notation) .
+    #owl:hasKey (:code) .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
