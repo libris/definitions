@@ -548,7 +548,7 @@
 
 :sourceConsulted a owl:ObjectProperty;
     rdfs:label "Konsulterad källa"@sv;
-    skos:definition 
+    rdfs:comment 
       "Relates data to a resource used in determining a name, title, or other identifying attributes of an entity, or in determining a relationship between entities."@en,
       "En konsulterad källa är en resurs som använts för att bestämma namn, titel eller andra identifierande attribut för en person eller annan entitet"@sv;
     #rdfs:subPropertyOf dc:source;
@@ -564,10 +564,11 @@
     rdfs:label "Källa vid icke-belagd uppgift"@sv;
     rdfs:subClassOf :SourceData .
 
-:citationSource a owl:DatatypeProperty;
-    rdfs:label "Citation Source"@en, "Källa"@sv;
-    rdfs:domain :SourceData;
-    owl:equivalentProperty madsrdf:citationSource .
+# 670a changed to label
+#:citationSource a owl:DatatypeProperty;
+#    rdfs:label "Citation Source"@en, "Källa"@sv;
+#    rdfs:domain :SourceData;
+#    owl:equivalentProperty madsrdf:citationSource .
 
 :citationNote a owl:DatatypeProperty;
     rdfs:label "Citation Note"@en, "Uppgift från källa"@sv;
