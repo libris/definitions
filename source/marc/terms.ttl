@@ -1202,6 +1202,17 @@ marc:hasHold949-9 a owl:DatatypeProperty ;
     rdfs:domain marc:Hold949 .
     
 marc:hasBib976 a owl:ObjectProperty ;
-    rdfs:label "Local classification (976)"@en, "SAB-rubrik (976)"@sv ;
+    rdfs:label "SAB-rubrik (976)"@sv ;
     rdfs:comment "Fältet är avsett för maskinell uppdatering och förekommer normalt endast i äldre poster konverterade från ett ursprungligt LIBRISIII-format, respektive i de MTM-poster (Myndigheten för tillgängliga medier) som maskinellt har lästs in från Bibliotekstjänst."@sv .
-    
+
+marc:Bib976 a owl:Class ;
+    rdfs:label "SAB-rubrik (976)"@sv .
+
+marc:bib976-i2 a owl:DatatypeProperty ;
+    rdfs:label "Indikator för Upplaga av SAB-systemet"@sv .
+
+marc:bib976-a a owl:DatatypeProperty ;
+    rdfs:label "SAB-klassifikation"@sv .
+
+marc:bib976-b a owl:DatatypeProperty ;
+    rdfs:label "SAB-rubrik"@sv .
