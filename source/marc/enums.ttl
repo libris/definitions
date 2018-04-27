@@ -769,7 +769,7 @@
     skos:prefLabel "Teckenuppsättning"@sv .
 
 :AuthorityEncLevelType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EncLevelType ;
     skos:notation "AuthorityEncLevelType" ;
     skos:prefLabel "Encoding Level"@en,
         "Fullständighetsnivå"@sv .
@@ -843,7 +843,7 @@
         "Underlag för beståndsuppgift"@sv .
 
 :EncLevelType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EnumeratedTerm, kbv:EncodingLevel ;
     skos:notation "EncLevelType" ;
     skos:prefLabel "Encoding Level"@en,
         "Fullständighetsnivå för katalogiseringen"@sv .
@@ -852,49 +852,49 @@
 
 # CATEGORY: BIB
 
-:FullLevel a :EncLevelType, kbv:EncodingLevel ;
+:FullLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-_ ;
     skos:notation "_" ;
     skos:prefLabel "Full level"@en,
         "Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv .
 
-:FullLevelMaterialNotExamined a :EncLevelType, kbv:EncodingLevel ;
+:FullLevelMaterialNotExamined a :EncLevelType ;
     owl:sameAs :EncLevelType-1 ;
     skos:notation "1" ;
     skos:prefLabel "Full level, material not examined"@en,
         "Retrospektiv nivå: omkatalogisering"@sv .
 
-:LessThanFullLevelMaterialNotExamined a :EncLevelType, kbv:EncodingLevel ;
+:LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     owl:sameAs :EncLevelType-2 ;
     skos:notation "2" ;
     skos:prefLabel "Less-than-full level, material not examined"@en,
         "Retrospektiv nivå: enligt katalogkort e.d."@sv .
 
-:AbbreviatedLevel a :EncLevelType, kbv:EncodingLevel ;
+:AbbreviatedLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-3 ;
     skos:notation "3" ;
     skos:prefLabel "Abbreviated level"@en,
         "Miniminivå (jfr KRS 1.0D1)"@sv .
 
-:CoreLevel a :EncLevelType, kbv:EncodingLevel ;
+:CoreLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-4 ;
     skos:notation "4" ;
     skos:prefLabel "Core level"@en,
         "Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv .
 
-:PartialPreliminaryLevel a :EncLevelType, kbv:EncodingLevel ;
+:PartialPreliminaryLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-5 ;
     skos:notation "5" ;
     skos:prefLabel "Partial (preliminary) level"@en,
         "Preliminär post (hit beställningsposter)"@sv .
 
-:MinimalLevel a :EncLevelType, kbv:EncodingLevel ;
+:MinimalLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-7 ;
     skos:notation "7" ;
     skos:prefLabel "Minimal level"@en,
         "Biblioteksnivå (jfr KRS 1.0D2)"@sv .
 
-:PrepublicationLevel a :EncLevelType, kbv:EncodingLevel ;
+:PrepublicationLevel a :EncLevelType ;
     owl:sameAs :EncLevelType-8 ;
     skos:notation "8" ;
     skos:prefLabel "Prepublication level"@en,
@@ -1009,7 +1009,7 @@
     skos:prefLabel "Teckenuppsättning"@sv .
 
 :HoldingEncLevelType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
+    rdfs:subClassOf :EncLevelType ;
     skos:notation "HoldingEncLevelType" ;
     skos:prefLabel "Encoding Level"@en,
         "Beståndsnivå"@sv .
