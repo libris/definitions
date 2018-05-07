@@ -109,17 +109,17 @@
         "Jurisdiction": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Jurisdiction",
-          "showProperties": [ "name" ]
+          "showProperties": [ "name", {"isPartOf": "name"}, "marc:subordinateUnit" ]
         },
         "Meeting": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Meeting",
-          "showProperties": [ "name", "date" ]
+          "showProperties": [ "name", "marc:subordinateUnit", "date" ]
         },
         "Organization": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Organization",
-          "showProperties": [ "name" ]
+          "showProperties": [ "name", {"isPartOf": "name"}, "marc:subordinateUnit" ]
         },
         "Library": {
           "@type": "fresnel:Lens",
