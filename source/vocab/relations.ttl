@@ -53,7 +53,9 @@
     owl:equivalentProperty bf2:hasPart, dc:hasPart .
 
 :isPartOf a owl:ObjectProperty;
+    #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
     sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction ;
+    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction ;
     rdfs:label "is part of"@en, "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
