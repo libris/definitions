@@ -47,7 +47,7 @@ construct {
                             ?error)))) as ?aliasbase)
 
     bind(IRI(concat(?aliasbase, '/', ?lccode)) as ?codealias)
-    bind(IRI(concat(?aliasbase, '/', ?lcpreflabel)) as ?labelalias)
+    bind(IRI(concat(?aliasbase, '/', encode_for_uri(?lcpreflabel))) as ?labelalias)
 
     ?rdarel skos:prefLabel ?rdapreflabel .
     FILTER(langMatches(lang(?rdapreflabel), 'en') ||
