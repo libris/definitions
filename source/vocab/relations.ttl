@@ -91,6 +91,38 @@
     owl:inverseOf :absorbed;
     owl:equivalentProperty bf2:absorbedBy .
 
+:absorbedInPart a owl:ObjectProperty;
+    rdfs:label "Absorbed in part"@en, "Har delvis införlivat"@sv;
+    rdfs:subPropertyOf :precededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    owl:inverseOf :absorbedInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:absorbedInPartBy a owl:ObjectProperty;
+    rdfs:label "Absorbed In part by"@en, "Har delvis uppgått i"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    owl:inverseOf :absorbedInPart .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:precededInPartBy a owl:ObjectProperty;
+    rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :succeededInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+    
+:succeededInPartBy a owl:ObjectProperty;
+    rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
+    rdfs:subPropertyOf :relatedTo;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    owl:inverseOf :precededInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
 :accompanies a owl:ObjectProperty;
     rdfs:label "medföljer"@sv;
     rdfs:subPropertyOf :relatedTo;
