@@ -26,9 +26,10 @@ marc:relatedAs a owl:ObjectProperty ;
     rdfs:range kbv:ObjectProperty .
 
 marc:electronicLocatorType a owl:DatatypeProperty ;
+    rdfs:domain kbv:Document ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
 
-marc:linkText  a owl:DatatypeProperty;
+marc:linkText a owl:DatatypeProperty;
     rdfs:label "Link text"@en, "Länktext"@sv ;
     rdfs:domain kbv:Endeavour .
             
@@ -240,7 +241,8 @@ marc:copyNote a owl:DatatypeProperty ;
     rdfs:label "Offentlig anmärkning"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
-                       marc:TextualHoldingsBasicBibliographicUnit .
+                       marc:TextualHoldingsBasicBibliographicUnit,
+                       kbv:Document .
 
 
 # BIB 300
@@ -579,9 +581,22 @@ marc:city a owl:DatatypeProperty ;
 
 # 856:
 
+marc:versionOfResource a owl:ObjectProperty ;
+    rdfs:label "annan relaterad resurs"@sv ;
+    sdo:domainIncludes kbv:Item, kbv:Instance;
+    rdfs:range kbv:Electronic .
+
+marc:hostName a owl:DatatypeProperty ;
+    rdfs:label "Värddator (namn)"@sv ;
+    rdfs:domain kbv:Document .
+
+marc:electronicName a owl:DatatypeProperty ;
+    rdfs:label "Elektroniskt namn"@sv ;
+    rdfs:domain kbv:Document .
+
 marc:linkText a owl:DatatypeProperty ;
     rdfs:label "Länktext"@sv ;
-    rdfs:domain kbv:Note .
+    sdo:domainIncludes kbv:Note, kbv:Document .
 
 # 866
 

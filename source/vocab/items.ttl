@@ -56,9 +56,10 @@
     rdfs:domain :Item .
 
 :electronicLocator a owl:ObjectProperty;
+    #NOTE: Deviates from bf2 since we don't use an intermediary Item
     rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
-    rdfs:domain :Item;
-    rdfs:range :Resource;
+    sdo:domainIncludes :Item, :Instance;
+    rdfs:range :Document;
     owl:equivalentProperty bf2:electronicLocator .
 
 :formerShelfLocation a owl:DatatypeProperty;
