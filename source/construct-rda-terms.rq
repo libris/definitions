@@ -1,0 +1,59 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
+prefix kbv: <https://id.kb.se/vocab/>
+prefix vann: <http://purl.org/vocab/vann/>
+base <https://id.kb.se/term/rda/>
+
+construct {
+
+    ?term a ?type;
+        skos:notation ?lccode;
+        rdfs:label ?lcpreflabel;
+        skos:prefLabel ?rdapreflabel;
+        skos:definition ?rdadefinition;
+        skos:inScheme </term/rda> ;
+        owl:sameAs ?lcrel, ?rdarel, ?codealias, ?labelalias .
+
+} where {
+
+    ?term a ?type ;
+        kbv:lccode ?lccode;
+        kbv:rdacode ?rdacode .
+
+    bind(IRI(concat('http://id.loc.gov/vocabulary/',
+                    if(?type = bf2:Content, 'contentTypes',
+                        if(?type = bf2:Media, 'mediaTypes',
+                            if(?type = bf2:Carrier, 'carriers',
+                                if(?type = bf2:Issuance, 'issuance',
+                                ?error)))),
+                    '/', ?lccode)) as ?lcrel)
+
+    ?lcrel skos:prefLabel ?lcpreflabel .
+
+    bind(IRI(concat('http://rdaregistry.info/termList/',
+                    if(?type = bf2:Content, 'RDAContentType',
+                        if(?type = bf2:Media, 'RDAMediaType',
+                            if(?type = bf2:Carrier, 'RDACarrierType',
+                                if(?type = bf2:Issuance, 'ModeIssue',
+                                ?error)))),
+                    '/', ?rdacode)) as ?rdarel)
+
+    bind(if(?type = bf2:Content, 'content',
+                if(?type = bf2:Media, 'media',
+                    if(?type = bf2:Carrier, 'carrier',
+                        if(?type = bf2:Issuance, 'issuance',
+                            ?error)))) as ?aliasbase)
+
+    bind(IRI(concat(?aliasbase, '/', ?lccode)) as ?codealias)
+    bind(IRI(concat(?aliasbase, '/', ?lcpreflabel)) as ?labelalias)
+
+    ?rdarel skos:prefLabel ?rdapreflabel .
+    FILTER(langMatches(lang(?rdapreflabel), 'en') ||
+            langMatches(lang(?rdapreflabel), 'sv'))
+    ?rdarel skos:definition ?rdadefinition .
+    FILTER(langMatches(lang(?rdadefinition), 'en') ||
+            langMatches(lang(?rdadefinition), 'sv'))
+
+}

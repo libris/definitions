@@ -1,0 +1,98 @@
+##
+# This is a sketch of how we could extend the BF2-based type hierarchy with
+# RDA-types. Things to add:
+
+# * owl:Restriction with owl:allValueFrom on :instanceOf (and :hasInstance)
+#   where applicable.
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix kbrda: <https://id.kb.se/term/rda/> .
+@prefix : <https://id.kb.se/vocab/> .
+
+:CartographicDataset a owl:Class; owl:equivalentClass kbrda:CartographicDataset; rdfs:subClassOf :Cartography, :Dataset .
+:CartographicImage a owl:Class; owl:equivalentClass kbrda:CartographicImage; rdfs:subClassOf :Cartography, :StillImage .
+:CartographicMovingImage a owl:Class; owl:equivalentClass kbrda:CartographicMovingImage; rdfs:subClassOf :Cartography, :MovingImage .
+:CartographicTactileImage a owl:Class; owl:equivalentClass kbrda:CartographicTactileImage; rdfs:subClassOf :Cartography, :StillImage .
+:CartographicTactileObject a owl:Class; owl:equivalentClass kbrda:CartographicTactileThreeDimensionalForm; rdfs:subClassOf :Cartography, :TactileObject .
+:CartographicObject a owl:Class; owl:equivalentClass kbrda:CartographicThreeDimensionalForm; rdfs:subClassOf :Cartography, :Object .
+:ComputerDataset a owl:Class; owl:equivalentClass kbrda:ComputerDataset; rdfs:subClassOf :Dataset .
+:ComputerProgram a owl:Class; owl:equivalentClass kbrda:ComputerProgram; rdfs:subClassOf :Multimedia .
+:NotatedMovement a owl:Class; owl:equivalentClass kbrda:NotatedMovement; rdfs:subClassOf :NotatedMovement .
+:NotatedMusic a owl:Class; owl:equivalentClass kbrda:NotatedMusic; rdfs:subClassOf :NotatedMusic .
+:PerformedMusic a owl:Class; owl:equivalentClass kbrda:PerformedMusic; rdfs:subClassOf :Audio .
+:Sounds a owl:Class; owl:equivalentClass kbrda:Sounds; rdfs:subClassOf :Audio .
+:SpokenWord a owl:Class; owl:equivalentClass kbrda:SpokenWord; rdfs:subClassOf :Audio .
+:StillImage a owl:Class; owl:equivalentClass kbrda:StillImage; rdfs:subClassOf :StillImage .
+:TactileImage a owl:Class; owl:equivalentClass kbrda:TactileImage; rdfs:subClassOf :StillImage .
+:TactileNotatedMusic a owl:Class; owl:equivalentClass kbrda:TactileNotatedMusic; rdfs:subClassOf :NotatedMusic .
+:TactileNotatedMovement a owl:Class; owl:equivalentClass kbrda:TactileNotatedMovement; rdfs:subClassOf :NotatedMovement .
+:TactileText a owl:Class; owl:equivalentClass kbrda:TactileText; rdfs:subClassOf :Text .
+:TactileObject a owl:Class; owl:equivalentClass kbrda:TactileThreeDimensionalForm; rdfs:subClassOf :Object .
+:Text a owl:Class; owl:equivalentClass kbrda:Text; rdfs:subClassOf :Text .
+:Object a owl:Class; owl:equivalentClass kbrda:ThreeDimensionalForm .
+:ThreeDimensionalMovingImage a owl:Class; owl:equivalentClass kbrda:ThreeDimensionalMovingImage; rdfs:subClassOf :MovingImage .
+:TwoDimensionalMovingImage a owl:Class; owl:equivalentClass kbrda:TwoDimensionalMovingImage; rdfs:subClassOf :MovingImage .
+
+:AudioInstance a owl:Class; owl:equivalentClass kbrda:Audio; rdfs:subClassOf :Instance .
+:Computer a owl:Class; owl:equivalentClass kbrda:Computer; rdfs:subClassOf :Electronic .
+:Microform a owl:Class; owl:equivalentClass kbrda:Microform; rdfs:subClassOf :Instance .
+:Microscopic a owl:Class; owl:equivalentClass kbrda:Microscopic; rdfs:subClassOf :Instance .
+:Projected a owl:Class; owl:equivalentClass kbrda:Projected; rdfs:subClassOf :Instance .
+:Stereographic a owl:Class; owl:equivalentClass kbrda:Stereographic; rdfs:subClassOf :Instance .
+:Unmediated a owl:Class; owl:equivalentClass kbrda:Unmediated; rdfs:subClassOf :Instance .
+:Video a owl:Class; owl:equivalentClass kbrda:Video; rdfs:subClassOf :Electronic .
+
+:AudioCartridge a owl:Class; owl:equivalentClass kbrda:AudioCartridge; rdfs:subClassOf :AudioInstance .
+:AudioCylinder a owl:Class; owl:equivalentClass kbrda:AudioCylinder; rdfs:subClassOf :AudioInstance .
+:AudioDisc a owl:Class; owl:equivalentClass kbrda:AudioDisc; rdfs:subClassOf :AudioInstance .
+:AudioRoll a owl:Class; owl:equivalentClass kbrda:AudioRoll; rdfs:subClassOf :AudioInstance .
+:Audiocassette a owl:Class; owl:equivalentClass kbrda:Audiocassette; rdfs:subClassOf :AudioInstance .
+:AudiotapeReel a owl:Class; owl:equivalentClass kbrda:AudiotapeReel; rdfs:subClassOf :AudioInstance .
+:SoundTrackReel a owl:Class; owl:equivalentClass kbrda:SoundTrackReel; rdfs:subClassOf :AudioInstance .
+
+:ComputerCard a owl:Class; owl:equivalentClass kbrda:ComputerCard; rdfs:subClassOf :Computer .
+:ComputerChipCartridge a owl:Class; owl:equivalentClass kbrda:ComputerChipCartridge; rdfs:subClassOf :Computer .
+:ComputerDisc a owl:Class; owl:equivalentClass kbrda:ComputerDisc; rdfs:subClassOf :Computer .
+:ComputerDiscCartridge a owl:Class; owl:equivalentClass kbrda:ComputerDiscCartridge; rdfs:subClassOf :Computer .
+:ComputerTapeCartridge a owl:Class; owl:equivalentClass kbrda:ComputerTapeCartridge; rdfs:subClassOf :Computer .
+:ComputerTapeCassette a owl:Class; owl:equivalentClass kbrda:ComputerTapeCassette; rdfs:subClassOf :Computer .
+:ComputerTapeReel a owl:Class; owl:equivalentClass kbrda:ComputerTapeReel; rdfs:subClassOf :Computer .
+:OnlineResource a owl:Class; owl:equivalentClass kbrda:OnlineResource; rdfs:subClassOf :Computer .
+
+:ApertureCard a owl:Class; owl:equivalentClass kbrda:ApertureCard; rdfs:subClassOf :Microform .
+:Microfiche a owl:Class; owl:equivalentClass kbrda:Microfiche; rdfs:subClassOf :Microform .
+:MicroficheCassette a owl:Class; owl:equivalentClass kbrda:MicroficheCassette; rdfs:subClassOf :Microform .
+:MicrofilmCartridge a owl:Class; owl:equivalentClass kbrda:MicrofilmCartridge; rdfs:subClassOf :Microform .
+:MicrofilmCassette a owl:Class; owl:equivalentClass kbrda:MicrofilmCassette; rdfs:subClassOf :Microform .
+:MicrofilmReel a owl:Class; owl:equivalentClass kbrda:MicrofilmReel; rdfs:subClassOf :Microform .
+:MicrofilmRoll a owl:Class; owl:equivalentClass kbrda:MicrofilmRoll; rdfs:subClassOf :Microform, :Video .
+:MicrofilmSlip a owl:Class; owl:equivalentClass kbrda:MicrofilmSlip; rdfs:subClassOf :Microform .
+:Microopaque a owl:Class; owl:equivalentClass kbrda:Microopaque; rdfs:subClassOf :Microform .
+
+:MicroscopeSlide a owl:Class; owl:equivalentClass kbrda:MicroscopeSlide; rdfs:subClassOf :Microscopic .
+
+:FilmCartridge a owl:Class; owl:equivalentClass kbrda:FilmCartridge; rdfs:subClassOf :Projected .
+:FilmCassette a owl:Class; owl:equivalentClass kbrda:FilmCassette; rdfs:subClassOf :Projected .
+:FilmReel a owl:Class; owl:equivalentClass kbrda:FilmReel; rdfs:subClassOf :Projected .
+:FilmRoll a owl:Class; owl:equivalentClass kbrda:FilmRoll; rdfs:subClassOf :Projected .
+:Filmslip a owl:Class; owl:equivalentClass kbrda:Filmslip; rdfs:subClassOf :Projected .
+:Filmstrip a owl:Class; owl:equivalentClass kbrda:Filmstrip; rdfs:subClassOf :Projected .
+:FilmstripCartridge a owl:Class; owl:equivalentClass kbrda:FilmstripCartridge; rdfs:subClassOf :Projected .
+:OverheadTransparency a owl:Class; owl:equivalentClass kbrda:OverheadTransparency; rdfs:subClassOf :Projected .
+:Slide a owl:Class; owl:equivalentClass kbrda:Slide; rdfs:subClassOf :Projected .
+
+:StereographCard a owl:Class; owl:equivalentClass kbrda:StereographCard; rdfs:subClassOf :Stereographic .
+:StereographDisc a owl:Class; owl:equivalentClass kbrda:StereographDisc; rdfs:subClassOf :Stereographic .
+
+:Card a owl:Class; owl:equivalentClass kbrda:Card; rdfs:subClassOf :Unmediated .
+:Flipchart a owl:Class; owl:equivalentClass kbrda:Flipchart; rdfs:subClassOf :Unmediated .
+:Roll a owl:Class; owl:equivalentClass kbrda:Roll; rdfs:subClassOf :Unmediated .
+:Sheet a owl:Class; owl:equivalentClass kbrda:Sheet; rdfs:subClassOf :Unmediated .
+:Volume a owl:Class; owl:equivalentClass kbrda:Volume; rdfs:subClassOf :Unmediated .
+:Object a owl:Class; owl:equivalentClass kbrda:Object; rdfs:subClassOf :Unmediated .
+
+:VideoCartridge a owl:Class; owl:equivalentClass kbrda:VideoCartridge; rdfs:subClassOf :Video .
+:Videocassette a owl:Class; owl:equivalentClass kbrda:Videocassette; rdfs:subClassOf :Video .
+:Videodisc a owl:Class; owl:equivalentClass kbrda:Videodisc; rdfs:subClassOf :Video .
+:VideotapeReel a owl:Class; owl:equivalentClass kbrda:VideotapeReel; rdfs:subClassOf :Video .
