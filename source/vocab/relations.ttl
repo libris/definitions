@@ -96,31 +96,39 @@
     rdfs:subPropertyOf :precededBy;
     rdfs:domain :Work;
     rdfs:range :Work;
-    owl:inverseOf :absorbedInPartBy .
+    rdfs:comment "Work that has been partially incorporated into another work."@en;
+    owl:inverseOf :absorbedInPartBy;
+    owl:equivalentProperty bf:absorbedInPart .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :absorbedInPartBy a owl:ObjectProperty;
-    rdfs:label "Absorbed In part by"@en, "Har delvis uppgått i"@sv;
+    rdfs:label "Absorbed in part by"@en, "Har delvis uppgått i"@sv;
     rdfs:subPropertyOf :succeededBy;
     rdfs:domain :Work;
     rdfs:range :Work;
-    owl:inverseOf :absorbedInPart .
+    rdfs:comment "Work that incorporates part of the content of another work."@en;
+    owl:inverseOf :absorbedInPart;
+    owl:equivalentProperty bf:absorbedInPartBy .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :precededInPartBy a owl:ObjectProperty;
     rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
-    rdfs:subPropertyOf :relatedTo;
-    owl:inverseOf :succeededInPartBy .
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :succeededInPartBy;
+    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersedesInPart .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
     
 :succeededInPartBy a owl:ObjectProperty;
     rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
-    rdfs:subPropertyOf :relatedTo;
+    rdfs:subPropertyOf :succeededBy;
     rdfs:domain :Work;
     rdfs:range :Work;
-    owl:inverseOf :precededInPartBy .
+    owl:inverseOf :precededInPartBy;
+    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersededInPartBy .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :accompanies a owl:ObjectProperty;
