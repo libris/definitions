@@ -122,7 +122,7 @@ def print_class(c, superclasses=set()):
     # Subclass Tree
     for subc in sorted(c.subjects(RDFS.subClassOf)):
         if subc in superclasses:
-            print(indent, "<=", subc.qname())
+            print(indent + "   ", "<=", subc.qname())
             continue
         print_class(subc, superclasses)
 
