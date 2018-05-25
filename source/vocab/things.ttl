@@ -41,11 +41,7 @@
 :Endeavour a owl:Class ;
     ptg:abstract true;
     #skos:closeMatch frbr:Endeavour ;
-    rdfs:subClassOf :Document ;
-    rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :relatedTo;
-            owl:allValuesFrom :Endeavour
-        ] .
+    rdfs:subClassOf :Document .
 
 :Creation a owl:Class ;
     ptg:abstract true;
@@ -145,7 +141,7 @@
 :IssuanceType owl:equivalentClass bf2:Issuance .
 
 :termGroup a owl:DatatypeProperty;
-    sdo:domainIncludes :ContentType, :MediaType ;
+    sdo:domainIncludes :ContentType, :MediaType, :CarrierType ;
     rdfs:label "Termgroup"@en, "Termgrupp"@sv .
 
 # Generation Rules for Alignment Mappings:
@@ -248,10 +244,11 @@
     rdfs:subClassOf :Work ;
     owl:equivalentClass dctype:Image .
 
-:VisualArtwork a owl:Class;
-    owl:equivalentClass sdo:VisualArtwork;
-    rdfs:subClassOf :Visual;
-    rdfs:label "Visual Artwork"@en, "Visuellt konstverk"@sv .
+#:VisualArtwork a owl:Class;
+#    ptg:abstract true ;
+#    owl:equivalentClass sdo:VisualArtwork;
+#    rdfs:subClassOf :Visual;
+#    rdfs:label "Visual Artwork"@en, "Visuellt konstverk"@sv .
 
 :MixedMaterial a owl:Class;
     rdfs:label "Blandat material"@sv;
@@ -260,15 +257,16 @@
     owl:equivalentClass bf2:MixedMaterial .
 
 :MovingImage a owl:Class; # Film, Video
+    ptg:abstract true ;
     rdfs:label "Rörlig bild"@sv;
     skos:exactMatch rdacontent:1023 ; # "two-dimensional moving image"
     rdfs:subClassOf :Visual ;
     owl:equivalentClass bf2:MovingImage, dctype:MovingImage .
 
-:Moving3DImage a owl:Class;
-    rdfs:label "Rörlig tredimensionell bild"@sv;
-    skos:exactMatch rdacontent:1022 ; # "three-dimensional moving image"
-    rdfs:subClassOf :MovingImage .
+#:Moving3DImage a owl:Class;
+#    rdfs:label "Rörlig tredimensionell bild"@sv;
+#    skos:exactMatch rdacontent:1022 ; # "three-dimensional moving image"
+#    rdfs:subClassOf :MovingImage .
 
 :Multimedia a owl:Class;
     rdfs:label "Multimedia"@sv;
@@ -322,10 +320,10 @@
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf2:Object, bf1:ThreeDimensionalObject .
 
-:InteractiveResource a owl:Class;
-    rdfs:label "Interaktiv resurs"@sv;
-    rdfs:subClassOf :Work;
-    rdfs:subClassOf dctype:InteractiveResource .
+#:InteractiveResource a owl:Class;
+#    rdfs:label "Interaktiv resurs"@sv;
+#    rdfs:subClassOf :Work;
+#    rdfs:subClassOf dctype:InteractiveResource .
 
 :Kit a owl:Class; # TODO: equivalentClass ?
     rdfs:label "Paket"@sv;
@@ -340,40 +338,40 @@
 
 # Combined Content Types
 
-:CartographicDataset a owl:Class;
-    rdfs:label "Kartografisk bild"@sv;
-    skos:exactMatch rdacontent:1001 ; # "cartographic dataset"
-    rdfs:subClassOf :Cartography, :Dataset .
-
-:CartographicImage a owl:Class;
-    rdfs:label "Kartografisk bild"@sv;
-    skos:exactMatch rdacontent:1002 ; # "cartographic image"
-    rdfs:subClassOf :Cartography, :Visual  .
-
-:CartographicMovingImage a owl:Class;
-    rdfs:label "Kartografisk rörlig bild"@sv;
-    skos:exactMatch rdacontent:1003 ; # "cartographic moving image"
-    rdfs:subClassOf :Cartography, :MovingImage .
-
-:CartographicTactileImage a owl:Class;
-    rdfs:label "Kartografisk taktil bild"@sv;
-    skos:exactMatch rdacontent:1004 ; # "cartographic tactile image"
-    rdfs:subClassOf :Cartography, :Tactile, :Visual  .
-
-:CartographicObject a owl:Class;
-    rdfs:label "Kartografiskt objekt"@sv;
-    skos:exactMatch rdacontent:1006 ; # "cartographic three-dimensional form"
-    rdfs:subClassOf :Cartography, :Object .
-
-:CartographicTactileObject a owl:Class;
-    rdfs:label "Kartografiskt taktilt objekt"@sv;
-    skos:exactMatch rdacontent:1005 ; # "cartographic tactile three-dimensional form"
-    rdfs:subClassOf :Cartography, :Object, :Tactile .
-
-:MultimediaDataset a owl:Class;
-    rdfs:label "Digitalt dataset"@sv;
-    skos:exactMatch rdacontent:1007 ; # "computer dataset"
-    rdfs:subClassOf :Multimedia, :Dataset .
+#:CartographicDataset a owl:Class;
+#    rdfs:label "Kartografisk bild"@sv;
+#    skos:exactMatch rdacontent:1001 ; # "cartographic dataset"
+#    rdfs:subClassOf :Cartography, :Dataset .
+#
+#:CartographicImage a owl:Class;
+#    rdfs:label "Kartografisk bild"@sv;
+#    skos:exactMatch rdacontent:1002 ; # "cartographic image"
+#    rdfs:subClassOf :Cartography, :Visual  .
+#
+#:CartographicMovingImage a owl:Class;
+#    rdfs:label "Kartografisk rörlig bild"@sv;
+#    skos:exactMatch rdacontent:1003 ; # "cartographic moving image"
+#    rdfs:subClassOf :Cartography, :MovingImage .
+#
+#:CartographicTactileImage a owl:Class;
+#    rdfs:label "Kartografisk taktil bild"@sv;
+#    skos:exactMatch rdacontent:1004 ; # "cartographic tactile image"
+#    rdfs:subClassOf :Cartography, :Tactile, :Visual  .
+#
+#:CartographicObject a owl:Class;
+#    rdfs:label "Kartografiskt objekt"@sv;
+#    skos:exactMatch rdacontent:1006 ; # "cartographic three-dimensional form"
+#    rdfs:subClassOf :Cartography, :Object .
+#
+#:CartographicTactileObject a owl:Class;
+#    rdfs:label "Kartografiskt taktilt objekt"@sv;
+#    skos:exactMatch rdacontent:1005 ; # "cartographic tactile three-dimensional form"
+#    rdfs:subClassOf :Cartography, :Object, :Tactile .
+#
+#:MultimediaDataset a owl:Class;
+#    rdfs:label "Digitalt dataset"@sv;
+#    skos:exactMatch rdacontent:1007 ; # "computer dataset"
+#    rdfs:subClassOf :Multimedia, :Dataset .
 
 
 # TODO: missing rdacontent mappings:
@@ -437,25 +435,26 @@
     #:inCollection marc:bibLevel;
     owl:equivalentClass bf1:Integrating .
 
-:MonographicComponentPart a owl:Class;
-    rdfs:label "Del av sammansatt monografisk resurs"@sv;
-    owl:equivalentClass bibo:DocumentPart;
-    rdfs:subClassOf :Monograph, :ComponentPart .
-
+#:MonographicComponentPart a owl:Class;
+#    rdfs:label "Del av sammansatt monografisk resurs"@sv;
+#    owl:equivalentClass bibo:DocumentPart;
+#    rdfs:subClassOf :Monograph, :ComponentPart .
+#
 :SerialComponentPart a owl:Class, :IssuanceType;
     rdfs:label "Del av sammansatt seriell resurs"@sv;
     #:inCollection marc:bibLevel;
     rdfs:subClassOf :Serial, :ComponentPart  .
 
 :Multipart a owl:Class;
+    ptg:abstract true;
     rdfs:label "Multipel del"@sv;
     rdfs:subClassOf :Aggregate .
 
-:MultipartMonograph a owl:Class;
-    rdfs:label "Flerbandsverk"@sv;
-    skos:exactMatch rdami:1002 ; # "multipart monograph"@en
-    rdfs:subClassOf :Multipart, :Monograph;
-    owl:equivalentClass bf1:MultipartMonograph .
+#:MultipartMonograph a owl:Class;
+#    rdfs:label "Flerbandsverk"@sv;
+#    skos:exactMatch rdami:1002 ; # "multipart monograph"@en
+#    rdfs:subClassOf :Multipart, :Monograph;
+#    owl:equivalentClass bf1:MultipartMonograph .
 
 :Serial a owl:Class, :IssuanceType;
     rdfs:label "Seriell resurs"@sv;
@@ -504,17 +503,20 @@
 :Electronic a owl:Class;
     rdfs:label "Elektronisk"@sv;
     rdfs:subClassOf :Instance;
+    :inCollection marc:typeFromBib007;
     skos:exactMatch rdamedia:1003 ; # "computer"
     owl:equivalentClass bf2:Electronic .
 
 :Microform a owl:Class;
     rdfs:label "Mikroform"@sv;
     skos:exactMatch rdamedia:1002 ; # "microform"
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf :Instance .
 
 :Tactile a owl:Class;
     rdfs:label "Taktil resurs"@sv;
     rdfs:subClassOf :Instance;
+    :inCollection marc:typeFromBib007;
     owl:equivalentClass bf2:Tactile .
 
 :ProjectedImage a owl:Class;
@@ -523,16 +525,16 @@
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Visual  .
 
-:PhysicalObject a owl:Class;
-    rdfs:label "Föremål"@sv;
-    skos:altLabel "Realia"@sv;
-    rdfs:subClassOf :Instance;
-    owl:equivalentClass dctype:PhysicalObject .
-
-:Software a owl:Class;
-    rdfs:label "Mjukvara"@sv;
-    rdfs:subClassOf :Electronic;
-    owl:equivalentClass dctype:Software, sdo:SoftwareApplication .
+#:PhysicalObject a owl:Class;
+#    rdfs:label "Föremål"@sv;
+#    skos:altLabel "Realia"@sv;
+#    rdfs:subClassOf :Instance;
+#    owl:equivalentClass dctype:PhysicalObject .
+#
+#:Software a owl:Class;
+#    rdfs:label "Mjukvara"@sv;
+#    rdfs:subClassOf :Electronic;
+#    owl:equivalentClass dctype:Software, sdo:SoftwareApplication .
 
 # TODO: missing rdamedia mappings:
 #    skos:exactMatch rdamedia:1004 ; # "microscopic"
@@ -545,6 +547,7 @@
 :StillImageInstance a owl:Class;
     rdfs:label "Instans av stillbild"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :StillImage
@@ -553,6 +556,7 @@
 :MovingImageInstance a owl:Class;
     rdfs:label "Instans av rörlig bild"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :MovingImage
@@ -561,6 +565,7 @@
 :KitInstance a owl:Class;
     rdfs:label "Instans av paket"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :Kit
@@ -569,6 +574,7 @@
 :NotatedMusicInstance a owl:Class;
     rdfs:label "Instans av musiknoter"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :NotatedMusic
@@ -577,15 +583,16 @@
 :TextInstance a owl:Class;
     rdfs:label "Instans av text"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :Text
         ] .
 
-
 :ProjectedImageInstance a owl:Class;
     rdfs:label "Instans av projicerad bild"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :instanceOf;
             owl:allValuesFrom :ProjectedImage
@@ -631,11 +638,12 @@
 # Concrete Types (can grow a lot, be combined with e.g. productontology...)
 
 ## Candidates for interface-enhanced types (easier to comprehend, combines multiple settings).
-# TODO: some classes here still conflate Work/Instance!
+# TODO: Do some classes here still conflate Work/Instance? (Apart from some commented?)
 
 :Globe a owl:Class;
     rdfs:label "Kartglob"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :instanceOf ;
             owl:allValuesFrom :Cartography
@@ -645,6 +653,7 @@
     rdfs:label "Karta"@sv;
     owl:equivalentClass bibo:Map ;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :instanceOf ;
             owl:allValuesFrom :Cartography
@@ -653,6 +662,7 @@
 :RemoteSensingImage a owl:Class;
     rdfs:label "Satellitbild"@sv; # Fjärranalysbild?
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :instanceOf ;
             owl:allValuesFrom :Cartography
@@ -661,6 +671,7 @@
 :SoundRecording a owl:Class;
     rdfs:label "Ljudinspelning"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :instanceOf ;
             owl:allValuesFrom :Audio
@@ -669,6 +680,7 @@
 :VideoRecording a owl:Class;
     rdfs:label "Videoinspelning"@sv;
     rdfs:subClassOf :Instance ;
+    :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :instanceOf ;
             owl:allValuesFrom :MovingImage
