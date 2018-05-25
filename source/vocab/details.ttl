@@ -602,12 +602,6 @@
 #    rdfs:label "Utgivningsort"@sv;
 #    owl:propertyChainAxiom (:publication :place) .
 
-:primaryProvisionActivity a owl:ObjectProperty;
-    ptg:abstract true;
-    rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :PrimaryProvisionActivity;
-    rdfs:label "huvudsakligt tillgängliggörande"@sv .
-
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
@@ -697,30 +691,18 @@
     rdfs:subClassOf :PrimaryProduction;
     rdfs:label "Primär bulkproduktion"@sv .
 
-:PublicationPeriod a owl:Class;
-    rdfs:subClassOf :PrimaryPublication;
-    rdfs:label "Primär utgivningsperiod"@sv .
-
-:CurrentPublicationPeriod a owl:Class;
-    rdfs:subClassOf :PublicationPeriod;
-    rdfs:label "Primär pågående utgivningsperiod"@sv .
-
-:CeasedPublicationPeriod a owl:Class;
-    rdfs:subClassOf :PublicationPeriod;
-    rdfs:label "Primär avslutad utgivningsperiod"@sv .
-
-:otherDate a owl:DatatypeProperty;
+:otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "kompletterande datum"@sv;
     rdfs:subPropertyOf :date .
 
 :startDate a owl:DatatypeProperty;
-    sdo:domainIncludes :PublicationPeriod ;
+    sdo:domainIncludes :PrimaryPublication ;
     rdfs:label "startdatum"@sv;
     rdfs:subPropertyOf :date .
 
 :endDate a owl:DatatypeProperty;
-    sdo:domainIncludes :PublicationPeriod ;
+    sdo:domainIncludes :PrimaryPublication ;
     rdfs:label "slutdatum"@sv;
     rdfs:subPropertyOf :date .
 
@@ -930,7 +912,14 @@
     #rdfs:domain :Resource ?;
     sdo:domainIncludes :Agent, :Capture, :Title, :ProvisionActivity, :Dissertation ;
     rdfs:label "datum"@sv;
+    rdfs:comment "Oformaterad uppgift om datum/årtal/tidsperiod."@sv;
     owl:equivalentProperty bf2:date, dc:date .
+
+:year a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryPublication;
+    rdfs:subPropertyOf :date;
+    rdfs:label "år"@sv;
+    rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
 
 :originDate a owl:DatatypeProperty;
     rdfs:label "Associated title date"@en, "Tid för verket"@sv;
@@ -949,6 +938,7 @@
     rdfs:range rdfs:Literal;
     rdfs:comment "Används för närvarande ej."@sv;
     rdfs:subPropertyOf bf2:date;
+    :category :shorthand;
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear;
     owl:propertyChainAxiom (:copyright :date) .
 

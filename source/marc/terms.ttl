@@ -34,20 +34,42 @@ marc:toDisplayNote a owl:DatatypeProperty;
 
 # bib 008
 
+marc:primaryProvisionActivity a owl:ObjectProperty;
+    rdfs:subPropertyOf kbv:provisionActivity;
+    rdfs:range kbv:PrimaryProvisionActivity;
+    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+
+marc:copyrightYear a owl:DatatypeProperty;
+    rdfs:label "Copyright year"@en, "Copyrightår"@sv;
+    rdfs:comment "När den anges i direkt relation till en utgivning."@sv;
+    sdo:domainIncludes kbv:PrimaryPublication ;
+    rdfs:subPropertyOf kbv:copyrightDate .
+
+kbv:distribution sdo:rangeIncludes marc:DistributionAndProduction .
+
 marc:DistributionAndProduction a owl:Class;
-    rdfs:subclassOf kbv:PrimaryProvisionActivity;
+    rdfs:subclassOf kbv:PrimaryProvisionActivity, kbv:Distribution;
     rdfs:label "Distribution och produktion"@sv .
 
-marc:productionDate a owl:DatatypeProperty;
+marc:distributionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "produktionsdatum"@sv;
-    rdfs:subPropertyOf kbv:date .
+    rdfs:label "distributionsår"@sv;
+    rdfs:subPropertyOf kbv:year .
 
-marc:distributionDate a owl:DatatypeProperty;
+marc:productionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "distributionsdatum"@sv;
-    rdfs:subPropertyOf kbv:date .
+    rdfs:label "produktionsår"@sv;
+    rdfs:subPropertyOf kbv:year .
 
+marc:ReprintReissueAndOriginalPublication a owl:Class;
+    rdfs:subClassOf kbv:PrimaryPublication ;
+    rdfs:label "Omtryck/återutgivning och orginalutgivning"@sv .
+
+marc:reprintYear a owl:DatatypeProperty ;
+    rdfs:domain marc:ReprintReissueAndOriginalPublication .
+
+marc:originalYear a owl:DatatypeProperty ;
+    rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 # IDENTIFIERS
 
@@ -1257,3 +1279,8 @@ marc:bib976-a a owl:DatatypeProperty ;
 
 marc:bib976-b a owl:DatatypeProperty ;
     rdfs:label "SAB-rubrik"@sv .
+
+marc:LinearScale a owl:Class; rdfs:subClassOf kbv:Scale .
+marc:AngularScale a owl:Class; rdfs:subClassOf kbv:Scale .
+marc:OtherCartographicScale a owl:Class; rdfs:subClassOf kbv:Scale .
+
