@@ -124,6 +124,26 @@ marc:TextualPhysicalFormDesignator a owl:Class;
 marc:ReproductionNote a owl:Class;
     rdfs:label "Lokal anmärkning: Reproduktion"@sv .
 
+# 034
+
+marc:LinearScale a owl:Class ;
+    rdfs:label "Linear scale"@en, "Linjär skala"@sv .
+
+marc:AngularScale a owl:Class ;
+    rdfs:label "Angular scale"@en, "Vinkelskala"@sv .
+
+marc:OtherCartographicScale a owl:Class ;
+    rdfs:label "Other cartographic scale"@en, "Annan skaltyp"@sv .
+
+marc:constantRatioLinearHorizontalScale a owl:DatatypeProperty ;
+    rdfs:label "Constant ratio linear horizontal scale"@en, "Linjär horisontell skala med konstant proportion"@sv .
+
+marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
+    rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
+
+marc:angularScale a owl:DatatypeProperty ;
+    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
+
 # 043
 
 marc:hasGeographicAreaCode a owl:ObjectProperty;
@@ -213,6 +233,12 @@ marc:formSubheading a owl:DatatypeProperty;
     rdfs:label "Form subheading"@en, "Specificering i form av grupptitel"@sv ;
     rdfs:domain kbv:Title . 
 
+# BIB 260 & 264
+
+marc:sequenceStatus a owl:ObjectProperty ;
+    rdfs:label "Sequence of statements"@en, "Sekvens av uppgifter"@sv;
+    rdfs:domain kbv:Publication .
+
 # USED WITH MULTIPLE TYPES:
 
 marc:sourceOfAcquisition a owl:DatatypeProperty ;
@@ -228,12 +254,12 @@ marc:organizationalUnit a owl:DatatypeProperty ;
                        marc:TextualHoldingsBasicBibliographicUnit .
 
 marc:cataloguersNote a owl:DatatypeProperty ;
-    rdfs:label "Intern anmärkning"@sv ;
+    rdfs:label "Katalogisatörens anmärkning"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
                        marc:TextualHoldingsBasicBibliographicUnit .
 
-marc:copyNote a owl:DatatypeProperty ;
+marc:publicNote a owl:DatatypeProperty ;
     rdfs:label "Offentlig anmärkning"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
@@ -387,6 +413,10 @@ marc:expansionOfSummaryNote a owl:DatatypeProperty ;
 marc:assigningSource a owl:DatatypeProperty ;
     rdfs:domain kbv:Summary ;
     rdfs:label "Assigning source"@en, "Instans som åsatt anmärkning/etikett "@sv .
+
+marc:summaryType a owl:ObjectProperty ;
+    rdfs:domain kbv:Summary ;
+    rdfs:label "Summary type"@en, "Typ av sammanfattning"@sv .
 
 # 538 (bib and hold)
 
