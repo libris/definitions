@@ -1,0 +1,180 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix kbv: <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
+
+# MARC Indicator Lists
+
+marc:SourceSpecifiedInSubfield2 a marc:EnumeratedTerm ;
+    rdfs:label "System specificerat i $2" .
+
+marc:isPrivate a owl:DatatypeProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Sekretessbelagd information"@sv .
+
+marc:thesaurus a owl:ObjectProperty;
+    rdfs:range marc:Thesaurus .
+marc:Thesaurus a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:LibraryOfCongressSubjectHeadingsNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "LCSH/LC authority files" .
+marc:LcSubjectHeadingsForChildrensLiterature a marc:Thesaurus ;
+          rdfs:label "LCSH for children's literature" .
+marc:MedicalSubjectHeadingsNlmNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "MeSH/NLM authority files" .
+marc:NationalAgriculturalLibrarySubjectAuthorityFile a marc:Thesaurus ;
+          rdfs:label "NAL subject authority file" .
+marc:SourceNotSpecified a marc:Thesaurus ;
+          rdfs:label "System ej specificerat" .
+marc:CanadianSubjectHeadingsNlcNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "Canadian SH/ NLC authority file" .
+marc:RepertoireDeVedettesMatiere a marc:Thesaurus ;
+          rdfs:label "Répertoire des vedettes-matière/NLC" .
+
+marc:nameForm a owl:ObjectProperty;
+    rdfs:range marc:NameForm .
+marc:InvertedName a marc:NameForm .
+marc:JurisdictionName a marc:NameForm .
+marc:NameInDirectOrder a marc:NameForm .
+
+marc:typeOfDate a owl:ObjectProperty ;
+    rdfs:range marc:TypeOfDate .
+marc:TypeOfDate a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:NoDateInformation a marc:TypeOfDate .
+marc:SingleDate a marc:TypeOfDate .
+marc:MultipleSingleDates a marc:TypeOfDate .
+marc:RangeOfDates a marc:TypeOfDate .
+
+marc:languageNote a owl:ObjectProperty ;
+    rdfs:range marc:LanguageNote .
+marc:LanguageNote a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote .
+marc:ItemIsOrIncludesATranslation a marc:LanguageNote .
+
+marc:languageCode a owl:ObjectProperty ;
+    rdfs:range marc:LanguageCode .
+marc:LanguageCode a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:SourceSpecifiedInSubfield2 a marc:LanguageCode .
+
+marc:typeOfTimePeriod a owl:ObjectProperty ;
+    rdfs:range marc:TypeOfTimePeriod .
+marc:TypeOfTimePeriod a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:SingleDateTime a marc:TypeOfTimePeriod .
+marc:MultipleSingleDatesTimes a marc:TypeOfTimePeriod .
+marc:RangeOfDatesTimes a marc:TypeOfTimePeriod .
+
+marc:i2sourceOfCode a owl:ObjectProperty ;
+    rdfs:range marc:I2sourceOfCode .
+marc:I2sourceOfCode a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:MARCMusicalCompositionCode a marc:I2sourceOfCode .
+marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode .
+
+marc:i2sourceOfCode a owl:ObjectProperty ;
+    rdfs:range marc:I2sourceOfCode .
+marc:I2sourceOfCode a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:MARCCode a marc:I2sourceOfCode .
+marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode .
+
+marc:i1codeSource a owl:ObjectProperty ;
+    rdfs:range marc:I1codeSource .
+marc:I1codeSource a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:LibraryOfCongressClassification a marc:I1codeSource .
+marc:UsDeptOfDefenseClassificationObsolete a marc:I1codeSource .
+marc:UsDeptOfDefenseClassification a marc:I1codeSource .
+marc:SourceSpecifiedInSubfield2 a marc:I1codeSource .
+
+marc:typeCompletenessSourceOfClassCallNumber a owl:ObjectProperty ;
+    rdfs:range marc:TypeCompletenessSourceOfClassCallNumber .
+marc:TypeCompletenessSourceOfClassCallNumber a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:LcBasedCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:CompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:IncompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:LcBasedCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:CompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:IncompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:OtherCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:OtherClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:OtherCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
+
+marc:numberSource a owl:ObjectProperty ;
+    rdfs:range marc:NumberSource .
+marc:NumberSource a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:SourceSpecifiedInSubfield2 a marc:NumberSource .
+marc:SuperintendentOfDocumentsClassificationSystem a marc:NumberSource .
+marc:GovernmentOfCanadaPublicationsOutlineOfClassification a marc:NumberSource .
+
+marc:searchControl a owl:ObjectProperty ;
+    rdfs:range marc:SearchControl .
+marc:SearchControl a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:NoteNoAddedEntry a marc:SearchControl .
+marc:NoteAddedEntry a marc:SearchControl .
+marc:NoNoteNoAddedEntry a marc:SearchControl .
+marc:NoNoteAddedEntry a marc:SearchControl .
+
+marc:coverageOrLocationInSource a owl:ObjectProperty ;
+    rdfs:range marc:CoverageOrLocationInSource .
+marc:CoverageOrLocationInSource a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:CoverageUnknown a marc:CoverageOrLocationInSource .
+marc:CoverageComplete a marc:CoverageOrLocationInSource .
+marc:CoverageIsSelective a marc:CoverageOrLocationInSource .
+marc:LocationInSourceNotGiven a marc:CoverageOrLocationInSource .
+marc:LocationInSourceGiven a marc:CoverageOrLocationInSource .
+
+marc:summaryType a owl:ObjectProperty ;
+    rdfs:domain kbv:Summary;
+    rdfs:range marc:SummaryType .
+marc:SummaryType a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Subject a marc:SummaryType .
+marc:Review a marc:SummaryType .
+marc:ScopeAndContent a marc:SummaryType .
+marc:Abstract a marc:SummaryType .
+marc:ContentAdvice a marc:SummaryType .
+marc:NoDisplayConstantGenerated a marc:SummaryType .
+
+marc:audienceType a owl:ObjectProperty;
+    rdfs:domain kbv:IntendedAudience;
+    rdfs:range marc:AudienceType .
+marc:AudienceType a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ReadingGradeLevel a marc:AudienceType .
+marc:InterestAgeLevel a marc:AudienceType .
+marc:InterestGradeLevel a marc:AudienceType .
+marc:SpecialAudienceCharacteristics a marc:AudienceType .
+marc:MotivationInterestLevel a marc:AudienceType .
+marc:NoDisplayConstantGenerated a marc:AudienceType .
+
+marc:displayConstantController a owl:ObjectProperty ;
+    rdfs:range marc:DisplayConstantController .
+marc:DisplayConstantController a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Publications a marc:DisplayConstantController .
+
+marc:subjectLevel a owl:ObjectProperty ;
+    rdfs:range marc:SubjectLevel .
+marc:SubjectLevel a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Unspecified a marc:SubjectLevel .
+marc:Primary a marc:SubjectLevel .
+marc:Secondary a marc:SubjectLevel .
+
+marc:languageCode a owl:ObjectProperty ;
+    rdfs:range marc:LanguageCode .
+marc:LanguageCode a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ISO-639-2B a marc:LanguageCode .
+marc:SourceSpecifiedInSubfield2 a marc:LanguageCode .
