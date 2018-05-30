@@ -195,6 +195,13 @@ def rdaterms():
 
 
 @compiler.dataset
+def enumterms():
+    graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
+
+    return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
 def generators():
     graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
 
