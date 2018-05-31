@@ -2,21 +2,31 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <http://schema.org/> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 
 # MARC Indicator Lists
 
-marc:SourceSpecifiedInSubfield2 a marc:EnumeratedTerm ;
-    rdfs:label "System specificerat i $2" .
+marc:SourceSpecifiedInSubfield2 a marc:EnumeratedTerm,
+        marc:LanguageCode,
+        marc:I1codeSource,
+        marc:I2sourceOfCode,
+        marc:NumberSource ;
+    rdfs:label "Annat kodsystem specificerat i $2" .
 
 marc:isPrivate a owl:DatatypeProperty ;
+    sdo:domainIncludes marc:ImmediateSourceOfAcquisitionNote, marc:ActionNote, kbv:ImmediateAcquisition ;
     rdfs:range xsd:boolean ;
     rdfs:label "Sekretessbelagd information"@sv .
 
 marc:thesaurus a owl:ObjectProperty;
+    sdo:domainIncludes marc:EstablishedHeadingLinkingEntryCorporateName,
+        marc:EstablishedHeadingLinkingEntryMeetingName,
+        marc:EstablishedHeadingLinkingEntryUniformTitle,
+        marc:EstablishedHeadingLinkingEntryChronologicalTerm ;
     rdfs:range marc:Thesaurus ;
-    rdfs:label "Ämnesordssystem / Thesaurus"@sv .
+    rdfs:label "ämnesordssystem / Thesaurus"@sv .
 marc:Thesaurus a marc:CollectionClass;
     rdfs:subClassOf marc:EnumeratedTerm ;
     rdfs:label "Ämnesordssystem / Thesaurus"@sv .
@@ -36,8 +46,13 @@ marc:RepertoireDeVedettesMatiere a marc:Thesaurus ;
           rdfs:label "Répertoire des vedettes-matière/NLC" .
 
 marc:nameForm a owl:ObjectProperty;
-    rdfs:label "Typ av namn"@sv .
+    sdo:domainIncludes marc:EstablishedHeadingLinkingEntryCorporateName,
+        marc:EstablishedHeadingLinkingEntryMeetingName ;
+    rdfs:label "typ av namn"@sv ;
     rdfs:range marc:NameForm .
+marc:NameForm a marc:CollectionClass;
+    rdfs:label "Typ av namn"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
 marc:InvertedName a marc:NameForm ;
     rdfs:label "Namn inlett med inverterat personnamn"@sv .
 marc:JurisdictionName a marc:NameForm ;
@@ -46,6 +61,7 @@ marc:NameInDirectOrder a marc:NameForm ;
     rdfs:label "Namn i rak följd"@sv .
 
 marc:typeOfDate a owl:ObjectProperty ;
+    rdfs:domain kbv:Capture ;
     rdfs:range marc:TypeOfDate ;
     rdfs:label "typ av datum"@sv .
 marc:TypeOfDate a marc:CollectionClass;
@@ -62,6 +78,12 @@ marc:RangeOfDates a marc:TypeOfDate ;
 
 marc:languageNote a owl:ObjectProperty ;
     rdfs:label "anmärkning: Språk"@sv ;
+    sdo:domainIncludes kbv:Work,
+        marc:Libretto,
+        kbv:Summary,
+        marc:SubtitlesOrCaptions,
+        marc:SungOrSpokenText,
+        kbv:TableOfContents ;
     rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
     rdfs:label "Anmärkning: Språk"@sv ;
@@ -73,15 +95,22 @@ marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
 
 marc:languageCode a owl:ObjectProperty ;
     rdfs:label "språkkod"@sv ;
+    sdo:domainIncludes kbv:Work,
+        marc:Libretto,
+        kbv:Summary,
+        marc:SubtitlesOrCaptions,
+        marc:SungOrSpokenText,
+        kbv:TableOfContents ;
     rdfs:range marc:LanguageCode .
 marc:LanguageCode a marc:CollectionClass;
     rdfs:label "Språkkod"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:SourceSpecifiedInSubfield2 a marc:LanguageCode ;
-    rdfs:label "Standardnummer eller -kod specificerad i $2"@sv .
+marc:ISO-639-2B a marc:LanguageCode ;
+    rdfs:label "Språkkod enligt ISO 639-2B"@sv .
 
 marc:typeOfTimePeriod a owl:ObjectProperty ;
     rdfs:label "typ av tidsperiod"@sv ;
+    rdfs:domain marc:TimePeriodOfContent ;
     rdfs:range marc:TypeOfTimePeriod .
 marc:TypeOfTimePeriod a marc:CollectionClass;
     rdfs:label "Typ av tidsperiod"@sv ;
@@ -95,26 +124,18 @@ marc:RangeOfDatesTimes a marc:TypeOfTimePeriod ;
 
 marc:i2sourceOfCode a owl:ObjectProperty ;
     rdfs:label "kodsystem"@sv ;
+    sdo:domainIncludes marc:FormOfMusicalCompositionCode,
+        marc:NumberOfInstrumentsOrVoicesCode ;
     rdfs:range marc:I2sourceOfCode .
 marc:I2sourceOfCode a marc:CollectionClass;
     rdfs:label "Kodsystem"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:MARCMusicalCompositionCode a marc:I2sourceOfCode ;
-    rdfs:label "MARC21-kod"@sv .
-marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode ;
-    rdfs:label "Annat kodsystem specificerat i $2"@sv .
-
-marc:i2sourceOfCode a owl:ObjectProperty ;
-    rdfs:range marc:I2sourceOfCode .
-marc:I2sourceOfCode a marc:CollectionClass;
-    rdfs:subClassOf marc:EnumeratedTerm .
 marc:MARCCode a marc:I2sourceOfCode ;
     rdfs:label "MARC21-kod"@sv .
-marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode ;
-    rdfs:label "Annat kodsystem specificerat i $2"@sv .
 
 marc:i1codeSource a owl:ObjectProperty ;
     rdfs:label "klassifikationssystem"@sv ;
+    rdfs:domain marc:GeographicClassification ;
     rdfs:range marc:I1codeSource .
 marc:I1codeSource a marc:CollectionClass;
     rdfs:label "Klassifikationssystem"@sv ;
@@ -125,11 +146,10 @@ marc:UsDeptOfDefenseClassificationObsolete a marc:I1codeSource ;
     rdfs:label "U.S. Dept. of Defense Classification - OBSOLET" .
 marc:UsDeptOfDefenseClassification a marc:I1codeSource ;
     rdfs:label "U.S. Dept. of Defense Classification" .
-marc:SourceSpecifiedInSubfield2 a marc:I1codeSource ;
-    rdfs:label "Annat kodsystem specificerat i $2"@sv .
 
 marc:typeCompletenessSourceOfClassCallNumber a owl:ObjectProperty ;
     rdfs:label "typ, fullständighet och källa för klassifikationen"@sv ;
+    rdfs:domain marc:ClassificationNumbersAssignedInCanada ;
     rdfs:range marc:TypeCompletenessSourceOfClassCallNumber .
 marc:TypeCompletenessSourceOfClassCallNumber a marc:CollectionClass;
     rdfs:label "Typ, fullständighet och källa för klassifikationen"@sv ;
@@ -156,13 +176,12 @@ marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSou
     rdfs:label "Annan klassifikationskod fr\u00e5n annat kanadensiskt bibliotek"@sv .
 
 marc:numberSource a owl:ObjectProperty ;
-    rdfs:label "Kod f\u00f6r klassifikationssystem"@sv ;
+    rdfs:label "kod för klassifikationssystem"@sv ;
+    rdfs:domain marc:GovernmentDocumentClassificationNumber ;
     rdfs:range marc:NumberSource .
 marc:NumberSource a marc:CollectionClass;
-    rdfs:label "Kod f\u00f6r klassifikationssystem"@sv ;
+    rdfs:label "Kod för klassifikationssystem"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:SourceSpecifiedInSubfield2 a marc:NumberSource ;
-    rdfs:label "System specificerat i $2"@sv .
 marc:SuperintendentOfDocumentsClassificationSystem a marc:NumberSource ;
     rdfs:label "Superintendent of Documents Classification System" .
 marc:GovernmentOfCanadaPublicationsOutlineOfClassification a marc:NumberSource ;
@@ -170,6 +189,7 @@ marc:GovernmentOfCanadaPublicationsOutlineOfClassification a marc:NumberSource ;
 
 marc:searchControl a owl:ObjectProperty ;
     rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
+    rdfs:domain kbv:Title ;
     rdfs:range marc:SearchControl .
 marc:SearchControl a marc:CollectionClass;
     rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
@@ -185,6 +205,7 @@ marc:NoNoteAddedEntry a marc:SearchControl ;
 
 marc:coverageOrLocationInSource a owl:ObjectProperty ;
     rdfs:label "täckningsgrad"@sv ;
+    rdfs:domain kbv:Instance ;
     rdfs:range marc:CoverageOrLocationInSource .
 marc:CoverageOrLocationInSource a marc:CollectionClass;
     rdfs:label "Täckningsgrad"@sv ;
@@ -242,6 +263,7 @@ marc:NoDisplayConstantGenerated a marc:AudienceType ;
 
 marc:displayConstantController a owl:ObjectProperty ;
     rdfs:label "kan styra standardfras"@sv ;
+    rdfs:domain marc:PublicationsAboutDescribedMaterialsNote ;
     rdfs:range marc:DisplayConstantController .
 marc:DisplayConstantController a marc:CollectionClass;
     rdfs:label "Kan styra standardfras"@sv ;
@@ -251,6 +273,7 @@ marc:Publications a marc:DisplayConstantController ;
 
 marc:subjectLevel a owl:ObjectProperty ;
     rdfs:label "nivå"@sv ;
+    rdfs:domain kbv:Topic ;
     rdfs:range marc:SubjectLevel .
 marc:SubjectLevel a marc:CollectionClass;
     rdfs:label "Nivå"@sv ;
@@ -262,13 +285,3 @@ marc:Primary a marc:SubjectLevel ;
 marc:Secondary a marc:SubjectLevel ;
     rdfs:label "Sekundär"@sv .
 
-marc:languageCode a owl:ObjectProperty ;
-    rdfs:label "Språkkod"@sv ;
-    rdfs:range marc:LanguageCode .
-marc:LanguageCode a marc:CollectionClass;
-    rdfs:label "Språkkod"@sv ;
-    rdfs:subClassOf marc:EnumeratedTerm .
-marc:ISO-639-2B a marc:LanguageCode ;
-    rdfs:label "Språkkod enligt ISO 639-2B"@sv .
-marc:SourceSpecifiedInSubfield2 a marc:LanguageCode ;
-    rdfs:label "Språkkod enligt standard specificerad i delfält #2"@sv .
