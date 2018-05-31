@@ -224,13 +224,18 @@
     rdfs:range :Identifier .
 
 ### LOCAL LIBRIS HOLDING TERMS ###
-    
-:availability a owl:DatatypeProperty;
+
+:availability a owl:ObjectProperty;
     owl:equivalentProperty sdo:availability;
     rdfs:label "Exemplarstatus"@sv;
     rdfs:domain :Item;
+    rdfs:range :ItemAvailability;
     rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
     skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
+
+:ItemAvailability a owl:Class;
+    rdfs:label "Availability"@en, "Exemplarstatus"@sv;
+    owl:equivalentClass sdo:ItemAvailability .
 
 #:classificationPart a owl:DatatypeProperty;
     # TODO: rename to shelfMark? rdfs:subPropertyOf bf2:shelfMark ?
