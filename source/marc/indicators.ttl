@@ -15,9 +15,11 @@ marc:isPrivate a owl:DatatypeProperty ;
     rdfs:label "Sekretessbelagd information"@sv .
 
 marc:thesaurus a owl:ObjectProperty;
-    rdfs:range marc:Thesaurus .
+    rdfs:range marc:Thesaurus ;
+    rdfs:label "Ämnesordssystem / Thesaurus"@sv .
 marc:Thesaurus a marc:CollectionClass;
-    rdfs:subClassOf marc:EnumeratedTerm .
+    rdfs:subClassOf marc:EnumeratedTerm ;
+    rdfs:label "Ämnesordssystem / Thesaurus"@sv .
 marc:LibraryOfCongressSubjectHeadingsNameAuthorityFile a marc:Thesaurus ;
           rdfs:label "LCSH/LC authority files" .
 marc:LcSubjectHeadingsForChildrensLiterature a marc:Thesaurus ;
@@ -35,69 +37,97 @@ marc:RepertoireDeVedettesMatiere a marc:Thesaurus ;
 
 marc:nameForm a owl:ObjectProperty;
     rdfs:range marc:NameForm .
-marc:InvertedName a marc:NameForm .
-marc:JurisdictionName a marc:NameForm .
-marc:NameInDirectOrder a marc:NameForm .
+marc:InvertedName a marc:NameForm ;
+    rdfs:label "Namn inlett med inverterat personnamn"@sv .
+marc:JurisdictionName a marc:NameForm ;
+    rdfs:label "Namn på administrativ enhet"@sv .
+marc:NameInDirectOrder a marc:NameForm ;
+    rdfs:label "Namn i rak följd"@sv .
 
 marc:typeOfDate a owl:ObjectProperty ;
-    rdfs:range marc:TypeOfDate .
+    rdfs:range marc:TypeOfDate ;
+    rdfs:label "typ av datum"@sv .
 marc:TypeOfDate a marc:CollectionClass;
+    rdfs:label "Typ av datum"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:NoDateInformation a marc:TypeOfDate .
-marc:SingleDate a marc:TypeOfDate .
-marc:MultipleSingleDates a marc:TypeOfDate .
-marc:RangeOfDates a marc:TypeOfDate .
+marc:NoDateInformation a marc:TypeOfDate ;
+    rdfs:label "Tidsangivelse saknas"@sv .
+marc:SingleDate a marc:TypeOfDate ;
+    rdfs:label "En tidsangivelse"@sv .
+marc:MultipleSingleDates a marc:TypeOfDate ;
+    rdfs:label "Flera enstaka tidsangivelser"@sv .
+marc:RangeOfDates a marc:TypeOfDate ;
+    rdfs:label "Tidsintervall"@sv .
 
 marc:languageNote a owl:ObjectProperty ;
+    rdfs:label "anmärkning: Språk"@sv ;
     rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
+    rdfs:label "Anmärkning: Språk"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote .
-marc:ItemIsOrIncludesATranslation a marc:LanguageNote .
+marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
+    rdfs:label "Objektet är/innehåller ej översättning"@sv .
+marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
+    rdfs:label "Objektet är/innehåller översättning"@sv .
 
 marc:languageCode a owl:ObjectProperty ;
+    rdfs:label "språkkod"@sv ;
     rdfs:range marc:LanguageCode .
 marc:LanguageCode a marc:CollectionClass;
+    rdfs:label "Språkkod"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:SourceSpecifiedInSubfield2 a marc:LanguageCode .
+marc:SourceSpecifiedInSubfield2 a marc:LanguageCode ;
+    rdfs:label "Standardnummer eller -kod specificerad i $2"@sv .
 
 marc:typeOfTimePeriod a owl:ObjectProperty ;
+    rdfs:label "typ av tidsperiod"@sv ;
     rdfs:range marc:TypeOfTimePeriod .
 marc:TypeOfTimePeriod a marc:CollectionClass;
+    rdfs:label "Typ av tidsperiod"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:SingleDateTime a marc:TypeOfTimePeriod .
-marc:MultipleSingleDatesTimes a marc:TypeOfTimePeriod .
-marc:RangeOfDatesTimes a marc:TypeOfTimePeriod .
+marc:SingleDateTime a marc:TypeOfTimePeriod ;
+    rdfs:label "Ett datum/en tid"@sv .
+marc:MultipleSingleDatesTimes a marc:TypeOfTimePeriod ;
+    rdfs:label "Flera enstaka datum/tider"@sv .
+marc:RangeOfDatesTimes a marc:TypeOfTimePeriod ;
+    rdfs:label "Datum-/tidsintervall"@sv .
 
 marc:i2sourceOfCode a owl:ObjectProperty ;
     rdfs:range marc:I2sourceOfCode .
 marc:I2sourceOfCode a marc:CollectionClass;
     rdfs:subClassOf marc:EnumeratedTerm .
 marc:MARCMusicalCompositionCode a marc:I2sourceOfCode .
-marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode .
+marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode ;
+    rdfs:label "Annat kodsystem specificerat i $2"@sv .
 
 marc:i2sourceOfCode a owl:ObjectProperty ;
     rdfs:range marc:I2sourceOfCode .
 marc:I2sourceOfCode a marc:CollectionClass;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:MARCCode a marc:I2sourceOfCode .
+marc:MARCCode a marc:I2sourceOfCode ;
+    rdfs:label "MARC21-kod"@sv .
 marc:SourceSpecifiedInSubfield2 a marc:I2sourceOfCode .
 
 marc:i1codeSource a owl:ObjectProperty ;
     rdfs:range marc:I1codeSource .
 marc:I1codeSource a marc:CollectionClass;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:LibraryOfCongressClassification a marc:I1codeSource .
+marc:LibraryOfCongressClassification a marc:I1codeSource ;
+    rdfs:label "LC-klassifikation"@sv .
 marc:UsDeptOfDefenseClassificationObsolete a marc:I1codeSource .
-marc:UsDeptOfDefenseClassification a marc:I1codeSource .
-marc:SourceSpecifiedInSubfield2 a marc:I1codeSource .
+marc:UsDeptOfDefenseClassification a marc:I1codeSource ;
+    rdfs:label "U.S. Dept. of Defense Classification" .
+marc:SourceSpecifiedInSubfield2 a marc:I1codeSource ;
+    rdfs:label "Annat kodsystem specificerat i $2"@sv .
 
 marc:typeCompletenessSourceOfClassCallNumber a owl:ObjectProperty ;
     rdfs:range marc:TypeCompletenessSourceOfClassCallNumber .
 marc:TypeCompletenessSourceOfClassCallNumber a marc:CollectionClass;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:LcBasedCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
-marc:CompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
+marc:LcBasedCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "LC-baserad klassifikationskod från LAC"@sv .
+marc:CompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Fullständig LC-klassifikationskod från LAC"@sv .
 marc:IncompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber .
 marc:LcBasedCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
 marc:CompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber .
