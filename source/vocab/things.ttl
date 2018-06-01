@@ -87,7 +87,7 @@
     rdfs:label "content type"@en, "innehållstyp"@sv ;
     rdfs:range :ContentType ;
     owl:equivalentProperty bf2:content ;
-    rdfs:subPropertyOf :additionalType, rdael:contentType, dc:type .
+    rdfs:subPropertyOf rdael:contentType, dc:type .
 
 :mediaType a owl:ObjectProperty;
     rdfs:label "media type"@en, "medietyp"@sv ;
@@ -103,7 +103,7 @@
     rdfs:range :CarrierType ;
     owl:equivalentProperty bf2:carrier ;
     rdfs:comment "Bärartyp anger fysiskt medium för lagring samt den enhet som behövs för att se, spela eller visa innehållet i resursen. "@sv;
-    rdfs:subPropertyOf :additionalType, rdael:carrierType, dc:format .
+    rdfs:subPropertyOf rdael:carrierType, dc:format .
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the rda-group)
 # alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
@@ -117,7 +117,7 @@
 :genreForm a owl:ObjectProperty;
     rdfs:label "genre/form"@en, "genre/form"@sv;
     rdfs:range :GenreForm;
-    rdfs:subPropertyOf :additionalType, dc:type, sdo:genre ;
+    rdfs:subPropertyOf dc:type, sdo:genre ;
     owl:equivalentProperty bf2:genreForm .
 
 :ContentType a owl:Class;
