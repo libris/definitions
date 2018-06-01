@@ -37,6 +37,12 @@
 :ToCEntry a owl:Class;
     rdfs:label "Table of Contents Entry"@en, "Utökad innehållsanmärkning"@sv .
 
+# RECORD
+
+:systemName a owl:DatatypeProperty ;
+    sdo:domainIncludes :Record ;
+    rdfs:label "Systemnamn"@sv .
+
 # THINGS
 
 :device a owl:ObjectProperty;
@@ -48,7 +54,23 @@
     rdfs:label "Apparat"@sv;
     owl:equivalentClass dbpo:Device .
 
-    
+:indexedIn a owl:ObjectProperty ;
+    sdo:domainIncludes :Instance ;
+    rdfs:label "Indexerad i"@sv .
+
+:imageBitDepth a owl:DatatypeProperty ;
+    sdo:domainIncludes :Electronic ;
+    rdfs:label "Bildens bit-djup"@sv .
+
+# ITEMS
+
+# NOTE: this is "hold 852 a", which Libris *does not use*.
+# It "should" be a Plan B property in marcframe.json,
+# and/or dropped.
+# It is kept here to attempt to avoid someone accidentally redefining it as an
+# ObjectProperty. .
+:location a owl:DatatypeProperty .
+
 # REMOVED FROM RELATIONS.TTL 2018-01-31, not in marcframe.
 # contributor property has been deleted from BF2.
 #

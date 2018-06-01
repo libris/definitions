@@ -5,6 +5,7 @@
 @prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 # Terms in KBV which are not promoted to real properties or forms, mostly used for MARC21 compatibility.
 # These should when we understand more about their usage be phased out or replaced by proper vocabulary terms.
@@ -31,6 +32,16 @@ marc:electronicLocatorType a owl:DatatypeProperty ;
 
 marc:toDisplayNote a owl:DatatypeProperty;
     rdfs:label "Display note"@en, "Visa anmärkning"@sv .
+
+# bib 006
+
+marc:SerialWork a owl:Class ;
+    ptg:abstract true;
+    rdfs:label "Ett verk på seriell nivå"@sv;
+    # NOTE: Not added in hierarchy to avoid polluting it until this "crutch"
+    # class for bib 006 has been properly defined and put to good use.
+    #rdfs:subClassOf kbv:Work .
+    .
 
 # bib 008
 
