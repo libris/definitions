@@ -16,6 +16,7 @@
 @prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -36,6 +37,11 @@
 rdf:type a owl:ObjectProperty;
     rdfs:label "type"@en, "typ"@sv .
 
+:Resource a owl:Class ;
+    owl:equivalentClass rdfs:Resource;
+    rdfs:label "Resurs"@sv, "Resource"@en;
+    skos:altLabel "Entitet"@sv, "Entity"@en .
+
 ##
 # Extended Vocabulary Components
 
@@ -46,6 +52,11 @@ rdf:type a owl:ObjectProperty;
 :ObjectProperty a owl:Class;
     owl:equivalentClass owl:ObjectProperty;
     rdfs:label "Relation"@sv .
+
+:SymmetricProperty a owl:Class;
+    owl:equivalentClass owl:SymmetricProperty;
+    rdfs:subClassOf :ObjectProperty;
+    rdfs:label "Symmetrisk relation"@sv .
 
 :DatatypeProperty a owl:Class;
     owl:equivalentClass owl:DatatypeProperty;
@@ -63,6 +74,7 @@ rdf:type a owl:ObjectProperty;
 
 :StructuredValue a owl:Class;
     owl:equivalentClass sdo:StructuredValue;
+    rdfs:subClassOf :Resource;
     skos:closeMatch rdfs:Datatype;
     rdfs:label "Strukturerat värde"@sv .
 
@@ -87,9 +99,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:subPropertyOf [ owl:inverseOf rdf:subject ];
     rdfs:range rdf:Statement .
 
-:predicate rdfs:subPropertyOf rdf:predicate; ptg:abstract true .
+:predicate a owl:ObjectProperty;
+    rdfs:subPropertyOf rdf:predicate; ptg:abstract true .
 
-:object rdfs:subPropertyOf rdf:object; ptg:abstract true .
+:object a owl:ObjectProperty;
+    rdfs:subPropertyOf rdf:object; ptg:abstract true .
 
 
 ##
@@ -103,15 +117,21 @@ rdf:type a owl:ObjectProperty;
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
+    rdfs:domain :Resource ;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
     rdfs:label "kommentar"@sv;
+    sdo:domainIncludes :Agent, :Title ; # ToCEntry also? Not in vocab yet.
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;
     rdfs:label "kod"@sv;
-    owl:equivalentProperty bf2:code .
+    skos:altLabel "notation"@sv;
+    rdfs:subPropertyOf :label;
+    # sdo:domainIncludes :Concept ;
+    rdfs:domain :Resource;
+    owl:equivalentProperty bf2:code, skos:notation, madsrdf:code .
 
 :count a owl:DatatypeProperty;
     rdfs:label "Number of units"@en, "Antal enheter"@sv;
@@ -129,11 +149,25 @@ rdf:type a owl:ObjectProperty;
 
 :value a owl:DatatypeProperty;
     rdfs:label "value"@en, "värde"@sv;
+    rdfs:domain :Resource;
     owl:equivalentProperty rdf:value .
 
 :seeAlso a owl:ObjectProperty;
     rdfs:label "se även"@sv;
-    owl:equivalentProperty rdfs:seeAlso .
+    rdfs:domain :Resource;
+    rdfs:range :Resource;
+    rdfs:subPropertyOf rdfs:seeAlso ;
+    owl:equivalentProperty madsrdf:see .
+# Range restrictions:
+:Concept rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Concept ] .
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Agent ] .
+:Work rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Work ] .
 
 :sameAs a owl:ObjectProperty;
     rdfs:label "samma sak som"@sv;

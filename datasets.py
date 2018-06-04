@@ -91,12 +91,13 @@ def vocab():
     #cg.parse(str(compiler.path('source/vocab/display.jsonld')), format='json-ld')
     #graph += cg
 
-    graph.update(compiler.path('source/vocab/update.rq').read_text())
+    graph.update(compiler.path('source/vocab/update.rq').read_text('utf-8'))
+    graph.update(compiler.path('source/vocab/updateResource.rq').read_text('utf-8'))
 
-    rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text()
+    rq = compiler.path('source/vocab/construct-enum-restrictions.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
-    rq = compiler.path('source/vocab/check-bases.rq').read_text()
+    rq = compiler.path('source/vocab/check-bases.rq').read_text('utf-8')
     checks = graph.query(rq).graph
     for check, msg in checks.subject_objects(SCRA.message):
         print("{}: {}".format(
@@ -107,6 +108,18 @@ def vocab():
 
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
+
+    # Clean up generated prefixes
+    preferred = {}
+    defaulted = {}
+    for pfx, uri in graph.store.namespaces():
+        if pfx.startswith('default'):
+            defaulted[uri] = pfx
+        else:
+            preferred[uri] = pfx
+    for default_pfx, uri in defaulted.items():
+        if uri in preferred:
+            graph.namespace_manager.bind(preferred[uri], uri, override=True)
 
     data = compiler.to_jsonld(graph)
     del data['@context']
@@ -123,7 +136,6 @@ def vocab():
 
     vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    #assert vocab_record['@id'] == vocab_base
     add_record_system_id(vocab_record)
 
     version = _get_repo_version()
@@ -147,22 +159,59 @@ def vocab():
 
 @compiler.dataset
 def enums():
-    #data = compiler.load_json('source/enums.jsonld')
-    #data['@graph'] = data.get('@graph') or data.pop('enumDefs').values()
-    #return "/enum/", data
     graph = Graph()
-    # These definitions are now included in the vocab package
-    #graph.parse(str(compiler.path('source/marc/enums.ttl')), format='turtle')
-
-    rq = compiler.path('source/marc/construct-enums.rq').read_text()
+    rq = compiler.path('source/marc/construct-enums.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
     return "/marc/", "2014-01-23T11:34:17.981Z", graph
 
 
 @compiler.dataset
+def rdaterms():
+    # NOTE: see also examples/mappings/rda-bf2-types.ttl for possibiliy of
+    # extending our type system (instead).
+    graph = compiler.construct(sources=[
+            {
+                "source": list(compiler.read_csv('source/rdamap.tsv')),
+                "context": "source/rdamap-context.jsonld"
+            },
+
+            {'source': 'http://rdaregistry.info/termList/RDAContentType'},
+            {'source': 'http://id.loc.gov/vocabulary/contentTypes'},
+
+            {'source': 'http://rdaregistry.info/termList/RDAMediaType'},
+            {'source': 'http://id.loc.gov/vocabulary/mediaTypes'},
+
+            {'source': 'http://rdaregistry.info/termList/RDACarrierType'},
+            {'source': 'http://id.loc.gov/vocabulary/carriers'},
+
+            #{'source': 'http://rdaregistry.info/termList/ModeIssue'},
+            #{'source': 'http://id.loc.gov/vocabulary/issuance.skos.rdf'},
+
+        ],
+        query="source/construct-rda-terms.rq")
+
+    return "/term/rda/", "2018-05-16T08:18:01.337Z", graph
+
+
+@compiler.dataset
+def enumterms():
+    graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
+
+    return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
+def generators():
+    graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
+
+    return "/generator/", "2018-04-25T20:55:14.723Z", graph
+
+
+@compiler.dataset
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
+
     return "/term/", "2014-02-01T21:00:01.766Z", graph
 
 
@@ -192,6 +241,7 @@ def relators():
             }
         ],
         query="source/construct-relators.rq")
+
     return "/relator/", "2014-02-01T17:29:12.378Z", graph
 
 
@@ -201,7 +251,7 @@ def languages():
     loclanggraph = Graph()
     if not loclangpath.exists():
         # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
-        cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text()
+        cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text('utf-8')
         loclanggraph += _get_zipped_graph(
                 compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
                 'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
@@ -246,6 +296,7 @@ def countries():
             }
         ],
         query="source/construct-countries.rq")
+
     return "/country/", "2014-02-01T13:21:14.008Z", graph
 
 
@@ -267,7 +318,7 @@ def docs():
     import markdown
     docs = []
     for fpath in compiler.path('source/doc').glob('**/*.mkd'):
-        text = fpath.read_text(encoding='utf-8')
+        text = fpath.read_text('utf-8')
         html = markdown.markdown(text)
         doc_id = (str(fpath)
                   .replace(os.sep, '/')

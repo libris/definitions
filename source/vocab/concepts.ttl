@@ -1,6 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -35,33 +36,37 @@
 :Nationality a owl:Class ;
     rdfs:label "Nationalitet"@sv .
 
-:controlledLabel a owl:DatatypeProperty;
-    rdfs:label "kontrollerad benämning"@sv; #NOTE: kontrollerad term inom concept
-    owl:equivalentProperty bf1:authorizedAccessPoint, madsrdf:authoritativeLabel;
-    rdfs:subPropertyOf :prefLabel .
-    #owl:propertyChainAxiom ( [owl:inverseOf foaf:focus] skos:prefLabel ) .
+
+##
+# Abstract Base Identity
+
+:Identity a owl:Class;
+    ptg:abstract true ;
+    :category marc:auth ;
+    rdfs:subClassOf :Resource;
+    rdfs:label "Identity"@en, "Identitet"@sv;
+    rdfs:comment "A distinguished identity (in a bibliographic sense)."@en .
 
 
 ##
 # Topics / Concept Codes / Subject Headings
 
 :Concept a owl:Class;
-    :category marc:auth ;
     rdfs:label "Concept"@en, "Koncept"@sv;
+    rdfs:subClassOf :Identity;
     owl:equivalentClass skos:Concept;
-    owl:hasKey (:notation :prefLabel :inScheme) .
+    owl:hasKey (:code :prefLabel :inScheme) .
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
-    sdo:domainIncludes :Concept ;
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
     rdfs:label "Concept scheme"@en, "Termlista"@sv;
     #owl:equivalentClass madsrdf:MADSScheme;
-    sdo:domainIncludes :Concept ;
+    rdfs:subClassOf :Source;
     owl:equivalentClass skos:ConceptScheme .
-    #owl:hasKey (:notation) .
+    #owl:hasKey (:code) .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
@@ -72,24 +77,28 @@
 :broader a owl:ObjectProperty;
     rdfs:label "bredare"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:broader ;
     owl:equivalentProperty madsrdf:hasBroaderAuthority .
 
 :broadMatch a owl:ObjectProperty;
     rdfs:label "bredare match"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Identity ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:broadMatch ;
     owl:equivalentProperty madsrdf:hasBroaderExternalAuthority .
 
 :closeMatch a owl:ObjectProperty;
     rdfs:label "nära match"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Identity ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:closeMatch ;
     owl:equivalentProperty madsrdf:hasCloseExternalAuthority .
 
-:exactMatch a owl:ObjectProperty;
-    rdfs:label "exakt match"@sv;
-    sdo:domainIncludes :Concept ;
+:exactMatch a owl:ObjectProperty ;
+    rdfs:label "exakt match"@sv ;
+    sdo:domainIncludes :Identity ;
+    sdo:rangeIncludes :Agent, :Concept ;
     owl:equivalentProperty skos:exactMatch ;
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
 
@@ -107,7 +116,9 @@
 
 :inScheme a owl:ObjectProperty;
     rdfs:label "termlista"@sv;
-    sdo:domainIncludes :Concept ;
+    rdfs:domain :Identity ;
+    rdfs:range :ConceptScheme ;
+    rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
 
@@ -123,13 +134,6 @@
     owl:equivalentProperty skos:narrowMatch ;
     owl:equivalentProperty madsrdf:hasNarrowerExternalAuthority .
 
-:notation a owl:DatatypeProperty;
-    rdfs:label "notation"@sv;
-    rdfs:subPropertyOf :label;
-    sdo:domainIncludes :Concept ;
-    owl:equivalentProperty skos:notation ;
-    owl:equivalentProperty madsrdf:code .
-
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "föredragen benämning"@sv; #NOTE: föredragen term inom concept
     rdfs:subPropertyOf :label;
@@ -140,8 +144,28 @@
 :related a owl:ObjectProperty;
     rdfs:label "relaterad"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range :Concept;
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
+
+:hasVariant a owl:ObjectProperty;
+    rdfs:label "variant"@sv;
+    rdfs:domain :Identity ;
+    rdfs:range :Identity;
+    rdfs:subPropertyOf skos:related ;
+    skos:closeMatch skos:exactMatch ;
+    rdfs:comment "OBS! Variantnamn ska ej göras till länkbara entiteter. Lägg till (ytterligare) variant genom att klicka på +ikonen och välj Skapa lokal entitet - Person eller Organisation."@sv;
+    owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
+# Range restrictions:
+:Concept rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Concept ] .
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Agent ] .
+:Work rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Work ] .
 
 :scopeNote a owl:DatatypeProperty;
     rdfs:label "anmärkning om användning"@sv;
@@ -151,7 +175,7 @@
 
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "redaktionell anmärkning"@sv;
-    sdo:domainIncludes :Concept, :Record ;
+    rdfs:domain :Concept;
     skos:definition "Information avsedd för redaktör, översättare elleter förvaltare av begreppsmodellen."@sv;
     owl:equivalentProperty skos:editorialNote .
 
@@ -163,15 +187,6 @@
     rdfs:label "fokus för"@sv;
     rdfs:subPropertyOf :identifiedBy, bf1:hasAuthority;
     owl:inverseOf :focus .
-
-:Frequency a owl:Class;
-    rdfs:label "Frekvens"@sv, "Frequency"@en;
-    owl:equivalentClass bf2:Frequency .
-
-:frequency a owl:ObjectProperty;
-    rdfs:label "frekvens"@sv, "frequency"@en;
-    owl:equivalentProperty bf2:frequency;
-    rdfs:range :Frequency .
 
 :collectionItem a owl:ObjectProperty;
     owl:equivalentProperty skos:member;
@@ -193,6 +208,13 @@
     rdfs:domain :Endeavour ;
     rdfs:range :Classification ;
     rdfs:label "Classification"@en, "klassifikation"@sv .
+
+:additionalClassificationDdc a owl:ObjectProperty;
+    rdfs:subPropertyOf :classification;
+    rdfs:domain :Creation ;
+    rdfs:range :ClassificationDdc ;
+    rdfs:comment "Kompletterande klassifikationskod, kan användas som ämnesingång tillsammans med den primära klassifikationen"@sv;
+    rdfs:label "Additional DDC Classification"@en, "DDK-klassifikation (Sekundär)"@sv .
 
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
@@ -263,7 +285,7 @@
 :Topic a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
     owl:equivalentClass bf2:Topic, madsrdf:Topic;
-    rdfs:subClassOf :Concept .
+    rdfs:subClassOf :Subject .
 
 :GenreForm a owl:Class;
     rdfs:label "Genre/Form"@en, "Genre/form"@sv;
@@ -274,7 +296,7 @@
 :Temporal a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
     owl:equivalentClass bf2:Temporal, madsrdf:Temporal;
-    rdfs:subClassOf :Concept;
+    rdfs:subClassOf :Subject;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :focus;
             owl:allValuesFrom :Event ] .
@@ -282,45 +304,56 @@
 :Geographic a owl:Class;
     rdfs:label "Geografiskt ämnesord"@sv;
     owl:equivalentClass madsrdf:Geographic;
-    rdfs:subClassOf :Concept, bf2:Place .
+    rdfs:subClassOf :Subject, bf2:Place .
 
 :TermCollection a owl:Class;
     rdfs:label "Term Collection"@en, "Termsamling"@sv;
     rdfs:subClassOf :ConceptCollection;
     owl:equivalentClass madsrdf:MADSCollection .
 
-:IndexTerm a owl:Class;
+:Subject a owl:Class;
     :category marc:auth ;
-    rdfs:label "Index Term"@en, "Indexterm"@sv;
+    ptg:abstract true;
+    rdfs:label "Subject"@en, "Ämne"@sv;
     owl:equivalentClass madsrdf:MADSType;
     rdfs:subClassOf :Concept;
     foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
 
-:ComplexTerm a owl:Class;
-    rdfs:subClassOf :IndexTerm;
+:ComplexSubject a owl:Class;
+    rdfs:subClassOf :Subject;
     owl:equivalentClass madsrdf:ComplexSubject;
-    rdfs:label "Complex Term"@en, "Sammansatt term"@sv .
+    rdfs:label "Complex Subject"@en, "Sammansatt term"@sv .
 
 :termComponentList a owl:ObjectProperty;
     owl:equivalentProperty madsrdf:componentList;
     rdfs:subPropertyOf :label, :hasPart;
     skos:related :broader;
     rdfs:domain :Concept;
+    sdo:rangeIncludes :Subject, :Subdivision ;
     rdfs:label "Term components"@en, "Termkomponenter"@sv;
     rdfs:comment "En ordnad lista på de komponenter som termen består av."@sv .
 
 :Subdivision a owl:Class;
+    ptg:abstract true;
     rdfs:label "Underindelning"@sv;
     rdfs:subClassOf :Concept .
 
-:ChronologicalSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :ChronologicalTerm;
+:TopicSubdivision a owl:Class ;
+    skos:broader :Topic;
+    rdfs:subClassOf :Subdivision;
+    rdfs:label "Underindelning för allmänt ämnesord"@sv .
+
+:TemporalSubdivision a owl:Class ;
+    skos:broader :Temporal;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för kronologisk term"@sv .
 
 :GenreSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :GenreForm;
+    skos:broader :GenreForm;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för genre/form"@sv .
 
-:GeographicalSubdivision a owl:Class ;
-    rdfs:subClassOf :Subdivision, :Geographic;
+:GeographicSubdivision a owl:Class ;
+    skos:broader :Geographic;
+    rdfs:subClassOf :Subdivision;
     rdfs:label "Underindelning för geografisk term"@sv .

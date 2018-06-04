@@ -22,6 +22,7 @@ construct {
         filter not exists {
             { ?base a rdf:Property }
             union { ?base a owl:ObjectProperty }
+            union { ?base a owl:SymmetricProperty }
             union { ?base a owl:DatatypeProperty }
         }
         bind("Unknown base property {} for term {}"@en as ?msg)

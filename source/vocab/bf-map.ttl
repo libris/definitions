@@ -1,5 +1,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix kbv: <https://id.kb.se/vocab/> .
 
@@ -10,9 +11,15 @@ kbv:modified owl:equivalentProperty bf2:changeDate .
 
 kbv:identifiedBy rdfs:domain kbv:Creation .
 kbv:language rdfs:domain kbv:Creation .
+kbv:partOfSeries rdfs:domain kbv:Creation .
+kbv:referencedBy rdfs:domain kbv:Creation .
+kbv:references rdfs:domain kbv:Creation .
+kbv:hasEquivalent rdfs:domain kbv:Creation .
+kbv:accompanies rdfs:domain kbv:Creation .
+kbv:accompaniedBy rdfs:domain kbv:Creation .
+kbv:summary rdfs:domain kbv:Endeavour .
 
 kbv:hasTitle owl:equivalentProperty bf2:title .
-
 kbv:contentType owl:equivalentProperty bf2:content .
 kbv:mediaType owl:equivalentProperty bf2:media .
 kbv:carrierType owl:equivalentProperty bf2:carrier .
@@ -24,14 +31,22 @@ kbv:issuanceType owl:equivalentProperty bf2:issuance .
 kbv:IssuanceType owl:equivalentClass bf2:Issuance .
 
 kbv:hasNotation owl:equivalentProperty bf2:notation .
+kbv:hasNote owl:equivalentProperty bf2:note .
 
 kbv:creditsNote owl:equivalentProperty bf2:credits .
 kbv:awardsNote owl:equivalentProperty bf2:awards .
-kbv:isPartOf owl:equivalentProperty bf2:partOf .
-
-kbv:notation owl:equivalentProperty bf2:code .
 
 kbv:organizationOfMaterial owl:equivalentProperty bf2:organization .
+
+kbv:isPartOf owl:equivalentProperty bf2:partOf .
+
+kbv:hasPart owl:equivalentProperty bf2:hasPart ;
+    rdfs:domain kbv:Resource ; # NOTE: loosens implied bf2 domain
+    rdfs:range kbv:Resource . # NOTE: loosens implied bf2 range
+
+kbv:relatedTo owl:equivalentProperty bf2:relatedTo ;
+    rdfs:domain kbv:Resource ; # NOTE: loosens implied bf2 domain
+    rdfs:range kbv:Resource . # NOTE: loosens implied bf2 range
 
 kbv:CODEN a rdfs:Datatype; owl:equivalentClass bf2:Coden .
 kbv:DOI a rdfs:Datatype; owl:equivalentClass bf2:Doi .
@@ -53,3 +68,11 @@ kbv:SICI a rdfs:Datatype; owl:equivalentClass bf2:Sici .
 kbv:STRN a rdfs:Datatype; owl:equivalentClass bf2:Strn .
 kbv:UPC a rdfs:Datatype; owl:equivalentClass bf2:Upc .
 kbv:URN a rdfs:Datatype; owl:equivalentClass bf2:Urn .
+
+
+# TODO: Remove from kbv
+# bf2:shelfMark as ObjectProperty
+# bf2:shelfMarkDdc
+# bf2:shelfMarkLcc
+# bf2:shelfMarkUdc
+# bf2:shelfMarkNlm

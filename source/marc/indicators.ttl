@@ -1,0 +1,287 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <http://schema.org/> .
+@prefix kbv: <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
+
+# MARC Indicator Lists
+
+marc:SourceSpecifiedInSubfield2 a marc:EnumeratedTerm,
+        marc:LanguageCode,
+        marc:I1codeSource,
+        marc:I2sourceOfCode,
+        marc:NumberSource ;
+    rdfs:label "Annat kodsystem specificerat i $2" .
+
+marc:isPrivate a owl:DatatypeProperty ;
+    sdo:domainIncludes marc:ImmediateSourceOfAcquisitionNote, marc:ActionNote, kbv:ImmediateAcquisition ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "Sekretessbelagd information"@sv .
+
+marc:thesaurus a owl:ObjectProperty;
+    sdo:domainIncludes marc:EstablishedHeadingLinkingEntryCorporateName,
+        marc:EstablishedHeadingLinkingEntryMeetingName,
+        marc:EstablishedHeadingLinkingEntryUniformTitle,
+        marc:EstablishedHeadingLinkingEntryChronologicalTerm ;
+    rdfs:range marc:Thesaurus ;
+    rdfs:label "ämnesordssystem / Thesaurus"@sv .
+marc:Thesaurus a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm ;
+    rdfs:label "Ämnesordssystem / Thesaurus"@sv .
+marc:LibraryOfCongressSubjectHeadingsNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "LCSH/LC authority files" .
+marc:LcSubjectHeadingsForChildrensLiterature a marc:Thesaurus ;
+          rdfs:label "LCSH for children's literature" .
+marc:MedicalSubjectHeadingsNlmNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "MeSH/NLM authority files" .
+marc:NationalAgriculturalLibrarySubjectAuthorityFile a marc:Thesaurus ;
+          rdfs:label "NAL subject authority file" .
+marc:SourceNotSpecified a marc:Thesaurus ;
+          rdfs:label "System ej specificerat" .
+marc:CanadianSubjectHeadingsNlcNameAuthorityFile a marc:Thesaurus ;
+          rdfs:label "Canadian SH/ NLC authority file" .
+marc:RepertoireDeVedettesMatiere a marc:Thesaurus ;
+          rdfs:label "Répertoire des vedettes-matière/NLC" .
+
+marc:nameForm a owl:ObjectProperty;
+    sdo:domainIncludes marc:EstablishedHeadingLinkingEntryCorporateName,
+        marc:EstablishedHeadingLinkingEntryMeetingName ;
+    rdfs:label "typ av namn"@sv ;
+    rdfs:range marc:NameForm .
+marc:NameForm a marc:CollectionClass;
+    rdfs:label "Typ av namn"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:InvertedName a marc:NameForm ;
+    rdfs:label "Namn inlett med inverterat personnamn"@sv .
+marc:JurisdictionName a marc:NameForm ;
+    rdfs:label "Namn på administrativ enhet"@sv .
+marc:NameInDirectOrder a marc:NameForm ;
+    rdfs:label "Namn i rak följd"@sv .
+
+marc:typeOfDate a owl:ObjectProperty ;
+    rdfs:domain kbv:Capture ;
+    rdfs:range marc:TypeOfDate ;
+    rdfs:label "typ av datum"@sv .
+marc:TypeOfDate a marc:CollectionClass;
+    rdfs:label "Typ av datum"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:NoDateInformation a marc:TypeOfDate ;
+    rdfs:label "Tidsangivelse saknas"@sv .
+marc:SingleDate a marc:TypeOfDate ;
+    rdfs:label "En tidsangivelse"@sv .
+marc:MultipleSingleDates a marc:TypeOfDate ;
+    rdfs:label "Flera enstaka tidsangivelser"@sv .
+marc:RangeOfDates a marc:TypeOfDate ;
+    rdfs:label "Tidsintervall"@sv .
+
+marc:languageNote a owl:ObjectProperty ;
+    rdfs:label "anmärkning: Språk"@sv ;
+    sdo:domainIncludes kbv:Work,
+        marc:Libretto,
+        kbv:Summary,
+        marc:SubtitlesOrCaptions,
+        marc:SungOrSpokenText,
+        kbv:TableOfContents ;
+    rdfs:range marc:LanguageNote .
+marc:LanguageNote a marc:CollectionClass;
+    rdfs:label "Anmärkning: Språk"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
+    rdfs:label "Objektet är/innehåller ej översättning"@sv .
+marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
+    rdfs:label "Objektet är/innehåller översättning"@sv .
+
+marc:languageCode a owl:ObjectProperty ;
+    rdfs:label "språkkod"@sv ;
+    sdo:domainIncludes kbv:Work,
+        marc:Libretto,
+        kbv:Summary,
+        marc:SubtitlesOrCaptions,
+        marc:SungOrSpokenText,
+        kbv:TableOfContents ;
+    rdfs:range marc:LanguageCode .
+marc:LanguageCode a marc:CollectionClass;
+    rdfs:label "Språkkod"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ISO-639-2B a marc:LanguageCode ;
+    rdfs:label "Språkkod enligt ISO 639-2B"@sv .
+
+marc:typeOfTimePeriod a owl:ObjectProperty ;
+    rdfs:label "typ av tidsperiod"@sv ;
+    rdfs:domain marc:TimePeriodOfContent ;
+    rdfs:range marc:TypeOfTimePeriod .
+marc:TypeOfTimePeriod a marc:CollectionClass;
+    rdfs:label "Typ av tidsperiod"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:SingleDateTime a marc:TypeOfTimePeriod ;
+    rdfs:label "Ett datum/en tid"@sv .
+marc:MultipleSingleDatesTimes a marc:TypeOfTimePeriod ;
+    rdfs:label "Flera enstaka datum/tider"@sv .
+marc:RangeOfDatesTimes a marc:TypeOfTimePeriod ;
+    rdfs:label "Datum-/tidsintervall"@sv .
+
+marc:i2sourceOfCode a owl:ObjectProperty ;
+    rdfs:label "kodsystem"@sv ;
+    sdo:domainIncludes marc:FormOfMusicalCompositionCode,
+        marc:NumberOfInstrumentsOrVoicesCode ;
+    rdfs:range marc:I2sourceOfCode .
+marc:I2sourceOfCode a marc:CollectionClass;
+    rdfs:label "Kodsystem"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:MARCCode a marc:I2sourceOfCode ;
+    rdfs:label "MARC21-kod"@sv .
+
+marc:i1codeSource a owl:ObjectProperty ;
+    rdfs:label "klassifikationssystem"@sv ;
+    rdfs:domain marc:GeographicClassification ;
+    rdfs:range marc:I1codeSource .
+marc:I1codeSource a marc:CollectionClass;
+    rdfs:label "Klassifikationssystem"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:LibraryOfCongressClassification a marc:I1codeSource ;
+    rdfs:label "LC-klassifikation"@sv .
+marc:UsDeptOfDefenseClassificationObsolete a marc:I1codeSource ;
+    rdfs:label "U.S. Dept. of Defense Classification - OBSOLET" .
+marc:UsDeptOfDefenseClassification a marc:I1codeSource ;
+    rdfs:label "U.S. Dept. of Defense Classification" .
+
+marc:typeCompletenessSourceOfClassCallNumber a owl:ObjectProperty ;
+    rdfs:label "typ, fullständighet och källa för klassifikationen"@sv ;
+    rdfs:domain marc:ClassificationNumbersAssignedInCanada ;
+    rdfs:range marc:TypeCompletenessSourceOfClassCallNumber .
+marc:TypeCompletenessSourceOfClassCallNumber a marc:CollectionClass;
+    rdfs:label "Typ, fullständighet och källa för klassifikationen"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:LcBasedCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "LC-baserad klassifikationskod från LAC"@sv .
+marc:CompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Fullständig LC-klassifikationskod från LAC"@sv .
+marc:IncompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Ofullständig LC-klassifikationskod från LAC"@sv .
+marc:LcBasedCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "LC-baserad klassifikationskod från annat kanadensiskt bibliotek"@sv .
+marc:CompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
+marc:IncompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
+marc:OtherCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Annat signum från LAC"@sv .
+marc:OtherClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Annan klassifikationskod från LAC"@sv .
+marc:OtherCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Annat signum från annat kanadensiskt bibliotek"@sv .
+marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+    rdfs:label "Annan klassifikationskod fr\u00e5n annat kanadensiskt bibliotek"@sv .
+
+marc:numberSource a owl:ObjectProperty ;
+    rdfs:label "kod för klassifikationssystem"@sv ;
+    rdfs:domain marc:GovernmentDocumentClassificationNumber ;
+    rdfs:range marc:NumberSource .
+marc:NumberSource a marc:CollectionClass;
+    rdfs:label "Kod för klassifikationssystem"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:SuperintendentOfDocumentsClassificationSystem a marc:NumberSource ;
+    rdfs:label "Superintendent of Documents Classification System" .
+marc:GovernmentOfCanadaPublicationsOutlineOfClassification a marc:NumberSource ;
+    rdfs:label "Government of Canada Publications" .
+
+marc:searchControl a owl:ObjectProperty ;
+    rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
+    rdfs:domain kbv:Title ;
+    rdfs:range marc:SearchControl .
+marc:SearchControl a marc:CollectionClass;
+    rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:NoteNoAddedEntry a marc:SearchControl ;
+    rdfs:label "Anmärkning, inget biuppslag"@sv .
+marc:NoteAddedEntry a marc:SearchControl ;
+    rdfs:label "Anmärkning, titeln är sökelement"@sv .
+marc:NoNoteNoAddedEntry a marc:SearchControl ;
+    rdfs:label "Ingen anmärkning eller biuppslag"@sv .
+marc:NoNoteAddedEntry a marc:SearchControl ;
+    rdfs:label "Biuppslag, ingen anmärkning"@sv .
+
+marc:coverageOrLocationInSource a owl:ObjectProperty ;
+    rdfs:label "täckningsgrad"@sv ;
+    rdfs:domain kbv:Instance ;
+    rdfs:range marc:CoverageOrLocationInSource .
+marc:CoverageOrLocationInSource a marc:CollectionClass;
+    rdfs:label "Täckningsgrad"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:CoverageUnknown a marc:CoverageOrLocationInSource ;
+    rdfs:label "Okänd"@sv .
+marc:CoverageComplete a marc:CoverageOrLocationInSource ;
+    rdfs:label "Fullständig"@sv .
+marc:CoverageIsSelective a marc:CoverageOrLocationInSource ;
+    rdfs:label "Selektiv"@sv .
+marc:LocationInSourceNotGiven a marc:CoverageOrLocationInSource ;
+    rdfs:label "Referensens plats anges inte"@sv .
+marc:LocationInSourceGiven a marc:CoverageOrLocationInSource ;
+    rdfs:label "Referensens plats anges"@sv .
+
+marc:summaryType a owl:ObjectProperty ;
+    rdfs:label "typ av innehållsbeskrivning/sammanfattning"@sv ;
+    rdfs:domain kbv:Summary;
+    rdfs:range marc:SummaryType .
+marc:SummaryType a marc:CollectionClass;
+    rdfs:label "Typ av innehållsbeskrivning/sammanfattning"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Subject a marc:SummaryType ;
+    rdfs:label "Ämne"@sv .
+marc:Review a marc:SummaryType ;
+    rdfs:label "Recension"@sv .
+marc:ScopeAndContent a marc:SummaryType ;
+    rdfs:label "Omfattning och innehåll"@sv .
+marc:Abstract a marc:SummaryType ;
+    rdfs:label "Abstract"@sv .
+marc:ContentAdvice a marc:SummaryType ;
+    rdfs:label "Innehållsetikett"@sv .
+marc:NoDisplayConstantGenerated a marc:SummaryType ;
+    rdfs:label "Ej preciserad"@sv .
+
+marc:audienceType a owl:ObjectProperty;
+    rdfs:label "typ av målgrupp"@sv ;
+    rdfs:domain kbv:IntendedAudience;
+    rdfs:range marc:AudienceType .
+marc:AudienceType a marc:CollectionClass;
+    rdfs:label "Typ av målgrupp"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:ReadingGradeLevel a marc:AudienceType ;
+    rdfs:label "Läs-/utbildningsnivå"@sv .
+marc:InterestAgeLevel a marc:AudienceType ;
+    rdfs:label "Åldersnivå"@sv .
+marc:InterestGradeLevel a marc:AudienceType ;
+    rdfs:label "Intressenivå"@sv .
+marc:SpecialAudienceCharacteristics a marc:AudienceType ;
+    rdfs:label "Kännetecken för speciell målgrupp"@sv .
+marc:MotivationInterestLevel a marc:AudienceType ;
+    rdfs:label "Motivations-/svårighetsnivå"@sv .
+marc:NoDisplayConstantGenerated a marc:AudienceType ;
+    rdfs:label "Ej preciserad"@sv .
+
+marc:displayConstantController a owl:ObjectProperty ;
+    rdfs:label "kan styra standardfras"@sv ;
+    rdfs:domain marc:PublicationsAboutDescribedMaterialsNote ;
+    rdfs:range marc:DisplayConstantController .
+marc:DisplayConstantController a marc:CollectionClass;
+    rdfs:label "Kan styra standardfras"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Publications a marc:DisplayConstantController ;
+    rdfs:label "Publikationen beskriven i"@sv .
+
+marc:subjectLevel a owl:ObjectProperty ;
+    rdfs:label "nivå"@sv ;
+    rdfs:domain kbv:Topic ;
+    rdfs:range marc:SubjectLevel .
+marc:SubjectLevel a marc:CollectionClass;
+    rdfs:label "Nivå"@sv ;
+    rdfs:subClassOf marc:EnumeratedTerm .
+marc:Unspecified a marc:SubjectLevel ;
+    rdfs:label "Nivå ej specificerad"@sv .
+marc:Primary a marc:SubjectLevel ;
+    rdfs:label "Primär"@sv .
+marc:Secondary a marc:SubjectLevel ;
+    rdfs:label "Sekundär"@sv .
+

@@ -28,7 +28,8 @@
 # "ours"
 
 <sao> a skos:ConceptScheme;
-    skos:notation "SAO";
+    skos:notation "sao";
+    dc:alternative "SAO";
     dc:title "Svenska ämnesord (SAO)"@sv;
     dc:description """
         Svenska ämnesord (SAO) är ett kontrollerat ämnesordssystem med nästan 38 000 termer från alla ämnesområden. Systemet har funnits sedan 2000 och används av de flesta högskole- och universitetsbibliotek och av många LIBRIS-bibliotek.
@@ -45,7 +46,8 @@
     void:inDataset </> .
 
 <saogf> a skos:ConceptScheme;
-    skos:notation "SAOGF";
+    skos:notation "saogf";
+    dc:alternative "SAOGF";
     dc:title "SAOGF - Genre och form"@sv;
     dc:description """
         Genre/formtermer kan användas som ett komplement till klassifikation och ämnesord.
@@ -58,7 +60,8 @@
     void:inDataset </> .
 
 <barn> a skos:ConceptScheme;
-    skos:notation "Barn";
+    skos:notation "barn";
+    dc:alternative "Barn";
     dc:title "Barnämnesord"@sv;
     dc:description """
         Barnämnesorden (Barn) är en lista med termer för indexering av litteratur för barn och ungdomar. Den innehåller cirka 1 500 godkända termer. Dessa finns i databasen Svenska ämnesord sedan 2005.
@@ -69,13 +72,14 @@
     void:inDataset </> .
 
 <barngf> a skos:ConceptScheme;
-    skos:notation "BarnGF";
+    skos:notation "barngf";
+    dc:alternative "BarnGF";
     dc:title "Barn - Genre och form"@sv;
     rdfs:seeAlso <barn>;
     void:inDataset </> .
 
-<gmgpc%2F%2Fswe> a skos:ConceptScheme;
-    owl:sameAs <gmgpc>;
+<gmgpc-swe> a skos:ConceptScheme;
+    owl:sameAs <gmgpc>, <gmgpc%2F%2Fswe>;
     skos:notation "gmgpc//swe";
     dc:title "Tesaurus för grafiskt material"@sv;
     dc:description """
@@ -88,6 +92,19 @@
     void:inDataset </>;
     foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
     foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
+
+<rda> a skos:ConceptScheme;
+    skos:notation "rda";
+    dc:alternative "RDA";
+    dc:title "KB RDA Term Mappings"@sv;
+    rdfs:seeAlso
+            <http://rdaregistry.info/termList/RDAContentType>,
+            <http://id.loc.gov/vocabulary/contentTypes>,
+            <http://rdaregistry.info/termList/RDAMediaType>,
+            <http://id.loc.gov/vocabulary/mediaTypes>,
+            <http://rdaregistry.info/termList/RDACarrierType>,
+            <http://id.loc.gov/vocabulary/carriers> ;
+    void:inDataset </> .
 
 # TODO: <sao/fack>, <sao/skon>, ...?
 
@@ -118,7 +135,8 @@
     void:inDataset </> .
 
 <NLT> a skos:Collection;
-    skos:notation "NLT";
+    skos:notation "nlt";
+    dc:alternative "NLT";
     dc:title "NLT (termer för Nya Lundstedt - tidskrifter)"@sv;
     void:inDataset </> .
 
@@ -209,14 +227,15 @@
     rdfs:comment "Providence, RI: American Mathematical Society"@en .
 
 <mesh> a skos:ConceptScheme;
-    skos:notation "MeSH";
+    skos:notation "mesh";
     dc:title "Medical Subject Headings"@en;
     dc:alternative "MeSH";
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
 
 <nlm> a skos:ConceptScheme;
-    skos:notation "NLM ";
+    skos:notation "nlm";
+    dc:alternative "NLM";
     dc:title "National Library of Medicine"@en .
 
 <rswk> a skos:ConceptScheme;
@@ -244,12 +263,14 @@
 # Other Public Schemes
 
 <http://dewey.info/scheme/ddc/> a skos:ConceptScheme;
-    skos:notation "DDC";
+    skos:notation "ddc";
+    dc:alternative "DDC"@en;
     dc:alternative "DDK"@sv;
     rdfs:label "Dewey decimalklassifikation"@sv .
 
 <http://udcdata.info/udc-schema> a skos:ConceptScheme;
-    skos:notation "UDC";
+    skos:notation "udc";
+    dc:alternative "UDC"@en;
     dc:alternative "UDK "@sv;
     rdfs:label "Universell decimalklassifikation"@sv .
 

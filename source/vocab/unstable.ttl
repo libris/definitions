@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf: <http://bibframe.org/vocab/> .
@@ -13,51 +14,92 @@
 
 @prefix marc: <https://id.kb.se/marc/> .
 
-# MARC terms, unstable enums...
 
 
-#TITLE
-marc:mediaTerm a owl:DatatypeProperty;
-    rdfs:label "Medieterm"@sv;
-    rdfs:comment "Medieterm som är del av titel i en MARC21 struktur. används ej i RDA"@sv;
-    rdfs:domain :Instance .
+# AGENT
 
-marc:nonfilingChars a owl:DatatypeProperty;
-    rdfs:label "Fileringsvärde"@sv;
-    rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
-    rdfs:domainIncludes :Title .
+:citationSource a owl:DatatypeProperty;
+    rdfs:label "Källa"@sv;
+    rdfs:domain marc:SourceDataNotFound .
 
-marc:searchElement a owl:DatatypeProperty;
-    rdfs:label "Titeln är sökelement"@sv;
-    rdfs:comment "Indikatorvärde saknar betydelse i LIBRIS-tillämpningen."@av .
+# NOTE
 
-marc:searchControl a owl:ObjectProperty;
-    rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv .
+:technicalNote a owl:ObjectProperty;
+    rdfs:subPropertyOf :hasNote;
+    rdfs:domain :Record;
+    rdfs:range :TechnicalNote;
+    rdfs:label "Systemteknisk anmärkning"@sv .
 
-#IDENTIFIERS
-marc:hiddenValue a owl:DatatypeProperty;
-    rdfs:label "Ogiltigt värde"@sv;
-    rdfs:domain :Identifier .
+:TechnicalNote a owl:Class;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Systemteknisk anmärkning"@sv .
 
-:Uri a owl:DatatypeProperty;
-    rdfs:label "URI"@sv .
+:ToCEntry a owl:Class;
+    rdfs:label "Table of Contents Entry"@en, "Utökad innehållsanmärkning"@sv .
 
-#NOTE
-:technicalNote a owl:DatatypeProperty;
-    rdfs:label "Intern anmärkning av systemteknisk karaktär"@sv .
+# RECORD
 
-:copyNote a owl:DatatypeProperty;
-    rdfs:label "Publik anmärkning"@sv .
+:systemName a owl:DatatypeProperty ;
+    sdo:domainIncludes :Record ;
+    rdfs:label "Systemnamn"@sv .
 
-#AGENT
+# THINGS
 
-marc:titleOther a owl:DatatypeProperty;
-    rdfs:label "Titel eller övrig beteckning"@sv;
-    rdfs:domain :Agent .
+:device a owl:ObjectProperty;
+    rdfs:label "apparat"@sv;
+    rdfs:subPropertyOf sdo:device;
+    rdfs:range :Device .
 
-marc:BiographicalOrHistoricalData a owl:Class;
-    rdfs:label "Biografisk information"@sv;
-    rdfs:domain :Agent .
+:Device a owl:Class;
+    rdfs:label "Apparat"@sv;
+    owl:equivalentClass dbpo:Device .
+
+:indexedIn a owl:ObjectProperty ;
+    sdo:domainIncludes :Instance ;
+    rdfs:label "Indexerad i"@sv .
+
+:imageBitDepth a owl:DatatypeProperty ;
+    sdo:domainIncludes :Electronic ;
+    rdfs:label "Bildens bit-djup"@sv .
+
+# ITEMS
+
+# NOTE: this is "hold 852 a", which Libris *does not use*.
+# It "should" be a Plan B property in marcframe.json,
+# and/or dropped.
+# It is kept here to attempt to avoid someone accidentally redefining it as an
+# ObjectProperty. .
+:location a owl:DatatypeProperty .
+
+# REMOVED FROM RELATIONS.TTL 2018-01-31, not in marcframe.
+# contributor property has been deleted from BF2.
+#
+#:creator a owl:ObjectProperty;
+#    skos:prefLabel "upphovsman"@sv;
+#    rdfs:label "skapare"@sv;
+#    rdfs:range :Agent;
+#    owl:equivalentProperty dc:creator .
+#
+#:contributor a owl:ObjectProperty;
+#    rdfs:label "delaktig i skapandet"@sv;
+#    rdfs:range :Agent;
+#    owl:equivalentProperty dc:contributor;
+#    rdfs:subPropertyOf prov:wasAttributedTo;
+#    owl:propertyChainAxiom ( :contribution :agent ) .
+#
+#:author a owl:ObjectProperty ;
+#    owl:equivalentProperty sdo:author;
+#    rdfs:subPropertyOf :creator;
+#    rdfs:label "author"@en, "författare"@sv .
+#
+#:authorList a owl:ObjectProperty;
+#    owl:equivalentProperty bibo:authorList;
+#    rdfs:range rdf:List .
+#
+#:contributorList a owl:ObjectProperty;
+#    owl:equivalentProperty bibo:contributorList;
+#    rdfs:range rdf:List .
+##
 
 # TODO: work-in-progress
 
@@ -132,3 +174,8 @@ marc:BiographicalOrHistoricalData a owl:Class;
 #:festschrift a rdf:Property; rdfs:label "Festskrift"@sv .
 #:offers rdfs:label "product offer"@en, "produkterbjudande"@sv .
 #:originalItem a rdf:Property; rdfs:label "Bärartyp"@sv .
+
+#:personTitle a owl:DatatypeProperty;
+#    rdfs:label "person title"@en, "persontitel"@sv;
+#    rdfs:subPropertyOf :qualifyingNote;
+#    owl:equivalentProperty sdo:jobTitle, foaf:title .

@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
@@ -21,6 +22,7 @@
 @prefix opensearch: <http://a9.com/-/spec/opensearch/1.1/> .
 
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -33,12 +35,16 @@
 # (which, unlike Hydra, is a REC as of 2017-05-23).
 
 
+:Document a owl:Class;
+    rdfs:label "Dokument"@sv;
+    owl:equivalentClass foaf:Document .
+
 ##
 # Records
 
 :Record a owl:Class;
     rdfs:label "Post"@sv;
-    rdfs:subClassOf bf2:AdminMetadata, foaf:Document .
+    rdfs:subClassOf :AdminMetadata .
 
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
@@ -53,13 +59,22 @@
     rdfs:range :Record .
 
 :describedBy a owl:ObjectProperty;
+    rdfs:domain :Work;
+    rdfs:range :Record;
     rdfs:label "Beskriven av"@sv;
     owl:equivalentProperty iana:describedby, wdrs:describedby .
+
+:recordStatus a owl:ObjectProperty;
+    rdfs:subPropertyOf :status;
+    rdfs:label "Poststatus"@sv;
+    rdfs:domain :Record;
+    sdo:rangeIncludes marc:StatusType .
 
 # NOTE: additional data about automapped BF2 terms
 
 :AdminMetadata a owl:Class;
     rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
+    rdfs:subClassOf :Document ;
     owl:equivalentClass bf2:AdminMetadata .
 
 :adminMetadata a owl:ObjectProperty;
@@ -74,19 +89,40 @@
     owl:equivalentProperty bf2:assigner .
 
 :descriptionModifier a owl:ObjectProperty;
+    ptg:abstract true;
     rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
     rdfs:range :Agent .
 
+:descriptionCreator a owl:ObjectProperty;
+    rdfs:label "Description creator"@en, "Skapad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
+:descriptionUpgrader a owl:ObjectProperty;
+    rdfs:label "Description upgrader"@en, "Uppgraderad eller importerad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
+:descriptionLastModifier a owl:ObjectProperty;
+    rdfs:label "Description last modifier"@en, "Senast ändrad av"@sv ;
+    rdfs:domain :Record;
+    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:range :Agent .
+
 :created a owl:DatatypeProperty;
     rdfs:label "Skapad"@sv;
+    rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:creationDate ;
     rdfs:subPropertyOf dc:created, sdo:dateCreated;
     rdfs:range xsd:dateTime .
 
 :modified a owl:DatatypeProperty;
     rdfs:label "Ändrad"@sv;
+    rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:changeDate ;
     rdfs:subPropertyOf dc:modified, sdo:dateModified ;
     rdfs:range xsd:dateTime .
@@ -173,6 +209,7 @@
 :identifiedBy rdfs:subPropertyOf :describedBy; owl:equivalentProperty sdo:sameAs .
 
 :controlNumber a owl:DatatypeProperty;
+    rdfs:domain :Record;
     rdfs:label "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
 

@@ -10,7 +10,7 @@
     "dc": "http://purl.org/dc/terms/",
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "fresnel": "http://www.w3.org/2004/09/fresnel#",
-    "l": "http://w3id.org/libris/logic/",
+    "marc": "https://id.kb.se/marc/",
 
     "value": "rdf:value",
 
@@ -36,9 +36,11 @@
     "altLabel": "skos:altLabel",
     "altLabelByLang": {"@id": "skos:altLabel", "@container": "@language"},
     "hiddenLabel": "skos:hiddenLabel",
-    "notation": {"@id": "skos:notation", "@type": null, "@language": null},
+    "code": {"@id": "skos:notation", "@type": null},
     "note": {"@id": "skos:note"},
     "noteByLang": {"@id": "skos:note", "@container": "@language"},
+    "definition": {"@id": "skos:definition"},
+    "definitionByLang": {"@id": "skos:definition", "@container": "@language"},
     "scopeNote": {"@id": "skos:scopeNote"},
     "scopeNoteByLang": {"@id": "skos:scopeNote", "@container": "@language"},
     "editorialNote": "skos:editorialNote",
@@ -77,14 +79,12 @@
     "category": "https://id.kb.se/vocab/category",
     "lensGroup": "fresnel:group",
 
-    "inScheme": {"@id": "skos:inScheme", "@container": "@set"},
     "broadMatch": {"@id": "skos:broadMatch", "@container": "@set"},
     "broader": {"@id": "skos:broader", "@container": "@set"},
     "closeMatch": {"@id": "skos:closeMatch", "@container": "@set"},
     "exactMatch": {"@id": "skos:exactMatch", "@container": "@set"},
     "narrowMatch": {"@id": "skos:narrowMatch", "@container": "@set"},
     "narrower": {"@id": "skos:narrower", "@container": "@set"},
-    "notation": {"@id": "skos:notation", "@container": "@set"},
     "related": {"@id": "skos:related", "@container": "@set"},
 
     "hasVersion": {"@id": "dc:hasVersion"},
@@ -92,12 +92,20 @@
     "isReplacedBy": {"@id": "dc:isReplacedBy"},
     "language": {"@id": "dc:language"},
 
+    "GenerationProcess": "http://id.loc.gov/ontologies/bibframe/GenerationProcess",
     "Country": "sdo:Country",
     "Language": "sdo:Language",
+    "Role": "http://id.loc.gov/ontologies/bibframe/Role",
     "Nationality": "https://id.kb.se/vocab/Nationality",
+    "ItemAvailability": "sdo:ItemAvailability",
 
-    "langCode": {"@id": "notation", "@type": "dc:ISO639-2"},
-    "langTag": {"@id": "notation", "@type": "dc:ISO639-1"}
+    "ContentType": "http://id.loc.gov/ontologies/bibframe/Content",
+    "MediaType": "http://id.loc.gov/ontologies/bibframe/Media",
+    "CarrierType": "http://id.loc.gov/ontologies/bibframe/Carrier",
+    "IssuanceType": "http://id.loc.gov/ontologies/bibframe/Issuance",
+
+    "langCode": {"@id": "code", "@type": "dc:ISO639-2"},
+    "langTag": {"@id": "code", "@type": "dc:ISO639-1"}
 
   }
 }

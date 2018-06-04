@@ -7,12 +7,12 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix persona: <http://www.pipian.com/schemas/foaf/persona#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix rdaa: <http://rdaregistry.info/Elements/a/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -31,13 +31,20 @@
 
 :additionalName a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:additionalName;
+    rdfs:domain :Meeting;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
+
+:fullerFormOfName a owl:DatatypeProperty; 
+    rdfs:label "has fuller form of name"@en, "fullständigare namnform"@sv; 
+    rdfs:domain :Person; 
+    owl:equivalentProperty rdau:P60530, rdau:fullerFormOfName.en . 
 
 :Agent a owl:Class;
     :category marc:auth ;
     rdfs:label "Agent"@sv;
     owl:equivalentClass bf2:Agent ;
-    rdfs:subClassOf rdfs:Resource, foaf:Agent, prov:Agent .
+    rdfs:subClassOf :Identity;
+    rdfs:subClassOf foaf:Agent, prov:Agent .
 
 :Person a owl:Class;
     rdfs:label "Person"@sv;
@@ -62,28 +69,43 @@
 # Person properties
 
 :familyName a owl:DatatypeProperty;
-    rdfs:label "family name"@en, "familjenamn"@sv;
+    rdfs:label "family name"@en, "efternamn"@sv;
+    skos:altLabel "familjenamn"@sv;
     rdfs:domain :Person;
     rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd"@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
-    owl:equivalentProperty sdo:familyName, foaf:familyName .
+    owl:equivalentProperty sdo:familyName, foaf:familyName, rdaa:P50291, rdaa:surname.en .
 
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "förnamn"@sv;
     rdfs:domain :Person;
     rdfs:comment "Förnamn, kan ej kombineras med egenskapen 'namn' som har rak ordföljd."@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
-    owl:equivalentProperty sdo:givenName, foaf:givenName .
+    owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
 
-:hasBiographicalInformation a owl:DatatypeProperty;
-    rdfs:label "has biographical information", "biografisk information";
+:hasBiographicalInformation a owl:ObjectProperty;
+    rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
+    sdo:domainIncludes :Person, :Instance;
+    # separate instance and agent properties?
+    rdfs:range :BiographicalNote;
     owl:equivalentProperty rdau:P60492 .
 
+:BiographicalNote a owl:Class;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Biographical Note"@en, "Anmärkning om biografiska uppgifter"@sv .
+
+:hasHistoricalData a owl:ObjectProperty;
+    rdfs:label "has historical data"@en, "Administrativ historik"@sv;
+    sdo:domainIncludes :Organization, :Instance;
+    # separate instance and agent properties?
+    rdfs:range :AdministrativeHistoryNote;
+    owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
+
+:AdministrativeHistoryNote a owl:Class;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Administrative history note"@en, "Anmärkning om administrativ historik"@sv .
+
 #titlesAndOtherWordsAssociatedWithName
-:personTitle a owl:DatatypeProperty;
-    rdfs:label "person title"@en, "persontitel"@sv;
-    rdfs:subPropertyOf :qualifyingNote;
-    owl:equivalentProperty sdo:jobTitle, foaf:title .
 
 # not in marcframe 2017-08-30 /FK
 #:honorificPrefix a owl:DatatypeProperty;
@@ -97,50 +119,81 @@
 :birthDate a owl:DatatypeProperty;
     rdfs:label "födelsedatum"@sv;
     rdfs:domain :Person;
-    owl:equivalentProperty sdo:birthDate .
+    owl:equivalentProperty sdo:birthDate, madsrdf:birthDate  .
 
-:birthYear a owl:DatatypeProperty;
-    #owl:propertyChainAxiom (:birthDate :year); # given that :Year rdfs:Datatype is defined as a "virtual" resource...
-    rdfs:subPropertyOf :birthDate;
-    rdfs:range :Year;
-    rdfs:label "birth year"@en, "födelseår"@sv .
+# in favor of lifeSpan.
+#:birthYear a owl:DatatypeProperty;
+#    #owl:propertyChainAxiom (:birthDate :year); # given that :Year rdfs:Datatype is defined as a "virtual" resource...
+#    rdfs:subPropertyOf :birthDate;
+#    rdfs:range :Year;
+#    rdfs:label "birth year"@en, "födelseår"@sv .
 
 :deathDate a owl:DatatypeProperty;
     rdfs:label "dödsdatum"@sv;
     rdfs:domain :Person;
-    owl:equivalentProperty sdo:deathDate .
+    owl:equivalentProperty sdo:deathDate, madsrdf:deathDate .
 
-:deathYear a owl:DatatypeProperty;
-    rdfs:subPropertyOf :deathDate;
-    rdfs:range :Year;
-    owl:equivalentProperty sdo:deathYear;
-    rdfs:label "death year"@en, "dödsår"@sv .
-
-:Persona a owl:Class;
-    rdfs:label "Persona"@sv;
-    rdfs:subClassOf :Person;
-    owl:equivalentClass persona:Persona .
-
-# use "has alternate identity"
-:hasPersona a owl:ObjectProperty;
-    rdfs:label "har persona"@sv;
-    rdfs:subPropertyOf rdfs:seeAlso;
-    owl:equivalentProperty persona:hasPersona .
+# in favor of lifeSpan.
+#:deathYear a owl:DatatypeProperty;
+#    rdfs:subPropertyOf :deathDate;
+#    rdfs:range :Year;
+#    owl:equivalentProperty sdo:deathYear;
+#    rdfs:label "death year"@en, "dödsår"@sv .
 
 :fieldOfActivity a owl:ObjectProperty;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
-    rdfs:range :FieldOfActivity;
-    owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089 .
+    sdo:rangeIncludes :FieldOfActivity, :Concept;
+    owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
 
+# NOTE: We would like to upgrade relevant SAO concepts to Instances of this Class in the future...
 :FieldOfActivity a owl:Class;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
+
+:address a owl:DatatypeProperty;
+    rdfs:label "Address"@en, "Adress"@sv;
+    sdo:domainIncludes :Person, :Organization;
+    owl:equivalentProperty sdo:address .
+
+:birthPlace a owl:ObjectProperty;
+    rdfs:label "Birthplace"@en,"Födelseplats"@sv;
+    rdfs:subPropertyOf :place;
+    rdfs:domain :Person;
+    rdfs:range :Place;
+    owl:equivalentProperty sdo:birthPlace, madsrdf:birthPlace, rdau:P60593, rdau:placeOfBirth.en .
+
+:deathPlace a owl:ObjectProperty;
+    rdfs:label "Deathplace"@en,"Dödsplats"@sv;
+    rdfs:subPropertyOf :place;
+    rdfs:domain :Person;
+    rdfs:range :Place;
+    owl:equivalentProperty sdo:deathPlace, madsrdf:deathPlace, rdau:P60592, rdau:placeOfDeath.en .
+
+:activityStartDate a owl:DatatypeProperty;
+    rdfs:label "Start date"@en, "Verksamhetens starttid"@sv;
+    rdfs:domain :Agent;
+    owl:equivalentProperty madsrdf:activityStartDate .
+
+:activityEndDate a owl:DatatypeProperty;
+    rdfs:label "End date"@en, "Verksamhetens sluttid"@sv;
+    rdfs:domain :Agent;
+    owl:equivalentProperty madsrdf:activityEndDate .
+
+:establishDate a owl:DatatypeProperty;
+    rdfs:label "Established"@en, "Tid för grundande"@sv;
+    rdfs:domain :Organization;
+    owl:equivalentProperty madsrdf:establishDate .
+
+:terminateDate a owl:DatatypeProperty;
+    rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
+    rdfs:domain :Organization;
+    owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;
     rdfs:label "Has affiliation"@en, "Organisatorisk tillhörighet"@sv;
     rdfs:domain :Agent;
-    rdfs:range :Affiliation; 
-    owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095 .
+    rdfs:range :Affiliation;
+    owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095, rdau:affiliation.en .
 
 :Affiliation a owl:Class;
     rdfs:label "Affiliation"@en, "Organisatorisk tillhörighet"@sv;
@@ -152,36 +205,45 @@
     rdfs:range :Language;
     owl:equivalentProperty madsrdf:associatedLanguage .
 
-:associatedLocale a owl:ObjectProperty;
-    rdfs:label "Associated place"@en, "Förknippad plats"@sv;
-    rdfs:domain :Agent;
-    rdfs:range :Place;
-    #rdfs:range madsrdf:Geographic?
-    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325 .
+# NOTE: Auth 370 remodeled with marc-terms for now. Possibly use this further on.
+#:associatedLocale a owl:ObjectProperty;
+#    rdfs:label "Associated place"@en, "Förknippad plats"@sv;
+#    rdfs:domain :Agent;
+#    rdfs:range :Place;
+#    #rdfs:range madsrdf:Geographic?
+#    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325, rdau:placeAssociatedWithTheAgent.en .
 
-:numeration a owl:DatatypeProperty;
-    rdfs:label "Numeration"@en, "Ordningstal"@sv;
-    rdfs:comment "Förekommer endast för namn i rak följd. Ange ordningstal för regenter med romerska siffror."@sv;
-    rdfs:domain :Person .
+:hasTypeOfFamily a owl:ObjectProperty;
+    rdfs:label "Has type of family"@en, "Typ av släkt"@sv;
+    rdfs:domain :Family;
+    rdfs:range :TypeOfFamily;
+    owl:equivalentProperty rdaa:P50051, rdaa:typeOfFamily.en .
+
+:TypeOfFamily a owl:Class;
+    rdfs:label "Type of family"@en, "Typ av släkt"@sv .
+
+:hasProminentFamilyMember a owl:ObjectProperty;
+    rdfs:label "Has Prominent Familymember"@en, "Har välkänd släktmedlem"@sv;
+    rdfs:domain :Family;
+    rdfs:range :Person;
+    owl:equivalentProperty rdaa:P50060, rdaa:prominentMemberOfFamily.en .
+
+:prominentFamilyMember a owl:DatatypeProperty;
+    :category :shorthand;
+    ptg:abstract true;
+    rdfs:label "Prominent Family Member"@en, "Välkänd släktmedlem"@sv;
+    owl:equivalentProperty madsrdf:prominentFamilyMember;
+    owl:propertyChainAxiom ( :hasProminentFamilyMember :prefLabel ) .
 
 :nationality a owl:ObjectProperty;
     rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
+    rdfs:range :Nationality;
     rdfs:domain :Agent .
 
 :lifeSpan a owl:DatatypeProperty;
     rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
+    rdfs:comment "Associerade datum som kan agera särskiljande för namn på agent. Exempel: '1854-1932' eller '1963-'."@sv;
     rdfs:domain :Agent.
-
-:prominentFamilyMember a owl:DatatypeProperty;
-    rdfs:label "Prominent Family Member"@en, "Välkänd medlem av släkten"@en;
-    rdfs:domain :Family;
-    rdfs:range :Person;
-    owl:equivalentProperty madsrdf:prominentFamilyMember .
-
-:gender a owl:DatatypeProperty;
-    rdfs:label "gender"@en, "kön"@sv;
-    rdfs:domain :Person;
-    owl:equivalentProperty sdo:gender, madsrdf:gender, rdau:P60531 .
 
 :Occupation a owl:Class;
     rdfs:label "Occupation"@en, "Yrke eller sysselsättning"@sv;
@@ -190,35 +252,37 @@
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "Har yrke eller sysselsättning"@sv;
     rdfs:domain :Person;
-    rdfs:range :Concept;
+    sdo:rangeIncludes :Occupation, :Concept;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .
 
 # Organization properties
 
 :Organization a owl:Class;
     rdfs:label "Organization"@en, "Organisation"@sv;
+    owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization ;
     rdfs:subClassOf :Agent;
-    owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization  .
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Organization ] .
 
 :Jurisdiction a owl:Class;
     rdfs:label "Jurisdiktion"@sv;
+    owl:equivalentClass bf2:Jurisdiction ;
     rdfs:subClassOf :Agent;
-    owl:equivalentClass bf2:Jurisdiction .
-
-:legalName a owl:DatatypeProperty;
-    rdfs:label "legal name"@en, "juridiskt namn"@sv;
-    owl:equivalentProperty sdo:legalName .
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Jurisdiction ] .
 
 :Library a owl:Class;
     rdfs:label "Library"@en, "Bibliotek"@sv;
     rdfs:subClassOf :Organization;
     owl:equivalentClass sdo:Library .
 
-:bibliography a owl:ObjectProperty;
-  rdfs:label "bibliografi"@sv .
-  #rdfs:subPropertyOf :Collection?
+:bibliography a owl:ObjectProperty ;
+    rdfs:domain :Record ;
+    rdfs:range :Library ;
+    rdfs:label "bibliografi"@sv .
+    #rdfs:subPropertyOf :Collection?
 
 :sigel a owl:DatatypeProperty;
     rdfs:label "Sigel"@sv ;
-    rdfs:subPropertyOf skos:notation;
+    rdfs:subPropertyOf :code;
     rdfs:domain :Library .

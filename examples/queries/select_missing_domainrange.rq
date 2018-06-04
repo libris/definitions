@@ -1,0 +1,19 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix sdo: <http://schema.org/>
+
+select distinct ?s ?domain ?range {
+    {
+        ?s a owl:DatatypeProperty
+    } union {
+        ?s a owl:ObjectProperty
+    }
+    optional {
+        ?s (rdfs:domain|sdo:domainIncludes) ?domain .
+    }
+    optional {
+        ?s (rdfs:range|sdo:rangeIncludes) ?range .
+    }
+    filter(!bound(?domain) || !bound(?range))
+}
+

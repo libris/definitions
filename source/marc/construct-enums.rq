@@ -5,6 +5,56 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix kbv: <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
+##
+# NOTE: These are not used in marcframe and can reasonably be deleted:
+#
+# TypeOfRecordType
+# BibLevelType
+# EncLevelType
+#
+# EntryMapType
+# NumberUnitsType
+#
+# AuthorityCatalogingSourceType
+# AuthorityCharacterCodingType
+# AuthorityEncLevelType
+# AuthorityStatusType
+#
+# HoldingCharacterCodingType
+# HoldingComputerSoundType
+# HoldingEncLevelType
+# HoldingMicroformRangeType
+# HoldingProjGraphMaterialType
+# HoldingRemoteSensImageAltitudeType
+# HoldingRemoteSensImageConstructionType
+# HoldingRemoteSensImageUseType
+# HoldingReproductionType
+# HoldingSoundKindOfMaterialType
+# HoldingSoundTapeWidthType
+# HoldingStatusType
+# HoldingType
+# HoldingVideoFormatType
+#
+# ComputerFileAntecedentType
+# ComputerFileColorType
+# ComputerFileCompressionType
+# ComputerFileDimensionsType
+# ComputerFileFileFormatsType
+# ComputerFileImageBitDepthType
+# ComputerFileMaterialType
+# ComputerFileQATargetType
+# ComputerFileReformattingQualityType
+# ComputerFileSoundType
+# ComputerImageBitDepthType
+# ItemInfoInRecordType
+# LinkedRecordReqType
+# ModifiedType
+# ProjGraphSecondaryType
+# PublicationStatusType
+# VisualRunningTimeType
+#
+##
+
 construct {
 
     ?enumvalue a ?enumtype ;
@@ -1442,20 +1492,20 @@ construct {
         (marc:BibLevelType	marc:IntegratingResource	marc:BibLevelType-i	"i"	UNDEF	UNDEF	"Integrerande resurs (kontinuerlig uppdatering)"@sv	"Integrating resource"@en)
         (marc:BibLevelType	marc:Periodica	marc:BibLevelType-p	"p"	UNDEF	UNDEF	"Periodica [endast i utländska poster, skall ÄNDRAS till \"s\"]"@sv)
 
-        (marc:EncLevelType	marc:MinimalLevel	marc:EncLevelType-7	"7"	UNDEF	UNDEF	"Biblioteksnivå (jfr KRS 1.0D2)"@sv	"Minimal level"@en)
-        (marc:EncLevelType	marc:FullLevel	marc:EncLevelType-_	"_"	UNDEF	UNDEF	"Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv	"Full level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:MinimalLevel	marc:EncLevelType-7	"7"	UNDEF	UNDEF	"Biblioteksnivå (jfr KRS 1.0D2)"@sv	"Minimal level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:FullLevel	marc:EncLevelType-_	"_"	UNDEF	UNDEF	"Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv	"Full level"@en)
         (marc:EncLevelType	marc:LessThanFullLevelInputAddedFromABatchProcessLocal	marc:EncLevelType-m	"m"	UNDEF	UNDEF	UNDEF	"Less-than-full-level input added from a batch process (LOCAL)"@en)
         (marc:EncLevelType	marc:DeletedRecordLocal	marc:EncLevelType-j	"j"	UNDEF	UNDEF	UNDEF	"Deleted record (LOCAL)"@en)
         (marc:EncLevelType	marc:FullLevelInputByOclcParticipantsLocal	marc:EncLevelType-i	"i"	UNDEF	UNDEF	UNDEF	"Full-level input by OCLC participants (LOCAL)"@en)
         (marc:EncLevelType	marc:FullLevelInputAddedFromABatchProcessLocal	marc:EncLevelType-l	"l"	UNDEF	UNDEF	UNDEF	"Full-level input added from a batch process (LOCAL)"@en)
         (marc:EncLevelType	marc:SystemIdentifiedMarcErrorInABatchloadedRecordLocal	marc:EncLevelType-e	"e"	UNDEF	UNDEF	UNDEF	"System-identified MARC error in a batchloaded record (LOCAL)"@en)
-        (marc:EncLevelType	marc:CoreLevel	marc:EncLevelType-4	"4"	UNDEF	UNDEF	"Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv	"Core level"@en)
-        (marc:EncLevelType	marc:PrepublicationLevel	marc:EncLevelType-8	"8"	UNDEF	UNDEF	"CIP-post"@sv	"Prepublication level"@en)
-        (marc:EncLevelType	marc:FullLevelMaterialNotExamined	marc:EncLevelType-1	"1"	UNDEF	UNDEF	"Retrospektiv nivå: omkatalogisering"@sv	"Full level, material not examined"@en)
-        (marc:EncLevelType	marc:PartialPreliminaryLevel	marc:EncLevelType-5	"5"	UNDEF	UNDEF	"Preliminär post (hit beställningsposter)"@sv	"Partial (preliminary) level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:CoreLevel	marc:EncLevelType-4	"4"	UNDEF	UNDEF	"Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv	"Core level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:PrepublicationLevel	marc:EncLevelType-8	"8"	UNDEF	UNDEF	"CIP-post"@sv	"Prepublication level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:FullLevelMaterialNotExamined	marc:EncLevelType-1	"1"	UNDEF	UNDEF	"Retrospektiv nivå: omkatalogisering"@sv	"Full level, material not examined"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:PartialPreliminaryLevel	marc:EncLevelType-5	"5"	UNDEF	UNDEF	"Preliminär post (hit beställningsposter)"@sv	"Partial (preliminary) level"@en)
         (marc:EncLevelType	marc:LessThanFullLevelInputByOclcParticipantsLocal	marc:EncLevelType-k	"k"	UNDEF	UNDEF	UNDEF	"Less-than-full-level input by OCLC participants (LOCAL)"@en)
-        (marc:EncLevelType	marc:AbbreviatedLevel	marc:EncLevelType-3	"3"	UNDEF	UNDEF	"Miniminivå (jfr KRS 1.0D1)"@sv	"Abbreviated level"@en)
-        (marc:EncLevelType	marc:LessThanFullLevelMaterialNotExamined	marc:EncLevelType-2	"2"	UNDEF	UNDEF	"Retrospektiv nivå: enligt katalogkort e.d."@sv	"Less-than-full level, material not examined"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:AbbreviatedLevel	marc:EncLevelType-3	"3"	UNDEF	UNDEF	"Miniminivå (jfr KRS 1.0D1)"@sv	"Abbreviated level"@en)
+        # Added to marc/enums.ttl: (marc:EncLevelType	marc:LessThanFullLevelMaterialNotExamined	marc:EncLevelType-2	"2"	UNDEF	UNDEF	"Retrospektiv nivå: enligt katalogkort e.d."@sv	"Less-than-full level, material not examined"@en)
 
         (marc:HeadingType	marc:Appropriate	marc:HeadingType-a	"a"	UNDEF	UNDEF	"Kan användas som seriebiuppslag"@sv	"Appropriate"@en)
         (marc:HeadingType	marc:NotAppropriate	marc:HeadingType-b	"b"	UNDEF	UNDEF	"Kan inte användas som seriebiuppslag"@sv	"Not Appropriate"@en)
@@ -1464,33 +1514,34 @@ construct {
         (marc:HoldingCharacterCodingType	marc:UCS-Unicode	marc:HoldingCharacterCodingType-a)
         (marc:AuthorityCharacterCodingType	marc:UCS-Unicode	marc:AuthorityCharacterCodingType-a)
 
-        (marc:PublicationStatusType	marc:DateOfDistributionReleaseIssueAndProductionRecordingSessionWhenDifferent	marc:PublicationStatusType-p	"p"	UNDEF	UNDEF	"Produktions-/inspelningsår + utgivningsår"@sv	"Date of distribution/release/issue and production/recording session when different"@en)
-        (marc:PublicationStatusType	marc:InclusiveDatesOfCollection	marc:PublicationStatusType-i	"i"	UNDEF	UNDEF	"Täckningstid för samling"@sv	"Inclusive dates of collection"@en)
-        (marc:PublicationStatusType	marc:NoDatesGivenBCDateInvolved	marc:PublicationStatusType-b	"b"	UNDEF	UNDEF	"Årtal före Kristi födelse"@sv	"No dates given; B.C. date involved"@en)
-        (marc:PublicationStatusType	marc:PublicationDateAndCopyrightDate	marc:PublicationStatusType-t	"t"	UNDEF	UNDEF	"Årtal för utgivning + startår för gällande copyright"@sv	"Publication date and copyright date"@en)
-        (marc:PublicationStatusType	marc:ContinuingResourceCeasedPublication	marc:PublicationStatusType-d	"d"	UNDEF	UNDEF	"Utgivning upphörd (fortlöpande resurs)"@sv	"Continuing resource ceased publication"@en)
-        (marc:PublicationStatusType	marc:DetailedDate	marc:PublicationStatusType-e	"e"	UNDEF	UNDEF	"Exakt tidpunkt (yyyymmdd)"@sv	"Detailed date"@en)
-        (marc:PublicationStatusType	marc:DatesUnknown	marc:PublicationStatusType-n	"n"	UNDEF	UNDEF	"Utgivningstid okänd"@sv	"Dates unknown"@en)
-        (marc:PublicationStatusType	marc:SingleKnownDateProbableDate	marc:PublicationStatusType-s	"s"	UNDEF	UNDEF	"Ett årtal"@sv	"Single known date/probable date"@en)
-        (marc:PublicationStatusType	marc:MultipleDates	marc:PublicationStatusType-m	"m"	UNDEF	UNDEF	"Flera årtal (monografisk resurs)"@sv	"Multiple dates"@en)
-        (marc:PublicationStatusType	marc:QuestionableDate	marc:PublicationStatusType-q	"q"	UNDEF	UNDEF	"Osäkert årtal"@sv	"Questionable date"@en)
-        (marc:PublicationStatusType	marc:RangeOfYearsOfBulkOfCollection	marc:PublicationStatusType-k	"k"	UNDEF	UNDEF	"Årtal för huvuddel av samling"@sv	"Range of years of bulk of collection"@en)
-        (marc:PublicationStatusType	marc:ContinuingResourceStatusUnknown	marc:PublicationStatusType-u	"u"	UNDEF	UNDEF	"Osäker utgivningsstatus (fortlöpande resurs)"@sv	"Continuing resource status unknown"@en)
-        (marc:PublicationStatusType	marc:ContinuingResourceCurrentlyPublished	marc:PublicationStatusType-c	"c"	UNDEF	UNDEF	"Utgivning pågår (fortlöpande resurs)"@sv	"Continuing resource currently published"@en)
-        (marc:PublicationStatusType	marc:ReprintReissueDateAndOriginalDate	marc:PublicationStatusType-r	"r"	UNDEF	UNDEF	"Årtal för ny utgivning + ursprungligt utgivningsår"@sv	"Reprint/reissue date and original date"@en)
+        # Added to marc/enums.ttl:
+        #(marc:PublicationStatusType	marc:DateOfDistributionReleaseIssueAndProductionRecordingSessionWhenDifferent	marc:PublicationStatusType-p	"p"	UNDEF	UNDEF	"Produktions-/inspelningsår + utgivningsår"@sv	"Date of distribution/release/issue and production/recording session when different"@en)
+        #(marc:PublicationStatusType	marc:InclusiveDatesOfCollection	marc:PublicationStatusType-i	"i"	UNDEF	UNDEF	"Täckningstid för samling"@sv	"Inclusive dates of collection"@en)
+        #(marc:PublicationStatusType	marc:NoDatesGivenBCDateInvolved	marc:PublicationStatusType-b	"b"	UNDEF	UNDEF	"Årtal före Kristi födelse"@sv	"No dates given; B.C. date involved"@en)
+        #(marc:PublicationStatusType	marc:PublicationDateAndCopyrightDate	marc:PublicationStatusType-t	"t"	UNDEF	UNDEF	"Årtal för utgivning + startår för gällande copyright"@sv	"Publication date and copyright date"@en)
+        #(marc:PublicationStatusType	marc:ContinuingResourceCeasedPublication	marc:PublicationStatusType-d	"d"	UNDEF	UNDEF	"Utgivning upphörd (fortlöpande resurs)"@sv	"Continuing resource ceased publication"@en)
+        #(marc:PublicationStatusType	marc:DetailedDate	marc:PublicationStatusType-e	"e"	UNDEF	UNDEF	"Exakt tidpunkt (yyyymmdd)"@sv	"Detailed date"@en)
+        #(marc:PublicationStatusType	marc:DatesUnknown	marc:PublicationStatusType-n	"n"	UNDEF	UNDEF	"Utgivningstid okänd"@sv	"Dates unknown"@en)
+        #(marc:PublicationStatusType	marc:SingleKnownDateProbableDate	marc:PublicationStatusType-s	"s"	UNDEF	UNDEF	"Ett årtal"@sv	"Single known date/probable date"@en)
+        #(marc:PublicationStatusType	marc:MultipleDates	marc:PublicationStatusType-m	"m"	UNDEF	UNDEF	"Flera årtal (monografisk resurs)"@sv	"Multiple dates"@en)
+        #(marc:PublicationStatusType	marc:QuestionableDate	marc:PublicationStatusType-q	"q"	UNDEF	UNDEF	"Osäkert årtal"@sv	"Questionable date"@en)
+        #(marc:PublicationStatusType	marc:RangeOfYearsOfBulkOfCollection	marc:PublicationStatusType-k	"k"	UNDEF	UNDEF	"Årtal för huvuddel av samling"@sv	"Range of years of bulk of collection"@en)
+        #(marc:PublicationStatusType	marc:ContinuingResourceStatusUnknown	marc:PublicationStatusType-u	"u"	UNDEF	UNDEF	"Osäker utgivningsstatus (fortlöpande resurs)"@sv	"Continuing resource status unknown"@en)
+        #(marc:PublicationStatusType	marc:ContinuingResourceCurrentlyPublished	marc:PublicationStatusType-c	"c"	UNDEF	UNDEF	"Utgivning pågår (fortlöpande resurs)"@sv	"Continuing resource currently published"@en)
+        #(marc:PublicationStatusType	marc:ReprintReissueDateAndOriginalDate	marc:PublicationStatusType-r	"r"	UNDEF	UNDEF	"Årtal för ny utgivning + ursprungligt utgivningsår"@sv	"Reprint/reissue date and original date"@en)
 
-        (marc:StatusType	marc:IncreaseInEncodingLevel	marc:StatusType-a	"a"	UNDEF	UNDEF	"Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv	"Increase in encoding level"@en) # "Uppgraderad"@sv
-        (marc:AuthorityStatusType	marc:IncreaseInEncodingLevel	marc:AuthorityStatusType-a)
-        (marc:StatusType	marc:New	marc:StatusType-n	"n"	UNDEF	UNDEF	"Ny post"@sv	"New"@en) # 	"Ny"@sv
-        (marc:HoldingStatusType	marc:New	marc:HoldingStatusType-n)
-        (marc:AuthorityStatusType	marc:New	marc:AuthorityStatusType-n)
-        (marc:StatusType	marc:IncreaseInEncodingLevelFromPrepublication	marc:StatusType-p	"p"	UNDEF	UNDEF	"Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv	"Increase in encoding level from prepublication"@en)
-        (marc:StatusType	marc:CorrectedOrRevised	marc:StatusType-c	"c"	UNDEF	UNDEF	"Rättad eller reviderad post (sätts maskinellt)"@sv	"Corrected or revised"@en) # "Rättad eller reviderad post"@sv "Rättad/Reviderad"@sv
-        (marc:HoldingStatusType	marc:CorrectedOrRevised	marc:HoldingStatusType-c)
-        (marc:AuthorityStatusType	marc:CorrectedOrRevised	marc:AuthorityStatusType-c)
-        (marc:StatusType	marc:Deleted	marc:StatusType-d	"d"	UNDEF	UNDEF	"Borttagen post (används ej)"@sv	"Deleted"@en) # "Makulerad: inget av följande"@sv
-        (marc:HoldingStatusType	marc:Deleted	marc:HoldingStatusType-d)
-        (marc:AuthorityStatusType	marc:Deleted	marc:AuthorityStatusType-d)
+        # Added to marc/enums.ttl: (marc:StatusType	marc:IncreaseInEncodingLevel	marc:StatusType-a	"a"	UNDEF	UNDEF	"Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv	"Increase in encoding level"@en) # "Uppgraderad"@sv
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:IncreaseInEncodingLevel	marc:AuthorityStatusType-a)
+        # Added to marc/enums.ttl: (marc:StatusType	marc:New	marc:StatusType-n	"n"	UNDEF	UNDEF	"Ny post"@sv	"New"@en) # 	"Ny"@sv
+        # Added to marc/enums.ttl: (marc:HoldingStatusType	marc:New	marc:HoldingStatusType-n)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:New	marc:AuthorityStatusType-n)
+        # Added to marc/enums.ttl: (marc:StatusType	marc:IncreaseInEncodingLevelFromPrepublication	marc:StatusType-p	"p"	UNDEF	UNDEF	"Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv	"Increase in encoding level from prepublication"@en)
+        # Added to marc/enums.ttl: (marc:StatusType	marc:CorrectedOrRevised	marc:StatusType-c	"c"	UNDEF	UNDEF	"Rättad eller reviderad post (sätts maskinellt)"@sv	"Corrected or revised"@en) # "Rättad eller reviderad post"@sv "Rättad/Reviderad"@sv
+        # Added to marc/enums.ttl: (marc:HoldingStatusType	marc:CorrectedOrRevised	marc:HoldingStatusType-c)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:CorrectedOrRevised	marc:AuthorityStatusType-c)
+        # Added to marc/enums.ttl: (marc:StatusType	marc:Deleted	marc:StatusType-d	"d"	UNDEF	UNDEF	"Borttagen post (används ej)"@sv	"Deleted"@en) # "Makulerad: inget av följande"@sv
+        # Added to marc/enums.ttl: (marc:HoldingStatusType	marc:Deleted	marc:HoldingStatusType-d)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:Deleted	marc:AuthorityStatusType-d)
 
         (marc:AcquisitionStatusType	marc:Completed	marc:AcquisitionStatusType-2	"2"	UNDEF	UNDEF	"Avslutad"@sv	"Completed"@en)
         (marc:AcquisitionStatusType	marc:OtherReceiptOrAcquisitionStatu	marc:AcquisitionStatusType-1	"1"	UNDEF	UNDEF	"Annan"@sv	"Other receipt or acquisition status"@en)
@@ -1498,17 +1549,17 @@ construct {
         (marc:AcquisitionStatusType	marc:NotCurrentlyReceived	marc:AcquisitionStatusType-5	"5"	UNDEF	UNDEF	"Ej löpande"@sv	"Not currently received"@en)
         (marc:AcquisitionStatusType	marc:CurrentlyReceived	marc:AcquisitionStatusType-4	"4"	UNDEF	UNDEF	"Löpande"@sv	"Currently received"@en)
 
-        (marc:HoldingEncLevelType	marc:HoldingsLevel4	marc:HoldingEncLevelType-4	"4"	UNDEF	UNDEF	"Nivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv	"Holdings level 4"@en)
-        (marc:HoldingEncLevelType	marc:HoldingsLevel3	marc:HoldingEncLevelType-3	"3"	UNDEF	UNDEF	"Nivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv	"Holdings level 3"@en)
-        (marc:HoldingEncLevelType	marc:HoldingsLevel4WithPieceDesignation	marc:HoldingEncLevelType-5	"5"	UNDEF	UNDEF	"Nivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv	"Holdings level 4 with piece designation"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:HoldingsLevel4	marc:HoldingEncLevelType-4	"4"	UNDEF	UNDEF	"Nivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv	"Holdings level 4"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:HoldingsLevel3	marc:HoldingEncLevelType-3	"3"	UNDEF	UNDEF	"Nivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv	"Holdings level 3"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:HoldingsLevel4WithPieceDesignation	marc:HoldingEncLevelType-5	"5"	UNDEF	UNDEF	"Nivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv	"Holdings level 4 with piece designation"@en)
         (marc:HoldingEncLevelType	marc:MixedLevels	marc:HoldingEncLevelType-m	"m"	UNDEF	UNDEF	UNDEF	"Mixed levels"@en)
-        (marc:HoldingEncLevelType	marc:HoldingsLevel1	marc:HoldingEncLevelType-1	"1"	UNDEF	UNDEF	"Grundnivå (endast 852)"@sv	"Holdings level 1"@en)
-        (marc:HoldingEncLevelType	marc:HoldingsLevel2	marc:HoldingEncLevelType-2	"2"	UNDEF	UNDEF	"Nivå 2 (används t.v. ej)"@sv	"Holdings level 2"@en)
-        (marc:HoldingEncLevelType	marc:OtherLevel	marc:HoldingEncLevelType-z	"z"	UNDEF	UNDEF	"Annan nivå"@sv	"Other level"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:HoldingsLevel1	marc:HoldingEncLevelType-1	"1"	UNDEF	UNDEF	"Grundnivå (endast 852)"@sv	"Holdings level 1"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:HoldingsLevel2	marc:HoldingEncLevelType-2	"2"	UNDEF	UNDEF	"Nivå 2 (används t.v. ej)"@sv	"Holdings level 2"@en)
+        # Added to marc/enums.ttl: (marc:HoldingEncLevelType	marc:OtherLevel	marc:HoldingEncLevelType-z	"z"	UNDEF	UNDEF	"Annan nivå"@sv	"Other level"@en)
 
-        (marc:AuthorityStatusType	marc:Obsolete	marc:AuthorityStatusType-o	"o"	UNDEF	UNDEF	"Obsolet"@sv	"Obsolete"@en)
-        (marc:AuthorityStatusType	marc:DeletedHeadingReplacedByAnotherHeading	marc:AuthorityStatusType-x	"x"	UNDEF	UNDEF	"Makulerad: ersatt av en annat sökelement"@sv	"Deleted, heading replaced by another heading"@en)
-        (marc:AuthorityStatusType	marc:DeletedHeadingSplitIntoTwoOrMoreHeading	marc:AuthorityStatusType-s	"s"	UNDEF	UNDEF	"Makulerad: uppdelat på två/flera andra sökelement"@sv	"Deleted, heading split into two or more headings"@en)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:Obsolete	marc:AuthorityStatusType-o	"o"	UNDEF	UNDEF	"Obsolet"@sv	"Obsolete"@en)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:DeletedHeadingReplacedByAnotherHeading	marc:AuthorityStatusType-x	"x"	UNDEF	UNDEF	"Makulerad: ersatt av en annat sökelement"@sv	"Deleted, heading replaced by another heading"@en)
+        # Added to marc/enums.ttl: (marc:AuthorityStatusType	marc:DeletedHeadingSplitIntoTwoOrMoreHeading	marc:AuthorityStatusType-s	"s"	UNDEF	UNDEF	"Makulerad: uppdelat på två/flera andra sökelement"@sv	"Deleted, heading split into two or more headings"@en)
 
         (marc:RetentionPolicyUnitType	marc:YearsTime	marc:RetentionPolicyUnitType-y	"y"	UNDEF	UNDEF	"År"@sv	"Year(s) [Time]"@en)
         (marc:RetentionPolicyUnitType	marc:EditionsPart	marc:RetentionPolicyUnitType-e	"e"	UNDEF	UNDEF	"Utgåvor"@sv	"Edition(s) [Part]"@en)
@@ -1631,8 +1682,8 @@ construct {
 
         (marc:CatalogingSourceType	marc:CatalogingSourceType-d	UNDEF	"d"	marc:Other	UNDEF	"Annan verksamhet"@sv	"Other"@en)
 
-        (marc:AuthorityEncLevelType	marc:CompleteAuthorityRecord	marc:AuthorityEncLevelType-n	"n"	UNDEF	UNDEF	"Fullständig"@sv	"Complete authority record"@en)
-        (marc:AuthorityEncLevelType	marc:IncompleteAuthorityRecord	marc:AuthorityEncLevelType-o	"o"	UNDEF	UNDEF	"Ofullständig"@sv	"Incomplete authority record"@en)
+        # Added to marc/enums.ttl: (marc:AuthorityEncLevelType	marc:CompleteAuthorityRecord	marc:AuthorityEncLevelType-n	"n"	UNDEF	UNDEF	"Fullständig"@sv	"Complete authority record"@en)
+        # Added to marc/enums.ttl: (marc:AuthorityEncLevelType	marc:IncompleteAuthorityRecord	marc:AuthorityEncLevelType-o	"o"	UNDEF	UNDEF	"Ofullständig"@sv	"Incomplete authority record"@en)
 
         (marc:SerialsTypeOfEntryType	marc:LatestEntry	marc:SerialsTypeOfEntryType-1	"1"	UNDEF	UNDEF	"Ändringar av titel redovisas i en enda post"@sv	"Latest entry"@en)
         (marc:SerialsTypeOfEntryType	marc:SuccessiveEntry	marc:SerialsTypeOfEntryType-0	"0"	UNDEF	UNDEF	"Titeländring ger upphov till ny post"@sv	"Successive entry"@en)

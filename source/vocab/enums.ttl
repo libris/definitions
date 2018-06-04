@@ -80,7 +80,16 @@
     rdfs:label "Layout"@sv, "Layout"@en;
     owl:equivalentClass bf2:Layout .
 
-:notation a owl:ObjectProperty;
+:frequency a owl:ObjectProperty;
+    rdfs:label "frekvens"@sv, "frequency"@en;
+    owl:equivalentProperty bf2:frequency;
+    rdfs:range :Frequency .
+
+:Frequency a owl:Class;
+    rdfs:label "Frekvens"@sv, "Frequency"@en;
+    owl:equivalentClass bf2:Frequency .
+
+:hasNotation a owl:ObjectProperty;
     rdfs:range :Notation;
     rdfs:label "Notationssystem"@sv, "Notation system"@en;
     owl:equivalentProperty bf2:notation .
@@ -109,15 +118,6 @@
     rdfs:label "Målgrupp"@sv;
     rdfs:subClassOf :Concept, sdo:Audience;
     owl:equivalentClass bf2:IntendedAudience .
-
-:device a owl:ObjectProperty;
-    rdfs:label "apparat"@sv;
-    rdfs:subPropertyOf sdo:device;
-    rdfs:range :Device .
-
-:Device a owl:Class;
-    rdfs:label "Apparat"@sv;
-    owl:equivalentClass dbpo:Device .
 
 :mount a owl:ObjectProperty;
     rdfs:domain :Instance;
@@ -343,6 +343,9 @@
     rdfs:subClassOf :SoundCharacteristic;
     rdfs:label "Spelhastighet"@sv, "Playing speed"@en;
     owl:equivalentClass bf2:PlayingSpeed .
+
+:PresentationFormat a owl:Class;
+    owl:equivalentClass bf2:PresentationFormat .
 
 :RecordingMedium a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;

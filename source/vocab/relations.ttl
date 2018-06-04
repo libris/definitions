@@ -1,6 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -16,55 +17,22 @@
 @prefix : <https://id.kb.se/vocab/> .
 
 
-:creator a owl:ObjectProperty;
-    skos:prefLabel "upphovsman"@sv;
-    rdfs:label "skapare"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty dc:creator .
-
-:contributor a owl:ObjectProperty;
-    rdfs:label "delaktig i skapandet"@sv;
-    rdfs:range :Agent;
-    owl:equivalentProperty bf2:contributor, dc:contributor;
-    rdfs:subPropertyOf prov:wasAttributedTo;
-    owl:propertyChainAxiom ( :contribution :agent ) .
-
-
-:author a owl:ObjectProperty ;
-    owl:equivalentProperty sdo:author;
-    rdfs:subPropertyOf :creator;
-    rdfs:label "author"@en, "författare"@sv .
-
-:translator a owl:ObjectProperty;
-    owl:equivalentProperty sdo:translator;
-    rdfs:label "translator"@en, "översättare"@sv .
-
-:authorList a owl:ObjectProperty;
-    owl:equivalentProperty bibo:authorList;
-    rdfs:range rdf:List .
-
-:contributorList a owl:ObjectProperty;
-    owl:equivalentProperty bibo:contributorList;
-    rdfs:range rdf:List .
-
-
-:publisher a owl:ObjectProperty;
-    rdfs:label "utgivare"@sv;
-    owl:equivalentProperty dc:publisher, bf:publisher .
-
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
     owl:equivalentProperty dc:license .
 
-
 :versionOf a owl:ObjectProperty;
+    ptg:abstract true;
     rdfs:label "version av"@sv;
     owl:equivalentProperty dc:isVersionOf .
 
 :hasVersion a owl:ObjectProperty;
+    ptg:abstract true;
+    rdfs:domain :Endeavour;
+    rdfs:range :Endeavour;
     rdfs:label "har version"@sv;
     owl:equivalentProperty dc:hasVersion;
-    rdfs:subPropertyOf :exampleOfWork .
+    rdfs:subPropertyOf sdo:exampleOfWork .
 
 :hasDerivative a owl:ObjectProperty;
     rdfs:label "has derivative"@en, "har bearbetning"@sv;
@@ -85,6 +53,9 @@
     owl:equivalentProperty bf2:hasPart, dc:hasPart .
 
 :isPartOf a owl:ObjectProperty;
+    #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
+    sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction ;
+    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction ;
     rdfs:label "is part of"@en, "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
@@ -105,14 +76,9 @@
 
 :relatedTo a owl:ObjectProperty;
     rdfs:label "relaterad till"@sv;
+    sdo:rangeIncludes :Document;
     owl:equivalentProperty bf2:relatedTo;
     rdfs:subPropertyOf dc:relation .
-
-:influentialRelation a owl:ObjectProperty;
-    rdfs:subPropertyOf :influencedBy, dc:relation .
-
-:influentialPart a owl:ObjectProperty;
-    rdfs:subPropertyOf :influencedBy, dc:hasPart .
 
 :absorbed a owl:ObjectProperty;
     rdfs:label "Absorption of"@en, "har införlivat"@sv;
@@ -126,11 +92,63 @@
     owl:inverseOf :absorbed;
     owl:equivalentProperty bf2:absorbedBy .
 
+:absorbedInPart a owl:ObjectProperty;
+    rdfs:label "Absorbed in part"@en, "Har delvis införlivat"@sv;
+    rdfs:subPropertyOf :precededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:comment "Work that has been partially incorporated into another work."@en;
+    owl:inverseOf :absorbedInPartBy;
+    owl:equivalentProperty bf:absorbedInPart .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:absorbedInPartBy a owl:ObjectProperty;
+    rdfs:label "Absorbed in part by"@en, "Har delvis uppgått i"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:comment "Work that incorporates part of the content of another work."@en;
+    owl:inverseOf :absorbedInPart;
+    owl:equivalentProperty bf:absorbedInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:precededInPartBy a owl:ObjectProperty;
+    rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :succeededInPartBy;
+    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersedesInPart .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+    
+:succeededInPartBy a owl:ObjectProperty;
+    rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    owl:inverseOf :precededInPartBy;
+    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersededInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
 :accompanies a owl:ObjectProperty;
     rdfs:label "medföljer"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompaniedBy;
     owl:equivalentProperty bf2:accompanies .
+
+:associatedMedia a owl:ObjectProperty;
+    #TODO: More specifically sdo:domainIncludes :Item, :Instance;
+    rdfs:domain :Endeavour;
+    rdfs:range :MediaObject;
+    rdfs:label "associated media"@en, "tillhörande media"@sv;
+    owl:equivalentProperty sdo:associatedMedia .
+
+:MediaObject a owl:Class;
+    rdfs:label "Media object"@en, "Mediaobjekt"@sv;
+    rdfs:subClassOf :Document;
+    owl:equivalentClass sdo:MediaObject .
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
@@ -246,16 +264,19 @@
 
 :otherPhysicalFormat a owl:ObjectProperty;
     owl:equivalentProperty bf2:otherPhysicalFormat;
+    rdfs:domain :Instance;
+    rdfs:range :Instance;
+    rdfs:subPropertyOf :hasEquivalent;
     rdfs:label "Annat bärarformat"@sv .
 
 :hasSubseries a owl:ObjectProperty;
     rdfs:label "Underserie"@sv;
     owl:equivalentProperty bf2:hasSubseries;
-    rdfs:subPropertyOf :partOf;
+    rdfs:subPropertyOf :isPartOf;
     owl:inverseOf :subseriesOf .
 
 :subseriesOf a owl:ObjectProperty;
-    rdfs:label "Underserie av"@sv;
+    rdfs:label "Underserie till"@sv;
     owl:equivalentProperty bf2:subseriesOf;
     rdfs:subPropertyOf :hasPart;
     owl:inverseOf :hasSubseries .
@@ -268,6 +289,8 @@
 
 :translationOf a owl:ObjectProperty;
     rdfs:label "översättning av"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
     owl:equivalentProperty bf2:translationOf;
     rdfs:subPropertyOf :derivativeOf;
     owl:inverseOf :translation .
@@ -284,7 +307,7 @@
     rdfs:label "har uttryck"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
-    rdfs:subPropertyOf :versionOf;
+    rdfs:subPropertyOf :hasVersion;
     owl:inverseOf :expressionOf;
     owl:equivalentProperty bf2:hasExpression .
 
@@ -343,6 +366,7 @@
 :hasSeries a owl:ObjectProperty;
     rdfs:label "har serie"@sv;
     rdfs:comment "Resurs i vilken delen har blivit utgiven; titel av den större resursen syns i delen."@sv;
+    owl:propertyChainAxiom ( :seriesMembership :inSeries ) ;
     owl:equivalentProperty bf2:hasSeries .
 
 :seriesOf a owl:ObjectProperty;
@@ -351,7 +375,30 @@
     owl:inverseOf :hasSeries;
     owl:equivalentProperty bf2:seriesOf .
 
+:seriesMembership a owl:ObjectProperty ;
+    sdo:domainIncludes :Instance ;
+    rdfs:subPropertyOf :hasStatement ;
+    rdfs:range :SeriesMembership ;
+    rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
+
+:inSeries a owl:ObjectProperty ;
+    rdfs:domain :SeriesMembership ;
+    rdfs:subPropertyOf :object ;
+    sdo:rangeIncludes :Instance ;
+    rdfs:label "in series"@en, "ingår i serie"@sv .
+
+:SeriesMembership a owl:Class ;
+    rdfs:subClassOf :PartitiveRelationship ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :predicate ;
+            owl:hasValue :hasSeries
+        ] ;
+    rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
+
 :isPrimaryTopicOf a owl:ObjectProperty;
+    sdo:domainIncludes :Item, :Instance ;
+    rdfs:range :Document ;
+    rdfs:label "Är huvudämne för"@sv ;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
 :language a owl:ObjectProperty;
@@ -361,11 +408,8 @@
     rdfs:subPropertyOf dc:language;
     rdfs:range :Language .
 
-:languageNote a owl:DatatypeProperty;
-    rdfs:label "språkanmärkning"@sv;
-    owl:equivalentProperty bf:languageNote .
-
 :country a owl:ObjectProperty ;
+    rdfs:domain :Item;
     rdfs:range :Country;
     rdfs:label "country"@en, "land"@sv .
 
@@ -375,16 +419,14 @@
 
 :source a owl:ObjectProperty;
     rdfs:label "källa"@sv, "source"@en;
+    rdfs:domain :Resource;
+    rdfs:comment "Källa från vilket ett namn, benämning eller värde är taget. Exempelvis termlistor"@sv;
     rdfs:range :Source;
     owl:equivalentProperty dc:source, bf2:source .
 
 :sourceNote a owl:DatatypeProperty;
     rdfs:label "källinformation"@sv;
     owl:propertyChainAxiom (:source :note) .
-
-:citation a owl:ObjectProperty;
-    rdfs:label "citat"@sv;
-    owl:equivalentProperty sdo:citation .
 
 #:about a owl:ObjectProperty;
 #    rdfs:label "handlar om"@sv;
@@ -394,7 +436,13 @@
     rdfs:label "subject"@en, "ämne"@sv;
     rdfs:subPropertyOf sdo:about;
     owl:equivalentProperty dc:subject ;
-    sdo:rangeIncludes :Concept, :Agent, :Work .
+    # FIXME:
+    # - Could use baseclass :Agent in rangeIncludes, but need to exclude subclasses of :Organization...
+    # - Should include :Work (but not its subclasses...)
+    #sdo:rangeIncludes :Subject, :Agent, :Work .
+    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject, :Work .
+    #rdfs:range :Identity . includes concept, makes for too many faulty choices.
+
 
 #:artform a owl:ObjectProperty ;
 #    owl:equivalentProperty sdo:artform;
@@ -405,6 +453,11 @@
 
 :Role a owl:Class;
     rdfs:label "Funktion"@sv;
+    rdfs:subClassOf owl:ObjectProperty ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty rdfs:range ;
+            owl:allValuesFrom :Agent
+        ] ;
     owl:equivalentClass bf2:Role .
 
 :role a owl:ObjectProperty;
@@ -438,7 +491,6 @@
 
 :agent a owl:ObjectProperty;
     rdfs:label "agent"@sv;
-    #rdfs:label "agent"@sv;
     rdfs:subPropertyOf :object ;
     owl:equivalentProperty bf2:agent, prov:agent;
     sdo:domainIncludes :Contribution, :Event;
@@ -448,18 +500,24 @@
     rdfs:label "Relation"@sv;
     owl:equivalentProperty bflc:relationship ;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedPrimarySource ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Endeavour ;
     rdfs:range :Relationship .
 
 :relation a owl:ObjectProperty;
     rdfs:label "Relation"@sv;
     rdfs:subPropertyOf :role;
     rdfs:domain :Relationship;
+    rdfs:range :Relation ;
     owl:equivalentProperty prov:hadRole, bflc:relation .
+
+:Relation a owl:Class;
+    rdfs:label "Relation"@sv;
+    rdfs:subClassOf owl:ObjectProperty ;
+    owl:equivalentClass bflc:Relation .
 
 :Relationship a owl:Class ;
     rdfs:label "Relation"@sv ;
-    rdfs:subClassOf prov:PrimarySource ;
+    rdfs:subClassOf prov:PrimarySource, :QualifiedRole ;
     owl:equivalentClass bflc:Relationship .
 
 :PartitiveRelationship a owl:Class ;
@@ -468,6 +526,12 @@
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :relation ;
             owl:someValuesFrom :hasPart ] .
+
+:applicableInstitution a owl:ObjectProperty ;
+    rdfs:range :Agent ;
+    rdfs:domain :Endeavour ;
+    rdfs:label "Applicable institution"@en, "Tillämplig institution"@sv ;
+    owl:equivalentProperty bflc:applicableInstitution .
 
 :Source a owl:Class;
     rdfs:label "Source"@en, "Källa"@sv;
