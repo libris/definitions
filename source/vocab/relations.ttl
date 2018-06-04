@@ -76,6 +76,7 @@
 
 :relatedTo a owl:ObjectProperty;
     rdfs:label "relaterad till"@sv;
+    sdo:rangeIncludes :Document;
     owl:equivalentProperty bf2:relatedTo;
     rdfs:subPropertyOf dc:relation .
 
@@ -90,6 +91,46 @@
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :absorbed;
     owl:equivalentProperty bf2:absorbedBy .
+
+:absorbedInPart a owl:ObjectProperty;
+    rdfs:label "Absorbed in part"@en, "Har delvis införlivat"@sv;
+    rdfs:subPropertyOf :precededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:comment "Work that has been partially incorporated into another work."@en;
+    owl:inverseOf :absorbedInPartBy;
+    owl:equivalentProperty bf:absorbedInPart .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:absorbedInPartBy a owl:ObjectProperty;
+    rdfs:label "Absorbed in part by"@en, "Har delvis uppgått i"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:comment "Work that incorporates part of the content of another work."@en;
+    owl:inverseOf :absorbedInPart;
+    owl:equivalentProperty bf:absorbedInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+
+:precededInPartBy a owl:ObjectProperty;
+    rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :precededBy;
+    owl:inverseOf :succeededInPartBy;
+    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersedesInPart .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
+    
+:succeededInPartBy a owl:ObjectProperty;
+    rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    owl:inverseOf :precededInPartBy;
+    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en ;
+    owl:equivalentProperty  bf:supersededInPartBy .
+    # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :accompanies a owl:ObjectProperty;
     rdfs:label "medföljer"@sv;
@@ -106,6 +147,7 @@
 
 :MediaObject a owl:Class;
     rdfs:label "Media object"@en, "Mediaobjekt"@sv;
+    rdfs:subClassOf :Document;
     owl:equivalentClass sdo:MediaObject .
 
 :accompaniedBy a owl:ObjectProperty;
@@ -354,6 +396,9 @@
     rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
 
 :isPrimaryTopicOf a owl:ObjectProperty;
+    sdo:domainIncludes :Item, :Instance ;
+    rdfs:range :Document ;
+    rdfs:label "Är huvudämne för"@sv ;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
 :language a owl:ObjectProperty;
@@ -362,11 +407,6 @@
     owl:equivalentProperty bf2:language;
     rdfs:subPropertyOf dc:language;
     rdfs:range :Language .
-
-:languageNote a owl:DatatypeProperty;
-    rdfs:label "språkanmärkning"@sv;
-    rdfs:domain :Work;
-    owl:equivalentProperty bf:languageNote .
 
 :country a owl:ObjectProperty ;
     rdfs:domain :Item;
@@ -400,7 +440,8 @@
     # - Could use baseclass :Agent in rangeIncludes, but need to exclude subclasses of :Organization...
     # - Should include :Work (but not its subclasses...)
     #sdo:rangeIncludes :Subject, :Agent, :Work .
-    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject .
+    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject, :Work .
+    #rdfs:range :Identity . includes concept, makes for too many faulty choices.
 
 
 #:artform a owl:ObjectProperty ;

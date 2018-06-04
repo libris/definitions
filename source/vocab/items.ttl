@@ -51,14 +51,11 @@
     rdfs:label "call number suffix"@en, "suffix för lokalsignum"@sv;
     rdfs:domain :Item .
 
-:copyNote a owl:DatatypeProperty;
-    rdfs:label "Publik anmärkning"@sv;
-    rdfs:domain :Item .
-
 :electronicLocator a owl:ObjectProperty;
+    #NOTE: Deviates from bf2 since we don't use an intermediary Item
     rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
-    rdfs:domain :Item;
-    rdfs:range :Resource;
+    sdo:domainIncludes :Item, :Instance;
+    rdfs:range :Document;
     owl:equivalentProperty bf2:electronicLocator .
 
 :formerShelfLocation a owl:DatatypeProperty;
@@ -89,6 +86,18 @@
     rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
     skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
     owl:equivalentProperty bf2:physicalLocation .
+
+:inventoryLevel a owl:DatatypeProperty ;
+    sdo:domainIncludes :Item ;
+    rdfs:label "Inventarienivå"@sv .
+
+:codedLocationQualifier a owl:DatatypeProperty ;
+    sdo:domainIncludes :Item ;
+    rdfs:label "Kodad platskvalifikator"@sv .
+
+:copyrightArticleFeeCode a owl:DatatypeProperty ;
+    sdo:domainIncludes :Item ;
+    rdfs:label "Avgiftskod för copyrightartikel"@sv .
 
 :url a owl:DatatypeProperty;
     owl:equivalentProperty sdo:url;
@@ -223,14 +232,6 @@
     rdfs:range :Identifier .
 
 ### LOCAL LIBRIS HOLDING TERMS ###
-    
-#:availability a owl:DatatypeProperty;
-#    owl:equivalentProperty sdo:availability;
-#    rdfs:label "Exemplarstatus"@sv;
-#    rdfs:domain :Item;
-#    rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
-#    skos:example "Beställd", "Saknas", "Ej fjärrlån", "Ej hemlån" .
-
 :availability a owl:ObjectProperty;
     owl:equivalentProperty sdo:availability;
     rdfs:label "Exemplarstatus"@sv;

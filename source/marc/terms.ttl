@@ -5,6 +5,7 @@
 @prefix kbv: <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 # Terms in KBV which are not promoted to real properties or forms, mostly used for MARC21 compatibility.
 # These should when we understand more about their usage be phased out or replaced by proper vocabulary terms.
@@ -26,31 +27,60 @@ marc:relatedAs a owl:ObjectProperty ;
     rdfs:range kbv:ObjectProperty .
 
 marc:electronicLocatorType a owl:DatatypeProperty ;
+    rdfs:domain kbv:Document ;
     rdfs:label "Access method"@en, "Åtkomstmetod"@sv .
 
-marc:linkText  a owl:DatatypeProperty;
-    rdfs:label "Link text"@en, "Länktext"@sv ;
-    rdfs:domain kbv:Endeavour .
-            
 marc:toDisplayNote a owl:DatatypeProperty;
     rdfs:label "Display note"@en, "Visa anmärkning"@sv .
 
+# bib 006
+
+marc:SerialWork a owl:Class ;
+    ptg:abstract true;
+    rdfs:label "Ett verk på seriell nivå"@sv;
+    # NOTE: Not added in hierarchy to avoid polluting it until this "crutch"
+    # class for bib 006 has been properly defined and put to good use.
+    #rdfs:subClassOf kbv:Work .
+    .
+
 # bib 008
 
+marc:primaryProvisionActivity a owl:ObjectProperty;
+    rdfs:subPropertyOf kbv:provisionActivity;
+    rdfs:range kbv:PrimaryProvisionActivity;
+    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+
+marc:copyrightYear a owl:DatatypeProperty;
+    rdfs:label "Copyright year"@en, "Copyrightår"@sv;
+    rdfs:comment "När den anges i direkt relation till en utgivning."@sv;
+    sdo:domainIncludes kbv:PrimaryPublication ;
+    rdfs:subPropertyOf kbv:copyrightDate .
+
+kbv:distribution sdo:rangeIncludes marc:DistributionAndProduction .
+
 marc:DistributionAndProduction a owl:Class;
-    rdfs:subclassOf kbv:PrimaryProvisionActivity;
+    rdfs:subClassOf kbv:PrimaryProvisionActivity, kbv:Distribution;
     rdfs:label "Distribution och produktion"@sv .
 
-marc:productionDate a owl:DatatypeProperty;
+marc:distributionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "produktionsdatum"@sv;
-    rdfs:subPropertyOf kbv:date .
+    rdfs:label "distributionsår"@sv;
+    rdfs:subPropertyOf kbv:year .
 
-marc:distributionDate a owl:DatatypeProperty;
+marc:productionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "distributionsdatum"@sv;
-    rdfs:subPropertyOf kbv:date .
+    rdfs:label "produktionsår"@sv;
+    rdfs:subPropertyOf kbv:year .
 
+marc:ReprintReissueAndOriginalPublication a owl:Class;
+    rdfs:subClassOf kbv:PrimaryPublication ;
+    rdfs:label "Omtryck/återutgivning och orginalutgivning"@sv .
+
+marc:reprintYear a owl:DatatypeProperty ;
+    rdfs:domain marc:ReprintReissueAndOriginalPublication .
+
+marc:originalYear a owl:DatatypeProperty ;
+    rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 # IDENTIFIERS
 
@@ -113,6 +143,7 @@ marc:affiliation a owl:DatatypeProperty;
 
 marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:label "Namn på underordnad enhet"@sv;
+    rdfs:comment "OBS! 'Namn på underordnad enhet' används endast tillsammans med egenskapen 'Är del av' för att skapa Organisationer i flera led. Egenskapen 'Namn' raderas om 'Är del av' och 'Namn på underordnad enhet' används."@sv;
     sdo:domainIncludes kbv:Jurisdiction, kbv:Organization, kbv:Meeting .
 
 marc:fullerFormOfPersonalName a owl:DatatypeProperty;
@@ -126,6 +157,26 @@ marc:TextualPhysicalFormDesignator a owl:Class;
 
 marc:ReproductionNote a owl:Class;
     rdfs:label "Lokal anmärkning: Reproduktion"@sv .
+
+# 034
+
+marc:LinearScale a owl:Class ;
+    rdfs:label "Linear scale"@en, "Linjär skala"@sv .
+
+marc:AngularScale a owl:Class ;
+    rdfs:label "Angular scale"@en, "Vinkelskala"@sv .
+
+marc:OtherCartographicScale a owl:Class ;
+    rdfs:label "Other cartographic scale"@en, "Annan skaltyp"@sv .
+
+marc:constantRatioLinearHorizontalScale a owl:DatatypeProperty ;
+    rdfs:label "Constant ratio linear horizontal scale"@en, "Linjär horisontell skala med konstant proportion"@sv .
+
+marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
+    rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
+
+marc:angularScale a owl:DatatypeProperty ;
+    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
 
 # 043
 
@@ -216,6 +267,29 @@ marc:formSubheading a owl:DatatypeProperty;
     rdfs:label "Form subheading"@en, "Specificering i form av grupptitel"@sv ;
     rdfs:domain kbv:Title . 
 
+# BIB 249
+
+marc:hasBib249 a owl:ObjectProperty;
+    rdfs:label "Har originaltitel (OBSOLET bib:249)"@sv .
+
+marc:Bib249 a owl:Class;
+    rdfs:label "Originaltitel (OBSOLET bib:249)"@sv .
+
+marc:originalTitle a owl:DatatypeProperty;
+    rdfs:label "Originaltitel"@sv .
+
+marc:titleNumber a owl:DataTypeProperty;
+    rdfs:label "Nummer på del eller avsnitt"@sv .
+
+marc:titlePart a owl:DataTypeProperty;
+    rdfs:label "Titel på del eller avsnitt av verk"@sv .
+
+# BIB 260 & 264
+
+marc:sequenceStatus a owl:ObjectProperty ;
+    rdfs:label "Sequence of statements"@en, "Sekvens av uppgifter"@sv;
+    rdfs:domain kbv:Publication .
+
 # USED WITH MULTIPLE TYPES:
 
 marc:sourceOfAcquisition a owl:DatatypeProperty ;
@@ -231,16 +305,17 @@ marc:organizationalUnit a owl:DatatypeProperty ;
                        marc:TextualHoldingsBasicBibliographicUnit .
 
 marc:cataloguersNote a owl:DatatypeProperty ;
-    rdfs:label "Intern anmärkning"@sv ;
+    rdfs:label "Katalogisatörens anmärkning"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
                        marc:TextualHoldingsBasicBibliographicUnit .
 
-marc:copyNote a owl:DatatypeProperty ;
+marc:publicNote a owl:DatatypeProperty ;
     rdfs:label "Offentlig anmärkning"@sv ;
     sdo:domainIncludes marc:ItemInformationBasicBibliographicUnit,
                        marc:ItemInformationSupplementaryMaterial,
-                       marc:TextualHoldingsBasicBibliographicUnit .
+                       marc:TextualHoldingsBasicBibliographicUnit,
+                       kbv:Document .
 
 
 # BIB 300
@@ -292,23 +367,15 @@ marc:seriesTracingPolicy a owl:DatatypeProperty;
 # 501:
 
 # uses hasNote
-#marc:hasWithNote a owl:ObjectProperty;
-#    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv ;
-#    rdfs:domain kbv:Instance;
-#    rdfs:range marc:WithNote .
+# Not for exports in bibliographic review 6.2
 
 marc:WithNote a owl:Class;
-    rdfs:label "With Note"@en, "Anmärkning: Utgiven tillsammans med"@sv;
+    rdfs:label "With Note"@en, "Anmärkning om utgiven tillsammans med"@sv;
     rdfs:subClassOf kbv:StructuredValue .
-    #TODO add restriction for Instance.
 
 # 504:
 
 # uses hasNote
-#marc:hasBibliographyEtcNote a owl:ObjectProperty;
-#    rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv ;
-#    rdfs:domain kbv:Instance;
-#    rdfs:range marc:BibliographyEtcNote .
 
 marc:BibliographyEtcNote a owl:Class;
     rdfs:label "Bibliography Note"@en, "Anmärkning om bibliografi etc."@sv;
@@ -341,38 +408,43 @@ marc:standardizedTerminologyForAccessRestriction a owl:DatatypeProperty ;
 
 # 508:
 # uses hasNote
-#marc:hasCreationProductionCreditsNote a owl:ObjectProperty;
-#    rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
-#    rdfs:domain kbv:Work;
-#    rdfs:range marc:CreationProductionCreditsNote .
 
 marc:CreationProductionCreditsNote a owl:Class;
     rdfs:label "Creation/Production Credits Note"@en, "Anmärkning om upphov inom produktion och teknik"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Work.
 
 # 511:
 
 # uses hasNote
-#marc:hasParticipantOrPerformerNote a owl:ObjectProperty;
-#    rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
-#    rdfs:domain kbv:Work;
-#    rdfs:range marc:ParticipantOrPerformerNote .
 
 marc:ParticipantOrPerformerNote a owl:Class;
     rdfs:label "Participant Or Performer Note"@en, "Anmärkning om medverkande"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Work.
 
 # 513:
 
 # uses hasNote
-#marc:hasTypeOfReportAndPeriodCoveredNote a owl:ObjectProperty ;
-#    rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
-#    rdfs:domain kbv:Instance;
-#    rdfs:range marc:TypeOfReportAndPeriodCoveredNote .
 
 marc:TypeOfReportAndPeriodCoveredNote a owl:Class ;
     rdfs:label "Type Of Report And Period Covered Note"@en, "Anmärkning om rapporttyp och period"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Instance.
+
+# 515
+
+marc:NumberingPeculiaritiesNote a owl:Class ;
+    rdfs:label "Numbering peculiarities note"@en, "Anmärkning om numrering och utgivning"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Instance.
+
+# 516
+
+marc:TypeOfComputerFileOrDataNote a owl:Class ;
+    rdfs:label "Type of computer file or data note"@en, "Anmärkning om filtyp och data"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+    #TODO add restriction for Instance.
 
 # 518
 
@@ -390,6 +462,23 @@ marc:assigningSource a owl:DatatypeProperty ;
     rdfs:domain kbv:Summary ;
     rdfs:label "Assigning source"@en, "Instans som åsatt anmärkning/etikett "@sv .
 
+marc:summaryType a owl:ObjectProperty ;
+    rdfs:domain kbv:Summary ;
+    rdfs:label "Summary type"@en, "Typ av sammanfattning"@sv .
+
+# 534
+
+marc:OriginalVersionNote a owl:Class;
+    rdfs:label "Original version note"@en, "Anmärkning om original"@sv;
+    rdfs:subClassOf kbv:StructuredValue .
+
+# 536
+# Not for exports in bibliographic review 6.2
+
+marc:FundingInformationNote a owl:Class;
+    rdfs:label "Funding information note"@en, "Anmärkning om finansiell information"@sv;
+    rdfs:subClassOf kbv:StructuredValue .
+
 # 538 (bib and hold)
 
 marc:hasSystemDetailsNote a owl:ObjectProperty ;
@@ -402,7 +491,7 @@ marc:SystemDetailsNote a owl:Class ;
     rdfs:subClassOf kbv:StructuredValue .
 
 marc:systemDetailsNote a owl:DatatypeProperty ;
-    rdfs:label "Anmärkningstext"@sv ;
+    rdfs:label "Anmärkningstext"@sv, "System details note"@en ;
     rdfs:domain marc:SystemDetailsNote .
 
 marc:uniformResourceIdentifier a owl:DatatypeProperty ;
@@ -443,7 +532,14 @@ marc:extent a owl:DatatypeProperty ;
     rdfs:label "Extent"@en, "Omfång"@sv ;
     rdfs:domain kbv:ImmediateAcquisition .
 
-# 546:
+# 544
+# Not for exports in bibliographic review 6.2
+
+marc:hasLocationOfOtherArchivalMaterialsNote a owl:Class ;
+    rdfs:label "Anmärkning Ägare/Hemvist för sammanhörande arkivmaterial"@sv;
+    rdfs:subClassOf kbv:StructuredValue .
+
+# 545:
 
 marc:hasBiographicalOrHistoricalData a owl:ObjectProperty ;
     rdfs:label "Has Biographical Or Historical Data"@en, "Anmärkning om biografiska eller historiska uppgifter"@sv;
@@ -463,19 +559,23 @@ marc:BiographicalOrHistoricalData a owl:Class;
 #    rdfs:range marc:LanguageNote .
 
 marc:LanguageNote a owl:Class ;
-    rdfs:label "Language note"@en, "Anmärkning: Språk"@sv ;
+    rdfs:label "Language note"@en, "Anmärkning om språk"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
     
 # 550:
 
 # uses hasNote
-#marc:hasIssuingBodyNote a owl:ObjectProperty ;
-#    rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution (fortlöpande resurser)"@sv ;
-#    rdfs:domain kbv:Instance;
-#    rdfs:range kbv:IssuingBodyNote .
+# Not for exports in bibliographic review 6.2
 
 marc:IssuingBodyNote a owl:Class ;
     rdfs:label "Issuing Body Note"@en, "Anmärkning om utgivande institution"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+    
+# 555
+# Not for exports in bibliographic review 6.2
+
+marc:CumulativeIndexFindingAidsNote a owl:Class ;
+    rdfs:label "Cumulative index finding aids note"@en, "Anmärkning om kumulerade register/sökhjälpmedel"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
 # 562 (bib and hold):
@@ -518,7 +618,14 @@ marc:hasBindingInformation a owl:ObjectProperty ;
     rdfs:range marc:BindingInformationNote .
 
 marc:BindingInformationNote a owl:Class ;
-    rdfs:label "Lokal anmärkning: Bokband"@sv ;
+    rdfs:label "Binding information note"@en, "Lokal anmärkning: Bokband"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
+
+# 580
+# Not for exports in bibliographic review 6.2
+
+marc:LinkingEntryComplexityNote a owl:Class ;
+    rdfs:label "Linking entry complexity note"@en, "Anmärkning om komplicerade länkningar"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
 # 581
@@ -538,6 +645,11 @@ marc:ActionNote a owl:Class ;
     rdfs:label "Lokal anmärkning: Åtgärd"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
+# 588
+
+marc:SourceOfDescriptionNote a owl:Class ;
+    rdfs:label "Source of description note"@en, "Anmärkning om katalogiseringskälla "@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
 
 # 698
 
@@ -553,12 +665,12 @@ marc:LocalSubjectAndHeading a owl:Class ;
 # 752
 
 marc:hasAddedEntryHierarchicalPlaceName a owl:ObjectProperty ;
-    rdfs:label "har exemplarspecifikt biuppslag  - Namn på orter och territrorier (hierarkisk uppställning)"@sv ;
-    rdfs:domain kbv:Item;
+    rdfs:label "Har biuppslag - Namn på orter och territorier (hierarkisk uppställning)"@sv ;
+    rdfs:domain kbv:Instance;
     rdfs:range marc:AddedEntryHierarchicalPlaceName .
 
 marc:AddedEntryHierarchicalPlaceName a owl:Class ;
-    rdfs:label "Exemplarspecifikt biuppslag  - Namn på orter och territrorier (hierarkisk uppställning)"@sv ;
+    rdfs:label "Biuppslag - Namn på orter och territorier (hierarkisk uppställning)"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
 marc:countryOrLargerEntity a owl:DatatypeProperty ;
@@ -579,9 +691,22 @@ marc:city a owl:DatatypeProperty ;
 
 # 856:
 
+marc:versionOfResource a owl:ObjectProperty ;
+    rdfs:label "annan relaterad resurs"@sv ;
+    sdo:domainIncludes kbv:Item, kbv:Instance;
+    rdfs:range kbv:Electronic .
+
+marc:hostName a owl:DatatypeProperty ;
+    rdfs:label "Värddator (namn)"@sv ;
+    rdfs:domain kbv:Document .
+
+marc:electronicName a owl:DatatypeProperty ;
+    rdfs:label "Elektroniskt namn"@sv ;
+    rdfs:domain kbv:Document .
+
 marc:linkText a owl:DatatypeProperty ;
-    rdfs:label "Länktext"@sv ;
-    rdfs:domain kbv:Note .
+    rdfs:label "Link text"@en, "Länktext"@sv ;
+    sdo:domainIncludes kbv:Note, kbv:Document .
 
 # 866
 
@@ -1216,3 +1341,8 @@ marc:bib976-a a owl:DatatypeProperty ;
 
 marc:bib976-b a owl:DatatypeProperty ;
     rdfs:label "SAB-rubrik"@sv .
+
+marc:LinearScale a owl:Class; rdfs:subClassOf kbv:Scale .
+marc:AngularScale a owl:Class; rdfs:subClassOf kbv:Scale .
+marc:OtherCartographicScale a owl:Class; rdfs:subClassOf kbv:Scale .
+

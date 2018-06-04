@@ -167,8 +167,36 @@ def enums():
 
 
 @compiler.dataset
+def rdaterms():
+    # NOTE: see also examples/mappings/rda-bf2-types.ttl for possibiliy of
+    # extending our type system (instead).
+    graph = compiler.construct(sources=[
+            {
+                "source": list(compiler.read_csv('source/rdamap.tsv')),
+                "context": "source/rdamap-context.jsonld"
+            },
+
+            {'source': 'http://rdaregistry.info/termList/RDAContentType'},
+            {'source': 'http://id.loc.gov/vocabulary/contentTypes'},
+
+            {'source': 'http://rdaregistry.info/termList/RDAMediaType'},
+            {'source': 'http://id.loc.gov/vocabulary/mediaTypes'},
+
+            {'source': 'http://rdaregistry.info/termList/RDACarrierType'},
+            {'source': 'http://id.loc.gov/vocabulary/carriers'},
+
+            #{'source': 'http://rdaregistry.info/termList/ModeIssue'},
+            #{'source': 'http://id.loc.gov/vocabulary/issuance.skos.rdf'},
+
+        ],
+        query="source/construct-rda-terms.rq")
+
+    return "/term/rda/", "2018-05-16T08:18:01.337Z", graph
+
+
+@compiler.dataset
 def enumterms():
-    graph = Graph().parse(str(compiler.path('source/vocab/kbv-enums.ttl')), format='turtle')
+    graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
 

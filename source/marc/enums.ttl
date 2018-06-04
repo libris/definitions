@@ -166,7 +166,7 @@
     skos:broadMatch kbv:Electronic ;
     skos:notation "ComputerMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för dator"@sv .
 
 :ComputerQATargetType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -201,7 +201,7 @@
     skos:notation "ComputerTypeOfFileType" ;
     skos:prefLabel "Type Of File"@en,
         "Type of File"@en,
-        "Typ"@sv .
+        "Typ av fil"@sv .
 
 :FilmBaseType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -218,7 +218,7 @@
     skos:broadMatch kbv:Globe ;
     skos:notation "GlobeMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för kartglober"@sv .
 
 :GlobeMediumType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -246,7 +246,7 @@
     skos:broadMatch kbv:ProjectedImage ;
     skos:notation "HoldingProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för projicerade bilder"@sv .
 
 :HoldingRemoteSensImageAltitudeType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -290,7 +290,7 @@
         kbv:NotatedMusic ;
     skos:notation "KitMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för paket"@sv .
 
 :LinkedRecordReqType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -317,7 +317,7 @@
     skos:broadMatch kbv:Map ;
     skos:notation "MapMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning kartmaterial"@sv .
 
 :MapMediumType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -343,7 +343,7 @@
     skos:notation "MapsMaterialType" ;
     skos:prefLabel "Material"@en,
         "Type of Cartographic Material"@en,
-        "Typ"@sv .
+        "Typ av kartografiskt material"@sv .
 
 :MapsPrimeMeridianType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -401,7 +401,7 @@
     skos:broadMatch kbv:Microform ;
     skos:notation "MicroformMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning mikrofilm"@sv .
 
 :MicroformRangeType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -457,7 +457,7 @@
     skos:broadMatch kbv:MovingImage ;
     skos:notation "MotionPicMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning spelfilm"@sv .
 
 :MotionPicPosNegType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -514,7 +514,7 @@
     skos:broadMatch kbv:StillImage ;
     skos:notation "NonProjMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för bilder"@sv .
 
 :NonProjectedType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -562,7 +562,7 @@
     skos:broadMatch kbv:ProjectedImage ;
     skos:notation "ProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning "@sv .
 
 :ProjGraphSecondaryType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -608,7 +608,7 @@
     skos:broadMatch kbv:RemoteSensingImage ;
     skos:notation "RemoteSensImageMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för sensor"@sv .
 
 :RemoteSensImageSensorType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -715,7 +715,7 @@
     skos:broadMatch kbv:TactileMaterial ;
     skos:notation "TacMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för taktilt material"@sv .
 
 :TacSpecPhysicalCharType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm, kbv:TactileNotation ;
@@ -729,7 +729,7 @@
     skos:broadMatch kbv:Text ;
     skos:notation "TextMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för text"@sv .
 
 :AcquisitionMethodType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -853,49 +853,49 @@
 # CATEGORY: BIB
 
 :FullLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-_ ;
+    #owl:sameAs :EncLevelType-_ ;
     skos:notation "_" ;
     skos:prefLabel "Full level"@en,
         "Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv .
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
-    owl:sameAs :EncLevelType-1 ;
+    #owl:sameAs :EncLevelType-1 ;
     skos:notation "1" ;
     skos:prefLabel "Full level, material not examined"@en,
         "Retrospektiv nivå: omkatalogisering"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
-    owl:sameAs :EncLevelType-2 ;
+    #owl:sameAs :EncLevelType-2 ;
     skos:notation "2" ;
     skos:prefLabel "Less-than-full level, material not examined"@en,
         "Retrospektiv nivå: enligt katalogkort e.d."@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-3 ;
+    #owl:sameAs :EncLevelType-3 ;
     skos:notation "3" ;
     skos:prefLabel "Abbreviated level"@en,
         "Miniminivå (jfr KRS 1.0D1)"@sv .
 
 :CoreLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-4 ;
+    #owl:sameAs :EncLevelType-4 ;
     skos:notation "4" ;
     skos:prefLabel "Core level"@en,
         "Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv .
 
 :PartialPreliminaryLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-5 ;
+    #owl:sameAs :EncLevelType-5 ;
     skos:notation "5" ;
     skos:prefLabel "Partial (preliminary) level"@en,
         "Preliminär post (hit beställningsposter)"@sv .
 
 :MinimalLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-7 ;
+    #owl:sameAs :EncLevelType-7 ;
     skos:notation "7" ;
     skos:prefLabel "Minimal level"@en,
         "Biblioteksnivå (jfr KRS 1.0D2)"@sv .
 
 :PrepublicationLevel a :EncLevelType ;
-    owl:sameAs :EncLevelType-8 ;
+    #owl:sameAs :EncLevelType-8 ;
     skos:notation "8" ;
     skos:prefLabel "Prepublication level"@en,
         "CIP-post"@sv .
@@ -904,13 +904,13 @@
 # CATEGORY AUTH:
 
 :IncompleteAuthorityRecord a :AuthorityEncLevelType ;
-    owl:sameAs :AuthorityEncLevelType-o ;
+    #owl:sameAs :AuthorityEncLevelType-o ;
     skos:notation "o" ;
     skos:prefLabel "Incomplete authority record"@en,
         "Ofullständig"@sv .
 
 :CompleteAuthorityRecord a :AuthorityEncLevelType ;
-    owl:sameAs :AuthorityEncLevelType-n ;
+    #owl:sameAs :AuthorityEncLevelType-n ;
     skos:notation "n" ;
     skos:prefLabel "Complete authority record"@en,
         "Fullständig"@sv .
@@ -918,55 +918,55 @@
 # CATEGORY HOLD:
 
 :HoldingsLevel1 a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-1 ;
+    #owl:sameAs :HoldingEncLevelType-1 ;
     skos:notation "1" ;
     skos:prefLabel "Holdings level 1"@en,
         "Grundnivå (endast 852)"@sv .
 
 :HoldingsLevel2 a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-2 ;
+    #owl:sameAs :HoldingEncLevelType-2 ;
     skos:notation "2" ;
     skos:prefLabel "Holdings level 2"@en,
         "Nivå 2 (används t.v. ej)"@sv .
 
 :HoldingsLevel3 a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-3 ;
+    #owl:sameAs :HoldingEncLevelType-3 ;
     skos:notation "3" ;
     skos:prefLabel "Holdings level 3"@en,
         "Nivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
 
 :HoldingsLevel4 a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-4 ;
+    #owl:sameAs :HoldingEncLevelType-4 ;
     skos:notation "4" ;
     skos:prefLabel "Holdings level 4"@en,
         "Nivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
 
 :HoldingsLevel4WithPieceDesignation a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-5 ;
+    #owl:sameAs :HoldingEncLevelType-5 ;
     skos:notation "5" ;
     skos:prefLabel "Holdings level 4 with piece designation"@en,
         "Nivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
 
 :OtherLevel a :HoldingEncLevelType ;
-    owl:sameAs :HoldingEncLevelType-z ;
+    #owl:sameAs :HoldingEncLevelType-z ;
     skos:notation "z" ;
     skos:prefLabel "Other level"@en,
         "Annan nivå"@sv .
 
 :MultipartItemHolding a :HoldingType ;
-    owl:sameAs :HoldingType-v ;
+    #owl:sameAs :HoldingType-v ;
     skos:notation "v" ;
     skos:prefLabel "Multipart item holdings"@en,
         "Monografisk resurs (1 bibliografisk post med flera delar)"@sv .
 
 :SinglePartItemHolding a :HoldingType ;
-    owl:sameAs :HoldingType-x ;
+    #owl:sameAs :HoldingType-x ;
     skos:notation "x" ;
     skos:prefLabel "Single-part item holdings"@en,
         "Monografisk resurs"@sv .
 
 :SerialItemHolding a :HoldingType ;
-    owl:sameAs :HoldingType-y ;
+    #owl:sameAs :HoldingType-y ;
     skos:notation "y" ;
     skos:prefLabel "Serial item holdings"@en,
         "Fortlöpande (seriell eller integrerande) resurs"@sv .
@@ -1215,7 +1215,7 @@
     skos:broadMatch kbv:NotatedMusic ;
     skos:notation "NotatedMusicMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för noterad musik"@sv .
 
 :NumberUnitsType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm,
@@ -1235,6 +1235,7 @@
     skos:prefLabel "Undifferentiated Personal Name"@en,
         "Differentiering av person"@sv .
 
+
 :PublicationStatusType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch kbv:Audio,
@@ -1247,6 +1248,91 @@
     skos:notation "PublicationStatusType" ;
     skos:prefLabel "Publication Status"@en,
         "Typ av utgivningssdatum"@sv .
+
+:ContinuingResourceCeasedPublication a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-d ;
+    skos:notation "d" ;
+    skos:prefLabel "Continuing resource ceased publication"@en,
+        "Utgivning upphörd (fortlöpande resurs)"@sv .
+
+:ContinuingResourceCurrentlyPublished a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-c ;
+    skos:notation "c" ;
+    skos:prefLabel "Continuing resource currently published"@en,
+        "Utgivning pågår (fortlöpande resurs)"@sv .
+
+:ContinuingResourceStatusUnknown a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-u ;
+    skos:notation "u" ;
+    skos:prefLabel "Continuing resource status unknown"@en,
+        "Osäker utgivningsstatus (fortlöpande resurs)"@sv .
+
+:DateOfDistributionReleaseIssueAndProductionRecordingSessionWhenDifferent a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-p ;
+    skos:notation "p" ;
+    skos:prefLabel "Date of distribution/release/issue and production/recording session when different"@en,
+        "Produktions-/inspelningsår + utgivningsår"@sv .
+
+:DatesUnknown a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-n ;
+    skos:notation "n" ;
+    skos:prefLabel "Dates unknown"@en,
+        "Utgivningstid okänd"@sv .
+
+:DetailedDate a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-e ;
+    skos:notation "e" ;
+    skos:prefLabel "Detailed date"@en,
+        "Exakt tidpunkt (yyyymmdd)"@sv .
+
+:InclusiveDatesOfCollection a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-i ;
+    skos:notation "i" ;
+    skos:prefLabel "Inclusive dates of collection"@en,
+        "Täckningstid för samling"@sv .
+
+:MultipleDates a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-m ;
+    skos:notation "m" ;
+    skos:prefLabel "Multiple dates"@en,
+        "Flera årtal (monografisk resurs)"@sv .
+
+:NoDatesGivenBCDateInvolved a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-b ;
+    skos:notation "b" ;
+    skos:prefLabel "No dates given; B.C. date involved"@en,
+        "Årtal före Kristi födelse"@sv .
+
+:PublicationDateAndCopyrightDate a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-t ;
+    skos:notation "t" ;
+    skos:prefLabel "Publication date and copyright date"@en,
+        "Årtal för utgivning + startår för gällande copyright"@sv .
+
+:QuestionableDate a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-q ;
+    skos:notation "q" ;
+    skos:prefLabel "Questionable date"@en,
+        "Osäkert årtal"@sv .
+
+:RangeOfYearsOfBulkOfCollection a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-k ;
+    skos:notation "k" ;
+    skos:prefLabel "Range of years of bulk of collection"@en,
+        "Årtal för huvuddel av samling"@sv .
+
+:ReprintReissueDateAndOriginalDate a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-r ;
+    skos:notation "r" ;
+    skos:prefLabel "Reprint/reissue date and original date"@en,
+        "Årtal för ny utgivning + ursprungligt utgivningsår"@sv .
+
+:SingleKnownDateProbableDate a :PublicationStatusType ;
+    #owl:sameAs :PublicationStatusType-s ;
+    skos:notation "s" ;
+    skos:prefLabel "Single known date/probable date"@en,
+        "Ett årtal"@sv .
+
 
 :RecordUpdateType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1356,7 +1442,7 @@
     skos:broadMatch kbv:Serial ;
     skos:notation "SerialsTypeOfSerialType" ;
     skos:prefLabel "Type of Continuing Resource"@en,
-        "Typ"@sv .
+        "Typ av fortlöpande resurs"@sv .
 
 :SoundCaptureType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1428,9 +1514,7 @@
 :CorrectedOrRevised a :AuthorityStatusType,
         :HoldingStatusType,
         :StatusType ;
-    owl:sameAs :AuthorityStatusType-c,
-        :HoldingStatusType-c,
-        :StatusType-c ;
+    #owl:sameAs :AuthorityStatusType-c, :HoldingStatusType-c, :StatusType-c ;
     skos:notation "c" ;
     skos:prefLabel "Corrected or revised"@en,
         "Rättad eller reviderad post (sätts maskinellt)"@sv .
@@ -1438,23 +1522,19 @@
 :Deleted a :AuthorityStatusType,
         :HoldingStatusType,
         :StatusType ;
-    owl:sameAs :AuthorityStatusType-d,
-        :HoldingStatusType-d,
-        :StatusType-d ;
+    #owl:sameAs :AuthorityStatusType-d, :HoldingStatusType-d, :StatusType-d ;
     skos:notation "d" ;
     skos:prefLabel "Deleted"@en,
         "Borttagen post (används ej)"@sv .
 
 :IncreaseInEncodingLevel a :AuthorityStatusType,
         :StatusType ;
-    owl:sameAs :AuthorityStatusType-a,
-        :StatusType-a ;
-    skos:notation "a" ;
+    #owl:sameAs :AuthorityStatusType-a, :StatusType-a ; skos:notation "a" ;
     skos:prefLabel "Increase in encoding level"@en,
         "Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv .
 
 :IncreaseInEncodingLevelFromPrepublication a :StatusType ;
-    owl:sameAs :StatusType-p ;
+    #owl:sameAs :StatusType-p ;
     skos:notation "p" ;
     skos:prefLabel "Increase in encoding level from prepublication"@en,
         "Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv .
@@ -1462,30 +1542,28 @@
 :New a :AuthorityStatusType,
         :HoldingStatusType,
         :StatusType ;
-    owl:sameAs :AuthorityStatusType-n,
-        :HoldingStatusType-n,
-        :StatusType-n ;
+    #owl:sameAs :AuthorityStatusType-n, :HoldingStatusType-n, :StatusType-n ;
     skos:notation "n" ;
     skos:prefLabel "New"@en,
         "Ny post"@sv .
 
 :Obsolete a :AuthorityStatusType,
     :StatusType ;
-    owl:sameAs :AuthorityStatusType-o ;
+    #owl:sameAs :AuthorityStatusType-o ;
     skos:notation "o" ;
     skos:prefLabel "Obsolete"@en,
         "Obsolet"@sv .
 
 :DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType,
     :StatusType ;
-    owl:sameAs :AuthorityStatusType-x ;
+    #owl:sameAs :AuthorityStatusType-x ;
     skos:notation "x" ;
     skos:prefLabel "Deleted, heading replaced by another heading"@en,
         "Makulerad: ersatt av en annat sökelement"@sv .
 
 :DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType,
     :StatusType ;
-    owl:sameAs :AuthorityStatusType-s ;
+    #owl:sameAs :AuthorityStatusType-s ;
     skos:notation "s" ;
     skos:prefLabel "Deleted, heading split into two or more headings"@en,
         "Makulerad: uppdelat på två/flera andra sökelement"@sv .
@@ -1554,14 +1632,14 @@
     skos:broadMatch kbv:VideoRecording ;
     skos:notation "VideoMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
-        "Särskild bärarbeteckning"@sv .
+        "Särskild bärarbeteckning för video"@sv .
 
 :VisualMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch kbv:Visual ;
     skos:notation "VisualMaterialType" ;
     skos:prefLabel "Type of Material"@en,
-        "Typ"@sv .
+        "Typ av visuell resurs"@sv .
 
 :VisualMatterType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1637,11 +1715,11 @@
     skos:prefLabel "Alphabet"@en,
         "Alfabet/Skriftart"@sv .
 
-:audience a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
-    sdo:rangeIncludes :AudienceType ;
-    skos:prefLabel "Audience"@en,
-        "Målgrupp"@sv .
+#:audience a owl:ObjectProperty ;
+#    sdo:domainIncludes kbv:Visual ;
+#    sdo:rangeIncludes :AudienceType ;
+#    skos:prefLabel "Audience"@en,
+#        "Målgrupp"@sv .
 
 :bibLevel a owl:ObjectProperty ;
     sdo:rangeIncludes :BibLevelType ;
@@ -1666,7 +1744,7 @@
         "Regler för deskriptiv katalogisering"@sv .
 
 :catalogingSource a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
+    sdo:domainIncludes kbv:Record ;
     sdo:rangeIncludes :AuthorityCatalogingSourceType,
         :CatalogingSourceType ;
     skos:prefLabel "Cataloging Source"@en,
@@ -1703,7 +1781,7 @@
         :VisualMaterialType ;
     skos:prefLabel "Type of Continuing Resource"@en,
         "Type of Material"@en,
-        "Typ"@sv .
+        "Typ av material"@sv .
 
 :contents a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Serial ;
@@ -1848,7 +1926,7 @@
         "Modifieringar"@sv .
 
 :modifiedRecord a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
+    sdo:domainIncludes kbv:Record ;
     sdo:rangeIncludes :ModifiedRecordType ;
     skos:prefLabel "Modified Record"@en,
         "Modifieringar"@sv .
@@ -1915,7 +1993,8 @@
         "Projektion"@sv .
 
 :publicationStatus a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
+    rdfs:domain kbv:ProvisionActivity ;
+    #sdo:domainIncludes kbv:Visual ;
     sdo:rangeIncludes :PublicationStatusType ;
     skos:prefLabel "Publication Status"@en,
         "Typ av utgivningssdatum"@sv .
@@ -2042,10 +2121,6 @@
     sdo:rangeIncludes :SubjectSubdivisionType ;
     skos:prefLabel "Subject Subdivision"@en,
         "Typ av underindelning"@sv .
-
-:systemDetailsNote a owl:ObjectProperty ;
-   # TODO: range and domain
-   skos:prefLabel "System details note"@en, "Anmärkningstext"@sv .
 
 :technique a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Visual ;

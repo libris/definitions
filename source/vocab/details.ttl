@@ -151,7 +151,7 @@
     rdfs:label "Running title"@en, "Kolumntitel"@sv .
 
 :SpineTitle a owl:Class;
-    rdfs:label "Spine title"@en;
+    rdfs:label "Spine title"@en, "Ryggtitel"@sv;
     # rdfs:domain :Instance or propertyChainAxiom?
     rdfs:subClassOf :VariantTitle .
 
@@ -480,7 +480,7 @@
     rdfs:range bf2:Status;
     owl:equivalentProperty bf2:status .
 
-:acquisitionTerms a rdf:Property;
+:acquisitionTerms a owl:DatatypeProperty;
     owl:equivalentProperty bf2:acquisitionTerms;
     rdfs:label "Anskaffningsvillkor"@sv .
 
@@ -602,12 +602,6 @@
 #    rdfs:label "Utgivningsort"@sv;
 #    owl:propertyChainAxiom (:publication :place) .
 
-:primaryProvisionActivity a owl:ObjectProperty;
-    ptg:abstract true;
-    rdfs:subPropertyOf :provisionActivity;
-    rdfs:range :PrimaryProvisionActivity;
-    rdfs:label "huvudsakligt tillgängliggörande"@sv .
-
 :production a owl:ObjectProperty;
     owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
@@ -697,32 +691,20 @@
     rdfs:subClassOf :PrimaryProduction;
     rdfs:label "Primär bulkproduktion"@sv .
 
-:PublicationPeriod a owl:Class;
-    rdfs:subClassOf :PrimaryPublication;
-    rdfs:label "Primär utgivningsperiod"@sv .
-
-:CurrentPublicationPeriod a owl:Class;
-    rdfs:subClassOf :PublicationPeriod;
-    rdfs:label "Primär pågående utgivningsperiod"@sv .
-
-:CeasedPublicationPeriod a owl:Class;
-    rdfs:subClassOf :PublicationPeriod;
-    rdfs:label "Primär avslutad utgivningsperiod"@sv .
-
-:otherDate a owl:DatatypeProperty;
+:otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "kompletterande datum"@sv;
     rdfs:subPropertyOf :date .
 
-:startDate a owl:DatatypeProperty;
-    sdo:domainIncludes :PublicationPeriod ;
-    rdfs:label "startdatum"@sv;
-    rdfs:subPropertyOf :date .
+:startYear a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryProvisionActivity ;
+    rdfs:label "startår"@sv;
+    rdfs:subPropertyOf :year .
 
-:endDate a owl:DatatypeProperty;
-    sdo:domainIncludes :PublicationPeriod ;
-    rdfs:label "slutdatum"@sv;
-    rdfs:subPropertyOf :date .
+:endYear a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryProvisionActivity ;
+    rdfs:label "slutår"@sv;
+    rdfs:subPropertyOf :year .
 
 :country a owl:ObjectProperty;
     rdfs:label "land"@sv;
@@ -745,6 +727,7 @@
 
 :responsibilityStatement a owl:DatatypeProperty;
     rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
+    sdo:domainIncludes :ToCEntry ;
     skos:definition "Uppgift som härrör agenter som är ansvariga för, eller som bidragit till, förverkligandet av resursens intellektuella eller konstnärliga innehåll."@sv;
     rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
@@ -899,7 +882,7 @@
 
 :cataloguersNote a owl:DatatypeProperty;
     rdfs:label "Cataloguers Note"@en, "Katalogisatörens anmärkning"@sv;
-    sdo:domainIncludes :Item, :Record ;
+    sdo:domainIncludes :Item, :Record, :Document, :MediaObject, :Electronic ;
     rdfs:subPropertyOf skos:editorialNote, rdael:cataloguersNote .
 
 :qualifier a owl:DatatypeProperty;
@@ -929,7 +912,14 @@
     #rdfs:domain :Resource ?;
     sdo:domainIncludes :Agent, :Capture, :Title, :ProvisionActivity, :Dissertation ;
     rdfs:label "datum"@sv;
+    rdfs:comment "Oformaterad uppgift om datum/årtal/tidsperiod."@sv;
     owl:equivalentProperty bf2:date, dc:date .
+
+:year a owl:DatatypeProperty;
+    sdo:domainIncludes :PrimaryProvisionActivity;
+    rdfs:subPropertyOf :date;
+    rdfs:label "år"@sv;
+    rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
 
 :originDate a owl:DatatypeProperty;
     rdfs:label "Associated title date"@en, "Tid för verket"@sv;
@@ -948,6 +938,7 @@
     rdfs:range rdfs:Literal;
     rdfs:comment "Används för närvarande ej."@sv;
     rdfs:subPropertyOf bf2:date;
+    :category :shorthand;
     owl:equivalentProperty bf2:copyrightDate, dc:dateCopyrighted, sdo:copyrightYear;
     owl:propertyChainAxiom (:copyright :date) .
 

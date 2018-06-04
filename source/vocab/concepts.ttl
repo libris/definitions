@@ -83,20 +83,22 @@
 
 :broadMatch a owl:ObjectProperty;
     rdfs:label "bredare match"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Identity ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:broadMatch ;
     owl:equivalentProperty madsrdf:hasBroaderExternalAuthority .
 
 :closeMatch a owl:ObjectProperty;
     rdfs:label "nära match"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Identity ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:closeMatch ;
     owl:equivalentProperty madsrdf:hasCloseExternalAuthority .
 
 :exactMatch a owl:ObjectProperty ;
     rdfs:label "exakt match"@sv ;
-    sdo:domainIncludes :Concept ;
-    rdfs:range :Agent ;
+    sdo:domainIncludes :Identity ;
+    sdo:rangeIncludes :Agent, :Concept ;
     owl:equivalentProperty skos:exactMatch ;
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
 
