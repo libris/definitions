@@ -15,6 +15,20 @@ marc:SourceSpecifiedInSubfield2 a marc:EnumeratedTerm,
         marc:NumberSource ;
     rdfs:label "Annat kodsystem specificerat i $2" .
 
+# BIB 260 & 264
+
+marc:sequenceStatus a owl:ObjectProperty ;
+    rdfs:label "Sequence of statements"@en, "Sekvens av uppgifter"@sv ;
+    rdfs:range marc:SequenceStatus ;
+    rdfs:domain kbv:Publication .
+marc:SequenceStatus a marc:CollectionClass;
+    rdfs:subClassOf marc:EnumeratedTerm ;
+    rdfs:label "Sequence of statements"@en, "Sekvens av uppgifter"@sv .
+marc:InBetweenInSequence a marc:SequenceStatus ;
+    rdfs:label "Mellanliggande utgivare"@sv, "Intervening publisher"@en .
+marc:LatestInSequence a marc:SequenceStatus ;
+    rdfs:label "Nuvarande / Senaste utgivare"@sv, "Current / Latest publisher"@en .
+
 marc:isPrivate a owl:DatatypeProperty ;
     sdo:domainIncludes marc:ImmediateSourceOfAcquisitionNote, marc:ActionNote, kbv:ImmediateAcquisition ;
     rdfs:range xsd:boolean ;
