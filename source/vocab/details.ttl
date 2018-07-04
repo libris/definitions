@@ -180,28 +180,44 @@
     owl:propertyChainAxiom ( :identifiedBy :value ) .
 
 :isbn a owl:DatatypeProperty ;
-    rdfs:label "ISBN"@sv;
+    :category :shorthand;
+    rdfs:label "ISBN"@en, "ISBN"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :ISBN .
 
 :issn a owl:DatatypeProperty ;
-    rdfs:label "ISSN"@sv;
+    :category :shorthand;
+    rdfs:label "ISSN"@en, "ISSN"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :ISSN .
 
 :coden a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "CODEN"@en, "CODEN"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :CODEN .
 
 :doi a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "DOI"@en, "DOI"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :DOI .
 
 :ean a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "EAN"@en, "EAN"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :EAN .
+    
+:standardTechnicalReportNumber a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "STRN"@en, "STRN"@sv;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:range :STRN .
 
 :upc a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "UPC"@en, "UPC"@sv;
     rdfs:subPropertyOf :identifier ;
     rdfs:range :UPC .
 
@@ -210,11 +226,7 @@
     rdfs:subPropertyOf bibo:uri ;
     rdfs:range xsd:anyURI ;
     rdfs:comment "Sträng som anger sökvägen till en resurs"@sv;
-    rdfs:label "URI"@sv .
-
-:standardTechnicalReportNumber a owl:DatatypeProperty ;
-    rdfs:subPropertyOf :identifier ;
-    rdfs:range :STRN .
+    rdfs:label "URI"@en, "URI"@sv .
 
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "Identifier"@en, "Identifikator"@sv;
