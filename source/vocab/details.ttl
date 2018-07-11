@@ -77,13 +77,13 @@
     rdfs:label "part title"@en, "deltitel"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partName;
-    rdfs:domain :Title .
+    sdo:domainIncludes :Title, :TitlePart .
 
 :partNumber a owl:DatatypeProperty;
     rdfs:label "part number"@en, "delbeteckning"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partNumber;
-    rdfs:domain :Title .
+    sdo:domainIncludes :Title, :TitlePart .
 
 #:WorkTitle  a owl:Class;
 #    owl:equivalentClass bf2:WorkTitle;
