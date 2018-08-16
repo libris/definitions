@@ -59,7 +59,7 @@
         "Title": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "showProperties": [ "mainTitle", "title", "subtitle", "partNumber", "partName", "hasPart" ]
+          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart" ]
         },
         "TitlePart": {
           "@type": "fresnel:Lens",
@@ -74,12 +74,12 @@
         "ProvisionActivity": {
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "place", "country", "agent", "date", "startDate", "endDate", "marc:publicationStatus", "otherDate" ]
+          "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Publication": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "place", "agent", "date" ]
+          "showProperties": [ "place", "agent", "year", "date" ]
         },
         "Serial": {
           "@type": "fresnel:Lens",
@@ -160,7 +160,7 @@
         "Record": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Record",
-          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions" ]
+          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "identifiedBy" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -274,12 +274,17 @@
         "Concept": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", {"inverseOf": "broader"}, "related", "scopeNote", "label", "notation", "note", "keyword" ]
+          "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", "exactMatch", "closeMatch", "broadMatch",  {"inverseOf": "broader"}, "related", "scopeNote", "label", "notation", "note", "keyword" ]
         },
         "Contribution": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Contribution",
           "showProperties": [ "agent", "role" ]
+        },
+        "SeriesMembership": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "SeriesMembership",
+          "showProperties": [ "inSeries", "seriesStatement", "seriesEnumeration" ]
         },
         "Ontology": {
           "@type": "fresnel:Lens",
