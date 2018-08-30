@@ -149,12 +149,13 @@
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
 
 :hasVariant a owl:ObjectProperty;
+    :category :compositional ;
     rdfs:label "variant"@sv;
     rdfs:domain :Identity ;
     rdfs:range :Identity;
     rdfs:subPropertyOf skos:related ;
     skos:closeMatch skos:exactMatch ;
-    rdfs:comment "OBS! Variantnamn ska ej göras till länkbara entiteter. Lägg till (ytterligare) variant genom att klicka på +ikonen och välj Skapa lokal entitet - Person eller Organisation."@sv;
+    rdfs:comment "Lägg till (ytterligare) variant genom att klicka på +ikonen och välj typ från listan - Person eller Organisation."@sv;
     owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
 # Range restrictions:
 :Concept rdfs:subClassOf [ a owl:Restriction;
@@ -329,7 +330,7 @@
     rdfs:subPropertyOf :label, :hasPart;
     skos:related :broader;
     rdfs:domain :Concept;
-    sdo:rangeIncludes :Subject, :Subdivision ;
+    sdo:rangeIncludes :Topic, :Geographic, :Temporal, :Subdivision, :Work, :Agent ;
     rdfs:label "Term components"@en, "Termkomponenter"@sv;
     rdfs:comment "En ordnad lista på de komponenter som termen består av."@sv .
 
