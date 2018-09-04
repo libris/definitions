@@ -18,8 +18,8 @@
     "marc:thesaurus": {"@type": "@vocab"},
     "marc:nameForm": {"@type": "@vocab"},
     "marc:typeOfDate": {"@type": "@vocab"},
-    "marc:languageNote": {"@type": "@vocab"},
     "marc:languageCode": {"@type": "@vocab"},
+    "marc:languageNote": {"@type": "@vocab"},
     "marc:typeOfTimePeriod": {"@type": "@vocab"},
     "marc:i2sourceOfCode": {"@type": "@vocab"},
     "marc:i1codeSource": {"@type": "@vocab"},
@@ -31,11 +31,9 @@
     "marc:audienceType": {"@type": "@vocab"},
     "marc:displayConstantController": {"@type": "@vocab"},
     "marc:subjectLevel": {"@type": "@vocab"},
-    "marc:languageCode": {"@type": "@vocab"},
 
-    "sameAs": {"@type": "@id", "@container": "@set"},
+    "sameAs": {"@container": "@set"},
 
-    "tableOfContents": {"@container": "@list"},
     "termComponentList": {"@container": "@list"},
     "unionOf": {"@id": "owl:unionOf", "@container": "@list"},
     "intersectionOf": {"@id": "owl:intersectionOf", "@container": "@list"},
@@ -171,7 +169,6 @@
     "relationship": {"@container": "@set"},
     "replaces": {"@container": "@set"},
     "role": {"@container": "@set"},
-    "sameAs": {"@container": "@set"},
     "scopeNote": {"@container": "@set"},
     "seeAlso": {"@container": "@set"},
     "separatedFrom": {"@container": "@set"},
@@ -198,6 +195,9 @@
     "uri": {"@container": "@set"},
     "usageAndAccessPolicy": {"@container": "@set"},
     "videoCharacteristic": {"@container": "@set"},
+
+    "marc:hasItemInformationBasicBibliographicUnit": {"@container": "@set"},
+    "marc:hasItemInformationSupplementaryMaterial": {"@container": "@set"},
 
     "sliceByDimension": {"@id": "slice", "@container": "@index"},
     "dimension": {"@type": "@vocab"},
