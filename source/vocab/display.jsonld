@@ -184,6 +184,7 @@
             "identifiedBy",
             "extent",
             "hasDimensions",
+            "accompaniedBy",
             "marc:otherPhysicalDetails",
             {"inverseOf": "itemOf"}
           ]
@@ -191,7 +192,16 @@
         "Work": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [ "hasTitle", "contribution", "composition", "language", "genreForm", "classification", "subject" ]
+          "showProperties": [ 
+            "hasTitle",
+            "musicKey",
+            "version",
+            "contribution",
+            "composition",
+            "language",
+            "genreForm",
+            "classification",
+            "subject" ]
         },
         "Item": {
           "@type": "fresnel:Lens",
@@ -216,7 +226,7 @@
         "Country": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Country",
-          "showProperties": [ "prefLabel", "notation" ]
+          "showProperties": [ "prefLabel", "notation", "isReplacedBy" ]
         },
         "DescriptionConventions": {
           "@type": "fresnel:Lens",

@@ -176,7 +176,7 @@
     owl:equivalentProperty bf2:continuedInPartBy .
 
 :separatedFrom a owl:ObjectProperty;
-    rdfs:label "Separated from"@en, "Separat från"@sv;
+    rdfs:label "Separated from"@en, "Separerad från"@sv;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :continuedInPartBy;
     owl:equivalentProperty bf2:separatedFrom .
@@ -398,7 +398,8 @@
 :isPrimaryTopicOf a owl:ObjectProperty;
     sdo:domainIncludes :Item, :Instance ;
     rdfs:range :Document ;
-    rdfs:label "Är huvudämne för"@sv ;
+    rdfs:label "Relaterad beskrivning eller innehåll"@sv ;
+    skos:relatedMatch bf2:supplementaryContent ;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
 :language a owl:ObjectProperty;

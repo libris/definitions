@@ -164,7 +164,7 @@
     rdfs:label "Title portion"@en, "Del av huvudtitel"@sv .
         
 :TitlePart a owl:Class;
-    rdfs:label "Title part"@en, "Deltitel"@sv .
+    rdfs:label "Title part"@en, "Titeldel"@sv .
 
 
 
@@ -233,7 +233,7 @@
     skos:altLabel "Identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
     owl:inverseOf :identifies;
-    rdfs:comment "Identifikatorn är en teckensträng knuten till en resurs och ska användas för att unikt särskilja resursen från andra. Hämta uppgift om identifikator från valfri källa."@sv;
+    rdfs:comment "Teckensträng knuten till en resurs som används för att unikt särskilja resursen från andra."@sv;
     sdo:domainIncludes :Agent, :Document;
     rdfs:range :Identifier .
 
@@ -619,6 +619,7 @@
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Production;
+    rdfs:comment "Uppgift som identifierar produktionsplats, producentnamn, produktionstid."@sv;
     rdfs:label "produktion"@sv .
 
 :publication a owl:ObjectProperty;
@@ -626,6 +627,7 @@
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Publication;
+    rdfs:comment "Uppgift som identifierar utgivningsplats, utgivarnamn, utgivningstid."@sv;
     rdfs:label "utgivning"@sv .
 
 :distribution a owl:ObjectProperty;
@@ -633,6 +635,7 @@
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Distribution;
+    rdfs:comment "Uppgift som identifierar distributionsplats, distributörsnamn, distributionstid."@sv;
     rdfs:label "distribution"@sv .
 
 :manufacture a owl:ObjectProperty;
@@ -640,6 +643,7 @@
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Manufacture;
+    rdfs:comment "Uppgift som identifierar tillverkningplats, tillverkarnamn, tillverkningstid."@sv;
     rdfs:label "tillverkning"@sv .
 
 :copyright a owl:ObjectProperty;
@@ -750,7 +754,7 @@
 :editionStatement a owl:DatatypeProperty ;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
     rdfs:domain :Instance;
-    rdfs:comment "En uppgift som identifierar den upplaga eller version (opublicerade resurser) till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
+    rdfs:comment "En uppgift som identifierar den upplaga eller version till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
     rdfs:equivalentProperty bf2:editionStatement .
 
 :editionStatementRemainder a owl:DatatypeProperty;
@@ -836,6 +840,7 @@
     rdfs:range :Note;
     rdfs:domain :Resource;
     rdfs:label "anmärkning"@sv;
+    rdfs:comment "Allmän textinformation om en resurs"@sv;
     owl:equivalentProperty bf2:note .
 
 :Note a owl:Class;

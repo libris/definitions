@@ -178,6 +178,13 @@ marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
 marc:angularScale a owl:DatatypeProperty ;
     rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
 
+# 040
+
+marc:transcribingAgency a owl:ObjectProperty ;
+    rdfs:label "Transcribing Agency"@en, "Institution som gjort translitterering"@sv ;
+    rdfs:domain kbv:Record;
+    rdfs:range kbv:Organization .
+
 # 043
 
 marc:hasGeographicAreaCode a owl:ObjectProperty;
@@ -356,7 +363,7 @@ marc:AssociatedPlace a owl:Class;
 
 marc:seriesTracingPolicy a owl:DatatypeProperty;
     rdfs:label "Series Tracing Policy"@en, "Indikator för seriebiuppslag"@sv;
-    rdfs:domain kbv:seriesMembership . 
+    rdfs:domain kbv:SeriesMembership .
 
 # 501:
 
