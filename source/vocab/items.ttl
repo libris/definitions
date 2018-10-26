@@ -107,6 +107,13 @@
 
 ### ENUMERATION AND CHRONOLOGY ###
 
+:enumerationAndChronology a owl:ObjectProperty ;
+    #NOTE: Bibframe property, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending ;
+    rdfs:label "Numbering or other enumeration and dates associated with issues or items held." ;
+    rdfs:range :EnumerationAndChronology ;
+    skos:definition "Numbering and dates of issues or items held." .
+
 :EnumerationAndChronology a owl:Class;
     rdfs:label "Enumeration and chronology"@en;
     owl:equivalentProperty bf2:EnumerationAndChronology .
@@ -135,6 +142,8 @@
     owl:equivalentProperty bf2:shelfMark .
 
 :ShelfMarkDdc a owl:Class;
+    #NOTE: Bibframe class, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending;
     rdfs:label "DDC call number"@en, "Hyllkod DDK"@sv;
     rdfs:subClassOf :ShelfMark;
     rdfs:domain: :Item;
@@ -142,6 +151,8 @@
     owl:equivalentClass bf2:ShelfMarkDdc .
 
 :ShelfMarkLcc a owl:Class;
+    #NOTE: Bibframe class, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending;
     rdfs:label "LCC call number"@en, "Hyllkod LCC"@sv;
     rdfs:subClassOf :ShelfMark;
     rdfs:domain: :Item;
@@ -149,6 +160,8 @@
     owl:equivalentClass bf2:ShelfMarkLcc .
 
 :ShelfMarkUdc a owl:Class;
+    #NOTE: Bibframe class, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending;
     rdfs:label "UDC call number"@en, "Hyllkod UDK"@sv;
     rdfs:subClassOf :ShelfMark;
     rdfs:domain: :Item;
@@ -156,11 +169,20 @@
     owl:equivalentClass bf2:ShelfMarkUdc .
 
 :ShelfMarkNlm a owl:Class;
+    #NOTE: Bibframe class, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending;
     rdfs:label "NLM call number"@en, "Hyllkod NLM"@sv;
     rdfs:subClassOf :ShelfMark;
     rdfs:domain: :Item;
     rdfs:range :ShelfMark;
     owl:equivalentClass bf2:ShelfMarkNlm .
+
+:sublocation a owl:ObjectProperty ;
+    #NOTE: Bibframe property, which we (at least for now) don't want to be able to add to the Libris XL viewer
+    :category :pending ;
+    rdfs:label "Held in sublocation" ;
+    rdfs:range :Sublocation ;
+    skos:definition "Specific place within the holding entity where the item is located or made available." .
 
 :Sublocation a owl:Class;
     rdfs:label "Sublocation"@en, "Sigelkod"@sv;
