@@ -96,7 +96,9 @@ marc:languageNote a owl:ObjectProperty ;
         kbv:TableOfContents ;
     rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
-    rdfs:label "Anmärkning: Språk"@sv ;
+    # NOTE: marc:LanguageNote is definied in source/marc/terms.ttl as an owl:class.
+    # To avoid duplicate labels in viewer, the label is removed here (temporarily)
+    # rdfs:label "Anmärkning: Språk"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
 marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
     rdfs:label "Objektet är/innehåller ej översättning"@sv .
