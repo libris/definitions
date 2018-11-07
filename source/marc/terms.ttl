@@ -188,13 +188,14 @@ marc:transcribingAgency a owl:ObjectProperty ;
 # 041
 
 marc:subtitlesOrCaptions a owl:ObjectProperty ;
-    rdfs:label "Language of subtitles or captions"@en, "Språk i bild- och filmtexter"@sv ;
-    # rdfs:domain kbv:Work ; 
-    # rdfs:range marc:SubtitlesOrCaptions;
+    rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
+    rdfs:domain kbv:Work ;
+    rdfs:range marc:SubtitlesOrCaptions;
     rdfs:comment "Även textning avsedd för personer med nedsatt hörsel."@sv .
 
 marc:SubtitlesOrCaptions a owl:Class ;
-    rdfs:label "Language of subtitles or captions"@en, "Språk i bild- och filmtexter"@sv .
+    rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
 
 # 043
 
