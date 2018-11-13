@@ -82,6 +82,11 @@ marc:reprintYear a owl:DatatypeProperty ;
 marc:originalYear a owl:DatatypeProperty ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
+marc:relief a owl:ObjectProperty ;
+    rdfs:label "Relief"@en, "Relief"@sv ;
+    rdfs:domain kbv:Instance ;
+    rdfs:range marc:MapsReliefType .
+
 # IDENTIFIERS
 
 marc:hiddenValue a owl:DatatypeProperty;
@@ -177,6 +182,22 @@ marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
 
 marc:angularScale a owl:DatatypeProperty ;
     rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
+
+marc:westernmostLongitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - westernmost longitude"@en, "Koordinater - västlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:easternmostLongitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - easternmost longitude"@en, "Koordinater - östlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:northernmostLatitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - northernmost longitude"@en, "Koordinater - nordlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:southernmostLatitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - southernmost longitude"@en, "Koordinater - sydlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
 
 # 040
 
