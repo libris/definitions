@@ -212,20 +212,13 @@
 
 :scale a owl:ObjectProperty;
     rdfs:range :Scale;
+    rdfs:domain :Cartographic;
     owl:equivalentProperty bf2:scale;
     rdfs:label "scale"@en, "skala"@sv .
 
 :Scale a owl:Class;
     owl:equivalentClass bf2:Scale;
     rdfs:label "Scale"@en, "Skala"@sv .
-
-:LinearScale a owl:Class;
-    rdfs:subClassOf :Scale;
-    rdfs:label "Linjär skala"@sv, "Linear scale"@en .
-
-:AngularScale a owl:Class;
-    rdfs:subClassOf :Scale;
-    rdfs:label "Vinkelskala"@sv, "Angular scale"@en . #stjärnkartor
 
 :coordinates a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
