@@ -166,18 +166,23 @@ marc:ReproductionNote a owl:Class;
 # 034
 
 marc:LinearScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Linear scale"@en, "Linjär skala"@sv .
 
 marc:AngularScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Angular scale"@en, "Vinkelskala"@sv .
 
 marc:OtherCartographicScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Other cartographic scale"@en, "Annan skaltyp"@sv .
 
 marc:constantRatioLinearHorizontalScale a owl:DatatypeProperty ;
+    rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear horizontal scale"@en, "Linjär horisontell skala med konstant proportion"@sv .
 
 marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
+    rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
 
 marc:angularScale a owl:DatatypeProperty ;
@@ -1376,7 +1381,4 @@ marc:bib976-a a owl:DatatypeProperty ;
 marc:bib976-b a owl:DatatypeProperty ;
     rdfs:label "SAB-rubrik"@sv .
 
-marc:LinearScale a owl:Class; rdfs:subClassOf kbv:Scale .
-marc:AngularScale a owl:Class; rdfs:subClassOf kbv:Scale .
-marc:OtherCartographicScale a owl:Class; rdfs:subClassOf kbv:Scale .
 
