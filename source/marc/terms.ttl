@@ -82,6 +82,11 @@ marc:reprintYear a owl:DatatypeProperty ;
 marc:originalYear a owl:DatatypeProperty ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
+marc:relief a owl:ObjectProperty ;
+    rdfs:label "Relief"@en, "Relief"@sv ;
+    rdfs:domain kbv:Instance ;
+    rdfs:range marc:MapsReliefType .
+
 # IDENTIFIERS
 
 marc:hiddenValue a owl:DatatypeProperty;
@@ -161,22 +166,43 @@ marc:ReproductionNote a owl:Class;
 # 034
 
 marc:LinearScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Linear scale"@en, "Linjär skala"@sv .
 
 marc:AngularScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Angular scale"@en, "Vinkelskala"@sv .
 
 marc:OtherCartographicScale a owl:Class ;
+    rdfs:subClassOf kbv:Scale ;
     rdfs:label "Other cartographic scale"@en, "Annan skaltyp"@sv .
 
 marc:constantRatioLinearHorizontalScale a owl:DatatypeProperty ;
+    rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear horizontal scale"@en, "Linjär horisontell skala med konstant proportion"@sv .
 
 marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
+    rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
 
 marc:angularScale a owl:DatatypeProperty ;
     rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
+
+marc:westernmostLongitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - westernmost longitude"@en, "Koordinater - västlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:easternmostLongitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - easternmost longitude"@en, "Koordinater - östlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:northernmostLatitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - northernmost longitude"@en, "Koordinater - nordlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
+
+marc:southernmostLatitudeCoordinates a owl:DatatypeProperty ;
+    rdfs:label "Coordinates - southernmost longitude"@en, "Koordinater - sydlig gränslongitud"@sv ;
+    rdfs:domain kbv:Cartographic .
 
 # 040
 
@@ -184,6 +210,18 @@ marc:transcribingAgency a owl:ObjectProperty ;
     rdfs:label "Transcribing Agency"@en, "Institution som gjort translitterering"@sv ;
     rdfs:domain kbv:Record;
     rdfs:range kbv:Organization .
+
+# 041
+
+marc:subtitlesOrCaptions a owl:ObjectProperty ;
+    rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
+    rdfs:domain kbv:Work ;
+    rdfs:range marc:SubtitlesOrCaptions;
+    rdfs:comment "Även textning avsedd för personer med nedsatt hörsel."@sv .
+
+marc:SubtitlesOrCaptions a owl:Class ;
+    rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
+    rdfs:subClassOf kbv:StructuredValue .
 
 # 043
 
@@ -1343,7 +1381,4 @@ marc:bib976-a a owl:DatatypeProperty ;
 marc:bib976-b a owl:DatatypeProperty ;
     rdfs:label "SAB-rubrik"@sv .
 
-marc:LinearScale a owl:Class; rdfs:subClassOf kbv:Scale .
-marc:AngularScale a owl:Class; rdfs:subClassOf kbv:Scale .
-marc:OtherCartographicScale a owl:Class; rdfs:subClassOf kbv:Scale .
 
