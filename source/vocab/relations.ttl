@@ -152,6 +152,7 @@
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
+    rdfs:comment "Resurs som medföljer den beskrivna resursen."@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompanies;
     owl:equivalentProperty bf2:accompaniedBy .
@@ -404,7 +405,8 @@
 
 :language a owl:ObjectProperty;
     rdfs:label "language"@en, "språk"@sv;
-    # TODO worklanguage? rdfs:comment "Innehållets språk - Gör en språkanmärkning om den klargör något som inte framgår av språkangivelsen. Om flera språk ska anges, och svenska är ett av dem, anges det först. I övrigt anges språken i alfabetisk ordning. Exempel: Innehållsförteckning även på engelska."@sv;
+    # TODO worklanguage? 
+    rdfs:comment "Språk förknippat med en resurs eller dess delar."@sv;
     sdo:domainIncludes :Creation, :StructuredValue;
     owl:equivalentProperty bf2:language;
     rdfs:subPropertyOf dc:language;
@@ -474,7 +476,7 @@
 :contribution a owl:ObjectProperty;
     rdfs:label "Medverkan och funktion"@sv;
     skos:altLabel "Upphov"@sv;
-    skos:definition "Agent och funktion i relation till den beskrivna resursen."@sv;
+    rdfs:comment "Agent och dess funktion i relation till resursen."@sv;
     owl:equivalentProperty bf2:contribution;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
