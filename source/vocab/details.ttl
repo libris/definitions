@@ -491,6 +491,18 @@
     rdfs:subClassOf :Identifier;
     owl:equivalentClass bf2:VideoRecordingNumber .
 
+## Used by SwePub {{{
+:ISI rdfs:subClassOf :Identifier .
+:IssueNumber rdfs:subClassOf :Identifier .
+:LibrisNumber rdfs:subClassOf :Identifier .
+:ORCID rdfs:subClassOf :Identifier .
+:PatentNumber rdfs:subClassOf :Identifier .
+:PMID rdfs:subClassOf :Identifier .
+:ScopusID rdfs:subClassOf :Identifier .
+:URI rdfs:subClassOf :Identifier .
+:WorldCatNumber rdfs:subClassOf :Identifier .
+## }}}
+
 ##
 # Stuff
 
@@ -1202,6 +1214,26 @@
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:legalDate .
+
+
+## Used by SwePub {{{
+
+:CreatorCount a owl:Class ;
+    rdfs:subClassOf :Note ;
+    :category :pending .
+
+:volumeNumber a owl:DatatypeProperty ;
+    owl:equivalentProperty schema:volumeNumber ;
+    :category :pending .
+
+:issueNumber a owl:DatatypeProperty ;
+    owl:equivalentProperty schema:issueNumber .
+    :category :pending .
+
+:articleNumber a owl:DatatypeProperty ;
+    :category :pending .
+
+## }}}
 
 
 ## NOTES
