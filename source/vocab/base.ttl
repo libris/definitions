@@ -115,8 +115,13 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "kategori"@sv;
     owl:equivalentProperty sdo:category .
 
-:shorthand a skos:Collection ; :code "shorthand" .
-:compositional a skos:Collection ; :code "compositional" .
+:shorthand a skos:Collection ;
+    rdfs:comment "Används för att i Libris katalogiseringsverktyg kunna dölja kortformer för egenskaper som har en mer komplex bakomliggande struktur. Exempelvis isbn som kan motsvara identifiedBy.ISBN.value"@sv ;
+    :code "shorthand".
+
+:compositional a skos:Collection ;
+    rdfs:comment "Används för att i Libris katalogiseringsverktyg endast möjliggöra beskrivning av en vanligtvis länkbar sak som lokal entitet. Exempelvis hasVariant som pekar på Agenter."@sv ;
+    :code "compositional" .
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
