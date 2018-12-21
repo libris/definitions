@@ -46,7 +46,7 @@
 :hasTitle a owl:ObjectProperty;
     owl:equivalentProperty bf2:title;
     rdfs:range :Title;
-    rdfs:label "has title"@en, "har titel"@sv;
+    rdfs:label "har titel"@sv;
     rdfs:comment "Innehåller titelelement"@sv .
 
 :Title a owl:Class;
@@ -333,6 +333,7 @@
     rdfs:label "ISBN" .
 
 :ISBN13 a owl:Class; # rdfs:Datatype ?
+    :category :pending ;
     rdfs:subClassOf :ISBN;
     rdfs:label "ISBN-13" .
 
@@ -410,7 +411,7 @@
 :MatrixNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
     rdfs:label "Matrix number"@en, "Matrisnummer"@en;
-    owl:equivalentClass bf2:MusicDistributorNumber .
+    owl:equivalentClass bf2:MatrixNumber .
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
@@ -750,7 +751,7 @@
 #Instance Description Statements
 
 :responsibilityStatement a owl:DatatypeProperty;
-    rdfs:label "responsibility statement"@en, "upphovsuppgift"@sv;
+    rdfs:label "upphovsuppgift"@sv;
     sdo:domainIncludes :ToCEntry ;
     skos:definition "Uppgift som härrör agenter som är ansvariga för, eller som bidragit till, förverkligandet av resursens intellektuella eller konstnärliga innehåll."@sv;
     rdfs:comment "Upphovsuppgift som hänför sig till huvudtiteln. Endast upphovsuppgifter som hämtas från en källa utanför resursen ska klamras."@sv;
@@ -1159,7 +1160,7 @@
 :ensemble a owl:ObjectProperty;
     rdfs:label "Ensemble"@en, "Ensemble"@sv;
     rdfs:domain :Work;
-    rdfs:range rdfs:MusicEnsemble;
+    rdfs:range :MusicEnsemble;
     owl:equivalentProperty bf2:ensemble .
 
 :ensembleType a owl:DatatypeProperty;
