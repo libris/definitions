@@ -116,11 +116,17 @@ rdf:type a owl:ObjectProperty;
     owl:equivalentProperty sdo:category .
 
 :shorthand a skos:Collection ;
-    rdfs:comment "Används för att i Libris katalogiseringsverktyg kunna dölja kortformer för egenskaper som har en mer komplex bakomliggande struktur. Exempelvis isbn som kan motsvara identifiedBy.ISBN.value"@sv ;
-    :code "shorthand".
+    rdfs:label "kortform"@sv ;
+    rdfs:comment "Anges som kategori på egenskaper som har en mer komplex bakomliggande struktur."@sv ;
+    skos:example "Exempelvis isbn, som motsvarar identifiedBy(type=ISBN).value."@sv ;
+    skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper."@sv ;
+    :code "shorthand" .
 
 :compositional a skos:Collection ;
-    rdfs:comment "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning, för en annars länkbar entitet. Exempelvis hasVariant som pekar på Agenter."@sv ;
+    rdfs:label "inneboende del"@sv ;
+    rdfs:comment "Anges på egenskaper för att betrakta deras värde som en sammansatt del av entiteten, istället för en länkbar fristående entitet."@sv ;
+    skos:example "Exempelvis hasVariant, som anger variantbeskrivingar av en Agent som distinkta Agenter (men enbart i formen, de respresenterar samma ting)."@sv ;
+    skos:scopeNote "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning."@sv ;
     :code "compositional" .
 
 :label a owl:DatatypeProperty;
