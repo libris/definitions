@@ -244,6 +244,13 @@
     rdfs:comment "En identifikator som indirekt är knuten till denna resurs (den kan vara hämtad från en resurs på annat format, eller vara en inkorrekt men ändå använd identifikator)."@sv;
     owl:propertyChainAxiom ( :hasEquivalent :identifiedBy ) .
 
+:incorrectlyIdentifiedBy a owl:ObjectProperty ;
+    rdfs:label "Incorrectly identified by"@en, "Inkorrekt identifierad av"@sv;
+    sdo:domainIncludes :Document;
+    rdfs:range :Identifier ;
+    rdfs:comment "En identifikator som är inkorrekt använd för denna resurs. Identifikatorn i sig kan vara korrekt, invalid i formatet, eller indragen (vilket kan anges med status-egenskapen på själva identifikatorn). Denna relation används för att klargöra att den inte går att använda för att unikt identifiera resursen."@sv;
+    skos:broadMatch :identifiedBy .
+
 :identifies a owl:ObjectProperty;
     rdfs:label "Identifierad resurs"@sv; #english bflabel misspelled
     #rdfs:domain :Identifier;
