@@ -15,7 +15,7 @@
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix : <https://id.kb.se/vocab/> .
-
+@prefix marc: <https://id.kb.se/marc/> .
 
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
@@ -152,6 +152,7 @@
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "tillsammans med"@sv;
+    rdfs:comment "Resurs som medföljer den beskrivna resursen."@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompanies;
     owl:equivalentProperty bf2:accompaniedBy .
@@ -403,9 +404,12 @@
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
 :language a owl:ObjectProperty;
-    rdfs:label "language"@en, "språk"@sv;
-    # TODO worklanguage? rdfs:comment "Innehållets språk - Gör en språkanmärkning om den klargör något som inte framgår av språkangivelsen. Om flera språk ska anges, och svenska är ett av dem, anges det först. I övrigt anges språken i alfabetisk ordning. Exempel: Innehållsförteckning även på engelska."@sv;
-    sdo:domainIncludes :Creation, :StructuredValue;
+    rdfs:label "språk"@sv;
+    # TODO worklanguage? 
+    rdfs:comment "Språk förknippat med en resurs eller dess delar."@sv;
+    # TODO: define an abstract base class of these?
+    # (E.g. bring back :Annotation in a new guise...)
+    sdo:domainIncludes :Creation, :Summary, :TableOfContents, :Title, marc:Libretto, marc:SubtitlesOrCaptions, marc:SungOrSpokenText;
     owl:equivalentProperty bf2:language;
     rdfs:subPropertyOf dc:language;
     rdfs:range :Language .
@@ -474,7 +478,7 @@
 :contribution a owl:ObjectProperty;
     rdfs:label "Medverkan och funktion"@sv;
     skos:altLabel "Upphov"@sv;
-    skos:definition "Agent och funktion i relation till den beskrivna resursen."@sv;
+    rdfs:comment "Agent och dess funktion i relation till resursen."@sv;
     owl:equivalentProperty bf2:contribution;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .

@@ -17,6 +17,7 @@
     owl:equivalentProperty bf2:cartographicAttributes;
     rdfs:domain :Cartography ;
     rdfs:range :Cartographic ;
+    rdfs:comment "Kartografiska attribut som identifierar karakteristika för resursen, såsom koordinater och kartprojektion."@sv;
     rdfs:label "Cartographic data"@en, "kartografiska data"@sv .
 
 :ProjectionCharacteristic a owl:Class;
@@ -55,6 +56,7 @@
 :colorContent a owl:ObjectProperty;
     rdfs:range :ColorContent;
     rdfs:label "Color content"@en, "färginnehåll"@sv;
+    rdfs:comment "Färgkarakteristika, t ex svartvit, färg, kolorerad."@sv;
     owl:equivalentProperty bf2:colorContent .
 
 :ColorContent a owl:Class;
@@ -82,6 +84,7 @@
 
 :frequency a owl:ObjectProperty;
     rdfs:label "frekvens"@sv, "frequency"@en;
+    rdfs:comment "Utgivningsfrekvens för seriell eller integrerande resurs."@sv;
     owl:equivalentProperty bf2:frequency;
     rdfs:range :Frequency .
 
@@ -109,7 +112,8 @@
     owl:equivalentClass bf2:TactileNotation .
 
 :intendedAudience a owl:ObjectProperty;
-    rdfs:label "audience"@en, "målgrupp"@sv;
+    rdfs:label "målgrupp"@sv;
+    rdfs:comment "Avsedd målgrupp, eller åldersnivå för vilken innehållet i resursen anses lämpligt."@sv;
     rdfs:subPropertyOf sdo:audience;
     owl:equivalentProperty bf2:intendedAudience;
     rdfs:range :IntendedAudience .
@@ -133,6 +137,7 @@
     rdfs:domain :Instance;
     rdfs:range :Polarity;
     rdfs:label "Polaritet"@sv, "Polarity"@en;
+    rdfs:comment "Förhållandet mellan färger och nyanser i en bild eller film och det avbildade objektets färger och nyanser."@sv;
     owl:equivalentProperty bf2:polarity .
 
 :Polarity a owl:Class;
@@ -172,6 +177,7 @@
 :baseMaterial a owl:ObjectProperty;
     rdfs:range :BaseMaterial;
     rdfs:label "bärande material"@sv, "Base material"@en;
+    rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
     rdfs:domain :Instance;
     owl:equivalentProperty bf2:baseMaterial .
 
@@ -182,6 +188,7 @@
 :appliedMaterial a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :AppliedMaterial;
+    rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
     rdfs:label "applied material"@en, "applicerat material"@sv;
     owl:equivalentProperty bf2:appliedMaterial .
 
@@ -193,6 +200,7 @@
     rdfs:domain :Instance;
     rdfs:range :ProductionMethod;
     rdfs:label "Production method"@en, "produktionsmetod"@sv;
+    rdfs:comment "Process som används för att producera en resurs."@sv;
     owl:equivalentProperty bf2:productionMethod .
 
 :ProductionMethod a owl:Class;
@@ -214,6 +222,7 @@
     rdfs:range :Scale;
     rdfs:domain :Cartographic;
     owl:equivalentProperty bf2:scale;
+    rdfs:comment "Förhållandet mellan avstånden i en resurs och de verkliga avstånd som de representerar, t ex för stillbilder eller kartor."@sv;
     rdfs:label "scale"@en, "skala"@sv .
 
 :Scale a owl:Class;
@@ -282,7 +291,7 @@
     owl:equivalentClass bf2:EncodedBitrate .
 
 :EncodingFormat a owl:Class;
-    rdfs:label "Encoding format"@en, "format för kodning"@sv;
+    rdfs:label "Encoding format"@en, "Kodningsformat"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:EncodingFormat .
 
@@ -354,6 +363,7 @@
     rdfs:domain :Instance;
     rdfs:range :VideoCharacteristic;
     rdfs:label "Video characteristic"@en, "videokarakteristika"@sv;
+    rdfs:comment "Teknisk specifikation avseende kodning av video."@sv;
     owl:equivalentProperty bf2:VideoCharacteristic .
 
 :VideoCharacteristic a owl:Class;
