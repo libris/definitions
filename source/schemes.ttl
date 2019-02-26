@@ -6,6 +6,7 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
 
 @base <https://id.kb.se/term/> .
 
@@ -212,6 +213,13 @@
     skos:notation "swemesh";
     dc:title "Svensk MeSH"@sv, "Swedish MeSH"@sv;
     foaf:homepage <https://mesh.kib.ki.se/> .
+
+<kssb> a :ClassificationScheme;
+    skos:notation "kssb";
+    dc:title "SAB-klassifikation"@sv .
+    # upplagor: 2, 5, 6, 7, 8, 9
+    # variant? (folkbibliotek, musikalier, musikinspelningar)
+    #<#usedWithProperty> dc:type .
 
 
 # Aliases for external schemes

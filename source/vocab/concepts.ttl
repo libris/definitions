@@ -61,11 +61,15 @@
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
-    rdfs:label "Concept scheme"@en, "Termlista"@sv;
+    rdfs:label "Concept scheme"@en, "Konceptsystem"@sv;
     #owl:equivalentClass madsrdf:MADSScheme;
     rdfs:subClassOf :Source;
     owl:equivalentClass skos:ConceptScheme .
     #owl:hasKey (:code) .
+
+:TopicScheme a owl:Class;
+    rdfs:label "Topic scheme"@en, "Ämnesordssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
@@ -114,12 +118,19 @@
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
-    rdfs:label "termlista"@sv;
+    rdfs:label "ingår i system"@sv;
     rdfs:domain :Identity ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
+# Range restrictions:
+:Classification rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:allValuesFrom :ClassificationScheme ] .
+:Subject rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:allValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
@@ -245,6 +256,10 @@
             owl:onProperty :inScheme;
             owl:hasValue <http://udcdata.info/udc-schema> ] ;
     owl:equivalentClass bf2:ClassificationUdc .
+
+:ClassificationScheme a owl:Class;
+    rdfs:label "Classification scheme"@en, "Klassifikationssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :classificationPortion a owl:DatatypeProperty;
     rdfs:label "klassifikationsdel"@sv;
