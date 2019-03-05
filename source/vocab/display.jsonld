@@ -199,6 +199,7 @@
             "marc:otherPhysicalDetails",
             "accompaniedBy",
             "seriesMembership",
+            "tableOfContents",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -324,6 +325,11 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "SeriesMembership",
           "showProperties": [ "inSeries", "seriesStatement", "seriesEnumeration" ]
+        },
+        "ToCEntry": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ToCEntry",
+          "showProperties": [ "label", "responsibilityStatement", "comment" ]
         },
         "Ontology": {
           "@type": "fresnel:Lens",
