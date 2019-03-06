@@ -17,10 +17,10 @@
 
 :Place a owl:Class;
     rdfs:label "Place"@en, "Plats"@sv;
-    owl:equivalentClass bf2:Place, prov:Location, sdo:Place, madsrdf:Geographic .
+    owl:equivalentClass bf2:Place, prov:Location, sdo:Place .
 
 :Country a owl:Class;
-    rdfs:label "Land"@sv;
+    rdfs:label "Country"@en, "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
     rdfs:subClassOf :Place .
 
@@ -30,11 +30,10 @@
 
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
-    owl:equivalentClass bf2:Language, madsrdf:Language,
-        sdo:Language .
+    owl:equivalentClass bf2:Language, madsrdf:Language, sdo:Language .
 
 :Nationality a owl:Class ;
-    rdfs:label "Nationalitet"@sv .
+    rdfs:label "Nationality"@en, "Nationalitet"@sv .
 
 
 ##
@@ -111,7 +110,7 @@
 :historyNote a owl:DatatypeProperty;
     rdfs:label "anmärkning om tillämpningshistorik"@sv;
     sdo:domainIncludes :Concept ;
-   skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
+    skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
@@ -155,7 +154,6 @@
     rdfs:range :Identity;
     rdfs:subPropertyOf skos:related ;
     skos:closeMatch skos:exactMatch ;
-    rdfs:comment "Lägg till (ytterligare) variant genom att klicka på +ikonen och välj typ från listan - Person eller Organisation."@sv;
     owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
 # Range restrictions:
 :Concept rdfs:subClassOf [ a owl:Restriction;
