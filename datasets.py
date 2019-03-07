@@ -212,7 +212,7 @@ def generators():
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
-    return "/term/", "2014-02-01T21:00:01.766Z", graph
+    return "/", "2014-02-01T21:00:01.766Z", graph
 
 
 @compiler.dataset
