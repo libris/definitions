@@ -298,7 +298,7 @@ marc:searchControl a owl:ObjectProperty;
 
 marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:label "Fileringsvärde"@sv;
-    rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
+    rdfs:comment "Värde '1-9' innebär att titeln inleds med alfanumeriska tecken som skall uteslutas vid filering. Tecken med diakriter räknas som 2 tecken. Lämna tomt om inga tecken ska uteslutas."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
 marc:OtherTitle a owl:Class ;
@@ -355,7 +355,10 @@ marc:publicNote a owl:DatatypeProperty ;
                        marc:TextualHoldingsBasicBibliographicUnit,
                        kbv:Document .
 
-
+# BIB 256
+marc:ComputerFileCharacteristics a owl:Class ;
+    rdfs:label "Computer file characteristics"@en, "Filspecifika uppgifter"@sv ;
+    skos:closeMatch kbv:Note .
 # BIB 300
 
 marc:sizeOfUnit a owl:DatatypeProperty ;

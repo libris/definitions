@@ -106,6 +106,14 @@
             <http://id.loc.gov/vocabulary/carriers> ;
     void:inDataset </> .
 
+
+# "our marc enumerations"
+</marc> a skos:ConceptScheme;
+    skos:notation "marc";
+    rdfs:comment "Här ingår termer som används för att representera koder i MARC"@sv;
+    dc:title "MARC terms"@en, "MARC-termer"@sv .
+
+
 # TODO: <sao/fack>, <sao/skon>, ...?
 
 <subdivisions> a skos:Collection;
@@ -164,10 +172,21 @@
     #];
     foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
 
+<kssb> a skos:ConceptScheme;
+    skos:notation "kssb";
+    dc:title "SAB-klassifikation"@sv .
+    # upplagor: 2, 5, 6, 7, 8, 9
+    # variant? (folkbibliotek, musikalier, musikinspelningar)
+    #<#usedWithProperty> dc:type .
+
 <prvt> a skos:ConceptScheme;
     skos:notation "prvt";
     dc:title "Patent- och registreringsverkets tesaurus"@sv;
     dc:alternative "PRVT" .
+
+<quiding> a skos:ConceptScheme;
+    skos:notation "quiding";
+    dc:title "Quiding, Nils Herman. Svenskt allmänt författningsregister för tiden från år 1522 till och med år 1862"@sv .
 
 <sbiao> a skos:ConceptScheme;
     skos:notation "sbiao";
@@ -189,12 +208,10 @@
     dc:title "Subject headings in business and economics"@en;
     rdfs:comment "Handelshögskolans i Stockholm bibliotek"@sv .
 
-<kssb> a skos:ConceptScheme;
-    skos:notation "kssb";
-    dc:title "SAB-klassifikation"@sv .
-    # upplagor: 2, 5, 6, 7, 8, 9
-    # variant? (folkbibliotek, musikalier, musikinspelningar)
-    #<#usedWithProperty> dc:type .
+<swemesh> a skos:ConceptScheme;
+    skos:notation "swemesh";
+    dc:title "Svensk MeSH"@sv, "Swedish MeSH"@sv;
+    foaf:homepage <https://mesh.kib.ki.se/> .
 
 
 # Aliases for external schemes
@@ -217,6 +234,12 @@
     skos:notation "fiaf"; #"fiaf/2" #?
     dc:title "International Federation of Film Archives"@en .
 
+<lcsh> a skos:ConceptScheme;
+    skos:notation "lcsh";
+    dc:alternative "LCSH";
+    dc:title "Library of Congress Subject Headings"@en;
+    foaf:homepage <http://id.loc.gov/authorities/subjects/> .
+
 <mipfesd> a skos:ConceptScheme;
     skos:notation "mipfesd"; #"mipfesd/5"
     dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en .
@@ -232,6 +255,11 @@
     dc:alternative "MeSH";
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
+
+<nal> a skos:ConceptScheme;
+    dc:title "National Agricultural Library Subject Headings/NAL"@en;
+    skos:notation "nal";
+    foaf:homepage <https://www.nal.usda.gov/> .
 
 <nlm> a skos:ConceptScheme;
     skos:notation "nlm";

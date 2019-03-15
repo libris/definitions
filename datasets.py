@@ -212,7 +212,7 @@ def generators():
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
-    return "/term/", "2014-02-01T21:00:01.766Z", graph
+    return "/", "2014-02-01T21:00:01.766Z", graph
 
 
 @compiler.dataset
@@ -304,7 +304,7 @@ def countries():
 def nationalities():
     return "/nationality/", "2014-02-01T14:08:56.596Z", compiler.construct({
             "source": decorate(
-                compiler.read_csv('source/nationalitetskoder.tsv', encoding='latin-1'),
+                compiler.read_csv('source/nationalitetskoder.tsv'),
                 {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
             "context": [
                 "sys/context/base.jsonld",
