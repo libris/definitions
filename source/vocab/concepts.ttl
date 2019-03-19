@@ -127,10 +127,13 @@
 # Range restrictions:
 :Classification rdfs:subClassOf [ a owl:Restriction;
          owl:onProperty :inScheme;
-         owl:allValuesFrom :ClassificationScheme ] .
+         owl:someValuesFrom :ClassificationScheme ] .
+:GenreForm rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :GenreFormScheme ] .
 :Subject rdfs:subClassOf [ a owl:Restriction;
          owl:onProperty :inScheme;
-         owl:allValuesFrom :TopicScheme ] .
+         owl:someValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
