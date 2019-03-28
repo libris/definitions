@@ -199,7 +199,6 @@
             "marc:otherPhysicalDetails",
             "accompaniedBy",
             "seriesMembership",
-            "tableOfContents",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -349,7 +348,12 @@
       "lenses": {
         "Instance": {
           "fresnel:extends": {"@id": "Instance-cards"},
-          "showProperties": [ "instanceOf", "fresnel:super", {"inverseOf": "itemOf"} ]
+          "showProperties": [
+            "instanceOf",
+            "fresnel:super",
+            "tableOfContents",
+            {"inverseOf": "itemOf"}
+          ]
         },
         "Family": {
           "fresnel:extends": {"@id": "Family-cards"},
