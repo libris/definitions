@@ -155,6 +155,16 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Relationship",
           "showProperties": [ "entity", "relation" ]
+        },
+        "ToCEntry": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ToCEntry",
+          "showProperties": [ "label" ]
+        },
+        "TableOfContents": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "TableOfContents",
+          "showProperties": [ "label" ]
         }
       }
     },
@@ -199,7 +209,6 @@
             "marc:otherPhysicalDetails",
             "accompaniedBy",
             "seriesMembership",
-            "tableOfContents",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -349,7 +358,12 @@
       "lenses": {
         "Instance": {
           "fresnel:extends": {"@id": "Instance-cards"},
-          "showProperties": [ "instanceOf", "fresnel:super", {"inverseOf": "itemOf"} ]
+          "showProperties": [
+            "instanceOf",
+            "fresnel:super",
+            "tableOfContents",
+            {"inverseOf": "itemOf"}
+          ]
         },
         "Family": {
           "fresnel:extends": {"@id": "Family-cards"},
