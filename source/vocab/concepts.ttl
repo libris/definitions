@@ -61,11 +61,15 @@
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
-    rdfs:label "Concept scheme"@en, "Termlista"@sv;
+    rdfs:label "Concept scheme"@en, "Konceptsystem"@sv;
     #owl:equivalentClass madsrdf:MADSScheme;
     rdfs:subClassOf :Source;
     owl:equivalentClass skos:ConceptScheme .
     #owl:hasKey (:code) .
+
+:TopicScheme a owl:Class;
+    rdfs:label "Topic scheme"@en, "Ämnesordssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
@@ -114,12 +118,22 @@
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
-    rdfs:label "termlista"@sv;
+    rdfs:label "ingår i system"@sv;
     rdfs:domain :Identity ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
+# Range restrictions:
+:Classification rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :ClassificationScheme ] .
+:GenreForm rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :GenreFormScheme ] .
+:Subject rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
@@ -246,6 +260,10 @@
             owl:hasValue <http://udcdata.info/udc-schema> ] ;
     owl:equivalentClass bf2:ClassificationUdc .
 
+:ClassificationScheme a owl:Class;
+    rdfs:label "Classification scheme"@en, "Klassifikationssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
+
 :classificationPortion a owl:DatatypeProperty;
     rdfs:label "klassifikationsdel"@sv;
     rdfs:domain :Classification ;
@@ -291,6 +309,10 @@
     rdfs:subClassOf :Concept;
     owl:equivalentClass madsrdf:GenreForm;
     owl:equivalentClass bf2:GenreForm . # added after merge of Class with same name from things.ttl
+
+:GenreFormScheme a owl:Class;
+    rdfs:label "Genre/Form scheme"@en, "Genre/form-system"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :Temporal a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
