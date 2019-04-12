@@ -109,11 +109,13 @@
           "showProperties": ["partNumber", "partName"]
         },
         "Identifier": {
+          "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Identifier",
           "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
         },
         "ProvisionActivity": {
+          "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
           "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
@@ -296,7 +298,8 @@
           "@type": "fresnel:Lens",
           "@id": "Identifier-cards",
           "classLensDomain": "Identifier",
-          "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
+          "fresnel:extends": {"@id": "Identifier-chips"},
+          "showProperties": [ "fresnel:super", "qualifier" ]
         },
         "ISBN": {
           "@type": "fresnel:Lens",
@@ -398,12 +401,6 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
           "showProperties": [ "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
-        },
-        "ProvisionActivity": {
-          "@type": "fresnel:Lens",
-          "@id": "ProvisionActivity-cards",
-          "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         }
       }
     },
@@ -471,7 +468,7 @@
           "showProperties": [ "fresnel:super" ]
         },
         "ProvisionActivity": {
-          "fresnel:extends": {"@id": "ProvisionActivity-cards"},
+          "fresnel:extends": {"@id": "ProvisionActivity-chips"},
           "showProperties": [ "fresnel:super" ]
         }
       }
