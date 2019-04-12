@@ -33,7 +33,7 @@ def libraries():
             }
         ],
         query="source/construct-libraries.rq")
-    return "/library/", "2019-03-14T15:31:17.000Z", graph
+    return "/", "2019-03-14T15:31:17.000Z", graph
 
 
 def fetch_libraries(start_url):

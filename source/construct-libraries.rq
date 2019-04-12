@@ -8,7 +8,7 @@ base <https://libris.kb.se/library/>
 construct {
 
     ?library a ?libtype ;
-        :sameAs ?bdb_id ;
+        :sameAs ?bdb_id, ?sameas, ?sameas_it ;
         :sigel ?sigel ;
         :name ?name ;
         :uri ?url ;
@@ -58,7 +58,17 @@ construct {
         FILTER(?lat > 0 && ?long > 0)
     }
 
-    bind(iri(concat(str(<>), ?sigel)) as ?library)
+    bind(if(?libtype = :Bibliography, </bibliography/>, </library/>) as ?uribase)
+    # TODO: coalesce should not be necessary here, due to the else clause. RDFLib bug?
+    bind(iri(concat(str(coalesce(?uribase, </library/>)), str(?sigel))) as ?library)
+
+    bind(if(?libtype = :Bibliography,
+                iri(concat(str(</library/>), ?sigel)),
+                ?NO_sameas) as ?sameas)
+
+    bind(iri(concat(str(<http://libris.kb.se/resource/library/>), ?sigel)) as ?sameas_it)
+    #bind(iri(concat(str(<http://libris.kb.se/library/>), ?sigel)) as ?sameas_record)
+
     bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
     bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
 }
