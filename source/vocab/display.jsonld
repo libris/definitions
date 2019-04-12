@@ -292,6 +292,12 @@
           "classLensDomain": "StructuredValue",
           "showProperties": [ "label" ]
         },
+        "Identifier": {
+          "@type": "fresnel:Lens",
+          "@id": "Identifier-cards",
+          "classLensDomain": "Identifier",
+          "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
+        },
         "ISBN": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Identifier",
@@ -392,6 +398,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
           "showProperties": [ "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+        },
+        "ProvisionActivity": {
+          "@type": "fresnel:Lens",
+          "@id": "ProvisionActivity-cards",
+          "classLensDomain": "ProvisionActivity",
+          "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         }
       }
     },
@@ -453,6 +465,14 @@
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
           "showProperties": [ "fresnel:super", "shelfLabel", "shelfControlNumber" ]
+        },
+        "Identifier": {
+          "fresnel:extends": {"@id": "Identifier-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ProvisionActivity": {
+          "fresnel:extends": {"@id": "ProvisionActivity-cards"},
+          "showProperties": [ "fresnel:super" ]
         }
       }
     }
