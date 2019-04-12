@@ -216,6 +216,7 @@
         },
         "Record": {
           "@type": "fresnel:Lens",
+          "@id": "Record-cards",
           "classLensDomain": "Record",
           "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess" ]
         },
@@ -251,6 +252,7 @@
         },
         "Work": {
           "@type": "fresnel:Lens",
+          "@id": "Work-cards",
           "classLensDomain": "Work",
           "showProperties": [ 
             "hasTitle",
@@ -264,6 +266,7 @@
         },
         "NotatedMusic": {
           "@type": "fresnel:Lens",
+          "@id": "NotatedMusic-cards",
           "classLensDomain": "NotatedMusic",
           "showProperties": [ 
             "hasTitle",
@@ -343,11 +346,13 @@
         },
         "Jurisdiction": {
           "@type": "fresnel:Lens",
+          "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
           "showProperties": [ "name", "isPartOf", "marc:subordinateUnit", "note", "identifiedBy", "hasVariant", "nationality" ]
         },
         "Meeting": {
           "@type": "fresnel:Lens",
+          "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
           "showProperties": [ "name", "marc:subordinateUnit", "date", "note", "identifiedBy", "hasVariant", "nationality"  ]
         },
@@ -359,6 +364,7 @@
         },
         "Concept": {
           "@type": "fresnel:Lens",
+          "@id": "Concept-cards",
           "classLensDomain": "Concept",
           "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", "exactMatch", "closeMatch", "broadMatch",  {"inverseOf": "broader"}, "hasVariant", "related", "scopeNote", "label", "code", "note", "keyword" ]
         },
@@ -393,6 +399,12 @@
       "@id": "full",
       "@type": "fresnel:Group",
       "lenses": {
+        "Record": {
+          "fresnel:extends": {"@id": "Record-cards"},
+          "showProperties": [
+            "fresnel:super"
+          ]
+        },
         "Instance": {
           "fresnel:extends": {"@id": "Instance-cards"},
           "showProperties": [
@@ -402,9 +414,33 @@
             {"inverseOf": "itemOf"}
           ]
         },
+        "Work": {
+          "fresnel:extends": {"@id": "Work-cards"},
+          "showProperties": [
+            "fresnel:super"
+          ]
+        },
+        "NotatedMusic": {
+          "fresnel:extends": {"@id": "NotatedMusic-cards"},
+          "showProperties": [
+            "fresnel:super"
+          ]
+        },
+        "Concept": {
+          "fresnel:extends": {"@id": "Concept-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Jurisdiction": {
+          "fresnel:extends": {"@id": "Jurisdiction-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "Family": {
           "fresnel:extends": {"@id": "Family-cards"},
           "showProperties": [ "fresnel:super", "hasTypeOfFamily", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
+        },
+        "Meeting": {
+          "fresnel:extends": {"@id": "Meeting-cards"},
+          "showProperties": [ "fresnel:super" ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-cards"},
