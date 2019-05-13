@@ -812,51 +812,59 @@
 
 :FullLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-_ ;
-    skos:notation "_" ;
-    skos:prefLabel "Full level"@en,
-        "Nationalbibliografisk nivå (jfr KRS 1.0D3)"@sv .
+    rdfs:comment "jfr KRS 1.0D3"@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/f>;
+    skos:notation " " ;
+    skos:prefLabel "Full level"@en, "Nationalbibliografisk nivå"@sv .
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-1 ;
+    rdfs:comment "Retrospektiv inmatning av kompletta poster, hit till exempel retrospektiv omkatalogisering."@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/1>;
     skos:notation "1" ;
-    skos:prefLabel "Full level, material not examined"@en,
-        "Retrospektiv nivå: omkatalogisering"@sv .
+    skos:prefLabel "Full level, material not examined"@en, "Retrospektiv nivå: omkatalogisering"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-2 ;
+    rdfs:comment "Retrospektiv inmatning av reducerade poster, såsom ur en kortkatalog Sökelement kan avspegla äldre praxis."@sv;
     skos:notation "2" ;
-    skos:prefLabel "Less-than-full level, material not examined"@en,
-        "Retrospektiv nivå: enligt katalogkort e.d."@sv .
+    skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv nivå: enligt katalogkort e.d."@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-3 ;
+    rdfs:comment "jfr KRS 1.0D1"@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/3>;
     skos:notation "3" ;
-    skos:prefLabel "Abbreviated level"@en,
-        "Miniminivå (jfr KRS 1.0D1)"@sv .
+    skos:prefLabel "Abbreviated level"@en, "Miniminivå"@sv .
 
 :CoreLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-4 ;
+    rdfs:comment "jfr KRS 1.0D, anm 1"@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/4>;
     skos:notation "4" ;
-    skos:prefLabel "Core level"@en,
-        "Verknivå (\"förkortad katalogisering\", jfr KRS 1.0D, anm 1)"@sv .
+    skos:prefLabel "Core level"@en, "Verknivå (förkortad katalogisering)"@sv .
 
 :PartialPreliminaryLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-5 ;
+    rdfs:comment "Hit till exempel poster som är baserade på förvärvsinformation eller på annat sätt okontrollerade."@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/5>;
     skos:notation "5" ;
-    skos:prefLabel "Partial (preliminary) level"@en,
-        "Preliminär post (hit beställningsposter)"@sv .
+    skos:prefLabel "Partial (preliminary) level"@en, "Preliminär post (hit beställningsposter)"@sv .
 
 :MinimalLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-7 ;
+    rdfs:comment "jfr KRS 1.0D2"@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/7>;
     skos:notation "7" ;
-    skos:prefLabel "Minimal level"@en,
-        "Biblioteksnivå (jfr KRS 1.0D2)"@sv .
+    skos:prefLabel "Minimal level"@en, "Biblioteksnivå"@sv .
 
 :PrepublicationLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-8 ;
+    rdfs:comment "Post upprättad innan objektet givits ut"@sv;
+    skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/8>;
     skos:notation "8" ;
-    skos:prefLabel "Prepublication level"@en,
-        "CIP-post"@sv .
+    skos:prefLabel "Prepublication level"@en, "CIP-post"@sv .
+
 
 
 # CATEGORY AUTH:
@@ -864,52 +872,44 @@
 :IncompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-o ;
     skos:notation "o" ;
-    skos:prefLabel "Incomplete authority record"@en,
-        "Ofullständig"@sv .
+    skos:prefLabel "Incomplete authority record"@en, "Ofullständig"@sv .
 
 :CompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-n ;
     skos:notation "n" ;
-    skos:prefLabel "Complete authority record"@en,
-        "Fullständig"@sv .
+    skos:prefLabel "Complete authority record"@en, "Fullständig"@sv .
 
 # CATEGORY HOLD:
 
 :HoldingsLevel1 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-1 ;
     skos:notation "1" ;
-    skos:prefLabel "Holdings level 1"@en,
-        "Grundnivå (endast 852)"@sv .
+    skos:prefLabel "Holdings level 1"@en, "Beståndsnivå 1 (grundnivå endast 852)"@sv .
 
 :HoldingsLevel2 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-2 ;
     skos:notation "2" ;
-    skos:prefLabel "Holdings level 2"@en,
-        "Nivå 2 (används t.v. ej)"@sv .
+    skos:prefLabel "Holdings level 2"@en, "Beståndsnivå 2 (används t.v. ej)"@sv .
 
 :HoldingsLevel3 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-3 ;
     skos:notation "3" ;
-    skos:prefLabel "Holdings level 3"@en,
-        "Nivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
+    skos:prefLabel "Holdings level 3"@en, "Beståndsnivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
 
 :HoldingsLevel4 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-4 ;
     skos:notation "4" ;
-    skos:prefLabel "Holdings level 4"@en,
-        "Nivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
+    skos:prefLabel "Holdings level 4"@en, "Beståndsnivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
 
 :HoldingsLevel4WithPieceDesignation a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-5 ;
     skos:notation "5" ;
-    skos:prefLabel "Holdings level 4 with piece designation"@en,
-        "Nivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
+    skos:prefLabel "Holdings level 4 with piece designation"@en, "Beståndsnivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
 
 :OtherLevel a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-z ;
     skos:notation "z" ;
-    skos:prefLabel "Other level"@en,
-        "Annan nivå"@sv .
+    skos:prefLabel "Other level"@en, "Annan beståndsnivå"@sv .
 
 :MultipartItemHolding a :HoldingType ;
     #owl:sameAs :HoldingType-v ;
