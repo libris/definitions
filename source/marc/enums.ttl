@@ -884,12 +884,14 @@
 :HoldingsLevel1 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-1 ;
     skos:notation "1" ;
-    skos:prefLabel "Holdings level 1"@en, "Beståndsnivå 1 (grundnivå endast 852)"@sv .
+    skos:prefLabel "Holdings level 1"@en, "Beståndsnivå 1 (grundnivå, endast 852)"@sv .
 
 :HoldingsLevel2 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-2 ;
+    :category :pending ;
+    rdfs:comment "Används t.v. ej enligt formathandboken"
     skos:notation "2" ;
-    skos:prefLabel "Holdings level 2"@en, "Beståndsnivå 2 (används t.v. ej)"@sv .
+    skos:prefLabel "Holdings level 2"@en, "Beståndsnivå 2"@sv .
 
 :HoldingsLevel3 a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-3 ;
@@ -909,7 +911,7 @@
 :OtherLevel a :HoldingEncLevelType ;
     #owl:sameAs :HoldingEncLevelType-z ;
     skos:notation "z" ;
-    skos:prefLabel "Other level"@en, "Annan beståndsnivå"@sv .
+    skos:prefLabel "Other level"@en, "Beståndsnivå annan"@sv .
 
 :MultipartItemHolding a :HoldingType ;
     #owl:sameAs :HoldingType-v ;
@@ -967,10 +969,10 @@
     skos:prefLabel "Teckenuppsättning"@sv .
 
 :HoldingEncLevelType a :CollectionClass ;
+    rdfs:comment "Enligt ISO 10324 resp. ANSI/NISO Z39.57 & Z39.81."@sv;
     rdfs:subClassOf :EncLevelType ;
     skos:notation "HoldingEncLevelType" ;
-    skos:prefLabel "Encoding Level"@en,
-        "Beståndsnivå"@sv .
+    skos:prefLabel "Encoding Level"@en, "Beståndsnivå"@sv .
 
 :HoldingSoundKindOfMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
