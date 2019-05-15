@@ -128,6 +128,13 @@ rdf:type a owl:ObjectProperty;
     skos:example "Exempelvis hasVariant, som anger variantbeskrivingar av en Agent som distinkta Agenter (men enbart i formen, de respresenterar samma ting)."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning."@sv ;
     :code "compositional" .
+    
+:pending a skos:Collection;
+    rdfs:label "väntar"@sv;
+    rdfs:comment "Anges för att markera termer som icke stabila i väntan på fastställande av status."@sv ;
+    skos:example "Egenskapen enumerationAndChronology som hittills inte använts i Libris praxis."@sv ;
+    skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper"@sv ;
+    :code "pending" .
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
