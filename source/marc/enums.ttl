@@ -812,58 +812,62 @@
 
 :FullLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-_ ;
-    rdfs:comment "jfr KRS 1.0D3"@sv;
+    rdfs:comment "Material som görs på denna nivå är sådant vars utgivning traditionellt förknippas med en nationalbibliografi och är en spegling av Sveriges bokproduktion. Förekommer även i poster som har importerats från utländsk nationalbibliografisk (motsvarande) instans."@sv;
+    skos:note "Motsvarar KRS 1.0D beskrivningsnivå 3, den mest fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/f>;
     skos:notation " " ;
-    skos:prefLabel "Full level"@en, "Nationalbibliografisk nivå"@sv .
+    skos:prefLabel "Full level"@en, "Nationalbibliografisk nivå"@sv;
+    skos:altLabel: "Fullständig nivå"@sv .
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-1 ;
     rdfs:comment "Retrospektiv inmatning av kompletta poster, hit till exempel retrospektiv omkatalogisering."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/1>;
     skos:notation "1" ;
-    skos:prefLabel "Full level, material not examined"@en, "Retrospektiv nivå: omkatalogisering"@sv .
+    skos:prefLabel "Full level, material not examined"@en, "Retrospektiv: omkatalogisering"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-2 ;
-    rdfs:comment "Retrospektiv inmatning av reducerade poster, såsom ur en kortkatalog Sökelement kan avspegla äldre praxis."@sv;
+    rdfs:comment "Retrospektiv inmatning av reducerade poster, såsom ur en kortkatalog. Sökelement kan avspegla äldre praxis."@sv;
     skos:notation "2" ;
-    skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv nivå: enligt katalogkort e.d."@sv .
+    skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv: enligt katalogkort e.d."@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-3 ;
-    rdfs:comment "jfr KRS 1.0D1"@sv;
+    rdfs:comment "Miniminivå med kontrollerade sökelement."@sv;
+    skos:note "Motsvarar KRS 1.0D beskrivningsnivå 1, den minst fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/3>;
     skos:notation "3" ;
     skos:prefLabel "Abbreviated level"@en, "Miniminivå"@sv .
 
 :CoreLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-4 ;
-    rdfs:comment "jfr KRS 1.0D, anm 1"@sv;
+    rdfs:comment "Förkortad katalogisering, främst på verknivå."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/4>;
     skos:notation "4" ;
-    skos:prefLabel "Core level"@en, "Verknivå (förkortad katalogisering)"@sv .
+    skos:prefLabel "Core level"@en, "Verknivå (förkortad)"@sv .
 
 :PartialPreliminaryLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-5 ;
-    rdfs:comment "Hit till exempel poster som är baserade på förvärvsinformation eller på annat sätt okontrollerade."@sv;
+    rdfs:comment "Hit till exempel beställningsposter baserade på förvärvsinformation, eller på annat sätt okontrollerade."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/5>;
     skos:notation "5" ;
-    skos:prefLabel "Partial (preliminary) level"@en, "Preliminär post (hit beställningsposter)"@sv .
+    skos:prefLabel "Partial (preliminary) level"@en, "Preliminär"@sv .
 
 :MinimalLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-7 ;
-    rdfs:comment "jfr KRS 1.0D2"@sv;
+    rdfs:comment "Normalvärde för Libris-bibliotekens katalogisering."@sv;
+    skos:note "Motsvarar KRS 1.0D beskrivningsnivå 2, den av biblioteken normalt tillämpade."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/7>;
     skos:notation "7" ;
     skos:prefLabel "Minimal level"@en, "Biblioteksnivå"@sv .
 
 :PrepublicationLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-8 ;
-    rdfs:comment "Post upprättad innan objektet givits ut"@sv;
+    rdfs:comment "Post upprättad innan resursen givits ut. Hit även CIP-poster."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/8>;
     skos:notation "8" ;
-    skos:prefLabel "Prepublication level"@en, "CIP-post"@sv .
+    skos:prefLabel "Prepublication level"@en, "Förhandsinformation"@sv .
 
 
 
