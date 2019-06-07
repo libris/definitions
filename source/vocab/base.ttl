@@ -112,22 +112,29 @@ rdf:type a owl:ObjectProperty;
 # .. use rdfs:range rdf:langString where applicable?
 
 :category a owl:ObjectProperty;
-    rdfs:label "kategori"@sv;
+    rdfs:label "category"@en, "kategori"@sv;
     owl:equivalentProperty sdo:category .
 
 :shorthand a skos:Collection ;
-    rdfs:label "kortform"@sv ;
+    rdfs:label "shorthand"@en, "kortform"@sv ;
     rdfs:comment "Anges som kategori på egenskaper som har en mer komplex bakomliggande struktur."@sv ;
     skos:example "Exempelvis isbn, som motsvarar identifiedBy(type=ISBN).value."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper."@sv ;
     :code "shorthand" .
 
 :compositional a skos:Collection ;
-    rdfs:label "inneboende del"@sv ;
+    rdfs:label "compositional"@en, "inneboende del"@sv ;
     rdfs:comment "Anges på egenskaper för att betrakta deras värde som en sammansatt del av entiteten, istället för en länkbar fristående entitet."@sv ;
     skos:example "Exempelvis hasVariant, som anger variantbeskrivingar av en Agent som distinkta Agenter (men enbart i formen, de respresenterar samma ting)."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning."@sv ;
     :code "compositional" .
+    
+:pending a skos:Collection;
+    rdfs:label "pending"@en, "ej fastställd"@sv;
+    rdfs:comment "Anges för att markera termer som icke stabila i väntan på fastställande av status."@sv ;
+    skos:example "Egenskapen enumerationAndChronology som hittills inte använts i Libris praxis."@sv ;
+    skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper"@sv ;
+    :code "pending" .
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
@@ -135,12 +142,12 @@ rdf:type a owl:ObjectProperty;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
-    rdfs:label "kommentar"@sv;
+    rdfs:label "comment"@en, "kommentar"@sv;
     sdo:domainIncludes :Agent, :Title, :ToCEntry ;
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;
-    rdfs:label "kod"@sv;
+    rdfs:label "code"@en, "kod"@sv;
     skos:altLabel "notation"@sv;
     skos:related :label;
     # sdo:domainIncludes :Concept ;
