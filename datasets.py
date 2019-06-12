@@ -218,10 +218,14 @@ def schemes():
 @compiler.dataset
 def relators():
     def relitem(item):
+
         mk_uri = lambda leaf: BASE + "relator/" + leaf
         item['@id'] = mk_uri(item.get('term') or
                 to_camel_case(item['label_en'].strip()))
         item['sameAs'] = {'@id': mk_uri(item['code'])}
+        if 'domain' in item.keys() :
+            item['domain'] = {"@id": BASE + "vocab/" + item.get('domain')}
+
         return item
     graph = compiler.construct(sources=[
             {
@@ -233,7 +237,8 @@ def relators():
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
                     "term": "rdfs:label",
-                    "sameAs": "owl:sameAs"
+                    "sameAs": "owl:sameAs",
+                    "domain": "rdfs:domain"
                 }]
             },
             {
