@@ -253,10 +253,10 @@ def languages():
         # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
         cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text('utf-8')
         loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
+                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-1.ttl.zip'),
                 'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-2.ttl.zip'),
+                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-2.ttl.zip'),
                 'vocabularyiso639-2.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph.serialize(str(loclangpath), format=fmt)
     else:
