@@ -62,8 +62,10 @@
     rdfs:domain :Title .
 
 :titleRemainder a owl:DatatypeProperty ;
+    :category :pending ;
     rdfs:domain :Title ;
     rdfs:label "Övrig titelinformation"@sv .
+    # catch for unmatched 245$b properties at conversion. :subtitle is prefered property.
 
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "övrig titelinformation"@sv;
