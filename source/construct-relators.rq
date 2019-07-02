@@ -9,7 +9,7 @@ construct {
         skos:notation ?notation;
         ?p ?o;
         owl:equivalentProperty ?locrel;
-        rdfs:domain :Work;
+        rdfs:domain ?domain;
         rdfs:subPropertyOf ?superrel .
 } where {
     graph <https://id.kb.se/dataset/relators> {
@@ -31,6 +31,6 @@ construct {
                 }
             }
         } optional { ?idrel rdfs:domain ?domain . }
-          filter ( !bound(?domain) ) .
+          bind (if(bound(?domain), ?domain, :Work) as ?domain)
     }
 }
