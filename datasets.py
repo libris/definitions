@@ -25,7 +25,7 @@ def decorate(items, template):
         for k, tplt in template.items():
             item[k] = tplt.format(**item)
         return item
-    return map(decorator, items)
+    return list(map(decorator, items))
 
 
 def to_camel_case(label):
@@ -225,7 +225,7 @@ def relators():
         return item
     graph = compiler.construct(sources=[
             {
-                "source": map(relitem, compiler.read_csv('source/funktionskoder.tsv')),
+                "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
                 "dataset": BASE + "dataset/relators",
                 "context": ["sys/context/ns.jsonld", {
                     "code": "skos:notation",
