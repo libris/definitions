@@ -1017,10 +1017,10 @@
     rdfs:comment "Information om resursens eller framförandets speltid/längd."@sv ;
     rdfs:domain :Instance ;
     rdfs:range :Duration ;
-    owl:equivalentProperty rdau:duration.en .
+    skos:closeMatch rdau:duration.en .
     
 :Duration a owl:Class;
-    rdfs:subClassOf dc:SizeOrDuration;
+    rdfs:subClassOf :StructuredValue, dc:SizeOrDuration ;
     rdfs:label "Duration"@en, "Speltid"@sv .
 
 :duration a owl:DatatypeProperty;
