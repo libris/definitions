@@ -1012,8 +1012,21 @@
     rdfs:subClassOf :Capture;
     rdfs:label "Capture of discovery of content"@en, "Upptäckt"@sv .
 
+:hasDuration a owl:ObjectProperty;
+    rdfs:label "Has duration"@en, "Speltid"@sv;
+    rdfs:comment "Information om resursens eller framförandets speltid/längd."@sv ;
+    rdfs:domain :Instance ;
+    rdfs:range :Duration ;
+    skos:closeMatch rdau:duration.en .
+    
+:Duration a owl:Class;
+    rdfs:subClassOf :StructuredValue, dc:SizeOrDuration ;
+    rdfs:label "Duration"@en, "Speltid"@sv .
+
 :duration a owl:DatatypeProperty;
+    :category :shorthand;
     rdfs:label "duration"@en, "speltid"@sv;
+    owl:propertyChainAxiom ( :hasDuration :value );
     owl:equivalentProperty bf2:duration .
 
 :extent a owl:ObjectProperty;
