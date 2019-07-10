@@ -48,6 +48,10 @@
     rdfs:subClassOf :Endeavour ;
     rdfs:subClassOf sdo:CreativeWork, dc:BibliographicResource .
 
+:Embodiment a owl:Class ;
+    ptg:abstract true;
+    rdfs:subClassOf :Endeavour .
+
 :Work a owl:Class ;
     :category marc:auth ;
     owl:equivalentClass bf2:Work;
@@ -59,7 +63,7 @@
 :Instance a owl:Class ;
     :category marc:bib ;
     rdfs:label "Instance"@en, "Instans"@sv;
-    rdfs:subClassOf :Creation ;
+    rdfs:subClassOf :Creation, :Embodiment ;
     owl:equivalentClass bf2:Instance ;
     skos:closeMatch sdo:Product, rdaent:Manifestation .
 

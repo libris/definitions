@@ -217,23 +217,29 @@ def schemes():
 
 @compiler.dataset
 def relators():
+
     def relitem(item):
-        mk_uri = lambda leaf: BASE + "relator/" + leaf
-        item['@id'] = mk_uri(item.get('term') or
-                to_camel_case(item['label_en'].strip()))
-        item['sameAs'] = {'@id': mk_uri(item['code'])}
+        item['@id'] = item.get('term') or to_camel_case(item['label_en'].strip())
+        item['sameAs'] = {'@id': item['code']}
         return item
+
     graph = compiler.construct(sources=[
             {
                 "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
                 "dataset": BASE + "dataset/relators",
                 "context": ["sys/context/ns.jsonld", {
+                    "@base": BASE + "relator/",
+                    "@vocab": "https://id.kb.se/vocab/",
                     "code": "skos:notation",
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
                     "term": "rdfs:label",
-                    "sameAs": "owl:sameAs"
+                    "sameAs": "owl:sameAs",
+                    "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
+                    "rda_app_i_1_en": None,
+                    "rda_app_i_2_en": None,
+                    "rda_app_i_3_en": None
                 }]
             },
             {
