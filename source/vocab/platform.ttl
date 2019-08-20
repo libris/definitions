@@ -318,10 +318,10 @@
 # Containers (mainly used here for controlled URI:s)
 
 :DirectContainer a owl:Class ;
-    rdfs:subClassOf ldp:DirectContainer .
+    owl:equivalentClass ldp:DirectContainer .
 
 :IndirectContainer a owl:Class ;
-    rdfs:subClassOf ldp:IndirectContainer .
+    owl:equivalentClass ldp:IndirectContainer .
 
 :EntityContainer a owl:Class ;
     rdfs:subClassOf :IndirectContainer ;
@@ -334,13 +334,13 @@
     rdfs:range :Agent .
 
 :insertedContentRelation a owl:ObjectProperty, owl:FunctionalProperty ;
-    rdfs:subClassOf ldp:insertedContentRelation .
+    owl:equivalentProperty ldp:insertedContentRelation .
 
 :membershipResource a owl:ObjectProperty, owl:FunctionalProperty ;
-    rdfs:subClassOf ldp:membershipResource .
+    owl:equivalentProperty ldp:membershipResource .
 
 :isMemberOfRelation a owl:ObjectProperty ;
-    rdfs:subClassOf ldp:isMemberOfRelation .
+    owl:equivalentProperty ldp:isMemberOfRelation .
 
 :memberClass a owl:ObjectProperty .
 
