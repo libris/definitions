@@ -9,9 +9,12 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 
 
 # TODO:
-# - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
-# - explicitly link each record to its logical source (or just the parent dataset record?)
+# * Explicitly link each record to it's parent dataset record unless we have an
+#   ldp:IndirectContainer (we now have *some* defined for terms using inScheme).
+# * Explicitly link each record to its logical source (or just the parent dataset record?)
+#   (derivativeOf <github.com/libris/definitions/**/.ttl> + generationProcess <definitions>?)
 
+NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
 
@@ -142,7 +145,7 @@ def vocab():
     if version:
         vocab_record['version'] = version
 
-    lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
+    lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
     faux_record = {'@id': BASE + 'vocab/context'}
@@ -199,6 +202,13 @@ def enumterms():
     graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
+def containers():
+    graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
+
+    return "/term/", "2019-07-11T15:04:17.964Z", graph
 
 
 @compiler.dataset
