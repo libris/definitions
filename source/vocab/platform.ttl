@@ -317,11 +317,16 @@
 ##
 # Containers (mainly used here for controlled URI:s)
 
+:Container a owl:Class ;
+    owl:equivalentClass ldp:Container .
+
 :DirectContainer a owl:Class ;
-    owl:equivalentClass ldp:DirectContainer .
+    owl:equivalentClass ldp:DirectContainer ;
+    rdfs:subClassOf :Container .
 
 :IndirectContainer a owl:Class ;
-    owl:equivalentClass ldp:IndirectContainer .
+    owl:equivalentClass ldp:IndirectContainer ;
+    rdfs:subClassOf :Container .
 
 :EntityContainer a owl:Class ;
     rdfs:subClassOf :IndirectContainer ;
