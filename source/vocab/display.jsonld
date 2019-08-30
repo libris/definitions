@@ -237,6 +237,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "marc:EnumeratedTerm",
           "showProperties": [ "prefLabel" ]
+        },
+        "Cartographic": {
+          "@id": "Cartographic-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Cartographic",
+          "showProperties": [ "prefLabel" ]
         }
       }
     },
@@ -445,11 +451,17 @@
           "classLensDomain": "Ontology",
           "showProperties": [ "title", {"inverseOf": "isDefinedBy"} ]
         },
+        "marc:EnumeratedTerm": {
+          "@id": "EnumeratedTerm-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:EnumeratedTerm",
+          "showProperties": [ "prefLabel" ]
+        },
         "Cartographic": {
           "@id": "Cartographic-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
-          "showProperties": [ "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
         }
       }
     },

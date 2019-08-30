@@ -62,6 +62,8 @@
     rdfs:domain :Title .
 
 :titleRemainder a owl:DatatypeProperty ;
+    :category :pending ;
+    rdfs:comment "Catch for unmatched 245$b properties at conversion from MARC21. Use ':subtitle' as preferred property."@en, "Egenskap som fångar upp omatchade 245$b vid konvertering från MARC21. Använd ':subtitle' som föredragen egenskap."@sv;
     rdfs:domain :Title ;
     rdfs:label "Övrig titelinformation"@sv .
 
@@ -69,7 +71,7 @@
     rdfs:label "subtitle"@en, "övrig titelinformation"@sv;
     skos:altlabel "Undertitel"@sv;
     rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel. Möjlig som titelkomponent"@sv;
-    rdfs:subPropertyOf :titleRemainder;
+    #rdfs:subPropertyOf :titleRemainder; - Commented out as not to depend on a pending property.
     owl:equivalentProperty bf2:subtitle;
     rdfs:domain :Title .
 
@@ -502,6 +504,7 @@
 
 :acquisitionTerms a owl:DatatypeProperty;
     owl:equivalentProperty bf2:acquisitionTerms;
+    sdo:domainIncludes :AcquisitionSource, :Identifier;
     rdfs:label "Anskaffningsvillkor"@sv .
 
 :AcquisitionSource a owl:Class;
@@ -881,8 +884,8 @@
     owl:equivalentProperty bf2:credits .
 
 :participantNote a owl:DatatypeProperty;
-    rdfs:label "Anmärkning om medverkan"@sv;
-    rdfs:domain :Note .
+    # previously note domain, has been used in error and should probably be deprecated after analysis.
+    rdfs:label "Anmärkning om medverkan"@sv .
 
 :ContentAccessibility a owl:Class;
     rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
@@ -1010,8 +1013,21 @@
     rdfs:subClassOf :Capture;
     rdfs:label "Capture of discovery of content"@en, "Upptäckt"@sv .
 
+:hasDuration a owl:ObjectProperty;
+    rdfs:label "Has duration"@en, "Speltid"@sv;
+    rdfs:comment "Information om resursens eller framförandets speltid/längd."@sv ;
+    rdfs:domain :Instance ;
+    rdfs:range :Duration ;
+    skos:closeMatch rdau:duration.en .
+    
+:Duration a owl:Class;
+    rdfs:subClassOf :StructuredValue, dc:SizeOrDuration ;
+    rdfs:label "Duration"@en, "Speltid"@sv .
+
 :duration a owl:DatatypeProperty;
+    :category :shorthand;
     rdfs:label "duration"@en, "speltid"@sv;
+    owl:propertyChainAxiom ( :hasDuration :value );
     owl:equivalentProperty bf2:duration .
 
 :extent a owl:ObjectProperty;

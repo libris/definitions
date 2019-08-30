@@ -2,12 +2,14 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
+prefix : <https://id.kb.se/vocab/>
 
 construct {
     ?idrel a bf2:Role;
         skos:notation ?notation;
         ?p ?o;
         owl:equivalentProperty ?locrel;
+        rdfs:domain ?domain;
         rdfs:subPropertyOf ?superrel .
 } where {
     graph <https://id.kb.se/dataset/relators> {
@@ -28,6 +30,7 @@ construct {
                     bind(coalesce(?idsuperrel, ?locsuperrel) as ?superrel)
                 }
             }
-        }
+        } optional { ?idrel rdfs:domain ?domain . }
+          bind (if(bound(?domain), ?domain, :Work) as ?domain)
     }
 }
