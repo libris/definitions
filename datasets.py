@@ -59,6 +59,14 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     union='definitions.jsonld.lines')
 
 
+def _insert_record(graph, created_ms):
+    entity = graph[0]
+    record = {'@type': 'Record'}
+    record[compiler.record_thing_link] = {'@id': entity['@id']}
+    graph.insert(0, record)
+    record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
+
+
 #@compiler.dataset
 #def datasets():
 #    graph = Graph().parse(compiler.path('source/index.ttl'), format='turtle')
@@ -131,29 +139,21 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    def add_record_system_id(record):
-        record_id = record['@id']
-        record['@id'] = compiler.generate_record_id(vocab_created_ms, record_id)
-        record.setdefault('sameAs', []).append(
-                {'@id': record_id})
-
-    vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    add_record_system_id(vocab_record)
-
+    _insert_record(data['@graph'], vocab_created_ms)
+    vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
-        vocab_record['version'] = version
+        vocab_node['version'] = version
 
     lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
-    faux_record = {'@id': BASE + 'vocab/context'}
-    add_record_system_id(faux_record)
-    lib_context['@graph'] = [faux_record]
+    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    _insert_record(lib_context['@graph'], vocab_created_ms)
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    add_record_system_id(display['@graph'][0])
+    _insert_record(display['@graph'], vocab_created_ms)
 
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')

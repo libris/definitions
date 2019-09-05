@@ -20,10 +20,6 @@
       "descriptionByLang": {"@id": "description", "@container": "@language"}
   },
   "@graph": [
-    {
-      "@id": "https://id.kb.se/vocab/display.jsonld",
-      "mainEntity": {"@id": "https://id.kb.se/vocab/display"}
-    },
     {"@id": "https://id.kb.se/vocab/display"}
   ],
   "lensGroups": {
@@ -451,11 +447,17 @@
           "classLensDomain": "Ontology",
           "showProperties": [ "title", {"inverseOf": "isDefinedBy"} ]
         },
+        "marc:EnumeratedTerm": {
+          "@id": "EnumeratedTerm-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:EnumeratedTerm",
+          "showProperties": [ "prefLabel" ]
+        },
         "Cartographic": {
           "@id": "Cartographic-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
-          "showProperties": [ "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
         },
         "EntityContainer": {
           "@id": "EntityContainer-card",

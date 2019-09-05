@@ -504,6 +504,7 @@
 
 :acquisitionTerms a owl:DatatypeProperty;
     owl:equivalentProperty bf2:acquisitionTerms;
+    sdo:domainIncludes :AcquisitionSource, :Identifier;
     rdfs:label "Anskaffningsvillkor"@sv .
 
 :AcquisitionSource a owl:Class;
@@ -883,8 +884,8 @@
     owl:equivalentProperty bf2:credits .
 
 :participantNote a owl:DatatypeProperty;
-    rdfs:label "Anmärkning om medverkan"@sv;
-    rdfs:domain :Note .
+    # previously note domain, has been used in error and should probably be deprecated after analysis.
+    rdfs:label "Anmärkning om medverkan"@sv .
 
 :ContentAccessibility a owl:Class;
     rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
