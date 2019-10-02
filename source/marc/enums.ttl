@@ -726,11 +726,11 @@
     skos:notation "AuthorityCharacterCodingType" ;
     skos:prefLabel "Teckenuppsättning"@sv .
 
-:AuthorityEncLevelType a :CollectionClass ;
-    rdfs:subClassOf :EncLevelType ;
-    skos:notation "AuthorityEncLevelType" ;
-    skos:prefLabel "Encoding Level"@en,
-        "Fullständighetsnivå"@sv .
+#:AuthorityEncLevelType a :CollectionClass ;
+#    rdfs:subClassOf :EncLevelType ;
+#    skos:notation "AuthorityEncLevelType" ;
+#    skos:prefLabel "Encoding Level"@en,
+#        "Fullständighetsnivå"@sv .
 
 :AuthorityStatusType a :CollectionClass ;
     rdfs:subClassOf :StatusType ;
@@ -874,15 +874,15 @@
 
 # CATEGORY AUTH:
 
-:IncompleteAuthorityRecord a :AuthorityEncLevelType ;
+#:IncompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-o ;
-    skos:notation "o" ;
-    skos:prefLabel "Incomplete authority record"@en, "Ofullständig"@sv .
+#    skos:notation "o" ;
+#    skos:prefLabel "Incomplete authority record"@en, "Ofullständig"@sv .
 
-:CompleteAuthorityRecord a :AuthorityEncLevelType ;
+#:CompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-n ;
-    skos:notation "n" ;
-    skos:prefLabel "Complete authority record"@en, "Fullständig"@sv .
+#    skos:notation "n" ;
+#    skos:prefLabel "Complete authority record"@en, "Fullständig"@sv .
 
 # CATEGORY HOLD:
 
@@ -1039,17 +1039,17 @@
     skos:prefLabel "Form of Item"@en,
         "Form"@sv .
 
-:KindOfRecordType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "KindOfRecordType" ;
-    skos:prefLabel "Kind of Record"@en,
-        "Typ av auktoritetspost"@sv .
+#:KindOfRecordType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "KindOfRecordType" ;
+#    skos:prefLabel "Kind of Record"@en,
+#        "Typ av auktoritetspost"@sv .
 
-:LanguageOfCatalogType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "LanguageOfCatalogType" ;
-    skos:prefLabel "Language of Catalog"@en,
-        "Katalogiseringsspråk(endast engelska/franska)"@sv .
+#:LanguageOfCatalogType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "LanguageOfCatalogType" ;
+#    skos:prefLabel "Language of Catalog"@en,
+#        "Katalogiseringsspråk(endast engelska/franska)"@sv .
 
 :LendingPolicyType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1298,11 +1298,11 @@
         "Ett årtal"@sv .
 
 
-:RecordUpdateType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "RecordUpdateType" ;
-    skos:prefLabel "Record Update"@en,
-        "Uppdatering av posten"@sv .
+#:RecordUpdateType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "RecordUpdateType" ;
+#    skos:prefLabel "Record Update"@en,
+#        "Uppdatering av posten"@sv .
 
 :ReferenceType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1530,23 +1530,23 @@
 
 ##
 
-:SubdivisionType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubdivisionType" ;
-    skos:prefLabel "Subdivision"@en,
-        "Geografisk precisering"@sv .
+#:SubdivisionType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubdivisionType" ;
+#    skos:prefLabel "Subdivision"@en,
+#        "Geografisk precisering"@sv .
 
-:SubjectHeadingType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubjectHeadingType" ;
-    skos:prefLabel "Subject Heading System/Thesaurus"@en,
-        "Ämnesordssystem / Thesaurus"@sv .
+#:SubjectHeadingType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubjectHeadingType" ;
+#    skos:prefLabel "Subject Heading System/Thesaurus"@en,
+#        "Ämnesordssystem / Thesaurus"@sv .
 
-:SubjectSubdivisionType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubjectSubdivisionType" ;
-    skos:prefLabel "Subject Subdivision"@en,
-        "Typ av underindelning"@sv .
+#:SubjectSubdivisionType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubjectSubdivisionType" ;
+#    skos:prefLabel "Subject Subdivision"@en,
+#        "Typ av underindelning"@sv .
 
 :TypeOfControlType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1838,15 +1838,15 @@
         :ItemInfoInRecordType ;
     skos:prefLabel "Exemplarinformation"@sv .
 
-:kindOfRecord a owl:ObjectProperty ;
-    sdo:rangeIncludes :KindOfRecordType ;
-    skos:prefLabel "Kind of Record"@en,
-        "Typ av auktoritetspost"@sv .
+#:kindOfRecord a owl:ObjectProperty ;
+#    sdo:rangeIncludes :KindOfRecordType ;
+#    skos:prefLabel "Kind of Record"@en,
+#        "Typ av auktoritetspost"@sv .
 
-:languageOfCatalog a owl:ObjectProperty ;
-    sdo:rangeIncludes :LanguageOfCatalogType ;
-    skos:prefLabel "Language of Catalog"@en,
-        "Katalogiseringsspråk(endast engelska/franska)"@sv .
+#:languageOfCatalog a owl:ObjectProperty ;
+#    sdo:rangeIncludes :LanguageOfCatalogType ;
+#    skos:prefLabel "Language of Catalog"@en,
+#        "Katalogiseringsspråk(endast engelska/franska)"@sv .
 
 :lendingPolicy a owl:ObjectProperty ;
     sdo:rangeIncludes :LendingPolicyType ;
@@ -1950,10 +1950,10 @@
     skos:prefLabel "Publication Status"@en,
         "Typ av utgivningsdatum"@sv .
 
-:recordUpdate a owl:ObjectProperty ;
-    sdo:rangeIncludes :RecordUpdateType ;
-    skos:prefLabel "Record Update"@en,
-        "Uppdatering av posten"@sv .
+#:recordUpdate a owl:ObjectProperty ;
+#    sdo:rangeIncludes :RecordUpdateType ;
+#    skos:prefLabel "Record Update"@en,
+#        "Uppdatering av posten"@sv .
 
 :reference a owl:ObjectProperty ;
     sdo:rangeIncludes :ReferenceType ;
@@ -2058,20 +2058,20 @@
     skos:prefLabel "Record Status"@en,
         "Poststatus"@sv .
 
-:subdivision a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubdivisionType ;
-    skos:prefLabel "Subdivision"@en,
-        "Geografisk precisering"@sv .
+#:subdivision a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubdivisionType ;
+#    skos:prefLabel "Subdivision"@en,
+#        "Geografisk precisering"@sv .
 
-:subjectHeading a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubjectHeadingType ;
-    skos:prefLabel "Subject Heading System/Thesaurus"@en,
-        "Ämnesordssystem / Thesaurus"@sv .
+#:subjectHeading a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubjectHeadingType ;
+#    skos:prefLabel "Subject Heading System/Thesaurus"@en,
+#        "Ämnesordssystem / Thesaurus"@sv .
 
-:subjectSubdivision a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubjectSubdivisionType ;
-    skos:prefLabel "Subject Subdivision"@en,
-        "Typ av underindelning"@sv .
+#:subjectSubdivision a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubjectSubdivisionType ;
+#    skos:prefLabel "Subject Subdivision"@en,
+#        "Typ av underindelning"@sv .
 
 :technique a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Visual ;
