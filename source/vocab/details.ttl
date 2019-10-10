@@ -738,6 +738,26 @@
     rdfs:subClassOf :PrimaryProduction;
     rdfs:label "Primär bulkproduktion"@sv .
 
+:Availability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Tillgänglighet"@sv, "Availability"@en .
+
+:Digitization a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Manufacture;
+    rdfs:label "Digitisering"@sv, "Digitization"@en .
+
+:OnlineAvailability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Availability;
+    rdfs:label "Online-tillgänglighet"@sv, "Online availability"@en .
+
+:OpenAccessAvailability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Availability;
+    rdfs:label "OpenAccess"@sv, "Open access"@en .
+
 :otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "kompletterande datum"@sv;
