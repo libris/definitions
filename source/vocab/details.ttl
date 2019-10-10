@@ -766,12 +766,12 @@
 :startYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "startår"@sv;
-    rdfs:subPropertyOf :year .
+    rdfs:subPropertyOf :year, :startDate .
 
 :endYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "slutår"@sv;
-    rdfs:subPropertyOf :year .
+    rdfs:subPropertyOf :year, :endDate .
 
 :country a owl:ObjectProperty;
     rdfs:label "land"@sv;
@@ -989,6 +989,15 @@
     rdfs:subPropertyOf :date;
     rdfs:label "år"@sv;
     rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
+
+:startDate a owl:DatatypeProperty;
+    rdfs:label "startdatum"@sv;
+    rdfs:subPropertyOf :date .
+
+:endDate a owl:DatatypeProperty;
+    sdo:domainIncludes :Embargo;
+    rdfs:label "slutdatum"@sv;
+    rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
     rdfs:label "Associated title date"@en, "Tid för verket"@sv;
@@ -1335,6 +1344,11 @@
     rdfs:label "Use policy"@en, "Användningsvillkor"@sv;
     rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:UsePolicy .
+
+:Embargo a owl:Class;
+    :category :pending ;
+    rdfs:label "Embargo"@en, "Embargo"@sv;
+    rdfs:subClassOf :UsageAndAccessPolicy .
 
 :usageAndAccessPolicy a owl:ObjectProperty;
     rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
