@@ -94,7 +94,7 @@
 
 :hasBiographicalInformation a owl:ObjectProperty;
     rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
-    sdo:domainIncludes :Person, :Instance;
+    sdo:domainIncludes :Person, :Family, :Instance;
     # separate instance and agent properties?
     rdfs:range :BiographicalNote;
     owl:equivalentProperty rdau:P60492 .
@@ -105,7 +105,7 @@
 
 :hasHistoricalData a owl:ObjectProperty;
     rdfs:label "has historical data"@en, "Administrativ historik"@sv;
-    sdo:domainIncludes :Organization, :Instance;
+    sdo:domainIncludes :Organization, :Jurisdiction, :Meeting, :Instance;
     # separate instance and agent properties?
     rdfs:range :AdministrativeHistoryNote;
     owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
@@ -190,12 +190,12 @@
 
 :establishDate a owl:DatatypeProperty;
     rdfs:label "Established"@en, "Tid för grundande"@sv;
-    rdfs:domain :Organization;
+    sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:establishDate .
 
 :terminateDate a owl:DatatypeProperty;
     rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
-    rdfs:domain :Organization;
+    sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;

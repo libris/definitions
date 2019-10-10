@@ -15,7 +15,7 @@
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix : <https://id.kb.se/vocab/> .
-
+@prefix marc: <https://id.kb.se/marc/> .
 
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv;
@@ -151,7 +151,7 @@
     owl:equivalentClass sdo:MediaObject .
 
 :accompaniedBy a owl:ObjectProperty;
-    rdfs:label "tillsammans med"@sv;
+    rdfs:label "Medföljs av"@sv;
     rdfs:comment "Resurs som medföljer den beskrivna resursen."@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompanies;
@@ -228,6 +228,12 @@
     rdfs:subPropertyOf :accompanies;
     owl:inverseOf :index;
     owl:equivalentProperty bf2:indexOf .
+
+:indexedIn a owl:ObjectProperty ;
+    rdfs:domain :Endeavour ;
+    sdo:rangeIncludes :Instance, :Work ;
+    rdfs:label "Indexed in"@en, "Indexerad i"@sv ;
+    owl:equivalentProperty bflc:indexedIn .
 
 :hasEquivalent a owl:SymmetricProperty;
     rdfs:label "Equivalence"@en, "Likvärdighet"@sv;
@@ -404,10 +410,12 @@
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
 :language a owl:ObjectProperty;
-    rdfs:label "language"@en, "språk"@sv;
+    rdfs:label "språk"@sv;
     # TODO worklanguage? 
     rdfs:comment "Språk förknippat med en resurs eller dess delar."@sv;
-    sdo:domainIncludes :Creation, :StructuredValue;
+    # TODO: define an abstract base class of these?
+    # (E.g. bring back :Annotation in a new guise...)
+    sdo:domainIncludes :Creation, :Summary, :TableOfContents, :Title, marc:Libretto, marc:SubtitlesOrCaptions, marc:SungOrSpokenText;
     owl:equivalentProperty bf2:language;
     rdfs:subPropertyOf dc:language;
     rdfs:range :Language .

@@ -48,7 +48,7 @@ marc:SerialWork a owl:Class ;
 marc:primaryProvisionActivity a owl:ObjectProperty;
     rdfs:subPropertyOf kbv:provisionActivity;
     rdfs:range kbv:PrimaryProvisionActivity;
-    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+    rdfs:label "Primary provision activity"@en, "Huvudsakligt tillgängliggörande"@sv .
 
 marc:copyrightYear a owl:DatatypeProperty;
     rdfs:label "Copyright year"@en, "Copyrightår"@sv;
@@ -60,26 +60,28 @@ kbv:distribution sdo:rangeIncludes marc:DistributionAndProduction .
 
 marc:DistributionAndProduction a owl:Class;
     rdfs:subClassOf kbv:PrimaryProvisionActivity, kbv:Distribution;
-    rdfs:label "Distribution och produktion"@sv .
+    rdfs:label "Distribution and production"@en, "Distribution och produktion"@sv .
 
 marc:distributionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "distributionsår"@sv;
+    rdfs:label "Distribution year"@en, "Distributionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:productionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "produktionsår"@sv;
+    rdfs:label "Production year"@en, "Produktionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:ReprintReissueAndOriginalPublication a owl:Class;
     rdfs:subClassOf kbv:PrimaryPublication ;
-    rdfs:label "Omtryck/återutgivning och originalutgivning"@sv .
+    rdfs:label "Reprint/reissue date and original publication"@en, "Omtryck/återutgivning och originalutgivning"@sv .
 
 marc:reprintYear a owl:DatatypeProperty ;
+    rdfs:label "Reprint Year"@en, "Årtal för ny utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:originalYear a owl:DatatypeProperty ;
+    rdfs:label "Original year"@en, "Årtal för ursprunglig utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:relief a owl:ObjectProperty ;
@@ -287,8 +289,7 @@ marc:NationalAgriculturalLibraryCallNumber a owl:Class;
 
 marc:mediaTerm a owl:DatatypeProperty;
     rdfs:label "Medieterm"@sv;
-    rdfs:comment "Medieterm som är del av titel i en MARC21 struktur. används ej i RDA"@sv;
-    rdfs:domain kbv:Instance .
+    rdfs:comment "Medieterm som är del av titel i en MARC21 struktur. används ej i RDA"@sv .
 
 marc:searchElement a owl:DatatypeProperty;
     rdfs:label "Titeln är sökelement"@sv;
@@ -299,7 +300,7 @@ marc:searchControl a owl:ObjectProperty;
 
 marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:label "Fileringsvärde"@sv;
-    rdfs:comment "Värde '0' innebär att fileringen skall starta med fältets första alfanumeriska tecken.  Värde '1-9' innebär att fältet inleds med alfanumeriska tecken som skall uteslutas vid filering."@sv;
+    rdfs:comment "Värde '1-9' innebär att titeln inleds med alfanumeriska tecken som skall uteslutas vid filering. Tecken med diakriter räknas som 2 tecken. Lämna tomt om inga tecken ska uteslutas."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
 marc:OtherTitle a owl:Class ;
@@ -356,7 +357,10 @@ marc:publicNote a owl:DatatypeProperty ;
                        marc:TextualHoldingsBasicBibliographicUnit,
                        kbv:Document .
 
-
+# BIB 256
+marc:ComputerFileCharacteristics a owl:Class ;
+    rdfs:label "Computer file characteristics"@en, "Filspecifika uppgifter"@sv ;
+    skos:closeMatch kbv:Note .
 # BIB 300
 
 marc:sizeOfUnit a owl:DatatypeProperty ;
@@ -727,6 +731,10 @@ marc:intermediatePoliticalJurisdiction a owl:DatatypeProperty ;
 marc:city a owl:DatatypeProperty ;
     rdfs:label "Stad, kommun"@sv ;
     rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:displayText a owl:DatatypeProperty;
+    rdfs:label "Relationsbeteckning"@sv .
+    
 
 # 856:
 

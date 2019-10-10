@@ -17,10 +17,10 @@
 
 :Place a owl:Class;
     rdfs:label "Place"@en, "Plats"@sv;
-    owl:equivalentClass bf2:Place, prov:Location, sdo:Place, madsrdf:Geographic .
+    owl:equivalentClass bf2:Place, prov:Location, sdo:Place .
 
 :Country a owl:Class;
-    rdfs:label "Land"@sv;
+    rdfs:label "Country"@en, "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
     rdfs:subClassOf :Place .
 
@@ -30,11 +30,10 @@
 
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
-    owl:equivalentClass bf2:Language, madsrdf:Language,
-        sdo:Language .
+    owl:equivalentClass bf2:Language, madsrdf:Language, sdo:Language .
 
 :Nationality a owl:Class ;
-    rdfs:label "Nationalitet"@sv .
+    rdfs:label "Nationality"@en, "Nationalitet"@sv .
 
 
 ##
@@ -62,11 +61,15 @@
     owl:equivalentClass skos:Collection .
 
 :ConceptScheme a owl:Class;
-    rdfs:label "Concept scheme"@en, "Termlista"@sv;
+    rdfs:label "Concept scheme"@en, "Konceptsystem"@sv;
     #owl:equivalentClass madsrdf:MADSScheme;
     rdfs:subClassOf :Source;
     owl:equivalentClass skos:ConceptScheme .
     #owl:hasKey (:code) .
+
+:TopicScheme a owl:Class;
+    rdfs:label "Topic scheme"@en, "Ämnesordssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :altLabel a owl:DatatypeProperty;
     rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
@@ -111,20 +114,31 @@
 :historyNote a owl:DatatypeProperty;
     rdfs:label "anmärkning om tillämpningshistorik"@sv;
     sdo:domainIncludes :Concept ;
-   skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
+    skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
-    rdfs:label "termlista"@sv;
+    rdfs:label "ingår i system"@sv;
     rdfs:domain :Identity ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
+# Range restrictions:
+:Classification rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :ClassificationScheme ] .
+:GenreForm rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :GenreFormScheme ] .
+:Subject rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:narrower ;
     owl:equivalentProperty madsrdf:hasNarrowerAuthority .
 
@@ -155,7 +169,6 @@
     rdfs:range :Identity;
     rdfs:subPropertyOf skos:related ;
     skos:closeMatch skos:exactMatch ;
-    rdfs:comment "Lägg till (ytterligare) variant genom att klicka på +ikonen och välj typ från listan - Person eller Organisation."@sv;
     owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
 # Range restrictions:
 :Concept rdfs:subClassOf [ a owl:Restriction;
@@ -248,6 +261,10 @@
             owl:hasValue <http://udcdata.info/udc-schema> ] ;
     owl:equivalentClass bf2:ClassificationUdc .
 
+:ClassificationScheme a owl:Class;
+    rdfs:label "Classification scheme"@en, "Klassifikationssystem"@sv;
+    rdfs:subClassOf :ConceptScheme .
+
 :classificationPortion a owl:DatatypeProperty;
     rdfs:label "klassifikationsdel"@sv;
     rdfs:domain :Classification ;
@@ -289,10 +306,14 @@
     rdfs:subClassOf :Subject .
 
 :GenreForm a owl:Class;
-    rdfs:label "Genre/Form"@en, "Genre/form"@sv;
+    rdfs:label "Genre/form"@sv;
     rdfs:subClassOf :Concept;
     owl:equivalentClass madsrdf:GenreForm;
     owl:equivalentClass bf2:GenreForm . # added after merge of Class with same name from things.ttl
+
+:GenreFormScheme a owl:Class;
+    rdfs:label "Genre/Form scheme"@en, "Genre/form-system"@sv;
+    rdfs:subClassOf :ConceptScheme .
 
 :Temporal a owl:Class;
     rdfs:label "Kronologiskt ämnesord"@sv;
@@ -303,7 +324,7 @@
             owl:allValuesFrom :Event ] .
 
 :Geographic a owl:Class;
-    rdfs:label "Geografiskt ämnesord"@sv;
+    rdfs:label "Geographic"@en, "Geografiskt ämnesord"@sv;
     owl:equivalentClass madsrdf:Geographic;
     rdfs:subClassOf :Subject, bf2:Place .
 
@@ -342,7 +363,7 @@
 :TopicSubdivision a owl:Class ;
     skos:broader :Topic;
     rdfs:subClassOf :Subdivision;
-    rdfs:label "Underindelning för allmänt ämnesord"@sv .
+    rdfs:label "Topic Subdivision"@en, "Underindelning för allmänt ämnesord"@sv .
 
 :TemporalSubdivision a owl:Class ;
     skos:broader :Temporal;

@@ -9,9 +9,12 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 
 
 # TODO:
-# - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
-# - explicitly link each record to its logical source (or just the parent dataset record?)
+# * Explicitly link each record to it's parent dataset record unless we have an
+#   ldp:IndirectContainer (we now have *some* defined for terms using inScheme).
+# * Explicitly link each record to its logical source (or just the parent dataset record?)
+#   (derivativeOf <github.com/libris/definitions/**/.ttl> + generationProcess <definitions>?)
 
+NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
 
@@ -25,7 +28,7 @@ def decorate(items, template):
         for k, tplt in template.items():
             item[k] = tplt.format(**item)
         return item
-    return map(decorator, items)
+    return list(map(decorator, items))
 
 
 def to_camel_case(label):
@@ -54,6 +57,14 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     record_thing_link='mainEntity',
                     system_base_iri="",
                     union='definitions.jsonld.lines')
+
+
+def _insert_record(graph, created_ms):
+    entity = graph[0]
+    record = {'@type': 'Record'}
+    record[compiler.record_thing_link] = {'@id': entity['@id']}
+    graph.insert(0, record)
+    record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
 
 
 #@compiler.dataset
@@ -128,29 +139,21 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    def add_record_system_id(record):
-        record_id = record['@id']
-        record['@id'] = compiler.generate_record_id(vocab_created_ms, record_id)
-        record.setdefault('sameAs', []).append(
-                {'@id': record_id})
-
-    vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    add_record_system_id(vocab_record)
-
+    _insert_record(data['@graph'], vocab_created_ms)
+    vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
-        vocab_record['version'] = version
+        vocab_node['version'] = version
 
-    lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
+    lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
-    faux_record = {'@id': BASE + 'vocab/context'}
-    add_record_system_id(faux_record)
-    lib_context['@graph'] = [faux_record]
+    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    _insert_record(lib_context['@graph'], vocab_created_ms)
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    add_record_system_id(display['@graph'][0])
+    _insert_record(display['@graph'], vocab_created_ms)
 
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')
@@ -202,6 +205,13 @@ def enumterms():
 
 
 @compiler.dataset
+def containers():
+    graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
+
+    return "/term/", "2019-07-11T15:04:17.964Z", graph
+
+
+@compiler.dataset
 def generators():
     graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
 
@@ -212,28 +222,34 @@ def generators():
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
-    return "/term/", "2014-02-01T21:00:01.766Z", graph
+    return "/", "2014-02-01T21:00:01.766Z", graph
 
 
 @compiler.dataset
 def relators():
+
     def relitem(item):
-        mk_uri = lambda leaf: BASE + "relator/" + leaf
-        item['@id'] = mk_uri(item.get('term') or
-                to_camel_case(item['label_en'].strip()))
-        item['sameAs'] = {'@id': mk_uri(item['code'])}
+        item['@id'] = item.get('term') or to_camel_case(item['label_en'].strip())
+        item['sameAs'] = {'@id': item['code']}
         return item
+
     graph = compiler.construct(sources=[
             {
-                "source": map(relitem, compiler.read_csv('source/funktionskoder.tsv')),
+                "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
                 "dataset": BASE + "dataset/relators",
                 "context": ["sys/context/ns.jsonld", {
+                    "@base": BASE + "relator/",
+                    "@vocab": "https://id.kb.se/vocab/",
                     "code": "skos:notation",
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
                     "term": "rdfs:label",
-                    "sameAs": "owl:sameAs"
+                    "sameAs": "owl:sameAs",
+                    "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
+                    "rda_app_i_1_en": None,
+                    "rda_app_i_2_en": None,
+                    "rda_app_i_3_en": None
                 }]
             },
             {
@@ -253,10 +269,10 @@ def languages():
         # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
         cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text('utf-8')
         loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-1.ttl.zip'),
+                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-1.ttl.zip'),
                 'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/vocabularyiso639-2.ttl.zip'),
+                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-2.ttl.zip'),
                 'vocabularyiso639-2.ttl').query(cherry_pick_loc_lang_data)
         loclanggraph.serialize(str(loclangpath), format=fmt)
     else:
@@ -304,7 +320,7 @@ def countries():
 def nationalities():
     return "/nationality/", "2014-02-01T14:08:56.596Z", compiler.construct({
             "source": decorate(
-                compiler.read_csv('source/nationalitetskoder.tsv', encoding='latin-1'),
+                compiler.read_csv('source/nationalitetskoder.tsv'),
                 {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
             "context": [
                 "sys/context/base.jsonld",

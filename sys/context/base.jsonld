@@ -10,6 +10,7 @@
     "dc": "http://purl.org/dc/terms/",
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "fresnel": "http://www.w3.org/2004/09/fresnel#",
+    "@vocab": "https://id.kb.se/vocab/",
     "marc": "https://id.kb.se/marc/",
 
     "value": "rdf:value",
@@ -75,14 +76,13 @@
     "abstract": "http://protege.stanford.edu/plugins/owl/protege#abstract",
     "termGroup": "http://purl.org/vocab/vann/termGroup",
     "term_status": "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status",
-    "inCollection": "https://id.kb.se/vocab/inCollection",
-    "category": "https://id.kb.se/vocab/category",
     "lensGroup": "fresnel:group",
 
     "broadMatch": {"@id": "skos:broadMatch", "@container": "@set"},
     "broader": {"@id": "skos:broader", "@container": "@set"},
     "closeMatch": {"@id": "skos:closeMatch", "@container": "@set"},
     "exactMatch": {"@id": "skos:exactMatch", "@container": "@set"},
+    "inScheme": {"@id": "skos:inScheme"},
     "narrowMatch": {"@id": "skos:narrowMatch", "@container": "@set"},
     "narrower": {"@id": "skos:narrower", "@container": "@set"},
     "related": {"@id": "skos:related", "@container": "@set"},
@@ -96,7 +96,6 @@
     "Country": "sdo:Country",
     "Language": "sdo:Language",
     "Role": "http://id.loc.gov/ontologies/bibframe/Role",
-    "Nationality": "https://id.kb.se/vocab/Nationality",
     "ItemAvailability": "sdo:ItemAvailability",
 
     "ContentType": "http://id.loc.gov/ontologies/bibframe/Content",
@@ -105,7 +104,11 @@
     "IssuanceType": "http://id.loc.gov/ontologies/bibframe/Issuance",
 
     "langCode": {"@id": "code", "@type": "dc:ISO639-2"},
-    "langTag": {"@id": "code", "@type": "dc:ISO639-1"}
+    "langTag": {"@id": "code", "@type": "dc:ISO639-1"},
 
+    "isMemberOfRelation": {"@type": "@vocab"},
+    "memberClass": {"@type": "@vocab", "@container": "@set"},
+    "slugProperty": {"@type": "@vocab"},
+    "administeredBy": {"@container": "@set"}
   }
 }
