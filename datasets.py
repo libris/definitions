@@ -205,6 +205,13 @@ def enumterms():
 
 
 @compiler.dataset
+def swepubterms():
+    graph = Graph().parse(str(compiler.path('source/swepub/index.ttl')), format='turtle')
+
+    return "/term/swepub/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
 def containers():
     graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
 
