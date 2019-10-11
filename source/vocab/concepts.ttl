@@ -138,6 +138,7 @@
 :narrower a owl:ObjectProperty;
     rdfs:label "smalare"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range :Concept ;
     owl:equivalentProperty skos:narrower ;
     owl:equivalentProperty madsrdf:hasNarrowerAuthority .
 
@@ -305,7 +306,7 @@
     rdfs:subClassOf :Subject .
 
 :GenreForm a owl:Class;
-    rdfs:label "Genre/Form"@en, "Genre/form"@sv;
+    rdfs:label "Genre/form"@sv;
     rdfs:subClassOf :Concept;
     owl:equivalentClass madsrdf:GenreForm;
     owl:equivalentClass bf2:GenreForm . # added after merge of Class with same name from things.ttl
@@ -323,7 +324,7 @@
             owl:allValuesFrom :Event ] .
 
 :Geographic a owl:Class;
-    rdfs:label "Geografiskt ämnesord"@sv;
+    rdfs:label "Geographic"@en, "Geografiskt ämnesord"@sv;
     owl:equivalentClass madsrdf:Geographic;
     rdfs:subClassOf :Subject, bf2:Place .
 
@@ -362,7 +363,7 @@
 :TopicSubdivision a owl:Class ;
     skos:broader :Topic;
     rdfs:subClassOf :Subdivision;
-    rdfs:label "Underindelning för allmänt ämnesord"@sv .
+    rdfs:label "Topic Subdivision"@en, "Underindelning för allmänt ämnesord"@sv .
 
 :TemporalSubdivision a owl:Class ;
     skos:broader :Temporal;

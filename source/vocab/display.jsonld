@@ -20,10 +20,6 @@
       "descriptionByLang": {"@id": "description", "@container": "@language"}
   },
   "@graph": [
-    {
-      "@id": "https://id.kb.se/vocab/display.jsonld",
-      "mainEntity": {"@id": "https://id.kb.se/vocab/display"}
-    },
     {"@id": "https://id.kb.se/vocab/display"}
   ],
   "lensGroups": {
@@ -214,11 +210,23 @@
           "classLensDomain": "Contribution",
           "showProperties": [ "agent", "role" ]
         },
+        "Duration": {
+          "@id": "Duration-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Duration",
+          "showProperties": [ "value", "hasPart" ]
+        },
         "Relationship": {
           "@id": "Relationship-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Relationship",
           "showProperties": [ "entity", "relation" ]
+        },
+        "SourceData": {
+          "@id": "SourceData-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "SourceData",
+          "showProperties": [ "label", "citationNote" ]
         },
         "ToCEntry": {
           "@id": "ToCEntry-chips",
@@ -260,7 +268,7 @@
           "@type": "fresnel:Lens",
           "@id": "Record-cards",
           "classLensDomain": "Record",
-          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess" ]
+          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -286,6 +294,7 @@
             "indirectlyIdentifiedBy",
             "extent",
             "hasDimensions",
+            "hasDuration",
             "marc:otherPhysicalDetails",
             "accompaniedBy",
             "seriesMembership",
@@ -439,6 +448,12 @@
           "classLensDomain": "SeriesMembership",
           "showProperties": [ "inSeries", "seriesStatement", "seriesEnumeration" ]
         },
+        "SourceData": {
+          "@id": "SourceData-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "SourceData",
+          "showProperties": [ "label", "citationNote", "uri" ]
+        },
         "ToCEntry": {
           "@id": "ToCEntry-cards",
           "@type": "fresnel:Lens",
@@ -462,6 +477,10 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+        },
+        "EntityContainer": {
+          "@id": "EntityContainer-card",
+          "showProperties": [ "administeredBy", "membershipResource", "isMemberOfRelation", "memberClass", "slugProperty" ]
         }
       }
     },

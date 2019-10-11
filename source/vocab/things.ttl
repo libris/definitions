@@ -239,7 +239,7 @@
 :Visual a owl:Class;
     owl:sameAs :Image ;
     #ptg:abstract true ;
-    rdfs:label "Visuell resurs"@sv ;
+    rdfs:label "Visual"@en, "Visuell resurs"@sv ;
     skos:altLabel "Bild"@sv ;
     rdfs:subClassOf :Work ;
     owl:equivalentClass dctype:Image .
@@ -297,8 +297,9 @@
     owl:equivalentClass dctype:Sound, bf2:Audio .
 
 :Music a owl:Class;
-    rdfs:label "Musik"@sv;
-    rdfs:subClassOf :Audio .
+    rdfs:label "Music"@en, "Musik"@sv;
+    # TODO: Work should not be necessary to set as subClassOf since Audio is subClass of Work. Should be removed with LXL-2735
+    rdfs:subClassOf :Audio, :Work .
 
 :StillImage a owl:Class;
     rdfs:label "Stillbild"@sv;
@@ -326,7 +327,7 @@
 #    rdfs:subClassOf dctype:InteractiveResource .
 
 :Kit a owl:Class; # TODO: equivalentClass ?
-    rdfs:label "Paket"@sv;
+    rdfs:label "Kit"@en, "Paket"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Work .
 
@@ -389,7 +390,7 @@
 # Mereological Dimensions (Issuance / Composition)
 
 :Monograph a owl:Class, :IssuanceType;
-    rdfs:label "Monografisk resurs"@sv;
+    rdfs:label "Monograph"@en, "Monografisk resurs"@sv;
     skos:exactMatch rdami:1001 ; # "single unit"@en
     #:inCollection marc:bibLevel; # TODO: just :category :marc ?
     owl:equivalentClass bf1:Monograph .
@@ -399,7 +400,7 @@
     ptg:abstract true .
 
 :ComponentPart a owl:Class, :IssuanceType;
-    rdfs:label "Del av sammansatt resurs"@sv;
+    rdfs:label "Component Part"@en, "Del av sammansatt resurs"@sv;
     #:inCollection marc:bibLevel;
     rdfs:subClassOf :Part .
 
@@ -424,12 +425,12 @@
     owl:equivalentClass dctype:Collection, bf1:Collection .
 
 :SubCollection a owl:Class, :IssuanceType;
-    rdfs:label "Delsamling"@sv;
+    rdfs:label "Subcollection"@en, "Delsamling"@sv;
     #:inCollection marc:bibLevel;
     rdfs:subClassOf :Collection, :Part .
 
 :Integrating a owl:Class, :IssuanceType;
-    rdfs:label "Integrerande resurs"@sv;
+    rdfs:label "Integrating"@en, "Integrerande resurs"@sv;
     skos:exactMatch rdami:1004 ; # "integrating resource"@en
     rdfs:subClassOf :Continuing;
     #:inCollection marc:bibLevel;
@@ -441,13 +442,13 @@
 #    rdfs:subClassOf :Monograph, :ComponentPart .
 #
 :SerialComponentPart a owl:Class, :IssuanceType;
-    rdfs:label "Del av sammansatt seriell resurs"@sv;
+    rdfs:label "Serial Component Part"@en, "Del av sammansatt seriell resurs"@sv;
     #:inCollection marc:bibLevel;
     rdfs:subClassOf :Serial, :ComponentPart  .
 
 :Multipart a owl:Class;
     ptg:abstract true;
-    rdfs:label "Multipel del"@sv;
+    rdfs:label "Multipart"@en, "Multipel del"@sv;
     rdfs:subClassOf :Aggregate .
 
 #:MultipartMonograph a owl:Class;
@@ -457,7 +458,7 @@
 #    owl:equivalentClass bf1:MultipartMonograph .
 
 :Serial a owl:Class, :IssuanceType;
-    rdfs:label "Seriell resurs"@sv;
+    rdfs:label "Serial"@en, "Seriell resurs"@sv;
     skos:exactMatch rdami:1003 ; # "serial" @en
     rdfs:subClassOf :Continuing;
     #:inCollection marc:bibLevel;
@@ -477,7 +478,7 @@
 #    rdfs:label "Creative Work Series"@en, "Utgivningsserie"@sv .
 
 :LicenseAgreementBoundDescription a owl:Class, :IssuanceType ;
-    rdfs:label "Licensavtalsbunden beskrivning"@sv;
+    rdfs:label "License Agreement Bound Description"@en, "Licensavtalsbunden beskrivning"@sv;
     owl:deprecated true;
     #:inCollection marc:bibLevel;
     rdfs:subClassOf :Aggregate .
@@ -508,7 +509,7 @@
     owl:equivalentClass bf2:Electronic .
 
 :Microform a owl:Class;
-    rdfs:label "Mikroform"@sv;
+    rdfs:label "Microform"@en, "Mikroform"@sv;
     skos:exactMatch rdamedia:1002 ; # "microform"
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf :Instance .
@@ -520,10 +521,11 @@
     owl:equivalentClass bf2:Tactile .
 
 :ProjectedImage a owl:Class;
-    rdfs:label "Projicerad bild"@sv;
+    rdfs:label "Projected Image"@en, "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
     :inCollection marc:typeOfRecord;
-    rdfs:subClassOf :Visual  .
+    # TODO: Work should not be necessary to set as subClassOf since Visual is subClass of Work. Should be removed with LXL-2735
+    rdfs:subClassOf :Visual, :Work  .
 
 #:PhysicalObject a owl:Class;
 #    rdfs:label "Föremål"@sv;
@@ -545,7 +547,7 @@
 # Combined "Instance with restricted Work" types from MARC (007)
 
 :StillImageInstance a owl:Class;
-    rdfs:label "Instans av stillbild"@sv;
+    rdfs:label "Still Image Instance"@en, "Instans av stillbild"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
@@ -563,7 +565,7 @@
         ] .
 
 :KitInstance a owl:Class;
-    rdfs:label "Instans av paket"@sv;
+    rdfs:label "Kit Instance"@en, "Instans av paket"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
@@ -572,7 +574,7 @@
         ] .
 
 :NotatedMusicInstance a owl:Class;
-    rdfs:label "Instans av musiknoter"@sv;
+    rdfs:label "Notated Music Instance"@en, "Instans av musiknoter"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
@@ -581,7 +583,7 @@
         ] .
 
 :TextInstance a owl:Class;
-    rdfs:label "Instans av text"@sv;
+    rdfs:label "Text Instance"@en, "Instans av text"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
@@ -590,7 +592,7 @@
         ] .
 
 :ProjectedImageInstance a owl:Class;
-    rdfs:label "Instans av projicerad bild"@sv;
+    rdfs:label "Projected Image Instance"@en, "Instans av projicerad bild"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction;
@@ -602,7 +604,7 @@
 # Combined "Work with restricted Instance" types from MARC (000 typeOfRecord)
 
 :ManuscriptCartography a owl:Class;
-    rdfs:label "Karthandskrift"@sv;
+    rdfs:label "Manuscript Cartography"@en, "Karthandskrift"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Cartography ;
     rdfs:subClassOf [ a owl:Restriction;
@@ -611,7 +613,7 @@
         ] .
 
 :ManuscriptNotatedMusic a owl:Class;
-    rdfs:label "Musikhandskrift"@sv;
+    rdfs:label "Manuscript Notated Music"@en, "Musikhandskrift"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :NotatedMusic ;
     rdfs:subClassOf [ a owl:Restriction;
@@ -620,7 +622,7 @@
         ] .
 
 :ManuscriptText a owl:Class;
-    rdfs:label "Texthandskrift"@sv;
+    rdfs:label "Manuscript Text"@en, "Texthandskrift"@sv;
     :inCollection marc:typeOfRecord;
     rdfs:subClassOf :Text ;
     rdfs:subClassOf [ a owl:Restriction;
@@ -641,7 +643,7 @@
 # TODO: Do some classes here still conflate Work/Instance? (Apart from some commented?)
 
 :Globe a owl:Class;
-    rdfs:label "Kartglob"@sv;
+    rdfs:label "Globe"@en, "Kartglob"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -650,7 +652,7 @@
         ] .
 
 :Map a owl:Class;
-    rdfs:label "Karta"@sv;
+    rdfs:label "Map"@en, "Karta"@sv;
     owl:equivalentClass bibo:Map ;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
@@ -669,7 +671,7 @@
         ] .
 
 :SoundRecording a owl:Class;
-    rdfs:label "Ljudinspelning"@sv;
+    rdfs:label "Sound Recording"@en, "Ljudinspelning"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -678,7 +680,7 @@
         ] .
 
 :VideoRecording a owl:Class;
-    rdfs:label "Videoinspelning"@sv;
+    rdfs:label "Video Recording"@en, "Videoinspelning"@sv;
     rdfs:subClassOf :Instance ;
     :inCollection marc:typeFromBib007;
     rdfs:subClassOf [ a owl:Restriction ;

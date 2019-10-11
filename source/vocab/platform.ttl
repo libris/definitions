@@ -18,6 +18,7 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
 @prefix sindsearch: <http://sindice.com/vocab/search#> .
 @prefix opensearch: <http://a9.com/-/spec/opensearch/1.1/> .
 
@@ -311,6 +312,44 @@
 :textQuery a owl:DatatypeProperty;
     owl:equivalentProperty hydra:freetextQuery;
     rdfs:label "freetext query"@en, "fritextsökning"@sv .
+
+
+##
+# Containers (mainly used here for controlled URI:s)
+
+:Container a owl:Class ;
+    owl:equivalentClass ldp:Container .
+
+:DirectContainer a owl:Class ;
+    owl:equivalentClass ldp:DirectContainer ;
+    rdfs:subClassOf :Container .
+
+:IndirectContainer a owl:Class ;
+    owl:equivalentClass ldp:IndirectContainer ;
+    rdfs:subClassOf :Container .
+
+:EntityContainer a owl:Class ;
+    rdfs:subClassOf :IndirectContainer ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :insertedContentRelation ;
+            owl:hasValue :mainEntity ] .
+
+:administeredBy a owl:ObjectProperty ;
+    sdo:domainIncludes :Container ;
+    rdfs:range :Agent .
+
+:insertedContentRelation a owl:ObjectProperty, owl:FunctionalProperty ;
+    owl:equivalentProperty ldp:insertedContentRelation .
+
+:membershipResource a owl:ObjectProperty, owl:FunctionalProperty ;
+    owl:equivalentProperty ldp:membershipResource .
+
+:isMemberOfRelation a owl:ObjectProperty ;
+    owl:equivalentProperty ldp:isMemberOfRelation .
+
+:memberClass a owl:ObjectProperty .
+
+:slugProperty a owl:DatatypeProperty .
 
 
 ##

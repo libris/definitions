@@ -726,11 +726,11 @@
     skos:notation "AuthorityCharacterCodingType" ;
     skos:prefLabel "Teckenuppsättning"@sv .
 
-:AuthorityEncLevelType a :CollectionClass ;
-    rdfs:subClassOf :EncLevelType ;
-    skos:notation "AuthorityEncLevelType" ;
-    skos:prefLabel "Encoding Level"@en,
-        "Fullständighetsnivå"@sv .
+#:AuthorityEncLevelType a :CollectionClass ;
+#    rdfs:subClassOf :EncLevelType ;
+#    skos:notation "AuthorityEncLevelType" ;
+#    skos:prefLabel "Encoding Level"@en,
+#        "Fullständighetsnivå"@sv .
 
 :AuthorityStatusType a :CollectionClass ;
     rdfs:subClassOf :StatusType ;
@@ -812,7 +812,7 @@
 
 :FullLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-_ ;
-    rdfs:comment "Material som görs på denna nivå är sådant vars utgivning traditionellt förknippas med en nationalbibliografi och är en spegling av Sveriges bokproduktion. Förekommer även i poster som har importerats från utländsk nationalbibliografisk (motsvarande) instans."@sv;
+    rdfs:comment "Den mest fullständiga nivån. Förekommer i poster gjorda av Enheten för nationalbibliografin på KB samt i poster som importeras från motsvarande utländsk nationalbibliografisk instans. Poster på nationalbibliografisk nivå uppdateras inte via maskinella flöden."@sv;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 3, den mest fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/f>;
     skos:notation " " ;
@@ -821,20 +821,20 @@
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-1 ;
-    rdfs:comment "Retrospektiv inmatning av kompletta poster, hit till exempel retrospektiv omkatalogisering."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. omkatalogiseringar. Posterna är kompletta men kan följa äldre praxis."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/1>;
     skos:notation "1" ;
-    skos:prefLabel "Full level, material not examined"@en, "Retrospektiv: omkatalogisering"@sv .
+    skos:prefLabel "Full level, material not examined"@en, "Retrospektiv: komplett"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-2 ;
-    rdfs:comment "Retrospektiv inmatning av reducerade poster, såsom ur en kortkatalog. Sökelement kan avspegla äldre praxis."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. ur kortkatalog. Posterna är reducerade och kan följa äldre praxis."@sv;
     skos:notation "2" ;
-    skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv: enligt katalogkort e.d."@sv .
+    skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv: reducerad"@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-3 ;
-    rdfs:comment "Miniminivå med kontrollerade sökelement."@sv;
+    rdfs:comment "Den lägsta godkända nivån. Primärkatalogiserade poster på miniminivå bör innehålla RDA:s kärnelement. Observera dock att poster på denna nivå kan vara okontrollerade. Poster på miniminivå uppdateras inte via maskinella flöden."@sv;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 1, den minst fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/3>;
     skos:notation "3" ;
@@ -850,14 +850,14 @@
 
 :PartialPreliminaryLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-5 ;
-    rdfs:comment "Hit till exempel beställningsposter baserade på förvärvsinformation, eller på annat sätt okontrollerade."@sv;
+    rdfs:comment "Beställningsposter för utgivna publikationer som inte redan har post i Libris. Preliminära poster uppgraderas av det/de bibliotek som har publikationen. Poster på preliminär nivå uppdateras av vissa maskinella flöden."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/5>;
     skos:notation "5" ;
     skos:prefLabel "Partial (preliminary) level"@en, "Preliminär"@sv .
 
 :MinimalLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-7 ;
-    rdfs:comment "Normalvärde för Libris-bibliotekens katalogisering."@sv;
+    rdfs:comment "Den nivå som normalt tillämpas av Librisbiblioteken. Vid primärkatalogisering på biblioteksnivå ska aktuell Librispraxis följas. Poster på biblioteksnivå uppdateras inte via maskinella flöden."@sv;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 2, den av biblioteken normalt tillämpade."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/7>;
     skos:notation "7" ;
@@ -865,59 +865,59 @@
 
 :PrepublicationLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-8 ;
-    rdfs:comment "Post upprättad innan resursen givits ut. Hit även CIP-poster."@sv;
+    rdfs:comment "Poster för publikationer som är under utgivning. Hit t.ex. poster från Bokinfo samt utländska CIP-poster (= cataloguing-in-publication). Posterna uppdateras via maskinella flöden och ska inte uppgraderas manuellt till annan nivå förrän efter utgivning."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/8>;
     skos:notation "8" ;
-    skos:prefLabel "Prepublication level"@en, "Förhandsinformation (CIP)"@sv .
+    skos:prefLabel "Prepublication level"@en, "Förhandsinformation"@sv .
 
 
 
 # CATEGORY AUTH:
 
-:IncompleteAuthorityRecord a :AuthorityEncLevelType ;
+#:IncompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-o ;
-    skos:notation "o" ;
-    skos:prefLabel "Incomplete authority record"@en, "Ofullständig"@sv .
+#    skos:notation "o" ;
+#    skos:prefLabel "Incomplete authority record"@en, "Ofullständig"@sv .
 
-:CompleteAuthorityRecord a :AuthorityEncLevelType ;
+#:CompleteAuthorityRecord a :AuthorityEncLevelType ;
     #owl:sameAs :AuthorityEncLevelType-n ;
-    skos:notation "n" ;
-    skos:prefLabel "Complete authority record"@en, "Fullständig"@sv .
+#    skos:notation "n" ;
+#    skos:prefLabel "Complete authority record"@en, "Fullständig"@sv .
 
 # CATEGORY HOLD:
 
-:HoldingsLevel1 a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-1 ;
-    skos:notation "1" ;
-    skos:prefLabel "Holdings level 1"@en, "Beståndsnivå 1 (grundnivå, endast 852)"@sv .
-
-:HoldingsLevel2 a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-2 ;
-    kbv:category kbv:pending ;
-    rdfs:comment "Används t.v. ej"@sv;
-    skos:notation "2" ;
-    skos:prefLabel "Holdings level 2"@en, "Beståndsnivå 2"@sv .
-
-:HoldingsLevel3 a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-3 ;
-    skos:notation "3" ;
-    skos:prefLabel "Holdings level 3"@en, "Beståndsnivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
-
-:HoldingsLevel4 a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-4 ;
-    skos:notation "4" ;
-    skos:prefLabel "Holdings level 4"@en, "Beståndsnivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
-
-:HoldingsLevel4WithPieceDesignation a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-5 ;
-    skos:notation "5" ;
-    skos:prefLabel "Holdings level 4 with piece designation"@en, "Beståndsnivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
-
-:OtherLevel a :HoldingEncLevelType ;
-    #owl:sameAs :HoldingEncLevelType-z ;
-    kbv:category kbv:pending ;
-    skos:notation "z" ;
-    skos:prefLabel "Other level"@en, "Beståndsnivå annan"@sv .
+# :HoldingsLevel1 a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-1 ;
+#     skos:notation "1" ;
+#     skos:prefLabel "Holdings level 1"@en, "Beståndsnivå 1 (grundnivå, endast 852)"@sv .
+# 
+# :HoldingsLevel2 a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-2 ;
+#     kbv:category kbv:pending ;
+#     rdfs:comment "Används t.v. ej"@sv;
+#     skos:notation "2" ;
+#     skos:prefLabel "Holdings level 2"@en, "Beståndsnivå 2"@sv .
+# 
+# :HoldingsLevel3 a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-3 ;
+#     skos:notation "3" ;
+#     skos:prefLabel "Holdings level 3"@en, "Beståndsnivå 3 (summariskt bestånd i 853-855 och/eller 86X)"@sv .
+# 
+# :HoldingsLevel4 a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-4 ;
+#     skos:notation "4" ;
+#     skos:prefLabel "Holdings level 4"@en, "Beståndsnivå 4 (detaljerat bestånd i 853-855 och/eller 86X)"@sv .
+# 
+# :HoldingsLevel4WithPieceDesignation a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-5 ;
+#     skos:notation "5" ;
+#     skos:prefLabel "Holdings level 4 with piece designation"@en, "Beståndsnivå 5 (detaljerat bestånd, inkl. exemplarinformation)"@sv .
+# 
+# :OtherLevel a :HoldingEncLevelType ;
+#     #owl:sameAs :HoldingEncLevelType-z ;
+#     kbv:category kbv:pending ;
+#     skos:notation "z" ;
+#     skos:prefLabel "Other level"@en, "Beståndsnivå annan"@sv .
 
 :MultipartItemHolding a :HoldingType ;
     #owl:sameAs :HoldingType-v ;
@@ -974,11 +974,11 @@
     skos:notation "HoldingCharacterCodingType" ;
     skos:prefLabel "Teckenuppsättning"@sv .
 
-:HoldingEncLevelType a :CollectionClass ;
-    rdfs:comment "Enligt ISO 10324 resp. ANSI/NISO Z39.57 & Z39.81."@sv;
-    rdfs:subClassOf :EncLevelType ;
-    skos:notation "HoldingEncLevelType" ;
-    skos:prefLabel "Encoding Level"@en, "Beståndsnivå"@sv .
+# :HoldingEncLevelType a :CollectionClass ;
+#     rdfs:comment "Enligt ISO 10324 resp. ANSI/NISO Z39.57 & Z39.81."@sv;
+#     rdfs:subClassOf :EncLevelType ;
+#     skos:notation "HoldingEncLevelType" ;
+#     skos:prefLabel "Encoding Level"@en, "Beståndsnivå"@sv .
 
 :HoldingSoundKindOfMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1039,17 +1039,17 @@
     skos:prefLabel "Form of Item"@en,
         "Form"@sv .
 
-:KindOfRecordType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "KindOfRecordType" ;
-    skos:prefLabel "Kind of Record"@en,
-        "Typ av auktoritetspost"@sv .
+#:KindOfRecordType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "KindOfRecordType" ;
+#    skos:prefLabel "Kind of Record"@en,
+#        "Typ av auktoritetspost"@sv .
 
-:LanguageOfCatalogType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "LanguageOfCatalogType" ;
-    skos:prefLabel "Language of Catalog"@en,
-        "Katalogiseringsspråk(endast engelska/franska)"@sv .
+#:LanguageOfCatalogType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "LanguageOfCatalogType" ;
+#    skos:prefLabel "Language of Catalog"@en,
+#        "Katalogiseringsspråk(endast engelska/franska)"@sv .
 
 :LendingPolicyType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1298,11 +1298,11 @@
         "Ett årtal"@sv .
 
 
-:RecordUpdateType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "RecordUpdateType" ;
-    skos:prefLabel "Record Update"@en,
-        "Uppdatering av posten"@sv .
+#:RecordUpdateType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "RecordUpdateType" ;
+#    skos:prefLabel "Record Update"@en,
+#        "Uppdatering av posten"@sv .
 
 :ReferenceType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1530,23 +1530,23 @@
 
 ##
 
-:SubdivisionType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubdivisionType" ;
-    skos:prefLabel "Subdivision"@en,
-        "Geografisk precisering"@sv .
+#:SubdivisionType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubdivisionType" ;
+#    skos:prefLabel "Subdivision"@en,
+#        "Geografisk precisering"@sv .
 
-:SubjectHeadingType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubjectHeadingType" ;
-    skos:prefLabel "Subject Heading System/Thesaurus"@en,
-        "Ämnesordssystem / Thesaurus"@sv .
+#:SubjectHeadingType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubjectHeadingType" ;
+#    skos:prefLabel "Subject Heading System/Thesaurus"@en,
+#        "Ämnesordssystem / Thesaurus"@sv .
 
-:SubjectSubdivisionType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "SubjectSubdivisionType" ;
-    skos:prefLabel "Subject Subdivision"@en,
-        "Typ av underindelning"@sv .
+#:SubjectSubdivisionType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm ;
+#    skos:notation "SubjectSubdivisionType" ;
+#    skos:prefLabel "Subject Subdivision"@en,
+#        "Typ av underindelning"@sv .
 
 :TypeOfControlType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1609,6 +1609,7 @@
         "Accompanying Matter (OBSOLETE)"@en .
 
 :VisualRunningTimeType a :CollectionClass ;
+    :category :pending ;
     rdfs:subClassOf :EnumeratedTerm ;
     skos:broadMatch kbv:Visual ;
     skos:notation "VisualRunningTimeType" ;
@@ -1757,13 +1758,9 @@
          "Direkt referensmetod"@sv .
 
 :encLevel a owl:ObjectProperty ;
-    sdo:rangeIncludes :AuthorityEncLevelType,
-        :EncLevelType,
-        :HoldingEncLevelType ;
+    sdo:rangeIncludes :EncLevelType ;
     skos:prefLabel "Encoding Level"@en,
-        "Beståndsnivå"@sv,
-        "Fullständighetsnivå"@sv,
-        "Fullständighetsnivå för katalogiseringen"@sv .
+        "Fullständighetsnivå"@sv .
 
 :entryMap a owl:ObjectProperty ;
     sdo:rangeIncludes :EntryMapType ;
@@ -1792,10 +1789,10 @@
     skos:prefLabel "Govt. Publication"@en,
         "Offentlig resurs"@sv .
 
-:headingMain a owl:ObjectProperty ;
-    sdo:rangeIncludes :Boolean,
-        :HeadingType ;
-    skos:prefLabel "Heading Use - Main or Added Entry"@en .
+# :headingMain a owl:ObjectProperty ;
+#     sdo:rangeIncludes :Boolean,
+#         :HeadingType ;
+#     skos:prefLabel "Heading Use - Main or Added Entry"@en .
 
 :headingSeries a owl:ObjectProperty ;
     sdo:rangeIncludes :Boolean,
@@ -1803,10 +1800,10 @@
     skos:prefLabel "Heading Use - Series Added Entry"@en,
         "Användningsområdeseriesökelement"@sv .
 
-:headingSubject a owl:ObjectProperty ;
-    sdo:rangeIncludes :Boolean,
-        :HeadingType ;
-    skos:prefLabel "Heading Use - Subject Added Entry"@en .
+# :headingSubject a owl:ObjectProperty ;
+#     sdo:rangeIncludes :Boolean,
+#         :HeadingType ;
+#     skos:prefLabel "Heading Use - Subject Added Entry"@en .
 
 :holdingType a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Record ;
@@ -1838,15 +1835,15 @@
         :ItemInfoInRecordType ;
     skos:prefLabel "Exemplarinformation"@sv .
 
-:kindOfRecord a owl:ObjectProperty ;
-    sdo:rangeIncludes :KindOfRecordType ;
-    skos:prefLabel "Kind of Record"@en,
-        "Typ av auktoritetspost"@sv .
+#:kindOfRecord a owl:ObjectProperty ;
+#    sdo:rangeIncludes :KindOfRecordType ;
+#    skos:prefLabel "Kind of Record"@en,
+#        "Typ av auktoritetspost"@sv .
 
-:languageOfCatalog a owl:ObjectProperty ;
-    sdo:rangeIncludes :LanguageOfCatalogType ;
-    skos:prefLabel "Language of Catalog"@en,
-        "Katalogiseringsspråk(endast engelska/franska)"@sv .
+#:languageOfCatalog a owl:ObjectProperty ;
+#    sdo:rangeIncludes :LanguageOfCatalogType ;
+#    skos:prefLabel "Language of Catalog"@en,
+#        "Katalogiseringsspråk(endast engelska/franska)"@sv .
 
 :lendingPolicy a owl:ObjectProperty ;
     sdo:rangeIncludes :LendingPolicyType ;
@@ -1950,10 +1947,10 @@
     skos:prefLabel "Publication Status"@en,
         "Typ av utgivningsdatum"@sv .
 
-:recordUpdate a owl:ObjectProperty ;
-    sdo:rangeIncludes :RecordUpdateType ;
-    skos:prefLabel "Record Update"@en,
-        "Uppdatering av posten"@sv .
+#:recordUpdate a owl:ObjectProperty ;
+#    sdo:rangeIncludes :RecordUpdateType ;
+#    skos:prefLabel "Record Update"@en,
+#        "Uppdatering av posten"@sv .
 
 :reference a owl:ObjectProperty ;
     sdo:rangeIncludes :ReferenceType ;
@@ -1999,6 +1996,7 @@
         "Translitterering"@sv .
 
 :runningTime a owl:ObjectProperty ;
+    :category :pending ;
     sdo:domainIncludes kbv:Visual ;
     sdo:rangeIncludes :VisualRunningTimeType ;
     skos:prefLabel "Running Time"@en,
@@ -2058,20 +2056,20 @@
     skos:prefLabel "Record Status"@en,
         "Poststatus"@sv .
 
-:subdivision a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubdivisionType ;
-    skos:prefLabel "Subdivision"@en,
-        "Geografisk precisering"@sv .
+#:subdivision a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubdivisionType ;
+#    skos:prefLabel "Subdivision"@en,
+#        "Geografisk precisering"@sv .
 
-:subjectHeading a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubjectHeadingType ;
-    skos:prefLabel "Subject Heading System/Thesaurus"@en,
-        "Ämnesordssystem / Thesaurus"@sv .
+#:subjectHeading a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubjectHeadingType ;
+#    skos:prefLabel "Subject Heading System/Thesaurus"@en,
+#        "Ämnesordssystem / Thesaurus"@sv .
 
-:subjectSubdivision a owl:ObjectProperty ;
-    sdo:rangeIncludes :SubjectSubdivisionType ;
-    skos:prefLabel "Subject Subdivision"@en,
-        "Typ av underindelning"@sv .
+#:subjectSubdivision a owl:ObjectProperty ;
+#    sdo:rangeIncludes :SubjectSubdivisionType ;
+#    skos:prefLabel "Subject Subdivision"@en,
+#        "Typ av underindelning"@sv .
 
 :technique a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Visual ;

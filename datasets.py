@@ -9,9 +9,12 @@ from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overl
 
 
 # TODO:
-# - explicitly link each record to it's parent dataset record (c.f. ldp:IndirectContainer)
-# - explicitly link each record to its logical source (or just the parent dataset record?)
+# * Explicitly link each record to it's parent dataset record unless we have an
+#   ldp:IndirectContainer (we now have *some* defined for terms using inScheme).
+# * Explicitly link each record to its logical source (or just the parent dataset record?)
+#   (derivativeOf <github.com/libris/definitions/**/.ttl> + generationProcess <definitions>?)
 
+NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
 
@@ -54,6 +57,14 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     record_thing_link='mainEntity',
                     system_base_iri="",
                     union='definitions.jsonld.lines')
+
+
+def _insert_record(graph, created_ms):
+    entity = graph[0]
+    record = {'@type': 'Record'}
+    record[compiler.record_thing_link] = {'@id': entity['@id']}
+    graph.insert(0, record)
+    record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
 
 
 #@compiler.dataset
@@ -128,29 +139,21 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    def add_record_system_id(record):
-        record_id = record['@id']
-        record['@id'] = compiler.generate_record_id(vocab_created_ms, record_id)
-        record.setdefault('sameAs', []).append(
-                {'@id': record_id})
-
-    vocab_record = data['@graph'][0]
     vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    add_record_system_id(vocab_record)
-
+    _insert_record(data['@graph'], vocab_created_ms)
+    vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
-        vocab_record['version'] = version
+        vocab_node['version'] = version
 
-    lib_context = make_context(graph, vocab_base, DEFAULT_NS_PREF_ORDER)
+    lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
-    faux_record = {'@id': BASE + 'vocab/context'}
-    add_record_system_id(faux_record)
-    lib_context['@graph'] = [faux_record]
+    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    _insert_record(lib_context['@graph'], vocab_created_ms)
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    add_record_system_id(display['@graph'][0])
+    _insert_record(display['@graph'], vocab_created_ms)
 
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')
@@ -199,6 +202,13 @@ def enumterms():
     graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
+def containers():
+    graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
+
+    return "/term/", "2019-07-11T15:04:17.964Z", graph
 
 
 @compiler.dataset

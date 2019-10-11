@@ -122,42 +122,42 @@
 
 # TODO: <sao/fack>, <sao/skon>, ...?
 
-<subdivisions> a skos:Collection;
+<subdivisions> a :TermCollection;
     skos:notation "subdivisions";
     dc:title "Underindelningar"@sv;
     void:inDataset </> .
 
-<fack> a skos:Collection;
+<fack> a :TermCollection;
     owl:sameAs <Fack>;
     skos:notation "Fack";
     dc:title "Facktermer"@sv;
     void:inDataset </> .
 
-<skon> a skos:Collection;
+<skon> a :TermCollection;
     owl:sameAs <Skon>;
     skos:notation "Skon";
     dc:title "Skönlitterära termer"@sv;
     void:inDataset </> .
 
-<musik> a skos:Collection;
+<musik> a :TermCollection;
     owl:sameAs <Musik>;
     skos:notation "Musik";
     dc:title "Musiktermer"@sv;
     void:inDataset </> .
 
-<film> a skos:Collection;
+<film> a :TermCollection;
     skos:notation "film";
     dc:title "Filmtermer"@sv;
     void:inDataset </> .
 
-<nlt> a skos:Collection;
+<nlt> a :TermCollection;
     owl:sameAs <NLT>;
     skos:notation "nlt";
     dc:alternative "NLT";
     dc:title "NLT (termer för Nya Lundstedt - tidskrifter)"@sv;
     void:inDataset </> .
 
-<datorspel> a skos:Collection;
+<datorspel> a :TermCollection;
     skos:notation "datorspel";
     dc:title "Datorspelstermer"@sv;
     void:inDataset </> .
@@ -259,6 +259,13 @@
     dc:title "KVINNSAM subject headings, engelskspråkig version"@sv;
     skos:broadMatch <http://id.loc.gov/vocabulary/subjectSchemes/kao>;
     foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
+
+<lcgft> a :GenreFormScheme;
+    skos:notation "lcgft";
+    dc:alternative "LCGFT";
+    dc:title "Library of Congress genre/form terms for library and archival materials"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/lcgft>;
+    foaf:homepage <http://id.loc.gov/authorities/genreForms/> .
 
 <lcsh> a :TopicScheme;
     skos:notation "lcsh";
