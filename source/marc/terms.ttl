@@ -48,7 +48,7 @@ marc:SerialWork a owl:Class ;
 marc:primaryProvisionActivity a owl:ObjectProperty;
     rdfs:subPropertyOf kbv:provisionActivity;
     rdfs:range kbv:PrimaryProvisionActivity;
-    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+    rdfs:label "Primary provision activity"@en, "Huvudsakligt tillgängliggörande"@sv .
 
 marc:copyrightYear a owl:DatatypeProperty;
     rdfs:label "Copyright year"@en, "Copyrightår"@sv;
@@ -60,26 +60,28 @@ kbv:distribution sdo:rangeIncludes marc:DistributionAndProduction .
 
 marc:DistributionAndProduction a owl:Class;
     rdfs:subClassOf kbv:PrimaryProvisionActivity, kbv:Distribution;
-    rdfs:label "Distribution och produktion"@sv .
+    rdfs:label "Distribution and production"@en, "Distribution och produktion"@sv .
 
 marc:distributionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "distributionsår"@sv;
+    rdfs:label "Distribution year"@en, "Distributionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:productionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "produktionsår"@sv;
+    rdfs:label "Production year"@en, "Produktionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:ReprintReissueAndOriginalPublication a owl:Class;
     rdfs:subClassOf kbv:PrimaryPublication ;
-    rdfs:label "Omtryck/återutgivning och originalutgivning"@sv .
+    rdfs:label "Reprint/reissue date and original publication"@en, "Omtryck/återutgivning och originalutgivning"@sv .
 
 marc:reprintYear a owl:DatatypeProperty ;
+    rdfs:label "Reprint Year"@en, "Årtal för ny utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:originalYear a owl:DatatypeProperty ;
+    rdfs:label "Original year"@en, "Årtal för ursprunglig utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:relief a owl:ObjectProperty ;

@@ -297,7 +297,8 @@
 
 :Music a owl:Class;
     rdfs:label "Music"@en, "Musik"@sv;
-    rdfs:subClassOf :Audio .
+    # TODO: Work should not be necessary to set as subClassOf since Audio is subClass of Work. Should be removed with LXL-2735
+    rdfs:subClassOf :Audio, :Work .
 
 :StillImage a owl:Class;
     rdfs:label "Stillbild"@sv;
