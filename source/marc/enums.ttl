@@ -56,8 +56,7 @@
     rdfs:subClassOf :EnumeratedTerm ;
     owl:equivalentClass :NonProjColorType,
         :ProjGraphColorType ;
-    skos:broadMatch kbv:ProjectedImage,
-        kbv:StillImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ColorType" ;
     skos:prefLabel "Color"@en,
         "Färg (projicerad-/stillbild)"@sv .
@@ -231,7 +230,7 @@
 
 :HoldingProjGraphMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual  ;
     skos:notation "HoldingProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning för projicerade bilder"@sv .
@@ -509,21 +508,21 @@
 
 :ProjGraphDimensionsType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphDimensionsType" ;
     skos:prefLabel "Dimensions"@en,
         "Mått (projicerad bild)"@sv .
 
 :ProjGraphEmulsionType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphEmulsionType" ;
     skos:prefLabel "Base of Emulsion"@en,
         "Bärande material (emulsion)"@sv .
 
 :ProjGraphMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:StillImage ;
     skos:notation "ProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning projicerbara stillbilder "@sv .
@@ -534,7 +533,7 @@
 
 :ProjGraphSupportType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphSupportType" ;
     skos:prefLabel "Secondary Support Material"@en,
         "Montering (projicerad bild)"@sv .
@@ -1083,7 +1082,6 @@
         kbv:Map,
         kbv:Microform,
         kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:SoundRecording,
         kbv:StillImage ;
     skos:notation "MapAspectType" ;
@@ -1102,7 +1100,6 @@
         :ProjGraphMediumType,
         :VideoMediumType ;
     skos:broadMatch kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:VideoRecording ;
     skos:notation "MediumType" ;
     skos:prefLabel "Medium for Sound"@en,
@@ -1446,7 +1443,6 @@
         :ProjGraphSoundType,
         :VideoSoundType ;
     skos:broadMatch kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:VideoRecording ;
     skos:notation "SoundType" ;
     skos:prefLabel "Sound on Medium"@en,
