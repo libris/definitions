@@ -298,8 +298,7 @@
 
 :Music a owl:Class;
     rdfs:label "Music"@en, "Musik"@sv;
-    # TODO: Work should not be necessary to set as subClassOf since Audio is subClass of Work. Should be removed with LXL-2735
-    rdfs:subClassOf :Audio, :Work .
+    rdfs:subClassOf :Audio .
 
 :StillImage a owl:Class;
     rdfs:label "Stillbild"@sv;
@@ -524,8 +523,7 @@
     rdfs:label "Projected Image"@en, "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
     :inCollection marc:typeOfRecord;
-    # TODO: Work should not be necessary to set as subClassOf since Visual is subClass of Work. Should be removed with LXL-2735
-    rdfs:subClassOf :Visual, :Work  .
+    rdfs:subClassOf :Visual  .
 
 #:PhysicalObject a owl:Class;
 #    rdfs:label "Föremål"@sv;
