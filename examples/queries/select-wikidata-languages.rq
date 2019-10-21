@@ -1,0 +1,13 @@
+##
+# Example invocation:
+# $ curl -Haccept:text/csv -s https://query.wikidata.org/sparql --data-urlencode "query=$(cat $THIS_FILE)"
+
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+
+select ?id ?code ?label {
+  ?id wdt:P31 wd:Q34770 ;
+    wdt:P220 ?code ;
+    rdfs:label ?label .
+}
