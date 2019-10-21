@@ -3,7 +3,6 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix dc: <http://purl.org/dc/terms/>
 prefix : <http://schema.org/>
-prefix iso639_1: <http://id.loc.gov/vocabulary/iso639-1/>
 
 construct {
     ?s a :Language;
@@ -11,8 +10,8 @@ construct {
         skos:prefLabel ?prefLabel ;
         rdfs:comment ?comment ;
         skos:notation ?not;
-        skos:closeMatch ?loclang ;
         skos:notation ?langCode;
+        skos:exactMatch ?loclang ;
         skos:closeMatch ?locvariant ;
         skos:notation ?langTag .
 
@@ -24,20 +23,16 @@ construct {
         } union {
             ?s skos:notation ?not .
             bind(strdt(?not, dc:ISO639-2) as ?langCode)
-            bind(strdt(?not, xsd:string) as ?strnot)
+            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?not)) as ?loclang)
             graph <http://id.loc.gov/vocabulary/languages> {
+                ?loclang skos:prefLabel ?prefLabel .
                 optional {
-                    ?loclang skos:notation ?strnot .
-                    optional {
-                        ?loclang skos:prefLabel ?prefLabel .
-                        filter(langMatches(lang(?prefLabel), 'en'))
-                    }
-                    optional {
-                        ?loclang skos:exactMatch ?locvariant .
-                        filter exists { ?locvariant a iso639_1:iso639-1_Language }
-                        ?locvariant skos:notation ?varnot .
-                        bind(strdt(?varnot, dc:ISO639-1) as ?langTag)
-                    }
+                    filter(langMatches(lang(?prefLabel), 'en'))
+                    ?locvariant skos:prefLabel ?prefLabel .
+                    bind('http://id.loc.gov/vocabulary/iso639-1/' as ?iso639_1_base)
+                    filter(strstarts(str(?locvariant), ?iso639_1_base))
+                    bind(substr(str(?locvariant), strlen(?iso639_1_base) + 1) as ?shortcode)
+                    bind(strdt(?shortcode, dc:ISO639-1) as ?langTag)
                 }
             }
         }

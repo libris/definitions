@@ -2,7 +2,6 @@
 from __future__ import unicode_literals, print_function
 import os
 import re
-import zipfile
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
 from lxltools.datacompiler import Compiler
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
@@ -34,11 +33,6 @@ def decorate(items, template):
 def to_camel_case(label):
     return "".join((s[0].upper() if i else s[0].lower()) + s[1:]
             for (i, s) in enumerate(re.split(r'[\s,.-]', label)) if s)
-
-
-def _get_zipped_graph(path, name):
-    with zipfile.ZipFile(str(path), 'r') as zipped:
-        return Graph().parse(zipped.open(name), format='turtle')
 
 
 def _get_repo_version():
@@ -263,20 +257,13 @@ def relators():
 
 @compiler.dataset
 def languages():
-    loclangpath, fmt = compiler.get_cached_path("loc-language-data.ttl"), 'turtle'
     loclanggraph = Graph()
-    if not loclangpath.exists():
-        # More than <http://id.loc.gov/vocabulary/iso639-*> but without inferred SKOS
-        cherry_pick_loc_lang_data = compiler.path('source/construct-loc-language-data.rq').read_text('utf-8')
-        loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-1.ttl.zip'),
-                'vocabularyiso639-1.ttl').query(cherry_pick_loc_lang_data)
-        loclanggraph += _get_zipped_graph(
-                compiler.cache_url('http://id.loc.gov/static/data/downloads/vocabularyiso639-2.ttl.zip'),
-                'vocabularyiso639-2.ttl').query(cherry_pick_loc_lang_data)
-        loclanggraph.serialize(str(loclangpath), format=fmt)
-    else:
-        loclanggraph.parse(str(loclangpath), format=fmt)
+    loclanggraph.parse(
+            str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-1.nt')),
+            format='nt')
+    loclanggraph.parse(
+            str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-2.nt')),
+            format='nt')
 
     languages = decorate(compiler.read_csv('source/spraakkoder.tsv'),
         {"@id": BASE + "language/{code}"})
