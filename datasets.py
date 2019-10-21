@@ -311,7 +311,8 @@ def nationalities():
                 {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
             "context": [
                 "sys/context/base.jsonld",
-                {"label_sv": {"@id": "rdfs:label", "@language": "sv"}}
+                {"label_sv": {"@id": "rdfs:label", "@language": "sv"}},
+                {"label_en": {"@id": "rdfs:label", "@language": "en"}}
             ]
         })
 
