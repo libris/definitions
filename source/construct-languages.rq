@@ -26,7 +26,7 @@ construct {
                 BIND (concat("^([^|]+\\|){", str(?n) ,"}") AS ?skipN)
                 BIND (replace(replace(?altLabels, ?skipN, ""), "\\|.*$", "") AS ?altLabel)
             }
-            #optional { ?s rdfs:comment ?comment }
+            optional { ?s rdfs:comment ?comment }
         } union {
             ?s skos:notation ?not .
             bind(strdt(?not, dc:ISO639-2) as ?langCode)
