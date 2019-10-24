@@ -21,10 +21,10 @@ construct {
         {
             ?s rdfs:label ?label .
             optional { 
-                VALUES ?n { 0 1 2 3 4 5 }
+                values ?n { 0 1 2 3 4 5 }
                 ?s skos:altLabel ?altLabels
-                BIND (concat("^([^|]+\\|){", str(?n) ,"}") AS ?skipN)
-                BIND (replace(replace(?altLabels, ?skipN, ""), "\\|.*$", "") AS ?altLabel)
+                bind(concat("^([^|]+\\|){", str(?n) ,"}") AS ?skipN)
+                bind(replace(replace(?altLabels, ?skipN, ""), "\\|.*$", "") AS ?altLabel)
             }
             optional { ?s rdfs:comment ?comment }
         } union {
