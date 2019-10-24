@@ -21,9 +21,14 @@ construct {
         {
             ?s rdfs:label ?label .
             optional { 
+                filter(contains(?altLabel, "|"))
+                ?s skos:altLabel ?altLabel
+            }
+            optional { 
+                filter(contains(?altLabels, "|"))
+                ?s skos:altLabel ?altLabels
                 values ?n { 0 1 2 3 4 5 }
                 bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-                ?s skos:altLabel ?altLabels
                 bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
             }
             optional { ?s rdfs:comment ?comment }
@@ -32,10 +37,17 @@ construct {
             bind(strdt(?not, dc:ISO639-2) as ?langCode)
             bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?not)) as ?loclang)
             graph <http://id.loc.gov/vocabulary/languages> {
-                ?loclang skos:prefLabel ?prefLabels
-                values ?n { 0 1 2 3 4 5 }
-                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-                bind(replace(replace(?prefLabels, ?skipN, ""), " *\\|.*$", "") as ?prefLabel)
+                optional {
+                    filter(!contains(?prefLabel, "|"))
+                    ?loclang skos:prefLabel ?prefLabel
+                }
+                optional {
+                    filter(contains(?prefLabels, "|"))
+                    ?loclang skos:prefLabel ?prefLabels
+                    values ?n { 0 1 2 3 4 5 }
+                    bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                    bind(replace(replace(?prefLabels, ?skipN, ""), " *\\|.*$", "") as ?prefLabel)
+                }
                 optional {
                     filter(langMatches(lang(?prefLabel), 'en'))
                     ?locvariant skos:prefLabel ?prefLabel .
