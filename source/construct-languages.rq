@@ -22,9 +22,9 @@ construct {
             ?s rdfs:label ?label .
             optional { 
                 values ?n { 0 1 2 3 4 5 }
+                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
                 ?s skos:altLabel ?altLabels
-                bind(concat("^([^|]+\\|){", str(?n) ,"}") AS ?skipN)
-                bind(replace(replace(?altLabels, ?skipN, ""), "\\|.*$", "") AS ?altLabel)
+                bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
             }
             optional { ?s rdfs:comment ?comment }
         } union {
@@ -32,7 +32,10 @@ construct {
             bind(strdt(?not, dc:ISO639-2) as ?langCode)
             bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?not)) as ?loclang)
             graph <http://id.loc.gov/vocabulary/languages> {
-                ?loclang skos:prefLabel ?prefLabel .
+                ?loclang skos:prefLabel ?prefLabels
+                values ?n { 0 1 2 3 4 5 }
+                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                bind(replace(replace(?prefLabels, ?skipN, ""), " *\\|.*$", "") as ?prefLabel)
                 optional {
                     filter(langMatches(lang(?prefLabel), 'en'))
                     ?locvariant skos:prefLabel ?prefLabel .
