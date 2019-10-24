@@ -8,6 +8,7 @@ construct {
     ?s a :Language;
         skos:prefLabel ?label ;
         skos:prefLabel ?prefLabel ;
+        skos:altLabel ?altLabel ;
         rdfs:comment ?comment ;
         skos:notation ?not;
         skos:notation ?langCode;
@@ -19,7 +20,13 @@ construct {
     graph <https://id.kb.se/dataset/languages> {
         {
             ?s rdfs:label ?label .
-            optional { ?s rdfs:comment ?comment }
+            optional { 
+                VALUES ?n { 0 1 2 3 4 5 }
+                ?s skos:altLabel ?altLabels
+                BIND (concat("^([^|]+\\|){", str(?n) ,"}") AS ?skipN)
+                BIND (replace(replace(?altLabels, ?skipN, ""), "\\|.*$", "") AS ?altLabel)
+            }
+            #optional { ?s rdfs:comment ?comment }
         } union {
             ?s skos:notation ?not .
             bind(strdt(?not, dc:ISO639-2) as ?langCode)
