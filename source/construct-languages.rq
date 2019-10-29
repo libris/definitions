@@ -44,9 +44,11 @@ construct {
                 optional {
                     filter(contains(?prefLabels, "|"))
                     ?loclang skos:prefLabel ?prefLabels
-                    values ?n { 0 1 2 3 4 5 }
+                    bind(replace(?prefLabels, " *\\|.*$", "") as ?prefLabel)
+                    bind(replace(?prefLabels, "^[^|]+\\| *", "") as ?altLabels)
+                    values ?n { 1 2 3 4 5 6 7 }
                     bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-                    bind(replace(replace(?prefLabels, ?skipN, ""), " *\\|.*$", "") as ?prefLabel)
+                    bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
                 }
                 optional {
                     filter(langMatches(lang(?prefLabel), 'en'))
