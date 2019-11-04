@@ -21,7 +21,7 @@ construct {
         {
             ?s rdfs:label ?label .
             optional { 
-                filter(contains(?altLabel, "|"))
+                filter(!contains(?altLabel, "|"))
                 ?s skos:altLabel ?altLabel
             }
             optional { 
