@@ -12,6 +12,7 @@ construct {
         rdfs:comment ?comment ;
         skos:notation ?not;
         skos:notation ?langCode;
+        dc:isReplacedBy ?replacement;
         skos:exactMatch ?loclang ;
         skos:closeMatch ?locvariant ;
         skos:notation ?langTag .
@@ -58,6 +59,14 @@ construct {
                     bind(substr(str(?locvariant), strlen(?iso639_1_base) + 1) as ?shortcode)
                     bind(strdt(?shortcode, dc:ISO639-1) as ?langTag)
                 }
+            }
+        } union {
+            optional { 
+                ?s dc:isReplacedBy ?map_to_codes .
+                values ?n { 0 1 2 3 }
+                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                bind(replace(replace(?map_to_codes, ?skipN, ""), " *\\|.*$", "") as ?map_to_code)
+                ?replacement skos:notation ?map_to_code .
             }
         }
     }
