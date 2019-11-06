@@ -68,6 +68,9 @@ construct {
                 bind(replace(replace(?map_to_codes, ?skipN, ""), " *\\|.*$", "") as ?map_to_code)
                 ?replacement skos:notation ?map_to_code .
             }
+        } union {
+            ?s skos:notation ?not .
+            bind(strdt(?not, dc:ISO639-2) as ?langCode)
         }
     }
 }
