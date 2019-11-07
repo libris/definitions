@@ -2,6 +2,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix dc: <http://purl.org/dc/terms/>
+prefix kbv: <https://id.kb.se/vocab/>
 prefix : <http://schema.org/>
 
 construct {
@@ -12,9 +13,10 @@ construct {
         rdfs:comment ?comment ;
         skos:notation ?not;
         skos:notation ?langCode;
+        kbv:ISO639-2-T ?termLangCode;
         dc:isReplacedBy ?replacement;
-        skos:exactMatch ?loclang ;
-        skos:closeMatch ?locvariant ;
+        skos:exactMatch ?locLang ;
+        skos:closeMatch ?locVariant ;
         skos:notation ?langTag .
 
 } where {
@@ -33,18 +35,18 @@ construct {
                 bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
             }
             optional { ?s rdfs:comment ?comment }
+            optional { ?s kbv:ISO639-2-T ?termLangCode . }
         } union {
-            ?s skos:notation ?not .
-            bind(strdt(?not, dc:ISO639-2) as ?langCode)
-            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?not)) as ?loclang)
+            {?s skos:notation ?locCode .} union {?s kbv:ISO639-2-T ?locCode .}  
+            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?locCode)) as ?locLang)
             graph <http://id.loc.gov/vocabulary/languages> {
                 optional {
                     filter(!contains(?prefLabel, "|"))
-                    ?loclang skos:prefLabel ?prefLabel
+                    ?locLang skos:prefLabel ?prefLabel
                 }
                 optional {
                     filter(contains(?prefLabels, "|"))
-                    ?loclang skos:prefLabel ?prefLabels
+                    ?locLang skos:prefLabel ?prefLabels
                     bind(replace(?prefLabels, " *\\|.*$", "") as ?prefLabel)
                     bind(replace(?prefLabels, "^[^|]+\\| *", "") as ?altLabels)
                     values ?n { 1 2 3 4 5 6 7 }
@@ -53,10 +55,10 @@ construct {
                 }
                 optional {
                     filter(langMatches(lang(?prefLabel), 'en'))
-                    ?locvariant skos:prefLabel ?prefLabel .
+                    ?locVariant skos:prefLabel ?prefLabel .
                     bind('http://id.loc.gov/vocabulary/iso639-1/' as ?iso639_1_base)
-                    filter(strstarts(str(?locvariant), ?iso639_1_base))
-                    bind(substr(str(?locvariant), strlen(?iso639_1_base) + 1) as ?shortcode)
+                    filter(strstarts(str(?locVariant), ?iso639_1_base))
+                    bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
                     bind(strdt(?shortcode, dc:ISO639-1) as ?langTag)
                 }
             }
