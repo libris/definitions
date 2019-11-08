@@ -1,0 +1,233 @@
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+prefix sppubl: <https://id.kb.se/term/swepub/publication/>
+prefix spout: <https://id.kb.se/term/swepub/output/>
+
+spout:publication a swepub:OutputType ;
+    :exactMatch sppubl:ovr ;
+    :narrowMatch sppubl:ovr\/vet ;
+    :code "publication" ;
+    :label "Publikation"@sv ;
+    :comment "Not classified at level 2"@en .
+
+spout:conference a swepub:OutputType ;
+    :code "conference" ;
+    :label "Konferensoutput"@sv ;
+    :exactMatch sppubl:kon ;
+    :narrowMatch sppubl:kon\/vet ;
+    :comment "Not classified at level 2"@en .
+
+spout:intellectual-property a swepub:OutputType ;
+    :code "intellectual-property" ;
+    :label "Immaterialrättslig output"@sv ;
+    :closeMatch sppubl:pat\/vet ;
+    :comment "Not classified at level 2"@en .
+
+spout:artistic-work a swepub:OutputType ;
+    :code "artistic-work" ;
+    :label "Konstnärlig output"@sv ;
+    :exactMatch sppubl:kfu ;
+    :narrowMatch sppubl:kfu\/vet ;
+    :comment "Not classified at level 2"@en .
+
+spout:other a swepub:OutputType ;
+    :code "other" ;
+    :label "Övrig output"@sv ;
+    :closeMatch sppubl:ovr\/vet ;
+    :comment "Appropriate output type at any level missing"@en .
+
+spout:publication\/book a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:bok ;
+    :narrowMatch sppubl:bok\/vet ;
+    :code "book" ;
+    :label "Bok"@sv .
+
+spout:publication\/edited-book a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:sam ;
+    :narrowMatch sppubl:sam\/vet ;
+    :code "edited-book" ;
+    :label "Samlingsverk (redaktörskap)"@sv .
+
+spout:publication\/book-chapter a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:kap ;
+    :narrowMatch sppubl:kap\/vet ;
+    :code "book-chapter" ;
+    :label "Kapitel i samlingsverk"@sv .
+
+spout:publication\/foreword-afterword a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:kap\/vet ;
+    :code "foreword-afterword" ;
+    :label "För-/Efterord"@sv .
+
+spout:publication\/report-chapter a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:kap\/vet ;
+    :code "report-chapter" ;
+    :label "Kapitel i rapport"@sv .
+
+spout:publication\/report a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:rap ;
+    :narrowMatch sppubl:rap\/vet ;
+    :code "report" ;
+    :label "Rapport"@sv .
+
+spout:publication\/journal-article a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:art\/ref ;
+    :code "journal-article" ;
+    :label "Artikel i vetenskaplig tidskrift"@sv .
+
+spout:publication\/review-article a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:for ;
+    :narrowMatch sppubl:for\/ref ;
+    :code "review-article" ;
+    :label "Forskningsöversiktsartikel"@sv .
+
+spout:publication\/doctoral-thesis a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:dok ;
+    :narrowMatch sppubl:dok\/vet ;
+    :code "doctoral-thesis" ;
+    :label "Doktorsavhandling"@sv .
+
+spout:publication\/licentiate-thesis a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:lic ;
+    :narrowMatch sppubl:lic\/vet ;
+    :code "licentiate-thesis" ;
+    :label "Licentiatavhandling"@sv .
+
+spout:publication\/critical-edition a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "critical-edition" ;
+    :label "Textkritisk utgåva"@sv ;
+    :comment "Changed from publication/translation"@en .
+
+spout:publication\/working-paper a swepub:OutputType ;
+    :closeMatch sppubl:ovr\/vet ;
+    :broader spout:publication ;
+    :code "working-paper" ;
+    :label "Working paper"@sv .
+
+spout:publication\/editorial-letter a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:art\/vet ;
+    :code "editorial-letter" ;
+    :label "Inledande text i tidskrift / proceeding (letters, editorials, comments, notes)"@sv .
+
+spout:publication\/book-review a swepub:OutputType ;
+    :broader spout:publication ;
+    :exactMatch sppubl:rec ;
+    :narrowMatch sppubl:rec\/vet ;
+    :code "book-review" ;
+    :label "Recension"@sv .
+
+spout:publication\/magazine-article a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:art\/vet ;
+    :code "magazine-article" ;
+    :label "Artikel i övriga tidskrifter"@sv .
+
+spout:publication\/newspaper-article a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:art\/pop ;
+    :code "newspaper-article" ;
+    :label "Artikel i dags-/nyhetstidning"@sv .
+
+spout:publication\/encyclopedia-entry a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:kap\/vet ;
+    :code "encyclopedia-entry" ;
+    :label "Bidrag till encyklopedi"@sv .
+
+spout:publication\/journal-issue a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "journal-issue" ;
+    :label "Special-/temanummer av tidskrift (redaktörskap)"@sv .
+
+spout:publication\/preprint a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "preprint" ;
+    :label "Preprint"@sv ;
+    :comment "Changed from being publication status to output type"@en .
+
+spout:publication\/other a swepub:OutputType ;
+    :broader spout:publication ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "other" ;
+    :label "Övrig publikation"@sv ;
+    :comment "Appropriate output type at level 2 missing"@en .
+
+spout:conference\/poster a swepub:OutputType ;
+    :broader spout:conference ;
+    :closeMatch sppubl:kon\/vet ;
+    :code "poster" ;
+    :label "Poster"@sv .
+
+spout:conference\/paper a swepub:OutputType ;
+    :broader spout:conference ;
+    :closeMatch sppubl:kon\/ref ;
+    :code "paper" ;
+    :label "Paper i proceeding"@sv .
+
+spout:conference\/proceeding a swepub:OutputType ;
+    :broader spout:conference ;
+    :exactMatch sppubl:pro ;
+    :narrowMatch sppubl:pro\/vet ;
+    :code "proceeding" ;
+    :label "Proceeding (redaktörskap)"@sv .
+
+spout:conference\/other a swepub:OutputType ;
+    :broader spout:conference ;
+    :closeMatch sppubl:kon\/vet ;
+    :code "other" ;
+    :label "Övriga konferensbidrag "@sv ;
+    :comment "Appropriate output type at level 2 missing"@en .
+
+spout:intellectual-property\/patent a swepub:OutputType ;
+    :broader spout:intellectual-property ;
+    :exactMatch sppubl:pat ;
+    :narrowMatch sppubl:pat\/vet ;
+    :code "patent" ;
+    :label "Patent"@sv .
+
+spout:intellectual-property\/other a swepub:OutputType ;
+    :broader spout:intellectual-property ;
+    :closeMatch sppubl:pat\/vet ;
+    :code "other" ;
+    :label "Övrig immaterialrättslig output"@sv ;
+    :comment "Appropriate output type at level 2 missing"@en .
+
+spout:artistic-work\/original-creative-work a swepub:OutputType ;
+    :broader spout:artistic-work ;
+    :closeMatch sppubl:kfu\/vet ;
+    :code "original-creative-work" ;
+    :label "Konstnärligt arbete"@sv .
+
+spout:artistic-work\/artistic-thesis a swepub:OutputType ;
+    :broader spout:artistic-work ;
+    :closeMatch sppubl:kfu\/vet, sppubl:dok\/vet ;
+    :code "artistic-thesis" ;
+    :label "Dokumenterat konstnärligt forskningsprojekt (doktorsavhandling)"@sv ;
+    :comment "Replacing a removed outputtype artistic-work/curated-exhibition-or-event ; maps to double publication types"@en .
+
+spout:other\/data-set a swepub:OutputType ;
+    :broader spout:other ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "data-set" ;
+    :label "Dataset"@sv .
+
+spout:other\/software a swepub:OutputType ;
+    :broader spout:other ;
+    :closeMatch sppubl:ovr\/vet ;
+    :code "software" ;
+    :label "Programvara"@sv .
