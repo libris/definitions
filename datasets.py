@@ -120,6 +120,8 @@ def vocab():
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
 
+    graph.parse(str(compiler.path('source/swepub/vocab.ttl')), format='turtle')
+
     # Clean up generated prefixes
     preferred = {}
     defaulted = {}
@@ -206,7 +208,11 @@ def enumterms():
 
 @compiler.dataset
 def swepubterms():
-    graph = Graph().parse(str(compiler.path('source/swepub/index.ttl')), format='turtle')
+    graph = Graph()
+    for part in compiler.path('source/swepub').glob('**/*.ttl'):
+        if part.stem == 'vocab':
+            continue
+        graph.parse(str(part), format='turtle')
 
     return "/term/swepub/", "2018-05-29T14:36:01.337Z", graph
 
