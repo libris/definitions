@@ -179,13 +179,13 @@ def rdaterms():
                 "context": "source/rdamap-context.jsonld"
             },
 
-            {'source': 'http://rdaregistry.info/termList/RDAContentType'},
+            {'source': 'http://rdaregistry.info/termList/RDAContentType.nt'},
             {'source': 'http://id.loc.gov/vocabulary/contentTypes'},
 
-            {'source': 'http://rdaregistry.info/termList/RDAMediaType'},
+            {'source': 'http://rdaregistry.info/termList/RDAMediaType.nt'},
             {'source': 'http://id.loc.gov/vocabulary/mediaTypes'},
 
-            {'source': 'http://rdaregistry.info/termList/RDACarrierType'},
+            {'source': 'http://rdaregistry.info/termList/RDACarrierType.nt'},
             {'source': 'http://id.loc.gov/vocabulary/carriers'},
 
             #{'source': 'http://rdaregistry.info/termList/ModeIssue'},
