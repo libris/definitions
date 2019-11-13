@@ -1,4 +1,7 @@
 from __future__ import unicode_literals, print_function, division
+if str is bytes:
+    str = unicode
+from functools import reduce
 from rdflib import *
 
 # Monkey!
@@ -43,7 +46,7 @@ def print_vocab(g, show_equivs=False, only_classes=False):
         if ':' not in qname:
             qname = ':%s' % qname
         pfx, name = qname.split(':')
-        ns = unicode(term)[:-len(name)]
+        ns = str(term)[:-len(name)]
         if pfx in prefixes:
             continue
         prefixes.add(pfx)
