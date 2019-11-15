@@ -238,7 +238,7 @@
 
 :Visual a owl:Class;
     owl:sameAs :Image ;
-    #ptg:abstract true ;
+    ptg:abstract true ;
     rdfs:label "Visual"@en, "Visuell resurs"@sv ;
     skos:altLabel "Bild"@sv ;
     rdfs:subClassOf :Work ;
@@ -256,8 +256,7 @@
     :inCollection marc:typeOfRecord;
     owl:equivalentClass bf2:MixedMaterial .
 
-:MovingImage a owl:Class; # Film, Video
-    ptg:abstract true ;
+:MovingImage a owl:Class;
     rdfs:label "Rörlig bild"@sv;
     skos:exactMatch rdacontent:1023 ; # "two-dimensional moving image"
     rdfs:subClassOf :Visual ;
@@ -298,8 +297,7 @@
 
 :Music a owl:Class;
     rdfs:label "Music"@en, "Musik"@sv;
-    # TODO: Work should not be necessary to set as subClassOf since Audio is subClass of Work. Should be removed with LXL-2735
-    rdfs:subClassOf :Audio, :Work .
+    rdfs:subClassOf :Audio .
 
 ## Used by SwePub {{{
 :NonMusicalAudio a owl:Class ;
@@ -530,8 +528,8 @@
     rdfs:label "Projected Image"@en, "Projicerad bild"@sv;
     skos:exactMatch rdamedia:1005 ; # "projected" ("projected graphic", "motion picture")
     :inCollection marc:typeOfRecord;
-    # TODO: Work should not be necessary to set as subClassOf since Visual is subClass of Work. Should be removed with LXL-2735
-    rdfs:subClassOf :Visual, :Work  .
+    owl:deprecated true;
+    rdfs:subClassOf :Visual  .
 
 #:PhysicalObject a owl:Class;
 #    rdfs:label "Föremål"@sv;
