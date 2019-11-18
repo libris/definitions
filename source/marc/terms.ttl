@@ -372,7 +372,7 @@ marc:sizeOfUnit a owl:DatatypeProperty ;
 marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
     rdfs:domain kbv:Agent;
-    rdfs:range marc:OtherAttributes .
+    sdo:rangeIncludes marc:OtherAttributes, kbv:Concept .
 
 marc:OtherAttributes a owl:Class;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
