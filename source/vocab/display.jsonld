@@ -126,6 +126,12 @@
           "classLensDomain": "Identifier",
           "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
         },
+        "ISBN": {
+          "@id": "ISBN-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISBN",
+          "showProperties": [ "value", "qualifier" ]
+        },
         "ProvisionActivity": {
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
@@ -369,13 +375,14 @@
           "@id": "Identifier-cards",
           "classLensDomain": "Identifier",
           "fresnel:extends": {"@id": "Identifier-chips"},
-          "showProperties": [ "fresnel:super", "qualifier" ]
+          "showProperties": [ "fresnel:super", "qualifier", "agent", "source" ]
         },
         "ISBN": {
           "@id": "ISBN-cards",
           "@type": "fresnel:Lens",
-          "classLensDomain": "Identifier",
-          "showProperties": [ "value", "qualifier" ]
+          "classLensDomain": "ISBN",
+          "fresnel:extends": {"@id": "ISBN-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "Library": {
           "@id": "Library-cards",
