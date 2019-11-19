@@ -114,6 +114,8 @@ def vocab():
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
 
+    graph.parse(str(compiler.path('source/swepub/vocab.ttl')), format='turtle')
+
     # Clean up generated prefixes
     preferred = {}
     defaulted = {}
@@ -196,6 +198,17 @@ def enumterms():
     graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+
+
+@compiler.dataset
+def swepubterms():
+    graph = Graph()
+    for part in compiler.path('source/swepub').glob('**/*.ttl'):
+        if part.stem == 'vocab':
+            continue
+        graph.parse(str(part), format='turtle')
+
+    return "/term/swepub/", "2018-05-29T14:36:01.337Z", graph
 
 
 @compiler.dataset

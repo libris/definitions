@@ -1,0 +1,235 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+prefix sppubl: <https://id.kb.se/term/swepub/publication/>
+prefix spout: <https://id.kb.se/term/swepub/output/>
+
+spout:publication a swepub:OutputType ;
+    skos:exactMatch sppubl:ovr ;
+    skos:narrowMatch sppubl:ovr\/vet ;
+    :code "publication" ;
+    skos:prefLabel "Publikation"@sv ;
+    rdfs:comment "Not classified at level 2"@en .
+
+spout:conference a swepub:OutputType ;
+    :code "conference" ;
+    skos:prefLabel "Konferensoutput"@sv ;
+    skos:exactMatch sppubl:kon ;
+    skos:narrowMatch sppubl:kon\/vet ;
+    rdfs:comment "Not classified at level 2"@en .
+
+spout:intellectual-property a swepub:OutputType ;
+    :code "intellectual-property" ;
+    skos:prefLabel "Immaterialrättslig output"@sv ;
+    skos:closeMatch sppubl:pat\/vet ;
+    rdfs:comment "Not classified at level 2"@en .
+
+spout:artistic-work a swepub:OutputType ;
+    :code "artistic-work" ;
+    skos:prefLabel "Konstnärlig output"@sv ;
+    skos:exactMatch sppubl:kfu ;
+    skos:narrowMatch sppubl:kfu\/vet ;
+    rdfs:comment "Not classified at level 2"@en .
+
+spout:other a swepub:OutputType ;
+    :code "other" ;
+    skos:prefLabel "Övrig output"@sv ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    rdfs:comment "Appropriate output type at any level missing"@en .
+
+spout:publication\/book a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:bok ;
+    skos:narrowMatch sppubl:bok\/vet ;
+    :code "book" ;
+    skos:prefLabel "Bok"@sv .
+
+spout:publication\/edited-book a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:sam ;
+    skos:narrowMatch sppubl:sam\/vet ;
+    :code "edited-book" ;
+    skos:prefLabel "Samlingsverk (redaktörskap)"@sv .
+
+spout:publication\/book-chapter a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:kap ;
+    skos:narrowMatch sppubl:kap\/vet ;
+    :code "book-chapter" ;
+    skos:prefLabel "Kapitel i samlingsverk"@sv .
+
+spout:publication\/foreword-afterword a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:kap\/vet ;
+    :code "foreword-afterword" ;
+    skos:prefLabel "För-/Efterord"@sv .
+
+spout:publication\/report-chapter a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:kap\/vet ;
+    :code "report-chapter" ;
+    skos:prefLabel "Kapitel i rapport"@sv .
+
+spout:publication\/report a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:rap ;
+    skos:narrowMatch sppubl:rap\/vet ;
+    :code "report" ;
+    skos:prefLabel "Rapport"@sv .
+
+spout:publication\/journal-article a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:art\/ref ;
+    :code "journal-article" ;
+    skos:prefLabel "Artikel i vetenskaplig tidskrift"@sv .
+
+spout:publication\/review-article a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:for ;
+    skos:narrowMatch sppubl:for\/ref ;
+    :code "review-article" ;
+    skos:prefLabel "Forskningsöversiktsartikel"@sv .
+
+spout:publication\/doctoral-thesis a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:dok ;
+    skos:narrowMatch sppubl:dok\/vet ;
+    :code "doctoral-thesis" ;
+    skos:prefLabel "Doktorsavhandling"@sv .
+
+spout:publication\/licentiate-thesis a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:lic ;
+    skos:narrowMatch sppubl:lic\/vet ;
+    :code "licentiate-thesis" ;
+    skos:prefLabel "Licentiatavhandling"@sv .
+
+spout:publication\/critical-edition a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "critical-edition" ;
+    skos:prefLabel "Textkritisk utgåva"@sv ;
+    rdfs:comment "Changed from publication/translation"@en .
+
+spout:publication\/working-paper a swepub:OutputType ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    skos:broader spout:publication ;
+    :code "working-paper" ;
+    skos:prefLabel "Working paper"@sv .
+
+spout:publication\/editorial-letter a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:art\/vet ;
+    :code "editorial-letter" ;
+    skos:prefLabel "Inledande text i tidskrift / proceeding (letters, editorials, comments, notes)"@sv .
+
+spout:publication\/book-review a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:exactMatch sppubl:rec ;
+    skos:narrowMatch sppubl:rec\/vet ;
+    :code "book-review" ;
+    skos:prefLabel "Recension"@sv .
+
+spout:publication\/magazine-article a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:art\/vet ;
+    :code "magazine-article" ;
+    skos:prefLabel "Artikel i övriga tidskrifter"@sv .
+
+spout:publication\/newspaper-article a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:art\/pop ;
+    :code "newspaper-article" ;
+    skos:prefLabel "Artikel i dags-/nyhetstidning"@sv .
+
+spout:publication\/encyclopedia-entry a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:kap\/vet ;
+    :code "encyclopedia-entry" ;
+    skos:prefLabel "Bidrag till encyklopedi"@sv .
+
+spout:publication\/journal-issue a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "journal-issue" ;
+    skos:prefLabel "Special-/temanummer av tidskrift (redaktörskap)"@sv .
+
+spout:publication\/preprint a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "preprint" ;
+    skos:prefLabel "Preprint"@sv ;
+    rdfs:comment "Changed from being publication status to output type"@en .
+
+spout:publication\/other a swepub:OutputType ;
+    skos:broader spout:publication ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "other" ;
+    skos:prefLabel "Övrig publikation"@sv ;
+    rdfs:comment "Appropriate output type at level 2 missing"@en .
+
+spout:conference\/poster a swepub:OutputType ;
+    skos:broader spout:conference ;
+    skos:closeMatch sppubl:kon\/vet ;
+    :code "poster" ;
+    skos:prefLabel "Poster"@sv .
+
+spout:conference\/paper a swepub:OutputType ;
+    skos:broader spout:conference ;
+    skos:closeMatch sppubl:kon\/ref ;
+    :code "paper" ;
+    skos:prefLabel "Paper i proceeding"@sv .
+
+spout:conference\/proceeding a swepub:OutputType ;
+    skos:broader spout:conference ;
+    skos:exactMatch sppubl:pro ;
+    skos:narrowMatch sppubl:pro\/vet ;
+    :code "proceeding" ;
+    skos:prefLabel "Proceeding (redaktörskap)"@sv .
+
+spout:conference\/other a swepub:OutputType ;
+    skos:broader spout:conference ;
+    skos:closeMatch sppubl:kon\/vet ;
+    :code "other" ;
+    skos:prefLabel "Övriga konferensbidrag "@sv ;
+    rdfs:comment "Appropriate output type at level 2 missing"@en .
+
+spout:intellectual-property\/patent a swepub:OutputType ;
+    skos:broader spout:intellectual-property ;
+    skos:exactMatch sppubl:pat ;
+    skos:narrowMatch sppubl:pat\/vet ;
+    :code "patent" ;
+    skos:prefLabel "Patent"@sv .
+
+spout:intellectual-property\/other a swepub:OutputType ;
+    skos:broader spout:intellectual-property ;
+    skos:closeMatch sppubl:pat\/vet ;
+    :code "other" ;
+    skos:prefLabel "Övrig immaterialrättslig output"@sv ;
+    rdfs:comment "Appropriate output type at level 2 missing"@en .
+
+spout:artistic-work\/original-creative-work a swepub:OutputType ;
+    skos:broader spout:artistic-work ;
+    skos:closeMatch sppubl:kfu\/vet ;
+    :code "original-creative-work" ;
+    skos:prefLabel "Konstnärligt arbete"@sv .
+
+spout:artistic-work\/artistic-thesis a swepub:OutputType ;
+    skos:broader spout:artistic-work ;
+    skos:closeMatch sppubl:kfu\/vet, sppubl:dok\/vet ;
+    :code "artistic-thesis" ;
+    skos:prefLabel "Dokumenterat konstnärligt forskningsprojekt (doktorsavhandling)"@sv ;
+    rdfs:comment "Replacing a removed outputtype artistic-work/curated-exhibition-or-event ; maps to double publication types"@en .
+
+spout:other\/data-set a swepub:OutputType ;
+    skos:broader spout:other ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "data-set" ;
+    skos:prefLabel "Dataset"@sv .
+
+spout:other\/software a swepub:OutputType ;
+    skos:broader spout:other ;
+    skos:closeMatch sppubl:ovr\/vet ;
+    :code "software" ;
+    skos:prefLabel "Programvara"@sv .

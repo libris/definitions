@@ -63,6 +63,22 @@
     rdfs:subClassOf :Agent; #:Event;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
+## Used by SwePub {{{
+
+:Collaboration a owl:Class ;
+    :category :pending ;
+    rdfs:label "Samarbete"@sv, "Collaboration"@en;
+    rdfs:comment "organisationsöverskridande konstellation"@sv;
+    rdfs:subClassOf :Agent .
+
+:Corporation a owl:Class ;
+    :category :pending ;
+    rdfs:label "Korporation"@sv, "Corporation"@en;
+    rdfs:subClassOf :Organization .
+
+## }}}
+
+
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
 

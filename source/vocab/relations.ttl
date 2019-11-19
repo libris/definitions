@@ -461,6 +461,25 @@
 #    rdfs:label "artform"@en, "verksform"@sv .
 
 
+## Qualified form of subject; used by SwePub {{{
+:qualifiedSubject a owl:ObjectProperty;
+    rdfs:label "Kvalificerat ämnespåstående"@sv;
+    rdfs:comment "Ofta automatiskt genererade"@sv;
+    rdfs:subPropertyOf :hasStatement;
+    rdfs:range :SubjectStatement .
+
+:SubjectStatement a owl:Class ;
+    rdfs:subClassOf rdf:Statement ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :predicate ;
+            owl:hasValue :subject
+        ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :object ;
+            owl:allValuesFrom :Topic
+        ] .
+# }}}
+
 # Qualified Forms of Contribution and Relationship
 
 :Role a owl:Class;
