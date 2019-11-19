@@ -413,6 +413,13 @@
           "classLensDomain": "CarrierType",
           "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
         },
+        "Publication": {
+          "@id": "Publication-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Publication",
+          "fresnel:extends": {"@id": "Publication-chips"},
+          "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
+        },
         "ContentType": {
           "@id": "ContentType-cards",
           "@type": "fresnel:Lens",
