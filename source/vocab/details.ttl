@@ -97,9 +97,9 @@
     rdfs:subClassOf :Title;
     rdfs:label "Title variation"@en, "Varianttitel"@sv .
 
-:AbbreviatedTitle  a owl:Class;
+:AbbreviatedTitle a owl:Class;
     owl:equivalentClass bf2:AbbreviatedTitle;
-    rdfs:subClassOf :Title;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv .
 
 :abbreviatedTitle a owl:DatatypeProperty;
@@ -402,7 +402,7 @@
 
 :LcOverseasAcq a owl:Class; # rdfs:Datatype ?
     rdfs:label "LC acquisition program"@en, "LC:s förvärvsprogram"@sv;
-    rdfs:subclassOf :Identifier;
+    rdfs:subClassOf :Identifier ;
     rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:LcOverseasAcq .
 
@@ -1333,12 +1333,12 @@
 
 :AccessPolicy a owl:Class;
     rdfs:label "Access policy"@en, "Villkor för åtkomst"@sv;
-    rdfs:subbClassOf :UsageAndAccessPolicy;
+    rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:AccessPolicy .
 
 :RetentionPolicy a owl:Class;
     rdfs:label "Retention policy"@en, "Villkor för bibehållande"@sv;
-    rdfs:subbClassOf :UsageAndAccessPolicy;
+    rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:RetentionPolicy .
 
 :UsePolicy a owl:Class;
