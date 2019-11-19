@@ -9,7 +9,6 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
-@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix lcvi: <http://id.loc.gov/vocabulary/issuance> .
 @prefix sdo: <http://schema.org/> .
@@ -411,8 +410,7 @@
 
 :Monograph a owl:Class, :IssuanceType;
     rdfs:label "Monograph"@en, "Monografisk resurs"@sv;
-    skos:exactMatch lcvi:mono, rdami:1001 ; # "single unit"@en
-    owl:equivalentClass bf1:Monograph .
+    skos:exactMatch lcvi:mono, rdami:1001 . # "single unit"@en
 
 :Part a owl:Class;
     rdfs:label "Part"@en, "Del av resurs"@sv;
@@ -435,7 +433,7 @@
 :Collection a owl:Class, :IssuanceType;
     rdfs:label "Collection"@en, "Samling"@sv;
     rdfs:subClassOf :Aggregate;
-    owl:equivalentClass dctype:Collection, bf1:Collection .
+    owl:equivalentClass dctype:Collection .
 
 :SubCollection a owl:Class, :IssuanceType;
     rdfs:label "Subcollection"@en, "Delsamling"@sv;
@@ -444,8 +442,7 @@
 :Integrating a owl:Class, :IssuanceType;
     rdfs:label "Integrating"@en, "Integrerande resurs"@sv;
     skos:exactMatch lcvi:intg, rdami:1004 ; # "integrating resource"@en
-    rdfs:subClassOf :Continuing;
-    owl:equivalentClass bf1:Integrating .
+    rdfs:subClassOf :Continuing .
 
 #:MonographicComponentPart a owl:Class;
 #    rdfs:label "Del av sammansatt monografisk resurs"@sv;
@@ -464,21 +461,18 @@
 #:MultipartMonograph a owl:Class;
 #    rdfs:label "Flerbandsverk"@sv;
 #    skos:exactMatch rdami:1002 ; # "multipart monograph"@en
-#    rdfs:subClassOf :Multipart, :Monograph;
-#    owl:equivalentClass bf1:MultipartMonograph .
+#    rdfs:subClassOf :Multipart, :Monograph .
 
 :Serial a owl:Class, :IssuanceType;
     rdfs:label "Serial"@en, "Seriell resurs"@sv;
     skos:exactMatch lcvi:serl, rdami:1003 ; # "serial" @en
-    rdfs:subClassOf :Continuing;
-    owl:equivalentClass bf1:Serial .
+    rdfs:subClassOf :Continuing .
 
 # OBSOLOTE CHOICE should use serial instead.
 #:Periodical a owl:Class, :IssuanceType;
 #    rdfs:label "Periodical"@en, "Periodika"@sv;
 #    skos:altLabel "Periodisk resurs"@sv;
-#    rdfs:comment "Samma sak som seriell resurs."@sv;
-#    owl:equivalentClass bf1:Serial .
+#    rdfs:comment "Samma sak som seriell resurs."@sv .
 
 #:CreativeWorkSeries a owl:Class;
 #    owl:equivalentClass sdo:CreativeWorkSeries;
