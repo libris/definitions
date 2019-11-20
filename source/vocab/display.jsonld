@@ -108,6 +108,12 @@
           "classLensDomain": "Title",
           "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart" ]
         },
+        "KeyTitle": {
+          "@id": "KeyTitle-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "KeyTitle",
+          "showProperties": [ "mainTitle", "qualifier" ]
+        },
         "TitlePart": {
           "@id": "TitlePart-chips",
           "@type": "fresnel:Lens",
@@ -120,6 +126,12 @@
           "classLensDomain": "Identifier",
           "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
         },
+        "ISBN": {
+          "@id": "ISBN-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISBN",
+          "showProperties": [ "value", "qualifier" ]
+        },
         "ProvisionActivity": {
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
@@ -130,7 +142,7 @@
           "@id": "Publication-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "place", "agent", "year", "date" ]
+          "showProperties": [ "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Serial": {
           "@id": "Serial-chips",
@@ -150,11 +162,23 @@
           "classLensDomain": "Country",
           "showProperties": [ "prefLabel" ]
         },
+        "marc:AddedEntryHierarchicalPlaceName": {
+          "@id": "AddedEntryHierarchicalPlaceName-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:AddedEntryHierarchicalPlaceName",
+          "showProperties": [ "countryOrLargerEntity", "city" ]
+        },
         "Language": {
           "@id": "Language-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
           "showProperties": [ "prefLabel" ]
+        },
+        "marc:LanguageNote": {
+          "@id": "Language-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:LanguageNote",
+          "showProperties": [ "label" ]
         },
         "Person": {
           "@id": "Person-chips",
@@ -196,7 +220,7 @@
           "@id": "Concept-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "label", "code", "inScheme", "inCollection" ]
+          "showProperties": [ "prefLabel", "label", "code", "inScheme" ]
         },
         "Classification": {
           "@id": "Classification-chips",
@@ -245,6 +269,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "marc:EnumeratedTerm",
           "showProperties": [ "prefLabel" ]
+        },
+        "marc:SystemDetailsNote": {
+          "@id": "SystemDetailsNote-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:SystemDetailsNote",
+          "showProperties": [ "marc:systemDetailsNote" ]
         },
         "Cartographic": {
           "@id": "Cartographic-chips",
@@ -296,8 +326,10 @@
             "hasDimensions",
             "hasDuration",
             "marc:otherPhysicalDetails",
+            "genreForm",
             "accompaniedBy",
             "seriesMembership",
+            "intendedAudience",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -305,7 +337,7 @@
           "@type": "fresnel:Lens",
           "@id": "Work-cards",
           "classLensDomain": "Work",
-          "showProperties": [ 
+          "showProperties": [
             "hasTitle",
             "contribution",
             "language",
@@ -313,6 +345,9 @@
             "genreForm",
             "classification",
             "subject",
+            "intendedAudience",
+            "contentType",
+            "illustrativeContent",
             "isPartOf"
            ]
         },
@@ -320,7 +355,7 @@
           "@type": "fresnel:Lens",
           "@id": "NotatedMusic-cards",
           "classLensDomain": "NotatedMusic",
-          "showProperties": [ 
+          "showProperties": [
             "hasTitle",
             "musicMedium",
             "musicKey",
@@ -331,6 +366,8 @@
             "genreForm",
             "classification",
             "subject",
+            "intendedAudience",
+            "contentType",
             "isPartOf"
            ]
         },
@@ -351,13 +388,14 @@
           "@id": "Identifier-cards",
           "classLensDomain": "Identifier",
           "fresnel:extends": {"@id": "Identifier-chips"},
-          "showProperties": [ "fresnel:super", "qualifier" ]
+          "showProperties": [ "fresnel:super", "qualifier", "agent", "source" ]
         },
         "ISBN": {
           "@id": "ISBN-cards",
           "@type": "fresnel:Lens",
-          "classLensDomain": "Identifier",
-          "showProperties": [ "value", "qualifier" ]
+          "classLensDomain": "ISBN",
+          "fresnel:extends": {"@id": "ISBN-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "Library": {
           "@id": "Library-cards",
@@ -394,6 +432,13 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "CarrierType",
           "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+        },
+        "Publication": {
+          "@id": "Publication-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Publication",
+          "fresnel:extends": {"@id": "Publication-chips"},
+          "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
         },
         "ContentType": {
           "@id": "ContentType-cards",
