@@ -67,7 +67,8 @@
 
 :recordStatus a owl:ObjectProperty;
     rdfs:subPropertyOf :status;
-    rdfs:label "Poststatus"@sv;
+    rdfs:label "Record status"@en, "Poststatus"@sv;
+    rdfs:comment "Postens status, sätts automatiskt."@sv;
     rdfs:domain :Record;
     sdo:rangeIncludes marc:StatusType .
 
@@ -98,6 +99,7 @@
 
 :descriptionCreator a owl:ObjectProperty;
     rdfs:label "Description creator"@en, "Skapad av"@sv ;
+    rdfs:comment "Entitet som upprättat beskrivningen."@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier ;
     rdfs:range :Agent .

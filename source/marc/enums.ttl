@@ -1301,11 +1301,11 @@
 #    skos:prefLabel "Record Update"@en,
 #        "Uppdatering av posten"@sv .
 
-:ReferenceType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "ReferenceType" ;
-    skos:prefLabel "Reference Evaluation"@en,
-        "Formatering av icke auktoriserade sökelement"@sv .
+# :ReferenceType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:notation "ReferenceType" ;
+#     skos:prefLabel "Reference Evaluation"@en,
+#         "Formatering av icke auktoriserade sökelement"@sv .
 
 :RemoteSensImageDataType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1467,62 +1467,52 @@
 
 # STATUSTYPES FOR RECORD
 
-:CorrectedOrRevised a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:CorrectedOrRevised a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-c, :HoldingStatusType-c, :StatusType-c ;
     skos:notation "c" ;
-    skos:prefLabel "Corrected or revised"@en,
-        "Rättad eller reviderad post (sätts maskinellt)"@sv .
+    skos:prefLabel "Corrected or revised"@en, "Rättad eller reviderad"@sv .
 
-:Deleted a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:Deleted a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-d, :HoldingStatusType-d, :StatusType-d ;
     skos:notation "d" ;
-    skos:prefLabel "Deleted"@en,
-        "Borttagen post (används ej)"@sv .
+    rdfs:comment "Används ej"@sv;
+    skos:prefLabel "Deleted"@en, "Borttagen"@sv .
 
-:IncreaseInEncodingLevel a :AuthorityStatusType,
-        :StatusType ;
+:IncreaseInEncodingLevel a :StatusType ;
     #owl:sameAs :AuthorityStatusType-a, :StatusType-a ; skos:notation "a" ;
-    skos:prefLabel "Increase in encoding level"@en,
-        "Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv .
+    skos:notation "a" ;
+    skos:prefLabel "Increase in encoding level"@en, "Uppgraderad eller kompletterad"@sv .
 
 :IncreaseInEncodingLevelFromPrepublication a :StatusType ;
     #owl:sameAs :StatusType-p ;
     skos:notation "p" ;
-    skos:prefLabel "Increase in encoding level from prepublication"@en,
-        "Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv .
+    skos:prefLabel "Increase in encoding level from prepublication"@en, "Uppgraderad från förhandsinformation"@sv .
 
-:New a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:New a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-n, :HoldingStatusType-n, :StatusType-n ;
     skos:notation "n" ;
-    skos:prefLabel "New"@en,
-        "Ny post"@sv .
+    skos:prefLabel "New"@en, "Ny post"@sv .
 
-:Obsolete a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-o ;
-    skos:notation "o" ;
-    skos:prefLabel "Obsolete"@en,
-        "Obsolet"@sv .
+# :Obsolete a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-o ;
+#     skos:notation "o" ;
+#     skos:prefLabel "Obsolete"@en,
+#         "Obsolet"@sv .
 
-:DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-x ;
-    skos:notation "x" ;
-    skos:prefLabel "Deleted, heading replaced by another heading"@en,
-        "Makulerad: ersatt av en annat sökelement"@sv .
-
-:DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-s ;
-    skos:notation "s" ;
-    skos:prefLabel "Deleted, heading split into two or more headings"@en,
-        "Makulerad: uppdelat på två/flera andra sökelement"@sv .
+# :DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-x ;
+#     skos:notation "x" ;
+#     skos:prefLabel "Deleted, heading replaced by another heading"@en,
+#         "Makulerad: ersatt av en annat sökelement"@sv .
+# 
+# :DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-s ;
+#     skos:notation "s" ;
+#     skos:prefLabel "Deleted, heading split into two or more headings"@en,
+#         "Makulerad: uppdelat på två/flera andra sökelement"@sv .
 
 ##
 
@@ -1794,7 +1784,7 @@
     sdo:rangeIncludes :Boolean,
         :HeadingType ;
     skos:prefLabel "Heading Use - Series Added Entry"@en,
-        "Användningsområdeseriesökelement"@sv .
+        "Användningsområde - Seriesökelement"@sv .
 
 # :headingSubject a owl:ObjectProperty ;
 #     sdo:rangeIncludes :Boolean,
