@@ -372,7 +372,7 @@ marc:sizeOfUnit a owl:DatatypeProperty ;
 marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
     rdfs:domain kbv:Agent;
-    rdfs:range marc:OtherAttributes .
+    sdo:rangeIncludes marc:OtherAttributes, kbv:Concept .
 
 marc:OtherAttributes a owl:Class;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
@@ -429,7 +429,7 @@ marc:BibliographyEtcNote a owl:Class;
 # 506:
 
 marc:jurisdiction a owl:DatatypeProperty ;
-    sdo:domainIncludes kbv:Instance, kbv:UsageAndAccessPolicy, marc:TermsGoverningUseAndReproductionNote ;
+    sdo:domainIncludes kbv:UsageAndAccessPolicy ;
     rdfs:label "jurisdiction"@en, "tillståndsgivare"@sv .
 
 marc:physicalAccessProvisions a owl:DatatypeProperty ;
@@ -586,7 +586,6 @@ marc:hasLocationOfOtherArchivalMaterialsNote a owl:Class ;
 
 marc:hasBiographicalOrHistoricalData a owl:ObjectProperty ;
     rdfs:label "Has Biographical Or Historical Data"@en, "Anmärkning om biografiska eller historiska uppgifter"@sv;
-    sdo:domainIncludes kbv:Instance;
     rdfs:range marc:BiographicalOrHistoricalData .
 
 marc:BiographicalOrHistoricalData a owl:Class;

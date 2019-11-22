@@ -10,6 +10,9 @@
 @prefix kbrda: <https://id.kb.se/term/rda/> .
 @prefix : <https://id.kb.se/vocab/> .
 
+_:TactileInstanceRestriction a owl:Restriction ; owl:onProperty :hasInstance; owl:allValueFrom :Tactile .
+
+# Content Types
 :CartographicDataset a owl:Class; owl:equivalentClass kbrda:CartographicDataset; rdfs:subClassOf :Cartography, :Dataset .
 :CartographicImage a owl:Class; owl:equivalentClass kbrda:CartographicImage; rdfs:subClassOf :Cartography, :StillImage .
 :CartographicMovingImage a owl:Class; owl:equivalentClass kbrda:CartographicMovingImage; rdfs:subClassOf :Cartography, :MovingImage .
@@ -18,23 +21,25 @@
 :CartographicObject a owl:Class; owl:equivalentClass kbrda:CartographicThreeDimensionalForm; rdfs:subClassOf :Cartography, :Object .
 :ComputerDataset a owl:Class; owl:equivalentClass kbrda:ComputerDataset; rdfs:subClassOf :Dataset .
 :ComputerProgram a owl:Class; owl:equivalentClass kbrda:ComputerProgram; rdfs:subClassOf :Multimedia .
-:NotatedMovement a owl:Class; owl:equivalentClass kbrda:NotatedMovement; rdfs:subClassOf :NotatedMovement .
-:NotatedMusic a owl:Class; owl:equivalentClass kbrda:NotatedMusic; rdfs:subClassOf :NotatedMusic .
+:NotatedMovement a owl:Class; owl:equivalentClass kbrda:NotatedMovement .
+:NotatedMusic a owl:Class; owl:equivalentClass kbrda:NotatedMusic .
 :PerformedMusic a owl:Class; owl:equivalentClass kbrda:PerformedMusic; rdfs:subClassOf :Audio .
 :Sounds a owl:Class; owl:equivalentClass kbrda:Sounds; rdfs:subClassOf :Audio .
 :SpokenWord a owl:Class; owl:equivalentClass kbrda:SpokenWord; rdfs:subClassOf :Audio .
-:StillImage a owl:Class; owl:equivalentClass kbrda:StillImage; rdfs:subClassOf :StillImage .
-:TactileImage a owl:Class; owl:equivalentClass kbrda:TactileImage; rdfs:subClassOf :StillImage .
-:TactileNotatedMusic a owl:Class; owl:equivalentClass kbrda:TactileNotatedMusic; rdfs:subClassOf :NotatedMusic .
-:TactileNotatedMovement a owl:Class; owl:equivalentClass kbrda:TactileNotatedMovement; rdfs:subClassOf :NotatedMovement .
-:TactileText a owl:Class; owl:equivalentClass kbrda:TactileText; rdfs:subClassOf :Text .
-:TactileObject a owl:Class; owl:equivalentClass kbrda:TactileThreeDimensionalForm; rdfs:subClassOf :Object .
-:Text a owl:Class; owl:equivalentClass kbrda:Text; rdfs:subClassOf :Text .
+:StillImage a owl:Class; owl:equivalentClass kbrda:StillImage .
+:TactileImage a owl:Class; owl:equivalentClass kbrda:TactileImage; rdfs:subClassOf :StillImage, _:TactileInstanceRestriction .
+:TactileNotatedMusic a owl:Class; owl:equivalentClass kbrda:TactileNotatedMusic; rdfs:subClassOf :NotatedMusic, _:TactileInstanceRestriction .
+:TactileNotatedMovement a owl:Class; owl:equivalentClass kbrda:TactileNotatedMovement; rdfs:subClassOf :NotatedMovement, _:TactileInstanceRestriction .
+:TactileText a owl:Class; owl:equivalentClass kbrda:TactileText; rdfs:subClassOf :Text, _:TactileInstanceRestriction .
+:TactileObject a owl:Class; owl:equivalentClass kbrda:TactileThreeDimensionalForm; rdfs:subClassOf :Object, _:TactileInstanceRestriction .
+:Text a owl:Class; owl:equivalentClass kbrda:Text .
 :Object a owl:Class; owl:equivalentClass kbrda:ThreeDimensionalForm .
 :ThreeDimensionalMovingImage a owl:Class; owl:equivalentClass kbrda:ThreeDimensionalMovingImage; rdfs:subClassOf :MovingImage .
 :TwoDimensionalMovingImage a owl:Class; owl:equivalentClass kbrda:TwoDimensionalMovingImage; rdfs:subClassOf :MovingImage .
 
-:AudioInstance a owl:Class; owl:equivalentClass kbrda:Audio; rdfs:subClassOf :Instance .
+# Media Types
+#:AudioMedia owl:sameAs :SoundRecording .
+:SoundRecording a owl:Class; owl:equivalentClass kbrda:Audio . #; rdfs:subClassOf :Instance .
 :Computer a owl:Class; owl:equivalentClass kbrda:Computer; rdfs:subClassOf :Electronic .
 :Microform a owl:Class; owl:equivalentClass kbrda:Microform; rdfs:subClassOf :Instance .
 :Microscopic a owl:Class; owl:equivalentClass kbrda:Microscopic; rdfs:subClassOf :Instance .
@@ -43,13 +48,15 @@
 :Unmediated a owl:Class; owl:equivalentClass kbrda:Unmediated; rdfs:subClassOf :Instance .
 :Video a owl:Class; owl:equivalentClass kbrda:Video; rdfs:subClassOf :Electronic .
 
-:AudioCartridge a owl:Class; owl:equivalentClass kbrda:AudioCartridge; rdfs:subClassOf :AudioInstance .
-:AudioCylinder a owl:Class; owl:equivalentClass kbrda:AudioCylinder; rdfs:subClassOf :AudioInstance .
-:AudioDisc a owl:Class; owl:equivalentClass kbrda:AudioDisc; rdfs:subClassOf :AudioInstance .
-:AudioRoll a owl:Class; owl:equivalentClass kbrda:AudioRoll; rdfs:subClassOf :AudioInstance .
-:Audiocassette a owl:Class; owl:equivalentClass kbrda:Audiocassette; rdfs:subClassOf :AudioInstance .
-:AudiotapeReel a owl:Class; owl:equivalentClass kbrda:AudiotapeReel; rdfs:subClassOf :AudioInstance .
-:SoundTrackReel a owl:Class; owl:equivalentClass kbrda:SoundTrackReel; rdfs:subClassOf :AudioInstance .
+# Groups of Carrier Types per Media Type
+
+:AudioCartridge a owl:Class; owl:equivalentClass kbrda:AudioCartridge; rdfs:subClassOf :SoundRecording .
+:AudioCylinder a owl:Class; owl:equivalentClass kbrda:AudioCylinder; rdfs:subClassOf :SoundRecording .
+:AudioDisc a owl:Class; owl:equivalentClass kbrda:AudioDisc; rdfs:subClassOf :SoundRecording .
+:AudioRoll a owl:Class; owl:equivalentClass kbrda:AudioRoll; rdfs:subClassOf :SoundRecording .
+:Audiocassette a owl:Class; owl:equivalentClass kbrda:Audiocassette; rdfs:subClassOf :SoundRecording .
+:AudiotapeReel a owl:Class; owl:equivalentClass kbrda:AudiotapeReel; rdfs:subClassOf :SoundRecording .
+:SoundTrackReel a owl:Class; owl:equivalentClass kbrda:SoundTrackReel; rdfs:subClassOf :SoundRecording .
 
 :ComputerCard a owl:Class; owl:equivalentClass kbrda:ComputerCard; rdfs:subClassOf :Computer .
 :ComputerChipCartridge a owl:Class; owl:equivalentClass kbrda:ComputerChipCartridge; rdfs:subClassOf :Computer .
@@ -90,7 +97,12 @@
 :Roll a owl:Class; owl:equivalentClass kbrda:Roll; rdfs:subClassOf :Unmediated .
 :Sheet a owl:Class; owl:equivalentClass kbrda:Sheet; rdfs:subClassOf :Unmediated .
 :Volume a owl:Class; owl:equivalentClass kbrda:Volume; rdfs:subClassOf :Unmediated .
-:ObjectInstance a owl:Class; owl:equivalentClass kbrda:Object; rdfs:subClassOf :Unmediated .
+:Print a owl:Class; rdfs:subClassOf :Volume .
+#:Hardcover a owl:Class; rdfs:subClassOf :Print .
+#:Paperback a owl:Class; rdfs:subClassOf :Print .
+#:Globe a owl:Class; rdfs:subClassOf :Unmediated . # Either :PhysicalGlobe < :Object or :ElectronicGlobe < :Electronic ?
+:Manuscript a owl:Class; rdfs:subClassOf :Volume .
+:PhysicalObject a owl:Class; owl:equivalentClass kbrda:Object; rdfs:subClassOf :Unmediated .
 
 :VideoCartridge a owl:Class; owl:equivalentClass kbrda:VideoCartridge; rdfs:subClassOf :Video .
 :Videocassette a owl:Class; owl:equivalentClass kbrda:Videocassette; rdfs:subClassOf :Video .

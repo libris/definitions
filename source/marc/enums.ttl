@@ -56,8 +56,7 @@
     rdfs:subClassOf :EnumeratedTerm ;
     owl:equivalentClass :NonProjColorType,
         :ProjGraphColorType ;
-    skos:broadMatch kbv:ProjectedImage,
-        kbv:StillImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ColorType" ;
     skos:prefLabel "Color"@en,
         "Färg (projicerad-/stillbild)"@sv .
@@ -231,7 +230,7 @@
 
 :HoldingProjGraphMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual  ;
     skos:notation "HoldingProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning för projicerade bilder"@sv .
@@ -509,21 +508,21 @@
 
 :ProjGraphDimensionsType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphDimensionsType" ;
     skos:prefLabel "Dimensions"@en,
         "Mått (projicerad bild)"@sv .
 
 :ProjGraphEmulsionType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphEmulsionType" ;
     skos:prefLabel "Base of Emulsion"@en,
         "Bärande material (emulsion)"@sv .
 
 :ProjGraphMaterialType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:StillImage ;
     skos:notation "ProjGraphMaterialType" ;
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning projicerbara stillbilder "@sv .
@@ -534,7 +533,7 @@
 
 :ProjGraphSupportType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:ProjectedImage ;
+    skos:broadMatch kbv:Visual ;
     skos:notation "ProjGraphSupportType" ;
     skos:prefLabel "Secondary Support Material"@en,
         "Montering (projicerad bild)"@sv .
@@ -1083,7 +1082,6 @@
         kbv:Map,
         kbv:Microform,
         kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:SoundRecording,
         kbv:StillImage ;
     skos:notation "MapAspectType" ;
@@ -1102,7 +1100,6 @@
         :ProjGraphMediumType,
         :VideoMediumType ;
     skos:broadMatch kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:VideoRecording ;
     skos:notation "MediumType" ;
     skos:prefLabel "Medium for Sound"@en,
@@ -1304,11 +1301,11 @@
 #    skos:prefLabel "Record Update"@en,
 #        "Uppdatering av posten"@sv .
 
-:ReferenceType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "ReferenceType" ;
-    skos:prefLabel "Reference Evaluation"@en,
-        "Formatering av icke auktoriserade sökelement"@sv .
+# :ReferenceType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:notation "ReferenceType" ;
+#     skos:prefLabel "Reference Evaluation"@en,
+#         "Formatering av icke auktoriserade sökelement"@sv .
 
 :RemoteSensImageDataType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1446,7 +1443,6 @@
         :ProjGraphSoundType,
         :VideoSoundType ;
     skos:broadMatch kbv:MovingImage,
-        kbv:ProjectedImage,
         kbv:VideoRecording ;
     skos:notation "SoundType" ;
     skos:prefLabel "Sound on Medium"@en,
@@ -1471,62 +1467,52 @@
 
 # STATUSTYPES FOR RECORD
 
-:CorrectedOrRevised a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:CorrectedOrRevised a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-c, :HoldingStatusType-c, :StatusType-c ;
     skos:notation "c" ;
-    skos:prefLabel "Corrected or revised"@en,
-        "Rättad eller reviderad post (sätts maskinellt)"@sv .
+    skos:prefLabel "Corrected or revised"@en, "Rättad eller reviderad"@sv .
 
-:Deleted a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:Deleted a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-d, :HoldingStatusType-d, :StatusType-d ;
     skos:notation "d" ;
-    skos:prefLabel "Deleted"@en,
-        "Borttagen post (används ej)"@sv .
+    rdfs:comment "Används ej"@sv;
+    skos:prefLabel "Deleted"@en, "Borttagen"@sv .
 
-:IncreaseInEncodingLevel a :AuthorityStatusType,
-        :StatusType ;
+:IncreaseInEncodingLevel a :StatusType ;
     #owl:sameAs :AuthorityStatusType-a, :StatusType-a ; skos:notation "a" ;
-    skos:prefLabel "Increase in encoding level"@en,
-        "Uppgraderad eller kompletterad post (jfr Fullständighetsnivå)"@sv .
+    skos:notation "a" ;
+    skos:prefLabel "Increase in encoding level"@en, "Uppgraderad eller kompletterad"@sv .
 
 :IncreaseInEncodingLevelFromPrepublication a :StatusType ;
     #owl:sameAs :StatusType-p ;
     skos:notation "p" ;
-    skos:prefLabel "Increase in encoding level from prepublication"@en,
-        "Uppgraderad CIP-post (jfr Fullständighetsnivå)"@sv .
+    skos:prefLabel "Increase in encoding level from prepublication"@en, "Uppgraderad från förhandsinformation"@sv .
 
-:New a :AuthorityStatusType,
-        :HoldingStatusType,
-        :StatusType ;
+:New a :AuthorityStatusType, :HoldingStatusType, :StatusType ;
     #owl:sameAs :AuthorityStatusType-n, :HoldingStatusType-n, :StatusType-n ;
     skos:notation "n" ;
-    skos:prefLabel "New"@en,
-        "Ny post"@sv .
+    skos:prefLabel "New"@en, "Ny post"@sv .
 
-:Obsolete a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-o ;
-    skos:notation "o" ;
-    skos:prefLabel "Obsolete"@en,
-        "Obsolet"@sv .
+# :Obsolete a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-o ;
+#     skos:notation "o" ;
+#     skos:prefLabel "Obsolete"@en,
+#         "Obsolet"@sv .
 
-:DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-x ;
-    skos:notation "x" ;
-    skos:prefLabel "Deleted, heading replaced by another heading"@en,
-        "Makulerad: ersatt av en annat sökelement"@sv .
-
-:DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType,
-    :StatusType ;
-    #owl:sameAs :AuthorityStatusType-s ;
-    skos:notation "s" ;
-    skos:prefLabel "Deleted, heading split into two or more headings"@en,
-        "Makulerad: uppdelat på två/flera andra sökelement"@sv .
+# :DeletedHeadingReplacedByAnotherHeading a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-x ;
+#     skos:notation "x" ;
+#     skos:prefLabel "Deleted, heading replaced by another heading"@en,
+#         "Makulerad: ersatt av en annat sökelement"@sv .
+# 
+# :DeletedHeadingSplitIntoTwoOrMoreHeading a :AuthorityStatusType,
+#     :StatusType ;
+#     #owl:sameAs :AuthorityStatusType-s ;
+#     skos:notation "s" ;
+#     skos:prefLabel "Deleted, heading split into two or more headings"@en,
+#         "Makulerad: uppdelat på två/flera andra sökelement"@sv .
 
 ##
 
@@ -1782,12 +1768,12 @@
     skos:prefLabel "Govt. Agency"@en,
         "Typ och nivå för officiellt organ"@sv .
 
-:govtPub a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial,
-        kbv:Visual ;
-    sdo:rangeIncludes :GovernmentPublicationType ;
-    skos:prefLabel "Govt. Publication"@en,
-        "Offentlig resurs"@sv .
+# :govtPub a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:Serial,
+#         kbv:Visual ;
+#     sdo:rangeIncludes :GovernmentPublicationType ;
+#     skos:prefLabel "Govt. Publication"@en,
+#         "Offentlig resurs"@sv .
 
 # :headingMain a owl:ObjectProperty ;
 #     sdo:rangeIncludes :Boolean,
@@ -1798,7 +1784,7 @@
     sdo:rangeIncludes :Boolean,
         :HeadingType ;
     skos:prefLabel "Heading Use - Series Added Entry"@en,
-        "Användningsområdeseriesökelement"@sv .
+        "Användningsområde - Seriesökelement"@sv .
 
 # :headingSubject a owl:ObjectProperty ;
 #     sdo:rangeIncludes :Boolean,
@@ -2013,31 +1999,31 @@
     skos:prefLabel "Capture & Storage Techniques"@en,
         "Inspelnings- och lagringsteknik"@sv .
 
-:soundKindOfCutting a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
-    sdo:rangeIncludes :SoundKindOfCuttingType ;
-    skos:prefLabel "Kind of Cutting"@en,
-        "Spårskärning"@sv .
+# :soundKindOfCutting a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:SoundRecording ;
+#     sdo:rangeIncludes :SoundKindOfCuttingType ;
+#     skos:prefLabel "Kind of Cutting"@en,
+#         "Spårskärning"@sv .
 
-:soundKindOfDisc a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
-    sdo:rangeIncludes :SoundKindOfDiscType ;
-    skos:prefLabel "Kind of Disc"@en,
-        "Typ eller generation"@sv .
+# :soundKindOfDisc a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:SoundRecording ;
+#     sdo:rangeIncludes :SoundKindOfDiscType ;
+#     skos:prefLabel "Kind of Disc"@en,
+#         "Typ eller generation"@sv .
 
-:soundKindOfMaterial a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
-    sdo:rangeIncludes :HoldingSoundKindOfMaterialType,
-        :SoundKindOfMaterialType ;
-    skos:prefLabel "Kind of Material"@en,
-        "Material"@sv .
+# :soundKindOfMaterial a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:SoundRecording ;
+#     sdo:rangeIncludes :HoldingSoundKindOfMaterialType,
+#         :SoundKindOfMaterialType ;
+#     skos:prefLabel "Kind of Material"@en,
+#         "Material"@sv .
 
-:soundPlaybackCharacter a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
-    sdo:rangeIncludes :SoundPlaybackCharacterType ;
-    skos:prefLabel "Playback Characteristics"@en,
-        "Inspelningskontroll"@sv,
-        "Inspelningsprotokoll"@sv .
+# :soundPlaybackCharacter a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:SoundRecording ;
+#     sdo:rangeIncludes :SoundPlaybackCharacterType ;
+#     skos:prefLabel "Playback Characteristics"@en,
+#         "Inspelningskontroll"@sv,
+#         "Inspelningsprotokoll"@sv .
 
 :specificRetentionPolicy a owl:ObjectProperty ;
     sdo:rangeIncludes :SpecificRetentionPolicyType ;
@@ -2077,11 +2063,11 @@
     skos:prefLabel "Technique"@en,
         "Teknik"@sv .
 
-:text a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Audio ;
-    sdo:rangeIncludes :MusicTextType ;
-    skos:prefLabel "Literary Text for Sound Recording"@en,
-        "Typ av genre för text till ljudupptagning (ej musik)"@sv .
+#:text a owl:ObjectProperty ;
+#    sdo:domainIncludes kbv:Audio ;
+#    sdo:rangeIncludes :MusicTextType ;
+#    skos:prefLabel "Literary Text for Sound Recording"@en,
+#        "Typ av genre för text till ljudupptagning (ej musik)"@sv .
 
 :typeOfControl a owl:ObjectProperty ;
     sdo:rangeIncludes :TypeOfControlType ;
@@ -2109,39 +2095,39 @@
    skos:prefLabel "Type of unit"@en,
         "Typ av fysisk enhet"@sv .
 
-:videoColor a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :VideoColorType ;
-    skos:prefLabel "Color"@en,
-        "Färg"@sv .
-
-:videoDimensions a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :VideoDimensionsType ;
-    skos:prefLabel "Dimensions"@en,
-        "Filmbredd"@sv .
-
-:videoFormat a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :HoldingVideoFormatType,
-        :VideoFormatType ;
-    skos:prefLabel "Format"@en,
-        "Format"@sv .
-
-:videoMedium a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :MediumType ;
-    skos:prefLabel "Medium for Sound"@en,
-        "Ljudbärare"@sv .
-
-:videoPlayback a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :MotionPicConfigurationOrVideoPlaybackType ;
-    skos:prefLabel "Playback Channels"@en,
-        "Ljudkonfigurtion"@sv .
-
-:videoSound a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:VideoRecording ;
-    sdo:rangeIncludes :SoundType ;
-    skos:prefLabel "Sound on Medium"@en,
-        "Ljud och dess plats"@sv .
+# :videoColor a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :VideoColorType ;
+#     skos:prefLabel "Color"@en,
+#         "Färg"@sv .
+# 
+# :videoDimensions a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :VideoDimensionsType ;
+#     skos:prefLabel "Dimensions"@en,
+#         "Filmbredd"@sv .
+# 
+# :videoFormat a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :HoldingVideoFormatType,
+#         :VideoFormatType ;
+#     skos:prefLabel "Format"@en,
+#         "Format"@sv .
+# 
+# :videoMedium a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :MediumType ;
+#     skos:prefLabel "Medium for Sound"@en,
+#         "Ljudbärare"@sv .
+# 
+# :videoPlayback a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :MotionPicConfigurationOrVideoPlaybackType ;
+#     skos:prefLabel "Playback Channels"@en,
+#         "Ljudkonfigurtion"@sv .
+# 
+# :videoSound a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:VideoRecording ;
+#     sdo:rangeIncludes :SoundType ;
+#     skos:prefLabel "Sound on Medium"@en,
+#         "Ljud och dess plats"@sv .

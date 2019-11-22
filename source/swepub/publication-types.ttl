@@ -1,0 +1,71 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+prefix svep: <https://id.kb.se/term/swepub/svep/>
+prefix sppubl: <https://id.kb.se/term/swepub/publication/>
+
+svep:ref a swepub:ContentType .
+svep:vet a swepub:ContentType .
+svep:pop a swepub:ContentType .
+
+sppubl:kfu a swepub:PublicationType ; :code "kfu" .
+sppubl:kfu\/vet a swepub:PublicationType ;
+    skos:broader sppubl:kfu, svep:vet ; :code "kfu/vet" .
+
+sppubl:bok a swepub:PublicationType ; :code "bok" .
+sppubl:bok\/vet a swepub:PublicationType ;
+    skos:broader sppubl:bok, svep:vet ; :code "bok/vet" .
+
+sppubl:kap a swepub:PublicationType ; :code "kap" .
+sppubl:kap\/vet a swepub:PublicationType ;
+    skos:broader sppubl:kap, svep:vet ; :code "kap/vet" .
+
+sppubl:kon a swepub:PublicationType ; :code "kon" .
+sppubl:kon\/ref a swepub:PublicationType ;
+    skos:broader sppubl:kon, svep:ref ; :code "kon/ref" .
+sppubl:kon\/vet a swepub:PublicationType ;
+    skos:broader sppubl:kon, svep:vet ; :code "kon/vet" .
+
+sppubl:dok a swepub:PublicationType ; :code "dok" .
+sppubl:dok\/vet a swepub:PublicationType ;
+    skos:broader sppubl:dok, svep:vet ; :code "dok/vet" .
+
+sppubl:sam a swepub:PublicationType ; :code "sam" .
+sppubl:sam\/vet a swepub:PublicationType ;
+    skos:broader sppubl:sam, svep:vet ; :code "sam/vet" .
+
+sppubl:pro a swepub:PublicationType ; :code "pro" .
+sppubl:pro\/vet a swepub:PublicationType ;
+    skos:broader sppubl:pro, svep:vet ; :code "pro/vet" .
+
+sppubl:art a swepub:PublicationType ; :code "art" .
+sppubl:art\/pop a swepub:PublicationType ;
+    skos:broader sppubl:art, svep:pop ; :code "art/pop" .
+sppubl:art\/ref a swepub:PublicationType ;
+    skos:broader sppubl:art, svep:ref ; :code "art/ref" .
+sppubl:art\/vet a swepub:PublicationType ;
+    skos:broader sppubl:art, svep:vet ; :code "art/vet" .
+
+sppubl:lic a swepub:PublicationType ; :code "lic" .
+sppubl:lic\/vet a swepub:PublicationType ;
+    skos:broader sppubl:lic, svep:vet ; :code "lic/vet" .
+
+sppubl:ovr a swepub:PublicationType ; :code "ovr" .
+sppubl:ovr\/vet a swepub:PublicationType ;
+    skos:broader sppubl:ovr, svep:vet ; :code "ovr/vet" .
+
+sppubl:pat a swepub:PublicationType ; :code "pat" .
+sppubl:pat\/vet a swepub:PublicationType ;
+    skos:broader sppubl:pat, svep:vet ; :code "pat/vet" .
+
+sppubl:rap a swepub:PublicationType ; :code "rap" .
+sppubl:rap\/vet a swepub:PublicationType ;
+    skos:broader sppubl:rap, svep:vet ; :code "rap/vet" .
+
+sppubl:for a swepub:PublicationType ; :code "for" .
+sppubl:for\/ref a swepub:PublicationType ;
+    skos:broader sppubl:for, svep:ref ; :code "for/ref" .
+
+sppubl:rec a swepub:PublicationType ; :code "rec" .
+sppubl:rec\/vet a swepub:PublicationType ;
+    skos:broader sppubl:rec, svep:vet ; :code "rec/vet" .

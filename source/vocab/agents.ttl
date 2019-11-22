@@ -23,7 +23,7 @@
 
 :name a owl:DatatypeProperty;
     rdfs:label "name"@en, "namn"@sv;
-    rdf:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
+    rdfs:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
     # hur tala om: Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. 
     rdfs:domain :Agent;
     rdfs:subPropertyOf :label;
@@ -63,6 +63,22 @@
     rdfs:subClassOf :Agent; #:Event;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
+## Used by SwePub {{{
+
+:Collaboration a owl:Class ;
+    :category :pending ;
+    rdfs:label "Samarbete"@sv, "Collaboration"@en;
+    rdfs:comment "organisationsöverskridande konstellation"@sv;
+    rdfs:subClassOf :Agent .
+
+:Corporation a owl:Class ;
+    :category :pending ;
+    rdfs:label "Korporation"@sv, "Corporation"@en;
+    rdfs:subClassOf :Organization .
+
+## }}}
+
+
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
 
@@ -85,7 +101,7 @@
 
 :hasBiographicalInformation a owl:ObjectProperty;
     rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
-    sdo:domainIncludes :Person, :Family, :Instance;
+    sdo:domainIncludes :Person, :Family;
     # separate instance and agent properties?
     rdfs:range :BiographicalNote;
     owl:equivalentProperty rdau:P60492 .
@@ -96,7 +112,7 @@
 
 :hasHistoricalData a owl:ObjectProperty;
     rdfs:label "has historical data"@en, "Administrativ historik"@sv;
-    sdo:domainIncludes :Organization, :Jurisdiction, :Meeting, :Instance;
+    sdo:domainIncludes :Organization, :Jurisdiction, :Meeting;
     # separate instance and agent properties?
     rdfs:range :AdministrativeHistoryNote;
     owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
@@ -277,6 +293,7 @@
     owl:equivalentClass sdo:Library .
 
 :bibliography a owl:ObjectProperty ;
+    rdfs:comment "Bibliografi som resursen ingår i."@sv ;
     rdfs:domain :Record ;
     rdfs:range :Library ;
     rdfs:label "bibliografi"@sv .

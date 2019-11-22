@@ -5,6 +5,7 @@
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
@@ -161,6 +162,12 @@
     rdfs:range :Concept;
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
+
+:isReplacedBy a owl:ObjectProperty ;
+    rdfs:label "replaced by"@en, "ersatt av"@sv ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    owl:equivalentProperty dc:isReplacedBy .
 
 :hasVariant a owl:ObjectProperty;
     :category :compositional ;
