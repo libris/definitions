@@ -14,7 +14,8 @@ construct {
         skos:prefLabel ?rdapreflabel;
         skos:definition ?rdadefinition;
         skos:inScheme </term/rda> ;
-        owl:sameAs ?lcrel, ?rdarel, ?codealias, ?labelalias .
+        owl:sameAs ?codealias, ?labelalias ;
+        skos:exactMatch ?lcrel, ?rdarel .
 
 } where {
 
@@ -50,10 +51,6 @@ construct {
     bind(IRI(concat(?aliasbase, '/', encode_for_uri(?lcpreflabel))) as ?labelalias)
 
     ?rdarel skos:prefLabel ?rdapreflabel .
-    FILTER(langMatches(lang(?rdapreflabel), 'en') ||
-            langMatches(lang(?rdapreflabel), 'sv'))
     ?rdarel skos:definition ?rdadefinition .
-    FILTER(langMatches(lang(?rdadefinition), 'en') ||
-            langMatches(lang(?rdadefinition), 'sv'))
 
 }

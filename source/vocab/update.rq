@@ -14,4 +14,11 @@ delete {
     ?s ?p ?o
     filter(?o != rdfs:Resource && strstarts(str(?o), str(:)))
     filter(?p in (rdfs:subClassOf, rdfs:domain, rdfs:range))
+};
+
+# remove redundant base classes
+delete {
+    ?c rdfs:subClassOf ?a .
+} where {
+    ?c rdfs:subClassOf / rdfs:subClassOf+ ?a .
 }

@@ -1,0 +1,44 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+base <https://id.kb.se/>
+
+
+swepub:Published a swepub:PublicationStatus .
+
+swepub:Preprint a swepub:PublicationStatus, swepub:OutputType .
+
+swepub:Submitted a swepub:PublicationStatus .
+
+swepub:Accepted a swepub:PublicationStatus .
+
+swepub:InPress a swepub:PublicationStatus .
+
+swepub:EpubAheadOfPrintOnlineFirst a swepub:PublicationStatus .
+
+
+</term/swepub/project> a :HostType ;
+    rdfs:label "project" .
+
+</term/swepub/programme> a :HostType ;
+    rdfs:label "programme" .
+
+</term/swepub/grantAgreement> a :HostType ;
+    rdfs:label "grantAgreement" .
+
+</term/swepub/initiative> a :HostType ;
+    rdfs:label "initiative" .
+
+</term/swepub/event> a :HostType ;
+    rdfs:label "event" .
+
+</term/swepub/dataset> a :HostType ;
+    rdfs:label "dataset" .
+
+
+</term/swepub/swedishlist/peer-reviewed> a :Classification ;
+    skos:prefLabel "Sakkunninggranskad publiceringskanal"@sv .
+
+</term/swepub/swedishlist/non-peer-reviewed> a :Classification ;
+    skos:prefLabel "Icke-sakkunninggranskad publiceringskanal"@sv .

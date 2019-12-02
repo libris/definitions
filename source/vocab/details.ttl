@@ -97,9 +97,9 @@
     rdfs:subClassOf :Title;
     rdfs:label "Title variation"@en, "Varianttitel"@sv .
 
-:AbbreviatedTitle  a owl:Class;
+:AbbreviatedTitle a owl:Class;
     owl:equivalentClass bf2:AbbreviatedTitle;
-    rdfs:subClassOf :Title;
+    rdfs:subClassOf :VariantTitle;
     rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv .
 
 :abbreviatedTitle a owl:DatatypeProperty;
@@ -246,6 +246,13 @@
     rdfs:comment "En identifikator som indirekt är knuten till denna resurs (den kan vara hämtad från en resurs på annat format, eller vara en inkorrekt men ändå använd identifikator)."@sv;
     owl:propertyChainAxiom ( :hasEquivalent :identifiedBy ) .
 
+:incorrectlyIdentifiedBy a owl:ObjectProperty ;
+    rdfs:label "Incorrectly identified by"@en, "Inkorrekt identifierad av"@sv;
+    sdo:domainIncludes :Document;
+    rdfs:range :Identifier ;
+    rdfs:comment "En identifikator som är inkorrekt använd för denna resurs. Identifikatorn i sig kan vara korrekt, invalid i formatet, eller indragen (vilket kan anges med status-egenskapen på själva identifikatorn). Denna relation används för att klargöra att den inte går att använda för att unikt identifiera resursen."@sv;
+    skos:broadMatch :identifiedBy .
+
 :identifies a owl:ObjectProperty;
     rdfs:label "Identifierad resurs"@sv; #english bflabel misspelled
     #rdfs:domain :Identifier;
@@ -308,7 +315,7 @@
 :Fingerprint a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Fingerprint;
     rdfs:subClassOf :Identifier;
-    rdfs:comment: "Används normalt ej"@sv;
+    rdfs:comment "Används normalt ej"@sv;
     rdfs:label "Fingerprint identifier"@en . #NOTE: ingen svensk motsvarighet
 
 :GTIN14 a owl:Class; # rdfs:Datatype ?
@@ -395,12 +402,12 @@
 
 :LcOverseasAcq a owl:Class; # rdfs:Datatype ?
     rdfs:label "LC acquisition program"@en, "LC:s förvärvsprogram"@sv;
-    rdfs:subclassOf :Identifier;
+    rdfs:subClassOf :Identifier ;
     rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:LcOverseasAcq .
 
 :LibrisIIINumber a owl:Class; # rdfs:Datatype ?
-    rdfs:comment: "[FÅR EJ MAKULERAS] Åtta- eller tioställigt identifikationsnummer på LIBRIS-poster som konverterats från ett ursprungligt LIBRISIII-format (ISBN, ISSN eller ett tioställigt nummer som inleds med siffrorna '99'). Avser postens unika identitet i det gamla LIBRIS-systemet."@sv;
+    rdfs:comment "[FÅR EJ MAKULERAS] Åtta- eller tioställigt identifikationsnummer på LIBRIS-poster som konverterats från ett ursprungligt LIBRISIII-format (ISBN, ISSN eller ett tioställigt nummer som inleds med siffrorna '99'). Avser postens unika identitet i det gamla LIBRIS-systemet."@sv;
     rdfs:domain :Record;
     rdfs:subClassOf :SystemNumber;
     rdfs:label "LIBRISIII-nummer"@sv .
@@ -412,7 +419,7 @@
 
 :MatrixNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
-    rdfs:label "Matrix number"@en, "Matrisnummer"@en;
+    rdfs:label "Matrix number"@en, "Matrisnummer"@sv;
     owl:equivalentClass bf2:MatrixNumber .
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
@@ -433,7 +440,7 @@
 :NBN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Nbn;
     rdfs:subClassOf :Identifier;
-    rdfs:comment: "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
+    rdfs:comment "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
     rdfs:label "NBN" .
 
 :PublisherNumber a owl:Class; # rdfs:Datatype ?
@@ -489,6 +496,18 @@
     rdfs:label "Video recording number"@en, "Utgivningsnummer (videoinspelning)"@sv;
     rdfs:subClassOf :Identifier;
     owl:equivalentClass bf2:VideoRecordingNumber .
+
+## Used by SwePub {{{
+:ISI rdfs:subClassOf :Identifier .
+:IssueNumber rdfs:subClassOf :Identifier .
+:LibrisNumber rdfs:subClassOf :Identifier .
+:ORCID rdfs:subClassOf :Identifier .
+:PatentNumber rdfs:subClassOf :Identifier .
+:PMID rdfs:subClassOf :Identifier .
+:ScopusID rdfs:subClassOf :Identifier .
+:URI rdfs:subClassOf :Identifier .
+:WorldCatNumber rdfs:subClassOf :Identifier .
+## }}}
 
 ##
 # Stuff
@@ -719,6 +738,26 @@
     rdfs:subClassOf :PrimaryProduction;
     rdfs:label "Primär bulkproduktion"@sv .
 
+:Availability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :ProvisionActivity;
+    rdfs:label "Tillgänglighet"@sv, "Availability"@en .
+
+:Digitization a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Manufacture;
+    rdfs:label "Digitisering"@sv, "Digitization"@en .
+
+:OnlineAvailability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Availability;
+    rdfs:label "Online-tillgänglighet"@sv, "Online availability"@en .
+
+:OpenAccessAvailability a owl:Class ;
+    :category :pending ;
+    rdfs:subClassOf :Availability;
+    rdfs:label "OpenAccess"@sv, "Open access"@en .
+
 :otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "kompletterande datum"@sv;
@@ -727,12 +766,12 @@
 :startYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "startår"@sv;
-    rdfs:subPropertyOf :year .
+    rdfs:subPropertyOf :year, :startDate .
 
 :endYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "slutår"@sv;
-    rdfs:subPropertyOf :year .
+    rdfs:subPropertyOf :year, :endDate .
 
 :country a owl:ObjectProperty;
     rdfs:label "land"@sv;
@@ -845,6 +884,7 @@
 
 :note a owl:DatatypeProperty;
     rdfs:label "anmärkning"@sv, "note"@en;
+    :category :pending;
     rdfs:domain :Resource;
     owl:equivalentProperty skos:note .
 
@@ -950,6 +990,15 @@
     rdfs:subPropertyOf :date;
     rdfs:label "år"@sv;
     rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
+
+:startDate a owl:DatatypeProperty;
+    rdfs:label "startdatum"@sv;
+    rdfs:subPropertyOf :date .
+
+:endDate a owl:DatatypeProperty;
+    sdo:domainIncludes :Embargo;
+    rdfs:label "slutdatum"@sv;
+    rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
     rdfs:label "Associated title date"@en, "Tid för verket"@sv;
@@ -1218,6 +1267,26 @@
     owl:equivalentProperty bf2:legalDate .
 
 
+## Used by SwePub {{{
+
+:CreatorCount a owl:Class ;
+    rdfs:subClassOf :Note ;
+    :category :pending .
+
+:volumeNumber a owl:DatatypeProperty ;
+    owl:equivalentProperty sdo:volumeNumber ;
+    :category :pending .
+
+:issueNumber a owl:DatatypeProperty ;
+    owl:equivalentProperty sdo:issueNumber ;
+    :category :pending .
+
+:articleNumber a owl:DatatypeProperty ;
+    :category :pending .
+
+## }}}
+
+
 ## NOTES
 
 :Summary a owl:Class;
@@ -1264,18 +1333,23 @@
 
 :AccessPolicy a owl:Class;
     rdfs:label "Access policy"@en, "Villkor för åtkomst"@sv;
-    rdfs:subbClassOf :UsageAndAccessPolicy;
+    rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:AccessPolicy .
 
 :RetentionPolicy a owl:Class;
     rdfs:label "Retention policy"@en, "Villkor för bibehållande"@sv;
-    rdfs:subbClassOf :UsageAndAccessPolicy;
+    rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:RetentionPolicy .
 
 :UsePolicy a owl:Class;
     rdfs:label "Use policy"@en, "Användningsvillkor"@sv;
     rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:UsePolicy .
+
+:Embargo a owl:Class;
+    :category :pending ;
+    rdfs:label "Embargo"@en, "Embargo"@sv;
+    rdfs:subClassOf :UsageAndAccessPolicy .
 
 :usageAndAccessPolicy a owl:ObjectProperty;
     rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;

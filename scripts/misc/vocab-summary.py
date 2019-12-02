@@ -1,4 +1,7 @@
 from __future__ import unicode_literals, print_function, division
+if str is bytes:
+    str = unicode
+from functools import reduce
 from rdflib import *
 
 # Monkey!
@@ -17,9 +20,10 @@ SCHEMA = Namespace("http://schema.org/")
 PTG = Namespace("http://protege.stanford.edu/plugins/owl/protege#")
 
 
-def print_vocab(g, show_equivs=False):
-    global otherclasses, otherprops, SHOW_EQUIVS
+def print_vocab(g, show_equivs=False, only_classes=False):
+    global otherclasses, otherprops, SHOW_EQUIVS, ONLY_CLASSES
     SHOW_EQUIVS = show_equivs
+    ONLY_CLASSES = only_classes
 
     otherclasses = reduce(set.__or__, (set(g.subjects(RDF.type, t))
         for t in [RDFS.Class, OWL.Class]))
@@ -42,7 +46,7 @@ def print_vocab(g, show_equivs=False):
         if ':' not in qname:
             qname = ':%s' % qname
         pfx, name = qname.split(':')
-        ns = unicode(term)[:-len(name)]
+        ns = str(term)[:-len(name)]
         if pfx in prefixes:
             continue
         prefixes.add(pfx)
@@ -131,6 +135,8 @@ def print_class(c, superclasses=set()):
 
 
 def print_subproperties(prop, domain, indent):
+    if ONLY_CLASSES:
+        return
     for subprop in sorted(prop.subjects(RDFS.subPropertyOf)):
         otherprops.discard(subprop.identifier)
         print_propsum(indent, subprop, domain)
@@ -138,6 +144,9 @@ def print_subproperties(prop, domain, indent):
 
 
 def print_propsum(indent, prop, domain=None):
+    if ONLY_CLASSES:
+        return
+
     if isinstance(prop.identifier, BNode):
         return
 
@@ -182,6 +191,7 @@ if __name__ == '__main__':
 
     argp = argparse.ArgumentParser()
     argp.add_argument('-v', '--show-equivalents', action='store_true', default=False)
+    argp.add_argument('-t', '--only-classes', action='store_true', default=False)
     argp.add_argument('sources', metavar='SOURCE', nargs='+')
     argp.add_argument('-c', '--context', metavar='CONTEXT')
     args = argp.parse_args()
@@ -193,4 +203,4 @@ if __name__ == '__main__':
         else:
             g.parse(src, format=guess_format(src))
 
-    print_vocab(g, args.show_equivalents)
+    print_vocab(g, args.show_equivalents, args.only_classes)
