@@ -10,9 +10,10 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
 
-@prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
+
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -98,8 +99,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:comment "Work that has been partially incorporated into another work."@en;
-    owl:inverseOf :absorbedInPartBy;
-    owl:equivalentProperty bf:absorbedInPart .
+    skos:closeMatch rdau:P60248, rdau:absorptionInPartOf.en ;
+    owl:inverseOf :absorbedInPartBy .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :absorbedInPartBy a owl:ObjectProperty;
@@ -108,8 +109,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:comment "Work that incorporates part of the content of another work."@en;
-    owl:inverseOf :absorbedInPart;
-    owl:equivalentProperty bf:absorbedInPartBy .
+    skos:closeMatch rdau:P60248, rdau:absorbedInPartBy.en ;
+    owl:inverseOf :absorbedInPart .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :precededInPartBy a owl:ObjectProperty;
@@ -118,8 +119,8 @@
     rdfs:range :Work;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :succeededInPartBy;
-    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en ;
-    owl:equivalentProperty  bf:supersedesInPart .
+    skos:closeMatch rdau:P60479, rdau:replacementInPartOf.en ;
+    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
     
 :succeededInPartBy a owl:ObjectProperty;
@@ -128,8 +129,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     owl:inverseOf :precededInPartBy;
-    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en ;
-    owl:equivalentProperty  bf:supersededInPartBy .
+    skos:closeMatch rdau:rdau:P60479, rdau:replacedInPartBy.en ;
+    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :accompanies a owl:ObjectProperty;
