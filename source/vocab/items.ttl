@@ -2,7 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
-@prefix bf1: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
 @prefix holding: <http://purl.org/ontology/holding#> .
@@ -29,17 +28,6 @@
     skos:closeMatch rdaent:Item ;
     #owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
     rdfs:label "Item"@en, "Bestånd"@sv .
-
-# Remove temporarily and only use :Item
-# :SomeItems a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass bf1:HeldMaterial, sdo:SomeProducts ; # bf2:CompoundItem
-#     rdfs:label "some items"@en, "några exemplar"@sv .
-
-# :IndividualItem a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass bf1:HeldItem, sdo:IndividualProduct ; # bf2:SimpleItem
-#     rdfs:label "individual item"@en, "enskilt exemplar"@sv .
 
 ### ITEM PROPERTIES AND CLASSES ###
 
@@ -199,11 +187,8 @@
     owl:equivalentClass bf2:ImmediateAcquisition .
 
 :itemOf a owl:ObjectProperty ;
-    owl:equivalentProperty bf1:holdingFor, bf2:itemOf, holding:examplarOf ;
+    owl:equivalentProperty bf2:itemOf, holding:examplarOf ;
     owl:inverseOf :hasItem;
-    #rdfs:subPropertyOf sdo:exampleOfWork ;
-    #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
-    #rdfs:range :CreativeWork ;
     rdfs:domain :Item ;
     rdfs:range :Instance;
     rdfs:subPropertyOf :relatedTo;
@@ -228,7 +213,6 @@
 
 :componentOf a owl:ObjectProperty ;
     owl:inverseOf :hasComponent ;
-    owl:equivalentProperty bf1:componentOf ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
     rdfs:subPropertyOf sdo:exampleOfWork ;
     rdfs:label "component of"@en, "komponent av"@sv  .
@@ -237,20 +221,13 @@
 # Older Schema/BF1 Holding Mappings
 
 :HeldMaterial a owl:Class;
+    :category :pending ;
     rdfs:label "Beståndsmaterial"@sv;
-    rdfs:subClassOf bf1:HeldMaterial, sdo:SomeProducts .
+    rdfs:subClassOf sdo:SomeProducts .
 
-#:heldBy a owl:ObjectProperty;
-#    rdfs:label "beståndsinnehavare"@sv;
-#    rdfs:domain :Offer;
-#    rdfs:range :Organization;
-#    rdfs:subPropertyOf sdo:seller, bf1:heldBy .
-
-
-##
-#
-
-:callno rdfs:subPropertyOf :identifier, bf1:callno, sdo:sku;
+:callno a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:subPropertyOf :identifier ;
     rdfs:domain :Item ;
     rdfs:range :Identifier .
 
