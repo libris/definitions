@@ -162,31 +162,33 @@
 :sublocation a owl:ObjectProperty ;
     #NOTE: Bibframe property, which we (at least for now) don't want to be able to add to the Libris XL viewer
     :category :pending ;
-    rdfs:label "Held in sublocation" ;
+    rdfs:label "Held in sublocation"@en ;
     rdfs:range :Sublocation ;
-    skos:definition "Specific place within the holding entity where the item is located or made available." .
+    owl:equivalentProperty bf2:sublocation .
 
 :Sublocation a owl:Class;
-    rdfs:label "Sublocation"@en, "Sigelkod"@sv;
+    :category :pending;
+    rdfs:label "Sublocation"@en ;
     owl:equivalentClass bf2:Sublocation .
 
 :immediateAcquisition a owl:ObjectProperty;
     rdfs:label "Immediate acquisition"@en, "Förvärvsuppgifter"@sv;
     rdfs:domain :Item;
     rdfs:range :ImmediateAcquisition;
-    owl:equivalentClass bf2:immediateAcquisition .
+    owl:equivalentProperty bf2:immediateAcquisition .
 
 :ImmediateAcquisition a owl:Class;
     rdfs:label "Immediate acquisition"@en, "Förvärvsuppgifter"@sv;
     owl:equivalentClass bf2:ImmediateAcquisition .
 
 :itemOf a owl:ObjectProperty ;
-    owl:equivalentProperty bf2:itemOf, holding:examplarOf ;
+    rdfs:label "Holding for"@en, "bestånd på"@sv ;
     owl:inverseOf :hasItem;
     rdfs:domain :Item ;
     rdfs:range :Instance;
     rdfs:subPropertyOf :relatedTo;
-    rdfs:label "Holding for"@en, "bestånd på"@sv .
+    owl:equivalentProperty bf2:itemOf, holding:examplarOf .
+
 
 :hasItem a owl:ObjectProperty;
     rdfs:label "Has holding"@en, "Har bestånd"@sv;
@@ -197,19 +199,21 @@
     owl:equivalentProperty bf2:hasItem .
 
 :hasComponent a owl:ObjectProperty ;
+    rdfs:label "has component"@en, "har komponent"@sv ;
     :category :compositional ;
     rdfs:subPropertyOf bf2:hasPart ;
     #rdfs:subPropertyOf :moreSpecifically ;
     rdfs:domain :Item ;
     # TODO: rdfs:domain :SomeItems ;
     rdfs:range :Item ;
-    rdfs:label "has component"@en, "har komponent"@sv .
+    skos:historyNote "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
 
 :componentOf a owl:ObjectProperty ;
+    rdfs:label "component of"@en, "komponent av"@sv ;
     owl:inverseOf :hasComponent ;
     #rdfs:subPropertyOf :moreGenerally, sdo:model, rdfa:copy ;
-    rdfs:subPropertyOf sdo:exampleOfWork ;
-    rdfs:label "component of"@en, "komponent av"@sv  .
+    rdfs:subPropertyOf sdo:exampleOfWork .
+
 
 ##
 # Older Schema/BF1 Holding Mappings
