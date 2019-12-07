@@ -98,13 +98,12 @@
 :enumerationAndChronology a owl:ObjectProperty ;
     #NOTE: Bibframe property, which we (at least for now) don't want to be able to add to the Libris XL viewer
     :category :pending ;
-    rdfs:label "Numbering or other enumeration and dates associated with issues or items held." ;
     rdfs:range :EnumerationAndChronology ;
-    skos:definition "Numbering and dates of issues or items held." .
+    owl:equivalentProperty bf2:enumerationAndChronology .
 
 :EnumerationAndChronology a owl:Class;
     rdfs:label "Enumeration and chronology"@en;
-    owl:equivalentProperty bf2:EnumerationAndChronology .
+    owl:equivalentClass bf2:EnumerationAndChronology .
 
 :Enumeration a owl:Class;
     rdfs:label "Enumeration"@en;
