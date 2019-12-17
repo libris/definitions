@@ -440,13 +440,15 @@
           "@id": "MediaType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "MediaType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "MediaType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "CarrierType": {
           "@id": "CarrierType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "CarrierType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "CarrierType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Publication": {
           "@id": "Publication-cards",
@@ -459,7 +461,8 @@
           "@id": "ContentType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "ContentType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "ContentType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
