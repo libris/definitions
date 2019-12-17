@@ -127,6 +127,12 @@
           "classLensDomain": "Title",
           "showProperties": ["partNumber", "partName"]
         },
+        "DescriptionConventions": {
+          "@id": "DescriptionConventions-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DescriptionConventions",
+          "showProperties": [ "prefLabel", "label" ]
+        },
         "Identifier": {
           "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
@@ -420,7 +426,8 @@
           "@id": "DescriptionConventions-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "DescriptionConventions",
-          "showProperties": [ "prefLabel", "label", "code" ]
+          "fresnel:extends": {"@id": "DescriptionConventions-chips"},
+          "showProperties": [ "fresnel:super", "code" ]
         },
         "Language": {
           "@id": "Language-cards",
@@ -433,13 +440,15 @@
           "@id": "MediaType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "MediaType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "MediaType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "CarrierType": {
           "@id": "CarrierType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "CarrierType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "CarrierType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Publication": {
           "@id": "Publication-cards",
@@ -452,7 +461,8 @@
           "@id": "ContentType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "ContentType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "ContentType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
