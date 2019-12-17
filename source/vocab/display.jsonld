@@ -127,6 +127,12 @@
           "classLensDomain": "Title",
           "showProperties": ["partNumber", "partName"]
         },
+        "DescriptionConventions": {
+          "@id": "DescriptionConventions-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DescriptionConventions",
+          "showProperties": [ "prefLabel", "label" ]
+        },
         "Identifier": {
           "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
@@ -420,7 +426,8 @@
           "@id": "DescriptionConventions-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "DescriptionConventions",
-          "showProperties": [ "prefLabel", "label", "code" ]
+          "fresnel:extends": {"@id": "DescriptionConventions-chips"},
+          "showProperties": [ "fresnel:super", "code" ]
         },
         "Language": {
           "@id": "Language-cards",
