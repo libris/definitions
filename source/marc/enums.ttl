@@ -805,6 +805,53 @@
     skos:prefLabel "Encoding Level"@en,
         "Fullständighetsnivå för katalogiseringen"@sv .
 
+##
+# CatalogingRulesType
+
+:EarlierRule a :CatalogingRulesType;
+    owl:sameAs :CatalogingRulesType-q;
+    skos:prefLabel "Äldre regler"@sv, "Earlier rules"@en;
+    skos:broadMatch <http://id.loc.gov/vocabulary/descriptionConventions/aacr>;
+    skos:notation "a" .
+
+:Aacr1 a :CatalogingRulesType;
+    owl:sameAs :CatalogingRulesType-b;
+    skos:prefLabel "AACR 1"@sv, "AACR 1"@en;
+    skos:notation "b" .
+
+:Aacr2 a :CatalogingRulesType;
+    owl:sameAs :CatalogingRulesType-c;
+    skos:prefLabel "AACR 2/KRS"@sv, "AACR 2"@en;
+    skos:broadMatch <http://id.loc.gov/vocabulary/descriptionConventions/aacr>;
+    skos:notation "c" .
+# add http://id.loc.gov/vocabulary/descriptionConventions/krsb ?
+
+:Aacr2CompatibleHeading a :CatalogingRulesType;
+    owl:sameAs :CatalogingRulesType-d;
+    skos:prefLabel "AACR2-liknande"@sv,"AACR 2 compatible heading"@en;
+    skos:notation "d" .
+
+##
+# CatFormType
+
+:Aacr2 a :CatFormType;
+    owl:sameAs :CatFormType-a;
+    skos:broadMatch <http://id.loc.gov/vocabulary/descriptionConventions/aacr>;
+    skos:prefLabel "AACR2/KRS"@sv, "AACR 2"@en;
+    skos:notation "a" .
+
+:ISBDPunctuationOmitted a :CatFormType;
+    owl:sameAs :CatFormType-c;
+    skos:prefLabel "ISBD-interpunktion saknas"@sv, "ISBD punctuation omitted"@en;
+    skos:notation "c" .
+    
+:Isbd a :CatFormType;
+    owl:sameAs :CatFormType-i;
+    skos:exactMatch <http://id.loc.gov/vocabulary/descriptionConventions/isbd>;
+    skos:prefLabel "ISBD-interpunktion finns"@sv, "ISBD punctuation included"@en;
+    skos:notation "i" .
+
+
 ## ENCLEVELTYPES
 
 # CATEGORY: BIB
