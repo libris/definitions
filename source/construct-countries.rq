@@ -15,7 +15,7 @@ construct {
 } where {
     graph <https://id.kb.se/dataset/countries> {
         {
-            ?s skos:notation ?notation ; rdfs:label ?label .
+            ?s skos:notation ?notation ; skos:prefLabel ?label .
                 optional { ?s rdfs:comment ?comment }
             bind(strdt(?notation, xsd:string) as ?strnot)
             optional {
