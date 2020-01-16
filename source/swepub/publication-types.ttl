@@ -5,38 +5,79 @@ prefix svep: <https://id.kb.se/term/swepub/svep/>
 prefix sppubl: <https://id.kb.se/term/swepub/publication/>
 
 svep:ref a swepub:ContentType .
+     label: "Sakkunniggranskat"@sv .
+     label: "Peer-reviewed"@en .
+     description: "Verk som har genomgått granskning av sakkunniga vars samlade bedömning avgör om det uppfyller tillräckliga krav på vetenskaplig eller konstnärlig kvalitet för att accepteras för publicering eller framförande."@en .
+     description: "Work reviewed by independent researchers and considered to meet the requirements for a scholar publication."@en .
 svep:vet a swepub:ContentType .
+     label: "Övrigt vetenskapligt"@sv .
+     label: "Other academic"@en .
+     description: "Verk som riktar sig mot forskningssamhället men har inte genomgått sakkunniggranskning."@sv .
+     description: Other works which are intended for the sholarly society but not peer-reviewed." @en .
 svep:pop a swepub:ContentType .
+     label: "Övrigt (populärvetenskap, debatt)"@sv .
+     label: "Popular scientific"@en .
+     description: "Verk av populärvetenskaplig karaktär som riktar sig mot allmänheten."@sv .
+     description: "Works intended to mediate scholar information to a general audience."@en .
 
 sppubl:kfu a swepub:PublicationType ; :code "kfu" .
 sppubl:kfu\/vet a swepub:PublicationType ;
     skos:broader sppubl:kfu, svep:vet ; :code "kfu/vet" .
+    label: "Konstnärligt arbete"@sv .
+    label: "Artistic work"@en .
+    description: Arbete eller rapport från ett konstnärligt forsknings- och/eller utvecklingsprojekt."@sv .
+    description: Work or report from an artistick research and/or development project."@en .
 
 sppubl:bok a swepub:PublicationType ; :code "bok" .
 sppubl:bok\/vet a swepub:PublicationType ;
     skos:broader sppubl:bok, svep:vet ; :code "bok/vet" .
+    label: "Bok"@sv .
+    label: "Book"@en .
+    description: "Monografisk publikation bestående av en eller flera fysiska delar, avsedd att utgöra en avslutad helhet."@sv .
+    description: "Monographic publication in one or more physical parts, intended to form a complete unity."@en .
 
 sppubl:kap a swepub:PublicationType ; :code "kap" .
 sppubl:kap\/vet a swepub:PublicationType ;
     skos:broader sppubl:kap, svep:vet ; :code "kap/vet" .
+    label: "Bokkapitel"@sv .
+    label: "Book chapter"@en .
+    description: "Självständig del av monografisk publikation, ofta samlingsverk. Ett antal fristående verk som utgivits tillsammans eventuellt under redaktionell styrning till ett visst tema."@sv .
+    description: "Independent part of a monographic publication or an editorial collection. A number of independent works published together, possibly selected by editors for a certain theme."@en .
 
 sppubl:kon a swepub:PublicationType ; :code "kon" .
 sppubl:kon\/ref a swepub:PublicationType ;
     skos:broader sppubl:kon, svep:ref ; :code "kon/ref" .
 sppubl:kon\/vet a swepub:PublicationType ;
     skos:broader sppubl:kon, svep:vet ; :code "kon/vet" .
+    label: "Konferensbidrag"@sv .
+    label: "Conference paper"@en .
+    description: "Bidrag som publicerats i officiell proceeding eller annan konferensskrift."@sv .
+    description: "Paper published in editorial proceedings or other conference publication."@en .
+
 
 sppubl:dok a swepub:PublicationType ; :code "dok" .
 sppubl:dok\/vet a swepub:PublicationType ;
     skos:broader sppubl:dok, svep:vet ; :code "dok/vet" .
+    label: "Doktorsavhandling"@sv .
+    label: "Doctoral thesis"@en .
+    description: "Godkänd avhandling för doktorsexamen."@sv .
+    description: Approved dissertation for Doctoral degree."@en .
 
 sppubl:sam a swepub:PublicationType ; :code "sam" .
 sppubl:sam\/vet a swepub:PublicationType ;
     skos:broader sppubl:sam, svep:vet ; :code "sam/vet" .
+    label: "Samlingsverk (redaktörskap)"@sv .
+    label: "Editorial collection"@en .
+    description: "Publikation där ett antal var för sig fristående verk utgivits tillsammans."@sv .
+    description: "Editorship for a number of separate works published collectively, often selected for a certain theme."@en .
 
 sppubl:pro a swepub:PublicationType ; :code "pro" .
 sppubl:pro\/vet a swepub:PublicationType ;
     skos:broader sppubl:pro, svep:vet ; :code "pro/vet" .
+    label: "Proceedings (redaktörskap)"@sv .
+    label: "Editorial proceedings"@en .
+    description: "Redaktörskap för officiell konferensproceeding eller konferensmeddelande."@sv .
+    description: "Editorship for official proceeding or conference publication."@en .
 
 sppubl:art a swepub:PublicationType ; :code "art" .
 sppubl:art\/pop a swepub:PublicationType ;
@@ -45,27 +86,55 @@ sppubl:art\/ref a swepub:PublicationType ;
     skos:broader sppubl:art, svep:ref ; :code "art/ref" .
 sppubl:art\/vet a swepub:PublicationType ;
     skos:broader sppubl:art, svep:vet ; :code "art/vet" .
+    label: "Tidskriftsartikel"@sv .
+    label: "Journal article"@en .
+    description: "Artikel i en tidskrift."@sv .
+    description: "Article published in scientific or other journal."@en .
 
 sppubl:lic a swepub:PublicationType ; :code "lic" .
 sppubl:lic\/vet a swepub:PublicationType ;
     skos:broader sppubl:lic, svep:vet ; :code "lic/vet" .
+    label: "Licentiatavhandling"@sv .
+    label: "Licentiate thesis"@en .
+    description: "Godkänd avhandling för licentiatexamen."@sv .
+    description: "Approved dissertation for Licentiate degree."@en .
 
 sppubl:ovr a swepub:PublicationType ; :code "ovr" .
 sppubl:ovr\/vet a swepub:PublicationType ;
     skos:broader sppubl:ovr, svep:vet ; :code "ovr/vet" .
+    label: "Annan publikation"@sv .
+    label: "Other publication"@en .
+    description: "Avser publikationer där ingen annan publikationstyp är tillämplig, till exempel poster (presentationer), evenemang, konserter, utställningar, teaterföreställningar eller textilier."@sv .
+    description: "Other type of publication, e.g. poster, event, concert, exhibition, performance or textiles."@en .
 
 sppubl:pat a swepub:PublicationType ; :code "pat" .
 sppubl:pat\/vet a swepub:PublicationType ;
     skos:broader sppubl:pat, svep:vet ; :code "pat/vet" .
+    label: "Patent"@sv .
+    label: "Patent"@en .
+    description: "Patenthandling."@sv .
+    description: "Patent document."@en .
 
 sppubl:rap a swepub:PublicationType ; :code "rap" .
 sppubl:rap\/vet a swepub:PublicationType ;
     skos:broader sppubl:rap, svep:vet ; :code "rap/vet" .
+    label: "Rapport"@sv .
+    label: "Report"@en .
+    description: "Publikation som exempelvis ingår i en rapportserie."@sv .
+    description: "Publication that e.g. is part of a report series."@en . 
 
 sppubl:for a swepub:PublicationType ; :code "for" .
 sppubl:for\/ref a swepub:PublicationType ;
     skos:broader sppubl:for, svep:ref ; :code "for/ref" .
+    label: "Forskningsöversikt"@sv .
+    label: "Research review"@en .
+    description: "Review/survey i vetenskapliga tidskrifter."@sv .
+    description: "Review/survey published in a scientific journal."@en .
 
 sppubl:rec a swepub:PublicationType ; :code "rec" .
 sppubl:rec\/vet a swepub:PublicationType ;
     skos:broader sppubl:rec, svep:vet ; :code "rec/vet" .
+    label: "Recension"@sv .
+    label: "Review"@en .
+    description: "Bokrecension i tidskrift eller dagstidning."@sv .
+    description: "Book review published in ajournal or newspaper."@en .
