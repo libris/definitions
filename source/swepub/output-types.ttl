@@ -11,6 +11,8 @@ spout:publication a swepub:OutputType ;
     :code "publication" ;
     skos:prefLabel "Publikation"@sv ;
     rdfs:comment "Not classified at level 2"@en .
+    description: "Textbaserad forskningspublikation."@sv .
+    description: "Text-based scholarly publication."@en .
 
 spout:conference a swepub:OutputType ;
     :code "conference" ;
@@ -18,12 +20,16 @@ spout:conference a swepub:OutputType ;
     skos:exactMatch sppubl:kon ;
     skos:narrowMatch sppubl:kon\/vet ;
     rdfs:comment "Not classified at level 2"@en .
+    description: "Publikationer och presentationer som härrör från konferenser."@sv .
+    description: "Publications and presentations from conferences."@en .
 
 spout:intellectual-property a swepub:OutputType ;
     :code "intellectual-property" ;
     skos:prefLabel "Immaterialrättslig output"@sv ;
     skos:closeMatch sppubl:pat\/vet ;
     rdfs:comment "Not classified at level 2"@en .
+    description: "Patent och andra typer av immaterialrättsliga output, till exempel registrerade varumärken eller licenser."@sv .
+    description: "Patents and other types of intellectual property outputs, such as registered trademarks or licenses."@en .
 
 spout:artistic-work a swepub:OutputType ;
     :code "artistic-work" ;
@@ -31,12 +37,16 @@ spout:artistic-work a swepub:OutputType ;
     skos:exactMatch sppubl:kfu ;
     skos:narrowMatch sppubl:kfu\/vet ;
     rdfs:comment "Not classified at level 2"@en .
+    description: "Output som bygger på konstnärliga utvecklingsprocesser och/eller forskningsprocesser utifrån perspektiven reflektion och utveckling av ny kunskap."@sv .
+    description: "Output based on artistic development processes and/or research processes from the perspective of reflection and development of new knowledge."@en .
 
 spout:other a swepub:OutputType ;
     :code "other" ;
     skos:prefLabel "Övrig output"@sv ;
     skos:closeMatch sppubl:ovr\/vet ;
     rdfs:comment "Appropriate output type at any level missing"@en .
+    description: "Med övrig output avses output som inte är textbaserade forskningspublikationer, konferensoutput, konstnärlig eller immaterialrättslig output, till exempel forskningsdata eller programvara."@sv .
+    description: "Other output refers to output that is not text-based research publications, conference output, artistic or intellectual property output, such as research data or software."@en .
 
 spout:publication\/book a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -44,6 +54,8 @@ spout:publication\/book a swepub:OutputType ;
     skos:narrowMatch sppubl:bok\/vet ;
     :code "book" ;
     skos:prefLabel "Bok"@sv .
+    description: "Monografisk publikation bestående av en eller flera delar avsedd att utgöra en avslutad helhet, där författarskapet beskrivs."@sv .
+    description: "Monographic publication in one or more parts, describing the authorship."@en .
 
 spout:publication\/edited-book a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -51,6 +63,8 @@ spout:publication\/edited-book a swepub:OutputType ;
     skos:narrowMatch sppubl:sam\/vet ;
     :code "edited-book" ;
     skos:prefLabel "Samlingsverk (redaktörskap)"@sv .
+    description: "Publikation av typen antologi eller samlingsverk, där redaktörskapet beskrivs."@sv .
+    description: "Publication of the type of anthology or collection, describing the editorship."@en .
 
 spout:publication\/book-chapter a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -58,18 +72,24 @@ spout:publication\/book-chapter a swepub:OutputType ;
     skos:narrowMatch sppubl:kap\/vet ;
     :code "book-chapter" ;
     skos:prefLabel "Kapitel i samlingsverk"@sv .
+    description: "Självständig del av monografisk publikation, där författarskapet beskrivs. Ingår ofta i samlingsverk, ett antal fristående verk som utgivits tillsammans, eventuellt under redaktionell styrning till ett visst tema."@sv .
+    description: "Independent part of the monographic publication, which describes the authorship. Often included in collections, a number of independent works published together, possibly under editorial control to a certain theme."@en .
 
 spout:publication\/foreword-afterword a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "foreword-afterword" ;
     skos:prefLabel "För-/Efterord"@sv .
+    description: "Inledande eller avslutande text till ett verk skriven av någon annan än verkets huvudupphov."@sv .
+    description: "Introductory or closing text for a work written by someone other than the author of the work."@en .
 
 spout:publication\/report-chapter a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "report-chapter" ;
     skos:prefLabel "Kapitel i rapport"@sv .
+    description: "Självständig del av rapport, där författarskapet beskrivs."@sv .
+    description: "Independent part of report describing the authorship."@en .
 
 spout:publication\/report a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -77,12 +97,16 @@ spout:publication\/report a swepub:OutputType ;
     skos:narrowMatch sppubl:rap\/vet ;
     :code "report" ;
     skos:prefLabel "Rapport"@sv .
+    description: "Publikation ingående i exempelvis en rapportserie som sällan är sakkunniggranskade, till exempel redogörelser av en undersökning eller ett utfört uppdrag/projekt."@sv . 
+    description: "Publication that e.g. is part of a report series, for example, reports from a study or an assignment/a project performed."@en .
 
 spout:publication\/journal-article a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/ref ;
     :code "journal-article" ;
     skos:prefLabel "Artikel i vetenskaplig tidskrift"@sv .
+    description: "Artikel i tidskrift, som publicerar sakkunniggranskade originalartiklar."@sv .
+    description: "Article in a peer-reviewed scientific journal."@en .
 
 spout:publication\/review-article a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -90,6 +114,8 @@ spout:publication\/review-article a swepub:OutputType ;
     skos:narrowMatch sppubl:for\/ref ;
     :code "review-article" ;
     skos:prefLabel "Forskningsöversiktsartikel"@sv .
+    description: "Översiktsartikel (review/survey) i vetenskaplig tidskrift som summerar och analyserar forskning i respektive forskningsfält."@sv .
+    description: "Review article in a scientific journal that summarizes and analyzes research in the respective research fields."@en .
 
 spout:publication\/doctoral-thesis a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -97,6 +123,8 @@ spout:publication\/doctoral-thesis a swepub:OutputType ;
     skos:narrowMatch sppubl:dok\/vet ;
     :code "doctoral-thesis" ;
     skos:prefLabel "Doktorsavhandling"@sv .
+    description: "Godkänd avhandling för doktorsexamen."@sv .
+    description: "Approved dissertation for Doctoral degree."@en .
 
 spout:publication\/licentiate-thesis a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -104,6 +132,8 @@ spout:publication\/licentiate-thesis a swepub:OutputType ;
     skos:narrowMatch sppubl:lic\/vet ;
     :code "licentiate-thesis" ;
     skos:prefLabel "Licentiatavhandling"@sv .
+    description: "Godkänd avhandling/uppsats inför licentiatexamen."@sv .
+    description: "Approved dissertation for Licentiate degree."@en .
 
 spout:publication\/critical-edition a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -111,18 +141,24 @@ spout:publication\/critical-edition a swepub:OutputType ;
     :code "critical-edition" ;
     skos:prefLabel "Textkritisk utgåva"@sv ;
     rdfs:comment "Changed from publication/translation"@en .
+    description: "Textkritisk bearbetning eller översättning av bok eller artikel."@sv .
+    description: "Text critical edition or translation of book or article."@en .
 
 spout:publication\/working-paper a swepub:OutputType ;
     skos:closeMatch sppubl:ovr\/vet ;
     skos:broader spout:publication ;
     :code "working-paper" ;
     skos:prefLabel "Working paper"@sv .
+    description: "Bidrag om pågående forskning presenterade för synpunkter och utgivna i working paper-serier."@sv .
+    description: "Contribution on ongoing research presented for comments and published in working paper series."@en .
 
 spout:publication\/editorial-letter a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/vet ;
     :code "editorial-letter" ;
     skos:prefLabel "Inledande text i tidskrift / proceeding (letters, editorials, comments, notes)"@sv .
+    description: "Inledande presentationstext i tidskrift eller proceeding, som en åsikts- eller policyförklaring från namngiven person. Även texter från en eller flera författare till utgivaren av publikationen som kommenterar en artikel i publikationen, eller kortare notiser om nya forskningsrön."@sv .
+    description: "Introductory text in journal or proceeding, as an opinion or policy statement from a named person. Also texts from one or more authors to the publisher of the publication commenting on an article in the publication, or shorter notes on new research findings."@en . 
 
 spout:publication\/book-review a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -130,30 +166,40 @@ spout:publication\/book-review a swepub:OutputType ;
     skos:narrowMatch sppubl:rec\/vet ;
     :code "book-review" ;
     skos:prefLabel "Recension"@sv .
+    description: "Sakkunnig bedömning och kritik av output, till exempel bok, tidskrift eller programvara."@sv .
+    description: "Review and criticism of output, such as book, journal or software."@en .
 
 spout:publication\/magazine-article a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/vet ;
     :code "magazine-article" ;
     skos:prefLabel "Artikel i övriga tidskrifter"@sv .
+    description: "Artikel i tidskrift som inte är sakkunniggranskad vetenskaplig tidskrift, till exempel artikel i populärvetenskapliga tidskrifter."@sv .
+    descriptions: "Article in journal that is not peer-reviewed scientific journal, for example article in popular scientific journals."@en .
 
 spout:publication\/newspaper-article a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/pop ;
     :code "newspaper-article" ;
     skos:prefLabel "Artikel i dags-/nyhetstidning"@sv .
+    description: "Artikel i dags-/nyhetstidning som vänder sig till allmänheten, till exempel debattinlägg."@sv .
+    description: "Articles in news magazines to a general audience."@en .
 
 spout:publication\/encyclopedia-entry a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "encyclopedia-entry" ;
     skos:prefLabel "Bidrag till encyklopedi"@sv .
+    description: "Bidrag till encyklopedi eller referensverk där författaren är namngiven."@sv .
+    description: "Contribution to an encyclopedia or a reference work where the author is named."@en .
 
 spout:publication\/journal-issue a swepub:OutputType ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "journal-issue" ;
     skos:prefLabel "Special-/temanummer av tidskrift (redaktörskap)"@sv .
+    description: "Special-/temanummer av tidskrift med namngivna redaktörer (guest editors)."
+    description: "Special/theme issue of journal with named editors (guest editors)."@en .
 
 spout:publication\/preprint a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -161,6 +207,8 @@ spout:publication\/preprint a swepub:OutputType ;
     :code "preprint" ;
     skos:prefLabel "Preprint"@sv ;
     rdfs:comment "Changed from being publication status to output type"@en .
+    description: "Publicerade preprints som inte ännu har genomgått sakkunniggranskning inför publicering i en tidskrift."@sv .
+    description: "Published preprints that have not yet been peer-reviewed before the process of publishing in a journal."@en .
 
 spout:publication\/other a swepub:OutputType ;
     skos:broader spout:publication ;
@@ -168,18 +216,24 @@ spout:publication\/other a swepub:OutputType ;
     :code "other" ;
     skos:prefLabel "Övrig publikation"@sv ;
     rdfs:comment "Appropriate output type at level 2 missing"@en .
+    description: "Offentliggjorda men ej nödvändigtvis utgivna publikationer utan identifikatorer för output eller värdpublikation."@sv .
+    description: "Presented but not necessarily published outputs without identifiers."@en .
 
 spout:conference\/poster a swepub:OutputType ;
     skos:broader spout:conference ;
     skos:closeMatch sppubl:kon\/vet ;
     :code "poster" ;
     skos:prefLabel "Poster"@sv .
+    description: "Konferensposter."@sv .
+    description: "Conference poster."@en .
 
 spout:conference\/paper a swepub:OutputType ;
     skos:broader spout:conference ;
     skos:closeMatch sppubl:kon\/ref ;
     :code "paper" ;
     skos:prefLabel "Paper i proceeding"@sv .
+    description: "Sammanställning av fullängdspapper från en konferens publicerad i proceeding."@sv .
+    description: "Compilation of full length papers from a conference published in proceeding."@en .
 
 spout:conference\/proceeding a swepub:OutputType ;
     skos:broader spout:conference ;
@@ -187,6 +241,8 @@ spout:conference\/proceeding a swepub:OutputType ;
     skos:narrowMatch sppubl:pro\/vet ;
     :code "proceeding" ;
     skos:prefLabel "Proceeding (redaktörskap)"@sv .
+    description: "Publikation av typen konferensproceeding, där redaktörskapet beskrivs."@sv .
+    description: "Conference proceeding, describing the editorship"@en .
 
 spout:conference\/other a swepub:OutputType ;
     skos:broader spout:conference ;
@@ -194,6 +250,8 @@ spout:conference\/other a swepub:OutputType ;
     :code "other" ;
     skos:prefLabel "Övriga konferensbidrag "@sv ;
     rdfs:comment "Appropriate output type at level 2 missing"@en .
+    description: "Konferensbidrag som är offentliggjorda på konferenswebbsida/-databas, key notes, invited speeches, muntliga presentationer, abstracts och powerpoints, som finns i tryckt eller elektronisk form, till exempel i ett elektroniskt arkiv eller USB-minne."@sv .
+    description: "Conference outputs published on conference website/database, key notes, invited speeches, oral presentations, abstracts and powerpoints, available in printed or electronic form, for example in an electronic archive or USB."@en .
 
 spout:intellectual-property\/patent a swepub:OutputType ;
     skos:broader spout:intellectual-property ;
@@ -201,6 +259,8 @@ spout:intellectual-property\/patent a swepub:OutputType ;
     skos:narrowMatch sppubl:pat\/vet ;
     :code "patent" ;
     skos:prefLabel "Patent"@sv .
+    description: "Patentuppfinning."@sv .
+    description: "Patent invention."@en .
 
 spout:intellectual-property\/other a swepub:OutputType ;
     skos:broader spout:intellectual-property ;
@@ -208,12 +268,16 @@ spout:intellectual-property\/other a swepub:OutputType ;
     :code "other" ;
     skos:prefLabel "Övrig immaterialrättslig output"@sv ;
     rdfs:comment "Appropriate output type at level 2 missing"@en .
+    description: "Immaterialrättslig output som inte avser patent, till exempel registrerade varumärken eller licenser."@sv .
+    description: "Intellectual property output other than patent, such as registered trademarks or licenses."@en .
 
 spout:artistic-work\/original-creative-work a swepub:OutputType ;
     skos:broader spout:artistic-work ;
     skos:closeMatch sppubl:kfu\/vet ;
     :code "original-creative-work" ;
     skos:prefLabel "Konstnärligt arbete"@sv .
+    description: "Konstnärligt verk, till exempel musikkompositioner, visuell konst, design/arkitektur, konsthantverk, artists’ books, film, video, TV, radio, performance, teater, musik, dans, cirkus, curerade/producerade utställningar/events samt skönlitteratur som inte har publicerats som textbaserad publikation."@sv .
+    description: "Artistic works, such as musical compositions, visual arts, design/architecture, crafts, artists' books, film, video, TV, radio, performance, theater, music, dance, circus, curated/produced exhibitions/events and non-published fiction as a text-based publication."@en .
 
 spout:artistic-work\/artistic-thesis a swepub:OutputType ;
     skos:broader spout:artistic-work ;
@@ -221,15 +285,21 @@ spout:artistic-work\/artistic-thesis a swepub:OutputType ;
     :code "artistic-thesis" ;
     skos:prefLabel "Dokumenterat konstnärligt forskningsprojekt (doktorsavhandling)"@sv ;
     rdfs:comment "Replacing a removed outputtype artistic-work/curated-exhibition-or-event ; maps to double publication types"@en .
+    description: "Dokumenterat konstnärligt examensarbete som motsvarar doktorsavhandling."@sv .
+    description: "Documented artistic research project for Doctoral degree."@en .
 
 spout:other\/data-set a swepub:OutputType ;
     skos:broader spout:other ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "data-set" ;
     skos:prefLabel "Dataset"@sv .
+    description: "Forskningsdata som finns tillgängliggjort digitalt som dataset i ett arkiv och/eller plattform."@sv .
+    description: "Research data that is available digitally as a dataset in an archive and/or platform."@ en.
 
 spout:other\/software a swepub:OutputType ;
     skos:broader spout:other ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "software" ;
     skos:prefLabel "Programvara"@sv .
+    description: "Datorprogram och andra instruktioner som körs på en dator, exempelvis operativsystem, applikationer, skript och drivrutiner."@sv .
+    description: "Computer programs and other instructions that run on a computer, such as operating systems, applications and scripts."@en .
