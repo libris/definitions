@@ -6,39 +6,66 @@ base <https://id.kb.se/>
 
 
 swepub:Published a swepub:PublicationStatus .
+     label: "Publicerad"@sv .
+     description: "Formellt publicerade publikationer så som artiklar och allt annat med beständiga bibliografiska uppgifter på plats (sidantal, nummer, volym etc)."@sv .
+     description: "Formally published publications such as articles and everything else with permanent bibliographic information in place (pages, issue, volume etc)."@en .
 
 swepub:Preprint a swepub:PublicationStatus, swepub:OutputType .
+    description: "Manuskript som inte ännu har genomgått sakkunniggranskning inför publicering i en tidskrift."@sv .
+    description: "Manuscripts that have not yet been peer-reviewed before the process of publishing in a journal."@en .
 
 swepub:Submitted a swepub:PublicationStatus .
+    label: "Submitted"@en .
+    description: "Output som skickats in för att genomgå processen för formell publicering. Till exempel artiklar som har skickats in till förlag."@sv .
+    description: "Output submitted to go through the process of formal publishing. For example, articles that have been submitted to publishers."@en .
 
 swepub:Accepted a swepub:PublicationStatus .
+    label: "Accepted"@en .
+    description: "Artiklar som förlag har godkänt för publicering efter processen för sakkunniggranskning."@sv .
+    description: "Articles that the publisher has approved for publication after the peer-review process."@en .
 
 swepub:InPress a swepub:PublicationStatus .
+    label: "In press"@en .
+    description: "Artiklar som har färdigställs för formell publicering."@sv .
+    description: "Articles that have been completed for formal publication."@en .
+
 
 swepub:EpubAheadOfPrintOnlineFirst a swepub:PublicationStatus .
-
+    label: "Epub ahead of print/Online first"@en .
+    description: "Publikationer som har tillgängliggjorts före formell publiceringen. Till exempel artiklar utan beständiga bibliografiska uppgifter på plats (sidantal, nummer, volym etc) som har tillgängliggjorts innan tidskriftsnumret de skall in i är färdiggjort."@ sv.
+    description: "Publications made available before formal publication. For example, articles without permanent bibliographic information in place (page number, number, volume, etc.) that have been made available before the journal number they are to be a part of is completed."@en . 
 
 </term/swepub/project> a :HostType ;
     rdfs:label "project" .
+    label: "Projekt"@sv .
 
 </term/swepub/programme> a :HostType ;
     rdfs:label "programme" .
+    label: "Program"@sv .
 
 </term/swepub/grantAgreement> a :HostType ;
     rdfs:label "grantAgreement" .
+    label: "Kontrakt"@sv .
 
 </term/swepub/initiative> a :HostType ;
     rdfs:label "initiative" .
+    description: "Strategisk initiativ"@sv .
 
 </term/swepub/event> a :HostType ;
     rdfs:label "event" .
+    label: "Event"@sv .
 
 </term/swepub/dataset> a :HostType ;
     rdfs:label "dataset" .
+    label: "Dataset"@sv .
 
 
 </term/swepub/swedishlist/peer-reviewed> a :Classification ;
     skos:prefLabel "Sakkunninggranskad publiceringskanal"@sv .
+    description: "Kanalen är specialiserad på publicering av vetenskapliga forskningsresultat och har en oberoende sakkunniggranskning av vetenskaplig eller konstnärlig kvalitet."@sv .
+    description: "Publication channel specialized in publishing scientific research results and has an independent peer review of scientific or artistic quality."@en .
 
 </term/swepub/swedishlist/non-peer-reviewed> a :Classification ;
     skos:prefLabel "Icke-sakkunninggranskad publiceringskanal"@sv .
+    description: "Kanalen uppfyller inte kriterierna för sakkunniggranskad publiceringskanal."@sv .
+    description: "Publication channel that does not meet the criteria for a peer-reviewed publication channel."@en .
