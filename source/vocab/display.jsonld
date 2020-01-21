@@ -306,6 +306,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel" ]
+        },
+        "MediaObject": {
+          "@id": "MediaObject-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "MediaObject",
+          "showProperties": [ "uri" ]
         }
       }
     },
@@ -355,6 +361,7 @@
             "accompaniedBy",
             "seriesMembership",
             "intendedAudience",
+            "associatedMedia",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -556,6 +563,10 @@
         },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "MediaObject": {
+          "fresnel:extends": {"@id": "MediaObject-chips"},
           "showProperties": [ "fresnel:super" ]
         },
         "EntityContainer": {
