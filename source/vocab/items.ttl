@@ -19,7 +19,7 @@
 # OTHER ITEM PROPERTIES AND CLASSES
 # RETAINED SCHEMA/BF1 MAPPINGS
 # EARLY LOCAL LIBRIS HOLDING TERMS
-
+# MODEL SUGGESTIONS
 
 ##
 # BF2 ITEM/HOLDING LOCATION
@@ -278,3 +278,16 @@
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
     skos:example "Deckare", "Lagerlöf" .
+
+
+# MODEL SUGGESTIONS
+#
+# :MultipleItems a owl:Class ;
+#     rdfs:subClassOf :Item ;
+#     owl:equivalentClass sdo:SomeProducts ;
+#     rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
+
+# :IndividualItem a owl:Class ;
+#     rdfs:subClassOf :Item ;
+#     owl:equivalentClass sdo:IndividualProduct ;
+#     rdfs:label "Individual item"@en, "Enskilt exemplar"@sv .
