@@ -244,6 +244,9 @@
 ##
 # Paged Collections
 
+:ResourceView a owl:Class;
+    owl:equivalentClass sdo:ItemPage .
+
 :PartialCollectionView a owl:Class;
     owl:equivalentClass hydra:PartialCollectionView, sdo:CollectionPage .
 
@@ -316,6 +319,10 @@
 :textQuery a owl:DatatypeProperty;
     owl:equivalentProperty hydra:freetextQuery;
     rdfs:label "freetext query"@en, "fritextsökning"@sv .
+
+:reverseLinks a owl:ObjectProperty;
+    rdfs:range :PartialCollectionView;
+    owl:inverseOf :items .
 
 
 ##
