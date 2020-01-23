@@ -22,7 +22,7 @@ construct {
 } where {
     graph <https://id.kb.se/dataset/languages> {
         {
-            ?s rdfs:label ?label .
+            ?s skos:prefLabel ?label .
             optional { 
                 filter(!contains(?altLabel, "|"))
                 ?s skos:altLabel ?altLabel
