@@ -811,33 +811,38 @@
 
 :FullLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-_ ;
-    rdfs:comment "Den mest fullständiga nivån. Förekommer i poster gjorda av Enheten för nationalbibliografin på KB samt i poster som importeras från motsvarande utländsk nationalbibliografisk instans. Poster på nationalbibliografisk nivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den mest fullständiga nivån. Förekommer i poster gjorda av Enheten för nationalbibliografin på Kungliga biblioteket samt i poster som importeras från motsvarande utländsk nationalbibliografisk instans. Poster på nationalbibliografisk nivå uppdateras inte via maskinella flöden."@sv,
+      "The most complete level. Used for records created by the National Bibliography at the Swedish National Library, as well as for imported records from corresponding national bibliographical authorities. Records with a national bibliographical level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 3, den mest fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/f>;
     skos:notation " " ;
-    skos:prefLabel "Full level"@en, "Nationalbibliografisk nivå"@sv;
-    skos:altLabel: "Fullständig nivå"@sv .
+    skos:prefLabel "Nationalbibliographic level"@en, "Nationalbibliografisk nivå"@sv;
+    skos:altLabel: "Full level"@en, "Fullständig nivå"@sv .
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-1 ;
-    rdfs:comment "Retrospektivt inlagda poster, t.ex. omkatalogiseringar. Posterna är kompletta men kan följa äldre praxis."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. omkatalogiseringar. Posterna är kompletta men kan följa äldre praxis."@sv,
+      "Retrospectively entered records, i.e. re-cataloging. The records are complete but might follow outdated cataloging practices"@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/1>;
     skos:notation "1" ;
     skos:prefLabel "Full level, material not examined"@en, "Retrospektiv: komplett"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-2 ;
-    rdfs:comment "Retrospektivt inlagda poster, t.ex. ur kortkatalog. Posterna är reducerade och kan följa äldre praxis."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. ur kortkatalog. Posterna är reducerade och kan följa äldre praxis."@sv,
+        "Retrospectively entered records, from a card catalog or something similar. The records are reduced and might follow outdated cataloging practices."@en;
     skos:notation "2" ;
     skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv: reducerad"@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-3 ;
-    rdfs:comment "Den lägsta godkända nivån. Primärkatalogiserade poster på miniminivå bör innehålla RDA:s kärnelement. Observera dock att poster på denna nivå kan vara okontrollerade. Poster på miniminivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den lägsta godkända nivån. Primärkatalogiserade poster på miniminivå bör innehålla RDA:s kärnelement. Observera dock att poster på denna nivå kan vara okontrollerade. Poster på miniminivå uppdateras inte via maskinella flöden."@sv,
+      "The lowest approved level. Primarily catalogued records at a minimal level are required to contain RDA’s core elements. Please observe that records on this level can be uncontrolled. Records at a minimal level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 1, den minst fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/3>;
     skos:notation "3" ;
-    skos:prefLabel "Abbreviated level"@en, "Miniminivå"@sv .
+    skos:altLabel "Abbreviated level"@en;
+    skos:prefLabel "Minimal level"@en, "Miniminivå"@sv .
 
 :CoreLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-4 ;
@@ -849,25 +854,29 @@
 
 :PartialPreliminaryLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-5 ;
-    rdfs:comment "Beställningsposter för utgivna publikationer som inte redan har post i Libris. Preliminära poster uppgraderas av det/de bibliotek som har publikationen. Poster på preliminär nivå uppdateras av vissa maskinella flöden."@sv;
+    rdfs:comment "Beställningsposter för utgivna publikationer som inte redan har post i Libris. Preliminära poster uppgraderas av det/de bibliotek som har publikationen. Poster på preliminär nivå uppdateras av vissa maskinella flöden."@sv,
+    "Records for published items without a previous record in Libris. Preliminary records are updated by the library/libraries carrying the item. Records at a preliminary level are updated by some automatic metadata flows."@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/5>;
     skos:notation "5" ;
-    skos:prefLabel "Partial (preliminary) level"@en, "Preliminär"@sv .
+    skos:prefLabel "Preliminary"@en, "Preliminär"@sv .
 
 :MinimalLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-7 ;
-    rdfs:comment "Den nivå som normalt tillämpas av Librisbiblioteken. Vid primärkatalogisering på biblioteksnivå ska aktuell Librispraxis följas. Poster på biblioteksnivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den nivå som normalt tillämpas av Librisbiblioteken. Vid primärkatalogisering på biblioteksnivå ska aktuell Librispraxis följas. Poster på biblioteksnivå uppdateras inte via maskinella flöden."@sv,
+    "This level is normally applied by the Libris libraries. For primary cataloging at this level, Libris cataloging practices are required. Records at a library level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 2, den av biblioteken normalt tillämpade."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/7>;
     skos:notation "7" ;
-    skos:prefLabel "Minimal level"@en, "Biblioteksnivå"@sv .
+    skos:altLabel "Minimal level"@en;
+    skos:prefLabel "Library level"@en, "Biblioteksnivå"@sv .
 
 :PrepublicationLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-8 ;
-    rdfs:comment "Poster för publikationer som är under utgivning. Hit t.ex. poster från Bokinfo samt utländska CIP-poster (= cataloguing-in-publication). Posterna uppdateras via maskinella flöden och ska inte uppgraderas manuellt till annan nivå förrän efter utgivning."@sv;
+    rdfs:comment "Poster för publikationer som är under utgivning. Hit t.ex. poster från Bokinfo samt utländska CIP-poster (= cataloguing-in-publication). Posterna uppdateras via maskinella flöden och ska inte uppgraderas manuellt till annan nivå förrän efter utgivning."@sv,
+    "Records for items that are not yet published. This is the level for records from Bokinfo as well as international CIP (= cataloguing-in-publication) records. The records are updated by automatic metadata flows and should not be updated to another level manually until after the item is published."@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/8>;
     skos:notation "8" ;
-    skos:prefLabel "Prepublication level"@en, "Förhandsinformation"@sv .
+    skos:prefLabel "Prepublication"@en, "Förhandsinformation"@sv .
 
 
 
