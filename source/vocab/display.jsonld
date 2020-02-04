@@ -47,6 +47,13 @@
           "showProperties": [
             "code"
           ]
+        },
+        "Language": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Language",
+          "showProperties": [
+            "prefLabel"
+          ]
         }
       }
     },
@@ -70,6 +77,12 @@
           "@id": "ContentType-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ContentType",
+          "showProperties": [ "prefLabel", "label" ]
+        },
+        "CarrierType": {
+          "@id": "CarrierType-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "CarrierType",
           "showProperties": [ "prefLabel", "label" ]
         },
         "Record": {
@@ -120,6 +133,12 @@
           "classLensDomain": "Title",
           "showProperties": ["partNumber", "partName"]
         },
+        "DescriptionConventions": {
+          "@id": "DescriptionConventions-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DescriptionConventions",
+          "showProperties": [ "prefLabel", "label" ]
+        },
         "Identifier": {
           "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
@@ -162,6 +181,12 @@
           "classLensDomain": "Country",
           "showProperties": [ "prefLabel" ]
         },
+        "Nationality": {
+          "@id": "Nationality-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Nationality",
+          "showProperties": [ "prefLabel" ]
+        },
         "marc:AddedEntryHierarchicalPlaceName": {
           "@id": "AddedEntryHierarchicalPlaceName-chips",
           "@type": "fresnel:Lens",
@@ -172,10 +197,10 @@
           "@id": "Language-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
-          "showProperties": [ "prefLabel" ]
+          "showProperties": [ "prefLabel", "label" ]
         },
         "marc:LanguageNote": {
-          "@id": "Language-chips",
+          "@id": "LanguageNote-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "marc:LanguageNote",
           "showProperties": [ "label" ]
@@ -281,6 +306,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel" ]
+        },
+        "MediaObject": {
+          "@id": "MediaObject-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "MediaObject",
+          "showProperties": [ "uri" ]
         }
       }
     },
@@ -292,7 +323,7 @@
           "@id": "Resource-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ "title", "prefLabel", "label", "name", "code", "sameAs", "exactMatch", "closeMatch", "broadMatch", "isPartOf", "isDefinedBy" ]
+          "showProperties": [ "title", "prefLabel", "label", "name", "code", "exactMatch", "closeMatch", "broadMatch", "isPartOf", "isDefinedBy" ]
         },
         "Record": {
           "@type": "fresnel:Lens",
@@ -330,6 +361,7 @@
             "accompaniedBy",
             "seriesMembership",
             "intendedAudience",
+            "associatedMedia",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -413,25 +445,29 @@
           "@id": "DescriptionConventions-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "DescriptionConventions",
-          "showProperties": [ "prefLabel", "label", "code" ]
+          "fresnel:extends": {"@id": "DescriptionConventions-chips"},
+          "showProperties": [ "fresnel:super", "code" ]
         },
         "Language": {
           "@id": "Language-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
-          "showProperties": [ "prefLabel", "label", "code", "isReplacedBy" ]
+          "fresnel:extends": {"@id": "Language-chips"},
+          "showProperties": [ "fresnel:super", "altLabel", "code", "isReplacedBy" ]
         },
         "MediaType": {
           "@id": "MediaType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "MediaType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "MediaType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "CarrierType": {
           "@id": "CarrierType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "CarrierType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "CarrierType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Publication": {
           "@id": "Publication-cards",
@@ -444,7 +480,8 @@
           "@id": "ContentType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "ContentType",
-          "showProperties": [ "prefLabel", "label", "code", "termGroup" ]
+          "fresnel:extends": {"@id": "ContentType-chips"},
+          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
@@ -524,8 +561,16 @@
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
         },
+        "Classification": {
+          "fresnel:extends": {"@id": "Classification-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "MediaObject": {
+          "fresnel:extends": {"@id": "MediaObject-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "EntityContainer": {
-          "@id": "EntityContainer-card",
+          "@id": "EntityContainer-cards",
           "showProperties": [ "administeredBy", "membershipResource", "isMemberOfRelation", "memberClass", "slugProperty" ]
         }
       }

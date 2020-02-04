@@ -11,7 +11,6 @@
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
-@prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
@@ -40,7 +39,7 @@
     :category :shorthand;
     rdfs:label "title"@en, "titel"@sv;
     rdfs:subPropertyOf :label;
-    owl:equivalentProperty bf:title, dc:title;
+    owl:equivalentProperty dc:title;
     owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
 
 :hasTitle a owl:ObjectProperty;
@@ -105,7 +104,6 @@
 :abbreviatedTitle a owl:DatatypeProperty;
     :category :shorthand;
     rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv;
-    owl:equivalentProperty bf:abbreviatedTitle;
     rdfs:subPropertyOf :title;
     rdfs:domain :Endeavour;
     owl:propertyChainAxiom (
@@ -120,7 +118,6 @@
 :keyTitle a owl:DatatypeProperty;
     :category :shorthand;
     rdfs:label "Key title"@en, "Nyckeltitel"@sv;
-    owl:equivalentProperty bf:keyTitle;
     rdfs:subPropertyOf :title;
     owl:propertyChainAxiom (
                 [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
@@ -147,6 +144,10 @@
 :DistinctiveTitle a owl:Class;
     rdfs:subClassOf :VariantTitle;
     rdfs:label "Distinctive title"@en, "Titelvariant"@sv .
+
+:FormerTitle a owl:Class;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:label "Former title"@en, "Tidigare titel"@sv .
 
 :RunningTitle a owl:Class;
     rdfs:subClassOf :VariantTitle;
@@ -645,7 +646,6 @@
 #    owl:propertyChainAxiom (:publication :place) .
 
 :production a owl:ObjectProperty;
-    owl:equivalentProperty bf:production;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Production;
@@ -653,7 +653,6 @@
     rdfs:label "produktion"@sv .
 
 :publication a owl:ObjectProperty;
-    owl:equivalentProperty bf:publication;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Publication;
@@ -661,7 +660,6 @@
     rdfs:label "utgivning"@sv .
 
 :distribution a owl:ObjectProperty;
-    owl:equivalentProperty bf:distribution;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Distribution;
@@ -669,7 +667,6 @@
     rdfs:label "distribution"@sv .
 
 :manufacture a owl:ObjectProperty;
-    owl:equivalentProperty bf:manufacture;
     rdfs:subPropertyOf :provisionActivity;
     rdfs:domain :Instance;
     rdfs:range :Manufacture;

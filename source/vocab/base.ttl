@@ -13,7 +13,6 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix edtf: <http://id.loc.gov/datatypes/edtf/> .
-@prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
@@ -28,11 +27,10 @@
     rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@sv;
     rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
     dc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
-    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bf: ;
+    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2: ;
     skos:hasTopConcept :Instance, :Work, :Item, :Agent, :IndexTerm .
 
 # Various sources beyond the linked defintions themselves:
-# - <http://bibframe.org/documentation/resource-types/#proposal>
 
 rdf:type a owl:ObjectProperty;
     rdfs:label "type"@en, "typ"@sv .

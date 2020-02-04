@@ -150,12 +150,14 @@
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
     owl:ObjectProperty bf2:descriptionConventions .
 
-:derivedFrom a owl:DatatypeProperty;
+:derivedFrom a owl:ObjectProperty;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
-    rdfs:range rdfs:Literal;
+    rdfs:range :AdminMetadata;
     owl:equivalentProperty bf2:derivedFrom .
+    # NOTE: Differing type and range! See:
+    # <https://github.com/lcnetdev/bibframe-ontology/issues/41>
 
 :GenerationProcess a owl:Class;
     rdfs:label "Generation process"@en, "Beskrivningsprocess"@sv;
@@ -242,6 +244,9 @@
 ##
 # Paged Collections
 
+:ResourceView a owl:Class;
+    owl:equivalentClass sdo:ItemPage .
+
 :PartialCollectionView a owl:Class;
     owl:equivalentClass hydra:PartialCollectionView, sdo:CollectionPage .
 
@@ -314,6 +319,10 @@
 :textQuery a owl:DatatypeProperty;
     owl:equivalentProperty hydra:freetextQuery;
     rdfs:label "freetext query"@en, "fritextsökning"@sv .
+
+:reverseLinks a owl:ObjectProperty;
+    rdfs:range :PartialCollectionView;
+    owl:inverseOf :items .
 
 
 ##
