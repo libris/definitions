@@ -1,42 +1,85 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix : <https://id.kb.se/vocab/>
 prefix swepub: <https://id.kb.se/term/swepub/>
 prefix svep: <https://id.kb.se/term/swepub/svep/>
 prefix sppubl: <https://id.kb.se/term/swepub/publication/>
 
-svep:ref a swepub:ContentType .
-svep:vet a swepub:ContentType .
-svep:pop a swepub:ContentType .
+svep:ref a swepub:ContentType ;
+     skos:prefLabel "Sakkunniggranskat"@sv ;
+     skos:prefLabel "Peer-reviewed"@en ;
+     rdfs:comment "Verk som har genomgått granskning av sakkunniga vars samlade bedömning avgör om det uppfyller tillräckliga krav på vetenskaplig eller konstnärlig kvalitet för att accepteras för publicering eller framförande."@sv ;
+     rdfs:comment "Work reviewed by independent researchers and considered to meet the requirements for a scholar publication."@en .
+
+svep:vet a swepub:ContentType ;
+     skos:prefLabel "Övrigt vetenskapligt"@sv ;
+     skos:prefLabel "Other academic"@en ;
+     rdfs:comment "Verk som riktar sig mot forskningssamhället men har inte genomgått sakkunniggranskning."@sv ;
+     rdfs:comment "Other works which are intended for the sholarly society but not peer-reviewed." @en .
+
+svep:pop a swepub:ContentType ;
+     skos:prefLabel "Övrigt (populärvetenskap, debatt)"@sv ;
+     skos:prefLabel "Popular scientific"@en ;
+     rdfs:comment "Verk av populärvetenskaplig karaktär som riktar sig mot allmänheten."@sv ;
+     rdfs:comment "Works intended to mediate scholar information to a general audience."@en .
 
 sppubl:kfu a swepub:PublicationType ; :code "kfu" .
 sppubl:kfu\/vet a swepub:PublicationType ;
-    skos:broader sppubl:kfu, svep:vet ; :code "kfu/vet" .
+    skos:broader sppubl:kfu, svep:vet ; :code "kfu/vet" ;
+    skos:prefLabel "Konstnärligt arbete"@sv ;
+    skos:prefLabel "Artistic work"@en ;
+    rdfs:comment "Arbete eller rapport från ett konstnärligt forsknings- och/eller utvecklingsprojekt."@sv ;
+    rdfs:comment "Work or report from an artistick research and/or development project."@en .
 
 sppubl:bok a swepub:PublicationType ; :code "bok" .
 sppubl:bok\/vet a swepub:PublicationType ;
-    skos:broader sppubl:bok, svep:vet ; :code "bok/vet" .
+    skos:broader sppubl:bok, svep:vet ; :code "bok/vet" ;
+    skos:prefLabel "Bok"@sv ;
+    skos:prefLabel "Book"@en ;
+    rdfs:comment "Monografisk publikation bestående av en eller flera fysiska delar, avsedd att utgöra en avslutad helhet."@sv ;
+    rdfs:comment "Monographic publication in one or more physical parts, intended to form a complete unity."@en .
 
 sppubl:kap a swepub:PublicationType ; :code "kap" .
 sppubl:kap\/vet a swepub:PublicationType ;
-    skos:broader sppubl:kap, svep:vet ; :code "kap/vet" .
+    skos:broader sppubl:kap, svep:vet ; :code "kap/vet" ;
+    skos:prefLabel "Bokkapitel"@sv ;
+    skos:prefLabel "Book chapter"@en ;
+    rdfs:comment "Självständig del av monografisk publikation, ofta samlingsverk. Ett antal fristående verk som utgivits tillsammans eventuellt under redaktionell styrning till ett visst tema."@sv ;
+    rdfs:comment "Independent part of a monographic publication or an editorial collection. A number of independent works published together, possibly selected by editors for a certain theme."@en .
 
 sppubl:kon a swepub:PublicationType ; :code "kon" .
 sppubl:kon\/ref a swepub:PublicationType ;
     skos:broader sppubl:kon, svep:ref ; :code "kon/ref" .
 sppubl:kon\/vet a swepub:PublicationType ;
-    skos:broader sppubl:kon, svep:vet ; :code "kon/vet" .
+    skos:broader sppubl:kon, svep:vet ; :code "kon/vet" ;
+    skos:prefLabel "Konferensbidrag"@sv ;
+    skos:prefLabel "Conference paper"@en ;
+    rdfs:comment "Bidrag som publicerats i officiell proceeding eller annan konferensskrift."@sv ;
+    rdfs:comment "Paper published in editorial proceedings or other conference publication."@en .
 
 sppubl:dok a swepub:PublicationType ; :code "dok" .
 sppubl:dok\/vet a swepub:PublicationType ;
-    skos:broader sppubl:dok, svep:vet ; :code "dok/vet" .
+    skos:broader sppubl:dok, svep:vet ; :code "dok/vet" ;
+    skos:prefLabel "Doktorsavhandling"@sv ;
+    skos:prefLabel "Doctoral thesis"@en ;
+    rdfs:comment "Godkänd avhandling för doktorsexamen."@sv ;
+    rdfs:comment "Approved dissertation for Doctoral degree."@en .
 
 sppubl:sam a swepub:PublicationType ; :code "sam" .
 sppubl:sam\/vet a swepub:PublicationType ;
-    skos:broader sppubl:sam, svep:vet ; :code "sam/vet" .
+    skos:broader sppubl:sam, svep:vet ; :code "sam/vet" ;
+    skos:prefLabel "Samlingsverk (redaktörskap)"@sv ;
+    skos:prefLabel "Editorial collection"@en ;
+    rdfs:comment "Publikation där ett antal var för sig fristående verk utgivits tillsammans."@sv ;
+    rdfs:comment "Editorship for a number of separate works published collectively, often selected for a certain theme."@en .
 
 sppubl:pro a swepub:PublicationType ; :code "pro" .
 sppubl:pro\/vet a swepub:PublicationType ;
-    skos:broader sppubl:pro, svep:vet ; :code "pro/vet" .
+    skos:broader sppubl:pro, svep:vet ; :code "pro/vet" ;
+    skos:prefLabel "Proceedings (redaktörskap)"@sv ;
+    skos:prefLabel "Editorial proceedings"@en ;
+    rdfs:comment "Redaktörskap för officiell konferensproceeding eller konferensmeddelande."@sv ;
+    rdfs:comment "Editorship for official proceeding or conference publication."@en .
 
 sppubl:art a swepub:PublicationType ; :code "art" .
 sppubl:art\/pop a swepub:PublicationType ;
@@ -44,28 +87,56 @@ sppubl:art\/pop a swepub:PublicationType ;
 sppubl:art\/ref a swepub:PublicationType ;
     skos:broader sppubl:art, svep:ref ; :code "art/ref" .
 sppubl:art\/vet a swepub:PublicationType ;
-    skos:broader sppubl:art, svep:vet ; :code "art/vet" .
+    skos:broader sppubl:art, svep:vet ; :code "art/vet" ;
+    skos:prefLabel "Tidskriftsartikel"@sv ;
+    skos:prefLabel "Journal article"@en ;
+    rdfs:comment "Artikel i en tidskrift."@sv ;
+    rdfs:comment "Article published in scientific or other journal."@en .
 
 sppubl:lic a swepub:PublicationType ; :code "lic" .
 sppubl:lic\/vet a swepub:PublicationType ;
-    skos:broader sppubl:lic, svep:vet ; :code "lic/vet" .
+    skos:broader sppubl:lic, svep:vet ; :code "lic/vet" ;
+    skos:prefLabel "Licentiatavhandling"@sv ;
+    skos:prefLabel "Licentiate thesis"@en ;
+    rdfs:comment "Godkänd avhandling för licentiatexamen."@sv ;
+    rdfs:comment "Approved dissertation for Licentiate degree."@en .
 
 sppubl:ovr a swepub:PublicationType ; :code "ovr" .
 sppubl:ovr\/vet a swepub:PublicationType ;
-    skos:broader sppubl:ovr, svep:vet ; :code "ovr/vet" .
+    skos:broader sppubl:ovr, svep:vet ; :code "ovr/vet" ;
+    skos:prefLabel "Annan publikation"@sv ;
+    skos:prefLabel "Other publication"@en ;
+    rdfs:comment "Avser publikationer där ingen annan publikationstyp är tillämplig, till exempel poster (presentationer), evenemang, konserter, utställningar, teaterföreställningar eller textilier."@sv ;
+    rdfs:comment "Other type of publication, e.g. poster, event, concert, exhibition, performance or textiles."@en .
 
 sppubl:pat a swepub:PublicationType ; :code "pat" .
 sppubl:pat\/vet a swepub:PublicationType ;
-    skos:broader sppubl:pat, svep:vet ; :code "pat/vet" .
+    skos:broader sppubl:pat, svep:vet ; :code "pat/vet" ;
+    skos:prefLabel "Patent"@sv ;
+    skos:prefLabel "Patent"@en ;
+    rdfs:comment "Patenthandling."@sv ;
+    rdfs:comment "Patent document."@en .
 
 sppubl:rap a swepub:PublicationType ; :code "rap" .
 sppubl:rap\/vet a swepub:PublicationType ;
-    skos:broader sppubl:rap, svep:vet ; :code "rap/vet" .
+    skos:broader sppubl:rap, svep:vet ; :code "rap/vet" ;
+    skos:prefLabel "Rapport"@sv ;
+    skos:prefLabel "Report"@en ;
+    rdfs:comment "Publikation som exempelvis ingår i en rapportserie."@sv ;
+    rdfs:comment "Publication that e.g. is part of a report series."@en . 
 
 sppubl:for a swepub:PublicationType ; :code "for" .
 sppubl:for\/ref a swepub:PublicationType ;
-    skos:broader sppubl:for, svep:ref ; :code "for/ref" .
+    skos:broader sppubl:for, svep:ref ; :code "for/ref" ;
+    skos:prefLabel "Forskningsöversikt"@sv ;
+    skos:prefLabel "Research review"@en ;
+    rdfs:comment "Review/survey i vetenskapliga tidskrifter."@sv ;
+    rdfs:comment "Review/survey published in a scientific journal."@en .
 
 sppubl:rec a swepub:PublicationType ; :code "rec" .
 sppubl:rec\/vet a swepub:PublicationType ;
-    skos:broader sppubl:rec, svep:vet ; :code "rec/vet" .
+    skos:broader sppubl:rec, svep:vet ; :code "rec/vet" ;
+    skos:prefLabel "Recension"@sv ;
+    skos:prefLabel "Review"@en ;
+    rdfs:comment "Bokrecension i tidskrift eller dagstidning."@sv ;
+    rdfs:comment "Book review published in a journal or newspaper."@en .
