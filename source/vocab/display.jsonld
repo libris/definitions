@@ -17,7 +17,8 @@
       "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
       "noteByLang": {"@id": "note", "@container": "@language"},
       "titleByLang": {"@id": "title", "@container": "@language"},
-      "descriptionByLang": {"@id": "description", "@container": "@language"}
+      "descriptionByLang": {"@id": "description", "@container": "@language"},
+      "nameByLang": {"@id": "name", "@container": "@language"}
   },
   "@graph": [
     {"@id": "https://id.kb.se/vocab/display"}
@@ -407,7 +408,17 @@
           "@id": "Item-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Item",
-          "showProperties": [ "itemOf", "heldBy", "hasComponent", "physicalLocation", "shelfMark" ]
+          "showProperties": [
+            "itemOf",
+            "heldBy",
+            "hasComponent",
+            "physicalLocation",
+            "shelfMark",
+            "language",
+            "genreForm",
+            "classification",
+            "subject"
+          ]
         },
         "StructuredValue": {
           "@id": "StructuredValue-cards",
