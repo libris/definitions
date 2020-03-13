@@ -136,11 +136,11 @@
     rdfs:subClassOf :EnumeratedTerm ;
     skos:notation "ComputerFileSoundType" .
 
-:ComputerFrequencyType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:Multimedia ;
-    skos:notation "ComputerFrequencyType" ;
-    skos:prefLabel "Frequency (OBSOLETE)"@en .
+# :ComputerFrequencyType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:broadMatch kbv:Multimedia ;
+#     skos:notation "ComputerFrequencyType" ;
+#     skos:prefLabel "Frequency (OBSOLETE)"@en .
 
 :ComputerItemType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -169,11 +169,11 @@
     skos:prefLabel "Reformatting Quality"@en,
         "Reformateringskvalitet"@sv .
 
-:ComputerRegularityType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:Multimedia ;
-    skos:notation "ComputerRegularityType" ;
-    skos:prefLabel "Regularity (OBSOLETE)"@en .
+# :ComputerRegularityType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:broadMatch kbv:Multimedia ;
+#     skos:notation "ComputerRegularityType" ;
+#     skos:prefLabel "Regularity (OBSOLETE)"@en .
 
 :ComputerSoundType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -329,11 +329,11 @@
         "Type of Cartographic Material"@en,
         "Typ av kartografiskt material"@sv .
 
-:MapsPrimeMeridianType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:Cartography ;
-    skos:notation "MapsPrimeMeridianType" ;
-    skos:prefLabel "Prime Meridian (OBSOLETE)"@en .
+# :MapsPrimeMeridianType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:broadMatch kbv:Cartography ;
+#     skos:notation "MapsPrimeMeridianType" ;
+#     skos:prefLabel "Prime Meridian (OBSOLETE)"@en .
 
 :MapsReliefType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -811,33 +811,38 @@
 
 :FullLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-_ ;
-    rdfs:comment "Den mest fullständiga nivån. Förekommer i poster gjorda av Enheten för nationalbibliografin på KB samt i poster som importeras från motsvarande utländsk nationalbibliografisk instans. Poster på nationalbibliografisk nivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den mest fullständiga nivån. Förekommer i poster gjorda av Enheten för nationalbibliografin på Kungliga biblioteket samt i poster som importeras från motsvarande utländsk nationalbibliografisk instans. Poster på nationalbibliografisk nivå uppdateras inte via maskinella flöden."@sv,
+      "The most complete level. Used for records created by the National Bibliography at the Swedish National Library, as well as for imported records from corresponding national bibliographical authorities. Records with a national bibliographical level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 3, den mest fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/f>;
     skos:notation " " ;
-    skos:prefLabel "Full level"@en, "Nationalbibliografisk nivå"@sv;
-    skos:altLabel: "Fullständig nivå"@sv .
+    skos:prefLabel "Nationalbibliographic level"@en, "Nationalbibliografisk nivå"@sv;
+    skos:altLabel: "Full level"@en, "Fullständig nivå"@sv .
 
 :FullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-1 ;
-    rdfs:comment "Retrospektivt inlagda poster, t.ex. omkatalogiseringar. Posterna är kompletta men kan följa äldre praxis."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. omkatalogiseringar. Posterna är kompletta men kan följa äldre praxis."@sv,
+      "Retrospectively entered records, i.e. re-cataloging. The records are complete but might follow outdated cataloging practices"@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/1>;
     skos:notation "1" ;
     skos:prefLabel "Full level, material not examined"@en, "Retrospektiv: komplett"@sv .
 
 :LessThanFullLevelMaterialNotExamined a :EncLevelType ;
     #owl:sameAs :EncLevelType-2 ;
-    rdfs:comment "Retrospektivt inlagda poster, t.ex. ur kortkatalog. Posterna är reducerade och kan följa äldre praxis."@sv;
+    rdfs:comment "Retrospektivt inlagda poster, t.ex. ur kortkatalog. Posterna är reducerade och kan följa äldre praxis."@sv,
+        "Retrospectively entered records, from a card catalog or something similar. The records are reduced and might follow outdated cataloging practices."@en;
     skos:notation "2" ;
     skos:prefLabel "Less-than-full level, material not examined"@en, "Retrospektiv: reducerad"@sv .
 
 :AbbreviatedLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-3 ;
-    rdfs:comment "Den lägsta godkända nivån. Primärkatalogiserade poster på miniminivå bör innehålla RDA:s kärnelement. Observera dock att poster på denna nivå kan vara okontrollerade. Poster på miniminivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den lägsta godkända nivån. Primärkatalogiserade poster på miniminivå bör innehålla RDA:s kärnelement. Observera dock att poster på denna nivå kan vara okontrollerade. Poster på miniminivå uppdateras inte via maskinella flöden."@sv,
+      "The lowest approved level. Primarily catalogued records at a minimal level are required to contain RDA’s core elements. Please observe that records on this level can be uncontrolled. Records at a minimal level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 1, den minst fullständiga."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/3>;
     skos:notation "3" ;
-    skos:prefLabel "Abbreviated level"@en, "Miniminivå"@sv .
+    skos:altLabel "Abbreviated level"@en;
+    skos:prefLabel "Minimal level"@en, "Miniminivå"@sv .
 
 :CoreLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-4 ;
@@ -849,25 +854,29 @@
 
 :PartialPreliminaryLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-5 ;
-    rdfs:comment "Beställningsposter för utgivna publikationer som inte redan har post i Libris. Preliminära poster uppgraderas av det/de bibliotek som har publikationen. Poster på preliminär nivå uppdateras av vissa maskinella flöden."@sv;
+    rdfs:comment "Beställningsposter för utgivna publikationer som inte redan har post i Libris. Preliminära poster uppgraderas av det/de bibliotek som har publikationen. Poster på preliminär nivå uppdateras av vissa maskinella flöden."@sv,
+    "Records for published items without a previous record in Libris. Preliminary records are updated by the library/libraries carrying the item. Records at a preliminary level are updated by some automatic metadata flows."@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/5>;
     skos:notation "5" ;
-    skos:prefLabel "Partial (preliminary) level"@en, "Preliminär"@sv .
+    skos:prefLabel "Preliminary"@en, "Preliminär"@sv .
 
 :MinimalLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-7 ;
-    rdfs:comment "Den nivå som normalt tillämpas av Librisbiblioteken. Vid primärkatalogisering på biblioteksnivå ska aktuell Librispraxis följas. Poster på biblioteksnivå uppdateras inte via maskinella flöden."@sv;
+    rdfs:comment "Den nivå som normalt tillämpas av Librisbiblioteken. Vid primärkatalogisering på biblioteksnivå ska aktuell Librispraxis följas. Poster på biblioteksnivå uppdateras inte via maskinella flöden."@sv,
+    "This level is normally applied by the Libris libraries. For primary cataloging at this level, Libris cataloging practices are required. Records at a library level are not updated by automatic metadata flows."@en;
     skos:note "Motsvarar KRS 1.0D beskrivningsnivå 2, den av biblioteken normalt tillämpade."@sv;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/7>;
     skos:notation "7" ;
-    skos:prefLabel "Minimal level"@en, "Biblioteksnivå"@sv .
+    skos:altLabel "Minimal level"@en;
+    skos:prefLabel "Library level"@en, "Biblioteksnivå"@sv .
 
 :PrepublicationLevel a :EncLevelType ;
     #owl:sameAs :EncLevelType-8 ;
-    rdfs:comment "Poster för publikationer som är under utgivning. Hit t.ex. poster från Bokinfo samt utländska CIP-poster (= cataloguing-in-publication). Posterna uppdateras via maskinella flöden och ska inte uppgraderas manuellt till annan nivå förrän efter utgivning."@sv;
+    rdfs:comment "Poster för publikationer som är under utgivning. Hit t.ex. poster från Bokinfo samt utländska CIP-poster (= cataloguing-in-publication). Posterna uppdateras via maskinella flöden och ska inte uppgraderas manuellt till annan nivå förrän efter utgivning."@sv,
+    "Records for items that are not yet published. This is the level for records from Bokinfo as well as international CIP (= cataloguing-in-publication) records. The records are updated by automatic metadata flows and should not be updated to another level manually until after the item is published."@en;
     skos:relatedMatch <http://id.loc.gov/vocabulary/menclvl/8>;
     skos:notation "8" ;
-    skos:prefLabel "Prepublication level"@en, "Förhandsinformation"@sv .
+    skos:prefLabel "Prepublication"@en, "Förhandsinformation"@sv .
 
 
 
@@ -1068,24 +1077,24 @@
     skos:prefLabel "Linked Record Requirement"@en,
         "Grad av beroende av sammanhörande post"@sv .
 
-:MapAspectType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    owl:equivalentClass :ComputerFileAspectType,
-        :GlobeAspectType,
-        :MicroformAspectType,
-        :MotionPicAspectType,
-        :NonProjAspectType,
-        :ProjGraphAspectType,
-        :SoundAspectType ;
-    skos:broadMatch kbv:Electronic,
-        kbv:Globe,
-        kbv:Map,
-        kbv:Microform,
-        kbv:MovingImage,
-        kbv:SoundRecording,
-        kbv:StillImage ;
-    skos:notation "MapAspectType" ;
-    skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
+# :MapAspectType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     owl:equivalentClass :ComputerFileAspectType,
+#         :GlobeAspectType,
+#         :MicroformAspectType,
+#         :MotionPicAspectType,
+#         :NonProjAspectType,
+#         :ProjGraphAspectType,
+#         :SoundAspectType ;
+#     skos:broadMatch kbv:Electronic,
+#         kbv:Globe,
+#         kbv:Map,
+#         kbv:Microform,
+#         kbv:MovingImage,
+#         kbv:SoundRecording,
+#         kbv:StillImage ;
+#     skos:notation "MapAspectType" ;
+#     skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
 
 :MapsProjectionType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm, kbv:Projection ;
@@ -1190,11 +1199,11 @@
     skos:prefLabel "Numbered or Unnumbered Series"@en,
         "Numrering i serie"@sv .
 
-:PersonalNameType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:notation "PersonalNameType" ;
-    skos:prefLabel "Undifferentiated Personal Name"@en,
-        "Differentiering av person"@sv .
+# :PersonalNameType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:notation "PersonalNameType" ;
+#     skos:prefLabel "Undifferentiated Personal Name"@en,
+#         "Differentiering av person"@sv .
 
 
 :PublicationStatusType a :CollectionClass ;
@@ -1587,12 +1596,12 @@
     skos:prefLabel "Type of Material"@en,
         "Typ av visuell resurs"@sv .
 
-:VisualMatterType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:Visual ;
-    skos:notation "VisualMatterType" ;
-    skos:prefLabel "Accompanying Matter (OBSOLETE)"@en,
-        "Accompanying Matter (OBSOLETE)"@en .
+# :VisualMatterType a :CollectionClass ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:broadMatch kbv:Visual ;
+#     skos:notation "VisualMatterType" ;
+#     skos:prefLabel "Accompanying Matter (OBSOLETE)"@en,
+#         "Accompanying Matter (OBSOLETE)"@en .
 
 :VisualRunningTimeType a :CollectionClass ;
     :category :pending ;
@@ -1810,11 +1819,11 @@
     skos:prefLabel "Index"@en,
         "Index"@sv .
 
-:issn a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial ;
-    sdo:rangeIncludes :SerialsISSNType ;
-    skos:prefLabel "ISSN Center (OBSOLETE)"@en,
-        "Odefinierad (tidigare ISSN-central se 022 $2)"@sv .
+# :issn a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:Serial ;
+#     sdo:rangeIncludes :SerialsISSNType ;
+#     skos:prefLabel "ISSN Center (OBSOLETE)"@en,
+#         "Odefinierad (tidigare ISSN-central se 022 $2)"@sv .
 
 :itemInfoInRecord a owl:ObjectProperty ;
     sdo:rangeIncludes :Boolean,
@@ -1847,11 +1856,11 @@
     skos:prefLabel "Linked Record Requirement"@en,
         "Grad av beroende av sammanhörande post"@sv .
 
-:matter a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
-    sdo:rangeIncludes :VisualMatterType ;
-    skos:prefLabel "Accompanying Matter (OBSOLETE)"@en,
-        "Accompanying Matter (OBSOLETE)"@en .
+# :matter a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:Visual ;
+#     sdo:rangeIncludes :VisualMatterType ;
+#     skos:prefLabel "Accompanying Matter (OBSOLETE)"@en,
+#         "Accompanying Matter (OBSOLETE)"@en .
 
 :modified a owl:ObjectProperty ;
     sdo:rangeIncludes :ModifiedType ;
@@ -1915,10 +1924,10 @@
     skos:prefLabel "Other physical details"@en,
         "Övriga fysiska detaljer"@sv .
 
-:personalName a owl:ObjectProperty ;
-    sdo:rangeIncludes :PersonalNameType ;
-    skos:prefLabel "Undifferentiated Personal Name"@en,
-        "Differentiering av person"@sv .
+# :personalName a owl:ObjectProperty ;
+#     sdo:rangeIncludes :PersonalNameType ;
+#     skos:prefLabel "Undifferentiated Personal Name"@en,
+#         "Differentiering av person"@sv .
 
 :projection a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Cartography ;
@@ -1943,11 +1952,11 @@
     skos:prefLabel "Reference Evaluation"@en,
         "Formatering av icke auktoriserade sökelement"@sv .
 
-:regularity a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial ;
-    sdo:rangeIncludes :SerialsRegularityType ;
-    skos:prefLabel "Regularity"@en,
-        "Regelbundenhet"@sv .
+# :regularity a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:Serial ;
+#     sdo:rangeIncludes :SerialsRegularityType ;
+#     skos:prefLabel "Regularity"@en,
+#         "Regelbundenhet"@sv .
 
 :remoteSensImageData a owl:ObjectProperty ;
     sdo:domainIncludes kbv:RemoteSensingImage ;
@@ -1988,10 +1997,10 @@
     skos:prefLabel "Running Time"@en,
         "Speltid"@sv .
 
-:soundAspect a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
-    sdo:rangeIncludes :MapAspectType ;
-    skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
+# :soundAspect a owl:ObjectProperty ;
+#     sdo:domainIncludes kbv:SoundRecording ;
+#     sdo:rangeIncludes :MapAspectType ;
+#     skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
 
 :soundCapture a owl:ObjectProperty ;
     sdo:domainIncludes kbv:SoundRecording ;
