@@ -240,6 +240,8 @@ def relators():
         item['sameAs'] = {'@id': item['code']}
         return item
 
+    # TODO: retrieve finnish label from link/id (finto.fi)
+    # TODO: link to german & french RDA terms
     graph = compiler.construct(sources=[
             {
                 "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
@@ -250,6 +252,12 @@ def relators():
                     "code": "skos:notation",
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
+                    "label_de": {"@id": "skos:altLabel", "@language": "de"},
+                    "label_fi": {"@id": "skos:prefLabel", "@language": "fi"},
+                    "label_is": {"@id": "skos:prefLabel", "@language": "is"},
+                    "label_fr": {"@id": "skos:prefLabel", "@language": "fr"},
+                    "urn_fi": {"@id": "skos:exactMatch", "@type": "@vocab"},
+                    "hidden_label": "skos:hiddenLabel",
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
                     "term": "rdfs:label",
                     "sameAs": "owl:sameAs",
