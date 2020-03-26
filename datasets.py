@@ -240,6 +240,8 @@ def relators():
         item['sameAs'] = {'@id': item['code']}
         return item
 
+    # TODO: retrieve finnish label from link/id (finto.fi)
+    # TODO: link to german & french RDA terms
     graph = compiler.construct(sources=[
             {
                 "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
@@ -250,13 +252,21 @@ def relators():
                     "code": "skos:notation",
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
+                    "label_de": {"@id": "skos:prefLabel", "@language": "de"},
+                    "altlabel_de": {"@id": "skos:altLabel", "@language": "de"},
+                    "label_fi": {"@id": "skos:prefLabel", "@language": "fi"},
+                    "label_is": {"@id": "skos:prefLabel", "@language": "is"},
+                    "label_fr": {"@id": "skos:prefLabel", "@language": "fr"},
+                    "urn_de": {"@id": "skos:exactMatch", "@type": "@vocab"},
+                    "urn_fi": {"@id": "skos:exactMatch", "@type": "@vocab"},
+                    "hidden_label": "skos:hiddenLabel",
                     "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
                     "term": "rdfs:label",
                     "sameAs": "owl:sameAs",
                     "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
-                    "rda_app_i_1_en": None,
-                    "rda_app_i_2_en": None,
-                    "rda_app_i_3_en": None
+                    "rda_app_i_1_en": {"@id": "skos:altLabel", "@language": "en"},
+                    "rda_app_i_2_en": {"@id": "skos:altLabel", "@language": "en"},
+                    "rda_app_i_3_en": {"@id": "skos:altLabel", "@language": "en"},
                 }]
             },
             {
