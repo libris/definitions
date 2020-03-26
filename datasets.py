@@ -262,9 +262,9 @@ def relators():
                     "term": "rdfs:label",
                     "sameAs": "owl:sameAs",
                     "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
-                    "rda_app_i_1_en": None,
-                    "rda_app_i_2_en": None,
-                    "rda_app_i_3_en": None
+                    "rda_app_i_1_en": {"@id": "skos:altLabel", "@language": "en"},
+                    "rda_app_i_2_en": {"@id": "skos:altLabel", "@language": "en"},
+                    "rda_app_i_3_en": {"@id": "skos:altLabel", "@language": "en"},
                 }]
             },
             {
