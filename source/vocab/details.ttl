@@ -909,10 +909,16 @@
     owl:equivalentProperty bf2:noteType .
 
 :description a owl:DatatypeProperty;
-    rdfs:domain :Instance;
+    sdo:domainIncludes :Instance, :Agent;
     rdfs:label "description"@en, "beskrivning"@sv;
-    rdfs:comment "A description of the item."@en, "En beskrivning av resursen";
-    owl:equivalentProperty sdo:description .
+    rdfs:comment "A description of the item."@en, "En beskrivning av resursen"@sv;
+    rdfs:subPropertyOf sdo:description .
+
+:disambiguatingDescription a owl:DatatypeProperty;
+    sdo:domainIncludes :Agent;
+    rdfs:subPropertyOf :description, sdo:disambiguatingDescription ;
+    rdfs:label "Disambiguating description"@en, "Särskiljande beskrivning"@sv;
+    rdfs:comment "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation."@en, "En särskiljande beskrivning av resursen."@sv.
 
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
