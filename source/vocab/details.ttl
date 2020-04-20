@@ -915,10 +915,11 @@
 :description a owl:DatatypeProperty;
     sdo:domainIncludes :Instance, :Agent;
     rdfs:label "description"@en, "beskrivning"@sv;
-    rdfs:comment "A description of the item."@en, "En beskrivning av resursen"@sv;
+    rdfs:comment "A description of the item."@en, "En sammanfattande beskrivning av resursen"@sv;
     rdfs:subPropertyOf sdo:description .
 
 :disambiguatingDescription a owl:DatatypeProperty;
+    :category :pending ;
     sdo:domainIncludes :Agent;
     rdfs:subPropertyOf :description, sdo:disambiguatingDescription ;
     rdfs:label "Disambiguating description"@en, "Särskiljande beskrivning"@sv;
