@@ -271,12 +271,6 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
-:Barcode a owl:Class; # rdfs:Datatype ?
-    rdfs:label "Barcode"@en, "Streckkod"@sv;
-    rdfs:subClassOf :Identifier;
-    skos:definition "Optiskt Maskinläsbar representation av data."@sv;
-    owl:equivalentClass bf2:Barcode .
-
 :Ansi a owl:Class; # rdfs:Datatype ?
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
@@ -292,6 +286,12 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "Audio recording take"@en, "Tagning (ljudinspelning)"@sv;
     owl:equivalentClass bf2:AudioTake .
+
+:Barcode a owl:Class; # rdfs:Datatype ?
+    rdfs:label "Barcode"@en, "Streckkod"@sv;
+    rdfs:subClassOf :Identifier;
+    skos:definition "Optiskt Maskinläsbar representation av data."@sv;
+    owl:equivalentClass bf2:Barcode .
 
 :CODEN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Coden;
@@ -319,11 +319,11 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
 
-:Eidr a owl:Class;
-  owl:equivalentClass bflc:Eidr;
-  rdfs:subClassOf :Identifier;
-  rdfs:label "Eidr";
-  rdfs:comment "Entertainment Identifier Registry Association ID"@en .
+:EIDR a owl:Class;
+    owl:equivalentClass bflc:Eidr;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Eidr";
+    rdfs:comment "Entertainment Identifier Registry Association ID"@en .
 
 :Fingerprint a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Fingerprint;
@@ -437,7 +437,7 @@
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
-    rdfs:label "Music distributor number"@en;
+    rdfs:label "Music distributor number"@en, "Distributörsnummer (musik)"@sv;
     owl:equivalentClass bf2:MusicDistributorNumber .
 
 :MusicPlate a owl:Class; # rdfs:Datatype ?
@@ -456,16 +456,16 @@
     rdfs:comment "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
     rdfs:label "NBN" .
 
-:PublisherNumber a owl:Class; # rdfs:Datatype ?
-    rdfs:subClassOf :Identifier;
-    rdfs:label "Utgivningsnummer"@sv;
-    owl:equivalentClass bf2:PublisherNumber .
-
 :PostalRegistration a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
     rdfs:label "Postal registration number"@en, "Registreringsnummer för postal behandling av publikationen"@sv;
     rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:PostalRegistration .
+
+:PublisherNumber a owl:Class; # rdfs:Datatype ?
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Utgivningsnummer"@sv;
+    owl:equivalentClass bf2:PublisherNumber .
 
 :ReportNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
