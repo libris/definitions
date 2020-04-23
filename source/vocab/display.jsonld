@@ -120,7 +120,7 @@
           "@id": "Title-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart" ]
+          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart", "marc:mediaTerm" ]
         },
         "KeyTitle": {
           "@id": "KeyTitle-chips",
@@ -498,37 +498,99 @@
           "@type": "fresnel:Lens",
           "@id": "Person-cards",
           "classLensDomain": "Person",
-          "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titlesAndOtherWordsAssociatedWithAName", "marc:fullerFormName", "lifeSpan", "marc:attributionQualifier", "personTitle", "identifiedBy", "hasVariant", "seeAlso", "nationality" ]
+          "showProperties": [ 
+            "familyName",
+            "givenName",
+            "name",
+            "marc:numeration",
+            "marc:titlesAndOtherWordsAssociatedWithAName",
+            "marc:fullerFormName",
+            "lifeSpan",
+            "hasVariant",
+            "seeAlso",
+            "hasOccupation",
+            "fieldOfActivity",
+            "description",
+            "disambiguatingDescription",
+            "identifiedBy",
+            "nationality"
+          ]
         },
         "Family": {
           "@type": "fresnel:Lens",
           "@id": "Family-cards",
           "classLensDomain": "Family",
-          "showProperties": [ "hasTypeOfFamily", "name", "marc:titlesAndOtherWordsAssociatedWithAName", "lifeSpan", "place", "identifiedBy", "hasVariant", "seeAlso", "nationality" ]
+          "showProperties": [ 
+            "hasTypeOfFamily",
+            "name",
+            "marc:titlesAndOtherWordsAssociatedWithAName",
+            "lifeSpan",
+            "place",
+            "hasVariant",
+            "seeAlso",
+            "description",
+            "disambiguatingDescription",
+            "identifiedBy",
+            "nationality"
+          ]
         },
         "Jurisdiction": {
           "@type": "fresnel:Lens",
           "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
-          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit", "identifiedBy", "hasVariant", "seeAlso", "nationality" ]
+          "showProperties": [ 
+            "name",
+            "isPartOf",
+            "marc:subordinateUnit",
+            "hasVariant",
+            "seeAlso",
+            "description",
+            "disambiguatingDescription",
+            "activityStartDate",
+            "activityEndDate",
+            "identifiedBy",
+            "nationality"
+          ]
         },
         "Meeting": {
           "@type": "fresnel:Lens",
           "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
-          "showProperties": [ "name", "marc:numeration", "date", "place", "identifiedBy", "hasVariant", "seeAlso", "nationality" ]
+          "showProperties": [ 
+            "name",
+            "marc:numeration",
+            "date",
+            "place",
+            "hasVariant",
+            "seeAlso",
+            "description",
+            "disambiguatingDescription",
+            "identifiedBy",
+            "nationality"
+          ]
         },
         "Organization": {
           "@type": "fresnel:Lens",
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
-          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit", "identifiedBy", "hasVariant", "seeAlso", "nationality" ]
+          "showProperties": [ 
+            "name",
+            "isPartOf",
+            "marc:subordinateUnit",
+            "hasVariant",
+            "seeAlso",
+            "description",
+            "disambiguatingDescription",
+            "activityStartDate",
+            "activityEndDate", 
+            "identifiedBy", 
+            "nationality" ]
         },
         "Concept": {
           "@type": "fresnel:Lens",
           "@id": "Concept-cards",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", "exactMatch", "closeMatch", "broadMatch",  {"inverseOf": "broader"}, "hasVariant", "related", "scopeNote", "label", "code", "keyword" ]
+          "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", "exactMatch", "closeMatch", "broadMatch",  {"inverseOf": "broader"}, "hasVariant", "related", "scopeNote", "label", "code", "keyword", "termComponentList" ]
         },
         "Contribution": {
           "@id": "Contribution-cards",

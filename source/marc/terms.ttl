@@ -141,8 +141,7 @@ marc:titlesAndOtherWordsAssociatedWithAName a owl:DatatypeProperty;
     rdfs:domain kbv:Agent .
 
 marc:attributionQualifier a owl:DatatypeProperty;
-    rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv;
-    rdfs:domain kbv:Agent .
+    rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv .
 
 marc:affiliation a owl:DatatypeProperty;
     rdfs:label "Affiliering"@sv;
@@ -150,6 +149,7 @@ marc:affiliation a owl:DatatypeProperty;
 
 marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:label "Namn på underordnad enhet"@sv;
+    rdfs:subPropertyOf kbv:name;
     rdfs:comment "OBS! 'Namn på underordnad enhet' används endast tillsammans med egenskapen 'Är del av' för att skapa Organisationer i flera led. Egenskapen 'Namn' raderas om 'Är del av' och 'Namn på underordnad enhet' används."@sv;
     sdo:domainIncludes kbv:Jurisdiction, kbv:Organization, kbv:Meeting .
 
@@ -258,7 +258,7 @@ marc:isoCountryCode a owl:DatatypeProperty;
 
 marc:hasTimePeriodOfContent a owl:ObjectProperty;
     rdfs:label "Time Period Of Content"@en, "Innehållets tidsperiod"@sv ;
-    sdo:domainIncludes kbv:Work, kbv:Agent;
+    sdo:domainIncludes kbv:Work ;
     rdfs:range marc:TimePeriodOfContent .
 
 marc:TimePeriodOfContent a owl:Class;
@@ -374,7 +374,7 @@ marc:sizeOfUnit a owl:DatatypeProperty ;
 marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
     rdfs:domain kbv:Agent;
-    sdo:rangeIncludes marc:OtherAttributes, kbv:Concept .
+    sdo:rangeIncludes marc:OtherAttributes, kbv:Topic .
 
 marc:OtherAttributes a owl:Class;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv .

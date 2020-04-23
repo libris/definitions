@@ -32,6 +32,7 @@
 :additionalName a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:additionalName;
     rdfs:domain :Meeting;
+    rdfs:subPropertyOf :name;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
 :fullerFormOfName a owl:DatatypeProperty; 
@@ -100,6 +101,7 @@
     owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
 
 :hasBiographicalInformation a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
     sdo:domainIncludes :Person, :Family;
     # separate instance and agent properties?
@@ -107,10 +109,12 @@
     owl:equivalentProperty rdau:P60492 .
 
 :BiographicalNote a owl:Class;
+    :category :pending ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Biographical Note"@en, "Anmärkning om biografiska uppgifter"@sv .
 
 :hasHistoricalData a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "has historical data"@en, "Administrativ historik"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction, :Meeting;
     # separate instance and agent properties?
@@ -118,6 +122,7 @@
     owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
 
 :AdministrativeHistoryNote a owl:Class;
+    :category :pending ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Administrative history note"@en, "Anmärkning om administrativ historik"@sv .
 
@@ -159,7 +164,7 @@
 :fieldOfActivity a owl:ObjectProperty;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
-    sdo:rangeIncludes :FieldOfActivity, :Concept;
+    sdo:rangeIncludes :FieldOfActivity, :Topic;
     owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
 
 # NOTE: We would like to upgrade relevant SAO concepts to Instances of this Class in the future...
@@ -269,7 +274,7 @@
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "Har yrke eller sysselsättning"@sv;
     rdfs:domain :Person;
-    sdo:rangeIncludes :Occupation, :Concept;
+    sdo:rangeIncludes :Occupation, :Topic;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .
 
 # Organization properties

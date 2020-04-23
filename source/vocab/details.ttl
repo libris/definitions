@@ -142,6 +142,8 @@
     rdfs:label "Cover title"@en, "Omslagstitel"@sv .
 
 :DistinctiveTitle a owl:Class;
+    :category :pending ;
+    skos:changeNote "2020-04-17: Felaktigt använd i Libris, blockerad för tillägg via gränssnitt tillsvidare, använd Varianttitel istället."@sv;
     rdfs:subClassOf :VariantTitle;
     rdfs:label "Distinctive title"@en, "Titelvariant"@sv .
 
@@ -169,6 +171,10 @@
 :TitlePart a owl:Class;
     rdfs:label "Title part"@en, "Titeldel"@sv .
 
+:TranslatedTitle a owl:Class;
+    rdfs:subClassOf :VariantTitle;
+    rdfs:comment "Translation of the title proper that is made by the cataloging agency when the translated title does not appear as a parallel title on the item"@en, "Översättning av titeluppgift som görs av katalogisatören när den översatta titeln inte finns som en parallell titel på resursen. Förekommer normalt endast i importerade poster"@sv;
+    rdfs:label "Translated title"@en, "Översatt titel"@sv .
 
 
 ##
@@ -265,12 +271,6 @@
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
 
-:Barcode a owl:Class; # rdfs:Datatype ?
-    rdfs:label "Barcode"@en, "Streckkod"@sv;
-    rdfs:subClassOf :Identifier;
-    skos:definition "Optiskt Maskinläsbar representation av data."@sv;
-    owl:equivalentClass bf2:Barcode .
-
 :Ansi a owl:Class; # rdfs:Datatype ?
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
@@ -286,6 +286,12 @@
     rdfs:subClassOf :Identifier;
     rdfs:label "Audio recording take"@en, "Tagning (ljudinspelning)"@sv;
     owl:equivalentClass bf2:AudioTake .
+
+:Barcode a owl:Class; # rdfs:Datatype ?
+    rdfs:label "Barcode"@en, "Streckkod"@sv;
+    rdfs:subClassOf :Identifier;
+    skos:definition "Optiskt Maskinläsbar representation av data."@sv;
+    owl:equivalentClass bf2:Barcode .
 
 :CODEN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Coden;
@@ -312,6 +318,12 @@
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
     rdfs:label "EAN" .
+
+:EIDR a owl:Class;
+    owl:equivalentClass bflc:Eidr;
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Eidr";
+    rdfs:comment "Entertainment Identifier Registry Association ID"@en .
 
 :Fingerprint a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Fingerprint;
@@ -411,7 +423,7 @@
     rdfs:comment "[FÅR EJ MAKULERAS] Åtta- eller tioställigt identifikationsnummer på LIBRIS-poster som konverterats från ett ursprungligt LIBRISIII-format (ISBN, ISSN eller ett tioställigt nummer som inleds med siffrorna '99'). Avser postens unika identitet i det gamla LIBRIS-systemet."@sv;
     rdfs:domain :Record;
     rdfs:subClassOf :SystemNumber;
-    rdfs:label "LIBRISIII-nummer"@sv .
+    rdfs:label "LIBRISIII-nummer"@sv, "LIBRISIII-number"@en .
 
 :Local a owl:Class ; #TODO LocalIdentifer?
     rdfs:subClassOf :Identifier;
@@ -425,7 +437,7 @@
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
-    rdfs:label "Music distributor number"@en;
+    rdfs:label "Music distributor number"@en, "Distributörsnummer (musik)"@sv;
     owl:equivalentClass bf2:MusicDistributorNumber .
 
 :MusicPlate a owl:Class; # rdfs:Datatype ?
@@ -444,16 +456,16 @@
     rdfs:comment "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
     rdfs:label "NBN" .
 
-:PublisherNumber a owl:Class; # rdfs:Datatype ?
-    rdfs:subClassOf :Identifier;
-    rdfs:label "Utgivningsnummer"@sv;
-    owl:equivalentClass bf2:PublisherNumber .
-
 :PostalRegistration a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
     rdfs:label "Postal registration number"@en, "Registreringsnummer för postal behandling av publikationen"@sv;
     rdfs:comment "Används normalt ej"@sv;
     owl:equivalentClass bf2:PostalRegistration .
+
+:PublisherNumber a owl:Class; # rdfs:Datatype ?
+    rdfs:subClassOf :Identifier;
+    rdfs:label "Utgivningsnummer"@sv;
+    owl:equivalentClass bf2:PublisherNumber .
 
 :ReportNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
@@ -499,13 +511,18 @@
     owl:equivalentClass bf2:VideoRecordingNumber .
 
 ## Used by SwePub {{{
+:CORDIS rdfs:subClassOf :Identifier .
+:FundRef rdfs:subClassOf :Identifier .
+:GRID rdfs:subClassOf :Identifier .
 :ISI rdfs:subClassOf :Identifier .
 :IssueNumber rdfs:subClassOf :Identifier .
 :LibrisNumber rdfs:subClassOf :Identifier .
 :ORCID rdfs:subClassOf :Identifier .
 :PatentNumber rdfs:subClassOf :Identifier .
 :PMID rdfs:subClassOf :Identifier .
-:ScopusID rdfs:subClassOf :Identifier .
+:Ringgold rdfs:subClassOf :Identifier .
+:ScopusID rdfs:subClassOf :Identifier.
+:SweCRIS rdfs:subClassOf :Identifier.
 :URI rdfs:subClassOf :Identifier .
 :WorldCatNumber rdfs:subClassOf :Identifier .
 ## }}}
@@ -903,10 +920,17 @@
     owl:equivalentProperty bf2:noteType .
 
 :description a owl:DatatypeProperty;
-    rdfs:domain :Instance;
+    sdo:domainIncludes :Instance, :Agent;
     rdfs:label "description"@en, "beskrivning"@sv;
-    rdfs:comment "A description of the item."@en, "En beskrivning av resursen";
-    owl:equivalentProperty sdo:description .
+    rdfs:comment "A description of the item."@en, "En sammanfattande beskrivning av resursen"@sv;
+    rdfs:subPropertyOf sdo:description .
+
+:disambiguatingDescription a owl:DatatypeProperty;
+    :category :pending ;
+    sdo:domainIncludes :Agent;
+    rdfs:subPropertyOf :description, sdo:disambiguatingDescription ;
+    rdfs:label "Disambiguating description"@en, "Särskiljande beskrivning"@sv;
+    rdfs:comment "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation."@en, "En särskiljande beskrivning av resursen."@sv.
 
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
