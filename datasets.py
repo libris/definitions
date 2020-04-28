@@ -251,6 +251,7 @@ def relators():
                     "@vocab": "https://id.kb.se/vocab/",
                     "code": "skos:notation",
                     "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
+                    "altlabel_sv": {"@id": "skos:altLabel", "@language": "sv"},
                     "label_en": {"@id": "skos:prefLabel", "@language": "en"},
                     "label_de": {"@id": "skos:prefLabel", "@language": "de"},
                     "altlabel_de": {"@id": "skos:altLabel", "@language": "de"},
