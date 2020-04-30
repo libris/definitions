@@ -381,6 +381,7 @@
             "intendedAudience",
             "contentType",
             "illustrativeContent",
+            "cartographicAttributes",
             "isPartOf"
            ]
         },
@@ -632,7 +633,7 @@
           "@id": "Cartographic-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
-          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates", "coordinates", "scale" ]
         },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
@@ -701,7 +702,7 @@
         },
         "Organization": {
           "fresnel:extends": {"@id": "Organization-cards"},
-          "showProperties": [ "fresnel:super", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
+          "showProperties": [ "fresnel:super", "establishDate", "terminateDate" ]
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
