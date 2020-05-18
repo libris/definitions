@@ -7,6 +7,7 @@
 @prefix dbpo: <http://dbpedia.org/ontology/> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdam: <http://rdaregistry.info/Elements/m/> .
 
@@ -304,6 +305,11 @@
     rdfs:label "File type"@en, "Filtyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:FileType .
+
+:ImageBitDepth a owl:Class;
+    rdfs:label "Image bit depth"@en, "Bildens bitdjup"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bflc:ImageBitDepth .
 
 :RegionalEncoding a owl:Class;
     rdfs:label "Regional encoding"@en, "Regional kodning"@sv;
