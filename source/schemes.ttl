@@ -83,10 +83,11 @@
     rdfs:seeAlso <barn>;
     void:inDataset </> .
 
-<gmgpc-swe> a :GenreFormScheme;
-    owl:sameAs <gmgpc>, <gmgpc%2F%2Fswe>;
-    skos:notation "gmgpc//swe";
+<gmgpc/swe> a :GenreFormScheme;
+    owl:sameAs <gmgpc%2F%2Fswe>,<gmgpc-swe>;
+    skos:notation "gmgpc/swe";
     dc:title "Tesaurus för grafiskt material"@sv;
+    dc:ISO639-2 "swe";
     dc:description """
         Tesaurus för grafiskt material (TGM) innehåller cirka 650 termer för form och genrer, framställningssätt och tekniker. De är avsedda att användas vid indexering av bilder, kartor och efemärt tryck.
 
@@ -97,7 +98,8 @@
     void:inDataset </>;
     skos:broadMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gmgpc>;
     foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
-    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
+    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/>;
+    skos:changeNote "Changed from gmgpc-swe to gmgpc/swe (also updated notation from gmgpc//swe) 2020-05-19"@en .
 
 <rda> a skos:ConceptScheme;
     skos:notation "rda";
