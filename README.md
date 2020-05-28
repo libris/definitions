@@ -75,15 +75,15 @@ the relevant sources.
 
 *Tip:* During vocab development. Regularly run just:
 
-    $ python datasets.py vocab
+    $ python datasets.py vocab
 
 to generate a vocab build file. Look at it as Turtle by running:
 
-    $ rdfpipe -ijson-ld:context=build/vocab/context.jsonld build/vocab.jsonld
+    $ rdfpipe -ijson-ld:context=build/vocab/context.jsonld build/vocab.jsonld
 
 , and/or make a nice, digested tree view by running:
 
-    $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c build/vocab/context.jsonld -v
+    $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c build/vocab/context.jsonld -v
 
 ### marcframe & legacy mappings
 
