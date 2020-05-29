@@ -9,6 +9,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
@@ -918,6 +919,13 @@
     rdfs:label "Note type"@en, "Typ av anmärkning"@sv;
     rdfs:domain :Note;
     owl:equivalentProperty bf2:noteType .
+
+:physicalDetailsNote a owl:DatatypeProperty ;
+    rdfs:label "Physical details note"@en, "Övriga fysiska detaljer"@sv ;
+    rdfs:domain :Instance ;
+    rdfs:Range rdfs:Literal ;
+    skos:changeNote "Tidigare marc:otherPhysicalDetails. Ändrat 2020-05-29."@sv;
+    rdfs:comment "Anmärkning om fysiska karaktäristika som till exempel illustrationer, färg, uppspelningshastighet, spårkaraktäristika, närvaro eller typ av ljud, antal kanaler, filmprojektionssystem."@sv .
 
 :description a owl:DatatypeProperty;
     sdo:domainIncludes :Instance, :Agent;
