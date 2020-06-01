@@ -241,14 +241,9 @@
     foaf:homepage <https://mesh.kib.ki.se/> .
 
 
-# Aliases for external schemes
+# Aliases for external SubjectSchemes
 
 #@base <https://id.kb.se/ext/term/> . # ?
-
-<agrissc> a :ClassificationScheme;
-    skos:notation "agrissc";
-    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/agrissc>;
-    foaf:homepage <http://agris.fao.org/agris-search/index.do> .
 
 <agrovoc> a :TopicScheme;
     dc:title "AgroVoc"@en;
@@ -258,18 +253,6 @@
 <bnb> a skos:ConceptScheme;
     skos:notation "bnb";
     dc:title "British National Bibliography"@en .
-
-<fiaf> a :ClassificationScheme;
-    skos:notation "fiaf"; #"fiaf/2" #?
-    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/fiaf>;
-    dc:title "International Federation of Film Archives"@en .
-
-<lcgft> a :GenreFormScheme;
-    skos:notation "lcgft";
-    dc:alternative "LCGFT";
-    dc:title "Library of Congress genre/form terms for library and archival materials"@en;
-    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/lcgft>;
-    foaf:homepage <http://id.loc.gov/authorities/genreForms/> .
 
 <lcsh> a :TopicScheme;
     skos:notation "lcsh";
@@ -282,12 +265,6 @@
     skos:notation "mipfesd"; #"mipfesd/5"
     skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/mipfesd>;
     dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en .
-
-<msc> a :ClassificationScheme;
-    skos:notation "msc";
-    dc:title "Mathematical subject classification"@en;
-    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/msc>;
-    rdfs:comment "Providence, RI: American Mathematical Society"@en .
 
 <mesh> a :TopicScheme;
     skos:notation "mesh";
@@ -303,12 +280,6 @@
     skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/nal>;
     foaf:homepage <https://www.nal.usda.gov/> .
 
-<nlm> a :ClassificationScheme;
-    skos:notation "nlm";
-    dc:alternative "NLM";
-    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/nlm>;
-    dc:title "National Library of Medicine"@en .
-
 <rswk> a :TopicScheme;
     skos:notation "rswk";
     dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)"@de;
@@ -320,6 +291,39 @@
     dc:title "SIPRI Library thesaurus"@en;
     skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sipri>;
     foaf:homepage <http://www.sipri.org/library/thesaurus/thesaurus.html/> .
+
+# Aliases for external ClassificationSchemes:
+
+<agrissc> a :ClassificationScheme;
+    skos:notation "agrissc";
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/agrissc>;
+    foaf:homepage <http://agris.fao.org/agris-search/index.do> .
+
+<fiaf> a :ClassificationScheme;
+    skos:notation "fiaf"; #"fiaf/2" #?
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/fiaf>;
+    dc:title "International Federation of Film Archives"@en .
+
+<msc> a :ClassificationScheme;
+    skos:notation "msc";
+    dc:title "Mathematical subject classification"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/msc>;
+    rdfs:comment "Providence, RI: American Mathematical Society"@en .
+
+<nlm> a :ClassificationScheme;
+    skos:notation "nlm";
+    dc:alternative "NLM";
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/nlm>;
+    dc:title "National Library of Medicine"@en .
+        
+# Aliases for external GenreFormSchemes:
+
+<lcgft> a :GenreFormScheme;
+    skos:notation "lcgft";
+    dc:alternative "LCGFT";
+    dc:title "Library of Congress genre/form terms for library and archival materials"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/lcgft>;
+    foaf:homepage <http://id.loc.gov/authorities/genreForms/> .
 
 # LoC
 
