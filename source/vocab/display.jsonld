@@ -156,13 +156,19 @@
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Publication": {
           "@id": "Publication-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+        },
+        "Reproduction": {
+          "@id": "Reproduction-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Reproduction",
+          "showProperties": [ "typeNote", "place", "agent", "date" ]
         },
         "Serial": {
           "@id": "Serial-chips",
@@ -488,6 +494,13 @@
           "classLensDomain": "Publication",
           "fresnel:extends": {"@id": "Publication-chips"},
           "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
+        },
+        "Reproduction": {
+          "@id": "Reproduction-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Reproduction",
+          "fresnel:extends": {"@id": "Reproduction-chips"},
+          "showProperties": [ "fresnel:super", "hasNote" ]
         },
         "ContentType": {
           "@id": "ContentType-cards",
