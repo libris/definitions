@@ -353,12 +353,19 @@
     owl:equivalentClass bf2:PlayingSpeed .
 
 :PresentationFormat a owl:Class;
+    rdfs:label "Presentationsformat"@sv;
+    rdfs:subClassOf bf2:ProjectionCharacteristic ;
     owl:equivalentClass bf2:PresentationFormat .
 
 :RecordingMedium a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
     rdfs:label "Ljudbärare"@sv, "Recording medium"@en;
     owl:equivalentClass bf2:RecordingMedium .
+
+:RecordingMethod a owl:Class ;
+    rdfs:label "Type of recording"@en, "Inspelningstyp"@sv ;
+    rdfs:subClassOf bf2:SoundCharacteristic ;
+    owl:equivalentClass bf2:RecordingMethod .
 
 :TapeConfig a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
