@@ -705,6 +705,14 @@
             owl:onProperty :hasPart; owl:someValuesFrom :Production ];
     rdfs:label "Produktion"@sv .
 
+:Reproduction a owl:Class;
+    rdfs:label "Reproduction"@en, "Reproduktion"@sv ;
+    rdfs:subClassOf :Production . 
+
+:DigitalReproduction a owl:Class;
+    rdfs:label "Digital reproduction"@en, "Digital reproduktion"@sv ;
+    rdfs:subClassOf :Reproduction . 
+
 # NOTE: alternative to the hasPart Restriction:
 #:hasProductionPart a owl:ObjectProperty;
 #    rdfs:subPropertyOf :hasPart; rdfs:domain :Production; rdfs:range :Production .
