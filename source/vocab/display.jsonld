@@ -260,6 +260,12 @@
           "classLensDomain": "Classification",
           "showProperties": [ "code", "inScheme", "edition" ]
         },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ClassificationDdc",
+          "showProperties": [ "code", "edition", "editionEnumeration" ]
+        },
         "Contribution": {
           "@id": "Contribution-chips",
           "@type": "fresnel:Lens",
@@ -653,6 +659,11 @@
           "fresnel:extends": {"@id": "Classification-chips"},
           "showProperties": [ "fresnel:super" ]
         },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-cards",
+          "fresnel:extends": {"@id": "ClassificationDdc-chips"},
+          "showProperties": [ "fresnel:super", "marc:explanatoryTerm" ]
+        },
         "MediaObject": {
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "showProperties": [ "fresnel:super" ]
@@ -730,9 +741,12 @@
           "fresnel:extends": {"@id": "ProvisionActivity-chips"},
           "showProperties": [ "fresnel:super" ]
         },
-
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ClassificationDdc": {
+          "fresnel:extends": {"@id": "ClassificationDdc-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Relationship": {
