@@ -260,6 +260,12 @@
           "classLensDomain": "Classification",
           "showProperties": [ "code", "inScheme", "edition" ]
         },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ClassificationDdc",
+          "showProperties": [ "code", "edition", "editionEnumeration" ]
+        },
         "Contribution": {
           "@id": "Contribution-chips",
           "@type": "fresnel:Lens",
@@ -360,16 +366,19 @@
             "distribution",
             "copyright",
             "copyrightDate",
+            "projectedProvisionDate",
             "indirectlyIdentifiedBy",
             "extent",
             "hasDimensions",
             "hasDuration",
             "physicalDetailsNote",
+            "digitalCharacteristic",
             "genreForm",
             "accompaniedBy",
             "seriesMembership",
             "intendedAudience",
             "associatedMedia",
+            "usageAndAccessPolicy",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -653,6 +662,11 @@
           "fresnel:extends": {"@id": "Classification-chips"},
           "showProperties": [ "fresnel:super" ]
         },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-cards",
+          "fresnel:extends": {"@id": "ClassificationDdc-chips"},
+          "showProperties": [ "fresnel:super", "marc:explanatoryTerm" ]
+        },
         "MediaObject": {
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "showProperties": [ "fresnel:super" ]
@@ -678,7 +692,11 @@
           "showProperties": [
             "instanceOf",
             "fresnel:super",
+            "isPrimaryTopicOf",
+            "electronicLocator",
+            "hasNote",
             "tableOfContents",
+            "relationship",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -730,9 +748,12 @@
           "fresnel:extends": {"@id": "ProvisionActivity-chips"},
           "showProperties": [ "fresnel:super" ]
         },
-
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ClassificationDdc": {
+          "fresnel:extends": {"@id": "ClassificationDdc-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Relationship": {
@@ -794,6 +815,10 @@
         },
         "MediaType": {
           "fresnel:extends": {"@id": "MediaType-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Reproduction": {
+          "fresnel:extends": {"@id": "Reproduction-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Ontology": {
