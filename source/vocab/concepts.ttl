@@ -72,13 +72,15 @@
     rdfs:subClassOf :ConceptScheme .
 
 :altLabel a owl:DatatypeProperty;
-    rdfs:label "alternativ benämning"@sv; #NOTE: alternativ term inom concept
-    rdfs:comment "Används som se-hänvisning";
+    rdfs:label "alternative label"@en, "alternativ benämning"@sv; #NOTE: alternativ term inom concept
+    rdfs:comment "Förkortningar, synonymer eller oregelbundna plural/singularformer kan inkluderas bland de alternativa benämningarna för ett begrepp. Felstavade termer inkluderas normalt som dolda benämningar (se skos: HiddenLabel)."@sv;
+    skos:definition "En alternativ lexikal benämning för en resurs."@sv;
+    skos:scopeNote "Används vanligen som se-hänvisning";
     sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:altLabel .
 
 :broader a owl:ObjectProperty;
-    rdfs:label "bredare"@sv;
+    rdfs:label "broader"@en, "bredare"@sv;
     sdo:domainIncludes :Concept ;
     owl:inverseOf :narrower;
     rdfs:range :Concept ;
@@ -86,40 +88,53 @@
     owl:equivalentProperty madsrdf:hasBroaderAuthority .
 
 :broadMatch a owl:ObjectProperty;
-    rdfs:label "bredare match"@sv;
+    rdfs:label "broader match"@en, "bredare match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
     owl:equivalentProperty skos:broadMatch ;
     owl:equivalentProperty madsrdf:hasBroaderExternalAuthority .
 
 :closeMatch a owl:ObjectProperty;
-    rdfs:label "nära match"@sv;
+    rdfs:label "close match"@en, "nära match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
     owl:equivalentProperty skos:closeMatch ;
     owl:equivalentProperty madsrdf:hasCloseExternalAuthority .
 
+:definition a owl:DatatypeProperty;
+    rdfs:label "definition"@en, "definition"@sv ;
+    sdo:domainIncludes :Concept ;
+    owl:equivalentProperty skos:definition ;
+    owl:equivalentProperty madsrdf:definitionNote .
+
 :exactMatch a owl:ObjectProperty ;
-    rdfs:label "exakt match"@sv ;
+    rdfs:label "exact match"@en, "exakt match"@sv ;
     sdo:domainIncludes :Identity ;
     sdo:rangeIncludes :Agent, :Concept ;
     owl:equivalentProperty skos:exactMatch ;
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
 
+:example a owl:DatatypeProperty;
+    rdfs:label "example"@en, "exempel"@sv ;
+    sdo:domainIncludes :Concept ;
+    owl:equivalentProperty skos:example ;
+    owl:equivalentProperty madsrdf:exampleNote .
+
 :hiddenLabel a owl:DatatypeProperty;
-    rdfs:label "dold benämning"@sv; #NOTE: dold term inom concept
+    rdfs:label "hidden label"@en, "dold benämning"@sv; #NOTE: dold term inom concept
+    rdfs:comment "En benämning för en resurs som bör döljas när man skapar visuella visningar av resursen, men som fortfarande ska vara tillgänglig för fri textsökning."@sv;
     sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:hiddenLabel ;
     owl:equivalentProperty madsrdf:deprecatedLabel .
 
 :historyNote a owl:DatatypeProperty;
-    rdfs:label "anmärkning om tillämpningshistorik"@sv;
+    rdfs:label "history note"@en, "anmärkning om tillämpningshistorik"@sv;
     sdo:domainIncludes :Concept ;
     skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
     owl:equivalentProperty skos:historyNote .
 
 :inScheme a owl:ObjectProperty;
-    rdfs:label "ingår i system"@sv;
+    rdfs:label "in scheme"@en, "ingår i system"@sv;
     rdfs:domain :Identity ;
     rdfs:range :ConceptScheme ;
     rdfs:subPropertyOf :source;
@@ -137,7 +152,7 @@
          owl:someValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
-    rdfs:label "smalare"@sv;
+    rdfs:label "narrower"@en, "smalare"@sv;
     sdo:domainIncludes :Concept ;
     owl:inverseOf :broader;
     rdfs:range :Concept ;
@@ -145,20 +160,20 @@
     owl:equivalentProperty madsrdf:hasNarrowerAuthority .
 
 :narrowMatch a owl:ObjectProperty;
-    rdfs:label "smalare match"@sv;
+    rdfs:label "narrower match"@en, "smalare match"@sv;
     sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:narrowMatch ;
     owl:equivalentProperty madsrdf:hasNarrowerExternalAuthority .
 
 :prefLabel a owl:DatatypeProperty;
-    rdfs:label "föredragen benämning"@sv; #NOTE: föredragen term inom concept
+    rdfs:label "preferred label"@en, "föredragen benämning"@sv; #NOTE: föredragen term inom concept
     rdfs:subPropertyOf :label;
     sdo:domainIncludes :Concept ;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
 
 :related a owl:ObjectProperty;
-    rdfs:label "relaterad"@sv;
+    rdfs:label "related"@en, "relaterad"@sv;
     sdo:domainIncludes :Concept ;
     rdfs:range :Concept;
     owl:equivalentProperty skos:related ;
@@ -172,7 +187,7 @@
 
 :hasVariant a owl:ObjectProperty;
     :category :compositional ;
-    rdfs:label "variant"@sv;
+    rdfs:label "variant"@en, "variant"@sv;
     rdfs:domain :Identity ;
     rdfs:range :Identity;
     rdfs:subPropertyOf skos:related ;
@@ -190,13 +205,13 @@
             owl:allValuesFrom :Work ] .
 
 :scopeNote a owl:DatatypeProperty;
-    rdfs:label "anmärkning om användning"@sv;
+    rdfs:label "scope note"@en, "anmärkning om användning"@sv;
     sdo:domainIncludes :Concept ;
     skos:definition "Information som förtydligar betydelsen av och/eller användningen av ett begrepp."@sv;
     owl:equivalentProperty skos:scopeNote .
 
 :editorialNote a owl:DatatypeProperty;
-    rdfs:label "redaktionell anmärkning"@sv;
+    rdfs:label "editorial note"@en, "redaktionell anmärkning"@sv;
     rdfs:domain :Concept;
     skos:definition "Information avsedd för redaktör, översättare elleter förvaltare av begreppsmodellen."@sv;
     owl:equivalentProperty skos:editorialNote .
@@ -257,7 +272,7 @@
     owl:equivalentClass bf2:ClassificationLcc .
 
 :ClassificationNlm a owl:Class;
-    rdfs:label "NLM classification"@en, "Nlm-klassifikation"@sv;
+    rdfs:label "NLM classification"@en, "NLM-klassifikation"@sv;
     rdfs:subClassOf :Classification;
     owl:equivalentClass bf2:ClassificationNlm .
 

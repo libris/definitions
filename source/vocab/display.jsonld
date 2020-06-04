@@ -156,13 +156,19 @@
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "place", "country", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Publication": {
           "@id": "Publication-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+        },
+        "Reproduction": {
+          "@id": "Reproduction-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Reproduction",
+          "showProperties": [ "typeNote", "place", "agent", "date" ]
         },
         "Serial": {
           "@id": "Serial-chips",
@@ -210,7 +216,7 @@
           "@id": "Person-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
-          "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titlesAndOtherWordsAssociatedWithAName", "marc:fullerFormName", "lifeSpan" ]
+          "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titlesAndOtherWordsAssociatedWithAName", "fullerFormOfName", "lifeSpan" ]
         },
         "Family": {
           "@id": "Family-chips",
@@ -253,6 +259,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Classification",
           "showProperties": [ "code", "inScheme", "edition" ]
+        },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ClassificationDdc",
+          "showProperties": [ "code", "edition", "editionEnumeration" ]
         },
         "Contribution": {
           "@id": "Contribution-chips",
@@ -337,6 +349,7 @@
           "@id": "Instance-cards",
           "classLensDomain": "Instance",
           "showProperties": [
+            "reproductionOf",
             "identifiedBy",
             "issuanceType",
             "mediaType",
@@ -353,16 +366,19 @@
             "distribution",
             "copyright",
             "copyrightDate",
+            "projectedProvisionDate",
             "indirectlyIdentifiedBy",
             "extent",
             "hasDimensions",
             "hasDuration",
-            "marc:otherPhysicalDetails",
+            "physicalDetailsNote",
+            "digitalCharacteristic",
             "genreForm",
             "accompaniedBy",
             "seriesMembership",
             "intendedAudience",
             "associatedMedia",
+            "usageAndAccessPolicy",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -381,6 +397,7 @@
             "intendedAudience",
             "contentType",
             "illustrativeContent",
+            "cartographicAttributes",
             "isPartOf"
            ]
         },
@@ -487,6 +504,13 @@
           "fresnel:extends": {"@id": "Publication-chips"},
           "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
         },
+        "Reproduction": {
+          "@id": "Reproduction-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Reproduction",
+          "fresnel:extends": {"@id": "Reproduction-chips"},
+          "showProperties": [ "fresnel:super", "hasNote" ]
+        },
         "ContentType": {
           "@id": "ContentType-cards",
           "@type": "fresnel:Lens",
@@ -504,7 +528,7 @@
             "name",
             "marc:numeration",
             "marc:titlesAndOtherWordsAssociatedWithAName",
-            "marc:fullerFormName",
+            "fullerFormOfName",
             "lifeSpan",
             "hasVariant",
             "seeAlso",
@@ -632,11 +656,16 @@
           "@id": "Cartographic-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Cartographic",
-          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates" ]
+          "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates", "coordinates", "scale" ]
         },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "ClassificationDdc": {
+          "@id": "ClassificationDdc-cards",
+          "fresnel:extends": {"@id": "ClassificationDdc-chips"},
+          "showProperties": [ "fresnel:super", "marc:explanatoryTerm" ]
         },
         "MediaObject": {
           "fresnel:extends": {"@id": "MediaObject-chips"},
@@ -663,7 +692,11 @@
           "showProperties": [
             "instanceOf",
             "fresnel:super",
+            "isPrimaryTopicOf",
+            "electronicLocator",
+            "hasNote",
             "tableOfContents",
+            "relationship",
             {"inverseOf": "itemOf"}
           ]
         },
@@ -701,7 +734,7 @@
         },
         "Organization": {
           "fresnel:extends": {"@id": "Organization-cards"},
-          "showProperties": [ "fresnel:super", "establishDate", "terminateDate", "activityStartDate", "activityEndDate" ]
+          "showProperties": [ "fresnel:super", "establishDate", "terminateDate" ]
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
@@ -715,9 +748,12 @@
           "fresnel:extends": {"@id": "ProvisionActivity-chips"},
           "showProperties": [ "fresnel:super" ]
         },
-
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ClassificationDdc": {
+          "fresnel:extends": {"@id": "ClassificationDdc-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Relationship": {
@@ -779,6 +815,10 @@
         },
         "MediaType": {
           "fresnel:extends": {"@id": "MediaType-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Reproduction": {
+          "fresnel:extends": {"@id": "Reproduction-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Ontology": {

@@ -9,6 +9,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
@@ -704,6 +705,14 @@
             owl:onProperty :hasPart; owl:someValuesFrom :Production ];
     rdfs:label "Produktion"@sv .
 
+:Reproduction a owl:Class;
+    rdfs:label "Reproduction"@en, "Reproduktion"@sv ;
+    rdfs:subClassOf :Production . 
+
+:DigitalReproduction a owl:Class;
+    rdfs:label "Digital reproduction"@en, "Digital reproduktion"@sv ;
+    rdfs:subClassOf :Reproduction . 
+
 # NOTE: alternative to the hasPart Restriction:
 #:hasProductionPart a owl:ObjectProperty;
 #    rdfs:subPropertyOf :hasPart; rdfs:domain :Production; rdfs:range :Production .
@@ -918,6 +927,13 @@
     rdfs:label "Note type"@en, "Typ av anmärkning"@sv;
     rdfs:domain :Note;
     owl:equivalentProperty bf2:noteType .
+
+:physicalDetailsNote a owl:DatatypeProperty ;
+    rdfs:label "Physical details note"@en, "Övriga fysiska detaljer"@sv ;
+    rdfs:domain :Instance ;
+    rdfs:range rdfs:Literal ;
+    skos:changeNote "Tidigare marc:otherPhysicalDetails. Ändrat 2020-05-29."@sv;
+    rdfs:comment "Anmärkning om fysiska karakteristika som till exempel illustrationer, färg, uppspelningshastighet, spårkarakteristika, närvaro eller typ av ljud, antal kanaler, filmprojektionssystem."@sv .
 
 :description a owl:DatatypeProperty;
     sdo:domainIncludes :Instance, :Agent;
@@ -1287,7 +1303,7 @@
     owl:equivalentProperty bf2:musicKey .
 
 :legalDate a owl:DatatypeProperty;
-    rdfs:label "Date of legal work"@sv, "Tid för rättsligt verk"@sv;
+    rdfs:label "Date of legal work"@en, "Tid för rättsligt verk"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf :date;

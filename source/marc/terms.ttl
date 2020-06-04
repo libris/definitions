@@ -187,8 +187,8 @@ marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
     rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
 
-marc:angularScale a owl:DatatypeProperty ;
-    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
+#marc:angularScale a owl:DatatypeProperty ;
+#    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
 
 marc:westernmostLongitudeCoordinates a owl:DatatypeProperty ;
     rdfs:label "Coordinates - westernmost longitude"@en, "Koordinater - västlig gränslongitud"@sv ;
@@ -333,6 +333,9 @@ marc:titlePart a owl:DataTypeProperty;
     rdfs:label "Titel på del eller avsnitt av verk"@sv .
 
 # USED WITH MULTIPLE TYPES:
+
+marc:explanatoryTerm a owl:DatatypeProperty ; # probably the label in linked DDC.
+    rdfs:domain kbv:ClassificationDdc .
 
 marc:sourceOfAcquisition a owl:DatatypeProperty ;
     rdfs:label "Förvärvskälla"@sv ;

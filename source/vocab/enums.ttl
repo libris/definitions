@@ -7,6 +7,7 @@
 @prefix dbpo: <http://dbpedia.org/ontology/> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdam: <http://rdaregistry.info/Elements/m/> .
 
@@ -305,6 +306,11 @@
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:FileType .
 
+:ImageBitDepth a owl:Class;
+    rdfs:label "Image bit depth"@en, "Bildens bitdjup"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bflc:ImageBitDepth .
+
 :RegionalEncoding a owl:Class;
     rdfs:label "Regional encoding"@en, "Regional kodning"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
@@ -347,12 +353,19 @@
     owl:equivalentClass bf2:PlayingSpeed .
 
 :PresentationFormat a owl:Class;
+    rdfs:label "Presentationsformat"@sv;
+    rdfs:subClassOf bf2:ProjectionCharacteristic ;
     owl:equivalentClass bf2:PresentationFormat .
 
 :RecordingMedium a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
     rdfs:label "Ljudbärare"@sv, "Recording medium"@en;
     owl:equivalentClass bf2:RecordingMedium .
+
+:RecordingMethod a owl:Class ;
+    rdfs:label "Type of recording"@en, "Inspelningstyp"@sv ;
+    rdfs:subClassOf bf2:SoundCharacteristic ;
+    owl:equivalentClass bf2:RecordingMethod .
 
 :TapeConfig a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
