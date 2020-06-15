@@ -26,18 +26,21 @@
     rdfs:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
     # hur tala om: Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. 
     rdfs:domain :Agent;
+    rdfs:range rdfs:Literal ;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty foaf:name .
 
 :additionalName a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:additionalName;
     rdfs:domain :Meeting;
+    rdfs:range rdfs:Literal ;
     rdfs:subPropertyOf :name;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
 :fullerFormOfName a owl:DatatypeProperty; 
     rdfs:label "has fuller form of name"@en, "fullständigare namnform"@sv; 
-    rdfs:domain :Person; 
+    rdfs:domain :Person;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty rdau:P60530, rdau:fullerFormOfName.en . 
 
 :Agent a owl:Class;
@@ -89,6 +92,7 @@
     rdfs:label "family name"@en, "efternamn"@sv;
     skos:altLabel "familjenamn"@sv;
     rdfs:domain :Person;
+    rdfs:range rdfs:Literal ;
     rdfs:comment "Enkelt eller sammansatt släktnamn. Kan ej kombineras med egenskapen 'namn' som har rak ordföljd"@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
     owl:equivalentProperty sdo:familyName, foaf:familyName, rdaa:P50291, rdaa:surname.en .
@@ -96,6 +100,7 @@
 :givenName a owl:DatatypeProperty;
     rdfs:label "given name"@en, "förnamn"@sv;
     rdfs:domain :Person;
+    rdfs:range rdfs:Literal ;
     rdfs:comment "Förnamn, kan ej kombineras med egenskapen 'namn' som har rak ordföljd."@sv;
     # hur tala om: (Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingången.)
     owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
@@ -140,6 +145,7 @@
 :birthDate a owl:DatatypeProperty;
     rdfs:label "födelsedatum"@sv;
     rdfs:domain :Person;
+    rdfs:range :Date ;
     owl:equivalentProperty sdo:birthDate, madsrdf:birthDate  .
 
 # in favor of lifeSpan.
@@ -152,6 +158,7 @@
 :deathDate a owl:DatatypeProperty;
     rdfs:label "dödsdatum"@sv;
     rdfs:domain :Person;
+    rdfs:range :Date ;
     owl:equivalentProperty sdo:deathDate, madsrdf:deathDate .
 
 # in favor of lifeSpan.
@@ -174,7 +181,8 @@
 :address a owl:DatatypeProperty;
     :category :pending ;
     rdfs:label "Address"@en, "Adress"@sv;
-    sdo:domainIncludes :Person, :Organization;
+    rdfs:range rdfs:Literal ;
+    sdo:domainIncludes :Organization;
     owl:equivalentProperty sdo:address .
 
 :birthPlace a owl:ObjectProperty;
@@ -194,21 +202,25 @@
 :activityStartDate a owl:DatatypeProperty;
     rdfs:label "Start date"@en, "Verksamhetens starttid"@sv;
     rdfs:domain :Agent;
+    rdfs:range :Date ;
     owl:equivalentProperty madsrdf:activityStartDate .
 
 :activityEndDate a owl:DatatypeProperty;
     rdfs:label "End date"@en, "Verksamhetens sluttid"@sv;
     rdfs:domain :Agent;
+    rdfs:range :Date ;
     owl:equivalentProperty madsrdf:activityEndDate .
 
 :establishDate a owl:DatatypeProperty;
     rdfs:label "Established"@en, "Tid för grundande"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction;
+    rdfs:range :Date ;
     owl:equivalentProperty madsrdf:establishDate .
 
 :terminateDate a owl:DatatypeProperty;
     rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction;
+    rdfs:range :Date ;
     owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;
@@ -265,7 +277,8 @@
 :lifeSpan a owl:DatatypeProperty;
     rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
     rdfs:comment "Associerade datum som kan agera särskiljande för namn på agent. Exempel: '1854-1932' eller '1963-'."@sv;
-    rdfs:domain :Agent.
+    rdfs:domain :Agent;
+    rdfs:range rdfs:Literal .
 
 :Occupation a owl:Class;
     rdfs:label "Occupation"@en, "Yrke eller sysselsättning"@sv;
@@ -308,4 +321,5 @@
 :sigel a owl:DatatypeProperty;
     rdfs:label "Sigel"@sv ;
     rdfs:subPropertyOf :code;
-    rdfs:domain :Library .
+    rdfs:domain :Library ;
+    rdfs:range rdfs:Literal .

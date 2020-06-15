@@ -77,6 +77,7 @@
     skos:definition "En alternativ lexikal benämning för en resurs."@sv;
     skos:scopeNote "Används vanligen som se-hänvisning";
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty skos:altLabel .
 
 :broader a owl:ObjectProperty;
@@ -104,6 +105,7 @@
 :definition a owl:DatatypeProperty;
     rdfs:label "definition"@en, "definition"@sv ;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty skos:definition ;
     owl:equivalentProperty madsrdf:definitionNote .
 
@@ -117,6 +119,7 @@
 :example a owl:DatatypeProperty;
     rdfs:label "example"@en, "exempel"@sv ;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty skos:example ;
     owl:equivalentProperty madsrdf:exampleNote .
 
@@ -124,12 +127,14 @@
     rdfs:label "hidden label"@en, "dold benämning"@sv; #NOTE: dold term inom concept
     rdfs:comment "En benämning för en resurs som bör döljas när man skapar visuella visningar av resursen, men som fortfarande ska vara tillgänglig för fri textsökning."@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty skos:hiddenLabel ;
     owl:equivalentProperty madsrdf:deprecatedLabel .
 
 :historyNote a owl:DatatypeProperty;
     rdfs:label "history note"@en, "anmärkning om tillämpningshistorik"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     skos:definition "Information om tidigare status/användning/innebörd av ett begrepp."@sv;
     owl:equivalentProperty skos:historyNote .
 
@@ -169,6 +174,7 @@
     rdfs:label "preferred label"@en, "föredragen benämning"@sv; #NOTE: föredragen term inom concept
     rdfs:subPropertyOf :label;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
 
@@ -207,12 +213,14 @@
 :scopeNote a owl:DatatypeProperty;
     rdfs:label "scope note"@en, "anmärkning om användning"@sv;
     sdo:domainIncludes :Concept ;
+    rdfs:range rdfs:Literal ;
     skos:definition "Information som förtydligar betydelsen av och/eller användningen av ett begrepp."@sv;
     owl:equivalentProperty skos:scopeNote .
 
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "editorial note"@en, "redaktionell anmärkning"@sv;
     rdfs:domain :Concept;
+    rdfs:range rdfs:Literal ;
     skos:definition "Information avsedd för redaktör, översättare elleter förvaltare av begreppsmodellen."@sv;
     owl:equivalentProperty skos:editorialNote .
 
@@ -291,6 +299,7 @@
 :classificationPortion a owl:DatatypeProperty;
     rdfs:label "klassifikationsdel"@sv;
     rdfs:domain :Classification ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty bf2:classificationPortion .
 
 :edition a owl:DatatypeProperty;
@@ -299,10 +308,12 @@
     owl:equivalentProperty bf2:edition .
 
 :itemPortion a owl:DatatypeProperty;
+    # TODO: swedish label
     rdfs:domain :Classification ;
     owl:equivalentProperty bf2:itemPortion .
 
 :schedulePart a owl:DatatypeProperty;
+    # TODO: swedish label
     rdfs:domain :Classification ;
     owl:equivalentProperty bf2:schedulePart .
 

@@ -137,11 +137,13 @@ rdf:type a owl:ObjectProperty;
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
     rdfs:domain :Resource ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
     rdfs:label "comment"@en, "kommentar"@sv;
     sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC ;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;
@@ -154,7 +156,6 @@ rdf:type a owl:ObjectProperty;
 
 :count a owl:DatatypeProperty;
     rdfs:label "Number of units"@en, "Antal enheter"@sv;
-    rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:count .
 
 :Unit a owl:Class;
@@ -169,6 +170,7 @@ rdf:type a owl:ObjectProperty;
 :value a owl:DatatypeProperty;
     rdfs:label "value"@en, "värde"@sv;
     rdfs:domain :Resource;
+    rdfs:range rdfs:Literal ;
     owl:equivalentProperty rdf:value .
 
 :seeAlso a owl:ObjectProperty;

@@ -58,13 +58,14 @@
     rdfs:label "huvudtitel"@sv;
     rdfs:comment "Huvudsaklig titelkomponent"@sv;
     rdfs:subPropertyOf :value;
-    owl:equivalentProperty bf2:mainTitle;
-    rdfs:domain :Title .
+    rdfs:domain :Title ;
+    owl:equivalentProperty bf2:mainTitle .
 
 :titleRemainder a owl:DatatypeProperty ;
     :category :pending ;
     rdfs:comment "Catch for unmatched 245$b properties at conversion from MARC21. Use ':subtitle' as preferred property."@en, "Egenskap som fångar upp omatchade 245$b vid konvertering från MARC21. Använd ':subtitle' som föredragen egenskap."@sv;
     rdfs:domain :Title ;
+    rdfs:range :Literal ;
     rdfs:label "Övrig titelinformation"@sv .
 
 :subtitle a owl:DatatypeProperty;
@@ -185,7 +186,6 @@
     :category :shorthand;
     rdfs:label "identifier"@en, "identifikator"@sv;
     rdfs:subPropertyOf :label;
-    rdfs:range :Identifier;
     owl:equivalentProperty dc:identifier, bibo:identifier;
     owl:propertyChainAxiom ( :identifiedBy :value ) .
 
@@ -537,7 +537,7 @@
 
 :status a owl:ObjectProperty;
     rdfs:label "status"@sv;
-    rdfs:range bf2:Status;
+    rdfs:range :Status;
     owl:equivalentProperty bf2:status .
 
 :acquisitionTerms a owl:DatatypeProperty;
@@ -600,6 +600,7 @@
     rdfs:label "has numbering of serials"@en, "har numrering av seriell resurs"@sv;
     rdfs:comment "Alfanumeriska och/eller kronologiska volymbeteckningar"@sv;
     rdfs:domain :Instance;
+    rdfs:range :Literal;
     rdfs:range :NumberingOfSerials;
     owl:equivalentProperty rdau:P60533, rdau:numberingOfSerials.en .
 
@@ -634,6 +635,7 @@
 :citationNote a owl:DatatypeProperty;
     rdfs:label "Citation Note"@en, "Uppgift från källa"@sv;
     rdfs:domain :SourceData;
+    rdfs:range :Literal;
     owl:equivalentProperty madsrdf:citationNote .
 
 # Provision Activity
@@ -784,16 +786,19 @@
 :otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "kompletterande datum"@sv;
+    rdfs:range :AnyDateTime ;
     rdfs:subPropertyOf :date .
 
 :startYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "startår"@sv;
+    rdfs:range :Year ;
     rdfs:subPropertyOf :year, :startDate .
 
 :endYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
     rdfs:label "slutår"@sv;
+    rdfs:range :Year ;
     rdfs:subPropertyOf :year, :endDate .
 
 :country a owl:ObjectProperty;
