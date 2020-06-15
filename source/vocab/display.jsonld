@@ -156,13 +156,13 @@
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus", "hasPart" ]
         },
         "Publication": {
           "@id": "Publication-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus", "hasPart" ]
         },
         "Reproduction": {
           "@id": "Reproduction-chips",
@@ -502,7 +502,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
           "fresnel:extends": {"@id": "Publication-chips"},
-          "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
+          "showProperties": [ "fresnel:super", "marc:sequenceStatus" ]
         },
         "Reproduction": {
           "@id": "Reproduction-cards",
