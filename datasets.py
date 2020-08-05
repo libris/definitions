@@ -336,7 +336,9 @@ def nationalities():
             "context": [
                 "sys/context/base.jsonld",
                 {"label_sv": {"@id": "skos:prefLabel", "@language": "sv"}},
-                {"label_en": {"@id": "skos:prefLabel", "@language": "en"}}
+                {"altLabel_sv": {"@id": "skos:altLabel", "@language": "sv"}},
+                {"label_en": {"@id": "skos:prefLabel", "@language": "en"}},
+                {"comment_sv": {"@id": "rdfs:comment", "@language": "sv"}}
             ]
         })
 
