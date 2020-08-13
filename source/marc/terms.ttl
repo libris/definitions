@@ -225,6 +225,11 @@ marc:SubtitlesOrCaptions a owl:Class ;
     rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
+marc:intermediateLanguage a owl:ObjectProperty ;
+    rdfs:label "Language code of intermediate translations"@en, "Intermediärt språk till översättningar"@sv ;
+    rdfs:domain kbv:Work ;
+    rdfs:range kbv:Work .
+
 # 043
 
 marc:hasGeographicAreaCode a owl:ObjectProperty;
@@ -305,9 +310,10 @@ marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:comment "Värde '1-9' innebär att titeln inleds med alfanumeriska tecken som skall uteslutas vid filering. Tecken med diakriter räknas som 2 tecken. Lämna tomt om inga tecken ska uteslutas."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
-marc:OtherTitle a owl:Class ;
-    rdfs:subClassOf kbv:VariantTitle;
-    rdfs:label "Other title"@en, "Även med titel"@sv .
+# previously 246i3
+#marc:OtherTitle a owl:Class ;
+#    rdfs:subClassOf kbv:VariantTitle; 
+#    rdfs:label "Other title"@en, "Även med titel"@sv .
 
 #240-k
 

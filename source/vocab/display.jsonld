@@ -156,13 +156,13 @@
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "hasPart", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Publication": {
           "@id": "Publication-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
-          "showProperties": [ "country", "place", "agent", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
+          "showProperties": [ "country", "place", "agent", "hasPart", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "Reproduction": {
           "@id": "Reproduction-chips",
@@ -390,6 +390,7 @@
             "hasTitle",
             "contribution",
             "language",
+            "translationOf",
             "hasVariant",
             "genreForm",
             "classification",
@@ -502,7 +503,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Publication",
           "fresnel:extends": {"@id": "Publication-chips"},
-          "showProperties": [ "fresnel:super", "marc:sequenceStatus", "hasPart" ]
+          "showProperties": [ "fresnel:super", "marc:sequenceStatus" ]
         },
         "Reproduction": {
           "@id": "Reproduction-cards",
@@ -703,7 +704,8 @@
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [
-            "fresnel:super"
+            "fresnel:super",
+            {"inverseOf": "instanceOf"}
           ]
         },
         "NotatedMusic": {
