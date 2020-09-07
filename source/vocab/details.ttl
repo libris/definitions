@@ -92,6 +92,12 @@
 #    rdfs:subClassOf :Title;
 #    rdfs:label "Work Title"@en, "Uniform titel"@sv .
 
+:alternative a owl:DatatypeProperty;
+    :category :shorthand;
+    rdfs:label "alternative title"@en, "alternativ titel"@sv;
+    owl:equivalentProperty dc:alternative .
+    #TODO? owl:propertyChainAxiom ( :hasVariant :mainTitle ) .
+
 :VariantTitle  a owl:Class;
     owl:equivalentClass bf2:VariantTitle;
     rdfs:subClassOf :Title;
