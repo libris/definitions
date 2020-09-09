@@ -39,6 +39,7 @@
 :title a owl:DatatypeProperty;
     :category :shorthand;
     rdfs:label "title"@en, "titel"@sv;
+    skos:definition "Ett namn som givits åt resursen."@sv;
     rdfs:subPropertyOf :label;
     owl:equivalentProperty dc:title;
     owl:propertyChainAxiom ( :hasTitle :mainTitle ) .
@@ -601,6 +602,17 @@
     skos:narrowMatch bf2:date ;
     #rdfs:seeAlso <http://web.archive.org/web/20070606222636/http:/www.kb.se/Metadata/dcmes/default.htm> ;
     sdo:domainIncludes :Title .
+
+:coverArt a owl:ObjectProperty ;
+    rdfs:label "Cover art"@en, "Omslagsbild"@sv ;
+    rdfs:range :CoverArt ; # :Image?
+    rdfs:comment "Omslagsbilden för en resurs" ;
+    owl:equivalentProperty bf2:coverArt .
+
+:CoverArt a owl:Class ;
+    rdfs:label "Cover art"@en, "Omslagsbild"@sv ;
+    #TODO? rdfs:subClassOf :Visual
+    owl:equivalentClass bf2:CoverArt .
 
 :hasNumberingOfSerials a owl:ObjectProperty;
     rdfs:label "has numbering of serials"@en, "har numrering av seriell resurs"@sv;

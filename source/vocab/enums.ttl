@@ -282,7 +282,7 @@
 
 :CartographicObjectType a owl:Class;
     #TODO: Should this be defined in things.ttl instead?
-    rdfs:label "Digital cartographic object type"@en, "Digtal kartografisk objekttyp";
+    rdfs:label "Digital cartographic object type"@en, "Digital kartografisk objekttyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:CartographicObjectType .
 
@@ -387,6 +387,11 @@
     rdfs:subClassOf :VideoCharacteristic;
     rdfs:label "Video format"@en, "Videoformat"@sv;
     owl:equivalentClass bf2:VideoFormat .
+
+:BroadcastStandard a owl:Class ;
+    rdfs:label "Broadcast standard"@en, "Sändningsstandard"@sv ;
+    rdfs:subClassOf :VideoCharacteristic ;
+    owl:equivalentClass bf2:BroadcastStandard .
 
 :soundContent a owl:ObjectProperty;
     rdfs:range :SoundContent;
