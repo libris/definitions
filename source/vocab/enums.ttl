@@ -107,6 +107,11 @@
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:MusicNotation .
 
+:Script a owl:Class;
+    rdfs:label "Skriftsystem"@sv;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:Script .
+
 :TactileNotation a owl:Class;
     rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
     rdfs:subClassOf :Notation;
@@ -371,6 +376,11 @@
     rdfs:subClassOf :SoundCharacteristic;
     rdfs:label "Antal spår"@sv, "Tape configuration"@en;
     owl:equivalentClass bf2:TapeConfig .
+
+:TrackConfig a owl:Class;
+    rdfs:subClassOf :SoundCharacteristic;
+    rdfs:label "Ljudspårskonfiguration för film"@sv, "Track configuration"@en;
+    owl:equivalentClass bf2:TrackConfig .
 
 :videoCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
