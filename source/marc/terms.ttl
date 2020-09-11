@@ -15,12 +15,12 @@
 marc:fieldref a owl:DatatypeProperty;
     rdfs:label "Länkning"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$6 i MARC21"@sv .
+    rdfs:comment "Delfält $6 i MARC21."@sv .
 
 marc:groupid a owl:DatatypeProperty;
     rdfs:label "Länk- och sekvensnummer"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$8 i MARC21"@sv .
+    rdfs:comment "Delfält $8 i MARC21."@sv .
 
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
@@ -93,7 +93,7 @@ marc:relief a owl:ObjectProperty ;
 
 marc:hiddenValue a owl:DatatypeProperty;
     rdfs:label "Ogiltigt värde"@sv;
-    skos:definition "$z i MARC21 identifiers.";
+    rdfs:comment "Vanligen delfält $z i MARC21 fält för identifikatorer."@sv;
     rdfs:domain kbv:Identifier .
 
 marc:NationalIssnCentre a owl:Class;
