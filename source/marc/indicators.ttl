@@ -86,24 +86,26 @@ marc:MultipleSingleDates a marc:TypeOfDate ;
 marc:RangeOfDates a marc:TypeOfDate ;
     rdfs:label "Tidsintervall"@sv .
 
-marc:languageNote a owl:ObjectProperty ;
-    rdfs:label "anmärkning: Språk"@sv ;
-    sdo:domainIncludes kbv:Work,
-        marc:Libretto,
-        kbv:Summary,
-        marc:SubtitlesOrCaptions,
-        marc:SungOrSpokenText,
-        kbv:TableOfContents ;
-    rdfs:range marc:LanguageNote .
+# NOTE: No longer used with release 1.19. Indicator value will instead be
+# set by absence/presence of translationOf
+#marc:languageNote a owl:ObjectProperty ;
+#    rdfs:label "anmärkning: Språk"@sv ;
+#    sdo:domainIncludes kbv:Work,
+#        marc:Libretto,
+#        kbv:Summary,
+#        marc:SubtitlesOrCaptions,
+#        marc:SungOrSpokenText,
+#        kbv:TableOfContents ;
+#    rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
     # NOTE: marc:LanguageNote is definied in source/marc/terms.ttl as an owl:class.
     # To avoid duplicate labels in viewer, the label is removed here (temporarily)
     # rdfs:label "Anmärkning: Språk"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller ej översättning"@sv .
-marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller översättning"@sv .
+#marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller ej översättning"@sv .
+#marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller översättning"@sv .
 
 marc:languageCode a owl:ObjectProperty ;
     rdfs:label "språkkod"@sv ;
