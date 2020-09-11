@@ -245,6 +245,8 @@
     rdfs:comment "Sträng som anger sökvägen till en resurs"@sv;
     rdfs:label "URI"@en, "URI"@sv .
 
+## Relations ->
+
 :identifiedBy a owl:ObjectProperty ;
     rdfs:label "Identifier"@en, "Identifikator"@sv;
     skos:altLabel "Identifierad av"@sv;
@@ -274,6 +276,8 @@
     owl:inverseOf :identifiedBy;
     owl:equivalentProperty bf2:identifies .
 
+## Classes ->
+
 :Identifier a owl:Class ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Identifikator"@sv;
@@ -282,6 +286,7 @@
 :Ansi a owl:Class; # rdfs:Datatype ?
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
+    rdfs:comment "American National Standards Institute";
     skos:definition "Identifikator för den amerikanska standardiseringsorganisationen American National Standards Institute."@sv;
     owl:equivalentClass bf2:Ansi .
 
@@ -304,6 +309,7 @@
 :CODEN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Coden;
     rdfs:subClassOf :Identifier;
+    skos:definition "Identifikator för vetenskapliga och tekniska seriella resurser tilldelade av International CODEN Service."@sv;
     rdfs:label "CODEN" .
 
 :CopyrightNumber a owl:Class; # rdfs:Datatype ?
@@ -319,19 +325,23 @@
 :DOI a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Doi;
     rdfs:comment "Digital Object Identifier.";
+    skos:definition "Internationell standard för identifikation av digitala objekt."@sv;
     rdfs:subClassOf :Identifier;
     rdfs:label "DOI" .
 
 :EAN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
+    rdfs:comment: "International Article Identifier (European Article Number).";
+    skos:definition "Internationellt artikelnummer."@sv;
     rdfs:label "EAN" .
 
 :EIDR a owl:Class;
     owl:equivalentClass bflc:Eidr;
     rdfs:subClassOf :Identifier;
-    rdfs:label "Eidr";
-    rdfs:comment "Entertainment Identifier Registry Association ID"@en .
+    rdfs:label "EIDR";
+    rdfs:comment "Entertainment Identifier Registry" ;
+    skos:definition "Universellt unikt identifieringssystem inom film, tv och radio."@sv .
 
 :Fingerprint a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Fingerprint;
@@ -343,11 +353,13 @@
     owl:equivalentClass bf2:Gtin14Number;
     rdfs:subClassOf :Identifier;
     rdfs:comment "Global Trade Item Number 14.";
+    skos:definition "14-siffrigt nummer tilldelat för identifikation av handelsartiklar."@sv;
     rdfs:label "GTIN-14" .
 
 :Hdl a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Hdl;
     rdfs:subClassOf :Identifier;
+    skos:definition "Unik och persistent identifikator för digitala objekt utvecklad av Corporation for National Research Initiatives."@sv;
     rdfs:label "Handle" .
 
 :ISAN a owl:Class; # rdfs:Datatype ?
@@ -360,10 +372,12 @@
     owl:equivalentClass bf2:Isbn;
     rdfs:subClassOf :Identifier;
     rdfs:comment "International Standard Book Number.";
+    skos:definition "Internationellt system för identifikation av monografiska publikationer, till exempel böcker och kartor utgivna för allmän spridning."@sv;
     rdfs:label "ISBN" .
 
 :ISBN13 a owl:Class; # rdfs:Datatype ?
     :category :pending ;
+    rdfs:comment "Används för närvarande ej i Libris."@sv;
     rdfs:subClassOf :ISBN;
     rdfs:label "ISBN-13" .
 
@@ -371,12 +385,14 @@
     owl:equivalentClass bf2:Ismn;
     rdfs:comment "International Standard Music Number.";
     rdfs:subClassOf :Identifier;
+    skos:definition "Internationellt system för identifikation av noterad musik."@sv;
     rdfs:label "ISMN" .
 
 :ISNI a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Isni;
     rdfs:comment "International Standard Name Identifier.";
     rdfs:subClassOf :Identifier;
+    skos:definition "Internationellt system för identifikation av medverkande till medieinnehåll som böcker, tv-program och tidningsartiklar."@sv;
     rdfs:label "ISNI" .
 
 :ISO a owl:Class; # rdfs:Datatype ?
@@ -388,6 +404,7 @@
 :ISRC a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Isrc;
     rdfs:comment "International Standard Recording Code.";
+    skos:definition "Internationell system för identifikation av ljudinspelningar och musikvideor."@sv;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISRC" .
 
@@ -395,36 +412,39 @@
     owl:equivalentClass bf2:Issn;
     rdfs:subClassOf :Identifier;
     rdfs:comment "International Standard Serial Number.";
+    skos:definition "Internationellt system för identifikation av seriella resurser såsom tidskrifter och dagstidningar."@sv;
     rdfs:label "ISSN" .
 
 :ISSNL a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:IssnL;
     rdfs:subClassOf :Identifier;
+    skos:definition "ISSN för identifikation av seriella resurser med samma innehåll i olika medieversioner."@sv;
     rdfs:label "ISSN-L" .
 
 :ISTC a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Istc;
     rdfs:comment "International Standard Text Code.";
+    skos:definition "Internationellt system för identifikation av textbaserade verk."@sv;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISTC" .
 
 :ISWC a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Iswc;
     rdfs:comment "International Standard Musical Work Code.";
+    skos:definition "Internationellt system för identifikation av musikaliska verk."@av;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISWC" .
 
 :LCCN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Lccn;
     rdfs:subClassOf :Identifier;
-    rdfs:comment "LC-nummer (Library of Congress). Används normalt ej i Libris."@sv;
     rdfs:comment "Library of Congress Control Number.";
     rdfs:label "LCCN" .
 
 :LcOverseasAcq a owl:Class; # rdfs:Datatype ?
     rdfs:label "LC acquisition program"@en, "LC:s förvärvsprogram"@sv;
     rdfs:subClassOf :Identifier ;
-    rdfs:comment "Används normalt ej"@sv;
+    rdfs:comment "Används normalt ej."@sv;
     owl:equivalentClass bf2:LcOverseasAcq .
 
 :LibrisIIINumber a owl:Class; # rdfs:Datatype ? - Disjoint with or subClassOf LibrisNumber?
@@ -436,6 +456,7 @@
 :Local a owl:Class ; #TODO LocalIdentifer?
     rdfs:subClassOf :Identifier;
     rdfs:label "Lokal identifikator"@sv;
+    skos:definition "Lokalt etablerad identifikator och inte ett standardnummer."@sv;
     owl:equivalentClass bf2:Local .
 
 :MatrixNumber a owl:Class; # rdfs:Datatype ?
@@ -461,7 +482,7 @@
 :NBN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Nbn;
     rdfs:subClassOf :Identifier;
-    rdfs:comment "National Bibliography Number."@en, "Nationalbibliografiskt nummer. Används normalt ej i Libris"@sv;
+    rdfs:comment "National Bibliography Number."@en, "Nationalbibliografiskt nummer. (Används normalt ej i Libris)."@sv;
     rdfs:label "NBN" .
 
 :PostalRegistration a owl:Class; # rdfs:Datatype ?
@@ -519,45 +540,77 @@
     owl:equivalentClass bf2:VideoRecordingNumber .
 
 ## Used by SwePub {{{
+
 :CORDIS a owl:Class;
     :category :pending ;
+    rdfs:label "CORDIS";
     rdfs:subClassOf :Identifier .
+
 :FundRef a owl:Class;
     :category :pending ;
+    rdfs:label "Crossref Funder Registry";
     rdfs:subClassOf :Identifier .
+
 :GRID a owl:Class;
     :category :pending ;
+    rdfs:label "GRID";
+    rdfs:comment "Global Research Identifier Database";
     rdfs:subClassOf :Identifier .
+
 :ISI a owl:Class;
     :category :pending ;
+    rdfs:label "ISI";
+    rdfs:comment "Institute of Scientific Information (Web of Science)";
     rdfs:subClassOf :Identifier .
+
 :IssueNumber a owl:Class;
     :category :pending ;
     rdfs:subClassOf :Identifier .
+
 :LibrisNumber a owl:Class;
     :category :pending ;
+    rdfs:label "Libris-nummer"@sv;
     rdfs:subClassOf :Identifier .
+
 :ORCID a owl:Class;
     :category :pending ;
+    rdfs:label "ORCID";
+    rdfs:comment "Open Researcher and Contributor ID";
     rdfs:subClassOf :Identifier .
+
 :PatentNumber a owl:Class;
     :category :pending ;
+    rdfs:label "Patentnummer"@sv;
     rdfs:subClassOf :Identifier .
+
 :PMID a owl:Class;
     :category :pending ;
+    rdfs:label "PMID";
+    rdfs:comment "PubMed ID";
     rdfs:subClassOf :Identifier .
+
 :Ringgold a owl:Class;
     :category :pending ;
+    rdfs:label "RIN";
+    rdfs:comment "Ringgold ID";
     rdfs:subClassOf :Identifier .
+
 :ScopusID a owl:Class;
     :category :pending ;
+    rdfs:label "Scopus ID";
     rdfs:subClassOf :Identifier.
+
 :SweCRIS a owl:Class;
     :category :pending ;
+    rdfs:label "SweCRIS";
     rdfs:subClassOf :Identifier.
+
 :URI a owl:Class;
     :category :pending ;
+    rdfs:label "URI";
+    rdfs:comment "Universal Resource Identifier";
     rdfs:subClassOf :Identifier .
+
 :WorldCatNumber a owl:Class;
     :category :pending ;
     rdfs:subClassOf :Identifier .
