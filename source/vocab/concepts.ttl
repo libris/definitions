@@ -210,10 +210,15 @@
     skos:definition "Information som förtydligar betydelsen av och/eller användningen av ett begrepp."@sv;
     owl:equivalentProperty skos:scopeNote .
 
+:changeNote a owl:DatatypeProperty;
+    rdfs:label "Change note"@en, "Anmärkning om ändring"@sv;
+    rdfs:domain :Concept;
+    owl:equivalentProperty skos:changeNote .
+
 :editorialNote a owl:DatatypeProperty;
     rdfs:label "editorial note"@en, "redaktionell anmärkning"@sv;
     rdfs:domain :Concept;
-    skos:definition "Information avsedd för redaktör, översättare elleter förvaltare av begreppsmodellen."@sv;
+    skos:definition "Information avsedd för redaktörer, översättare eller förvaltare av en begreppsmodell."@sv;
     owl:equivalentProperty skos:editorialNote .
 
 :focus a owl:ObjectProperty;
