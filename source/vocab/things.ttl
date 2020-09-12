@@ -75,7 +75,7 @@
     rdfs:label "instans av Verk"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
-    rdfs:comment "Verk som den beskrivna instansen manifesterar. Används för att koppla ihop instanser med Verk i en Bibframe-struktur."@sv;
+    rdfs:comment "Verk som den beskrivna instansen manifesterar. Används för att koppla ihop instanser med verk i en Bibframe-struktur."@sv;
     sdo:rangeIncludes :Work .
 
 :hasInstance a owl:ObjectProperty ;
@@ -85,6 +85,7 @@
     owl:equivalentProperty bf2:hasInstance;
     rdfs:subClassOf sdo:workExample;
     rdfs:domain :Work ;
+    rdfs:comment "Instans relaterad till det beskrivna verket. Används för att koppla ihop verk med instanser i en Bibframe-struktur."@sv;
     rdfs:range :Instance .
 
 
