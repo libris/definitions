@@ -674,7 +674,7 @@
 
 :coverage a owl:DatatypeProperty;
     rdfs:label "Täckning eller tillkomst"@sv, "Coverage"@en;
-    rdfs:subPropertyOf dc:coverage ;
+    rdfs:subPropertyOf dc:coverage ; # TODO objectProperty and baseclass for temporalCoverage and geographicCoverage
     skos:narrowMatch bf2:date ;
     #rdfs:seeAlso <http://web.archive.org/web/20070606222636/http:/www.kb.se/Metadata/dcmes/default.htm> ;
     sdo:domainIncludes :Title .
@@ -1300,12 +1300,14 @@
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
     rdfs:domain :Creation;
     rdfs:range :GeographicCoverage;
+    rdfs:comment "Geografisk täckning avseende innehållet i resursen."@sv;
     owl:equivalentProperty bf2:geographicCoverage .
 
 :temporalCoverage a owl:DatatypeProperty;
     rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
+    rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
     owl:equivalentProperty bf2:temporalCoverage .
 
 :MusicMedium a owl:Class;
