@@ -40,16 +40,20 @@
 
 :Endeavour a owl:Class ;
     ptg:abstract true;
-    #skos:closeMatch frbr:Endeavour ;
+    #TOOD? skos:relatedMatch <http://purl.org/vocab/frbr/core#Endeavour>
+    rdfs:comment "Abstrakt basklass för :Work, :Instance och :Item."@sv;    
     rdfs:subClassOf :Document .
 
 :Creation a owl:Class ;
     ptg:abstract true;
+    rdfs:comment "Abstrakt basklass för :Work och :Instance."@sv;
     rdfs:subClassOf :Endeavour ;
     rdfs:subClassOf sdo:CreativeWork, dc:BibliographicResource .
 
+# Inspiration taken from relation http://purl.org/vocab/frbr/core#embodiment
 :Embodiment a owl:Class ;
     ptg:abstract true;
+    rdfs:comment "Abstrakt basklass för :Instance och :Item."@sv;
     rdfs:subClassOf :Endeavour .
 
 :Work a owl:Class ;
