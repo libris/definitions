@@ -199,20 +199,14 @@
 :isbn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISBN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/isbn
     rdfs:range :ISBN .
 
 :issn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISSN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/issn
     rdfs:range :ISSN .
-
-:coden a owl:DatatypeProperty ;
-    :category :shorthand;
-    rdfs:label "CODEN";
-    rdfs:subPropertyOf :identifier ;
-    rdfs:range :CODEN .
 
 :doi a owl:DatatypeProperty ;
     :category :shorthand;
@@ -223,26 +217,20 @@
 :ean a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "EAN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :EAN .
-    
-:standardTechnicalReportNumber a owl:DatatypeProperty ;
-    :category :shorthand;
-    rdfs:label "STRN";
-    rdfs:subPropertyOf :identifier ;
-    rdfs:range :STRN .
 
 :upc a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "UPC";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :UPC .
 
 :uri a owl:DatatypeProperty;
     rdfs:domain :Resource;
     rdfs:subPropertyOf bibo:uri ;
     rdfs:range xsd:anyURI ;
-    rdfs:comment "Sträng som anger sökvägen till en resurs"@sv;
+    rdfs:comment "Sträng som unikt identifierar och anger sökvägen till en resurs."@sv;
     rdfs:label "URI"@en, "URI"@sv .
 
 ## Relations ->
