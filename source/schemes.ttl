@@ -45,7 +45,8 @@
 
         Underhållet av Svenska ämnesord sköts av en redaktionskommitté vid Kungliga biblioteket.
     """@sv;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sao>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sao>,
+                    <https://www.wikidata.org/wiki/Q24262283>;
     foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
     void:inDataset </> .
 
@@ -111,6 +112,7 @@
     skos:notation "rda";
     dc:alternative "RDA";
     dc:title "RDA-termer"@sv, "RDA Terms"@en;
+    dc:description "Termlista innehållandes Kungliga bibliotekets mappningar mellan RDA Registry och Library of Congress MARC-termer för bärar-, media- och innehållstyper."@sv, "Term alignments by National Library of Sweden between RDA Registry and Library of Congress MARC-terms for carrier, media and content types."@en;
     rdfs:seeAlso
             <http://rdaregistry.info/termList/RDAContentType>,
             <http://id.loc.gov/vocabulary/contentTypes>,
@@ -124,7 +126,8 @@
 # "our marc enumerations"
 </marc> a skos:ConceptScheme;
     skos:notation "marc";
-    rdfs:comment "Här ingår termer som används för att representera koder i MARC"@sv;
+    dc:description "Termlista för att representera koder i MARC21 katalogisering. Dessa är främst för internt bruk av Kungliga biblioteket och ska inte räknas med att vara beständiga."@sv, "Termlist for representing codes in MARC21 cataloging. These are mostly for internal use by the National Library of Sweden and shall not be counted on being persistent."@sv;
+    rdfs:seeAlso <https://id.loc.gov/> ;
     dc:title "MARC terms"@en, "MARC-termer"@sv .
 
 
@@ -183,6 +186,7 @@
 <kao> a :TopicScheme;
     skos:notation "kao";
     dc:title "KVINNSAM"@sv;
+    dc:alternative "KVINNSAM ämnesordsregister"@sv;
     dc:language [ skos:notation "sv"];
     #dc:hasVersion [
     #    skos:notation "kao//eng";
@@ -197,6 +201,7 @@
     dc:title "KVINNSAM subject headings, engelskspråkig version"@sv;
     dc:ISO639-2 "eng";
     skos:broadMatch <http://id.loc.gov/vocabulary/subjectSchemes/kao>;
+    skos:scopeNote "Engelskspråkig version"@sv;
     foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
 
 <kssb> a :ClassificationScheme;
@@ -259,17 +264,20 @@
 
 <agrovoc> a :TopicScheme;
     skos:notation "agrovoc";
-    dc:title "AGROVOC Multilingual Thesaurus"@en;
-    dc:title "AGROVOC Multilingual Thesaurus";
+    dc:title "AGROVOC flerspråkig tesaurus"@sv, "AGROVOC Multilingual Thesaurus"@en;
+    dc:alternative "AGROVOC";
     foaf:page <http://aims.fao.org/vest-registry/vocabularies/agrovoc>;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/agrovoc>, <http://aims.fao.org/aos/agrovoc>;
-    skos:scopeNote "Kan användas även i genre/form."@sv .
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/agrovoc>,
+                    <http://aims.fao.org/aos/agrovoc>,
+                    <https://www.wikidata.org/wiki/Q292649>;
+    skos:scopeNote "Kan användas även inom genre/form."@sv .
 
 <allars> a :TopicScheme;
     skos:notation "allars";
     dc:title "Allärs: allmän tesaurus på svenska"@sv;
     rdfs:comment "Nationalbiblioteket i Finland"@sv;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/allars>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/allars>,
+                    <https://www.wikidata.org/wiki/Q18888511>;
     skos:broadmatch <http://www.yso.fi/onto/allars/> .
 
 <bella> a :TopicScheme;
@@ -303,7 +311,8 @@
     dc:title "Faceted application of subject terminology";
     rdfs:comment "Dublin, Ohio: OCLC"@sv;
     skos:scopeNote "Kan användas även i genre/form"@sv;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/fast>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/fast>,
+                    <https://www.wikidata.org/wiki/Q3294867>;
     foaf:page <http://fast.oclc.org/> .
 
 <gtt> a :TopicScheme;
@@ -315,9 +324,15 @@
 
 <humord> a :TopicScheme;
     skos:notation "humord";
-    dc:title "HUMORD";
-    rdfs:comment "Norge: Universitetsbibliotekene i Oslo, Bergen og Tromsø"@sv;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/humord>, <http://data.ub.uio.no/humord/> .
+    dc:title "Humord";
+    dc:alternative "HUMORD";
+    rdfs:comment "Norge: Universitetsbiblioteken i Oslo, Bergen och Tromsø"@sv;
+    dc:description "Humord is a Norwegian thesaurus for the subject areas humanities and social sciences."@en,
+                   "Humord är en norsk tesaurus för ämnen inom humaniora och samhällsvetenskap."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/humord>,
+                    <http://data.ub.uio.no/humord/>,
+                    <http://www.wikidata.org/entity/Q22927022> .
+
 
 <kaunokki> a :TopicScheme;
     skos:notation "kaunokki";
@@ -331,7 +346,8 @@
     dc:alternative "LCSH";
     dc:title "Library of Congress Subject Headings"@en;
     dc:title "Library of Congress Subject Headings";
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/lcsh>,<http://purl.org/dc/terms/LCSH>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/lcsh>,<http://purl.org/dc/terms/LCSH>,
+                    <https://www.wikidata.org/wiki/Q1823134>;
     foaf:homepage <http://id.loc.gov/authorities/subjects/> .
 
 <local> a skos:ConceptScheme;
@@ -353,7 +369,9 @@
     dc:alternative "MeSH";
     rdfs:comment "Bethesda, MD: National Library of Medicine"@sv;
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/mesh>, <http://purl.org/dc/terms/MESH>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/mesh>,
+                    <http://purl.org/dc/terms/MESH>,
+                    <https://www.wikidata.org/wiki/Q199897>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
 
 <nal> a :TopicScheme;
@@ -371,7 +389,8 @@
     dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)";
     skos:scopeNote "Kan användas även i genre/form"@sv;
     rdfs:comment "Tyskland, Berlin: Deutsches Bibliotheksinstitut"@sv;
-    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rswk>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rswk>,
+                    <https://www.wikidata.org/wiki/Q897080>;
     foaf:homepage <http://deposit.ddb.de/ep/netpub/89/96/96/967969689/_data_stat/www.dbi-berlin.de/dbi_pub/einzelpu/regelw/rswk/rswk_00.htm> .
 
 <samisk> a :TopicScheme;

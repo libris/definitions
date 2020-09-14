@@ -25,7 +25,6 @@
 ## Identifiers
 ## Stuff?
 ## Instance Description Statements
-## Additional kbv Statements
 ## Arrangement and Organization
 ## Notes
 ## Content description information
@@ -71,7 +70,7 @@
 :subtitle a owl:DatatypeProperty;
     rdfs:label "subtitle"@en, "övrig titelinformation"@sv;
     skos:altlabel "Undertitel"@sv;
-    rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel. Möjlig som titelkomponent"@sv;
+    rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel."@sv;
     #rdfs:subPropertyOf :titleRemainder; - Commented out as not to depend on a pending property.
     owl:equivalentProperty bf2:subtitle;
     rdfs:domain :Title .
@@ -181,7 +180,8 @@
 
 :TranslatedTitle a owl:Class;
     rdfs:subClassOf :VariantTitle;
-    rdfs:comment "Översättning av titeluppgift som görs av katalogisatören när den översatta titeln inte finns som en parallell titel på resursen. Förekommer normalt endast i importerade poster"@sv, "Translation of the title proper that is made by the cataloging agency when the translated title does not appear as a parallel title on the item"@en;
+    rdfs:comment "Förekommer normalt endast i importerade poster"@sv;
+    rdfs:comment "Översättning av titeluppgift som görs av katalogisatören när den översatta titeln inte finns som en parallelltitel på resursen."@sv, "Translation of the title proper that is made by the cataloging agency when the translated title does not appear as a parallel title on the item"@en;
     rdfs:label "Translated title"@en, "Översatt titel"@sv .
 
 
@@ -199,20 +199,14 @@
 :isbn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISBN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/isbn
     rdfs:range :ISBN .
 
 :issn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISSN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/issn
     rdfs:range :ISSN .
-
-:coden a owl:DatatypeProperty ;
-    :category :shorthand;
-    rdfs:label "CODEN";
-    rdfs:subPropertyOf :identifier ;
-    rdfs:range :CODEN .
 
 :doi a owl:DatatypeProperty ;
     :category :shorthand;
@@ -223,26 +217,20 @@
 :ean a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "EAN";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :EAN .
-    
-:standardTechnicalReportNumber a owl:DatatypeProperty ;
-    :category :shorthand;
-    rdfs:label "STRN";
-    rdfs:subPropertyOf :identifier ;
-    rdfs:range :STRN .
 
 :upc a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "UPC";
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :UPC .
 
 :uri a owl:DatatypeProperty;
     rdfs:domain :Resource;
     rdfs:subPropertyOf bibo:uri ;
     rdfs:range xsd:anyURI ;
-    rdfs:comment "Sträng som anger sökvägen till en resurs"@sv;
+    rdfs:comment "Sträng som unikt identifierar och anger sökvägen till en resurs."@sv;
     rdfs:label "URI"@en, "URI"@sv .
 
 ## Relations ->
@@ -287,7 +275,7 @@
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
     rdfs:subClassOf :Identifier;
     rdfs:comment "American National Standards Institute";
-    skos:definition "Identifikator för den amerikanska standardiseringsorganisationen American National Standards Institute."@sv;
+    skos:definition "Identifikator utfärdat av den amerikanska standardiseringsorganisationen American National Standards Institute."@sv;
     owl:equivalentClass bf2:Ansi .
 
 :AudioIssueNumber a owl:Class; # rdfs:Datatype ?
@@ -539,6 +527,13 @@
     rdfs:subClassOf :Identifier;
     owl:equivalentClass bf2:VideoRecordingNumber .
 
+:WikidataID a owl:Class;
+    rdfs:label "Wikidata ID";
+    :code "wikidata";
+    :exactMatch <http://id.loc.gov/vocabulary/identifiers/wikidata>;
+    rdfs:subClassOf :Identifier;
+    rdfs:comment "Wikidata item." .
+
 ## Used by SwePub {{{
 
 :CORDIS a owl:Class;
@@ -678,8 +673,8 @@
 #    owl:equivalentProperty dc:modified .
 
 :coverage a owl:DatatypeProperty;
-    rdfs:label "Täckning eller tillkomst"@sv;
-    rdfs:subPropertyOf dc:coverage ;
+    rdfs:label "Täckning eller tillkomst"@sv, "Coverage"@en;
+    rdfs:subPropertyOf dc:coverage ; # TODO objectProperty and baseclass for temporalCoverage and geographicCoverage
     skos:narrowMatch bf2:date ;
     #rdfs:seeAlso <http://web.archive.org/web/20070606222636/http:/www.kb.se/Metadata/dcmes/default.htm> ;
     sdo:domainIncludes :Title .
@@ -933,7 +928,7 @@
 :editionStatementRemainder a owl:DatatypeProperty;
     rdfs:label "edition statement remainder"@en, "Påföljande upplageuppgift"@sv;
     rdfs:domain :Instance;
-    rdfs:subPropertyOf bf2:editionStatement .
+    rdfs:subPropertyOf :editionStatement .
     
 :editionEnumeration a owl:DatatypeProperty;
     rdfs:domain :Instance;
@@ -964,12 +959,6 @@
 :subseriesEnumeration a owl:DatatypeProperty ;
     rdfs:equivalentProperty bf2:subseriesEnumeration;
     rdfs:label "Subseries enumeration"@en, "Numrering inom underserie"@sv .
-
-# Additional kbv statements
-
-:noteOnPublicationStatement a owl:DatatypeProperty;
-    rdfs:label "note on publication statement"@en, "utgivningsuppgiftsanmärkning"@sv;
-    skos:definition "Ange uppgiften som den står i objektet."@sv .
 
 # Arrangement and Organization
 
@@ -1311,12 +1300,14 @@
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
     rdfs:domain :Creation;
     rdfs:range :GeographicCoverage;
+    rdfs:comment "Geografisk täckning avseende innehållet i resursen."@sv;
     owl:equivalentProperty bf2:geographicCoverage .
 
 :temporalCoverage a owl:DatatypeProperty;
     rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
+    rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
     owl:equivalentProperty bf2:temporalCoverage .
 
 :MusicMedium a owl:Class;
