@@ -40,16 +40,20 @@
 
 :Endeavour a owl:Class ;
     ptg:abstract true;
-    #skos:closeMatch frbr:Endeavour ;
+    #TOOD? skos:relatedMatch <http://purl.org/vocab/frbr/core#Endeavour>
+    rdfs:comment "Abstrakt basklass för :Work, :Instance och :Item."@sv;    
     rdfs:subClassOf :Document .
 
 :Creation a owl:Class ;
     ptg:abstract true;
+    rdfs:comment "Abstrakt basklass för :Work och :Instance."@sv;
     rdfs:subClassOf :Endeavour ;
     rdfs:subClassOf sdo:CreativeWork, dc:BibliographicResource .
 
+# Inspiration taken from relation http://purl.org/vocab/frbr/core#embodiment
 :Embodiment a owl:Class ;
     ptg:abstract true;
+    rdfs:comment "Abstrakt basklass för :Instance och :Item."@sv;
     rdfs:subClassOf :Endeavour .
 
 :Work a owl:Class ;
@@ -71,7 +75,7 @@
     rdfs:label "instans av Verk"@sv;
     owl:equivalentProperty bf2:instanceOf;
     rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
-    rdfs:comment "Verk som den beskrivna instansen manifesterar. Används för att koppla ihop instanser med Verk i en Bibframe-struktur."@sv;
+    rdfs:comment "Verk som den beskrivna instansen manifesterar. Används för att koppla ihop instanser med verk i en Bibframe-struktur."@sv;
     sdo:rangeIncludes :Work .
 
 :hasInstance a owl:ObjectProperty ;
@@ -81,6 +85,7 @@
     owl:equivalentProperty bf2:hasInstance;
     rdfs:subClassOf sdo:workExample;
     rdfs:domain :Work ;
+    rdfs:comment "Instans relaterad till det beskrivna verket. Används för att koppla ihop verk med instanser i en Bibframe-struktur."@sv;
     rdfs:range :Instance .
 
 
@@ -334,7 +339,7 @@
     rdfs:subClassOf :Cartography ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasInstance;
-            owl:allValuesFrom :Manuscript
+            owl:allValuesFrom :Manuscript # Also Electronic, add genreForm Manuscript?
         ] .
 
 :ManuscriptNotatedMusic a owl:Class;
@@ -343,7 +348,7 @@
     rdfs:subClassOf :NotatedMusic ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasInstance;
-            owl:allValuesFrom :Manuscript
+            owl:allValuesFrom :Manuscript # Also Electronic, add genreForm Manuscript?
         ] .
 
 :ManuscriptText a owl:Class;
@@ -352,7 +357,7 @@
     rdfs:subClassOf :Text ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasInstance;
-            owl:allValuesFrom :Manuscript
+            owl:allValuesFrom :Manuscript # Also Electronic, add genreForm Manuscript?
         ] .
 
 # Combined Content Types

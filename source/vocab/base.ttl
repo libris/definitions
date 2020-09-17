@@ -14,6 +14,7 @@
 
 @prefix edtf: <http://id.loc.gov/datatypes/edtf/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
@@ -23,11 +24,11 @@
 : a owl:Ontology;
     owl:sameAs <https://id.kb.se/vocab> ;
     rdfs:label "KB Base Vocabulary"@en;
-    rdfs:label "KBs basvokabulär"@sv;
+    rdfs:label "KB:s basvokabulär"@sv;
     rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@sv;
     rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
     dc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
-    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2: ;
+    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bflc: ;
     skos:hasTopConcept :Instance, :Work, :Item, :Agent, :IndexTerm .
 
 # Various sources beyond the linked defintions themselves:

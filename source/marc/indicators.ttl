@@ -86,24 +86,26 @@ marc:MultipleSingleDates a marc:TypeOfDate ;
 marc:RangeOfDates a marc:TypeOfDate ;
     rdfs:label "Tidsintervall"@sv .
 
-marc:languageNote a owl:ObjectProperty ;
-    rdfs:label "anmärkning: Språk"@sv ;
-    sdo:domainIncludes kbv:Work,
-        marc:Libretto,
-        kbv:Summary,
-        marc:SubtitlesOrCaptions,
-        marc:SungOrSpokenText,
-        kbv:TableOfContents ;
-    rdfs:range marc:LanguageNote .
+# NOTE: No longer used with release 1.19. Indicator value will instead be
+# set by absence/presence of translationOf
+#marc:languageNote a owl:ObjectProperty ;
+#    rdfs:label "anmärkning: Språk"@sv ;
+#    sdo:domainIncludes kbv:Work,
+#        marc:Libretto,
+#        kbv:Summary,
+#        marc:SubtitlesOrCaptions,
+#        marc:SungOrSpokenText,
+#        kbv:TableOfContents ;
+#    rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
     # NOTE: marc:LanguageNote is definied in source/marc/terms.ttl as an owl:class.
     # To avoid duplicate labels in viewer, the label is removed here (temporarily)
     # rdfs:label "Anmärkning: Språk"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller ej översättning"@sv .
-marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller översättning"@sv .
+#marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller ej översättning"@sv .
+#marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller översättning"@sv .
 
 marc:languageCode a owl:ObjectProperty ;
     rdfs:label "språkkod"@sv ;
@@ -195,21 +197,21 @@ marc:NumberSource a marc:CollectionClass;
     rdfs:label "Kod för klassifikationssystem"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
 
-marc:searchControl a owl:ObjectProperty ;
-    rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
-    rdfs:domain kbv:Title ;
-    rdfs:range marc:SearchControl .
-marc:SearchControl a marc:CollectionClass;
-    rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
-    rdfs:subClassOf marc:EnumeratedTerm .
-marc:NoteNoAddedEntry a marc:SearchControl ;
-    rdfs:label "Anmärkning, inget biuppslag"@sv .
-marc:NoteAddedEntry a marc:SearchControl ;
-    rdfs:label "Anmärkning, titeln är sökelement"@sv .
-marc:NoNoteNoAddedEntry a marc:SearchControl ;
-    rdfs:label "Ingen anmärkning eller biuppslag"@sv .
-marc:NoNoteAddedEntry a marc:SearchControl ;
-    rdfs:label "Biuppslag, ingen anmärkning"@sv .
+# marc:searchControl a owl:ObjectProperty ;
+#     rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
+#     rdfs:domain kbv:Title ;
+#     rdfs:range marc:SearchControl .
+# marc:SearchControl a marc:CollectionClass;
+#     rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
+#     rdfs:subClassOf marc:EnumeratedTerm .
+# marc:NoteNoAddedEntry a marc:SearchControl ;
+#     rdfs:label "Anmärkning, inget biuppslag"@sv .
+# marc:NoteAddedEntry a marc:SearchControl ;
+#     rdfs:label "Anmärkning, titeln är sökelement"@sv .
+# marc:NoNoteNoAddedEntry a marc:SearchControl ;
+#     rdfs:label "Ingen anmärkning eller biuppslag"@sv .
+# marc:NoNoteAddedEntry a marc:SearchControl ;
+#     rdfs:label "Biuppslag, ingen anmärkning"@sv .
 
 marc:coverageOrLocationInSource a owl:ObjectProperty ;
     rdfs:label "täckningsgrad"@sv ;

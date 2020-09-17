@@ -13,7 +13,9 @@ construct {
         rdfs:comment ?comment ;
         skos:notation ?not;
         skos:notation ?langCode;
+        kbv:ISO639-2-B ?bibliographicLangCode;
         kbv:ISO639-2-T ?termLangCode;
+        kbv:ISO639-3 ?iso_639_3;
         dc:isReplacedBy ?replacement;
         skos:exactMatch ?locLang ;
         skos:closeMatch ?locVariant ;
@@ -36,6 +38,7 @@ construct {
             }
             optional { ?s rdfs:comment ?comment }
             optional { ?s kbv:ISO639-2-T ?termLangCode . }
+            optional { ?s kbv:ISO639-3 ?iso_639_3 . }
         } union {
             {?s skos:notation ?locCode .} union {?s kbv:ISO639-2-T ?locCode .}  
             bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?locCode)) as ?locLang)

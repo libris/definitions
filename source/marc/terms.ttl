@@ -15,12 +15,12 @@
 marc:fieldref a owl:DatatypeProperty;
     rdfs:label "Länkning"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$6 i MARC21"@sv .
+    rdfs:comment "Delfält $6 i MARC21."@sv .
 
 marc:groupid a owl:DatatypeProperty;
     rdfs:label "Länk- och sekvensnummer"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$8 i MARC21"@sv .
+    rdfs:comment "Delfält $8 i MARC21."@sv .
 
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
@@ -93,7 +93,7 @@ marc:relief a owl:ObjectProperty ;
 
 marc:hiddenValue a owl:DatatypeProperty;
     rdfs:label "Ogiltigt värde"@sv;
-    skos:definition "$z i MARC21 identifiers.";
+    rdfs:comment "Vanligen delfält $z i MARC21 fält för identifikatorer."@sv;
     rdfs:domain kbv:Identifier .
 
 marc:NationalIssnCentre a owl:Class;
@@ -321,22 +321,23 @@ marc:formSubheading a owl:DatatypeProperty;
     rdfs:label "Form subheading"@en, "Specificering i form av grupptitel"@sv ;
     rdfs:domain kbv:Title . 
 
-# BIB 249
-
-marc:hasBib249 a owl:ObjectProperty;
-    rdfs:label "Har originaltitel (OBSOLET bib:249)"@sv .
-
-marc:Bib249 a owl:Class;
-    rdfs:label "Originaltitel (OBSOLET bib:249)"@sv .
-
-marc:originalTitle a owl:DatatypeProperty;
-    rdfs:label "Originaltitel"@sv .
-
-marc:titleNumber a owl:DataTypeProperty;
-    rdfs:label "Nummer på del eller avsnitt"@sv .
-
-marc:titlePart a owl:DataTypeProperty;
-    rdfs:label "Titel på del eller avsnitt av verk"@sv .
+# BIB 249 removed per https://github.com/libris/librisxl/pull/678
+# 
+# marc:hasBib249 a owl:ObjectProperty;
+#     rdfs:label "Har originaltitel (OBSOLET bib:249)"@sv .
+# 
+# marc:Bib249 a owl:Class;
+#     rdfs:label "Originaltitel (OBSOLET bib:249)"@sv .
+# 
+# marc:originalTitle a owl:DatatypeProperty;
+#     rdfs:label "Originaltitel"@sv .
+# 
+# marc:titleNumber a owl:DataTypeProperty;
+#     rdfs:label "Nummer på del eller avsnitt"@sv .
+# 
+# marc:titlePart a owl:DataTypeProperty;
+#     rdfs:label "Titel på del eller avsnitt av verk"@sv .
+##
 
 # USED WITH MULTIPLE TYPES:
 

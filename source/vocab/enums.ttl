@@ -107,6 +107,11 @@
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:MusicNotation .
 
+:Script a owl:Class;
+    rdfs:label "Skriftsystem"@sv;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:Script .
+
 :TactileNotation a owl:Class;
     rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
     rdfs:subClassOf :Notation;
@@ -282,7 +287,7 @@
 
 :CartographicObjectType a owl:Class;
     #TODO: Should this be defined in things.ttl instead?
-    rdfs:label "Digital cartographic object type"@en, "Digtal kartografisk objekttyp";
+    rdfs:label "Digital cartographic object type"@en, "Digital kartografisk objekttyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:CartographicObjectType .
 
@@ -372,6 +377,11 @@
     rdfs:label "Antal spår"@sv, "Tape configuration"@en;
     owl:equivalentClass bf2:TapeConfig .
 
+:TrackConfig a owl:Class;
+    rdfs:subClassOf :SoundCharacteristic;
+    rdfs:label "Ljudspårskonfiguration för film"@sv, "Track configuration"@en;
+    owl:equivalentClass bf2:TrackConfig .
+
 :videoCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :VideoCharacteristic;
@@ -387,6 +397,11 @@
     rdfs:subClassOf :VideoCharacteristic;
     rdfs:label "Video format"@en, "Videoformat"@sv;
     owl:equivalentClass bf2:VideoFormat .
+
+:BroadcastStandard a owl:Class ;
+    rdfs:label "Broadcast standard"@en, "Sändningsstandard"@sv ;
+    rdfs:subClassOf :VideoCharacteristic ;
+    owl:equivalentClass bf2:BroadcastStandard .
 
 :soundContent a owl:ObjectProperty;
     rdfs:range :SoundContent;
