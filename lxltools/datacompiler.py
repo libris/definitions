@@ -144,16 +144,23 @@ class Compiler:
                     datasets=[self.dataset_id, ds_url])
             self.write(desc, fpath)
 
-    def _create_dataset_description(self, ds_url, created_ms):
-        ds = {'@id': ds_url, '@type': 'Dataset'}
+    def _create_dataset_description(self, ds_url, created_ms, label=None):
+        if not label:
+            label = ds_url.rsplit('/', 1)[-1]
+        ds = {
+            '@id': ds_url,
+            '@type': 'Dataset',
+            'label': label
+        }
         desc = self._to_node_description(ds, created_ms,
                 datasets={self.dataset_id, ds_url})
+
         record = desc['@graph'][0]
         if self.tool_id:
             record['generationProcess'] = {'@id': self.tool_id}
-        #if source_file:
-        #    record['derviedFrom'] = /sys/.../source_file
+
         ds_path = urlparse(ds_url).path[1:]
+
         self.write(desc, ds_path)
 
     def _to_node_description(self, node, created_ms,
