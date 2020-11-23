@@ -19,6 +19,7 @@ import sys
 import json
 import csv
 import time
+from datetime import datetime
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -32,6 +33,8 @@ class Compiler:
     def __init__(self,
                  base_dir=None,
                  dataset_id=None,
+                 tool_id=None,
+                 created=None,
                  context=None,
                  record_thing_link='mainEntity',
                  system_base_iri=None,
@@ -39,6 +42,8 @@ class Compiler:
         self.datasets = {}
         self.base_dir = Path(base_dir)
         self.dataset_id = dataset_id
+        self.tool_id = tool_id
+        self.created = created
         self.system_base_iri = system_base_iri
         self.record_thing_link = record_thing_link
         self.context = context
@@ -100,37 +105,62 @@ class Compiler:
                          self.load_json(self.context))
 
     def _compile_datasets(self, names):
+        self._create_dataset_description(self.dataset_id,
+                w3c_dtz_to_ms(self.created))
         for name in names:
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
             result = build()
             if as_dataset:
-                base, created_time, data = result
+                self._compile_dataset(name, result)
+        print()
 
-                created_ms = self.ztime_to_millis(created_time)
+    def _compile_dataset(self, name, result):
+        base, created_time, data = result
 
-                if isinstance(data, Graph):
-                    data = self.to_jsonld(data)
+        created_ms = w3c_dtz_to_ms(created_time)
 
-                context, resultset = _partition_dataset(urljoin(self.dataset_id, base), data)
+        if isinstance(data, Graph):
+            data = self.to_jsonld(data)
 
-                for key, node in resultset.items():
-                    node = self._to_node_description(node,
-                            created_ms,
-                            dataset=self.dataset_id,
-                            source='/dataset/%s' % name)
-                    self.write(node, key)
-            print()
+        ds_url = urljoin(self.dataset_id, name)
+        self._create_dataset_description(ds_url, created_ms)
 
-    def _to_node_description(self, node, datasource_created_ms, dataset=None, source=None):
+        base_id = urljoin(self.dataset_id, base)
+
+        for node in data['@graph']:
+            nodeid = node.get('@id')
+            if not nodeid:
+                print("Missing id for:", node)
+                continue
+            if not nodeid.startswith(base_id):
+                print("Missing mapping of <%s> under base <%s>" % (nodeid, base_id))
+                continue
+
+            fpath = urlparse(nodeid).path[1:]
+            desc = self._to_node_description(node,
+                    created_ms + _faux_offset(node['@id']),
+                    datasets=[self.dataset_id, ds_url])
+            self.write(desc, fpath)
+
+    def _create_dataset_description(self, ds_url, created_ms):
+        ds = {'@id': ds_url, '@type': 'Dataset'}
+        desc = self._to_node_description(ds, created_ms,
+                datasets={self.dataset_id, ds_url})
+        record = desc['@graph'][0]
+        if self.tool_id:
+            record['generationProcess'] = {'@id': self.tool_id}
+        #if source_file:
+        #    record['derviedFrom'] = /sys/.../source_file
+        ds_path = urlparse(ds_url).path[1:]
+        self.write(desc, ds_path)
+
+    def _to_node_description(self, node, created_ms,
+            modified_ms=None, datasets=None):
         assert self.record_thing_link not in node
 
-        def faux_offset(s):
-            return sum(ord(c) * ((i+1) ** 2)  for i, c in enumerate(s))
-
         node_id = node['@id']
-        created_ms = datasource_created_ms + faux_offset(node_id)
 
         record = OrderedDict()
         record['@type'] = 'Record'
@@ -138,25 +168,15 @@ class Compiler:
         record[self.record_thing_link] = {'@id': node_id}
 
         # Add provenance
-        # TODO: overhaul these? E.g. mainEntity with timestamp and 'datasource'.
-        #print(dataset, source)
-        #record['created'] = date_created
-        #record['modified'] = date_modified
-        #if datasource:
-        #    record['datasource'] = {'@id': datasource}
+        record['created'] = to_w3c_dtz(created_ms)
+        if modified_ms is not None:
+            record['modified'] = to_w3c_dtz(created_ms)
+        if datasets:
+            record['inDataset'] = [{'@id': ds} for ds in datasets]
 
         items = [record, node]
 
         return {'@graph': items}
-
-    def ztime_to_millis(self, ztime):
-        assert ztime.endswith('Z')
-        ztime, ms = ztime.rsplit('.', 1)
-        if ms.endswith('Z'):
-            ms = ms[:-1]
-        return int(time.mktime(time.strptime(ztime,
-                                             "%Y-%m-%dT%H:%M:%S"))
-                   * 1000 + int(ms))
 
     def generate_record_id(self, created_ms, node_id):
         slug = lxlslug.librisencode(created_ms, lxlslug.checksum(node_id))
@@ -223,6 +243,24 @@ class Compiler:
 
     def construct(self, sources, query=None):
         return _construct(self, sources, query)
+
+
+def w3c_dtz_to_ms(ztime):
+    assert ztime.endswith('Z')
+    ztime, ms = ztime.rsplit('.', 1)
+    if ms.endswith('Z'):
+        ms = ms[:-1]
+    return int(time.mktime(time.strptime(ztime,
+                                         "%Y-%m-%dT%H:%M:%S"))
+               * 1000 + int(ms))
+
+
+def to_w3c_dtz(ms):
+    return datetime.fromtimestamp(ms / 1000).isoformat()[:-3] + 'Z'
+
+
+def _faux_offset(s):
+    return sum(ord(c) * ((i+1) ** 2)  for i, c in enumerate(s))
 
 
 def _serialize(data):
@@ -329,19 +367,3 @@ def _embed_singly_referenced_bnodes(data):
             refs[0].pop('@id')
 
     data['@graph'] = sorted(graph_index.values(), key=lambda node: node['@id'])
-
-
-def _partition_dataset(base, data):
-    resultset = OrderedDict()
-    for node in data.pop('@graph'):
-        nodeid = node['@id']
-        # TODO: Absence caused by mismatch between external id and local mapping
-        if not nodeid:
-            print("Missing id for:", node)
-            continue
-        if not nodeid.startswith(base):
-            print("Missing mapping of <%s> under base <%s>" % (nodeid, base))
-            continue
-        rel_path = urlparse(nodeid).path[1:]
-        resultset[rel_path] = node
-    return data.get('@context'), resultset

@@ -3,15 +3,9 @@ from __future__ import unicode_literals, print_function
 import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
-from lxltools.datacompiler import Compiler
+from lxltools.datacompiler import Compiler, w3c_dtz_to_ms
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 
-
-# TODO:
-# * Explicitly link each record to it's parent dataset record unless we have an
-#   ldp:IndirectContainer (we now have *some* defined for terms using inScheme).
-# * Explicitly link each record to its logical source (or just the parent dataset record?)
-#   (derivativeOf <github.com/libris/definitions/**/.ttl> + generationProcess <definitions>?)
 
 NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
 
@@ -46,10 +40,12 @@ def _get_repo_version():
 
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
-                    dataset_id=BASE + 'definitions',
+                    dataset_id=BASE + 'dataset/definitions',
+                    created='2013-10-17T16:07:48.000Z',
+                    tool_id=BASE + 'generator/definitions',
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
-                    system_base_iri="",
+                    system_base_iri='',
                     union='definitions.jsonld.lines')
 
 
@@ -66,15 +62,6 @@ def _insert_record(graph, created_ms):
 #    graph = Graph().parse(compiler.path('source/index.ttl'), format='turtle')
 #    return to_jsonld(graph, (None, None), { "@language": "sv"})
 
-
-# NOTE: this step is currently part of the source maintenance, used to sync
-# with "unstable" marcframe mappings. I plan to inverse parts of this flow
-# to generate token-maps (used by marcframe processors) from these vocab
-# and enum sources instead.
-#prep_vocab_data():
-#    python scripts/vocab-from-marcframe.py
-#           ext-libris/src/main/resources/marcframe.json build/vocab.ttl
-#           > build/vocab-generated-source-1.ttl
 
 @compiler.handler
 def vocab():
@@ -135,7 +122,7 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
+    vocab_created_ms = w3c_dtz_to_ms("2014-01-01T00:00:00.000Z")
     _insert_record(data['@graph'], vocab_created_ms)
     vocab_node = data['@graph'][1]
     version = _get_repo_version()
