@@ -1603,13 +1603,13 @@
 #     skos:prefLabel "Accompanying Matter (OBSOLETE)"@en,
 #         "Accompanying Matter (OBSOLETE)"@en .
 
-:VisualRunningTimeType a :CollectionClass ;
-    :category :pending ;
-    rdfs:subClassOf :EnumeratedTerm ;
-    skos:broadMatch kbv:Visual ;
-    skos:notation "VisualRunningTimeType" ;
-    skos:prefLabel "Running Time"@en,
-        "Speltid"@sv .
+# :VisualRunningTimeType a :CollectionClass ;
+#     :category :pending ;
+#     rdfs:subClassOf :EnumeratedTerm ;
+#     skos:broadMatch kbv:Visual ;
+#     skos:notation "VisualRunningTimeType" ;
+#     skos:prefLabel "Running Time"@en,
+#         "Speltid"@sv .
 
 :VisualTechniqueType a :CollectionClass ;
     rdfs:subClassOf :EnumeratedTerm ;
@@ -1990,10 +1990,10 @@
     skos:prefLabel "Romanization Scheme"@en,
         "Translitterering"@sv .
 
-:runningTime a owl:ObjectProperty ;
+:runningTime a owl:DatatypeProperty ;
     :category :pending ;
     sdo:domainIncludes kbv:Visual ;
-    sdo:rangeIncludes :VisualRunningTimeType ;
+    # sdo:rangeIncludes :VisualRunningTimeType ;
     skos:prefLabel "Running Time"@en,
         "Speltid"@sv .
 
