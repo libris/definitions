@@ -10,18 +10,18 @@ construct {
         dc:isReplacedBy ?replacement;
         skos:notation ?notation;
         rdfs:comment ?comment;
-        skos:prefLabel ?label ;
+        skos:prefLabel ?label;
         skos:prefLabel ?prefLabel .
+
 } where {
     graph <https://id.kb.se/dataset/countries> {
         {
             ?s skos:notation ?notation ; skos:prefLabel ?label .
-                optional { ?s rdfs:comment ?comment }
-            bind(strdt(?notation, xsd:string) as ?strnot)
+            optional { ?s rdfs:comment ?comment }
             optional {
                 graph <http://id.loc.gov/vocabulary/countries> {
-                    ?loc skos:notation ?strnot
-                    optional { ?loc skos:prefLabel ?prefLabel }
+                    ?loc skos:prefLabel ?prefLabel .
+                    filter strends(str(?loc), concat('/', ?notation))
                 }
             }
         } union {
