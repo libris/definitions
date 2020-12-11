@@ -1,16 +1,16 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix : <https://id.kb.se/vocab/>
 
 construct {
     ?idrel a bf2:Role;
         skos:notation ?notation;
         ?p ?o;
-        owl:equivalentProperty ?locrel;
+        skos:exactMatch ?locrel;
         rdfs:domain ?domain;
-        rdfs:subPropertyOf ?superrel .
+
 } where {
     graph <https://id.kb.se/dataset/relators> {
         {
@@ -22,17 +22,8 @@ construct {
         } union {
             ?idrel skos:notation ?notation .
             graph <http://id.loc.gov/vocabulary/relators> {
-                ?locrel skos:notation ?notation .
-                optional {
-                    ?locrel rdfs:subPropertyOf ?locsuperrel .
-                    optional {
-                        ?locsuperrel skos:notation ?supernot .
-                        graph <https://id.kb.se/dataset/relators> {
-                            ?idsuperrel skos:notation ?supernot .
-                        }
-                    }
-                    bind(coalesce(?idsuperrel, ?locsuperrel) as ?superrel)
-                }
+                ?locrel madsrdf:authoritativeLabel ?authLabel .
+                filter strends(str(?locrel), concat('/', ?notation))
             }
         } optional { ?idrel rdfs:domain ?domain . }
           bind (if(bound(?domain), ?domain, :Work) as ?domain)
