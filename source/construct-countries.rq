@@ -3,6 +3,7 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix dc: <http://purl.org/dc/terms/>
+prefix loccountries: <http://id.loc.gov/vocabulary/countries>
 
 construct {
     ?s a :Country;
@@ -18,10 +19,10 @@ construct {
         {
             ?s skos:notation ?notation ; skos:prefLabel ?label .
             optional { ?s rdfs:comment ?comment }
+            bind(iri(concat(str(loccountries:), '/', ?notation)) as ?loc)
             optional {
-                graph <http://id.loc.gov/vocabulary/countries> {
+                graph loccountries: {
                     ?loc skos:prefLabel ?prefLabel .
-                    filter strends(str(?loc), concat('/', ?notation))
                 }
             }
         } union {

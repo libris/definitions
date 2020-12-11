@@ -3,6 +3,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
 prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix : <https://id.kb.se/vocab/>
+prefix locrelators: <http://id.loc.gov/vocabulary/relators>
 
 construct {
     ?idrel a bf2:Role;
@@ -21,9 +22,9 @@ construct {
             bind(replace(replace(?os, ?skipN, ""), " *\\|.*$", "") as ?o)
         } union {
             ?idrel skos:notation ?notation .
-            graph <http://id.loc.gov/vocabulary/relators> {
+            bind(iri(concat(str(locrelators:), '/', ?notation)) as ?locrel)
+            graph locrelators: {
                 ?locrel madsrdf:authoritativeLabel ?authLabel .
-                filter strends(str(?locrel), concat('/', ?notation))
             }
         } optional { ?idrel rdfs:domain ?domain . }
           bind (if(bound(?domain), ?domain, :Work) as ?domain)
