@@ -11,15 +11,12 @@ construct {
         skos:prefLabel ?prefLabel ;
         skos:altLabel ?altLabel ;
         rdfs:comment ?comment ;
-        skos:notation ?not;
-        skos:notation ?langCode;
-        kbv:ISO639-2-B ?bibliographicLangCode;
-        kbv:ISO639-2-T ?termLangCode;
-        kbv:ISO639-3 ?iso_639_3;
+        skos:notation ?code;
+        skos:notation ?langTag ;
+        skos:notation ?langCode ;
         dc:isReplacedBy ?replacement;
         skos:exactMatch ?locLang ;
-        skos:closeMatch ?locVariant ;
-        skos:notation ?langTag .
+        skos:closeMatch ?locVariant .
 
 } where {
     graph <https://id.kb.se/dataset/languages> {
@@ -37,17 +34,22 @@ construct {
                 bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
             }
             optional { ?s rdfs:comment ?comment }
-            optional { ?s kbv:ISO639-2-T ?termLangCode . }
-            optional { ?s kbv:ISO639-3 ?iso_639_3 . }
         } union {
-            {?s skos:notation ?locCode .} union {?s kbv:ISO639-2-T ?locCode .}  
-            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', ?locCode)) as ?locLang)
+            ?s skos:notation ?code .
+            filter(datatype(?code) = xsd:string)
+            bind(strdt(?code, kbv:ISO639-2) as ?langCode)
+        } union {
+            ?s skos:notation ?locCode .
+            filter(
+                datatype(?locCode) = kbv:ISO639-2-T ||
+                datatype(?locCode) = xsd:string
+            )
+            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', str(?locCode))) as ?locLang)
             graph <http://id.loc.gov/vocabulary/languages> {
-                optional {
+                {
                     filter(!contains(?prefLabel, "|"))
                     ?locLang skos:prefLabel ?prefLabel
-                }
-                optional {
+                } union {
                     filter(contains(?prefLabels, "|"))
                     ?locLang skos:prefLabel ?prefLabels
                     bind(replace(?prefLabels, " *\\|.*$", "") as ?prefLabel)
@@ -62,20 +64,19 @@ construct {
                     bind('http://id.loc.gov/vocabulary/iso639-1/' as ?iso639_1_base)
                     filter(strstarts(str(?locVariant), ?iso639_1_base))
                     bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
-                    bind(strdt(?shortcode, dc:ISO639-1) as ?langTag)
+                    bind(strdt(?shortcode, kbv:ISO639-1) as ?langTag)
                 }
             }
         } union {
-            optional { 
+            ?s skos:notation ?code .
+        } union {
+            optional {
                 ?s dc:isReplacedBy ?map_to_codes .
                 values ?n { 0 1 2 3 }
                 bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
                 bind(replace(replace(?map_to_codes, ?skipN, ""), " *\\|.*$", "") as ?map_to_code)
                 ?replacement skos:notation ?map_to_code .
             }
-        } union {
-            ?s skos:notation ?not .
-            bind(strdt(?not, dc:ISO639-2) as ?langCode)
         }
     }
 }

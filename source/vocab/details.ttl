@@ -534,6 +534,30 @@
     rdfs:subClassOf :Identifier;
     rdfs:comment "Wikidata item." .
 
+:ISO639-1 a rdfs:Datatype ;
+    rdfs:label "ISO 639-1" ;
+    owl:equivalentClass dc:ISO639-1 .
+
+:ISO639-2 a rdfs:Datatype ;
+    rdfs:label "ISO 639-2" ;
+    owl:equivalentClass dc:ISO639-2 .
+
+:ISO639-2-B a rdfs:Datatype ;
+    rdfs:label "ISO 639-2/B" ;
+    rdfs:comment "Bibliografisk språkkod"@sv ;
+    rdfs:subClassOf :ISO639-2 .
+
+:ISO639-2-T a rdfs:Datatype ;
+    rdfs:label "ISO 639-2/T" ;
+    rdfs:comment "Terminologisk språkkod"@sv ;
+    rdfs:subClassOf :ISO639-2 .
+
+:ISO639-3 a rdfs:Datatype ;
+    rdfs:label "ISO 639-3" ;
+    rdfs:comment "Ur komplett, omfattande språkkodslista."@sv ;
+    rdfs:seeAlso <https://iso639-3.sil.org/about/relationships>;
+    owl:equivalentClass dc:ISO639-3 .
+
 ## Used by SwePub {{{
 
 :CORDIS a owl:Class;
