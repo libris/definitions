@@ -1,4 +1,5 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
 prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
@@ -9,7 +10,8 @@ construct {
         skos:notation ?notation;
         ?p ?o;
         skos:exactMatch ?locrel;
-        rdfs:domain ?domain;
+        owl:equivalentProperty ?locrel;
+        rdfs:domain ?domain.
 
 } where {
     graph <https://id.kb.se/dataset/relators> {
