@@ -1,0 +1,121 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix sdo: <http://schema.org/>
+prefix dc: <http://purl.org/dc/terms/>
+prefix premis3: <http://www.loc.gov/premis/rdf/v3/>
+#prefix edm: <http://www.europeana.eu/schemas/edm/>
+prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/>
+prefix : <https://id.kb.se/vocab/>
+
+##
+# PREMIS 3.0
+
+:Instance rdfs:subClassOf premis3:IntellectualEntity .
+
+:Representation a owl:Class ;
+    owl:equivalentClass premis3:Representation ;
+    rdfs:subClassOf :Embodiment .
+
+:Bitstream a owl:Class ;
+    owl:equivalentClass premis3:Bitstream ;
+    rdfs:subClassOf :MediaObject .
+
+:File a owl:Class ;
+    owl:equivalentClass premis3:File ;
+    rdfs:subClassOf :MediaObject .
+
+# TODO: Rename to :represents, as PREMIS calls it (the label of :rep)?
+#:represents owl:sameAs :representationOf .
+:representationOf a owl:ObjectProperty ;
+    sdo:domainIncludes :File, :Representation ;
+    rdfs:range :Embodiment ;
+    owl:equivalentProperty relsubtype:rep ;
+    rdfs:subPropertyOf sdo:encodesCreativeWork, :formatOf .
+
+# TODO: Rename to :isRepresentedBy, as PREMIS calls it (the label of :isr)?
+#:representedBy owl:sameAs :hasRepresentation .
+:hasRepresentation a owl:ObjectProperty ;
+    rdfs:domain :Embodiment ;
+    sdo:rangeIncludes :MediaObject, :Representation ;
+    owl:equivalentProperty relsubtype:isr ;
+    rdfs:subPropertyOf :associatedMedia .
+
+:associatedMedia a owl:ObjectProperty ;
+    owl:equivalentProperty sdo:associatedMedia ;
+    rdfs:subPropertyOf :hasFormat .
+
+:includes a owl:ObjectProperty ;
+    sdo:domainIncludes :FilePackage, :MediaObject, :Representation ;
+    sdo:rangeIncludes :MediaObject, :Representation ;
+    owl:equivalentProperty relsubtype:inc ;
+    rdfs:subPropertyOf :hasPart .
+
+:includedIn a owl:ObjectProperty ;
+    sdo:domainIncludes :MediaObject, :Representation ;
+    sdo:rangeIncludes :MediaObject, :Representation ;
+    owl:equivalentProperty relsubtype:isi ;
+    rdfs:subPropertyOf :isPartOf .
+
+:mediaFormat a owl:ObjectProperty ;
+    rdfs:domain :MediaObject ;
+    rdfs:range :MediaFormat ;
+    owl:equivalentProperty sdo:encodingFormat ;
+    rdfs:subPropertyOf :format .
+
+:MediaFormat a owl:Class ;
+    owl:equivalentClass dc:FileFormat ;
+    skos:altLabel "IANA Media Type"@en, "MIME-Type"@en .
+
+:checksum a owl:DatatypeProperty ;
+    rdfs:domain :File ;
+    rdfs:range :Checksum ;
+    rdfs:subPropertyOf premis3:fixity .
+
+:Checksum a rdfs:Datatype, owl:Class ; rdfs:subClassOf premis3:Fixity .
+:MD5 a rdfs:Datatype; rdfs:subClassOf :Checksum .
+:SHA256 a rdfs:Datatype; rdfs:subClassOf :Checksum .
+
+:fileName a owl:DatatypeProperty ;
+    rdfs:domain :File ;
+    rdfs:range xsd:string ;
+    owl:equivalentProperty premis3:originalName ;
+    rdfs:subPropertyOf :label .
+
+:fileSize a owl:DatatypeProperty ;
+    rdfs:domain :MediaObject ;
+    #rdfs:range xsd:integer ;
+    skos:scopeNote "The value is an integer representing the file size in bytes, or a qualified string constisting of an integer followed by a conventional unit symbol (KB, MB, GB, TB)."@en ;
+    owl:equivalentProperty premis3:size, sdo:fileSize .
+
+##
+# New terms
+
+:FilePackage a owl:Class ; # TODO: is it just an ArchiveFile (e.g. ZIP)?
+    skos:broader :Dataset, :MediaObject .
+
+:containsFile a owl:ObjectProperty;
+    rdfs:domain :FilePackage ;
+    rdfs:range :File;
+    skos:broader :includes ;
+    rdfs:subPropertyOf :isPartOf .
+
+:parentPackage a owl:ObjectProperty; # TODO: how is it used?
+    rdfs:domain :FilePackage ;
+    rdfs:range :FilePackage;
+    rdfs:subPropertyOf :includedIn ;
+    skos:broader :inDataset .
+
+# TODO: find a better name? :creatingApplication? :toolUsed?
+:tool a owl:ObjectProperty ;
+    rdfs:subPropertyOf sdo:tool .
+
+:width a owl:DatatypeProperty ;
+    sdo:domainIncludes :MediaObject ;
+    owl:equivalentProperty sdo:width .
+
+:height a owl:DatatypeProperty ;
+    sdo:domainIncludes :MediaObject ;
+    owl:equivalentProperty sdo:height .
