@@ -5,6 +5,10 @@ import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
 from lxltools.datacompiler import Compiler, w3c_dtz_to_ms
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 
 NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
@@ -49,12 +53,13 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     union='definitions.jsonld.lines')
 
 
-def _insert_record(graph, created_ms):
+def _insert_record(graph, created_ms, dataset_id):
     entity = graph[0]
     record = {'@type': 'Record'}
     record[compiler.record_thing_link] = {'@id': entity['@id']}
     graph.insert(0, record)
     record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
+    record['inDataset'] = [{'@id': compiler.dataset_id}, {'@id': dataset_id}]
 
 
 #@compiler.dataset
@@ -123,7 +128,11 @@ def vocab():
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
     vocab_created_ms = w3c_dtz_to_ms("2014-01-01T00:00:00.000Z")
-    _insert_record(data['@graph'], vocab_created_ms)
+
+    vocab_ds_url = urljoin(compiler.dataset_id, 'vocab')
+    compiler._create_dataset_description(vocab_ds_url, vocab_created_ms)
+
+    _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
     vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
@@ -133,10 +142,10 @@ def vocab():
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
-    _insert_record(lib_context['@graph'], vocab_created_ms)
+    _insert_record(lib_context['@graph'], vocab_created_ms, vocab_ds_url)
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    _insert_record(display['@graph'], vocab_created_ms)
+    _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')
