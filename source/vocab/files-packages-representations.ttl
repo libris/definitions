@@ -43,13 +43,9 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentProperty relsubtype:isr ;
     rdfs:subPropertyOf :associatedMedia .
 
-:associatedMedia a owl:ObjectProperty ;
-    owl:equivalentProperty sdo:associatedMedia ;
-    rdfs:subPropertyOf :hasFormat .
-
 :includes a owl:ObjectProperty ;
     sdo:domainIncludes :FilePackage, :MediaObject, :Representation ;
-    sdo:rangeIncludes :MediaObject, :Representation ;
+    sdo:rangeIncludes :MediaObject ;
     owl:equivalentProperty relsubtype:inc ;
     rdfs:subPropertyOf :hasPart .
 
@@ -84,11 +80,11 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentProperty premis3:originalName ;
     rdfs:subPropertyOf :label .
 
-:fileSize a owl:DatatypeProperty ;
+:contentSize a owl:DatatypeProperty ; # albeit "content" is rather vague, so let's consider options ("mediaSize" or whatnot)
     rdfs:domain :MediaObject ;
     #rdfs:range xsd:integer ;
     skos:scopeNote "The value is an integer representing the file size in bytes, or a qualified string constisting of an integer followed by a conventional unit symbol (KB, MB, GB, TB)."@en ;
-    owl:equivalentProperty premis3:size, sdo:fileSize .
+    owl:equivalentProperty premis3:size, sdo:contentSize .
 
 ##
 # New terms
