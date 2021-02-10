@@ -130,7 +130,9 @@ def vocab():
     vocab_created_ms = w3c_dtz_to_ms("2014-01-01T00:00:00.000Z")
 
     vocab_ds_url = urljoin(compiler.dataset_id, 'vocab')
-    compiler._create_dataset_description(vocab_ds_url, vocab_created_ms)
+    vocab_func = compiler.datasets['vocab'][0]
+    vocab_modified_ms = compiler.last_modified_ms(vocab_func)
+    compiler._create_dataset_description(vocab_ds_url, vocab_created_ms, vocab_modified_ms)
 
     _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
     vocab_node = data['@graph'][1]
