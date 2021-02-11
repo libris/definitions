@@ -17,7 +17,13 @@ prefix : <https://id.kb.se/vocab/>
 
 :Representation a owl:Class ;
     owl:equivalentClass premis3:Representation ;
-    rdfs:subClassOf :Embodiment .
+    rdfs:subClassOf :Embodiment ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasPart; owl:someValuesFrom :Representation ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :includes; owl:allValuesFrom [ owl:disjointWith :Representation ] ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :includedIn; owl:allValuesFrom [ owl:disjointWith :Representation ] ] .
 
 :Bitstream a owl:Class ;
     owl:equivalentClass premis3:Bitstream ;
@@ -25,7 +31,13 @@ prefix : <https://id.kb.se/vocab/>
 
 :File a owl:Class ;
     owl:equivalentClass premis3:File ;
-    rdfs:subClassOf :MediaObject .
+    rdfs:subClassOf :MediaObject ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :hasPart; owl:someValuesFrom :File ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :includes; owl:allValuesFrom [ owl:disjointWith :File ] ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :includedIn; owl:allValuesFrom [ owl:disjointWith :File ] ] .
 
 # TODO: Rename to :represents, as PREMIS calls it (the label of :rep)?
 #:represents owl:sameAs :representationOf .
@@ -46,13 +58,13 @@ prefix : <https://id.kb.se/vocab/>
 :includes a owl:ObjectProperty ;
     sdo:domainIncludes :FilePackage, :MediaObject, :Representation ;
     sdo:rangeIncludes :MediaObject ;
-    owl:equivalentProperty relsubtype:inc ;
+    owl:equivalentProperty relsubtype:inc ; # TODO: super-properties of relsubtype:inc instead?
     rdfs:subPropertyOf :hasPart .
 
 :includedIn a owl:ObjectProperty ;
     sdo:domainIncludes :MediaObject, :Representation ;
     sdo:rangeIncludes :MediaObject, :Representation ;
-    owl:equivalentProperty relsubtype:isi ;
+    owl:equivalentProperty relsubtype:isi ; # TODO: super-properties of relsubtype:isi instead?
     rdfs:subPropertyOf :isPartOf .
 
 :mediaFormat a owl:ObjectProperty ;
@@ -115,13 +127,3 @@ prefix : <https://id.kb.se/vocab/>
 :height a owl:DatatypeProperty ;
     sdo:domainIncludes :MediaObject ;
     owl:equivalentProperty sdo:height .
-
-:startTime a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ;  #for event and bitstream?
-    owl:equivalentProperty sdo:startTime ;
-    rdfs:label "start time"@en, "starttid"@sv.
-
-:endTime a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ; #for event and bitstream?
-    owl:equivalentProperty sdo:endTime ;
-    rdfs:label "end time"@en, "sluttid"@sv.
