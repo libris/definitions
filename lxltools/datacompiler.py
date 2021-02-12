@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, print_function
 __metaclass__ = type
+
 if bytes is not str:
     unicode = str
 
@@ -21,6 +22,7 @@ import csv
 import time
 from os import path
 from datetime import datetime
+from functools import partial
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -50,6 +52,7 @@ class Compiler:
         self.context = context
         self.cachedir = None
         self.union = union
+        self.current_ds_resources = None
 
     def main(self):
         argp = argparse.ArgumentParser(
@@ -98,7 +101,23 @@ class Compiler:
         return func
 
     def path(self, pth):
+        if self.current_ds_resources is not None:
+            self._extract_resources(self.base_dir / pth)
         return self.base_dir / pth
+
+    def _extract_resources(self, pth):
+        if pth.is_file():
+            self.current_ds_resources.add(pth)
+        elif pth.is_dir():
+            std_glob = Path.__dict__['glob']
+            Path.glob = partial(self._tmp_glob, std_glob, pth)
+
+    def _tmp_glob(self, std_glob, pth, pattern):
+        fpaths = std_glob(pth, pattern)
+        Path.glob = std_glob
+        for f in fpaths:
+            self.current_ds_resources.add(f)
+        return fpaths
 
     def to_jsonld(self, graph):
         return _to_jsonld(graph,
@@ -106,24 +125,24 @@ class Compiler:
                          self.load_json(self.context))
 
     def _compile_datasets(self, names):
-
         self._create_dataset_description(self.dataset_id,
                 w3c_dtz_to_ms(self.created))
         for name in names:
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
+            self.current_ds_resources = set()
+            result = build()
             if as_dataset:
-                self._compile_dataset(name, build)
-            else:
-                build()
+                self._compile_dataset(name, result)
+            self.current_ds_resources = None
         print()
 
-    def _compile_dataset(self, name, func):
-        base, created_time, data = func()
+    def _compile_dataset(self, name, result):
+        base, created_time, data = result
 
         created_ms = w3c_dtz_to_ms(created_time)
-        modified_ms = self.last_modified_ms(func)
+        modified_ms = last_modified_ms(self.current_ds_resources)
 
         if isinstance(data, Graph):
             data = self.to_jsonld(data)
@@ -189,28 +208,6 @@ class Compiler:
 
         return {'@graph': items}
 
-    def last_modified_ms(self, func):
-        fpaths = self._generating_resources(func)
-        time_stamps = [path.getmtime(file) for file in fpaths]
-        last_modified_s = max(time_stamps)
-        return last_modified_s * 1000
-
-    def _generating_resources(self, func):
-        func_consts = func.__code__.co_consts
-        resources = set()
-        for i, c in enumerate(func_consts):
-            if isinstance(c, str):
-                pth = self.path(c)
-                if path.isfile(pth):
-                    resources.add(pth)
-                elif path.isdir(pth):
-                    # We expect a dir to be followed by a filename wildcard pattern used with glob
-                    if '/*.' in func_consts[i + 1]:
-                        files_from_dir = pth.glob(func_consts[i + 1])
-                        for f in files_from_dir:
-                            resources.add(f)
-        return resources
-
     def generate_record_id(self, created_ms, node_id):
         slug = lxlslug.librisencode(created_ms, lxlslug.checksum(node_id))
         return urljoin(self.system_base_iri, slug)
@@ -257,6 +254,7 @@ class Compiler:
         elif fpath.startswith(http):
             remotepath = fpath
             fpath = self.cachedir / (remotepath[len(http):] + '.ttl')
+            self.current_ds_resources.add(fpath)
             if not fpath.is_file():
                 fpath.parent.mkdir(parents=True, exist_ok=True)
                 source.parse(remotepath)
@@ -290,6 +288,12 @@ def w3c_dtz_to_ms(ztime):
 
 def to_w3c_dtz(ms):
     return datetime.fromtimestamp(ms / 1000).isoformat()[:-3] + 'Z'
+
+
+def last_modified_ms(fpaths):
+    time_stamps = [path.getmtime(f) for f in fpaths]
+    last_modified_s = max(time_stamps)
+    return last_modified_s * 1000
 
 
 def _faux_offset(s):

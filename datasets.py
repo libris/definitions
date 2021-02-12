@@ -3,7 +3,7 @@ from __future__ import unicode_literals, print_function
 import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
-from lxltools.datacompiler import Compiler, w3c_dtz_to_ms
+from lxltools.datacompiler import Compiler, w3c_dtz_to_ms, last_modified_ms
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
 try:
     from urllib.parse import urljoin
@@ -130,8 +130,7 @@ def vocab():
     vocab_created_ms = w3c_dtz_to_ms("2014-01-01T00:00:00.000Z")
 
     vocab_ds_url = urljoin(compiler.dataset_id, 'vocab')
-    vocab_func = compiler.datasets['vocab'][0]
-    vocab_modified_ms = compiler.last_modified_ms(vocab_func)
+    vocab_modified_ms = last_modified_ms(compiler.current_ds_resources)
     compiler._create_dataset_description(vocab_ds_url, vocab_created_ms, vocab_modified_ms)
 
     _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
