@@ -20,9 +20,7 @@ import sys
 import json
 import csv
 import time
-from os import path
 from datetime import datetime
-from functools import partial
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -43,7 +41,8 @@ class Compiler:
                  system_base_iri=None,
                  union='all.jsonld.lines'):
         self.datasets = {}
-        self.base_dir = Path(base_dir)
+        self.current_ds_resources = set()
+        self.base_dir = tracked_path_type(self.current_ds_resources)(base_dir)
         self.dataset_id = dataset_id
         self.tool_id = tool_id
         self.created = created
@@ -52,7 +51,6 @@ class Compiler:
         self.context = context
         self.cachedir = None
         self.union = union
-        self.current_ds_resources = None
 
     def main(self):
         argp = argparse.ArgumentParser(
@@ -61,7 +59,7 @@ class Compiler:
         arg = argp.add_argument
         arg('-s', '--system-base-iri', type=str, default=None, help="System base IRI")
         arg('-o', '--outdir', type=str, default=self.path("build"), help="Output directory")
-        arg('-c', '--cache', type=str, default=self.path("cache"), help="Cache directory")
+        arg('-c', '--cache', type=str, default="cache", help="Cache directory")
         arg('-l', '--lines', action='store_true',
                 help="Output a single file with one JSON-LD document per line")
         arg('datasets', metavar='DATASET', nargs='*')
@@ -77,7 +75,7 @@ class Compiler:
         if system_base_iri:
             self.system_base_iri = system_base_iri
         self.outdir = Path(outdir)
-        self.cachedir = cachedir
+        self.cachedir = tracked_path_type(self.current_ds_resources)(cachedir)
         if use_union:
             union_fpath = self.outdir / self.union
             union_fpath.parent.mkdir(parents=True, exist_ok=True)
@@ -101,23 +99,7 @@ class Compiler:
         return func
 
     def path(self, pth):
-        if self.current_ds_resources is not None:
-            self._extract_resources(self.base_dir / pth)
         return self.base_dir / pth
-
-    def _extract_resources(self, pth):
-        if pth.is_file():
-            self.current_ds_resources.add(pth)
-        elif pth.is_dir():
-            std_glob = Path.__dict__['glob']
-            Path.glob = partial(self._tmp_glob, std_glob, pth)
-
-    def _tmp_glob(self, std_glob, pth, pattern):
-        fpaths = std_glob(pth, pattern)
-        Path.glob = std_glob
-        for f in fpaths:
-            self.current_ds_resources.add(f)
-        return fpaths
 
     def to_jsonld(self, graph):
         return _to_jsonld(graph,
@@ -131,11 +113,10 @@ class Compiler:
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
-            self.current_ds_resources = set()
             result = build()
             if as_dataset:
                 self._compile_dataset(name, result)
-            self.current_ds_resources = None
+            self.current_ds_resources.clear()
         print()
 
     def _compile_dataset(self, name, result):
@@ -254,7 +235,6 @@ class Compiler:
         elif fpath.startswith(http):
             remotepath = fpath
             fpath = self.cachedir / (remotepath[len(http):] + '.ttl')
-            self.current_ds_resources.add(fpath)
             if not fpath.is_file():
                 fpath.parent.mkdir(parents=True, exist_ok=True)
                 source.parse(remotepath)
@@ -291,9 +271,19 @@ def to_w3c_dtz(ms):
 
 
 def last_modified_ms(fpaths):
-    time_stamps = [path.getmtime(f) for f in fpaths]
+    time_stamps = [f.stat().st_mtime for f in fpaths]
     last_modified_s = max(time_stamps)
     return last_modified_s * 1000
+
+
+def tracked_path_type(resources):
+    class TrackedPath(type(Path())):
+        def _init(self, *args, **kwargs):
+            super()._init(*args, **kwargs)
+            if self.is_file():
+                resources.add(self)
+
+    return TrackedPath
 
 
 def _faux_offset(s):
