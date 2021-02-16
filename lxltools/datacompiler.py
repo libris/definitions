@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, print_function
 __metaclass__ = type
+
 if bytes is not str:
     unicode = str
 
@@ -40,7 +41,8 @@ class Compiler:
                  system_base_iri=None,
                  union='all.jsonld.lines'):
         self.datasets = {}
-        self.base_dir = Path(base_dir)
+        self.current_ds_resources = set()
+        self.base_dir = tracked_path_type(self.current_ds_resources)(base_dir)
         self.dataset_id = dataset_id
         self.tool_id = tool_id
         self.created = created
@@ -58,8 +60,7 @@ class Compiler:
         arg = argp.add_argument
         arg('-s', '--system-base-iri', type=str, default=None, help="System base IRI")
         arg('-o', '--outdir', type=str, default=self.path("build"), help="Output directory")
-        arg('-c', '--cache', type=str, default=self.path("cache"), help="Cache directory")
-        #arg('-l', '--lines', const=True, nargs='?')
+        arg('-c', '--cache', type=str, default="cache", help="Cache directory")
         arg('-l', '--lines', action='store_true',
                 help="Output a single file with one JSON-LD document per line")
         arg('datasets', metavar='DATASET', nargs='*')
@@ -75,7 +76,7 @@ class Compiler:
         if system_base_iri:
             self.system_base_iri = system_base_iri
         self.outdir = Path(outdir)
-        self.cachedir = cachedir
+        self.cachedir = tracked_path_type(self.current_ds_resources)(cachedir)
         if use_union:
             union_fpath = self.outdir / self.union
             union_fpath.parent.mkdir(parents=True, exist_ok=True)
@@ -123,18 +124,20 @@ class Compiler:
                 if as_dataset:
                     self._compile_dataset(name, result)
                 self.current_ds_file = None
+            self.current_ds_resources.clear()
         print()
 
     def _compile_dataset(self, name, result):
         base, created_time, data = result
 
         created_ms = w3c_dtz_to_ms(created_time)
+        modified_ms = last_modified_ms(self.current_ds_resources)
 
         if isinstance(data, Graph):
             data = self.to_jsonld(data)
 
         ds_url = urljoin(self.dataset_id, name)
-        self._create_dataset_description(ds_url, created_ms)
+        self._create_dataset_description(ds_url, created_ms, modified_ms)
 
         base_id = urljoin(self.dataset_id, base)
 
@@ -153,7 +156,7 @@ class Compiler:
                     datasets=[self.dataset_id, ds_url])
             self.write(desc, fpath)
 
-    def _create_dataset_description(self, ds_url, created_ms, label=None):
+    def _create_dataset_description(self, ds_url, created_ms, modified_ms=None, label=None):
         if not label:
             label = ds_url.rsplit('/', 1)[-1]
         ds = {
@@ -161,7 +164,7 @@ class Compiler:
             '@type': 'Dataset',
             'label': label
         }
-        desc = self._to_node_description(ds, created_ms,
+        desc = self._to_node_description(ds, created_ms, modified_ms,
                 datasets={self.dataset_id, ds_url})
 
         record = desc['@graph'][0]
@@ -186,7 +189,7 @@ class Compiler:
         # Add provenance
         record['created'] = to_w3c_dtz(created_ms)
         if modified_ms is not None:
-            record['modified'] = to_w3c_dtz(created_ms)
+            record['modified'] = to_w3c_dtz(modified_ms)
         if datasets:
             record['inDataset'] = [{'@id': ds} for ds in datasets]
 
@@ -276,6 +279,22 @@ def w3c_dtz_to_ms(ztime):
 
 def to_w3c_dtz(ms):
     return datetime.fromtimestamp(ms / 1000).isoformat()[:-3] + 'Z'
+
+
+def last_modified_ms(fpaths):
+    time_stamps = [f.stat().st_mtime for f in fpaths]
+    last_modified_s = max(time_stamps)
+    return last_modified_s * 1000
+
+
+def tracked_path_type(resources):
+    class TrackedPath(type(Path())):
+        def _init(self, *args, **kwargs):
+            super()._init(*args, **kwargs)
+            if self.is_file():
+                resources.add(self)
+
+    return TrackedPath
 
 
 def _faux_offset(s):
