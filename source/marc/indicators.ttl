@@ -189,13 +189,12 @@ marc:IncompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCa
 # marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
 #     rdfs:label "Annan klassifikationskod från annat kanadensiskt bibliotek"@sv .
 
-marc:numberSource a owl:ObjectProperty ;
+marc:numberSource a owl:DatatypeProperty ;
     rdfs:label "kod för klassifikationssystem"@sv ;
-    rdfs:domain marc:GovernmentDocumentClassificationNumber ;
-    rdfs:range marc:NumberSource .
-marc:NumberSource a marc:CollectionClass;
-    rdfs:label "Kod för klassifikationssystem"@sv ;
-    rdfs:subClassOf marc:EnumeratedTerm .
+    rdfs:domain marc:GovernmentDocumentClassificationNumber .
+# marc:NumberSource a marc:CollectionClass;
+#     rdfs:label "Kod för klassifikationssystem"@sv ;
+#     rdfs:subClassOf marc:EnumeratedTerm .
 
 # marc:searchControl a owl:ObjectProperty ;
 #     rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;

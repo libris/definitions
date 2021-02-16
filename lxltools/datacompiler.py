@@ -51,6 +51,7 @@ class Compiler:
         self.context = context
         self.cachedir = None
         self.union = union
+        self.current_ds_file = None
 
     def main(self):
         argp = argparse.ArgumentParser(
@@ -80,6 +81,7 @@ class Compiler:
             union_fpath = self.outdir / self.union
             union_fpath.parent.mkdir(parents=True, exist_ok=True)
             self.union_file = union_fpath.open('wt', encoding='utf-8')
+            print("Writing dataset lines to file:", self.union_file.name)
         else:
             self.union_file = None
 
@@ -113,9 +115,15 @@ class Compiler:
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
-            result = build()
-            if as_dataset:
-                self._compile_dataset(name, result)
+            ds_fpath = self.outdir / '{}.json.lines'.format(name)
+            ds_fpath.parent.mkdir(parents=True, exist_ok=True)
+            with ds_fpath.open('wt', encoding='utf-8') as ds_file:
+                self.current_ds_file = ds_file
+                print("Writing dataset lines to file:", self.current_ds_file.name)
+                result = build()
+                if as_dataset:
+                    self._compile_dataset(name, result)
+                self.current_ds_file = None
             self.current_ds_resources.clear()
         print()
 
@@ -197,11 +205,14 @@ class Compiler:
         node_id = node.get('@id')
         if node_id:
             assert not node_id.startswith('_:')
-        if self.union_file:
+        if self.union_file or self.current_ds_file:
             line = json.dumps(node)
             if isinstance(line, bytes):
                 line = line.decode('utf-8')
-            print(line, file=self.union_file)
+            if self.union_file:
+                print(line, file=self.union_file)
+            if self.current_ds_file:
+                print(line, file=self.current_ds_file)
         # TODO: else: # don't write both to union_file and separate file
         pretty_repr = _serialize(node)
         if pretty_repr:
