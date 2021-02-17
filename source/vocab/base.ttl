@@ -13,8 +13,8 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix edtf: <http://id.loc.gov/datatypes/edtf/> .
-@prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
@@ -24,15 +24,14 @@
 : a owl:Ontology;
     owl:sameAs <https://id.kb.se/vocab> ;
     rdfs:label "KB Base Vocabulary"@en;
-    rdfs:label "KBs basvokabulär"@sv;
+    rdfs:label "KB:s basvokabulär"@sv;
     rdfs:comment "Detta vokabulär fungerar som en central mappning till publika, välkända egenskaper och klasser."@sv;
     rdfs:comment "This vocabulary serves as a central mapping to public, well-known properties and classes."@en;
     dc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
-    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bf: ;
+    owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bflc: ;
     skos:hasTopConcept :Instance, :Work, :Item, :Agent, :IndexTerm .
 
 # Various sources beyond the linked defintions themselves:
-# - <http://bibframe.org/documentation/resource-types/#proposal>
 
 rdf:type a owl:ObjectProperty;
     rdfs:label "type"@en, "typ"@sv .
@@ -112,22 +111,29 @@ rdf:type a owl:ObjectProperty;
 # .. use rdfs:range rdf:langString where applicable?
 
 :category a owl:ObjectProperty;
-    rdfs:label "kategori"@sv;
+    rdfs:label "category"@en, "kategori"@sv;
     owl:equivalentProperty sdo:category .
 
 :shorthand a skos:Collection ;
-    rdfs:label "kortform"@sv ;
+    rdfs:label "shorthand"@en, "kortform"@sv ;
     rdfs:comment "Anges som kategori på egenskaper som har en mer komplex bakomliggande struktur."@sv ;
     skos:example "Exempelvis isbn, som motsvarar identifiedBy(type=ISBN).value."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper."@sv ;
     :code "shorthand" .
 
 :compositional a skos:Collection ;
-    rdfs:label "inneboende del"@sv ;
+    rdfs:label "compositional"@en, "inneboende del"@sv ;
     rdfs:comment "Anges på egenskaper för att betrakta deras värde som en sammansatt del av entiteten, istället för en länkbar fristående entitet."@sv ;
     skos:example "Exempelvis hasVariant, som anger variantbeskrivingar av en Agent som distinkta Agenter (men enbart i formen, de respresenterar samma ting)."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning."@sv ;
     :code "compositional" .
+    
+:pending a skos:Collection;
+    rdfs:label "pending"@en, "ej fastställd"@sv;
+    rdfs:comment "Anges för att markera termer som icke stabila i väntan på fastställande av status."@sv ;
+    skos:example "Egenskapen enumerationAndChronology som hittills inte använts i Libris praxis."@sv ;
+    skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper"@sv ;
+    :code "pending" .
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
@@ -135,12 +141,12 @@ rdf:type a owl:ObjectProperty;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
-    rdfs:label "kommentar"@sv;
-    sdo:domainIncludes :Agent, :Title, :ToCEntry ;
+    rdfs:label "comment"@en, "kommentar"@sv;
+    sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC ;
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;
-    rdfs:label "kod"@sv;
+    rdfs:label "code"@en, "kod"@sv;
     skos:altLabel "notation"@sv;
     skos:related :label;
     # sdo:domainIncludes :Concept ;

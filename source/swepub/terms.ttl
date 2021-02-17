@@ -1,0 +1,71 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+base <https://id.kb.se/>
+
+
+swepub:Published a swepub:PublicationStatus ;
+     skos:prefLabel "Publicerad"@sv ;
+     rdfs:comment "Formellt publicerade publikationer så som artiklar och allt annat med beständiga bibliografiska uppgifter på plats (sidantal, nummer, volym etc)."@sv ;
+     rdfs:comment "Formally published publications such as articles and everything else with permanent bibliographic information in place (pages, issue, volume etc)."@en .
+
+swepub:Preprint a swepub:PublicationStatus, swepub:OutputType ;
+    rdfs:comment "Manuskript som inte ännu har genomgått sakkunniggranskning inför publicering i en tidskrift."@sv ;
+    rdfs:comment "Manuscripts that have not yet been peer-reviewed before the process of publishing in a journal."@en .
+
+swepub:Submitted a swepub:PublicationStatus ;
+    skos:prefLabel "Submitted"@en ;
+    rdfs:comment "Output som skickats in för att genomgå processen för formell publicering. Till exempel artiklar som har skickats in till förlag."@sv ;
+    rdfs:comment "Output submitted to go through the process of formal publishing. For example, articles that have been submitted to publishers."@en .
+
+swepub:Accepted a swepub:PublicationStatus ;
+    skos:prefLabel "Accepted"@en ;
+    rdfs:comment "Artiklar som förlag har godkänt för publicering efter processen för sakkunniggranskning."@sv ;
+    rdfs:comment "Articles that the publisher has approved for publication after the peer-review process."@en .
+
+swepub:InPress a swepub:PublicationStatus ;
+    skos:prefLabel "In press"@en ;
+    rdfs:comment "Artiklar som har färdigställs för formell publicering."@sv ;
+    rdfs:comment "Articles that have been completed for formal publication."@en .
+
+
+swepub:EpubAheadOfPrintOnlineFirst a swepub:PublicationStatus ;
+    skos:prefLabel "Epub ahead of print/Online first"@en ;
+    rdfs:comment "Publikationer som har tillgängliggjorts före formell publiceringen. Till exempel artiklar utan beständiga bibliografiska uppgifter på plats (sidantal, nummer, volym etc) som har tillgängliggjorts innan tidskriftsnumret de skall in i är färdiggjort."@sv ;
+    rdfs:comment "Publications made available before formal publication. For example, articles without permanent bibliographic information in place (page number, number, volume, etc.) that have been made available before the journal number they are to be a part of is completed."@en . 
+
+</term/swepub/project> a :HostType ;
+    rdfs:label "project" ;
+    skos:prefLabel "Projekt"@sv .
+
+</term/swepub/programme> a :HostType ;
+    rdfs:label "programme" ;
+    skos:prefLabel "Program"@sv .
+
+</term/swepub/grantAgreement> a :HostType ;
+    rdfs:label "grantAgreement" ;
+    skos:prefLabel "Kontrakt"@sv .
+
+</term/swepub/initiative> a :HostType ;
+    rdfs:label "initiative" ;
+    skos:prefLabel "Strategisk initiativ"@sv .
+
+</term/swepub/event> a :HostType ;
+    rdfs:label "event" ;
+    skos:prefLabel "Event"@sv .
+
+</term/swepub/dataset> a :HostType ;
+    rdfs:label "dataset" ;
+    skos:prefLabel "Dataset"@sv .
+
+
+</term/swepub/swedishlist/peer-reviewed> a :Classification ;
+    skos:prefLabel "Sakkunninggranskad publiceringskanal"@sv ;
+    rdfs:comment "Kanalen är specialiserad på publicering av vetenskapliga forskningsresultat och har en oberoende sakkunniggranskning av vetenskaplig eller konstnärlig kvalitet."@sv ;
+    rdfs:comment "Publication channel specialized in publishing scientific research results and has an independent peer review of scientific or artistic quality."@en .
+
+</term/swepub/swedishlist/non-peer-reviewed> a :Classification ;
+    skos:prefLabel "Icke-sakkunninggranskad publiceringskanal"@sv ;
+    rdfs:comment "Kanalen uppfyller inte kriterierna för sakkunniggranskad publiceringskanal."@sv ;
+    rdfs:comment "Publication channel that does not meet the criteria for a peer-reviewed publication channel."@en .

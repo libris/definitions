@@ -86,24 +86,26 @@ marc:MultipleSingleDates a marc:TypeOfDate ;
 marc:RangeOfDates a marc:TypeOfDate ;
     rdfs:label "Tidsintervall"@sv .
 
-marc:languageNote a owl:ObjectProperty ;
-    rdfs:label "anmärkning: Språk"@sv ;
-    sdo:domainIncludes kbv:Work,
-        marc:Libretto,
-        kbv:Summary,
-        marc:SubtitlesOrCaptions,
-        marc:SungOrSpokenText,
-        kbv:TableOfContents ;
-    rdfs:range marc:LanguageNote .
+# NOTE: No longer used with release 1.19. Indicator value will instead be
+# set by absence/presence of translationOf
+#marc:languageNote a owl:ObjectProperty ;
+#    rdfs:label "anmärkning: Språk"@sv ;
+#    sdo:domainIncludes kbv:Work,
+#        marc:Libretto,
+#        kbv:Summary,
+#        marc:SubtitlesOrCaptions,
+#        marc:SungOrSpokenText,
+#        kbv:TableOfContents ;
+#    rdfs:range marc:LanguageNote .
 marc:LanguageNote a marc:CollectionClass;
     # NOTE: marc:LanguageNote is definied in source/marc/terms.ttl as an owl:class.
     # To avoid duplicate labels in viewer, the label is removed here (temporarily)
     # rdfs:label "Anmärkning: Språk"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
-marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller ej översättning"@sv .
-marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
-    rdfs:label "Objektet är/innehåller översättning"@sv .
+#marc:ItemNotATranslationDoesNotIncludeATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller ej översättning"@sv .
+#marc:ItemIsOrIncludesATranslation a marc:LanguageNote ;
+#    rdfs:label "Objektet är/innehåller översättning"@sv .
 
 marc:languageCode a owl:ObjectProperty ;
     rdfs:label "språkkod"@sv ;
@@ -161,57 +163,54 @@ marc:typeCompletenessSourceOfClassCallNumber a owl:ObjectProperty ;
     rdfs:label "typ, fullständighet och källa för klassifikationen"@sv ;
     rdfs:domain marc:ClassificationNumbersAssignedInCanada ;
     rdfs:range marc:TypeCompletenessSourceOfClassCallNumber .
+
 marc:TypeCompletenessSourceOfClassCallNumber a marc:CollectionClass;
     rdfs:label "Typ, fullständighet och källa för klassifikationen"@sv ;
     rdfs:subClassOf marc:EnumeratedTerm .
+
 marc:LcBasedCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
     rdfs:label "LC-baserad klassifikationskod från LAC"@sv .
 marc:CompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
     rdfs:label "Fullständig LC-klassifikationskod från LAC"@sv .
 marc:IncompleteLcClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
     rdfs:label "Ofullständig LC-klassifikationskod från LAC"@sv .
-marc:LcBasedCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "LC-baserad klassifikationskod från annat kanadensiskt bibliotek"@sv .
-marc:CompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
-marc:IncompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
-marc:OtherCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Annat signum från LAC"@sv .
-marc:OtherClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Annan klassifikationskod från LAC"@sv .
-marc:OtherCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Annat signum från annat kanadensiskt bibliotek"@sv .
-marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
-    rdfs:label "Annan klassifikationskod fr\u00e5n annat kanadensiskt bibliotek"@sv .
+# marc:LcBasedCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "LC-baserad klassifikationskod från annat kanadensiskt bibliotek"@sv .
+# marc:CompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
+# marc:IncompleteLcClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Fullständig LC-klassifikationskod från annat kanadensiskt bibliotek"@sv .
+# marc:OtherCallNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Annat signum från LAC"@sv .
+# marc:OtherClassNumberAssignedByLac a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Annan klassifikationskod från LAC"@sv .
+# marc:OtherCallNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Annat signum från annat kanadensiskt bibliotek"@sv .
+# marc:OtherClassNumberAssignedByTheContributingLibrary a marc:TypeCompletenessSourceOfClassCallNumber ;
+#     rdfs:label "Annan klassifikationskod från annat kanadensiskt bibliotek"@sv .
 
-marc:numberSource a owl:ObjectProperty ;
+marc:numberSource a owl:DatatypeProperty ;
     rdfs:label "kod för klassifikationssystem"@sv ;
-    rdfs:domain marc:GovernmentDocumentClassificationNumber ;
-    rdfs:range marc:NumberSource .
-marc:NumberSource a marc:CollectionClass;
-    rdfs:label "Kod för klassifikationssystem"@sv ;
-    rdfs:subClassOf marc:EnumeratedTerm .
-marc:SuperintendentOfDocumentsClassificationSystem a marc:NumberSource ;
-    rdfs:label "Superintendent of Documents Classification System" .
-marc:GovernmentOfCanadaPublicationsOutlineOfClassification a marc:NumberSource ;
-    rdfs:label "Government of Canada Publications" .
+    rdfs:domain marc:GovernmentDocumentClassificationNumber .
+# marc:NumberSource a marc:CollectionClass;
+#     rdfs:label "Kod för klassifikationssystem"@sv ;
+#     rdfs:subClassOf marc:EnumeratedTerm .
 
-marc:searchControl a owl:ObjectProperty ;
-    rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
-    rdfs:domain kbv:Title ;
-    rdfs:range marc:SearchControl .
-marc:SearchControl a marc:CollectionClass;
-    rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
-    rdfs:subClassOf marc:EnumeratedTerm .
-marc:NoteNoAddedEntry a marc:SearchControl ;
-    rdfs:label "Anmärkning, inget biuppslag"@sv .
-marc:NoteAddedEntry a marc:SearchControl ;
-    rdfs:label "Anmärkning, titeln är sökelement"@sv .
-marc:NoNoteNoAddedEntry a marc:SearchControl ;
-    rdfs:label "Ingen anmärkning eller biuppslag"@sv .
-marc:NoNoteAddedEntry a marc:SearchControl ;
-    rdfs:label "Biuppslag, ingen anmärkning"@sv .
+# marc:searchControl a owl:ObjectProperty ;
+#     rdfs:label "titeln blir biuppslag i konventionell katalog"@sv ;
+#     rdfs:domain kbv:Title ;
+#     rdfs:range marc:SearchControl .
+# marc:SearchControl a marc:CollectionClass;
+#     rdfs:label "Titeln blir biuppslag i konventionell katalog"@sv ;
+#     rdfs:subClassOf marc:EnumeratedTerm .
+# marc:NoteNoAddedEntry a marc:SearchControl ;
+#     rdfs:label "Anmärkning, inget biuppslag"@sv .
+# marc:NoteAddedEntry a marc:SearchControl ;
+#     rdfs:label "Anmärkning, titeln är sökelement"@sv .
+# marc:NoNoteNoAddedEntry a marc:SearchControl ;
+#     rdfs:label "Ingen anmärkning eller biuppslag"@sv .
+# marc:NoNoteAddedEntry a marc:SearchControl ;
+#     rdfs:label "Biuppslag, ingen anmärkning"@sv .
 
 marc:coverageOrLocationInSource a owl:ObjectProperty ;
     rdfs:label "täckningsgrad"@sv ;

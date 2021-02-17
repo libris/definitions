@@ -6,6 +6,7 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
 
 @base <https://id.kb.se/term/> .
 
@@ -27,10 +28,12 @@
 
 # "ours"
 
-<sao> a skos:ConceptScheme;
+# TODO: use dc:publisher (and preferably link) instead of rdfs:comment for sources.
+
+<sao> a :TopicScheme;
     skos:notation "sao";
     dc:alternative "SAO";
-    dc:title "Svenska ämnesord (SAO)"@sv;
+    dc:title "Svenska ämnesord"@sv;
     dc:description """
         Svenska ämnesord (SAO) är ett kontrollerat ämnesordssystem med nästan 38 000 termer från alla ämnesområden. Systemet har funnits sedan 2000 och används av de flesta högskole- och universitetsbibliotek och av många LIBRIS-bibliotek.
 
@@ -40,12 +43,14 @@
 
         Svenska ämnesord följer IFLA:s  (International Federation of Library Associations and Institutions) principer och riktlinjer för ämnesord. De flesta termerna är hierarkiskt ordnade och de semantiska relationerna mellan termerna är angivna. De flesta ämnesorden har en klassifikationskod från SAB-systemet (Klassifikationssystem för svenska bibliotek). Från och med KB:s övergång till DDK (Dewey decimalklassifikation) i januari 2011 kompletteras ämnesorden istället med koder från DDK. Ämnesorden förses också med sina motsvarigheter i Library of Congress Subject Headings (LCSH).
 
-        Underhållet av Svenska ämnesord sköts av en redaktionskommitté vid Kungl. biblioteket.
+        Underhållet av Svenska ämnesord sköts av en redaktionskommitté vid Kungliga biblioteket.
     """@sv;
-    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sao>,
+                    <https://www.wikidata.org/entity/Q24262283>;
+    foaf:page <https://metadatabyran.kb.se/amnesord-och-genre-form/svenska-amnesord>;
     void:inDataset </> .
 
-<saogf> a skos:ConceptScheme;
+<saogf> a :GenreFormScheme;
     skos:notation "saogf";
     dc:alternative "SAOGF";
     dc:title "SAOGF - Genre och form"@sv;
@@ -56,10 +61,11 @@
 
         Form talar om att verket har en särskild form och/eller särskilt syfte. Eftersom det ofta är svårt att skilja form från genre är de sammanförda till samma fasett.
        """@sv;
-    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/saogf>;
+    foaf:page <https://metadatabyran.kb.se/amnesord-och-genre-form/svenska-amnesord-genre-form>;
     void:inDataset </> .
 
-<barn> a skos:ConceptScheme;
+<barn> a :TopicScheme;
     skos:notation "barn";
     dc:alternative "Barn";
     dc:title "Barnämnesord"@sv;
@@ -68,35 +74,46 @@
 
         Nya ämnesord för barnlistan godkänns av Svenska barnboksinstitutets redaktion för barnämnesord och förs därefter in i databasen.
     """@sv;
-    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/barn>;
+    foaf:page <https://metadatabyran.kb.se/amnesord-och-genre-form/barnamnesord>;
     void:inDataset </> .
 
-<barngf> a skos:ConceptScheme;
+<barngf> a :GenreFormScheme;
     skos:notation "barngf";
     dc:alternative "BarnGF";
     dc:title "Barn - Genre och form"@sv;
+    dc:description "Termer som används för att beskriva genre och form för barn- och ungdomslitteratur. Termerna används som ett komplement till barnämnesord."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/barngf>;
+    foaf:page <https://metadatabyran.kb.se/amnesord-och-genre-form/barnamnesord-genre-form>;
     rdfs:seeAlso <barn>;
     void:inDataset </> .
 
-<gmgpc-swe> a skos:ConceptScheme;
-    owl:sameAs <gmgpc>, <gmgpc%2F%2Fswe>;
-    skos:notation "gmgpc//swe";
+<gmgpc/swe> a :GenreFormScheme;
+    owl:sameAs <gmgpc%2F%2Fswe>,<gmgpc-swe>;
+    skos:notation "gmgpc/swe";
     dc:title "Tesaurus för grafiskt material"@sv;
+    dc:alternative "TGM";
+    dc:ISO639-2 "swe";
     dc:description """
         Tesaurus för grafiskt material (TGM) innehåller cirka 650 termer för form och genrer, framställningssätt och tekniker. De är avsedda att användas vid indexering av bilder, kartor och efemärt tryck.
 
         TGM är en översättning av Library of Congress' Thesaurus for Graphic Materials II. Tesaurusen är hierarkiskt ordnad med de semantiska relationerna mellan termerna angivna. Listan infördes i databasen i oktober 2007.
 
-        Underhållet av TGM sköts av en redaktionskommitté vid Kungl. biblioteket tillsammans med bildexperter på biblioteket. Det finns också en referensgrupp för TGM med representanter för bibliotek, arkiv och museer.
+        Underhållet av TGM sköts av en redaktionskommitté vid Kungliga biblioteket tillsammans med bildexperter på biblioteket. Det finns också en referensgrupp för TGM med representanter för bibliotek, arkiv och museer.
     """@sv;
     void:inDataset </>;
-    foaf:page <http://www.kb.se/katalogisering/Svenska-amnesord/om/>;
-    foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tesaurus/> .
+    skos:broadMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gmgpc>;
+    foaf:page <https://metadatabyran.kb.se/amnesord-och-genre-form/tesaurus-for-grafiskt-material>;
+    rdfs:seeAlso <gmgpc>;
+    skos:changeNote "2020-05-19: Ändrat gmgpc-swe till gmgpc/swe (även uppdaterat skos:notation från gmgpc//swe)."@sv,
+                    "2020-05-19: Change gmgpc-swe to gmgpc/swe (also update skos:notation from gmgpc//swe)."@en .
+          
 
 <rda> a skos:ConceptScheme;
     skos:notation "rda";
     dc:alternative "RDA";
-    dc:title "KB RDA Term Mappings"@sv;
+    dc:title "RDA-termer"@sv, "RDA Terms"@en;
+    dc:description "Termlista innehållandes Kungliga bibliotekets mappningar mellan RDA Registry och Library of Congress MARC-termer för bärar-, media- och innehållstyper."@sv, "Term alignments by National Library of Sweden between RDA Registry and Library of Congress MARC-terms for carrier, media and content types."@en;
     rdfs:seeAlso
             <http://rdaregistry.info/termList/RDAContentType>,
             <http://id.loc.gov/vocabulary/contentTypes>,
@@ -110,179 +127,725 @@
 # "our marc enumerations"
 </marc> a skos:ConceptScheme;
     skos:notation "marc";
-    rdfs:comment "Här ingår termer som används för att representera koder i MARC"@sv;
+    dc:description "Termlista för att representera koder i MARC21 katalogisering. Dessa är främst för internt bruk av Kungliga biblioteket och ska inte räknas med att vara beständiga."@sv, "Termlist for representing codes in MARC21 cataloging. These are mostly for internal use by the National Library of Sweden and shall not be counted on being persistent."@en;
+    rdfs:seeAlso <https://id.loc.gov/> ;
     dc:title "MARC terms"@en, "MARC-termer"@sv .
 
 
 # TODO: <sao/fack>, <sao/skon>, ...?
 
-<subdivisions> a skos:Collection;
+<subdivisions> a :TermCollection;
     skos:notation "subdivisions";
     dc:title "Underindelningar"@sv;
     void:inDataset </> .
 
-<Fack> a skos:Collection;
+<fack> a :TermCollection;
+    owl:sameAs <Fack>;
     skos:notation "Fack";
     dc:title "Facktermer"@sv;
     void:inDataset </> .
 
-<Skon> a skos:Collection;
+<skon> a :TermCollection;
+    owl:sameAs <Skon>;
     skos:notation "Skon";
     dc:title "Skönlitterära termer"@sv;
     void:inDataset </> .
 
-<Musik> a skos:Collection;
-    owl:sameAs <musik>;
+<musik> a :TermCollection;
+    owl:sameAs <Musik>;
     skos:notation "Musik";
     dc:title "Musiktermer"@sv;
     void:inDataset </> .
 
-<film> a skos:Collection;
+<film> a :TermCollection;
     skos:notation "film";
     dc:title "Filmtermer"@sv;
     void:inDataset </> .
 
-<NLT> a skos:Collection;
+<nlt> a :TermCollection;
+    owl:sameAs <NLT>;
     skos:notation "nlt";
     dc:alternative "NLT";
-    dc:title "NLT (termer för Nya Lundstedt - tidskrifter)"@sv;
+    dc:title "NLT-termer"@sv;
+    rdfs:comment "Termer för Nya Lundstedt - tidskrifter"@sv;
     void:inDataset </> .
 
-<datorspel> a skos:Collection;
+<datorspel> a :TermCollection;
     skos:notation "datorspel";
     dc:title "Datorspelstermer"@sv;
     void:inDataset </> .
 
-
-#<kaab/8> ?
+<uniformWorkTitle> a :TermCollection;
+    skos:notation "uniformWorkTitle";
+    dc:title "Uniform titel"@sv;
+    rdfs:comment "Tillfällig samling för det som i MARC21 var auktoriserade verk. Ej att förväxlas med Bibframe verk."@sv .
 
 # "others"
 
-<albt> a skos:ConceptScheme;
-    skos:notation "albt//swe";
-    dc:title "Arbetslivsbibliotekets tesaurus"@sv .
+<albt> a :TopicScheme;
+    skos:notation "albt";
+    dc:title "Arbetslivsbibliotekets tesaurus"@sv;
+    skos:scopeNote "Kan användas även i genre/form."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/albt>.
 
-<kao> a skos:ConceptScheme;
+<kao> a :TopicScheme;
     skos:notation "kao";
     dc:title "KVINNSAM"@sv;
+    dc:alternative "KVINNSAM ämnesordsregister"@sv;
     dc:language [ skos:notation "sv"];
     #dc:hasVersion [
     #    skos:notation "kao//eng";
     #    dc:language [ skos:notation "en" ];
     #];
+    skos:scopeNote "För engelskspråkiga termer använd KVINNSAM subject headings."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/kao>;
     foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
 
-<kssb> a skos:ConceptScheme;
+<kao-eng> a :TopicScheme;
+    skos:notation "kao//eng";
+    dc:title "KVINNSAM subject headings, engelskspråkig version"@sv;
+    dc:ISO639-2 "eng";
+    skos:broadMatch <http://id.loc.gov/vocabulary/subjectSchemes/kao>;
+    skos:scopeNote "Engelskspråkig version"@sv;
+    foaf:homepage <http://www.ub.gu.se/kvinn/kvinnsam/listor/> .
+
+<kssb> a :ClassificationScheme;
     skos:notation "kssb";
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/kssb>;
     dc:title "SAB-klassifikation"@sv .
     # upplagor: 2, 5, 6, 7, 8, 9
     # variant? (folkbibliotek, musikalier, musikinspelningar)
     #<#usedWithProperty> dc:type .
 
-<prvt> a skos:ConceptScheme;
+<prvt> a :TopicScheme;
     skos:notation "prvt";
     dc:title "Patent- och registreringsverkets tesaurus"@sv;
-    dc:alternative "PRVT" .
+    dc:alternative "PRVT";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/prvt>.
 
-<quiding> a skos:ConceptScheme;
+<quiding> a :TopicScheme;
     skos:notation "quiding";
-    dc:title "Quiding, Nils Herman. Svenskt allmänt författningsregister för tiden från år 1522 till och med år 1862"@sv .
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/quiding>;
+    dc:title "Quiding, Nils Herman. Svenskt allmänt författningsregister för tiden från år 1522 till och med år 1862"@sv ;
+    skos:scopeNote "Ämnesordslista använd i SOT, Svenskt offentligt tryck t.o.m. 1833"@sv .
 
-<sbiao> a skos:ConceptScheme;
+<sbiao> a :TopicScheme;
     skos:notation "sbiao";
     dc:title "Svenska barnboksinstitutets ämnesordsindex för teoretisk litteratur"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sbiao>;
     foaf:homepage <http://www.sbi.kb.se/sv/Biblioteket/Soka/Amnesordsindex/Teoretiska-amnesord/> .
 
-<sfit> a skos:ConceptScheme;
+<sfit> a :TopicScheme;
     skos:notation "sfit";
     dc:title "Svenska filminstitutets tesaurus"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sfit>;
     dc:alternative "SFIT" .
 
-<sgp> a skos:ConceptScheme;
+<sgp> a :GenreFormScheme;
     skos:notation "sgp";
     dc:title "Svenska genrebeteckningar för periodika"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/sgp>;
     foaf:homepage <http://www.kb.se/katalogisering/Svenska-amnesord/genrer-form/tidskrifter/> .
 
-<shbe> a skos:ConceptScheme;
+<shbe> a :TopicScheme;
     skos:notation "shbe";
     dc:title "Subject headings in business and economics"@en;
+    dc:title "Subject headings in business and economics";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/shbe>;
     rdfs:comment "Handelshögskolans i Stockholm bibliotek"@sv .
 
-<swemesh> a skos:ConceptScheme;
+<swemesh> a :TopicScheme;
     skos:notation "swemesh";
-    dc:title "Svensk MeSH"@sv, "Swedish MeSH"@sv;
+    dc:title "Svensk MeSH"@sv, "Swedish MeSH"@en;
+    skos:scopeNote "För engelskspråkiga termer använd MeSH"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/swemesh>;
+    skos:broadMatch <http://id.loc.gov/vocabulary/subjectSchemes/mesh> ;
     foaf:homepage <https://mesh.kib.ki.se/> .
 
 
-# Aliases for external schemes
+  # NOTE: Before adding external lists, the following should be taken into account:
+  #
+  # 1. Are there linkable sources for the terms and the termlist in which there is a chance to map to these in the future?
+  # 2. Is the scheme managed by other national libraries (or equivalent)? These have a high chance of becoming linkable in the future.
+  # 3. Is there a high frequency in the data and an exactMatch can be made to LC schemelist on id.loc.gov?
+
+# Aliases for external SubjectSchemes
 
 #@base <https://id.kb.se/ext/term/> . # ?
+# add @sv on titles in other languages or keep an untagged version?
 
-<agrovoc> a skos:ConceptScheme;
-    dc:title "AgroVoc"@en;
-    skos:notation "agrovoc" .
+<agrifors> a :TopicScheme;
+    skos:notation "agrifors";
+    dc:title "AGRIFOREST-sanasto";
+    dc:title "AGRIFOREST-sanasto"@fi;
+    rdfs:comment "Finland, Helsingfors: Helsingfors universitet"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/agrifors> .
+
+<agrovoc> a :TopicScheme;
+    skos:notation "agrovoc";
+    dc:title "AGROVOC flerspråkig tesaurus"@sv, "AGROVOC Multilingual Thesaurus"@en;
+    dc:alternative "AGROVOC";
+    foaf:page <http://aims.fao.org/vest-registry/vocabularies/agrovoc>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/agrovoc>,
+                    <http://aims.fao.org/aos/agrovoc>,
+                    <https://www.wikidata.org/entity/Q292649>;
+    skos:scopeNote "Kan användas även inom genre/form."@sv .
+
+<allars> a :TopicScheme;
+    skos:notation "allars";
+    dc:title "Allärs: allmän tesaurus på svenska"@sv;
+    rdfs:comment "Nationalbiblioteket i Finland"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/allars>,
+                    <https://www.wikidata.org/entity/Q18888511>;
+    skos:broadmatch <http://www.yso.fi/onto/allars/> .
+
+<bella> a :TopicScheme;
+    skos:notation "bella";
+    dc:title "Bella: specialtesaurus för skönlitteratur"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/bella> .
+
+<bicssc> a :TopicScheme;
+    skos:notation "bicssc";
+    dc:title "BIC standard subject categories";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/bicssc>;
+    foaf:homepage <https://bic.org.uk/7/Subject-Categories/> .
+
+<bidex> a :TopicScheme;
+    skos:notation "bidex";
+    dc:title "Bilindex";
+    dc:description "Bilindex: a bilingual Spanish-English subject heading list"@sv;
+    rdfs:comment "USA, Oakland: California Spanish Language Data Base"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/bidex> .
+
+<bisacsh> a :TopicScheme;
+    skos:notation "bisacsh";
+    dc:title "BISAC Subject Headings";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/bisacsh>;
+    foaf:homepage <https://bisg.org/page/bisacsubjectcodes> .
+
+<bokbas> a :TopicScheme;
+    skos:notation "bokbas";
+    dc:title "Bokbasen"@no;
+    dc:title "Bokbasen";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/bokbas> .
 
 <bnb> a skos:ConceptScheme;
     skos:notation "bnb";
-    dc:title "British National Bibliography"@en .
+    dc:title "British National Bibliography"@en;
+    dc:title "British National Bibliography" .
 
-<fao> a skos:ConceptScheme;
-    skos:notation "fao"; #, "agrissc"; #?
-    foaf:homepage <http://agris.fao.org/?InfoT=Subject&Language=EN> .
+<cct> a :TopicScheme;
+    skos:notation "cct";
+    dc:title "Chinese Classified Thesaurus"@en;
+    dc:title "Zhong guo fen lei zhu ti ci biao (di er ban)"@zh;
+    dc:title "Chinese Classified Thesaurus";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/cct>;
+    rdfs:comment """Kina, Beijing: Guo jia tu shu guan "Zhongguo tu shu guan fen lei fa" bian wei hui"""@sv.
 
-<fiaf> a skos:ConceptScheme;
-    skos:notation "fiaf"; #"fiaf/2" #?
-    dc:title "International Federation of Film Archives"@en .
+<cabt> a :TopicScheme;
+    skos:notation "cabt";
+    dc:title "CAB thesaurus"@en;
+    dc:title "CAB thesaurus";
+    rdfs:comment "Storbritannien: CABI"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/cabt>;
+    foaf:page <https://www.cabi.org/cabthesaurus/> .
 
-<lcsh> a skos:ConceptScheme;
+<czenas> a :TopicScheme;
+    skos:notation "czenas";
+    dc:title "CZENAS thesaurus: a list of subject terms used in the National Library of the Czech Republic"@en;
+    dc:title "Soubor vĕcných autorit Národní knihovny ČR"@cs;
+    dc:title "CZENAS thesaurus";
+    rdfs:comment "Tjeckien, Prag: Národní knihovna Čseké republiky"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/czenas> .
+
+<dbn> a :TopicScheme;
+    skos:notation "dbn";
+    dc:title "Deskryptory Biblioteki Narodowej"@pl;
+    dc:title "National Library of Poland Descriptors"@en;
+    dc:title "Deskryptory Biblioteki Narodowej";
+    rdfs:comment "Polen, Warszawa: Biblioteka Narodowa"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/dbn> .
+
+<eclas> a :TopicScheme;
+    skos:notation "eclas";
+    dc:title "ECLAS thesaurus";
+    rdfs:comment "Luxemburg: Europeiska unionens publikationsbyrå"@sv;
+    rdfs:comment "Luxembourg: Publications Office of the EU"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/eclas> .
+
+<eflch> a :TopicScheme;
+    skos:notation "eflch";
+    dc:title "E4Libraries Category Headings";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/eflch> .
+
+<eks> a :TopicScheme;
+    skos:notation "eks";
+    dc:title "EKS-ämnesord"@sv;
+    dc:title "EKS-asiasanasto"@fi;
+    dc:title "EKS subject headings"@en;
+    dc:title "EKS-ämnesord";
+    rdfs:comment "Finland, Helsingfors: Riksdagsbiblioteket"@sv;
+    rdfs:comment "Soumi, Helsinki: Eduskunnan Kirjasto"@fi;
+    rdfs:comment "Finland, Helsinki: The Library of Parliament"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/eks>;
+    foaf:page <https://www.eduskunta.fi/kirjasto/EKS/> .
+
+<embne> a :TopicScheme;
+    skos:notation "embne";
+    dc:title "Encabezamientos de materia de la Biblioteca Nacional de España"@es;
+    dc:title "Encabezamientos de materia de la Biblioteca Nacional de España";
+    rdfs:comment "Spanien, Madrid: Biblioteca Nacional de España"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/embne> .
+
+<eurovocen> a :TopicScheme;
+    skos:notation "eurovocen";
+    dc:title "Eurovoc thesaurus (English)"@en;
+    dc:title "Eurovoc thesaurus (Engelsk)"@sv;
+    rdfs:comment "Europeiska unionens publikationsbyrå"@sv, "Publications Office of the European Union"@en;
+    foaf:page <http://eurovoc.europa.eu/>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/eurovocen> .
+
+<fast> a skos:ConceptScheme;
+    skos:notation "fast";
+    dc:alternative "FAST";
+    dc:title "Faceted application of subject terminology"@en;
+    dc:title "Faceted application of subject terminology";
+    rdfs:comment "Dublin, Ohio: OCLC"@sv;
+    skos:scopeNote "Kan användas även i genre/form"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/fast>,
+                    <https://www.wikidata.org/entity/Q3294867>;
+    foaf:page <http://fast.oclc.org/> .
+
+<gtt> a :TopicScheme;
+    skos:notation "gtt";
+    dc:title "GOO-trefwoorden thesaurus"@en;
+    dc:title "GOO-trefwoorden thesaurus";
+    rdfs:comment "Nederländerna, Haag: Koninklijke Bibliotheek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/gtt> .
+
+<humord> a :TopicScheme;
+    skos:notation "humord";
+    dc:title "Humord";
+    dc:alternative "HUMORD";
+    rdfs:comment "Norge: Universitetsbiblioteken i Oslo, Bergen och Tromsø"@sv;
+    dc:description "Humord is a Norwegian thesaurus for the subject areas humanities and social sciences."@en,
+                   "Humord är en norsk tesaurus för ämnen inom humaniora och samhällsvetenskap."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/humord>,
+                    <http://data.ub.uio.no/humord/>,
+                    <http://www.wikidata.org/entity/Q22927022> .
+
+<idszbb> a :TopicScheme;
+    skos:notation "idszbb";
+    dc:title "Thesaurus IDS Basel Bern"@de;
+    dc:title "Thesaurus IDS Basel Bern";
+    rdfs:comment "Schweiz, Basel: Universitätsbibliothek; Schweiz, Bern: Universitätsbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbb> .
+
+<idszbz> a :TopicScheme;
+    skos:notation "idszbz";
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich"@de;
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich";
+    rdfs:comment "Schweiz, Zürich: Zentralbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbz> .
+
+<idszbzes> a :TopicScheme;
+    skos:notation "idszbzes";
+    dc:title "Thesaurus IDS Nebis Bibliothek Englisches Seminar der Universität Zürich"@de;
+    dc:title "Thesaurus IDS Nebis Bibliothek Englisches Seminar der Universität Zürich";
+    rdfs:comment "Schweiz, Zürich: Universität Zürich"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbzes> .
+
+<idszbzna> a :TopicScheme;
+    skos:notation "idszbzna";
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Nordamerika-Bibliothek"@de;
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Nordamerika-Bibliothek";
+    rdfs:comment "Schweiz, Zürich: Zentralbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbzna> .
+
+<idszbzzg> a :TopicScheme;
+    skos:notation "idszbzzg";
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Graphische Sammlung"@de;
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Graphische Sammlung";
+    rdfs:comment "Schweiz, Zürich: Zentralbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbzzg> .
+
+<idszbzzh> a :TopicScheme;
+    skos:notation "idszbzzh";
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Handschriftenabteilung"@de;
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Handschriftenabteilung";
+    rdfs:comment "Schweiz, Zürich: Zentralbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbzzh> .
+
+<idszbzzk> a :TopicScheme;
+    skos:notation "idszbzzk";
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Kartensammlung"@de;
+    dc:title "Thesaurus IDS Nebis Zentralbibliothek Zürich, Kartensammlung";
+    rdfs:comment "Schweiz, Zürich: Zentralbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/idszbzzk> .
+
+<jhpk> a :TopicScheme;
+    skos:notation "jhpk";
+    dc:alternative "KABA";
+    dc:title "Język haseł przedmiotowych KABA"@pl;
+    dc:title "KABA subject headings"@en;
+    dc:title "KABA ämnesord"@sv;
+    rdfs:comment "Polen, Warszawa: NUKAT Center of the University of Warsaw Library."@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/jhpk> .
+
+<kaunokki> a :TopicScheme;
+    skos:notation "kaunokki";
+    dc:title "Kaunokki: kaunokirjallisuuden asiasanasto"@fi;
+    dc:title "Kaunokki: kaunokirjallisuuden asiasanasto";
+    rdfs:comment "Finland, Helsingfors: BTJ Kirjastopalvelu"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/kaunokki> .
+
+<larpcal> a :TopicScheme;
+    skos:notation "larpcal";
+    dc:title "Lista de assuntos referente ao programa de cadastramento automatizado de livros da USP"@pt;
+    dc:title "Lista de assuntos referente ao programa de cadastramento automatizado de livros da USP";
+    rdfs:comment "Brasilien, São Paulo: Universitetet i São Paulo, Sistema Integrado de Bibliotecas"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/larpcal> .
+
+<lcsh> a :TopicScheme;
     skos:notation "lcsh";
     dc:alternative "LCSH";
     dc:title "Library of Congress Subject Headings"@en;
+    dc:title "Library of Congress Subject Headings";
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/lcsh>,<http://purl.org/dc/terms/LCSH>,
+                    <https://www.wikidata.org/entity/Q1823134>;
     foaf:homepage <http://id.loc.gov/authorities/subjects/> .
 
-<mipfesd> a skos:ConceptScheme;
+<lcshac> a :TopicScheme;
+    skos:notation "lcshac";
+    dc:alternative "LCSHAC";
+    dc:title "Library of Congress Children's Subject Headings"@en;
+    dc:title "Library of Congress Children's Subject Headings";
+    skos:exactMatch <https://id.loc.gov/vocabulary/subjectSchemes/lcshac>,
+                    <http://www.wikidata.org/entity/Q98713532>;
+    foaf:homepage <https://id.loc.gov/authorities/childrensSubjects> .
+
+<local> a skos:ConceptScheme;
+    skos:notation "local";
+    dc:title "Locally assigned term"@en, "Lokalt tilldelad term"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/local>.
+
+<mipfesd> a :TopicScheme;
     skos:notation "mipfesd"; #"mipfesd/5"
-    dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en .
+    dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)"@en;
+    dc:title "Marcrothesaurus for information processing in the field of economic and social development (OECD)";
+    rdfs:comment "Frankrike, Paris: Organisation for Economic Co-operation and Development"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/mipfesd> .
 
-<msc> a skos:ConceptScheme;
-    skos:notation "msc";
-    dc:title "Mathematical subject classification"@en;
-    rdfs:comment "Providence, RI: American Mathematical Society"@en .
-
-<mesh> a skos:ConceptScheme;
+<mesh> a :TopicScheme;
     skos:notation "mesh";
     dc:title "Medical Subject Headings"@en;
+    dc:title "Medical Subject Headings";
     dc:alternative "MeSH";
+    rdfs:comment "Bethesda, MD: National Library of Medicine"@sv;
     rdfs:seeAlso <http://neurocommons.org/page/Bundles/mesh/mesh-skos>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/mesh>,
+                    <http://purl.org/dc/terms/MESH>,
+                    <https://www.wikidata.org/entity/Q199897>;
     foaf:homepage <http://www.nlm.nih.gov/mesh/meshhome.html> .
 
-<nal> a skos:ConceptScheme;
-    dc:title "National Agricultural Library Subject Headings/NAL"@en;
+<nal> a :TopicScheme;
+    dc:title "National Agricultural Library Subject Headings"@en;
+    dc:title "National Agricultural Library Subject Headings";
+    dc:alternative "NAL";
     skos:notation "nal";
+    rdfs:comment "Beltsville, MD: National Agricultural Library"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/nal>;
     foaf:homepage <https://www.nal.usda.gov/> .
 
-<nlm> a skos:ConceptScheme;
-    skos:notation "nlm";
-    dc:alternative "NLM";
-    dc:title "National Library of Medicine"@en .
+<ncjt> a :TopicScheme;
+    dc:title "National criminal justice thesaurus"@en;
+    dc:title "National criminal justice thesaurus";
+    skos:notation "ncjt";
+    rdfs:comment "USA, Rockville, MD: U.S. Dept. of Justice, Institute of Justice, National Criminal Justice Reference Service"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/ncjt>;
+    foaf:homepage <https://www.ncjrs.gov/App/Search/ThesaurusSearch.aspx> .
 
-<rswk> a skos:ConceptScheme;
+<ram> a :TopicScheme;
+    skos:notation "ram";
+    dc:alternative "RAMEAU";
+    dc:title "RAMEAU: répertoire d'authorité de matières encyclopédique unifié"@fr;
+    dc:title "RAMEAU: répertoire d'authorité de matières encyclopédique unifié";
+    rdfs:comment "Frankrike, Paris: Bibliothèque nationale de France"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/ram>;
+    foaf:homepage <https://rameau.bnf.fr/> .
+
+<rasuqam> a :TopicScheme;
+    skos:notation "rasuqam";
+    dc:title "Répertoire d'autorités-sujet de l'UQAM"@fr;
+    dc:title "Répertoire d'autorités-sujet de l'UQAM";
+    rdfs:comment "Kanada, Montréal: Université du Québec Montréal, Services techniques des bibliothèques"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rasuqam> .
+
+<renib> a :TopicScheme;
+    skos:notation "renib";
+    dc:title "RENIB";
+    dc:description "RENIB base de datos de autoridad. RENIB: National Bibliographic Network (Red Nacional de Información Bibliográfica)"@en;
+    rdfs:comment "Chile, Santiago de Chile: Biblioteca Nacional"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/renib> .
+
+<rero> a :TopicScheme;
+    skos:notation "rero";
+    dc:alternative "RERO";
+    dc:title "Indexation matires RERO"@fr;
+    dc:title "Indexation matires RERO";
+    rdfs:comment "Schweiz, Martigny: Réseau des bibliothèques de Suisse occidentale (RERO)"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rero> .
+
+<rswk> a :TopicScheme;
     skos:notation "rswk";
     dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)"@de;
+    dc:title "Regeln für den Schlagwortkatalog (Deutsches Bibliotheksinstitut)";
+    skos:scopeNote "Kan användas även i genre/form"@sv;
+    rdfs:comment "Tyskland, Berlin: Deutsches Bibliotheksinstitut"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rswk>,
+                    <https://www.wikidata.org/entity/Q897080>;
     foaf:homepage <http://deposit.ddb.de/ep/netpub/89/96/96/967969689/_data_stat/www.dbi-berlin.de/dbi_pub/einzelpu/regelw/rswk/rswk_00.htm> .
 
-<sipri> a skos:ConceptScheme;
+<rvm> a :TopicScheme;
+    skos:notation "rvm";
+    dc:alternative "RVM";
+    dc:title "RVM: Répertoire de vedettes-matière"@fr;
+    dc:title "RVM: Répertoire de vedettes-matière";
+    rdfs:comment "Kanada, Québec: Bibliothèque de l'Université Laval"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/rvm>;
+    foaf:homepage <https://rvmweb.bibl.ulaval.ca/> .
+
+<samisk> a :TopicScheme;
+    skos:notation "samisk";
+    dc:title "Sami bibliography"@en;
+    dc:title "Samisk bibliografi (Norge)"@sv;
+    rdfs:comment "Norge, Oslo: National Library of Norway"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/samisk> .
+
+<sears> a :TopicScheme;
+    skos:notation "sears";
+    dc:title "Sears list of subject headings"@en;
+    dc:title "Sears list of subject headings";
+    rdfs:comment "USA, New York: H.W. Wilson"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sears> .
+
+<sigle> a :TopicScheme;
+    skos:notation "sigle";
+    dc:title "SIGLE manual, Part 2, Subject category list";
+    dc:description "SIGLE: System for Information on Grey Literature in Europe"@en;
+    rdfs:comment "Nederländerna, Haag: European Association for Grey Literature Exploitation"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sigle> .
+
+<sipri> a :TopicScheme;
     skos:notation "sipri";
     dc:title "SIPRI Library thesaurus"@en;
+    dc:title "SIPRI Library thesaurus";
+    rdfs:comment "Sverige, Stockholm: Stockholm International Peace Research Institute"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sipri>;
     foaf:homepage <http://www.sipri.org/library/thesaurus/thesaurus.html/> .
+
+<ssif> a :TopicScheme;
+    skos:notation "ssif";
+    dc:title "Standard för svensk indelning av forskningsämnen 2011"@sv;
+    dc:title "Standard för svensk indelning av forskningsämnen 2011";
+    dc:description """Koden "ssif" är inte registrerad som MARC Source Code hos Library of Congress."""@sv;
+    rdfs:comment "Sverige, Stockholm: Universitetskanslersämbetet (UKÄ); Sverige, Stockholm: Statistiska centralbyrån (SCB)"@sv;
+    foaf:homepage <https://www.uka.se/statistik--analys/information-om-statistiken/amneslistor-och-huvudomraden/2017-02-14-forskningsamnen.html>,
+                  <https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-indelning-av-forskningsamnen/>.
+
+<stw> a :TopicScheme;
+    skos:notation "stw";
+    dc:title "Standard-Thesaurus Wirtschaft"@de;
+    dc:title "STW Thesaurus for Economics"@en;
+    dc:title "Standard-Thesaurus Wirtschaft";
+    rdfs:comment "Tyskland, Kiel: ZBW - Leibniz-Informationszentrum Wirtschaft"@sv;
+    rdfs:comment "Germany, Kiel: ZBW – Leibniz Information Centre for Economics"@en;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/stw>, <http://zbw.eu/stw>;
+    foaf:homepage <https://zbw.eu/stw/version/latest/about.en.html> .
+
+<swd> a :TopicScheme;
+    skos:notation "swd";
+    dc:title "Schlagwortnormdatei"@de;
+    dc:title "Schlagwortnormdatei";
+    rdfs:comment "Tyskland, Frankfurt am Main: Die Deutsche Bibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/swd> .
+
+<ukslc> a :TopicScheme;
+    skos:notation "ukslc";
+    dc:title "UK standard library categories"@en;
+    dc:title "UK standard library categories";
+    rdfs:comment "Storbritannien, London: BIC"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/ukslc>;
+    foaf:homepage <http://www.bic.org.uk/51/E4libraries-Subject-Category-Headings/> .
+
+<unbisn> a :TopicScheme;
+    skos:notation "unbisn";
+    dc:title "UNBIS name authority list"@en;
+    dc:title "UNBIS name authority list";
+    rdfs:comment "USA, New York: Förenta Nationerna, Dag Hammarskjöld Library"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/unbisn> .
+
+<unbist> a :TopicScheme;
+    skos:notation "unbist";
+    dc:title "UNBIS thesaurus"@en;
+    dc:title "UNBIS thesaurus";
+    rdfs:comment "USA, New York: Förenta Nationerna, Dag Hammarskjöld Library"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/unbist>, <http://metadata.un.org/thesaurus/00>;
+    foaf:homepage <http://metadata.un.org/thesaurus> .
+
+<ysa> a :TopicScheme;
+    skos:notation "ysa";
+    dc:title "Yleinen suomalainen asiasanasto"@fi;
+    dc:title "Yleinen suomalainen asiasanasto";
+    rdfs:comment "Finland, Helsingfors: Kirjastopalvelu"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/ysa>, <http://www.yso.fi/onto/ysa/>.
+
+# Aliases for external ClassificationSchemes:
+
+<agrissc> a :ClassificationScheme;
+    skos:notation "agrissc";
+    dc:title "AGRIS: subject categories"@en;
+    dc:title "AGRIS: subject categories";
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/agrissc>;
+    foaf:homepage <http://agris.fao.org/agris-search/index.do> .
+
+<fiaf> a :ClassificationScheme;
+    skos:notation "fiaf"; #"fiaf/2" #?
+    dc:title "International Federation of Film Archives"@en;
+    dc:title "International Federation of Film Archives";
+    rdfs:comment "London: International Federation of Film Archives"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/fiaf> .
+
+<msc> a :ClassificationScheme;
+    skos:notation "msc";
+    dc:title "Mathematical subject classification"@en;
+    dc:title "Mathematical subject classification";
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/msc>;
+    foaf:homepage "https://www.ams.org/msc/";
+    rdfs:comment "Providence, RI: American Mathematical Society"@sv .
+
+<nlm> a :ClassificationScheme;
+    # TODO Relate to bf2:ClassificationNlm
+    skos:notation "nlm";
+    dc:title "National Library of Medicine classification"@en;
+    dc:title "National Library of Medicine classification";
+    dc:alternative "NLM";
+    rdfs:comment "Bethesda, MD: National Library of Medicine"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/classSchemes/nlm> .
+
+# Aliases for external GenreFormSchemes:
+
+<gatbeg> a :GenreFormScheme;
+    skos:notation "gatbeg";
+    dc:title "Gattungsbegriffe"@de;
+    dc:title "Gattungsbegriffe";
+    rdfs:comment "Tyskland, Leipzig & Frankfurt: Deutsche Nationalbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gatbeg> .
+
+<gmgpc> a :GenreFormScheme;
+    skos:notation "gmgpc";
+    dc:title "Thesaurus for graphic materials: TGM II, Genre and physical characteristic terms"@en;
+    dc:title "Thesaurus for graphic materials: TGM II, Genre and physical characteristic terms";
+    rdfs:comment "Washington, DC: Library of Congress"@sv;
+    rdfs:seeAlso <gmgpc/swe>;
+    foaf:homepage <https://www.loc.gov/pictures/collection/tgm/>;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gmgpc> .
+
+<gnd> a :GenreFormScheme;
+    skos:notation "gnd";
+    dc:title "Gemeinsame Normdatei"@de;
+    dc:title "Gemeinsame Normdatei";
+    rdfs:comment "Tyskland, Leipzig & Frankfurt: Deutsche Nationalbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gnd>;
+    foaf:homepage <https://www.dnb.de/EN/gnd> .
+
+<gnd-carrier> a :GenreFormScheme;
+    skos:notation "gnd-carrier";
+    dc:title "Gemeinsame Normdatei: Datenträgertyp"@de;
+    dc:title "Gemeinsame Normdatei: Datenträgertyp";
+    rdfs:comment "Tyskland, Leipzig & Frankfurt: Deutsche Nationalbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gnd-carrier> .
+
+<gnd-content> a :GenreFormScheme;
+    skos:notation "gnd-content";
+    dc:title "Gemeinsame Normdatei: Beschreibung des Inhalts"@de;
+    dc:title "Gemeinsame Normdatei: Beschreibung des Inhalts";
+    rdfs:comment "Tyskland, Leipzig & Frankfurt: Deutsche Nationalbibliothek"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gnd-content> .
+
+<gsafd> a :GenreFormScheme;
+    skos:notation "gsafd";
+    dc:title "Guidelines on subject access to individual works of fiction, drama, etc."@en;
+    dc:title "Guidelines on subject access to individual works of fiction, drama, etc.";
+    rdfs:comment "Chicago: American Library Association"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/gsafd> .
+
+<lcgft> a :GenreFormScheme;
+    skos:notation "lcgft";
+    dc:alternative "LCGFT";
+    dc:title "Library of Congress genre/form terms for library and archival materials"@en;
+    dc:title "Library of Congress genre/form terms for library and archival materials";
+    rdfs:comment "Washington, DC: Library of Congress"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/lcgft>;
+    foaf:homepage <http://id.loc.gov/authorities/genreForms/> .
+
+<marcgt> a :GenreFormScheme;
+    skos:notation "marcgt";
+    dc:title "MARC genre terms"@en;
+    dc:title "MARC genre terms";
+    rdfs:comment "Washington, DC: Library of Congress"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/marcgt>;
+    foaf:homepage <http://www.loc.gov/standards/valuelist/marcgt.html> .
+
+<rbgenr> a :GenreFormScheme;
+    skos:notation "rbgenr";
+    dc:title "Genre terms: a thesaurus for use in rare book and special collections cataloguing"@en;
+    dc:title "Genre terms: a thesaurus for use in rare book and special collections cataloguing";
+    rdfs:comment "Chicago: Association of College and Research Libraries"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/rbgenr> .
+
+<rbpub> a :GenreFormScheme;
+    skos:notation "rbpub";
+    dc:title "Printing and publishing evidence: a thesaurus for use in rare book and special collections cataloging"@en;
+    dc:title "Printing and publishing evidence: a thesaurus for use in rare book and special collections cataloging";
+    rdfs:comment "Chicago: Association of College and Research Libraries"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/rbpub> .
+
+<rvmgf> a :GenreFormScheme;
+    skos:notation "rvmgf";
+    dc:title "Thésaurus des descripteurs de genre/forme de l'Université Laval"@fr;
+    dc:title "Thésaurus des descripteurs de genre/forme de l'Université Laval";
+    rdfs:comment "Kanada, Québec: Bibliothèque de l'Université Laval"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/rvmgf> .
+
+<slm/fin> a :GenreFormScheme;
+    skos:notation "slm/fin";
+    dc:title "Suomalainen lajityyppi- ja muotosanasto"@fi;
+    dc:title "Suomalainen lajityyppi- ja muotosanasto";
+    dc:ISO639-2 "fin";
+    rdfs:comment "Finland: Kansalliskirjasto"@sv;
+    rdfs:seeAlso <slm/swe>;
+    skos:exactMatch  <http://finto.fi/slm/fi/>;
+    skos:broadMatch <http://id.loc.gov/vocabulary/genreFormSchemes/slm> .
+
+<slm/swe> a :GenreFormScheme;
+    skos:notation "slm/swe";
+    dc:title "FGF - Finländsk genre- och formlista"@sv;
+    dc:ISO639-2 "swe";
+    rdfs:comment "Finland: Kansalliskirjasto"@sv;
+    rdfs:seeAlso <slm/fin>;
+    skos:exactMatch <http://finto.fi/slm/sv/>;
+    skos:broadMatch <http://id.loc.gov/vocabulary/genreFormSchemes/slm>.
+
+<tgfbne> a :GenreFormScheme;
+    skos:notation "tgfbne";
+    dc:title "Términos de género/forma de la Biblioteca Nacional de España"@es;
+    dc:title "Términos de género/forma de la Biblioteca Nacional de España";
+    rdfs:comment "Spanien, Madrid: Biblioteca Nacional de España"@sv;
+    skos:exactMatch <http://id.loc.gov/vocabulary/genreFormSchemes/tgfbne> .
 
 # LoC
 
-<http://id.loc.gov/authorities/subjects> a skos:ConceptScheme;
-    dc:title "Library of Congress Subject Headings"@en;
-    dc:alternative "LCSH";
-    skos:notation "lcsh" .
-<http://id.loc.gov/authorities/childrensSubjects> a skos:ConceptScheme .
 <http://id.loc.gov/authorities/genreForms> a skos:ConceptScheme .
 <http://id.loc.gov/vocabulary/graphicMaterials> a skos:ConceptScheme .
 
@@ -290,13 +853,13 @@
 
 # Other Public Schemes
 
-<http://dewey.info/scheme/ddc/> a skos:ConceptScheme;
+<http://dewey.info/scheme/ddc/> a :ClassificationScheme;
     skos:notation "ddc";
     dc:alternative "DDC"@en;
     dc:alternative "DDK"@sv;
     rdfs:label "Dewey decimalklassifikation"@sv .
 
-<http://udcdata.info/udc-schema> a skos:ConceptScheme;
+<http://udcdata.info/udc-schema> a :ClassificationScheme;
     skos:notation "udc";
     dc:alternative "UDC"@en;
     dc:alternative "UDK "@sv;

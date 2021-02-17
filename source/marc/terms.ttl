@@ -15,12 +15,12 @@
 marc:fieldref a owl:DatatypeProperty;
     rdfs:label "Länkning"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$6 i MARC21"@sv .
+    rdfs:comment "Delfält $6 i MARC21."@sv .
 
 marc:groupid a owl:DatatypeProperty;
     rdfs:label "Länk- och sekvensnummer"@sv;
     rdfs:domain kbv:Resource;
-    skos:definition "$8 i MARC21"@sv .
+    rdfs:comment "Delfält $8 i MARC21."@sv .
 
 marc:relatedAs a owl:ObjectProperty ;
     sdo:domainIncludes kbv:Work, kbv:Agent ;
@@ -48,7 +48,7 @@ marc:SerialWork a owl:Class ;
 marc:primaryProvisionActivity a owl:ObjectProperty;
     rdfs:subPropertyOf kbv:provisionActivity;
     rdfs:range kbv:PrimaryProvisionActivity;
-    rdfs:label "huvudsakligt tillgängliggörande"@sv .
+    rdfs:label "Primary provision activity"@en, "Huvudsakligt tillgängliggörande"@sv .
 
 marc:copyrightYear a owl:DatatypeProperty;
     rdfs:label "Copyright year"@en, "Copyrightår"@sv;
@@ -60,26 +60,28 @@ kbv:distribution sdo:rangeIncludes marc:DistributionAndProduction .
 
 marc:DistributionAndProduction a owl:Class;
     rdfs:subClassOf kbv:PrimaryProvisionActivity, kbv:Distribution;
-    rdfs:label "Distribution och produktion"@sv .
+    rdfs:label "Distribution and production"@en, "Distribution och produktion"@sv .
 
 marc:distributionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "distributionsår"@sv;
+    rdfs:label "Distribution year"@en, "Distributionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:productionYear a owl:DatatypeProperty;
     sdo:domainIncludes marc:DistributionAndProduction ;
-    rdfs:label "produktionsår"@sv;
+    rdfs:label "Production year"@en, "Produktionsår"@sv;
     rdfs:subPropertyOf kbv:year .
 
 marc:ReprintReissueAndOriginalPublication a owl:Class;
     rdfs:subClassOf kbv:PrimaryPublication ;
-    rdfs:label "Omtryck/återutgivning och originalutgivning"@sv .
+    rdfs:label "Reprint/reissue date and original publication"@en, "Omtryck/återutgivning och originalutgivning"@sv .
 
 marc:reprintYear a owl:DatatypeProperty ;
+    rdfs:label "Reprint Year"@en, "Årtal för ny utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:originalYear a owl:DatatypeProperty ;
+    rdfs:label "Original year"@en, "Årtal för ursprunglig utgivning"@sv ;
     rdfs:domain marc:ReprintReissueAndOriginalPublication .
 
 marc:relief a owl:ObjectProperty ;
@@ -91,7 +93,7 @@ marc:relief a owl:ObjectProperty ;
 
 marc:hiddenValue a owl:DatatypeProperty;
     rdfs:label "Ogiltigt värde"@sv;
-    skos:definition "$z i MARC21 identifiers.";
+    rdfs:comment "Vanligen delfält $z i MARC21 fält för identifikatorer."@sv;
     rdfs:domain kbv:Identifier .
 
 marc:NationalIssnCentre a owl:Class;
@@ -139,8 +141,7 @@ marc:titlesAndOtherWordsAssociatedWithAName a owl:DatatypeProperty;
     rdfs:domain kbv:Agent .
 
 marc:attributionQualifier a owl:DatatypeProperty;
-    rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv;
-    rdfs:domain kbv:Agent .
+    rdfs:label "Attribution qualifier"@en, "Attribuerande tillägg"@sv .
 
 marc:affiliation a owl:DatatypeProperty;
     rdfs:label "Affiliering"@sv;
@@ -148,6 +149,7 @@ marc:affiliation a owl:DatatypeProperty;
 
 marc:subordinateUnit a owl:DatatypeProperty;
     rdfs:label "Namn på underordnad enhet"@sv;
+    rdfs:subPropertyOf kbv:name;
     rdfs:comment "OBS! 'Namn på underordnad enhet' används endast tillsammans med egenskapen 'Är del av' för att skapa Organisationer i flera led. Egenskapen 'Namn' raderas om 'Är del av' och 'Namn på underordnad enhet' används."@sv;
     sdo:domainIncludes kbv:Jurisdiction, kbv:Organization, kbv:Meeting .
 
@@ -185,8 +187,8 @@ marc:constantRatioLinearVerticalScale a owl:DatatypeProperty ;
     rdfs:domain kbv:Scale ;
     rdfs:label "Constant ratio linear vertical scale"@en, "Linjär vertikal skala med konstant proportio"@sv .
 
-marc:angularScale a owl:DatatypeProperty ;
-    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
+#marc:angularScale a owl:DatatypeProperty ;
+#    rdfs:label "Angular scale"@en, "Vinkelskala (angular scale)"@sv .
 
 marc:westernmostLongitudeCoordinates a owl:DatatypeProperty ;
     rdfs:label "Coordinates - westernmost longitude"@en, "Koordinater - västlig gränslongitud"@sv ;
@@ -223,6 +225,11 @@ marc:SubtitlesOrCaptions a owl:Class ;
     rdfs:label "Subtitles or captions"@en, "Bild- och filmtexter"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
+marc:intermediateLanguage a owl:ObjectProperty ;
+    rdfs:label "Language code of intermediate translations"@en, "Intermediärt språk till översättningar"@sv ;
+    rdfs:domain kbv:Work ;
+    rdfs:range kbv:Work .
+
 # 043
 
 marc:hasGeographicAreaCode a owl:ObjectProperty;
@@ -238,11 +245,13 @@ marc:GeographicAreaCode a owl:Class;
 # 044
 
 marc:hasCountryOfPublishingProducingEntityCode a owl:ObjectProperty;
+    kbv:category kbv:unstable ;
+    owl:deprecated true ;
     rdfs:label "Country Of Publishing/Producing Entity Code"@en, "Landkod för utgivande/producerande enhet"@sv ;
-    rdfs:domain kbv:Instance;
     rdfs:range marc:CountryOfPublishingProducingEntityCode .
     
 marc:CountryOfPublishingProducingEntityCode a owl:Class;
+    kbv:category kbv:unstable ;
     rdfs:label "Country Of Publishing/Producing Entity Code"@en, "Landkod för utgivande/producerande enhet"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
 
@@ -254,7 +263,7 @@ marc:isoCountryCode a owl:DatatypeProperty;
 
 marc:hasTimePeriodOfContent a owl:ObjectProperty;
     rdfs:label "Time Period Of Content"@en, "Innehållets tidsperiod"@sv ;
-    sdo:domainIncludes kbv:Work, kbv:Agent;
+    sdo:domainIncludes kbv:Work ;
     rdfs:range marc:TimePeriodOfContent .
 
 marc:TimePeriodOfContent a owl:Class;
@@ -271,10 +280,6 @@ marc:formatted9999BCThroughCETimePeriod a owl:DatatypeProperty;
 
 marc:formattedPre9999BCTimePeriod a owl:DatatypeProperty;
     rdfs:label "Formatted pre-9999 B.C. time period"@en, "Period före 9999 f.Kr."@sv ;
-    rdfs:domain marc:TimePeriodOfContent .
-
-marc:typeOfTimePeriod a owl:DatatypeProperty;
-    rdfs:label "typeOfTimePeriod"@en, "Typ av tidsperiod"@sv;
     rdfs:domain marc:TimePeriodOfContent .
 
 # 070
@@ -301,9 +306,10 @@ marc:nonfilingChars a owl:DatatypeProperty;
     rdfs:comment "Värde '1-9' innebär att titeln inleds med alfanumeriska tecken som skall uteslutas vid filering. Tecken med diakriter räknas som 2 tecken. Lämna tomt om inga tecken ska uteslutas."@sv;
     rdfs:domain kbv:Title . #TODO: maybe domainIncludes if only possible to add for certain Titles?
 
-marc:OtherTitle a owl:Class ;
-    rdfs:subClassOf kbv:VariantTitle;
-    rdfs:label "Other title"@en, "Även med titel"@sv .
+# previously 246i3
+#marc:OtherTitle a owl:Class ;
+#    rdfs:subClassOf kbv:VariantTitle; 
+#    rdfs:label "Other title"@en, "Även med titel"@sv .
 
 #240-k
 
@@ -311,24 +317,28 @@ marc:formSubheading a owl:DatatypeProperty;
     rdfs:label "Form subheading"@en, "Specificering i form av grupptitel"@sv ;
     rdfs:domain kbv:Title . 
 
-# BIB 249
-
-marc:hasBib249 a owl:ObjectProperty;
-    rdfs:label "Har originaltitel (OBSOLET bib:249)"@sv .
-
-marc:Bib249 a owl:Class;
-    rdfs:label "Originaltitel (OBSOLET bib:249)"@sv .
-
-marc:originalTitle a owl:DatatypeProperty;
-    rdfs:label "Originaltitel"@sv .
-
-marc:titleNumber a owl:DataTypeProperty;
-    rdfs:label "Nummer på del eller avsnitt"@sv .
-
-marc:titlePart a owl:DataTypeProperty;
-    rdfs:label "Titel på del eller avsnitt av verk"@sv .
+# BIB 249 removed per https://github.com/libris/librisxl/pull/678
+# 
+# marc:hasBib249 a owl:ObjectProperty;
+#     rdfs:label "Har originaltitel (OBSOLET bib:249)"@sv .
+# 
+# marc:Bib249 a owl:Class;
+#     rdfs:label "Originaltitel (OBSOLET bib:249)"@sv .
+# 
+# marc:originalTitle a owl:DatatypeProperty;
+#     rdfs:label "Originaltitel"@sv .
+# 
+# marc:titleNumber a owl:DataTypeProperty;
+#     rdfs:label "Nummer på del eller avsnitt"@sv .
+# 
+# marc:titlePart a owl:DataTypeProperty;
+#     rdfs:label "Titel på del eller avsnitt av verk"@sv .
+##
 
 # USED WITH MULTIPLE TYPES:
+
+marc:explanatoryTerm a owl:DatatypeProperty ; # probably the label in linked DDC.
+    rdfs:domain kbv:ClassificationDdc .
 
 marc:sourceOfAcquisition a owl:DatatypeProperty ;
     rdfs:label "Förvärvskälla"@sv ;
@@ -370,7 +380,7 @@ marc:sizeOfUnit a owl:DatatypeProperty ;
 marc:hasOtherAttributes a owl:ObjectProperty;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv;
     rdfs:domain kbv:Agent;
-    rdfs:range marc:OtherAttributes .
+    sdo:rangeIncludes marc:OtherAttributes, kbv:Topic .
 
 marc:OtherAttributes a owl:Class;
     rdfs:label "Andra attribut för person- och organisationsnamn"@sv .
@@ -427,7 +437,7 @@ marc:BibliographyEtcNote a owl:Class;
 # 506:
 
 marc:jurisdiction a owl:DatatypeProperty ;
-    sdo:domainIncludes kbv:Instance, kbv:UsageAndAccessPolicy, marc:TermsGoverningUseAndReproductionNote ;
+    sdo:domainIncludes kbv:UsageAndAccessPolicy ;
     rdfs:label "jurisdiction"@en, "tillståndsgivare"@sv .
 
 marc:physicalAccessProvisions a owl:DatatypeProperty ;
@@ -584,7 +594,6 @@ marc:hasLocationOfOtherArchivalMaterialsNote a owl:Class ;
 
 marc:hasBiographicalOrHistoricalData a owl:ObjectProperty ;
     rdfs:label "Has Biographical Or Historical Data"@en, "Anmärkning om biografiska eller historiska uppgifter"@sv;
-    sdo:domainIncludes kbv:Instance;
     rdfs:range marc:BiographicalOrHistoricalData .
 
 marc:BiographicalOrHistoricalData a owl:Class;
@@ -729,6 +738,10 @@ marc:intermediatePoliticalJurisdiction a owl:DatatypeProperty ;
 marc:city a owl:DatatypeProperty ;
     rdfs:label "Stad, kommun"@sv ;
     rdfs:domain marc:AddedEntryHierarchicalPlaceName .
+
+marc:displayText a owl:DatatypeProperty;
+    rdfs:label "Relationsbeteckning"@sv .
+    
 
 # 856:
 

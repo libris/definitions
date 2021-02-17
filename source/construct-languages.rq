@@ -2,43 +2,80 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix dc: <http://purl.org/dc/terms/>
+prefix kbv: <https://id.kb.se/vocab/>
 prefix : <http://schema.org/>
-prefix iso639_1: <http://id.loc.gov/vocabulary/iso639-1/>
 
 construct {
     ?s a :Language;
         skos:prefLabel ?label ;
         skos:prefLabel ?prefLabel ;
+        skos:altLabel ?altLabel ;
         rdfs:comment ?comment ;
-        skos:notation ?not;
-        skos:closeMatch ?loclang ;
-        skos:notation ?langCode;
-        skos:closeMatch ?locvariant ;
-        skos:notation ?langTag .
+        skos:notation ?code;
+        skos:notation ?langTag ;
+        skos:notation ?langCode ;
+        dc:isReplacedBy ?replacement;
+        skos:exactMatch ?locLang ;
+        skos:closeMatch ?locVariant .
 
 } where {
     graph <https://id.kb.se/dataset/languages> {
         {
-            ?s rdfs:label ?label .
+            ?s skos:prefLabel ?label .
+            optional { 
+                filter(!contains(?altLabel, "|"))
+                ?s skos:altLabel ?altLabel
+            }
+            optional { 
+                filter(contains(?altLabels, "|"))
+                ?s skos:altLabel ?altLabels
+                values ?n { 0 1 2 3 4 5 }
+                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
+            }
             optional { ?s rdfs:comment ?comment }
         } union {
-            ?s skos:notation ?not .
-            bind(strdt(?not, dc:ISO639-2) as ?langCode)
-            bind(strdt(?not, xsd:string) as ?strnot)
+            ?s skos:notation ?code .
+            filter(datatype(?code) = xsd:string)
+            bind(strdt(?code, kbv:ISO639-2) as ?langCode)
+        } union {
+            ?s skos:notation ?locCode .
+            filter(
+                datatype(?locCode) = kbv:ISO639-2-T ||
+                datatype(?locCode) = xsd:string
+            )
+            bind(iri(concat('http://id.loc.gov/vocabulary/iso639-2/', str(?locCode))) as ?locLang)
             graph <http://id.loc.gov/vocabulary/languages> {
-                optional {
-                    ?loclang skos:notation ?strnot .
-                    optional {
-                        ?loclang skos:prefLabel ?prefLabel .
-                        filter(langMatches(lang(?prefLabel), 'en'))
-                    }
-                    optional {
-                        ?loclang skos:exactMatch ?locvariant .
-                        filter exists { ?locvariant a iso639_1:iso639-1_Language }
-                        ?locvariant skos:notation ?varnot .
-                        bind(strdt(?varnot, dc:ISO639-1) as ?langTag)
-                    }
+                {
+                    filter(!contains(?prefLabel, "|"))
+                    ?locLang skos:prefLabel ?prefLabel
+                } union {
+                    filter(contains(?prefLabels, "|"))
+                    ?locLang skos:prefLabel ?prefLabels
+                    bind(replace(?prefLabels, " *\\|.*$", "") as ?prefLabel)
+                    bind(replace(?prefLabels, "^[^|]+\\| *", "") as ?altLabels)
+                    values ?n { 1 2 3 4 5 6 7 }
+                    bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                    bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
                 }
+                optional {
+                    filter(langMatches(lang(?prefLabel), 'en'))
+                    ?locVariant skos:prefLabel ?prefLabel .
+                    bind('http://id.loc.gov/vocabulary/iso639-1/' as ?iso639_1_base)
+                    filter(strstarts(str(?locVariant), ?iso639_1_base))
+                    bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
+                    bind(strdt(?shortcode, kbv:ISO639-1) as ?langTag)
+                }
+            }
+        } union {
+            ?s skos:notation ?code .
+        } union {
+            optional {
+                ?s dc:isReplacedBy ?map_to_codes .
+                values ?n { 0 1 2 3 }
+                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
+                bind(replace(replace(?map_to_codes, ?skipN, ""), " *\\|.*$", "") as ?map_to_code)
+                ?replacement skos:notation ?map_to_code .
             }
         }
     }

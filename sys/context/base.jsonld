@@ -10,6 +10,7 @@
     "dc": "http://purl.org/dc/terms/",
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "fresnel": "http://www.w3.org/2004/09/fresnel#",
+    "@vocab": "https://id.kb.se/vocab/",
     "marc": "https://id.kb.se/marc/",
 
     "value": "rdf:value",
@@ -43,16 +44,20 @@
     "definitionByLang": {"@id": "skos:definition", "@container": "@language"},
     "scopeNote": {"@id": "skos:scopeNote"},
     "scopeNoteByLang": {"@id": "skos:scopeNote", "@container": "@language"},
+    "changeNote": "skos:changeNote",
+    "changeNoteByLang": {"@id": "skos:changeNote", "@container": "@language"},
     "editorialNote": "skos:editorialNote",
     "historyNote": "skos:historyNote",
     "inDataset": "void:inDataset",
 
     "title": "dc:title",
     "titleByLang": {"@id": "title", "@container": "@language"},
+    "alternative": "dc:alternative",
     "description": "dc:description",
     "descriptionByLang": {"@id": "description", "@container": "@language"},
 
     "homepage": "foaf:homepage",
+    "page": "foaf:page",
 
     "subClassOf": {"@id": "rdfs:subClassOf", "@container": "@set"},
     "subPropertyOf": {"@id": "rdfs:subPropertyOf", "@container": "@set"},
@@ -75,8 +80,6 @@
     "abstract": "http://protege.stanford.edu/plugins/owl/protege#abstract",
     "termGroup": "http://purl.org/vocab/vann/termGroup",
     "term_status": "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status",
-    "inCollection": "https://id.kb.se/vocab/inCollection",
-    "category": "https://id.kb.se/vocab/category",
     "lensGroup": "fresnel:group",
 
     "broadMatch": {"@id": "skos:broadMatch", "@container": "@set"},
@@ -97,7 +100,6 @@
     "Country": "sdo:Country",
     "Language": "sdo:Language",
     "Role": "http://id.loc.gov/ontologies/bibframe/Role",
-    "Nationality": "https://id.kb.se/vocab/Nationality",
     "ItemAvailability": "sdo:ItemAvailability",
 
     "ContentType": "http://id.loc.gov/ontologies/bibframe/Content",
@@ -105,8 +107,15 @@
     "CarrierType": "http://id.loc.gov/ontologies/bibframe/Carrier",
     "IssuanceType": "http://id.loc.gov/ontologies/bibframe/Issuance",
 
-    "langCode": {"@id": "code", "@type": "dc:ISO639-2"},
-    "langTag": {"@id": "code", "@type": "dc:ISO639-1"}
+    "langTag": {"@id": "code", "@type": "ISO639-1"},
+    "langCode": {"@id": "code", "@type": "ISO639-2"},
+    "langCodeBib": {"@id": "code", "@type": "ISO639-2-B"},
+    "langCodeTerm": {"@id": "code", "@type": "ISO639-2-T"},
+    "langCodeFull": {"@id": "code", "@type": "ISO639-3"},
 
+    "isMemberOfRelation": {"@type": "@vocab"},
+    "memberClass": {"@type": "@vocab", "@container": "@set"},
+    "slugProperty": {"@type": "@vocab"},
+    "administeredBy": {"@container": "@set"}
   }
 }

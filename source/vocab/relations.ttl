@@ -10,9 +10,10 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
 
-@prefix bf: <http://bibframe.org/vocab/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
+
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -59,6 +60,7 @@
     rdfs:label "is part of"@en, "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
+    rdfs:comment "Relaterad resurs vilken den beskrivna resursen är en fysisk eller logisk del av."@sv;
     owl:equivalentProperty bf2:partOf, dc:isPartOf .
 
 :partOfSeries a owl:ObjectProperty;
@@ -98,8 +100,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:comment "Work that has been partially incorporated into another work."@en;
-    owl:inverseOf :absorbedInPartBy;
-    owl:equivalentProperty bf:absorbedInPart .
+    skos:closeMatch rdau:P60248, rdau:absorptionInPartOf.en ;
+    owl:inverseOf :absorbedInPartBy .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :absorbedInPartBy a owl:ObjectProperty;
@@ -108,8 +110,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:comment "Work that incorporates part of the content of another work."@en;
-    owl:inverseOf :absorbedInPart;
-    owl:equivalentProperty bf:absorbedInPartBy .
+    skos:closeMatch rdau:P60248, rdau:absorbedInPartBy.en ;
+    owl:inverseOf :absorbedInPart .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :precededInPartBy a owl:ObjectProperty;
@@ -118,8 +120,8 @@
     rdfs:range :Work;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :succeededInPartBy;
-    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en ;
-    owl:equivalentProperty  bf:supersedesInPart .
+    skos:closeMatch rdau:P60479, rdau:replacementInPartOf.en ;
+    rdfs:comment "Earlier work whose content has been partially replaced by a later work, usually because the later work contains updated or new information."@en .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
     
 :succeededInPartBy a owl:ObjectProperty;
@@ -128,8 +130,8 @@
     rdfs:domain :Work;
     rdfs:range :Work;
     owl:inverseOf :precededInPartBy;
-    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en ;
-    owl:equivalentProperty  bf:supersededInPartBy .
+    skos:closeMatch rdau:rdau:P60479, rdau:replacedInPartBy.en ;
+    rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en .
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :accompanies a owl:ObjectProperty;
@@ -151,7 +153,7 @@
     owl:equivalentClass sdo:MediaObject .
 
 :accompaniedBy a owl:ObjectProperty;
-    rdfs:label "tillsammans med"@sv;
+    rdfs:label "Medföljs av"@sv;
     rdfs:comment "Resurs som medföljer den beskrivna resursen."@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompanies;
@@ -195,10 +197,10 @@
     owl:equivalentProperty bf2:continuesInPart .
 
 :splitInto a owl:ObjectProperty;
-  rdfs:label "uppdelat på"@sv;
-  rdfs:subPropertyOf :succeededBy;
-  owl:inverseOf :continuesInPart;
-  owl:equivalentProperty bf2:splitInto .
+    rdfs:label "uppdelat på"@sv;
+    rdfs:subPropertyOf :succeededBy;
+    owl:inverseOf :continuesInPart;
+    owl:equivalentProperty bf2:splitInto .
 
 :dataSource a owl:ObjectProperty;
     rdfs:label "datakälla"@sv;
@@ -265,9 +267,9 @@
     owl:equivalentProperty bf2:originalVersionOf .
 
 :otherEdition a owl:ObjectProperty;
-  rdfs:label "other edition"@en, "annan utgåva"@sv;
-  rdfs:subPropertyOf :derivativeOf;
-  owl:equivalentProperty bf2:otherEdition .
+    rdfs:label "other edition"@en, "annan utgåva"@sv;
+    rdfs:subPropertyOf :derivativeOf;
+    owl:equivalentProperty bf2:otherEdition .
 
 :otherPhysicalFormat a owl:ObjectProperty;
     owl:equivalentProperty bf2:otherPhysicalFormat;
@@ -333,7 +335,7 @@
 :replacedBy a owl:ObjectProperty;
     rdfs:label "replaced by"@en, "ersatt av"@sv;
     owl:equivalentProperty bf2:replacedBy;
-    rdfs:subPropertyOf :succeededBy;
+    rdfs:subPropertyOf :succeededBy, dc:isReplacedBy ;
     owl:inverseOf :replacementOf .
 
 :replacementOf a owl:ObjectProperty;
@@ -460,6 +462,25 @@
 #    owl:equivalentProperty sdo:artform;
 #    rdfs:label "artform"@en, "verksform"@sv .
 
+
+## Qualified form of subject; used by SwePub {{{
+:qualifiedSubject a owl:ObjectProperty;
+    rdfs:label "Kvalificerat ämnespåstående"@sv;
+    rdfs:comment "Ofta automatiskt genererade"@sv;
+    rdfs:subPropertyOf :hasStatement;
+    rdfs:range :SubjectStatement .
+
+:SubjectStatement a owl:Class ;
+    rdfs:subClassOf rdf:Statement ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :predicate ;
+            owl:hasValue :subject
+        ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :object ;
+            owl:allValuesFrom :Topic
+        ] .
+# }}}
 
 # Qualified Forms of Contribution and Relationship
 

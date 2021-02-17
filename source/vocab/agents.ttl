@@ -23,7 +23,7 @@
 
 :name a owl:DatatypeProperty;
     rdfs:label "name"@en, "namn"@sv;
-    rdf:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
+    rdfs:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
     # hur tala om: Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. 
     rdfs:domain :Agent;
     rdfs:subPropertyOf :label;
@@ -32,6 +32,7 @@
 :additionalName a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:additionalName;
     rdfs:domain :Meeting;
+    rdfs:subPropertyOf :name;
     rdfs:label "additional name"@en, "tilläggsnamn"@sv .
 
 :fullerFormOfName a owl:DatatypeProperty; 
@@ -63,6 +64,22 @@
     rdfs:subClassOf :Agent; #:Event;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
+## Used by SwePub {{{
+
+:Collaboration a owl:Class ;
+    :category :pending ;
+    rdfs:label "Samarbete"@sv, "Collaboration"@en;
+    rdfs:comment "organisationsöverskridande konstellation"@sv;
+    rdfs:subClassOf :Agent .
+
+:Corporation a owl:Class ;
+    :category :pending ;
+    rdfs:label "Korporation"@sv, "Corporation"@en;
+    rdfs:subClassOf :Organization .
+
+## }}}
+
+
 #[] a owl:Class; rdfs:subClassOf :Person; ptg:abstract true;
 #    owl:hasKey (:name :familyName :givenName :numeration :birthDate :deathDate :personTitle) .
 
@@ -84,24 +101,28 @@
     owl:equivalentProperty sdo:givenName, foaf:givenName, rdaa:P50292, rdaa:givenName.en .
 
 :hasBiographicalInformation a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
-    sdo:domainIncludes :Person, :Instance;
+    sdo:domainIncludes :Person, :Family;
     # separate instance and agent properties?
     rdfs:range :BiographicalNote;
     owl:equivalentProperty rdau:P60492 .
 
 :BiographicalNote a owl:Class;
+    :category :pending ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Biographical Note"@en, "Anmärkning om biografiska uppgifter"@sv .
 
 :hasHistoricalData a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "has historical data"@en, "Administrativ historik"@sv;
-    sdo:domainIncludes :Organization, :Jurisdiction, :Instance;
+    sdo:domainIncludes :Organization, :Jurisdiction, :Meeting;
     # separate instance and agent properties?
     rdfs:range :AdministrativeHistoryNote;
     owl:equivalentProperty rdau:P60484, rdau:agentHistory.en .
 
 :AdministrativeHistoryNote a owl:Class;
+    :category :pending ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Administrative history note"@en, "Anmärkning om administrativ historik"@sv .
 
@@ -143,7 +164,7 @@
 :fieldOfActivity a owl:ObjectProperty;
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
     rdfs:domain :Agent;
-    sdo:rangeIncludes :FieldOfActivity, :Concept;
+    sdo:rangeIncludes :FieldOfActivity, :Topic;
     owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
 
 # NOTE: We would like to upgrade relevant SAO concepts to Instances of this Class in the future...
@@ -151,6 +172,7 @@
     rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv .
 
 :address a owl:DatatypeProperty;
+    :category :pending ;
     rdfs:label "Address"@en, "Adress"@sv;
     sdo:domainIncludes :Person, :Organization;
     owl:equivalentProperty sdo:address .
@@ -181,12 +203,12 @@
 
 :establishDate a owl:DatatypeProperty;
     rdfs:label "Established"@en, "Tid för grundande"@sv;
-    rdfs:domain :Organization;
+    sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:establishDate .
 
 :terminateDate a owl:DatatypeProperty;
     rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
-    rdfs:domain :Organization;
+    sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;
@@ -252,7 +274,7 @@
 :hasOccupation a owl:ObjectProperty;
     rdfs:label "has occupation"@en, "Har yrke eller sysselsättning"@sv;
     rdfs:domain :Person;
-    sdo:rangeIncludes :Occupation, :Concept;
+    sdo:rangeIncludes :Occupation, :Topic;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .
 
 # Organization properties
@@ -277,6 +299,7 @@
     owl:equivalentClass sdo:Library .
 
 :bibliography a owl:ObjectProperty ;
+    rdfs:comment "Bibliografi som resursen ingår i."@sv ;
     rdfs:domain :Record ;
     rdfs:range :Library ;
     rdfs:label "bibliografi"@sv .

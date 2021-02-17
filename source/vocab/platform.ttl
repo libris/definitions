@@ -18,6 +18,7 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
 @prefix sindsearch: <http://sindice.com/vocab/search#> .
 @prefix opensearch: <http://a9.com/-/spec/opensearch/1.1/> .
 
@@ -43,7 +44,7 @@
 # Records
 
 :Record a owl:Class;
-    rdfs:label "Post"@sv;
+    rdfs:label "Post"@sv, "Record"@en;
     rdfs:subClassOf :AdminMetadata .
 
 :mainEntity a owl:ObjectProperty;
@@ -66,7 +67,8 @@
 
 :recordStatus a owl:ObjectProperty;
     rdfs:subPropertyOf :status;
-    rdfs:label "Poststatus"@sv;
+    rdfs:label "Record status"@en, "Poststatus"@sv;
+    rdfs:comment "Postens status, sätts automatiskt."@sv;
     rdfs:domain :Record;
     sdo:rangeIncludes marc:StatusType .
 
@@ -97,6 +99,7 @@
 
 :descriptionCreator a owl:ObjectProperty;
     rdfs:label "Description creator"@en, "Skapad av"@sv ;
+    rdfs:comment "Entitet som upprättat beskrivningen."@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier ;
     rdfs:range :Agent .
@@ -147,12 +150,14 @@
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
     owl:ObjectProperty bf2:descriptionConventions .
 
-:derivedFrom a owl:DatatypeProperty;
+:derivedFrom a owl:ObjectProperty;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
-    rdfs:range rdfs:Literal;
+    rdfs:range :AdminMetadata;
     owl:equivalentProperty bf2:derivedFrom .
+    # NOTE: Differing type and range! See:
+    # <https://github.com/lcnetdev/bibframe-ontology/issues/41>
 
 :GenerationProcess a owl:Class;
     rdfs:label "Generation process"@en, "Beskrivningsprocess"@sv;
@@ -239,6 +244,9 @@
 ##
 # Paged Collections
 
+:ResourceView a owl:Class;
+    owl:equivalentClass sdo:ItemPage .
+
 :PartialCollectionView a owl:Class;
     owl:equivalentClass hydra:PartialCollectionView, sdo:CollectionPage .
 
@@ -311,6 +319,48 @@
 :textQuery a owl:DatatypeProperty;
     owl:equivalentProperty hydra:freetextQuery;
     rdfs:label "freetext query"@en, "fritextsökning"@sv .
+
+:reverseLinks a owl:ObjectProperty;
+    rdfs:range :PartialCollectionView;
+    owl:inverseOf :items .
+
+
+##
+# Containers (mainly used here for controlled URI:s)
+
+:Container a owl:Class ;
+    owl:equivalentClass ldp:Container .
+
+:DirectContainer a owl:Class ;
+    owl:equivalentClass ldp:DirectContainer ;
+    rdfs:subClassOf :Container .
+
+:IndirectContainer a owl:Class ;
+    owl:equivalentClass ldp:IndirectContainer ;
+    rdfs:subClassOf :Container .
+
+:EntityContainer a owl:Class ;
+    rdfs:subClassOf :IndirectContainer ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :insertedContentRelation ;
+            owl:hasValue :mainEntity ] .
+
+:administeredBy a owl:ObjectProperty ;
+    sdo:domainIncludes :Container ;
+    rdfs:range :Agent .
+
+:insertedContentRelation a owl:ObjectProperty, owl:FunctionalProperty ;
+    owl:equivalentProperty ldp:insertedContentRelation .
+
+:membershipResource a owl:ObjectProperty, owl:FunctionalProperty ;
+    owl:equivalentProperty ldp:membershipResource .
+
+:isMemberOfRelation a owl:ObjectProperty ;
+    owl:equivalentProperty ldp:isMemberOfRelation .
+
+:memberClass a owl:ObjectProperty .
+
+:slugProperty a owl:DatatypeProperty .
 
 
 ##

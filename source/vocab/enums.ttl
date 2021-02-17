@@ -7,6 +7,7 @@
 @prefix dbpo: <http://dbpedia.org/ontology/> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdam: <http://rdaregistry.info/Elements/m/> .
 
@@ -105,6 +106,11 @@
     rdfs:label "Format för musiknoter"@sv, "Music notation used"@en;
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:MusicNotation .
+
+:Script a owl:Class;
+    rdfs:label "Skriftsystem"@sv;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:Script .
 
 :TactileNotation a owl:Class;
     rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
@@ -281,7 +287,7 @@
 
 :CartographicObjectType a owl:Class;
     #TODO: Should this be defined in things.ttl instead?
-    rdfs:label "Digital cartographic object type"@en, "Digtal kartografisk objekttyp";
+    rdfs:label "Digital cartographic object type"@en, "Digital kartografisk objekttyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:CartographicObjectType .
 
@@ -304,6 +310,11 @@
     rdfs:label "File type"@en, "Filtyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:FileType .
+
+:ImageBitDepth a owl:Class;
+    rdfs:label "Image bit depth"@en, "Bildens bitdjup"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bflc:ImageBitDepth .
 
 :RegionalEncoding a owl:Class;
     rdfs:label "Regional encoding"@en, "Regional kodning"@sv;
@@ -347,6 +358,8 @@
     owl:equivalentClass bf2:PlayingSpeed .
 
 :PresentationFormat a owl:Class;
+    rdfs:label "Presentationsformat"@sv;
+    rdfs:subClassOf bf2:ProjectionCharacteristic ;
     owl:equivalentClass bf2:PresentationFormat .
 
 :RecordingMedium a owl:Class;
@@ -354,10 +367,20 @@
     rdfs:label "Ljudbärare"@sv, "Recording medium"@en;
     owl:equivalentClass bf2:RecordingMedium .
 
+:RecordingMethod a owl:Class ;
+    rdfs:label "Type of recording"@en, "Inspelningstyp"@sv ;
+    rdfs:subClassOf bf2:SoundCharacteristic ;
+    owl:equivalentClass bf2:RecordingMethod .
+
 :TapeConfig a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
     rdfs:label "Antal spår"@sv, "Tape configuration"@en;
     owl:equivalentClass bf2:TapeConfig .
+
+:TrackConfig a owl:Class;
+    rdfs:subClassOf :SoundCharacteristic;
+    rdfs:label "Ljudspårskonfiguration för film"@sv, "Track configuration"@en;
+    owl:equivalentClass bf2:TrackConfig .
 
 :videoCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
@@ -374,6 +397,11 @@
     rdfs:subClassOf :VideoCharacteristic;
     rdfs:label "Video format"@en, "Videoformat"@sv;
     owl:equivalentClass bf2:VideoFormat .
+
+:BroadcastStandard a owl:Class ;
+    rdfs:label "Broadcast standard"@en, "Sändningsstandard"@sv ;
+    rdfs:subClassOf :VideoCharacteristic ;
+    owl:equivalentClass bf2:BroadcastStandard .
 
 :soundContent a owl:ObjectProperty;
     rdfs:range :SoundContent;
