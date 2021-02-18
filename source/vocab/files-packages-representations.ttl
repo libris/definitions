@@ -19,7 +19,7 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentClass premis3:Representation ;
     rdfs:subClassOf :Embodiment ;
     rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :hasPart; owl:someValuesFrom :Representation ] ;
+            owl:onProperty :hasPart; owl:allValuesFrom :Representation ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :includes; owl:allValuesFrom [ owl:disjointWith :Representation ] ] ;
     rdfs:subClassOf [ a owl:Restriction;
@@ -33,7 +33,7 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentClass premis3:File ;
     rdfs:subClassOf :MediaObject ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty :hasPart; owl:someValuesFrom :File ] ;
+            owl:onProperty :hasPart; owl:allValuesFrom :File ] ;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :includes; owl:allValuesFrom [ owl:disjointWith :File ] ] ;
     rdfs:subClassOf [ a owl:Restriction;
