@@ -1,7 +1,6 @@
-from __future__ import unicode_literals, print_function
+import datetime
 from lxltools.datacompiler import Compiler
 import os
-
 
 SCRIPT_DIR = os.path.dirname(__file__) or '.'
 BASE = 'https://libris.kb.se/'
@@ -12,8 +11,8 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
         context='source/vocab-overlay.jsonld',
         record_thing_link='mainEntity',
         system_base_iri="",
-        union='libraries.jsonld.lines')
-
+        union='libraries.jsonld.lines',
+        created=datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()[:-6] + 'Z') # Beware, Compiler() demands UTC but treats as local time. Potential source of time bugs!
 
 @compiler.dataset
 def libraries():
