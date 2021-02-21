@@ -45,7 +45,7 @@ def _get_repo_version():
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
                     dataset_id=BASE + 'dataset/definitions',
-                    created='2013-10-17T16:07:48.000Z',
+                    created='2013-10-17T14:07:48.000Z',
                     tool_id=BASE + 'generator/definitions',
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
@@ -127,7 +127,7 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    vocab_created_ms = w3c_dtz_to_ms("2014-01-01T00:00:00.000Z")
+    vocab_created_ms = w3c_dtz_to_ms("2013-12-31T23:00:00.000Z")
 
     vocab_ds_url = urljoin(compiler.dataset_id, 'vocab')
     vocab_modified_ms = last_modified_ms(compiler.current_ds_resources)
@@ -159,7 +159,7 @@ def enums():
     rq = compiler.path('source/marc/construct-enums.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
-    return "/marc/", "2014-01-23T11:34:17.981Z", graph
+    return "/marc/", "2014-01-23T10:34:17.981Z", graph
 
 
 @compiler.dataset
@@ -187,14 +187,14 @@ def rdaterms():
         ],
         query="source/construct-rda-terms.rq")
 
-    return "/term/rda/", "2018-05-16T08:18:01.337Z", graph
+    return "/term/rda/", "2018-05-16T06:18:01.337Z", graph
 
 
 @compiler.dataset
 def enumterms():
     graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
-    return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+    return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
 
 @compiler.dataset
@@ -205,28 +205,28 @@ def swepubterms():
             continue
         graph.parse(str(part), format='turtle')
 
-    return "/term/swepub/", "2018-05-29T14:36:01.337Z", graph
+    return "/term/swepub/", "2018-05-29T12:36:01.337Z", graph
 
 
 @compiler.dataset
 def containers():
     graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
 
-    return "/term/", "2019-07-11T15:04:17.964Z", graph
+    return "/term/", "2019-07-11T13:04:17.964Z", graph
 
 
 @compiler.dataset
 def generators():
     graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
 
-    return "/generator/", "2018-04-25T20:55:14.723Z", graph
+    return "/generator/", "2018-04-25T18:55:14.723Z", graph
 
 
 @compiler.dataset
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
-    return "/", "2014-02-01T21:00:01.766Z", graph
+    return "/", "2014-02-01T20:00:01.766Z", graph
 
 
 @compiler.dataset
@@ -273,7 +273,7 @@ def relators():
         ],
         query="source/construct-relators.rq")
 
-    return "/relator/", "2014-02-01T17:29:12.378Z", graph
+    return "/relator/", "2014-02-01T16:29:12.378Z", graph
 
 
 @compiler.dataset
@@ -302,7 +302,7 @@ def languages():
         ],
         query="source/construct-languages.rq")
 
-    return "/language/", "2014-08-01T09:56:51.110Z", graph
+    return "/language/", "2014-08-01T07:56:51.110Z", graph
 
 
 @compiler.dataset
@@ -321,12 +321,12 @@ def countries():
         ],
         query="source/construct-countries.rq")
 
-    return "/country/", "2014-02-01T13:21:14.008Z", graph
+    return "/country/", "2014-02-01T12:21:14.008Z", graph
 
 
 @compiler.dataset
 def nationalities():
-    return "/nationality/", "2014-02-01T14:08:56.596Z", compiler.construct({
+    return "/nationality/", "2014-02-01T13:08:56.596Z", compiler.construct({
             "source": decorate(
                 compiler.read_csv('source/nationalitetskoder.tsv'),
                 {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
@@ -364,7 +364,7 @@ def docs():
             doc['language'] = {"langTag": lang},
         docs.append(doc)
 
-    return "/doc", "2016-04-15T16:43:38.072Z", {
+    return "/doc", "2016-04-15T14:43:38.072Z", {
         "@context": "../sys/context/base.jsonld",
         "@graph": docs
     }
