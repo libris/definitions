@@ -19,8 +19,7 @@ except ImportError:
 import sys
 import json
 import csv
-import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -269,16 +268,21 @@ class Compiler:
 
 def w3c_dtz_to_ms(ztime):
     assert ztime.endswith('Z')
-    ztime, ms = ztime.rsplit('.', 1)
-    if ms.endswith('Z'):
-        ms = ms[:-1]
-    return int(time.mktime(time.strptime(ztime,
-                                         "%Y-%m-%dT%H:%M:%S"))
-               * 1000 + int(ms))
+    try:  # fromisoformat is new in Python 3.7
+        return int(datetime.fromisoformat(ztime.replace('Z', '+00:00'))
+                   .timestamp() * 1000)
+    except AttributeError:  # fallback can be removed when we rely on Py 3.7+
+        ztime = ztime[:-1]  # drop 'Z'
+        if '.' not in ztime:
+            ztime += '.000'  # add millisecs to comply with format
+        ztime += '+0000'  # strptime-compliant UTC timezone format
+        return int(datetime.strptime(ztime, '%Y-%m-%dT%H:%M:%S.%f%z')
+                   .timestamp() * 1000)
 
 
 def to_w3c_dtz(ms):
-    return datetime.fromtimestamp(ms / 1000).isoformat()[:-3] + 'Z'
+    dt = datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
+    return dt.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
 
 
 def last_modified_ms(fpaths):
