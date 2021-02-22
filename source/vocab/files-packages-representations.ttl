@@ -13,7 +13,7 @@ prefix : <https://id.kb.se/vocab/>
 ##
 # PREMIS 3.0
 
-:Instance rdfs:subClassOf premis3:IntellectualEntity .
+:Creation rdfs:subClassOf premis3:IntellectualEntity .
 
 :Representation a owl:Class ;
     owl:equivalentClass premis3:Representation ;
@@ -117,13 +117,14 @@ prefix : <https://id.kb.se/vocab/>
     skos:broader :inDataset .
 
 # TODO: find a better name? :creatingApplication? :toolUsed?
+# TODO: Will probalby be able to remove this. No usecase to have this information.
 :tool a owl:ObjectProperty ;
     rdfs:subPropertyOf sdo:tool .
 
 :width a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ;
+    sdo:domainIncludes :MediaObject ; # might also apply for Representation (but then not equivalentProperty with sdo:width)
     owl:equivalentProperty sdo:width .
 
 :height a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ;
+    sdo:domainIncludes :MediaObject ; # might also apply for Representation (but then not equivalentProperty with sdo:height)
     owl:equivalentProperty sdo:height .

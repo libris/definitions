@@ -188,6 +188,13 @@ def enumterms():
 
 
 @compiler.dataset
+def aatterms():
+    graph = Graph().parse(str(compiler.path('source/aat-terms.ttl')), format='turtle')
+
+    return "/term/aat/", "2021-02-22T10:32:01.337Z", graph
+
+
+@compiler.dataset
 def swepubterms():
     graph = Graph()
     for part in compiler.path('source/swepub').glob('**/*.ttl'):
