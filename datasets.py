@@ -186,13 +186,12 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
 
-
+#TODO: Change to a more suitable name
 @compiler.dataset
 def aatterms():
     graph = Graph().parse(str(compiler.path('source/aat-terms.ttl')), format='turtle')
 
     return "/term/aat/", "2021-02-22T10:32:01.337Z", graph
-
 
 @compiler.dataset
 def swepubterms():
