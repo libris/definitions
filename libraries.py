@@ -6,22 +6,30 @@ SCRIPT_DIR = os.path.dirname(__file__) or '.'
 BASE = 'https://libris.kb.se/'
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
-        dataset_id=BASE + 'library/',
-        #context='build/vocab/context.jsonld',
+        dataset_id=BASE + 'dataset/bibdb',
         context='source/vocab-overlay.jsonld',
         record_thing_link='mainEntity',
         system_base_iri="",
         union='libraries.jsonld.lines',
-        created=datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()[:-6] + 'Z') # Beware, Compiler() demands UTC but treats as local time. Potential source of time bugs!
+        created="2019-03-14T15:00:00.000Z")
+
 
 @compiler.dataset
 def libraries():
-    libraries = fetch_libraries(
-            'https://bibdb.libris.kb.se/api?sigel=*&level=&libris_reg=True'
-            ) + fetch_libraries(
-            'https://bibdb.libris.kb.se/api?sigel=*&level=&libris_reg=&org_type=bibliography')
+    graph = _construct_bibdb_data('sigel=*&level=&libris_reg=True&org_type=library')
+    return "/library", "2019-03-14T15:31:17.000Z", graph
+
+
+@compiler.dataset
+def bibliographies():
+    graph = _construct_bibdb_data('sigel=*&level=&libris_reg=&org_type=bibliography')
+    return "/bibliography", "2019-03-14T19:32:20.000Z", graph
+
+
+def _construct_bibdb_data(query):
+    libraries = _fetch_libraries(f'https://bibdb.libris.kb.se/api?{query}')
     bidb_context = 'https://bibdb.libris.kb.se/libdb/static/meta/context.jsonld'
-    graph = compiler.construct(sources=[
+    return compiler.construct(sources=[
             {
                 "source": libraries,
                 "dataset": BASE + "dataset/libraries",
@@ -32,10 +40,9 @@ def libraries():
             }
         ],
         query="source/construct-libraries.rq")
-    return "/", "2019-03-14T15:31:17.000Z", graph
 
 
-def fetch_libraries(start_url):
+def _fetch_libraries(start_url):
     url = start_url
     result = []
 
@@ -48,7 +55,7 @@ def fetch_libraries(start_url):
         if libraries:
             result += libraries
             start += batch
-            url = start_url + '&start=%s' % start
+            url = f'{start_url}&start={start}'
         else:
             break
 
