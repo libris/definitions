@@ -1,14 +1,9 @@
-# -*- coding: UTF-8 -*-
-from __future__ import unicode_literals, print_function
 import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
 from lxltools.datacompiler import Compiler, w3c_dtz_to_ms, last_modified_ms
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
+from urllib.parse import urljoin
 
 
 NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']

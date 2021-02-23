@@ -1,25 +1,12 @@
-from __future__ import unicode_literals, print_function
-__metaclass__ = type
-
-if bytes is not str:
-    unicode = str
-
 import argparse
-from collections import OrderedDict
-try:
-    from pathlib import Path
-except ImportError:
-    from pathlib2 import Path
-try:
-    from urllib.parse import urlparse, urljoin, quote
-    from urllib.request import urlopen
-except ImportError:
-    from urlparse import urlparse, urljoin
-    from urllib2 import quote, urlopen
-import sys
-import json
 import csv
+import json
+import sys
+from collections import OrderedDict
 from datetime import datetime, timezone
+from pathlib import Path
+from urllib.parse import urlparse, urljoin, quote
+from urllib.request import Request, urlopen
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -309,7 +296,7 @@ def _serialize(data):
     if isinstance(data, (list, dict)):
         data = json.dumps(data, indent=2, sort_keys=True,
                 separators=(',', ': '), ensure_ascii=False)
-    if isinstance(data, unicode):
+    if isinstance(data, str):
         data = data.encode('utf-8')
     return data
 
@@ -319,16 +306,10 @@ CSV_FORMATS = {'.csv': 'excel', '.tsv': 'excel-tab'}
 def _read_csv(fpath, encoding='utf-8'):
     csv_dialect = CSV_FORMATS.get(fpath.suffix)
     assert csv_dialect
-    if unicode is str:
-        opened = fpath.open('rt', encoding=encoding)
-        decode = lambda v: v
-    else:
-        opened = fpath.open('rb')
-        decode = lambda v: v.decode(encoding)
-    with opened as fp:
+    with fpath.open('rt', encoding=encoding) as fp:
         reader = csv.DictReader(fp, dialect=csv_dialect)
         for item in reader:
-            yield {k: decode(v.strip()) for (k, v) in item.items() if v}
+            yield {k: v.strip() for (k, v) in item.items() if v}
 
 
 def _construct(compiler, sources, query=None):
@@ -343,7 +324,7 @@ def _construct(compiler, sources, query=None):
             if not isinstance(context_data, list):
                 context_data = compiler.load_json(context_data )['@context']
             context_data = [compiler.load_json(ctx)['@context']
-                            if isinstance(ctx, unicode) else ctx
+                            if isinstance(ctx, str) else ctx
                             for ctx in context_data]
             to_rdf(source, graph, context_data=context_data)
         elif isinstance(source, Graph):
