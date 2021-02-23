@@ -140,9 +140,23 @@ class Compiler:
                 print("Missing mapping of <%s> under base <%s>" % (nodeid, base_id))
                 continue
 
+            created_ms = created_ms + _faux_offset(node['@id'])
+            modified_ms = None
+
+            meta = node.pop('meta', None)
+            if meta:
+                if 'created' in meta:
+                    created_ms = w3c_dtz_to_ms(meta.pop('created'))
+                if 'modified' in meta:
+                    modified_ms = w3c_dtz_to_ms(meta.pop('modified'))
+
+                assert not meta, f'meta {meta} was not exhausted'
+
             fpath = urlparse(nodeid).path[1:]
-            desc = self._to_node_description(node,
-                    created_ms + _faux_offset(node['@id']),
+            desc = self._to_node_description(
+                    node,
+                    created_ms,
+                    modified_ms,
                     datasets=[self.dataset_id, ds_url])
             self.write(desc, fpath)
 

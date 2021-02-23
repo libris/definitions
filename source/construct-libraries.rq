@@ -8,11 +8,14 @@ base <https://libris.kb.se/library/>
 construct {
 
     ?library a ?libtype ;
+        :meta _:meta ;
         :sameAs ?bdb_id, ?sameas, ?sameas_it ;
         :sigel ?sigel ;
         :name ?name ;
         :uri ?url ;
         :place ?place .
+
+    _:meta :created ?created ; :modified ?modified .
 
     ?place a :Place ;
         :label ?region ;
@@ -30,6 +33,15 @@ construct {
         bibdb:sigel ?sigel ;
         sdo:name ?name .
         # :organisation, sdo:address
+
+    optional {
+        ?bdb_id bibdb:date_created ?raw_created .
+        bind(concat(?raw_created, '.000Z') as ?created)
+    }
+    optional {
+        ?bdb_id bibdb:date_modified ?raw_modified .
+        bind(concat(?raw_modified, '.000Z') as ?modified)
+    }
 
     bind(encode_for_uri(replace(str(?sigel), "\\s+", "")) as ?sigelslug)
 

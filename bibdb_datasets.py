@@ -37,7 +37,12 @@ def _construct_bibdb_data(query):
                 "dataset": BASE + "dataset/libraries",
                 "context": [
                     compiler.load_json(compiler.cache_url(bidb_context)),
-                    {"@base": "http://bibdb.libris.kb.se/"}
+                    {
+                        "@base": "http://bibdb.libris.kb.se/",
+                        # TODO: these are dropped in the source context; fix that and drop this
+                        "date_created": "http://libris.kb.se/def/lib#date_created",
+                        "date_modified": "http://libris.kb.se/def/lib#date_modified",
+                    }
                 ]
             }
         ],
