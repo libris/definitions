@@ -2,8 +2,10 @@ import datetime
 from lxltools.datacompiler import Compiler
 import os
 
+
 SCRIPT_DIR = os.path.dirname(__file__) or '.'
 BASE = 'https://libris.kb.se/'
+
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
         dataset_id=BASE + 'dataset/bibdb',
@@ -49,7 +51,6 @@ def _fetch_libraries(start_url):
     start = 0
     batch = 200
     while True:
-        print('Fetching %s' % url)
         data = compiler.load_json(compiler.cache_url(url))
         libraries = data['libraries']
         if libraries:

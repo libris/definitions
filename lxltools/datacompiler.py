@@ -7,12 +7,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse, urljoin, quote
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
 from rdflib_jsonld.parser import to_rdf
 
 from . import lxlslug
+
+
+MAX_CACHE = 60 * 60
 
 
 class Compiler:
@@ -213,15 +217,34 @@ class Compiler:
     def get_cached_path(self, url):
         return self.cachedir / quote(url, safe="")
 
-    def cache_url(self, url):
+    def cache_url(self, url, maxcache=MAX_CACHE):
         path = self.get_cached_path(url)
-        if not path.exists():
-            with path.open('wb') as fp:
-                r = urlopen(url)
-                while True:
-                    chunk = r.read(1024 * 8)
-                    if not chunk: break
-                    fp.write(chunk)
+        mtime = path.stat().st_mtime if path.exists() else None
+
+        if mtime and datetime.now().timestamp() < mtime + maxcache:
+            print('Using cached URL: %s' % url)
+            return path
+
+        print('Fetching URL: %s' % url)
+        req = Request(url)
+        if mtime:
+            req.add_header('If-Modified-Since', to_http_date(mtime))
+
+        try:
+            r = urlopen(req)
+        except HTTPError as e:
+            if e.status == 304: # not modified
+                print('Not modified, using cached URL: %s' % url)
+                return path
+
+            raise e
+
+        with path.open('wb') as fp:
+            while True:
+                chunk = r.read(1024 * 8)
+                if not chunk: break
+                fp.write(chunk)
+
         return path
 
     def cached_rdf(self, fpath):
@@ -270,6 +293,10 @@ def w3c_dtz_to_ms(ztime):
 def to_w3c_dtz(ms):
     dt = datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
     return dt.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+
+
+def to_http_date(s):
+    return datetime.utcfromtimestamp(s).strftime('%a, %d %b %Y %H:%M:%S GMT')
 
 
 def last_modified_ms(fpaths):
