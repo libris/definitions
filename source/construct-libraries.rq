@@ -31,6 +31,8 @@ construct {
         sdo:name ?name .
         # :organisation, sdo:address
 
+    bind(encode_for_uri(replace(str(?sigel), "\\s+", "")) as ?sigelslug)
+
     optional { ?bdb_id a ?type }
 
     optional {
@@ -60,14 +62,14 @@ construct {
 
     bind(if(?libtype = :Bibliography, </bibliography/>, </library/>) as ?uribase)
     # TODO: coalesce should not be necessary here, due to the else clause. RDFLib bug?
-    bind(iri(concat(str(coalesce(?uribase, </library/>)), str(?sigel))) as ?library)
+    bind(iri(concat(str(coalesce(?uribase, </library/>)), ?sigelslug)) as ?library)
 
     bind(if(?libtype = :Bibliography,
-                iri(concat(str(</library/>), ?sigel)),
+                iri(concat(str(</library/>), ?sigelslug)),
                 ?NO_sameas) as ?sameas)
 
-    bind(iri(concat(str(<http://libris.kb.se/resource/library/>), ?sigel)) as ?sameas_it)
-    #bind(iri(concat(str(<http://libris.kb.se/library/>), ?sigel)) as ?sameas_record)
+    bind(iri(concat(str(<http://libris.kb.se/resource/library/>), ?sigelslug)) as ?sameas_it)
+    #bind(iri(concat(str(<http://libris.kb.se/library/>), ?sigelslug)) as ?sameas_record)
 
     bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
     bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
