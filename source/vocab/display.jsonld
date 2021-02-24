@@ -259,7 +259,7 @@
           "@id": "Library-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
-          "showProperties": [ "sigel" ]
+          "showProperties": [ "sigel", "name" ]
         },
         "Concept": {
           "@id": "Concept-chips",
@@ -486,7 +486,8 @@
           "@id": "Library-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
-          "showProperties": [ "sigel" ]
+          "fresnel:extends": {"@id": "Library-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "Country": {
           "@id": "Country-cards",
