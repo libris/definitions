@@ -261,6 +261,12 @@
           "classLensDomain": "Library",
           "showProperties": [ "sigel", "name" ]
         },
+        "Bibliography": {
+          "@id": "Bibliography-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Bibliography",
+          "showProperties": [ "sigel", "name" ]
+        },
         "Concept": {
           "@id": "Concept-chips",
           "@type": "fresnel:Lens",
@@ -487,6 +493,13 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
           "fresnel:extends": {"@id": "Library-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Bibliography": {
+          "@id": "Bibliography-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Bibliography",
+          "fresnel:extends": {"@id": "Bibliography-chips"},
           "showProperties": [ "fresnel:super" ]
         },
         "Country": {
@@ -803,6 +816,10 @@
           "showProperties": [ "fresnel:super" ]
         },
 
+        "Bibliography": {
+          "fresnel:extends": {"@id": "Bibliography-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "CarrierType": {
           "fresnel:extends": {"@id": "CarrierType-cards"},
           "showProperties": [ "fresnel:super" ]
