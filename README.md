@@ -6,7 +6,14 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
-Install the Python-based dependencies (preferably within a virtualenv):
+Requires Python 3.6+. (Use PyPy for a general speed improvement.)
+
+Preferably set up a virtualenv:
+
+    $ python3 -m venv PATH_TO_VENV_OF_YOUR_CHOICE
+    $ source PATH_TO_VENV_OF_YOUR_CHOICE/bin/activate
+
+Install the Python-based dependencies:
 
     $ pip install -r requirements.txt
 

@@ -1,31 +1,22 @@
-from __future__ import unicode_literals, print_function
-__metaclass__ = type
-
-if bytes is not str:
-    unicode = str
-
 import argparse
-from collections import OrderedDict
-try:
-    from pathlib import Path
-except ImportError:
-    from pathlib2 import Path
-try:
-    from urllib.parse import urlparse, urljoin, quote
-    from urllib.request import urlopen
-except ImportError:
-    from urlparse import urlparse, urljoin
-    from urllib2 import quote, urlopen
-import sys
-import json
 import csv
+import json
+import sys
+from collections import OrderedDict
 from datetime import datetime, timezone
+from pathlib import Path
+from urllib.parse import urlparse, urljoin, quote
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
 from rdflib_jsonld.parser import to_rdf
 
 from . import lxlslug
+
+
+MAX_CACHE = 60 * 60
 
 
 class Compiler:
@@ -149,9 +140,23 @@ class Compiler:
                 print("Missing mapping of <%s> under base <%s>" % (nodeid, base_id))
                 continue
 
+            created_ms = created_ms + _faux_offset(node['@id'])
+            modified_ms = None
+
+            meta = node.pop('meta', None)
+            if meta:
+                if 'created' in meta:
+                    created_ms = w3c_dtz_to_ms(meta.pop('created'))
+                if 'modified' in meta:
+                    modified_ms = w3c_dtz_to_ms(meta.pop('modified'))
+
+                assert not meta, f'meta {meta} was not exhausted'
+
             fpath = urlparse(nodeid).path[1:]
-            desc = self._to_node_description(node,
-                    created_ms + _faux_offset(node['@id']),
+            desc = self._to_node_description(
+                    node,
+                    created_ms,
+                    modified_ms,
                     datasets=[self.dataset_id, ds_url])
             self.write(desc, fpath)
 
@@ -226,15 +231,34 @@ class Compiler:
     def get_cached_path(self, url):
         return self.cachedir / quote(url, safe="")
 
-    def cache_url(self, url):
+    def cache_url(self, url, maxcache=MAX_CACHE):
         path = self.get_cached_path(url)
-        if not path.exists():
-            with path.open('wb') as fp:
-                r = urlopen(url)
-                while True:
-                    chunk = r.read(1024 * 8)
-                    if not chunk: break
-                    fp.write(chunk)
+        mtime = path.stat().st_mtime if path.exists() else None
+
+        if mtime and datetime.now().timestamp() < mtime + maxcache:
+            print('Using cached URL: %s' % url)
+            return path
+
+        print('Fetching URL: %s' % url)
+        req = Request(url)
+        if mtime:
+            req.add_header('If-Modified-Since', to_http_date(mtime))
+
+        try:
+            r = urlopen(req)
+        except HTTPError as e:
+            if e.status == 304: # not modified
+                print('Not modified, using cached URL: %s' % url)
+                return path
+
+            raise e
+
+        with path.open('wb') as fp:
+            while True:
+                chunk = r.read(1024 * 8)
+                if not chunk: break
+                fp.write(chunk)
+
         return path
 
     def cached_rdf(self, fpath):
@@ -285,6 +309,10 @@ def to_w3c_dtz(ms):
     return dt.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
 
 
+def to_http_date(s):
+    return datetime.utcfromtimestamp(s).strftime('%a, %d %b %Y %H:%M:%S GMT')
+
+
 def last_modified_ms(fpaths):
     time_stamps = [f.stat().st_mtime for f in fpaths]
     last_modified_s = max(time_stamps)
@@ -309,7 +337,7 @@ def _serialize(data):
     if isinstance(data, (list, dict)):
         data = json.dumps(data, indent=2, sort_keys=True,
                 separators=(',', ': '), ensure_ascii=False)
-    if isinstance(data, unicode):
+    if isinstance(data, str):
         data = data.encode('utf-8')
     return data
 
@@ -319,16 +347,10 @@ CSV_FORMATS = {'.csv': 'excel', '.tsv': 'excel-tab'}
 def _read_csv(fpath, encoding='utf-8'):
     csv_dialect = CSV_FORMATS.get(fpath.suffix)
     assert csv_dialect
-    if unicode is str:
-        opened = fpath.open('rt', encoding=encoding)
-        decode = lambda v: v
-    else:
-        opened = fpath.open('rb')
-        decode = lambda v: v.decode(encoding)
-    with opened as fp:
+    with fpath.open('rt', encoding=encoding) as fp:
         reader = csv.DictReader(fp, dialect=csv_dialect)
         for item in reader:
-            yield {k: decode(v.strip()) for (k, v) in item.items() if v}
+            yield {k: v.strip() for (k, v) in item.items() if v}
 
 
 def _construct(compiler, sources, query=None):
@@ -343,7 +365,7 @@ def _construct(compiler, sources, query=None):
             if not isinstance(context_data, list):
                 context_data = compiler.load_json(context_data )['@context']
             context_data = [compiler.load_json(ctx)['@context']
-                            if isinstance(ctx, unicode) else ctx
+                            if isinstance(ctx, str) else ctx
                             for ctx in context_data]
             to_rdf(source, graph, context_data=context_data)
         elif isinstance(source, Graph):
