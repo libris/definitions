@@ -253,7 +253,7 @@ class Compiler:
                             HTTPStatus.BAD_GATEWAY,
                             HTTPStatus.SERVICE_UNAVAILABLE,
                             HTTPStatus.GATEWAY_TIMEOUT}:
-                print(f'{HTTPStatus(e.status)}, using cached URL: {url}')
+                print(f'Got HTTP {e.status} {e.reason}, using cached URL: {url}')
                 return path
 
             raise e
