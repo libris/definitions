@@ -453,7 +453,7 @@
 
 :MatrixNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
-    rdfs:label "Matrix number"@en, "Matrisnummer"@sv;
+    rdfs:label "Audio matrix number"@en, "Matrisnummer"@sv;
     owl:equivalentClass bf2:MatrixNumber .
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
@@ -648,7 +648,7 @@
 
 :status a owl:ObjectProperty;
     rdfs:label "status"@sv;
-    rdfs:range bf2:Status;
+    rdfs:range :Status;
     owl:equivalentProperty bf2:status .
 
 :acquisitionTerms a owl:DatatypeProperty;
@@ -661,7 +661,7 @@
     owl:equivalentClass bf2:AcquisitionSource .
 
 :acquisitionSource a owl:ObjectProperty;
-    rdfs:label "source of acquisition"@en, "förvärvskälla"@sv;  
+    rdfs:label "Source of acquisition"@en, "förvärvskälla"@sv;  
     rdfs:range :AcquisitionSource;
     owl:equivalentProperty bf2:acquisitionSource .
 
@@ -1090,7 +1090,7 @@
     owl:equivalentProperty bf2:contentAccessibility .
 
 :CopyrightRegistration a owl:Class;
-    rdfs:label "Copyright registration"@en;
+    rdfs:label "Copyright or Legal Deposit registration information"@en;
     owl:equivalentClass bf2:CopyrightRegistration .
 
 :copyrightRegistration a owl:ObjectProperty;
@@ -1188,7 +1188,7 @@
 :aspectRatio a owl:ObjectProperty;
     rdfs:range :AspectRatio;
     owl:equivalentProperty bf2:aspectRatio;
-    rdfs:label "aspect ratio"@en, "bildförhållande"@sv .
+    rdfs:label "Aspect ratio"@en, "bildförhållande"@sv .
 
 :AspectRatio a owl:Class;
     owl:equivalentClass bf2:AspectRatio;
@@ -1197,7 +1197,7 @@
 :capture a owl:ObjectProperty;
     rdfs:range :Capture;
     owl:equivalentProperty bf2:capture;
-    rdfs:label "capture of content"@en, "inspelning"@sv .
+    rdfs:label "Capture of content"@en, "inspelning"@sv .
 
 :Capture a owl:Class;
     owl:equivalentClass bf2:Capture;
@@ -1355,7 +1355,7 @@
 :voice a owl:ObjectProperty;
     rdfs:label "Voice"@en, "Röst"@sv;
     rdfs:domain :Work;
-    rdfs:range rdfs:MusicVoice;
+    rdfs:range :MusicVoice;
     owl:equivalentProperty bf2:voice .
 
 :voiceType a owl:DatatypeProperty;
