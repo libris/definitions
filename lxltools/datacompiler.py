@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import urlparse, urljoin, quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+from http import HTTPStatus
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -247,8 +248,12 @@ class Compiler:
         try:
             r = urlopen(req)
         except HTTPError as e:
-            if e.status == 304: # not modified
-                print('Not modified, using cached URL: %s' % url)
+            if e.status in {HTTPStatus.NOT_MODIFIED,
+                            HTTPStatus.INTERNAL_SERVER_ERROR,
+                            HTTPStatus.BAD_GATEWAY,
+                            HTTPStatus.SERVICE_UNAVAILABLE,
+                            HTTPStatus.GATEWAY_TIMEOUT}:
+                print(f'{HTTPStatus(e.status)}, using cached URL: {url}')
                 return path
 
             raise e
