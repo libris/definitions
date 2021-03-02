@@ -16,6 +16,7 @@
 # BF2 ENUMERATION AND CHRONOLOGY
 # BF2 IMMEDIATE ACQUISITION
 # BF2 SHELFMARKS
+# SHELFMARK SEQUENCE
 # OTHER ITEM PROPERTIES AND CLASSES
 # RETAINED SCHEMA/BF1 MAPPINGS
 # EARLY LOCAL LIBRIS HOLDING TERMS
@@ -156,6 +157,39 @@
     rdfs:label "NLM call number"@en, "Hyllkod NLM"@sv;
     rdfs:subClassOf :ShelfMark;
     owl:equivalentClass bf2:ShelfMarkNlm .
+
+##
+# SHELFMARK SEQUENCE (linkable)
+
+:ShelfMarkSequence a owl:Class ;
+    rdfs:label "Shelf mark sequence"@en, "Hyllkodssvit"@sv ;
+    rdfs:subClassOf :ShelfMark ;
+    :category :distinct .
+
+:shelfMarkStatus a owl:ObjectProperty ;
+    rdfs:subPropertyOf :status ;
+    rdfs:label "ShelfMark status"@en, "Status för hyllkod"@sv ;
+    rdfs:comment "Shelf mark status"@en, "Hyllkodens status"@sv ;
+    rdfs:domain :ShelfMarkSequence ;
+    rdfs:range :ShelfMarkStatusType .
+
+:ShelfMarkStatusType a :CollectionClass ; # TODO: CollectionClass and EnumeratedTerm not used in KBV?
+    rdfs:subClassOf :EnumeratedTerm, :Status ;
+    skos:notation "ShelfMarkStatusType" ;
+    skos:prefLabel "Shelf mark status"@en, "Status för hyllkod"@sv .
+
+:InactiveShelfMark a :ShelfMarkStatusType ;
+    skos:prefLabel "Inactive shelf mark"@en, "Inaktiv hyllkod"@sv .
+    # TODO: description ?
+
+:ActiveShelfMark a :ShelfMarkStatusType ;
+    skos:prefLabel "Active shelf mark"@en, "Aktiv hyllkod"@sv .
+    # TODO: description ?
+
+:nextShelfControlNumber a :DatatypeProperty ;
+  rdfs:label "Next shelf control Number"@en, "Nästa löpnummer för hyllkod"@sv ;
+  rdfs:domain :ShelfMarkSequence ;
+  rdfs:range xsd:integer .
 
 ##
 # OTHER ITEM PROPERTIES AND CLASSES
