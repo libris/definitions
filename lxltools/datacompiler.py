@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import urlparse, urljoin, quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+from http import HTTPStatus
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
 from rdflib_jsonld.serializer import from_rdf
@@ -137,7 +138,7 @@ class Compiler:
                 print("Missing id for:", node)
                 continue
             if not nodeid.startswith(base_id):
-                print("Missing mapping of <%s> under base <%s>" % (nodeid, base_id))
+                print(f"Missing mapping of <{nodeid}> under base <{base_id}>")
                 continue
 
             created_ms = created_ms + _faux_offset(node['@id'])
@@ -220,7 +221,7 @@ class Compiler:
         # TODO: else: # don't write both to union_file and separate file
         pretty_repr = _serialize(node)
         if pretty_repr:
-            outfile = self.outdir / ("%s.jsonld" % name)
+            outfile = self.outdir / f'{name}.jsonld'
             print("Writing:", outfile)
             outfile.parent.mkdir(parents=True, exist_ok=True)
             with outfile.open('wb') as fp:
@@ -236,10 +237,10 @@ class Compiler:
         mtime = path.stat().st_mtime if path.exists() else None
 
         if mtime and datetime.now().timestamp() < mtime + maxcache:
-            print('Using cached URL: %s' % url)
+            print(f'Using cached URL: {url}')
             return path
 
-        print('Fetching URL: %s' % url)
+        print(f'Fetching URL: {url}')
         req = Request(url)
         if mtime:
             req.add_header('If-Modified-Since', to_http_date(mtime))
@@ -247,8 +248,12 @@ class Compiler:
         try:
             r = urlopen(req)
         except HTTPError as e:
-            if e.status == 304: # not modified
-                print('Not modified, using cached URL: %s' % url)
+            if e.status in {HTTPStatus.NOT_MODIFIED,
+                            HTTPStatus.INTERNAL_SERVER_ERROR,
+                            HTTPStatus.BAD_GATEWAY,
+                            HTTPStatus.SERVICE_UNAVAILABLE,
+                            HTTPStatus.GATEWAY_TIMEOUT}:
+                print(f'Got HTTP {e.status} {e.reason}, using cached URL: {url}')
                 return path
 
             raise e
