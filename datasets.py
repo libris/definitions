@@ -194,6 +194,12 @@ def reprterms():
     return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
 
 @compiler.dataset
+def mediaterms():
+    graph = Graph().parse(str(compiler.path('source/mediaformat-terms.ttl')), format='turtle')
+
+    return "/term/mediaformat/", "2021-02-22T10:32:01.337Z", graph
+
+@compiler.dataset
 def swepubterms():
     graph = Graph()
     for part in compiler.path('source/swepub').glob('**/*.ttl'):
