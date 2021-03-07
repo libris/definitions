@@ -194,10 +194,10 @@ def reprterms():
     return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
 
 @compiler.dataset
-def mediaterms():
-    graph = Graph().parse(str(compiler.path('source/mediaformat-terms.ttl')), format='turtle')
+def imtterms():
+    graph = Graph().parse(str(compiler.path('source/imt-terms.ttl')), format='turtle')
 
-    return "/term/mediaformat/", "2021-02-22T10:32:01.337Z", graph
+    return "/term/imt/", "2021-03-04T10:12:09.921Z", graph
 
 @compiler.dataset
 def swepubterms():
