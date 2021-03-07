@@ -5,6 +5,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix sdo: <http://schema.org/>
 prefix dc: <http://purl.org/dc/terms/>
+prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
 prefix premis3: <http://www.loc.gov/premis/rdf/v3/>
 #prefix edm: <http://www.europeana.eu/schemas/edm/>
 prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/>
@@ -67,15 +68,11 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentProperty relsubtype:isi ; # TODO: super-properties of relsubtype:isi instead?
     rdfs:subPropertyOf :isPartOf .
 
-:mediaFormat a owl:ObjectProperty ;
+:encodingFormat a owl:ObjectProperty ;
     rdfs:domain :MediaObject ;
-    rdfs:range :MediaFormat ;
+    rdfs:range :EncodingFormat ;
     owl:equivalentProperty sdo:encodingFormat ;
-    rdfs:subPropertyOf :format .
-
-:MediaFormat a owl:Class ;
-    owl:equivalentClass dc:FileFormat ;
-    skos:altLabel "IANA Media Type"@en, "MIME-Type"@en .
+    rdfs:subPropertyOf :digitalCharacteristic, :format .
 
 :checksum a owl:DatatypeProperty ;
     rdfs:domain :File ;
