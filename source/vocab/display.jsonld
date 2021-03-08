@@ -123,6 +123,12 @@
           "classLensDomain": "ShelfMark",
           "showProperties": [ "label" ]
         },
+        "ShelfMarkSequence": {
+          "@id": "ShelfMarkSequence-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ShelfMarkSequence",
+          "showProperties": [ "label", "qualifier" ]
+        },
         "Title": {
           "@id": "Title-chips",
           "@type": "fresnel:Lens",
@@ -719,6 +725,11 @@
         "EntityContainer": {
           "@id": "EntityContainer-cards",
           "showProperties": [ "administeredBy", "membershipResource", "isMemberOfRelation", "memberClass", "slugProperty" ]
+        },
+        "ShelfMarkSequence": {
+          "@id": "ShelfMarkSequence-cards",
+          "fresnel:extends": {"@id": "ShelfMarkSequence-chips"},
+          "showProperties": [ "fresnel:super", "description", "hasNote", "shelfMarkStatus" ]
         }
       }
     },
@@ -807,6 +818,10 @@
         },
         "ShelfMark": {
           "fresnel:extends": {"@id": "ShelfMark-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ShelfMarkSequence": {
+          "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "TableOfContents": {
