@@ -126,7 +126,7 @@
 :shelfMark a owl:ObjectProperty;
     rdfs:label "Shelf mark"@en, "Hyllkod"@sv; 
     rdfs:domain :Item;
-    rdfs:range :ShelfMark;
+    sdo:rangeIncludes :ShelfMark, :ShelfMarkSequence;
     owl:equivalentProperty bf2:shelfMark .
 
 :ShelfMark a owl:Class;
@@ -163,7 +163,6 @@
 
 :ShelfMarkSequence a owl:Class ;
     rdfs:label "Shelf mark sequence"@en, "Hyllkodssvit"@sv ;
-    rdfs:subClassOf :ShelfMark ;
     :category marc:auth, :distinct .
 
 :shelfMarkStatus a owl:ObjectProperty ;
