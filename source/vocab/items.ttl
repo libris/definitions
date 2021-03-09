@@ -162,31 +162,31 @@
 # SHELFMARK SEQUENCE (linkable)
 
 :ShelfMarkSequence a owl:Class ;
-    rdfs:label "Shelf mark sequence"@en, "Hyllkodssvit"@sv ;
+    rdfs:label "Shelf label sequence"@en, "Signumsvit"@sv ;
     :category marc:auth, :distinct .
 
 :shelfMarkStatus a owl:ObjectProperty ;
     rdfs:subPropertyOf :status ;
-    rdfs:label "ShelfMark status"@en, "Status för hyllkod"@sv ;
-    rdfs:comment "Shelf mark status"@en, "Hyllkodens status"@sv ;
+    rdfs:label "Shelf label status"@en, "Status för signumsvit"@sv ;
+    rdfs:comment "Shelf label status"@en, "Signumsvitens status"@sv ;
     rdfs:domain :ShelfMarkSequence ;
     rdfs:range :ShelfMarkStatusType .
 
 :ShelfMarkStatusType a owl:Class ;
     rdfs:subClassOf :Status ;
     skos:notation "ShelfMarkStatusType" ;
-    skos:prefLabel "Shelf mark status"@en, "Status för hyllkod"@sv .
+    skos:prefLabel "Shelf label status"@en, "Status för signumsvit"@sv .
 
 :InactiveShelfMark a :ShelfMarkStatusType ;
-    skos:prefLabel "Inactive shelf mark"@en, "Inaktiv hyllkod"@sv .
+    skos:prefLabel "Inactive shelf label"@en, "Inaktiv signumsvit"@sv .
     # TODO: description ?
 
 :ActiveShelfMark a :ShelfMarkStatusType ;
-    skos:prefLabel "Active shelf mark"@en, "Aktiv hyllkod"@sv .
+    skos:prefLabel "Active shelf label"@en, "Aktiv signumsvit"@sv .
     # TODO: description ?
 
 :nextShelfControlNumber a :DatatypeProperty ;
-  rdfs:label "Next shelf control Number"@en, "Nästa löpnummer för hyllkod"@sv ;
+  rdfs:label "Next shelf control Number"@en, "Nästa löpnummer"@sv ;
   rdfs:domain :ShelfMarkSequence ;
   rdfs:range xsd:positiveInteger .
 
