@@ -115,7 +115,7 @@
           "@id": "Item-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Item",
-          "showProperties": [ "itemOf", "heldBy", "shelfMark" ]
+          "showProperties": [ "itemOf", "heldBy", "shelfMark", "shelfControlNumber" ]
         },
         "ShelfMark": {
           "@id": "ShelfMark-chips",
@@ -474,6 +474,7 @@
             "hasComponent",
             "physicalLocation",
             "shelfMark",
+            "shelfControlNumber",
             "language",
             "genreForm",
             "classification",
@@ -794,7 +795,7 @@
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
-          "showProperties": [ "fresnel:super", "shelfLabel", "shelfControlNumber" ]
+          "showProperties": [ "fresnel:super", "shelfLabel" ]
         },
         "Identifier": {
           "fresnel:extends": {"@id": "Identifier-cards"},
