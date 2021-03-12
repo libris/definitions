@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+#@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+
+#@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+#@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <http://schema.org/> .
+
+@prefix : <https://id.kb.se/vocab/> .
+
+# SCHEMA ACCESSIBILITY TERMS
+
+# TODO: define Classes and/or Vocab terms for linkability. (https://id.kb.se/term/a11y/... ?)
+# No term should at the moment be addable in gui. All is MTM-API dependent. / 20210312 
+
+:accessibilityAPI a owl:ObjectProperty ;
+    :category :pending ;
+    owl:equivalentProperty sdo:accessibilityAPI .
+
+:accessibilityControl a owl:ObjectProperty ;
+    :category :pending ;
+    owl:equivalentProperty sdo:accessibilityControl .
+
+:accessibilityFeature a owl:ObjectProperty ;
+    :category :pending ;
+    owl:equivalentProperty sdo:accessibilityFeature .
+
+:accessibilityHazard a owl:ObjectProperty ;
+    :category :pending ;
+    owl:equivalentProperty :accessibilityHazard .
+
+:accessibilitySummary a owl:DatatypeProperty ; # connected to contentAccessibility in BF?
+    :category :pending ;
+    owl:equivalentProperty sdo:accessibilitySummary .
+
+:accessMode a owl:ObjectProperty ;
+    :category :pending ;
+    owl:equivalentProperty sdo:accessMode .
+
+:accessModeSufficient a owl:ObjectProperty ; # Qualified list-type?
+    :category :pending ;
+    owl:equivalentProperty sdo:accessModeSufficient .
+
+# ADDITIONAL TERMS
+
+:certifiedBy a owl:DatatypeProperty ;
+    :category :pending ;
+    rdfs:range xsd:string ; # no link :'(
+    :seeAlso <https://www.w3.org/TR/epub-a11y-11/#certifiedBy> .
+
+:conformsTo a owl:DatatypeProperty ;
+    :category :pending ;
+    rdfs:range xsd:anyURI ; # TODO? :range dc:Standard in DC?
+    owl:equivalentProperty dc:conformsTo .
