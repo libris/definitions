@@ -2,57 +2,108 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-#@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
-#@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
-@prefix dctype: <http://purl.org/dc/dcmitype/> .
-#@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 
+
+# NOTE: This a preliminary scetch of accesibility terms used by epub3/a11y.
+# No term should at the moment be addable in gui. All is MTM-API dependent. / 20210312 
+#
+# readmore about the format and usage:
+# https://www.w3.org/wiki/WebSchemas/Accessibility
+# https://w3c.github.io/publ-a11y/UX-Guide-Metadata/techniques/epub-metadata.html
+# https://w3c.github.io/publ-a11y/UX-Guide-Metadata/principles/index.html
+
+
+# TODO:
+# Define Classes and/or Vocab terms for linkability. (https://id.kb.se/term/a11y/... ?)
+# for values see https://www.w3.org/wiki/WebSchemas/Accessibility
+#
+# TERM EXAMPLES:
+#
+# TODO: Should we have a base prefix like a11y: <https://id.kb.se/term/a11y/> and/or deeper structures like in examples below?
+#
+# </term/a11y/accessibilityFeature/alternativeText> a :AccessibilityFeatureType ;
+#     skos:prefLabel "Alternative Text"@en ;
+#     :description "Alternative text is provided for visual content (e.g., via the HTML alt attribute). "@en ;
+#     :seeAlso <https://www.w3.org/TR/WCAG20/#text-altdef> .
+# 
+# </term/a11y/accessibilityFeature/audioDescription > a :AccessibilityFeatureType ;
+#     skos:prefLabel "Audio Description"@en ;
+#     :description "Audio descriptions are available (e.g., via an HTML5 track element with kind="descriptions"). "@en ;
+#     :seeAlso <http://www.w3.org/TR/WCAG20/#audiodescdef> .
+#
+# </term/a11y/accessibilityHazard/flashing > a :AccessibilityHazardType ;
+#     skos:prefLabel "Flashing"@en ;
+#     skos:definition "A resource whose visual pattern flashes more than three times in any one second; this level of flashing can cause seizures in some users ."@en ;
+#     :seeAlso <http://www.w3.org/TR/WCAG20/#seizure> .
+
+##
 # SCHEMA ACCESSIBILITY TERMS
 
-# TODO: define Classes and/or Vocab terms for linkability. (https://id.kb.se/term/a11y/... ?)
-# No term should at the moment be addable in gui. All is MTM-API dependent. / 20210312 
-
-:accessibilityAPI a owl:ObjectProperty ;
-    :category :pending ;
-    owl:equivalentProperty sdo:accessibilityAPI .
-
-:accessibilityControl a owl:ObjectProperty ;
-    :category :pending ;
-    owl:equivalentProperty sdo:accessibilityControl .
+# Not used by MTM for now:
+#
+# :accessibilityAPI a owl:ObjectProperty ;
+#     :category :pending ;
+#     owl:equivalentProperty sdo:accessibilityAPI .
+# 
+# :accessibilityControl a owl:ObjectProperty ;
+#     :category :pending ;
+#     owl:equivalentProperty sdo:accessibilityControl .
 
 :accessibilityFeature a owl:ObjectProperty ;
     :category :pending ;
-    owl:equivalentProperty sdo:accessibilityFeature .
+    sdo:rangeIncludes :AccessibilityFeatureType ;
+    owl:equivalentProperty sdo:accessibilityFeature . # TODO: subClassOf ?
+
+:AccessibilityFeatureType a owl:Class ; # TODO: Make a :EnumerationClass ; ?
+    :notation :accessibilityFeature ;
+    :category :pending .
 
 :accessibilityHazard a owl:ObjectProperty ;
     :category :pending ;
-    owl:equivalentProperty :accessibilityHazard .
+    sdo:rangeIncludes :AccessibilityHazardType ;
+    owl:equivalentProperty sdo:accessibilityHazard . # TODO: subPropertyOf ?
 
-:accessibilitySummary a owl:DatatypeProperty ; # connected to contentAccessibility in BF?
+:AccessibilityHazardType a owl:Class ; # TODO: Make a :EnumerationClass ; ?
+    :notation :accessibilityHazard ;
+    :category :pending .
+
+:accessibilitySummary a owl:DatatypeProperty ; # TODO: Connected to bf:contentAccessibility ? Use as base/superProperty ?
     :category :pending ;
-    owl:equivalentProperty sdo:accessibilitySummary .
+    owl:equivalentProperty sdo:accessibilitySummary . # TODO: subPropertyOf ?
 
-:accessMode a owl:ObjectProperty ;
+:accessMode a owl:ObjectProperty ; 
     :category :pending ;
-    owl:equivalentProperty sdo:accessMode .
+    owl:equivalentProperty sdo:accessMode . # TODO: subPropertyOf ?
 
-:accessModeSufficient a owl:ObjectProperty ; # Qualified list-type?
+:AccessModeType a owl:Class ; # TODO: Make a :EnumerationClass ; ? # NOTE: exactMatch/closeMatch :MediaType (in RDA-sense) ?
+    :notation :accessMode ;
+    :category :pending .
+    
+:accessModeSufficient a owl:ObjectProperty ;
     :category :pending ;
-    owl:equivalentProperty sdo:accessModeSufficient .
+    owl:equivalentProperty sdo:accessModeSufficient . # TODO: subPropertyOf ?
 
+:AccessModeSufficient a owl:Class ; # TODO: Qualified list-type of thing? Combination of values from AccessMode. Restrictions?
+    :category :pending .
+
+##
 # ADDITIONAL TERMS
 
-:certifiedBy a owl:DatatypeProperty ;
+:certifiedBy a owl:ObjectProperty ;
     :category :pending ;
-    rdfs:range xsd:string ; # no link :'(
+    rdfs:range :Agent ;
     :seeAlso <https://www.w3.org/TR/epub-a11y-11/#certifiedBy> .
 
-:conformsTo a owl:DatatypeProperty ;
+:conformsTo a owl:ObjectProperty ;
     :category :pending ;
-    rdfs:range xsd:anyURI ; # TODO? :range dc:Standard in DC?
+    sdo:rangeIncludes :Standard ;
     owl:equivalentProperty dc:conformsTo .
+
+:Standard a owl:Class ;
+    :category :pending ;
+    owl:equivalentClass dc:Standard .
