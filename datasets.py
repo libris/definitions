@@ -1,17 +1,10 @@
-# -*- coding: UTF-8 -*-
-from __future__ import unicode_literals, print_function
 import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
-from lxltools.datacompiler import Compiler
+from lxltools.datacompiler import Compiler, w3c_dtz_to_ms, last_modified_ms
 from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
+from urllib.parse import urljoin
 
-
-# TODO:
-# * Explicitly link each record to it's parent dataset record unless we have an
-#   ldp:IndirectContainer (we now have *some* defined for terms using inScheme).
-# * Explicitly link each record to its logical source (or just the parent dataset record?)
-#   (derivativeOf <github.com/libris/definitions/**/.ttl> + generationProcess <definitions>?)
 
 NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
 
@@ -46,19 +39,22 @@ def _get_repo_version():
 
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
-                    dataset_id=BASE + 'definitions',
+                    dataset_id=BASE + 'dataset/definitions',
+                    created='2013-10-17T14:07:48.000Z',
+                    tool_id=BASE + 'generator/definitions',
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
-                    system_base_iri="",
+                    system_base_iri='',
                     union='definitions.jsonld.lines')
 
 
-def _insert_record(graph, created_ms):
+def _insert_record(graph, created_ms, dataset_id):
     entity = graph[0]
     record = {'@type': 'Record'}
     record[compiler.record_thing_link] = {'@id': entity['@id']}
     graph.insert(0, record)
     record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
+    record['inDataset'] = [{'@id': compiler.dataset_id}, {'@id': dataset_id}]
 
 
 #@compiler.dataset
@@ -66,15 +62,6 @@ def _insert_record(graph, created_ms):
 #    graph = Graph().parse(compiler.path('source/index.ttl'), format='turtle')
 #    return to_jsonld(graph, (None, None), { "@language": "sv"})
 
-
-# NOTE: this step is currently part of the source maintenance, used to sync
-# with "unstable" marcframe mappings. I plan to inverse parts of this flow
-# to generate token-maps (used by marcframe processors) from these vocab
-# and enum sources instead.
-#prep_vocab_data():
-#    python scripts/vocab-from-marcframe.py
-#           ext-libris/src/main/resources/marcframe.json build/vocab.ttl
-#           > build/vocab-generated-source-1.ttl
 
 @compiler.handler
 def vocab():
@@ -135,8 +122,13 @@ def vocab():
     data['@graph'] = sorted(data['@graph'], key=lambda node:
             (not node.get('@id', '').startswith(vocab_base), node.get('@id')))
 
-    vocab_created_ms = compiler.ztime_to_millis("2014-01-01T00:00:00.000Z")
-    _insert_record(data['@graph'], vocab_created_ms)
+    vocab_created_ms = w3c_dtz_to_ms("2013-12-31T23:00:00.000Z")
+
+    vocab_ds_url = urljoin(compiler.dataset_id, 'vocab')
+    vocab_modified_ms = last_modified_ms(compiler.current_ds_resources)
+    compiler._create_dataset_description(vocab_ds_url, vocab_created_ms, vocab_modified_ms)
+
+    _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
     vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
@@ -146,10 +138,10 @@ def vocab():
     add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
     add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
-    _insert_record(lib_context['@graph'], vocab_created_ms)
+    _insert_record(lib_context['@graph'], vocab_created_ms, vocab_ds_url)
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    _insert_record(display['@graph'], vocab_created_ms)
+    _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')
@@ -162,7 +154,7 @@ def enums():
     rq = compiler.path('source/marc/construct-enums.rq').read_text('utf-8')
     graph += Graph().query(rq).graph
 
-    return "/marc/", "2014-01-23T11:34:17.981Z", graph
+    return "/marc/", "2014-01-23T10:34:17.981Z", graph
 
 
 @compiler.dataset
@@ -190,14 +182,14 @@ def rdaterms():
         ],
         query="source/construct-rda-terms.rq")
 
-    return "/term/rda/", "2018-05-16T08:18:01.337Z", graph
+    return "/term/rda/", "2018-05-16T06:18:01.337Z", graph
 
 
 @compiler.dataset
 def enumterms():
     graph = Graph().parse(str(compiler.path('source/kbv-enums.ttl')), format='turtle')
 
-    return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
+    return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
 
 @compiler.dataset
@@ -208,28 +200,28 @@ def swepubterms():
             continue
         graph.parse(str(part), format='turtle')
 
-    return "/term/swepub/", "2018-05-29T14:36:01.337Z", graph
+    return "/term/swepub/", "2018-05-29T12:36:01.337Z", graph
 
 
 @compiler.dataset
 def containers():
     graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
 
-    return "/term/", "2019-07-11T15:04:17.964Z", graph
+    return "/term/", "2019-07-11T13:04:17.964Z", graph
 
 
 @compiler.dataset
 def generators():
     graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
 
-    return "/generator/", "2018-04-25T20:55:14.723Z", graph
+    return "/generator/", "2018-04-25T18:55:14.723Z", graph
 
 
 @compiler.dataset
 def schemes():
     graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
 
-    return "/", "2014-02-01T21:00:01.766Z", graph
+    return "/", "2014-02-01T20:00:01.766Z", graph
 
 
 @compiler.dataset
@@ -276,7 +268,7 @@ def relators():
         ],
         query="source/construct-relators.rq")
 
-    return "/relator/", "2014-02-01T17:29:12.378Z", graph
+    return "/relator/", "2014-02-01T16:29:12.378Z", graph
 
 
 @compiler.dataset
@@ -305,7 +297,7 @@ def languages():
         ],
         query="source/construct-languages.rq")
 
-    return "/language/", "2014-08-01T09:56:51.110Z", graph
+    return "/language/", "2014-08-01T07:56:51.110Z", graph
 
 
 @compiler.dataset
@@ -324,12 +316,12 @@ def countries():
         ],
         query="source/construct-countries.rq")
 
-    return "/country/", "2014-02-01T13:21:14.008Z", graph
+    return "/country/", "2014-02-01T12:21:14.008Z", graph
 
 
 @compiler.dataset
 def nationalities():
-    return "/nationality/", "2014-02-01T14:08:56.596Z", compiler.construct({
+    return "/nationality/", "2014-02-01T13:08:56.596Z", compiler.construct({
             "source": decorate(
                 compiler.read_csv('source/nationalitetskoder.tsv'),
                 {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
@@ -367,7 +359,7 @@ def docs():
             doc['language'] = {"langTag": lang},
         docs.append(doc)
 
-    return "/doc", "2016-04-15T16:43:38.072Z", {
+    return "/doc", "2016-04-15T14:43:38.072Z", {
         "@context": "../sys/context/base.jsonld",
         "@graph": docs
     }

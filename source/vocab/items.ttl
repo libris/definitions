@@ -16,6 +16,7 @@
 # BF2 ENUMERATION AND CHRONOLOGY
 # BF2 IMMEDIATE ACQUISITION
 # BF2 SHELFMARKS
+# SHELFMARK SEQUENCE
 # OTHER ITEM PROPERTIES AND CLASSES
 # RETAINED SCHEMA/BF1 MAPPINGS
 # EARLY LOCAL LIBRIS HOLDING TERMS
@@ -125,7 +126,7 @@
 :shelfMark a owl:ObjectProperty;
     rdfs:label "Shelf mark"@en, "Hyllkod"@sv; 
     rdfs:domain :Item;
-    rdfs:range :ShelfMark;
+    sdo:rangeIncludes :ShelfMark, :ShelfMarkSequence;
     owl:equivalentProperty bf2:shelfMark .
 
 :ShelfMark a owl:Class;
@@ -156,6 +157,38 @@
     rdfs:label "NLM call number"@en, "Hyllkod NLM"@sv;
     rdfs:subClassOf :ShelfMark;
     owl:equivalentClass bf2:ShelfMarkNlm .
+
+##
+# SHELFMARK SEQUENCE (linkable)
+
+:ShelfMarkSequence a owl:Class ;
+    rdfs:label "Shelf label sequence"@en, "Signumsvit"@sv ;
+    :category marc:auth, :distinct .
+
+:shelfMarkStatus a owl:ObjectProperty ;
+    rdfs:subPropertyOf :status ;
+    rdfs:label "Shelf label status"@en, "Status för signumsvit"@sv ;
+    rdfs:comment "Shelf label status"@en, "Signumsvitens status"@sv ;
+    rdfs:domain :ShelfMarkSequence ;
+    rdfs:range :ShelfMarkStatusType .
+
+:ShelfMarkStatusType a owl:Class ;
+    rdfs:subClassOf :Status ;
+    skos:notation "ShelfMarkStatusType" ;
+    skos:prefLabel "Shelf label status"@en, "Status för signumsvit"@sv .
+
+:InactiveShelfMark a :ShelfMarkStatusType ;
+    skos:prefLabel "Inactive shelf label"@en, "Inaktiv signumsvit"@sv .
+    # TODO: description ?
+
+:ActiveShelfMark a :ShelfMarkStatusType ;
+    skos:prefLabel "Active shelf label"@en, "Aktiv signumsvit"@sv .
+    # TODO: description ?
+
+:nextShelfControlNumber a :DatatypeProperty ;
+  rdfs:label "Next shelf control Number"@en, "Nästa löpnummer"@sv ;
+  rdfs:domain :ShelfMarkSequence ;
+  rdfs:range xsd:positiveInteger .
 
 ##
 # OTHER ITEM PROPERTIES AND CLASSES
@@ -230,7 +263,7 @@
 
 :callno a owl:ObjectProperty ;
     :category :pending ;
-    rdfs:subPropertyOf :identifier ;
+    rdfs:subPropertyOf :identifiedBy ;
     rdfs:domain :Item ;
     rdfs:range :Identifier .
 

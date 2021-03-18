@@ -754,9 +754,9 @@ construct {
         (marc:SoundKindOfMaterialType	marc:PlasticWithMetal	marc:SoundKindOfMaterialType-m	"m"	UNDEF	UNDEF	"Plastbas med metallyta (hit CD)"@sv	"Plastic with metal"@en)
         (marc:HoldingSoundKindOfMaterialType	marc:PlasticWithMetal	marc:HoldingSoundKindOfMaterialType-m)
 
-        (marc:MusicTranspositionType	marc:Arrangement	marc:MusicTranspositionType-b	"b"	UNDEF	UNDEF	"Arrangemang"@sv	"Arrangement"@en)
-        (marc:MusicTranspositionType	marc:Transposition	marc:MusicTranspositionType-a	"a"	UNDEF	UNDEF	"Transponering"@sv	"Transposition"@en)
-        (marc:MusicTranspositionType	marc:BothTransposedAndArranged	marc:MusicTranspositionType-c	"c"	UNDEF	UNDEF	"Transponering och arrangemang"@sv	"Both transposed and arranged"@en)
+        #(marc:MusicTranspositionType	marc:Arrangement	marc:MusicTranspositionType-b	"b"	UNDEF	UNDEF	"Arrangemang"@sv	"Arrangement"@en)
+        #(marc:MusicTranspositionType	marc:Transposition	marc:MusicTranspositionType-a	"a"	UNDEF	UNDEF	"Transponering"@sv	"Transposition"@en)
+        #(marc:MusicTranspositionType	marc:BothTransposedAndArranged	marc:MusicTranspositionType-c	"c"	UNDEF	UNDEF	"Transponering och arrangemang"@sv	"Both transposed and arranged"@en)
 
         (marc:ColorType	marc:HandColored	marc:ColorType-h	"h"	UNDEF	UNDEF	"Handkolorerad"@sv	"Hand colored"@en)
         (marc:MotionPicColorType	marc:HandColored	marc:MotionPicColorType-h)
@@ -1003,9 +1003,9 @@ construct {
         # (marc:MapsPrimeMeridianType	marc:Paris-Obsolete	marc:MapsPrimeMeridianType-g	"g"	UNDEF	true	UNDEF	"Paris (OBSOLETE)"@en)
         # (marc:MapsPrimeMeridianType	marc:WashingtonDC-Obsolete	marc:MapsPrimeMeridianType-w	"w"	UNDEF	true	UNDEF	"Washington, D.C. (OBSOLETE)"@en)
 
-        (marc:VisualRunningTimeType	marc:RunningTimeExceedsThreeCharacters	marc:VisualRunningTimeType-000	"000"	UNDEF	UNDEF	"Speltid överstiger 999 minuter"@sv	"Running time exceeds three characters"@en)
-        (marc:VisualRunningTimeType	marc:RunningTimeUnknown	marc:VisualRunningTimeType----	"---"	UNDEF	UNDEF	"Speltid okänd"@sv	"Running time unknown"@en)
-        (marc:VisualRunningTimeType	marc:RunningTime	marc:VisualRunningTimeType-001-999	"001~999"	UNDEF	UNDEF	"Speltid (i minuter)"@sv	"Running time"@en)
+        #(marc:VisualRunningTimeType	marc:RunningTimeExceedsThreeCharacters	marc:VisualRunningTimeType-000	"000"	UNDEF	UNDEF	"Speltid överstiger 999 minuter"@sv	"Running time exceeds three characters"@en)
+        #(marc:VisualRunningTimeType	marc:RunningTimeUnknown	marc:VisualRunningTimeType----	"---"	UNDEF	UNDEF	"Speltid okänd"@sv	"Running time unknown"@en)
+        #(marc:VisualRunningTimeType	marc:RunningTime	marc:VisualRunningTimeType-001-999	"001~999"	UNDEF	UNDEF	"Speltid (i minuter)"@sv	"Running time"@en)
 
         (marc:MotionPicFormatType	marc:NonanamorphicWideScreen	marc:MotionPicFormatType-b	"b"	UNDEF	UNDEF	"Icke anamorf vidfilm"@sv	"Nonanamorphic (wide-screen)"@en)
         (marc:MotionPicFormatType	marc:StandardSilentApertureFullFrame	marc:MotionPicFormatType-f	"f"	UNDEF	UNDEF	"Standardformat för stumfilm"@sv	"Standard silent aperture (full frame)"@en)
@@ -1584,14 +1584,14 @@ construct {
         (marc:LinkedRecordReqType	marc:Set	marc:LinkedRecordReqType-a)
         (marc:LinkedRecordReqType	marc:RelatedRecordRequired-Obsolete	marc:LinkedRecordReqType-r	"r"	UNDEF	true	UNDEF	"Related record required (OBSOLETE)"@en)
 
-        (marc:ModifiedType	marc:Shortened	marc:ModifiedType-s	"s"	UNDEF	UNDEF	"Posten är förkortad av tekniska skäl"@sv	"Shortened"@en) # "Förkortad"@sv
-        (marc:ModifiedRecordType	marc:Shortened	marc:ModifiedRecordType-s)
-        (marc:ModifiedType	marc:MissingCharacters	marc:ModifiedType-x	"x"	UNDEF	UNDEF	"Vissa tecken och symboler har uteslutits i posten"@sv	"Missing characters"@en) # "Vissa tecken saknas"@sv
-        (marc:ModifiedRecordType	marc:MissingCharacters	marc:ModifiedRecordType-x)
-
-        (marc:ModifiedRecordType	marc:CompletelyRomanizedPrintedCardsRomanized	marc:ModifiedRecordType-o	"o"	UNDEF	UNDEF	"Icke-latinska tecken är translittererade"@sv	"Completely romanized/printed cards romanized"@en)
-        (marc:ModifiedRecordType	marc:DashedOnInformationOmitted	marc:ModifiedRecordType-d	"d"	UNDEF	UNDEF	"Bakgrundsinformation har förbigåtts"@sv	"Dashed-on information omitted"@en)
-        (marc:ModifiedRecordType	marc:CompletelyRomanizedPrintedCardsInScript	marc:ModifiedRecordType-r	"r"	UNDEF	UNDEF	"Icke-latinska tecken finns i såväl originalform som translittererad form"@sv	"Completely romanized/printed cards in script"@en)
+        # (marc:ModifiedType	marc:Shortened	marc:ModifiedType-s	"s"	UNDEF	UNDEF	"Posten är förkortad av tekniska skäl"@sv	"Shortened"@en) # "Förkortad"@sv
+        # (marc:ModifiedRecordType	marc:Shortened	marc:ModifiedRecordType-s)
+        # (marc:ModifiedType	marc:MissingCharacters	marc:ModifiedType-x	"x"	UNDEF	UNDEF	"Vissa tecken och symboler har uteslutits i posten"@sv	"Missing characters"@en) # "Vissa tecken saknas"@sv
+        # (marc:ModifiedRecordType	marc:MissingCharacters	marc:ModifiedRecordType-x)
+        # 
+        # (marc:ModifiedRecordType	marc:CompletelyRomanizedPrintedCardsRomanized	marc:ModifiedRecordType-o	"o"	UNDEF	UNDEF	"Icke-latinska tecken är translittererade"@sv	"Completely romanized/printed cards romanized"@en)
+        # (marc:ModifiedRecordType	marc:DashedOnInformationOmitted	marc:ModifiedRecordType-d	"d"	UNDEF	UNDEF	"Bakgrundsinformation har förbigåtts"@sv	"Dashed-on information omitted"@en)
+        # (marc:ModifiedRecordType	marc:CompletelyRomanizedPrintedCardsInScript	marc:ModifiedRecordType-r	"r"	UNDEF	UNDEF	"Icke-latinska tecken finns i såväl originalform som translittererad form"@sv	"Completely romanized/printed cards in script"@en)
 
         #removed (marc:ReferenceType	marc:TracingsAreNotNecessarilyConsistentWithTheHeading	marc:ReferenceType-b	"b"	UNDEF	UNDEF	"Överensstämmer inte nödvändigtvis med sökelementet i 1XX"@sv	"Tracings are not necessarily consistent with the heading"@en)
         #removed (marc:ReferenceType	marc:TracingsAreConsistentWithTheHeading	marc:ReferenceType-a	"a"	UNDEF	UNDEF	"Överensstämmer med sökelementet i 1XX"@sv	"Tracings are consistent with the heading"@en)

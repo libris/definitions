@@ -1,0 +1,88 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix sdo: <http://schema.org/>
+prefix bibdb: <http://libris.kb.se/def/lib#>
+prefix : <https://id.kb.se/vocab/>
+base <https://libris.kb.se/library/>
+
+construct {
+
+    ?library a ?libtype ;
+        :meta _:meta ;
+        :sameAs ?bdb_id, ?sameas, ?sameas_it ;
+        :sigel ?sigel ;
+        :name ?name ;
+        :uri ?url ;
+        :place ?place .
+
+    _:meta :created ?created ; :modified ?modified .
+
+    ?place a :Place ;
+        :label ?region ;
+        :code ?municipality_code ;
+        :isPartOf ?country ;
+        :latitude ?lat ;
+        :longitude ?long .
+
+    ?country a :Country ;
+        :code ?country_code .
+
+} where {
+
+    ?bdb_id
+        bibdb:sigel ?sigel ;
+        sdo:name ?name .
+        # :organisation, sdo:address
+
+    optional {
+        ?bdb_id bibdb:date_created ?raw_created .
+        bind(concat(?raw_created, '.000Z') as ?created)
+    }
+    optional {
+        ?bdb_id bibdb:date_modified ?raw_modified .
+        bind(concat(?raw_modified, '.000Z') as ?modified)
+    }
+
+    bind(encode_for_uri(replace(str(?sigel), "\\s+", "")) as ?sigelslug)
+
+    optional { ?bdb_id a ?type }
+
+    optional {
+        ?bdb_id sdo:url ?url .
+        FILTER(?url != "" && ?url != "http://")
+    }
+    bind(if(?type = sdo:Library, :Library, :Bibliography) as ?libtype)
+
+    optional {
+        ?bdb_id bibdb:country_code ?country_code .
+        FILTER(?country_code != "")
+    }
+
+    optional {
+        ?bdb_id bibdb:municipality_code ?municipality_code .
+        FILTER(?municipality_code != "")
+    }
+
+    optional {
+        ?bdb_id bibdb:region ?region
+    }
+
+    optional {
+        ?bdb_id sdo:latitude ?lat ; sdo:longitude ?long .
+        FILTER(?lat > 0 && ?long > 0)
+    }
+
+    bind(if(?libtype = :Bibliography, </bibliography/>, </library/>) as ?uribase)
+    # TODO: coalesce should not be necessary here, due to the else clause. RDFLib bug?
+    bind(iri(concat(str(coalesce(?uribase, </library/>)), ?sigelslug)) as ?library)
+
+    bind(if(?libtype = :Bibliography,
+                iri(concat(str(</library/>), ?sigelslug)),
+                ?NO_sameas) as ?sameas)
+
+    bind(iri(concat(str(<http://libris.kb.se/resource/library/>), ?sigelslug)) as ?sameas_it)
+    #bind(iri(concat(str(<http://libris.kb.se/library/>), ?sigelslug)) as ?sameas_record)
+
+    bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
+    bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
+}

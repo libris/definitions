@@ -294,6 +294,10 @@
     skos:definition "Optiskt Maskinläsbar representation av data."@sv;
     owl:equivalentClass bf2:Barcode .
 
+:Bibliography a owl:Class;
+    rdfs:label "Bibliography"@en, "Bibliografi"@sv;
+    rdfs:subClassOf :Collection.
+
 :CODEN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Coden;
     rdfs:subClassOf :Identifier;
@@ -449,7 +453,7 @@
 
 :MatrixNumber a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
-    rdfs:label "Matrix number"@en, "Matrisnummer"@sv;
+    rdfs:label "Audio matrix number"@en, "Matrisnummer"@sv;
     owl:equivalentClass bf2:MatrixNumber .
 
 :MusicDistributorNumber a owl:Class; # rdfs:Datatype ?
@@ -533,6 +537,30 @@
     :exactMatch <http://id.loc.gov/vocabulary/identifiers/wikidata>;
     rdfs:subClassOf :Identifier;
     rdfs:comment "Wikidata item." .
+
+:ISO639-1 a rdfs:Datatype ;
+    rdfs:label "ISO 639-1" ;
+    owl:equivalentClass dc:ISO639-1 .
+
+:ISO639-2 a rdfs:Datatype ;
+    rdfs:label "ISO 639-2" ;
+    owl:equivalentClass dc:ISO639-2 .
+
+:ISO639-2-B a rdfs:Datatype ;
+    rdfs:label "ISO 639-2/B" ;
+    rdfs:comment "Bibliografisk språkkod"@sv ;
+    rdfs:subClassOf :ISO639-2 .
+
+:ISO639-2-T a rdfs:Datatype ;
+    rdfs:label "ISO 639-2/T" ;
+    rdfs:comment "Terminologisk språkkod"@sv ;
+    rdfs:subClassOf :ISO639-2 .
+
+:ISO639-3 a rdfs:Datatype ;
+    rdfs:label "ISO 639-3" ;
+    rdfs:comment "Ur komplett, omfattande språkkodslista."@sv ;
+    rdfs:seeAlso <https://iso639-3.sil.org/about/relationships>;
+    owl:equivalentClass dc:ISO639-3 .
 
 ## Used by SwePub {{{
 
@@ -620,7 +648,7 @@
 
 :status a owl:ObjectProperty;
     rdfs:label "status"@sv;
-    rdfs:range bf2:Status;
+    rdfs:range :Status;
     owl:equivalentProperty bf2:status .
 
 :acquisitionTerms a owl:DatatypeProperty;
@@ -633,7 +661,7 @@
     owl:equivalentClass bf2:AcquisitionSource .
 
 :acquisitionSource a owl:ObjectProperty;
-    rdfs:label "source of acquisition"@en, "förvärvskälla"@sv;  
+    rdfs:label "Source of acquisition"@en, "förvärvskälla"@sv;  
     rdfs:range :AcquisitionSource;
     owl:equivalentProperty bf2:acquisitionSource .
 
@@ -1024,7 +1052,7 @@
     rdfs:comment "Anmärkning om fysiska karakteristika som till exempel illustrationer, färg, uppspelningshastighet, spårkarakteristika, närvaro eller typ av ljud, antal kanaler, filmprojektionssystem."@sv .
 
 :description a owl:DatatypeProperty;
-    sdo:domainIncludes :Instance, :Agent;
+    sdo:domainIncludes :Instance, :Agent, :ShelfMarkSequence ;
     rdfs:label "description"@en, "beskrivning"@sv;
     rdfs:comment "A description of the item."@en, "En sammanfattande beskrivning av resursen"@sv;
     rdfs:subPropertyOf sdo:description .
@@ -1083,7 +1111,7 @@
 :qualifier a owl:DatatypeProperty;
     rdfs:label "Qualifier"@en, "Särskiljande tillägg"@sv;
     owl:equivalentProperty bf2:qualifier, skos:note;
-    sdo:domainIncludes :Creation, :Person, :Title, :Identifier .
+    sdo:domainIncludes :Creation, :Person, :Title, :Identifier, :ShelfMarkSequence .
 
 :typeNote a owl:DatatypeProperty;
     rdfs:label "Typanmärkning"@sv;
@@ -1160,7 +1188,7 @@
 :aspectRatio a owl:ObjectProperty;
     rdfs:range :AspectRatio;
     owl:equivalentProperty bf2:aspectRatio;
-    rdfs:label "aspect ratio"@en, "bildförhållande"@sv .
+    rdfs:label "Aspect ratio"@en, "bildförhållande"@sv .
 
 :AspectRatio a owl:Class;
     owl:equivalentClass bf2:AspectRatio;
@@ -1169,7 +1197,7 @@
 :capture a owl:ObjectProperty;
     rdfs:range :Capture;
     owl:equivalentProperty bf2:capture;
-    rdfs:label "capture of content"@en, "inspelning"@sv .
+    rdfs:label "Capture of content"@en, "inspelning"@sv .
 
 :Capture a owl:Class;
     owl:equivalentClass bf2:Capture;
@@ -1327,7 +1355,7 @@
 :voice a owl:ObjectProperty;
     rdfs:label "Voice"@en, "Röst"@sv;
     rdfs:domain :Work;
-    rdfs:range rdfs:MusicVoice;
+    rdfs:range :MusicVoice;
     owl:equivalentProperty bf2:voice .
 
 :voiceType a owl:DatatypeProperty;
