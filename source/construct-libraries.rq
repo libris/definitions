@@ -13,6 +13,7 @@ construct {
         :sigel ?sigel ;
         :name ?name ;
         :uri ?url ;
+        :qualifier ?dept ;
         :place ?place .
 
     _:meta :created ?created ; :modified ?modified .
@@ -33,6 +34,10 @@ construct {
         bibdb:sigel ?sigel ;
         sdo:name ?name .
         # :organisation, sdo:address
+
+    optional {
+        ?bdb_id bibdb:dept ?dept
+    }
 
     optional {
         ?bdb_id bibdb:date_created ?raw_created .
