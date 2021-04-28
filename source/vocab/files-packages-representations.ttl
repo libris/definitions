@@ -1,15 +1,15 @@
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix sdo: <http://schema.org/>
-prefix dc: <http://purl.org/dc/terms/>
-prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
-prefix premis3: <http://www.loc.gov/premis/rdf/v3/>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sdo: <http://schema.org/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix premis3: <http://www.loc.gov/premis/rdf/v3/> .
 #prefix edm: <http://www.europeana.eu/schemas/edm/>
-prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/>
-prefix : <https://id.kb.se/vocab/>
+@prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
+@prefix : <https://id.kb.se/vocab/> .
 
 ##
 # PREMIS 3.0
@@ -17,6 +17,7 @@ prefix : <https://id.kb.se/vocab/>
 :Creation rdfs:subClassOf premis3:IntellectualEntity .
 
 :Representation a owl:Class ;
+    rdfs:label "Representation"@en, "Representation"@sv ;
     owl:equivalentClass premis3:Representation ;
     rdfs:subClassOf :Embodiment ;
     rdfs:subClassOf [ a owl:Restriction;
@@ -27,10 +28,12 @@ prefix : <https://id.kb.se/vocab/>
             owl:onProperty :includedIn; owl:allValuesFrom [ owl:disjointWith :Representation ] ] .
 
 :Bitstream a owl:Class ;
+    rdfs:label "Bitstream"@en, "Bitström"@sv ;
     owl:equivalentClass premis3:Bitstream ;
     rdfs:subClassOf :MediaObject .
 
 :File a owl:Class ;
+    rdfs:label "File"@en, "Fil"@sv ;
     owl:equivalentClass premis3:File ;
     rdfs:subClassOf :MediaObject ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -41,6 +44,7 @@ prefix : <https://id.kb.se/vocab/>
             owl:onProperty :includedIn; owl:allValuesFrom [ owl:disjointWith :File ] ] .
 
 :representationOf a owl:ObjectProperty ;
+    rdfs:label "representation of"@en, "representation av"@sv ;
     sdo:domainIncludes :File, :Representation ;
     rdfs:range :Embodiment ;
     owl:equivalentProperty relsubtype:rep ; # NOTE: PREMIS calls it represents (the label of rep).
@@ -48,6 +52,7 @@ prefix : <https://id.kb.se/vocab/>
     rdfs:subPropertyOf sdo:encodesCreativeWork, :formatOf .
 
 :hasRepresentation a owl:ObjectProperty ;
+    rdfs:label "has representation"@en, "har representation"@sv ;
     rdfs:domain :Embodiment ;
     sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:isr ; # NOTE: PREMIS calls it isRepresentedBy (the label of isr).
@@ -55,6 +60,7 @@ prefix : <https://id.kb.se/vocab/>
     rdfs:subPropertyOf :associatedMedia .
 
 :includes a owl:ObjectProperty ;
+    rdfs:label "includes"@en, "inkluderar"@sv ;
     sdo:domainIncludes :FilePackage, :MediaObject, :Representation ;
     sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:inc ; # TODO: super-properties of relsubtype:inc instead?
@@ -62,6 +68,7 @@ prefix : <https://id.kb.se/vocab/>
     rdfs:subPropertyOf :hasPart .
 
 :includedIn a owl:ObjectProperty ;
+    rdfs:label "included in"@en, "inkluderad i"@sv ;
     sdo:domainIncludes :MediaObject, :Representation ;
     sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:isi ; # TODO: super-properties of relsubtype:isi instead?
@@ -69,12 +76,14 @@ prefix : <https://id.kb.se/vocab/>
     rdfs:subPropertyOf :isPartOf .
 
 :encodingFormat a owl:ObjectProperty ;
+    rdfs:label "encoding format"@en, "kodningsformat"@sv ;
     rdfs:domain :MediaObject ;
     rdfs:range :EncodingFormat ;
     owl:equivalentProperty sdo:encodingFormat ;
     rdfs:subPropertyOf :digitalCharacteristic, :format .
 
 :checksum a owl:DatatypeProperty ;
+    rdfs:label "checksum"@en, "kontrollsumma"@sv ;
     rdfs:domain :File ;
     rdfs:range :Checksum ;
     rdfs:subPropertyOf premis3:fixity .
@@ -84,12 +93,14 @@ prefix : <https://id.kb.se/vocab/>
 :SHA256 a rdfs:Datatype; rdfs:subClassOf :Checksum .
 
 :fileName a owl:DatatypeProperty ;
+    rdfs:label "filename"@en, "filnamn"@sv ;
     rdfs:domain :File ;
     rdfs:range xsd:string ;
     owl:equivalentProperty premis3:originalName ;
     rdfs:subPropertyOf :label .
 
 :contentSize a owl:DatatypeProperty ;
+    rdfs:label "content size"@en, "innehållsstorlek"@sv ;
     rdfs:domain :MediaObject ;
     #rdfs:range xsd:integer ; NOTE: Can we be sure data always is in the form of an integer?
     skos:scopeNote "The value is an integer representing the file size in bytes, or a qualified string constisting of an integer followed by a conventional unit symbol (KB, MB, GB, TB)."@en ;
@@ -99,12 +110,15 @@ prefix : <https://id.kb.se/vocab/>
 # New terms
 
 :FilePackage a owl:Class ;
+    rdfs:label "File package"@en, "Filpaket"@sv ;
     skos:broader :Dataset, :MediaObject . # TODO: broader dcat:Distribution?
 
 :width a owl:DatatypeProperty ;
+    rdfs:label "width"@en, "bredd"@sv ;
     sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
     owl:equivalentProperty sdo:width .
 
 :height a owl:DatatypeProperty ;
+    rdfs:label "height"@en, "höjd"@sv ;
     sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
     owl:equivalentProperty sdo:height .
