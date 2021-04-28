@@ -40,32 +40,32 @@ prefix : <https://id.kb.se/vocab/>
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :includedIn; owl:allValuesFrom [ owl:disjointWith :File ] ] .
 
-# TODO: Rename to :represents, as PREMIS calls it (the label of :rep)?
-#:represents owl:sameAs :representationOf .
 :representationOf a owl:ObjectProperty ;
     sdo:domainIncludes :File, :Representation ;
     rdfs:range :Embodiment ;
-    owl:equivalentProperty relsubtype:rep ;
+    owl:equivalentProperty relsubtype:rep ; # NOTE: PREMIS calls it represents (the label of rep).
+    owl:inverseOf :hasRepresentation ;
     rdfs:subPropertyOf sdo:encodesCreativeWork, :formatOf .
 
-# TODO: Rename to :isRepresentedBy, as PREMIS calls it (the label of :isr)?
-#:representedBy owl:sameAs :hasRepresentation .
 :hasRepresentation a owl:ObjectProperty ;
     rdfs:domain :Embodiment ;
     sdo:rangeIncludes :MediaObject, :Representation ;
-    owl:equivalentProperty relsubtype:isr ;
+    owl:equivalentProperty relsubtype:isr ; # NOTE: PREMIS calls it isRepresentedBy (the label of isr).
+    owl:inverseOf :representationOf ;
     rdfs:subPropertyOf :associatedMedia .
 
 :includes a owl:ObjectProperty ;
     sdo:domainIncludes :FilePackage, :MediaObject, :Representation ;
-    sdo:rangeIncludes :MediaObject ;
+    sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:inc ; # TODO: super-properties of relsubtype:inc instead?
+    owl:inverseOf :includedIn ;
     rdfs:subPropertyOf :hasPart .
 
 :includedIn a owl:ObjectProperty ;
     sdo:domainIncludes :MediaObject, :Representation ;
     sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:isi ; # TODO: super-properties of relsubtype:isi instead?
+    owl:inverseOf :includes ;
     rdfs:subPropertyOf :isPartOf .
 
 :encodingFormat a owl:ObjectProperty ;
@@ -89,39 +89,22 @@ prefix : <https://id.kb.se/vocab/>
     owl:equivalentProperty premis3:originalName ;
     rdfs:subPropertyOf :label .
 
-:contentSize a owl:DatatypeProperty ; # albeit "content" is rather vague, so let's consider options ("mediaSize" or whatnot)
+:contentSize a owl:DatatypeProperty ;
     rdfs:domain :MediaObject ;
-    #rdfs:range xsd:integer ;
+    #rdfs:range xsd:integer ; NOTE: Can we be sure data always is in the form of an integer?
     skos:scopeNote "The value is an integer representing the file size in bytes, or a qualified string constisting of an integer followed by a conventional unit symbol (KB, MB, GB, TB)."@en ;
     owl:equivalentProperty premis3:size, sdo:contentSize .
 
 ##
 # New terms
 
-:FilePackage a owl:Class ; # TODO: is it just an ArchiveFile (e.g. ZIP)?
-    skos:broader :Dataset, :MediaObject .
-
-:containsFile a owl:ObjectProperty;
-    rdfs:domain :FilePackage ;
-    rdfs:range :File;
-    skos:broader :includes ;
-    rdfs:subPropertyOf :isPartOf .
-
-:parentPackage a owl:ObjectProperty; # TODO: how is it used?
-    rdfs:domain :FilePackage ;
-    rdfs:range :FilePackage;
-    rdfs:subPropertyOf :includedIn ;
-    skos:broader :inDataset .
-
-# TODO: find a better name? :creatingApplication? :toolUsed?
-# TODO: Will probalby be able to remove this. No usecase to have this information.
-:tool a owl:ObjectProperty ;
-    rdfs:subPropertyOf sdo:tool .
+:FilePackage a owl:Class ;
+    skos:broader :Dataset, :MediaObject . # TODO: broader dcat:Distribution?
 
 :width a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ; # might also apply for Representation (but then not equivalentProperty with sdo:width)
+    sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
     owl:equivalentProperty sdo:width .
 
 :height a owl:DatatypeProperty ;
-    sdo:domainIncludes :MediaObject ; # might also apply for Representation (but then not equivalentProperty with sdo:height)
+    sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
     owl:equivalentProperty sdo:height .
