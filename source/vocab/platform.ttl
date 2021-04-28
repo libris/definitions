@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -229,18 +230,36 @@
 
 :DataCatalog a owl:Class;
     rdfs:label "Data catalog"@en, "Datakatalog"@sv;
+    skos:definition "A collection of datasets or data services."@en, "En samling av dataset eller datatjänster."@sv;
+    # NOTE: DCAT has Catalog as subClassOf Dataset, maybe something to consider.
     owl:equivalentClass sdo:DataCatalog, dcat:Catalog .
 
 :Dataset a owl:Class;
-    owl:equivalentClass sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
+    rdfs:label "Dataset"@sv; # NOTE: English label provided through bf2 equivalence. Also minimally defined in things.ttl for "visibility".
+    skos:definition "Data kodad i en definierad struktur. Inkluderar bland annat numeriska data, miljödata. Används av applikationsprogramvara för att beräkna medelvärden, korrelationer, eller för att producera modeller etc."@sv;
+    rdfs:subClassOf :Work;
+    rdfs:seeAlso <https://www.w3.org/wiki/WebSchemas/Datasets>, 
+                 <https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/about>,
+                 <https://schema.org/docs/data-and-datasets.html>;
+    rdfs:comment "Dataset som begrepp har en bred och ibland svårdefinierad gräns. Vokabulären Schema och DCAT används vanligen mer inkluderande för att kunna vara behjälplig inom flera olika domäner och för den senare med definierade profiler för semantisk interoperabilitet. Bibframe och Dublin Core syftar mer till att beskriva det faktiska innehållet t.ex. tabelldata. Void används mer specifikt för att beskriva samlingar av RDF-tripplar. Initativ till mappningar och linjeringar mellan dessa vokabulär förs genom olika intressegrupper bland annat W3C och DCAT-AP."@sv;
+    owl:equivalentClass bf2:Dataset, sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
 
 :hasDataset a owl:ObjectProperty;
     rdfs:label "har dataset"@sv;
     rdfs:domain :DataCatalog;
     rdfs:range :Dataset;
     owl:equivalentProperty sdo:dataset, dcat:dataset;
+    owl:inverseOf :includedInDataCatalog ;
     rdfs:subPropertyOf dc:hasPart .
 
+:inDataCatalog a owl:ObjectProperty;
+    rdfs:label "ingår i datakatalog"@sv;
+    skos:definition "A data catalog which contains this dataset."@en, "En datakatalog som datasetet ingår i."@sv;
+    rdfs:domain :Dataset;
+    rdfs:range :DataCatalog;
+    owl:equivalentProperty sdo:includedInDataCatalog ;
+    owl:inverseOf :hasDataset ;
+    rdfs:subPropertyOf dc:isPartOf .
 
 ##
 # Paged Collections
