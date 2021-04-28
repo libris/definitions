@@ -191,6 +191,18 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
+#NOTE: More suitable name might be needed if usage is broader than digital representations
+@compiler.dataset
+def reprterms():
+    graph = Graph().parse(str(compiler.path('source/repr-terms.ttl')), format='turtle')
+
+    return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
+
+@compiler.dataset
+def imtterms():
+    graph = Graph().parse(str(compiler.path('source/imt-terms.ttl')), format='turtle')
+
+    return "/term/imt/", "2021-03-04T10:12:09.921Z", graph
 
 @compiler.dataset
 def swepubterms():

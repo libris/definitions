@@ -9,6 +9,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
+prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/>
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
@@ -51,7 +52,7 @@
     rdfs:label "has part"@en, "har del"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :isPartOf;
-    owl:equivalentProperty bf2:hasPart, dc:hasPart .
+    owl:equivalentProperty bf2:hasPart, dc:hasPart, sdo:hasPart, relsubtype:hsp . # TODO: super-properties of relsubtype:hsp instead?
 
 :isPartOf a owl:ObjectProperty;
     #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
@@ -61,7 +62,7 @@
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
     rdfs:comment "Relaterad resurs vilken den beskrivna resursen är en fysisk eller logisk del av."@sv;
-    owl:equivalentProperty bf2:partOf, dc:isPartOf .
+    owl:equivalentProperty bf2:partOf, dc:isPartOf, sdo:isPartOf, relsubtype:isp . # TODO: super-properties of relsubtype:isp instead?
 
 :partOfSeries a owl:ObjectProperty;
     rdfs:subPropertyOf :isPartOf;
@@ -145,6 +146,7 @@
     rdfs:domain :Endeavour;
     rdfs:range :MediaObject;
     rdfs:label "associated media"@en, "tillhörande media"@sv;
+    rdfs:subPropertyOf :hasFormat;
     owl:equivalentProperty sdo:associatedMedia .
 
 :MediaObject a owl:Class;

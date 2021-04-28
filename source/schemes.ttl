@@ -131,6 +131,11 @@
     rdfs:seeAlso <https://id.loc.gov/> ;
     dc:title "MARC terms"@en, "MARC-termer"@sv .
 
+# GenreFormScheme used together with representation
+<repr> a :GenreFormScheme;
+    skos:notation "representation";
+    dc:description "Genre/form-termer som används i samband med representation av digitala objekt"@sv, "Genre/form terms used in conjunction with representation of digital objects"@en;
+    dc:title "Genre/form terms used together with representation"@en, "Genre/form-termer för representation"@sv .
 
 # TODO: <sao/fack>, <sao/skon>, ...?
 
@@ -879,3 +884,16 @@
     dc:alternative "UDK "@sv;
     rdfs:label "Universell decimalklassifikation"@sv .
 
+<aat> a :ConceptScheme;
+    skos:notation "aat";
+    dc:title "Art & Architecture Thesaurus"@en, "Thesaurus för konst och arkitektur"@sv;
+    rdfs:comment "The Getty Research Institute";
+    foaf:homepage <http://www.getty.edu/research/tools/vocabularies/aat/index.html> .
+
+<imt> a skos:ConceptScheme ;
+    skos:notation "IMT";
+    dc:title "IANA Registry of Media Types"@en, "IANAs register över mediatyper"@sv;
+    rdfs:comment "Internet Assigned Numbers Authority (IANA)";
+    skos:altLabel "MIME-Types"@en, "MIME-typer"@sv;
+    skos:exactMatch <http://purl.org/dc/terms/IMT> ;
+    foaf:homepage <https://www.iana.org/assignments/media-types/media-types.xhtml/> .
