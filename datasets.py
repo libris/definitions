@@ -186,7 +186,7 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T14:36:01.337Z", graph
 
-#TODO: Change to a more suitable name
+#NOTE: More suitable name might be needed if usage is broader than digital representations
 @compiler.dataset
 def reprterms():
     graph = Graph().parse(str(compiler.path('source/repr-terms.ttl')), format='turtle')
