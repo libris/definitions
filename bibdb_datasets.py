@@ -25,7 +25,7 @@ def libraries():
 @compiler.dataset
 def bibliographies():
     graph = _construct_bibdb_data('sigel=*&level=&libris_reg=&org_type=bibliography')
-    return "/bibliography", "2019-03-14T19:32:20.000Z", graph
+    return "/library", "2019-03-14T19:32:20.000Z", graph
 
 
 def _construct_bibdb_data(query):
