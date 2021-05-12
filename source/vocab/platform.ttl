@@ -280,6 +280,10 @@
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
 
+:maxItems a owl:ObjectProperty;
+    skos:definition "The maximum number of items that may be accessed through pagination. Might be smaller than totalItems"@en;
+    rdfs:domain :PartialCollectionView .
+
 :first a owl:ObjectProperty;
     rdfs:domain :PartialCollectionView;
     owl:equivalentProperty hydra:first;
