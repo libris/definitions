@@ -499,6 +499,12 @@
     rdfs:comment "Serial Item and Contribution Identifier.";
     rdfs:label "SICI" .
 
+:SMDBNumber a owl:Class ; # rdfs:Datatype ?
+    rdfs:subClassOf :SystemNumber ;
+    rdfs:comment "Identifikationsnummer i Svensk mediedatabas."@sv ;
+    skos:editorialNote "ID-numren i SMDB är helt numeriska och innehåller 9 positioner, t ex 001451747"@sv ;
+    rdfs:label "SMDB-Nummer" .
+
 :STRN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Strn;
     rdfs:subClassOf :Identifier;

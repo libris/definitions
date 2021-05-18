@@ -222,7 +222,7 @@
     owl:equivalentProperty :identifier .
 
 :inDataset a owl:ObjectProperty;
-    rdfs:label "ingår i dataset"@sv;
+    rdfs:label "in dataset"@en, "ingår i dataset"@sv;
     rdfs:domain :Record;
     rdfs:range :Dataset;
     owl:equivalentProperty void:inDataset;
@@ -236,30 +236,65 @@
 
 :Dataset a owl:Class;
     rdfs:label "Dataset"@sv; # NOTE: English label provided through bf2 equivalence. Also minimally defined in things.ttl for "visibility".
+    skos:altLabel "Datamängd"@sv;
     skos:definition "Data kodad i en definierad struktur. Inkluderar bland annat numeriska data, miljödata. Används av applikationsprogramvara för att beräkna medelvärden, korrelationer, eller för att producera modeller etc."@sv;
     rdfs:subClassOf :Work;
     rdfs:seeAlso <https://www.w3.org/wiki/WebSchemas/Datasets>, 
                  <https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/about>,
                  <https://schema.org/docs/data-and-datasets.html>;
-    rdfs:comment "Dataset som begrepp har en bred och ibland svårdefinierad gräns. Vokabulären Schema och DCAT används vanligen mer inkluderande för att kunna vara behjälplig inom flera olika domäner och för den senare med definierade profiler för semantisk interoperabilitet. Bibframe och Dublin Core syftar mer till att beskriva det faktiska innehållet t.ex. tabelldata. Void används mer specifikt för att beskriva samlingar av RDF-tripplar. Initativ till mappningar och linjeringar mellan dessa vokabulär förs genom olika intressegrupper bland annat W3C och DCAT-AP."@sv;
+    rdfs:comment "Dataset som begrepp har en bred och ibland svårdefinierad gräns. Vokabulären Schema och DCAT används vanligen mer inkluderande för att kunna vara behjälplig inom flera olika domäner och för den senare med definierade profiler för semantisk interoperabilitet. Bibframe och Dublin Core definitionerna syftar mer till att beskriva det strukturerade innehållet t.ex. listor, tabelldata. Void vokabuläret används mer specifikt för att beskriva samlingar av RDF-tripplar. Initativ till mappningar och linjeringar mellan dessa vokabulär förs genom olika intressegrupper bland annat W3C och DCAT-AP."@sv;
     owl:equivalentClass bf2:Dataset, sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
 
 :hasDataset a owl:ObjectProperty;
-    rdfs:label "har dataset"@sv;
+    rdfs:label "has dataset"@en, "har dataset"@sv;
     rdfs:domain :DataCatalog;
     rdfs:range :Dataset;
     owl:equivalentProperty sdo:dataset, dcat:dataset;
-    owl:inverseOf :includedInDataCatalog ;
+    owl:inverseOf :inDataCatalog ;
     rdfs:subPropertyOf dc:hasPart .
 
 :inDataCatalog a owl:ObjectProperty;
-    rdfs:label "ingår i datakatalog"@sv;
+    rdfs:label "included in data catalog"@en, "ingår i datakatalog"@sv;
     skos:definition "A data catalog which contains this dataset."@en, "En datakatalog som datasetet ingår i."@sv;
     rdfs:domain :Dataset;
     rdfs:range :DataCatalog;
     owl:equivalentProperty sdo:includedInDataCatalog ;
     owl:inverseOf :hasDataset ;
     rdfs:subPropertyOf dc:isPartOf .
+
+# Pending:
+
+:datasetDistribution a owl:ObjectProperty;
+    :category :pending;
+    rdfs:label "dataset distribution"@en, "dataset distribution"@sv;
+    rdfs:domain :Dataset;
+    rdfs:range  :DataDistribution;
+    owl:equivalentProperty dcat:distribution, sdo:distribution .
+
+:DataDistribution a owl:Class; # NOTE: DatasetDistribution?
+    :category :pending;
+    rdfs:label "Data distribution"@en, "Datadistribution"@sv;
+    owl:equivalentClass dcat:Distribution, sdo:DataDownload .
+
+:DataService a owl:Class;
+    :category :pending;
+    rdfs:label "Data service"@en, "Datatjänst"@sv;
+    owl:equivalentClass dcat:DataService, sdo:DataDownload .
+
+# Candidates for addition (NOTE: check dcat3 status):
+
+#:accessService owl:equivalentProperty dcat:accessService .
+#:accessURL owl:equivalentProperty dcat:accessURL .
+#:downloadURL owl:equivalentProperty dcat:downloadURL
+#:endpointURL owl:equivalentProperty dcat:endpointURL .
+#:endpointDescription owl:equivalentProperty dcat:endpointDescription .
+#:servesDataset owl:equivalentProperty dcat:servesDataset .
+#:landingPage owl:equivalentProperty dcat:landingPage .
+
+#:ContactPoint owl:equivalentClass dcat:ContactPoint, sdo:ContactPoint . 
+
+
+#
 
 ##
 # Paged Collections
@@ -279,6 +314,10 @@
     #rdfs:domain :Collection;
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
+
+:maxItems a owl:ObjectProperty;
+    skos:definition "The maximum number of items that may be accessed through pagination. Might be smaller than totalItems"@en;
+    rdfs:domain :PartialCollectionView .
 
 :first a owl:ObjectProperty;
     rdfs:domain :PartialCollectionView;

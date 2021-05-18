@@ -18,14 +18,14 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
 
 @compiler.dataset
 def libraries():
-    graph = _construct_bibdb_data('sigel=*&level=&libris_reg=True&org_type=library')
+    graph = _construct_bibdb_data('sigel=*&holdings=True&org_type=library')
     return "/library", "2019-03-14T15:31:17.000Z", graph
 
 
 @compiler.dataset
 def bibliographies():
-    graph = _construct_bibdb_data('sigel=*&level=&libris_reg=&org_type=bibliography')
-    return "/library", "2019-03-14T19:32:20.000Z", graph
+    graph = _construct_bibdb_data('sigel=*&org_type=bibliography')
+    return "/bibliography", "2019-03-14T19:32:20.000Z", graph
 
 
 def _construct_bibdb_data(query):
