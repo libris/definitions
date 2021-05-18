@@ -1,0 +1,49 @@
+@prefix iiif: <http://iiif.io/api/presentation/3/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sdo: <http://schema.org/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+#prefix edm: <http://www.europeana.eu/schemas/edm/>
+@prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
+@prefix : <https://id.kb.se/vocab/> .
+
+##
+# IIIF PRESENTATION API 3.0
+
+:Manifest a owl:Class ;
+    rdfs:label "Manifest"@en, "Manifest"@sv ;
+    owl:equivalentClass iiif:Manifest ;
+    rdfs:subClassOf :Embodiment ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :items; owl:allValuesFrom :Canvas ] .
+
+:Canvas a owl:Class ;
+    rdfs:label "Canvas"@en, "Canvas"@sv ;
+    owl:equivalentClass iiif:Canvas ;
+    rdfs:subClassOf :Embodiment  ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :items; owl:allValuesFrom :AnnotationPage  ]  .
+
+:AnnotationPage a owl:Class ;
+    rdfs:label "AnnotationPage"@en, "Annoteringssida"@sv ;
+    owl:equivalentClass iiif:AnnotationPage ;
+    rdfs:subClassOf :Embodiment  ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :items; owl:allValuesFrom :Annotation ]  .
+
+:Annotation a owl:Class ;
+    rdfs:label "Annotation"@en, "Annotering"@sv ;
+    owl:equivalentClass iiif:Annotation ;
+    rdfs:subClassOf :Embodiment  .
+
+:items a owl:ObjectProperty ;
+    rdfs:label "items"@en, "element"@sv ; #in progress
+    sdo:domainIncludes :Manifest, :Canvas, :AnnotationPage  ;
+    sdo:rangeIncludes :Canvas, :AnnotationPage, :Annotation ;
+    owl:equivalentProperty :includes ;
+    owl:inverseOf :target . # eller partOf?
+
