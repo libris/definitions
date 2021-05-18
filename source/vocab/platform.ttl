@@ -297,6 +297,35 @@
 #
 
 ##
+# Libris administrative "things"
+
+# Possible idea forward with a base "operator" Class for bibdb things, for now we inherit Library and Bibliography from Agent and Collection.
+# :OperatorProfile a owl:Class ;
+#     :category :abstract ;
+#     rdfs:label "Sigel"@sv ;
+#     rdfs:subClassOf :Agent .
+
+:Library a owl:Class ;
+    rdfs:label "Library"@en, "Bibliotek"@sv ;
+    rdfs:subClassOf :Collection, :Agent .
+    # rdfs 
+
+:Bibliography a owl:Class;
+    rdfs:label "Bibliography"@en, "Bibliografi"@sv;
+    rdfs:subClassOf :Collection, :Agent .
+
+:bibliography a owl:ObjectProperty ;
+    rdfs:comment "in bibliography"@en, "bibliografi som resursen ingår i"@sv ;
+    rdfs:domain :Record ;
+    sdo:rangeIncludes :Bibliography ;
+    rdfs:label "bibliografi"@sv .
+
+:sigel a owl:DatatypeProperty;
+    rdfs:label "Sigel"@sv ;
+    rdfs:subPropertyOf :code;
+    rdfs:domain :Agent; .
+
+##
 # Paged Collections
 
 :ResourceView a owl:Class;

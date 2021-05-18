@@ -293,18 +293,3 @@
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Jurisdiction ] .
 
-:Library a owl:Class;
-    rdfs:label "Library"@en, "Bibliotek"@sv;
-    rdfs:subClassOf :Organization;
-    owl:equivalentClass sdo:Library .
-
-:bibliography a owl:ObjectProperty ;
-    rdfs:comment "Bibliografi som resursen ingår i."@sv ;
-    rdfs:domain :Record ;
-    sdo:rangeIncludes :Library, :Bibliography;
-    rdfs:label "bibliografi"@sv .
-
-:sigel a owl:DatatypeProperty;
-    rdfs:label "Sigel"@sv ;
-    rdfs:subPropertyOf :code;
-    rdfs:domain :Library .
