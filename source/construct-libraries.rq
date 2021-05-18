@@ -9,7 +9,7 @@ construct {
 
     ?library a ?libtype ;
         :meta _:meta ;
-        :sameAs ?bdb_id, ?sameas, ?sameas_it ;
+        :sameAs ?bdb_id, ?sameas ;
         :sigel ?sigel ;
         :name ?name ;
         :uri ?url ;
@@ -79,9 +79,6 @@ construct {
 
     # TODO: coalesce should not be necessary here, due to the else clause. RDFLib bug?
     bind(iri(concat(str(coalesce(?uribase, </library/>)), ?sigelslug)) as ?library)
-
-    bind(iri(concat(str(<http://libris.kb.se/resource/library/>), ?sigelslug)) as ?sameas_it)
-    #bind(iri(concat(str(<http://libris.kb.se/library/>), ?sigelslug)) as ?sameas_record)
 
     bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
     bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
