@@ -22,6 +22,7 @@
 :Country a owl:Class;
     rdfs:label "Country"@en, "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
+    :category :heuristicIdentity;
     rdfs:subClassOf :Place .
 
 :Event a owl:Class;
@@ -77,6 +78,7 @@
     skos:definition "En alternativ lexikal benämning för en resurs."@sv;
     skos:scopeNote "Används vanligen som se-hänvisning";
     sdo:domainIncludes :Concept ;
+    :category :heuristicIdentifier ;
     owl:equivalentProperty skos:altLabel .
 
 :broader a owl:ObjectProperty;
@@ -124,6 +126,7 @@
     rdfs:label "hidden label"@en, "dold benämning"@sv; #NOTE: dold term inom concept
     rdfs:comment "En benämning för en resurs som bör döljas när man skapar visuella visningar av resursen, men som fortfarande ska vara tillgänglig för fri textsökning."@sv;
     sdo:domainIncludes :Concept ;
+    :category :heuristicIdentifier ;
     owl:equivalentProperty skos:hiddenLabel ;
     owl:equivalentProperty madsrdf:deprecatedLabel .
 
@@ -169,6 +172,7 @@
     rdfs:label "preferred label"@en, "föredragen benämning"@sv; #NOTE: föredragen term inom concept
     rdfs:subPropertyOf :label;
     sdo:domainIncludes :Concept ;
+    :category :heuristicIdentifier ;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
 

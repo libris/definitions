@@ -142,9 +142,24 @@ rdf:type a owl:ObjectProperty;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att dölja dessa vid listning av egenskaper"@sv ;
     :code "pending" .
 
+:heuristicIdentity a skos:Collection;
+    rdfs:label "heuristicIdentity"@en, "heuristisk identitet"@sv;
+    rdfs:comment "Anges för att markera klasser där blanka noder kan identifieras via en :heuristicIdentifier."@sv ;
+    skos:example "Role, Country och Language kan identifieras via code, prefLabelByLang, altLabel osv."@sv ;
+    skos:scopeNote "Används i XL för att automatiskt ersätta blanka noder med länkar"@sv ;
+    :code "heuristicIdentity" .
+
+:heuristicIdentifier a skos:Collection;
+    rdfs:label "heuristicIdentifier"@en, "heuristisk identifierare"@sv;
+    rdfs:comment "Anges för att markera egenskaper som kan identifiera blanka noder."@sv ;
+    skos:example "prefLabelByLang, altLabel, labelByLang osv."@sv ;
+    skos:scopeNote "Används i XL för att automatiskt ersätta blanka noder med länkar"@sv ;
+    :code "heuristicIdentifier" .
+
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
     rdfs:domain :Resource ;
+    :category :heuristicIdentifier ;
     owl:equivalentProperty rdfs:label, sdo:name .
 
 :comment a owl:DatatypeProperty;
@@ -158,6 +173,7 @@ rdf:type a owl:ObjectProperty;
     skos:related :label;
     # sdo:domainIncludes :Concept ;
     rdfs:domain :Resource;
+    :category :heuristicIdentifier ;
     owl:equivalentProperty bf2:code, skos:notation, madsrdf:code .
 
 :count a owl:DatatypeProperty;
