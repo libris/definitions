@@ -1,4 +1,4 @@
-@prefix iiif: <http://iiif.io/api/presentation/3/> .
+@prefix iiif: <http://iiif.io/api/presentation/3#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -7,7 +7,6 @@
 @prefix sdo: <http://schema.org/> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
-#prefix edm: <http://www.europeana.eu/schemas/edm/>
 @prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -24,14 +23,14 @@
 :Canvas a owl:Class ;
     rdfs:label "Canvas"@en, "Canvas"@sv ;
     owl:equivalentClass iiif:Canvas ;
-    rdfs:subClassOf :Embodiment  ;
+    rdfs:subClassOf :Embodiment ; # Canvas motsv ju mer en sida. Funkar Embodiment då?
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :items; owl:allValuesFrom :AnnotationPage  ]  .
 
 :AnnotationPage a owl:Class ;
     rdfs:label "AnnotationPage"@en, "Annoteringssida"@sv ;
     owl:equivalentClass iiif:AnnotationPage ;
-    rdfs:subClassOf :Embodiment  ;
+    rdfs:subClassOf :Embodiment ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :items; owl:allValuesFrom :Annotation ]  .
 
@@ -47,3 +46,4 @@
     owl:equivalentProperty :includes ;
     owl:inverseOf :target . # eller partOf?
 
+# TODO: seeAlso, metadata, label, rights, height, width, motivation, body, format, service, profile, target, annotations
