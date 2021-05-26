@@ -1,0 +1,69 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
+@base <https://id.kb.se/term/rda/musnotation/> .
+
+@prefix rdafmn: <http://rdaregistry.info/termList/MusNotation/> .
+@prefix marcmus: <http://id.loc.gov/vocabulary/mmusnotation/> .
+
+
+# MUSICAL NOTATION linked to id.loc.gov and rdaregistry.com
+
+<GraphicNotation> a :MusicNotation ;
+    skos:notation "1001" ;
+    :code "graph" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1001, marcmus:graph .
+
+<LetterNotation> a :MusicNotation ;
+    skos:notation "1002" ;
+    :code "letter" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1002, marcmus:letter .
+
+<MensuralNotation> a :MusicNotation ;
+    skos:notation "1003" ;
+    :code "mensu" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1003, marcmus:mensu .
+
+<NumberNotation> a :MusicNotation ;
+    skos:notation "1004" ;
+    :code "numb" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1004, marcmus:numb .
+
+#NOTE: 1005: plainsong, 1006: solmization deprecated.
+
+<StaffNotation> a :MusicNotation ;
+    :prefLabel "Traditionell västerländsk notskrift"@sv;
+    skos:notation "1007" ;
+    :code "staff" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1007, marcmus:staff .
+
+<Tablature> a :MusicNotation ;
+    skos:notation "1008" ;
+    :code "tabla" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1008, marcmus:tabla .
+
+<TonicSol-fa> a :MusicNotation ;
+    skos:notation "1009" ;
+    :code "tonic" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1009, marcmus:tonic .
+
+<NeumaticNotation> a :MusicNotation ;
+    skos:notation "1010" ;
+    :code "neuma" ;
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1010, marcmus:neuma .
+
+<SyllabicNotation> a :MusicNotation ;
+    skos:notation "1011" ;
+    #NOTE: NO marc counterpart.
+    skos:inScheme </term/rda/musnotation> ;
+    skos:exactMatch rdafmn:1011 .

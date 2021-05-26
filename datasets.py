@@ -191,6 +191,18 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
+@compiler.dataset
+def musnotationterms():
+    graph = Graph().parse(str(compiler.path('source/musicalnotation.ttl')), format='turtle')
+
+    return "/terms/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
+
+@compiler.dataset
+def tacnotationterms():
+    graph = Graph().parse(str(compiler.path('source/tactilenotation.ttl')), format='turtle')
+
+    return "/terms/rda/tacnotation/", "2021-05-21T23:59:10.456Z", graph
+
 #NOTE: More suitable name might be needed if usage is broader than digital representations
 @compiler.dataset
 def reprterms():
@@ -203,6 +215,7 @@ def imtterms():
     graph = Graph().parse(str(compiler.path('source/imt-terms.ttl')), format='turtle')
 
     return "/term/imt/", "2021-03-04T10:12:09.921Z", graph
+
 
 @compiler.dataset
 def swepubterms():
