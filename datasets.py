@@ -195,13 +195,13 @@ def enumterms():
 def musnotationterms():
     graph = Graph().parse(str(compiler.path('source/musicalnotation.ttl')), format='turtle')
 
-    return "/terms/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
+    return "/term/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
 
 @compiler.dataset
 def tacnotationterms():
     graph = Graph().parse(str(compiler.path('source/tactilenotation.ttl')), format='turtle')
 
-    return "/terms/rda/tacnotation/", "2021-05-21T23:59:10.456Z", graph
+    return "/term/rda/tacnotation/", "2021-05-21T23:59:10.456Z", graph
 
 #NOTE: More suitable name might be needed if usage is broader than digital representations
 @compiler.dataset
