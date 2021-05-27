@@ -113,6 +113,16 @@
     rdfs:label "File package"@en, "Filpaket"@sv ;
     skos:broader :Dataset, :MediaObject . # TODO: broader dcat:Distribution?
 
+:hasFilePackage a owl:Class ;
+    rdfs:label "has file package"@en, "har filpaket"@sv ;
+    sdo:domainIncludes :Document ;
+    rdfs:range :FilePackage .
+
+:hasIntellectualEntity a owl:Class ;
+    rdfs:label "has intellectual entity"@en, "har intellektuell entitet"@sv ;
+    sdo:domainIncludes :Document ;
+    rdfs:range :Creation .
+
 :width a owl:DatatypeProperty ;
     rdfs:label "width"@en, "bredd"@sv ;
     sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
