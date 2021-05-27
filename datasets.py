@@ -193,7 +193,7 @@ def enumterms():
 
 @compiler.dataset
 def musnotationterms():
-    graph = Graph().parse(str(compiler.path('source/musicalnotation.ttl')), format='turtle')
+    graph = Graph().parse(str(compiler.path('source/musicnotation.ttl')), format='turtle')
 
     return "/term/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
 
