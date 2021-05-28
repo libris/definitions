@@ -1,83 +1,95 @@
+@prefix : <https://id.kb.se/vocab/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix : <https://id.kb.se/vocab/> .
 @prefix iana: <https://www.iana.org/assignments/media-types/> .
-@base <https://id.kb.se/term/imt/> .
+@prefix lcmenc: <https://id.loc.gov/vocabulary/mencformat/> .
+@base <https://id.kb.se/encodingFormat/> .
 
+# TODO: Add TAR
 
 <application/json> a :EncodingFormat ;
+    rdfs:label "JSON" ;
     skos:notation "application/json" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/json .
 
 <application/ld+json> a :EncodingFormat ;
+    rdfs:label "JSON-LD" ;
     skos:notation "application/ld+json" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/ld\+json .
 
 <application/marc> a :EncodingFormat ;
+    rdfs:label "MARC" ;
     skos:notation "application/marc" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/marc .
 
 <application/marcxml+xml> a :EncodingFormat ;
+    rdfs:label "MARCXML" ;
     skos:notation "application/marcxml+xml" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/marcxml\+xml .
 
+<application/msword> a :EncodingFormat ;
+    rdfs:label "MSWord" ;
+    skos:notation "application/msword" ;
+    skos:exactMatch iana:application\/msword .
+
 <application/pdf> a :EncodingFormat ;
+    rdfs:label "PDF" ;
     skos:notation "application/pdf" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/pdf .
 
 <application/rdf+xml> a :EncodingFormat ;
+    rdfs:label "RDF/XML" ;
     skos:notation "application/rdf+xml" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:application\/rdf\+xml .
 
-<audio/mpeg> a :EncodingFormat ;
-    skos:notation "audio/mpeg" ;
-    skos:inScheme </term/imt> ;
-    skos:exactMatch iana:audio\/mpeg .
+<application/zip> a :EncodingFormat ;
+    rdfs:label "ZIP" ;
+    skos:notation "application/zip" ;
+    skos:exactMatch iana:application\/zip .
+
+<audio/mp3> a :EncodingFormat ;
+    rdfs:label "MP3" ;
+    skos:notation "audio/mp3" ;
+    skos:exactMatch lcmenc:mp3 ; skos:broadMatch iana:audio\/mpeg .
+
+<image/jpeg> a :EncodingFormat ;
+    rdfs:label "JPEG" ;
+    skos:notation "image/jpeg" ;
+    skos:exactMatch lcmenc:jpeg .
 
 <image/jp2> a :EncodingFormat  ;
+    rdfs:label "JP2" ;
     skos:notation "image/jp2" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:image\/jp2 .
 
 <image/tiff> a :EncodingFormat  ;
+    rdfs:label "TIFF" ;
     skos:notation "image/tiff" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:image\/tiff .
 
 <text/turtle> a :EncodingFormat ;
+    rdfs:label "Turtle" ;
     skos:notation "text/turtle" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:text\/turtle .
 
 <text/csv> a :EncodingFormat ;
+    rdfs:label "CSV" ;
     skos:notation "text/csv" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:text\/csv .
 
 <text/tab-separated-values> a :EncodingFormat ;
+    rdfs:label "TSV" ;
     skos:notation "text/tab-separated-values" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:text\/tab-separated-values .
 
 <text/xml> a :EncodingFormat ;
+    rdfs:label "XML" ;
     skos:notation "text/xml" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:text\/xml .
 
-<video/JPEG> a :EncodingFormat ;
-    skos:notation "video/JPEG" ;
-    skos:inScheme </term/imt> ;
-    skos:exactMatch iana:video\/JPEG .
-
 <video/mp4> a :EncodingFormat  ;
+    rdfs:label "MP4" ;
     skos:notation "video/mp4" ;
-    skos:inScheme </term/imt> ;
     skos:exactMatch iana:video\/mp4 .

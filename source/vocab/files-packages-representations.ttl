@@ -7,6 +7,7 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix premis3: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix iiifpres3: <http://iiif.io/api/presentation/3/> .
 #prefix edm: <http://www.europeana.eu/schemas/edm/>
 @prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
 @prefix : <https://id.kb.se/vocab/> .
@@ -58,6 +59,11 @@
     owl:equivalentProperty relsubtype:isr ; # NOTE: PREMIS calls it isRepresentedBy (the label of isr).
     owl:inverseOf :representationOf ;
     rdfs:subPropertyOf :associatedMedia .
+
+:hasIIIFManifest a owl:ObjectProperty ;
+    rdfs:label "has manifest"@en, "har manifest"@sv ;
+    rdfs:domain :Document ;
+    sdo:rangeIncludes iiifpres3:Manifest .
 
 :includes a owl:ObjectProperty ;
     rdfs:label "includes"@en, "inkluderar"@sv ;
