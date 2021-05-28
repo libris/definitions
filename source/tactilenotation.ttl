@@ -1,0 +1,53 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
+@base <https://id.kb.se/term/rda/tacnotation/> .
+
+@prefix rdaftn: <http://rdaregistry.info/termList/TacNotation/> .
+@prefix marctac: <http://id.loc.gov/vocabulary/mtactile/> .
+
+# TACTILE NOTATION linked to id.loc.gov and rdaregistry.com
+
+<BrailleCode> a :TactileNotation ;
+    :label "Punktskrift"@sv ;
+    skos:notation "1001" ;
+    :code "brail" ;
+    skos:exactMatch rdaftn:1001, marctac:brail .
+
+<ComputingBrailleCode> a :TactileNotation ;
+    :label "Punktskrift för databehandling"@sv ;
+    skos:notation "1002" ;
+    :code "comp" ;
+    skos:exactMatch rdaftn:1002, marctac:comp .
+
+<MathematicsBrailleCode> a :TactileNotation ;
+    :label "Matematisk och naturvetenskaplig punktskrift"@sv ;
+    skos:notation "1003" ;
+    :code "math" ;
+    skos:exactMatch rdaftn:1003, marctac:math .
+
+<MoonCode> a :TactileNotation ;
+    :label "Moonskrift"@sv; 
+    skos:notation "1004" ;
+    :code "moon" ;
+    skos:exactMatch rdaftn:1004, marctac:moon .
+
+<MusicBrailleCode> a :TactileNotation ;
+    :label "Punktskrift för musik"@sv ;
+    skos:notation "1005" ;
+    :code "music" ;
+    skos:exactMatch rdaftn:1005, marctac:music .
+
+<TactileMusicalNotation> a :TactileNotation ;
+    :label "Taktil musiknotation"@sv ;
+    skos:notation "1006" ;
+    :code "tactm" ;
+    skos:exactMatch rdaftn:1006, marctac:tactm .
+
+<TactileGraphic> a :TactileNotation ;
+    :label "Taktil grafik"@sv ;
+    skos:notation "1007" ;
+    :code "graph" ;
+    skos:exactMatch rdaftn:1006, marctac:graph .
