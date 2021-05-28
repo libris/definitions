@@ -184,6 +184,12 @@
           "classLensDomain": "ISBN",
           "showProperties": [ "value", "qualifier" ]
         },
+        "Notation": {
+          "@id": "Notation-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Notation",
+          "showProperties": [ "label", "prefLabel"]
+        },
         "ProvisionActivity": {
           "@id": "ProvisionActivity-chips",
           "@type": "fresnel:Lens",
@@ -475,6 +481,7 @@
             "contribution",
             "composition",
             "language",
+            "hasNotation",
             "genreForm",
             "classification",
             "subject",
@@ -567,6 +574,12 @@
           "classLensDomain": "CarrierType",
           "fresnel:extends": {"@id": "CarrierType-chips"},
           "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup", "definition" ]
+        },
+        "Notation": {
+          "@id": "Notation-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Notation",
+          "showProperties": [ "fresnel:super", "exactMatch"]
         },
         "AccessModeType": {
           "@id": "AccessModeType-cards",
