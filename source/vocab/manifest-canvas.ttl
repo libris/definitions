@@ -39,11 +39,59 @@
     owl:equivalentClass iiif:Annotation ;
     rdfs:subClassOf :Embodiment  .
 
+:Range a owl:Class ;
+    rdfs:label "Annotation"@en, "Annotering"@sv ;
+    owl:equivalentClass iiif:Range ;
+    rdfs:subClassOf :Embodiment .
+
+:structures a owl:ObjectProperty ;
+    rdfs:label "structures"@en, "strukturer"@sv ;
+    sdo:domainIncludes :Manifest ;
+    sdo:rangeIncludes :Range ;
+    owl:equivalentProperty iiif:structures .
+
 :items a owl:ObjectProperty ;
     rdfs:label "items"@en, "element"@sv ; #in progress
-    sdo:domainIncludes :Manifest, :Canvas, :AnnotationPage  ;
-    sdo:rangeIncludes :Canvas, :AnnotationPage, :Annotation ;
+    sdo:domainIncludes :Manifest, :Canvas, :AnnotationPage  ; # slopa includes, mer exakt?
+    sdo:rangeIncludes :Canvas, :AnnotationPage, :Annotation ; # --II--
     owl:equivalentProperty :includes ;
     owl:inverseOf :target . # eller partOf?
 
-# TODO: seeAlso, metadata, label, rights, height, width, motivation, body, format, service, profile, target, annotations
+:annotations a owl:ObjectProperty ;
+    rdfs:label "annotations"@en, "annoteringar"@sv ; #in progress
+    sdo:domainIncludes :Manifest, :Canvas, :Range  ; # slopa includes, mer exakt?
+    sdo:rangeIncludes :AnnotationPage ;
+    owl:equivalentProperty iiif:annotations .
+
+:motivation a owl:ObjectProperty  ;
+    rdfs:label "motivation"@en, "motivation"@sv ;
+    sdo:domainIncludes :Annotation  ;
+    owl:equivalentProperty  #?; .
+    .
+
+:metadata a owl:ObjectProperty ;
+    rdfs:label "metadata"@en, "metadata"@sv ;
+    sdo:domain :Manifest ;
+    owl:equivalentProperty iiif:metadata ;
+.
+
+:profile a owl:ObjectProperty ;
+    rdfs:label  "profile"@en, "anvisning"@sv ;
+    sdo:domain :Annotation  ;
+    owl:equivalentProperty iiif:profile .
+
+:service a owl:ObjectProperty;
+    rdfs:label  "service"@en, "tjänst"@sv ;
+    sdo:domain :Annotation ;
+    owl:equivalentProperty iiif:service .
+
+:target a owl:ObjectProperty ;
+    rdfs:label  "target"@en, "mål"@sv ;
+    sdo:domain :Annotation ;
+    sdo:range :Canvas ;
+    owl:equivalentProperty iiif:service .
+
+
+
+# TODO: seeAlso, label, rights, height, width, body, dc:format, painting?, supplementing?
+# Vad göra med Image (StillImage hos oss?). Audio, Video,
