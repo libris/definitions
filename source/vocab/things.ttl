@@ -26,6 +26,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+@prefix iiif_pres3: <http://iiif.io/api/presentation/3#> .
 
 
 # TODO: List top concepts to provide interfaces with:
@@ -199,7 +200,7 @@
 :format a owl:ObjectProperty;
     rdfs:label "format"@en, "format"@sv;
     ptg:abstract true ;
-    owl:equivalentProperty dc:format .
+    owl:equivalentProperty dc:format, iiif_pres3:format .
 
 :BookFormat a owl:Class;
     rdfs:label "Book format"@en, "Bokformat"@sv;
@@ -234,7 +235,7 @@
     skos:definition "Resurs uttryckt i en hörbar form, inklusive musik och andra ljud."@sv;
     rdfs:subClassOf :Work;
     skos:exactMatch rdamedia:1001 ; # "audio"
-    owl:equivalentClass dctype:Sound, bf2:Audio .
+    owl:equivalentClass dctype:Sound, bf2:Audio, iiif_pres3:Audio .
 
 :Cartography a owl:Class;
     rdfs:label "Karta"@sv;
@@ -308,7 +309,7 @@
     skos:definition "Resurs avsedd att uppfattas visuellt och förstås genom användning av språk i skriftlig eller talad form."@sv;
     skos:exactMatch rdacontent:1020 ; # "text"
     rdfs:subClassOf :Work;
-    owl:equivalentClass dctype:Text, bf2:Text .
+    owl:equivalentClass dctype:Text, bf2:Text, iiif_pres3:Text .
 
 # Additional Work/Coordination Types
 

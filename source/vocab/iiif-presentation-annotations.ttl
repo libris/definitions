@@ -1,0 +1,118 @@
+@prefix iiif_pres3: <http://iiif.io/api/presentation/3#> . # Funkar denna urin?
+@prefix oa: <http://www.w3.org/ns/oa#> . # Funkar denna urin?
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sdo: <http://schema.org/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
+@prefix : <https://id.kb.se/vocab/> .
+
+##
+# IIIF PRESENTATION API 3.0
+
+:id owl:equivalentProperty iiif_pres3:id .
+:type owl:equivalentProperty iiif_pres3:type .
+
+:Manifest a owl:Class ;
+    :category :pending ;
+    rdfs:label "Manifest"@en, "Manifest"@sv ;
+    owl:equivalentClass iiif_pres3:Manifest ;
+    rdfs:subClassOf :Embodiment ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :items; owl:allValuesFrom :Canvas ] .
+
+:Canvas a owl:Class ;
+    :category :pending ;
+    rdfs:label "Canvas"@en, "Canvas"@sv ;
+    owl:equivalentClass iiif_pres3:Canvas ;
+#    rdfs:subClassOf :Embodiment ; # Canvas motsv ju en sida av ett verk, men oxå en bild som är ett eget verk. Kan vi hitta en lämplig superklass?
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :items; owl:allValuesFrom :AnnotationPage  ]  .
+
+:AnnotationPage a owl:Class ;
+    :category :pending ;
+    rdfs:label "AnnotationPage"@en, "Annoteringssida"@sv ;
+    owl:equivalentClass iiif_pres3:AnnotationPage ;
+#    rdfs:subClassOf :Embodiment ; # En samlingspunkt för annoteringar. Ex. en och samma video men olika annoteringar för
+#        textningar --> dom blir olika AnnotationPage under en och sammma Canvas. Kan vi hitta en lämplig superklass?
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :items; owl:allValuesFrom :Annotation ]  .
+
+:Annotation a owl:Class ;
+    :category :pending ;
+    rdfs:label "Annotation"@en, "Annotering"@sv ;
+    owl:equivalentClass iiif_pres3:Annotation, oa:Annotation .
+    # Lämplig superklass?
+
+:Image owl:equivalentClass :StillImage .
+:Video owl:equivalentClass :MovingImage .
+
+# TODO :Range a owl:Class ; --> Behov kommer med Tidningar och Visa
+# TODO :structures a owl:ObjectProperty ; --> Behov kommer med Tidningar och Visa
+# TODO :annotations a owl:ObjectProperty ; --> Behov kommer med Tidningar och Visa
+
+:items a owl:ObjectProperty ; # Begreppskrock med itemOf, hasItem och Item?
+    :category :pending ;
+    rdfs:label "items"@en, "element"@sv ; # Begreppskrock med itemOf, hasItem och Item?
+    sdo:domainIncludes :Manifest, :Canvas, :AnnotationPage  ;
+    sdo:rangeIncludes :Canvas, :AnnotationPage, :Annotation ;
+    owl:equivalentProperty :includes . # Kan de vara equivalentProperty när de inte har samma range och domain? Vilken annan relation?
+    # TODO owl:inverseOf :target ? # eller partOf? En annotering som pekar ut ett Manifest eller Canvas, men inte AnnotationPage
+
+:motivation a owl:DatatypeProperty  ; # NOTE: Ett visst antal möjliga värden; painting, supplementing etc - Kan vi ha DatatypeProperty?
+    :category :pending ;
+    rdfs:label "motivation"@en, "motivering"@sv ;
+    rdfs:domain :Annotation  ;
+    owl:equivalentProperty oa:motivation .
+
+:metadata a owl:DatatypeProperty ; # Behöver vi tänka nåt på språktaggarna för label? Vi har tagit bort det pga ej obligatoriskt
+    :category :pending ;
+    rdfs:label "metadata"@en, "metadata"@sv ;
+    rdfs:domain :Manifest ;
+    owl:equivalentProperty iiif_pres3:metadata .
+
+:profile a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:label  "profile"@en, "profil"@sv ;
+    rdfs:domain iiif_pres3:ImageService3 ;
+    owl:equivalentProperty iiif_pres3:profile .
+
+:service a owl:ObjectProperty;
+    :category :pending ;
+    rdfs:label  "service"@en, "tjänst"@sv ;
+    owl:domainIncludes :Image, :Video, :Audio, :Text ;
+    owl:equivalentProperty iiif_pres3:service .
+
+:target a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:label  "target"@en, "mål"@sv ;
+    rdfs:domain :Annotation ;
+    rdfs:range :Canvas ;
+    owl:equivalentProperty oa:target .
+
+:body a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:label  "body"@en ; # TODO: Svensk label?
+    rdfs:domain :Annotation ;
+    owl:rangeIncludes :Image, :Video, :Audio, :Text ;
+    owl:equivalentProperty oa:body .
+
+:height a owl:DatatypeProperty ; # OBS! Krockar med kbv:height. iiif_pres3:height är endast för digitala objekt
+    :category :pending ;
+    rdfs:label "height"@en, "höjd"@sv ;
+    owl:domainIncludes :Canvas, :Image, :Video ;
+#    rdfs:range :Integer ;
+    owl:equivalentProperty iiif_pres3:height .
+
+:width a owl:DatatypeProperty ; # OBS! Krockar med kbv:width. iiif_pres3:width är endast för digitala objekt
+    :category :pending ;
+    rdfs:label "width"@en, "bredd"@sv ;
+    owl:domainIncludes :Canvas, :Image, :Video ;
+#    rdfs:range :Integer ;
+    owl:equivalentProperty iiif_pres3:width .
+
+# TODO: painting, supplementing som värden för motivation
