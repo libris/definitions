@@ -517,7 +517,10 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:label "Medverkan"@sv ;
     #rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
     rdfs:subClassOf prov:Attribution, :QualifiedRole ;
-    owl:equivalentClass bf2:Contribution .
+    owl:equivalentClass bf2:Contribution ;
+    rdfs:subClassOf [ a owl:Restriction;
+                owl:onProperty :agent;
+                owl:allValuesFrom :BibliographicAgent ] .
 
 :PrimaryContribution a owl:Class ;
     rdfs:label "Primär medverkan"@sv ;

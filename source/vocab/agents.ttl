@@ -47,21 +47,30 @@
     rdfs:subClassOf :Identity;
     rdfs:subClassOf foaf:Agent, prov:Agent .
 
+# To be able to restrict Contribution :agent
+:BibliographicAgent a owl:Class;
+    rdfs:label "Agent"@en, "Agent"@sv;
+    ptg:abstract true;
+    :rdfs:subClassOf :Agent.
+
 :Person a owl:Class;
     rdfs:label "Person"@sv;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Person, foaf:Person, sdo:Person .
 
 :Family a owl:Class;
     rdfs:label "Släkt"@sv;
     skos:altLabel "Familj"@sv;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Family .
 
 :Meeting a owl:Class;
     rdfs:label "Möte"@sv;
     rdfs:comment "En formell sammankomst"@sv;
     rdfs:subClassOf :Agent; #:Event;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
 ## Used by SwePub {{{
@@ -283,6 +292,7 @@
     rdfs:label "Organization"@en, "Organisation"@sv;
     owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization ;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Organization ] .
 
