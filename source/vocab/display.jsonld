@@ -117,12 +117,17 @@
           "classLensDomain": "Work",
           "showProperties": [ "hasTitle", "legalDate", "language", "marc:version", "version", "originDate" ]
         },
+        "DataCatalog": {
+          "@id": "DataCatalog-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DataCatalog",
+          "showProperties": [ "label", "hasTitle" ]
+        },
         "Dataset": {
           "@id": "Dataset-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
-          "fresnel:extends": {"@id": "Work-chips"},
-          "showProperties": [ "label", "fresnel:super" ]
+          "showProperties": [ "label", "hasTitle" ]
         },
         "Item": {
           "@id": "Item-chips",
@@ -462,12 +467,29 @@
             "isPartOf"
            ]
         },
+        "DataCatalog": {
+          "@id": "DataCatalog-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DataCatalog",
+          "fresnel:extends": {"@id": "DataCatalog-chips"},
+          "showProperties": [ "fresnel:super", "description", "hasDataset" ]
+        },
         "Dataset": {
           "@id": "Dataset-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
-          "fresnel:extends": {"@id": "Work-cards"},
-          "showProperties": [ "label", "fresnel:super" ]
+          "fresnel:extends": {"@id": "Dataset-chips"},
+          "showProperties": [ 
+            "fresnel:super",
+            "contribution",
+            "description",
+            "language",
+            "genreForm",
+            "classification",
+            "subject",
+            "contentType",
+            {"inverseOf": "hasDataset"}
+          ]
         },
         "NotatedMusic": {
           "@type": "fresnel:Lens",
