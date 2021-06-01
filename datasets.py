@@ -192,6 +192,12 @@ def enumterms():
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
 @compiler.dataset
+def a11yenumterms():
+    graph = Graph().parse(str(compiler.path('source/a11y-enums.ttl')), format='turtle')
+
+    return "/term/enum/a11y/", "2018-05-29T12:36:01.337Z", graph
+
+@compiler.dataset
 def musnotationterms():
     graph = Graph().parse(str(compiler.path('source/musicnotation.ttl')), format='turtle')
 

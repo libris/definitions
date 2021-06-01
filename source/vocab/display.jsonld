@@ -97,7 +97,7 @@
           "@id": "AccessModeType-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "AccessModeType",
-          "showProperties": [ "code" ]
+          "showProperties": [ "notation" ]
         },
         "Record": {
           "@id": "Record-chips",
@@ -436,6 +436,7 @@
             "intendedAudience",
             "associatedMedia",
             "usageAndAccessPolicy",
+            "contentAccessibility",
             "accessMode",
             "relatedTo",
             {"inverseOf": "itemOf"},
@@ -608,6 +609,7 @@
           "@id": "AccessModeType-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "AccessModeType",
+          "fresnel:extends": {"@id": "AccessModeType-chips"},
           "showProperties": [ "fresnel:super", "label" ]
         },
         "Publication": {

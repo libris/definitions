@@ -55,57 +55,49 @@
 #     owl:equivalentProperty sdo:accessibilityControl .
 
 :accessibilityFeature a owl:ObjectProperty ;
-    :category :pending ;
-    sdo:rangeIncludes :AccessibilityFeatureType ;
-    owl:equivalentProperty sdo:accessibilityFeature . # TODO: subClassOf ?
+    :subPropertyOf :contentAccessibility, sdo:accessibilityFeature  ;
+    sdo:rangeIncludes :AccessibilityFeatureType .
 
-:AccessibilityFeatureType a owl:Class ; # TODO: Make a :EnumerationClass ; ?
-    :notation :accessibilityFeature ;
-    :category :pending .
+:AccessibilityFeatureType a owl:Class ;
+    :subClassOf :ContentAccessibility .
 
 :accessibilityHazard a owl:ObjectProperty ;
-    :category :pending ;
-    sdo:rangeIncludes :AccessibilityHazardType ;
-    owl:equivalentProperty sdo:accessibilityHazard . # TODO: subPropertyOf ?
+    :subPropertyOf :contentAccessibility, sdo:accessibilityHazard ;
+    sdo:rangeIncludes :AccessibilityHazardType .
 
-:AccessibilityHazardType a owl:Class ; # TODO: Make a :EnumerationClass ; ?
-    :notation :accessibilityHazard ;
-    :category :pending .
+:AccessibilityHazardType a owl:Class ;
+    :subClassOf :ContentAccessibility .
 
-:accessibilitySummary a owl:DatatypeProperty ; # TODO: Connected to bf:contentAccessibility ? Use as base/superProperty ?
-    :category :pending ;
-    owl:equivalentProperty sdo:accessibilitySummary . # TODO: subPropertyOf ?
+:accessibilitySummary a owl:DatatypeProperty ;
+    :subPropertyOf :contentAccessibility ;
+    owl:equivalentProperty sdo:accessibilitySummary . 
 
-:accessMode a owl:ObjectProperty ; 
-    :category :pending ;
-    sdo:rangeIncludes :AccessModeType ;
-    owl:equivalentProperty sdo:accessMode . # TODO: subPropertyOf ?
+:accessMode a owl:ObjectProperty ;
+    :subPropertyOf :contentAccessibility, sdo:accessMode  ;
+    sdo:rangeIncludes :AccessModeType .
 
-:AccessModeType a owl:Class ; # TODO: Make a :EnumerationClass ; ? # NOTE: exactMatch/closeMatch :MediaType (in RDA-sense) ?
-    :notation :accessMode ;
-    :category :pending .
+:AccessModeType a owl:Class ;
+    :subClassOf :ContentAccessibility .
     
 :accessModeSufficient a owl:ObjectProperty ;
-    :category :pending ;
-    sdo:rangeIncludes :AccessModeSufficient ;
-    owl:equivalentProperty sdo:accessModeSufficient . # TODO: subPropertyOf ?
+    :subPropertyOf :contentAccessibility, sdo:accessModeSufficient ;
+    sdo:rangeIncludes :AccessModeSufficient .
 
 :AccessModeSufficient a owl:Class ; # TODO: Qualified list-type of thing? Combination of values from AccessMode. Restrictions?
-    :category :pending .
+    :subClassOf :ContentAccessibility .
 
 ##
 # ADDITIONAL TERMS
 
 :certifiedBy a owl:ObjectProperty ;
-    :category :pending ;
+    rdfs:domain :Resource;
     rdfs:range :Agent ;
     :seeAlso <https://www.w3.org/TR/epub-a11y-11/#certifiedBy> .
 
 :conformsTo a owl:ObjectProperty ;
-    :category :pending ;
+    rdfs:domain :Resource;
     sdo:rangeIncludes :Standard ;
     owl:equivalentProperty dc:conformsTo .
 
 :Standard a owl:Class ;
-    :category :pending ;
     owl:equivalentClass dc:Standard .
