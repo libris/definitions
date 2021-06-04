@@ -191,15 +191,35 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
+
 @compiler.dataset
 def musnotationterms():
-    graph = Graph().parse(str(compiler.path('source/musicnotation.ttl')), format='turtle')
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/musicnotation.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/musnotationterms"
+        },
+        {
+            "source": "http://rdaregistry.info/termList/MusNotation.nt"
+        }
+    ],
+        query="source/construct-musnotationsterms.rq")
 
     return "/term/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
 
+
 @compiler.dataset
 def tacnotationterms():
-    graph = Graph().parse(str(compiler.path('source/tactilenotation.ttl')), format='turtle')
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/tactilenotation.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/tacnotationterms"
+        },
+        {
+            "source": "http://www.rdaregistry.info/nt/termList/TacNotation.nt"
+        }
+    ],
+        query="source/construct-tacnotationterms.rq")
 
     return "/term/rda/tacnotation/", "2021-05-21T23:59:10.456Z", graph
 

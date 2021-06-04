@@ -1,0 +1,16 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+    ?s ?p ?o ;
+        skos:prefLabel ?prefLabel .
+} where {
+    graph <https://id.kb.se/dataset/tacnotationterms> {
+        ?s ?p ?o ; skos:exactMatch ?rda .
+        optional {
+            graph <http://www.rdaregistry.info/nt/termList/TacNotation.nt> {
+                ?rda skos:prefLabel ?prefLabel .
+                filter(lang(?prefLabel) != 'sv')
+            }
+        }
+    }
+}
