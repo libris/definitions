@@ -216,7 +216,7 @@ def tacnotationterms():
             "dataset": BASE + "dataset/tacnotationterms"
         },
         {
-            "source": "http://www.rdaregistry.info/nt/termList/TacNotation.nt"
+            "source": "http://rdaregistry.info/termList/TacNotation.nt"
         }
     ],
         query="source/construct-tacnotationterms.rq")
