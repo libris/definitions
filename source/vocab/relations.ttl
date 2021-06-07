@@ -571,6 +571,10 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Endeavour ;
     rdfs:label "Applicable institution"@en, "Tillämplig institution"@sv ;
     owl:equivalentProperty bflc:applicableInstitution .
+# Range restrictions:
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :applicableInstitution;
+            owl:allValuesFrom :BibliographicAgent ] .
 
 :Source a owl:Class;
     rdfs:label "Source"@en, "Källa"@sv;
