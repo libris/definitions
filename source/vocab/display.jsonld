@@ -965,6 +965,20 @@
         }
 
       }
+    },
+    "search-cards": {
+      "@id": "search-cards",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Instance": {
+          "fresnel:extends": {"@id": "Instance-cards"},
+          "showProperties": [ "fresnel:super", "hasNote" ]
+        },
+        "Work": {
+          "fresnel:extends": {"@id": "Work-cards"},
+          "showProperties": [ "fresnel:super", "hasNote", "summary" ]
+        }
+      }
     }
   }
 }
