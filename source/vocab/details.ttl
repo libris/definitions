@@ -1329,12 +1329,15 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:degree .
 
-# TODO: Awaiting swedish translation
 :grantingInstitution a owl:ObjectProperty;
     rdfs:label "Degree issuing institution"@en, "Lärosäte som utfärdat examen"@sv;
     rdfs:domain :Dissertation;
     rdfs:range :Agent;
     owl:equivalentProperty bf2:grantingInstitution .
+# Range restrictions:
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :grantingInstitution;
+            owl:allValuesFrom :BibliographicAgent ] .
 
 :GeographicCoverage a owl:Class;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
