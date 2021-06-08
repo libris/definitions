@@ -231,10 +231,10 @@ def reprterms():
     return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
 
 @compiler.dataset
-def imtterms():
-    graph = Graph().parse(str(compiler.path('source/imt-terms.ttl')), format='turtle')
+def encodingFormatterms():
+    graph = Graph().parse(str(compiler.path('source/encodingFormat-terms.ttl')), format='turtle')
 
-    return "/term/imt/", "2021-03-04T10:12:09.921Z", graph
+    return "/encodingFormat/", "2021-03-04T10:12:09.921Z", graph
 
 
 @compiler.dataset
