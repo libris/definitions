@@ -237,6 +237,12 @@
           "classLensDomain": "Nationality",
           "showProperties": [ "prefLabel" ]
         },
+        "marc:AddedEntryGeographicName": {
+          "@id": "marc:AddedEntryGeographicName-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:AddedEntryGeographicName",
+          "showProperties": [ "marc:geographicName", "marc:generalSubdivision", "marc:generalSubdivision" ]
+        },
         "marc:AddedEntryHierarchicalPlaceName": {
           "@id": "AddedEntryHierarchicalPlaceName-chips",
           "@type": "fresnel:Lens",
@@ -977,6 +983,10 @@
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [ "fresnel:super", "hasNote", "summary" ]
+        },
+        "Concept": {
+          "fresnel:extends": {"@id": "Concept-cards"},
+          "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorsNote", "historyNote" ]
         },
         "ShelfMarkSequence": {
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
