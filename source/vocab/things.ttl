@@ -237,10 +237,11 @@
     owl:equivalentClass bf2:Cartography .
 
 :Dataset a owl:Class;
-    rdfs:label "Dataset"@sv;
-    skos:definition "Data kodad i en definierad struktur. Inkluderar bland annat numeriska data, miljödata. Används av applikationsprogramvara för att beräkna medelvärden, korrelationer, eller för att producera modeller etc. Visas normalt inte i sin råa form."@sv;
-    rdfs:subClassOf :Work;
-    owl:equivalentClass dctype:Dataset, bf2:Dataset, sdo:Dataset .
+    # NOTE: See :Dataset in platform.ttl for more detailed descriptions and vocabulary correlations regarding the notion of Datasets.
+    # rdfs:label "Dataset"@sv;
+    # skos:definition "Data kodad i en definierad struktur. Inkluderar bland annat numeriska data, miljödata. Används av applikationsprogramvara för att beräkna medelvärden, korrelationer, eller för att producera modeller etc. Visas normalt inte i sin råa form."@sv;
+    # rdfs:subClassOf :Work;
+    owl:equivalentClass bf2:Dataset .
 
 :MixedMaterial a owl:Class;
     rdfs:label "Blandat material"@sv;
@@ -322,6 +323,14 @@
     :category :pending ;
     rdfs:label "Projected Image"@en, "Projicerad bild"@sv;
     rdfs:subClassOf :Visual  .
+
+:Software a owl:Class;
+    :category :pending ;
+    rdfs:label "Software"@en, "Programvara"@sv;
+    skos:altlabel "Mjukvara"@sv;
+    skos:definition "A computer program in source or compiled form."@en, "Data och maskininstruktioner representerad som källkod eller i kompilerad form."@sv;
+    rdfs:subClassOf :Work ;
+    owl:equivalentClass dctype:Software .
 
 :Visual a owl:Class;
     owl:sameAs :Image ;

@@ -294,10 +294,6 @@
     skos:definition "Optiskt Maskinläsbar representation av data."@sv;
     owl:equivalentClass bf2:Barcode .
 
-:Bibliography a owl:Class;
-    rdfs:label "Bibliography"@en, "Bibliografi"@sv;
-    rdfs:subClassOf :Collection.
-
 :CODEN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Coden;
     rdfs:subClassOf :Identifier;
@@ -499,6 +495,12 @@
     rdfs:comment "Serial Item and Contribution Identifier.";
     rdfs:label "SICI" .
 
+:SMDBNumber a owl:Class ; # rdfs:Datatype ?
+    rdfs:subClassOf :SystemNumber ;
+    rdfs:comment "Identifikationsnummer i Svensk mediedatabas."@sv ;
+    skos:editorialNote "ID-numren i SMDB är helt numeriska och innehåller 9 positioner, t ex 001451747"@sv ;
+    rdfs:label "SMDB-Nummer" .
+
 :STRN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Strn;
     rdfs:subClassOf :Identifier;
@@ -596,7 +598,6 @@
     rdfs:subClassOf :Identifier .
 
 :ORCID a owl:Class;
-    :category :pending ;
     rdfs:label "ORCID";
     rdfs:comment "Open Researcher and Contributor ID";
     rdfs:subClassOf :Identifier .
@@ -633,6 +634,11 @@
     rdfs:label "URI";
     rdfs:comment "Universal Resource Identifier";
     rdfs:subClassOf :Identifier .
+
+:VIAF a owl:Class;
+    rdfs:comment "The Virtual International Authority File";
+    rdfs:label "VIAF";
+    rdfs:subClassOf :Identifier.
 
 :WorldCatNumber a owl:Class;
     :category :pending ;
@@ -686,6 +692,16 @@
     rdfs:label "Review content"@en, "recension"@sv;
     rdfs:range :Review;
     owl:equivalentProperty bf2:review .
+
+:startTime a owl:DatatypeProperty ;
+    rdfs:domain :MediaObject ;  #for event and bitstream?
+    owl:equivalentProperty sdo:startTime ;
+    rdfs:label "start time"@en, "starttid"@sv.
+
+:endTime a owl:DatatypeProperty ;
+    rdfs:domain :MediaObject ; #for event and bitstream?
+    owl:equivalentProperty sdo:endTime ;
+    rdfs:label "end time"@en, "sluttid"@sv.
 
 
 # TODO: events? provenance?
@@ -1052,7 +1068,7 @@
     rdfs:comment "Anmärkning om fysiska karakteristika som till exempel illustrationer, färg, uppspelningshastighet, spårkarakteristika, närvaro eller typ av ljud, antal kanaler, filmprojektionssystem."@sv .
 
 :description a owl:DatatypeProperty;
-    sdo:domainIncludes :Instance, :Agent, :ShelfMarkSequence ;
+    sdo:domainIncludes :Instance, :Agent, :ShelfMarkSequence, :Dataset, :DataCatalog ;
     rdfs:label "description"@en, "beskrivning"@sv;
     rdfs:comment "A description of the item."@en, "En sammanfattande beskrivning av resursen"@sv;
     rdfs:subPropertyOf sdo:description .
@@ -1111,7 +1127,7 @@
 :qualifier a owl:DatatypeProperty;
     rdfs:label "Qualifier"@en, "Särskiljande tillägg"@sv;
     owl:equivalentProperty bf2:qualifier, skos:note;
-    sdo:domainIncludes :Creation, :Person, :Title, :Identifier, :ShelfMarkSequence .
+    sdo:domainIncludes :Creation, :Person, :Title, :Identifier, :ShelfMarkSequence, :Library, :Bibliography.
 
 :typeNote a owl:DatatypeProperty;
     rdfs:label "Typanmärkning"@sv;
@@ -1313,12 +1329,15 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:degree .
 
-# TODO: Awaiting swedish translation
 :grantingInstitution a owl:ObjectProperty;
     rdfs:label "Degree issuing institution"@en, "Lärosäte som utfärdat examen"@sv;
     rdfs:domain :Dissertation;
     rdfs:range :Agent;
     owl:equivalentProperty bf2:grantingInstitution .
+# Range restrictions:
+:Agent rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :grantingInstitution;
+            owl:allValuesFrom :BibliographicAgent ] .
 
 :GeographicCoverage a owl:Class;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;

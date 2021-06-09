@@ -213,6 +213,8 @@ marc:transcribingAgency a owl:ObjectProperty ;
     rdfs:domain kbv:Record;
     rdfs:range kbv:Organization .
 
+marc:agreementName a owl:DatatypeProperty .
+
 # 041
 
 marc:subtitlesOrCaptions a owl:ObjectProperty ;
@@ -708,6 +710,13 @@ marc:hasLocalSubjectAndHeading a owl:ObjectProperty ;
 marc:LocalSubjectAndHeading a owl:Class ;
     rdfs:label "Local subjects/headings"@en, "Lokala ämnesord/rubriker (övriga)"@sv ;
     rdfs:subClassOf kbv:StructuredValue .
+
+# 751 Auth
+
+marc:hasAddedEntryGeographicName a owl:ObjectProperty ;
+    rdfs:range marc:AddedEntryGeographicName .
+
+marc:AddedEntryGeographicName a owl:Class .
 
 # 752
 

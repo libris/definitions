@@ -49,6 +49,13 @@
             "code"
           ]
         },
+        "Concept": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
+          "showProperties": [
+            "prefLabel"
+          ]
+        },
         "Language": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
@@ -108,20 +115,25 @@
           "@id": "Work-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [ "hasTitle", "language" ]
+          "showProperties": [ "hasTitle", "legalDate", "language", "marc:version", "version", "originDate" ]
+        },
+        "DataCatalog": {
+          "@id": "DataCatalog-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DataCatalog",
+          "showProperties": [ "label", "hasTitle" ]
         },
         "Dataset": {
           "@id": "Dataset-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
-          "fresnel:extends": {"@id": "Work-chips"},
-          "showProperties": [ "label", "fresnel:super" ]
+          "showProperties": [ "label", "hasTitle" ]
         },
         "Item": {
           "@id": "Item-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Item",
-          "showProperties": [ "itemOf", "heldBy", "shelfMark", "shelfControlNumber" ]
+          "showProperties": [ "heldBy", "itemOf", "shelfMark", "shelfControlNumber" ]
         },
         "ShelfMark": {
           "@id": "ShelfMark-chips",
@@ -139,7 +151,7 @@
           "@id": "Title-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart", "marc:mediaTerm" ]
+          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart" ]
         },
         "KeyTitle": {
           "@id": "KeyTitle-chips",
@@ -176,6 +188,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "ISBN",
           "showProperties": [ "value", "qualifier" ]
+        },
+        "Notation": {
+          "@id": "Notation-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Notation",
+          "showProperties": [ "label", "prefLabel"]
         },
         "ProvisionActivity": {
           "@id": "ProvisionActivity-chips",
@@ -218,6 +236,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Nationality",
           "showProperties": [ "prefLabel" ]
+        },
+        "marc:AddedEntryGeographicName": {
+          "@id": "marc:AddedEntryGeographicName-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:AddedEntryGeographicName",
+          "showProperties": [ "marc:geographicName", "marc:generalSubdivision", "marc:chronologicalSubdivision", "marc:geographicSubdivision" ]
         },
         "marc:AddedEntryHierarchicalPlaceName": {
           "@id": "AddedEntryHierarchicalPlaceName-chips",
@@ -271,13 +295,13 @@
           "@id": "Library-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
-          "showProperties": [ "sigel", "name" ]
+          "showProperties": [ "name", "qualifier", "sigel" ]
         },
         "Bibliography": {
           "@id": "Bibliography-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Bibliography",
-          "showProperties": [ "sigel", "name" ]
+          "showProperties": [ "name", "qualifier", "sigel" ]
         },
         "Concept": {
           "@id": "Concept-chips",
@@ -301,7 +325,7 @@
           "@id": "ComplexSubject-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ComplexSubject",
-          "showProperties": [ "termComponentList", "inScheme" ]
+          "showProperties": [ "prefLabel", "termComponentList", "inScheme" ]
         },
         "Contribution": {
           "@id": "Contribution-chips",
@@ -410,6 +434,7 @@
             "hasDuration",
             "physicalDetailsNote",
             "digitalCharacteristic",
+            "marc:mediaTerm",
             "genreForm",
             "classification",
             "accompaniedBy",
@@ -418,6 +443,7 @@
             "associatedMedia",
             "usageAndAccessPolicy",
             "accessMode",
+            "relatedTo",
             {"inverseOf": "itemOf"},
             {"inverseOf": "reproductionOf"},
             {"inverseOf": "supplementTo"}
@@ -429,9 +455,12 @@
           "classLensDomain": "Work",
           "showProperties": [
             "hasTitle",
+            "marc:version",
+            "version",
             "translationOf",
             "contribution",
             "language",
+            "hasNotation",
             "hasVariant",
             "inCollection",
             "genreForm",
@@ -444,12 +473,29 @@
             "isPartOf"
            ]
         },
+        "DataCatalog": {
+          "@id": "DataCatalog-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "DataCatalog",
+          "fresnel:extends": {"@id": "DataCatalog-chips"},
+          "showProperties": [ "fresnel:super", "description", "hasDataset" ]
+        },
         "Dataset": {
           "@id": "Dataset-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
-          "fresnel:extends": {"@id": "Work-cards"},
-          "showProperties": [ "label", "fresnel:super" ]
+          "fresnel:extends": {"@id": "Dataset-chips"},
+          "showProperties": [ 
+            "fresnel:super",
+            "contribution",
+            "description",
+            "language",
+            "genreForm",
+            "classification",
+            "subject",
+            "contentType",
+            {"inverseOf": "hasDataset"}
+          ]
         },
         "NotatedMusic": {
           "@type": "fresnel:Lens",
@@ -463,6 +509,7 @@
             "contribution",
             "composition",
             "language",
+            "hasNotation",
             "genreForm",
             "classification",
             "subject",
@@ -555,6 +602,13 @@
           "classLensDomain": "CarrierType",
           "fresnel:extends": {"@id": "CarrierType-chips"},
           "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup", "definition" ]
+        },
+        "Notation": {
+          "@id": "Notation-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Notation",
+          "fresnel:extends": {"@id": "Notation-chips"},
+          "showProperties": [ "fresnel:super", "code", "exactMatch"]
         },
         "AccessModeType": {
           "@id": "AccessModeType-cards",
@@ -711,6 +765,11 @@
           "classLensDomain": "Ontology",
           "showProperties": [ "title", {"inverseOf": "isDefinedBy"} ]
         },
+        "marc:AddedEntryGeographicName": {
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "marc:AddedEntryGeographicName-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "marc:EnumeratedTerm": {
           "@id": "EnumeratedTerm-cards",
           "@type": "fresnel:Lens",
@@ -743,7 +802,7 @@
         "ShelfMarkSequence": {
           "@id": "ShelfMarkSequence-cards",
           "fresnel:extends": {"@id": "ShelfMarkSequence-chips"},
-          "showProperties": [ "fresnel:super", "description", "hasNote", "shelfMarkStatus" ]
+          "showProperties": [ "fresnel:super", "description", "hasNote" ]
         }
       }
     },
@@ -916,6 +975,28 @@
           "showProperties": [ "fresnel:super" ]
         }
 
+      }
+    },
+    "search-cards": {
+      "@id": "search-cards",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Instance": {
+          "fresnel:extends": {"@id": "Instance-cards"},
+          "showProperties": [ "fresnel:super", "hasNote" ]
+        },
+        "Work": {
+          "fresnel:extends": {"@id": "Work-cards"},
+          "showProperties": [ "fresnel:super", "hasNote", "summary" ]
+        },
+        "Concept": {
+          "fresnel:extends": {"@id": "Concept-cards"},
+          "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorsNote", "historyNote" ]
+        },
+        "ShelfMarkSequence": {
+          "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
+          "showProperties": [ "fresnel:super", "shelfMarkStatus" ]
+        }
       }
     }
   }

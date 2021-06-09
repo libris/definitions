@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -47,21 +48,31 @@
     rdfs:subClassOf :Identity;
     rdfs:subClassOf foaf:Agent, prov:Agent .
 
+# To be able to restrict Contribution :agent
+:BibliographicAgent a owl:Class;
+    rdfs:label "Agent"@en, "Agent"@sv;
+    ptg:abstract true;
+    vs:term_status "unstable";
+    :rdfs:subClassOf :Agent.
+
 :Person a owl:Class;
     rdfs:label "Person"@sv;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Person, foaf:Person, sdo:Person .
 
 :Family a owl:Class;
     rdfs:label "Släkt"@sv;
     skos:altLabel "Familj"@sv;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Family .
 
 :Meeting a owl:Class;
     rdfs:label "Möte"@sv;
     rdfs:comment "En formell sammankomst"@sv;
     rdfs:subClassOf :Agent; #:Event;
+    rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
 ## Used by SwePub {{{
@@ -283,6 +294,7 @@
     rdfs:label "Organization"@en, "Organisation"@sv;
     owl:equivalentClass bf2:Organization, sdo:Organization, foaf:Organization ;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Organization ] .
 
@@ -290,21 +302,7 @@
     rdfs:label "Jurisdiktion"@sv;
     owl:equivalentClass bf2:Jurisdiction ;
     rdfs:subClassOf :Agent;
+    rdfs:subClassOf :BibliographicAgent;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Jurisdiction ] .
 
-:Library a owl:Class;
-    rdfs:label "Library"@en, "Bibliotek"@sv;
-    rdfs:subClassOf :Organization;
-    owl:equivalentClass sdo:Library .
-
-:bibliography a owl:ObjectProperty ;
-    rdfs:comment "Bibliografi som resursen ingår i."@sv ;
-    rdfs:domain :Record ;
-    sdo:rangeIncludes :Library, :Bibliography;
-    rdfs:label "bibliografi"@sv .
-
-:sigel a owl:DatatypeProperty;
-    rdfs:label "Sigel"@sv ;
-    rdfs:subPropertyOf :code;
-    rdfs:domain :Library .

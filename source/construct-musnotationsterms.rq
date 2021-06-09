@@ -1,0 +1,18 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+    ?s ?p ?o ;
+        skos:prefLabel ?prefLabel ;
+        skos:definition ?definition .
+} where {
+    graph <https://id.kb.se/dataset/musnotationterms> {
+        ?s ?p ?o ; skos:exactMatch ?rda .
+        optional {
+            graph <http://rdaregistry.info/termList/MusNotation.nt> {
+                ?rda skos:prefLabel ?prefLabel ;
+                    skos:definition ?definition .
+                filter(lang(?prefLabel) != 'sv')
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -105,6 +106,7 @@
     rdfs:range :Agent .
 
 :descriptionUpgrader a owl:ObjectProperty;
+    :category :compositional ;
     rdfs:label "Description upgrader"@en, "Uppgraderad eller importerad av"@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier ;
@@ -221,25 +223,108 @@
     owl:equivalentProperty :identifier .
 
 :inDataset a owl:ObjectProperty;
-    rdfs:label "ingår i dataset"@sv;
+    rdfs:label "in dataset"@en, "ingår i dataset"@sv;
     rdfs:domain :Record;
     rdfs:range :Dataset;
     owl:equivalentProperty void:inDataset;
     rdfs:subPropertyOf dc:isPartOf .
 
 :DataCatalog a owl:Class;
+    rdfs:label "Data catalog"@en, "Datakatalog"@sv;
+    skos:definition "A collection of datasets or data services."@en, "En samling av dataset eller datatjänster."@sv;
+    # NOTE: DCAT has Catalog as subClassOf Dataset, maybe something to consider.
     owl:equivalentClass sdo:DataCatalog, dcat:Catalog .
 
 :Dataset a owl:Class;
-    owl:equivalentClass sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
+    rdfs:label "Dataset"@sv; # NOTE: English label provided through bf2 equivalence. Also minimally defined in things.ttl for "visibility".
+    skos:altLabel "Datamängd"@sv;
+    skos:definition "Data kodad i en definierad struktur. Inkluderar bland annat numeriska data, miljödata. Används av applikationsprogramvara för att beräkna medelvärden, korrelationer, eller för att producera modeller etc."@sv;
+    rdfs:subClassOf :Work;
+    rdfs:seeAlso <https://www.w3.org/wiki/WebSchemas/Datasets>, 
+                 <https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/about>,
+                 <https://schema.org/docs/data-and-datasets.html>;
+    rdfs:comment "Dataset som begrepp har en bred och ibland svårdefinierad gräns. Vokabulären Schema och DCAT används vanligen mer inkluderande för att kunna vara behjälplig inom flera olika domäner och för den senare med definierade profiler för semantisk interoperabilitet. Bibframe och Dublin Core definitionerna syftar mer till att beskriva det strukturerade innehållet t.ex. listor, tabelldata. Void vokabuläret används mer specifikt för att beskriva samlingar av RDF-tripplar. Initativ till mappningar och linjeringar mellan dessa vokabulär förs genom olika intressegrupper bland annat W3C och DCAT-AP."@sv;
+    owl:equivalentClass bf2:Dataset, sdo:Dataset, dcat:Dataset, void:Dataset, dctype:Dataset .
 
 :hasDataset a owl:ObjectProperty;
-    rdfs:label "har dataset"@sv;
+    rdfs:label "has dataset"@en, "har dataset"@sv;
     rdfs:domain :DataCatalog;
     rdfs:range :Dataset;
     owl:equivalentProperty sdo:dataset, dcat:dataset;
+    owl:inverseOf :inDataCatalog ;
     rdfs:subPropertyOf dc:hasPart .
 
+:inDataCatalog a owl:ObjectProperty;
+    rdfs:label "included in data catalog"@en, "ingår i datakatalog"@sv;
+    skos:definition "A data catalog which contains this dataset."@en, "En datakatalog som datasetet ingår i."@sv;
+    rdfs:domain :Dataset;
+    rdfs:range :DataCatalog;
+    owl:equivalentProperty sdo:includedInDataCatalog ;
+    owl:inverseOf :hasDataset ;
+    rdfs:subPropertyOf dc:isPartOf .
+
+# Pending:
+
+:datasetDistribution a owl:ObjectProperty;
+    :category :pending;
+    rdfs:label "dataset distribution"@en, "dataset distribution"@sv;
+    rdfs:domain :Dataset;
+    rdfs:range  :DataDistribution;
+    owl:equivalentProperty dcat:distribution, sdo:distribution .
+
+:DataDistribution a owl:Class; # NOTE: DatasetDistribution?
+    :category :pending;
+    rdfs:label "Data distribution"@en, "Datadistribution"@sv;
+    owl:equivalentClass dcat:Distribution, sdo:DataDownload .
+
+:DataService a owl:Class;
+    :category :pending;
+    rdfs:label "Data service"@en, "Datatjänst"@sv;
+    owl:equivalentClass dcat:DataService, sdo:DataDownload .
+
+# Candidates for addition (NOTE: check dcat3 status):
+
+#:accessService owl:equivalentProperty dcat:accessService .
+#:accessURL owl:equivalentProperty dcat:accessURL .
+#:downloadURL owl:equivalentProperty dcat:downloadURL
+#:endpointURL owl:equivalentProperty dcat:endpointURL .
+#:endpointDescription owl:equivalentProperty dcat:endpointDescription .
+#:servesDataset owl:equivalentProperty dcat:servesDataset .
+#:landingPage owl:equivalentProperty dcat:landingPage .
+
+#:ContactPoint owl:equivalentClass dcat:ContactPoint, sdo:ContactPoint . 
+
+
+#
+
+##
+# Libris administrative "things"
+
+# Possible idea forward with a base "operator" Class for bibdb things, for now we inherit Library and Bibliography from Agent and Collection.
+# :OperatorProfile a owl:Class ;
+#     :category :abstract ;
+#     rdfs:label "Sigel"@sv ;
+#     rdfs:subClassOf :Agent .
+
+:Library a owl:Class ;
+    rdfs:label "Library"@en, "Bibliotek"@sv ;
+    rdfs:subClassOf :Collection, :Agent .
+    # rdfs 
+
+:Bibliography a owl:Class;
+    rdfs:label "Bibliography"@en, "Bibliografi"@sv;
+    rdfs:subClassOf :Collection, :Agent .
+
+:bibliography a owl:ObjectProperty ;
+    rdfs:comment "in bibliography"@en, "bibliografi som resursen ingår i"@sv ;
+    rdfs:domain :Record ;
+    sdo:rangeIncludes :Bibliography ;
+    rdfs:label "bibliografi"@sv .
+
+:sigel a owl:DatatypeProperty;
+    rdfs:label "Sigel"@sv ;
+    rdfs:subPropertyOf :code;
+    rdfs:domain :Agent; .
 
 ##
 # Paged Collections
@@ -259,6 +344,10 @@
     #rdfs:domain :Collection;
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
+
+:maxItems a owl:ObjectProperty;
+    skos:definition "The maximum number of items that may be accessed through pagination. Might be smaller than totalItems"@en;
+    rdfs:domain :PartialCollectionView .
 
 :first a owl:ObjectProperty;
     rdfs:domain :PartialCollectionView;

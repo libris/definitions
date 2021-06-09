@@ -240,7 +240,7 @@
 
 :url a owl:DatatypeProperty;
     rdfs:label "URL"@en, "URL"@sv ;
-    rdfs:domain :Item;
+    sdo:domainIncludes :Item, :Agent ; # Make this even broader?
     rdfs:range xsd:anyURI ;
     owl:equivalentProperty sdo:url .
 

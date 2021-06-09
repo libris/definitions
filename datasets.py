@@ -193,6 +193,51 @@ def enumterms():
 
 
 @compiler.dataset
+def musnotationterms():
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/musicnotation.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/musnotationterms"
+        },
+        {
+            "source": "http://rdaregistry.info/termList/MusNotation.nt"
+        }
+    ],
+        query="source/construct-musnotationsterms.rq")
+
+    return "/term/rda/musnotation/", "2021-05-21T23:59:01.337Z", graph
+
+
+@compiler.dataset
+def tacnotationterms():
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/tactilenotation.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/tacnotationterms"
+        },
+        {
+            "source": "http://rdaregistry.info/termList/TacNotation.nt"
+        }
+    ],
+        query="source/construct-tacnotationterms.rq")
+
+    return "/term/rda/tacnotation/", "2021-05-21T23:59:10.456Z", graph
+
+#NOTE: More suitable name might be needed if usage is broader than digital representations
+@compiler.dataset
+def reprterms():
+    graph = Graph().parse(str(compiler.path('source/repr-terms.ttl')), format='turtle')
+
+    return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
+
+@compiler.dataset
+def encodingFormatterms():
+    graph = Graph().parse(str(compiler.path('source/encodingFormat-terms.ttl')), format='turtle')
+
+    return "/encodingFormat/", "2021-03-04T10:12:09.921Z", graph
+
+
+@compiler.dataset
 def swepubterms():
     graph = Graph()
     for part in compiler.path('source/swepub').glob('**/*.ttl'):
