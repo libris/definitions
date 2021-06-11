@@ -375,6 +375,12 @@
           "classLensDomain": "marc:SystemDetailsNote",
           "showProperties": [ "marc:systemDetailsNote" ]
         },
+        "marc:SummaryType": {
+          "@id": "SummaryType-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:SummaryType",
+          "showProperties": [ "label" ]
+        },
         "Cartographic": {
           "@id": "Cartographic-chips",
           "@type": "fresnel:Lens",
@@ -775,6 +781,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "marc:EnumeratedTerm",
           "showProperties": [ "prefLabel" ]
+        },
+        "marc:SummaryType": {
+          "@id": "SummaryType-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "marc:SummaryType-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "Cartographic": {
           "@id": "Cartographic-cards",
