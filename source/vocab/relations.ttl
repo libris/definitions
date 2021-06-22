@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
@@ -15,6 +16,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix rdaw: <http://rdaregistry.info/Elements/w/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -321,6 +323,23 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:subPropertyOf :hasVersion;
     owl:inverseOf :expressionOf;
     owl:equivalentProperty bf2:hasExpression .
+
+:hasRepresentativeExpression a owl:ObjectProperty;
+    vs:term_status "unstable";
+    rdfs:label "has representative expression"@sv, "har representativt uttryck"@en ;
+    rdfs:domain :Work ;
+    rdfs:range :Work ;
+    rdfs:subPropertyOf :hasExpression;
+    owl:inverseOf :representativeExpressionOf;
+    owl:equivalentProperty rdaw:P10346 .
+
+:representativeExpressionOf a owl:ObjectProperty;
+    vs:term_status "unstable";
+    rdfs:label "is representative expression of"@sv, "är representativt uttryck av"@en ;
+    rdfs:domain :Work ;
+    rdfs:range :Work ;
+    owl:inverseOf :hasRepresentativeExpression;
+    rdfs:subPropertyOf :expressionOf .
 
 :precededBy a owl:ObjectProperty;
     rdfs:label "föregående"@sv;
