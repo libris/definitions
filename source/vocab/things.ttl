@@ -57,10 +57,10 @@
     rdfs:comment "Abstrakt basklass för :Instance och :Item."@sv;
     rdfs:subClassOf :Endeavour .
 
-:Hub a owl:Class ;
-    rdfs:label "Hub"@en, "Nav"@sv ; # LC Uses in conjunction with Work. Sublass a WorkHub?
-    rdfs:subClassOf :Endeavour ; # ?
-    owl:equivalentClass bflc:Hub . # not dereferencing yet?
+:Hub a owl:Class ; # LC Uses in conjunction with Work. SubClass a WorkHub and keep as baseClass in KBV?
+    rdfs:label "Hub"@en, "Nav"@sv ; 
+    rdfs:subClassOf :Work ;
+    owl:equivalentClass bf2:Hub .
 
 :Work a owl:Class ;
     :category marc:auth ;
