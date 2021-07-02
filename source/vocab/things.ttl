@@ -10,6 +10,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 @prefix lcvi: <http://id.loc.gov/vocabulary/issuance/> .
 @prefix sdo: <http://schema.org/> .
 
@@ -55,6 +56,11 @@
     ptg:abstract true;
     rdfs:comment "Abstrakt basklass för :Instance och :Item."@sv;
     rdfs:subClassOf :Endeavour .
+
+:Hub a owl:Class ; # LC Uses in conjunction with Work. SubClass a WorkHub and keep as baseClass in KBV?
+    # rdfs:label "Hub"@en, "Nav"@sv ;  - TODO: Naming things...
+    rdfs:subClassOf :Work ;
+    owl:equivalentClass bf2:Hub .
 
 :Work a owl:Class ;
     :category marc:auth ;
