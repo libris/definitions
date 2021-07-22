@@ -384,12 +384,12 @@ def nationalities():
 def docs():
     import markdown
     docs = []
-    for fpath in compiler.path('source/doc').glob('**/*.mkd'):
+    sourcepath = compiler.path('source')
+    for fpath in (sourcepath / 'doc').glob('**/*.mkd'):
         text = fpath.read_text('utf-8')
         html = markdown.markdown(text)
-        doc_id = (str(fpath)
+        doc_id = (str(fpath.relative_to(sourcepath))
                   .replace(os.sep, '/')
-                  .replace('source/', '')
                   .replace('.mkd', ''))
         doc_id, dot, lang = doc_id.partition('.')
         doc = {
