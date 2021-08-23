@@ -188,7 +188,7 @@
     owl:equivalentClass bf2:Generation .
 
 :material a owl:ObjectProperty;
-    rdfs:range :Material; # eller Resource (enligt bf)?
+    rdfs:range :Material;
     rdfs:label "Material"@en, "material"@sv;
     rdfs:comment "Material som resursen använder, består av, integrerar etc."@sv;
     owl:equivalentProperty bf2:material .
@@ -198,8 +198,8 @@
     owl:equivalentClass bf2:Material .
 
 :baseMaterial a owl:ObjectProperty;
-    rdfs:domain :Instance; # Ta bort?
-    rdfs:range :Material; # Ändra till Resource?
+    rdfs:domain :Instance
+    rdfs:range :Material;
     rdfs:label "bärande material"@sv, "Base material"@en;
     rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
     rdfs:subPropertyOf :material;
@@ -211,8 +211,8 @@
     owl:equivalentClass bf2:BaseMaterial .
 
 :appliedMaterial a owl:ObjectProperty;
-    rdfs:domain :Instance; # Ta bort?
-    rdfs:range :Material; # Ändra till Resource?
+    rdfs:domain :Instance;
+    rdfs:range :Material
     rdfs:label "Applied material"@en, "applicerat material"@sv;
     rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
     rdfs:subPropertyOf :material;
