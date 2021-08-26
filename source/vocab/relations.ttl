@@ -143,6 +143,22 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:inverseOf :accompaniedBy;
     owl:equivalentProperty bf2:accompanies .
 
+:arrangement a owl:ObjectProperty;
+    rdfs:label "arrangemang"@sv, "Arrangement"@en;
+    rdfs:comment "Resurs som är ett arrangemang av den beskrivna resursen"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :relatedTo;
+    owl:equivalentProperty bf2:arrangement .
+
+:arrangementOf a owl:ObjectProperty;
+    rdfs:label "arrangemang"@sv, "Arrangement"@en;
+    rdfs:comment "Resurs som den beskrivna resursen är ett arrangemang av"@sv;
+    rdfs:domain :Work;
+    rdfs:range :Work;
+    rdfs:subPropertyOf :relatedTo;
+    owl:equivalentProperty bf2:arrangementOf .
+
 :associatedMedia a owl:ObjectProperty;
     #TODO: More specifically sdo:domainIncludes :Item, :Instance;
     rdfs:domain :Endeavour;
