@@ -1186,11 +1186,11 @@
     skos:prefLabel "Specific Material Designation"@en,
         "Särskild bärarbeteckning för noterad musik"@sv .
 
-:NumberUnitsType a :CollectionClass ;
-    rdfs:subClassOf :EnumeratedTerm,
-        :Number ;
-    skos:notation "NumberUnitsType" ;
-    skos:prefLabel "Specific Retention Policy - Number of Units"@en .
+#:NumberUnitsType a :CollectionClass ;
+#    rdfs:subClassOf :EnumeratedTerm,
+#        :Number ;
+#    skos:notation "NumberUnitsType" ;
+#    skos:prefLabel "Specific Retention Policy - Number of Units"@en .
 
 # :NumberedSeriesType a :CollectionClass ;
 #     rdfs:subClassOf :EnumeratedTerm ;
@@ -1974,8 +1974,7 @@
         "Generell bevarandepolicy"@sv .
 
 :retentionPolicyNumberOfUnits a owl:ObjectProperty ;
-    sdo:rangeIncludes :Number,
-        :NumberUnitsType ;
+    sdo:rangeIncludes :Number ;
     skos:prefLabel "Specific Retention Policy - Number of Units"@en .
 
 :retentionPolicyUnitType a owl:ObjectProperty ;
