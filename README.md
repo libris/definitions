@@ -92,6 +92,36 @@ to generate a vocab build file. Look at it as Turtle by running:
 
     $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c build/vocab/context.jsonld -v
 
+### Term Categories
+
+To categorize classes and properties, we use or own `kbv:category` property,
+which links to various terms we've defined for various purposes, such as
+`:pending`.
+
+We do not use `vs:term_status` for this, since:
+
+1. We have a more broad set of categories than "status" implies. Categories are
+   defined for various application-specific purposes, e.g. to state that a term
+   is a shorthand term, or that a class belongs to a group of classes mappable
+   to MARC bibliographic records).
+
+2. Its use of string literals is poor practise, since out-of-band definitions
+   are then needed to discover applicable values and their meanings. This is
+   natural when using linked data by simply minting a URI for the status item
+   and defining it with labels and definition texts (in any languages needed).
+
+We have put `vs:term_status "unstable"` to use in some places, to clearly
+indicate that using a common colloquialism. But for out application purposes,
+we use `:category :pending`.
+
+For deprecation we use `owl:deprecated true`, to facilitate any eventual
+tooling requiring this exact form.
+
+We also mark terms using `ptg:abstract true` if they are not supposed to be
+used for resources directly (and thus choosable e.g. in an editing interface),
+but to represent a point in a class or property hierarchy defined for
+structuring the vocabulary.
+
 ### Cleaning Up Terms
 
 In principle, we should keep any published terms indefinitely. Everything at
