@@ -96,13 +96,14 @@
     rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
+    rdfs:subPropertyOf dc:contributor ;
     rdfs:range :Agent .
 
 :descriptionCreator a owl:ObjectProperty;
     rdfs:label "Description creator"@en, "Skapad av"@sv ;
     rdfs:comment "Entitet som upprättat beskrivningen."@sv ;
     rdfs:domain :Record;
-    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:subPropertyOf :descriptionModifier, dc:creator ;
     rdfs:range :Agent .
 
 :descriptionUpgrader a owl:ObjectProperty;
@@ -319,6 +320,7 @@
     rdfs:comment "in bibliography"@en, "bibliografi som resursen ingår i"@sv ;
     rdfs:domain :Record ;
     sdo:rangeIncludes :Bibliography ;
+    rdfs:subPropertyOf dc:isPartOf ;
     rdfs:label "bibliografi"@sv .
 
 :sigel a owl:DatatypeProperty;
