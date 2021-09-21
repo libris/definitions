@@ -13,7 +13,8 @@ construct {
         :sigel ?sigel ;
         :name ?name ;
         :url ?url ;
-        :qualifier ?dept .
+        :qualifier ?dept ;
+        :category ?registranturl .
         #:place ?place .
 
     _:meta :created ?created ; :modified ?modified .
@@ -35,6 +36,11 @@ construct {
         bibdb:sigel ?sigel ;
         sdo:name ?name .
         # :organisation, sdo:address
+
+    optional {
+        ?bdb_id bibdb:libris_reg ?reg . filter ( ?reg = true )
+        bind (iri('http://id.kb.se/term/bibdb/Registrant') as ?registranturl)
+    }
 
     optional {
         ?bdb_id bibdb:dept ?dept
