@@ -236,6 +236,14 @@ def encodingFormatterms():
 
     return "/encodingFormat/", "2021-03-04T10:12:09.921Z", graph
 
+@compiler.dataset
+def bibdbterms():
+    graph = ConjunctiveGraph()
+    # graph = Graph()
+    for part in compiler.path('source/bibdb').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
+
+    return "/term/bibdb/", "2021-09-20T08:13:50.570Z", graph
 
 @compiler.dataset
 def swepubterms():
