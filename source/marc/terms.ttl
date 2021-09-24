@@ -548,9 +548,9 @@ marc:uniformResourceIdentifier a owl:DatatypeProperty ;
     rdfs:label "Uniform Resource Identifier (URI)"@sv ;
     rdfs:domain marc:SystemDetailsNote .
 
-marc:institutionToWhichFieldApplies a owl:DatatypeProperty ;
-    rdfs:label "Institution för vilken fältet gäller"@sv ;
-    rdfs:domain marc:SystemDetailsNote .
+# marc:institutionToWhichFieldApplies a owl:DatatypeProperty ;
+#     rdfs:label "Institution för vilken fältet gäller"@sv ;
+#     rdfs:domain marc:SystemDetailsNote .
 
 # hold 541
 
@@ -564,10 +564,6 @@ marc:methodOfAcquisition a owl:DatatypeProperty ;
 
 marc:dateOfAcquisition a owl:DatatypeProperty ;
     rdfs:label "Date of acquisition"@en, "Förvärvsdatum"@sv ;
-    rdfs:domain kbv:ImmediateAcquisition .
-
-marc:accessionNumber a owl:DatatypeProperty ;
-    rdfs:label "Accession number"@en, "Accessionsnummer"@sv ;
     rdfs:domain kbv:ImmediateAcquisition .
 
 marc:owner a owl:DatatypeProperty ;
@@ -585,7 +581,7 @@ marc:extent a owl:DatatypeProperty ;
 # 544
 # Not for exports in bibliographic review 6.2
 
-marc:hasLocationOfOtherArchivalMaterialsNote a owl:Class ;
+marc:hasLocationOfOtherArchivalMaterialsNote a owl:ObjectProperty ;
     rdfs:label "Anmärkning Ägare/Hemvist för sammanhörande arkivmaterial"@sv;
     rdfs:subClassOf kbv:StructuredValue .
 

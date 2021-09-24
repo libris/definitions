@@ -121,14 +121,14 @@ class Compiler:
     def _compile_dataset(self, name, result):
         base, created_time, data = result
 
-        created_ms = w3c_dtz_to_ms(created_time)
-        modified_ms = last_modified_ms(self.current_ds_resources)
+        ds_created_ms = w3c_dtz_to_ms(created_time)
+        ds_modified_ms = last_modified_ms(self.current_ds_resources)
 
         if isinstance(data, Graph):
             data = self.to_jsonld(data)
 
         ds_url = urljoin(self.dataset_id, name)
-        self._create_dataset_description(ds_url, created_ms, modified_ms)
+        self._create_dataset_description(ds_url, ds_created_ms, ds_modified_ms)
 
         base_id = urljoin(self.dataset_id, base)
 
@@ -141,7 +141,7 @@ class Compiler:
                 print(f"Missing mapping of <{nodeid}> under base <{base_id}>")
                 continue
 
-            created_ms = created_ms + _faux_offset(node['@id'])
+            created_ms = ds_created_ms + _faux_offset(node['@id'])
             modified_ms = None
 
             meta = node.pop('meta', None)

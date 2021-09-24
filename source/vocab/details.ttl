@@ -241,7 +241,7 @@
     owl:equivalentProperty bf2:identifiedBy;
     owl:inverseOf :identifies;
     rdfs:comment "Teckensträng knuten till en resurs som används för att unikt särskilja resursen från andra."@sv;
-    sdo:domainIncludes :Agent, :Document;
+    rdfs:domain :Resource;
     rdfs:range :Identifier .
 
 :indirectlyIdentifiedBy a owl:ObjectProperty ;
@@ -270,6 +270,11 @@
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Identifikator"@sv;
     owl:equivalentClass bf2:Identifier .
+
+:AccessionNumber a owl:Class;
+    rdfs:label "Accession number"@en, "Accessionsnummer"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:AccessionNumber .
 
 :Ansi a owl:Class; # rdfs:Datatype ?
     rdfs:label "ANSI number"@en, "ANSI-nummer"@sv;
@@ -672,10 +677,11 @@
     owl:equivalentProperty bf2:acquisitionSource .
 
 :keyword a owl:ObjectProperty;
-    rdfs:label "nyckelord"@sv;
+    rdfs:label "keyword"@en, "nyckelord"@sv;
     owl:equivalentProperty sdo:keywords;
     rdfs:subPropertyOf dc:subject;
-    rdfs:range xsd:string .
+    sdo:domainIncludes :DataCatalog, :Dataset;
+    rdfs:range :Resource .
 
 :appliesTo a owl:ObjectProperty ;
     skos:closeMatch bf2:part ;

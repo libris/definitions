@@ -236,6 +236,14 @@ def encodingFormatterms():
 
     return "/encodingFormat/", "2021-03-04T10:12:09.921Z", graph
 
+@compiler.dataset
+def bibdbterms():
+    graph = ConjunctiveGraph()
+    # graph = Graph()
+    for part in compiler.path('source/bibdb').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
+
+    return "/term/bibdb/", "2021-09-20T08:13:50.570Z", graph
 
 @compiler.dataset
 def swepubterms():
@@ -384,12 +392,12 @@ def nationalities():
 def docs():
     import markdown
     docs = []
-    for fpath in compiler.path('source/doc').glob('**/*.mkd'):
+    sourcepath = compiler.path('source')
+    for fpath in (sourcepath / 'doc').glob('**/*.mkd'):
         text = fpath.read_text('utf-8')
         html = markdown.markdown(text)
-        doc_id = (str(fpath)
+        doc_id = (str(fpath.relative_to(sourcepath))
                   .replace(os.sep, '/')
-                  .replace('source/', '')
                   .replace('.mkd', ''))
         doc_id, dot, lang = doc_id.partition('.')
         doc = {

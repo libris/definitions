@@ -95,25 +95,32 @@
 
 :hasNotation a owl:ObjectProperty;
     rdfs:range :Notation;
-    rdfs:label "Notationssystem"@sv, "Notation system"@en;
+    rdfs:label "Notationssystem"@sv;
     owl:equivalentProperty bf2:notation .
 
 :Notation a owl:Class;
-    rdfs:label "Notation"@sv, "Notation"@en;
+    rdfs:label "Notationssystem"@sv;
     owl:equivalentClass bf2:Notation .
 
+:MovementNotation a owl:Class;
+    rdfs:label "Typ av rörelsenotation"@sv;
+    rdfs:subClassOf :Notation;
+    owl:equivalentClass bf2:MovementNotation .
+
 :MusicNotation a owl:Class;
-    rdfs:label "Format för musiknoter"@sv, "Music notation used"@en;
+    rdfs:label "Typ av musiknotation"@sv;
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:MusicNotation .
 
 :Script a owl:Class;
     rdfs:label "Skriftsystem"@sv;
+    skos:altLabel "Skriftart"@sv;
+    skos:editorsNote "Hette tidigare Skriftart i KRS."@sv;
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:Script .
 
 :TactileNotation a owl:Class;
-    rdfs:label "Taktil notation"@sv, "Tactile notation used"@en;
+    rdfs:label "Typ av taktil notation"@sv;
     rdfs:subClassOf :Notation;
     owl:equivalentClass bf2:TactileNotation .
 
@@ -180,26 +187,41 @@
     rdfs:label "Generation"@sv, "Generation"@en;
     owl:equivalentClass bf2:Generation .
 
+:material a owl:ObjectProperty;
+    rdfs:domain :Instance;
+    rdfs:range :Material;
+    rdfs:label "Material"@en, "material"@sv;
+    rdfs:comment "Material som resursen använder, består av, integrerar etc."@sv;
+    owl:equivalentProperty bf2:material .
+
+:Material a owl:Class;
+    rdfs:label "Material"@sv, "Material"@en;
+    owl:equivalentClass bf2:Material .
+
 :baseMaterial a owl:ObjectProperty;
-    rdfs:range :BaseMaterial;
+    rdfs:domain :Instance;
+    rdfs:range :Material;
     rdfs:label "bärande material"@sv, "Base material"@en;
     rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
-    rdfs:domain :Instance;
+    rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:baseMaterial .
 
 :BaseMaterial a owl:Class;
-    owl:equivalentClass bf2:BaseMaterial;
-    rdfs:label "Bärande material"@sv, "Base material"@en .
+    rdfs:label "Bärande material"@sv, "Base material"@en;
+    rdfs:subClassOf :Material;
+    owl:equivalentClass bf2:BaseMaterial .
 
 :appliedMaterial a owl:ObjectProperty;
     rdfs:domain :Instance;
-    rdfs:range :AppliedMaterial;
-    rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
+    rdfs:range :Material;
     rdfs:label "Applied material"@en, "applicerat material"@sv;
+    rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
+    rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:appliedMaterial .
 
 :AppliedMaterial a owl:Class;
     rdfs:label "Applied material"@en, "Applicerat material"@sv;
+    rdfs:subClassOf :Material;
     owl:equivalentClass bf2:AppliedMaterial .
 
 :productionMethod a owl:ObjectProperty;
