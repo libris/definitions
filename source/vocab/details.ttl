@@ -956,6 +956,12 @@
     rdfs:subPropertyOf dc:issued;
     owl:propertyChainAxiom ( :publication :date ) .
 
+:yearPublished a owl:DatatypeProperty;
+    :category :shorthand;
+    owl:equivalentProperty sdo:datePublished;
+    rdfs:subPropertyOf dc:issued;
+    owl:propertyChainAxiom ( :publication :year ) .
+
 :publisher a owl:ObjectProperty;
     :category :shorthand;
     owl:equivalentProperty dc:publisher, sdo:publisher;
@@ -1272,7 +1278,7 @@
     owl:propertyChainAxiom ( :hasDuration :value );
     owl:equivalentProperty bf2:duration .
 
-:extentLabel a owl:DatatypeProperty ;
+:extentNote a owl:DatatypeProperty ;
     :category :abstract, :shorthand ;
     rdfs:subPropertyOf skos:note ;
     owl:propertyChainAxiom ( :extent :label ) .
