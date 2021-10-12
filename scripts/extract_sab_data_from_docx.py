@@ -1,17 +1,12 @@
 # -*- coding: UTF-8 -*-
-from __future__ import unicode_literals, print_function, division
-__metaclass__ = type
 import sys
-if not sys.stdout.encoding:
-    import codecs
-    sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 from collections import OrderedDict
 import re
 from zipfile import ZipFile
 import json
 from lxml import etree
-from urllib2 import quote
+from urllib.parse import quote
 
 
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
