@@ -966,6 +966,9 @@
 :publisher a owl:ObjectProperty;
     :category :shorthand;
     owl:equivalentProperty dc:publisher, sdo:publisher;
+    # NOTE: :publisher may also be derived from :role on a :contribution, but
+    # there is no corresponding correlation in these mappings.
+    # (We have ~600k linked publisher roles in contribution (as of 2021).)
     owl:propertyChainAxiom ( :publication :agent ) .
 
 :firstIssue a owl:DatatypeProperty;
