@@ -143,7 +143,7 @@
 
 :DescriptionConventions a owl:Class;
     rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
-    rdfs:subClassOf :AdminMetadata;
+    rdfs:subClassOf :AdminMetadata, :Standard ;
     owl:equivalentClass bf2:DescriptionConventions .
 
 :descriptionConventions a owl:ObjectProperty;
@@ -151,7 +151,7 @@
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionConventions;
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
-    owl:ObjectProperty bf2:descriptionConventions .
+    rdfs:subPropertyOf bf2:descriptionConventions, :conformsTo .
 
 :derivedFrom a owl:ObjectProperty;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
