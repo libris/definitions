@@ -6,6 +6,7 @@
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
@@ -989,7 +990,7 @@
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
     owl:equivalentProperty bf2:responsibilityStatement, rdael:statementOfResponsibility ;
-    rdfs:subPropertyOf rdfs:comment .
+    rdfs:subPropertyOf dce:contributor .
 
 :editionStatement a owl:DatatypeProperty ;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
