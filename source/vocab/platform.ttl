@@ -48,6 +48,15 @@
     rdfs:label "Post"@sv, "Record"@en;
     rdfs:subClassOf :AdminMetadata .
 
+:CacheRecord a owl:Class;
+    rdfs:label "Cache-post"@sv, "Cache record"@en;
+    rdfs:comment "En lokal kopia av en entitet från ett annat system. Transkriberad till det lokala vokabuläret."@sv;
+    rdfs:subClassOf :Record .
+
+:PlaceholderRecord a owl:Class;
+    rdfs:label "Platshållarpost"@sv, "Placeholder record"@en;
+    rdfs:subClassOf :Record .
+
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
     rdfs:domain :Record;
