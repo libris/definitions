@@ -231,6 +231,12 @@
           "classLensDomain": "Country",
           "showProperties": [ "prefLabel" ]
         },
+        "Place": {
+          "@id": "Place-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Place",
+          "showProperties": [ "prefLabel" ]
+        },
         "Nationality": {
           "@id": "Nationality-chips",
           "@type": "fresnel:Lens",
@@ -580,6 +586,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Country",
           "showProperties": [ "prefLabel", "code", "isReplacedBy" ]
+        },
+        "Place": {
+          "@id": "Place-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Place",
+          "showProperties": [ "prefLabel", "country", "isPartOf" ]
         },
         "DescriptionConventions": {
           "@id": "DescriptionConventions-cards",
@@ -945,6 +957,10 @@
         },
         "Country": {
           "fresnel:extends": {"@id": "Country-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Place": {
+          "fresnel:extends": {"@id": "Place-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "DescriptionConventions": {

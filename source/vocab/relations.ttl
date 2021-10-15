@@ -58,8 +58,8 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 
 :isPartOf a owl:ObjectProperty;
     #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
-    sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction ;
-    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction ;
+    sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
+    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
     rdfs:label "is part of"@en, "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
@@ -475,7 +475,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     # - Could use baseclass :Agent in rangeIncludes, but need to exclude subclasses of :Organization...
     # - Should include :Work (but not its subclasses...)
     #sdo:rangeIncludes :Subject, :Agent, :Work .
-    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject, :Work .
+    sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject, :Work, :Place .
     #rdfs:range :Identity . includes concept, makes for too many faulty choices.
 
 
