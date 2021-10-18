@@ -2,11 +2,13 @@ import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
 from lxltools.datacompiler import Compiler, w3c_dtz_to_ms, last_modified_ms
-from lxltools.contextmaker import DEFAULT_NS_PREF_ORDER, make_context, add_overlay
+from lxltools.contextmaker import make_context, add_overlay
 from urllib.parse import urljoin
 
 
-NS_PREF_ORDER = DEFAULT_NS_PREF_ORDER + ['ldp']
+NS_PREF_ORDER = (
+        'bf2 bf madsrdf skos dc dctype prov sdo bibo foaf void ldp '
+        'owl rdfs rdf xsd edtf').split()
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
 
@@ -135,8 +137,7 @@ def vocab():
         vocab_node['version'] = version
 
     lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
-    add_overlay(lib_context, compiler.load_json('sys/context/base.jsonld'))
-    add_overlay(lib_context, compiler.load_json('source/vocab-overlay.jsonld'))
+    add_overlay(lib_context, compiler.load_json('sys/context/kbv.jsonld'))
     lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
     _insert_record(lib_context['@graph'], vocab_created_ms, vocab_ds_url)
 
@@ -146,6 +147,28 @@ def vocab():
     compiler.write(data, "vocab")
     compiler.write(lib_context, 'vocab/context')
     compiler.write(display, 'vocab/display')
+
+
+@compiler.handler
+def contexts():
+    contexts_ds_url = urljoin(compiler.dataset_id, 'sys/context')
+
+    docpath = compiler.path('sys/context/kbv.jsonld')
+    uripath = BASE + 'sys/context/kbv'
+    _write_context_record(compiler, docpath, uripath, contexts_ds_url)
+
+    root = compiler.path('')
+    for docpath in compiler.path('sys/context').glob('target/*.jsonld'):
+        uripath = BASE + str(docpath.relative_to(root).with_suffix(''))
+        _write_context_record(compiler, docpath, uripath, contexts_ds_url)
+
+
+def _write_context_record(compiler, filepath, uripath, ds_url):
+    ctx_data = compiler.load_json(filepath)
+    ctx_created_ms = w3c_dtz_to_ms(ctx_data.pop('created'))
+    ctx_data['@graph'] = [{"@id": uripath, "@type": "jsonld:Context"}]
+    _insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
+    compiler.write(ctx_data, uripath)
 
 
 @compiler.dataset
