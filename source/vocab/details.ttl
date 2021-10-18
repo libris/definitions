@@ -6,6 +6,7 @@
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
@@ -199,13 +200,17 @@
 :isbn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISBN";
-    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/isbn
+    rdfs:subPropertyOf :identifier ;
+    owl:equivalentProperty sdo:isbn , bibo:isbn ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISBN ] :value ) ;
     rdfs:range :ISBN .
 
 :issn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISSN";
-    rdfs:subPropertyOf :identifier ; #TODO? relate to https://schema.org/issn
+    rdfs:subPropertyOf :identifier ;
+    owl:equivalentProperty sdo:isnn , bibo:isnn ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISSN ] :value ) ;
     rdfs:range :ISSN .
 
 :doi a owl:DatatypeProperty ;
@@ -946,6 +951,26 @@
     rdfs:subPropertyOf :place ;
     rdfs:range :Country .
 
+:datePublished a owl:DatatypeProperty;
+    :category :shorthand;
+    owl:equivalentProperty sdo:datePublished;
+    rdfs:subPropertyOf dc:issued;
+    owl:propertyChainAxiom ( :publication :date ) .
+
+:yearPublished a owl:DatatypeProperty;
+    :category :shorthand;
+    owl:equivalentProperty sdo:datePublished;
+    rdfs:subPropertyOf dc:issued;
+    owl:propertyChainAxiom ( :publication :year ) .
+
+:publisher a owl:ObjectProperty;
+    :category :shorthand;
+    owl:equivalentProperty dc:publisher, sdo:publisher;
+    # NOTE: :publisher may also be derived from :role on a :contribution, but
+    # there is no corresponding correlation in these mappings.
+    # (We have ~600k linked publisher roles in contribution (as of 2021).)
+    owl:propertyChainAxiom ( :publication :agent ) .
+
 :firstIssue a owl:DatatypeProperty;
     rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
     rdfs:comment "Används för närvarande ej i Libris."@sv;
@@ -967,7 +992,8 @@
     # TODO: remove "klammer" form in favour of placing :responsibilityStatement
     # in relevant entity (e.g. :TitlePage)
     #rdfs:comment "Om upphov står på annan plats än primärkällan (ofta titelsidan), lägg det inom klammer. Exempel: text: Eva Andersson, Bengt Larsson ; [foto: Sofia Lundgren, Lisa Ek]"@sv;
-    owl:equivalentProperty bf2:responsibilityStatement, rdael:statementOfResponsibility .
+    owl:equivalentProperty bf2:responsibilityStatement, rdael:statementOfResponsibility ;
+    rdfs:subPropertyOf dce:contributor .
 
 :editionStatement a owl:DatatypeProperty ;
     rdfs:label "edition statement"@en, "upplageuppgift"@sv;
@@ -1045,8 +1071,9 @@
 
 :note a owl:DatatypeProperty;
     rdfs:label "anmärkning"@sv, "note"@en;
-    :category :pending;
+    :category :pending, :shorthand ;
     rdfs:domain :Resource;
+    owl:propertyChainAxiom (:hasNote :label) ;
     owl:equivalentProperty skos:note .
 
 :hasNote a owl:ObjectProperty;
@@ -1070,6 +1097,7 @@
     rdfs:label "Physical details note"@en, "Övriga fysiska detaljer"@sv ;
     rdfs:domain :Instance ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf skos:note ;
     skos:changeNote "2020-05-29: Ändrad från marc:otherPhysicalDetails."@sv;
     rdfs:comment "Anmärkning om fysiska karakteristika som till exempel illustrationer, färg, uppspelningshastighet, spårkarakteristika, närvaro eller typ av ljud, antal kanaler, filmprojektionssystem."@sv .
 
@@ -1243,7 +1271,7 @@
     rdfs:domain :Instance ;
     rdfs:range :Duration ;
     skos:closeMatch rdau:duration.en .
-    
+
 :Duration a owl:Class;
     rdfs:subClassOf :StructuredValue, dc:SizeOrDuration ;
     rdfs:label "Duration"@en, "Speltid"@sv .
@@ -1253,6 +1281,11 @@
     rdfs:label "duration"@en, "speltid"@sv;
     owl:propertyChainAxiom ( :hasDuration :value );
     owl:equivalentProperty bf2:duration .
+
+:extentNote a owl:DatatypeProperty ;
+    :category :abstract, :shorthand ;
+    rdfs:subPropertyOf skos:note ;
+    owl:propertyChainAxiom ( :extent :label ) .
 
 :extent a owl:ObjectProperty;
     rdfs:domain :Instance ;
@@ -1276,7 +1309,8 @@
 # NOTE: SDO-experimental mapping.
 #:numberOfPages a owl:DatatypeProperty ;
 #    owl:equivalentProperty sdo:numberOfPages;
-#    rdfs:subPropertyOf :extent;
+##    rdfs:subPropertyOf :extent;
+#    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :extent ; rdfs:range :PageExtent ] :value ) ;
 #    rdfs:label "number of pages"@en, "sidantal"@sv .
 
 :preferredCitation a owl:DatatypeProperty;
@@ -1294,6 +1328,7 @@
     rdfs:range rdfs:Literal;
     rdfs:label "mått"@sv, "dimensions"@en;
     #skos:altLabel "Dimensioner"@sv;
+    rdfs:subPropertyOf skos:note ;
     owl:propertyChainAxiom (:hasDimensions :label) ;
     owl:equivalentProperty bf2:dimensions .
 
