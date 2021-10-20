@@ -7,8 +7,10 @@
       "@vocab": "https://id.kb.se/vocab/",
       "marc": "https://id.kb.se/marc/",
       "lensGroups": {"@id": "@graph", "@container": "@index"},
+      "formatters": {"@id": "@graph", "@container": "@index"},
       "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
       "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
+      "alternateProperties": {"@id": "fresnel:alternateProperties", "@container": "@list", "@type": "@vocab"},
       "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"},
       "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"},
       "labelByLang": {"@id": "label", "@container": "@language"},
@@ -313,7 +315,11 @@
           "@id": "Concept-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "label", "code", "termComponentList", "inScheme" ]
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "termComponentList"]},
+            "code",
+            "inScheme"
+          ]
         },
         "Classification": {
           "@id": "Classification-chips",
@@ -1026,6 +1032,17 @@
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
           "showProperties": [ "fresnel:super", "shelfMarkStatus" ]
         }
+      }
+    }
+  },
+  "formatters": {
+    "termComponentList-format": {
+      "@id": "termComponentList-format",
+      "@type": "fresnel:Format",
+      "fresnel:propertyFormatDomain": "termComponentList",
+      "fresnel:valueFormat": {
+        "fresnel:contentAfter": "--",
+        "fresnel:contentLast": ""
       }
     }
   }
