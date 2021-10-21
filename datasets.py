@@ -253,6 +253,8 @@ def swepubterms():
             continue
         graph.parse(str(part), format='turtle')
 
+    graph.update(compiler.path('source/swepub/update.rq').read_text('utf-8'))
+
     return "/term/swepub/", "2018-05-29T12:36:01.337Z", graph
 
 
