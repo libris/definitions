@@ -149,6 +149,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :arrangementOf;
     owl:equivalentProperty bf2:arrangement .
 
 :arrangementOf a owl:ObjectProperty;
@@ -157,6 +158,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Work;
     rdfs:range :Work;
     rdfs:subPropertyOf :relatedTo;
+    owl:inverseOf :arrangement;
     owl:equivalentProperty bf2:arrangementOf .
 
 :Arrangement a owl:Class;
