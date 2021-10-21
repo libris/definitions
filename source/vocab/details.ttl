@@ -26,7 +26,7 @@
 ## Identifiers
 ## Stuff?
 ## Instance Description Statements
-## Arrangement and Organization
+## Collection Arrangement
 ## Notes
 ## Content description information
 ## Annotations
@@ -1036,35 +1036,36 @@
     rdfs:equivalentProperty bf2:subseriesEnumeration;
     rdfs:label "Subseries enumeration"@en, "Numrering inom underserie"@sv .
 
-# Arrangement and Organization
+# Collection arrangement
 
 ## TODO: map in marcframe (351&880)
-:Arrangement a owl:Class;
+:CollectionArrangement a owl:Class;
     rdfs:label "Organization of materials information"@en, "Information om ordning och sorteringsprinciper"@sv;
-    owl:equivalentClass bf2:Arrangement .
+    owl:equivalentClass bf2:CollectionArrangement .
 
-:arrangement a owl:ObjectProperty;
-    rdfs:label "Organization and arrangement"@en, "Ordning och sorteringsprinciper"@sv;
-    rdfs:range :Arrangement;
-    owl:equivalentProperty bf2:arrangement .
+:collectionArrangement a owl:ObjectProperty;
+    rdfs:label "Collection Organization and arrangement"@en, "Ordning och sorteringsprinciper"@sv;
+    rdfs:range :CollectionArrangement;
+    owl:equivalentProperty bf2:collectionArrangement .
 
 :pattern a owl:DatatypeProperty;
     rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
-    rdfs:domain :Arrangement;
+    rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:pattern .
 
 :hierarchicalLevel a owl:DatatypeProperty;
     rdfs:label "Hierarchical level of material"@en, "Hierarkisk nivå"@sv;
-    rdfs:domain :Arrangement;
+    rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:hierarchicalLevel .
 
-:organizationOfMaterial a owl:DatatypeProperty;
-    rdfs:label "Organization of material"@en, "Ordning av material"@sv;
-    rdfs:domain :Arrangement;
+:collectionOrganization a owl:DatatypeProperty;
+    rdfs:label "Organization of material"@en, "Uppdelningsprinciper"@sv;
+    rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
-    owl:equivalentProperty bf2:organization .
+    owl:equivalentProperty bf2:collectionOrganization;
+    owl:sameAs :organizationOfMaterial .
 ##
 
 # Notes
