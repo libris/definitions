@@ -511,6 +511,11 @@
     skos:editorialNote "ID-numren i SMDB är helt numeriska och innehåller 9 positioner, t ex 001451747"@sv ;
     rdfs:label "SMDB-Nummer" .
 
+:StockNumber a owl:Class; # rdfs:Datatype ?
+    rdfs:label "Stock number"@en, "Lagernummer"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:StockNumber .
+
 :STRN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Strn;
     rdfs:subClassOf :Identifier;
