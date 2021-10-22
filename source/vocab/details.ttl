@@ -767,11 +767,11 @@
     owl:equivalentProperty madsrdf:hasSource, rdaz:P60001, rdaz:sourceConsulted.en .
 
 :SourceData a owl:Class;
-    rdfs:label "Källa vid belagd uppgift"@sv;
+    rdfs:label "Source data"@en, "Källa vid belagd uppgift"@sv;
     rdfs:subClassOf madsrdf:Source, :QualifiedRole .
 
 :SourceDataNotFound a owl:Class;
-    rdfs:label "Källa vid icke-belagd uppgift"@sv;
+    rdfs:label "Source data not found"@en, "Källa vid icke-belagd uppgift"@sv;
     rdfs:subClassOf :SourceData .
 
 # 670a changed to label
@@ -891,24 +891,24 @@
     rdfs:subClassOf :ProvisionActivity;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Copyright ];
-    rdfs:label "Copyright"@sv .
+    rdfs:label "Copyright"@en, "Copyright"@sv .
 
 :PrimaryProvisionActivity a owl:Class;
     ptg:abstract true;
     rdfs:subClassOf :ProvisionActivity;
-    rdfs:label "Primärt tillgängliggörande"@sv .
+    rdfs:label "Primary provision activity"@en, "Primärt tillgängliggörande"@sv .
 
 :PrimaryPublication a owl:Class;
     rdfs:subClassOf :Publication, :PrimaryProvisionActivity;
-    rdfs:label "Primär utgivning"@sv .
+    rdfs:label "Primary publication"@en, "Primär utgivning"@sv .
 
 :PrimaryProduction a owl:Class;
     rdfs:subClassOf :Production, :PrimaryProvisionActivity;
-    rdfs:label "Primär produktion"@sv .
+    rdfs:label "Primary production"@en, "Primär produktion"@sv .
 
 :PrimaryBulkProduction a owl:Class;
     rdfs:subClassOf :PrimaryProduction;
-    rdfs:label "Primär bulkproduktion"@sv .
+    rdfs:label "Primary bulk production"@en, "Primär bulkproduktion"@sv .
 
 :Availability a owl:Class ;
     :category :pending ;

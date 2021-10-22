@@ -595,17 +595,17 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty prov:hadRole, bflc:relation .
 
 :Relation a owl:Class;
-    rdfs:label "Relation"@sv;
+    rdfs:label "Relation"@en, "Relation"@sv;
     rdfs:subClassOf :ObjectProperty ;
     owl:equivalentClass bflc:Relation .
 
 :Relationship a owl:Class ;
-    rdfs:label "Relation"@sv ;
+    rdfs:label "Relationship"@en, "Relation"@sv ;
     rdfs:subClassOf prov:PrimarySource, :QualifiedRole ;
     owl:equivalentClass bflc:Relationship .
 
 :PartitiveRelationship a owl:Class ;
-    rdfs:label "Relation till del"@sv ;
+    rdfs:label "Partitive relationship"@en, "Relation till del"@sv ;
     rdfs:subClassOf :Relationship ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty :relation ;
