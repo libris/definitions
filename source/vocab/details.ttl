@@ -335,7 +335,7 @@
     rdfs:label "EAN" .
 
 :EIDR a owl:Class;
-    owl:equivalentClass bflc:Eidr;
+    owl:equivalentClass bf2:Eidr;
     rdfs:subClassOf :Identifier;
     rdfs:label "EIDR";
     rdfs:comment "Entertainment Identifier Registry" ;
@@ -535,7 +535,7 @@
 :URN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Urn;
     rdfs:subClassOf :Identifier;
-    rdfs:comment "Uniform Resource Number.";
+    rdfs:comment "Uniform Resource Name.";
     rdfs:label "URN" .
 
 :VideoRecordingNumber a owl:Class; # rdfs:Datatype ?
@@ -1205,7 +1205,7 @@
     rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
-    rdfs:label "Associated title date"@en, "Tid för verket"@sv;
+    rdfs:label "Origin date"@en, "Tid för verket"@sv;
     rdfs:domain :Work;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:originDate .
@@ -1441,19 +1441,24 @@
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:instrumentalType .
 
+:Ensemble a owl:Class;
+    rdfs:label "Ensemble"@en, "Ensemble"@sv;
+    owl:equivalentClass bf2:Ensemble .
+
 :MusicEnsemble a owl:Class;
     rdfs:label "Music ensemble"@en, "Musikensemble"@sv;
+    rdfs:subClassOf :Ensemble;
     owl:equivalentClass bf2:MusicEnsemble .
 
 :ensemble a owl:ObjectProperty;
     rdfs:label "Ensemble"@en, "Ensemble"@sv;
     rdfs:domain :Work;
-    rdfs:range :MusicEnsemble;
+    rdfs:range :Ensemble;
     owl:equivalentProperty bf2:ensemble .
 
 :ensembleType a owl:DatatypeProperty;
     rdfs:label "Ensemble Type"@en, "Ensembletyp"@sv;
-    rdfs:domain :MusicEnsemble;
+    rdfs:domain :Ensemble;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:ensembleType .
     
