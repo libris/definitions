@@ -74,7 +74,11 @@
           "@id": "Resource-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ "title", "prefLabel", "label", "name", "code", "isPartOf", "isDefinedBy", "uri" ]
+          "showProperties": [ 
+            {"alternateProperties": ["title", "prefLabel", "label", "name", "code", "uri"]},
+            "isPartOf",
+            "isDefinedBy"
+          ]
         },
         "MediaType": {
           "@id": "MediaType-chips",
