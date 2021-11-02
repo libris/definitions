@@ -330,7 +330,7 @@
 :EAN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Ean;
     rdfs:subClassOf :Identifier;
-    rdfs:comment: "International Article Identifier (European Article Number).";
+    rdfs:comment "International Article Identifier (European Article Number).";
     skos:definition "Internationellt artikelnummer."@sv;
     rdfs:label "EAN" .
 
@@ -402,7 +402,7 @@
 :ISRC a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Isrc;
     rdfs:comment "International Standard Recording Code.";
-    skos:definition "Internationell system för identifikation av ljudinspelningar och musikvideor."@sv;
+    skos:definition "Internationellt system för identifikation av ljudinspelningar och musikvideor."@sv;
     rdfs:subClassOf :Identifier;
     rdfs:label "ISRC" .
 
@@ -486,7 +486,7 @@
 :PostalRegistration a owl:Class; # rdfs:Datatype ?
     rdfs:subClassOf :Identifier;
     rdfs:label "Postal registration number"@en, "Registreringsnummer för postal behandling av publikationen"@sv;
-    rdfs:comment "Används normalt ej"@sv;
+    rdfs:comment "Används normalt ej i Libris."@sv;
     owl:equivalentClass bf2:PostalRegistration .
 
 :PublisherNumber a owl:Class; # rdfs:Datatype ?
@@ -510,6 +510,11 @@
     rdfs:comment "Identifikationsnummer i Svensk mediedatabas."@sv ;
     skos:editorialNote "ID-numren i SMDB är helt numeriska och innehåller 9 positioner, t ex 001451747"@sv ;
     rdfs:label "SMDB-Nummer" .
+
+:StockNumber a owl:Class; # rdfs:Datatype ?
+    rdfs:label "Stock number"@en, "Lagernummer"@sv;
+    rdfs:subClassOf :Identifier;
+    owl:equivalentClass bf2:StockNumber .
 
 :STRN a owl:Class; # rdfs:Datatype ?
     owl:equivalentClass bf2:Strn;
@@ -767,11 +772,11 @@
     owl:equivalentProperty madsrdf:hasSource, rdaz:P60001, rdaz:sourceConsulted.en .
 
 :SourceData a owl:Class;
-    rdfs:label "Källa vid belagd uppgift"@sv;
+    rdfs:label "Source data"@en, "Källa vid belagd uppgift"@sv;
     rdfs:subClassOf madsrdf:Source, :QualifiedRole .
 
 :SourceDataNotFound a owl:Class;
-    rdfs:label "Källa vid icke-belagd uppgift"@sv;
+    rdfs:label "Source data not found"@en, "Källa vid icke-belagd uppgift"@sv;
     rdfs:subClassOf :SourceData .
 
 # 670a changed to label
@@ -891,24 +896,24 @@
     rdfs:subClassOf :ProvisionActivity;
     rdfs:subClassOf [ a owl:Restriction;
             owl:onProperty :hasPart; owl:someValuesFrom :Copyright ];
-    rdfs:label "Copyright"@sv .
+    rdfs:label "Copyright"@en, "Copyright"@sv .
 
 :PrimaryProvisionActivity a owl:Class;
     ptg:abstract true;
     rdfs:subClassOf :ProvisionActivity;
-    rdfs:label "Primärt tillgängliggörande"@sv .
+    rdfs:label "Primary provision activity"@en, "Primärt tillgängliggörande"@sv .
 
 :PrimaryPublication a owl:Class;
     rdfs:subClassOf :Publication, :PrimaryProvisionActivity;
-    rdfs:label "Primär utgivning"@sv .
+    rdfs:label "Primary publication"@en, "Primär utgivning"@sv .
 
 :PrimaryProduction a owl:Class;
     rdfs:subClassOf :Production, :PrimaryProvisionActivity;
-    rdfs:label "Primär produktion"@sv .
+    rdfs:label "Primary production"@en, "Primär produktion"@sv .
 
 :PrimaryBulkProduction a owl:Class;
     rdfs:subClassOf :PrimaryProduction;
-    rdfs:label "Primär bulkproduktion"@sv .
+    rdfs:label "Primary bulk production"@en, "Primär bulkproduktion"@sv .
 
 :Availability a owl:Class ;
     :category :pending ;
@@ -1118,7 +1123,7 @@
 :awardsNote a owl:DatatypeProperty;
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
     rdfs:range rdfs:Literal;
-    rdfs:comment "Används normalt ej"@sv;
+    rdfs:comment "Används normalt ej i Libris."@sv;
     owl:equivalentProperty bf2:awards .
   
 :creditsNote a owl:DatatypeProperty;

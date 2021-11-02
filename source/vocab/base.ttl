@@ -46,36 +46,36 @@ rdf:type a owl:ObjectProperty;
 
 :Class a owl:Class;
     owl:equivalentClass owl:Class;
-    rdfs:label "Klass"@sv .
+    rdfs:label "Class"@en, "Klass"@sv .
 
 :ObjectProperty a owl:Class;
     owl:equivalentClass owl:ObjectProperty;
-    rdfs:label "Relation"@sv .
+    rdfs:label "Object property"@en, "Relation"@sv .
 
 :SymmetricProperty a owl:Class;
     owl:equivalentClass owl:SymmetricProperty;
     rdfs:subClassOf :ObjectProperty;
-    rdfs:label "Symmetrisk relation"@sv .
+    rdfs:label "Symmetric property"@en, "Symmetrisk relation"@sv .
 
 :DatatypeProperty a owl:Class;
     owl:equivalentClass owl:DatatypeProperty;
     rdfs:range :Datatype;
-    rdfs:label "Egenskap"@sv .
+    rdfs:label "Data type property"@en, "Egenskap"@sv .
 
 :Datatype a owl:Class;
     owl:equivalentClass rdfs:Datatype;
-    rdfs:label "Datatyp"@sv .
+    rdfs:label "Data type"@en, "Datatyp"@sv .
 
 :StructuredProperty a owl:Class;
     rdfs:subPropertyOf owl:ObjectProperty;
     rdfs:range :StructuredValue;
-    rdfs:label "Strukturerad egenskap"@sv .
+    rdfs:label "Structured property"@en,  "Strukturerad egenskap"@sv .
 
 :StructuredValue a owl:Class;
     owl:equivalentClass sdo:StructuredValue;
     rdfs:subClassOf :Resource;
     skos:closeMatch rdfs:Datatype;
-    rdfs:label "Strukturerat värde"@sv .
+    rdfs:label "Structured value"@en, "Strukturerat värde"@sv .
 
 
 # NOTE: these constructs, used below, will yield inferred statements, which if
@@ -91,7 +91,7 @@ rdf:type a owl:ObjectProperty;
     rdfs:subClassOf rdf:Statement ;
     ptg:abstract true ;
     owl:equivalentClass sdo:Role;
-    rdfs:label "Kvalificerad roll"@sv .
+    rdfs:label "Qualified role"@en, "Kvalificerad roll"@sv .
 
 :hasStatement a owl:ObjectProperty;
     ptg:abstract true;
