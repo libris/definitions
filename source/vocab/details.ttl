@@ -1120,10 +1120,10 @@
     rdfs:label "Disambiguating description"@en, "Särskiljande beskrivning"@sv;
     rdfs:comment "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation."@en, "En särskiljande beskrivning av resursen."@sv.
 
-:awardsNote a owl:DatatypeProperty;
+:awardsNote a owl:DatatypeProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
     rdfs:range rdfs:Literal;
-    rdfs:comment "Används normalt ej i Libris."@sv;
+    skos:scopeNote "Används normalt ej i Libris."@sv;
     owl:equivalentProperty bf2:awards .
   
 :creditsNote a owl:DatatypeProperty;
@@ -1154,7 +1154,7 @@
     rdfs:range :CopyrightRegistration;
     owl:equivalentProperty bf2:copyrightRegistration .
 
-:custodialHistory a owl:DatatypeProperty;
+:custodialHistory a owl:DatatypeProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:label "custodial history"@en, "ägarhistorik"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:custodialHistory .
@@ -1338,7 +1338,7 @@
     owl:propertyChainAxiom (:hasDimensions :label) ;
     owl:equivalentProperty bf2:dimensions .
 
-:hasDimensions a owl:ObjectProperty;
+:hasDimensions a owl:ObjectProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:domain :Instance;
     rdfs:range :Dimensions;
     rdfs:comment "Mått på resursens bärare eller behållare."@sv;
