@@ -56,13 +56,6 @@
           "showProperties": [
             "prefLabel"
           ]
-        },
-        "Language": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Language",
-          "showProperties": [
-            "prefLabel"
-          ]
         }
       }
     },
@@ -237,18 +230,6 @@
           "classLensDomain": "SeriesMembership",
           "showProperties": [ "inSeries", "seriesStatement", "seriesEnumeration" ]
         },
-        "Country": {
-          "@id": "Country-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Country",
-          "showProperties": [ "prefLabel" ]
-        },
-        "Nationality": {
-          "@id": "Nationality-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Nationality",
-          "showProperties": [ "prefLabel" ]
-        },
         "marc:AddedEntryGeographicName": {
           "@id": "marc:AddedEntryGeographicName-chips",
           "@type": "fresnel:Lens",
@@ -265,7 +246,9 @@
           "@id": "Language-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
-          "showProperties": [ "prefLabel", "label" ]
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "code"]}
+          ]
         },
         "marc:LanguageNote": {
           "@id": "LanguageNote-chips",
