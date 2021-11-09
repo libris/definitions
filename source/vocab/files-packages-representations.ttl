@@ -117,14 +117,15 @@
 
 :FilePackage a owl:Class ;
     rdfs:label "File package"@en, "Filpaket"@sv ;
+    rdfs:subClassOf :Document;
     skos:broader :Dataset, :MediaObject . # TODO: broader dcat:Distribution?
 
-:hasFilePackage a owl:Class ;
+:hasFilePackage a owl:ObjectProperty ;
     rdfs:label "has file package"@en, "har filpaket"@sv ;
     sdo:domainIncludes :Document ;
     rdfs:range :FilePackage .
 
-:hasIntellectualEntity a owl:Class ;
+:hasIntellectualEntity a owl:ObjectProperty ;
     rdfs:label "has intellectual entity"@en, "har intellektuell entitet"@sv ;
     sdo:domainIncludes :Document ;
     rdfs:range :Creation .
