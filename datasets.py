@@ -168,7 +168,8 @@ def _write_context_record(compiler, filepath, uripath, ds_url):
     ctx_created_ms = w3c_dtz_to_ms(ctx_data.pop('created'))
     ctx_data['@graph'] = [{"@id": uripath, "@type": "jsonld:Context"}]
     _insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
-    compiler.write(ctx_data, uripath)
+    assert uripath.startswith(BASE)
+    compiler.write(ctx_data, uripath.replace(BASE, ''))
 
 
 @compiler.dataset
