@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 
 NS_PREF_ORDER = (
-        'bf2 bf madsrdf skos dc dctype prov sdo bibo foaf void ldp '
+        'bf2 bflc bf madsrdf skos dc dctype prov sdo bibo foaf void ldp '
         'owl rdfs rdf xsd edtf').split()
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
