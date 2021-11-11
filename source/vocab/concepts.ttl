@@ -25,6 +25,14 @@
     :category :heuristicIdentity;
     rdfs:subClassOf :Place .
 
+:locatedIn a owl:ObjectProperty ;
+    :category :integral ;
+    rdfs:label "located in"@en, "ligger i"@sv;
+    sdo:domainIncludes :Place ;
+    rdfs:range :Place ;
+    rdfs:subPropertyOf :isPartOf ;
+    skos:closeMatch sdo:location .
+
 :Event a owl:Class;
     rdfs:label "Händelse"@sv;
     owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
