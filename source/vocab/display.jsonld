@@ -196,7 +196,11 @@
           "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Identifier",
-          "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
+          "showProperties": [
+            {"alternateProperties": [ "value", "marc:hiddenValue" ]},
+            "typeNote",
+            "hasNote" 
+          ]
         },
         "ImageBitDepth": {
           "@id": "ImageBitDepth-chips",
@@ -569,7 +573,7 @@
           "@id": "Identifier-cards",
           "classLensDomain": "Identifier",
           "fresnel:extends": {"@id": "Identifier-chips"},
-          "showProperties": [ "fresnel:super", "qualifier", "agent", "source" ]
+          "showProperties": [ "fresnel:super", "qualifier", "agent", "source", "assigner" ]
         },
         "ISBN": {
           "@id": "ISBN-cards",
