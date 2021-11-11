@@ -196,7 +196,11 @@
           "@id": "Identifier-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Identifier",
-          "showProperties": [ "value", "typeNote", "marc:hiddenValue" ]
+          "showProperties": [
+            {"alternateProperties": [ "value", "marc:hiddenValue" ]},
+            "typeNote",
+            "hasNote" 
+          ]
         },
         "ImageBitDepth": {
           "@id": "ImageBitDepth-chips",
@@ -209,6 +213,14 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "ISBN",
           "showProperties": [ "value", "qualifier" ]
+        },
+        "ISSN": {
+          "@id": "ISSN-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISSN",
+          "showProperties": [
+            {"alternateProperties": [ "value", "marc:canceledIssn", "marc:incorrectIssn", "marc:issnL" ]}
+          ]
         },
         "Notation": {
           "@id": "Notation-chips",
@@ -426,6 +438,7 @@
           "showProperties": [
             "reproductionOf",
             "identifiedBy",
+            "indirectlyIdentifiedBy",
             "issuanceType",
             "mediaType",
             "carrierType",
@@ -442,7 +455,6 @@
             "copyright",
             "copyrightDate",
             "projectedProvisionDate",
-            "indirectlyIdentifiedBy",
             "extent",
             "hasDimensions",
             "hasDuration",
@@ -561,7 +573,7 @@
           "@id": "Identifier-cards",
           "classLensDomain": "Identifier",
           "fresnel:extends": {"@id": "Identifier-chips"},
-          "showProperties": [ "fresnel:super", "qualifier", "agent", "source" ]
+          "showProperties": [ "fresnel:super", "qualifier", "agent", "source", "assigner" ]
         },
         "ISBN": {
           "@id": "ISBN-cards",
@@ -569,6 +581,13 @@
           "classLensDomain": "ISBN",
           "fresnel:extends": {"@id": "ISBN-chips"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "ISSN": {
+          "@id": "ISSN-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISSN",
+          "fresnel:extends": {"@id": "ISSN-chips"},
+          "showProperties": [ "fresnel:super", "source" ]
         },
         "Library": {
           "@id": "Library-cards",
