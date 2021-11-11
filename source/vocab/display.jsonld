@@ -210,6 +210,14 @@
           "classLensDomain": "ISBN",
           "showProperties": [ "value", "qualifier" ]
         },
+        "ISSN": {
+          "@id": "ISSN-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISSN",
+          "showProperties": [
+            {"alternateProperties": [ "value", "marc:canceledIssn", "marc:incorrectIssn", "marc:issnL" ]}
+          ]
+        },
         "Notation": {
           "@id": "Notation-chips",
           "@type": "fresnel:Lens",
@@ -569,6 +577,13 @@
           "classLensDomain": "ISBN",
           "fresnel:extends": {"@id": "ISBN-chips"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "ISSN": {
+          "@id": "ISSN-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ISSN",
+          "fresnel:extends": {"@id": "ISSN-chips"},
+          "showProperties": [ "fresnel:super", "source" ]
         },
         "Library": {
           "@id": "Library-cards",
