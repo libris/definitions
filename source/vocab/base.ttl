@@ -156,6 +156,13 @@ rdf:type a owl:ObjectProperty;
     skos:scopeNote "Används i XL för att automatiskt ersätta blanka noder med länkar"@sv ;
     :code "heuristicIdentifier" .
 
+:integral a skos:Collection ;
+    rdfs:label "integral relation"@en, "väsentlig relation"@sv ;
+    rdfs:comment "Anges som kategori på relationer som är väsentliga för att ge en komplett förståelse för en resurs."@sv ;
+    skos:example "instanceOf, translationOf, locatedIn"@sv ;
+    skos:scopeNote "Används i XL för att presentera relaterade resurser tillsammans med huvudsaklig resurs."@sv ;
+    :code "integral" .
+
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;
     rdfs:domain :Resource ;
