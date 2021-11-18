@@ -2,8 +2,8 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
-prefix kbv: <https://id.kb.se/vocab/>
 prefix vann: <http://purl.org/vocab/vann/>
+prefix : <https://id.kb.se/tmp/rdamap#>
 base <https://id.kb.se/term/rda/>
 
 construct {
@@ -15,13 +15,21 @@ construct {
         skos:definition ?rdadefinition;
         skos:inScheme </term/rda> ;
         owl:sameAs ?codealias, ?labelalias ;
-        skos:exactMatch ?lcrel, ?rdarel .
+        skos:broader ?base ;
+        skos:exactMatch ?lcrel, ?rdarel, ?exact ;
+        skos:closeMatch ?close ;
+        skos:broadMatch ?broad .
 
 } where {
 
     ?term a ?type ;
-        kbv:lccode ?lccode;
-        kbv:rdacode ?rdacode .
+        :lccode ?lccode ;
+        :rdacode ?rdacode .
+
+    optional { ?term :base ?base }
+    optional { ?term :exact ?exact }
+    optional { ?term :close ?close }
+    optional { ?term :broad ?broad }
 
     bind(IRI(concat('http://id.loc.gov/vocabulary/',
                     if(?type = bf2:Content, 'contentTypes',

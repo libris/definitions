@@ -1,4 +1,4 @@
-@id	@type	lccode	rdacode
+@id	@type	lccode	rdacode	base	exact	close	broad
 CartographicDataset	ContentType	crd	1001
 CartographicImage	ContentType	cri	1002
 CartographicMovingImage	ContentType	crm	1003
@@ -6,11 +6,11 @@ CartographicTactileImage	ContentType	crt	1004
 CartographicTactileThreeDimensionalForm	ContentType	crn	1005
 CartographicThreeDimensionalForm	ContentType	crf	1006
 ComputerDataset	ContentType	cod	1007
-ComputerProgram	ContentType	cop	1008
+ComputerProgram	ContentType	cop	1008		marc:ComputerProgram
 NotatedMovement	ContentType	ntv	1009
 NotatedMusic	ContentType	ntm	1010
 PerformedMusic	ContentType	prm	1011
-Sounds	ContentType	snd	1012
+Sounds	ContentType	snd	1012		marc:Sound
 SpokenWord	ContentType	spw	1013
 StillImage	ContentType	sti	1014
 TactileImage	ContentType	tci	1015
@@ -28,60 +28,60 @@ Computer	MediaType	c	1003
 Microform	MediaType	h	1002
 Microscopic	MediaType	p	1004
 Projected	MediaType	g	1005
-Stereographic	MediaType	e	1006
+Stereographic	MediaType	e	1006	marc:Stereographic
 Unmediated	MediaType	n	1007
 Video	MediaType	v	1008
 
-AudioCartridge	CarrierType	sg	1002
-AudioCylinder	CarrierType	se	1003
-AudioDisc	CarrierType	sd	1004
-AudioRoll	CarrierType	sq	1006
-Audiocassette	CarrierType	ss	1007
-AudiotapeReel	CarrierType	st	1008
-SoundTrackReel	CarrierType	si	1005
+AudioCartridge	CarrierType	sg	1002	Audio
+AudioCylinder	CarrierType	se	1003	Audio
+AudioDisc	CarrierType	sd	1004	Audio
+AudioRoll	CarrierType	sq	1006	Audio
+Audiocassette	CarrierType	ss	1007	Audio
+AudiotapeReel	CarrierType	st	1008	Audio
+SoundTrackReel	CarrierType	si	1005	Audio
 
-ComputerCard	CarrierType	ck	1011
-ComputerChipCartridge	CarrierType	cb	1012
-ComputerDisc	CarrierType	cd	1013
-ComputerDiscCartridge	CarrierType	ce	1014
-ComputerTapeCartridge	CarrierType	ca	1015
-ComputerTapeCassette	CarrierType	cf	1016
-ComputerTapeReel	CarrierType	ch	1017
-OnlineResource	CarrierType	cr	1018
+ComputerCard	CarrierType	ck	1011	Computer	marc:ComputerCard
+ComputerChipCartridge	CarrierType	cb	1012	Computer
+ComputerDisc	CarrierType	cd	1013	Computer	marc:ComputerDisc
+ComputerDiscCartridge	CarrierType	ce	1014	Computer	marc:ComputerDiscCartridge
+ComputerTapeCartridge	CarrierType	ca	1015	Computer			marc:TapeCartridge
+ComputerTapeCassette	CarrierType	cf	1016	Computer			marc:TapeCassette
+ComputerTapeReel	CarrierType	ch	1017	Computer			marc:TapeReel
+OnlineResource	CarrierType	cr	1018	Computer	marc:OnlineResource	marc:Online
 
-ApertureCard	CarrierType	ha	1021
-Microfiche	CarrierType	he	1022
-MicroficheCassette	CarrierType	hf	1023
-MicrofilmCartridge	CarrierType	hb	1024
-MicrofilmCassette	CarrierType	hc	1025
-MicrofilmReel	CarrierType	hd	1026
-MicrofilmRoll	CarrierType	hj	1056
-MicrofilmSlip	CarrierType	hh	1027
-Microopaque	CarrierType	hg	1028
+ApertureCard	CarrierType	ha	1021	Microform	marc:ApertureCard
+Microfiche	CarrierType	he	1022	Microform	marc:Microfiche
+MicroficheCassette	CarrierType	hf	1023	Microform	marc:MicroficheCassette
+MicrofilmCartridge	CarrierType	hb	1024	Microform	marc:MicrofilmCartridge
+MicrofilmCassette	CarrierType	hc	1025	Microform	marc:MicrofilmCassette
+MicrofilmReel	CarrierType	hd	1026	Microform	marc:MicrofilmReel
+MicrofilmRoll	CarrierType	hj	1056	Microform	marc:MicrofilmRoll
+MicrofilmSlip	CarrierType	hh	1027	Microform	marc:MicrofilmSlip
+Microopaque	CarrierType	hg	1028	Microform	marc:Microopaque
 
-MicroscopeSlide	CarrierType	pp	1030
+MicroscopeSlide	CarrierType	pp	1030	Microscopic	marc:MicroscopeSlide
 
-FilmCartridge	CarrierType	mc	1032
-FilmCassette	CarrierType	mf	1033
-FilmReel	CarrierType	mr	1034
-FilmRoll	CarrierType	mo	1069
-Filmslip	CarrierType	gd	1035
-Filmstrip	CarrierType	gf	1036
-FilmstripCartridge	CarrierType	gc	1037
-OverheadTransparency	CarrierType	gt	1039
-Slide	CarrierType	gs	1040
+FilmCartridge	CarrierType	mc	1032	Projected
+FilmCassette	CarrierType	mf	1033	Projected
+FilmReel	CarrierType	mr	1034	Projected
+FilmRoll	CarrierType	mo	1069	Projected
+Filmslip	CarrierType	gd	1035	Projected	marc:Filmslip
+Filmstrip	CarrierType	gf	1036	Projected	marc:Filmstrip
+FilmstripCartridge	CarrierType	gc	1037	Projected	marc:FilmstripCartridge
+OverheadTransparency	CarrierType	gt	1039	Projected
+Slide	CarrierType	gs	1040	Projected	marc:Slide
 
-StereographCard	CarrierType	eh	1042
-StereographDisc	CarrierType	es	1043
+StereographCard	CarrierType	eh	1042	Stereographic
+StereographDisc	CarrierType	es	1043	Stereographic
 
-Card	CarrierType	no	1045
-Flipchart	CarrierType	nn	1046
-Roll	CarrierType	na	1047
-Sheet	CarrierType	nb	1048
-Volume	CarrierType	nc	1049
-Object	CarrierType	nr	1059
+Card	CarrierType	no	1045	Unmediated
+Flipchart	CarrierType	nn	1046	Unmediated
+Roll	CarrierType	na	1047	Unmediated	marc:Roll
+Sheet	CarrierType	nb	1048	Unmediated
+Volume	CarrierType	nc	1049	Unmediated
+Object	CarrierType	nr	1059	Unmediated
 
-VideoCartridge	CarrierType	vc	1051
-Videocassette	CarrierType	vf	1052
-Videodisc	CarrierType	vd	1060
-VideotapeReel	CarrierType	vr	1053
+VideoCartridge	CarrierType	vc	1051	Video	marc:Videocartridge
+Videocassette	CarrierType	vf	1052	Video	marc:Videocassette
+Videodisc	CarrierType	vd	1060	Video	marc:Videodisc
+VideotapeReel	CarrierType	vr	1053	Video		marc:Videotape
