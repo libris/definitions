@@ -768,7 +768,7 @@
     rdfs:subClassOf :StructuredValue .
 
 :sourceConsulted a owl:ObjectProperty;
-    rdfs:label "Konsulterad källa"@sv;
+    rdfs:label "source consulted"@en, "konsulterad källa"@sv;
     rdfs:comment 
       "Relates data to a resource used in determining a name, title, or other identifying attributes of an entity, or in determining a relationship between entities."@en,
       "En konsulterad källa är en resurs som använts för att bestämma namn, titel eller andra identifierande attribut för en person eller annan entitet"@sv;
@@ -856,7 +856,7 @@
     rdfs:domain :Instance;
     rdfs:range :Copyright;
     rdfs:comment "Tid förknippad med upphovsrättskydd."@sv;
-    rdfs:label "copyright"@sv .
+    rdfs:label "copyright"@en, "copyright"@sv .
 
 :Production a owl:Class;
     owl:equivalentClass bf2:Production;
@@ -943,21 +943,21 @@
 
 :otherYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
-    rdfs:label "kompletterande datum"@sv;
+    rdfs:label "other year"@en, "kompletterande datum"@sv;
     rdfs:subPropertyOf :date .
 
 :startYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
-    rdfs:label "startår"@sv;
+    rdfs:label "start year"@en, "startår"@sv;
     rdfs:subPropertyOf :year, :startDate .
 
 :endYear a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity ;
-    rdfs:label "slutår"@sv;
+    rdfs:label "end year"@en, "slutår"@sv;
     rdfs:subPropertyOf :year, :endDate .
 
 :country a owl:ObjectProperty;
-    rdfs:label "land"@sv;
+    rdfs:label "country"@en, "land"@sv;
     sdo:domainIncludes :PrimaryProvisionActivity;
     rdfs:subPropertyOf :place ;
     rdfs:range :Country .
@@ -1007,7 +1007,7 @@
     rdfs:subPropertyOf dce:contributor .
 
 :editionStatement a owl:DatatypeProperty ;
-    rdfs:label "edition statement"@en, "upplageuppgift"@sv;
+    rdfs:label "upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:comment "En uppgift som identifierar den upplaga eller version till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
     rdfs:equivalentProperty bf2:editionStatement .
@@ -1018,34 +1018,34 @@
     rdfs:subPropertyOf :editionStatement .
     
 :editionEnumeration a owl:DatatypeProperty;
+    rdfs:label "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
     rdfs:domain :Instance;
-    rdfs:label "Edition enumeration"@en, "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
     owl:equivalentProperty bf2:editionEnumeration .
 
 :provisionActivityStatement a owl:DatatypeProperty;
-    rdfs:label "Provider statement"@en, "Uppgift om produktion, utgivning, distribution och/eller tillverkning"@sv;
+    rdfs:label "uppgift om produktion, utgivning, distribution och/eller tillverkning"@sv;
     rdfs:domain :Instance;
     owl:equivalentProperty bf2:provisionActivityStatement .
 
 :seriesStatement a owl:DatatypeProperty ;
     rdfs:equivalentProperty bf2:seriesStatement;
     sdo:domainIncludes :SeriesMembership ;
-    rdfs:label "series statement"@en, "serieuppgift"@sv;
+    rdfs:label "serieuppgift"@sv;
     rdfs:comment "Ange uppgiften som den står i objektet."@sv .
 
 :seriesEnumeration a owl:DatatypeProperty;
     sdo:domainIncludes :SeriesMembership ;
-    rdfs:label "Series enumeration"@en, "Numrering inom serie"@sv;
+    rdfs:label "numrering inom serie"@sv;
     owl:equivalentProperty bf2:seriesEnumeration .
 
 :subseriesStatement a owl:DatatypeProperty ;
     rdfs:equivalentProperty bf2:subseriesStatement;
-    rdfs:label "subseries statement"@en, "uppgift om underserie"@sv;
+    rdfs:label "uppgift om underserie"@sv;
     rdfs:comment "Ange uppgiften som den står i objektet."@sv .
 
 :subseriesEnumeration a owl:DatatypeProperty ;
     rdfs:equivalentProperty bf2:subseriesEnumeration;
-    rdfs:label "Subseries enumeration"@en, "Numrering inom underserie"@sv .
+    rdfs:label "numrering inom underserie"@sv .
 
 # Collection arrangement
 
@@ -1203,16 +1203,16 @@
 :year a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity;
     rdfs:subPropertyOf :date;
-    rdfs:label "år"@sv;
+    rdfs:label "year"@en, "år"@sv;
     rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
 
 :startDate a owl:DatatypeProperty;
-    rdfs:label "startdatum"@sv;
+    rdfs:label "start date"@en,"startdatum"@sv;
     rdfs:subPropertyOf :date .
 
 :endDate a owl:DatatypeProperty;
     sdo:domainIncludes :Embargo;
-    rdfs:label "slutdatum"@sv;
+    rdfs:label "end date"@en, "slutdatum"@sv;
     rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
