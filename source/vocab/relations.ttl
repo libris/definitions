@@ -39,19 +39,19 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:subPropertyOf sdo:exampleOfWork .
 
 :hasDerivative a owl:ObjectProperty;
-    rdfs:label "has derivative"@en, "har bearbetning"@sv;
+    rdfs:label "har bearbetning"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :derivativeOf;
     owl:equivalentProperty bf2:hasDerivative .
 
 :derivativeOf a owl:ObjectProperty;
-    rdfs:label "is derivative of"@en, "är bearbetning av"@sv;
+    rdfs:label "är bearbetning av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasDerivative;
     owl:equivalentProperty bf2:derivativeOf .
 
 :hasPart a owl:ObjectProperty;
-    rdfs:label "has part"@en, "har del"@sv;
+    rdfs:label "har del"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :isPartOf;
     owl:equivalentProperty bf2:hasPart, dc:hasPart, sdo:hasPart, relsubtype:hsp . # TODO: super-properties of relsubtype:hsp instead?
@@ -60,7 +60,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
     sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
     sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
-    rdfs:label "is part of"@en, "är del av"@sv;
+    rdfs:label "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
     rdfs:comment "Relaterad resurs vilken den beskrivna resursen är en fysisk eller logisk del av."@sv;
@@ -190,38 +190,38 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty bf2:accompaniedBy .
 
 :issuedWith a owl:SymmetricProperty;
-    rdfs:label "Issued with"@en, "utgiven med"@sv;
+    rdfs:label "utgiven med"@sv;
     rdfs:domain :Instance;
     rdfs:range :Instance;
     rdfs:subPropertyOf :accompanies;
     owl:equivalentProperty bf2:issuedWith .
 
 :continuedBy a owl:ObjectProperty;
-    rdfs:label "fortsättes av"@sv, "continued by"@en;
+    rdfs:label "fortsättes av"@sv ;
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :continues;
     owl:equivalentProperty bf2:continuedBy .
 
 :continuedInPartBy a owl:ObjectProperty;
-    rdfs:label "fortsättes delvis av"@sv, "continued in part by"@en;
+    rdfs:label "fortsättes delvis av"@sv ;
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :separatedFrom;
     owl:equivalentProperty bf2:continuedInPartBy .
 
 :separatedFrom a owl:ObjectProperty;
-    rdfs:label "Separated from"@en, "Separerad från"@sv;
+    rdfs:label "separerad från"@sv;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :continuedInPartBy;
     owl:equivalentProperty bf2:separatedFrom .
 
 :continues a owl:ObjectProperty;
-    rdfs:label "fortsätter"@sv, "continuation of"@en;
+    rdfs:label "fortsätter"@sv ;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :continuedBy;
     owl:equivalentProperty bf2:continues .
 
 :continuesInPart a owl:ObjectProperty;
-    rdfs:label "fortsätter delvis"@sv, "continuation in part of"@en;
+    rdfs:label "fortsätter delvis"@sv ;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :splitInto;
     owl:equivalentProperty bf2:continuesInPart .
@@ -250,13 +250,13 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty bf2:findingAidOf .
 
 :index a owl:ObjectProperty;
-    rdfs:label "has index"@en, "register"@sv;
+    rdfs:label "register"@sv;
     rdfs:subPropertyOf :accompaniedBy;
     owl:inverseOf :indexOf;
     owl:equivalentProperty bf2:index .
 
 :indexOf a owl:ObjectProperty;
-    rdfs:label "index to"@en, "register till"@sv;
+    rdfs:label "register till"@sv;
     rdfs:subPropertyOf :accompanies;
     owl:inverseOf :index;
     owl:equivalentProperty bf2:indexOf .
@@ -273,13 +273,13 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty bf2:hasEquivalent .
 
 :mergerOf a owl:ObjectProperty;
-    rdfs:label "sammanslagen med"@sv, "merger of"@en;
+    rdfs:label "sammanslagen med"@sv ;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :mergedToForm;
     owl:equivalentProperty bf2:mergerOf .
 
 :mergedToForm a owl:ObjectProperty;
-    rdfs:label "sammanslagen till"@sv, "merged to form"@en;
+    rdfs:label "sammanslagen till"@sv ;
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :mergerOf;
     owl:equivalentProperty bf2:mergedToForm .
@@ -315,7 +315,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:inverseOf :subseriesOf .
 
 :subseriesOf a owl:ObjectProperty;
-    rdfs:label "Underserie till"@sv;
+    rdfs:label "underserie till"@sv;
     owl:equivalentProperty bf2:subseriesOf;
     rdfs:subPropertyOf :hasPart;
     owl:inverseOf :hasSubseries .
@@ -381,13 +381,13 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:inverseOf :precededBy .
 
 :replacedBy a owl:ObjectProperty;
-    rdfs:label "replaced by"@en, "ersatt av"@sv;
+    rdfs:label "ersatt av"@sv;
     owl:equivalentProperty bf2:replacedBy;
     rdfs:subPropertyOf :succeededBy, dc:isReplacedBy ;
     owl:inverseOf :replacementOf .
 
 :replacementOf a owl:ObjectProperty;
-    rdfs:label "replacement of"@en, "ersätter"@sv;
+    rdfs:label "ersätter"@sv;
     owl:equivalentProperty bf2:replacementOf;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :replacedBy .
@@ -443,7 +443,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :SeriesMembership ;
     rdfs:subPropertyOf :object ;
     sdo:rangeIncludes :Instance ;
-    rdfs:label "in series"@en, "ingår i serie"@sv .
+    rdfs:label "ingår i serie"@sv .
 
 :SeriesMembership a owl:Class ;
     rdfs:subClassOf :PartitiveRelationship ;
@@ -481,14 +481,14 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty dc:replaces .
 
 :source a owl:ObjectProperty;
-    rdfs:label "källa"@sv, "source"@en;
+    rdfs:label "källa"@sv ;
     rdfs:domain :Resource;
     rdfs:comment "Källa från vilket ett namn, benämning eller värde är taget. Exempelvis termlistor"@sv;
     rdfs:range :Source;
     owl:equivalentProperty dc:source, bf2:source .
 
 :sourceNote a owl:DatatypeProperty;
-    rdfs:label "källinformation"@sv;
+    rdfs:label "source note"@en, "källinformation"@sv;
     owl:propertyChainAxiom (:source :note) .
 
 #:about a owl:ObjectProperty;
