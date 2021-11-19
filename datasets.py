@@ -283,6 +283,13 @@ def swepubterms():
 
 
 @compiler.dataset
+def policies():
+    graph = Graph().parse(str(compiler.path('source/policies.ttl')), format='turtle')
+
+    return "/policy/", "2021-11-18T11:48:51Z", graph
+
+
+@compiler.dataset
 def containers():
     graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
 
