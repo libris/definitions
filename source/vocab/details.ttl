@@ -1176,9 +1176,13 @@
     sdo:domainIncludes :Creation, :Person, :Title, :Identifier, :ShelfMarkSequence, :Library, :Bibliography.
 
 :typeNote a owl:DatatypeProperty;
-    rdfs:label "Typanmärkning"@sv;
+    rdfs:label "Type note"@en, "Typanmärkning"@sv;
     owl:propertyChainAxiom (:type :note);
     sdo:domainIncludes :VariantTitle, :Identifier .
+
+:variantType a owl:DatatypeProperty;
+    :category :pending ;
+    owl:equivalentProperty bf2:variantType .
 
 :place a owl:ObjectProperty;
     rdfs:label "plats"@sv;
