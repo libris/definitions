@@ -69,7 +69,7 @@
     rdfs:label "Övrig titelinformation"@sv .
 
 :subtitle a owl:DatatypeProperty;
-    rdfs:label "subtitle"@en, "övrig titelinformation"@sv;
+    rdfs:label "övrig titelinformation"@sv;
     skos:altlabel "Undertitel"@sv;
     rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel."@sv;
     #rdfs:subPropertyOf :titleRemainder; - Commented out as not to depend on a pending property.
@@ -77,13 +77,13 @@
     rdfs:domain :Title .
 
 :partName a owl:DatatypeProperty;
-    rdfs:label "part title"@en, "deltitel"@sv;
+    rdfs:label "deltitel"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partName;
     sdo:domainIncludes :Title, :TitlePart .
 
 :partNumber a owl:DatatypeProperty;
-    rdfs:label "part number"@en, "delbeteckning"@sv;
+    rdfs:label "delbeteckning"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:partNumber;
     sdo:domainIncludes :Title, :TitlePart .
@@ -1161,7 +1161,7 @@
     owl:equivalentProperty bf2:copyrightRegistration .
 
 :custodialHistory a owl:DatatypeProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
-    rdfs:label "custodial history"@en, "ägarhistorik"@sv;
+    rdfs:label "ägarhistorik"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:custodialHistory .
 
@@ -1216,7 +1216,7 @@
     rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
-    rdfs:label "Origin date"@en, "Tid för verket"@sv;
+    rdfs:label "Tid för verket"@sv;
     rdfs:domain :Work;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:originDate .
@@ -1364,7 +1364,7 @@
 
 :natureOfContent a owl:DatatypeProperty;
     rdfs:range rdfs:Literal;
-    rdfs:label "content nature"@en, "innehållets karaktär"@sv ;
+    rdfs:label "innehållets karaktär"@sv ;
     owl:equivalentProperty bf2:natureOfContent .
 
 :Dissertation a owl:Class;
@@ -1468,7 +1468,7 @@
     owl:equivalentProperty bf2:ensemble .
 
 :ensembleType a owl:DatatypeProperty;
-    rdfs:label "Ensemble Type"@en, "Ensembletyp"@sv;
+    rdfs:label "Ensembletyp"@sv;
     rdfs:domain :Ensemble;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:ensembleType .
