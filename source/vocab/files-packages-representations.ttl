@@ -94,7 +94,9 @@
     rdfs:range :Checksum ;
     rdfs:subPropertyOf premis3:fixity .
 
-:Checksum a rdfs:Datatype, owl:Class ; rdfs:subClassOf premis3:Fixity .
+:Checksum a rdfs:Datatype, owl:Class ; rdfs:subClassOf premis3:Fixity ;
+  rdfs:label "Checksum"@en, "Kontrollsumma"@sv .
+  
 :MD5 a rdfs:Datatype; rdfs:subClassOf :Checksum .
 :SHA256 a rdfs:Datatype; rdfs:subClassOf :Checksum .
 
