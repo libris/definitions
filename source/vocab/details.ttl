@@ -1592,6 +1592,11 @@
     rdfs:subClassOf :UsageAndAccessPolicy;
     owl:equivalentClass bf2:UsePolicy .
 
+:License a owl:Class;
+    rdfs:label "License"@en, "Licens"@sv;
+    rdfs:subClassOf :UsagePolicy;
+    owl:equivalentClass dc:LicenseDocument .
+
 :Embargo a owl:Class;
     :category :pending ;
     rdfs:label "Embargo"@en, "Embargo"@sv;
@@ -1600,4 +1605,5 @@
 :usageAndAccessPolicy a owl:ObjectProperty;
     rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
     rdfs:range :UsageAndAccessPolicy;
+    skos:narrowMatch dc:license, sdo:license ;
     owl:equivalentProperty bf2:usageAndAccessPolicy .
