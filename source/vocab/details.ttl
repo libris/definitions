@@ -979,7 +979,7 @@
     rdfs:label "utgivare"@sv, "publisher"@en ;
     rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
                  "An entity responsible for making the resource available."@en ;
-    sdo:domainIncludes :MediaObject ;
+    sdo:domainIncludes :Embodiment, :MediaObject ;
     rdfs:range :Agent ;
     owl:equivalentProperty dc:publisher, sdo:publisher;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
@@ -1605,6 +1605,7 @@
 
 :usageAndAccessPolicy a owl:ObjectProperty;
     rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
+    sdo:domainIncludes :Embodiment, :MediaObject ;
     rdfs:range :UsageAndAccessPolicy;
     skos:narrowMatch dc:license, sdo:license ;
     owl:equivalentProperty bf2:usageAndAccessPolicy .
