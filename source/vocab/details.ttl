@@ -975,7 +975,11 @@
     owl:propertyChainAxiom ( :publication :year ) .
 
 :publisher a owl:ObjectProperty;
-    :category :shorthand;
+    #:category :shorthand;
+    rdfs:label "utgivare"@sv, "publisher"@en ;
+    rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
+                 "An entity responsible for making the resource available."@en ;
+    sdo:domainIncludes :MediaObject ;
     owl:equivalentProperty dc:publisher, sdo:publisher;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
     # there is no corresponding correlation in these mappings.
