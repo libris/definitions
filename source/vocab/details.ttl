@@ -979,7 +979,9 @@
     rdfs:label "utgivare"@sv, "publisher"@en ;
     rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
                  "An entity responsible for making the resource available."@en ;
-    sdo:domainIncludes :Embodiment, :MediaObject ;
+    sdo:domainIncludes :MediaObject ;
+    # TODO: also sdo:domainIncludes :Embodiment ; but on those, we prefer
+    # :publication, and should treat this as a :shorthand.
     rdfs:range :Agent ;
     owl:equivalentProperty dc:publisher, sdo:publisher;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
