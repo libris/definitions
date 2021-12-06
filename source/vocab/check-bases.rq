@@ -13,7 +13,7 @@ construct {
     {
         ?term (rdfs:subClassOf|owl:equivalentClass) ?base .
         filter not exists {
-            { ?base a rdfs:Class } union { ?base a owl:Class }
+            { ?base a rdfs:Class } union { ?base a owl:Class } union { ?base a rdfs:Datatype }
         }
         bind("Unknown base class {} for term {}"@en as ?msg)
 

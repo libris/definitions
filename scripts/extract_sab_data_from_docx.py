@@ -1,18 +1,15 @@
 # -*- coding: UTF-8 -*-
-from __future__ import unicode_literals, print_function, division
-__metaclass__ = type
 import sys
-if not sys.stdout.encoding:
-    import codecs
-    sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 from collections import OrderedDict
 import re
 from zipfile import ZipFile
 import json
 from lxml import etree
-from urllib2 import quote
+from urllib.parse import quote
 
+
+ID = '@id'
 
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
@@ -60,7 +57,7 @@ class TableHandler:
             return
 
         if node['@type'].endswith('Collection'):
-            self._current_coll = [ node['@id'] ] + code.split('--')
+            self._current_coll = [ node[ID] ] + code.split('--')
             # NOTE: we "incorrectly" link the collection to the parent
             # classification, instead of:
             #return
@@ -69,7 +66,7 @@ class TableHandler:
             coll_id, coll_start, coll_end = self._current_coll
             if (len(code) == len(coll_start) and
                     code >= coll_start and code <= coll_end):
-                node['inCollection'] = {'@id': coll_id}
+                node['inCollection'] = {ID: coll_id}
 
         if len(code) > len(current['code']):
             # "Deeper" Collection nodes got lost otherwise (see FIXME though)
@@ -118,8 +115,8 @@ class TableHandler:
             if code[0].isalpha():
                 self._index[code] = node
         else:
-            assert node['label'] == label, "%r != %r" % (
-                    (node['code'], node['label']), (code, label))
+            assert node['prefLabel'] == label, "%r != %r" % (
+                    (node['code'], node['prefLabel']), (code, label))
 
         if is_collection:
             node['@type'] = 'Collection'
@@ -134,12 +131,12 @@ class TableHandler:
         # far from all (and special '.0' elements are always locally unique).
         if current and element_type:
             if code[0:2] != '.0':
-                node['broader'] = {'@id': node_id}
-            node_id = current['@id'] + code
+                node['broader'] = {ID: node_id}
+            node_id = current[ID] + code
 
-        node['@id'] = node_id
+        node[ID] = node_id
         node['code'] = code
-        node['label'] = label
+        node['prefLabel'] = label
 
         if len(parts) > 2:
             node['comment'] = parts[2]
@@ -313,7 +310,26 @@ def extract_sab(doc, debug=False):
                 print(indent, sep='', end='')
                 print(('%s =' % parts[0]), *parts[1:], sep='\t')
 
-    return thandler.get_results()
+    return flatten(thandler.get_results())
+
+
+def flatten(data, results=None, broader=None):
+    results = {} if results is None else results
+    for item in data:
+        if broader:
+            item['broader'] = broader
+        if 'narrower' in item:
+            flatten(item.pop('narrower'), results, broader={ID: item[ID]})
+        existing = results.get(item[ID])
+        if existing:
+            for k, v in item.items():
+                if k not in existing:
+                    existing[k] = v
+                #elif existing[k] != v:
+                #    print('DIFF', item[ID], existing[k], v, file=sys.stderr)
+        else:
+            results[item[ID]] = item
+    return list(results.values())
 
 
 if __name__ == '__main__':

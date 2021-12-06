@@ -284,9 +284,22 @@ class Compiler:
         source.parse(str(fpath))
         return source
 
-    def load_json(self, fpath):
-        with self.path(fpath).open() as fp:
-            return json.load(fp)
+    def load_json(self, fpathref):
+        fpath = self.path(fpathref)
+        with fpath.open() as fp:
+            data = json.load(fp)
+
+            # Rudimentary context import handling to reduce repetition locally
+            ctx = data.get('@context')
+            if ctx and '@import' in ctx:
+                imported = self.load_json(fpath.parent / ctx.pop('@import'))
+                impctx = imported.get('@context')
+                assert isinstance(impctx, dict), "Only handling imports of simple contexts"
+                for k, v in impctx.items():
+                    assert k not in ctx, f"Redefinition of imported {k} in {fpath}"
+                    ctx.setdefault(k, v)
+
+            return data
 
     def read_csv(self, fpath, **kws):
         return _read_csv(self.path(fpath), **kws)
