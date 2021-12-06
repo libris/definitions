@@ -25,8 +25,16 @@
     :category :heuristicIdentity;
     rdfs:subClassOf :Place .
 
+:locatedIn a owl:ObjectProperty ;
+    :category :integral ;
+    rdfs:label "located in"@en, "ligger i"@sv;
+    sdo:domainIncludes :Place ;
+    rdfs:range :Place ;
+    rdfs:subPropertyOf :isPartOf ;
+    skos:closeMatch sdo:location .
+
 :Event a owl:Class;
-    rdfs:label "Event"@en, "Händelse"@sv;
+    rdfs:label "Händelse"@sv;
     owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
 
 :Language a owl:Class ;
@@ -110,6 +118,7 @@
     owl:equivalentProperty madsrdf:definitionNote .
 
 :exactMatch a owl:ObjectProperty ;
+    :category :integral ;
     rdfs:label "exact match"@en, "exakt match"@sv ;
     sdo:domainIncludes :Identity ;
     sdo:rangeIncludes :Agent, :Concept ;
@@ -253,6 +262,7 @@
     owl:equivalentProperty bf2:classification;
     rdfs:domain :Endeavour ;
     rdfs:range :Classification ;
+    rdfs:subPropertyOf sdo:hasCategoryCode ;
     rdfs:label "Classification"@en, "klassifikation"@sv .
 
 :additionalClassificationDdc a owl:ObjectProperty;
@@ -265,7 +275,7 @@
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
     owl:equivalentClass bf2:Classification;
-    rdfs:label "Classification"@en, "Klassifikation"@sv .
+    rdfs:label "Klassifikation"@sv .
     
 :ClassificationDdc a owl:Class;
     rdfs:label "DDC Classification"@en, "DDK-klassifikation"@sv;
@@ -359,7 +369,7 @@
 :Geographic a owl:Class;
     rdfs:label "Geographic"@en, "Geografiskt ämnesord"@sv;
     owl:equivalentClass madsrdf:Geographic;
-    rdfs:subClassOf :Subject, bf2:Place .
+    rdfs:subClassOf :Subject, :Place .
 
 :TermCollection a owl:Class;
     rdfs:label "Term Collection"@en, "Termsamling"@sv;
@@ -406,7 +416,7 @@
 :GenreSubdivision a owl:Class ;
     skos:broader :GenreForm;
     rdfs:subClassOf :Subdivision;
-    rdfs:label "Underindelning för genre/form"@sv .
+    rdfs:label "Genre subdivision"@en, "Underindelning för genre/form"@sv .
 
 :GeographicSubdivision a owl:Class ;
     skos:broader :Geographic;

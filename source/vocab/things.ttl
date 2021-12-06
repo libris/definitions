@@ -78,9 +78,11 @@
     skos:closeMatch sdo:Product, rdaent:Manifestation .
 
 :instanceOf a owl:ObjectProperty ;
+    :category :integral ;
     rdfs:label "instans av Verk"@sv;
+    owl:inverseOf :hasInstance ;
     owl:equivalentProperty bf2:instanceOf;
-    rdfs:subPropertyOf sdo:exampleOfWork, rdfa:copy;
+    rdfs:subPropertyOf sdo:exampleOfWork, dc:isFormatOf, rdfa:copy;
     rdfs:comment "Verk som den beskrivna instansen manifesterar. Används för att koppla ihop instanser med verk i en Bibframe-struktur."@sv;
     sdo:rangeIncludes :Work .
 
@@ -99,14 +101,14 @@
 # Type-like Enumerations
 
 :contentType a owl:ObjectProperty;
-    rdfs:label "Content type"@en, "innehållstyp"@sv ;
+    rdfs:label "innehållstyp"@sv ;
     rdfs:range :ContentType ;
     owl:equivalentProperty bf2:content ;
     rdfs:comment "Kategorisering som anger hur innehållet uttrycks och med vilket mänskligt sinne det ska upplevas."@sv;
     rdfs:subPropertyOf rdael:contentType, dc:type .
 
 :mediaType a owl:ObjectProperty;
-    rdfs:label "media type"@en, "medietyp"@sv ;
+    rdfs:label "medietyp"@sv ;
     rdfs:range :MediaType ;
     owl:equivalentProperty bf2:media ;
     rdfs:subPropertyOf rdael:mediaType ;
@@ -131,7 +133,7 @@
 
 #TODO move to concepts.ttl?
 :genreForm a owl:ObjectProperty;
-    rdfs:label "genre/form"@en, "genre/form"@sv;
+    rdfs:label "genre/form"@sv;
     rdfs:range :GenreForm;
     rdfs:subPropertyOf dc:type, sdo:genre ;
     owl:equivalentProperty bf2:genreForm .
@@ -149,7 +151,8 @@
     rdfs:subClassOf :MediaType ;
     owl:equivalentClass bf2:Carrier .
 
-:IssuanceType owl:equivalentClass bf2:Issuance .
+:IssuanceType owl:equivalentClass bf2:Issuance;
+    rdfs:label "Utgivningssätt"@sv .
 
 :termGroup a owl:DatatypeProperty;
     sdo:domainIncludes :ContentType, :MediaType, :CarrierType ;
@@ -217,7 +220,7 @@
     rdfs:subPropertyOf :format;
     owl:equivalentProperty bf2:musicFormat;
     rdfs:range :MusicFormat;
-    rdfs:label "notated music format"@en, "format för noterad musik"@sv .
+    rdfs:label "format för noterad musik"@sv .
 
 :MusicFormat a owl:Class; # TODO: =~ marc:MusicFormatType (?)
     owl:euivalentClass bf2:MusicFormat;
@@ -446,7 +449,7 @@
     # Not used in marcframe from 1.15.0.
 
 :Continuing a owl:Class;
-    rdfs:label "Fortlöpande resurs"@sv;
+    rdfs:label "Continuing"@en, "Fortlöpande resurs"@sv;
     ptg:abstract true;
     rdfs:subClassOf :Aggregate .
 

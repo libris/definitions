@@ -38,7 +38,7 @@
 
 
 :Document a owl:Class;
-    rdfs:label "Dokument"@sv;
+    rdfs:label "Document"@en, "Dokument"@sv;
     owl:equivalentClass foaf:Document .
 
 ##
@@ -48,22 +48,31 @@
     rdfs:label "Post"@sv, "Record"@en;
     rdfs:subClassOf :AdminMetadata .
 
+:CacheRecord a owl:Class;
+    rdfs:label "Cache-post"@sv, "Cache record"@en;
+    rdfs:comment "En lokal kopia av en entitet från ett annat system. Transkriberad till det lokala vokabuläret."@sv;
+    rdfs:subClassOf :Record .
+
+:PlaceholderRecord a owl:Class;
+    rdfs:label "Platshållarpost"@sv, "Placeholder record"@en;
+    rdfs:subClassOf :Record .
+
 :mainEntity a owl:ObjectProperty;
     rdfs:label "handlar om"@sv;
     rdfs:domain :Record;
     owl:equivalentProperty sdo:mainEntity, foaf:primaryTopic .
 
 :meta a owl:ObjectProperty;
-    rdfs:label "Metadata"@sv;
+    rdfs:label "Metadata"@en, "Metadata"@sv;
     owl:inverseOf :mainEntity;
     owl:equivalentProperty bf2:adminMetadata, foaf:isPrimaryTopicOf, sdo:mainEntityOfPage, xhv:meta ;
     rdfs:subPropertyOf :describedBy ;
     rdfs:range :Record .
 
 :describedBy a owl:ObjectProperty;
-    rdfs:domain :Work;
-    rdfs:range :Record;
-    rdfs:label "Beskriven av"@sv;
+    sdo:domainIncludes :Document;
+    rdfs:range :Document;
+    rdfs:label "Described by"@en, "Beskriven av"@sv;
     owl:equivalentProperty iana:describedby, wdrs:describedby .
 
 :recordStatus a owl:ObjectProperty;
@@ -96,13 +105,14 @@
     rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
+    rdfs:subPropertyOf dc:contributor ;
     rdfs:range :Agent .
 
 :descriptionCreator a owl:ObjectProperty;
     rdfs:label "Description creator"@en, "Skapad av"@sv ;
     rdfs:comment "Entitet som upprättat beskrivningen."@sv ;
     rdfs:domain :Record;
-    rdfs:subPropertyOf :descriptionModifier ;
+    rdfs:subPropertyOf :descriptionModifier, dc:creator ;
     rdfs:range :Agent .
 
 :descriptionUpgrader a owl:ObjectProperty;
@@ -142,7 +152,7 @@
 
 :DescriptionConventions a owl:Class;
     rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
-    rdfs:subClassOf :AdminMetadata;
+    rdfs:subClassOf :AdminMetadata, :Standard ;
     owl:equivalentClass bf2:DescriptionConventions .
 
 :descriptionConventions a owl:ObjectProperty;
@@ -150,7 +160,7 @@
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionConventions;
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
-    owl:ObjectProperty bf2:descriptionConventions .
+    rdfs:subPropertyOf bf2:descriptionConventions, :conformsTo .
 
 :derivedFrom a owl:ObjectProperty;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
@@ -158,8 +168,6 @@
     rdfs:domain :AdminMetadata;
     rdfs:range :AdminMetadata;
     owl:equivalentProperty bf2:derivedFrom .
-    # NOTE: Differing type and range! See:
-    # <https://github.com/lcnetdev/bibframe-ontology/issues/41>
 
 :GenerationProcess a owl:Class;
     rdfs:label "Generation process"@en, "Beskrivningsprocess"@sv;
@@ -183,7 +191,7 @@
     owl:equivalentProperty bf2:generationDate .
 
 :DescriptionAuthentication a owl:Class;
-    rdfs:label "Description authentication"@en, "Beskrivningskontroll"@sv;
+    rdfs:label "Metadata authentication"@en, "Beskrivningskontroll"@sv;
     rdfs:subClassOf :AdminMetadata;
     owl:equivalentClass bf2:DescriptionAuthentication .
 
@@ -219,7 +227,7 @@
 
 :controlNumber a owl:DatatypeProperty;
     rdfs:domain :Record;
-    rdfs:label "kontrollnummer"@sv;
+    rdfs:label "control number"@en, "kontrollnummer"@sv;
     owl:equivalentProperty :identifier .
 
 :inDataset a owl:ObjectProperty;
@@ -319,10 +327,11 @@
     rdfs:comment "in bibliography"@en, "bibliografi som resursen ingår i"@sv ;
     rdfs:domain :Record ;
     sdo:rangeIncludes :Bibliography ;
+    rdfs:subPropertyOf dc:isPartOf ;
     rdfs:label "bibliografi"@sv .
 
 :sigel a owl:DatatypeProperty;
-    rdfs:label "Sigel"@sv ;
+    rdfs:label "sigel code"@en, "sigel"@sv ;
     rdfs:subPropertyOf :code;
     rdfs:domain :Agent; .
 

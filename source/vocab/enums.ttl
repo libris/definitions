@@ -76,7 +76,7 @@
 :layout a owl:ObjectProperty;
     rdfs:range :Layout;
     rdfs:domain :Instance;
-    rdfs:label "layout"@sv, "layout"@en;
+    rdfs:label "layout"@sv ;
     owl:equivalentProperty bf2:layout .
 
 :Layout a owl:Class;
@@ -84,13 +84,13 @@
     owl:equivalentClass bf2:Layout .
 
 :frequency a owl:ObjectProperty;
-    rdfs:label "frekvens"@sv, "frequency"@en;
+    rdfs:label "frekvens"@sv ;
     rdfs:comment "Utgivningsfrekvens för seriell eller integrerande resurs."@sv;
     owl:equivalentProperty bf2:frequency;
     rdfs:range :Frequency .
 
 :Frequency a owl:Class;
-    rdfs:label "Frekvens"@sv, "Frequency"@en;
+    rdfs:label "Frekvens"@sv ;
     owl:equivalentClass bf2:Frequency .
 
 :hasNotation a owl:ObjectProperty;
@@ -139,7 +139,7 @@
 :mount a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Mount;
-    rdfs:label "Monteringsmaterial"@sv, "Mount material"@en;
+    rdfs:label "Monteringsmaterial eller monteringsobjekt"@sv, "Mount material or object"@en;
     owl:equivalentProperty bf2:mount .
 
 :Mount a owl:Class;
@@ -160,7 +160,7 @@
 :reductionRatio a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :ReductionRatio;
-    rdfs:label "förminskningsgrad"@sv, "reduction ratio"@en;
+    rdfs:label "förminskningsgrad"@sv ;
     owl:equivalentProperty bf2:reductionRatio .
 
 :ReductionRatio a owl:Class;
@@ -180,7 +180,7 @@
 :generation a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Generation;
-    rdfs:label "generation"@sv, "generation"@en;
+    rdfs:label "generation"@sv ;
     owl:equivalentProperty bf2:generation .
 
 :Generation a owl:Class;
@@ -235,7 +235,7 @@
     rdfs:label "Production method"@en, "Produktionsmetod"@sv;
     owl:equivalentClass bf2:ProductionMethod .
 
-:fontSize a owl:ObjectProperty;
+:fontSize a owl:ObjectProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:domain :Instance;
     rdfs:range :FontSize;
     rdfs:label "Font size"@en, "teckengrad"@sv;
@@ -306,6 +306,12 @@
     rdfs:label "Digital cartographic data type"@en, "Digital kartografisk datatyp"@sv;
     rdfs:subClassOf :DigitalCharacteristic;
     owl:equivalentClass bf2:CartographicDataType .
+
+:CartographicObjectCount a owl:Class;
+    #TODO: Should this be defined in things.ttl instead?
+    rdfs:label "Digital cartographic object count"@en, "Antal digitala kartografiska objekt"@sv;
+    rdfs:subClassOf :DigitalCharacteristic;
+    owl:equivalentClass bf2:ObjectCount .
 
 :CartographicObjectType a owl:Class;
     #TODO: Should this be defined in things.ttl instead?
@@ -385,6 +391,11 @@
     rdfs:label "Presentationsformat"@sv;
     rdfs:subClassOf bf2:ProjectionCharacteristic ;
     owl:equivalentClass bf2:PresentationFormat .
+
+:ProjectionSpeed a owl:Class;
+    rdfs:label "Projektionshastighet"@sv;
+    rdfs:subClassOf bf2:ProjectionCharacteristic ;
+    owl:equivalentClass bf2:ProjectionSpeed .
 
 :RecordingMedium a owl:Class;
     rdfs:subClassOf :SoundCharacteristic;
