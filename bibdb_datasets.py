@@ -9,7 +9,7 @@ BASE = 'https://libris.kb.se/'
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
         dataset_id=BASE + 'dataset/bibdb',
-        context='source/vocab-overlay.jsonld',
+        context='sys/context/base.jsonld',
         record_thing_link='mainEntity',
         system_base_iri="",
         union='libraries.jsonld.lines',
