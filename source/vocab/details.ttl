@@ -649,34 +649,42 @@
 
 :LibrisNumber a owl:Class;
     :category :pending ;
-    rdfs:label "Libris-nummer"@sv;
+    rdfs:label "Libris number"@en, "Libris-nummer"@sv ;
     rdfs:subClassOf :Identifier .
 
 :ORCID a owl:Class;
-    rdfs:label "ORCID";
-    rdfs:comment "Open Researcher and Contributor ID";
+    rdfs:label "ORCID" ;
+    rdfs:comment "Open Researcher and Contributor ID" ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q51044> ;
     rdfs:subClassOf :Identifier .
 
 :PatentNumber a owl:Class;
     :category :pending ;
-    rdfs:label "Patentnummer"@sv;
+    rdfs:label "Patent number"@en, "Patentnummer"@sv ;
     rdfs:subClassOf :Identifier .
 
 :PMID a owl:Class;
     :category :pending ;
     rdfs:label "PMID";
     rdfs:comment "PubMed ID";
+    skos:exactMatch <http://www.wikidata.org/entity/Q2082879> ;
     rdfs:subClassOf :Identifier .
 
 :Ringgold a owl:Class;
     :category :pending ;
     rdfs:label "RIN";
     rdfs:comment "Ringgold ID";
+    skos:exactMatch <http://www.wikidata.org/entity/Q17016896> ;
     rdfs:subClassOf :Identifier .
 
 :ScopusID a owl:Class;
     :category :pending ;
     rdfs:label "Scopus ID";
+    # TODO: Define relationship narrowMatch to different ScopusIDs
+    # <http://id.loc.gov/vocabulary/identifiers/scopus> author
+    # <http://www.wikidata.org/entity/P1153> Scopus author ID
+    # <http://www.wikidata.org/entity/P1156> Scopus source ID
+    # <http://www.wikidata.org/entity/P1155> Scopus affiliation ID
     rdfs:subClassOf :Identifier.
 
 :SweCRIS a owl:Class;
@@ -687,17 +695,26 @@
 :URI a owl:Class;
     :category :pending ;
     rdfs:label "URI";
+    skos:notation "uri";
     rdfs:comment "Universal Resource Identifier";
+    skos:exactMatch <http://id.loc.gov/vocabulary/identifiers/uri>, <http://www.wikidata.org/entity/Q61694> ;
     rdfs:subClassOf :Identifier .
 
 :VIAF a owl:Class;
-    rdfs:comment "The Virtual International Authority File";
+    rdfs:comment "Virtual International Authority File";
     rdfs:label "VIAF";
+    skos:exactMatch <http://id.loc.gov/vocabulary/identifiers/viaf>, <http://www.wikidata.org/entity/Q19832964>;
+    skos:notation "viaf" ;
+    # rdfs:seeAlso <https://www.viaf.org> ; NOTE: or define base-uri for VIAF slugs?
     rdfs:subClassOf :Identifier.
 
 :WorldCatNumber a owl:Class;
     :category :pending ;
     rdfs:subClassOf :Identifier .
+    # TODO:
+    # define relationship to <http://www.wikidata.org/entity/P243> OCLC number,
+    # <http://www.wikidata.org/entity/P5505> WorldCat registry ID,
+    # <http://www.wikidata.org/entity/Q76630151> WorldCat identities
 ## }}}
 
 ##
