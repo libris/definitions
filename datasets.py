@@ -386,13 +386,12 @@ def languages():
 
 @compiler.dataset
 def countries():
+    countries = Graph().parse(str(compiler.path('source/countries.ttl')), format='turtle')
+
     graph = compiler.construct(sources=[
             {
-                "source": decorate(compiler.read_csv('source/landskoder.tsv'),
-                    {"@id": BASE + "country/{code}"}),
-                "dataset": BASE + "dataset/countries",
-                # TODO: fix rdflib_jsonld so urls in external contexts are loaded
-                "context": "source/table-context.jsonld"
+                "source": countries,
+                "dataset": BASE + "dataset/countries"
             },
             {
                 "source": "http://id.loc.gov/vocabulary/countries"
