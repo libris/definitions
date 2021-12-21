@@ -6,38 +6,16 @@ prefix kbv: <https://id.kb.se/vocab/>
 prefix : <http://schema.org/>
 
 construct {
-    ?s a :Language;
-        skos:prefLabel ?label ;
+    ?s ?p ?o ;
         skos:prefLabel ?prefLabel ;
         skos:altLabel ?altLabel ;
-        rdfs:comment ?comment ;
-        skos:notation ?code;
         skos:notation ?langTag ;
-        skos:notation ?langCode ;
-        dc:isReplacedBy ?replacement;
         skos:exactMatch ?locLang ;
         skos:closeMatch ?locVariant .
-
 } where {
     graph <https://id.kb.se/dataset/languages> {
         {
-            ?s skos:prefLabel ?label .
-            optional { 
-                filter(!contains(?altLabel, "|"))
-                ?s skos:altLabel ?altLabel
-            }
-            optional { 
-                filter(contains(?altLabels, "|"))
-                ?s skos:altLabel ?altLabels
-                values ?n { 0 1 2 3 4 5 }
-                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-                bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
-            }
-            optional { ?s rdfs:comment ?comment }
-        } union {
-            ?s skos:notation ?code .
-            filter(datatype(?code) = xsd:string)
-            bind(strdt(?code, kbv:ISO639-2) as ?langCode)
+            ?s ?p ?o .
         } union {
             ?s skos:notation ?locCode .
             filter(
@@ -66,16 +44,6 @@ construct {
                     bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
                     bind(strdt(?shortcode, kbv:ISO639-1) as ?langTag)
                 }
-            }
-        } union {
-            ?s skos:notation ?code .
-        } union {
-            optional {
-                ?s dc:isReplacedBy ?map_to_codes .
-                values ?n { 0 1 2 3 }
-                bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-                bind(replace(replace(?map_to_codes, ?skipN, ""), " *\\|.*$", "") as ?map_to_code)
-                ?replacement skos:notation ?map_to_code .
             }
         }
     }
