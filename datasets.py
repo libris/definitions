@@ -367,14 +367,12 @@ def languages():
             str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-2.nt')),
             format='nt')
 
-    languages = decorate(compiler.read_csv('source/spraakkoder.tsv'),
-        {"@id": BASE + "language/{code}"})
+    languages = Graph().parse(str(compiler.path('source/languages.ttl')), format='turtle')
 
     graph = compiler.construct(sources=[
             {
                 "source": languages,
-                "dataset": BASE + "dataset/languages",
-                "context": "source/table-context.jsonld"
+                "dataset": BASE + "dataset/languages"
             },
             {
                 "source": loclanggraph,
