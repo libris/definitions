@@ -22,6 +22,13 @@
         "9fs"^^kbv:ISO639-2 ;
     skos:prefLabel "Fornsvenska"@sv .
 
+<9so> a schema:Language ; 
+    rdfs:comment "Obsolet Librisdefinierad kod: använd \"smn\" (enaresamiska), \"sms\" (skoltsamiska) eller \"smi\" (samiska)"@sv ;
+    dc:isReplacedBy <smn>, <sms>, <smi> ;
+    skos:notation "9so",
+        "9so"^^kbv:ISO639-2 ;
+    skos:prefLabel "Östsamiska"@sv .
+
 <aar> a schema:Language ;
     skos:altLabel "Afariska"@sv ;
     skos:notation "aar",
@@ -882,11 +889,12 @@
 
 <fit> a schema:Language ;
     owl:sameAs <9mk> ;
-    skos:notation "9mk",
-        "fit",
-        "fit"^^kbv:ISO639-2,
+    rdfs:comment "9mk Librisdefinierad MARC-kod"@sv ;
+    skos:notation "fit",
+        "9mk"^^kbv:ISO639-2,
         "fit"^^kbv:ISO639-3 ;
-    skos:prefLabel "Meänkieli"@sv .
+    skos:prefLabel "Meänkieli"@sv ;
+    skos:prefLabel "Meänkieli"@en .
 
 <fiu> a schema:Language ;
     skos:notation "fiu",
@@ -1877,6 +1885,13 @@
         "moh"^^kbv:ISO639-2-B ;
     skos:prefLabel "Mohawk"@sv .
 
+<mol> a schema:Language ;
+    rdfs:comment "Obsolet, använd \"rum\" (rumänska)"@sv ;
+    dc:isReplacedBy <rum> ;
+    skos:notation "mol",
+        "mol"^^kbv:ISO639-2 ;
+    skos:prefLabel "Moldaviska"@sv .
+
 <mon> a schema:Language ;
     skos:notation "mon",
         "mon"^^kbv:ISO639-2,
@@ -2150,14 +2165,14 @@
     skos:prefLabel "Ossetiska"@sv .
 
 <osx> a schema:Language ;
-    rdfs:comment "Ca 850-1050"@sv ;
+    rdfs:comment "Ca 850-1050. (\"9ft\" Librisdefinierad MARC-kod)"@sv ;
     owl:sameAs <9ft> ;
     skos:altLabel "Fornsaxiska"@sv ;
-    skos:notation "9ft",
-        "osx",
-        "osx"^^kbv:ISO639-2,
+    skos:notation "osx",
+        "9ft"^^kbv:ISO639-2,
         "osx"^^kbv:ISO639-3 ;
-    skos:prefLabel "Fornlågtyska"@sv .
+    skos:prefLabel "Fornlågtyska"@sv ;
+    skos:prefLabel "Old Saxon"@en .
 
 <ota> a schema:Language ;
     skos:altLabel "Ottomanska"@sv ;
@@ -2334,9 +2349,7 @@
     skos:prefLabel "Romani"@sv .
 
 <rum> a schema:Language ;
-    owl:sameAs <mol> ;
-    skos:notation "mol",
-        "rum",
+    skos:notation "rum",
         "rum"^^kbv:ISO639-2,
         "rum"^^kbv:ISO639-2-B,
         "ron"^^kbv:ISO639-2-T,
@@ -2559,9 +2572,7 @@
 
 <smi> a schema:Language ;
     rdfs:comment "Används restriktivt; se \"sia\" (akkalasamiska) \"sjd\" (kildinsamiska), \"sje\" (pitesamiska), \"sjk\" (kemisamiska), \"sjt\" (tersamiska), \"sju\" (umesamiska), \"sma\" (sydsamiska), \"sme\" (nordsamiska), \"smj\" (lulesamiska), \"smn\" (enaresamiska) och \"sms\" (skoltsamiska)"@sv ;
-    owl:sameAs <9so> ;
-    skos:notation "9so",
-        "smi",
+    skos:notation "smi",
         "smi"^^kbv:ISO639-2,
         "smi"^^kbv:ISO639-2-B ;
     skos:prefLabel "Samiskt språk"@sv .
@@ -2571,13 +2582,12 @@
     skos:notation "9sl",
         "smj",
         "smj"^^kbv:ISO639-2,
+        "9sl"^^kbv:ISO639-2,
         "smj"^^kbv:ISO639-2-B ;
     skos:prefLabel "Lulesamiska"@sv .
 
 <smn> a schema:Language ;
-    owl:sameAs <9so> ;
-    skos:notation "9so",
-        "smn",
+    skos:notation "smn",
         "smn"^^kbv:ISO639-2,
         "smn"^^kbv:ISO639-2-B ;
     skos:prefLabel "Enaresamiska"@sv .
@@ -2589,9 +2599,7 @@
     skos:prefLabel "Samoanska"@sv .
 
 <sms> a schema:Language ;
-    owl:sameAs <9so> ;
-    skos:notation "9so",
-        "sms",
+    skos:notation "sms",
         "sms"^^kbv:ISO639-2,
         "sms"^^kbv:ISO639-2-B ;
     skos:prefLabel "Skoltsamiska"@sv .
@@ -2718,7 +2726,6 @@
 
 <swl> a schema:Language ;
     skos:notation "swl",
-        "swl"^^kbv:ISO639-2,
         "swl"^^kbv:ISO639-3 ;
     skos:prefLabel "Svenskt teckenspråk"@sv .
 
