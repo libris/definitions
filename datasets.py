@@ -404,18 +404,9 @@ def countries():
 
 @compiler.dataset
 def nationalities():
-    return "/nationality/", "2014-02-01T13:08:56.596Z", compiler.construct({
-            "source": decorate(
-                compiler.read_csv('source/nationalitetskoder.tsv'),
-                {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
-            "context": [
-                "sys/context/base.jsonld",
-                {"label_sv": {"@id": "skos:prefLabel", "@language": "sv"}},
-                {"altLabel_sv": {"@id": "skos:altLabel", "@language": "sv"}},
-                {"label_en": {"@id": "skos:prefLabel", "@language": "en"}},
-                {"comment_sv": {"@id": "rdfs:comment", "@language": "sv"}}
-            ]
-        })
+    graph = Graph().parse(str(compiler.path('source/nationalities.ttl')), format='turtle')
+
+    return "/nationality/", "2014-02-01T13:08:56.596Z", graph
 
 
 @compiler.dataset
