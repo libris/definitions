@@ -187,8 +187,8 @@ def rdaterms():
     # extending our type system (instead).
     graph = compiler.construct(sources=[
             {
-                "source": list(compiler.read_csv('source/rdamap.tsv')),
-                "context": "source/rdamap-context.jsonld"
+                'source': Graph().parse(str(compiler.path('source/rda-terms.ttl')), format='turtle'),
+                'dataset': BASE + 'dataset/rdaterms'
             },
 
             {'source': 'http://rdaregistry.info/termList/RDAContentType.nt'},

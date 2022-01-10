@@ -1,64 +1,27 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix bf2: <http://id.loc.gov/ontologies/bibframe/>
-prefix vann: <http://purl.org/vocab/vann/>
-prefix : <https://id.kb.se/tmp/rdamap#>
-base <https://id.kb.se/term/rda/>
 
 construct {
 
-    ?term a ?type;
-        skos:notation ?lccode;
-        rdfs:label ?lcpreflabel;
-        skos:prefLabel ?rdapreflabel;
-        skos:definition ?rdadefinition;
-        skos:inScheme </term/rda> ;
-        owl:sameAs ?codealias, ?labelalias ;
-        skos:broader ?base ;
-        skos:exactMatch ?lcrel, ?rdarel, ?exact ;
-        skos:closeMatch ?close ;
-        skos:broadMatch ?broad .
+    ?s ?p ?o ;
+        rdfs:label ?lcpreflabel ;
+        skos:prefLabel ?rdapreflabel ;
+        skos:definition ?rdadefinition .
 
 } where {
-
-    ?term a ?type ;
-        :lccode ?lccode ;
-        :rdacode ?rdacode .
-
-    optional { ?term :base ?base }
-    optional { ?term :exact ?exact }
-    optional { ?term :close ?close }
-    optional { ?term :broad ?broad }
-
-    bind(IRI(concat('http://id.loc.gov/vocabulary/',
-                    if(?type = bf2:Content, 'contentTypes',
-                        if(?type = bf2:Media, 'mediaTypes',
-                            if(?type = bf2:Carrier, 'carriers',
-                                if(?type = bf2:Issuance, 'issuance',
-                                ?error)))),
-                    '/', ?lccode)) as ?lcrel)
-
-    ?lcrel skos:prefLabel ?lcpreflabel .
-
-    bind(IRI(concat('http://rdaregistry.info/termList/',
-                    if(?type = bf2:Content, 'RDAContentType',
-                        if(?type = bf2:Media, 'RDAMediaType',
-                            if(?type = bf2:Carrier, 'RDACarrierType',
-                                if(?type = bf2:Issuance, 'ModeIssue',
-                                ?error)))),
-                    '/', ?rdacode)) as ?rdarel)
-
-    bind(if(?type = bf2:Content, 'content',
-                if(?type = bf2:Media, 'media',
-                    if(?type = bf2:Carrier, 'carrier',
-                        if(?type = bf2:Issuance, 'issuance',
-                            ?error)))) as ?aliasbase)
-
-    bind(IRI(concat(?aliasbase, '/', ?lccode)) as ?codealias)
-    bind(IRI(concat(?aliasbase, '/', encode_for_uri(?lcpreflabel))) as ?labelalias)
-
-    ?rdarel skos:prefLabel ?rdapreflabel .
-    ?rdarel skos:definition ?rdadefinition .
-
+    {
+        graph <https://id.kb.se/dataset/rdaterms> {
+            ?s ?p ?o .
+        }
+    } union {
+        ?s skos:exactMatch ?lc .
+        filter(strstarts(str(?lc), 'http://id.loc.gov/vocabulary/'))
+        ?lc skos:prefLabel ?lcpreflabel .
+    } union {
+        ?s skos:exactMatch ?rda .
+        filter(strstarts(str(?rda), 'http://rdaregistry.info/termList/'))
+        ?rda skos:prefLabel ?rdapreflabel ;
+            skos:definition ?rdadefinition .
+    }
 }
