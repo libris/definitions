@@ -45,8 +45,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "Resurs"@sv, "Resource"@en;
     skos:altLabel "Entitet"@sv, "Entity"@en .
 
-##
-# Extended Vocabulary Components
+:Ontology a owl:Class ;
+    owl:equivalentClass owl:Ontology ;
+    rdfs:subClassOf :Resource;
+    rdfs:label "Ontologi"@sv, "Ontology"@en ;
+    skos:altLabel "Vokabulär"@sv, "Vocabulary"@en .
 
 :Class a owl:Class;
     owl:equivalentClass owl:Class;
@@ -55,6 +58,14 @@ rdf:type a owl:ObjectProperty;
 :ObjectProperty a owl:Class;
     owl:equivalentClass owl:ObjectProperty;
     rdfs:label "Object property"@en, "Relation"@sv .
+
+:FunctionalProperty a owl:Class;
+    owl:equivalentClass owl:FunctionalProperty;
+    rdfs:label "Functional property"@en, "Funktionell egenskap"@sv .
+
+:TransitiveProperty a owl:Class;
+    owl:equivalentClass owl:TransitiveProperty;
+    rdfs:label "Transitive property"@en, "Transitiv egenskap"@sv .
 
 :SymmetricProperty a owl:Class;
     owl:equivalentClass owl:SymmetricProperty;
