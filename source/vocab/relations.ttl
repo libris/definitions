@@ -28,7 +28,9 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 :versionOf a owl:ObjectProperty;
     ptg:abstract true;
     rdfs:label "version av"@sv;
-    owl:equivalentProperty dc:isVersionOf .
+    owl:equivalentProperty dc:isVersionOf ;
+    owl:inverseOf :hasVersion;
+    rdfs:subPropertyOf :relatedTo .
 
 :hasVersion a owl:ObjectProperty;
     ptg:abstract true;
@@ -36,17 +38,18 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:range :Endeavour;
     rdfs:label "har version"@sv;
     owl:equivalentProperty dc:hasVersion;
-    rdfs:subPropertyOf sdo:exampleOfWork .
+    owl:inverseOf :versionOf;
+    rdfs:subPropertyOf :relatedTo, sdo:exampleOfWork .
 
 :hasDerivative a owl:ObjectProperty;
     rdfs:label "har bearbetning"@sv;
-    rdfs:subPropertyOf :relatedTo;
+    rdfs:subPropertyOf :hasVersion;
     owl:inverseOf :derivativeOf;
     owl:equivalentProperty bf2:hasDerivative .
 
 :derivativeOf a owl:ObjectProperty;
     rdfs:label "är bearbetning av"@sv;
-    rdfs:subPropertyOf :relatedTo;
+    rdfs:subPropertyOf :versionOf;
     owl:inverseOf :hasDerivative;
     owl:equivalentProperty bf2:derivativeOf .
 
