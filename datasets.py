@@ -228,7 +228,7 @@ def materialterms():
     ],
         query="source/construct-material-terms.rq")
 
-    return "/term/rda/material/", "2021-12-07T21:28:01.123Z", graph
+    return "/material/", "2021-12-07T21:28:01.123Z", graph
 
 @compiler.dataset
 def musnotationterms():
