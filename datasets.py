@@ -312,46 +312,36 @@ def schemes():
 
 @compiler.dataset
 def relators():
-
-    def relitem(item):
-        item['@id'] = item.get('term') or to_camel_case(item['label_en'].strip())
-        item['sameAs'] = {'@id': item['code']}
-        return item
-
-    # TODO: retrieve finnish label from link/id (finto.fi)
-    # TODO: link to german & french RDA terms
     graph = compiler.construct(sources=[
-            {
-                "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
-                "dataset": BASE + "dataset/relators",
-                "context": ["sys/context/ns.jsonld", {
-                    "@base": BASE + "relator/",
-                    "@vocab": "https://id.kb.se/vocab/",
-                    "code": "skos:notation",
-                    "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
-                    "altlabel_sv": {"@id": "skos:altLabel", "@language": "sv"},
-                    "label_en": {"@id": "skos:prefLabel", "@language": "en"},
-                    "label_de": {"@id": "skos:prefLabel", "@language": "de"},
-                    "altlabel_de": {"@id": "skos:altLabel", "@language": "de"},
-                    "label_fi": {"@id": "skos:prefLabel", "@language": "fi"},
-                    "label_is": {"@id": "skos:prefLabel", "@language": "is"},
-                    "label_fr": {"@id": "skos:prefLabel", "@language": "fr"},
-                    "urn_de": {"@id": "skos:exactMatch", "@type": "@vocab"},
-                    "urn_fi": {"@id": "skos:exactMatch", "@type": "@vocab"},
-                    "hidden_label": "skos:hiddenLabel",
-                    "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
-                    "term": "rdfs:label",
-                    "sameAs": "owl:sameAs",
-                    "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
-                    "rda_app_i_1_en": {"@id": "skos:altLabel", "@language": "en"},
-                    "rda_app_i_2_en": {"@id": "skos:altLabel", "@language": "en"},
-                    "rda_app_i_3_en": {"@id": "skos:altLabel", "@language": "en"},
-                }]
-            },
-            {
-                "source": "http://id.loc.gov/vocabulary/relators"
-            }
-        ],
+        {
+            "source": Graph().parse(str(compiler.path('source/relators.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/relators",
+        },
+        {
+            "source": "http://id.loc.gov/vocabulary/relators"
+        },
+        {
+            "source": "https://finto.fi/rest/v1/mts/data",
+            "dataset": "http://urn.fi/URN:NBN:fi:au:mts:"
+        },
+        {
+            "source": "https://d-nb.info/standards/elementset/gnd"
+        }
+        # },
+        # {
+        #     "source": compiler.cached_sparql(
+        #         'bnf-roles',
+        #         'https://data.bnf.fr/sparql/',
+        #         """
+        #             select ?role ?p ?o {
+        #                 ?role skos:inScheme <http://data.bnf.fr/vocabulary/roles> ;
+        #                     ?p ?o .
+        #             }
+        #         """
+        #     ),
+        #     "dataset": 'bnf-roles'
+        # }
+    ],
         query="source/construct-relators.rq")
 
     return "/relator/", "2014-02-01T16:29:12.378Z", graph
