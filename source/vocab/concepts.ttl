@@ -62,8 +62,7 @@
 :Concept a owl:Class;
     rdfs:label "Concept"@en, "Koncept"@sv;
     rdfs:subClassOf :Identity;
-    owl:equivalentClass skos:Concept;
-    owl:hasKey (:code :prefLabel :inScheme) .
+    owl:equivalentClass skos:Concept .
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
@@ -79,15 +78,6 @@
 :TopicScheme a owl:Class;
     rdfs:label "Topic scheme"@en, "Ämnesordssystem"@sv;
     rdfs:subClassOf :ConceptScheme .
-
-:altLabel a owl:DatatypeProperty;
-    rdfs:label "alternative label"@en, "alternativ benämning"@sv; #NOTE: alternativ term inom concept
-    rdfs:comment "Förkortningar, synonymer eller oregelbundna plural/singularformer kan inkluderas bland de alternativa benämningarna för ett begrepp. Felstavade termer inkluderas normalt som dolda benämningar (se skos: HiddenLabel)."@sv;
-    skos:definition "En alternativ lexikal benämning för en resurs."@sv;
-    skos:scopeNote "Används vanligen som se-hänvisning";
-    sdo:domainIncludes :Concept ;
-    :category :heuristicIdentifier ;
-    owl:equivalentProperty skos:altLabel .
 
 :matchesTransitive a owl:TransitiveProperty ;
     ptg:abstract true ;
@@ -208,6 +198,15 @@
     :category :heuristicIdentifier ;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
+
+:altLabel a owl:DatatypeProperty;
+    rdfs:label "alternative label"@en, "alternativ benämning"@sv; #NOTE: alternativ term inom concept
+    rdfs:comment "Förkortningar, synonymer eller oregelbundna plural/singularformer kan inkluderas bland de alternativa benämningarna för ett begrepp. Felstavade termer inkluderas normalt som dolda benämningar."@sv;
+    skos:definition "En alternativ lexikal benämning för en resurs."@sv;
+    skos:scopeNote "Används vanligen som se-hänvisning";
+    sdo:domainIncludes :Concept ;
+    :category :heuristicIdentifier ;
+    owl:equivalentProperty skos:altLabel .
 
 :related a owl:ObjectProperty;
     rdfs:label "related"@en, "relaterad"@sv;
