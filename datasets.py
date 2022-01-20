@@ -224,6 +224,10 @@ def materialterms():
         },
         {
             "source": "http://rdaregistry.info/termList/RDAMaterial.nt"
+        },
+        {
+            "source": "sparql/aat-materials",
+            "construct": "source/remote/construct-aat-materials.rq",
         }
     ],
         query="source/construct-material-terms.rq")
