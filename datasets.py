@@ -326,21 +326,11 @@ def relators():
         },
         {
             "source": "https://d-nb.info/standards/elementset/gnd"
+        },
+        {
+            "source": "sparql/bnf-roles",
+            "construct": "source/remote/construct-bnf-roles.rq"
         }
-        # },
-        # {
-        #     "source": compiler.cached_sparql(
-        #         'bnf-roles',
-        #         'https://data.bnf.fr/sparql/',
-        #         """
-        #             select ?role ?p ?o {
-        #                 ?role skos:inScheme <http://data.bnf.fr/vocabulary/roles> ;
-        #                     ?p ?o .
-        #             }
-        #         """
-        #     ),
-        #     "dataset": 'bnf-roles'
-        # }
     ],
         query="source/construct-relators.rq")
 
