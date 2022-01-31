@@ -6,11 +6,18 @@ construct {
         skos:definition ?definition .
 } where {
     graph <https://id.kb.se/dataset/materialterms> {
-        ?s ?p ?o ; skos:exactMatch ?rda .
-        optional {
+        {
+            ?s ?p ?o .
+        } union {
+            ?s skos:exactMatch ?rda .
             graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
                 ?rda skos:prefLabel ?prefLabel ;
                     skos:definition ?definition .
+            }
+        } union {
+            ?s skos:exactMatch ?aat .
+            graph <sparql/aat-materials> {
+                ?aat skos:prefLabel ?prefLabel .
             }
         }
     }

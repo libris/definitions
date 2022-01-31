@@ -1,0 +1,13 @@
+prefix aat: <http://vocab.getty.edu/aat/>
+prefix gvp: <http://vocab.getty.edu/ontology#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+    ?material skos:prefLabel ?prefLabel
+} where {
+    service <http://vocab.getty.edu/sparql> {
+        values ?hierarchy { aat:300010357 aat:300168215 }
+        ?material gvp:broaderExtended ?hierarchy ;
+            skos:prefLabel ?prefLabel .
+    }
+}
