@@ -228,6 +228,14 @@
             {"alternateProperties": [ "value", "marc:canceledIssn", "marc:incorrectIssn", "marc:issnL" ]}
           ]
         },
+        "Material": {
+          "@id": "Material-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Material",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label"]}
+          ]
+        },
         "Notation": {
           "@id": "Notation-chips",
           "@type": "fresnel:Lens",
@@ -635,6 +643,13 @@
           "classLensDomain": "Language",
           "fresnel:extends": {"@id": "Language-chips"},
           "showProperties": [ "fresnel:super", "altLabel", "code", "isReplacedBy" ]
+        },
+        "Material": {
+          "@id": "Material-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Material",
+          "fresnel:extends": {"@id": "Material-chips"},
+          "showProperties": [ "fresnel:super", "code", "exactMatch", "definition" ]
         },
         "MediaType": {
           "@id": "MediaType-cards",
