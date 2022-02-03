@@ -6,8 +6,7 @@ construct {
     ?material skos:prefLabel ?prefLabel
 } where {
     service <http://vocab.getty.edu/sparql> {
-        values ?hierarchy { aat:300010357 aat:300168215 }
-        ?material gvp:broaderExtended ?hierarchy ;
+        ?material gvp:broaderExtended aat:300010357 ; # belongs to the materials hierarchy
             skos:prefLabel ?prefLabel .
     }
 }
