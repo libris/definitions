@@ -1,4 +1,5 @@
 prefix : <http://schema.org/>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
@@ -17,7 +18,7 @@ construct {
             } union {
                 ?s skos:notation ?notation .
                 graph <http://id.loc.gov/vocabulary/countries> {
-                    ?loc skos:prefLabel ?prefLabel .
+                    ?loc madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel .
                     filter strends(str(?loc), concat('/', ?notation))
                 }
             }

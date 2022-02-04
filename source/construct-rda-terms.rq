@@ -18,7 +18,7 @@ construct {
     } union {
         ?s skos:exactMatch ?lc .
         filter(strstarts(str(?lc), 'http://id.loc.gov/vocabulary/'))
-        ?lc madsrdf:authoritativeLabel ?lcLabel .
+        ?lc madsrdf:authoritativeLabel|skos:prefLabel ?lcLabel .
     } union {
         ?s skos:exactMatch ?rda .
         filter(strstarts(str(?rda), 'http://rdaregistry.info/termList/'))

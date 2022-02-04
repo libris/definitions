@@ -17,7 +17,7 @@ construct {
         } union {
             ?s skos:exactMatch ?lc .
             graph <http://id.loc.gov/vocabulary/relators> {
-                ?lc madsrdf:authoritativeLabel ?lcLabel .
+                ?lc madsrdf:authoritativeLabel|skos:prefLabel ?lcLabel .
                 bind(strlang(?lcLabel, 'en') as ?enLabel)
             }
         } union {

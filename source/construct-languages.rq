@@ -1,3 +1,4 @@
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
@@ -26,10 +27,10 @@ construct {
             graph <http://id.loc.gov/vocabulary/languages> {
                 {
                     filter(!contains(?prefLabel, "|"))
-                    ?locLang skos:prefLabel ?prefLabel
+                    ?locLang madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel
                 } union {
                     filter(contains(?prefLabels, "|"))
-                    ?locLang skos:prefLabel ?prefLabels
+                    ?locLang madsrdf:authoritativeLabel|skos:prefLabel ?prefLabels
                     bind(replace(?prefLabels, " *\\|.*$", "") as ?prefLabel)
                     bind(replace(?prefLabels, "^[^|]+\\| *", "") as ?altLabels)
                     values ?n { 1 2 3 4 5 6 7 }
@@ -38,7 +39,7 @@ construct {
                 }
                 optional {
                     filter(langMatches(lang(?prefLabel), 'en'))
-                    ?locVariant skos:prefLabel ?prefLabel .
+                    ?locVariant madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel .
                     bind('http://id.loc.gov/vocabulary/iso639-1/' as ?iso639_1_base)
                     filter(strstarts(str(?locVariant), ?iso639_1_base))
                     bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
