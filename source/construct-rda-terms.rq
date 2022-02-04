@@ -1,3 +1,4 @@
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
@@ -5,7 +6,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 construct {
 
     ?s ?p ?o ;
-        rdfs:label ?lcpreflabel ;
+        rdfs:label ?lcLabel ;
         skos:prefLabel ?rdapreflabel ;
         skos:definition ?rdadefinition .
 
@@ -17,7 +18,7 @@ construct {
     } union {
         ?s skos:exactMatch ?lc .
         filter(strstarts(str(?lc), 'http://id.loc.gov/vocabulary/'))
-        ?lc skos:prefLabel ?lcpreflabel .
+        ?lc madsrdf:authoritativeLabel ?lcLabel .
     } union {
         ?s skos:exactMatch ?rda .
         filter(strstarts(str(?rda), 'http://rdaregistry.info/termList/'))
