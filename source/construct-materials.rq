@@ -9,16 +9,17 @@ construct {
         {
             ?s ?p ?o .
         } union {
-            ?s skos:exactMatch ?rda .
-            graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
-                ?rda skos:prefLabel ?prefLabel ;
-                    skos:definition ?definition .
-            }
-        } union {
             ?s skos:exactMatch ?aat .
             graph <sparql/aat-materials> {
-                ?aat skos:prefLabel ?prefLabel .
+                ?aat skos:prefLabel ?aatLabel .
             }
+            optional {
+                ?s skos:exactMatch ?rda .
+                graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
+                    ?rda skos:prefLabel ?rdaLabel .
+                }
+            }
+            bind(coalesce(?rdaLabel, ?aatLabel) as ?prefLabel)
         }
     }
 }
