@@ -16,7 +16,8 @@ construct {
             optional {
                 ?s skos:exactMatch ?rda .
                 graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
-                    ?rda skos:prefLabel ?rdaLabel .
+                    ?rda skos:prefLabel ?rdaLabel ;
+                        skos:definition ?definition .
                 }
             }
             bind(coalesce(?rdaLabel, ?aatLabel) as ?prefLabel)
