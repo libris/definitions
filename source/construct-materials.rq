@@ -8,19 +8,20 @@ construct {
     graph <https://id.kb.se/dataset/materials> {
         {
             ?s ?p ?o .
-        } union {
+        }
+        optional {
             ?s skos:exactMatch ?aat .
             graph <sparql/aat-materials> {
                 ?aat skos:prefLabel ?aatLabel .
             }
-            optional {
-                ?s skos:exactMatch ?rda .
-                graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
-                    ?rda skos:prefLabel ?rdaLabel ;
-                        skos:definition ?definition .
-                }
-            }
-            bind(coalesce(?rdaLabel, ?aatLabel) as ?prefLabel)
         }
+        optional {
+            ?s skos:exactMatch ?rda .
+            graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
+                ?rda skos:prefLabel ?rdaLabel ;
+                    skos:definition ?definition .
+            }
+        }
+        bind(coalesce(?rdaLabel, ?aatLabel) as ?prefLabel)
     }
 }
