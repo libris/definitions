@@ -2,6 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
 @base <https://id.kb.se/material/> .
 
 @prefix aat: <http://vocab.getty.edu/aat/> .
@@ -17,7 +18,7 @@
 
 # NOTES:
 # Only swedish labels missing from rdaregistry.info added.
-# TODO: Add sameAs to marc enumerations if there is significant usage, need to converge with marcframe mapping.
+# TODO: Add exactMatch to marc enumerations if there is significant usage, need to converge with marcframe mapping.
 
 <Acetat> a :Material ; skos:notation "1001" ; skos:exactMatch rdamat:1001, marcmat:ace, aat:300014439 .
 <AcrylicPaint> a :Material ; skos:notation "1002" ; skos:exactMatch rdamat:1002, marcmat:acp, aat:300015058, wikidata:Q207849 ; skos:prefLabel "akrylfärg"@sv .
@@ -52,14 +53,14 @@
 # http://id.loc.gov/vocabulary/mmaterial/nsf no RDA match.
 <OilPaint> a :Material ; skos:notation "1024" ; skos:exactMatch rdamat:1024, marcmat:oip, aat:300015050, wikidata:Q296955 ; skos:prefLabel "oljefärg"@sv .
 <Panel> a :Material ; skos:exactMatch aat:300014657 ; skos:prefLabel "pannå"@sv . # no RDA match
-<Paper> a :Material ; skos:notation "1025" ; skos:exactMatch rdamat:1025, marcmat:pap, aat:300014109, wikidata:Q11472 . #TODO? :sameAs <https://id.kb.se/marc/Paper> .
+<Paper> a :Material ; skos:notation "1025" ; skos:exactMatch rdamat:1025, marcmat:pap, aat:300014109, wikidata:Q11472, marc:Paper .
 <Parchment> a :Material ; skos:notation "1026" ; skos:exactMatch rdamat:1026, marcmat:par, aat:300011851, wikidata:Q226697 .
 <Papyrus> a :Material ; skos:exactMatch aat:300014127, wikidata:Q125576 ; skos:prefLabel "papyrus"@sv . # no RDA match
 <Pastel> a :Material ; skos:notation "1027" ; skos:exactMatch rdamat:1027, marcmat:pas, aat:300404632, wikidata:Q189085 ; skos:prefLabel "pastell"@sv .
 #<Pen> a :Material ; skos:exactMatch aat:300022452 ; skos:prefLabel "penna"@sv . # no RDA match, in Tools and Equipment hierarchy in AAT
 #<Pencil> a :Material ; skos:exactMatch aat:300410335 ; skos:prefLabel "blyerts"@sv . # no RDA match, AAT term too broad?
 <Plaster> a :Material ; skos:notation "1028" ; skos:exactMatch rdamat:1028, marcmat:plt, aat:300014922 .
-<Plastic> a :Material ; skos:notation "1029" ; skos:exactMatch rdamat:1029, marcmat:pla, aat:300014570, wikidata:Q11474 . #TODO? :sameAs <https://id.kb.se/marc/Plastic> .
+<Plastic> a :Material ; skos:notation "1029" ; skos:exactMatch rdamat:1029, marcmat:pla, aat:300014570, wikidata:Q11474 . #TODO? :exactMatch <https://id.kb.se/marc/Plastic> .
 <Polyester> a :Material ; skos:notation "1030" ; skos:exactMatch rdamat:1030, marcmat:pol, aat:300379829, wikidata:Q188245 ; skos:prefLabel "polyester"@sv .
 <Porcelain> a :Material ; skos:notation "1031" ; skos:exactMatch rdamat:1031, marcmat:por, aat:300010662, wikidata:Q130693 ; skos:prefLabel "porslin"@sv .
 <Rubber> a :Material ; skos:notation "1032" ; skos:exactMatch rdamat:1032, marcmat:rub, aat:300012941, wikidata:Q18113858 .
