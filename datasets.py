@@ -215,6 +215,24 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
+@compiler.dataset
+def materials():
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/materials.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/materials"
+        },
+        {
+            "source": "http://rdaregistry.info/termList/RDAMaterial.nt"
+        },
+        {
+            "source": "sparql/aat-materials",
+            "construct": "source/remote/construct-aat-materials.rq",
+        }
+    ],
+        query="source/construct-materials.rq")
+
+    return "/material/", "2021-12-07T21:28:01.123Z", graph
 
 @compiler.dataset
 def musnotationterms():

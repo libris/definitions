@@ -1,0 +1,86 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
+@base <https://id.kb.se/material/> .
+
+@prefix aat: <http://vocab.getty.edu/aat/> .
+@prefix rdamat: <http://rdaregistry.info/termList/RDAMaterial/> .
+@prefix marcmat: <http://id.loc.gov/vocabulary/mmaterial/> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+
+# RDA MATERIAL mapped to rdaregistry.com and id.loc.gov.
+# "Concepts for a physical or chemical substance that is used to create a manifestation."
+
+# Extended with mappings to Art & Architecture Thesaurus (Getty).
+# Wikidata mappings added where possible for additional co-ordination.
+
+# NOTES:
+# Only swedish labels missing from rdaregistry.info added.
+# TODO: Add exactMatch to marc enumerations if there is significant usage, need to converge with marcframe mapping.
+
+<Acetat> a :Material ; skos:notation "1001" ; skos:exactMatch rdamat:1001, marcmat:ace, aat:300014439 .
+<AcrylicPaint> a :Material ; skos:notation "1002" ; skos:exactMatch rdamat:1002, marcmat:acp, aat:300015058, wikidata:Q207849 ; skos:prefLabel "akrylfärg"@sv .
+<Aluminium> a :Material ; skos:notation "1003" ; skos:exactMatch rdamat:1003, marcmat:alu, aat:300011015, wikidata:Q663 .
+<Bister> a :Material ; skos:exactMatch aat:300013351 ; skos:prefLabel "bister"@sv . # no RDA match
+<BristolBoard> a :Material ; skos:notation "1004" ; skos:exactMatch rdamat:1004, marcmat:brb, aat:300014228, wikidata:Q2916879 .
+<Canvas> a :Material ; skos:notation "1005" ; skos:exactMatch rdamat:1005, marcmat:can, aat:300014078 .
+#<Cardboard> a :Material ; skos:notation "1006" ; skos:exactMatch rdamat:1006, marcmat:crd, aat:300014224, wikidata:Q389782 . # uncertain scope (papp/kartong)
+<Ceramic> a :Material ; skos:notation "1007" ; skos:exactMatch rdamat:1007, marcmat:cer, aat:300235507, wikidata:Q45621 .
+<Chalk> a :Material ; skos:notation "1008" ; skos:exactMatch rdamat:1008, marcmat:chk, aat:300011727, wikidata:Q183670 ; skos:prefLabel "krita"@sv .
+<Charcoal> a :Material ; skos:notation "1009" ; skos:exactMatch rdamat:1009, marcmat:chr, aat:300012862 ; skos:prefLabel "kol"@sv .
+#<ColoredPencil> a :Material ; skos:exactMatch aat:300022441 ; skos:prefLabel "färgpenna"@sv . # no RDA match, in Tools and Equipment hierarchy in AAT
+#<Crayon> a :Material ; skos:exactMatch aat:300022415 ; skos:prefLabel "färgkrita"@sv . # no RDA match, in Tools and Equipment hierarchy in AAT
+<Diacetate> a :Material ; skos:notation "1010" ; skos:exactMatch rdamat:1010, marcmat:dic, aat:300138328 .
+# http://id.loc.gov/vocabulary/mmaterial/dia see 1046.
+<Dye> a :Material ; skos:notation "1011" ; skos:exactMatch rdamat:1011, marcmat:dye, aat:300013029, wikidata:Q189720 ; skos:prefLabel "färgämne"@sv .
+#<FeltPen> a :Material ; skos:exactMatch aat:300022458 ; skos:prefLabel "tuschpenna"@sv . # no RDA match, in Tools and Equipment hierarchy in AAT
+<Glass> a :Material ; skos:notation "1012" ; skos:exactMatch rdamat:1012, marcmat:gls, aat:300010797, wikidata:Q11469 ; skos:prefLabel "glas"@sv .
+<Gouache> a :Material ; skos:notation "1013" ; skos:exactMatch rdamat:1013, marcmat:gou, aat:300070114 ; skos:prefLabel "gouach"@sv .
+<Graphite> a :Material ; skos:notation "1014" ; skos:exactMatch rdamat:1014, marcmat:gra, aat:300011098, wikidata:Q5309 ; skos:prefLabel "grafit"@sv .
+<Hardboard> a :Material ; skos:notation "1015" ; skos:exactMatch rdamat:1015, marcmat:hdb, aat:300014203, wikidata:Q1251688 .
+<IllustrationBoard> a :Material ; skos:notation "1016" ; skos:exactMatch rdamat:1016, marcmat:ill, aat:300014229, wikidata:Q99900954 .
+<IndiaInk> a :Material ; skos:exactMatch aat:300015018 ; skos:prefLabel "tusch"@sv . # no RDA match
+<Ink> a :Material ; skos:notation "1017" ; skos:exactMatch rdamat:1017, marcmat:ink, aat:300015012, wikidata:Q127418 ; skos:prefLabel "bläck"@sv .
+<Ivory> a :Material ; skos:notation "1018" ; skos:exactMatch rdamat:1018, marcmat:ivo, aat:300011857, wikidata:Q82001 .
+<Lacquer> a :Material ; skos:notation "1019" ; skos:exactMatch rdamat:1019, marcmat:lac, aat:300014916, wikidata:Q11236878 ; skos:prefLabel "lack"@sv .
+<Leather> a :Material ; skos:notation "1020" ; skos:exactMatch rdamat:1020, marcmat:lea, aat:30001184, wikidata:Q286 .
+<MagneticParticles> a :Material ; skos:notation "1021" ; skos:exactMatch rdamat:1021, marcmat:fer, wikidata:Q105954869 ; skos:prefLabel "magnetiska partiklar"@sv .
+<Metal> a :Material ; skos:notation "1022" ; skos:exactMatch rdamat:1022, marcmat:mtl, aat:300010900, wikidata:Q11426 .
+<Mixture> a :Material ; skos:exactMatch marcmat:mix, aat:300246925 ; skos:prefLabel "blandat material"@sv . # no RDA match.
+<Nitrate> a :Material ; skos:notation "1023" ; skos:exactMatch rdamat:1023, marcmat:nit, aat:300379863 .
+# http://id.loc.gov/vocabulary/mmaterial/nsf no RDA match.
+<OilPaint> a :Material ; skos:notation "1024" ; skos:exactMatch rdamat:1024, marcmat:oip, aat:300015050, wikidata:Q296955 ; skos:prefLabel "oljefärg"@sv .
+<Panel> a :Material ; skos:exactMatch aat:300014657 ; skos:prefLabel "pannå"@sv . # no RDA match
+<Paper> a :Material ; skos:notation "1025" ; skos:exactMatch rdamat:1025, marcmat:pap, aat:300014109, wikidata:Q11472, marc:Paper .
+<Parchment> a :Material ; skos:notation "1026" ; skos:exactMatch rdamat:1026, marcmat:par, aat:300011851, wikidata:Q226697 .
+<Papyrus> a :Material ; skos:exactMatch aat:300014127, wikidata:Q125576 ; skos:prefLabel "papyrus"@sv . # no RDA match
+<Pastel> a :Material ; skos:notation "1027" ; skos:exactMatch rdamat:1027, marcmat:pas, aat:300404632, wikidata:Q189085 ; skos:prefLabel "pastell"@sv .
+#<Pen> a :Material ; skos:exactMatch aat:300022452 ; skos:prefLabel "penna"@sv . # no RDA match, in Tools and Equipment hierarchy in AAT
+#<Pencil> a :Material ; skos:exactMatch aat:300410335 ; skos:prefLabel "blyerts"@sv . # no RDA match, AAT term too broad?
+<Plaster> a :Material ; skos:notation "1028" ; skos:exactMatch rdamat:1028, marcmat:plt, aat:300014922 .
+<Plastic> a :Material ; skos:notation "1029" ; skos:exactMatch rdamat:1029, marcmat:pla, aat:300014570, wikidata:Q11474 . #TODO? :exactMatch <https://id.kb.se/marc/Plastic> .
+<Polyester> a :Material ; skos:notation "1030" ; skos:exactMatch rdamat:1030, marcmat:pol, aat:300379829, wikidata:Q188245 ; skos:prefLabel "polyester"@sv .
+<Porcelain> a :Material ; skos:notation "1031" ; skos:exactMatch rdamat:1031, marcmat:por, aat:300010662, wikidata:Q130693 ; skos:prefLabel "porslin"@sv .
+<Rubber> a :Material ; skos:notation "1032" ; skos:exactMatch rdamat:1032, marcmat:rub, aat:300012941, wikidata:Q18113858 .
+<SafetyBase> a :Material ; skos:notation "1033" ; skos:exactMatch rdamat:1033, marcmat:saf, aat:300127384 .
+<Sepia> a :Material ; skos:exactMatch aat:300015025 ; skos:prefLabel "sepia"@sv . # no RDA match
+<Shellac> a :Material ; skos:notation "1034" ; skos:exactMatch rdamat:1034, marcmat:she, aat:300014918, wikidata:Q429659 .
+<Silk> a :Material ; skos:exactMatch aat:300243428 ; skos:prefLabel "siden"@sv . # no RDA match
+<Skin> a :Material ; skos:notation "1035" ; skos:exactMatch rdamat:1035, marcmat:ski, aat:300011840 .
+<Stone> a :Material ; skos:notation "1036" ; skos:exactMatch rdamat:1036, marcmat:sto, aat:300011176, wikidata:Q22731 .
+<Synthetic> a :Material ; skos:notation "1037" ; skos:exactMatch rdamat:1037, marcmat:syn .
+<Tempera> a :Material ; skos:notation "1038" ; skos:exactMatch rdamat:1038, marcmat:tem, aat:300015062, wikidata:Q175166 ; skos:prefLabel "tempera"@sv .
+<Textile> a :Material ; skos:notation "1039" ; skos:exactMatch rdamat:1039, marcmat:tex, aat:300231565, wikidata:Q28823 .
+<Triacetate> a :Material ; skos:notation "1040" ; skos:exactMatch rdamat:1040, marcmat:tri, aat:300130950 .
+<Vellum> a :Material ; skos:notation "1041" ; skos:exactMatch rdamat:1041, marcmat:vel, aat:300011852, wikidata:Q378274 ; skos:prefLabel "veläng"@sv .
+# http://id.loc.gov/vocabulary/mmaterial/ves see 1048
+<Vinyl> a :Material ; skos:notation "1042" ; skos:exactMatch rdamat:1042, marcmat:vny, aat:300014502 ; skos:prefLabel "vinyl"@sv .
+#<Wash> a :Material ; skos:exactMatch aat:300011051 ; skos:prefLabel "lavering"@sv . # no RDA match, uncertain if the AAT match is correct
+<Watercolour> a :Material ; skos:notation "1043" ; skos:exactMatch rdamat:1043, marcmat:wat, aat:300015045 ; skos:prefLabel "akvarell"@sv .
+<Wax> a :Material ; skos:notation "1044" ; skos:exactMatch rdamat:1044, marcmat:wax, aat:300014585, wikidata:Q124695 ; skos:prefLabel "vax"@sv .
+<Wood> a :Material ; skos:notation "1045" ; skos:exactMatch rdamat:1045, marcmat:wod, aat:300011914, wikidata:Q287 ; skos:prefLabel "trä"@sv .
+<DiazoEmulsion> a :Material ; skos:notation "1046" ; skos:exactMatch rdamat:1046, marcmat:dia ; skos:prefLabel "diazo"@sv .
+<SilverHalideEmulsion> a :Material ; skos:notation "1047" ; skos:exactMatch rdamat:1047, marcmat:slh ; skos:prefLabel "silverhalogen"@sv .
+<VesicularEmulsion> a :Material ; skos:notation "1048" ; skos:exactMatch rdamat:1048, marcmat:ves ; skos:prefLabel "vesikulär emulsion"@sv .

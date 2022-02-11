@@ -6,7 +6,7 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
-Requires Python 3.6+. (Use PyPy for a general speed improvement.)
+Requires Python 3.7+. (Use PyPy for a general speed improvement.)
 
 Preferably set up a virtualenv:
 

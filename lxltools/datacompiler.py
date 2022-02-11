@@ -11,8 +11,8 @@ from urllib.error import HTTPError
 from http import HTTPStatus
 
 from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
-from rdflib_jsonld.serializer import from_rdf
-from rdflib_jsonld.parser import to_rdf
+from rdflib.plugins.serializers.jsonld import from_rdf
+from rdflib.plugins.parsers.jsonld import to_rdf
 
 from . import lxlslug
 
@@ -266,11 +266,25 @@ class Compiler:
 
         return path
 
-    def cached_rdf(self, fpath):
+    def cached_rdf(self, fpath, construct=None, graph=None):
         source = Graph()
         http = 'http://'
         if not self.cachedir:
             print("No cache directory configured", file=sys.stderr)
+        elif construct:
+            fpath = self.cachedir / (fpath + '.ttl')
+            if not fpath.is_file():
+                with self.path(construct).open() as fp:
+                    try:
+                        res = (graph or Graph()).query(fp.read())
+                        fpath.parent.mkdir(parents=True, exist_ok=True)
+                        res.serialize(str(fpath), format='turtle')
+                        source.parse(str(fpath), format='turtle')
+                    except Exception as e:
+                        print(f'Failed to cache {fpath}: {e}')
+            else:
+                source.parse(str(fpath), format='turtle')
+            return source
         elif fpath.startswith(http):
             remotepath = fpath
             fpath = self.cachedir / (remotepath[len(http):] + '.ttl')
@@ -389,7 +403,7 @@ def _construct(compiler, sources, query=None):
         elif isinstance(source, Graph):
             graph += source
         else:
-            graph += compiler.cached_rdf(source)
+            graph += compiler.cached_rdf(source, sourcedfn.get('construct'), sourcedfn.get('graph'))
     if not query:
         return graph
     with compiler.path(query).open() as fp:
