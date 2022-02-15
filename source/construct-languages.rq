@@ -10,13 +10,23 @@ construct {
     ?s ?p ?o ;
         skos:prefLabel ?prefLabel ;
         skos:altLabel ?altLabel ;
-        skos:notation ?langTag ;
+        skos:notation ?langTag, ?marc ;
         skos:exactMatch ?locLang ;
         skos:closeMatch ?locVariant .
 } where {
     graph <https://id.kb.se/dataset/languages> {
         {
             ?s ?p ?o .
+        } union {
+            optional {
+                ?s skos:notation ?iso2b .
+                filter(datatype(?iso2b) = kbv:ISO639-2-B)
+            }
+            optional {
+                ?s skos:notation ?librisMarc .
+                filter(datatype(?librisMarc) = kbv:LibrisMarcLanguageCode)
+            }
+            bind(strdt(coalesce(?iso2b, ?librisMarc), kbv:MarcLanguageCode) as ?marc)
         } union {
             ?s skos:notation ?locCode .
             filter(
