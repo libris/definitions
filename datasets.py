@@ -140,16 +140,19 @@ def vocab():
     if version:
         vocab_node['version'] = version
 
+    gen_context_path = 'sys/context/auto'
     lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/kbv.jsonld'))
-    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    lib_context['@graph'] = [
+        {'@id': BASE + gen_context_path, '@type': 'jsonld:Context'}
+    ]
     _insert_record(lib_context['@graph'], vocab_created_ms, vocab_ds_url)
 
     display = compiler.load_json('source/vocab/display.jsonld')
     _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
-    compiler.write(lib_context, 'vocab/context')
+    compiler.write(lib_context, gen_context_path)
     compiler.write(display, 'vocab/display')
 
 
@@ -157,9 +160,11 @@ def vocab():
 def contexts():
     contexts_ds_url = urljoin(compiler.dataset_id, 'sys/context')
 
+    context_alias = BASE + 'vocab/context'
+
     docpath = compiler.path('sys/context/kbv.jsonld')
     uripath = BASE + 'sys/context/kbv'
-    _write_context_record(compiler, docpath, uripath, contexts_ds_url)
+    _write_context_record(compiler, docpath, uripath, contexts_ds_url, context_alias)
 
     root = compiler.path('')
     for docpath in compiler.path('sys/context').glob('target/*.jsonld'):
@@ -167,11 +172,15 @@ def contexts():
         _write_context_record(compiler, docpath, uripath, contexts_ds_url)
 
 
-def _write_context_record(compiler, filepath, uripath, ds_url):
+def _write_context_record(compiler, filepath, uripath, ds_url, alias=None):
     ctx_data = compiler.load_json(filepath)
     ctx_created_ms = w3c_dtz_to_ms(ctx_data.pop('created'))
+
     ctx_data['@graph'] = [{"@id": uripath, "@type": "jsonld:Context"}]
     _insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
+    if alias:
+        ctx_data['@graph'][0]['sameAs'] = [{'@id': alias}]
+
     assert uripath.startswith(BASE)
     compiler.write(ctx_data, uripath.replace(BASE, ''))
 
