@@ -177,7 +177,9 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Endeavour;
     rdfs:range :MediaObject;
     rdfs:label "associated media"@en, "tillhörande media"@sv;
+    rdfs:comment "En associerad digital mediaresurs som kan representera hela eller delar av detta objekt. För referens till en exakt representation, använd 'har representation'."@sv ;
     rdfs:subPropertyOf :hasFormat;
+    skos:narrower :hasRepresentation ;
     owl:equivalentProperty sdo:associatedMedia .
 
 :MediaObject a owl:Class;
