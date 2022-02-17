@@ -69,10 +69,6 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:comment "Relaterad resurs vilken den beskrivna resursen är en fysisk eller logisk del av."@sv;
     owl:equivalentProperty bf2:partOf, dc:isPartOf, sdo:isPartOf, relsubtype:isp . # TODO: super-properties of relsubtype:isp instead?
 
-:partOfSeries a owl:ObjectProperty;
-    rdfs:subPropertyOf :isPartOf;
-    rdfs:label "part of series"@en, "del av serie"@sv .
-
 :references a owl:ObjectProperty;
     rdfs:label "hänvisar till"@sv;
     owl:equivalentProperty dc:references .
@@ -424,11 +420,16 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:subPropertyOf :accompanies;
     owl:inverseOf :supplement .
 
-:hasSeries a owl:ObjectProperty;
-    rdfs:label "har serie"@sv;
+:partOfSeries a owl:ObjectProperty;
+    owl:sameAs :hasSeries;
+    rdfs:subPropertyOf :isPartOf;
+    sdo:domainIncludes :Creation ;
+    sdo:rangeIncludes :Creation ;
+    rdfs:label "part of series"@en, "del av serie"@sv ;
+    skos:altLabel "har serie"@sv;
     rdfs:comment "Resurs i vilken delen har blivit utgiven; titel av den större resursen syns i delen."@sv;
     owl:propertyChainAxiom ( :seriesMembership :inSeries ) ;
-    owl:equivalentProperty bf2:hasSeries .
+    owl:equivalentProperty bf2:hasSeries, sdo:partOfSeries .
 
 :seriesOf a owl:ObjectProperty;
     rdfs:label "Series container of"@en, "Ingående seriedel"@sv;
@@ -446,7 +447,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :SeriesMembership ;
     rdfs:subPropertyOf :object ;
     sdo:rangeIncludes :Instance ;
-    rdfs:label "ingår i serie"@sv .
+    rdfs:label "medlemskap i serie"@sv .
 
 :SeriesMembership a owl:Class ;
     rdfs:subClassOf :PartitiveRelationship ;
