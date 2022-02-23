@@ -79,7 +79,11 @@ def vocab():
         query="source/vocab/bf-to-kbv-base.rq")
 
     for part in compiler.path('source/vocab').glob('**/*.ttl'):
-        graph.parse(str(part), format='turtle')
+        try:
+            graph.parse(str(part), format='turtle')
+        except:
+            print(f"Error in file: {part}")
+            raise
 
     #cg = ConjunctiveGraph()
     #cg.parse(str(compiler.path('source/vocab/display.jsonld')), format='json-ld')

@@ -19,7 +19,9 @@
 @prefix rdael: <http://rdvocab.info/Elements/> .
 @prefix rdaz: <http://rdaregistry.info/Elements/z/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
+
 @prefix : <https://id.kb.se/vocab/> .
+@prefix kbrel: <https://id.kb.se/relator/> .
 
 ##--------------------------------#
 ## Title Information
@@ -1036,7 +1038,7 @@
     # TODO: also sdo:domainIncludes :Embodiment ; but on those, we prefer
     # :publication, and should treat this as a :shorthand.
     rdfs:range :Agent ;
-    owl:equivalentProperty dc:publisher, sdo:publisher;
+    owl:equivalentProperty dc:publisher, sdo:publisher, kbrel:publisher ;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
     # there is no corresponding correlation in these mappings.
     # (We have ~600k linked publisher roles in contribution (as of 2021).)
@@ -1465,6 +1467,7 @@
     rdfs:domain :Creation;
     rdfs:range :GeographicCoverage;
     rdfs:comment "Geografisk täckning avseende innehållet i resursen."@sv;
+    rdfs:subPropertyOf sdo:spatialCoverage ;
     owl:equivalentProperty bf2:geographicCoverage .
 
 :temporalCoverage a owl:DatatypeProperty;
@@ -1472,6 +1475,7 @@
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
+    rdfs:subPropertyOf sdo:temporalCoverage ;
     owl:equivalentProperty bf2:temporalCoverage .
 
 :MusicMedium a owl:Class;
