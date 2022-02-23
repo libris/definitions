@@ -46,15 +46,15 @@
 
 :representationOf a owl:ObjectProperty ;
     rdfs:label "representation of"@en, "representation av"@sv ;
-    sdo:domainIncludes :File, :Representation ;
-    rdfs:range :Embodiment ;
+    sdo:domainIncludes :MediaObject, :Representation ;
+    rdfs:range :Creation ;
     owl:equivalentProperty relsubtype:rep ; # NOTE: PREMIS calls it represents (the label of rep).
     owl:inverseOf :hasRepresentation ;
     rdfs:subPropertyOf sdo:encodesCreativeWork, :formatOf .
 
 :hasRepresentation a owl:ObjectProperty ;
     rdfs:label "has representation"@en, "har representation"@sv ;
-    rdfs:domain :Embodiment ;
+    rdfs:domain :Creation ;
     sdo:rangeIncludes :MediaObject, :Representation ;
     owl:equivalentProperty relsubtype:isr ; # NOTE: PREMIS calls it isRepresentedBy (the label of isr).
     owl:inverseOf :representationOf ;

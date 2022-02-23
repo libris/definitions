@@ -177,13 +177,21 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Endeavour;
     rdfs:range :MediaObject;
     rdfs:label "associated media"@en, "tillhörande media"@sv;
+    rdfs:comment "En associerad digital mediaresurs som kan representera hela eller delar av detta objekt. För referens till en exakt representation, använd 'har representation'."@sv ;
     rdfs:subPropertyOf :hasFormat;
+    skos:narrower :hasRepresentation ;
     owl:equivalentProperty sdo:associatedMedia .
 
 :MediaObject a owl:Class;
     rdfs:label "Media object"@en, "Mediaobjekt"@sv;
     rdfs:subClassOf :Document;
     owl:equivalentClass sdo:MediaObject .
+
+:electronicLocator a owl:ObjectProperty;
+    rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
+    sdo:domainIncludes :Item, :Instance;
+    sdo:rangeIncludes :Document;
+    owl:equivalentProperty bf2:electronicLocator .
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "Medföljs av"@sv;
