@@ -447,7 +447,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 :isIssueOf a owl:ObjectProperty;
     rdfs:label "Is issue of"@en, "nummer av"@sv;
     rdfs:subPropertyOf :isPartOf;
-    # owl:inverseOf :hasIssue; ?
+    owl:inverseOf [rdfs:label "Has issue"@en, "har nummer"@sv] ; #NOTE: Until we need a properly defined inverse term (For reference rdau:P60240).
     owl:equivalentProperty rdau:P60193 .
 
 :seriesMembership a owl:ObjectProperty ;
