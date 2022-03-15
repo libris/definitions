@@ -28,7 +28,9 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 :versionOf a owl:ObjectProperty;
     ptg:abstract true;
     rdfs:label "version av"@sv;
-    owl:equivalentProperty dc:isVersionOf .
+    owl:equivalentProperty dc:isVersionOf ;
+    owl:inverseOf :hasVersion;
+    rdfs:subPropertyOf :relatedTo .
 
 :hasVersion a owl:ObjectProperty;
     ptg:abstract true;
@@ -36,17 +38,18 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:range :Endeavour;
     rdfs:label "har version"@sv;
     owl:equivalentProperty dc:hasVersion;
-    rdfs:subPropertyOf sdo:exampleOfWork .
+    owl:inverseOf :versionOf;
+    rdfs:subPropertyOf :relatedTo, sdo:exampleOfWork .
 
 :hasDerivative a owl:ObjectProperty;
     rdfs:label "har bearbetning"@sv;
-    rdfs:subPropertyOf :relatedTo;
+    rdfs:subPropertyOf :hasVersion;
     owl:inverseOf :derivativeOf;
     owl:equivalentProperty bf2:hasDerivative .
 
 :derivativeOf a owl:ObjectProperty;
     rdfs:label "är bearbetning av"@sv;
-    rdfs:subPropertyOf :relatedTo;
+    rdfs:subPropertyOf :versionOf;
     owl:inverseOf :hasDerivative;
     owl:equivalentProperty bf2:derivativeOf .
 
@@ -174,13 +177,21 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:domain :Endeavour;
     rdfs:range :MediaObject;
     rdfs:label "associated media"@en, "tillhörande media"@sv;
+    rdfs:comment "En associerad digital mediaresurs som kan representera hela eller delar av detta objekt. För referens till en exakt representation, använd 'har representation'."@sv ;
     rdfs:subPropertyOf :hasFormat;
+    skos:narrower :hasRepresentation ;
     owl:equivalentProperty sdo:associatedMedia .
 
 :MediaObject a owl:Class;
     rdfs:label "Media object"@en, "Mediaobjekt"@sv;
     rdfs:subClassOf :Document;
     owl:equivalentClass sdo:MediaObject .
+
+:electronicLocator a owl:ObjectProperty;
+    rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
+    sdo:domainIncludes :Item, :Instance;
+    sdo:rangeIncludes :Document;
+    owl:equivalentProperty bf2:electronicLocator .
 
 :accompaniedBy a owl:ObjectProperty;
     rdfs:label "Medföljs av"@sv;

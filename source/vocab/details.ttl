@@ -19,7 +19,9 @@
 @prefix rdael: <http://rdvocab.info/Elements/> .
 @prefix rdaz: <http://rdaregistry.info/Elements/z/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
+
 @prefix : <https://id.kb.se/vocab/> .
+@prefix kbrel: <https://id.kb.se/relator/> .
 
 ##--------------------------------#
 ## Title Information
@@ -70,7 +72,7 @@
 
 :subtitle a owl:DatatypeProperty;
     rdfs:label "övrig titelinformation"@sv;
-    skos:altlabel "Undertitel"@sv;
+    skos:altLabel "Undertitel"@sv;
     rdfs:comment "Ord eller tecken som bildar återstående del av titel efter huvudtitel."@sv;
     #rdfs:subPropertyOf :titleRemainder; - Commented out as not to depend on a pending property.
     owl:equivalentProperty bf2:subtitle;
@@ -606,11 +608,13 @@
 :ISO639-2-B a rdfs:Datatype ;
     rdfs:label "ISO 639-2/B" ;
     rdfs:comment "Bibliografisk språkkod"@sv ;
+    rdfs:seeAlso <http://id.loc.gov/vocabulary/iso639-2/collection_iso639-2_Bibliographic_Codes> ;
     rdfs:subClassOf :ISO639-2 .
 
 :ISO639-2-T a rdfs:Datatype ;
     rdfs:label "ISO 639-2/T" ;
     rdfs:comment "Terminologisk språkkod"@sv ;
+    rdfs:seeAlso <http://id.loc.gov/vocabulary/iso639-2/collection_iso639-2_Terminology_Codes> ;
     rdfs:subClassOf :ISO639-2 .
 
 :ISO639-3 a rdfs:Datatype ;
@@ -1039,7 +1043,7 @@
     # TODO: also sdo:domainIncludes :Embodiment ; but on those, we prefer
     # :publication, and should treat this as a :shorthand.
     rdfs:range :Agent ;
-    owl:equivalentProperty dc:publisher, sdo:publisher;
+    owl:equivalentProperty dc:publisher, sdo:publisher, kbrel:publisher ;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
     # there is no corresponding correlation in these mappings.
     # (We have ~600k linked publisher roles in contribution (as of 2021).)
@@ -1468,6 +1472,7 @@
     rdfs:domain :Creation;
     rdfs:range :GeographicCoverage;
     rdfs:comment "Geografisk täckning avseende innehållet i resursen."@sv;
+    rdfs:subPropertyOf sdo:spatialCoverage ;
     owl:equivalentProperty bf2:geographicCoverage .
 
 :temporalCoverage a owl:DatatypeProperty;
@@ -1475,6 +1480,7 @@
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
+    rdfs:subPropertyOf sdo:temporalCoverage ;
     owl:equivalentProperty bf2:temporalCoverage .
 
 :MusicMedium a owl:Class;

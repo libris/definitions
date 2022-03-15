@@ -6,7 +6,7 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
-Requires Python 3.6+. (Use PyPy for a general speed improvement.)
+Requires Python 3.7+. (Use PyPy for a general speed improvement.)
 
 Preferably set up a virtualenv:
 
@@ -91,6 +91,18 @@ to generate a vocab build file. Look at it as Turtle by running:
 , and/or make a nice, digested tree view by running:
 
     $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c build/vocab/context.jsonld -v
+
+When bigger changes are made, you can generate a more predicable output by
+calling:
+
+    $ PYTHONHASHSEED=1 python datasets.py -l
+
+Use this in conjunction with switching between a stable branch and a feature,
+backing up the build directory when doing so, then using e.g.:
+
+    diff -qr /tmp/build-develop-bak build
+
+to see the resulting differences.
 
 ### Term Categories
 
