@@ -1,0 +1,45 @@
+prefix dc: <http://purl.org/dc/terms/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+prefix : <https://id.kb.se/vocab/>
+
+base <https://libris.kb.se/qlit/>
+
+construct {
+    ?x a ?concept ;
+        :identifier ?identifier ;
+        :issued ?issued ;
+        :modified ?modified ;
+        skos:altLabel ?altlabel ;
+        skos:scopeNote ?scopenote ;
+        skos:prefLabel ?prefLabel ;
+        skos:broader ?broader ;
+        skos:inScheme ?inScheme ;
+        skos:related ?related ;
+        skos:closeMatch ?closeMatch ;
+        skos:exactMatch ?exactMatch ;
+        skos:broader ?broader .
+} where {
+    ?x
+        dc:identifier ?identifier .
+
+    optional { ?x dc:issued ?issued }
+    optional { ?x dc:modified ?modified }
+    optional { ?x skos:scopeNote ?scopenote }
+    optional { ?x skos:altLabel ?altLabel }
+    optional { ?x skos:prefLabel ?prefLabel }
+    optional { ?x skos:inScheme ?inScheme }
+    optional { ?x skos:related ?related }
+    optional { ?x skos:closeMatch ?closeMatch }
+    optional { ?x skos:exactMatch ?exactMatch }
+    optional { ?x skos:broader ?broader }
+    ?x a ?concept ;
+    # bind(iri(concat(str(coalesce(?uribase, </qlit/>)), ?identifier)) as ?x)
+}
+
+#Ska ej synas på id.kb.se
+#ska ej gå att ändra
+#   skos:closeMatch <https://homosaurus.org/v3/homoit0000070> .
