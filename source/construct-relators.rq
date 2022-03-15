@@ -6,28 +6,46 @@ prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix : <https://id.kb.se/vocab/>
 
 construct {
-    ?idrel a bf2:Role;
-        skos:notation ?notation;
-        ?p ?o;
-        skos:exactMatch ?locrel;
-        owl:equivalentProperty ?locrel;
-        rdfs:domain ?domain.
+    ?s ?p ?o ;
+        skos:prefLabel ?enLabel, ?fiLabel, ?deLabel, ?frLabel ;
+        skos:altLabel ?fiAltLabel, ?frAltLabel .
 
 } where {
     graph <https://id.kb.se/dataset/relators> {
         {
-            ?idrel ?p ?o.
-            ?idrel ?p ?os.
-            values ?n { 0 1 2 3 4 5 6 7 8 9 10 11}
-            bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
-            bind(replace(replace(?os, ?skipN, ""), " *\\|.*$", "") as ?o)
+            ?s ?p ?o .
         } union {
-            ?idrel skos:notation ?notation .
+            ?s skos:exactMatch ?lc .
             graph <http://id.loc.gov/vocabulary/relators> {
-                ?locrel madsrdf:authoritativeLabel ?authLabel .
-                filter strends(str(?locrel), concat('/', ?notation))
+                ?lc madsrdf:authoritativeLabel|skos:prefLabel ?lcLabel .
+                bind(strlang(?lcLabel, 'en') as ?enLabel)
             }
-        } optional { ?idrel rdfs:domain ?domain . }
-          bind (if(bound(?domain), ?domain, :Work) as ?domain)
+        } union {
+            ?s skos:exactMatch ?mts .
+            graph <http://urn.fi/URN:NBN:fi:au:mts:> {
+                ?mts skos:prefLabel ?fiLabel .
+                filter(lang(?fiLabel) = 'fi')
+                optional {
+                    ?mts skos:altLabel ?fiAltLabel .
+                    filter(lang(?fiAltLabel) = 'fi')
+                }
+            }
+        } union {
+            ?s skos:exactMatch ?dnb .
+            graph <https://d-nb.info/standards/elementset/gnd> {
+                ?dnb rdfs:label ?deLabel .
+                filter(lang(?deLabel) = 'de')
+            }
+        } union {
+            ?s skos:exactMatch ?bnf .
+            graph <sparql/bnf-roles> {
+                ?bnf skos:prefLabel ?frLabel .
+                filter(lang(?frLabel) = 'fr')
+                optional {
+                    ?bnf skos:altLabel ?frAltLabel
+                    filter(lang(?frAltLabel) = 'fr')
+                }
+            }
+        }
     }
 }

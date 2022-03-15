@@ -1,0 +1,2561 @@
+@prefix : <https://id.kb.se/vocab/> .
+@prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bnfroles: <http://data.bnf.fr/vocabulary/roles/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix gnd: <https://d-nb.info/standards/elementset/gnd#> .
+@prefix locrel: <http://id.loc.gov/vocabulary/relators/> .
+@prefix mts: <http://urn.fi/URN:NBN:fi:au:mts:> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@base <https://id.kb.se/relator/> .
+
+<abridger> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:abr ;
+    owl:sameAs <abr> ;
+    skos:closeMatch rdau:P60394 ;
+    skos:exactMatch locrel:abr ;
+    skos:notation "abr" ;
+    skos:prefLabel "Förkortad utgåva"@sv .
+
+<actor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:act ;
+    owl:sameAs <act> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60142 ;
+    skos:exactMatch locrel:act,
+        mts:m1241 ;
+    skos:notation "act" ;
+    skos:prefLabel "Skådespelare"@sv .
+
+<adapter> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:adp ;
+    owl:sameAs <adp> ;
+    skos:exactMatch locrel:adp ;
+    skos:hiddenLabel "adaptor", # RDA
+        "bearb" ;
+    skos:notation "adp" ;
+    skos:prefLabel "Bearbetare"@sv .
+
+<addressee> a bf:Role ;
+    rdfs:comment "Agent som är mottagare av korrespondensen i ett verk."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rcp ;
+    owl:sameAs <rcp> ;
+    skos:closeMatch rdau:P60456 ;
+    skos:exactMatch locrel:rcp ;
+    skos:hiddenLabel "Adressat",
+        "Recipient" ;
+    skos:notation "rcp" ;
+    skos:prefLabel "Mottagare av korrespondens"@sv .
+
+<analyst> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:anl ;
+    owl:sameAs <anl> ;
+    skos:exactMatch locrel:anl ;
+    skos:notation "anl" ;
+    skos:prefLabel "Analytiker"@sv .
+
+<animator> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:anm ;
+    owl:sameAs <anm> ;
+    skos:closeMatch rdau:P60378 ;
+    skos:exactMatch locrel:anm ;
+    skos:notation "anm" ;
+    skos:prefLabel "Animatör"@sv .
+
+<annotator> a bf:Role ;
+    rdfs:comment "Författare till handskrivna kommentarer på exemplaret"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:ann ;
+    owl:sameAs <ann> ;
+    skos:closeMatch rdau:P60464 ;
+    skos:exactMatch locrel:ann ;
+    skos:notation "ann" ;
+    skos:prefLabel "Annotation"@sv .
+
+<appellant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:apl ;
+    owl:sameAs <apl> ;
+    skos:closeMatch rdau:P60457 ;
+    skos:exactMatch locrel:apl ;
+    skos:notation "apl" ;
+    skos:prefLabel "Överklagande part i appellationsdomstol"@sv .
+
+<appellee> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ape ;
+    owl:sameAs <ape> ;
+    skos:closeMatch rdau:P60373 ;
+    skos:exactMatch locrel:ape ;
+    skos:notation "ape" ;
+    skos:prefLabel "Svarande part i appellationsdomstol"@sv .
+
+<applicant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:app ;
+    owl:sameAs <app> ;
+    skos:exactMatch locrel:app ;
+    skos:notation "app" ;
+    skos:prefLabel "Sökande"@sv .
+
+<architect> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:arc ;
+    owl:sameAs <arc> ;
+    skos:closeMatch rdau:P60435 ;
+    skos:exactMatch locrel:arc ;
+    skos:notation "arc" ;
+    skos:prefLabel "Arkitekt"@sv .
+
+<arranger> a bf:Role ;
+    rdfs:comment "Musik"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:arr ;
+    owl:sameAs <arr> ;
+    skos:closeMatch rdau:P60379 ;
+    skos:exactMatch locrel:arr ;
+    skos:hiddenLabel "arranger of music" ;
+    skos:notation "arr" ;
+    skos:prefLabel "Arrangemang"@sv .
+
+<artCopyist> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:acp ;
+    owl:sameAs <acp> ;
+    skos:exactMatch locrel:acp ;
+    skos:notation "acp" ;
+    skos:prefLabel "Konstkopist"@sv .
+
+<artDirector> a bf:Role ;
+    rdfs:comment "Jfr \"ard\" (konstnärlig ledare)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:adi ;
+    owl:sameAs <adi> ;
+    skos:closeMatch rdau:P60386 ;
+    skos:exactMatch locrel:adi ;
+    skos:notation "adi" ;
+    skos:prefLabel "Art Director"@sv .
+
+<artist> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:art ;
+    owl:sameAs <art> ;
+    skos:closeMatch rdau:P60431 ;
+    skos:exactMatch locrel:art,
+        mts:m511,
+        gnd:artist ;
+    skos:hiddenLabel "Künstlerin",
+        "Taiteilija";
+    skos:notation "art" ;
+    skos:prefLabel "Konstnär"@sv .
+
+<artisticDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ard ;
+    owl:sameAs <ard> ;
+    skos:exactMatch locrel:ard ;
+    skos:notation "ard" ;
+    skos:prefLabel "Konstnärlig ledare"@sv .
+
+<assignee> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:asg ;
+    owl:sameAs <asg> ;
+    skos:exactMatch locrel:asg ;
+    skos:notation "asg" ;
+    skos:prefLabel "Innehavare av tryckeri- eller utgivarlicens"@sv .
+
+<associatedName> a bf:Role ;
+    rdfs:comment "Okänt samband"@sv ;
+    rdfs:domain :Creation ;
+    owl:equivalentProperty locrel:asn ;
+    owl:sameAs <asn> ;
+    skos:exactMatch locrel:asn ;
+    skos:notation "asn" ;
+    skos:prefLabel "Associerat namn"@sv .
+
+<attributedName> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:att ;
+    owl:sameAs <att> ;
+    skos:exactMatch locrel:att ;
+    skos:notation "att" ;
+    skos:prefLabel "Attribuerat/tillskrivet namn"@sv .
+
+<auctioneer> a bf:Role ;
+    rdfs:domain :Item ;
+    owl:equivalentProperty locrel:auc ;
+    owl:sameAs <auc> ;
+    skos:exactMatch locrel:auc ;
+    skos:notation "auc" ;
+    skos:prefLabel "Auktionsförrättare"@sv .
+
+<author> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aut ;
+    owl:sameAs <aut> ;
+    skos:closeMatch rdau:P60434 ;
+    skos:exactMatch locrel:aut,
+        mts:m552,
+        gnd:author ;
+    skos:hiddenLabel "Auteur",
+        "Autor",
+        "Forfatter",
+        "Höfundur",
+        "Verfasserin" ;
+    skos:notation "aut" ;
+    skos:prefLabel "Författare"@sv .
+
+<authorInQuotationsOrTextAbstracts> a bf:Role ;
+    rdfs:comment "Författare till citat etc. i utställningskataloger, fotografisamlingar etc."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aqt ;
+    owl:sameAs <aqt> ;
+    skos:broader <author> ;
+    skos:exactMatch locrel:aqt ;
+    skos:notation "aqt" ;
+    skos:prefLabel "Citat, textudrag"@sv .
+
+<authorOfAfterwordColophonEtc> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aft ;
+    owl:sameAs <aft> ;
+    skos:broader <author> ;
+    skos:exactMatch locrel:aft ;
+    skos:hiddenLabel "author of afterword",
+        "järelsõna autor",
+        "writer of afterword" ;
+    skos:notation "aft" ;
+    skos:prefLabel "Efterord, kolofon etc."@sv .
+
+<authorOfDialog> a bf:Role ;
+    rdfs:comment "Film, ljudupptagningar"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aud ;
+    owl:sameAs <aud> ;
+    skos:broader <author> ;
+    skos:exactMatch locrel:aud ;
+    skos:notation "aud" ;
+    skos:prefLabel "Dialogförfattare"@sv .
+
+<authorOfIntroduction> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aui ;
+    owl:sameAs <aui> ;
+    skos:broader <author> ;
+    skos:exactMatch locrel:aui,
+        mts:m952 ;
+    skos:hiddenLabel "Johdannon kirjoittaja",
+        "Préface",
+        "Verfasser einer Einleitung",
+        "Verfasser eines Geleitworts",
+        "Verfasser eines Vorworts",
+        "Verfasserin einer Einleitung",
+        "Verfasserin eines Geleitworts",
+        "Verfasserin eines Vorworts",
+        "author of foreword",
+        "eessõna autor",
+        "foreword by",
+        "writer of foreword",
+        "writer of introduction",                   # RDA
+        "writer of preface",                        # RDA
+        "writer of supplementary textual content" ; # RDA
+    skos:notation "aui" ;
+    skos:prefLabel "Förord, introducerande material"@sv .
+
+<autographer> a bf:Role ;
+    rdfs:comment "Person vars signatur finns på exemplaret; jfr \"sgn\" (signatur)"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:ato ;
+    owl:sameAs <ato> ;
+    skos:closeMatch rdau:P60466 ;
+    skos:exactMatch locrel:ato ;
+    skos:notation "ato" ;
+    skos:prefLabel "Autograf/signatur"@sv .
+
+<bibliographicAntecedent> a bf:Role ;
+    rdfs:comment "Bibliografisk föregångare; jfr \"ccp\" (idé, koncept)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ant ;
+    owl:sameAs <ant> ;
+    skos:exactMatch locrel:ant ;
+    skos:notation "ant" ;
+    skos:prefLabel "Baserat på"@sv .
+
+<binder> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:bnd ;
+    owl:sameAs <bnd> ;
+    skos:closeMatch rdau:P60458 ;
+    skos:exactMatch locrel:bnd,
+        gnd:bookbinder ;
+    skos:notation "bnd" ;
+    skos:prefLabel "Bokbindare"@sv .
+
+<bindingDesigner> a bf:Role ;
+    rdfs:comment "Bokbandsformgivare"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:bdd ;
+    owl:sameAs <bdd> ;
+    skos:exactMatch locrel:bdd ;
+    skos:notation "bdd" ;
+    skos:prefLabel "Bokband"@sv .
+
+<blurbWriter> a bf:Role ;
+    rdfs:comment "Författare till baksidestext, reklammaterial etc."@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:blw ;
+    owl:sameAs <blw> ;
+    skos:exactMatch locrel:blw ;
+    skos:notation "blw" ;
+    skos:prefLabel "Förlags-/reklamtext"@sv .
+
+<bookDesigner> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:bkd ;
+    owl:sameAs <bkd> ;
+    skos:closeMatch rdau:P60409 ;
+    skos:exactMatch locrel:bkd ;
+    skos:notation "bkd" ;
+    skos:prefLabel "Bokformgivare"@sv .
+
+<bookProducer> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:bkp ;
+    owl:sameAs <bkp> ;
+    skos:exactMatch locrel:bkp ;
+    skos:notation "bkp" ;
+    skos:prefLabel "Bokproducent"@sv .
+
+<bookjacketDesigner> a bf:Role ;
+    rdfs:comment "Formgivare av skyddsomslag; jfr \"cov\" (omslag)"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:bjd ;
+    owl:sameAs <bjd> ;
+    skos:exactMatch locrel:bjd ;
+    skos:notation "bjd" ;
+    skos:prefLabel "Skyddsomslag"@sv .
+
+<bookplateDesigner> a bf:Role ;
+    rdfs:comment "Avser formgivaren"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:bpd ;
+    owl:sameAs <bpd> ;
+    skos:exactMatch locrel:bpd ;
+    skos:notation "bpd" ;
+    skos:prefLabel "Exlibris, bokägarmärke"@sv .
+
+<bookseller> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:bsl ;
+    owl:sameAs <bsl> ;
+    skos:exactMatch locrel:bsl ;
+    skos:notation "bsl" ;
+    skos:prefLabel "Bokhandlare"@sv .
+
+<brailleEmbosser> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:brl ;
+    owl:sameAs <brl> ;
+    skos:closeMatch rdau:P60411 ;
+    skos:exactMatch locrel:brl ;
+    skos:notation "brl" ;
+    skos:prefLabel "Punktskriftspräglare"@sv .
+
+<broadcaster> a bf:Role ;
+    rdfs:comment "Person etc. som arbetar med utsändning via TV, radio, webcast eller liknande"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:brd ;
+    owl:sameAs <brd> ;
+    skos:closeMatch rdau:P60407 ;
+    skos:exactMatch locrel:brd ;
+    skos:notation "brd" ;
+    skos:prefLabel "TV-/radioutsändning"@sv .
+
+<calligrapher> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cll ;
+    owl:sameAs <cll> ;
+    skos:closeMatch rdau:P60752 ;
+    skos:exactMatch locrel:cll ;
+    skos:notation "cll" ;
+    skos:prefLabel "Kalligraf"@sv .
+
+<cartographer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ctg ;
+    owl:sameAs <ctg> ;
+    skos:closeMatch rdau:P60425 ;
+    skos:exactMatch locrel:ctg,
+        mts:m6,
+        gnd:cartographer ;
+    skos:hiddenLabel "Kartografin" ;
+    skos:notation "ctg" ;
+    skos:prefLabel "Kartograf"@sv .
+
+<caster> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:cas ;
+    owl:sameAs <cas> ;
+    skos:closeMatch rdau:P60413 ;
+    skos:exactMatch locrel:cas ;
+    skos:notation "cas" ;
+    skos:prefLabel "Gjutare"@sv .
+
+<censor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cns ;
+    owl:sameAs <cns> ;
+    skos:closeMatch rdau:P60851 ;
+    skos:exactMatch locrel:cns ;
+    skos:notation "cns" ;
+    skos:prefLabel "Censor"@sv .
+
+<choreographer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:chr ;
+    owl:sameAs <chr> ;
+    skos:closeMatch rdau:P60433 ;
+    skos:exactMatch locrel:chr ;
+    skos:hiddenLabel "choreographer (expression)" ; # RDA
+    skos:notation "chr" ;
+    skos:prefLabel "Koreograf"@sv .
+
+<cinematographer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cng ;
+    owl:sameAs <cng> ;
+    skos:exactMatch locrel:cng ;
+    skos:hiddenLabel "director of photography" ; # RDA
+    skos:notation "cng" ;
+    skos:prefLabel "Filmfotograf"@sv .
+
+<client> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cli ;
+    owl:sameAs <cli> ;
+    skos:exactMatch locrel:cli ;
+    skos:notation "cli" ;
+    skos:prefLabel "Klient"@sv .
+
+<collaborator> a bf:Role ;
+    rdfs:comment "Obsolet; använd \"ctb\" (bidragsgivare)"@sv ;
+    rdfs:domain :Work ;
+    owl:sameAs <clb> ;
+    skos:prefLabel "Redaktionell medarbetare"@sv .
+
+<collectionRegistrar> a bf:Role ;
+    rdfs:comment "Förtecknare/inventerare av föremål eller exemplar som ingår i samlingsutställning/samlingsverk; Jfr \"cur\" (utställningsansvarig, utställningskommissarie)"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:cor ;
+    owl:sameAs <cor> ;
+    skos:broader <curator> ;
+    skos:closeMatch rdau:P60067 ;
+    skos:exactMatch locrel:cor ;
+    skos:notation "cor" ;
+    skos:prefLabel "Samlingsregistrator"@sv .
+
+<collector> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:col ;
+    owl:sameAs <col> ;
+    skos:broader <curator> ;
+    skos:closeMatch rdau:P60066 ;
+    skos:exactMatch locrel:col ;
+    skos:notation "col" ;
+    skos:prefLabel "Samlare"@sv .
+
+<collotyper> a bf:Role ;
+    rdfs:comment "Ljustryck = Plantrycksmetod för mångfaldigande utan raster av i huvudsak konstverk och fotografier"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:clt ;
+    owl:sameAs <clt> ;
+    skos:closeMatch rdau:P60417 ;
+    skos:exactMatch locrel:clt ;
+    skos:notation "clt" ;
+    skos:prefLabel "Ljustryck"@sv .
+
+<colorist> a bf:Role ;
+    rdfs:comment "Färgläggare av teckningar, tryck, fotografier, kartor, filmer etc."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:clr ;
+    owl:sameAs <clr> ;
+    skos:closeMatch rdau:P60838 ;
+    skos:exactMatch locrel:clr ;
+    skos:hiddenLabel "colourist" ;
+    skos:notation "clr" ;
+    skos:prefLabel "Färg"@sv .
+
+<commentator> a bf:Role ;
+    rdfs:comment "AV-medier"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cmm ;
+    owl:sameAs <cmm> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60151 ;
+    skos:exactMatch locrel:cmm ;
+    skos:notation "cmm" ;
+    skos:prefLabel "Kommentar"@sv .
+
+<commentatorForWrittenText> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cwt ;
+    owl:sameAs <cwt> ;
+    skos:exactMatch locrel:cwt ;
+    skos:notation "cwt" ;
+    skos:prefLabel "Textkommentar"@sv .
+
+<compiler> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:com ;
+    owl:sameAs <com> ;
+    skos:closeMatch rdau:P60428 ;
+    skos:exactMatch locrel:com,
+        mts:m1037 ;
+    skos:hiddenLabel "Zusammenstellender",
+        "koostaja" ;
+    skos:notation "com" ;
+    skos:prefLabel "Sammanställare"@sv .
+
+<complainant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cpl ;
+    owl:sameAs <cpl> ;
+    skos:exactMatch locrel:cpl ;
+    skos:notation "cpl" ;
+    skos:prefLabel "Complainant"@sv .
+
+<complainantAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cpt ;
+    owl:sameAs <cpt> ;
+    skos:broader <complainant> ;
+    skos:exactMatch locrel:cpt ;
+    skos:notation "cpt" ;
+    skos:prefLabel "Complainant-appellant"@sv .
+
+<complainantAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cpe ;
+    owl:sameAs <cpe> ;
+    skos:broader <complainant> ;
+    skos:exactMatch locrel:cpe ;
+    skos:notation "cpe" ;
+    skos:prefLabel "Complainant-appellee"@sv .
+
+<composer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cmp ;
+    owl:sameAs <cmp> ;
+    skos:closeMatch rdau:P60426 ;
+    skos:exactMatch locrel:cmp,
+        mts:m695,
+        gnd:composer ;
+    skos:hiddenLabel "Helilooja",
+        "composer (expression)" ; # RDA
+    skos:notation "cmp" ;
+    skos:prefLabel "Kompositör, tonsättare"@sv .
+
+<compositor> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:cmt ;
+    owl:sameAs <cmt> ;
+    skos:exactMatch locrel:cmt ;
+    skos:notation "cmt" ;
+    skos:prefLabel "Sättare"@sv .
+
+<conceptor> a bf:Role ;
+    rdfs:comment "Jfr \"ant\" (baserat på)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ccp ;
+    owl:sameAs <ccp> ;
+    skos:closeMatch rdau:P60447 ;
+    skos:exactMatch locrel:ccp ;
+    skos:notation "ccp" ;
+    skos:prefLabel "Idé, koncept"@sv .
+
+<conductor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cnd ;
+    owl:sameAs <cnd> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60141 ;
+    skos:exactMatch locrel:cnd ;
+    skos:notation "cnd" ;
+    skos:prefLabel "Dirigent"@sv .
+
+<conservator> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:con ;
+    owl:sameAs <con> ;
+    skos:closeMatch rdau:P60450 ;
+    skos:exactMatch locrel:con ;
+    skos:notation "con" ;
+    skos:prefLabel "Konservator"@sv .
+
+<consultant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:csl ;
+    owl:sameAs <csl> ;
+    skos:closeMatch rdau:P60465 ;
+    skos:exactMatch locrel:csl ;
+    skos:hiddenLabel "consultant" ; # RDA
+    skos:notation "csl" ;
+    skos:prefLabel "Konsult"@sv .
+
+<consultantToAProject> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:csp ;
+    owl:sameAs <csp> ;
+    skos:exactMatch locrel:csp ;
+    skos:notation "csp" ;
+    skos:prefLabel "Projektkonsult"@sv .
+
+<contestant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande åklagare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cos ;
+    owl:sameAs <cos> ;
+    skos:exactMatch locrel:cos ;
+    skos:notation "cos" ;
+    skos:prefLabel "Contestant"@sv .
+
+<contestantAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande åklagare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cot ;
+    owl:sameAs <cot> ;
+    skos:broader <contestant> ;
+    skos:exactMatch locrel:cot ;
+    skos:notation "cot" ;
+    skos:prefLabel "Contestant -appellant"@sv .
+
+<contestantAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande åklagare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:coe ;
+    owl:sameAs <coe> ;
+    skos:broader <contestant> ;
+    skos:exactMatch locrel:coe ;
+    skos:notation "coe" ;
+    skos:prefLabel "Contestant -appellee"@sv .
+
+<contestee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande försvarare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cts ;
+    owl:sameAs <cts> ;
+    skos:exactMatch locrel:cts ;
+    skos:notation "cts" ;
+    skos:prefLabel "Contestee"@sv .
+
+<contesteeAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande försvarare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ctt ;
+    owl:sameAs <ctt> ;
+    skos:broader <contestee> ;
+    skos:exactMatch locrel:ctt ;
+    skos:notation "ctt" ;
+    skos:prefLabel "Contestee-appellant"@sv .
+
+<contesteeAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande försvarare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cte ;
+    owl:sameAs <cte> ;
+    skos:broader <contestee> ;
+    skos:exactMatch locrel:cte ;
+    skos:notation "cte" ;
+    skos:prefLabel "Contestee-appellee"@sv .
+
+<contractor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ctr ;
+    owl:sameAs <ctr> ;
+    skos:exactMatch locrel:ctr ;
+    skos:notation "ctr" ;
+    skos:prefLabel "Entreprenör, leverantör"@sv .
+
+<contributor> a bf:Role ;
+    rdfs:comment "Som bidrar med texter eller annat material till antologier, fortlöpande publikationer eller andra sammanställningar"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ctb ;
+    owl:sameAs <ctb> ;
+    skos:exactMatch locrel:ctb ;
+    skos:notation "ctb" ;
+    skos:prefLabel "Bidragsgivare"@sv .
+
+<copyrightClaimant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cpc ;
+    owl:sameAs <cpc> ;
+    skos:exactMatch locrel:cpc ;
+    skos:notation "cpc" ;
+    skos:prefLabel "Upphovsrättssökande"@sv .
+
+<copyrightHolder> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cph ;
+    owl:sameAs <cph> ;
+    skos:exactMatch locrel:cph ;
+    skos:notation "cph" ;
+    skos:prefLabel "Upphovsrättsinnehavare"@sv .
+
+<corrector> a bf:Role ;
+    rdfs:comment "Jfr \"prf\" (korrekturläsare)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:crr ;
+    owl:sameAs <crr> ;
+    skos:exactMatch locrel:crr ;
+    skos:notation "crr" ;
+    skos:prefLabel "Handskriftskorrektur"@sv .
+
+<correspondent> a bf:Role ;
+    rdfs:comment "Agent som är avsändare eller mottagare till ett brev eller annan skrivelse."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:crp ;
+    owl:sameAs <crp> ;
+    skos:exactMatch locrel:crp ;
+    skos:notation "crp" ;
+    skos:prefLabel "Korrespondent"@sv .
+
+<costumeDesigner> a bf:Role ;
+    rdfs:comment "Som skapar kostymer för teater-, dans- och musikföreställningar, samt för filmer"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cst ;
+    owl:sameAs <cst> ;
+    skos:closeMatch rdau:P60384 ;
+    skos:exactMatch locrel:cst ;
+    skos:notation "cst" ;
+    skos:prefLabel "Kostym"@sv .
+
+<courtGoverned> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cou ;
+    owl:sameAs <cou> ;
+    skos:closeMatch rdau:P60065 ;
+    skos:exactMatch locrel:cou ;
+    skos:notation "cou" ;
+    skos:prefLabel "Domstols regelverk"@sv .
+
+<courtReporter> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:crt ;
+    owl:sameAs <crt> ;
+    skos:closeMatch rdau:P60388 ;
+    skos:exactMatch locrel:crt ;
+    skos:notation "crt" ;
+    skos:prefLabel "Domstolsreporter"@sv .
+
+<coverDesigner> a bf:Role ;
+    rdfs:comment "Formgivare av bokomslag; jfr \"bjd\" (skyddsomslag)"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:cov ;
+    owl:sameAs <cov> ;
+    skos:exactMatch locrel:cov ;
+    skos:hiddenLabel "cover artist" ;
+    skos:notation "cov" ;
+    skos:prefLabel "Omslag"@sv .
+
+<creator> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:cre ;
+    owl:sameAs <cre> ;
+    skos:closeMatch rdau:P60447 ;
+    skos:exactMatch locrel:cre ;
+    skos:notation "cre" ;
+    skos:prefLabel "Upphov/creator"@sv .
+
+<curator> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:cur ;
+    owl:sameAs <cur> ;
+    skos:exactMatch locrel:cur ;
+    skos:notation "cur" ;
+    skos:prefLabel "Utställningsansvarig, utställningskommissarie"@sv .
+
+<dancer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dnc ;
+    owl:sameAs <dnc> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60144 ;
+    skos:exactMatch locrel:dnc ;
+    skos:notation "dnc" ;
+    skos:prefLabel "Dansare"@sv .
+
+<dataContributor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dtc ;
+    owl:sameAs <dtc> ;
+    skos:exactMatch locrel:dtc ;
+    skos:notation "dtc" ;
+    skos:prefLabel "Katalog- eller metadatakälla"@sv .
+
+<dataManager> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dtm ;
+    owl:sameAs <dtm> ;
+    skos:exactMatch locrel:dtm ;
+    skos:notation "dtm" ;
+    skos:prefLabel "Katalog- eller metadataansvarig"@sv .
+
+<dedicatee> a bf:Role ;
+    rdfs:comment "Jfr \"dto\" (dedikation, dvs den som författat dedikationen)"@sv ;
+    rdfs:domain :Endeavour ;
+    owl:equivalentProperty locrel:dte ;
+    owl:sameAs <dte> ;
+    skos:closeMatch rdau:P60455 ;
+    skos:exactMatch locrel:dte ;
+    skos:hiddenLabel "dedicatee of item" ; # RDA
+    skos:notation "dte" ;
+    skos:prefLabel "Dedicerat till"@sv .
+
+<dedicator> a bf:Role ;
+    rdfs:comment "Jfr \"dte\" (dedicerat till)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dto ;
+    owl:sameAs <dto> ;
+    skos:closeMatch rdau:P60375 ;
+    skos:exactMatch locrel:dto ;
+    skos:notation "dto" ;
+    skos:prefLabel "Dedikation"@sv .
+
+<defendant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dfd ;
+    owl:sameAs <dfd> ;
+    skos:closeMatch rdau:P60462 ;
+    skos:exactMatch locrel:dfd ;
+    skos:notation "dfd" ;
+    skos:prefLabel "Defendant"@sv .
+
+<defendantAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dft ;
+    owl:sameAs <dft> ;
+    skos:broader <defendant> ;
+    skos:exactMatch locrel:dft ;
+    skos:notation "dft" ;
+    skos:prefLabel "Defendant-appellant"@sv .
+
+<defendantAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dfe ;
+    owl:sameAs <dfe> ;
+    skos:broader <defendant> ;
+    skos:exactMatch locrel:dfe ;
+    skos:notation "dfe" ;
+    skos:prefLabel "Defendant-appellee"@sv .
+
+<degreeGrantingInstitution> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dgg ;
+    owl:sameAs <dgg> ;
+    skos:closeMatch rdau:P60060 ;
+    skos:exactMatch locrel:dgg ;
+    skos:hiddenLabel "Grad-verleihende Institution" ;
+    skos:notation "dgg" ;
+    skos:prefLabel "Utfärdare av akademisk examen"@sv .
+
+<delineator> a bf:Role ;
+    rdfs:comment "Person etc. som utför en teknisk ritning utifrån någon annans design; jfr \"drm\" (teknisk detaljritning)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dln ;
+    owl:sameAs <dln> ;
+    skos:exactMatch locrel:dln ;
+    skos:notation "dln" ;
+    skos:prefLabel "Utförare av teknisk ritning"@sv .
+
+<depicted> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dpc ;
+    owl:sameAs <dpc> ;
+    skos:exactMatch locrel:dpc ;
+    skos:notation "dpc" ;
+    skos:prefLabel "Avbildad"@sv .
+
+<depositor> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:dpt ;
+    owl:sameAs <dpt> ;
+    skos:broader <owner> ;
+    skos:closeMatch rdau:P60068 ;
+    skos:exactMatch locrel:dpt ;
+    skos:notation "dpt" ;
+    skos:prefLabel "Deponerat av"@sv .
+
+<designer> a bf:Role ;
+    rdfs:comment "Jfr \"bdd\" (bokband), \"bjd\" (skyddsomslag), \"bkd\" (bokformgivare), \"tyd\" (typsnitt)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dsr ;
+    owl:sameAs <dsr> ;
+    skos:closeMatch rdau:P60424 ;
+    skos:exactMatch locrel:dsr ;
+    skos:notation "dsr" ;
+    skos:prefLabel "Formgivare"@sv .
+
+<director> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:drt ;
+    owl:sameAs <drt> ;
+    skos:closeMatch rdau:P60449 ;
+    skos:exactMatch locrel:drt,
+        gnd:director ;
+    skos:hiddenLabel "Regisseur" ;
+    skos:notation "drt" ;
+    skos:prefLabel "Regissör"@sv .
+
+<dissertant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dis ;
+    owl:sameAs <dis> ;
+    skos:exactMatch locrel:dis ;
+    skos:notation "dis" ;
+    skos:prefLabel "Presentatör av avhandling"@sv .
+
+<distributionPlace> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:dbp ;
+    owl:sameAs <dbp> ;
+    skos:closeMatch rdau:P60160 ;
+    skos:exactMatch locrel:dbp ;
+    skos:notation "dbp" ;
+    skos:prefLabel "Distributionsort"@sv .
+
+<distributor> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:dst ;
+    owl:sameAs <dst> ;
+    skos:broader <provider> ;
+    skos:closeMatch rdau:P60438 ;
+    skos:exactMatch locrel:dst ;
+    skos:notation "dst" ;
+    skos:prefLabel "Distributör"@sv .
+
+<donor> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:dnr ;
+    owl:sameAs <dnr> ;
+    skos:broader <formerOwner> ;
+    skos:closeMatch rdau:P60091 ;
+    skos:exactMatch locrel:dnr ;
+    skos:notation "dnr" ;
+    skos:prefLabel "Donator"@sv .
+
+<draftsman> a bf:Role ;
+    rdfs:comment "Jfr \"dln\" (utförare av teknisk ritning)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:drm ;
+    owl:sameAs <drm> ;
+    skos:closeMatch rdau:P60381 ;
+    skos:exactMatch locrel:drm ;
+    skos:notation "drm" ;
+    skos:prefLabel "Teknisk detaljritning"@sv .
+
+<dubiousAuthor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dub ;
+    owl:sameAs <dub> ;
+    skos:exactMatch locrel:dub ;
+    skos:notation "dub" ;
+    skos:prefLabel "Tvivelaktigt/felaktigt tillskriven"@sv .
+
+<editor> a bf:Role ;
+    rdfs:comment "Jfr \"edc\" (sammanställande redaktör)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:edt ;
+    owl:sameAs <edt> ;
+    skos:closeMatch rdau:P61008 ;
+    skos:exactMatch locrel:edt,
+        mts:m629,
+        gnd:editor ;
+    skos:hiddenLabel "Herausgeberin",
+        "Hrsg",
+        "Redakcja",
+        "Redaktør",
+        "Ritstjóri",
+        "Toimetaja",
+        "edited by",
+        "Éditeur scientifique",
+        "éditeur intellectuel" ;
+    skos:notation "edt" ;
+    skos:prefLabel "Redaktör"@sv .
+
+<editorOfCompilation> a bf:Role ;
+    rdfs:comment "Jfr \"edt\" (redaktör)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:edc ;
+    owl:sameAs <edc> ;
+    skos:closeMatch rdau:P60428 ;
+    skos:exactMatch locrel:edc ;
+    skos:notation "edc" ;
+    skos:prefLabel "Sammanställande redaktör"@sv .
+
+<editorOfMovingImageWork> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:edm ;
+    owl:sameAs <edm> ;
+    skos:closeMatch rdau:P60422 ;
+    skos:exactMatch locrel:edm ;
+    skos:notation "edm" ;
+    skos:prefLabel "Film-/videoredaktör"@sv .
+
+<electrician> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:elg ;
+    owl:sameAs <elg> ;
+    skos:exactMatch locrel:elg ;
+    skos:notation "elg" ;
+    skos:prefLabel "Elektriker"@sv .
+
+<electrotyper> a bf:Role ;
+    rdfs:comment "Elektrotypi = Metod för att använda klichéer inom boktryckarkonsten"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:elt ;
+    owl:sameAs <elt> ;
+    skos:exactMatch locrel:elt ;
+    skos:notation "elt" ;
+    skos:prefLabel "Elektrotypi"@sv .
+
+<enactingJurisdiction> a bf:Role ;
+    rdfs:comment "Jfr \"jug\" (tillämplig jurisdiktion)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:enj ;
+    owl:sameAs <enj> ;
+    skos:closeMatch rdau:P60096 ;
+    skos:exactMatch locrel:enj ;
+    skos:notation "enj" ;
+    skos:prefLabel "Verkställande jurisdiktion"@sv .
+
+<engineer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:eng ;
+    owl:sameAs <eng> ;
+    skos:exactMatch locrel:eng ;
+    skos:notation "eng" ;
+    skos:prefLabel "Ingenjör"@sv .
+
+<engraver> a bf:Role ;
+    rdfs:comment "Gravyr = Grafisk tryckmetod där bilden eller texten ristas på en hård yta av t.ex. trä eller metall"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:egr ;
+    owl:sameAs <egr> ;
+    skos:closeMatch rdau:P60410 ;
+    skos:exactMatch locrel:egr,
+        gnd:engraver ;
+    skos:notation "egr" ;
+    skos:prefLabel "Gravör"@sv .
+
+<etcher> a bf:Role ;
+    rdfs:comment "Etsning = Grafisk djuptrycksmetod där de färgbärande nedsänkta partierna i plåten åstadkoms med hjälp av frätande vätskor"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:etr ;
+    owl:sameAs <etr> ;
+    skos:closeMatch rdau:P60416 ;
+    skos:exactMatch locrel:etr,
+        gnd:etcher ;
+    skos:notation "etr" ;
+    skos:prefLabel "Etsare"@sv .
+
+<eventPlace> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:evp ;
+    owl:sameAs <evp> ;
+    skos:exactMatch locrel:evp ;
+    skos:notation "evp" ;
+    skos:prefLabel "Plats/ort för händelse"@sv .
+
+<expert> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:exp ;
+    owl:sameAs <exp> ;
+    skos:exactMatch locrel:exp ;
+    skos:notation "exp" ;
+    skos:prefLabel "Expert"@sv .
+
+<facsimilist> a bf:Role ;
+    rdfs:comment "Person etc. som gjort faksimilutgåvan"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:fac ;
+    owl:sameAs <fac> ;
+    skos:exactMatch locrel:fac ;
+    skos:notation "fac" ;
+    skos:prefLabel "Faksimil"@sv .
+
+<fieldDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fld ;
+    owl:sameAs <fld> ;
+    skos:exactMatch locrel:fld ;
+    skos:notation "fld" ;
+    skos:prefLabel "Fältchef"@sv .
+
+<filmDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fmd ;
+    owl:sameAs <fmd> ;
+    skos:broader <director> ;
+    skos:closeMatch rdau:P60084 ;
+    skos:exactMatch locrel:fmd ;
+    skos:notation "fmd" ;
+    skos:prefLabel "Filmregissör"@sv .
+
+<filmDistributor> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:fds ;
+    owl:sameAs <fds> ;
+    skos:broader <distributor> ;
+    skos:closeMatch rdau:P60408 ;
+    skos:exactMatch locrel:fds ;
+    skos:notation "fds" ;
+    skos:prefLabel "Filmdistributör"@sv .
+
+<filmEditor> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:flm ;
+    owl:sameAs <flm> ;
+    skos:broader <editorOfMovingImageWork> ;
+    skos:closeMatch rdau:P60422 ;
+    skos:exactMatch locrel:flm ;
+    skos:notation "flm" ;
+    skos:prefLabel "Filmredaktör"@sv .
+
+<filmProducer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fmp ;
+    owl:sameAs <fmp> ;
+    skos:broader <producer> ;
+    skos:closeMatch rdau:P60169 ;
+    skos:exactMatch locrel:fmp ;
+    skos:notation "fmp" ;
+    skos:prefLabel "Filmproducent"@sv .
+
+<filmmaker> a bf:Role ;
+    rdfs:comment "Avser produktion av independent- eller Indiefilm"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fmk ;
+    owl:sameAs <fmk> ;
+    skos:broader <director> ;
+    skos:closeMatch rdau:P60436 ;
+    skos:exactMatch locrel:fmk ;
+    skos:notation "fmk" ;
+    skos:prefLabel "Oberoende filmskapare"@sv .
+
+<firstParty> a bf:Role ;
+    rdfs:comment "Första eller enda parten i ett fördrag, en överenskommelse eller annan händelse; vid överlåtelse av rättigheter betraktas överlåtaren, licensutfärdaren, etc., som första part"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fpy ;
+    owl:sameAs <fpy> ;
+    skos:exactMatch locrel:fpy ;
+    skos:notation "fpy" ;
+    skos:prefLabel "Första part"@sv .
+
+<forger> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:frg ;
+    owl:sameAs <frg> ;
+    skos:exactMatch locrel:frg ;
+    skos:notation "frg" ;
+    skos:prefLabel "Förfalskare"@sv .
+
+<formerOwner> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:fmo ;
+    owl:sameAs <fmo> ;
+    skos:closeMatch rdau:P60401 ;
+    skos:exactMatch locrel:fmo ;
+    skos:notation "fmo" ;
+    skos:prefLabel "Tidigare ägare"@sv .
+
+<funder> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:fnd ;
+    owl:sameAs <fnd> ;
+    skos:exactMatch locrel:fnd ;
+    skos:notation "fnd" ;
+    skos:prefLabel "Finansiär"@sv .
+
+<geographicInformationSpecialist> a bf:Role ;
+    rdfs:comment "Geografisk information"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:gis ;
+    owl:sameAs <gis> ;
+    skos:exactMatch locrel:gis ;
+    skos:notation "gis" ;
+    skos:prefLabel "GIS-specialist"@sv .
+
+<graphicTechnician> a bf:Role ;
+    rdfs:comment "Obsolet; använd \"art\" (konstnär)"@sv ;
+    rdfs:domain :Work ;
+    owl:sameAs <grt> ;
+    skos:prefLabel "Grafisk tekniker"@sv .
+
+<honoree> a bf:Role ;
+    rdfs:comment "Hit även person etc. som på annat sätt hedrats i verket eller exemplaret"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:hnr ;
+    owl:sameAs <hnr> ;
+    skos:closeMatch rdau:P60406 ;
+    skos:exactMatch locrel:hnr ;
+    skos:hiddenLabel "honouree of item" ; # RDA
+    skos:notation "hnr" ;
+    skos:prefLabel "Festskriftsföremål"@sv .
+
+<host> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:hst ;
+    owl:sameAs <hst> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60146 ;
+    skos:exactMatch locrel:hst ;
+    skos:notation "hst" ;
+    skos:prefLabel "Programvärd, programledare"@sv .
+
+<hostInstitution> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:his ;
+    owl:sameAs <his> ;
+    skos:broader <host> ;
+    skos:closeMatch rdau:P60061 ;
+    skos:exactMatch locrel:his ;
+    skos:hiddenLabel "Gastgebende Institution" ;
+    skos:notation "his" ;
+    skos:prefLabel "Värdinstitution"@sv .
+
+<illuminator> a bf:Role ;
+    rdfs:comment "Färglagda initialer, randornament, bilder eller annan utsmyckande illustration i främst medeltida handskrifter"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:ilu ;
+    owl:sameAs <ilu> ;
+    skos:closeMatch rdau:P60421 ;
+    skos:exactMatch locrel:ilu ;
+    skos:notation "ilu" ;
+    skos:prefLabel "Illuminatör"@sv .
+
+<illustrator> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ill ;
+    owl:sameAs <ill> ;
+    skos:closeMatch rdau:P60396 ;
+    skos:exactMatch locrel:ill,
+        mts:m179 ;
+    skos:hiddenLabel "Illustrateur",
+        "Illustratorin",
+        "Myndskreyting",
+        "illus",
+        "illustr",
+        "illustreerija",
+        "ilustracje",
+        "ilustrador",
+        "ilustrator" ;
+    skos:notation "ill" ;
+    skos:prefLabel "Illustratör"@sv .
+
+<inscriber> a bf:Role ;
+    rdfs:comment "Författare till inskription, eller person vars namn eller signatur förekommer tillsammans med uppgift om samband (t.ex. proveniens) i exemplaret"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:ins ;
+    owl:sameAs <ins> ;
+    skos:closeMatch rdau:P60460 ;
+    skos:exactMatch locrel:ins ;
+    skos:notation "ins" ;
+    skos:prefLabel "Inskription"@sv .
+
+<instrumentalist> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:itr ;
+    owl:sameAs <itr> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60150 ;
+    skos:exactMatch locrel:itr ;
+    skos:hiddenLabel "instrumentiste" ;
+    skos:notation "itr" ;
+    skos:prefLabel "Instrumentalist"@sv .
+
+<interviewee> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ive ;
+    owl:sameAs <ive> ;
+    skos:closeMatch rdau:P60432 ;
+    skos:exactMatch locrel:ive,
+        mts:m758 ;
+    skos:hiddenLabel "interviewee (expression)" ; # RDA
+    skos:notation "ive" ;
+    skos:prefLabel "Intervjuobjekt"@sv .
+
+<interviewer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ivr ;
+    owl:sameAs <ivr> ;
+    skos:closeMatch rdau:P60430 ;
+    skos:exactMatch locrel:ivr,
+        mts:m767 ;
+    skos:hiddenLabel "interviewer (expression)" ; # RDA
+    skos:notation "ivr" ;
+    skos:prefLabel "Intervjuare"@sv .
+
+<inventor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:inv ;
+    owl:sameAs <inv> ;
+    skos:closeMatch rdau:P60427 ;
+    skos:exactMatch locrel:inv ;
+    skos:notation "inv" ;
+    skos:prefLabel "Uppfinnare"@sv .
+
+<issuingBody> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:isb ;
+    owl:sameAs <isb> ;
+    skos:closeMatch rdau:P60467 ;
+    skos:exactMatch locrel:isb ;
+    skos:hiddenLabel "Herausgebendes Organ" ;
+    skos:notation "isb" ;
+    skos:prefLabel "Utgivande instans"@sv .
+
+<judge> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:jud ;
+    owl:sameAs <jud> ;
+    skos:closeMatch rdau:P60461 ;
+    skos:exactMatch locrel:jud ;
+    skos:notation "jud" ;
+    skos:prefLabel "Domare"@sv .
+
+<jurisdictionGoverned> a bf:Role ;
+    rdfs:comment "Jurisdiktion vars lagar etc. verkställs av annan instans; jfr \"enj\" (verkställande jurisdiktion)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:jug ;
+    owl:sameAs <jug> ;
+    skos:closeMatch rdau:P60097 ;
+    skos:exactMatch locrel:jug ;
+    skos:notation "jug" ;
+    skos:prefLabel "Tillämplig jurisdiktion"@sv .
+
+<laboratory> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lbr ;
+    owl:sameAs <lbr> ;
+    skos:exactMatch locrel:lbr ;
+    skos:notation "lbr" ;
+    skos:prefLabel "Laboratorium"@sv .
+
+<laboratoryDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ldr ;
+    owl:sameAs <ldr> ;
+    skos:exactMatch locrel:ldr ;
+    skos:notation "ldr" ;
+    skos:prefLabel "Laboratoriechef"@sv .
+
+<landscapeArchitect> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lsa ;
+    owl:sameAs <lsa> ;
+    skos:broader <architect> ;
+    skos:closeMatch rdau:P60473 ;
+    skos:exactMatch locrel:lsa ;
+    skos:notation "lsa" ;
+    skos:prefLabel "Landskapsarkitekt"@sv .
+
+<lead> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:led ;
+    owl:sameAs <led> ;
+    skos:exactMatch locrel:led ;
+    skos:notation "led" ;
+    skos:prefLabel "Chef, ledare"@sv .
+
+<lender> a bf:Role ;
+    rdfs:comment "Instans som har långat ut eller medgivit utlåning för t.ex. kopiering eller mikrofilmining"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:len ;
+    owl:sameAs <len> ;
+    skos:exactMatch locrel:len ;
+    skos:notation "len" ;
+    skos:prefLabel "Utlånare"@sv .
+
+<libelant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lil ;
+    owl:sameAs <lil> ;
+    skos:exactMatch locrel:lil ;
+    skos:notation "lil" ;
+    skos:prefLabel "Libelant"@sv .
+
+<libelantAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lit ;
+    owl:sameAs <lit> ;
+    skos:broader <libelant> ;
+    skos:exactMatch locrel:lit ;
+    skos:notation "lit" ;
+    skos:prefLabel "Libelant-appellant"@sv .
+
+<libelantAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lie ;
+    owl:sameAs <lie> ;
+    skos:broader <libelant> ;
+    skos:exactMatch locrel:lie ;
+    skos:notation "lie" ;
+    skos:prefLabel "Libelant-appellee"@sv .
+
+<libellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande svarande, tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lel ;
+    owl:sameAs <lel> ;
+    skos:exactMatch locrel:lel ;
+    skos:notation "lel" ;
+    skos:prefLabel "Libellee"@sv .
+
+<libeleeAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande svarande, tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:let ;
+    owl:sameAs <let> ;
+    skos:broader <libellee> ;
+    skos:exactMatch locrel:let ;
+    skos:notation "let" ;
+    skos:prefLabel "Libelee-appellant"@sv .
+
+<libelleeAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande svarande, tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lee ;
+    owl:sameAs <lee> ;
+    skos:broader <libellee> ;
+    skos:exactMatch locrel:lee ;
+    skos:notation "lee" ;
+    skos:prefLabel "Libellee-appellee"@sv .
+
+<librettist> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lbt ;
+    owl:sameAs <lbt> ;
+    skos:broader <author> ;
+    skos:closeMatch rdau:P60478 ;
+    skos:exactMatch locrel:lbt ;
+    skos:notation "lbt" ;
+    skos:prefLabel "Librettist"@sv .
+
+<licensee> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lse ;
+    owl:sameAs <lse> ;
+    skos:exactMatch locrel:lse ;
+    skos:notation "lse" ;
+    skos:prefLabel "Licensinnehavare"@sv .
+
+<licensor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lso ;
+    owl:sameAs <lso> ;
+    skos:exactMatch locrel:lso ;
+    skos:notation "lso" ;
+    skos:prefLabel "Licensutfärdare"@sv .
+
+<lightingDesigner> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lgd ;
+    owl:sameAs <lgd> ;
+    skos:closeMatch rdau:P60813 ;
+    skos:exactMatch locrel:lgd ;
+    skos:notation "lgd" ;
+    skos:prefLabel "Ljusdesigner, ljussättare"@sv .
+
+<lithographer> a bf:Role ;
+    rdfs:comment "Litografi = Grafisk plantrycksmetod som bygger på att tryckstenen absorberar fett och vatten, men att dessa stöter bort varandra"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:ltg ;
+    owl:sameAs <ltg> ;
+    skos:broader <libelant> ;
+    skos:closeMatch rdau:P60414 ;
+    skos:exactMatch locrel:ltg,
+        gnd:lithographer ;
+    skos:notation "ltg" ;
+    skos:prefLabel "Litograf"@sv .
+
+<lyricist> a bf:Role ;
+    rdfs:comment "Sångtextförfattare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:lyr ;
+    owl:sameAs <lyr> ;
+    skos:broader <author> ;
+    skos:closeMatch rdau:P60477 ;
+    skos:exactMatch locrel:lyr ;
+    skos:notation "lyr" ;
+    skos:prefLabel "Sångtext"@sv .
+
+<manufacturePlace> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:mfp ;
+    owl:sameAs <mfp> ;
+    skos:closeMatch rdau:P60162 ;
+    skos:exactMatch locrel:mfp ;
+    skos:notation "mfp" ;
+    skos:prefLabel "Produktions-/tryckort"@sv .
+
+<manufacturer> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:mfr ;
+    owl:sameAs <mfr> ;
+    skos:broader <provider> ;
+    skos:closeMatch rdau:P60443 ;
+    skos:exactMatch locrel:mfr ;
+    skos:notation "mfr" ;
+    skos:prefLabel "Fabrikant, tillverkare"@sv .
+
+<marbler> a bf:Role ;
+    rdfs:comment "Person etc. ansvarig för marmoreringen"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mrb ;
+    owl:sameAs <mrb> ;
+    skos:exactMatch locrel:mrb ;
+    skos:notation "mrb" ;
+    skos:prefLabel "Marmorering"@sv .
+
+<markupEditor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mrk ;
+    owl:sameAs <mrk> ;
+    skos:closeMatch rdau:P61083 ;
+    skos:exactMatch locrel:mrk ;
+    skos:notation "mrk" ;
+    skos:prefLabel "Metadatauppmärkare"@sv .
+
+<metadataContact> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mdc ;
+    owl:sameAs <mdc> ;
+    skos:exactMatch locrel:mdc ;
+    skos:notation "mdc" ;
+    skos:prefLabel "Metadataansvarig"@sv .
+
+<metalEngraver> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:mte ;
+    owl:sameAs <mte> ;
+    skos:broader <engraver> ;
+    skos:exactMatch locrel:mte ;
+    skos:notation "mte" ;
+    skos:prefLabel "Metallgravör"@sv .
+
+<moderator> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mod ;
+    owl:sameAs <mod> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60147 ;
+    skos:exactMatch locrel:mod ;
+    skos:notation "mod" ;
+    skos:prefLabel "Moderator"@sv .
+
+<monitor> a bf:Role ;
+    rdfs:comment "Som har kontrollerat eller övervakat att ett uppdrag utförts enligt avtal eller överenskommelse"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mon ;
+    owl:sameAs <mon> ;
+    skos:exactMatch locrel:mon ;
+    skos:notation "mon" ;
+    skos:prefLabel "Övervakare, inspektör"@sv .
+
+<musicCopyist> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:mcp ;
+    owl:sameAs <mcp> ;
+    skos:exactMatch locrel:mcp ;
+    skos:notation "mcp" ;
+    skos:prefLabel "Musikkopist"@sv .
+
+<musicalDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:msd ;
+    owl:sameAs <msd> ;
+    skos:closeMatch rdau:P60383 ;
+    skos:exactMatch locrel:msd ;
+    skos:notation "msd" ;
+    skos:prefLabel "Musikalisk ledare"@sv .
+
+<musician> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mus ;
+    owl:sameAs <mus> ;
+    skos:exactMatch locrel:mus ;
+    skos:notation "mus" ;
+    skos:prefLabel "Musiker"@sv .
+
+<narrator> a bf:Role ;
+    rdfs:comment "Person som beskriver eller kommenterar handlingen eller specifika detaljer i en dokumentärfilm, teaterföreställning, etc. Hit även kåsörer och inläsare eller uppläsare av tal- och ljudböcker, etc"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:nrt ;
+    owl:sameAs <nrt> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60153 ;
+    skos:exactMatch locrel:nrt,
+        mts:m994,
+        gnd:narrator ;
+    skos:hiddenLabel "Erzählerin",
+        "voice actor" ; # RDA
+    skos:notation "nrt" ;
+    skos:prefLabel "Berättare, inläsare"@sv .
+
+<onscreenPresenter> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:osp ;
+    owl:sameAs <osp> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60143 ;
+    skos:exactMatch locrel:osp ;
+    skos:hiddenLabel "on-screen presenter" ; # RDA
+    skos:notation "osp" ;
+    skos:prefLabel "Introduktör/presentatör av faktafilm"@sv .
+
+<opponent> a bf:Role ;
+    rdfs:comment "Person som opponerar vid akademisk disputation"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:opn ;
+    owl:sameAs <opn> ;
+    skos:exactMatch locrel:opn ;
+    skos:notation "opn" ;
+    skos:prefLabel "Opponent"@sv .
+
+<organizerOfMeeting> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:orm ;
+    owl:sameAs <orm> ;
+    skos:closeMatch rdau:P60849 ;
+    skos:exactMatch locrel:orm,
+        gnd:organizerOrHost ;
+    skos:hiddenLabel "Gastgeber",
+        "Veranstalter",
+        "Veranstalterin" ;
+    skos:notation "orm" ;
+    skos:prefLabel "Mötesarrangör"@sv .
+
+<originator> a bf:Role ;
+    rdfs:comment "Persone etc. associerad med verkets intellektuella innehåll"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:org ;
+    owl:sameAs <org> ;
+    skos:closeMatch rdau:P60447 ;
+    skos:exactMatch locrel:org ;
+    skos:notation "org" ;
+    skos:prefLabel "Ursprunglig upphovsman"@sv .
+
+<owner> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:own ;
+    owl:sameAs <own> ;
+    skos:closeMatch rdau:P60400 ;
+    skos:exactMatch locrel:own ;
+    skos:notation "own" ;
+    skos:prefLabel "Ägare"@sv .
+
+<panelist> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pan ;
+    owl:sameAs <pan> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60149 ;
+    skos:exactMatch locrel:pan ;
+    skos:notation "pan" ;
+    skos:prefLabel "Deltagare i paneldiskussion"@sv .
+
+<papermaker> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:ppm ;
+    owl:sameAs <ppm> ;
+    skos:closeMatch rdau:P60746 ;
+    skos:exactMatch locrel:ppm ;
+    skos:notation "ppm" ;
+    skos:prefLabel "Pappersmakare"@sv .
+
+<patentApplicant> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pta ;
+    owl:sameAs <pta> ;
+    skos:exactMatch locrel:pta ;
+    skos:notation "pta" ;
+    skos:prefLabel "Patentsökande"@sv .
+
+<patentHolder> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pth ;
+    owl:sameAs <pth> ;
+    skos:exactMatch locrel:pth ;
+    skos:notation "pth" ;
+    skos:prefLabel "Patentinnehavare"@sv .
+
+<patron> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pat ;
+    owl:sameAs <pat> ;
+    skos:exactMatch locrel:pat ;
+    skos:notation "pat" ;
+    skos:prefLabel "Mecenat"@sv .
+
+<performer> a bf:Role ;
+    rdfs:comment "Skådespelare, musiker etc."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prf ;
+    owl:sameAs <prf> ;
+    skos:closeMatch rdau:P60387 ;
+    skos:exactMatch locrel:prf,
+        mts:m1060 ;
+    skos:notation "prf" ;
+    skos:prefLabel "Framförande"@sv .
+
+<permittingAgency> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pma ;
+    owl:sameAs <pma> ;
+    skos:exactMatch locrel:pma ;
+    skos:notation "pma" ;
+    skos:prefLabel "Tillståndsgivande instans"@sv .
+
+<photographer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pht ;
+    owl:sameAs <pht> ;
+    skos:closeMatch rdau:P60429 ;
+    skos:exactMatch locrel:pht,
+        mts:m1042 ;
+    skos:hiddenLabel "Ljósmyndari",
+        "fotograaf",
+        "fotografin",
+        "photographie" ;
+    skos:notation "pht" ;
+    skos:prefLabel "Fotograf"@sv .
+
+<plaintiff> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ptf ;
+    owl:sameAs <ptf> ;
+    skos:closeMatch rdau:P60459 ;
+    skos:exactMatch locrel:ptf ;
+    skos:notation "ptf" ;
+    skos:prefLabel "Plaintiff"@sv .
+
+<plaintiffAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ptt ;
+    owl:sameAs <ptt> ;
+    skos:broader <plaintiff> ;
+    skos:exactMatch locrel:ptt ;
+    skos:notation "ptt" ;
+    skos:prefLabel "Plaintiff-appellant"@sv .
+
+<plaintiffAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pte ;
+    owl:sameAs <pte> ;
+    skos:broader <plaintiff> ;
+    skos:exactMatch locrel:pte ;
+    skos:notation "pte" ;
+    skos:prefLabel "Plaintiff-appellee"@sv .
+
+<platemaker> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:plt ;
+    owl:sameAs <plt> ;
+    skos:closeMatch rdau:P60415 ;
+    skos:exactMatch locrel:plt ;
+    skos:notation "plt" ;
+    skos:prefLabel "Tryckplåtstillverkare"@sv .
+
+<praeses> a bf:Role ;
+    rdfs:comment "Handledare vid akademisk disputation; jfr \"ths\" (avhandlingshandledare)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pra ;
+    owl:sameAs <pra> ;
+    skos:closeMatch rdau:P60463 ;
+    skos:exactMatch locrel:pra ;
+    skos:notation "pra" ;
+    skos:prefLabel "Preses"@sv .
+
+<presenter> a bf:Role ;
+    rdfs:comment "Omnämnd med ett \"X presenterar\"-erkännande i samband med produktion, finansiering eller distribution av film"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pre ;
+    owl:sameAs <pre> ;
+    skos:closeMatch rdau:P60419 ;
+    skos:exactMatch locrel:pre ;
+    skos:notation "pre" ;
+    skos:prefLabel "Filmpresentatör"@sv .
+
+<primaryRightsHolder> a bf:Role ;
+    rdfs:comment "LIBRIS-definierad kod"@sv ;
+    rdfs:domain :Work ;
+    owl:sameAs <9pu> ;
+    skos:prefLabel "Primärt upphovsansvarig"@sv .
+
+<printer> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:prt ;
+    owl:sameAs <prt> ;
+    skos:closeMatch rdau:P60418 ;
+    skos:exactMatch locrel:prt ;
+    skos:notation "prt" ;
+    skos:prefLabel "Tryckare"@sv .
+
+<printerOfPlates> a bf:Role ;
+    rdfs:comment "Person etc. som trycker illustrationer från plåtoriginal"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:pop ;
+    owl:sameAs <pop> ;
+    skos:exactMatch locrel:pop ;
+    skos:notation "pop" ;
+    skos:prefLabel "Tryckare av illustrationer"@sv .
+
+<printmaker> a bf:Role ;
+    rdfs:comment "Som har gjort ytan till reliefen, intatglion (djuptrycket) eller plantrycket"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:prm ;
+    owl:sameAs <prm> ;
+    skos:closeMatch rdau:P60412 ;
+    skos:exactMatch locrel:prm ;
+    skos:notation "prm" ;
+    skos:prefLabel "Tryckmakare"@sv .
+
+<processContact> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prc ;
+    owl:sameAs <prc> ;
+    skos:exactMatch locrel:prc ;
+    skos:notation "prc" ;
+    skos:prefLabel "Processansvarig"@sv .
+
+<producer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pro ;
+    owl:sameAs <pro> ;
+    skos:broader <provider> ;
+    skos:closeMatch rdau:P60441 ;
+    skos:exactMatch locrel:pro ;
+    skos:notation "pro" ;
+    skos:prefLabel "Producent"@sv .
+
+<productionCompany> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prn ;
+    owl:sameAs <prn> ;
+    skos:closeMatch rdau:P60062 ;
+    skos:exactMatch locrel:prn ;
+    skos:notation "prn" ;
+    skos:prefLabel "Produktionsbolag"@sv .
+
+<productionDesigner> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prs ;
+    owl:sameAs <prs> ;
+    skos:closeMatch rdau:P60437 ;
+    skos:exactMatch locrel:prs ;
+    skos:notation "prs" ;
+    skos:prefLabel "Produktionsdesigner"@sv .
+
+<productionManager> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pmn ;
+    owl:sameAs <pmn> ;
+    skos:exactMatch locrel:pmn ;
+    skos:notation "pmn" ;
+    skos:prefLabel "Produktionsledning"@sv .
+
+<productionPersonnel> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prd ;
+    owl:sameAs <prd> ;
+    skos:exactMatch locrel:prd ;
+    skos:notation "prd" ;
+    skos:prefLabel "Produktionspersonal"@sv .
+
+<productionPlace> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:prp ;
+    owl:sameAs <prp> ;
+    skos:exactMatch locrel:prp ;
+    skos:notation "prp" ;
+    skos:prefLabel "Konstruktionsort"@sv .
+
+<programmer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:prg ;
+    owl:sameAs <prg> ;
+    skos:closeMatch rdau:P60423 ;
+    skos:exactMatch locrel:prg ;
+    skos:notation "prg" ;
+    skos:prefLabel "Programmerare"@sv .
+
+<projectDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pdr ;
+    owl:sameAs <pdr> ;
+    skos:exactMatch locrel:pdr ;
+    skos:notation "pdr" ;
+    skos:prefLabel "Projektchef, projektsamordnare"@sv .
+
+<proofreader> a bf:Role ;
+    rdfs:comment "Jfr \"crr\" (handskriftskorrektur)"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:pfr ;
+    owl:sameAs <pfr> ;
+    skos:exactMatch locrel:pfr ;
+    skos:notation "pfr" ;
+    skos:prefLabel "Korrekturläsare"@sv .
+
+<provider> a bf:Role ;
+    rdfs:domain :Item ;
+    owl:equivalentProperty locrel:prv ;
+    owl:sameAs <prv> ;
+    skos:exactMatch locrel:prv ;
+    skos:notation "prv" ;
+    skos:prefLabel "Leverantör"@sv .
+
+<publicationPlace> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:pup ;
+    owl:sameAs <pup> ;
+    skos:closeMatch rdau:P60163 ;
+    skos:exactMatch locrel:pup ;
+    skos:notation "pup" ;
+    skos:prefLabel "Utgivnings-/publikationsort"@sv .
+
+<publisher> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:pbl ;
+    owl:sameAs <pbl> ;
+    skos:broader <provider> ;
+    skos:closeMatch rdau:P60444 ;
+    skos:exactMatch locrel:pbl,
+        mts:m518 ;
+    skos:hiddenLabel "Verlag",
+        "publ",
+        "wydawca",
+        "Útgefandi" ;
+    skos:notation "pbl" ;
+    skos:prefLabel "Utgivare"@sv .
+
+<publishingDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:pbd ;
+    owl:sameAs <pbd> ;
+    skos:closeMatch rdau:P60428 ;
+    skos:exactMatch locrel:pbd ;
+    skos:hiddenLabel "Directeur de la publication",
+        "director de la publicación",
+        "zhu bian" ;
+    skos:notation "pbd" ;
+    skos:prefLabel "Chefredaktör, huvudredaktör"@sv .
+
+<puppeteer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ppt ;
+    owl:sameAs <ppt> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60148 ;
+    skos:exactMatch locrel:ppt ;
+    skos:notation "ppt" ;
+    skos:prefLabel "Marionettspelare"@sv .
+
+<radioDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rdd ;
+    owl:sameAs <rdd> ;
+    skos:broader <director> ;
+    skos:closeMatch rdau:P60085 ;
+    skos:exactMatch locrel:rdd ;
+    skos:notation "rdd" ;
+    skos:prefLabel "Radioregissör"@sv .
+
+<radioProducer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rpc ;
+    owl:sameAs <rpc> ;
+    skos:broader <producer> ;
+    skos:closeMatch rdau:P60170 ;
+    skos:exactMatch locrel:rpc ;
+    skos:notation "rpc" ;
+    skos:prefLabel "Radioproducent"@sv .
+
+<recordingEngineer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rce ;
+    owl:sameAs <rce> ;
+    skos:closeMatch rdau:P60395 ;
+    skos:exactMatch locrel:rce ;
+    skos:notation "rce" ;
+    skos:prefLabel "Inspelningstekniker"@sv .
+
+<recordist> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rcd ;
+    owl:sameAs <rcd> ;
+    skos:closeMatch rdau:P60397 ;
+    skos:exactMatch locrel:rcd ;
+    skos:notation "rcd" ;
+    skos:prefLabel "Inspelning"@sv .
+
+<redaktor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:red ;
+    owl:sameAs <red> ;
+    skos:exactMatch locrel:red ;
+    skos:notation "red" ;
+    skos:prefLabel "Redigerare"@sv .
+
+<renderer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ren ;
+    owl:sameAs <ren> ;
+    skos:exactMatch locrel:ren ;
+    skos:notation "ren" ;
+    skos:prefLabel "Prototyp, visualisering"@sv .
+
+<reporter> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rpt ;
+    owl:sameAs <rpt> ;
+    skos:exactMatch locrel:rpt ;
+    skos:notation "rpt" ;
+    skos:prefLabel "Reporter, journalist"@sv .
+
+<repository> a bf:Role ;
+    rdfs:domain :Endeavour ;
+    owl:equivalentProperty locrel:rps ;
+    owl:sameAs <rps> ;
+    skos:exactMatch locrel:rps ;
+    skos:notation "rps" ;
+    skos:prefLabel "Arkiv, repository"@sv .
+
+<researchTeamHead> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rth ;
+    owl:sameAs <rth> ;
+    skos:exactMatch locrel:rth ;
+    skos:notation "rth" ;
+    skos:prefLabel "Chef för forskargrupp"@sv .
+
+<researchTeamMember> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rtm ;
+    owl:sameAs <rtm> ;
+    skos:exactMatch locrel:rtm ;
+    skos:notation "rtm" ;
+    skos:prefLabel "Medlem av forskargrupp"@sv .
+
+<researcher> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:res ;
+    owl:sameAs <res> ;
+    skos:closeMatch rdau:P60836 ;
+    skos:exactMatch locrel:res ;
+    skos:notation "res" ;
+    skos:prefLabel "Forskare"@sv .
+
+<respondent> a bf:Role ;
+    rdfs:comment "Kandidat som försvarar eller opponerar vid disputation av akademisk avhandling; jfr \"dis\" (presentatör av avhandling). Även juridisk term för svarande part i domstolsförhandling"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rsp ;
+    owl:sameAs <rsp> ;
+    skos:closeMatch rdau:P60045 ;
+    skos:exactMatch locrel:rsp ;
+    skos:notation "rsp" ;
+    skos:prefLabel "Respondent"@sv .
+
+<respondentAppellant> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande svarande, tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rst ;
+    owl:sameAs <rst> ;
+    skos:exactMatch locrel:rst ;
+    skos:notation "rst" ;
+    skos:prefLabel "Respondent-appellant"@sv .
+
+<respondentAppellee> a bf:Role ;
+    rdfs:comment "Juridisk term ung. motsvarande svarande, tilltalad"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rse ;
+    owl:sameAs <rse> ;
+    skos:exactMatch locrel:rse ;
+    skos:notation "rse" ;
+    skos:prefLabel "Respondent-appellee"@sv .
+
+<responsibleParty> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rpy ;
+    owl:sameAs <rpy> ;
+    skos:exactMatch locrel:rpy ;
+    skos:notation "rpy" ;
+    skos:prefLabel "Ansvarig utgivare"@sv .
+
+<restager> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rsg ;
+    owl:sameAs <rsg> ;
+    skos:exactMatch locrel:rsg ;
+    skos:notation "rsg" ;
+    skos:prefLabel "Bearbetare av sceniskt verk"@sv .
+
+<restorationist> a bf:Role ;
+    rdfs:comment "Jfr \"con\" (konservator)"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:rsr ;
+    owl:sameAs <rsr> ;
+    skos:closeMatch rdau:P60450 ;
+    skos:exactMatch locrel:rsr ;
+    skos:notation "rsr" ;
+    skos:prefLabel "Restaturering"@sv .
+
+<reviewer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rev ;
+    owl:sameAs <rev> ;
+    skos:exactMatch locrel:rev ;
+    skos:notation "rev" ;
+    skos:prefLabel "Recensent"@sv .
+
+<rubricator> a bf:Role ;
+    rdfs:comment "Utförare av rubriker (ofta skrivna i rött) i medeltida handskrift; Rubricatorn kunde ibland även vara handskriftens huvudsaklige skrivare"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:rbr ;
+    owl:sameAs <rbr> ;
+    skos:exactMatch locrel:rbr ;
+    skos:notation "rbr" ;
+    skos:prefLabel "Rubricator"@sv .
+
+<scenarist> a bf:Role ;
+    rdfs:comment "Vanligen den person som skrev stumfilmsscenarier"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sce ;
+    owl:sameAs <sce> ;
+    skos:closeMatch rdau:P60476 ;
+    skos:exactMatch locrel:sce ;
+    skos:notation "sce" ;
+    skos:prefLabel "Scenario"@sv .
+
+<scientificAdvisor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sad ;
+    owl:sameAs <sad> ;
+    skos:exactMatch locrel:sad ;
+    skos:notation "sad" ;
+    skos:prefLabel "Vetenskaplig rådgivare"@sv .
+
+<screenwriter> a bf:Role ;
+    rdfs:comment "Film"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:aus ;
+    owl:sameAs <aus> ;
+    skos:broader <author> ;
+    skos:closeMatch rdau:P60476 ;
+    skos:exactMatch locrel:aus,
+        mts:m79 ;
+    skos:notation "aus" ;
+    skos:prefLabel "Manusförfattare"@sv .
+
+<scribe> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:scr ;
+    owl:sameAs <scr> ;
+    skos:exactMatch locrel:scr ;
+    skos:notation "scr" ;
+    skos:prefLabel "Skrivare, kopist"@sv .
+
+<sculptor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:scl ;
+    owl:sameAs <scl> ;
+    skos:broader <artist> ;
+    skos:closeMatch rdau:P60475 ;
+    skos:exactMatch locrel:scl ;
+    skos:notation "scl" ;
+    skos:prefLabel "Skulptör"@sv .
+
+<secondParty> a bf:Role ;
+    rdfs:comment "Andra parten i ett fördrag, en överenskommelse eller annan händelse; vid överlåtelse betraktas den part till vilken rättigheterna, licensen, etc. har överlåtits som andra part"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:spy ;
+    owl:sameAs <spy> ;
+    skos:exactMatch locrel:spy ;
+    skos:notation "spy" ;
+    skos:prefLabel "Andra part"@sv .
+
+<secretary> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:sec ;
+    owl:sameAs <sec> ;
+    skos:exactMatch locrel:sec ;
+    skos:notation "sec" ;
+    skos:prefLabel "Sekreterare"@sv .
+
+<seller> a bf:Role ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:sll ;
+    owl:sameAs <sll> ;
+    skos:broader <formerOwner> ;
+    skos:closeMatch rdau:P60092 ;
+    skos:exactMatch locrel:sll ;
+    skos:notation "sll" ;
+    skos:prefLabel "Försäljare"@sv .
+
+<setDesigner> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:std ;
+    owl:sameAs <std> ;
+    skos:exactMatch locrel:std ;
+    skos:notation "std" ;
+    skos:prefLabel "Scenograf"@sv .
+
+<setting> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:stg ;
+    owl:sameAs <stg> ;
+    skos:exactMatch locrel:stg ;
+    skos:notation "stg" ;
+    skos:prefLabel "Scensättning"@sv .
+
+<signer> a bf:Role ;
+    rdfs:comment "Okänd proveniens; Jfr \"ato\" (autograf/signatur)"@sv ;
+    rdfs:domain :Embodiment ;
+    owl:equivalentProperty locrel:sgn ;
+    owl:sameAs <sgn> ;
+    skos:exactMatch locrel:sgn ;
+    skos:notation "sgn" ;
+    skos:prefLabel "Signatur"@sv .
+
+<singer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sng ;
+    owl:sameAs <sng> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60156 ;
+    skos:exactMatch locrel:sng ;
+    skos:notation "sng" ;
+    skos:prefLabel "Sångare"@sv .
+
+<soundDesigner> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sds ;
+    owl:sameAs <sds> ;
+    skos:closeMatch rdau:P60811 ;
+    skos:exactMatch locrel:sds ;
+    skos:notation "sds" ;
+    skos:prefLabel "Ljudproducent, ljudtekniker"@sv .
+
+<speaker> a bf:Role ;
+    rdfs:comment "Person som deltar med muntliga framföranden eller presentationer i t.ex. en ljudupptagning. Hit även röst i animerade filmer, dataspel, etc."@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:spk ;
+    owl:sameAs <spk> ;
+    skos:broader <producer> ;
+    skos:closeMatch rdau:P60155 ;
+    skos:exactMatch locrel:spk ;
+    skos:notation "spk" ;
+    skos:prefLabel "Röst, tal"@sv .
+
+<sponsor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:spn ;
+    owl:sameAs <spn> ;
+    skos:closeMatch rdau:P60451,
+        rdau:P60676 ;
+    skos:exactMatch locrel:spn ;
+    skos:hiddenLabel "Sponsoring body",
+        "Sponsoring institution" ;
+    skos:notation "spn" ;
+    skos:prefLabel "Sponsor"@sv .
+
+<stageDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sgd ;
+    owl:sameAs <sgd> ;
+    skos:closeMatch rdau:P60399 ;
+    skos:exactMatch locrel:sgd ;
+    skos:notation "sgd" ;
+    skos:prefLabel "Scenregissör"@sv .
+
+<stageManager> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:stm ;
+    owl:sameAs <stm> ;
+    skos:closeMatch rdau:P60399 ;
+    skos:exactMatch locrel:stm ;
+    skos:notation "stm" ;
+    skos:prefLabel "Inspicient, regiassistent"@sv .
+
+<standardsBody> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:stn ;
+    owl:sameAs <stn> ;
+    skos:exactMatch locrel:stn ;
+    skos:notation "stn" ;
+    skos:prefLabel "Standardiseringsorgan"@sv .
+
+<stereotyper> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:str ;
+    owl:sameAs <str> ;
+    skos:exactMatch locrel:str ;
+    skos:notation "str" ;
+    skos:prefLabel "Sterotyper, klichéer"@sv .
+
+<storyteller> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:stl ;
+    owl:sameAs <stl> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60154 ;
+    skos:exactMatch locrel:stl ;
+    skos:notation "stl" ;
+    skos:prefLabel "Dramatisering"@sv .
+
+<supportingHost> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:sht ;
+    owl:sameAs <sht> ;
+    skos:exactMatch locrel:sht ;
+    skos:notation "sht" ;
+    skos:prefLabel "Organiserat med stöd av"@sv .
+
+<surveyor> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:srv ;
+    owl:sameAs <srv> ;
+    skos:closeMatch rdau:P60377 ;
+    skos:exactMatch locrel:srv ;
+    skos:notation "srv" ;
+    skos:prefLabel "Lantmätare"@sv .
+
+<teacher> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:tch ;
+    owl:sameAs <tch> ;
+    skos:broader <performer> ;
+    skos:closeMatch rdau:P60145 ;
+    skos:exactMatch locrel:tch ;
+    skos:notation "tch" ;
+    skos:prefLabel "Lärare"@sv .
+
+<technicalDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:tcd ;
+    owl:sameAs <tcd> ;
+    skos:exactMatch locrel:tcd ;
+    skos:notation "tcd" ;
+    skos:prefLabel "Teknisk chef"@sv .
+
+<televisionDirector> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:tld ;
+    owl:sameAs <tld> ;
+    skos:broader <director> ;
+    skos:closeMatch rdau:P60086 ;
+    skos:exactMatch locrel:tld ;
+    skos:notation "tld" ;
+    skos:prefLabel "TV-regissör"@sv .
+
+<televisionProducer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:tlp ;
+    owl:sameAs <tlp> ;
+    skos:broader <producer> ;
+    skos:closeMatch rdau:P60171 ;
+    skos:exactMatch locrel:tlp ;
+    skos:notation "tlp" ;
+    skos:prefLabel "TV-producent"@sv .
+
+<thesisAdvisor> a bf:Role ;
+    rdfs:comment "Jfr \"pra\" (preses)"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:ths ;
+    owl:sameAs <ths> ;
+    skos:closeMatch rdau:P60420 ;
+    skos:exactMatch locrel:ths ;
+    skos:hiddenLabel "degree supervisor" ; # RDA
+    skos:notation "ths" ;
+    skos:prefLabel "Avhandlingshandledare"@sv .
+
+<transcriber> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:trc ;
+    owl:sameAs <trc> ;
+    skos:closeMatch rdau:P60382 ;
+    skos:exactMatch locrel:trc ;
+    skos:notation "trc" ;
+    skos:prefLabel "Avskrivare"@sv .
+
+<translator> a bf:Role ;
+    rdfs:comment "Hit även person/organisation som moderniserat äldre text"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:trl ;
+    owl:sameAs <trl> ;
+    skos:closeMatch rdau:P60385 ;
+    skos:exactMatch locrel:trl,
+        mts:m23,
+        gnd:translator ;
+    skos:hiddenLabel "Oversetter",
+        "overs",
+        "tolkija",
+        "traduction",
+        "traductor",
+        "translated by",
+        "tõlkija",
+        "tł",
+        "tłumacz",
+        "tłumaczenie",
+        "Übersetzerin",
+        "Þýðandi",
+        "übers" ;
+    skos:notation "trl" ;
+    skos:prefLabel "Översättare"@sv .
+
+<typeDesigner> a bf:Role ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:tyd ;
+    owl:sameAs <tyd> ;
+    skos:exactMatch locrel:tyd ;
+    skos:notation "tyd" ;
+    skos:prefLabel "Typsnitt"@sv .
+
+<typographer> a bf:Role ;
+    rdfs:comment "Typsättning; kan kombineras med \"bkd\" (bokformgivare) om typografen även svarat för andra aspekter av boken formgivning"@sv ;
+    rdfs:domain :Instance ;
+    owl:equivalentProperty locrel:tyg ;
+    owl:sameAs <tyg> ;
+    skos:exactMatch locrel:tyg ;
+    skos:notation "tyg" ;
+    skos:prefLabel "Typograf"@sv .
+
+<universityPlace> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:uvp ;
+    owl:sameAs <uvp> ;
+    skos:exactMatch locrel:uvp ;
+    skos:notation "uvp" ;
+    skos:prefLabel "Universitetsort"@sv .
+
+<unspecifiedContributor> a bf:Role ;
+    rdfs:comment "Other"@sv ;
+    rdfs:domain :Endeavour ;
+    owl:equivalentProperty locrel:oth ;
+    owl:sameAs <oth> ;
+    skos:exactMatch locrel:oth ;
+    skos:hiddenLabel "Beteiligter",
+        "Mitwirkender",
+        "Sonstige",
+        "medarb",
+        "mitarb" ;
+    skos:notation "oth" ;
+    skos:prefLabel "Medarbetare (Ospecificerad)"@sv .
+
+<videographer> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:vdg ;
+    owl:sameAs <vdg> ;
+    skos:exactMatch locrel:vdg ;
+    skos:notation "vdg" ;
+    skos:prefLabel "Videoproducent"@sv .
+
+<vocalist> a bf:Role ;
+    rdfs:comment "Obsolet; använd \"sng\" (sångare)"@sv ;
+    rdfs:domain :Work ;
+    owl:sameAs <voc> ;
+    skos:prefLabel "Vokalist"@sv .
+
+<witness> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wit ;
+    owl:sameAs <wit> ;
+    skos:exactMatch locrel:wit ;
+    skos:notation "wit" ;
+    skos:prefLabel "Vittne"@sv .
+
+<woodEngraver> a bf:Role ;
+    rdfs:comment "Xylografi/trägravyr = grafisk reproduktionsmetod med utskurna träplattor som tryckform"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wde ;
+    owl:sameAs <wde> ;
+    skos:exactMatch locrel:wde ;
+    skos:notation "wde" ;
+    skos:prefLabel "Xylograf"@sv .
+
+<woodcutter> a bf:Role ;
+    rdfs:comment "Träsnitt = grafisk högtrycksmetod där de upphöjda partierna på den plana delen av stocken bär själva bildytan"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wdc ;
+    owl:sameAs <wdc> ;
+    skos:exactMatch locrel:wdc ;
+    skos:notation "wdc" ;
+    skos:prefLabel "Träsnidare"@sv .
+
+<writerOfAccompanyingMaterial> a bf:Role ;
+    rdfs:comment "Audiovisuella medier"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wam ;
+    owl:sameAs <wam> ;
+    skos:exactMatch locrel:wam ;
+    skos:notation "wam" ;
+    skos:prefLabel "Medföljande material"@sv .
+
+<writerOfAddedCommentary> a bf:Role ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wac ;
+    owl:sameAs <wac> ;
+    skos:exactMatch locrel:wac,
+        gnd:writerOfAddedCommentary ;
+    skos:hiddenLabel "writer of supplementary textual content" ; # RDA
+    skos:notation "wac" ;
+    skos:prefLabel "Analys, kommentar"@sv .
+
+<writerOfAddedLyrics> a bf:Role ;
+    rdfs:comment "Musik"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wal ;
+    owl:sameAs <wal> ;
+    skos:exactMatch locrel:wal ;
+    skos:hiddenLabel "writer of supplementary textual content" ; # RDA
+    skos:notation "wal" ;
+    skos:prefLabel "Kompletterande text"@sv .
+
+<writerOfAddedText> a bf:Role ;
+    rdfs:comment "Icke-språkliga resurser"@sv ;
+    rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wat ;
+    owl:sameAs <wat> ;
+    skos:exactMatch locrel:wat ;
+    skos:hiddenLabel "Verfasser von Zusatztexten",
+        "Verfasser von ergänzendem Text",
+        "Verfasserin von Zusatztexten",
+        "Verfasserin von ergänzendem Text",
+        "writer of supplementary textual content" ; # RDA
+    skos:notation "wat" ;
+    skos:prefLabel "Kompletterande text"@sv .
+
