@@ -6,13 +6,15 @@ construct {
         skos:definition ?definition .
 } where {
     graph <https://id.kb.se/dataset/materials> {
-        {
-            ?s ?p ?o .
-        }
+        ?s ?p ?o .
         optional {
             ?s skos:exactMatch ?aat .
             graph <sparql/aat-materials> {
                 ?aat skos:prefLabel ?aatLabel .
+            }
+            filter not exists {
+                ?s skos:prefLabel ?pl .
+                filter(lang(?pl) = lang(?aatLabel))
             }
         }
         optional {
@@ -20,6 +22,10 @@ construct {
             graph <http://rdaregistry.info/termList/RDAMaterial.nt> {
                 ?rda skos:prefLabel ?rdaLabel ;
                     skos:definition ?definition .
+            }
+            filter not exists {
+                ?s skos:prefLabel ?pl .
+                filter(lang(?pl) = lang(?rdaLabel))
             }
         }
         bind(coalesce(?rdaLabel, ?aatLabel) as ?prefLabel)
