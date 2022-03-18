@@ -94,6 +94,17 @@
     rdfs:label "Frekvens"@sv ;
     owl:equivalentClass bf2:Frequency .
 
+:pubFrequency a owl:ObjectProperty;
+    # No relation in bf to frequency?
+    :category :pending ;
+    rdfs:range :PubFrequency ;
+    owl:equivalentProperty bf2:pubFrequency .
+
+:PubFrequency a owl:Class;
+    # No relation in bf to Frequency?
+    :category :pending ;
+    owl:equivalentClass bf2:PubFrequency .
+
 :hasNotation a owl:ObjectProperty;
     rdfs:range :Notation;
     rdfs:label "Notationssystem"@sv;
