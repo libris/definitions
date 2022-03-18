@@ -523,6 +523,9 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     sdo:rangeIncludes :Person, :Family, :Meeting, :Organization, :Jurisdiction, :Subject, :Work, :Place .
     #rdfs:range :Identity . includes concept, makes for too many faulty choices.
 
+:subjectOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:subjectOf .
 
 #:artform a owl:ObjectProperty ;
 #    owl:equivalentProperty sdo:artform;
@@ -577,6 +580,10 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
 
+:contributionOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:contributionOf .
+
 :Contribution a owl:Class ;
     rdfs:label "Medverkan"@sv ;
     #rdfs:comment "Ange övriga upphov som biuppslag, om det finns flera författare, redaktörer, illustratörer etc. Välj en auktoriserad namnform från listan eller skapa en ny, om det behövs. Gör inte biuppslag på alla upphov, t ex formgivare, författare till förord etc."@sv;
@@ -598,6 +605,10 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     owl:equivalentProperty bf2:agent, prov:agent;
     sdo:domainIncludes :Contribution, :Event;
     rdfs:range :Agent .
+
+:agentOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:agentOf .
 
 :relationship a owl:ObjectProperty;
     rdfs:label "Relation"@sv;

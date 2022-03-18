@@ -5,6 +5,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
 @prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
@@ -194,6 +195,10 @@
     rdfs:comment "Material som resursen använder, består av, integrerar etc."@sv;
     owl:equivalentProperty bf2:material .
 
+:materialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:materialOf .
+
 :Material a owl:Class;
     rdfs:label "Material"@sv, "Material"@en;
     owl:equivalentClass bf2:Material .
@@ -205,6 +210,10 @@
     rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:baseMaterial .
+
+:baseMaterialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:baseMaterialOf .
 
 :BaseMaterial a owl:Class;
     rdfs:label "Bärande material"@sv, "Base material"@en;
@@ -218,6 +227,10 @@
     rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:appliedMaterial .
+
+:appliedMaterialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:appliedMaterialOf .
 
 :AppliedMaterial a owl:Class;
     rdfs:label "Applied material"@en, "Applicerat material"@sv;

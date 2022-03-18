@@ -52,6 +52,10 @@
     rdfs:label "har titel"@sv;
     rdfs:comment "Innehåller titelelement"@sv .
 
+:titleOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:titleOf .
+
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Titel"@sv;
@@ -1126,6 +1130,10 @@
     rdfs:range :CollectionArrangement;
     owl:equivalentProperty bf2:collectionArrangement .
 
+:collectionArrangementOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:collectionArrangementOf .
+
 :pattern a owl:DatatypeProperty;
     rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
     rdfs:domain :CollectionArrangement;
@@ -1161,6 +1169,10 @@
     rdfs:label "anmärkning"@sv;
     rdfs:comment "Allmän textinformation om en resurs"@sv;
     owl:equivalentProperty bf2:note .
+
+:noteFor a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:noteFor .
 
 :Note a owl:Class;
     rdfs:subClassOf :StructuredValue;
