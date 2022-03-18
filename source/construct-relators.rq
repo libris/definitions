@@ -7,8 +7,7 @@ prefix : <https://id.kb.se/vocab/>
 
 construct {
     ?s ?p ?o ;
-        skos:prefLabel ?enLabel, ?fiLabel, ?deLabel, ?frLabel ;
-        skos:altLabel ?fiAltLabel, ?frAltLabel .
+        skos:prefLabel ?enLabel, ?fiLabel, ?deLabel, ?frLabel .
 
 } where {
     graph <https://id.kb.se/dataset/relators> {
@@ -25,10 +24,6 @@ construct {
             graph <http://urn.fi/URN:NBN:fi:au:mts:> {
                 ?mts skos:prefLabel ?fiLabel .
                 filter(lang(?fiLabel) = 'fi')
-                optional {
-                    ?mts skos:altLabel ?fiAltLabel .
-                    filter(lang(?fiAltLabel) = 'fi')
-                }
             }
         } union {
             ?s skos:exactMatch ?dnb .
@@ -41,10 +36,6 @@ construct {
             graph <sparql/bnf-roles> {
                 ?bnf skos:prefLabel ?frLabel .
                 filter(lang(?frLabel) = 'fr')
-                optional {
-                    ?bnf skos:altLabel ?frAltLabel
-                    filter(lang(?frAltLabel) = 'fr')
-                }
             }
         }
     }
