@@ -157,6 +157,7 @@
     skos:prefLabel "oljefärg"@sv .
 
 <Paper> a :Material ;
+    owl:sameAs marc:Paper, marc:NonProjectedType-o, marc:ProjGraphEmulsionType-o ;
     skos:definition "Tunt material bestående av hopfiltade djur- växt-, mineral- eller syntetfiber som bearbetats i vatten och bretts ut på en väv och som när vattnet runnit av, pressats och torkats."@sv ;
     skos:notation "1025" ;
     skos:exactMatch rdamat:1025, marcmat:pap, aat:300014109, wikidata:Q11472, marc:Paper .
@@ -179,6 +180,7 @@
     skos:exactMatch rdamat:1028, marcmat:plt, aat:300014922 .
 
 <Plastic> a :Material ;
+    owl:sameAs marc:Plastic ; 
     skos:definition "Material bestående av syntetiska eller halvsyntetiska organiska polymerer, med hög molekylmassa, som är formbar."@sv ;
     skos:notation "1029" ;
     skos:exactMatch rdamat:1029, marcmat:pla, aat:300014570, wikidata:Q11474 . #TODO? :exactMatch <https://id.kb.se/marc/Plastic> .
@@ -208,6 +210,8 @@
     skos:definition "Material bestående av en hartsartad utsöndring från sköldlushonan som genom att lösas upp i etanol bildar en vätska som kan appliceras med pensel."@sv ;
     skos:notation "1034" ;
     skos:exactMatch rdamat:1034, marcmat:she, aat:300014918, wikidata:Q429659 .
+
+# <SilverHalideEmulsion> see 1047
 
 <Skin> a :Material ;
     skos:definition "Material bestående av hud från djur, till exempel från får, get eller kalv, som avskilts från kroppen och bearbetats på olika sätt för att avlägsna hår, torka, garva och så vidare."@sv ;
@@ -246,6 +250,8 @@
     skos:exactMatch rdamat:1041, marcmat:vel, aat:300011852, wikidata:Q378274 ;
     skos:prefLabel "veläng"@sv .
 
+# <VesicularEmulsion> see 1048
+
 <Vinyl> a :Material ;
     skos:definition "Material bestående av en polymer eller sampolymer från en vinylgrupp, vanligtvis vinylklorid."@sv ;
     skos:notation "1042" ;
@@ -277,8 +283,13 @@
     skos:prefLabel "diazo"@sv .
 
 <SilverHalideEmulsion> a :Material ;
-    skos:notation "1047" ; 
+    skos:definition "Material bestående av en blandning av ljuskänsliga föreningar av silver och klorid, bromid, jod eller fluor flytande i en kolloidal lösning."@sv ;
+    skos:notation "1047" ;
     skos:exactMatch rdamat:1047, marcmat:slh ;
     skos:prefLabel "silverhalogen"@sv .
 
-<VesicularEmulsion> a :Material ; skos:notation "1048" ; skos:exactMatch rdamat:1048, marcmat:ves ; skos:prefLabel "vesikulär emulsion"@sv .
+<VesicularEmulsion> a :Material ;
+    skos:definition "Material bestående av en emulsion av ett eller flera ljuskänsliga lager diazoniumsalter i en termoplastbas av polyester som sönderdelas vid exponering och producerar kvävebubblor, så kallade vesiklar, som skapar en latent bild, vanligtvis blå eller beige, som blir synlig och fixeras när den värms upp och får svalna."@sv ;
+    skos:notation "1048" ;
+    skos:exactMatch rdamat:1048, marcmat:ves ;
+    skos:prefLabel "vesikulär emulsion"@sv .
