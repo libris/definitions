@@ -1,0 +1,188 @@
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix : <https://id.kb.se/vocab/> .
+
+:GeographicRegion a owl:Class ;
+    rdfs:label "Geografiskt område"@sv, "Geographic region"@en ;
+    rdfs:subClassOf :Place ;
+    owl:equivalentClass wd:Q82794 .
+
+####################################
+
+:AdministrativeRegion a owl:Class ;
+    rdfs:label "Administrativt/politiskt avgränsat område"@sv, "Administrative region"@en ;
+    rdfs:subClassOf :GeographicRegion ;
+    owl:equivalentClass gn:A.ADMD, wd:Q56061 .
+
+:CountrySubdivisionOfSpecificLevel a owl:Class ;
+    rdfs:label "Administrativ underindelning av ett land på en specifik nivå"@sv, "Country subdivision of a specific level"@en ;
+    rdfs:subClassOf :AdministrativeRegion ;
+    owl:equivalentClass wd:Q1799794 .
+
+:FirstOrderCountrySubdivision a owl:Class ;
+    rdfs:label "Första ordningens administrativ underindelning av ett land"@sv, "First-order administrative country subdivision"@en ;
+    rdfs:subClassOf :CountrySubdivisionOfSpecificLevel ;
+    owl:equivalentClass gn:A.ADM1, wd:Q10864048 .
+
+:SecondOrderCountrySubdivision a owl:Class ;
+    rdfs:label "Andra ordningens administrativ underindelning av ett land"@sv, "Second-order administrative country subdivision"@en ;
+    rdfs:subClassOf :CountrySubdivisionOfSpecificLevel ;
+    owl:equivalentClass gn:A.ADM2, wd:Q13220204 .
+
+:ThirdOrderCountrySubdivision a owl:Class ;
+    rdfs:label "Tredje ordningens administrativ underindelning av ett land"@sv, "Third-order administrative country subdivision"@en ;
+    rdfs:subClassOf :CountrySubdivisionOfSpecificLevel ;
+    owl:equivalentClass gn:A.ADM3, wd:Q13221722 .
+
+:FourthOrderCountrySubdivision a owl:Class ;
+    rdfs:label "Fjärde ordningens administrativ underindelning av ett land"@sv, "Fourth-order administrative country subdivision"@en ;
+    rdfs:subClassOf :CountrySubdivisionOfSpecificLevel ;
+    owl:equivalentClass gn:A.ADM4, wd:Q14757767 .
+
+:FifthOrderCountrySubdivision a owl:Class ;
+    rdfs:label "Femte ordningens administrativ underindelning av ett land"@sv, "Fifth-order administrative country subdivision"@en ;
+    rdfs:subClassOf :CountrySubdivisionOfSpecificLevel ;
+    owl:equivalentClass gn:A.ADM5, wd:Q15640612 .
+
+## First order country subdivisions
+:CountyOfSweden a owl:Class ;
+    rdfs:label "Län"@sv, "County of Sweden"@en ;
+    rdfs:subClassOf :FirstOrderCountrySubdivision ;
+    owl:equivalentClass wd:Q200547 .
+
+:CountyOfNorway a owl:Class ;
+    rdfs:label "Fylke"@sv, "County of Norway"@en ;
+    rdfs:subClassOf :FirstOrderCountrySubdivision ;
+    owl:equivalentClass wd:Q192299 .
+
+:RegionOfFinland a owl:Class ;
+    rdfs:label "Landskap i Finland"@sv, "Region of Finland"@en ;
+    rdfs:subClassOf :FirstOrderCountrySubdivision ;
+    owl:equivalentClass wd:Q193512 .
+
+:USState a owl:Class ;
+    rdfs:label "Delstat i USA"@sv, "U.S. state"@en ;
+    rdfs:subClassOf :FirstOrderCountrySubdivision ;
+    owl:equivalentClass wd:Q35657 .
+
+# Add equivalents for Spain, France, Italy et al.?
+# ISO 3166 subdivisions could be helpful https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+
+## Second order country subdivisions
+:MunicipalityOfSweden a owl:Class ;
+    rdfs:label "Kommun i Sverige"@sv, "Municipality of Sweden"@en ;
+    rdfs:subClassOf :SecondOrderCountrySubdivision ;
+    owl:equivalentClass wd:Q35657 .
+
+# MunicipalityOfSweden sufficient at 2nd level?
+# E.g. Great Britain have many different types of second level subdivisions https://en.wikipedia.org/wiki/ISO_3166-2:GB
+# Probably overkill to try and catch all variants for various countries. Should be fine with just
+# <ExamplePlace> a :SecondOrderCountrySubdivision ;
+#     :country <GreatBritain> .
+
+####################################
+
+:PopulatedPlace a owl:Class ;
+    rdfs:label "Befolkad plats"@sv, "Populated place"@en ;
+    rdfs:subClassOf :Place ;
+    owl:equivalentClass gn:P.PPL, wd:Q486972 .
+
+:UrbanArea a owl:Class ;
+    rdfs:label "Tätbebyggd/tätbefolkad ort"@sv, "Urban area"@en ;
+    rdfs:subClassOf :PopulatedPlace ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q702492 wd:Q7930989 ) ] .
+
+:City a owl:Class ;
+    rdfs:label "Stad"@sv, "City"@en ;
+    rdfs:subClassOf :UrbanArea ;
+    owl:equivalentClass wd:Q515 .
+
+:Village a owl:Class ;
+    rdfs:label "Mindre ort/by"@sv, "Village"@en ;
+    rdfs:subClassOf :PopulatedPlace ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q532 wd:Q14839548 ) ] .
+
+# We have in Wikidata:
+# wd:Q14839548 rdfs:label "minor locality in Sweden" ;
+#     wdt:P31 wd:Q702492 .
+# meaning that "minor locality in Sweden" (Q14839548) is a subclass of "Urban Area" (Q702492) which seems a bit odd
+# hence the ad hoc mapping of Q14839548 to :Village
+
+####################################
+
+:BodyOfWater a owl:Class ;
+    rdfs:label "Vattensamling"@sv, "Body of water"@en ;
+    rdfs:subClassOf :GeographicRegion ;
+    owl:equivalentClass wd:Q15324 .
+
+:Lake a owl:Class ;
+    rdfs:label "Sjö"@sv, "Lake"@en ;
+    rdfs:subClassOf :BodyOfWater ;
+    owl:equivalentClass wd:Q23397 .
+
+:Sea a owl:Class ;
+    rdfs:label "Hav"@sv, "Sea"@en ;
+    rdfs:subClassOf :BodyOfWater ;
+    owl:equivalentClass gn:L.SEA, wd:Q165 .
+
+:Ocean a owl:Class ;
+    rdfs:label "Världshav"@sv, "Ocean"@en ;
+    rdfs:subClassOf :BodyOfWater ;
+    owl:equivalentClass gn::H.OCN, wd:Q9430 .
+
+:Watercourse a owl:Class ;
+    rdfs:label "Vattendrag"@sv, "Watercourse"@en ;
+    rdfs:subClassOf :BodyOfWater ;
+    owl:equivalentClass gn:H.WTRC, wd:Q355304 .
+
+####################################
+
+:Landscape a owl:Class ;
+    rdfs:label "Landskap/landform"@sv, "Landscape/landform"@en ;
+    rdfs:subClassOf :Place ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q107425 wd:Q271669 ) ] .
+
+:Island a owl:Class ;
+    rdfs:label "Ö eller ögrupp"@sv, "Island or island group"@en ;
+    rdfs:subClassOf :Landscape ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q23442 wd:Q1402592 ) ] .
+
+:Mountain a owl:Class ;
+    rdfs:label "Berg eller bergskedja"@sv, "Mountain or mountain range"@en ;
+    rdfs:subClassOf :Landscape ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q8502 wd:Q46831 ) ] .
+
+:NatureReserve a owl:Class ;
+    rdfs:label "Naturreservat"@sv, "Nature reserve"@en ;
+    rdfs:subClassOf :Landscape ;
+    owl:equivalentClass gn:L.RESN, wd:Q179049 .
+
+:Park a owl:Class ;
+    rdfs:label "Park"@sv, "Park"@en ;
+    rdfs:subClassOf :Landscape ;
+    owl:equivalentClass gn:L.PRK, wd:Q22698 .
+
+####################################
+
+:Construction a owl:Class ;
+    rdfs:label "Byggnadsverk/facilitet"@sv, "Construction/facility"@en ;
+    rdfs:subClassOf :Place ;
+    owl:equivalentClass [ owl:unionOf ( wd:Q811430 wd:Q13226383 ) ] .
+
+:Building a owl:Class ;
+    rdfs:label "Byggnad"@sv, "Building"@en ;
+    rdfs:subClassOf :Construction ;
+    owl:equivalentClass gn:S.BLDG, wd:Q41176 .
+
+:Route a owl:Class ;
+    rdfs:label "Väg"@sv, "Route"@en ;
+    rdfs:subClassOf :Construction ;
+    owl:equivalentClass wd:Q83620 .
+
+:Street a owl:Class ;
+    rdfs:label "Gata"@sv, "Street"@en ;
+    rdfs:subClassOf :Route ;
+    owl:equivalentClass gn:R.ST, wd:Q811430 .
