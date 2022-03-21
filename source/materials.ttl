@@ -60,7 +60,7 @@
 <Chalk> a :Material ;
     skos:definition "Material bestående av finkornig kalksten eller en mjuk, jordig form av kalciumkarbonat."@sv ;
     skos:notation "1008" ;
-    # skos:scopeNote "Används för tavel- och asfaltskrita. Icke att förväxla med \"färgkrita\"".@sv
+    # skos:scopeNote "Används för tavel- och asfaltskrita. Ej att förväxla med \"färgkrita\"".@sv
     skos:exactMatch rdamat:1008, marcmat:chk, aat:300011727, wikidata:Q183670 ;
     skos:prefLabel "krita"@sv .
 
@@ -169,7 +169,7 @@
 <Pastel> a :Material ;
     skos:definition "Material bestående av pigment blandat med bindemedel, vanligtvis i form av en krita."@sv ;
     skos:notation "1027" ;
-    # skos:scopeNote "Används för torrpastell. Icke att förväxla med \"färgkrita\""@sv ;
+    # skos:scopeNote "Används för torrpastell. Ej att förväxla med \"färgkrita\""@sv ;
     skos:exactMatch rdamat:1027, marcmat:pas, aat:300404632, wikidata:Q189085 ;
     skos:prefLabel "pastell"@sv .
 
@@ -198,31 +198,87 @@
     skos:definition "Material bestående av naturliga eller syntetiska plaster och som har en hög grad av flexibilitet och elasticitet."@sv ;
     skos:notation "1032" ;
     skos:exactMatch rdamat:1032, marcmat:rub, aat:300012941, wikidata:Q18113858 .
-    
-<SafetyBase> a :Material ; skos:notation "1033" ; skos:exactMatch rdamat:1033, marcmat:saf, aat:300127384 .
-<Sepia> a :Material ; skos:exactMatch aat:300015025 ; skos:prefLabel "sepia"@sv . # no RDA match
-<Shellac> a :Material ; skos:notation "1034" ; skos:exactMatch rdamat:1034, marcmat:she, aat:300014918, wikidata:Q429659 .
-<Silk> a :Material ; skos:exactMatch aat:300243428 ; skos:prefLabel "siden"@sv . # no RDA match
-<Skin> a :Material ; skos:notation "1035" ; skos:exactMatch rdamat:1035, marcmat:ski, aat:300011840 .
-<Stone> a :Material ; skos:notation "1036" ; skos:exactMatch rdamat:1036, marcmat:sto, aat:300011176, wikidata:Q22731 .
-<Synthetic> a :Material ; skos:notation "1037" ; skos:exactMatch rdamat:1037, marcmat:syn .
-<Tempera> a :Material ; skos:notation "1038" ; skos:exactMatch rdamat:1038, marcmat:tem, aat:300015062, wikidata:Q175166 ; skos:prefLabel "tempera"@sv .
-<Textile> a :Material ; skos:notation "1039" ; skos:exactMatch rdamat:1039, marcmat:tex, aat:300231565, wikidata:Q28823 .
-<Triacetate> a :Material ; skos:notation "1040" ; skos:exactMatch rdamat:1040, marcmat:tri, aat:300130950 .
-<Vellum> a :Material ; skos:notation "1041" ; skos:exactMatch rdamat:1041, marcmat:vel, aat:300011852, wikidata:Q378274 ; skos:prefLabel "veläng"@sv .
-# http://id.loc.gov/vocabulary/mmaterial/ves see 1048
-<Vinyl> a :Material ; skos:notation "1042" ; skos:exactMatch rdamat:1042, marcmat:vny, aat:300014502 ; skos:prefLabel "vinyl"@sv .
-#<Wash> a :Material ; skos:exactMatch aat:300011051 ; skos:prefLabel "lavering"@sv . # no RDA match, uncertain if the AAT match is correct
-<Watercolour> a :Material ; skos:notation "1043" ; skos:exactMatch rdamat:1043, marcmat:wat, aat:300015045 ; skos:prefLabel "akvarell"@sv .
-<Wax> a :Material ; skos:notation "1044" ; skos:exactMatch rdamat:1044, marcmat:wax, aat:300014585, wikidata:Q124695 ; skos:prefLabel "vax"@sv .
-<Wood> a :Material ; skos:notation "1045" ; skos:exactMatch rdamat:1045, marcmat:wod, aat:300011914, wikidata:Q287 ; skos:prefLabel "trä"@sv .
+
+<SafetyBase> a :Material ;
+    skos:definition "Material tillverkat av svårantändliga cellulosaacetat eller polyester."@sv ;
+    skos:notation "1033" ;
+    skos:exactMatch rdamat:1033, marcmat:saf, aat:300127384 .
+
+<Shellac> a :Material ;
+    skos:definition "Material bestående av en hartsartad utsöndring från sköldlushonan som genom att lösas upp i etanol bildar en vätska som kan appliceras med pensel."@sv ;
+    skos:notation "1034" ;
+    skos:exactMatch rdamat:1034, marcmat:she, aat:300014918, wikidata:Q429659 .
+
+<Skin> a :Material ;
+    skos:definition "Material bestående av hud från djur, till exempel från får, get eller kalv, som avskilts från kroppen och bearbetats på olika sätt för att avlägsna hår, torka, garva och så vidare."@sv ;
+    skos:notation "1035" ;
+    skos:exactMatch rdamat:1035, marcmat:ski, aat:300011840 .
+
+<Stone> a :Material ;
+    skos:definition "Material bestående av bergarter och mineraler antingen i sin naturliga form eller hugget, krossat eller på annat sätt format."@sv ;
+    skos:notation "1036" ;
+    skos:exactMatch rdamat:1036, marcmat:sto, aat:300011176, wikidata:Q22731 .
+
+<Synthetic> a :Material ;
+    skos:definition "Material som producerats på konstgjord väg, används vanligtvis som substitut för naturmaterial."@sv ;
+    skos:notation "1037" ;
+    skos:exactMatch rdamat:1037, marcmat:syn, wikidata:Q3300022 .
+
+<Tempera> a :Material ;
+    skos:definition "Material bestående av pigment blandat med ett vattenlösligt bindemedel, vanligtvis av limliknande konsistens, till exempel äggula eller något annat klistrigt, för att få fram en beständig, snabbtorkande målarfärg."@sv ;
+    skos:notation "1038" ;
+    skos:exactMatch rdamat:1038, marcmat:tem, aat:300015062, wikidata:Q175166 ;
+    skos:prefLabel "tempera"@sv .
+
+<Textile> a :Material ;
+    skos:definition "Material framställt genom vävning, tovning, knytning, tvinning eller annan bearbetning av naturliga eller syntetiska fibrer så att de hänger samman."@sv ;
+    skos:notation "1039" ;
+    skos:exactMatch rdamat:1039, marcmat:tex, aat:300231565, wikidata:Q28823 .
+
+<Triacetate> a :Material ;
+    skos:definition "Material framställt av cellulosaacetat, vanligtvis ättiksyraanhydrider."@sv ;
+    skos:notation "1040" ;
+    skos:exactMatch rdamat:1040, marcmat:tri, aat:300130950 .
+
+<Vellum> a :Material ;
+    skos:definition "Material bestående av högkvalitativt pergament från kalvar eller lamm."@sv ;
+    skos:notation "1041" ;
+    skos:exactMatch rdamat:1041, marcmat:vel, aat:300011852, wikidata:Q378274 ;
+    skos:prefLabel "veläng"@sv .
+
+<Vinyl> a :Material ;
+    skos:definition "Material bestående av en polymer eller sampolymer från en vinylgrupp, vanligtvis vinylklorid."@sv ;
+    skos:notation "1042" ;
+    skos:exactMatch rdamat:1042, marcmat:vny, aat:300014502 ;
+    skos:prefLabel "vinyl"@sv .
+
+<Watercolour> a :Material ;
+    skos:definition "Material bestående av pigment i vattensuspension som skapar ett transparent färgmedium."@sv ;
+    skos:notation "1043" ;
+    skos:exactMatch rdamat:1043, marcmat:wat, aat:300015045, wikidata:Q22915256 ;
+    skos:prefLabel "akvarell"@sv .
+
+<Wax> a :Material ;
+    skos:definition "Material bestående av en kemisk förening med animaliskt, växtbaserat, mineraliskt eller syntetiskt ursprung som är formbart vid rumstemperatur, känns lätt oljigt vid beröring, har en låg smältpunkt och är vanligtvis genomskinligt, vattenavvisande och lösligt i organiska lösningsmedel."@sv ;
+    skos:notation "1044" ;
+    skos:exactMatch rdamat:1044, marcmat:wax, aat:300014585, wikidata:Q124695 ;
+    skos:prefLabel "vax"@sv .
+
+<Wood> a :Material ;
+    skos:definition "Material bestående av träd och liknande växters ved."@sv ;
+    skos:notation "1045" ;
+    skos:exactMatch rdamat:1045, marcmat:wod, aat:300011914, wikidata:Q287 ;
+    skos:prefLabel "trä"@sv .
 
 <DiazoEmulsion> a :Material ;
     skos:definition "Material bestående av en emulsion av ett eller flera ljuskänsliga lager diazoniumsalter i en polyester- eller acetatbas som reagerar med färgämneskopplare i processen för att skapa diazofärgbilder."@sv ;
     skos:notation "1046" ;
-    skos:exactMatch rdamat:1046,
-    marcmat:dia ;
+    skos:exactMatch rdamat:1046, marcmat:dia ;
     skos:prefLabel "diazo"@sv .
 
-<SilverHalideEmulsion> a :Material ; skos:notation "1047" ; skos:exactMatch rdamat:1047, marcmat:slh ; skos:prefLabel "silverhalogen"@sv .
+<SilverHalideEmulsion> a :Material ;
+    skos:notation "1047" ; 
+    skos:exactMatch rdamat:1047, marcmat:slh ;
+    skos:prefLabel "silverhalogen"@sv .
+
 <VesicularEmulsion> a :Material ; skos:notation "1048" ; skos:exactMatch rdamat:1048, marcmat:ves ; skos:prefLabel "vesikulär emulsion"@sv .
