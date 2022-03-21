@@ -6,9 +6,7 @@ construct {
         skos:definition ?definition .
 } where {
     graph <https://id.kb.se/dataset/materials> {
-        {
-            ?s ?p ?o .
-        }
+        ?s ?p ?o .
         optional {
             ?s skos:exactMatch ?aat .
             graph <sparql/aat-materials> {
