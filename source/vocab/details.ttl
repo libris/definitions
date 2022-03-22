@@ -48,9 +48,14 @@
 
 :hasTitle a owl:ObjectProperty;
     owl:equivalentProperty bf2:title;
+    sdo:domainIncludes :Endeavour, :Event ;
     rdfs:range :Title;
     rdfs:label "har titel"@sv;
     rdfs:comment "Innehåller titelelement"@sv .
+
+:titleOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:titleOf .
 
 :Title a owl:Class;
     rdfs:subClassOf :StructuredValue;
@@ -1126,6 +1131,10 @@
     rdfs:range :CollectionArrangement;
     owl:equivalentProperty bf2:collectionArrangement .
 
+:collectionArrangementOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:collectionArrangementOf .
+
 :pattern a owl:DatatypeProperty;
     rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
     rdfs:domain :CollectionArrangement;
@@ -1162,6 +1171,10 @@
     rdfs:comment "Allmän textinformation om en resurs"@sv;
     owl:equivalentProperty bf2:note .
 
+:noteFor a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:noteFor .
+
 :Note a owl:Class;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Note"@en, "Anmärkning"@sv;
@@ -1195,6 +1208,7 @@
 
 :awardsNote a owl:DatatypeProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
+    sdo:domainIncludes :Creation ;
     rdfs:range rdfs:Literal;
     skos:scopeNote "Används normalt ej i Libris."@sv;
     owl:equivalentProperty bf2:awards .

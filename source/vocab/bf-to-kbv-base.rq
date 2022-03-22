@@ -2,6 +2,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 prefix kbv: <https://id.kb.se/vocab/>
+prefix sdo: <http://schema.org/>
 
 construct {
 
@@ -10,7 +11,9 @@ construct {
         rdfs:label ?kbvlabel_en ;
         rdfs:subClassOf ?kbvbaseclass ;
         rdfs:domain ?kbvdomain ;
+        sdo:domainIncludes ?kbvdomainincludes ;
         rdfs:range ?kbvrange ;
+        sdo:rangeIncludes ?kbvrangeincludes ;
         rdfs:isDefinedBy kbv: .
 
 } where {
@@ -53,6 +56,7 @@ construct {
 
     # Property
 
+    # map domain
     optional {
         ?bfterm rdfs:domain ?domain
         optional { ?mappeddomain owl:equivalentClass ?domain }
@@ -71,12 +75,24 @@ construct {
         filter exists { ?bfterm rdfs:comment "Used with Work or Instance" }
         bind(kbv:Creation as ?kbvdomain)
     }
+
     optional {
         filter not exists { ?kbvterm rdfs:domain [] }
         filter exists { ?bfterm rdfs:comment "Used with Unspecified" }
         bind(rdfs:Resource as ?kbvdomain)
     }
-
+    # map domainIncludes
+    optional {
+        filter not exists { ?kbvterm rdfs:domain [] }
+        filter exists { ?bfterm rdfs:comment "Suggested use - With Work, Instance or Item" }
+        bind(kbv:Endeavour as ?kbvdomainincludes)
+    }
+    optional {
+        filter not exists { ?kbvterm rdfs:domain [] }
+        filter exists { ?bfterm rdfs:comment "Suggested use - With Work or Instance" }
+        bind(kbv:Creation as ?kbvdomainincludes)
+    }
+    # map range
     optional {
         ?bfterm rdfs:range ?range
         optional { ?mappedrange owl:equivalentClass ?range }
@@ -94,5 +110,15 @@ construct {
         filter exists { ?bfterm rdfs:comment "Expected value Work or Instance" }
         bind(kbv:Creation as ?kbvrange)
     }
-
+    # map rangeIncludes
+    optional {
+        filter not exists { ?kbvterm rdfs:range [] }
+        filter exists { ?bfterm rdfs:comment "Suggested value - Work, Instance or Item" }
+        bind(kbv:Endeavour as ?kbvrangeincludes)
+    }
+    optional {
+        filter not exists { ?kbvterm rdfs:range [] }
+        filter exists { ?bfterm rdfs:comment "Suggested value - Work or Instance" }
+        bind(kbv:Creation as ?kbvrangeincludes)
+    }
 }
