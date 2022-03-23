@@ -20,8 +20,9 @@ delete {
 # Remap domain/range if there are specific suggestions.
 delete {
     ?s ?domainOrRange rdfs:Resource
-} insert {
-    ?s ?domainOrRange :Resource
+# TODO: this is formally correct, but "mutes" the includes in the cataloguing tool...
+#} insert {
+#    ?s ?domainOrRange :Resource
 } where {
     ?s ?includesRelation ?o
     filter(?o != rdfs:Resource && strstarts(str(?o), str(:)))
