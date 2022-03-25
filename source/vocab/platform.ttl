@@ -94,10 +94,14 @@
     rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
     owl:equivalentProperty bf2:adminMetadata .
 
+:adminMetadataFor a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:adminMetadataFor .
+
 :assigner a owl:ObjectProperty;
     rdfs:label "Assigner"@en, "Tilldelad av"@sv;
-    rdfs:domain :AdminMetadata;
-    rdfs:range :Agent;
+    rdfs:domain :Resource ;
+    rdfs:range :Resource ;
     owl:equivalentProperty bf2:assigner .
 
 :descriptionModifier a owl:ObjectProperty;

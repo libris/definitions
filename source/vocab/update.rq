@@ -8,12 +8,29 @@ insert {
     filter ((?term != :) && strstarts(str(?term), str(:)))
 };
 
+# Remove uninteresting domain/range if there are specific ones.
 delete {
     ?s ?p rdfs:Resource
 } where {
     ?s ?p ?o
     filter(?o != rdfs:Resource && strstarts(str(?o), str(:)))
     filter(?p in (rdfs:subClassOf, rdfs:domain, rdfs:range))
+};
+
+# Remap domain/range if there are specific suggestions.
+delete {
+    ?s ?domainOrRange rdfs:Resource
+# TODO: this is formally correct, but "mutes" the includes in the cataloguing tool...
+#} insert {
+#    ?s ?domainOrRange :Resource
+} where {
+    ?s ?includesRelation ?o
+    filter(?o != rdfs:Resource && strstarts(str(?o), str(:)))
+
+    values (?domainOrRange ?includesRelation) {
+        (rdfs:domain sdo:domainIncludes)
+        (rdfs:range sdo:rangeIncludes)
+    }
 };
 
 # remove redundant base classes

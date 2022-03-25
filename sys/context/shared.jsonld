@@ -3,6 +3,7 @@
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "sdo": "http://schema.org/",
     "jsonld": "http://www.w3.org/ns/json-ld#",
     "fresnel": "http://www.w3.org/2004/09/fresnel#",
@@ -15,6 +16,7 @@
     "ObjectProperty": "owl:ObjectProperty",
     "DatatypeProperty": "owl:DatatypeProperty",
     "FunctionalProperty": "owl:FunctionalProperty",
+    "TransitiveProperty": "owl:TransitiveProperty",
     "Restriction": "owl:Restriction",
 
     "subClassOf": {"@id": "rdfs:subClassOf", "@container": "@set"},
@@ -41,6 +43,11 @@
     "term_status": "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status",
     "lensGroup": "fresnel:group",
 
+    "isMemberOfRelation": {"@type": "@vocab"},
+    "memberClass": {"@type": "@vocab", "@container": "@set"},
+    "slugProperty": {"@type": "@vocab"},
+    "administeredBy": {"@container": "@set"},
+
     "labelByLang": {"@id": "label", "@container": "@language"},
     "commentByLang": {"@id": "comment", "@container": "@language"},
     "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
@@ -50,6 +57,13 @@
     "scopeNoteByLang": {"@id": "scopeNote", "@container": "@language"},
     "changeNoteByLang": {"@id": "changeNote", "@container": "@language"},
     "titleByLang": {"@id": "title", "@container": "@language"},
-    "descriptionByLang": {"@id": "description", "@container": "@language"}
+    "descriptionByLang": {"@id": "description", "@container": "@language"},
+
+    "langTag": {"@id": "code", "@type": "ISO639-1"},
+    "langCode": {"@id": "code", "@type": "ISO639-2"},
+    "langCodeBib": {"@id": "code", "@type": "ISO639-2-B"},
+    "langCodeTerm": {"@id": "code", "@type": "ISO639-2-T"},
+    "langCodeFull": {"@id": "code", "@type": "ISO639-3"},
+    "langCodeLibrisLocal": {"@id": "code", "@type": "LibrisLocalLanguageCode"}
   }
 }

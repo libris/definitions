@@ -5,6 +5,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sdo: <http://schema.org/> .
 @prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
@@ -92,6 +93,17 @@
 :Frequency a owl:Class;
     rdfs:label "Frekvens"@sv ;
     owl:equivalentClass bf2:Frequency .
+
+:pubFrequency a owl:ObjectProperty;
+    # No relation in bf to frequency?
+    :category :pending ;
+    rdfs:range :PubFrequency ;
+    owl:equivalentProperty bf2:pubFrequency .
+
+:PubFrequency a owl:Class;
+    # No relation in bf to Frequency?
+    :category :pending ;
+    owl:equivalentClass bf2:PubFrequency .
 
 :hasNotation a owl:ObjectProperty;
     rdfs:range :Notation;
@@ -188,14 +200,19 @@
     owl:equivalentClass bf2:Generation .
 
 :material a owl:ObjectProperty;
-    rdfs:domain :Instance;
+    rdfs:domain :Instance; # NOTE: BF2 Suggested use - With Work, Instance or Item
     rdfs:range :Material;
     rdfs:label "Material"@en, "material"@sv;
     rdfs:comment "Material som resursen använder, består av, integrerar etc."@sv;
     owl:equivalentProperty bf2:material .
 
+:materialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:materialOf .
+
 :Material a owl:Class;
     rdfs:label "Material"@sv, "Material"@en;
+    skos:definition "Substans eller sammansättning som använts i framställningen av en resurs."@sv ;
     owl:equivalentClass bf2:Material .
 
 :baseMaterial a owl:ObjectProperty;
@@ -205,6 +222,10 @@
     rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:baseMaterial .
+
+:baseMaterialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:baseMaterialOf .
 
 :BaseMaterial a owl:Class;
     rdfs:label "Bärande material"@sv, "Base material"@en;
@@ -218,6 +239,10 @@
     rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:appliedMaterial .
+
+:appliedMaterialOf a owl:ObjectProperty ;
+    ptg:abstract true;
+    owl:equivalentProperty bf2:appliedMaterialOf .
 
 :AppliedMaterial a owl:Class;
     rdfs:label "Applied material"@en, "Applicerat material"@sv;

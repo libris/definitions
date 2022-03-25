@@ -47,7 +47,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "ConceptScheme",
           "showProperties": [
-            "code"
+            {"alternateProperties": ["code", "title", "prefLabel", "label"]}
           ]
         },
         "Concept": {
@@ -226,6 +226,14 @@
           "classLensDomain": "ISSN",
           "showProperties": [
             {"alternateProperties": [ "value", "marc:canceledIssn", "marc:incorrectIssn", "marc:issnL" ]}
+          ]
+        },
+        "Material": {
+          "@id": "Material-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Material",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label"]}
           ]
         },
         "Notation": {
@@ -465,6 +473,9 @@
             "hasDimensions",
             "hasDuration",
             "physicalDetailsNote",
+            "baseMaterial",
+            "appliedMaterial",
+            "productionMethod",
             "digitalCharacteristic",
             "marc:mediaTerm",
             "genreForm",
@@ -635,6 +646,13 @@
           "classLensDomain": "Language",
           "fresnel:extends": {"@id": "Language-chips"},
           "showProperties": [ "fresnel:super", "altLabel", "code", "isReplacedBy" ]
+        },
+        "Material": {
+          "@id": "Material-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Material",
+          "fresnel:extends": {"@id": "Material-chips"},
+          "showProperties": [ "fresnel:super", "altLabel", "definition", "scopeNote", "code", "exactMatch" ]
         },
         "MediaType": {
           "@id": "MediaType-cards",
@@ -1049,7 +1067,7 @@
         },
         "Concept": {
           "fresnel:extends": {"@id": "Concept-cards"},
-          "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorsNote", "historyNote" ]
+          "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorsNote", "historyNote", "hiddenLabel" ]
         },
         "ShelfMarkSequence": {
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},

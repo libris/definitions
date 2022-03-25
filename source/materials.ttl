@@ -1,0 +1,295 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
+@prefix marc: <https://id.kb.se/marc/> .
+@base <https://id.kb.se/material/> .
+
+@prefix aat: <http://vocab.getty.edu/aat/> .
+@prefix rdamat: <http://rdaregistry.info/termList/RDAMaterial/> .
+@prefix marcmat: <http://id.loc.gov/vocabulary/mmaterial/> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+
+# RDA MATERIAL mapped to rdaregistry.com and id.loc.gov.
+# "Concepts for a physical or chemical substance that is used to create a manifestation."
+
+# Extended with mappings to Art & Architecture Thesaurus (Getty).
+# Wikidata mappings added where possible for additional co-ordination.
+
+# NOTES:
+# Only swedish labels missing from rdaregistry.info added.
+# TODO: Add exactMatch to marc enumerations if there is significant usage, need to converge with marcframe mapping.
+
+<Acetat> a :Material ;
+    skos:definition "Material framställt genom acetylering av cellulosa."@sv ;
+    skos:notation "1001" ;
+    skos:exactMatch rdamat:1001, marcmat:ace, aat:300014439, wikidata:Q124686 .
+
+<AcrylicPaint> a :Material ;
+    skos:definition "Material bestående av pigment blandat med akrylharts som bindemedel."@sv ;
+    skos:notation "1002" ;
+    skos:exactMatch rdamat:1002, marcmat:acp, aat:300015058, wikidata:Q207849 ;
+    skos:prefLabel "akrylfärg"@sv .
+
+<Aluminium> a :Material ;
+    skos:definition "Formbart, lättarbetat material bestående av icke-magnetisk metall, vanligtvis legerad, med en glans som varierar från grå till silverfärgad."@sv ;
+    skos:notation "1003" ;
+    skos:exactMatch rdamat:1003, marcmat:alu, aat:300011015, wikidata:Q663 .
+
+<BristolBoard> a :Material ;
+    skos:definition "Material bestående av vit papp/kartong av hög kvalitet, vanligtvis tillverkat genom att ark av kraftigt ledger-papper limmats samman."@sv ;
+    skos:notation "1004" ;
+    skos:exactMatch rdamat:1004, marcmat:brb, aat:300014228, wikidata:Q2916879 .
+
+<Canvas> a :Material ;
+    skos:definition "Material bestående av tättvävd textil i olika viktklasser, vanligtvis av lin, hampa, jute eller bomull, som används som underlag för måleri eller tryck."@sv ;
+    skos:notation "1005" ;
+    skos:exactMatch rdamat:1005, marcmat:can, aat:300014078, wikidata:Q12321255 .
+
+<Cardboard> a :Material ;
+    skos:definition "Material bestående av en sorts styvt ark, vanligtvis framställt av sulfatmassa av god kvalitet eller lumpmassa, med stor variation avseende typ och styrka, och med en tjocklek på minst 0,15 mm."@sv ;
+    skos:notation "1006" ;
+    skos:exactMatch rdamat:1006, marcmat:crd, aat:300014224, wikidata:Q389782 ;
+    skos:altLabel "kartong"@sv, "papp"@sv .
+
+<Ceramic> a :Material ;
+    skos:notation "1007" ;
+    skos:definition "Material bestående av icke-metalliskt mineral, t.ex. lera, bränd vid hög temperatur för att skapa ett hårt, sprött material som tål värme och slitage."@sv ;
+    skos:exactMatch rdamat:1007, marcmat:cer, aat:300235507, wikidata:Q45621 .
+
+<Chalk> a :Material ;
+    skos:definition "Material bestående av finkornig kalksten eller en mjuk, jordig form av kalciumkarbonat."@sv ;
+    skos:notation "1008" ;
+    skos:scopeNote "Används för tavel- och asfaltskrita."@sv ;
+    skos:exactMatch rdamat:1008, marcmat:chk, aat:300011727, wikidata:Q183670 ;
+    skos:prefLabel "krita"@sv .
+
+<Charcoal> a :Material ;
+    skos:definition "Material bestående av de mörkgrå kolrester, samt eventuell återstående aska, som är kvar när vatten och andra flyktiga beståndsdelar avlägsnats från djur- och växtsubstanser."@sv ;
+    skos:notation "1009" ;
+    skos:exactMatch rdamat:1009, marcmat:chr, aat:300012862, wikidata:Q1424515 ;
+    skos:prefLabel "kol"@sv .
+
+<Diacetate> a :Material ;
+    skos:definition "Material framställt genom att cellulosa behandlas med ättiksyra."@sv ;
+    skos:notation "1010" ;
+    skos:exactMatch rdamat:1010, marcmat:dic, aat:300138328 .
+
+# <DiazoEmulsion> see 1046.
+
+<Dye> a :Material ;
+    skos:definition "Material bestående av en färgad substans upplöst i en vätska som kan absorberas av basmaterialet."@sv ;
+    skos:notation "1011" ;
+    skos:exactMatch rdamat:1011, marcmat:dye, aat:300013029, wikidata:Q189720 ;
+    skos:prefLabel "färgämne"@sv .
+
+<Glass> a :Material ;
+    skos:definition "Material bestående av kiseldioxid, även känt som silikat, samt en eller flera basiska oxider, vanligtvis genomskinligt men ofta halvgenomskinligt eller ogenomskinligt."@sv ;
+    skos:notation "1012" ;
+    skos:exactMatch rdamat:1012, marcmat:gls, aat:300010797, wikidata:Q11469 ;
+    skos:prefLabel "glas"@sv .
+
+<Gouache> a :Material ;
+    skos:definition "Material bestående av pigment och bindmedel och ibland ytterligare inerta material, som tillsammans bildar en täckande, vattenlöslig färg."@sv ;
+    skos:notation "1013" ;
+    skos:exactMatch rdamat:1013, marcmat:gou, aat:300070114, wikidata:Q204330 ;
+    skos:prefLabel "gouach"@sv .
+
+<Graphite> a :Material ;
+    skos:definition "Material bestående av naturligt förekommande allotroper av kol, som är ogenomskinligt, mjukt och känns oljigt vid beröring, med järnsvart till stålgrå färg."@sv ;
+    skos:notation "1014" ;
+    skos:exactMatch rdamat:1014, marcmat:gra, aat:300011098, wikidata:Q5309 ;
+    skos:prefLabel "grafit"@sv .
+
+<Hardboard> a :Material ;
+    skos:definition "Material bestående av en fast, tät, styv platta, ofta framställd av fiber som har pressats i en värmepress."@sv ;
+    skos:notation "1015" ;
+    skos:exactMatch rdamat:1015, marcmat:hdb, aat:300014203, wikidata:Q1251688 .
+
+<IllustrationBoard> a :Material ;
+    skos:definition "Material tillverkat av en laminerad pappersplatta med lager av papper limmade på ytan."@sv ;
+    skos:notation "1016" ;
+    skos:exactMatch rdamat:1016, marcmat:ill, aat:300014229, wikidata:Q99900954 .
+
+<Ink> a :Material ;
+    skos:definition "Material bestående av pigment eller färgämnen i en vätska eller massa."@sv ;
+    skos:notation "1017" ;
+    skos:exactMatch rdamat:1017, marcmat:ink, aat:300015012, wikidata:Q127418 ;
+    skos:prefLabel "bläck"@sv .
+
+<Ivory> a :Material ;
+    skos:definition "Material bestående av tandben eller betar från djur som elefanter, valrossar och narvalar."@sv ;
+    skos:notation "1018" ;
+    skos:exactMatch rdamat:1018, marcmat:ivo, aat:300011857, wikidata:Q82001 .
+
+<Lacquer> a :Material ;
+    skos:definition "Material bestående av plaster eller akrylföreningar upplösta i flyktiga organiska föreningar eller andra lösningsmedel, som blir hårt och hållbart när det torkat."@sv ;
+    skos:notation "1019" ;
+    skos:exactMatch rdamat:1019, marcmat:lac, aat:300014916, wikidata:Q11236878 ;
+    skos:altLabel "fernissa"@sv ;
+    skos:prefLabel "lack"@sv .
+
+<Leather> a :Material ;
+    skos:definition "Material tillverkat av hud eller skinn från djur som garvats för att motstå förruttnelse och som är relativt mjukt och böjligt när det är torrt."@sv ;
+    skos:notation "1020" ;
+    skos:exactMatch rdamat:1020, marcmat:lea, aat:300011845, wikidata:Q286 . 
+
+<MagneticParticles> a :Material ;
+    skos:definition "Material bestående av en naturlig eller syntetisk oorganisk förening som utgörs av kraftigt magnetiska partiklar och som vanligtvis används för att lagra digital eller analog information."@sv ;
+    skos:notation "1021" ;
+    skos:exactMatch rdamat:1021, marcmat:fer, wikidata:Q105954869 ;
+    skos:prefLabel "magnetiska partiklar"@sv .
+
+<Metal> a :Material ;
+    skos:definition "Material bestående av ett ämne med metalliska egenskaper, till exempel hög ledningsförmåga för elektricitet och värme, ogenomskinligt med karakteristisk glans, smältbart och vanligtvis formbart."@sv ;
+    skos:notation "1022" ;
+    skos:exactMatch rdamat:1022, marcmat:mtl, aat:300010900, wikidata:Q11426 .
+
+<Nitrate> a :Material ;
+    skos:definition "Material tillverkat av cellulosanitrat som mjukgjorts med kamfer"@sv ;
+    skos:notation "1023" ;
+    skos:exactMatch rdamat:1023, marcmat:nit, aat:300379863 .
+
+<OilPaint> a :Material ;
+    skos:definition "Material bestående av pigment flytande i torkande olja"@sv ;
+    skos:notation "1024" ;
+    skos:exactMatch rdamat:1024, marcmat:oip, aat:300015050, wikidata:Q296955 ;
+    skos:prefLabel "oljefärg"@sv .
+
+<Paper> a :Material ;
+    owl:sameAs marc:Paper, marc:NonProjectedType-o, marc:ProjGraphEmulsionType-o ;
+    skos:definition "Tunt material bestående av hopfiltade djur- växt-, mineral- eller syntetfiber som bearbetats i vatten och bretts ut på en väv och som när vattnet runnit av, pressats och torkats."@sv ;
+    skos:notation "1025" ;
+    skos:exactMatch rdamat:1025, marcmat:pap, aat:300014109, wikidata:Q11472 .
+
+<Parchment> a :Material ;
+    skos:definition "Material bestående av kalv-, får- eller getskinn som har behandlats för att få fram ett tunt, starkt, halv- eller ogenomskinligt material för att skriva på, binda in böcker med mera."@sv ;
+    skos:notation "1026" ;
+    skos:exactMatch rdamat:1026, marcmat:par, aat:300011851, wikidata:Q226697 .
+
+<Pastel> a :Material ;
+    skos:definition "Material bestående av pigment blandat med bindemedel, vanligtvis i form av en krita."@sv ;
+    skos:notation "1027" ;
+    skos:scopeNote "Används för torrpastell / soft pastel."@sv ;
+    skos:exactMatch rdamat:1027, marcmat:pas, aat:300404632, wikidata:Q189085 ;
+    skos:prefLabel "pastell"@sv .
+
+<Plaster> a :Material ;
+    skos:definition "Material bestående av ett pulver, framställt av kalciumsulfatdihydrat, även känt som naturgips, eller kalciumkarbonat, blandat med vatten och ibland ett fyllnadsmedel, som blir en massa som frigör värme och då stelnar."@sv ;
+    skos:notation "1028" ;
+    skos:exactMatch rdamat:1028, marcmat:plt, aat:300014922 .
+
+<Plastic> a :Material ;
+    owl:sameAs marc:Plastic ;
+    skos:definition "Material bestående av syntetiska eller halvsyntetiska organiska polymerer, med hög molekylmassa, som är formbar."@sv ;
+    skos:notation "1029" ;
+    skos:exactMatch rdamat:1029, marcmat:pla, aat:300014570, wikidata:Q11474 .
+
+<Polyester> a :Material ;
+    skos:definition "Material tillhörande en grupp av plaster som har estermonomerer i sin kedja."@sv ;
+    skos:notation "1030" ;
+    skos:exactMatch rdamat:1030, marcmat:pol, aat:300379829, wikidata:Q188245 .
+
+<Porcelain> a :Material ;
+    skos:definition "Material bestående av eldfast vit lera, känd som kaolin, och fältspat som upphettas och då bildar ett keramiskt material."@sv ;
+    skos:notation "1031" ;
+    skos:exactMatch rdamat:1031, marcmat:por, aat:300010662, wikidata:Q130693 ;
+    skos:prefLabel "porslin"@sv .
+
+<Rubber> a :Material ;
+    skos:definition "Material bestående av naturliga eller syntetiska plaster och som har en hög grad av flexibilitet och elasticitet."@sv ;
+    skos:notation "1032" ;
+    skos:exactMatch rdamat:1032, marcmat:rub, aat:300012941, wikidata:Q18113858 .
+
+<SafetyBase> a :Material ;
+    skos:definition "Material tillverkat av svårantändliga cellulosaacetat eller polyester."@sv ;
+    skos:notation "1033" ;
+    skos:exactMatch rdamat:1033, marcmat:saf, aat:300127384 .
+
+<Shellac> a :Material ;
+    skos:definition "Material bestående av en hartsartad utsöndring från sköldlushonan som genom att lösas upp i etanol bildar en vätska som kan appliceras med pensel."@sv ;
+    skos:notation "1034" ;
+    skos:exactMatch rdamat:1034, marcmat:she, aat:300014918, wikidata:Q429659 .
+
+# <SilverHalideEmulsion> see 1047
+
+<Skin> a :Material ;
+    skos:definition "Material bestående av hud från djur, till exempel från får, get eller kalv, som avskilts från kroppen och bearbetats på olika sätt för att avlägsna hår, torka, garva och så vidare."@sv ;
+    skos:notation "1035" ;
+    skos:exactMatch rdamat:1035, marcmat:ski, aat:300011840 .
+
+<Stone> a :Material ;
+    skos:definition "Material bestående av bergarter och mineraler antingen i sin naturliga form eller hugget, krossat eller på annat sätt format."@sv ;
+    skos:notation "1036" ;
+    skos:exactMatch rdamat:1036, marcmat:sto, aat:300011176, wikidata:Q22731 .
+
+<Synthetic> a :Material ;
+    skos:definition "Material som producerats på konstgjord väg, används vanligtvis som substitut för naturmaterial."@sv ;
+    skos:notation "1037" ;
+    skos:exactMatch rdamat:1037, marcmat:syn, wikidata:Q3300022 .
+
+<Tempera> a :Material ;
+    skos:definition "Material bestående av pigment blandat med ett vattenlösligt bindemedel, vanligtvis av limliknande konsistens, till exempel äggula eller något annat klistrigt, för att få fram en beständig, snabbtorkande målarfärg."@sv ;
+    skos:notation "1038" ;
+    skos:exactMatch rdamat:1038, marcmat:tem, aat:300015062, wikidata:Q175166 ;
+    skos:prefLabel "tempera"@sv .
+
+<Textile> a :Material ;
+    skos:definition "Material framställt genom vävning, tovning, knytning, tvinning eller annan bearbetning av naturliga eller syntetiska fibrer så att de hänger samman."@sv ;
+    skos:notation "1039" ;
+    skos:exactMatch rdamat:1039, marcmat:tex, aat:300231565, wikidata:Q28823 .
+
+<Triacetate> a :Material ;
+    skos:definition "Material framställt av cellulosaacetat, vanligtvis ättiksyraanhydrider."@sv ;
+    skos:notation "1040" ;
+    skos:exactMatch rdamat:1040, marcmat:tri, aat:300130950 .
+
+<Vellum> a :Material ;
+    skos:definition "Material bestående av högkvalitativt pergament från kalvar eller lamm."@sv ;
+    skos:notation "1041" ;
+    skos:exactMatch rdamat:1041, marcmat:vel, aat:300011852, wikidata:Q378274 ;
+    skos:prefLabel "veläng"@sv .
+
+# <VesicularEmulsion> see 1048
+
+<Vinyl> a :Material ;
+    skos:definition "Material bestående av en polymer eller sampolymer från en vinylgrupp, vanligtvis vinylklorid."@sv ;
+    skos:notation "1042" ;
+    skos:exactMatch rdamat:1042, marcmat:vny, aat:300014502 ;
+    skos:prefLabel "vinyl"@sv .
+
+<Watercolour> a :Material ;
+    skos:definition "Material bestående av pigment i vattensuspension som skapar ett transparent färgmedium."@sv ;
+    skos:notation "1043" ;
+    skos:exactMatch rdamat:1043, marcmat:wat, aat:300015045, wikidata:Q22915256 ;
+    skos:prefLabel "akvarell"@sv .
+
+<Wax> a :Material ;
+    skos:definition "Material bestående av en kemisk förening med animaliskt, växtbaserat, mineraliskt eller syntetiskt ursprung som är formbart vid rumstemperatur, känns lätt oljigt vid beröring, har en låg smältpunkt och är vanligtvis genomskinligt, vattenavvisande och lösligt i organiska lösningsmedel."@sv ;
+    skos:notation "1044" ;
+    skos:exactMatch rdamat:1044, marcmat:wax, aat:300014585, wikidata:Q124695 ;
+    skos:prefLabel "vax"@sv .
+
+<Wood> a :Material ;
+    skos:definition "Material bestående av träd och liknande växters ved."@sv ;
+    skos:notation "1045" ;
+    skos:exactMatch rdamat:1045, marcmat:wod, aat:300011914, wikidata:Q287 ;
+    skos:prefLabel "trä"@sv .
+
+<DiazoEmulsion> a :Material ;
+    skos:definition "Material bestående av en emulsion av ett eller flera ljuskänsliga lager diazoniumsalter i en polyester- eller acetatbas som reagerar med färgämneskopplare i processen för att skapa diazofärgbilder."@sv ;
+    skos:notation "1046" ;
+    skos:exactMatch rdamat:1046, marcmat:dia ;
+    skos:prefLabel "diazo"@sv .
+
+<SilverHalideEmulsion> a :Material ;
+    skos:definition "Material bestående av en blandning av ljuskänsliga föreningar av silver och klorid, bromid, jod eller fluor flytande i en kolloidal lösning."@sv ;
+    skos:notation "1047" ;
+    skos:exactMatch rdamat:1047, marcmat:slh, wikidata:Q105755385 ;
+    skos:prefLabel "silverhalogen"@sv .
+
+<VesicularEmulsion> a :Material ;
+    skos:definition "Material bestående av en emulsion av ett eller flera ljuskänsliga lager diazoniumsalter i en termoplastbas av polyester som sönderdelas vid exponering och producerar kvävebubblor, så kallade vesiklar, som skapar en latent bild, vanligtvis blå eller beige, som blir synlig och fixeras när den värms upp och får svalna."@sv ;
+    skos:notation "1048" ;
+    skos:exactMatch rdamat:1048, marcmat:ves ;
+    skos:prefLabel "vesikulär emulsion"@sv .

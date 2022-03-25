@@ -30,7 +30,7 @@
     rdfs:label "located in"@en, "ligger i"@sv;
     sdo:domainIncludes :Place ;
     rdfs:range :Place ;
-    rdfs:subPropertyOf :isPartOf ;
+    rdfs:subPropertyOf :isPartOf, :matchesTransitive ;
     skos:closeMatch sdo:location .
 
 :Event a owl:Class;
@@ -62,8 +62,7 @@
 :Concept a owl:Class;
     rdfs:label "Concept"@en, "Koncept"@sv;
     rdfs:subClassOf :Identity;
-    owl:equivalentClass skos:Concept;
-    owl:hasKey (:code :prefLabel :inScheme) .
+    owl:equivalentClass skos:Concept .
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
@@ -80,20 +79,32 @@
     rdfs:label "Topic scheme"@en, "Ämnesordssystem"@sv;
     rdfs:subClassOf :ConceptScheme .
 
-:altLabel a owl:DatatypeProperty;
-    rdfs:label "alternative label"@en, "alternativ benämning"@sv; #NOTE: alternativ term inom concept
-    rdfs:comment "Förkortningar, synonymer eller oregelbundna plural/singularformer kan inkluderas bland de alternativa benämningarna för ett begrepp. Felstavade termer inkluderas normalt som dolda benämningar (se skos: HiddenLabel)."@sv;
-    skos:definition "En alternativ lexikal benämning för en resurs."@sv;
-    skos:scopeNote "Används vanligen som se-hänvisning";
-    sdo:domainIncludes :Concept ;
-    :category :heuristicIdentifier ;
-    owl:equivalentProperty skos:altLabel .
+:matchesTransitive a owl:TransitiveProperty ;
+    ptg:abstract true ;
+    rdfs:label "matches transitive"@en, "matchar transitivt"@sv ;
+    skos:scopeNote "Beräknad egenskap för sökningar och navigering. Används inte direkt."@sv, "Computed property for search and navigation. Not to be used directly."@en ;
+    skos:definition "Inferred generalized likeness of any valuable kind. Conceptually a superproperty of equivalence and even identity."@en .
+
+:broaderTransitive a owl:TransitiveProperty ;
+    ptg:abstract true ;
+    rdfs:label "broader transitive"@en, "transitivt bredare"@sv;
+    rdfs:subPropertyOf :matchesTransitive ;
+    #owl:inverseOf :narrowerTransitive;
+    owl:equivalentProperty skos:broaderTransitive .
+
+# NOTE: No need for this at the moment.
+#:narrowerTransitive a owl:TransitiveProperty ;
+#    ptg:abstract true ;
+#    rdfs:label "narrower transitive"@en, "transitivt smalare"@sv;
+#    owl:inverseOf :broaderTransitive;
+#    owl:equivalentProperty skos:narrowerTransitive .
 
 :broader a owl:ObjectProperty;
     rdfs:label "broader"@en, "bredare"@sv;
     sdo:domainIncludes :Concept ;
     owl:inverseOf :narrower;
     rdfs:range :Concept ;
+    rdfs:subPropertyOf :broaderTransitive ;
     owl:equivalentProperty skos:broader ;
     owl:equivalentProperty madsrdf:hasBroaderAuthority .
 
@@ -101,6 +112,7 @@
     rdfs:label "broader match"@en, "bredare match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
+    rdfs:subPropertyOf :broader ;
     owl:equivalentProperty skos:broadMatch ;
     owl:equivalentProperty madsrdf:hasBroaderExternalAuthority .
 
@@ -108,22 +120,24 @@
     rdfs:label "close match"@en, "nära match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
+    rdfs:subPropertyOf :matchesTransitive ;
     owl:equivalentProperty skos:closeMatch ;
     owl:equivalentProperty madsrdf:hasCloseExternalAuthority .
-
-:definition a owl:DatatypeProperty;
-    rdfs:label "definition"@en, "definition"@sv ;
-    sdo:domainIncludes :Concept ;
-    owl:equivalentProperty skos:definition ;
-    owl:equivalentProperty madsrdf:definitionNote .
 
 :exactMatch a owl:ObjectProperty ;
     :category :integral ;
     rdfs:label "exact match"@en, "exakt match"@sv ;
     sdo:domainIncludes :Identity ;
     sdo:rangeIncludes :Agent, :Concept ;
+    rdfs:subPropertyOf :closeMatch ;
     owl:equivalentProperty skos:exactMatch ;
     owl:equivalentProperty madsrdf:hasExactExternalAuthority .
+
+:definition a owl:DatatypeProperty;
+    rdfs:label "definition"@en, "definition"@sv ;
+    sdo:domainIncludes :Concept ;
+    owl:equivalentProperty skos:definition ;
+    owl:equivalentProperty madsrdf:definitionNote .
 
 :example a owl:DatatypeProperty;
     rdfs:label "example"@en, "exempel"@sv ;
@@ -184,6 +198,15 @@
     :category :heuristicIdentifier ;
     owl:equivalentProperty skos:prefLabel ;
     owl:equivalentProperty madsrdf:authoritativeLabel .
+
+:altLabel a owl:DatatypeProperty;
+    rdfs:label "alternative label"@en, "alternativ benämning"@sv; #NOTE: alternativ term inom concept
+    rdfs:comment "Förkortningar, synonymer eller oregelbundna plural/singularformer kan inkluderas bland de alternativa benämningarna för ett begrepp. Felstavade termer inkluderas normalt som dolda benämningar."@sv;
+    skos:definition "En alternativ lexikal benämning för en resurs."@sv;
+    skos:scopeNote "Används vanligen som se-hänvisning";
+    sdo:domainIncludes :Concept ;
+    :category :heuristicIdentifier ;
+    owl:equivalentProperty skos:altLabel .
 
 :related a owl:ObjectProperty;
     rdfs:label "related"@en, "relaterad"@sv;

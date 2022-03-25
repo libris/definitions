@@ -1,34 +1,27 @@
 prefix : <http://schema.org/>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix dc: <http://purl.org/dc/terms/>
 
 construct {
-    ?s a :Country;
-        skos:exactMatch ?loc;
-        skos:exactMatch ?match;
-        dc:isReplacedBy ?replacement;
-        skos:notation ?notation;
-        rdfs:comment ?comment;
-        skos:prefLabel ?label;
+    ?s ?p ?o ;
+        skos:exactMatch ?loc ;
         skos:prefLabel ?prefLabel .
 
 } where {
     graph <https://id.kb.se/dataset/countries> {
         {
-            ?s skos:notation ?notation ; skos:prefLabel ?label .
-            optional { ?s rdfs:comment ?comment }
-            optional { ?s skos:exactMatch ?match }
-            optional {
+            {
+                ?s ?p ?o .
+            } union {
+                ?s skos:notation ?notation .
                 graph <http://id.loc.gov/vocabulary/countries> {
-                    ?loc skos:prefLabel ?prefLabel .
+                    ?loc madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel .
                     filter strends(str(?loc), concat('/', ?notation))
                 }
             }
-        } union {
-            ?s dc:isReplacedBy ?replnot .
-            ?replacement skos:notation ?replnot .
         }
     }
 }

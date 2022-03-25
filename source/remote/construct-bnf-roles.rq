@@ -1,0 +1,11 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+    ?role ?p ?o
+} where {
+    service <https://data.bnf.fr/sparql> {
+        ?role skos:inScheme <http://data.bnf.fr/vocabulary/roles> ;
+            ?p ?o .
+    }
+}
+

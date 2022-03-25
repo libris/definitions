@@ -31,7 +31,11 @@
     owl:imports dc:, dctype:, skos:, prov:, foaf:, bibo:, sdo:, bf2:, bflc: ;
     skos:hasTopConcept :Instance, :Work, :Item, :Agent, :IndexTerm .
 
-# Various sources beyond the linked defintions themselves:
+
+##
+# Local Definitions Of Core Vocabulary Components
+##
+# TODO: just use context aliases, and add these labels in <external-labels.ttl>?
 
 rdf:type a owl:ObjectProperty;
     rdfs:label "type"@en, "typ"@sv .
@@ -41,8 +45,11 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "Resurs"@sv, "Resource"@en;
     skos:altLabel "Entitet"@sv, "Entity"@en .
 
-##
-# Extended Vocabulary Components
+:Ontology a owl:Class ;
+    owl:equivalentClass owl:Ontology ;
+    rdfs:subClassOf :Resource;
+    rdfs:label "Ontologi"@sv, "Ontology"@en ;
+    skos:altLabel "Vokabulär"@sv, "Vocabulary"@en .
 
 :Class a owl:Class;
     owl:equivalentClass owl:Class;
@@ -51,6 +58,14 @@ rdf:type a owl:ObjectProperty;
 :ObjectProperty a owl:Class;
     owl:equivalentClass owl:ObjectProperty;
     rdfs:label "Object property"@en, "Relation"@sv .
+
+:FunctionalProperty a owl:Class;
+    owl:equivalentClass owl:FunctionalProperty;
+    rdfs:label "Functional property"@en, "Funktionell egenskap"@sv .
+
+:TransitiveProperty a owl:Class;
+    owl:equivalentClass owl:TransitiveProperty;
+    rdfs:label "Transitive property"@en, "Transitiv egenskap"@sv .
 
 :SymmetricProperty a owl:Class;
     owl:equivalentClass owl:SymmetricProperty;
@@ -65,6 +80,9 @@ rdf:type a owl:ObjectProperty;
 :Datatype a owl:Class;
     owl:equivalentClass rdfs:Datatype;
     rdfs:label "Data type"@en, "Datatyp"@sv .
+
+##
+# Extended Vocabulary Components
 
 :StructuredProperty a owl:Class;
     rdfs:subPropertyOf owl:ObjectProperty;
@@ -106,9 +124,7 @@ rdf:type a owl:ObjectProperty;
 
 
 ##
-# Common Properties
-
-# .. use rdfs:range rdf:langString where applicable?
+# Categorization Of Terms
 
 :category a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
@@ -162,6 +178,11 @@ rdf:type a owl:ObjectProperty;
     skos:example "instanceOf, translationOf, locatedIn"@sv ;
     skos:scopeNote "Används i XL för att presentera relaterade resurser tillsammans med huvudsaklig resurs."@sv ;
     :code "integral" .
+
+
+##
+# Common Properties
+# .. use rdfs:range rdf:langString where applicable?
 
 :label a owl:DatatypeProperty;
     rdfs:label "label"@en, "benämning"@sv;

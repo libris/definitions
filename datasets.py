@@ -79,7 +79,11 @@ def vocab():
         query="source/vocab/bf-to-kbv-base.rq")
 
     for part in compiler.path('source/vocab').glob('**/*.ttl'):
-        graph.parse(str(part), format='turtle')
+        try:
+            graph.parse(str(part), format='turtle')
+        except:
+            print(f"Error in file: {part}")
+            raise
 
     #cg = ConjunctiveGraph()
     #cg.parse(str(compiler.path('source/vocab/display.jsonld')), format='json-ld')
@@ -136,16 +140,19 @@ def vocab():
     if version:
         vocab_node['version'] = version
 
+    gen_context_path = 'sys/context/auto'
     lib_context = make_context(graph, vocab_base, NS_PREF_ORDER)
     add_overlay(lib_context, compiler.load_json('sys/context/kbv.jsonld'))
-    lib_context['@graph'] = [{'@id': BASE + 'vocab/context'}]
+    lib_context['@graph'] = [
+        {'@id': BASE + gen_context_path, '@type': 'jsonld:Context'}
+    ]
     _insert_record(lib_context['@graph'], vocab_created_ms, vocab_ds_url)
 
     display = compiler.load_json('source/vocab/display.jsonld')
     _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
-    compiler.write(lib_context, 'vocab/context')
+    compiler.write(lib_context, gen_context_path)
     compiler.write(display, 'vocab/display')
 
 
@@ -153,9 +160,11 @@ def vocab():
 def contexts():
     contexts_ds_url = urljoin(compiler.dataset_id, 'sys/context')
 
+    context_alias = BASE + 'vocab/context'
+
     docpath = compiler.path('sys/context/kbv.jsonld')
     uripath = BASE + 'sys/context/kbv'
-    _write_context_record(compiler, docpath, uripath, contexts_ds_url)
+    _write_context_record(compiler, docpath, uripath, contexts_ds_url, context_alias)
 
     root = compiler.path('')
     for docpath in compiler.path('sys/context').glob('target/*.jsonld'):
@@ -163,11 +172,15 @@ def contexts():
         _write_context_record(compiler, docpath, uripath, contexts_ds_url)
 
 
-def _write_context_record(compiler, filepath, uripath, ds_url):
+def _write_context_record(compiler, filepath, uripath, ds_url, alias=None):
     ctx_data = compiler.load_json(filepath)
     ctx_created_ms = w3c_dtz_to_ms(ctx_data.pop('created'))
+
     ctx_data['@graph'] = [{"@id": uripath, "@type": "jsonld:Context"}]
     _insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
+    if alias:
+        ctx_data['@graph'][0]['sameAs'] = [{'@id': alias}]
+
     assert uripath.startswith(BASE)
     compiler.write(ctx_data, uripath.replace(BASE, ''))
 
@@ -187,8 +200,8 @@ def rdaterms():
     # extending our type system (instead).
     graph = compiler.construct(sources=[
             {
-                "source": list(compiler.read_csv('source/rdamap.tsv')),
-                "context": "source/rdamap-context.jsonld"
+                'source': Graph().parse(str(compiler.path('source/rda-terms.ttl')), format='turtle'),
+                'dataset': BASE + 'dataset/rdaterms'
             },
 
             {'source': 'http://rdaregistry.info/termList/RDAContentType.nt'},
@@ -215,6 +228,24 @@ def enumterms():
 
     return "/term/enum/", "2018-05-29T12:36:01.337Z", graph
 
+@compiler.dataset
+def materials():
+    graph = compiler.construct(sources=[
+        {
+            "source": Graph().parse(str(compiler.path('source/materials.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/materials"
+        },
+        {
+            "source": "http://rdaregistry.info/termList/RDAMaterial.nt"
+        },
+        {
+            "source": "sparql/aat-materials",
+            "construct": "source/remote/construct-aat-materials.rq",
+        }
+    ],
+        query="source/construct-materials.rq")
+
+    return "/material/", "2021-12-07T21:28:01.123Z", graph
 
 @compiler.dataset
 def musnotationterms():
@@ -312,46 +343,26 @@ def schemes():
 
 @compiler.dataset
 def relators():
-
-    def relitem(item):
-        item['@id'] = item.get('term') or to_camel_case(item['label_en'].strip())
-        item['sameAs'] = {'@id': item['code']}
-        return item
-
-    # TODO: retrieve finnish label from link/id (finto.fi)
-    # TODO: link to german & french RDA terms
     graph = compiler.construct(sources=[
-            {
-                "source": list(map(relitem, compiler.read_csv('source/funktionskoder.tsv'))),
-                "dataset": BASE + "dataset/relators",
-                "context": ["sys/context/ns.jsonld", {
-                    "@base": BASE + "relator/",
-                    "@vocab": "https://id.kb.se/vocab/",
-                    "code": "skos:notation",
-                    "label_sv": {"@id": "skos:prefLabel", "@language": "sv"},
-                    "altlabel_sv": {"@id": "skos:altLabel", "@language": "sv"},
-                    "label_en": {"@id": "skos:prefLabel", "@language": "en"},
-                    "label_de": {"@id": "skos:prefLabel", "@language": "de"},
-                    "altlabel_de": {"@id": "skos:altLabel", "@language": "de"},
-                    "label_fi": {"@id": "skos:prefLabel", "@language": "fi"},
-                    "label_is": {"@id": "skos:prefLabel", "@language": "is"},
-                    "label_fr": {"@id": "skos:prefLabel", "@language": "fr"},
-                    "urn_de": {"@id": "skos:exactMatch", "@type": "@vocab"},
-                    "urn_fi": {"@id": "skos:exactMatch", "@type": "@vocab"},
-                    "hidden_label": "skos:hiddenLabel",
-                    "comment_sv": {"@id": "rdfs:comment", "@language": "sv"},
-                    "term": "rdfs:label",
-                    "sameAs": "owl:sameAs",
-                    "domain": {"@id": "rdfs:domain", "@type": "@vocab"},
-                    "rda_app_i_1_en": {"@id": "skos:altLabel", "@language": "en"},
-                    "rda_app_i_2_en": {"@id": "skos:altLabel", "@language": "en"},
-                    "rda_app_i_3_en": {"@id": "skos:altLabel", "@language": "en"},
-                }]
-            },
-            {
-                "source": "http://id.loc.gov/vocabulary/relators"
-            }
-        ],
+        {
+            "source": Graph().parse(str(compiler.path('source/relators.ttl')), format='turtle'),
+            "dataset": BASE + "dataset/relators",
+        },
+        {
+            "source": "http://id.loc.gov/vocabulary/relators"
+        },
+        {
+            "source": "http://finto.fi/rest/v1/mts/data",
+            "dataset": "http://urn.fi/URN:NBN:fi:au:mts:"
+        },
+        {
+            "source": "http://d-nb.info/standards/elementset/gnd"
+        },
+        {
+            "source": "sparql/bnf-roles",
+            "construct": "source/remote/construct-bnf-roles.rq"
+        }
+    ],
         query="source/construct-relators.rq")
 
     return "/relator/", "2014-02-01T16:29:12.378Z", graph
@@ -367,14 +378,12 @@ def languages():
             str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-2.nt')),
             format='nt')
 
-    languages = decorate(compiler.read_csv('source/spraakkoder.tsv'),
-        {"@id": BASE + "language/{code}"})
+    languages = Graph().parse(str(compiler.path('source/languages.ttl')), format='turtle')
 
     graph = compiler.construct(sources=[
             {
                 "source": languages,
-                "dataset": BASE + "dataset/languages",
-                "context": "source/table-context.jsonld"
+                "dataset": BASE + "dataset/languages"
             },
             {
                 "source": loclanggraph,
@@ -388,13 +397,12 @@ def languages():
 
 @compiler.dataset
 def countries():
+    countries = Graph().parse(str(compiler.path('source/countries.ttl')), format='turtle')
+
     graph = compiler.construct(sources=[
             {
-                "source": decorate(compiler.read_csv('source/landskoder.tsv'),
-                    {"@id": BASE + "country/{code}"}),
-                "dataset": BASE + "dataset/countries",
-                # TODO: fix rdflib_jsonld so urls in external contexts are loaded
-                "context": "source/table-context.jsonld"
+                "source": countries,
+                "dataset": BASE + "dataset/countries"
             },
             {
                 "source": "http://id.loc.gov/vocabulary/countries"
@@ -407,18 +415,9 @@ def countries():
 
 @compiler.dataset
 def nationalities():
-    return "/nationality/", "2014-02-01T13:08:56.596Z", compiler.construct({
-            "source": decorate(
-                compiler.read_csv('source/nationalitetskoder.tsv'),
-                {"@id": BASE + "nationality/{code}", "@type": 'Nationality'}),
-            "context": [
-                "sys/context/base.jsonld",
-                {"label_sv": {"@id": "skos:prefLabel", "@language": "sv"}},
-                {"altLabel_sv": {"@id": "skos:altLabel", "@language": "sv"}},
-                {"label_en": {"@id": "skos:prefLabel", "@language": "en"}},
-                {"comment_sv": {"@id": "rdfs:comment", "@language": "sv"}}
-            ]
-        })
+    graph = Graph().parse(str(compiler.path('source/nationalities.ttl')), format='turtle')
+
+    return "/nationality/", "2014-02-01T13:08:56.596Z", graph
 
 
 @compiler.dataset
