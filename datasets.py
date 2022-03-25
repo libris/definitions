@@ -352,11 +352,11 @@ def relators():
             "source": "http://id.loc.gov/vocabulary/relators"
         },
         {
-            "source": "https://finto.fi/rest/v1/mts/data",
+            "source": "http://finto.fi/rest/v1/mts/data",
             "dataset": "http://urn.fi/URN:NBN:fi:au:mts:"
         },
         {
-            "source": "https://d-nb.info/standards/elementset/gnd"
+            "source": "http://d-nb.info/standards/elementset/gnd"
         },
         {
             "source": "sparql/bnf-roles",
