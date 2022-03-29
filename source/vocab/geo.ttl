@@ -107,7 +107,7 @@
 
 # We have in Wikidata:
 # wd:Q14839548 rdfs:label "minor locality in Sweden" ;
-#     wdt:P31 wd:Q702492 .
+#     wdt:P279 wd:Q702492 .
 # meaning that "minor locality in Sweden" (Q14839548) is a subclass of "Urban Area" (Q702492) which seems a bit odd
 # hence the ad hoc mapping of Q14839548 to :Village
 
@@ -126,12 +126,7 @@
 :Sea a owl:Class ;
     rdfs:label "Hav"@sv, "Sea"@en ;
     rdfs:subClassOf :BodyOfWater ;
-    owl:equivalentClass gn:L.SEA, wd:Q165 .
-
-:Ocean a owl:Class ;
-    rdfs:label "Världshav"@sv, "Ocean"@en ;
-    rdfs:subClassOf :BodyOfWater ;
-    owl:equivalentClass gn::H.OCN, wd:Q9430 .
+    owl:equivalentClass [ owl:unionOf ( wd:Q165 wd:Q9430 ) ] .
 
 :Watercourse a owl:Class ;
     rdfs:label "Vattendrag"@sv, "Watercourse"@en ;
