@@ -898,13 +898,21 @@
             "hasNote",
             "tableOfContents",
             "relationship",
+            "continues",
+            {"inverseOf": "continuedBy"},
+            "continuedBy",
+            {"inverseOf": "continues"},
             {"inverseOf": "itemOf"}
           ]
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [
-            "fresnel:super"
+            "fresnel:super",
+            "continues",
+            {"inverseOf": "continuedBy"},
+            "continuedBy",
+            {"inverseOf": "continues"}
           ]
         },
         "NotatedMusic": {
