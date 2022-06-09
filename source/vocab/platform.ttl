@@ -241,6 +241,25 @@
     owl:equivalentProperty void:inDataset;
     rdfs:subPropertyOf dc:isPartOf .
 
+:uriSpace a owl:DatatypeProperty ;
+    :category :pending ;
+    rdfs:domain :Dataset ;
+    rdfs:label "URI-rymd"@sv, "URI space"@en ;
+    owl:equivalentProperty void:uriSpace .
+
+:uriRegexPattern a owl:DatatypeProperty ;
+    :category :pending ;
+    rdfs:domain :Dataset ;
+    rdfs:label "URI-regex-uttryck"@sv, "URI regex pattern"@en ;
+    owl:equivalentProperty void:uriRegexPattern .
+
+:datasetClass a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:domain :Dataset ;
+    rdfs:range owl:Class ;
+    rdfs:label "Beskriver resurser av klass"@sv, "Describes resources of class"@en ;
+    owl:equivalentProperty void:class .
+
 :DataCatalog a owl:Class;
     rdfs:label "Data catalog"@en, "Datakatalog"@sv;
     skos:definition "A collection of datasets or data services."@en, "En samling av dataset eller datatjänster."@sv;
