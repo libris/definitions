@@ -244,14 +244,21 @@
 :uriSpace a owl:DatatypeProperty ;
     :category :pending ;
     rdfs:domain :Dataset ;
-    rdfs:label "URI-rymd"@en, "URI space"@sv ;
+    rdfs:label "URI-rymd"@sv, "URI space"@en ;
     owl:equivalentProperty void:uriSpace .
 
 :uriRegexPattern a owl:DatatypeProperty ;
     :category :pending ;
     rdfs:domain :Dataset ;
-    rdfs:label "URI-regex-uttryck"@en, "URI regex pattern"@sv ;
+    rdfs:label "URI-regex-uttryck"@sv, "URI regex pattern"@en ;
     owl:equivalentProperty void:uriRegexPattern .
+
+:datasetClass a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:domain :Dataset ;
+    rdfs:range owl:Class ;
+    rdfs:label "Beskriver resurser av klass"@sv, "Describes resources of class"@en ;
+    owl:equivalentProperty void:class .
 
 :DataCatalog a owl:Class;
     rdfs:label "Data catalog"@en, "Datakatalog"@sv;
