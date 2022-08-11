@@ -120,14 +120,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
           "showProperties": [
-            {
-              "alternateProperties": [
-                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
-                {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle",
-                "identifiedBy"
-              ]
-            },
+            {"alternateProperties": [ "hasTitle", "identifiedBy" ]},
             "provisionActivity"
           ]
         },
@@ -135,20 +128,7 @@
           "@id": "Work-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [
-            {
-              "alternateProperties": [
-                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
-                {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
-              ]
-            },
-            "legalDate",
-            "language",
-            "marc:version",
-            "version",
-            "originDate"
-          ]
+          "showProperties": [ "hasTitle", "legalDate", "language", "marc:version", "version", "originDate" ]
         },
         "DataCatalog": {
           "@id": "DataCatalog-chips",
@@ -476,13 +456,7 @@
             "issuanceType",
             "mediaType",
             "carrierType",
-            {
-              "alternateProperties": [
-                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
-                {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
-              ]
-            },
+            "hasTitle",
             "instanceOf",
             "responsibilityStatement",
             "editionStatement",
@@ -524,13 +498,7 @@
           "@id": "Work-cards",
           "classLensDomain": "Work",
           "showProperties": [
-            {
-              "alternateProperties": [
-                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
-                {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
-              ]
-            },
+            "hasTitle",
             "marc:version",
             "version",
             "translationOf",
