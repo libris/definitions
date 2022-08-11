@@ -120,7 +120,14 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Instance",
           "showProperties": [
-            {"alternateProperties": [ "hasTitle", "identifiedBy" ]},
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle",
+                "identifiedBy"
+              ]
+            },
             "provisionActivity"
           ]
         },
@@ -128,7 +135,20 @@
           "@id": "Work-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Work",
-          "showProperties": [ "hasTitle", "legalDate", "language", "marc:version", "version", "originDate" ]
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
+            "legalDate",
+            "language",
+            "marc:version",
+            "version",
+            "originDate"
+          ]
         },
         "DataCatalog": {
           "@id": "DataCatalog-chips",
@@ -456,7 +476,13 @@
             "issuanceType",
             "mediaType",
             "carrierType",
-            "hasTitle",
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
             "instanceOf",
             "responsibilityStatement",
             "editionStatement",
@@ -498,7 +524,13 @@
           "@id": "Work-cards",
           "classLensDomain": "Work",
           "showProperties": [
-            "hasTitle",
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
             "marc:version",
             "version",
             "translationOf",
