@@ -39,6 +39,7 @@
 
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
+    :category :heuristicIdentity;
     owl:equivalentClass bf2:Language, madsrdf:Language, sdo:Language .
 
 :Nationality a owl:Class ;
@@ -101,9 +102,9 @@
 
 :broader a owl:ObjectProperty;
     rdfs:label "broader"@en, "bredare"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Concept, :Language ;
     owl:inverseOf :narrower;
-    rdfs:range :Concept ;
+    sdo:rangeIncludes :Concept, :Language ;
     rdfs:subPropertyOf :broaderTransitive ;
     owl:equivalentProperty skos:broader ;
     owl:equivalentProperty madsrdf:hasBroaderAuthority .
@@ -179,9 +180,9 @@
 
 :narrower a owl:ObjectProperty;
     rdfs:label "narrower"@en, "smalare"@sv;
-    sdo:domainIncludes :Concept ;
+    sdo:domainIncludes :Concept, :Language ;
     owl:inverseOf :broader;
-    rdfs:range :Concept ;
+    sdo:rangeIncludes :Concept, :Language ;
     owl:equivalentProperty skos:narrower ;
     owl:equivalentProperty madsrdf:hasNarrowerAuthority .
 
