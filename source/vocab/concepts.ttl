@@ -37,10 +37,29 @@
     rdfs:label "Händelse"@sv;
     owl:equivalentClass bf2:Event , prov:Activity, sdo:Event .
 
+:LanguageForm a owl:Class ;
+    rdfs:label "Språklig form"@sv, "Language form"@en;
+    ptg:abstract true .
+
 :Language a owl:Class ;
     rdfs:label "Språk"@sv;
     :category :heuristicIdentity;
+    rdfs:subClassOf :LanguageForm ;
     owl:equivalentClass bf2:Language, madsrdf:Language, sdo:Language .
+
+:LanguageScript a owl:Class ;
+    rdfs:label "Skriftsystem"@sv, "Language script"@en;
+    skos:altLabel "Writing system"@en ;
+    :subClassOf :LanguageForm .
+
+:TransformedLanguageForm a owl:Class ;
+    rdfs:label "Transformerad språkform"@sv, "Transformed language form"@en;
+    skos:altLabel "Translittererad eller transkriberad form"@sv ;
+    :subClassOf :LanguageForm .
+
+:LanguageTransformRules a owl:Class ;
+    rdfs:label "Språktransformationsregler"@sv, "Language transform rules"@en;
+    rdfs:subClassOf :ConceptScheme .
 
 :Nationality a owl:Class ;
     rdfs:label "Nationality"@en, "Nationalitet"@sv .
