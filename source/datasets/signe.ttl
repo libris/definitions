@@ -1,0 +1,21 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix : <https://id.kb.se/vocab/>
+base <https://libris.kb.se/dataset/>
+
+<signe> a :Dataset ;
+    :created "2022-02-19T09:06:00Z"^^xsd:dateTime ;
+    :source <https://signe.kb.se/> ;
+    :license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+<signe/tidningar> a :Dataset ;
+    :uriSpace "https://libris.kb.se/dataset/signe/bib/" ;
+    :created "2022-04-07T13:40:10Z"^^xsd:dateTime ;
+    :ingestStrategy in:ReplaceMainId, in:MergeWithMatching ;
+    :isPartOf <signe> .
+
+<signe/editioner> a :Dataset ;
+    :uriSpace "https://libris.kb.se/dataset/signe/edition/" ;
+    :created "2022-04-19T10:00:00Z"^^xsd:dateTime ;
+    :ingestStrategy in:ReplaceMainId ;
+    :dependsOn <signe/tidningar> ;
+    :isPartOf <signe> .
