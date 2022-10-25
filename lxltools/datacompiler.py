@@ -43,6 +43,7 @@ class Compiler:
         self.cachedir = None
         self.union = union
         self.current_ds_file = None
+        self.no_records = False
 
     def main(self):
         argp = argparse.ArgumentParser(
@@ -54,16 +55,18 @@ class Compiler:
         arg('-c', '--cache', type=str, default="cache", help="Cache directory")
         arg('-l', '--lines', action='store_true',
                 help="Output a single file with one JSON-LD document per line")
+        arg('-R', '--no-records', action='store_true', help="Do not add Record descriptions")
         arg('datasets', metavar='DATASET', nargs='*')
 
         args = argp.parse_args()
         if not args.datasets and args.outdir:
             args.datasets = list(self.datasets)
 
-        self._configure(args.outdir, args.cache, args.system_base_iri, use_union=args.lines)
+        use_union = args.lines
+        self._configure(args.outdir, args.cache, args.system_base_iri, use_union, args.no_records)
         self._run(args.datasets)
 
-    def _configure(self, outdir, cachedir=None, system_base_iri=None, use_union=False):
+    def _configure(self, outdir, cachedir=None, system_base_iri=None, use_union=False, no_records=False):
         if system_base_iri:
             self.system_base_iri = system_base_iri
         self.outdir = Path(outdir)
@@ -75,6 +78,7 @@ class Compiler:
             print("Writing dataset lines to file:", self.union_file.name)
         else:
             self.union_file = None
+        self.no_records = no_records
 
     def _run(self, names):
         try:
@@ -143,6 +147,11 @@ class Compiler:
 
             created_ms = ds_created_ms + _faux_offset(node['@id'])
             modified_ms = None
+            fpath = urlparse(nodeid).path[1:]
+
+            if self.no_records:
+                self.write(node, fpath)
+                continue
 
             meta = node.pop('meta', None)
             if meta:
@@ -153,7 +162,6 @@ class Compiler:
 
                 assert not meta, f'meta {meta} was not exhausted'
 
-            fpath = urlparse(nodeid).path[1:]
             desc = self._to_node_description(
                     node,
                     created_ms,
@@ -169,14 +177,22 @@ class Compiler:
             '@type': 'Dataset',
             'label': label
         }
+
+        ds_path = urlparse(ds_url).path[1:]
+
+        if self.no_records:
+            # TODO: with-record-less data, the dataset description is given as
+            # additional source data to XL LDImporter. The routine is not yet
+            # set whether that should add/update the DS description (which
+            # seems reasonable).
+            return
+
         desc = self._to_node_description(ds, created_ms, modified_ms,
                 datasets={self.dataset_id, ds_url})
 
         record = desc['@graph'][0]
         if self.tool_id:
             record['generationProcess'] = {'@id': self.tool_id}
-
-        ds_path = urlparse(ds_url).path[1:]
 
         self.write(desc, ds_path)
 
