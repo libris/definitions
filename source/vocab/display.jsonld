@@ -469,7 +469,8 @@
           "@id": "Resource-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ "title", "prefLabel", "label", "name", "code", "exactMatch", "closeMatch", "broadMatch", "isPartOf", "isDefinedBy" ]
+          "fresnel:extends": {"@id": "Resource-chips"},
+          "showProperties": [ "fresnel:super", "exactMatch", "closeMatch", "broadMatch" ]
         },
         "Record": {
           "@type": "fresnel:Lens",
