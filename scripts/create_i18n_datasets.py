@@ -67,8 +67,15 @@ with open('build/languages.json.lines') as f:
             if tag:
                 LANG_CODE_MAP[tag] = thing['code']
 
-def get_langcode(tag):
-    return LANG_CODE_MAP.get(tag, tag)
+
+def get_langlink(tag):
+    # TODO: Decide to EITHER lookup id:
+    code = LANG_CODE_MAP.get(tag, tag)
+    return {ID: f"/language/{code}"}
+    # OR use tag-based sameAs alias to all languages (not done yet):
+    #return {ID: f"/i18n/lang/{tag}"}
+    # OR rely on LanguageLinker:
+    #return {TYPE: "Language", "code": tag}
 
 
 tags: set[str] = set()
@@ -89,15 +96,16 @@ for form in forms:
     for tag, script, otag, oscript, rule in FORM_RE.findall(form):
         tags.add(tag)
         tags.add(otag)
-        # TODO: lookup id *or* add tag-based sameAs alias to all languages!
-        #langref = {ID: f"/i18n/lang/{tag}"}
-        #langref = {TYPE: "Language", "code": tag}
-        langref = {ID: f"/language/{get_langcode(tag)}"}
+        langref = get_langlink(tag)
         if tag != otag:
-            desc["inLanguage"] = langref
-            desc["fromLanguage"] = langref
+            desc["basedOnLanguage"] = langref
+            desc["fromLanguage"] = get_langlink(otag)
         else:
-            desc["broader"] = langref
+            # TODO: which is better/worse for applications?
+            # (Note 1: We do use broader for specialized languages).
+            # (Note 2: We've defined basedOnLanguage as a subPropertyOf broader).
+            #desc["broader"] = langref
+            desc["basedOnLanguage"] = langref
 
         desc["inLangScript"] = {ID: f"/i18n/script/{script}"}
         scripts.add(script)
