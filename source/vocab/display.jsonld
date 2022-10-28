@@ -12,6 +12,8 @@
       "alternateProperties": {"@id": "fresnel:alternateProperties", "@container": "@list", "@type": "@vocab"},
       "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"},
       "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"},
+      "subPropertyOf": {"@id": "rdfs:subPropertyOf", "@type": "@vocab"},
+      "range": {"@id": "rdfs:range", "@type": "@vocab"},
       "labelByLang": {"@id": "label", "@container": "@language"},
       "commentByLang": {"@id": "comment", "@container": "@language"},
       "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
@@ -469,7 +471,8 @@
           "@id": "Resource-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ "title", "prefLabel", "label", "name", "code", "exactMatch", "closeMatch", "broadMatch", "isPartOf", "isDefinedBy" ]
+          "fresnel:extends": {"@id": "Resource-chips"},
+          "showProperties": [ "fresnel:super", "exactMatch", "closeMatch", "broadMatch" ]
         },
         "Record": {
           "@type": "fresnel:Lens",
@@ -1103,7 +1106,6 @@
           "fresnel:extends": {"@id": "ToCEntry-cards"},
           "showProperties": [ "fresnel:super" ]
         }
-
       }
     },
     "search-cards": {
