@@ -47,15 +47,31 @@
     rdfs:subClassOf :LanguageForm ;
     owl:equivalentClass bf2:Language, madsrdf:Language, sdo:Language .
 
-:LanguageScript a owl:Class ;
-    rdfs:label "Skriftsystem"@sv, "Language script"@en;
-    skos:altLabel "Writing system"@en ;
-    :subClassOf :LanguageForm .
-
 :TransformedLanguageForm a owl:Class ;
     rdfs:label "Transformerad språkform"@sv, "Transformed language form"@en;
     skos:altLabel "Translittererad eller transkriberad form"@sv ;
-    :subClassOf :LanguageForm .
+    rdfs:subClassOf :LanguageForm .
+
+:inLangScript a owl:ObjectProperty ;
+    rdfs:label "på skriftsystem"@sv, "in language script"@en;
+    rdfs:domain :TransformedLanguageForm ;
+    rdfs:range :Script .
+
+:fromLangScript a owl:ObjectProperty ;
+    rdfs:label "från skriftsystem"@sv, "from language script"@en;
+    rdfs:domain :TransformedLanguageForm ;
+    rdfs:range :Script .
+
+:basedOnLanguage a owl:ObjectProperty ;
+    rdfs:label "baserat på språk"@sv, "based on language"@en;
+    rdfs:subPropertyOf :broader ;
+    rdfs:domain :TransformedLanguageForm ;
+    rdfs:range :Language .
+
+:langTransformAccordingTo a owl:ObjectProperty ;
+    rdfs:label "enligt translittereringsregler"@sv, "according to transform rules"@en;
+    rdfs:domain :TransformedLanguageForm ;
+    rdfs:range :LanguageTransformRules .
 
 :LanguageTransformRules a owl:Class ;
     rdfs:label "Språktransformationsregler"@sv, "Language transform rules"@en;
