@@ -98,14 +98,14 @@ for form in forms:
         tags.add(otag)
         langref = get_langlink(tag)
         if tag != otag:
-            desc["basedOnLanguage"] = langref
+            desc["inLanguage"] = langref
             desc["fromLanguage"] = get_langlink(otag)
         else:
             # TODO: which is better/worse for applications?
             # (Note 1: We do use broader for specialized languages).
-            # (Note 2: We've defined basedOnLanguage as a subPropertyOf broader).
+            # (Note 2: We've defined inLanguage as a subPropertyOf broader).
             #desc["broader"] = langref
-            desc["basedOnLanguage"] = langref
+            desc["inLanguage"] = langref
 
         desc["inLangScript"] = {ID: f"/i18n/script/{script}"}
         scripts.add(script)
