@@ -4,6 +4,7 @@ import sys
 
 ID = "@id"
 TYPE = "@type"
+VALUE = "@value"
 GRAPH = "@graph"
 
 FORM_RE = re.compile(r'(\w+)-(\w+)-t-(\w+)(?:-(?:(\w+)-)?([xm]0-.+))?')
@@ -61,7 +62,9 @@ forms = [
 LANG_CODE_MAP: dict[str, str] = {}
 with open('build/languages.json.lines') as f:
     for l in f:
-        thing = json.loads(l)[GRAPH][-1]
+        thing = json.loads(l)
+        if GRAPH in thing:
+            thing = thing[GRAPH][1]
         if thing[TYPE] == 'Language':
             tag = thing.get('langTag')
             if tag:
@@ -94,6 +97,8 @@ def describe(code, cat, rtype):
 for form in forms:
     desc = describe(form, 'lang', LANG_FORM)
     for tag, script, otag, oscript, rule in FORM_RE.findall(form):
+        code = desc.pop("code")
+        desc["code"] = [{VALUE: code, TYPE: 'BCP47'}]
         tags.add(tag)
         tags.add(otag)
         langref = get_langlink(tag)
