@@ -34,6 +34,8 @@ COMBINATIONS = [
     ('uz', 'Cyrl', 'm0-alaloc'),
     ('zh', 'Hani', 'm0-alaloc'),
     ('mn', 'Mong', 'm0-alaloc'),
+
+    ('ar', 'Arab', 'm0-alaloc'),
 ]
 
 ALA_LOC_NO_SCRIPT = ['am', 'chu', 'ka', 'hy']
@@ -43,8 +45,6 @@ ALA_LOC_NON_SLAVIC_CYRILLIC = [
     'inh', 'kaa', 'kbd', 'kom', 'krc', 'krl', 'kum', 'lez', 'lit', 'nog',
     'oss', 'rom', 'rum', 'rum', 'sah', 'sel', 'tut', 'udm', 'xal',
 ]
-
-JUST_TAGS = ['ara', 'und']  # TODO: map lang to script
 
 forms = [
     f"{tag}-Latn-t-{tag}-{script}-{rules}"
@@ -56,7 +56,7 @@ forms = [
     f"{tag}-Latn-t-{tag}-Cyrl-m0-alaloc"
     for tag in ALA_LOC_NON_SLAVIC_CYRILLIC
 ] + [
-    f"{tag}-Latn-t-{tag}" for tag in JUST_TAGS
+    f"und-Latn-t-und",
 ]
 
 
