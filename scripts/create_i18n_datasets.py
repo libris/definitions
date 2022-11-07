@@ -122,7 +122,7 @@ for form in forms:
 
         if rule:
             rule = rule.replace('0-', '0/')  # TODO: is this what we want?
-            desc["langTransformAccordingTo"] = {ID: f"/i18n/rules/{rule}"}
+            desc["langTransformAccordingTo"] = {ID: f"/i18n/rule/{rule}"}
             rules.add(rule)
 
 for script in scripts:
@@ -130,7 +130,7 @@ for script in scripts:
 
 for rule in rules:
     base, code = rule.split('/')
-    desc = describe(code, f'rules/{base}', 'LanguageTransformRules')
-    desc['inCollection'] = {ID: f'/i18n/rules/{base}'}
+    desc = describe(code, f'rule/{base}', 'LanguageTransformRules')
+    desc['inCollection'] = {ID: f'/i18n/rule/{base}'}
 
 json.dump({"@graph": items}, sys.stdout, indent=2, ensure_ascii=True)
