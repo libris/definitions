@@ -19,10 +19,25 @@ base <https://id.kb.se/>
   :code "skr-1980" ;
   :inCollection </i18n/rule/x0> .
 
-</i18n/rule/m0/iso-1995> a :LanguageTransformRules ;
-  :label "Translitterering enligt ISO 9:1995"@sv ;
-  :code "iso-1995" ;
+</i18n/rule/m0/iso> a :LanguageTransformRules ;
+  :code "iso" ;
+  :label "Translitterering enligt ISO-standard"@sv ;
   :inCollection </i18n/rule/m0> .
+
+</i18n/rule/m0/iso-1995> a :LanguageTransformRules ;
+  :code "iso-1995" ;
+  :label "Translitterering enligt ISO-standard från 1995"@sv ;
+  :broader </i18n/rule/m0/iso> ;
+  :inCollection </i18n/rule/m0> .
+
+</i18n/rule/iso-1995/Cyrl-t-Latn> a :LanguageTransformRules ;
+  :broader </i18n/rule/m0/iso-1995> ;
+  :label "Translitterering av kyrillisk till latinsk skrift enligt ISO 9:1995"@sv ;
+  :specifiesLanguageForm [ a :TransformedLanguageForm ;
+      :inLangScript </i18n/script/Latn> ;
+      :fromLangScript </i18n/script/Cyrl> ] ;
+  :seeAlso <https://sv.wikipedia.org/wiki/ISO_9> ,
+    <https://metadatabyran.kb.se/download/18.6945cdaa174b74a2c3615fe/1601917435290/Kyrilliska%20alfabetet.pdf> .
 
 </i18n/rule/x0/btj> a :LanguageTransformRules ;
   :label "Transkribering enligt Btj:s praxis för folkbiblioteken"@sv ;
