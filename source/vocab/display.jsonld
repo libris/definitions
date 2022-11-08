@@ -923,6 +923,11 @@
           "@id": "ShelfMarkSequence-cards",
           "fresnel:extends": {"@id": "ShelfMarkSequence-chips"},
           "showProperties": [ "fresnel:super", "description", "hasNote" ]
+        },
+        "TransformedLanguageForm": {
+          "@id": "TransformedLanguageForm-cards",
+          "fresnel:extends": {"@id": "Resource-chips"},
+          "showProperties": [ "fresnel:super", "inLanguage", "inLangScript", "fromLangScript", "langTransformAccordingTo" ]
         }
       }
     },
@@ -1104,6 +1109,10 @@
         },
         "ToCEntry": {
           "fresnel:extends": {"@id": "ToCEntry-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "TransformedLanguageForm": {
+          "fresnel:extends": {"@id": "TransformedLanguageForm-cards"},
           "showProperties": [ "fresnel:super" ]
         }
       }

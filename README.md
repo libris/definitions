@@ -90,7 +90,7 @@ to generate a vocab build file. Look at it as Turtle by running:
 
 , and/or make a nice, digested tree view by running:
 
-    $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c build/vocab/context.jsonld -v
+    $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c sys/context/kbv.jsonld -v
 
 When bigger changes are made, you can generate a more predicable output by
 calling:

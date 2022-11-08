@@ -126,10 +126,11 @@
     owl:equivalentClass bf2:MusicNotation .
 
 :Script a owl:Class;
-    rdfs:label "Skriftsystem"@sv;
-    skos:altLabel "Skriftart"@sv;
+    rdfs:label "Skriftsystem"@sv, "Language script"@en;
+    skos:altLabel "Skriftart"@sv, "Writing system"@en ;
     skos:editorialNote "Hette tidigare Skriftart i KRS."@sv;
     rdfs:subClassOf :Notation;
+    #rdfs:subClassOf :LanguageForm ;  # TODO: Correct/useful? (Purpose: to find all "component parts of a lang tag".)
     owl:equivalentClass bf2:Script .
 
 :TactileNotation a owl:Class;
