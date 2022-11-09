@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-from __future__ import print_function, unicode_literals
 import csv
 import json
 import sys
@@ -19,7 +18,7 @@ def create_data(fpath):
         label_en = columns[-1]
         item = {
             '@id': code,
-            '@type': 'Topic',
+            '@type': 'Classification',
             'prefLabelByLang': {'sv': label_sv, 'en': label_en}
         }
 
