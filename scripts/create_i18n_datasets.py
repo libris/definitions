@@ -17,6 +17,7 @@ COMBINATIONS = [
     ('grc', 'Grek', 'x0-skr-1980'),
     ('mn', 'Cyrl', 'x0-lessing'),
 
+    # TODO: keep code, but link to specific: iso-1995/Cyrl-t-Latn
     ('be', 'Cyrl', 'm0-iso-1995'),
     ('bg', 'Cyrl', 'm0-iso-1995'),
     ('kk', 'Cyrl', 'm0-iso-1995'),
@@ -36,7 +37,15 @@ COMBINATIONS = [
     ('mn', 'Mong', 'm0-alaloc'),
 
     ('ar', 'Arab', 'm0-alaloc'),
+    ('kk', 'Arab', 'm0-alaloc'),
+
+    # TODO: do we have tables for these? (Actually, TODO: collect the ones we have tables for.)
+    ('ja', 'Hira', 'm0-alaloc'),
+    ('ja', 'Kana', 'm0-alaloc'),
+    # Hrkt (broader of the two above) too?
 ]
+
+# TODO: Cyrl for VariantTitle can also be according to x0-kr76
 
 ALA_LOC_NO_SCRIPT = ['am', 'chu', 'ka', 'hy']
 
