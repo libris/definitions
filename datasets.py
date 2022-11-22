@@ -1,7 +1,8 @@
 import os
 import re
 from rdflib import Graph, ConjunctiveGraph, RDF, Namespace
-from lxltools.datacompiler import Compiler, w3c_dtz_to_ms, last_modified_ms
+from lxltools.datacompiler import Compiler, last_modified_ms
+from lxltools.timeutil import w3c_dtz_to_ms
 from lxltools.contextmaker import make_context, add_overlay
 from urllib.parse import urljoin
 
