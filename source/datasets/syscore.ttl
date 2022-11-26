@@ -2,14 +2,14 @@ prefix : <https://id.kb.se/vocab/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 base <https://libris.kb.se/>
 
-</dataset/> a :Dataset ;
+</dataset> a :Dataset ;
     :sameAs </.well-known/void>;
     :inDataCatalog </> ;
     :publisher </20dgd3zl56pmrzk#it> ;
     :label "The Dataset of all Libris Datasets"@en .
 
 </dataset/syscore> a :Dataset ;
-    :inDataset </dataset/> ;
+    :isPartOf </dataset/> ;
     :created "2022-11-19T13:09:35.010Z"^^xsd:dateTime ;
-    :sourceData [ :uri "build/syscore.ndjsonld" ;
+    :sourceData [ :uri "build/syscore.jsonld.lines" ;
         :sourceData [ :tool <https://id.kb.se/generator/syscorecompiler> ] ] .

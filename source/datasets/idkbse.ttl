@@ -1,19 +1,9 @@
-prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix void: <http://rdfs.org/ns/void#>
-prefix encfmt: <https://id.kb.se/encodingFormat/>
 prefix : <https://id.kb.se/vocab/>
 base <https://id.kb.se/dataset/>
 
-<definitions> a :Dataset;
-    owl:sameAs </.well-known/void>;
-    :inDataset <https://libris.kb.se/dataset/> ;
-    void:classPartition <countries>;
-    void:classPartition <languages>;
-    void:classPartition <relators>;
-    void:classPartition <types>;
-    void:classPartition <schemes> .
+<common> a :Dataset;
+    :isPartOf <https://libris.kb.se/dataset> .
 
 <enums> a :Dataset ;
     :sourceData [ :uri "build/enums.json.lines" ;
@@ -22,6 +12,7 @@ base <https://id.kb.se/dataset/>
     :created "2014-01-23T10:34:17.981Z"^^xsd:dateTime .
 
 <rdaterms> a :Dataset ;
+    :isPartOf <common> ;
     #; NOTE: see also examples/mappings/rda-bf2-types.ttl for possibiliy of
     # extending our type system (instead).
     :sourceData [ :uri "build/rdaterms.json.lines" ;
@@ -46,6 +37,7 @@ base <https://id.kb.se/dataset/>
 
 
 <materials> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/materials.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-materials.rq" ] ;
             :sourceData [ :uri 'source/materials.ttl'; :representationOf <materials> ],
@@ -59,6 +51,7 @@ base <https://id.kb.se/dataset/>
     :created "2021-12-07T21:28:01.123Z"^^xsd:dateTime .
 
 <musnotationterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/musnotationterms.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-musnotationsterms.rq" ] ;
             :sourceData [ :uri 'source/musicnotation.ttl' ; :representationOf <musnotationterms> ] ,
@@ -68,6 +61,7 @@ base <https://id.kb.se/dataset/>
     :created "2021-05-21T23:59:01.337Z"^^xsd:dateTime .
 
 <tacnotationterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/tacnotationterms.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-tacnotationterms.rq" ] ;
             :sourceData [ :uri 'source/tactilenotation.ttl' ; :representationOf <tacnotationterms> ],
@@ -77,6 +71,7 @@ base <https://id.kb.se/dataset/>
     :created "2021-05-21T23:59:10.456Z"^^xsd:dateTime .
 
 <swepubterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/swepubterms.json.lines" ; :sourceData [ a :SparqlUpdate ;
             :dataQuery [ :uri 'source/swepub/update.rq' ] ;
             :sourceData [ :uri 'source/swepub/output-types.ttl' ],
@@ -88,7 +83,7 @@ base <https://id.kb.se/dataset/>
     :created "2018-05-29T12:36:01.337Z"^^xsd:dateTime .
 
 <relators> a :Dataset ;
-    void:class :Relator;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/relators.json.lines" ; :sourceData [ a :QueryConstruct ;
             :sourceData [ :uri 'source/relators.ttl' ; :representationOf <relators> ],
                     <http://id.loc.gov/vocabulary/relators> ,
@@ -103,7 +98,7 @@ base <https://id.kb.se/dataset/>
     :created "2014-02-01T16:29:12.378Z"^^xsd:dateTime .
 
 <languages> a :Dataset ;
-    void:class :Language;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/languages.json.lines" ;
             :sourceData [ a :QueryConstruct ;
                     :dataQuery [ :uri "source/construct-languages.rq" ] ;
@@ -118,7 +113,7 @@ base <https://id.kb.se/dataset/>
     :created "2014-08-01T07:56:51.110Z"^^xsd:dateTime .
 
 <countries> a :Dataset ;
-    void:class :Country;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/countries.json.lines" ; :sourceData [ a :QueryConstruct ;
             :sourceData [ :uri 'source/countries.ttl' ], <http://id.loc.gov/vocabulary/countries> ;
             :dataQuery [ :uri "source/construct-countries.rq" ]
@@ -132,6 +127,7 @@ base <https://id.kb.se/dataset/>
 # be removed and just inner source is kept.
 
 <enumterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/enumterms.json.lines" ;
             :sourceData [ :uri 'source/kbv-enums.ttl' ] ] ;
     :uriSpace "/term/enum/" ;
@@ -139,48 +135,56 @@ base <https://id.kb.se/dataset/>
 
 #NOTE: More suitable name might be needed if usage is broader than digital representations
 <reprterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/reprterms.json.lines' ;
             :sourceData [ :uri 'source/repr-terms.ttl' ] ] ;
     :uriSpace "/term/repr/" ;
     :created "2021-02-22T10:32:01.337Z"^^xsd:dateTime .
 
 <encodingFormatterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/encodingFormatterms.json.lines' ;
             :sourceData [ :uri 'source/encodingFormat-terms.ttl' ] ] ;
     :uriSpace "/encodingFormat/" ;
     :created "2021-03-04T10:12:09.921Z"^^xsd:dateTime .
 
 <bibdbterms> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/bibdbterms.json.lines' ;
         :sourceData [ :uri 'source/bibdb/terms.ttl' ] ] ;
     :uriSpace "/term/bibdb/" ;
     :created "2021-09-20T08:13:50.570Z"^^xsd:dateTime .
 
 <policies> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/policies.json.lines' ;
         :sourceData [ :uri 'source/policies.ttl' ] ] ;
     :uriSpace "/policy/" ;
     :created "2021-11-18T11:48:51Z"^^xsd:dateTime .
 
 <containers> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/containers.json.lines' ;
         :sourceData [ :uri 'source/containers.ttl' ] ] ;
     :uriSpace "/term/" ;
     :created "2019-07-11T13:04:17.964Z"^^xsd:dateTime .
 
 <generators> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/generators.json.lines' ;
         :sourceData [ :uri 'source/generators.ttl' ] ] ;
     :uriSpace "/generator/" ;
     :created "2018-04-25T18:55:14.723Z"^^xsd:dateTime .
 
 <schemes> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri 'build/schemes.json.lines' ;
         :sourceData [ :uri 'source/schemes.ttl' ] ] ;
     :uriSpace "/" ;
     :created "2014-02-01T20:00:01.766Z"^^xsd:dateTime .
 
 <nationalities> a :Dataset ;
+    :isPartOf <common> ;
     :sourceData [ :uri "build/nationalities.json.lines" ;
         :sourceData [ :uri "source/nationalities.ttl" ] ] ;
     :uriSpace "/nationality/" ;
