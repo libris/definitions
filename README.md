@@ -84,9 +84,11 @@ the relevant sources.
 
     $ python datasets.py vocab
 
-to generate a vocab build file. Look at it as Turtle by running:
+to generate a vocab build file.
 
-    $ rdfpipe -ijson-ld:context=build/vocab/context.jsonld build/vocab.jsonld
+Look at it as Turtle by running:
+
+    $ rdfpipe -ijson-ld:context=sys/context/kbv.jsonld build/vocab.jsonld
 
 , and/or make a nice, digested tree view by running:
 
