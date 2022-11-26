@@ -7,7 +7,22 @@
       "article": {
         "@type": "Article",
         "articleBody": "<p xml:lang='sv'>Data på <b>LIBRIS.KB.SE</b>.</p>"
-      },
+      }
+    },
+    {
+      "@id": "https://libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Sök-tjänst", "en": "Search Service"},
       "statistics": {
         "sliceList": [
           { "dimensionChain": [{"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000 },
@@ -32,16 +47,6 @@
       }
     },
     {
-      "@id": "https://libris.kb.se/data",
-      "@type": "DataService",
-      "titleByLang":  {"sv": "Data-index för libris.kb.se"},
-      "statistics": {
-        "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
-        ]
-      }
-    },
-    {
       "@id": "https://id.kb.se/",
       "@type": "DataCatalog",
       "title": "ID.KB.SE",
@@ -51,14 +56,7 @@
         {"@id": "https://id.kb.se/marcframe/"},
         {"@id": "https://id.kb.se/vocab/"},
         {"@id": "https://id.kb.se/doc/about"}
-      ],
-      "statistics": {
-        "sliceList": [
-          { "dimensionChain": ["inScheme"], "itemLimit": 1000 },
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
-          { "dimensionChain": ["inCollection"], "itemLimit": 100 }
-        ]
-      }
+      ]
     },
     {
       "@id": "https://id.kb.se/data",
@@ -68,6 +66,18 @@
         "sliceList": [
           { "dimensionChain": ["inScheme"], "itemLimit": 1000 },
           { "dimensionChain": ["rdf:type"], "itemLimit": 100 }
+        ]
+      }
+    },
+    {
+      "@id": "https://id.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Sök-tjänst för id.kb.se", "en": "Search Service for id.kb.se"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["inScheme"], "itemLimit": 1000 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["inCollection"], "itemLimit": 100 }
         ]
       }
     }
