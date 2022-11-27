@@ -35,6 +35,22 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
 
 
 @compiler.handler
+def contexts():
+    contexts_ds_url = urljoin(compiler.dataset_id, 'sys/context')
+
+    context_alias = ID_BASE + 'vocab/context'
+
+    docpath = compiler.path('sys/context/kbv.jsonld')
+    uripath = ID_BASE + 'sys/context/kbv'
+    _write_context_record(compiler, docpath, uripath, contexts_ds_url, context_alias)
+
+    root = compiler.path('')
+    for docpath in compiler.path('sys/context').glob('target/*.jsonld'):
+        uripath = ID_BASE + str(docpath.relative_to(root).with_suffix(''))
+        _write_context_record(compiler, docpath, uripath, contexts_ds_url)
+
+
+@compiler.handler
 def vocab():
     vocab_base = ID_BASE + 'vocab/'
 
@@ -122,36 +138,6 @@ def apps():
         descriptions = [app]
         _insert_record(descriptions, created_ms, ds_url)
         compiler.write({'@graph': descriptions}, slug)
-
-
-@compiler.dataset
-def docs():
-    import markdown
-    docs = []
-    sourcepath = compiler.path('source')
-    for fpath in (sourcepath / 'doc').glob('**/*.mkd'):
-        text = fpath.read_text('utf-8')
-        html = markdown.markdown(text)
-        doc_id = (str(fpath.relative_to(sourcepath))
-                  .replace(os.sep, '/')
-                  .replace('.mkd', ''))
-        doc_id, dot, lang = doc_id.partition('.')
-        doc = {
-            "@type": "Article",
-            "@id": ID_BASE + doc_id,
-            "articleBody": html
-        }
-        h1end = html.find('</h1>')
-        if h1end > -1:
-            doc['title'] = html[len('<h1>'):h1end]
-        if lang:
-            doc['language'] = {"langTag": lang},
-        docs.append(doc)
-
-    return ID_BASE + "doc", "2016-04-15T14:43:38.072Z", {
-        "@context": "../sys/context/base.jsonld",
-        "@graph": docs
-    }
 
 
 def _insert_record(graph, created_ms, dataset_id):

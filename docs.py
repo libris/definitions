@@ -17,7 +17,7 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
 
 
 @compiler.dataset
-def docs():
+def id_docs():
     docs = []
     sourcepath = compiler.path('source')
     for fpath in (sourcepath / 'doc').glob('**/*.mkd'):
