@@ -1,5 +1,5 @@
 import os
-from rdflib import Graph
+from rdflib import Graph, ConjunctiveGraph
 from lxltools.datacompiler import Compiler
 from urllib.parse import urljoin
 
@@ -194,6 +194,57 @@ def countries():
         query="source/construct-countries.rq")
 
     return "/country/", "2014-02-01T12:21:14.008Z", graph
+
+
+@compiler.dataset
+def reprterms():
+    graph = Graph().parse(str(compiler.path('source/repr-terms.ttl')), format='turtle')
+
+    return "/term/repr/", "2021-02-22T10:32:01.337Z", graph
+
+
+@compiler.dataset
+def encodingFormatterms():
+    graph = Graph().parse(str(compiler.path('source/encodingFormat-terms.ttl')), format='turtle')
+
+    return "/encodingFormat/", "2021-03-04T10:12:09.921Z", graph
+
+
+@compiler.dataset
+def bibdbterms():
+    graph = ConjunctiveGraph()
+    for part in compiler.path('source/bibdb').glob('**/*.ttl'):
+        graph.parse(str(part), format='turtle')
+
+    return "/term/bibdb/", "2021-09-20T08:13:50.570Z", graph
+
+
+@compiler.dataset
+def policies():
+    graph = Graph().parse(str(compiler.path('source/policies.ttl')), format='turtle')
+
+    return "/policy/", "2021-11-18T11:48:51Z", graph
+
+
+@compiler.dataset
+def containers():
+    graph = Graph().parse(str(compiler.path('source/containers.ttl')), format='turtle')
+
+    return "/term/", "2019-07-11T13:04:17.964Z", graph
+
+
+@compiler.dataset
+def generators():
+    graph = Graph().parse(str(compiler.path('source/generators.ttl')), format='turtle')
+
+    return "/generator/", "2018-04-25T18:55:14.723Z", graph
+
+
+@compiler.dataset
+def schemes():
+    graph = Graph().parse(str(compiler.path('source/schemes.ttl')), format='turtle')
+
+    return "/", "2014-02-01T20:00:01.766Z", graph
 
 
 if __name__ == '__main__':
