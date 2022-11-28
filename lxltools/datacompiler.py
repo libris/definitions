@@ -115,7 +115,13 @@ class Compiler:
     def _compile_datasets(self, names):
         self._create_dataset_description(self.dataset_id,
                 timeutil.w3c_dtz_to_ms(self.created))
+
         for name in names:
+            if name not in self.datasets:
+                print(f"Skipping dataset: {name} (not defined in {self.dataset_id})",
+                      file=sys.stderr)
+                continue
+
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
