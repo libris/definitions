@@ -19,12 +19,31 @@ Install the Python-based dependencies:
 
 ## Usage
 
-Run the following script to build the full set of definition resources:
+See the files in `source/datasets/' for definitions of what is included in each
+(set of) datasets.
+
+Run the following to build the full set of datasets:
 
     $ python datasets.py -l
 
+This is often not needed, as not all datasets are updated all the time.
+Instead, prefer to set up and use the following to produce a load file only for
+what has been worked on.
+
+This builds the system core dataset:
+
+    $ python syscore.py -l
+
+Run the following to build the full set of common datasets for id.kb.se:
+
+    $ python common.py -l
+
 You can also pass dataset names to generate the different parts in isolation.
 Pass `-h` or `--help` to the script for details.
+
+Finally, this builds as set of documentation articles for id.kb.se:
+
+    $ python docs.py -l
 
 ## Contents
 
@@ -82,9 +101,9 @@ the relevant sources.
 
 *Tip:* During vocab development. Regularly run just:
 
-    $ python datasets.py vocab
+    $ python syscore.py
 
-to generate a vocab build file.
+which generates the vocab build file.
 
 Look at it as Turtle by running:
 
@@ -95,7 +114,7 @@ Look at it as Turtle by running:
     $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c sys/context/kbv.jsonld -v
 
 When bigger changes are made, you can generate a more predicable output by
-calling:
+calling e.g.:
 
     $ PYTHONHASHSEED=1 python datasets.py -l
 
