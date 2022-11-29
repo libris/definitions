@@ -247,5 +247,12 @@ def schemes():
     return "/", "2014-02-01T20:00:01.766Z", graph
 
 
+@compiler.dataset
+def nationalities():
+    graph = Graph().parse(str(compiler.path('source/nationalities.ttl')), format='turtle')
+
+    return "/nationality/", "2014-02-01T13:08:56.596Z", graph
+
+
 if __name__ == '__main__':
     compiler.main()
