@@ -3,19 +3,14 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 prefix dc: <http://purl.org/dc/terms/>
-prefix iso639_1: <http://id.loc.gov/vocabulary/iso639-1/>
 prefix iso639_2: <http://id.loc.gov/vocabulary/iso639-2/>
 prefix kbv: <https://id.kb.se/vocab/>
-prefix langtag: <https://id.kb.se/i18n/lang/>
 
 construct {
     ?s ?p ?o ;
-        owl:sameAs ?bcp47alias ;
         skos:prefLabel ?prefLabel ;
         skos:altLabel ?altLabel ;
-        skos:notation ?langCodeShort, ?langTag, ?marc ;
         skos:exactMatch ?locLang ;
-        skos:closeMatch ?locVariant .
 } where {
     graph <https://id.kb.se/dataset/languages> {
         {
@@ -27,7 +22,7 @@ construct {
                 datatype(?locCode) = xsd:string
             )
             bind(iri(concat(str(iso639_2:), str(?locCode))) as ?locLang)
-            graph <http://id.loc.gov/vocabulary/languages> {
+            graph <http://id.loc.gov/vocabulary/iso639-2> {
                 {
                     filter(!contains(?prefLabel, "|"))
                     ?locLang madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel
@@ -40,17 +35,6 @@ construct {
                     bind(concat("^([^|]+\\|){", str(?n) ,"} *") as ?skipN)
                     bind(replace(replace(?altLabels, ?skipN, ""), " *\\|.*$", "") as ?altLabel)
                 }
-                optional {
-                    filter(langMatches(lang(?prefLabel), 'en'))
-                    ?locVariant madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel .
-                    bind(str(iso639_1:) as ?iso639_1_base)
-                    filter(strstarts(str(?locVariant), ?iso639_1_base))
-                    bind(substr(str(?locVariant), strlen(?iso639_1_base) + 1) as ?shortcode)
-                    bind(strdt(?shortcode, kbv:ISO639-1) as ?langCodeShort)
-                }
-                bind(str(coalesce(?langCodeShort, ?locCode)) as ?langTagStr)
-                bind(strdt(?langTagStr, kbv:BCP47) as ?langTag)
-                bind(IRI(concat(str(langtag:), ?langTagStr)) as ?bcp47alias)
             }
         }
     }
