@@ -21,9 +21,10 @@ construct {
         ?term (rdfs:subPropertyOf|owl:equivalentProperty) ?base .
         filter not exists {
             { ?base a rdf:Property }
+            union { ?base a owl:DatatypeProperty }
             union { ?base a owl:ObjectProperty }
             union { ?base a owl:SymmetricProperty }
-            union { ?base a owl:DatatypeProperty }
+            union { ?base a owl:TransitiveProperty }
         }
         bind("Unknown base property {} for term {}"@en as ?msg)
 

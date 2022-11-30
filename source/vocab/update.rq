@@ -38,4 +38,18 @@ delete {
     ?c rdfs:subClassOf ?a .
 } where {
     ?c rdfs:subClassOf / rdfs:subClassOf+ ?a .
+};
+
+# remove disputed work sublasses
+delete {
+    ?notawork rdfs:subClassOf :Work .
+} where {
+    values (?notawork) {
+        (:Manuscript)
+        (:Collection)
+        (:Integrating)
+        (:Monograph)
+        (:Serial)
+        (:Series)
+    }
 }
