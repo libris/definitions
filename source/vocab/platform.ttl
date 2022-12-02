@@ -4,6 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix fresnel: <http://www.w3.org/2004/09/fresnel#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
@@ -13,6 +14,7 @@
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix jsonld: <http://www.w3.org/ns/json-ld#> .
 @prefix iana: <http://www.iana.org/assignments/relation/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
@@ -47,6 +49,11 @@
 :Record a owl:Class;
     rdfs:label "Post"@sv, "Record"@en;
     rdfs:subClassOf :AdminMetadata .
+
+:SystemRecord a owl:Class;
+    rdfs:label "System-post"@sv, "System record"@en;
+    rdfs:comment "En post som innehåller systemkritisk eller -specifik information."@sv;
+    rdfs:subClassOf :Record .
 
 :CacheRecord a owl:Class;
     rdfs:label "Cache-post"@sv, "Cache record"@en;
@@ -260,6 +267,10 @@
     rdfs:label "Beskriver resurser av klass"@sv, "Describes resources of class"@en ;
     owl:equivalentProperty void:class .
 
+:displayLens a owl:ObjectProperty ;
+    :category :pending ;
+    owl:inverseOf fresnel:classLensDomain .
+
 :DataCatalog a owl:Class;
     rdfs:label "Data catalog"@en, "Datakatalog"@sv;
     skos:definition "A collection of datasets or data services."@en, "En samling av dataset eller datatjänster."@sv;
@@ -294,6 +305,23 @@
     owl:inverseOf :hasDataset ;
     rdfs:subPropertyOf dc:isPartOf .
 
+:QueryConstruct a owl:Class ;
+    :category :pending .
+
+:dataQuery a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:label "data query"@en, "datafråga"@sv ;
+    rdfs:domain :QueryConstruct ;
+    rdfs:range :Representation .
+
+:sourceData a owl:ObjectProperty ;
+    rdfs:label "data source"@en, "källdata"@sv ;
+    rdfs:subPropertyOf dc:source .
+
+:dataDisplay a owl:ObjectProperty ;
+    rdfs:label "data display"@en, "datavisning"@sv ;
+    rdfs:subPropertyOf :describedBy .
+
 # Pending:
 
 :datasetDistribution a owl:ObjectProperty;
@@ -311,7 +339,7 @@
 :DataService a owl:Class;
     :category :pending;
     rdfs:label "Data service"@en, "Datatjänst"@sv;
-    owl:equivalentClass dcat:DataService, sdo:DataDownload .
+    owl:equivalentClass dcat:DataService .
 
 # Candidates for addition (NOTE: check dcat3 status):
 

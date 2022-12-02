@@ -1,4 +1,3 @@
-prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix : <https://id.kb.se/vocab/>
 
@@ -6,7 +5,8 @@ base <https://libris.kb.se/dataset/>
 
 <qlit/terms> a :Dataset ;
     :prefLabel "Dataset med QLIT-termer"@sv, "Dataset of QLIT terms"@en ;
+    :uriSpace "https://queerlit.dh.gu.se/qlit/" ;
     :uriRegexPattern "https://queerlit\\.dh\\.gu\\.se/qlit/v1.*" ;
-    :dataSource <https://queerlit.dh.gu.se/qlit/v1/> ;
-    :datasetClass [ :broadMatch :Concept ; :closeMatch :Topic ] ;
-    :created "2022-05-19T08:12:00Z"^^xsd:dateTime .
+    :created "2022-05-19T08:12:00Z"^^xsd:dateTime ;
+    :sourceData <https://queerlit.dh.gu.se/qlit/v1/> ;
+    :datasetClass [ :broadMatch :Concept ; :closeMatch :Topic ] .

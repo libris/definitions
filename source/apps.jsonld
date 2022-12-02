@@ -1,0 +1,85 @@
+{
+  "@graph": [
+    {
+      "@id": "https://libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "libris.kb.se",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>LIBRIS.KB.SE</b>.</p>"
+      }
+    },
+    {
+      "@id": "https://libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Sök-tjänst", "en": "Search Service"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": [{"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["instanceOf", "language"], "itemLimit": 100 },
+          { "dimensionChain": ["carrierType"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["publication", "year"], "itemLimit": 500 },
+          { "dimensionChain": ["issuanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["meta", "encodingLevel"], "itemLimit": 100 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["inScheme"], "itemLimit": 100 },
+          { "dimensionChain": ["inCollection"], "itemLimit": 100 },
+          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["contentType"], "itemLimit": 100 },
+          { "dimensionChain": ["nationality"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100 },
+          { "dimensionChain": ["contribution", "agent"], "itemLimit": 20 },
+          { "dimensionChain": ["instanceOf", "subject"], "itemLimit": 100 },
+          { "dimensionChain": ["meta", "bibliography"], "itemLimit": 100 }
+        ]
+      }
+    },
+    {
+      "@id": "https://id.kb.se/",
+      "@type": "DataCatalog",
+      "title": "ID.KB.SE",
+      "description": {"@id": "https://id.kb.se/doc/summary"},
+      "articleList": [
+        {"@id": "https://id.kb.se/"},
+        {"@id": "https://id.kb.se/marcframe/"},
+        {"@id": "https://id.kb.se/vocab/"},
+        {"@id": "https://id.kb.se/doc/about"}
+      ]
+    },
+    {
+      "@id": "https://id.kb.se/data",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Data-index för id.kb.se"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["inScheme"], "itemLimit": 1000 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 }
+        ]
+      }
+    },
+    {
+      "@id": "https://id.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Sök-tjänst för id.kb.se", "en": "Search Service for id.kb.se"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["inScheme"], "itemLimit": 1000 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["inCollection"], "itemLimit": 100 }
+        ]
+      }
+    }
+  ]
+}

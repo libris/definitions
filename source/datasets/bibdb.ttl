@@ -1,0 +1,24 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix : <https://id.kb.se/vocab/>
+base <https://libris.kb.se/dataset/>
+
+# IMPORTANT: these are currently self-described (the dataset description is
+# part of the dataset itself). If ever deleted and dataset items are remade
+# into "record-free" items, reloading the dataset will fail unless it is
+# forced, and if so it needs the descriptions below to compute the same
+# xl-id:s!)
+
+<bibdb> a :Dataset ;
+    :created "2019-03-14T15:00:00.000Z"^^xsd:dateTime ;
+    :dataSource <https://bibdb.libris.kb.se/> ;
+    :license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+<libraries> a :Dataset ;
+    :created "2019-03-14T15:31:17.000Z"^^xsd:dateTime ;
+    :uriSpace "https://libris.kb.se/library/" ;
+    :isPartOf <bibdb> .
+
+<bibliographies> a :Dataset ;
+    :created "2019-03-14T19:32:20.000Z"^^xsd:dateTime ;
+    :uriSpace "https://libris.kb.se/library/" ;
+    :isPartOf <bibdb> .

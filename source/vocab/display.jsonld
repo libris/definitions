@@ -12,6 +12,8 @@
       "alternateProperties": {"@id": "fresnel:alternateProperties", "@container": "@list", "@type": "@vocab"},
       "classLensDomain": {"@reverse": "displayLens", "@type": "@vocab"},
       "inverseOf": {"@id": "owl:inverseOf", "@type": "@vocab"},
+      "subPropertyOf": {"@id": "rdfs:subPropertyOf", "@type": "@vocab"},
+      "range": {"@id": "rdfs:range", "@type": "@vocab"},
       "labelByLang": {"@id": "label", "@container": "@language"},
       "commentByLang": {"@id": "comment", "@container": "@language"},
       "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
@@ -272,7 +274,9 @@
           "@id": "Notation-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Notation",
-          "showProperties": [ "label", "prefLabel"]
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label"]}
+          ]
         },
         "ProvisionActivity": {
           "@id": "ProvisionActivity-chips",
@@ -324,6 +328,12 @@
             {"alternateProperties": ["prefLabel", "label", "code"]}
           ]
         },
+        "TransformedLanguageForm": {
+          "@id": "TransformedLanguageForm-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "TransformedLanguageForm",
+          "showProperties": [ "prefLabel", "inLanguage", "inLangScript"]
+        },
         "marc:LanguageNote": {
           "@id": "LanguageNote-chips",
           "@type": "fresnel:Lens",
@@ -334,7 +344,7 @@
           "@id": "Person-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
-          "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "marc:titlesAndOtherWordsAssociatedWithAName", "fullerFormOfName", "lifeSpan" ]
+          "showProperties": [ "familyName", "givenName", "name", "marc:numeration", "lifeSpan", "marc:titlesAndOtherWordsAssociatedWithAName", "fullerFormOfName" ]
         },
         "Family": {
           "@id": "Family-chips",
@@ -469,7 +479,8 @@
           "@id": "Resource-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ "title", "prefLabel", "label", "name", "code", "exactMatch", "closeMatch", "broadMatch", "isPartOf", "isDefinedBy" ]
+          "fresnel:extends": {"@id": "Resource-chips"},
+          "showProperties": [ "fresnel:super", "exactMatch", "closeMatch", "broadMatch" ]
         },
         "Record": {
           "@type": "fresnel:Lens",
@@ -690,7 +701,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
           "fresnel:extends": {"@id": "Language-chips"},
-          "showProperties": [ "fresnel:super", "altLabel", "code", "isReplacedBy", "broader", {"inverseOf" : "broader"}, "comment" ]
+          "showProperties": [ "fresnel:super", "altLabel", "code", "langTag", "isReplacedBy", "broader", {"inverseOf" : "broader"}, "comment" ]
         },
         "Material": {
           "@id": "Material-cards",
@@ -920,6 +931,11 @@
           "@id": "ShelfMarkSequence-cards",
           "fresnel:extends": {"@id": "ShelfMarkSequence-chips"},
           "showProperties": [ "fresnel:super", "description", "hasNote" ]
+        },
+        "TransformedLanguageForm": {
+          "@id": "TransformedLanguageForm-cards",
+          "fresnel:extends": {"@id": "Resource-chips"},
+          "showProperties": [ "fresnel:super", "inLanguage", "inLangScript", "fromLangScript", "langTransformAccordingTo" ]
         }
       }
     },
@@ -1102,8 +1118,11 @@
         "ToCEntry": {
           "fresnel:extends": {"@id": "ToCEntry-cards"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "TransformedLanguageForm": {
+          "fresnel:extends": {"@id": "TransformedLanguageForm-cards"},
+          "showProperties": [ "fresnel:super" ]
         }
-
       }
     },
     "search-cards": {

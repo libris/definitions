@@ -10,11 +10,32 @@
 
 @base <https://id.kb.se/language/> .
 
+<9an> a schema:Language ;
+    rdfs:comment "\"9an\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9an",
+        "9an"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Angloromani"@sv ;
+    skos:broader <rom> .
+
 <9ar> a schema:Language ;
     rdfs:comment "\"9ar\" Librisdefinierad MARC-kod."@sv ;
     skos:notation "9ar",
         "9ar"^^kbv:LibrisLocalLanguageCode ;
     skos:prefLabel "Arli"@sv ;
+    skos:broader <rom> .
+
+<9bu> a schema:Language ;
+    rdfs:comment "\"9bu\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9bu",
+        "9bu"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Bugurdži"@sv ;
+    skos:broader <rom> .
+
+<9ca> a schema:Language ;
+    rdfs:comment "\"9ca\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9ca",
+        "9ca"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Caló"@sv ;
     skos:broader <rom> .
 
 <9fd> a schema:Language ;
@@ -39,6 +60,13 @@
         "9ft"^^kbv:LibrisLocalLanguageCode ;
     skos:prefLabel "Fornlågtyska"@sv ;
     skos:prefLabel "Old Saxon"@en .
+
+<9gu> a schema:Language ;
+    rdfs:comment "\"9gu\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9gu",
+        "9gu"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Gurbeti"@sv ;
+    skos:broader <rom> .
 
 <9kd> a schema:Language ;
     rdfs:comment "\"9kd\" Librisdefinierad MARC-kod."@sv ;
@@ -87,6 +115,20 @@
     skos:prefLabel "Meänkieli"@sv ;
     skos:prefLabel "Meänkieli"@en ;
     skos:hiddenLabel "tornedalsfinska"@sv .
+
+<9pr> a schema:Language ;
+    rdfs:comment "\"9pr\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9pr",
+        "9pr"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Polsk romani"@sv ;
+    skos:broader <rom> .
+
+<9si> a schema:Language ;
+    rdfs:comment "\"9si\" Librisdefinierad MARC-kod."@sv ;
+    skos:notation "9si",
+        "9si"^^kbv:LibrisLocalLanguageCode ;
+    skos:prefLabel "Sinte romani"@sv ;
+    skos:broader <rom> .
 
 <9sj> a schema:Language ;
     rdfs:comment "\"9sj\" Librisdefinierad MARC-kod"@sv ;
@@ -1025,7 +1067,8 @@
     rdfs:comment "-1453"@sv ;
     skos:notation "grc",
         "grc"^^kbv:ISO639-2 ;
-    skos:prefLabel "Grekiska, klassisk"@sv .
+    skos:prefLabel "Grekiska, klassisk"@sv ;
+    skos:hiddenLabel "grekiska"@sv, "greek"@en .
 
 <gre> a schema:Language ;
     rdfs:comment "1453-"@sv ;
@@ -1034,7 +1077,7 @@
         "ell"^^kbv:ISO639-2-T,
         "ell"^^kbv:ISO639-3 ;
     skos:prefLabel "Nygrekiska"@sv ;
-    skos:hiddenLabel "grekiska (nygrekiska)"@sv .
+    skos:hiddenLabel "grekiska (nygrekiska)"@sv, "grekiska"@sv, "greek"@en .
 
 <grn> a schema:Language ;
     skos:notation "grn",
@@ -1121,7 +1164,7 @@
     skos:notation "hrv",
         "hrv"^^kbv:ISO639-2 ;
     skos:prefLabel "Kroatiska"@sv ;
-    skos:hiddenLabel "kroat" .
+    skos:hiddenLabel "kroat", "serbokroatiska"@sv .
 
 <hsb> a schema:Language ;
     skos:notation "hsb",
@@ -1849,13 +1892,15 @@
     skos:notation "nno",
         "nno"^^kbv:ISO639-2 ;
     skos:prefLabel "Nynorska"@sv ;
-    skos:hiddenLabel "norska (nynorsk)", "norska (nynorska)"@sv .
+    skos:hiddenLabel "norska (nynorsk)", "norska (nynorska)"@sv ;
+    skos:broader <nor> .
 
 <nob> a schema:Language ;
     rdfs:comment "\"nor\" (norska) föredras"@sv ;
     skos:notation "nob",
         "nob"^^kbv:ISO639-2 ;
-    skos:prefLabel "Bokmål"@sv .
+    skos:prefLabel "Bokmål"@sv ;
+    skos:broader <nor> .
 
 <nog> a schema:Language ;
     skos:notation "nog",
@@ -2096,7 +2141,8 @@
 <rom> a schema:Language ;
     skos:notation "rom",
         "rom"^^kbv:ISO639-2 ;
-    skos:prefLabel "Romani"@sv .
+    skos:prefLabel "Romani chib"@sv ;
+    skos:altLabel "Romani"@sv .
 
 <rum> a schema:Language ;
     skos:notation "rum",
@@ -2356,7 +2402,8 @@
 <srp> a schema:Language ;
     skos:notation "srp",
         "srp"^^kbv:ISO639-2 ;
-    skos:prefLabel "Serbiska"@sv .
+    skos:prefLabel "Serbiska"@sv ;
+    skos:hiddenLabel "serbokroatiska"@sv .
 
 <srr> a schema:Language ;
     skos:notation "srr",
@@ -2407,12 +2454,14 @@
 <syc> a schema:Language ;
     skos:notation "syc",
         "syc"^^kbv:ISO639-2 ;
-    skos:prefLabel "Syriska, klassisk"@sv .
+    skos:prefLabel "Syriska, klassisk"@sv ;
+    skos:hiddenLabel "syriska"@sv .
 
 <syr> a schema:Language ;
     skos:notation "syr",
         "syr"^^kbv:ISO639-2 ;
-    skos:prefLabel "Syriska, modern"@sv .
+    skos:prefLabel "Syriska, modern"@sv ;
+    skos:hiddenLabel "syriska"@sv .
 
 <tah> a schema:Language ;
     skos:notation "tah",

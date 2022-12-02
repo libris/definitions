@@ -3,17 +3,16 @@ import csv
 import json
 import sys
 from collections import OrderedDict
-from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse, urljoin, quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from http import HTTPStatus
 
-from rdflib import ConjunctiveGraph, Graph, RDF, URIRef
-from rdflib.plugins.serializers.jsonld import from_rdf
-from rdflib.plugins.parsers.jsonld import to_rdf
+from rdflib import ConjunctiveGraph, Graph, URIRef
 
+from . import timeutil
+from . import ldutil
 from . import lxlslug
 
 
@@ -43,6 +42,7 @@ class Compiler:
         self.cachedir = None
         self.union = union
         self.current_ds_file = None
+        self.no_records = False
 
     def main(self):
         argp = argparse.ArgumentParser(
@@ -50,22 +50,33 @@ class Compiler:
                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         arg = argp.add_argument
         arg('-s', '--system-base-iri', type=str, default=None, help="System base IRI")
+        arg('-d', '--dataset-iri', type=str, default=None, help="Union dataset IRI")
         arg('-o', '--outdir', type=str, default=self.path("build"), help="Output directory")
         arg('-c', '--cache', type=str, default="cache", help="Cache directory")
         arg('-l', '--lines', action='store_true',
                 help="Output a single file with one JSON-LD document per line")
+        arg('-u', '--union-file', type=str, help="Output union file with one JSON-LD document per line")
+        arg('-R', '--no-records', action='store_true', help="Do not add Record descriptions")
         arg('datasets', metavar='DATASET', nargs='*')
 
         args = argp.parse_args()
         if not args.datasets and args.outdir:
             args.datasets = list(self.datasets)
 
-        self._configure(args.outdir, args.cache, args.system_base_iri, use_union=args.lines)
+        if args.dataset_iri:
+            self.dataset_id = args.dataset_iri
+
+        use_union = args.lines or args.union_file
+        if args.union_file:
+            self.union = args.union_file
+
+        self._configure(args.outdir, args.cache, args.system_base_iri, use_union, args.no_records)
         self._run(args.datasets)
 
-    def _configure(self, outdir, cachedir=None, system_base_iri=None, use_union=False):
+    def _configure(self, outdir, cachedir=None, system_base_iri=None, use_union=False, no_records=False):
         if system_base_iri:
             self.system_base_iri = system_base_iri
+
         self.outdir = Path(outdir)
         self.cachedir = tracked_path_type(self.current_ds_resources)(cachedir)
         if use_union:
@@ -75,6 +86,8 @@ class Compiler:
             print("Writing dataset lines to file:", self.union_file.name)
         else:
             self.union_file = None
+
+        self.no_records = no_records
 
     def _run(self, names):
         try:
@@ -95,14 +108,20 @@ class Compiler:
         return self.base_dir / pth
 
     def to_jsonld(self, graph):
-        return _to_jsonld(graph,
+        return ldutil.to_jsonld(graph,
                          "../" + self.context,
                          self.load_json(self.context))
 
     def _compile_datasets(self, names):
         self._create_dataset_description(self.dataset_id,
-                w3c_dtz_to_ms(self.created))
+                timeutil.w3c_dtz_to_ms(self.created))
+
         for name in names:
+            if name not in self.datasets:
+                print(f"Skipping dataset: {name} (not defined in {self.dataset_id})",
+                      file=sys.stderr)
+                continue
+
             build, as_dataset = self.datasets[name]
             if len(names) > 1:
                 print("Dataset:", name)
@@ -121,7 +140,7 @@ class Compiler:
     def _compile_dataset(self, name, result):
         base, created_time, data = result
 
-        ds_created_ms = w3c_dtz_to_ms(created_time)
+        ds_created_ms = timeutil.w3c_dtz_to_ms(created_time)
         ds_modified_ms = last_modified_ms(self.current_ds_resources)
 
         if isinstance(data, Graph):
@@ -143,17 +162,21 @@ class Compiler:
 
             created_ms = ds_created_ms + _faux_offset(node['@id'])
             modified_ms = None
+            fpath = urlparse(nodeid).path[1:]
+
+            if self.no_records:
+                self.write(node, fpath)
+                continue
 
             meta = node.pop('meta', None)
             if meta:
                 if 'created' in meta:
-                    created_ms = w3c_dtz_to_ms(meta.pop('created'))
+                    created_ms = timeutil.w3c_dtz_to_ms(meta.pop('created'))
                 if 'modified' in meta:
-                    modified_ms = w3c_dtz_to_ms(meta.pop('modified'))
+                    modified_ms = timeutil.w3c_dtz_to_ms(meta.pop('modified'))
 
                 assert not meta, f'meta {meta} was not exhausted'
 
-            fpath = urlparse(nodeid).path[1:]
             desc = self._to_node_description(
                     node,
                     created_ms,
@@ -169,14 +192,22 @@ class Compiler:
             '@type': 'Dataset',
             'label': label
         }
+
+        ds_path = urlparse(ds_url).path[1:]
+
+        if self.no_records:
+            # TODO: with-record-less data, the dataset description is given as
+            # additional source data to XL LDImporter. The routine is not yet
+            # set whether that should add/update the DS description (which
+            # seems reasonable).
+            return
+
         desc = self._to_node_description(ds, created_ms, modified_ms,
                 datasets={self.dataset_id, ds_url})
 
         record = desc['@graph'][0]
         if self.tool_id:
             record['generationProcess'] = {'@id': self.tool_id}
-
-        ds_path = urlparse(ds_url).path[1:]
 
         self.write(desc, ds_path)
 
@@ -192,9 +223,9 @@ class Compiler:
         record[self.record_thing_link] = {'@id': node_id}
 
         # Add provenance
-        record['created'] = to_w3c_dtz(created_ms)
+        record['created'] = timeutil.to_w3c_dtz(created_ms)
         if modified_ms is not None:
-            record['modified'] = to_w3c_dtz(modified_ms)
+            record['modified'] = timeutil.to_w3c_dtz(modified_ms)
         if datasets:
             record['inDataset'] = [{'@id': ds} for ds in datasets]
 
@@ -236,14 +267,14 @@ class Compiler:
         path = self.get_cached_path(url)
         mtime = path.stat().st_mtime if path.exists() else None
 
-        if mtime and datetime.now().timestamp() < mtime + maxcache:
+        if mtime and timeutil.nowstamp() < mtime + maxcache:
             print(f'Using cached URL: {url}')
             return path
 
         print(f'Fetching URL: {url}')
         req = Request(url)
         if mtime:
-            req.add_header('If-Modified-Since', to_http_date(mtime))
+            req.add_header('If-Modified-Since', timeutil.to_http_date(mtime))
 
         try:
             r = urlopen(req)
@@ -322,29 +353,6 @@ class Compiler:
         return _construct(self, sources, query)
 
 
-def w3c_dtz_to_ms(ztime):
-    assert ztime.endswith('Z')
-    try:  # fromisoformat is new in Python 3.7
-        return int(datetime.fromisoformat(ztime.replace('Z', '+00:00'))
-                   .timestamp() * 1000)
-    except AttributeError:  # fallback can be removed when we rely on Py 3.7+
-        ztime = ztime[:-1]  # drop 'Z'
-        if '.' not in ztime:
-            ztime += '.000'  # add millisecs to comply with format
-        ztime += '+0000'  # strptime-compliant UTC timezone format
-        return int(datetime.strptime(ztime, '%Y-%m-%dT%H:%M:%S.%f%z')
-                   .timestamp() * 1000)
-
-
-def to_w3c_dtz(ms):
-    dt = datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
-    return dt.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
-
-
-def to_http_date(s):
-    return datetime.utcfromtimestamp(s).strftime('%a, %d %b %Y %H:%M:%S GMT')
-
-
 def last_modified_ms(fpaths):
     time_stamps = [f.stat().st_mtime for f in fpaths]
     last_modified_s = max(time_stamps)
@@ -409,7 +417,7 @@ def _construct(compiler, sources, query=None):
             context_data = [compiler.load_json(ctx)['@context']
                             if isinstance(ctx, str) else ctx
                             for ctx in context_data]
-            to_rdf(source, graph, context_data=context_data)
+            ldutil.to_rdf(source, graph, context_data=context_data)
         elif isinstance(source, Graph):
             graph += source
         else:
@@ -422,54 +430,3 @@ def _construct(compiler, sources, query=None):
     for spo in result:
         g.add(spo)
     return g
-
-
-def _to_jsonld(source, context_uri, contextobj):
-    data = from_rdf(source, context_data=contextobj)
-    data['@context'] = context_uri
-    _embed_singly_referenced_bnodes(data)
-    _expand_ids(data['@graph'], contextobj['@context'])
-    return data
-
-
-def _expand_ids(obj, pfx_map):
-    """
-    Ensure @id values are in expanded form (i.e. full URIs).
-    """
-    if isinstance(obj, list):
-        for item in obj:
-            _expand_ids(item, pfx_map)
-    elif isinstance(obj, dict):
-        node_id = obj.get('@id')
-        if node_id:
-            pfx, colon, leaf = node_id.partition(':')
-            ns = pfx_map.get(pfx)
-            if ns:
-                obj['@id'] = node_id.replace(pfx + ':', ns, 1)
-        for value in obj.values():
-            _expand_ids(value, pfx_map)
-
-
-def _embed_singly_referenced_bnodes(data):
-    graph_index = {item['@id']: item for item in data.pop('@graph')}
-    bnode_refs = {}
-
-    def collect_refs(node):
-        for values in node.values():
-            if not isinstance(values, list):
-                values = [values]
-            for value in values:
-                if isinstance(value, dict):
-                    if value.get('@id', '').startswith('_:'):
-                        bnode_refs.setdefault(value['@id'], []).append(value)
-                    collect_refs(value)
-
-    for node in graph_index.values():
-        collect_refs(node)
-
-    for refid, refs in bnode_refs.items():
-        if len(refs) == 1:
-            refs[0].update(graph_index.pop(refid))
-            refs[0].pop('@id')
-
-    data['@graph'] = sorted(graph_index.values(), key=lambda node: node['@id'])
