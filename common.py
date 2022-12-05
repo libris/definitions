@@ -167,7 +167,7 @@ def languages():
             "dataset": "http://id.loc.gov/vocabulary/iso639-2"
         }
     ],
-        query="source/construct-languages-1.rq")
+        query="source/construct-languages-iso639-2.rq")
 
     graph = compiler.construct(sources=[
         {
@@ -179,7 +179,7 @@ def languages():
             "dataset": "http://id.loc.gov/vocabulary/iso639-1"
         }
     ],
-        query="source/construct-languages-2.rq")
+        query="source/construct-languages-iso639-1.rq")
 
     return "/language/", "2014-08-01T07:56:51.110Z", graph
 
