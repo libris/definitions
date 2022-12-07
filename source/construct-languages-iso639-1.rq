@@ -14,27 +14,29 @@ construct {
         skos:closeMatch ?locVariant .
 } where {
     graph <https://id.kb.se/dataset/languages> {
-        {
-            ?s ?p ?o
-        } union {
-            ?s skos:prefLabel ?prefLabel ;
-                skos:notation ?locCode .
-            filter(
-                datatype(?locCode) = kbv:ISO639-2-T ||
-                datatype(?locCode) = xsd:string
-            )
-            filter(langMatches(lang(?prefLabel), 'en'))
+        ?s ?p ?o .
+        optional {
+            ?s skos:prefLabel ?prefLabel .
             graph <http://id.loc.gov/vocabulary/iso639-1> {
-                optional {
-                    ?locVariant madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel
-                    bind(substr(str(?locVariant), strlen(str(iso639_1:)) + 1) as ?shortcode)
-                    bind(strdt(?shortcode, kbv:ISO639-1) as ?langCodeShort)
-                }
+                ?locVariant madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel
+                bind(substr(str(?locVariant), strlen(str(iso639_1:)) + 1) as ?shortcode)
+                bind(strdt(?shortcode, kbv:ISO639-1) as ?langCodeShort)
             }
-            bind(str(coalesce(?langCodeShort, ?locCode)) as ?langTagStr)
-            bind(strdt(?langTagStr, kbv:BCP47) as ?langTag)
-            bind(IRI(concat(str(langtag:), ?langTagStr)) as ?bcp47alias)
         }
+        optional {
+            ?s skos:notation ?iso639_2 .
+            filter(datatype(?iso639_2) = kbv:ISO639-2)
+        }
+        optional {
+            ?s skos:notation ?iso639_3 .
+            filter(datatype(?iso639_3) = kbv:ISO639-3)
+        }
+        bind(str(
+            coalesce(?langCodeShort,
+                coalesce(?iso639_2, ?iso639_3))
+        ) as ?langTagStr)
+        bind(strdt(?langTagStr, kbv:BCP47) as ?langTag)
+        bind(IRI(concat(str(langtag:), ?langTagStr)) as ?bcp47alias)
     }
 }
 
