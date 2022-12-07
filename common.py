@@ -153,27 +153,33 @@ def relators():
 
 @compiler.dataset
 def languages():
-    loclanggraph = Graph()
-    loclanggraph.parse(
-            str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-1.nt')),
-            format='nt')
-    loclanggraph.parse(
-            str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-2.nt')),
-            format='nt')
-
     languages = Graph().parse(str(compiler.path('source/languages.ttl')), format='turtle')
+    iso639_1 = Graph().parse(str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-1.nt')), format='nt')
+    iso639_2 = Graph().parse(str(compiler.cache_url('http://id.loc.gov/vocabulary/iso639-2.nt')), format='nt')
 
     graph = compiler.construct(sources=[
-            {
-                "source": languages,
-                "dataset": BASE + "dataset/languages"
-            },
-            {
-                "source": loclanggraph,
-                "dataset": "http://id.loc.gov/vocabulary/languages"
-            }
-        ],
-        query="source/construct-languages.rq")
+        {
+            "source": languages,
+            "dataset": BASE + "dataset/languages"
+        },
+        {
+            "source": iso639_2,
+            "dataset": "http://id.loc.gov/vocabulary/iso639-2"
+        }
+    ],
+        query="source/construct-languages-iso639-2.rq")
+
+    graph = compiler.construct(sources=[
+        {
+            "source": graph,
+            "dataset": BASE + "dataset/languages"
+        },
+        {
+            "source": iso639_1,
+            "dataset": "http://id.loc.gov/vocabulary/iso639-1"
+        }
+    ],
+        query="source/construct-languages-iso639-1.rq")
 
     return "/language/", "2014-08-01T07:56:51.110Z", graph
 
