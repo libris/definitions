@@ -1,5 +1,15 @@
+# See also:
+# <https://metadatabyran.kb.se/beskrivning/specialanvisningar/mangsprak/romaniseringsscheman>
 prefix : <https://id.kb.se/vocab/>
 base <https://id.kb.se/>
+
+</i18n/rule/m0> a :TermCollection ;
+  :code "m0";
+  :label "Standardiserade språktransformationsregler enligt BCP47"@sv .
+
+</i18n/rule/x0> a :TermCollection ;
+  :code "x0";
+  :label "Libris-specifika språktransformationsregler"@sv .
 
 </i18n/rule/x0/lessing> a :LanguageTransformRules ;
   :label "Translitterering enligt Ferdinand Lessings schema"@sv ;
@@ -11,10 +21,46 @@ base <https://id.kb.se/>
   :code "skr-1980" ;
   :inCollection </i18n/rule/x0> .
 
-</i18n/rule/m0/iso-1995> a :LanguageTransformRules ;
-  :label "Translitterering enligt ISO 9:1995"@sv ;
-  :code "iso-1995" ;
+</i18n/rule/x0/kr76> a :LanguageTransformRules ; # :LanguageTranscriptionRules
+  :label "Transkribering enligt KR76 (Kjellberg)"@sv ;
+  :code "x0-kr76" ;
+  :inCollection </i18n/rule/x0> ;
+  :languageFormSpecification [ a :TransformedLanguageForm ;
+      :inLangScript </i18n/script/Latn> ;
+      :fromLangScript </i18n/script/Cyrl> ] ;
+  :seeAlso <https://metadatabyran.kb.se/download/18.6945cdaa174b74a2c361604/1601918194487/Transkriberingsschema_Kyrilliska%20alfabet_2015.pdf> .
+
+# TODO: form OK?
+</i18n/rule/x0/frhngbzs-1ed> a :LanguageTransformRules ;
+  :broader </i18n/rule/m0/alaloc> ;
+  :inCollection </i18n/rule/x0> ;
+  :languageFormSpecification [ a :TransformedLanguageForm ;
+      :inLangScript </i18n/script/Latn> ;
+      :fromLangScript </i18n/script/Arab> ] ;
+  :label "Translitterering enligt LC:s tabell, utskrivning av korta vokaler enligt Farhang-i buzurg-i sukhan (1. uppl.)"@sv .
+
+</i18n/rule/m0/iso> a :LanguageTransformRules ;
+  :code "iso" ;
+  :label "Translitterering enligt ISO-standard"@sv ;
   :inCollection </i18n/rule/m0> .
+
+</i18n/rule/m0/iso-1995> a :LanguageTransformRules ;
+  :code "iso-1995" ;
+  :label "Translitterering enligt ISO-standard från 1995"@sv ;
+  :broader </i18n/rule/m0/iso> ;
+  :inCollection </i18n/rule/m0> .
+
+</i18n/rule/iso-1995/Cyrl-t-Latn> a :LanguageTransformRules ;
+  # NOTE: no :inCollection <x0>, since this specialization can be found by:
+  # { ?tlang :langTransformAccordingTo ?rule ; ?p ?o .
+  #   ?rule :languageFormSpecification [ ?p ?o ] . }
+  :broader </i18n/rule/m0/iso-1995> ;
+  :label "Translitterering av kyrillisk till latinsk skrift enligt ISO 9:1995"@sv ;
+  :languageFormSpecification [ a :TransformedLanguageForm ;
+      :inLangScript </i18n/script/Latn> ;
+      :fromLangScript </i18n/script/Cyrl> ] ;
+  :seeAlso <https://sv.wikipedia.org/wiki/ISO_9> ,
+    <https://metadatabyran.kb.se/download/18.6945cdaa174b74a2c3615fe/1601917435290/Kyrilliska%20alfabetet.pdf> .
 
 </i18n/rule/x0/btj> a :LanguageTransformRules ;
   :label "Transkribering enligt Btj:s praxis för folkbiblioteken"@sv ;
