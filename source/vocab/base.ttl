@@ -18,6 +18,8 @@
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
+@prefix quid: <https://w3id.org/quid/> .
+
 @prefix : <https://id.kb.se/vocab/> .
 
 
@@ -122,6 +124,22 @@ rdf:type a owl:ObjectProperty;
 
 :object a owl:ObjectProperty;
     rdfs:subPropertyOf rdf:object; ptg:abstract true .
+
+
+##
+# Temporal qualifications (cf. https://en.wikipedia.org/wiki/Perdurantism)
+
+:TemporalEntity a owl:Class ;
+    ptg:abstract true ;
+    # perdurant entity ("4D worm")
+    rdfs:label "Temporal entity"@en, "Temporal entitet"@sv;
+    rdfs:subClassOf quid:QualifiedIdentity .
+
+:TemporalQualification a owl:Class ;
+    ptg:abstract true ;
+    # exdurant part (has the properties of a "stage")
+    rdfs:label "Temporal qualification"@en, "Temporal kvalificering"@sv;
+    rdfs:subClassOf :TemporalEntity, :QualifiedRole .
 
 
 ##

@@ -915,7 +915,7 @@
 
 :manufacture a owl:ObjectProperty;
     rdfs:subPropertyOf :provisionActivity;
-    rdfs:domain :Instance;
+    sdo:domainIncludes :Instance, :SerialEdition ;
     rdfs:range :Manufacture;
     rdfs:comment "Uppgift som identifierar tillverkningplats, tillverkarnamn, tillverkningstid."@sv;
     rdfs:label "manufacture"@en, "tillverkning"@sv .
@@ -1086,7 +1086,8 @@
     rdfs:label "upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:comment "En uppgift som identifierar den upplaga eller version till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
-    rdfs:equivalentProperty bf2:editionStatement .
+    rdfs:equivalentProperty bf2:editionStatement ;
+    owl:propertyChainAxiom (:isIssueOfEdition :label) .
 
 :editionStatementRemainder a owl:DatatypeProperty;
     rdfs:label "edition statement remainder"@en, "Påföljande upplageuppgift"@sv;
@@ -1493,10 +1494,14 @@
     rdfs:subPropertyOf sdo:spatialCoverage ;
     owl:equivalentProperty bf2:geographicCoverage .
 
-:temporalCoverage a owl:DatatypeProperty;
+:TemporalCoverage a owl:Class ;
+    rdfs:subClassOf :TemporalQualification ;
+    rdfs:label "temporal coverage"@en, "temporal täckning"@sv .
+
+:temporalCoverage a owl:ObjectProperty ;
     rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
-    rdfs:domain :Work;
-    rdfs:range rdfs:Literal;
+    rdfs:domain :Work ;
+    rdfs:range :TemporalCoverage ;
     rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
     rdfs:subPropertyOf sdo:temporalCoverage ;
     owl:equivalentProperty bf2:temporalCoverage .
