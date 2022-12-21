@@ -328,6 +328,14 @@
             {"alternateProperties": ["prefLabel", "label", "code"]}
           ]
         },
+        "Script": {
+          "@id": "Script-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Script",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "code"]}
+          ]
+        },
         "TransformedLanguageForm": {
           "@id": "TransformedLanguageForm-chips",
           "@type": "fresnel:Lens",
@@ -702,6 +710,13 @@
           "classLensDomain": "Language",
           "fresnel:extends": {"@id": "Language-chips"},
           "showProperties": [ "fresnel:super", "altLabel", "code", "langTag", "isReplacedBy", "broader", {"inverseOf" : "broader"}, "comment" ]
+        },
+        "Script": {
+          "@id": "Script-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Script",
+          "fresnel:extends": {"@id": "Script-chips"},
+          "showProperties": [ "fresnel:super", "altLabel", "code", "comment" ]
         },
         "Material": {
           "@id": "Material-cards",
