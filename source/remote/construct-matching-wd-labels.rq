@@ -1,0 +1,12 @@
+prefix : <https://id.kb.se/vocab/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+    ?script :exactMatch ?match ; :prefLabel ?label .
+} where {
+    ?script a :Script ; :exactMatch ?match .
+    service <https://query.wikidata.org/sparql> {
+        ?match (skos:prefLabel|rdfs:label) ?label .
+    }
+}
