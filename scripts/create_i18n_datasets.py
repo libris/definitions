@@ -42,8 +42,6 @@ COMBINATIONS = [
     ('iu', 'Cans', 'm0-alaloc'),
     ('jrb', 'Hebr', 'm0-alaloc'),
     ('jv', 'Java', 'm0-alaloc'),
-    ('ka', 'Geok', 'm0-alaloc'),
-    ('ka', 'Geor', 'm0-alaloc'),
     ('kir', 'Cyrl', 'm0-alaloc'),
     ('km', 'Khmr', 'm0-alaloc'),
     ('kn', 'Knda', 'm0-alaloc'),
@@ -94,7 +92,7 @@ COMBINATIONS = [
 
 LANG_FORM = "TransformedLanguageForm"
 
-ALA_LOC_NO_SCRIPT = ['tmh']
+ALA_LOC_NO_SCRIPT = ['tmh', 'ka']
 
 ALA_LOC_NON_SLAVIC_CYRILLIC = [
     'abk', 'ady', 'alt', 'ava', 'bak', 'bua', 'che', 'chm', 'chv', 'dar',
