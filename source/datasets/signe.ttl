@@ -10,10 +10,12 @@ base <https://libris.kb.se/dataset/>
 <signe/tidningar> a :Dataset ;
     :uriSpace "https://libris.kb.se/dataset/signe/bib/" ;
     :created "2022-04-07T13:40:10Z"^^xsd:dateTime ;
+    :sourceData [ :uri "../signe2librisxl/build/bibs.jsonld.lines" ] ;
     :isPartOf <signe> .
 
 <signe/editioner> a :Dataset ;
     :uriSpace "https://libris.kb.se/dataset/signe/edition/" ;
     :created "2022-04-19T10:00:00Z"^^xsd:dateTime ;
+    :sourceData [ :uri "../signe2librisxl/build/editions.jsonld.lines" ] ;
     :dependsOn <signe/tidningar> ;
     :isPartOf <signe> .

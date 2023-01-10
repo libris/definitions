@@ -1,5 +1,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -93,16 +94,17 @@
 
 :Frequency a owl:Class;
     rdfs:label "Frekvens"@sv ;
-    owl:equivalentClass bf2:Frequency .
+    owl:equivalentClass bf2:Frequency ;
+    :category :heuristicIdentity .
 
 :pubFrequency a owl:ObjectProperty;
-    # No relation in bf to frequency?
+    # "Qualified" form of frequency; prefer :frequencyPeriod
     :category :pending ;
     rdfs:range :PubFrequency ;
     owl:equivalentProperty bf2:pubFrequency .
 
 :PubFrequency a owl:Class;
-    # No relation in bf to Frequency?
+    # "Qualified" form of frequency; prefer :FrequencyPeriod
     :category :pending ;
     owl:equivalentClass bf2:PubFrequency .
 
@@ -473,3 +475,58 @@
 :SoundContent a owl:Class;
     rdfs:label "Ljudinnehåll"@sv, "Sound content"@en;
     owl:equivalentClass bf2:SoundContent .
+
+## For serials {{{
+
+:languagePeriod a owl:ObjectProperty ;
+    #rdfs:domain :Serial ;
+    :category :pending ;
+    rdfs:label "language period"@en, "språkperiod"@sv;
+    rdfs:range :LanguagePeriod .
+
+:LanguagePeriod a owl:Class ;
+    rdfs:subClassOf :TemporalQualification ;
+    rdfs:label "language period"@en, "språkperiod"@sv .
+
+:politicalTendencyPeriod a owl:ObjectProperty ;
+    #rdfs:domain :Serial ;
+    :category :pending ;
+    rdfs:label "political tendency period"@en, "period av politisk tendens"@sv;
+    rdfs:range :PoliticalTendencyPeriod .
+
+:PoliticalTendencyPeriod a owl:Class ;
+    rdfs:subClassOf :TemporalQualification ;
+    rdfs:label "political tendency period"@en, "period av politisk tendens"@sv .
+
+:politicalTendency a owl:ObjectProperty ;
+    skos:related :intendedAudience ;
+    rdfs:label "political tendency"@en, "politisk tendens"@sv;
+    :category :pending ;
+    sdo:domainIncludes :PoliticalTendencyPeriod ;
+    rdfs:range :PoliticalTendency .
+
+:PoliticalTendency a owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "political tendency"@en, "politisk tendens"@sv .
+
+:frequencyPeriod a owl:ObjectProperty ;
+    rdfs:label "frequency period"@en, "frekvensperiod"@sv;
+    rdfs:subPropertyOf :pubFrequency .
+
+:FrequencyPeriod a owl:Class ;
+    rdfs:label "Frequency Period"@en, "Frekvensperiod"@sv;
+    rdfs:subClassOf :PubFrequency, :TemporalQualification .
+
+:firstIssueDate a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :firstIssue, :startDate ;
+    rdfs:label "first issue date"@en, "första numrets datum"@sv;
+    sdo:domainIncludes :FormerTitle, :TemporalEntity ;
+    rdfs:range xsd:date .
+
+:lastIssueDate a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :lastIssue, :endDate ;
+    rdfs:label "last issue date"@en, "senaste numrets datum"@sv;
+    sdo:domainIncludes :FormerTitle, :TemporalEntity ;
+    rdfs:range xsd:date .
+
+## }}}
