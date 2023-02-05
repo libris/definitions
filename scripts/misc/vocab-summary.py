@@ -107,16 +107,35 @@ def print_class(c, superclasses=set()):
         print_subproperties(prop, c, indent + "       ")
 
     # Restrictions
+    restrictions_by_property = {}
+
     for subc in sorted(c.objects(RDFS.subClassOf)):
         if any(t for t in subc.objects(RDF.type) if t.identifier == OWL.Restriction):
-            print(indent + "   ", "@",
-                    subc.value(OWL.onProperty).qname(),
-                    "=>",
-                    ", ".join("All(%s)" % rc.qname() for rc in
-                        subc.objects(OWL.allValuesFrom)) +
-                    ", ".join("Some(%s)" % rc.qname() for rc in
-                        subc.objects(OWL.someValuesFrom))
-                    )
+            propname = subc.value(OWL.onProperty).qname()
+            restrs = restrictions_by_property.setdefault(propname, [])
+
+            all_from = ["All(%s)" % repr_class(rc) for rc in
+                        subc.objects(OWL.allValuesFrom)]
+            if all_from:
+                restrs.append(all_from)
+
+            some_from = ["Some(%s)" % rc.qname() for rc in
+                         subc.objects(OWL.someValuesFrom)]
+            if some_from:
+                restrs.append(some_from)
+
+            if subc.value(OWL.cardinality):
+                restrs.append([str(subc.value(OWL.cardinality))])
+
+            if subc.value(OWL.minCardinality):
+                restrs.append([f"{(subc.value(OWL.minCardinality))}.."])
+
+            if subc.value(OWL.maxCardinality):
+                restrs.append([f"..{(subc.value(OWL.maxCardinality))}"])
+
+    for propname, restrs in restrictions_by_property.items():
+        restr_repr = " & ".join(sorted(", ".join(restr) for restr in restrs))
+        print(indent + "   ", "@", propname, "=>", restr_repr)
 
     # Instances
     for inst in sorted(c.subjects(RDF.type)):
@@ -159,8 +178,10 @@ def print_propsum(indent, prop, domain=None):
 
     ranges = tuple(prop.objects(RDFS.range|SCHEMA.rangeIncludes))
     if ranges:
-        lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
-                for rc in ranges if isinstance(rc.identifier, URIRef))
+        lbl += " => " + ", ".join(
+            repr_class(_fix_bf_range(prop.graph, rc))
+            for rc in ranges
+        )
 
     note = prop.value(ABS.marcField) or ""
     if SHOW_EQUIVS:
@@ -173,6 +194,12 @@ def print_propsum(indent, prop, domain=None):
         lbl += " # " + note
 
     print(indent, lbl)
+
+
+def repr_class(rc):
+    if rc.value(OWL.unionOf):
+        return ' | '.join(repr_class(x) for x in rc.value(OWL.unionOf).items())
+    return rc.qname()
 
 
 def _ns(g, o):
