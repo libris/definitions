@@ -19,6 +19,11 @@ ABS = Namespace("http://bibframe.org/model-abstract/")
 SCHEMA = Namespace("http://schema.org/")
 PTG = Namespace("http://protege.stanford.edu/plugins/owl/protege#")
 
+assert str(SDO) == "https://schema.org/"
+
+DOMAIN = RDFS.domain | SCHEMA.domainIncludes | SDO.domainIncludes
+RANGE = RDFS.range | SCHEMA.rangeIncludes | SDO.rangeIncludes
+
 
 def print_vocab(g, show_equivs=False, only_classes=False):
     global otherclasses, otherprops, SHOW_EQUIVS, ONLY_CLASSES
@@ -97,7 +102,7 @@ def print_class(c, superclasses=set()):
     print(indent + subnote + c.qname() + other_type_decl + note_comment)
 
     # Properties
-    props = sorted(c.subjects(RDFS.domain|SCHEMA.domainIncludes))
+    props = sorted(c.subjects(DOMAIN))
     for prop in props:
         #if any(prop.objects(RDFS.subPropertyOf)):
         #    continue
@@ -172,11 +177,11 @@ def print_propsum(indent, prop, domain=None):
     lbl = prop.qname()
 
     if domain:
-        subpropdomains = sorted(prop.objects(RDFS.domain|SCHEMA.domainIncludes))
+        subpropdomains = sorted(prop.objects(DOMAIN))
         if subpropdomains and subpropdomains != [domain]:
             lbl += " of " + ", ".join(spd.qname() for spd in subpropdomains)
 
-    ranges = tuple(prop.objects(RDFS.range|SCHEMA.rangeIncludes))
+    ranges = tuple(prop.objects(RANGE))
     if ranges:
         lbl += " => " + ", ".join(
             repr_class(_fix_bf_range(prop.graph, rc))
