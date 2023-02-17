@@ -71,8 +71,8 @@ def materials():
             "source": "http://rdaregistry.info/termList/RDAMaterial.nt"
         },
         {
-            "source": "sparql/aat-materials",
-            "construct": "source/remote/construct-aat-materials.rq",
+            "source": "urn:x-cache:sparql:aat-materials",
+            "query": "source/remote/construct-aat-materials.rq",
         }
     ],
         query="source/construct-materials.rq")
@@ -142,8 +142,8 @@ def relators():
             "source": "http://d-nb.info/standards/elementset/gnd"
         },
         {
-            "source": "sparql/bnf-roles",
-            "construct": "source/remote/construct-bnf-roles.rq"
+            "source": "urn:x-cache:sparql:bnf-roles",
+            "query": "source/remote/construct-bnf-roles.rq"
         }
     ],
         query="source/construct-relators.rq")

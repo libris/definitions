@@ -1,6 +1,7 @@
 import argparse
 import csv
 import json
+import re
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -17,6 +18,8 @@ from . import lxlslug
 
 
 MAX_CACHE = 60 * 60
+
+CACHE_SPAQRL_BASE = 'urn:x-cache:sparql:'
 
 
 class Compiler:
@@ -234,6 +237,7 @@ class Compiler:
         return {'@graph': items}
 
     def generate_record_id(self, created_ms, node_id):
+        # FIXME: backwards_form=created_ms < 2015
         slug = lxlslug.librisencode(created_ms, lxlslug.checksum(node_id))
         return urljoin(self.system_base_iri, slug)
 
@@ -260,8 +264,13 @@ class Compiler:
         else:
             print("No data")
 
+    def is_cachable(self, ref):
+        return ref.startswith(('http:', 'https:', CACHE_SPAQRL_BASE))
+
     def get_cached_path(self, url):
-        return self.cachedir / quote(url, safe="")
+        fpath = self.cachedir / quote(url.replace(CACHE_SPAQRL_BASE, 'sparql/'), safe="")
+        print(url, fpath)
+        return fpath
 
     def cache_url(self, url, maxcache=MAX_CACHE):
         path = self.get_cached_path(url)
@@ -299,11 +308,10 @@ class Compiler:
 
     def cached_rdf(self, fpath, construct=None, graph=None):
         source = Graph()
-        http = 'http://'
         if not self.cachedir:
             print("No cache directory configured", file=sys.stderr)
         elif construct:
-            fpath = self.cachedir / (fpath + '.ttl')
+            fpath = self.get_cached_path(fpath + '.ttl')
             if not fpath.is_file():
                 with self.path(construct).open() as fp:
                     try:
@@ -312,21 +320,33 @@ class Compiler:
                         res.serialize(str(fpath), format='turtle')
                         source.parse(str(fpath), format='turtle')
                     except Exception as e:
-                        print(f'Failed to cache {fpath}: {e}')
+                        print(f'Failed to cache {fpath}: {e}', file=sys.stderr)
             else:
                 source.parse(str(fpath), format='turtle')
             return source
-        elif fpath.startswith(http):
+
+        elif self.is_cachable(fpath):
             remotepath = fpath
-            fpath = self.cachedir / (remotepath[len(http):] + '.ttl')
+            fpath = self.get_cached_path(fpath + '.ttl')
+            print(f'Using cached {fpath} for {remotepath}', file=sys.stderr)
             if not fpath.is_file():
                 fpath.parent.mkdir(parents=True, exist_ok=True)
-                source.parse(remotepath)
+                try:
+                    # At least rdaregistry is *very* picky about what is asked for,
+                    # so we'll tell them explicitly using `format`.
+                    format = 'nt' if remotepath.endswith('.nt') else None
+                    source.parse(remotepath, format=format)
+                except Exception as e:
+                    print(f'Failed on remote path {remotepath}', file=sys.stderr)
+                    raise e
                 source.serialize(str(fpath), format='turtle')
                 return source
             else:
                 return source.parse(str(fpath), format='turtle')
-        source.parse(str(fpath))
+
+        fmt = 'nt' if fpath.endswith('.nt') else None
+        source.parse(str(fpath), format=fmt)
+
         return source
 
     def load_json(self, fpathref):
@@ -405,28 +425,47 @@ def _read_csv(fpath, encoding='utf-8'):
 
 def _construct(compiler, sources, query=None):
     dataset = ConjunctiveGraph()
+
     if not isinstance(sources, list):
         sources = [sources]
+
     for sourcedfn in sources:
-        source = sourcedfn['source']
+        if isinstance(sourcedfn, str):
+            sourcedfn = {'source': sourcedfn}
+
+        source = sourcedfn.get('source', [])
         graph = dataset.get_context(URIRef(sourcedfn.get('dataset') or source))
         if isinstance(source, (dict, list)):
-            context_data = sourcedfn['context']
-            if not isinstance(context_data, list):
-                context_data = compiler.load_json(context_data )['@context']
-            context_data = [compiler.load_json(ctx)['@context']
-                            if isinstance(ctx, str) else ctx
-                            for ctx in context_data]
-            ldutil.to_rdf(source, graph, context_data=context_data)
+            # TODO: was currently unused, and not yet supported in the data-driven form.
+            #context_data = sourcedfn['context']
+            #if not isinstance(context_data, list):
+            #    context_data = compiler.load_json(context_data )['@context']
+            #context_data = [compiler.load_json(ctx)['@context']
+            #                if isinstance(ctx, str) else ctx
+            #                for ctx in context_data]
+            #ldutil.to_rdf(source, graph, context_data=context_data)
+            graph += _construct(compiler, source, sourcedfn.get('query'))
         elif isinstance(source, Graph):
             graph += source
+        elif compiler.is_cachable(source):
+            graph += compiler.cached_rdf(source, sourcedfn.get('query'), sourcedfn.get('graph'))
         else:
-            graph += compiler.cached_rdf(source, sourcedfn.get('construct'), sourcedfn.get('graph'))
+            sourcepath = compiler.path(source)
+            assert sourcepath.is_file(), (source, source.startswith(('http:', 'https:')))
+            fmt = 'nt' if source.endswith('.nt') else 'turtle'
+            graph += Graph().parse(str(sourcepath), format=fmt)
+
     if not query:
         return graph
+
     with compiler.path(query).open() as fp:
-        result = dataset.query(fp.read())
-    g = Graph()
-    for spo in result:
-        g.add(spo)
-    return g
+        querytext = fp.read()
+        if re.search(r'\bCONSTRUCT\b', querytext, re.I):
+            result = dataset.query(querytext)
+        else:
+            dataset.update(querytext)
+            result = dataset
+        g = Graph()
+        for spo in result:
+            g.add(spo)
+        return g
