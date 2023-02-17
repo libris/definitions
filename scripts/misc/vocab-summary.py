@@ -19,6 +19,11 @@ ABS = Namespace("http://bibframe.org/model-abstract/")
 SCHEMA = Namespace("http://schema.org/")
 PTG = Namespace("http://protege.stanford.edu/plugins/owl/protege#")
 
+assert str(SDO) == "https://schema.org/"
+
+DOMAIN = RDFS.domain | SCHEMA.domainIncludes | SDO.domainIncludes
+RANGE = RDFS.range | SCHEMA.rangeIncludes | SDO.rangeIncludes
+
 
 def print_vocab(g, show_equivs=False, only_classes=False):
     global otherclasses, otherprops, SHOW_EQUIVS, ONLY_CLASSES
@@ -97,7 +102,7 @@ def print_class(c, superclasses=set()):
     print(indent + subnote + c.qname() + other_type_decl + note_comment)
 
     # Properties
-    props = sorted(c.subjects(RDFS.domain|SCHEMA.domainIncludes))
+    props = sorted(c.subjects(DOMAIN))
     for prop in props:
         #if any(prop.objects(RDFS.subPropertyOf)):
         #    continue
@@ -107,16 +112,35 @@ def print_class(c, superclasses=set()):
         print_subproperties(prop, c, indent + "       ")
 
     # Restrictions
+    restrictions_by_property = {}
+
     for subc in sorted(c.objects(RDFS.subClassOf)):
         if any(t for t in subc.objects(RDF.type) if t.identifier == OWL.Restriction):
-            print(indent + "   ", "@",
-                    subc.value(OWL.onProperty).qname(),
-                    "=>",
-                    ", ".join("All(%s)" % rc.qname() for rc in
-                        subc.objects(OWL.allValuesFrom)) +
-                    ", ".join("Some(%s)" % rc.qname() for rc in
-                        subc.objects(OWL.someValuesFrom))
-                    )
+            propname = subc.value(OWL.onProperty).qname()
+            restrs = restrictions_by_property.setdefault(propname, [])
+
+            all_from = ["All(%s)" % repr_class(rc) for rc in
+                        subc.objects(OWL.allValuesFrom)]
+            if all_from:
+                restrs.append(all_from)
+
+            some_from = ["Some(%s)" % rc.qname() for rc in
+                         subc.objects(OWL.someValuesFrom)]
+            if some_from:
+                restrs.append(some_from)
+
+            if subc.value(OWL.cardinality):
+                restrs.append([str(subc.value(OWL.cardinality))])
+
+            if subc.value(OWL.minCardinality):
+                restrs.append([f"{(subc.value(OWL.minCardinality))}.."])
+
+            if subc.value(OWL.maxCardinality):
+                restrs.append([f"..{(subc.value(OWL.maxCardinality))}"])
+
+    for propname, restrs in restrictions_by_property.items():
+        restr_repr = " & ".join(sorted(", ".join(restr) for restr in restrs))
+        print(indent + "   ", "@", propname, "=>", restr_repr)
 
     # Instances
     for inst in sorted(c.subjects(RDF.type)):
@@ -153,14 +177,16 @@ def print_propsum(indent, prop, domain=None):
     lbl = prop.qname()
 
     if domain:
-        subpropdomains = sorted(prop.objects(RDFS.domain|SCHEMA.domainIncludes))
+        subpropdomains = sorted(prop.objects(DOMAIN))
         if subpropdomains and subpropdomains != [domain]:
             lbl += " of " + ", ".join(spd.qname() for spd in subpropdomains)
 
-    ranges = tuple(prop.objects(RDFS.range|SCHEMA.rangeIncludes))
+    ranges = tuple(prop.objects(RANGE))
     if ranges:
-        lbl += " => " + ", ".join(_fix_bf_range(prop.graph, rc).qname()
-                for rc in ranges if isinstance(rc.identifier, URIRef))
+        lbl += " => " + ", ".join(
+            repr_class(_fix_bf_range(prop.graph, rc))
+            for rc in ranges
+        )
 
     note = prop.value(ABS.marcField) or ""
     if SHOW_EQUIVS:
@@ -173,6 +199,12 @@ def print_propsum(indent, prop, domain=None):
         lbl += " # " + note
 
     print(indent, lbl)
+
+
+def repr_class(rc):
+    if rc.value(OWL.unionOf):
+        return ' | '.join(repr_class(x) for x in rc.value(OWL.unionOf).items())
+    return rc.qname()
 
 
 def _ns(g, o):
