@@ -18,7 +18,8 @@ base <https://id.kb.se/dataset/>
     :sourceData [ :uri "build/rdaterms.json.lines" ;
         :sourceData [ a :QueryConstruct ;
                 :dataQuery [ :uri "source/construct-rda-terms.rq" ] ;
-                :sourceData [ :uri 'source/rda-terms.ttl' ] ,
+                :sourceData [ :uri 'source/rda-terms.ttl' ;
+                              :representationOf <rdaterms> ] ,
                     <http://rdaregistry.info/termList/RDAContentType.nt> ,
                     <http://id.loc.gov/vocabulary/contentTypes> ,
 
@@ -28,7 +29,7 @@ base <https://id.kb.se/dataset/>
                     <http://rdaregistry.info/termList/RDACarrierType.nt> ,
                     <http://id.loc.gov/vocabulary/carriers> ,
 
-                    <http://rdaregistry.info/termList/ModeIssue> ,
+                    #<http://rdaregistry.info/termList/ModeIssue> ,
                     <http://id.loc.gov/vocabulary/issuance.skos.rdf> ;
                 # NOTE: this is serialized using system context!
             ] ] ;
@@ -44,8 +45,7 @@ base <https://id.kb.se/dataset/>
                 <http://rdaregistry.info/termList/RDAMaterial.nt> ,
                 [ a :QueryConstruct ;
                     :dataQuery [ :uri "source/remote/construct-aat-materials.rq" ] ;
-                    :sourceData [ :uri "sparql/aat-materials" ]
-                ]
+                    :representationOf <urn:x-cache:sparql:aat-materials> ]
         ] ] ;
     :uriSpace "/material/" ;
     :created "2021-12-07T21:28:01.123Z"^^xsd:dateTime .
@@ -91,7 +91,7 @@ base <https://id.kb.se/dataset/>
                     <http://d-nb.info/standards/elementset/gnd> ,
                     [ a :QueryConstruct ;
                         :dataQuery [ :uri "source/remote/construct-bnf-roles.rq" ] ;
-                        :sourceData <sparql/bnf-roles> ] ;
+                        :representationOf <urn:x-cache:sparql:bnf-roles> ] ;
             :dataQuery [ :uri "source/construct-relators.rq" ]
         ] ] ;
     :uriSpace "/relator/" ;
@@ -101,13 +101,16 @@ base <https://id.kb.se/dataset/>
     :isPartOf <common> ;
     :sourceData [ :uri "build/languages.json.lines" ;
             :sourceData [ a :QueryConstruct ;
-                    :dataQuery [ :uri "source/construct-languages.rq" ] ;
-                    :sourceData [ :uri 'source/languages.ttl' ; :representationOf <languages> ] ,
-                            [ :sourceData <http://id.loc.gov/vocabulary/iso639-1.nt> ,
-                                    <http://id.loc.gov/vocabulary/iso639-2.nt> ;
-                              :representationOf <http://id.loc.gov/vocabulary/languages> ]
-                ]
-        ] ;
+                    :dataQuery [ :uri "source/construct-languages-iso639-1.rq" ] ;
+                    :sourceData [ a :QueryConstruct ;
+                            :dataQuery [ :uri "source/construct-languages-iso639-2.rq" ] ;
+                            :sourceData [ :uri "source/languages.ttl" ;
+                                          :representationOf <languages> ] ,
+                                [ :sourceData <https://id.loc.gov/vocabulary/iso639-2.nt> ;
+                                  :representationOf <http://id.loc.gov/vocabulary/iso639-2> ] ;
+                            :representationOf <languages> ] ,
+                        [ :sourceData <https://id.loc.gov/vocabulary/iso639-1.nt> ;
+                          :representationOf <http://id.loc.gov/vocabulary/iso639-1> ] ] ] ;
     # Candidate source: <http://www.lexvo.org/>
     :uriSpace "/language/" ;
     :created "2014-08-01T07:56:51.110Z"^^xsd:dateTime .
@@ -115,7 +118,8 @@ base <https://id.kb.se/dataset/>
 <countries> a :Dataset ;
     :isPartOf <common> ;
     :sourceData [ :uri "build/countries.json.lines" ; :sourceData [ a :QueryConstruct ;
-            :sourceData [ :uri 'source/countries.ttl' ], <http://id.loc.gov/vocabulary/countries> ;
+            :sourceData [ :uri 'source/countries.ttl' ; :representationOf <countries> ] ,
+                        <http://id.loc.gov/vocabulary/countries> ;
             :dataQuery [ :uri "source/construct-countries.rq" ]
         ] ] ;
     :uriSpace "/country/" ;
@@ -123,8 +127,8 @@ base <https://id.kb.se/dataset/>
 
 # TODO [637cd07f]: Nested :sourceData is provisionally kept below.
 # While the new Datasetsimporter can read Turle; this first step keeps the same
-# exact built data. In the nest step,wrapping :sourceData with .json.lines will
-# be removed and just inner source is kept.
+# exact built data. In the nest step, wrapping :sourceData with .json.lines
+# will be removed and just inner source is kept.
 
 <enumterms> a :Dataset ;
     :isPartOf <common> ;
