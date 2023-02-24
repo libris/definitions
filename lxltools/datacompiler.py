@@ -274,9 +274,9 @@ class Compiler:
 
     def get_cached_path(self, url):
         fpath = self.cachedir / quote(url.replace(CACHE_SPAQRL_BASE, 'sparql/'), safe="")
-        print(url, fpath)
         return fpath
 
+    # TODO: now unused; either remove or use inside of cached_rdf (for more control)
     def cache_url(self, url, maxcache=MAX_CACHE):
         path = self.get_cached_path(url)
         mtime = path.stat().st_mtime if path.exists() else None
@@ -317,7 +317,9 @@ class Compiler:
             print("No cache directory configured", file=sys.stderr)
         elif construct:
             fpath = self.get_cached_path(fpath + '.ttl')
-            if not fpath.is_file():
+
+            if not (fpath.is_file() and fpath.stat().st_size > 0):
+                print(f'Caching result of {construct} as {fpath}', file=sys.stderr)
                 with self.path(construct).open() as fp:
                     try:
                         res = (graph or Graph()).query(fp.read())
@@ -327,14 +329,17 @@ class Compiler:
                     except Exception as e:
                         print(f'Failed to cache {fpath}: {e}', file=sys.stderr)
             else:
+                print(f'Using cached {fpath} as result of {construct}', file=sys.stderr)
                 source.parse(str(fpath), format='turtle')
+
             return source
 
         elif self.is_cachable(fpath):
             remotepath = fpath
             fpath = self.get_cached_path(fpath + '.ttl')
-            print(f'Using cached {fpath} for {remotepath}', file=sys.stderr)
-            if not fpath.is_file():
+
+            if not (fpath.is_file() and fpath.stat().st_size > 0):
+                print(f'Caching {remotepath} as {fpath}', file=sys.stderr)
                 fpath.parent.mkdir(parents=True, exist_ok=True)
                 try:
                     # At least rdaregistry is *very* picky about what is asked for,
@@ -347,6 +352,7 @@ class Compiler:
                 source.serialize(str(fpath), format='turtle')
                 return source
             else:
+                print(f'Using cached {fpath} for {remotepath}', file=sys.stderr)
                 return source.parse(str(fpath), format='turtle')
 
         fmt = 'nt' if fpath.endswith('.nt') else None
@@ -414,7 +420,7 @@ def _digest_source_data(src):
         source['query'] = src['dataQuery']['uri']
     elif '@id' in src:
         assert 'source' not in source
-        source['source'] = str(src['@id']) # TODO: bug in rdflib; URIRef in the json-ld
+        source['source'] = str(src['@id'])  # TODO: bug in rdflib; URIRef in the JSON-LD
     elif 'uri' in src:
         instruct = 'result' if 'sourceData' in src else 'source'
         assert instruct not in source
@@ -425,7 +431,7 @@ def _digest_source_data(src):
     if 'representationOf' in src:
         instruct = 'dataset'
         assert instruct not in source
-        source[instruct] = src['representationOf']['@id']
+        source[instruct] = str(src['representationOf']['@id'])  # TODO: (same as above)
         unhandled = False
 
     for part in _aslist(src.get('sourceData')):
@@ -497,7 +503,7 @@ def _construct(compiler, sources, query=None):
         if isinstance(sourcedfn, str):
             sourcedfn = {'source': sourcedfn}
 
-        source = sourcedfn.get('source', [])
+        source = sourcedfn.get('source') or sourcedfn.get('dataset')
         graph = dataset.get_context(URIRef(sourcedfn.get('dataset') or source))
         if isinstance(source, (dict, list)):
             # TODO: was currently unused, and not yet supported in the data-driven form.
