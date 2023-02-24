@@ -815,14 +815,9 @@
           "@type": "fresnel:Lens",
           "@id": "Person-cards",
           "classLensDomain": "Person",
+          "fresnel:extends": {"@id": "Person-chips"},
           "showProperties": [ 
-            "familyName",
-            "givenName",
-            "name",
-            "marc:numeration",
-            "marc:titlesAndOtherWordsAssociatedWithAName",
-            "fullerFormOfName",
-            "lifeSpan",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "hasOccupation",
@@ -837,12 +832,10 @@
           "@type": "fresnel:Lens",
           "@id": "Family-cards",
           "classLensDomain": "Family",
+          "fresnel:extends": {"@id": "Family-chips"},
           "showProperties": [ 
+            "fresnel:super",
             "hasTypeOfFamily",
-            "name",
-            "marc:titlesAndOtherWordsAssociatedWithAName",
-            "lifeSpan",
-            "place",
             "hasVariant",
             "seeAlso",
             "description",
@@ -855,10 +848,9 @@
           "@type": "fresnel:Lens",
           "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
+          "fresnel:extends": {"@id": "Jurisdiction-chips"},
           "showProperties": [ 
-            "name",
-            "isPartOf",
-            "marc:subordinateUnit",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -873,11 +865,9 @@
           "@type": "fresnel:Lens",
           "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
+          "fresnel:extends": {"@id": "Meeting-chips"},
           "showProperties": [ 
-            "name",
-            "marc:numeration",
-            "date",
-            "place",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -890,10 +880,9 @@
           "@type": "fresnel:Lens",
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
+          "fresnel:extends": {"@id": "Organization-chips"},
           "showProperties": [ 
-            "name",
-            "isPartOf",
-            "marc:subordinateUnit",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -1238,6 +1227,26 @@
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
           "showProperties": [ "fresnel:super", "subject", "summary" ]
+        },
+        "Person": {
+          "fresnel:extends": {"@id": "Person-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Family": {
+          "fresnel:extends": {"@id": "Family-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Jurisdiction": {
+          "fresnel:extends": {"@id": "Jurisdiction-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Meeting": {
+          "fresnel:extends": {"@id": "Meeting-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Organization": {
+          "fresnel:extends": {"@id": "Organization-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
         }
       }
     },
