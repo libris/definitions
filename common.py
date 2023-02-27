@@ -11,6 +11,7 @@ compiler = Compiler(
     context="sys/context/base.jsonld",
     system_base_iri="",
     union="common.jsonld.lines",
+    last_backwards_id_time="2022-10-14T16:26:16Z"
 )
 
 if __name__ == "__main__":

@@ -33,7 +33,8 @@ class Compiler:
                  context=None,
                  record_thing_link='mainEntity',
                  system_base_iri=None,
-                 union='all.jsonld.lines'):
+                 union='all.jsonld.lines',
+                 last_backwards_id_time=None):
         self.datasets_description = datasets_description
         self.datasets = {}
         self.current_ds_resources = set()
@@ -48,6 +49,11 @@ class Compiler:
         self.union = union
         self.current_ds_file = None
         self.no_records = False
+
+        self.last_backwards_id_time = (
+            timeutil.w3c_dtz_to_ms(last_backwards_id_time)
+            if isinstance(last_backwards_id_time, str)
+            else None)
 
         if datasets_description:
             self._handlers_from_datasets_description(datasets_description)
@@ -155,7 +161,8 @@ class Compiler:
             data = self.to_jsonld(data)
 
         ds_url = urljoin(self.dataset_id, name)
-        self._create_dataset_description(ds_url, ds_created_ms, ds_modified_ms)
+        self._create_dataset_description(
+            ds_url, ds_created_ms, ds_created_ms=ds_created_ms)
 
         base_id = urljoin(self.dataset_id, base)
 
@@ -172,10 +179,6 @@ class Compiler:
             modified_ms = None
             fpath = urlparse(nodeid).path[1:]
 
-            if self.no_records:
-                self.write(node, fpath)
-                continue
-
             meta = node.pop('meta', None)
             if meta:
                 if 'created' in meta:
@@ -189,10 +192,25 @@ class Compiler:
                     node,
                     created_ms,
                     modified_ms,
-                    datasets=[self.dataset_id, ds_url])
-            self.write(desc, fpath)
+                    datasets=[self.dataset_id, ds_url],
+                    ds_created_ms=ds_created_ms)
 
-    def _create_dataset_description(self, ds_url, created_ms, modified_ms=None, label=None):
+            # Keep sameAs "fowards" form in meta even if no_records is used
+            if self.no_records:
+                meta = meta or {}
+                sameas = meta.setdefault('sameAs', [])
+                rec = desc['@graph'][0]
+                if 'sameAs' in rec:
+                    sameas.append({"@id": rec['@id']})
+                for same in rec.get('sameAs', []):
+                    sameas.append(same)
+                node['meta'] = meta
+                self.write(node, fpath)
+            else:
+                self.write(desc, fpath)
+
+    def _create_dataset_description(self, ds_url, created_ms, modified_ms=None,
+            label=None, ds_created_ms=None):
         if not label:
             label = ds_url.rsplit('/', 1)[-1]
         ds = {
@@ -211,7 +229,7 @@ class Compiler:
             return
 
         desc = self._to_node_description(ds, created_ms, modified_ms,
-                datasets={self.dataset_id, ds_url})
+                datasets={self.dataset_id, ds_url}, ds_created_ms=ds_created_ms)
 
         record = desc['@graph'][0]
         if self.tool_id:
@@ -220,14 +238,16 @@ class Compiler:
         self.write(desc, ds_path)
 
     def _to_node_description(self, node, created_ms,
-            modified_ms=None, datasets=None):
+            modified_ms=None, datasets=None, ds_created_ms=None):
         assert self.record_thing_link not in node
 
         node_id = node['@id']
 
         record = OrderedDict()
         record['@type'] = 'Record'
-        record['@id'] = self.generate_record_id(created_ms, node_id)
+
+        self.set_record_id(record, created_ms, node_id, ds_created_ms)
+
         record[self.record_thing_link] = {'@id': node_id}
 
         # Add provenance
@@ -241,9 +261,19 @@ class Compiler:
 
         return {'@graph': items}
 
-    def generate_record_id(self, created_ms, node_id):
-        # FIXME: backwards_form=created_ms < 2015
-        slug = lxlslug.librisencode(created_ms, lxlslug.checksum(node_id))
+    def set_record_id(self, record, created_ms, node_id, ds_created_ms=None):
+        if ds_created_ms is None:
+            ds_created_ms = created_ms
+        backwards_form = ds_created_ms < self.last_backwards_id_time
+        # TODO: use normal form and keep backwards_form as sameAs until "GC:able"?
+        record['@id'] = self.generate_record_id(created_ms, node_id, backwards_form)
+        if backwards_form:
+            record['sameAs'] = [{'@id': self.generate_record_id(created_ms, node_id)}]
+
+    def generate_record_id(self, created_ms, node_id, backwards_form=False):
+        slug = lxlslug.librisencode(
+            created_ms, lxlslug.checksum(node_id), backwards_form=backwards_form
+        )
         return urljoin(self.system_base_iri, slug)
 
     def write(self, node, name):
