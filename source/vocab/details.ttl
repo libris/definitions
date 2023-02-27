@@ -1277,9 +1277,10 @@
     owl:equivalentProperty bf2:place, prov:atLocation .
 
 :originPlace a owl:ObjectProperty;
-    rdfs:label "Ursprungsplats för verket"@sv;
-    rdfs:domain :Work;
-    rdfs:range :Place;
+    rdfs:label "ursprungsplats"@sv;
+    skos:changeNote "2023-02-27: Ändrat från \"Ursprungsplats för verket\""@sv;
+    sdo:domainIncludes :Work, :Instance;
+    rdfs:range :Place; # NOTE: bf2 use range rdf:Resource.
     rdfs:subPropertyOf :place;
     owl:equivalentProperty bf2:originPlace .
 
@@ -1306,7 +1307,8 @@
     rdfs:subPropertyOf :date .
 
 :originDate a owl:DatatypeProperty;
-    rdfs:label "Tid för verket"@sv;
+    rdfs:label "tillkomsttid"@sv;
+    skos:changeNote "2023-02-27: Ändrat från \"Tid för verket\""@sv;
     rdfs:domain :Work;
     rdfs:subPropertyOf :date;
     owl:equivalentProperty bf2:originDate .
