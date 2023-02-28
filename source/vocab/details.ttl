@@ -12,6 +12,7 @@
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix cc: <http://creativecommons.org/ns#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
@@ -1685,7 +1686,7 @@
 :License a owl:Class;
     rdfs:label "License"@en, "Licens"@sv;
     rdfs:subClassOf :UsePolicy;
-    owl:equivalentClass dc:LicenseDocument .
+    owl:equivalentClass dc:LicenseDocument, cc:License .
 
 :Embargo a owl:Class;
     :category :pending ;
