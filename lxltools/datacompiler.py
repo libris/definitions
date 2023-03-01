@@ -195,7 +195,7 @@ class Compiler:
                     datasets=[self.dataset_id, ds_url],
                     ds_created_ms=ds_created_ms)
 
-            # Keep sameAs "fowards" form in meta even if no_records is used
+            # Keep sameAs "forwards" form in meta even if no_records is used
             if self.no_records:
                 meta = meta or {}
                 sameas = meta.setdefault('sameAs', [])
