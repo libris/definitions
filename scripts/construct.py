@@ -2,6 +2,9 @@
 import sys
 
 from rdflib import ConjunctiveGraph
+from rdflib.plugin import Parser, register
+
+register("text/html", Parser, "pyRdfa.rdflibparsers", "RDFaParser")
 
 queryfile, *infiles = sys.argv[1:]
 

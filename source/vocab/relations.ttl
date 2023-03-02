@@ -10,7 +10,9 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix sdo: <http://schema.org/> .
-prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/>
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
 
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
@@ -23,7 +25,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv, "license"@en ;
-    owl:equivalentProperty dc:license .
+    owl:equivalentProperty dc:license, xhv:license .
 
 :versionOf a owl:ObjectProperty;
     ptg:abstract true;
@@ -333,7 +335,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
 
 :translation a owl:ObjectProperty;
     rdfs:label "översättning till"@sv;
-    owl:equivalentProperty bf2:translation;
+    owl:equivalentProperty bf2:translation, frbr:translation;
     rdfs:subPropertyOf :hasDerivative;
     owl:inverseOf :translationOf .
 
@@ -342,7 +344,7 @@ prefix relsubtype: <http://id.loc.gov/vocabulary/preservation/relationshipSubTyp
     rdfs:label "översättning av"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
-    owl:equivalentProperty bf2:translationOf;
+    owl:equivalentProperty bf2:translationOf, frbr:translationOf;;
     rdfs:subPropertyOf :derivativeOf;
     owl:inverseOf :translation .
 
