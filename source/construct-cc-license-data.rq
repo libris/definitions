@@ -5,29 +5,26 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
 
 CONSTRUCT {
-    ?http a cc:License ;
-        owl:sameAs ?s ;
+    ?secure a cc:License ;
+        owl:sameAs ?license ;
         ?p ?o ;
-        dct:identifier ?identifier .
+        dct:identifier ?identifier ;
+        frbr:translation ?translation .
 } WHERE {
-    VALUES (?p) {
-        (dct:creator) (dct:title) (xhv:license) (cc:permits) (cc:requires) (cc:prohibits)
-    }
     GRAPH ?g {
         ?license a cc:License ; dct:identifier ?id .
-        BIND(STR(?id) AS ?idstr)
-        BIND(REPLACE(?idstr, "^\\s*\\(|\\)\\s*$", "") AS ?identifier)
-        OPTIONAL { ?license ?p ?o }
+        BIND(REPLACE(STR(?id), "^\\s*\\(|\\)\\s*$", "") AS ?identifier)
     }
-    {
-        SELECT ?real ?idstr {
-            GRAPH ?real { ?x dct:identifier ?id }
-            FILTER(!REGEX(STR(?real), ".*/deed\\.\\w+$"))
-            BIND(STR(?id) AS ?idstr)
-        }
+    VALUES (?p) {
+        (dct:creator) (dct:title) (cc:permits) (cc:requires) (cc:prohibits) (xhv:license)
     }
-    BIND(COALESCE(?real, ?g, ?license) AS ?s)
-    BIND(IF(STRSTARTS(STR(?s), "https://"),
-            IRI(CONCAT("http://", STRAFTER((STR(?s)), "https://"))),
-            ?s) AS ?http)
+    ?license ?p ?o .
+    OPTIONAL {
+        ?license frbr:translation ?translation .
+        FILTER(?translation = ?g)
+    }
+    BIND(IF(!BOUND(?translation) && ?g != ?license, ?g, ?nothing) AS ?same)
+    BIND(IF(STRSTARTS(STR(?license), "http://"),
+            IRI(CONCAT("https://", STRAFTER((STR(?license)), "http://"))),
+            ?license) AS ?secure)
 }
