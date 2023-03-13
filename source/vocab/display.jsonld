@@ -159,8 +159,8 @@
                 {"subPropertyOf": "contribution", "range": "PrimaryContribution"}
               ]
             },
-            "marc:version",
             "version",
+            "marc:arrangedStatementForMusic",
             "originDate"
           ]
         },
@@ -328,6 +328,14 @@
             {"alternateProperties": ["prefLabel", "label", "code"]}
           ]
         },
+        "Script": {
+          "@id": "Script-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Script",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "code"]}
+          ]
+        },
         "TransformedLanguageForm": {
           "@id": "TransformedLanguageForm-chips",
           "@type": "fresnel:Lens",
@@ -468,6 +476,42 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "MediaObject",
           "showProperties": [ "uri" ]
+        },
+        "TemporalEntity": {
+          "@id": "TemporalEntity-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "TemporalEntity",
+          "showProperties": [ "firstIssueDate", "lastIssueDate" ]
+        },
+        "SerialEdition": {
+          "@id": "SerialEdition-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "SerialEdition",
+          "showProperties": [ "label", "manufacture", "firstIssueDate", "lastIssueDate" ]
+        },
+        "GeographicCoverage": {
+          "@id": "GeographicCoverage-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "GeographicCoverage",
+          "showProperties": [ "place", "firstIssueDate", "lastIssueDate" ]
+        },
+        "FrequencyPeriod": {
+          "@id": "FrequencyPeriod-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "PoliticalTendencyPeriod",
+          "showProperties": [ "frequency", "firstIssueDate", "lastIssueDate" ]
+        },
+        "LanguagePeriod": {
+          "@id": "LanguagePeriod-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "LanguagePeriod",
+          "showProperties": [ "language", "firstIssueDate", "lastIssueDate" ]
+        },
+        "PoliticalTendencyPeriod": {
+          "@id": "PoliticalTendencyPeriod-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "PoliticalTendencyPeriod",
+          "showProperties": [ "politicalTendency", "firstIssueDate", "lastIssueDate" ]
         }
       }
     },
@@ -510,6 +554,7 @@
             "responsibilityStatement",
             "editionStatement",
             "editionStatementRemainder",
+            "isIssueOfEdition",
             "publication",
             "marc:primaryProvisionActivity",
             "production",
@@ -554,9 +599,8 @@
                 "hasTitle"
               ]
             },
-            "marc:version",
             "version",
-            "translationOf",
+            "marc:arrangedStatementForMusic",
             "contribution",
             "language",
             "hasNotation",
@@ -570,7 +614,9 @@
             "illustrativeContent",
             "cartographicAttributes",
             "isPartOf",
+            "translationOf",
             {"inverseOf": "instanceOf"}
+
           ]
         },
         "DataCatalog": {
@@ -605,7 +651,7 @@
             "hasTitle",
             "musicMedium",
             "musicKey",
-            "version",
+            "marc:arrangedStatementForMusic",
             "contribution",
             "composition",
             "language",
@@ -633,6 +679,7 @@
             "genreForm",
             "classification",
             "subject",
+            "summary",
             "immediateAcquisition"
           ]
         },
@@ -703,6 +750,13 @@
           "fresnel:extends": {"@id": "Language-chips"},
           "showProperties": [ "fresnel:super", "altLabel", "code", "langTag", "isReplacedBy", "broader", {"inverseOf" : "broader"}, "comment" ]
         },
+        "Script": {
+          "@id": "Script-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Script",
+          "fresnel:extends": {"@id": "Script-chips"},
+          "showProperties": [ "fresnel:super", "altLabel", "code", "comment" ]
+        },
         "Material": {
           "@id": "Material-cards",
           "@type": "fresnel:Lens",
@@ -763,14 +817,9 @@
           "@type": "fresnel:Lens",
           "@id": "Person-cards",
           "classLensDomain": "Person",
+          "fresnel:extends": {"@id": "Person-chips"},
           "showProperties": [ 
-            "familyName",
-            "givenName",
-            "name",
-            "marc:numeration",
-            "marc:titlesAndOtherWordsAssociatedWithAName",
-            "fullerFormOfName",
-            "lifeSpan",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "hasOccupation",
@@ -785,12 +834,10 @@
           "@type": "fresnel:Lens",
           "@id": "Family-cards",
           "classLensDomain": "Family",
+          "fresnel:extends": {"@id": "Family-chips"},
           "showProperties": [ 
+            "fresnel:super",
             "hasTypeOfFamily",
-            "name",
-            "marc:titlesAndOtherWordsAssociatedWithAName",
-            "lifeSpan",
-            "place",
             "hasVariant",
             "seeAlso",
             "description",
@@ -803,10 +850,9 @@
           "@type": "fresnel:Lens",
           "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
+          "fresnel:extends": {"@id": "Jurisdiction-chips"},
           "showProperties": [ 
-            "name",
-            "isPartOf",
-            "marc:subordinateUnit",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -821,11 +867,9 @@
           "@type": "fresnel:Lens",
           "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
+          "fresnel:extends": {"@id": "Meeting-chips"},
           "showProperties": [ 
-            "name",
-            "marc:numeration",
-            "date",
-            "place",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -838,10 +882,9 @@
           "@type": "fresnel:Lens",
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
+          "fresnel:extends": {"@id": "Organization-chips"},
           "showProperties": [ 
-            "name",
-            "isPartOf",
-            "marc:subordinateUnit",
+            "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
@@ -931,6 +974,36 @@
           "@id": "ShelfMarkSequence-cards",
           "fresnel:extends": {"@id": "ShelfMarkSequence-chips"},
           "showProperties": [ "fresnel:super", "description", "hasNote" ]
+        },
+        "TemporalEntity": {
+          "@id": "TemporalEntity-cards",
+          "fresnel:extends": {"@id": "TemporalEntity-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "SerialEdition": {
+          "@id": "SerialEdition-cards",
+          "fresnel:extends": {"@id": "SerialEdition-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "GeographicCoverage": {
+          "@id": "GeographicCoverage-cards",
+          "fresnel:extends": {"@id": "GeographicCoverage-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "FrequencyPeriod": {
+          "@id": "FrequencyPeriod-cards",
+          "fresnel:extends": {"@id": "FrequencyPeriod-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "LanguagePeriod": {
+          "@id": "LanguagePeriod-cards",
+          "fresnel:extends": {"@id": "LanguagePeriod-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "PoliticalTendencyPeriod": {
+          "@id": "PoliticalTendencyPeriod-cards",
+          "fresnel:extends": {"@id": "PoliticalTendencyPeriod-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "TransformedLanguageForm": {
           "@id": "TransformedLanguageForm-cards",
@@ -1119,9 +1192,63 @@
           "fresnel:extends": {"@id": "ToCEntry-cards"},
           "showProperties": [ "fresnel:super" ]
         },
+        "TemporalEntity": {
+          "fresnel:extends": {"@id": "TemporalEntity-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "SerialEdition": {
+          "fresnel:extends": {"@id": "SerialEdition-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "GeographicCoverage": {
+          "fresnel:extends": {"@id": "GeographicCoverage-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "LanguagePeriod": {
+          "fresnel:extends": {"@id": "LanguagePeriod-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "FrequencyPeriod": {
+          "fresnel:extends": {"@id": "FrequencyPeriod-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "PoliticalTendencyPeriod": {
+          "fresnel:extends": {"@id": "PoliticalTendencyPeriod-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "TransformedLanguageForm": {
           "fresnel:extends": {"@id": "TransformedLanguageForm-cards"},
           "showProperties": [ "fresnel:super" ]
+        }
+      }
+    },
+    "search-chips": {
+      "@id": "search-chips",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Item": {
+          "fresnel:extends": {"@id": "Item-chips"},
+          "showProperties": [ "fresnel:super", "subject", "summary" ]
+        },
+        "Person": {
+          "fresnel:extends": {"@id": "Person-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Family": {
+          "fresnel:extends": {"@id": "Family-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Jurisdiction": {
+          "fresnel:extends": {"@id": "Jurisdiction-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Meeting": {
+          "fresnel:extends": {"@id": "Meeting-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Organization": {
+          "fresnel:extends": {"@id": "Organization-chips"},
+          "showProperties": [ "fresnel:super", "hasVariant" ]
         }
       }
     },
@@ -1135,7 +1262,7 @@
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
-          "showProperties": [ "fresnel:super", "subject", "summary" ]
+          "showProperties": [ "fresnel:super", "subject", "summary", "cataloguersNote" ]
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},

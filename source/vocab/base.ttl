@@ -18,6 +18,8 @@
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
 
+@prefix quid: <https://w3id.org/quid/> .
+
 @prefix : <https://id.kb.se/vocab/> .
 
 
@@ -125,6 +127,34 @@ rdf:type a owl:ObjectProperty;
 
 
 ##
+# Temporal qualifications (cf. https://en.wikipedia.org/wiki/Perdurantism)
+#
+# A perdurant entity ("4D worm") has exdurant parts (carrying the properties of
+# a "stage"). Temporal entities are somewhere in between ("slices of time").
+# Think of them as discrete, statistical things, carrying some properties,
+# stable witin that time slice, of something perdurant.
+#
+# To compare, for *endurant* entities, properties do not change. For instance,
+# a newspaper issue had a specific geographical coverage, whereas for the
+# newspaper serial, this coverage may change, but probably not for every issue.
+# The newspaper issue is, for all practical cataloging purposes, an endurant
+# thing, whereas the serial has aspects, such as geographic coverage, which can
+# be temporally qualified.
+
+:TemporalEntity a owl:Class ;
+    ptg:abstract true ;
+    rdfs:label "Temporal entity"@en, "Temporal entitet"@sv;
+    rdfs:comment "Something existing over a period of time."@en ;
+    rdfs:subClassOf quid:QualifiedIdentity .
+
+:TemporalQualification a owl:Class ;
+    ptg:abstract true ;
+    rdfs:label "Temporal qualification"@en, "Temporal kvalificering"@sv;
+    rdfs:comment "Constitues an aspect of a more distinct entity."@en ;
+    rdfs:subClassOf :TemporalEntity, :QualifiedRole .
+
+
+##
 # Categorization Of Terms
 
 :category a owl:ObjectProperty;
@@ -193,7 +223,7 @@ rdf:type a owl:ObjectProperty;
 
 :comment a owl:DatatypeProperty;
     rdfs:label "comment"@en, "kommentar"@sv;
-    sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC ;
+    sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC, :Language, :Script ;
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;

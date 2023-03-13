@@ -1,0 +1,30 @@
+PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frbr: <http://purl.org/vocab/frbr/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+
+CONSTRUCT {
+    ?secure a cc:License ;
+        owl:sameAs ?license ;
+        ?p ?o ;
+        dct:identifier ?identifier ;
+        frbr:translation ?translation .
+} WHERE {
+    GRAPH ?g {
+        ?license a cc:License ; dct:identifier ?id .
+        BIND(REPLACE(STR(?id), "^\\s*\\(|\\)\\s*$", "") AS ?identifier)
+    }
+    VALUES (?p) {
+        (dct:creator) (dct:title) (cc:permits) (cc:requires) (cc:prohibits) (xhv:license)
+    }
+    ?license ?p ?o .
+    OPTIONAL {
+        ?license frbr:translation ?translation .
+        FILTER(?translation = ?g)
+    }
+    BIND(IF(!BOUND(?translation) && ?g != ?license, ?g, ?nothing) AS ?same)
+    BIND(IF(STRSTARTS(STR(?license), "http://"),
+            IRI(CONCAT("https://", STRAFTER((STR(?license)), "http://"))),
+            ?license) AS ?secure)
+}

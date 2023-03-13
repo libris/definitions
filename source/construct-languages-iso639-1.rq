@@ -1,0 +1,42 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#>
+prefix dc: <http://purl.org/dc/terms/>
+prefix iso639_1: <http://id.loc.gov/vocabulary/iso639-1/>
+prefix kbv: <https://id.kb.se/vocab/>
+prefix langtag: <https://id.kb.se/i18n/lang/>
+
+construct {
+    ?s ?p ?o ;
+        owl:sameAs ?bcp47alias ;
+        skos:notation ?langCodeShort, ?langTag ;
+        skos:closeMatch ?locVariant .
+} where {
+    graph <https://id.kb.se/dataset/languages> {
+        ?s ?p ?o .
+        optional {
+            ?s skos:prefLabel ?prefLabel .
+            graph <http://id.loc.gov/vocabulary/iso639-1> {
+                ?locVariant madsrdf:authoritativeLabel|skos:prefLabel ?prefLabel
+                bind(substr(str(?locVariant), strlen(str(iso639_1:)) + 1) as ?shortcode)
+                bind(strdt(?shortcode, kbv:ISO639-1) as ?langCodeShort)
+            }
+        }
+        optional {
+            ?s skos:notation ?iso639_2 .
+            filter(datatype(?iso639_2) = kbv:ISO639-2)
+        }
+        optional {
+            ?s skos:notation ?iso639_3 .
+            filter(datatype(?iso639_3) = kbv:ISO639-3)
+        }
+        bind(str(
+            coalesce(?langCodeShort,
+                coalesce(?iso639_2, ?iso639_3))
+        ) as ?langTagStr)
+        bind(strdt(?langTagStr, kbv:BCP47) as ?langTag)
+        bind(IRI(concat(str(langtag:), ?langTagStr)) as ?bcp47alias)
+    }
+}
+

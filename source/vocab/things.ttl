@@ -507,7 +507,26 @@
     rdfs:label "License Agreement Bound Description"@en, "Licensavtalsbunden beskrivning"@sv;
     rdfs:subClassOf :Aggregate .
 
-# subClassOf bf2:Instance Types
+:SerialEdition a owl:Class ;
+    rdfs:subClassOf :Creation, :TemporalEntity , [ a owl:Restriction ;
+            owl:onProperty :issuanceType ;
+            owl:hasValue :Serial ] ;
+    rdfs:label "Serial Edition"@en, "Seriell utgåva"@sv .
+
+:isIssueOfEdition a owl:ObjectProperty ;
+    rdfs:subPropertyOf :isPartOf ;
+    rdfs:label "issue of edition"@en, "tidningnummer i utgåva"@sv;
+    rdfs:domain :Instance ; # :Serial
+    rdfs:range :SerialEdition .
+
+:isEditionOf a owl:ObjectProperty ;
+    rdfs:subPropertyOf :isPartOf ;
+    rdfs:label "is edition of"@en, "är edition av"@sv;
+    rdfs:domain :SerialEdition ;
+    rdfs:range :Instance .
+
+
+## subClassOf bf2:Instance Types
 
 :Archival a owl:Class;
     rdfs:label "Arkiv"@sv;
