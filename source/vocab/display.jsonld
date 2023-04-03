@@ -531,7 +531,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
           "fresnel:extends": {"@id": "Resource-chips"},
-          "showProperties": [ "fresnel:super", "exactMatch", "closeMatch", "broadMatch" ]
+          "showProperties": [ "fresnel:super", "exactMatch", "closeMatch", "broadMatch", "comment" ]
         },
         "Record": {
           "@type": "fresnel:Lens",
@@ -1023,6 +1023,10 @@
       "@id": "full",
       "@type": "fresnel:Group",
       "lenses": {
+        "Resource": {
+          "fresnel:extends": {"@id": "Resource-cards"},
+          "showProperties": [ "fresnel:super", "description", "url" ]
+        },
         "Record": {
           "fresnel:extends": {"@id": "Record-cards"},
           "showProperties": [
