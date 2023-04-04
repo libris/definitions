@@ -29,8 +29,9 @@ marc:InBetweenInSequence a marc:SequenceStatus ;
 marc:LatestInSequence a marc:SequenceStatus ;
     rdfs:label "Nuvarande / Senaste utgivare"@sv, "Current / Latest publisher"@en .
 
-marc:isPrivate a owl:DatatypeProperty ;
+marc:isPrivate a owl:DatatypeProperty ; # these should be removed from descriptions going forward.
     sdo:domainIncludes marc:ImmediateSourceOfAcquisitionNote, marc:ActionNote, kbv:ImmediateAcquisition ;
+    kbv:category kbv:pending ;
     rdfs:range xsd:boolean ;
     rdfs:label "Sekretessbelagd information"@sv .
 
