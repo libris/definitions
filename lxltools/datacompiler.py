@@ -505,15 +505,9 @@ def _construct(compiler, sources, query=None):
 
         source = sourcedfn.get('source') or sourcedfn.get('dataset')
         graph = dataset.get_context(URIRef(sourcedfn.get('dataset') or source))
-        if isinstance(source, (dict, list)):
-            # TODO: was currently unused, and not yet supported in the data-driven form.
-            #context_data = sourcedfn['context']
-            #if not isinstance(context_data, list):
-            #    context_data = compiler.load_json(context_data )['@context']
-            #context_data = [compiler.load_json(ctx)['@context']
-            #                if isinstance(ctx, str) else ctx
-            #                for ctx in context_data]
-            #ldutil.to_rdf(source, graph, context_data=context_data)
+        if 'data' in sourcedfn:
+            ldutil.to_rdf(sourcedfn['data'], graph, context_data=sourcedfn['context'])
+        elif isinstance(source, (dict, list)):
             graph += _construct(compiler, source, sourcedfn.get('query'))
         elif isinstance(source, Graph):
             graph += source
