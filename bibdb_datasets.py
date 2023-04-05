@@ -33,8 +33,8 @@ def _construct_bibdb_data(query):
     bidb_context = 'https://bibdb.libris.kb.se/libdb/static/meta/context.jsonld'
     return compiler.construct(sources=[
             {
-                "source": libraries,
                 "dataset": BASE + "dataset/libraries",
+                "data": libraries,
                 "context": [
                     compiler.load_json(compiler.cache_url(bidb_context)),
                     {
