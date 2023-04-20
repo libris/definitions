@@ -12,7 +12,8 @@ CONSTRUCT {
         frbr:translation ?translation .
 } WHERE {
     GRAPH ?g {
-        ?license a cc:License ; dct:identifier ?id .
+        ?license a cc:License .
+        OPTIONAL { ?license dct:identifier ?id }
         BIND(REPLACE(STR(?id), "^\\s*\\(|\\)\\s*$", "") AS ?identifier)
     }
     VALUES (?p) {
