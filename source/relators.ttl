@@ -235,6 +235,7 @@
     owl:equivalentProperty locrel:aft ;
     owl:sameAs <aft> ;
     skos:broader <author> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:aft ;
     skos:hiddenLabel "author of afterword",
         "järelsõna autor",
@@ -257,6 +258,7 @@
     owl:equivalentProperty locrel:aui ;
     owl:sameAs <aui> ;
     skos:broader <author> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:aui,
         mts:m952 ;
     skos:hiddenLabel "Johdannon kirjoittaja",
@@ -320,6 +322,7 @@
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:blw ;
     owl:sameAs <blw> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:blw ;
     skos:notation "blw" ;
     skos:prefLabel "Förlags-/reklamtext"@sv .
@@ -516,6 +519,7 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:cwt ;
     owl:sameAs <cwt> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:cwt ;
     skos:notation "cwt" ;
     skos:prefLabel "Textkommentar"@sv .
@@ -870,6 +874,15 @@
     skos:notation "dfe" ;
     skos:prefLabel "Defendant-appellee"@sv .
 
+<degreeCommitteeMember> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:dgc ;
+    owl:sameAs <dgc> ;
+    #skos:definition ""@sv .
+    skos:exactMatch locrel:dgc ;
+    skos:notation "dgc" ;
+    skos:prefLabel ""@sv .
+
 <degreeGrantingInstitution> a bf:Role ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:dgg ;
@@ -879,6 +892,16 @@
     skos:hiddenLabel "Grad-verleihende Institution" ;
     skos:notation "dgg" ;
     skos:prefLabel "Utfärdare av akademisk examen"@sv .
+
+<degreeSupervisor> a bf:Role ;
+    #rdfs:domain :Work ;
+    skos:closeMatch rdau:P60420 ;
+    owl:equivalentProperty locrel:dgs ;
+    owl:sameAs <dgs> ;
+    #skos:definition ""@sv .
+    skos:exactMatch locrel:dgs ;
+    skos:notation "dgs" ;
+    skos:prefLabel ""@sv .
 
 <delineator> a bf:Role ;
     rdfs:comment "Person etc. som utför en teknisk ritning utifrån någon annans design; jfr \"drm\" (teknisk detaljritning)"@sv ;
@@ -1552,6 +1575,16 @@
     skos:notation "mrk" ;
     skos:prefLabel "Metadatauppmärkare"@sv .
 
+<medium> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:med ;
+    owl:sameAs <med> ;
+    skos:closeMatch rdau:P60157;
+    #skos:definition ""@sv ;
+    skos:exactMatch locrel:med ;
+    skos:notation "med" ;
+    skos:prefLabel ""@sv .
+
 <metadataContact> a bf:Role ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:mdc ;
@@ -1568,6 +1601,16 @@
     skos:exactMatch locrel:mte ;
     skos:notation "mte" ;
     skos:prefLabel "Metallgravör"@sv .
+
+<minuteTaker> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:mtk ;
+    owl:sameAs <mtk> ;
+    skos:closeMatch rdau:P60446 ;
+    #skos:definitions ""@sv ;
+    skos:exactMatch locrel:mtk ;
+    skos:notation "mtk" ;
+    skos:prefLabel ""@sv .
 
 <moderator> a bf:Role ;
     rdfs:domain :Work ;
@@ -1756,6 +1799,8 @@
     skos:notation "pht" ;
     skos:prefLabel "Fotograf"@sv .
 
+# <placeOfAddress> owl:sameAs <pad> . The place to which a resource is sent is not a contributing role.
+
 <plaintiff> a bf:Role ;
     rdfs:comment "Juridisk term ung. motsvarande kärande, målsägande"@sv ;
     rdfs:domain :Work ;
@@ -1924,6 +1969,7 @@
     owl:equivalentProperty locrel:pdr ;
     owl:sameAs <pdr> ;
     skos:exactMatch locrel:pdr ;
+    skos:narrowMatch rdau:P61102 ;
     skos:notation "pdr" ;
     skos:prefLabel "Projektchef, projektsamordnare"@sv .
 
@@ -2152,6 +2198,7 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:rbr ;
     owl:sameAs <rbr> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:rbr ;
     skos:notation "rbr" ;
     skos:prefLabel "Rubricator"@sv .
@@ -2496,6 +2543,16 @@
     skos:notation "voc" ;
     skos:prefLabel "Vokalist"@sv .
 
+<voiceActor> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:vac ;
+    owl:sameAs <vac> ;
+    skos:closeMatch rdau:P60152 ;
+    #skos:definition ""@sv ;
+    skos:exactMatch locrel:vac ;
+    skos:notation "vac" ;
+    skos:prefLabel ""@sv .
+
 <witness> a bf:Role ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:wit ;
@@ -2527,6 +2584,7 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:wam ;
     owl:sameAs <wam> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:wam ;
     skos:notation "wam" ;
     skos:prefLabel "Medföljande material"@sv .
@@ -2535,6 +2593,8 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:wac ;
     owl:sameAs <wac> ;
+    skos:broader <wst> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:wac,
         gnd:writerOfAddedCommentary ;
     skos:hiddenLabel "writer of supplementary textual content" ; # RDA
@@ -2546,6 +2606,8 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:wal ;
     owl:sameAs <wal> ;
+    skos:broader <wst> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:wal ;
     skos:hiddenLabel "writer of supplementary textual content" ; # RDA
     skos:notation "wal" ;
@@ -2556,6 +2618,8 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:wat ;
     owl:sameAs <wat> ;
+    skos:broader <wst> ;
+    skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:wat ;
     skos:hiddenLabel "Verfasser von Zusatztexten",
         "Verfasser von ergänzendem Text",
@@ -2565,3 +2629,32 @@
     skos:notation "wat" ;
     skos:prefLabel "Kompletterande text"@sv .
 
+<writerOfIntroduction> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:win ;
+    owl:sameAs <win> ;
+    skos:broadMatch rdau:P61139 ;
+    #skos:definition ""@sv ;
+    skos:exactMatch locrel:win ;
+    skos:notation "win" ;
+    skos:prefLabel ""@sv .
+
+<writerOfPreface> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wpr ;
+    owl:sameAs <wpr> ;
+    skos:broadMatch rdau:P61139 ;
+    #skos:definition ""@sv ;
+    skos:exactMatch locrel:wpr ;
+    skos:notation "wpr" ;
+    skos:prefLabel ""@sv .
+
+<writerOfSupplementaryTextualContent> a bf:Role ;
+    #rdfs:domain :Work ;
+    owl:equivalentProperty locrel:wst ;
+    owl:sameAs <wst> ;
+    skos:broadMatch rdau:P61139 ;
+    #skos:definition ""@sv ;
+    skos:exactMatch locrel:wst ;
+    skos:notation "wst" ;
+    skos:prefLabel ""@sv .
