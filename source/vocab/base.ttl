@@ -161,6 +161,16 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
     owl:equivalentProperty sdo:category .
 
+##
+# These terms may also be "bibliographic", but the platform cannot work without
+# them. If the "bibliographic" notions are 1:1 with the technical, the term is
+# the same, otherwise we need subclasses (which may also derive from other
+# subclasses).
+# See also: <https://github.com/libris/definitions/pull/413>
+:platform a skos:Collection ;
+    :code "platform" ;
+    rdfs:comment "Terms required by the XL platform."@en .
+
 :shorthand a skos:Collection ;
     rdfs:label "shorthand"@en, "kortform"@sv ;
     rdfs:comment "Anges som kategori på egenskaper som har en mer komplex bakomliggande struktur."@sv ;
