@@ -14,6 +14,13 @@ COMBINATIONS = [
     ('grc', 'Grek', 'x0-skr-1980'),
     ('mn', 'Cyrl', 'x0-lessing'),
 
+    ('be', 'Cyrl', 'm0-iso-1968'),
+    ('bg', 'Cyrl', 'm0-iso-1968'),
+    ('mk', 'Cyrl', 'm0-iso-1968'),
+    ('ru', 'Cyrl', 'm0-iso-1968'),
+    ('sr', 'Cyrl', 'm0-iso-1968'),
+    ('uk', 'Cyrl', 'm0-iso-1968'),
+    
     ('be', 'Cyrl', 'm0-iso-1995'),
     ('bg', 'Cyrl', 'm0-iso-1995'),
     ('kk', 'Cyrl', 'm0-iso-1995'),
