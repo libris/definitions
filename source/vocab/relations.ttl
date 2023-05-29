@@ -349,6 +349,7 @@
     owl:inverseOf :translation .
 
 :expressionOf a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "uttryck av"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -357,6 +358,7 @@
     owl:equivalentProperty bf2:expressionOf .
 
 :hasExpression a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "har uttryck"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -365,6 +367,7 @@
     owl:equivalentProperty bf2:hasExpression .
 
 :hasRepresentativeExpression a owl:ObjectProperty;
+    :category :pending ;
     vs:term_status "unstable";
     rdfs:label "has representative expression"@en, "har representativt uttryck"@sv ;
     rdfs:domain :Work ;
@@ -374,6 +377,7 @@
     owl:equivalentProperty rdaw:P10346 .
 
 :representativeExpressionOf a owl:ObjectProperty;
+    :category :pending ;
     vs:term_status "unstable";
     rdfs:label "is representative expression of"@en, "är representativt uttryck av"@sv ;
     rdfs:domain :Work ;
@@ -395,6 +399,8 @@
 
 :replacedBy a owl:ObjectProperty;
     rdfs:label "ersatt av"@sv;
+    sdo:domainIncludes :ShelfMarkSequence ;
+    sdo:rangeIncludes :ShelfMarkSequence ;
     owl:equivalentProperty bf2:replacedBy;
     rdfs:subPropertyOf :succeededBy, dc:isReplacedBy ;
     owl:inverseOf :replacementOf .
@@ -450,6 +456,7 @@
     rdfs:label "Is issue of"@en, "nummer av"@sv;
     rdfs:subPropertyOf :isPartOf;
     owl:inverseOf [rdfs:label "Has issue"@en, "har nummer"@sv] ; #NOTE: Until we need a properly defined inverse term (For reference rdau:P60240).
+    rdfs:range :Instance ;
     owl:equivalentProperty rdau:P60193 .
 
 :seriesMembership a owl:ObjectProperty ;
