@@ -72,6 +72,19 @@
           "showProperties": [
             "agent"
           ]
+        },
+        "GenerationProcess": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "GenerationProcess",
+          "showProperties": [
+            {"alternateProperties": ["code", "label"]}
+          ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-tokens",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "showProperties": [ "category" ]
         }
       }
     },
@@ -519,6 +532,13 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "PoliticalTendencyPeriod",
           "showProperties": [ "politicalTendency", "firstIssueDate", "lastIssueDate" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-tokens"},
+          "showProperties": [ "fresnel:super", "label", "tool" ]
         }
       }
     },
@@ -537,7 +557,7 @@
           "@type": "fresnel:Lens",
           "@id": "Record-cards",
           "classLensDomain": "Record",
-          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
+          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "hasChangeNote", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -1018,6 +1038,13 @@
           "@id": "TransformedLanguageForm-cards",
           "fresnel:extends": {"@id": "Resource-chips"},
           "showProperties": [ "fresnel:super", "inLanguage", "inLangScript", "fromLangScript", "langTransformAccordingTo" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-chips"},
+          "showProperties": [ "category", "label", "comment", "atTime", "tool" ]
         }
       }
     },
@@ -1231,6 +1258,13 @@
         },
         "TransformedLanguageForm": {
           "fresnel:extends": {"@id": "TransformedLanguageForm-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-full",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-cards"},
           "showProperties": [ "fresnel:super" ]
         }
       }
