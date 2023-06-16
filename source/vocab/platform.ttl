@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <http://schema.org/> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix fresnel: <http://www.w3.org/2004/09/fresnel#> .
 
@@ -262,6 +263,47 @@
     rdfs:range :Dataset;
     owl:equivalentProperty void:inDataset;
     rdfs:subPropertyOf dc:isPartOf .
+
+# Technical  details and change descriptions {{{
+
+:technicalNote a owl:ObjectProperty;
+    rdfs:subPropertyOf :hasNote;
+    rdfs:domain :Record;
+    rdfs:range :TechnicalNote;
+    rdfs:label "technical note"@en, "systemteknisk anmärkning"@sv .
+
+:TechnicalNote a owl:Class;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Technical note"@en, "Systemteknisk anmärkning"@sv .
+
+:hasChangeNote a owl:ObjectProperty ;
+  rdfs:subPropertyOf :technicalNote ;
+  sdo:domainIncludes :Record ;
+  rdfs:range :ChangeNote ;
+  rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+
+:ChangeNote a owl:Class ;
+  rdfs:subClassOf :TechnicalNote ;
+  rdfs:subClassOf [ a owl:Restriction ;
+      owl:onProperty :category ;
+      owl:allValuesFrom :ChangeCategory
+    ] ;
+  rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+
+:ChangeCategory a owl:Class ;
+  rdfs:subClassOf :Concept ;
+  rdfs:label "Change Category"@en, "Ändringskategori"@sv .
+
+:CreateNote a owl:Class ;
+  rdfs:subClassOf :ChangeNote ;
+  rdfs:label "Create note"@en, "Uppkomstanmärkning"@sv .
+
+:tool a owl:ObjectProperty ;
+  sdo:domainIncludes :ChangeNote ;
+  sdo:rangeIncludes :GenerationProcess ;
+  rdfs:label "Tool"@en, "Verktyg"@sv .
+
+# }}}
 
 :uriSpace a owl:DatatypeProperty ;
     :category :platform ;
