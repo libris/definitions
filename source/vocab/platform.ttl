@@ -186,6 +186,7 @@
     rdfs:subPropertyOf bf2:descriptionConventions, :conformsTo .
 
 :derivedFrom a owl:ObjectProperty;
+    :category :platform ;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
@@ -267,22 +268,26 @@
 # Technical  details and change descriptions {{{
 
 :technicalNote a owl:ObjectProperty;
+    :category :platform ;
     rdfs:subPropertyOf :hasNote;
     rdfs:domain :Record;
     rdfs:range :TechnicalNote;
     rdfs:label "technical note"@en, "systemteknisk anmärkning"@sv .
 
 :TechnicalNote a owl:Class;
+    :category :platform ;
     rdfs:subClassOf :StructuredValue;
     rdfs:label "Technical note"@en, "Systemteknisk anmärkning"@sv .
 
 :hasChangeNote a owl:ObjectProperty ;
+    :category :platform ;
     rdfs:subPropertyOf :technicalNote ;
     sdo:domainIncludes :Record ;
     rdfs:range :ChangeNote ;
     rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
 
 :ChangeNote a owl:Class ;
+    :category :platform ;
     rdfs:subClassOf :TechnicalNote ;
     rdfs:subClassOf [ a owl:Restriction ;
           owl:onProperty :category ;
@@ -291,14 +296,17 @@
     rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
 
 :ChangeCategory a owl:Class ;
+    :category :platform ;
     rdfs:subClassOf :Concept ;
     rdfs:label "Change Category"@en, "Ändringskategori"@sv .
 
 :CreateNote a owl:Class ;
+    :category :platform ;
     rdfs:subClassOf :ChangeNote ;
     rdfs:label "Create note"@en, "Uppkomstanmärkning"@sv .
 
 :tool a owl:ObjectProperty ;
+    :category :platform ;
     sdo:domainIncludes :ChangeNote ;
     sdo:rangeIncludes :GenerationProcess ;
     rdfs:label "Tool"@en, "Verktyg"@sv .
