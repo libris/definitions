@@ -277,31 +277,31 @@
     rdfs:label "Technical note"@en, "Systemteknisk anmärkning"@sv .
 
 :hasChangeNote a owl:ObjectProperty ;
-  rdfs:subPropertyOf :technicalNote ;
-  sdo:domainIncludes :Record ;
-  rdfs:range :ChangeNote ;
-  rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+    rdfs:subPropertyOf :technicalNote ;
+    sdo:domainIncludes :Record ;
+    rdfs:range :ChangeNote ;
+    rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
 
 :ChangeNote a owl:Class ;
-  rdfs:subClassOf :TechnicalNote ;
-  rdfs:subClassOf [ a owl:Restriction ;
-      owl:onProperty :category ;
-      owl:allValuesFrom :ChangeCategory
-    ] ;
-  rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+    rdfs:subClassOf :TechnicalNote ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:allValuesFrom :ChangeCategory
+      ] ;
+    rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
 
 :ChangeCategory a owl:Class ;
-  rdfs:subClassOf :Concept ;
-  rdfs:label "Change Category"@en, "Ändringskategori"@sv .
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Change Category"@en, "Ändringskategori"@sv .
 
 :CreateNote a owl:Class ;
-  rdfs:subClassOf :ChangeNote ;
-  rdfs:label "Create note"@en, "Uppkomstanmärkning"@sv .
+    rdfs:subClassOf :ChangeNote ;
+    rdfs:label "Create note"@en, "Uppkomstanmärkning"@sv .
 
 :tool a owl:ObjectProperty ;
-  sdo:domainIncludes :ChangeNote ;
-  sdo:rangeIncludes :GenerationProcess ;
-  rdfs:label "Tool"@en, "Verktyg"@sv .
+    sdo:domainIncludes :ChangeNote ;
+    sdo:rangeIncludes :GenerationProcess ;
+    rdfs:label "Tool"@en, "Verktyg"@sv .
 
 # }}}
 
