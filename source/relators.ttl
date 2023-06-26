@@ -180,7 +180,7 @@
 
 <associatedName> a bf:Role ;
     rdfs:comment "Okänt samband"@sv ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:asn ;
     owl:sameAs <asn> ;
     skos:exactMatch locrel:asn ;
@@ -222,7 +222,7 @@
 
 <authorInQuotationsOrTextAbstracts> a bf:Role ;
     rdfs:comment "Författare till citat etc. i utställningskataloger, fotografisamlingar etc."@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:aqt ;
     owl:sameAs <aqt> ;
     skos:broader <author> ;
@@ -231,7 +231,7 @@
     skos:prefLabel "Citat, textudrag"@sv .
 
 <authorOfAfterwordColophonEtc> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:aft ;
     owl:sameAs <aft> ;
     skos:broader <author> ;
@@ -254,7 +254,7 @@
     skos:prefLabel "Dialogförfattare"@sv .
 
 <authorOfIntroduction> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:aui ;
     owl:sameAs <aui> ;
     skos:broader <author> ;
@@ -457,14 +457,14 @@
 
 <collaborator> a bf:Role ;
     rdfs:comment "Obsolet; använd \"ctb\" (bidragsgivare)"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:sameAs <clb> ;
     skos:notation "clb" ;
     skos:prefLabel "Redaktionell medarbetare"@sv .
 
 <collectionRegistrar> a bf:Role ;
     rdfs:comment "Förtecknare/inventerare av föremål eller exemplar som ingår i samlingsutställning/samlingsverk; Jfr \"cur\" (utställningsansvarig, utställningskommissarie)"@sv ;
-    rdfs:domain :Embodiment ;
+    rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:cor ;
     owl:sameAs <cor> ;
     skos:broader <curator> ;
@@ -474,7 +474,7 @@
     skos:prefLabel "Samlingsregistrator"@sv .
 
 <collector> a bf:Role ;
-    rdfs:domain :Instance ;
+    rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:col ;
     owl:sameAs <col> ;
     skos:broader <curator> ;
@@ -516,7 +516,7 @@
     skos:prefLabel "Kommentar"@sv .
 
 <commentatorForWrittenText> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:cwt ;
     owl:sameAs <cwt> ;
     skos:broadMatch rdau:P61139 ;
@@ -701,7 +701,7 @@
 
 <contributor> a bf:Role ;
     rdfs:comment "Som bidrar med texter eller annat material till antologier, fortlöpande publikationer eller andra sammanställningar"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:ctb ;
     owl:sameAs <ctb> ;
     skos:exactMatch locrel:ctb ;
@@ -790,7 +790,7 @@
     skos:prefLabel "Upphov/creator"@sv .
 
 <curator> a bf:Role ;
-    rdfs:domain :Embodiment ;
+    rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:cur ;
     owl:sameAs <cur> ;
     skos:exactMatch locrel:cur ;
@@ -1786,7 +1786,7 @@
     skos:prefLabel "Tillståndsgivande instans"@sv .
 
 <photographer> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:pht ;
     owl:sameAs <pht> ;
     skos:closeMatch rdau:P60429 ;
@@ -2075,7 +2075,7 @@
     skos:prefLabel "Inspelning"@sv .
 
 <redaktor> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:red ;
     owl:sameAs <red> ;
     skos:exactMatch locrel:red ;
@@ -2195,7 +2195,7 @@
 
 <rubricator> a bf:Role ;
     rdfs:comment "Utförare av rubriker (ofta skrivna i rött) i medeltida handskrift; Rubricatorn kunde ibland även vara handskriftens huvudsaklige skrivare"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:rbr ;
     owl:sameAs <rbr> ;
     skos:broadMatch rdau:P61139 ;
@@ -2234,7 +2234,7 @@
     skos:prefLabel "Manusförfattare"@sv .
 
 <scribe> a bf:Role ;
-    rdfs:domain :Instance ;
+    rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:scr ;
     owl:sameAs <scr> ;
     skos:exactMatch locrel:scr ;
@@ -2563,7 +2563,7 @@
 
 <woodEngraver> a bf:Role ;
     rdfs:comment "Xylografi/trägravyr = grafisk reproduktionsmetod med utskurna träplattor som tryckform"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wde ;
     owl:sameAs <wde> ;
     skos:exactMatch locrel:wde ;
@@ -2572,7 +2572,7 @@
 
 <woodcutter> a bf:Role ;
     rdfs:comment "Träsnitt = grafisk högtrycksmetod där de upphöjda partierna på den plana delen av stocken bär själva bildytan"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wdc ;
     owl:sameAs <wdc> ;
     skos:exactMatch locrel:wdc ;
@@ -2581,7 +2581,7 @@
 
 <writerOfAccompanyingMaterial> a bf:Role ;
     rdfs:comment "Audiovisuella medier"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wam ;
     owl:sameAs <wam> ;
     skos:broadMatch rdau:P61139 ;
@@ -2590,7 +2590,7 @@
     skos:prefLabel "Medföljande material"@sv .
 
 <writerOfAddedCommentary> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wac ;
     owl:sameAs <wac> ;
     skos:broader <wst> ;
@@ -2603,7 +2603,7 @@
 
 <writerOfAddedLyrics> a bf:Role ;
     rdfs:comment "Musik"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wal ;
     owl:sameAs <wal> ;
     skos:broader <wst> ;
@@ -2615,7 +2615,7 @@
 
 <writerOfAddedText> a bf:Role ;
     rdfs:comment "Icke-språkliga resurser"@sv ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wat ;
     owl:sameAs <wat> ;
     skos:broader <wst> ;
@@ -2630,7 +2630,7 @@
     skos:prefLabel "Kompletterande text"@sv .
 
 <writerOfIntroduction> a bf:Role ;
-    #rdfs:domain :Work ;
+    #rdfs:domain :Creation ;
     owl:equivalentProperty locrel:win ;
     owl:sameAs <win> ;
     skos:broadMatch rdau:P61139 ;
@@ -2640,7 +2640,7 @@
     skos:prefLabel ""@sv .
 
 <writerOfPreface> a bf:Role ;
-    #rdfs:domain :Work ;
+    #rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wpr ;
     owl:sameAs <wpr> ;
     skos:broadMatch rdau:P61139 ;
@@ -2650,7 +2650,7 @@
     skos:prefLabel ""@sv .
 
 <writerOfSupplementaryTextualContent> a bf:Role ;
-    #rdfs:domain :Work ;
+    #rdfs:domain :Creation ;
     owl:equivalentProperty locrel:wst ;
     owl:sameAs <wst> ;
     skos:broadMatch rdau:P61139 ;
