@@ -187,6 +187,12 @@
             {"alternateProperties": [ "label", "prefLabel", "hasTitle" ]}
           ]
         },
+        "Dissertation": {
+          "@id": "Dissertation-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Dissertation",
+          "showProperties": [ "label", "degree", "grantingInstitution" ]
+        },
         "ImmediateAcquisition": {
           "@id": "ImmediateAcquisition-chips",
           "@type": "fresnel:Lens",
@@ -621,6 +627,7 @@
             "intendedAudience",
             "contentType",
             "illustrativeContent",
+            "dissertation",
             "cartographicAttributes",
             "isPartOf",
             "translationOf",
@@ -738,6 +745,13 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Country",
           "showProperties": [ "prefLabel", "code", "isReplacedBy" ]
+        },
+        "Dissertation": {
+          "@id": "Dissertation-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Dissertation",
+          "fresnel:extends": {"@id": "Dissertation-chips"},
+          "showProperties": [ "fresnel:super", "date", "hasNote", "identifiedBy" ]
         },
         "Place": {
           "@id": "Place-cards",
