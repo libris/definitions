@@ -1320,6 +1320,13 @@
     rdfs:comment "Oformaterad uppgift om datum/årtal/tidsperiod."@sv;
     owl:equivalentProperty bf2:date, dc:date .
 
+:atTime a owl:DatatypeProperty ;
+  owl:equivalentProperty prov:atTime ;
+  sdo:domainIncludes :Event , :ChangeNote ;
+  rdfs:label "at time"@en, "tidpunkt"@sv ;
+  rdfs:comment "Tidpunkt angiven med exakt tidsstämpel."@sv ;
+  rdfs:range xsd:dateTime .
+
 :year a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryProvisionActivity;
     rdfs:subPropertyOf :date;
