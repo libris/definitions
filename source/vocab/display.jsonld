@@ -429,7 +429,12 @@
           "@id": "Classification-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Classification",
-          "showProperties": [ "code", "inScheme", "edition" ]
+          "showProperties": [ "code", "inScheme", "prefLabel", "edition" ]
+        },
+        "Subdivision": {
+          "@id": "Subdivision-chips",
+          "@type": "fresnel:Lens",
+          "showProperties": [ "code", "prefLabel", "inScheme" ]
         },
         "ClassificationDdc": {
           "@id": "ClassificationDdc-chips",
@@ -996,9 +1001,13 @@
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates", "coordinates", "scale" ]
         },
+        "Subdivision": {
+          "fresnel:extends": {"@id": "Subdivision-chips"},
+          "showProperties": [ "fresnel:super", "inCollection" ]
+        },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "fresnel:super", "inCollection" ]
         },
         "ClassificationDdc": {
           "@id": "ClassificationDdc-cards",
