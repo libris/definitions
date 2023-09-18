@@ -1,5 +1,6 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix dct: <http://purl.org/dc/terms/>
 prefix : <https://id.kb.se/vocab/>
 base <https://id.kb.se/>
 
@@ -18,7 +19,16 @@ base <https://id.kb.se/>
 
 </policy/kb/digisaml/1.0> a :UsePolicy ;
     skos:prefLabel "KB:s villkor för digitala samlingar"@sv, "KB Usage Policy for Digital Collections"@en ;
-    rdfs:comment "Det är du som användare som ansvarar för att ta reda på om materialet är upphovsrättsligt skyddat och att få godkännande om du vill sprida det vidare."@sv ,
-        "It is you as the user who is responsible for finding out whether the material is copyright protected and for obtaining approval if you want to distribute it further."@en ;
-    :url "https://www.kb.se/besok-och-anvand/kopiera-och-fotografera/upphovsratt/" ;
+    dct:description """
+De samlingar som Kungliga biblioteket tillhandahåller via Internet innehåller verk som är skyddade av upphovsrätt enligt upphovsrättslagen (SFS 1960:729). De innehåller också verk som inte är skyddade av upphovsrätt.
+
+För de verk i dessa samlingar som är skyddade av upphovsrätt har Kungl. biblioteket tecknat licenser med organisationer som företräder de som har upphovsrätten. Licenserna ger Kungl. biblioteket rätt att visa det upphovsrättsskyddade materialet på Internet.
+
+Verk som inte är skyddade av upphovsrätt får användas fritt. Verk som är skyddade av upphovsrätt har du inte rätt att sprida utan upphovsmannens godkännande.
+
+Kungl. biblioteket kan inte lämna något godkännande om vidare spridning av upphovsrättsligt skyddat material. Sådant tillstånd lämnas av upphovsmannen eller de som har upphovsrätten. Kungl. biblioteket kan inte hjälpa till med att utreda om verk är upphovsrättsligt skyddade eller inte.
+
+Det är du som användare som ansvarar för att ta reda på om materialet är upphovsrättsligt skyddat och att få godkännande om du vill sprida det vidare.
+"""@sv ;
+    :seeAlso <https://www.kb.se/besok-och-anvand/kopiera-och-fotografera/upphovsratt/> ;
     :publisher <https://libris.kb.se/20dgd3zl56pmrzk#it> .
