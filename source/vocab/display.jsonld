@@ -95,6 +95,16 @@
             "isDefinedBy"
           ]
         },
+        "Role": {
+          "@id": "Role-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Resource",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "altLabel", "label", "code"]},
+            "inScheme",
+            "isDefinedBy"
+          ]
+        },
         "MediaType": {
           "@id": "MediaType-chips",
           "@type": "fresnel:Lens",
@@ -538,6 +548,13 @@
           "@id": "Record-cards",
           "classLensDomain": "Record",
           "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
+        },
+        "Role": {
+          "@type": "fresnel:Lens",
+          "@id": "Role-cards",
+          "classLensDomain": "Role",
+          "fresnel:extends": {"@id": "Role-chips"},
+          "showProperties": [ "fresnel:super", "domain", "definition", "scopeNote", "comment", "equivalentProperty", "related" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -1187,6 +1204,10 @@
         },
         "Reproduction": {
           "fresnel:extends": {"@id": "Reproduction-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Role": {
+          "fresnel:extends": {"@id": "Role-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Ontology": {
