@@ -51,7 +51,6 @@
     skos:definition "Agent som 1) bearbetar en musikalisk komposition, vanligtvis för ett annat medium, eller 2) bearbetar en roman eller berättelse för film eller annat visuellt medium"@sv .
 
 <addressee> a bf:Role ;
-    rdfs:comment "Agent som är mottagare av korrespondensen i ett verk."@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:rcp ;
     owl:sameAs <rcp> ;
@@ -85,7 +84,6 @@
     skos:scopeNote "För agent som gjort animerade teckningar, se Konstnär"@sv .
 
 <annotator> a bf:Role ;
-    rdfs:comment "Författare till handskrivna kommentarer på exemplaret"@sv ;
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:ann ;
     owl:sameAs <ann> ;
@@ -141,7 +139,6 @@
     skos:definition "Agent som ansvarar för den arkitektoniska designen, inklusive bilder över hur byggnaden ska se ut när den är färdig, samt övervakar konstruktionen  av byggnaden"@sv .
 
 <arranger> a bf:Role ;
-    rdfs:comment "Musik"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:arr ;
     owl:sameAs <arr> ;
@@ -167,7 +164,6 @@
     skos:definition "Agent, t.ex. en målare eller skulptör, som kopierar ett bildkonstverk"@sv .
 
 <artDirector> a bf:Role ;
-    rdfs:comment "Jfr \"ard\" (konstnärlig ledare)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:adi ;
     owl:sameAs <adi> ;
@@ -175,6 +171,7 @@
     skos:exactMatch locrel:adi ;
     skos:notation "adi" ;
     skos:prefLabel "Art Director"@sv ;
+    skos:related <artisticDirector> ;
     skos:definition "Agent som bidrar till en film- eller tv-produktion genom att övervaka de konstnärer och hantverkare som bygger kulisserna"@sv .
 
 <artist> a bf:Role ;
@@ -199,6 +196,7 @@
     skos:exactMatch locrel:ard ;
     skos:notation "ard" ;
     skos:prefLabel "Konstnärlig ledare"@sv ;
+    skos:related <artDirector> ;
     skos:definition "Agent som har det övergripande ansvaret för produktionens konstnärliga stil och bl.a. väljer verket som presenteras"@sv .
 
 <assignee> a bf:Role ;
@@ -211,7 +209,6 @@
     skos:definition "Agent till vilken en licens för tryckning eller utgivning är överförd"@sv .
 
 <associatedName> a bf:Role ;
-    rdfs:comment "Okänt samband"@sv ;
     rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:asn ;
     owl:sameAs <asn> ;
@@ -258,7 +255,6 @@
     skos:definition "Agent som 1) skapar ett verk som huvudsakligen består av text, oavsett medietyp (t.ex. tryckt text, talade ord, elektronisk text, taktil text) eller genre, (t.ex. dikter, romaner, filmmanus, bloggar), eller 2) agent som skapar ett nytt verk genom att parafrasera, skriva om eller anpassa ett annat verk så att dess innehåll, natur eller uttrycksmedium väsentligen förändras"@sv .
 
 <authorInQuotationsOrTextAbstracts> a bf:Role ;
-    rdfs:comment "Författare till citat etc. i utställningskataloger, fotografisamlingar etc."@sv ;
     rdfs:domain :Creation ;
     owl:equivalentProperty locrel:aqt ;
     owl:sameAs <aqt> ;
@@ -284,7 +280,6 @@
     skos:definition "Agent som författar ett efterord, en kolofon etc."@sv .
 
 <authorOfDialog> a bf:Role ;
-    rdfs:comment "Film, ljudupptagningar"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:aud ;
     owl:sameAs <aud> ;
@@ -323,7 +318,7 @@
     skos:definition "Agent som författar en introduktion, ett förord eller annan viktig inledande text"@sv .
 
 <autographer> a bf:Role ;
-    rdfs:comment "Person vars signatur finns på exemplaret; jfr \"sgn\" (signatur)"@sv ;
+    # TODO se över och jämför med signer och inscriber
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:ato ;
     owl:sameAs <ato> ;
@@ -331,10 +326,10 @@
     skos:exactMatch locrel:ato ;
     skos:notation "ato" ;
     skos:prefLabel "Autograf/signatur"@sv ;
+    skos:related <signer> ;
     skos:definition "Agent vars namnteckning finns på en resurs"@sv .
 
 <bibliographicAntecedent> a bf:Role ;
-    rdfs:comment "Bibliografisk föregångare; jfr \"ccp\" (idé, koncept)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:ant ;
     owl:sameAs <ant> ;
@@ -342,6 +337,7 @@
     skos:notation "ant" ;
     skos:prefLabel "Baserat på"@sv ;
     skos:definition "Agent som skapat verket som det beskrivna verket är baserat på."@sv ;
+    skos:related <conceptor> ;
     skos:scopeNote "Används för t.ex. bearbetningar, omarbetningar, uppföljare, fortsättningar, index etc."@sv .
 
 <binder> a bf:Role ;
@@ -356,28 +352,25 @@
     skos:definition "Agent som binder ett  exemplar"@sv .
 
 <bindingDesigner> a bf:Role ;
-    rdfs:comment "Bokbandsformgivare"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:bdd ;
     owl:sameAs <bdd> ;
     skos:exactMatch locrel:bdd ;
     skos:notation "bdd" ;
-    skos:prefLabel "Bokband"@sv ;
+    skos:prefLabel "Bokbandsformgivare"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Bokband"'@sv ;
     skos:definition "Agent som utformar ett bokband, t.ex. genom att välja typ av bindning, inklusive eventuella dekorationer, samt material"@sv .
 
 <blurbWriter> a bf:Role ;
-    rdfs:comment "Författare till baksidestext, reklammaterial etc."@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:blw ;
     owl:sameAs <blw> ;
     skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:blw ;
     skos:notation "blw" ;
-    skos:prefLabel "Förlags-/reklamtext"@sv ;
-    # TODO: rename? Reduced form of:
-    # skos:prefLabel "Förlags-/reklamtextförfattare"@sv ;
-    # skos:changeNote '2023-09: omdöpt från "Förlags-/reklamtext"'@sv ;
-    skos:definition "Agent som skriver en säljande text om en resurs.  Texten kan finnas på eller i själva resursen, ofta på baksidan eller på skyddsomslaget, om det är en tryckt publikation, eller på reklammaterial för andra medietyper."@sv .
+    skos:prefLabel "Förlags-/reklamtextförfattare"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Förlags-/reklamtext"'@sv ;
+    skos:definition "Agent som skriver en säljande text om en resurs. Texten kan finnas på eller i själva resursen (ofta på baksidan eller på skyddsomslaget) eller i reklammaterial."@sv .
 
 <bookDesigner> a bf:Role ;
     rdfs:domain :Instance ;
@@ -399,23 +392,25 @@
     skos:definition "Agent som ansvarar för produktionen av en bok eller annat tryckt medium"@sv .
 
 <bookjacketDesigner> a bf:Role ;
-    rdfs:comment "Formgivare av skyddsomslag; jfr \"cov\" (omslag)"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:bjd ;
     owl:sameAs <bjd> ;
     skos:exactMatch locrel:bjd ;
     skos:notation "bjd" ;
-    skos:prefLabel "Skyddsomslag"@sv ;
+    skos:prefLabel "Skyddsomslagsformgivare"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Skyddsomslag"'@sv ;
+    skos:related <coverDesigner> ;
     skos:definition "Agent som ansvarar för utformningen av en boks skyddsomslag t.ex. genom att välja material och eventuella dekorationer"@sv .
 
 <bookplateDesigner> a bf:Role ;
-    rdfs:comment "Avser formgivaren"@sv ;
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:bpd ;
     owl:sameAs <bpd> ;
     skos:exactMatch locrel:bpd ;
     skos:notation "bpd" ;
-    skos:prefLabel "Exlibris, bokägarmärke"@sv ;
+    skos:prefLabel "Exlibrisformgivare"@sv ;
+    skos:hiddenLabel "Bokägarmärke"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Exlibris, bokägarmärke"'@sv ;
     skos:definition "Agent som ansvarar för formgivningen av en etikett som anger ägaren till en bok och som oftast klistras på insidan av främre pärmen på en bok"@sv .
 
 <bookseller> a bf:Role ;
@@ -438,7 +433,6 @@
     skos:definition "Agent som präglar punktskriftsceller med hjälp av en penna, en speciell präglingsskrivare eller annan anordning"@sv .
 
 <broadcaster> a bf:Role ;
-    rdfs:comment "Person etc. som arbetar med utsändning via TV, radio, webcast eller liknande"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:brd ;
     owl:sameAs <brd> ;
@@ -531,7 +525,6 @@
     skos:prefLabel "Redaktionell medarbetare"@sv .
 
 <collectionRegistrar> a bf:Role ;
-    rdfs:comment "Förtecknare/inventerare av föremål eller exemplar som ingår i samlingsutställning/samlingsverk; Jfr \"cur\" (utställningsansvarig, utställningskommissarie)"@sv ;
     rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:cor ;
     owl:sameAs <cor> ;
@@ -540,6 +533,7 @@
     skos:exactMatch locrel:cor ;
     skos:notation "cor" ;
     skos:prefLabel "Samlingsregistrator"@sv ;
+    skos:related <curator> ;
     skos:definition "Agent som förtecknar eller inventerar föremålen eller verken i en samling"@sv .
 
 <collector> a bf:Role ;
@@ -554,7 +548,6 @@
     skos:definition "Agent som skapar en samling genom att välja ut, ordna och beskriva resurser från olika källor"@sv .
 
 <collotyper> a bf:Role ;
-    rdfs:comment "Ljustryck = Plantrycksmetod för mångfaldigande utan raster av i huvudsak konstverk och fotografier"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:clt ;
     owl:sameAs <clt> ;
@@ -565,7 +558,6 @@
     skos:definition "Agent som tillverkar en resurs genom att göra fotografiska avtryck från film eller annan kolloid med bläckmottagande och bläckavvisande ytor"@sv .
 
 <colorist> a bf:Role ;
-    rdfs:comment "Färgläggare av teckningar, tryck, fotografier, kartor, filmer etc."@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:clr ;
     owl:sameAs <clr> ;
@@ -577,7 +569,6 @@
     skos:definition "Agent som applicerar färg på ritningar, tryck, fotografier, kartor, rörliga bilder etc."@sv .
 
 <commentator> a bf:Role ;
-    rdfs:comment "AV-medier"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:cmm ;
     owl:sameAs <cmm> ;
@@ -657,7 +648,8 @@
     skos:hiddenLabel "Helilooja",
         "composer (expression)" ; # RDA
     skos:notation "cmp" ;
-    skos:prefLabel "Kompositör, tonsättare"@sv ;
+    skos:prefLabel "Kompositör"@sv ;
+    skos:altLabel "Tonsättare"@sv ;
     skos:definition "Agent som skapar ett musikverk eller bidrar till en musikalisk resurs genom att lägga till musik till ett verk som ursprungligen saknade musik"@sv .
 
 <compositor> a bf:Role ;
@@ -670,15 +662,14 @@
     skos:definition "Agent som skapar formar som används för produktion av texter och bilder i trycksaker"@sv .
 
 <conceptor> a bf:Role ;
-    # TODO: rename?
-    rdfs:comment "Jfr \"ant\" (baserat på)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:ccp ;
     owl:sameAs <ccp> ;
     skos:closeMatch rdau:P60447 ;
     skos:exactMatch locrel:ccp ;
     skos:notation "ccp" ;
-    skos:prefLabel "Idé, koncept"@sv ;
+    skos:prefLabel "Idé/koncept"@sv ;
+    skos:related <bibliographicAntecedent> ;
     skos:definition "Agent som ansvarar för den ursprungliga idén som ett verk bygger på"@sv .
 
 <conductor> a bf:Role ;
@@ -793,11 +784,11 @@
     owl:sameAs <ctr> ;
     skos:exactMatch locrel:ctr ;
     skos:notation "ctr" ;
-    skos:prefLabel "Entreprenör, leverantör"@sv ;
+    skos:prefLabel "Entreprenör"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Entreprenör, leverantör"'@sv ;
     skos:definition "Agent som ingår ett avtal med en annan agent för att utföra en specifik uppgift"@sv .
 
 <contributor> a bf:Role ;
-    rdfs:comment "Som bidrar med texter eller annat material till antologier, fortlöpande publikationer eller andra sammanställningar"@sv ;
     rdfs:domain :Creation ;
     owl:equivalentProperty locrel:ctb ;
     owl:sameAs <ctb> ;
@@ -826,7 +817,6 @@
     skos:definition "Agent till vilken kopierings- och juridiska rättigheter beviljas eller överförs för det intellektuella innehållet i ett verk. Upphovsrättsinnehavaren, som inte nödvändigtvis är skaparen av verket, har vanligtvis ensamrätt att dra ekonomisk nytta av försäljning och användning av det verk för vilket det tillhörande upphovsrättsskyddet gäller"@sv .
 
 <corrector> a bf:Role ;
-    rdfs:comment "Jfr \"prf\" (korrekturläsare)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:crr ;
     owl:sameAs <crr> ;
@@ -837,7 +827,6 @@
     skos:scopeNote "För trycksaker, se Korrekturläsare"@sv .
 
 <correspondent> a bf:Role ;
-    rdfs:comment "Agent som är avsändare eller mottagare till ett brev eller annan skrivelse."@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:crp ;
     owl:sameAs <crp> ;
@@ -847,7 +836,6 @@
     skos:definition "Agent som antingen skriver eller tar emot ett brev eller annan typ av kommunikation"@sv .
 
 <costumeDesigner> a bf:Role ;
-    rdfs:comment "Som skapar kostymer för teater-, dans- och musikföreställningar, samt för filmer"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:cst ;
     owl:sameAs <cst> ;
@@ -883,14 +871,15 @@
     rdfs:comment "Angloamerikansk juridisk term. I Sverige ungefär motsvarande domstolsstenograf eller protokollförare i en rättegång"@sv .
 
 <coverDesigner> a bf:Role ;
-    rdfs:comment "Formgivare av bokomslag; jfr \"bjd\" (skyddsomslag)"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:cov ;
     owl:sameAs <cov> ;
     skos:exactMatch locrel:cov ;
     skos:hiddenLabel "cover artist" ;
     skos:notation "cov" ;
-    skos:prefLabel "Omslag"@sv ;
+    skos:prefLabel "Omslagsformgivare"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Omslag"'@sv ;
+    skos:related <bookjacketDesigner> ;
     skos:definition "Agent som ansvarar för den grafiska utformningen av ett bokomslag, skivomslag, fodral, en behållare etc."@sv ;
     skos:scopeNote "För en agent som ansvarat för den grafiska utformningen av en hel bok, se Bokband; för agent som tar fram bokomslag, se Skyddsomslag"@sv .
 
@@ -915,6 +904,7 @@
     skos:prefLabel "Utställningskurator"@sv ;
     skos:hiddenLabel "Utställningsansvarig, utställningskommissarie"@sv ;
     skos:changeNote '2023-09: omdöpt från "Utställningsansvarig, utställningskommissarie"'@sv ;
+    skos:related <collectionRegistrar> ;
     skos:definition "Agent som som utformar, sammanställer och/eller organiserar en utställning eller samling"@sv .
 
 <dancer> a bf:Role ;
@@ -951,7 +941,6 @@
     skos:definition "Agent som ansvarar för att hantera databaser eller andra datakällor"@sv .
 
 <dedicatee> a bf:Role ;
-    rdfs:comment "Jfr \"dto\" (dedikation, dvs den som författat dedikationen)"@sv ;
     rdfs:domain :Endeavour ;
     owl:equivalentProperty locrel:dte ;
     owl:sameAs <dte> ;
@@ -965,7 +954,6 @@
     skos:definition "Agent som tillägnats en resurs"@sv .
 
 <dedicator> a bf:Role ;
-    rdfs:comment "Jfr \"dte\" (dedicerat till)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:dto ;
     owl:sameAs <dto> ;
@@ -1041,13 +1029,13 @@
     skos:definition "Agent som handleder en akademisk examen på högre nivå"@sv .
 
 <delineator> a bf:Role ;
-    rdfs:comment "Person etc. som utför en teknisk ritning utifrån någon annans design; jfr \"drm\" (teknisk detaljritning)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:dln ;
     owl:sameAs <dln> ;
     skos:exactMatch locrel:dln ;
     skos:notation "dln" ;
     skos:prefLabel "Utförare av teknisk ritning"@sv ;
+    skos:related <draftsman> ;
     skos:definition "Agent som utför tekniska ritningar efter andras ritningar"@sv .
 
 <depicted> a bf:Role ;
@@ -1071,7 +1059,6 @@
     skos:definition "Agent som äger en resurs men som har deponerat  den hos en annan agent "@sv .
 
 <designer> a bf:Role ;
-    rdfs:comment "Jfr \"bdd\" (bokband), \"bjd\" (skyddsomslag), \"bkd\" (bokformgivare), \"tyd\" (typsnitt)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:dsr ;
     owl:sameAs <dsr> ;
@@ -1079,6 +1066,7 @@
     skos:exactMatch locrel:dsr ;
     skos:notation "dsr" ;
     skos:prefLabel "Formgivare"@sv ;
+    skos:related <bindingDesigner> , <bookjacketDesigner> , <bookDesigner> , <typeDesigner> ;
     skos:definition "Agent som formger en resurs"@sv .
 
 <director> a bf:Role ;
@@ -1137,7 +1125,6 @@
     skos:definition "Agent som tidigare ägt en resurs men som donerat den till en annan agent"@sv .
 
 <draftsman> a bf:Role ;
-    rdfs:comment "Jfr \"dln\" (utförare av teknisk ritning)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:drm ;
     owl:sameAs <drm> ;
@@ -1145,6 +1132,7 @@
     skos:exactMatch locrel:drm ;
     skos:notation "drm" ;
     skos:prefLabel "Teknisk detaljritning"@sv ;
+    skos:related <delineator> ;
     skos:definition "Agent som gör detaljerade planer eller ritningar för byggnader, fartyg, flygplan, maskiner, föremål etc. som skapats av en arkitekt, uppfinnare etc."@sv .
 
 <dubiousAuthor> a bf:Role ;
@@ -1159,7 +1147,6 @@
     skos:definition "Agent som på tveksamma eller tvivelaktiga grunder tillskrivits skapandet av en resurs"@sv .
 
 <editor> a bf:Role ;
-    rdfs:comment "Jfr \"edc\" (sammanställande redaktör)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:edt ;
     owl:sameAs <edt> ;
@@ -1178,11 +1165,11 @@
         "éditeur intellectuel" ;
     skos:notation "edt" ;
     skos:prefLabel "Redaktör"@sv ;
+    skos:related <editorOfCompilation> ;
     skos:definition "Agent som reviderar eller förtydligar innehållet i en resurs för att förbereda den för produktion, publicering eller distribution."@sv ;
     skos:scopeNote "För större revideringar, bearbetningar etc. som väsentligen förändrar originalverkets karaktär och som resulterar i ett nytt verk, se Författare"@sv .
 
 <editorOfCompilation> a bf:Role ;
-    rdfs:comment "Jfr \"edt\" (redaktör)"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:edc ;
     owl:sameAs <edc> ;
@@ -1190,6 +1177,7 @@
     skos:exactMatch locrel:edc ;
     skos:notation "edc" ;
     skos:prefLabel "Sammanställande redaktör"@sv ;
+skos:related <editor> ;
     skos:definition "Agent som bidrar till ett aggregat genom att välja ut och sätta samman verk eller delar av verk, av en eller flera skapare."@sv ;
     skos:scopeNote "För sammanställningar av data, information etc. som resulterar i nya verk, se  Sammanställare"@sv .
 
@@ -1213,7 +1201,6 @@
     skos:definition "Agent som sätter upp en ljusrigg och fokuserar ljuset för en produktion, samt sköter ljuset under en föreställning"@sv .
 
 <electrotyper> a bf:Role ;
-    rdfs:comment "Elektrotypi = Metod för att använda klichéer inom boktryckarkonsten"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:elt ;
     owl:sameAs <elt> ;
@@ -1223,16 +1210,18 @@
     skos:definition "Agent som skapar en duplicerad tryckyta genom tryckgjutning och elektrodeponering av metall som sedan backas upp med bly för tryckning"@sv .
 
 <enactingJurisdiction> a bf:Role ;
-    rdfs:comment "Jfr \"jug\" (tillämplig jurisdiktion)"@sv ;
+    rdfs:comment "Angloamerikansk juridisk term. I Sverige ungefär motsvarande behörig jurisdiktion eller rättsordning."@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:enj ;
     owl:sameAs <enj> ;
     skos:closeMatch rdau:P60096 ;
     skos:exactMatch locrel:enj ;
     skos:notation "enj" ;
-    skos:prefLabel "Verkställande jurisdiktion"@sv ;
-    skos:definition "Jurisdiktion som antar en lag, förordning, konstitution, domstolsbeslut etc."@sv .
-
+    skos:prefLabel "Enacting jurisdiction"@en ;
+    skos:changeNote '2023-09: omdöpt från "Verkställande jurisdiktion"'@sv ;
+    skos:related <jurisdictionGoverned> ;
+    skos:definition "Jurisdiktion eller rättsordning som verkställer en lag, förordning, konstitution, domstolsbeslut etc."@sv .
+    
 <engineer> a bf:Role ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:eng ;
@@ -1243,7 +1232,6 @@
     skos:definition "Agent som ansvarar för teknisk planering och design, särskilt inom konstruktion"@sv .
 
 <engraver> a bf:Role ;
-    rdfs:comment "Gravyr = Grafisk tryckmetod där bilden eller texten ristas på en hård yta av t.ex. trä eller metall"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:egr ;
     owl:sameAs <egr> ;
@@ -1255,7 +1243,6 @@
     skos:definition "Agent som skär mönster, bokstäver, siffror, bilder etc. på en yta som används för tryckning. Ytan kan vara i t.ex. trä eller metall"@sv .
 
 <etcher> a bf:Role ;
-    rdfs:comment "Etsning = Grafisk djuptrycksmetod där de färgbärande nedsänkta partierna i plåten åstadkoms med hjälp av frätande vätskor"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:etr ;
     owl:sameAs <etr> ;
@@ -1286,7 +1273,6 @@
     skos:definition "Agent som beskriver och bedömer värdet på resurser, särskilt sällsynta föremål, konstverk etc."@sv .
 
 <facsimilist> a bf:Role ;
-    rdfs:comment "Person etc. som gjort faksimilutgåvan"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:fac ;
     owl:sameAs <fac> ;
@@ -1363,7 +1349,6 @@
     skos:definition "Agent som ensam ansvarar för alla aspekter kopplade till skapandet av filmen"@sv .
 
 <firstParty> a bf:Role ;
-    rdfs:comment "Första eller enda parten i ett fördrag, en överenskommelse eller annan händelse; vid överlåtelse av rättigheter betraktas överlåtaren, licensutfärdaren, etc., som första part"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:fpy ;
     owl:sameAs <fpy> ;
@@ -1401,7 +1386,6 @@
     skos:definition "Agent som bidrar med ekonomiskt stöd till produktionen av en resurs"@sv .
 
 <geographicInformationSpecialist> a bf:Role ;
-    rdfs:comment "Geografisk information"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:gis ;
     owl:sameAs <gis> ;
@@ -1419,7 +1403,6 @@
     skos:prefLabel "Grafisk tekniker"@sv .
 
 <honoree> a bf:Role ;
-    rdfs:comment "Hit även person etc. som på annat sätt hedrats i verket eller exemplaret"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:hnr ;
     owl:sameAs <hnr> ;
@@ -1438,7 +1421,8 @@
     skos:closeMatch rdau:P60146 ;
     skos:exactMatch locrel:hst ;
     skos:notation "hst" ;
-    skos:prefLabel "Programvärd, programledare"@sv ;
+    skos:prefLabel "Programledare"@sv ;
+    skos:altLabel "Programvärd"@sv ;
     skos:definition "Agent som leder ett program (ofta utsänt) som har inbjudna gäster, artister etc., t.ex. en värd för en pratshow"@sv .
 
 <hostInstitution> a bf:Role ;
@@ -1455,7 +1439,6 @@
     skos:definition "Agent som är värd för evenemanget, utställningen eller konferensen som ger upphov till en resurs men som har lite eller inget ansvar för innehållet i den"@sv .
 
 <illuminator> a bf:Role ;
-    rdfs:comment "Färglagda initialer, randornament, bilder eller annan utsmyckande illustration i främst medeltida handskrifter"@sv ;
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:ilu ;
     owl:sameAs <ilu> ;
@@ -1488,7 +1471,7 @@
     skos:scopeNote "Om verket huvudsakligen är det konstnärliga innehåll som skapats av denna agent, använd Konstnär eller Fotograf"@sv .
 
 <inscriber> a bf:Role ;
-    rdfs:domain :Embodiment ; # TODO: :Item
+    rdfs:domain :Item
     owl:equivalentProperty locrel:ins ;
     owl:sameAs <ins> ;
     skos:closeMatch rdau:P60460 ;
@@ -1496,8 +1479,7 @@
     skos:notation "ins" ;
     skos:prefLabel "Inskription"@sv ;
     skos:definition "Agent som skriver in en dedikation eller hälsning i en resurs"@sv ;
-    rdfs:comment "Författare till inskription, eller person vars namn eller signatur förekommer tillsammans med uppgift om samband (t.ex. proveniens) i exemplaret"@sv .
-
+    
 <instrumentalist> a bf:Role ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:itr ;
@@ -1574,7 +1556,10 @@
     skos:closeMatch rdau:P60097 ;
     skos:exactMatch locrel:jug ;
     skos:notation "jug" ;
-    skos:prefLabel "Tillämplig jurisdiktion"@sv, "Jurisdiction governed"@en .
+    skos:changeNote '2023-09: omdöpt från "Tillämplig jurisdiktion"'@sv ;
+    skos:prefLabel "Jurisdiction governed"@en ;
+    skos:related <enactingJurisdiction> ;
+    skos:definition "Jurisdiktion som styrs av en lag, förordning etc. som antagits av en annan jurisdiktion"@sv.
 
 <laboratory> a bf:Role ;
     rdfs:domain :Work ;
@@ -1618,7 +1603,6 @@
     skos:scopeNote "Om agenten har mer än en roll, använd endast Chef, ledare om agenten är ledande inom alla rollerna."@sv .
 
 <lender> a bf:Role ;
-    rdfs:comment "Instans som har långat ut eller medgivit utlåning för t.ex. kopiering eller mikrofilmining"@sv ;
     rdfs:domain :Embodiment ; # TODO: :Item
     owl:equivalentProperty locrel:len ;
     owl:sameAs <len> ;
@@ -1727,11 +1711,11 @@
     skos:closeMatch rdau:P60813 ;
     skos:exactMatch locrel:lgd ;
     skos:notation "lgd" ;
-    skos:prefLabel "Ljusdesigner, ljussättare"@sv ;
+    skos:prefLabel "Ljussättare"@sv ;
+    skos:altLabel "Ljusdesigner"@sv ;
     skos:definition "Agent som utformar ljussättningen för en teaterföreställning, film etc."@sv .
 
 <lithographer> a bf:Role ;
-    # skos:related <Litografi>
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:ltg ;
     owl:sameAs <ltg> ;
@@ -1773,7 +1757,9 @@
     skos:closeMatch rdau:P60443 ;
     skos:exactMatch locrel:mfr ;
     skos:notation "mfr" ;
-    skos:prefLabel "Fabrikant, tillverkare"@sv ;
+    skos:prefLabel "Tillverkare"@sv ;
+    skos:hiddenLabel "Fabrikant"@sv ;
+    skos:changeNote '2023-09: omdöpt från "Fabrikant, tillverkare"'@sv ;
     skos:definition "Agent som ansvarar för tryckning, duplicering, gjutning etc. av en resurs"@sv .
 
 <marbler> a bf:Role ;
@@ -1846,13 +1832,13 @@
     skos:definition "Agent som leder ett program (ofta utsänt) där ett eller flera ämnen diskuteras"@sv .
 
 <monitor> a bf:Role ;
-    rdfs:comment "Som har kontrollerat eller övervakat att ett uppdrag utförts enligt avtal eller överenskommelse"@sv ;
+    # TODO: rename
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:mon ;
     owl:sameAs <mon> ;
     skos:exactMatch locrel:mon ;
     skos:notation "mon" ;
-    skos:prefLabel "Övervakare, inspektör"@sv ;
+    skos:prefLabel "Övervakare/inspektör"@sv ;
     skos:definition "Agent som kontrollerar att avtal eller överenskommelser följs"@sv .
 
 <musicCopyist> a bf:Role ;
@@ -1942,7 +1928,6 @@
 
 <originator> a bf:Role ;
     # TODO: define better?
-    rdfs:comment "Person etc. associerad med verkets intellektuella innehåll"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:org ;
     owl:sameAs <org> ;
@@ -2011,7 +1996,6 @@
     skos:definition "Agent som beställer ett verk. En mecenat använder vanligtvis sina tillgångar eller sitt inflytande för att stödja konstnärers, författares etc. arbete. "@sv .
 
 <performer> a bf:Role ;
-    rdfs:comment "Skådespelare, musiker etc."@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:prf ;
     owl:sameAs <prf> ;
@@ -2104,7 +2088,6 @@
     skos:definition "Agent som modererar en akademisk disputation och presenterar avhandlingen."@sv .
 
 <presenter> a bf:Role ;
-    rdfs:comment "Omnämnd med ett \"X presenterar\"-erkännande i samband med produktion, finansiering eller distribution av film"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:pre ;
     owl:sameAs <pre> ;
@@ -2115,12 +2098,11 @@
     skos:definition "Agent som nämns i exempelvis förtexten till en film (“X presenterar”) och som på något sätt är inblandad i produktion, finansiering eller distribution"@sv .
 
 <primaryRightsHolder> a bf:Role ;
-    rdfs:comment "LIBRIS-definierad kod"@sv ;
     rdfs:domain :Work ;
     owl:sameAs <9pu> ;
     skos:notation "9pu" ;
     skos:prefLabel "Primärt upphovsansvarig"@sv ;
-    skos:definition "Kommentar: LIBRIS-definierad kod. Används endast av Kungliga biblioteket."@sv .
+    skos:definition "LIBRIS-definierad kod. Används endast av Kungliga biblioteket."@sv .
 
 <printer> a bf:Role ;
     rdfs:domain :Instance ;
@@ -2142,7 +2124,6 @@
     skos:definition "Agent som trycker illustrationer från plåtar"@sv .
 
 <printmaker> a bf:Role ;
-    rdfs:comment "Som har gjort ytan till reliefen, intatglion (djuptrycket) eller plantrycket"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:prm ;
     owl:sameAs <prm> ;
@@ -2165,7 +2146,7 @@
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:pro ;
     owl:sameAs <pro> ;
-    skos:broader <provider> ;
+    # probably not skos:broader <provider>
     skos:closeMatch rdau:P60441 ;
     skos:exactMatch locrel:pro ;
     skos:notation "pro" ;
@@ -2242,7 +2223,6 @@
     skos:definition "Agent som har det övergripande ansvaret för att leda ett projekt eller vägleda en projektledare"@sv .
 
 <proofreader> a bf:Role ;
-    rdfs:comment "Jfr \"crr\" (handskriftskorrektur)"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty locrel:pfr ;
     owl:sameAs <pfr> ;
@@ -2253,7 +2233,7 @@
     skos:scopeNote "För manuskript se Handskriftskorrektur"@sv .
 
 <provider> a bf:Role ;
-    rdfs:domain :Item ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:prv ;
     owl:sameAs <prv> ;
     skos:exactMatch locrel:prv ;
@@ -2261,7 +2241,7 @@
     skos:prefLabel "Leverantör"@sv ;
     skos:definition "Agent som producerar, tillverkar eller distribuerar en resurs."@sv ;
     # TODO: :preferNarrower?
-    skos:scopeNote "Föredra specifika roller, t.ex. Fabrikant, tillverkare eller Utgivare"@sv .
+    skos:scopeNote "Föredra specifika roller, t.ex. Tillverkare eller Utgivare"@sv .
 
 <publicationPlace> a bf:Role ;
     # TODO: remove!
@@ -2475,7 +2455,6 @@
     skos:definition "Agent, annan än den ursprungliga skaparen, som gör en nyinspelning av ett koreografiskt eller dramatiskt verk utan att innehållet väsentligen förändras"@sv .
 
 <restorationist> a bf:Role ;
-    rdfs:comment "Jfr \"con\" (konservator)"@sv ;
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:rsr ;
     owl:sameAs <rsr> ;
@@ -2498,7 +2477,6 @@
     skos:definition "Agent som recenserar en bok, film, föreställning etc."@sv .
 
 <rubricator> a bf:Role ;
-    rdfs:comment "Utförare av rubriker (ofta skrivna i rött) i medeltida handskrift; Rubricatorn kunde ibland även vara handskriftens huvudsaklige skrivare"@sv ;
     rdfs:domain :Creation ;
     owl:equivalentProperty locrel:rbr ;
     owl:sameAs <rbr> ;
@@ -2509,7 +2487,6 @@
     skos:definition "Agent som ansvarar för att lägga till delar, ofta rubriker eller inledande text i handskrifter. Texten har ofta en distinkt färg, vanligtvis röd"@sv .
 
 <scenarist> a bf:Role ;
-    rdfs:comment "Vanligen den person som skrev stumfilmsscenarier"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:sce ;
     owl:sameAs <sce> ;
@@ -2530,7 +2507,6 @@
     skos:definition "Agent som bidrar med vetenskaplig, pedagogisk eller historisk kompetens till en resurs, särskilt audiovisuella resurser"@sv .
 
 <screenwriter> a bf:Role ;
-    rdfs:comment "Film"@sv ;
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:aus ;
     owl:sameAs <aus> ;
@@ -2541,7 +2517,7 @@
     skos:related <scenarist> ;
     skos:notation "aus" ;
     skos:prefLabel "Manusförfattare"@sv ;
-    skos:definition "Agent som skriver manus. Se även Scenari"@sv .
+    skos:definition "Agent som skriver manus."@sv .
 
 <scribe> a bf:Role ;
     rdfs:domain :Embodiment ;
@@ -2621,6 +2597,7 @@
     skos:notation "sgn" ;
     skos:prefLabel "Signatur"@sv ;
     skos:definition "Agent vars signatur förekommer utan presentation eller annan uppgift som indikerar proveniens."@sv ;
+    skos:related <autographer> ;
     skos:scopeNote "När proveniens finns, se Inskription"@sv .
 
 <singer> a bf:Role ;
@@ -2793,7 +2770,7 @@
     skos:notation "ths" ;
     skos:prefLabel "Handledare"@sv ;
     skos:changeNote '2023-09: omdöpt från "Avhandlingshandledare"'@sv ;
-    skos:definition "Agent under vars handledning en examenskandidat utvecklar och presenterar en  uppsats eller avhandling "@sv .
+    skos:definition "Agent under vars handledning en examenskandidat utvecklar och presenterar en uppsats eller avhandling"@sv .
 
 <transcriber> a bf:Role ;
     rdfs:domain :Work ;
