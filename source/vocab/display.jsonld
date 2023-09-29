@@ -108,6 +108,16 @@
             "isDefinedBy"
           ]
         },
+        "Role": {
+          "@id": "Role-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Resource",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "altLabel", "label", "code"]},
+            "inScheme",
+            "isDefinedBy"
+          ]
+        },
         "MediaType": {
           "@id": "MediaType-chips",
           "@type": "fresnel:Lens",
@@ -569,6 +579,13 @@
           "@id": "Record-cards",
           "classLensDomain": "Record",
           "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "hasChangeNote", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
+        },
+        "Role": {
+          "@type": "fresnel:Lens",
+          "@id": "Role-cards",
+          "classLensDomain": "Role",
+          "fresnel:extends": {"@id": "Role-chips"},
+          "showProperties": [ "fresnel:super", "domain", "definition", "scopeNote", "comment", "equivalentProperty", "related" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -1239,6 +1256,10 @@
           "fresnel:extends": {"@id": "Reproduction-cards"},
           "showProperties": [ "fresnel:super" ]
         },
+        "Role": {
+          "fresnel:extends": {"@id": "Role-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "Ontology": {
           "fresnel:extends": {"@id": "Ontology-cards"},
           "showProperties": [ "fresnel:super" ]
@@ -1341,6 +1362,10 @@
         "Concept": {
           "fresnel:extends": {"@id": "Concept-cards"},
           "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorialNote", "historyNote", "hiddenLabel" ]
+        },
+        "Role": {
+          "fresnel:extends": {"@id": "Role-cards"},
+          "showProperties": [ "fresnel:super", "altLabel", "hiddenLabel" ]
         },
         "ShelfMarkSequence": {
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
