@@ -276,7 +276,8 @@
         "järelsõna autor",
         "writer of afterword" ;
     skos:notation "aft" ;
-    skos:prefLabel "Efterord, kolofon etc."@sv ;
+    skos:prefLabel "Efterordsförfattare"@sv ;
+    skos:changeNote '2023-10: omdöpt från "Efterord, kolofon etc."'@sv ;
     skos:definition "Agent som författar ett efterord, en kolofon etc."@sv .
 
 <authorOfDialog> a bf:Role ;
@@ -290,7 +291,7 @@
     skos:definition "Agent som skapar dialogen eller den talade kommentaren till ett manus eller en ljudinspelning."@sv .
 
 <authorOfIntroduction> a bf:Role ;
-    # TODO: merge with writerOfIntroduction?
+    # TODO: use instead of writerOfIntroduction and writerOfPreface?
     rdfs:domain :Creation ;
     owl:equivalentProperty locrel:aui ;
     owl:sameAs <aui> ;
@@ -314,7 +315,8 @@
         "writer of preface",                        # RDA
         "writer of supplementary textual content" ; # RDA
     skos:notation "aui" ;
-    skos:prefLabel "Förord, introducerande material"@sv ;
+    skos:prefLabel "Förordsförfattare"@sv ;
+    skos:changeNote '2023-10: omdöpt från "Förord, introducerande material"'@sv ;
     skos:definition "Agent som författar en introduktion, ett förord eller annan viktig inledande text."@sv .
 
 <autographer> a bf:Role ;
