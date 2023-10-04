@@ -564,7 +564,8 @@
 # Qualified Forms of Contribution and Relationship
 
 :Role a owl:Class;
-    rdfs:label "Funktion"@sv;
+    rdfs:label "Roll"@sv;
+    skos:altLabel "Funktion"@sv ;
     rdfs:subClassOf :ObjectProperty ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty rdfs:range ;
@@ -574,18 +575,19 @@
     owl:equivalentClass bf2:Role .
 
 :role a owl:ObjectProperty;
-    rdfs:label "funktion"@sv;
+    rdfs:label "roll"@sv;
+    skos:altLabel "funktion"@sv ;
     rdfs:subPropertyOf :predicate;
     #ptg:abstract true ;
-    skos:definition "Funktion för medverkande, t.ex. författare, illustratör, etc."@sv;
+    skos:definition "Roll för medverkande, t.ex. författare, illustratör, etc."@sv;
     rdfs:domain :Contribution;
     rdfs:range :Role;
     owl:equivalentProperty bf2:role, prov:hadRole .
 
 :contribution a owl:ObjectProperty;
-    rdfs:label "Medverkan och funktion"@sv;
+    rdfs:label "Medverkan och roll"@sv;
     skos:altLabel "Upphov"@sv;
-    rdfs:comment "Agent och dess funktion i relation till resursen."@sv;
+    rdfs:comment "Agent och dess roll i relation till resursen."@sv;
     owl:equivalentProperty bf2:contribution;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedAttribution;
     rdfs:range :Contribution .
