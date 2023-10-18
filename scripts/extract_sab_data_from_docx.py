@@ -339,6 +339,8 @@ def flatten(data, results=None, broader=None):
         '@context': {
             '@vocab': 'https://id.kb.se/vocab/',
             '@base': f'https://id.kb.se/term/{SAO_CODE}/',
+            'prefLabel': {'@language': 'sv'},
+            'comment': {'@language': 'sv'},
         },
         '@graph': list(results.values())
     }
