@@ -1123,11 +1123,36 @@
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [
-            "fresnel:super",
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
+            "legalDate",
+            "version",
+            "marc:arrangedStatementForMusic",
+            "originDate",
+            "contribution",
+            "language",
+            "hasNotation",
+            "hasVariant",
+            "inCollection",
+            "genreForm",
+            "classification",
+            "subject",
+            "intendedAudience",
+            "contentType",
+            "dissertation",
+            "cartographicAttributes",
+            "isPartOf",
+            "translationOf",
             "continues",
             {"inverseOf": "continuedBy"},
             "continuedBy",
-            {"inverseOf": "continues"}
+            {"inverseOf": "continues"},
+            {"inverseOf": "instanceOf"}
           ]
         },
         "NotatedMusic": {
