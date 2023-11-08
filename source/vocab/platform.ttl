@@ -311,6 +311,71 @@
     sdo:rangeIncludes :GenerationProcess ;
     rdfs:label "Tool"@en, "Verktyg"@sv .
 
+:AdministrativeAction a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    ptg:abstract true;
+    rdfs:label "Administrative action"@en, "Administrativ handling"@sv .
+
+# TODO? The reason for the somewhat complicated class structure
+# is that we want a common base class that can be queried to find 
+# all "change notices" but not HandleAction
+ 
+:AdministrativeNotice a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    ptg:abstract true;
+    rdfs:subClassOf :AdministrativeAction ;
+    rdfs:label "Administrative notice"@en, "Administrativt anslag"@sv .
+
+:ChangeObservation a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:allValuesFrom :ChangeCategory
+      ] ;
+    rdfs:label "Change"@en, "Ändring"@sv .
+   
+:InquiryAction a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:label "Inquiry"@en, "Förfrågan"@sv .
+
+:ChangeNotice a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:label "Change notice"@en, "Ändringsmeddelande"@sv .
+
+:HandleAction a owl:Class ; # TODO: Hantera, Markera, Behandla, Handlägga ?
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeAction ;
+    rdfs:label "Handle"@en, "Behandla"@sv .
+
+:concerning a owl:ObjectProperty ;
+    :category :platform ;
+    :category :dependent ;
+    :category :pending ;
+    sdo:domainIncludes :AdministrativeAction ;
+    rdfs:range :Resource ;
+    rdfs:label "concerning"@en, "rörande"@sv .
+
+:representationBefore ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:domain :ChangeObservation;
+    rdfs:label "Value before"@en, "Värde före"@sv .
+
+:representationAfter ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:domain :ChangeObservation;
+    rdfs:label "Value after"@en, "Värde efter"@sv .
+
 # }}}
 
 :uriSpace a owl:DatatypeProperty ;
