@@ -561,6 +561,12 @@
           "classLensDomain": "ChangeNote",
           "fresnel:extends": {"@id": "ChangeNote-tokens"},
           "showProperties": [ "fresnel:super", "label", "tool" ]
+        },
+        "AdministrativeAction": {
+          "@id": "AdministrativeAction-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "AdministrativeAction",
+          "showProperties": [ "category", "concerning" ]
         }
       }
     },
@@ -1087,6 +1093,13 @@
           "classLensDomain": "ChangeNote",
           "fresnel:extends": {"@id": "ChangeNote-chips"},
           "showProperties": [ "category", "label", "comment", "atTime", "tool" ]
+        },
+        "AdministrativeAction": {
+          "@id": "AdministrativeAction-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "AdministrativeAction",
+          "fresnel:extends": {"@id": "AdministrativeAction-chips"},
+          "showProperties": [ "fresnel:super", "comment", "representationBefore", "representationAfter", "agent" ]
         }
       }
     },
