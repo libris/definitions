@@ -1604,7 +1604,7 @@ skos:related <editor> ;
     skos:scopeNote "Om agenten har mer än en roll, använd endast Chef, ledare om agenten är ledande inom alla rollerna."@sv .
 
 <lender> a bf:Role ;
-    rdfs:domain :Embodiment ; # TODO: :Item
+    rdfs:domain :Item ; # TODO: deprecate?
     owl:equivalentProperty locrel:len ;
     owl:sameAs <len> ;
     skos:exactMatch locrel:len ;
@@ -1939,6 +1939,7 @@ skos:related <editor> ;
     skos:definition "Agent som är associerad med det intellektuella och konstnärliga innehållet i en resurs."@sv .
 
 <owner> a bf:Role ;
+    # TODO: tydliggör ägare av resurs och ägaren av något som beskrivs i resursen (ex. samling i en katalog)
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:own ;
     owl:sameAs <own> ;
