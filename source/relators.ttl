@@ -1872,6 +1872,7 @@ skos:related <editor> ;
     skos:scopeNote "Används när det varken är möjligt eller önskvärt att identifiera funktionen exakt."@sv .
 
 <narrator> a bf:Role ;
+    # TODO: Hade tidigare hidden label voice actor som är en egen relation. Titta på förekomster.
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:nrt ;
     owl:sameAs <nrt> ;
@@ -1880,8 +1881,7 @@ skos:related <editor> ;
     skos:exactMatch locrel:nrt,
         mts:m994,
         gnd:narrator ;
-    skos:hiddenLabel "Erzählerin",
-        "voice actor" ; # RDA
+    skos:hiddenLabel "Erzählerin";
     skos:notation "nrt" ;
     skos:prefLabel "Berättare"@sv ;
     skos:altLabel "Inläsare"@sv ;
