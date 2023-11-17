@@ -265,8 +265,7 @@
     skos:definition "Agent vars arbete till stor del citeras eller återges i ett verk som agenten inte direkt har bidragit till. Sådana citat förekommer särskilt i utställningskataloger, fotografisamlingar m.m."@sv .
 
 <authorOfAfterwordColophonEtc> a bf:Role ;
-    # TODO: rename?
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:aft ;
     owl:sameAs <aft> ;
     skos:broader <author> ;
@@ -276,7 +275,8 @@
         "järelsõna autor",
         "writer of afterword" ;
     skos:notation "aft" ;
-    skos:prefLabel "Efterord, kolofon etc."@sv ;
+    skos:prefLabel "Efterordsförfattare"@sv ;
+    skos:changeNote '2023-10: omdöpt från "Efterord, kolofon etc."'@sv ;
     skos:definition "Agent som författar ett efterord, en kolofon etc."@sv .
 
 <authorOfDialog> a bf:Role ;
@@ -290,8 +290,8 @@
     skos:definition "Agent som skapar dialogen eller den talade kommentaren till ett manus eller en ljudinspelning."@sv .
 
 <authorOfIntroduction> a bf:Role ;
-    # TODO: merge with writerOfIntroduction?
-    rdfs:domain :Creation ;
+    # TODO: use instead of writerOfIntroduction and writerOfPreface?
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:aui ;
     owl:sameAs <aui> ;
     skos:broader <author> ;
@@ -314,11 +314,12 @@
         "writer of preface",                        # RDA
         "writer of supplementary textual content" ; # RDA
     skos:notation "aui" ;
-    skos:prefLabel "Förord, introducerande material"@sv ;
+    skos:prefLabel "Förordsförfattare"@sv ;
+    skos:changeNote '2023-10: omdöpt från "Förord, introducerande material"'@sv ;
     skos:definition "Agent som författar en introduktion, ett förord eller annan viktig inledande text."@sv .
 
 <autographer> a bf:Role ;
-    # TODO se över och jämför med signer och inscriber
+    # TODO se över och jämför med signer och inscriber (i samband med handskrifter tex)
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:ato ;
     owl:sameAs <ato> ;
@@ -335,7 +336,7 @@
     owl:sameAs <ant> ;
     skos:exactMatch locrel:ant ;
     skos:notation "ant" ;
-    skos:prefLabel "Baserat på"@sv ;
+    skos:prefLabel "Baserat på ett verk av"@sv ;
     skos:definition "Agent som skapat verket som det beskrivna verket är baserat på."@sv ;
     skos:related <conceptor> ;
     skos:scopeNote "Används för t.ex. bearbetningar, omarbetningar, uppföljare, fortsättningar, index etc."@sv .
@@ -569,7 +570,7 @@
     skos:definition "Agent som applicerar färg på ritningar, tryck, fotografier, kartor, rörliga bilder etc."@sv .
 
 <commentator> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:cmm ;
     owl:sameAs <cmm> ;
     skos:broader <performer> ;
@@ -668,7 +669,7 @@
     skos:closeMatch rdau:P60447 ;
     skos:exactMatch locrel:ccp ;
     skos:notation "ccp" ;
-    skos:prefLabel "Idé/koncept"@sv ;
+    skos:prefLabel "Originalidé"@sv ;
     skos:related <bibliographicAntecedent> ;
     skos:definition "Agent som ansvarar för den ursprungliga idén som ett verk bygger på."@sv .
 
@@ -1147,7 +1148,7 @@
     skos:definition "Agent som på tveksamma eller tvivelaktiga grunder tillskrivits skapandet av en resurs."@sv .
 
 <editor> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:edt ;
     owl:sameAs <edt> ;
     skos:closeMatch rdau:P61008 ;
@@ -1170,7 +1171,7 @@
     skos:scopeNote "För större revideringar, bearbetningar etc. som väsentligen förändrar originalverkets karaktär och som resulterar i ett nytt verk, se Författare."@sv .
 
 <editorOfCompilation> a bf:Role ;
-    rdfs:domain :Work ;
+    rdfs:domain :Creation ;
     owl:equivalentProperty locrel:edc ;
     owl:sameAs <edc> ;
     skos:closeMatch rdau:P60428 ;
@@ -1603,7 +1604,7 @@ skos:related <editor> ;
     skos:scopeNote "Om agenten har mer än en roll, använd endast Chef, ledare om agenten är ledande inom alla rollerna."@sv .
 
 <lender> a bf:Role ;
-    rdfs:domain :Embodiment ; # TODO: :Item
+    rdfs:domain :Item ; # TODO: deprecate?
     owl:equivalentProperty locrel:len ;
     owl:sameAs <len> ;
     skos:exactMatch locrel:len ;
@@ -1871,6 +1872,7 @@ skos:related <editor> ;
     skos:scopeNote "Används när det varken är möjligt eller önskvärt att identifiera funktionen exakt."@sv .
 
 <narrator> a bf:Role ;
+    # TODO: Hade tidigare hidden label voice actor som är en egen relation. Titta på förekomster.
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:nrt ;
     owl:sameAs <nrt> ;
@@ -1879,8 +1881,7 @@ skos:related <editor> ;
     skos:exactMatch locrel:nrt,
         mts:m994,
         gnd:narrator ;
-    skos:hiddenLabel "Erzählerin",
-        "voice actor" ; # RDA
+    skos:hiddenLabel "Erzählerin";
     skos:notation "nrt" ;
     skos:prefLabel "Berättare"@sv ;
     skos:altLabel "Inläsare"@sv ;
@@ -1927,7 +1928,7 @@ skos:related <editor> ;
     skos:definition "Agent som organiserar utställningen, evenemanget, konferensen etc. som ger upphov till en resurs."@sv .
 
 <originator> a bf:Role ;
-    # TODO: define better?
+    # TODO: define better? jmf conceptor, bibliographicAntecedent.
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:org ;
     owl:sameAs <org> ;
@@ -1938,6 +1939,7 @@ skos:related <editor> ;
     skos:definition "Agent som är associerad med det intellektuella och konstnärliga innehållet i en resurs."@sv .
 
 <owner> a bf:Role ;
+    # TODO: tydliggör ägare av resurs och ägaren av något som beskrivs i resursen (ex. samling i en katalog)
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:own ;
     owl:sameAs <own> ;
@@ -2439,6 +2441,7 @@ skos:related <editor> ;
     skos:definition "Agent som är motpart när ett överklagande görs från en domstol eller jurisdiktion till en annan för att upphäva en dom."@sv .
 
 <responsibleParty> a bf:Role ;
+    # TODO: skapa en egen term för ansvarig utgivare?
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:rpy ;
     owl:sameAs <rpy> ;
@@ -2561,7 +2564,7 @@ skos:related <editor> ;
     skos:definition "Agent som för anteckningar, är redaktör eller på annat sätt ansvarar för att uttrycka en organisations åsikter."@sv .
 
 <seller> a bf:Role ;
-    rdfs:domain :Embodiment ;
+    rdfs:domain :Item ;
     owl:equivalentProperty locrel:sll ;
     owl:sameAs <sll> ;
     skos:broader <formerOwner> ;
@@ -2927,7 +2930,7 @@ skos:related <editor> ;
     skos:definition "Agent som skriver betydande material som medföljer en ljudinspelning eller annat audiovisuellt material."@sv .
 
 <writerOfAddedCommentary> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wac ;
     owl:sameAs <wac> ;
     skos:broader <wst> ;
@@ -2941,7 +2944,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en analys av eller kommentar till ett verk som är manifesterat i aggregatet."@sv .
 
 <writerOfAddedLyrics> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wal ;
     owl:sameAs <wal> ;
     skos:broader <wst> ;
@@ -2954,7 +2957,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en sångtext till ett musikaliskt verk som är manifesterat i aggregatet. För en textförfattare som samarbetar med en kompositör, se Textförfattare."@sv .
 
 <writerOfAddedText> a bf:Role ;
-    rdfs:domain :Creation ; # TODO: complementOf :Text
+    rdfs:domain :Instance ; # TODO: complementOf :Text
     owl:equivalentProperty locrel:wat ;
     owl:sameAs <wat> ;
     skos:broader <wst> ;
@@ -2971,26 +2974,28 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en kompletterande text till ett icke-textuellt verk som är manifesterat i aggregatet."@sv .
 
 <writerOfIntroduction> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:win ;
     owl:sameAs <win> ;
     skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:win ;
     skos:notation "win" ;
+    skos:related <authorOfIntroduction> ;
     skos:prefLabel "Författare av introduktion"@sv ;
     skos:definition "Agent som skriver en introduktion till ett verk."@sv ;
-    skos:scopeNote "Används för en agent som bidrar till ett aggregat med en introduktion till ett verk som är manifesterat i aggregatet."@sv .
+    skos:scopeNote "Använd förordsförfattare"@sv .
 
 <writerOfPreface> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wpr ;
     owl:sameAs <wpr> ;
     skos:broadMatch rdau:P61139 ;
     skos:exactMatch locrel:wpr ;
     skos:notation "wpr" ;
     skos:prefLabel "Författare av förord"@sv ;
+    skos:related <authorOfIntroduction> ;
     skos:definition "Agent som skriver ett förord till ett verk."@sv ;
-    skos:scopeNote "Används för en agent som bidrar till ett aggregat med ett förord till ett verk som är manifesterat i aggregatet."@sv .
+    skos:scopeNote "Använd förordsförfattare"@sv .
 
 <writerOfSupplementaryTextualContent> a bf:Role ;
     rdfs:domain :Creation ;
