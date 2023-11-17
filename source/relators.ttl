@@ -265,8 +265,7 @@
     skos:definition "Agent vars arbete till stor del citeras eller återges i ett verk som agenten inte direkt har bidragit till. Sådana citat förekommer särskilt i utställningskataloger, fotografisamlingar m.m."@sv .
 
 <authorOfAfterwordColophonEtc> a bf:Role ;
-    # TODO: rename?
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:aft ;
     owl:sameAs <aft> ;
     skos:broader <author> ;
@@ -292,7 +291,7 @@
 
 <authorOfIntroduction> a bf:Role ;
     # TODO: use instead of writerOfIntroduction and writerOfPreface?
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:aui ;
     owl:sameAs <aui> ;
     skos:broader <author> ;
@@ -320,7 +319,7 @@
     skos:definition "Agent som författar en introduktion, ett förord eller annan viktig inledande text."@sv .
 
 <autographer> a bf:Role ;
-    # TODO se över och jämför med signer och inscriber
+    # TODO se över och jämför med signer och inscriber (i samband med handskrifter tex)
     rdfs:domain :Embodiment ;
     owl:equivalentProperty locrel:ato ;
     owl:sameAs <ato> ;
@@ -337,7 +336,7 @@
     owl:sameAs <ant> ;
     skos:exactMatch locrel:ant ;
     skos:notation "ant" ;
-    skos:prefLabel "Baserat på"@sv ;
+    skos:prefLabel "Baserat på ett verk av"@sv ;
     skos:definition "Agent som skapat verket som det beskrivna verket är baserat på."@sv ;
     skos:related <conceptor> ;
     skos:scopeNote "Används för t.ex. bearbetningar, omarbetningar, uppföljare, fortsättningar, index etc."@sv .
@@ -670,7 +669,7 @@
     skos:closeMatch rdau:P60447 ;
     skos:exactMatch locrel:ccp ;
     skos:notation "ccp" ;
-    skos:prefLabel "Idé/koncept"@sv ;
+    skos:prefLabel "Originalidé"@sv ;
     skos:related <bibliographicAntecedent> ;
     skos:definition "Agent som ansvarar för den ursprungliga idén som ett verk bygger på."@sv .
 
@@ -1929,7 +1928,7 @@ skos:related <editor> ;
     skos:definition "Agent som organiserar utställningen, evenemanget, konferensen etc. som ger upphov till en resurs."@sv .
 
 <originator> a bf:Role ;
-    # TODO: define better?
+    # TODO: define better? jmf conceptor, bibliographicAntecedent.
     rdfs:domain :Work ;
     owl:equivalentProperty locrel:org ;
     owl:sameAs <org> ;
@@ -2929,7 +2928,7 @@ skos:related <editor> ;
     skos:definition "Agent som skriver betydande material som medföljer en ljudinspelning eller annat audiovisuellt material."@sv .
 
 <writerOfAddedCommentary> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wac ;
     owl:sameAs <wac> ;
     skos:broader <wst> ;
@@ -2943,7 +2942,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en analys av eller kommentar till ett verk som är manifesterat i aggregatet."@sv .
 
 <writerOfAddedLyrics> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wal ;
     owl:sameAs <wal> ;
     skos:broader <wst> ;
@@ -2956,7 +2955,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en sångtext till ett musikaliskt verk som är manifesterat i aggregatet. För en textförfattare som samarbetar med en kompositör, se Textförfattare."@sv .
 
 <writerOfAddedText> a bf:Role ;
-    rdfs:domain :Creation ; # TODO: complementOf :Text
+    rdfs:domain :Instance ; # TODO: complementOf :Text
     owl:equivalentProperty locrel:wat ;
     owl:sameAs <wat> ;
     skos:broader <wst> ;
@@ -2973,7 +2972,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en kompletterande text till ett icke-textuellt verk som är manifesterat i aggregatet."@sv .
 
 <writerOfIntroduction> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:win ;
     owl:sameAs <win> ;
     skos:broadMatch rdau:P61139 ;
@@ -2984,7 +2983,7 @@ skos:related <editor> ;
     skos:scopeNote "Används för en agent som bidrar till ett aggregat med en introduktion till ett verk som är manifesterat i aggregatet."@sv .
 
 <writerOfPreface> a bf:Role ;
-    rdfs:domain :Creation ;
+    rdfs:domain :Instance ;
     owl:equivalentProperty locrel:wpr ;
     owl:sameAs <wpr> ;
     skos:broadMatch rdau:P61139 ;
