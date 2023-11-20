@@ -1358,7 +1358,12 @@
           "classLensDomain": "ChangeNote",
           "fresnel:extends": {"@id": "ChangeNote-cards"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "AdministrativeAction": {
+          "fresnel:extends": {"@id": "AdministrativeAction-cards"},
+          "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
+
       }
     },
     "search-chips": {
@@ -1418,6 +1423,10 @@
         "ShelfMarkSequence": {
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
           "showProperties": [ "fresnel:super", "shelfMarkStatus" ]
+        },
+        "AdministrativeAction": {
+          "fresnel:extends": {"@id": "AdministrativeAction-cards"},
+          "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
       }
     },
