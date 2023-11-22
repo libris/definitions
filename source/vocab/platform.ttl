@@ -313,7 +313,6 @@
 
 :AdministrativeAction a owl:Class ;
     :category :platform ;
-    :category :pending ;
     ptg:abstract true;
     rdfs:label "Administrative action"@en, "Administrativ handling"@sv .
 
@@ -323,7 +322,6 @@
  
 :AdministrativeNotice a owl:Class ;
     :category :platform ;
-    :category :pending ;
     ptg:abstract true;
     rdfs:subClassOf :AdministrativeAction ;
     rdfs:label "Message"@en, "Meddelande"@sv .
@@ -340,13 +338,11 @@
    
 :InquiryAction a owl:Class ;
     :category :platform ;
-    :category :pending ;
     rdfs:subClassOf :AdministrativeNotice ;
     rdfs:label "Inquiry"@en, "Förfrågan"@sv .
 
 :ChangeNotice a owl:Class ;
     :category :platform ;
-    :category :pending ;
     rdfs:subClassOf :AdministrativeNotice ;
     rdfs:label "Change notice"@en, "Ändringsmeddelande"@sv .
 
@@ -360,7 +356,6 @@
     :category :platform ;
     :category :dependent ;
     :category :integral ;
-    :category :pending ;
     sdo:domainIncludes :AdministrativeAction ;
     rdfs:range :Resource ;
     rdfs:label "concerning"@en, "rörande"@sv .
