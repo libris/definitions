@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <http://schema.org/> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix fresnel: <http://www.w3.org/2004/09/fresnel#> .
 
@@ -185,6 +186,7 @@
     rdfs:subPropertyOf bf2:descriptionConventions, :conformsTo .
 
 :derivedFrom a owl:ObjectProperty;
+    :category :platform ;
     rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
@@ -262,6 +264,115 @@
     rdfs:range :Dataset;
     owl:equivalentProperty void:inDataset;
     rdfs:subPropertyOf dc:isPartOf .
+
+# Technical  details and change descriptions {{{
+
+:technicalNote a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:subPropertyOf :hasNote;
+    rdfs:domain :Record;
+    rdfs:range :TechnicalNote;
+    rdfs:label "technical note"@en, "systemteknisk anmärkning"@sv .
+
+:TechnicalNote a owl:Class;
+    :category :platform ;
+    rdfs:subClassOf :StructuredValue;
+    rdfs:label "Technical note"@en, "Systemteknisk anmärkning"@sv .
+
+:hasChangeNote a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:subPropertyOf :technicalNote ;
+    sdo:domainIncludes :Record ;
+    rdfs:range :ChangeNote ;
+    rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+
+:ChangeNote a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :TechnicalNote ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:allValuesFrom :ChangeCategory
+      ] ;
+    rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+
+:ChangeCategory a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Change Category"@en, "Ändringskategori"@sv .
+
+:CreateNote a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :ChangeNote ;
+    rdfs:label "Create note"@en, "Tillkomstanmärkning"@sv .
+
+:tool a owl:ObjectProperty ;
+    :category :platform ;
+    sdo:domainIncludes :ChangeNote ;
+    sdo:rangeIncludes :GenerationProcess ;
+    rdfs:label "Tool"@en, "Verktyg"@sv .
+
+:AdministrativeAction a owl:Class ;
+    :category :platform ;
+    ptg:abstract true;
+    rdfs:label "Administrative action"@en, "Administrativ handling"@sv .
+
+# TODO? The reason for the somewhat complicated class structure
+# is that we want a common base class that can be queried to find 
+# all "change notices" but not HandleAction
+ 
+:AdministrativeNotice a owl:Class ;
+    :category :platform ;
+    ptg:abstract true;
+    rdfs:subClassOf :AdministrativeAction ;
+    rdfs:label "Message"@en, "Meddelande"@sv .
+
+:ChangeObservation a owl:Class ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:allValuesFrom :ChangeCategory
+      ] ;
+    rdfs:label "Change"@en, "Ändring"@sv .
+   
+:InquiryAction a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:label "Inquiry"@en, "Förfrågan"@sv .
+
+:ChangeNotice a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :AdministrativeNotice ;
+    rdfs:label "Change notice"@en, "Ändringsmeddelande"@sv .
+
+:HandleAction a owl:Class ; # TODO: Hantera, Markera, Behandla, Handlägga ?
+    :category :platform ;
+    :category :pending ;
+    rdfs:subClassOf :AdministrativeAction ;
+    rdfs:label "Handle"@en, "Behandla"@sv .
+
+:concerning a owl:ObjectProperty ;
+    :category :platform ;
+    :category :dependent ;
+    :category :integral ;
+    sdo:domainIncludes :AdministrativeAction ;
+    rdfs:range :Resource ;
+    rdfs:label "concerning"@en, "rörande"@sv .
+
+:representationBefore a owl:ObjectProperty ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:domain :ChangeObservation;
+    rdfs:label "Value before"@en, "Värde före"@sv .
+
+:representationAfter a owl:ObjectProperty ;
+    :category :platform ;
+    :category :pending ;
+    rdfs:domain :ChangeObservation;
+    rdfs:label "Value after"@en, "Värde efter"@sv .
+
+# }}}
 
 :uriSpace a owl:DatatypeProperty ;
     :category :platform ;

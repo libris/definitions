@@ -452,19 +452,24 @@ def last_modified_ms(fpaths):
 def tracked_path_type(resources):
     pathtype = type(Path())  # usually PosixPath
 
-    class TrackedPath(pathtype):
-        @classmethod
-        def _from_parsed_parts(cls, *args, **kwargs):
-            path = super()._from_parsed_parts(*args, **kwargs)
-            if path.is_file():
-                resources.add(path)
-            return path
+    if hasattr(pathtype, 'with_segments'):
+        class TrackedPath(pathtype):
+            def with_segments(self, *pathsegments):
+                path = super().with_segments(*pathsegments)
+                if path.is_file():
+                    resources.add(path)
+                return path
 
-    methodname = TrackedPath._from_parsed_parts.__name__
+    else:  # Python version < 3.12
+        assert hasattr(pathtype, '_from_parsed_parts')
 
-    assert hasattr(pathtype, methodname), (
-        f"Expected pathlib implementation to have a `{methodname}`"
-    )
+        class TrackedPath(pathtype):
+            @classmethod
+            def _from_parsed_parts(cls, *args, **kwargs):
+                path = super()._from_parsed_parts(*args, **kwargs)
+                if path.is_file():
+                    resources.add(path)
+                return path
 
     return TrackedPath
 

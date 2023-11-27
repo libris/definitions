@@ -22,7 +22,7 @@
     {
       "@id": "https://libris.kb.se/find",
       "@type": "DataService",
-      "titleByLang":  {"sv": "Sök-tjänst", "en": "Search Service"},
+      "titleByLang":  {"sv": "Libris sök", "en": "Libris Search"},
       "statistics": {
         "sliceList": [
           { "dimensionChain": [{"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000 },
@@ -44,7 +44,9 @@
           { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["instanceOf", "subject"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
-          { "dimensionChain": ["meta", "bibliography"], "itemLimit": 100 }
+          { "dimensionChain": ["meta", "bibliography"], "itemLimit": 100 },
+          { "dimensionChain": ["concerning", {"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 100, "connective": "OR", "_matchMissing": "concerning" },
+          { "dimensionChain": ["category"], "itemLimit": 100, "connective": "OR", "_matchMissing": "category"}
         ]
       }
     },

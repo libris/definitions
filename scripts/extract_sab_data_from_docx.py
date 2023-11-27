@@ -9,8 +9,6 @@ from lxml import etree
 from urllib.parse import quote
 
 
-ID = '@id'
-
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
 INDENT_MAP = {
@@ -27,6 +25,22 @@ HEADING_MAP = {
     'HJÄLPTABELLER': 'HELP',
     'APPENDIX': None,
     'LOKAL UTBYGGNAD': None
+}
+
+ID = '@id'
+
+SAO_CODE = 'kssb'
+
+CODE_TYPE_MAP = {
+    None: 'Subdivision',
+    '-': 'GeographicSubdivision',
+    ':': 'ContentGenreSubdivision', # can be any Classification code.lower()
+    '.': 'TemporalSubdivision',
+    #'z': 'MonographicElemet',
+    '(': 'ContentFormSubdivision',
+    '=': 'LanguageSubdivision',
+    '/': 'MediaSubdivision',
+    ',': 'AudienceSubdivision',
 }
 
 
@@ -50,7 +64,7 @@ class TableHandler:
         node = self._make_node(parts, current=current)
         code = node['code']
 
-        if node['@type'].endswith('Element'):
+        if node['@type'].endswith('Subdivision'):
             current.setdefault('element', []).append(node)
             return
         elif not level and not len(code) == 1:
@@ -125,7 +139,9 @@ class TableHandler:
         else:
             node['@type'] = 'Classification'
 
-        node_id = "sab:%s" % quote(code.encode('utf-8'), safe=b'')
+        node['inScheme'] = {ID: f'/term/{SAO_CODE}'}
+
+        node_id = "%s" % quote(code.encode('utf-8'), safe=b'')
 
         # NOTE: Many local elements are similar to their top-level element, but
         # far from all (and special '.0' elements are always locally unique).
@@ -135,6 +151,7 @@ class TableHandler:
             node_id = current[ID] + code
 
         node[ID] = node_id
+
         node['code'] = code
         node['prefLabel'] = label
 
@@ -163,19 +180,7 @@ class TableHandler:
         c = code[0]
         if c.isalpha():
             return None
-        if code[0:2] == '.0':
-            return 'Element'
-        code_type_map = {
-             '-': 'GeographicElement',
-             ':': 'ContentGenreElement', # can be any Classification code.lower()
-             '.': 'TemporalElement',
-             #'z': 'MonographicElemet',
-             '(': 'ContentFormElement',
-             '=': 'LanguageElement',
-             '/': 'MediaElement',
-             ',': 'AudienceElement',
-        }
-        return code_type_map.get(c)
+        return CODE_TYPE_MAP.get(None if code[0:2] == '.0' else c)
 
 
 def error_correct(parts):
@@ -329,7 +334,16 @@ def flatten(data, results=None, broader=None):
                 #    print('DIFF', item[ID], existing[k], v, file=sys.stderr)
         else:
             results[item[ID]] = item
-    return list(results.values())
+
+    return {
+        '@context': {
+            '@vocab': 'https://id.kb.se/vocab/',
+            '@base': f'https://id.kb.se/term/{SAO_CODE}/',
+            'prefLabel': {'@language': 'sv'},
+            'comment': {'@language': 'sv'},
+        },
+        '@graph': list(results.values())
+    }
 
 
 if __name__ == '__main__':

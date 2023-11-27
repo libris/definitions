@@ -49,7 +49,8 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "ConceptScheme",
           "showProperties": [
-            {"alternateProperties": ["code", "title", "prefLabel", "label"]}
+            {"alternateProperties": ["code", "title", "prefLabel", "label"]},
+            "version"
           ]
         },
         "Concept": {
@@ -72,6 +73,19 @@
           "showProperties": [
             "agent"
           ]
+        },
+        "GenerationProcess": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "GenerationProcess",
+          "showProperties": [
+            {"alternateProperties": ["code", "label"]}
+          ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-tokens",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "showProperties": [ "category" ]
         }
       }
     },
@@ -92,6 +106,16 @@
           "showProperties": [ 
             {"alternateProperties": ["title", "prefLabel", "label", "name", "code", "uri"]},
             "isPartOf",
+            "isDefinedBy"
+          ]
+        },
+        "Role": {
+          "@id": "Role-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Resource",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "altLabel", "label", "code"]},
+            "inScheme",
             "isDefinedBy"
           ]
         },
@@ -416,7 +440,12 @@
           "@id": "Classification-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Classification",
-          "showProperties": [ "code", "inScheme", "edition" ]
+          "showProperties": [ "code", "inScheme", "prefLabel", "edition" ]
+        },
+        "Subdivision": {
+          "@id": "Subdivision-chips",
+          "@type": "fresnel:Lens",
+          "showProperties": [ "code", "prefLabel", "inScheme" ]
         },
         "ClassificationDdc": {
           "@id": "ClassificationDdc-chips",
@@ -525,6 +554,27 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "PoliticalTendencyPeriod",
           "showProperties": [ "politicalTendency", "firstIssueDate", "lastIssueDate" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-tokens"},
+          "showProperties": [ "fresnel:super", "label", "tool" ]
+        },
+        "AdministrativeAction": {
+          "@id": "AdministrativeAction-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "AdministrativeAction",
+          "showProperties": [ 
+            {
+              "alternateProperties": [
+                "category",
+                "label"
+              ]
+            },
+            "concerning" 
+          ]
         }
       }
     },
@@ -543,7 +593,14 @@
           "@type": "fresnel:Lens",
           "@id": "Record-cards",
           "classLensDomain": "Record",
-          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
+          "showProperties": [ "controlNumber", "inDataset", "created", "modified", "identifiedBy", "bibliography", "encodingLevel", "hasChangeNote", "technicalNote", "recordStatus", "descriptionCreator", "descriptionUpgrader", "descriptionLastModifier", "descriptionConventions", "cataloguersNote",  "generationDate", "generationProcess", "sourceConsulted" ]
+        },
+        "Role": {
+          "@type": "fresnel:Lens",
+          "@id": "Role-cards",
+          "classLensDomain": "Role",
+          "fresnel:extends": {"@id": "Role-chips"},
+          "showProperties": [ "fresnel:super", "isReplacedBy", "domain", "definition", "scopeNote", "comment", "equivalentProperty", "related" ]
         },
         "Instance": {
           "@type": "fresnel:Lens",
@@ -565,6 +622,7 @@
             },
             "instanceOf",
             "responsibilityStatement",
+            "contribution",
             "editionStatement",
             "editionStatementRemainder",
             "isIssueOfEdition",
@@ -580,6 +638,7 @@
             "hasDimensions",
             "hasDuration",
             "physicalDetailsNote",
+            "illustrativeContent",
             "baseMaterial",
             "appliedMaterial",
             "productionMethod",
@@ -627,7 +686,6 @@
             "subject",
             "intendedAudience",
             "contentType",
-            "illustrativeContent",
             "dissertation",
             "cartographicAttributes",
             "isPartOf",
@@ -976,9 +1034,13 @@
           "classLensDomain": "Cartographic",
           "showProperties": [ "prefLabel", "marc:westernmostLongitudeCoordinates", "marc:easternmostLongitudeCoordinates", "marc:northernmostLatitudeCoordinates", "marc:southernmostLatitudeCoordinates", "coordinates", "scale" ]
         },
+        "Subdivision": {
+          "fresnel:extends": {"@id": "Subdivision-chips"},
+          "showProperties": [ "fresnel:super", "inCollection" ]
+        },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "fresnel:super", "inCollection" ]
         },
         "ClassificationDdc": {
           "@id": "ClassificationDdc-cards",
@@ -1032,6 +1094,20 @@
           "@id": "TransformedLanguageForm-cards",
           "fresnel:extends": {"@id": "Resource-chips"},
           "showProperties": [ "fresnel:super", "inLanguage", "inLangScript", "fromLangScript", "langTransformAccordingTo" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-chips"},
+          "showProperties": [ "category", "label", "comment", "atTime", "tool" ]
+        },
+        "AdministrativeAction": {
+          "@id": "AdministrativeAction-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "AdministrativeAction",
+          "fresnel:extends": {"@id": "AdministrativeAction-chips"},
+          "showProperties": [ "fresnel:super", "comment", "representationBefore", "representationAfter", "agent" ]
         }
       }
     },
@@ -1069,11 +1145,36 @@
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [
-            "fresnel:super",
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
+            "legalDate",
+            "version",
+            "marc:arrangedStatementForMusic",
+            "originDate",
+            "contribution",
+            "language",
+            "hasNotation",
+            "hasVariant",
+            "inCollection",
+            "genreForm",
+            "classification",
+            "subject",
+            "intendedAudience",
+            "contentType",
+            "dissertation",
+            "cartographicAttributes",
+            "isPartOf",
+            "translationOf",
             "continues",
             {"inverseOf": "continuedBy"},
             "continuedBy",
-            {"inverseOf": "continues"}
+            {"inverseOf": "continues"},
+            {"inverseOf": "instanceOf"}
           ]
         },
         "NotatedMusic": {
@@ -1203,6 +1304,10 @@
           "fresnel:extends": {"@id": "Reproduction-cards"},
           "showProperties": [ "fresnel:super" ]
         },
+        "Role": {
+          "fresnel:extends": {"@id": "Role-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
         "Ontology": {
           "fresnel:extends": {"@id": "Ontology-cards"},
           "showProperties": [ "fresnel:super" ]
@@ -1246,7 +1351,19 @@
         "TransformedLanguageForm": {
           "fresnel:extends": {"@id": "TransformedLanguageForm-cards"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "ChangeNote": {
+          "@id": "ChangeNote-full",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ChangeNote",
+          "fresnel:extends": {"@id": "ChangeNote-cards"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "AdministrativeAction": {
+          "fresnel:extends": {"@id": "AdministrativeAction-cards"},
+          "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
+
       }
     },
     "search-chips": {
@@ -1276,6 +1393,11 @@
         "Organization": {
           "fresnel:extends": {"@id": "Organization-chips"},
           "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "HandleAction": {
+          "classLensDomain": "HandleAction",
+          "fresnel:extends": {"@id": "AdministrativeAction-chips"},
+          "showProperties": [ "fresnel:super", "agent" ]
         }
       }
     },
@@ -1299,9 +1421,17 @@
           "fresnel:extends": {"@id": "Concept-cards"},
           "showProperties": [ "fresnel:super", "marc:hasAddedEntryGeographicName", "hasNote", "editorialNote", "historyNote", "hiddenLabel" ]
         },
+        "Role": {
+          "fresnel:extends": {"@id": "Role-cards"},
+          "showProperties": [ "fresnel:super", "altLabel", "hiddenLabel" ]
+        },
         "ShelfMarkSequence": {
           "fresnel:extends": {"@id": "ShelfMarkSequence-cards"},
           "showProperties": [ "fresnel:super", "shelfMarkStatus" ]
+        },
+        "AdministrativeAction": {
+          "fresnel:extends": {"@id": "AdministrativeAction-cards"},
+          "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
       }
     },

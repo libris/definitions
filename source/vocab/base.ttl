@@ -159,6 +159,7 @@ rdf:type a owl:ObjectProperty;
 
 :category a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
+    sdo:domainIncludes :ChangeNote ;
     owl:equivalentProperty sdo:category .
 
 ##
@@ -184,7 +185,13 @@ rdf:type a owl:ObjectProperty;
     skos:example "Exempelvis hasVariant, som anger variantbeskrivingar av en Agent som distinkta Agenter (men enbart i formen, de respresenterar samma ting)."@sv ;
     skos:scopeNote "Används i Libris katalogiseringsverktyg för att stödja arbetsflödet att endast skapa en lokal beskrivning."@sv ;
     :code "compositional" .
-    
+   
+:dependent a skos:Collection ;
+    rdfs:label "dependent"@en, "avhängig"@sv ;
+    rdfs:comment "Anges på egenskaper där en entitet inte kan existera utan en en entitet den länkar till. Entiteten tas automatiskt bort om den länkade entiteten tas bort."@sv ;
+    skos:example "Egenskapen concerning"@sv ;
+    :code "dependent" .
+
 :distinct a skos:Collection ;
     rdfs:label "distinct"@en, "distinkt"@sv ;
     #TODO: rdfs:comment "Anges på egenskaper för att..."@sv ;
@@ -233,7 +240,7 @@ rdf:type a owl:ObjectProperty;
 
 :comment a owl:DatatypeProperty;
     rdfs:label "comment"@en, "kommentar"@sv;
-    sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC, :Language, :Script ;
+    sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC, :Language, :Script , :ChangeNote, :AdministrativeAction;
     owl:equivalentProperty rdfs:comment .
 
 :code a owl:DatatypeProperty;
