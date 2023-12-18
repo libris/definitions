@@ -1442,8 +1442,39 @@
         "fresnel:propertyFormatDomain": "termComponentList",
         "fresnel:valueFormat": {
           "fresnel:contentAfter": "--",
-         "fresnel:contentLast": ""
+          "fresnel:contentLast": ""
         }
+      },
+      "givenName-format": {
+        "@id": "givenName-format",
+        "@type": "fresnel:Format",
+        "fresnel:propertyFormatDomain": "givenName",
+        "fresnel:propertyFormat": {
+          "fresnel:contentBefore": ", ",
+          "fresnel:contentFirst": ""
+        }
+      },
+      "provisionActivity-agent-format": {
+        "@id": "provisionActivity-agent-format",
+        "@type": "fresnel:Format",
+        "fresnel:propertyFormatDomain": "agent",
+        "fresnel:propertyFormat": {
+          "fresnel:contentBefore": " : ",
+          "fresnel:contentFirst": ""
+        },
+        "fresnel:group": "provisionActivity"
+      },
+      "publication-format": {
+        "@id": "provisionActivity-format",
+        "@type": "fresnel:Format",
+        "fresnel:classFormatDomain": "ProvisionActivity",
+        "fresnel:group": "provisionActivity"
+      }
+    },
+    "groups": {
+      "provisionActivity": {
+        "@id": "provisionActivity",
+        "@type": "fresnel:Group"
       }
     }
   }
