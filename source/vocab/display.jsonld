@@ -616,7 +616,8 @@
               "alternateProperties": [
                 {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
                 {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
+                "hasTitle",
+                "identifiedBy"
               ]
             },
             "instanceOf",
@@ -1433,6 +1434,38 @@
         }
       }
     },
+    "web-chips": {
+      "@id": "web-chips",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Work": {
+          "@id": "Work-web-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
+            "legalDate",
+            "version",
+            "marc:arrangedStatementForMusic",
+            "originDate"
+          ]
+        },
+        "Concept": {
+          "@id": "Concept-web-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "termComponentList", "code"]}
+          ]
+        }
+      }
+    },
     "formatters": {
       "termComponentList-format": {
         "TODO": "fix vue-client and remove me",
@@ -1566,10 +1599,23 @@
         "fresnel:contentFirst": ""
       }
     },
+    "subtitle-format": {
+      "@id": "subtitle-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Title"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "subtitle"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " : ",
+        "fresnel:contentFirst": ""
+      }
+    },
     "Contribution-role-format": {
       "@id": "Contribution-role-format",
       "@type": "fresnel:Format",
-      "fresnel:propertyStyle": "light",
       "fresnel:classFormatDomain": [
         "Contribution"
       ],
@@ -1582,6 +1628,130 @@
         "fresnel:contentAfter": ")",
         "fresnel:contentLast": ")"
       }
+    },
+    "Meeting-format": {
+      "NOTE": "This ia a workaround for old MARC formatting inside the fields",
+      "@id": "Meeting-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Meeting"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "name",
+        "date",
+        "place"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": "",
+        "fresnel:contentFirst": "",
+        "fresnel:contentAfter": "",
+        "fresnel:contentLast": ""
+      }
+    },
+    "Family-format": {
+      "NOTE": "This ia a workaround for old MARC formatting inside the fields",
+      "@id": "Meeting-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Family"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "lifeSpan"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": "",
+        "fresnel:contentFirst": "",
+        "fresnel:contentAfter": "",
+        "fresnel:contentLast": ""
+      }
+    },
+    "ISNI-digits-format": {
+      "@id": "ISNI-digits-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ISNI",
+        "ORCID"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "value"
+      ],
+      "fresnel:valueStyle": [
+        "isniGroupDigits()"
+      ]
+    },
+    "Identifier-format": {
+      "@id": "Identifier-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Identifier"
+      ],
+      "fresnel:resourceStyle": [
+        "displayType()"
+      ]
+    },
+    "genreForm-format": {
+      "@id": "genreForm-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Work"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "genreForm"
+      ],
+      "fresnel:propertyStyle": [
+        "pill",
+        "nolabel"
+      ]
+    },
+    "Agent-format": {
+      "@id": "Agent-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Agent"
+      ],
+      "fresnel:resourceStyle": [
+        "link"
+      ]
+    },
+    "Role-format": {
+      "@id": "Agent-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Role"
+      ],
+      "fresnel:resourceStyle": [
+        "definition"
+      ]
+    },
+    "Instance-self-x-format": {
+      "@id": "Instance-self-x-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Instance"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasTitle",
+        "identifiedBy",
+        "summary"
+      ],
+      "fresnel:propertyStyle": [
+        "nolabel"
+      ]
+    },
+    "Work-self-x-format": {
+      "@id": "Instance-self-x-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Work"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasTitle",
+        "identifiedBy",
+        "summary"
+      ],
+      "fresnel:propertyStyle": [
+        "nolabel"
+      ]
     },
     "ISBD-area-format": {
       "@id": "ISBD-area-format",
