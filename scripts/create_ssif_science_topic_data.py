@@ -1,7 +1,12 @@
 # -*- coding: UTF-8 -*-
 import csv
 import json
+import re
 import sys
+from urllib.parse import urljoin
+
+SCHEME = "https://id.kb.se/term/ssif"
+BASE = f"{SCHEME}/"
 
 
 def create_data(fpath):
@@ -19,9 +24,11 @@ def create_data(fpath):
         label_en, altlabel_en, comment_en = _parse_value(columns[-1])
 
         item = {
-            '@id': code,
+            '@id': _iri(code),
             '@type': 'Classification',
-            'prefLabelByLang': {'sv': label_sv, 'en': label_en}
+            'inScheme': {'@id': SCHEME},
+            'code': code,
+            'prefLabelByLang': {'sv': label_sv, 'en': label_en},
         }
 
         for prop, value, lang in [
@@ -38,7 +45,7 @@ def create_data(fpath):
             tree.pop()
 
         if tree and code.startswith(tree[-1]):
-            item['broader'] = {'@id': tree[-1]}
+            item['broader'] = {'@id': _iri(tree[-1])}
 
         if not tree or len(tree[-1]) < len(code):
             tree.append(code)
@@ -47,14 +54,17 @@ def create_data(fpath):
 
     return {
         "@context": {
-          "@vocab": "https://id.kb.se/vocab/",
-          "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
-          "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
-          "commentByLang": {"@id": "comment", "@container": "@language"},
-          "@base": "https://id.kb.se/term/ssif/"
+            "@vocab": "https://id.kb.se/vocab/",
+            "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
+            "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
+            "commentByLang": {"@id": "comment", "@container": "@language"},
         },
-        "@graph": items
+        "@graph": items,
     }
+
+
+def _iri(code: str) -> str:
+    return urljoin(BASE, code)
 
 
 def _parse_value(s: str) -> tuple[str, str | None, str | None]:
@@ -87,8 +97,9 @@ def _parse_value(s: str) -> tuple[str, str | None, str | None]:
     return label, altlabel or None, comment or None
 
 
-def read_csv_items(fpath, skip_first=True, skip_comment=False,
-        csv_dialect='excel-tab', size=0):
+def read_csv_items(
+    fpath, skip_first=True, skip_comment=False, csv_dialect='excel-tab', size=0
+):
     with open(fpath, 'rt') as fp:
         reader = csv.reader(fp, csv_dialect)
         if skip_first is True:
@@ -108,5 +119,6 @@ if __name__ == '__main__':
 
     data = create_data(fpath)
 
-    print(json.dumps(data, indent=2, ensure_ascii=False,
-                     separators=(',', ': ')))
+    s = json.dumps(data, indent=2, ensure_ascii=False, separators=(',', ': '))
+    s = re.sub(r'{\s+(\S+: "[^"]*")\s+}', r'{\1}', s)
+    print(s)
