@@ -191,15 +191,15 @@
 
 :image a owl:ObjectProperty;
     rdfs:label "image"@en, "bild"@sv;
-    rdfs:comment "En bild på resursen"@sv;
+    rdfs:comment "En bild på resursen."@sv;
     rdfs:domain :Resource;
     rdfs:range :ImageObject;
     rdfs:subPropertyOf :isPrimaryTopicOf;
     owl:equivalentProperty sdo:image, foaf:depicts .
 
- :imageOf a owl:ObjectProperty;
+:imageOf a owl:ObjectProperty;
     rdfs:label "image of"@en, "bild på"@sv;
-    rdfs:comment "Det som finns på bilden."@sv;
+    rdfs:comment "Resurs som förekommer på bilden."@sv;
     rdfs:domain :ImageObject;
     rdfs:range :Resource;
     rdfs:subPropertyOf sdo:about ;
