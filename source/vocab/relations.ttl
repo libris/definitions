@@ -189,6 +189,36 @@
     rdfs:subClassOf :Document;
     owl:equivalentClass sdo:MediaObject .
 
+:image a owl:ObjectProperty;
+    rdfs:label "image"@en, "bild"@sv;
+    rdfs:comment "En bild på resursen."@sv;
+    rdfs:domain :Resource;
+    rdfs:range :ImageObject;
+    rdfs:subPropertyOf :isPrimaryTopicOf;
+    owl:equivalentProperty sdo:image, foaf:depiction .
+
+:imageOf a owl:ObjectProperty;
+    rdfs:label "image of"@en, "bild på"@sv;
+    rdfs:comment "Resurs som förekommer på bilden."@sv;
+    rdfs:domain :ImageObject;
+    rdfs:range :Resource;
+    rdfs:subPropertyOf sdo:about ;
+    owl:equivalentProperty foaf:depicts .    
+
+:thumbnail a owl:ObjectProperty;
+    rdfs:label "thumbnail"@en, "miniatyrbild"@sv;
+    skos:altLabel "tumnagel"@sv, "indexbild"@sv;
+    rdfs:comment "En förminskad bild"@sv;
+    sdo:domainIncludes :ImageObject;
+    sdo:rangeIncludes :ImageObject;
+    rdfs:subPropertyOf :image;
+    owl:equivalentProperty sdo:thumbnail .
+
+:ImageObject a owl:Class;
+    rdfs:label "Image object"@en, "Bildobjekt"@sv;
+    rdfs:subclassOf :MediaObject;
+    owl:equivalentClass sdo:ImageObject .
+
 :electronicLocator a owl:ObjectProperty;
     rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
     sdo:domainIncludes :Item, :Instance;
@@ -593,6 +623,14 @@
 :contributionOf a owl:ObjectProperty ;
     ptg:abstract true;
     owl:equivalentProperty bf2:contributionOf .
+
+:contributor a owl:DatatypeProperty;
+    :category :shorthand;
+    rdfs:label "Contributor"@en, "Medverkande"@sv;
+    sdo:domainIncludes :Endeavour, :MediaObject ;
+    owl:equivalentProperty dc:contributor;
+    rdfs:subPropertyOf prov:wasAttributedTo;
+    owl:propertyChainAxiom ( :contribution :agent ) .
 
 :Contribution a owl:Class ;
     rdfs:label "Medverkan"@sv ;
