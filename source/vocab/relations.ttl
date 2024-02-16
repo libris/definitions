@@ -619,7 +619,7 @@
 :contributor a owl:DatatypeProperty;
     :category :shorthand;
     rdfs:label "Contributor"@en, "Medverkande"@sv;
-    rdfs:domain :Document; # TODO?
+    sdo:domainIncludes :Endeavour, :MediaObject ;
     owl:equivalentProperty dc:contributor;
     rdfs:subPropertyOf prov:wasAttributedTo;
     owl:propertyChainAxiom ( :contribution :agent ) .
