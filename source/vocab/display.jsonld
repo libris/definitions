@@ -566,10 +566,9 @@
           "@id": "AdministrativeAction-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "AdministrativeAction",
-          "showProperties": [ 
+          "showProperties": [
             {
               "alternateProperties": [
-                "category",
                 "label"
               ]
             },
@@ -1036,7 +1035,7 @@
         },
         "Subdivision": {
           "fresnel:extends": {"@id": "Subdivision-chips"},
-          "showProperties": [ "fresnel:super", "inCollection" ]
+          "showProperties": [ "fresnel:super", "inCollection", "scopeNote" ]
         },
         "Classification": {
           "fresnel:extends": {"@id": "Classification-chips"},
@@ -1107,7 +1106,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "AdministrativeAction",
           "fresnel:extends": {"@id": "AdministrativeAction-chips"},
-          "showProperties": [ "fresnel:super", "comment", "representationBefore", "representationAfter", "agent" ]
+          "showProperties": [ "representationAfter", "representationBefore", "comment", "concerning", "category", "agent", "descriptionCreator", "descriptionLastModifier" ]
         }
       }
     },
