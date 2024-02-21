@@ -103,7 +103,7 @@
           "@id": "Resource-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ 
+          "showProperties": [
             {"alternateProperties": ["title", "prefLabel", "label", "name", "code", "uri"]},
             "isPartOf",
             "isDefinedBy"
@@ -276,7 +276,7 @@
           "showProperties": [
             {"alternateProperties": [ "value", "marc:hiddenValue" ]},
             "typeNote",
-            "hasNote" 
+            "hasNote"
           ]
         },
         "ImageBitDepth": {
@@ -572,7 +572,7 @@
                 "label"
               ]
             },
-            "concerning" 
+            "concerning"
           ]
         }
       }
@@ -616,7 +616,8 @@
               "alternateProperties": [
                 {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
                 {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
+                "hasTitle",
+                "identifiedBy"
               ]
             },
             "instanceOf",
@@ -689,7 +690,6 @@
             "cartographicAttributes",
             "isPartOf",
             {"inverseOf": "instanceOf"}
-
           ]
         },
         "DataCatalog": {
@@ -704,7 +704,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
           "fresnel:extends": {"@id": "Dataset-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "contribution",
             "description",
@@ -898,7 +898,7 @@
           "@id": "Person-cards",
           "classLensDomain": "Person",
           "fresnel:extends": {"@id": "Person-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -915,7 +915,7 @@
           "@id": "Family-cards",
           "classLensDomain": "Family",
           "fresnel:extends": {"@id": "Family-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasTypeOfFamily",
             "hasVariant",
@@ -931,7 +931,7 @@
           "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
           "fresnel:extends": {"@id": "Jurisdiction-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -948,7 +948,7 @@
           "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
           "fresnel:extends": {"@id": "Meeting-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -963,15 +963,15 @@
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
           "fresnel:extends": {"@id": "Organization-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
             "disambiguatingDescription",
             "activityStartDate",
-            "activityEndDate", 
-            "identifiedBy", 
+            "activityEndDate",
+            "identifiedBy",
             "nationality" ]
         },
         "Concept": {
@@ -1129,6 +1129,7 @@
           "showProperties": [
             "instanceOf",
             "fresnel:super",
+            "hasTitle",
             "isPrimaryTopicOf",
             "electronicLocator",
             "hasNote",
@@ -1434,15 +1435,377 @@
         }
       }
     },
+    "web-chips": {
+      "@id": "web-chips",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Work": {
+          "@id": "Work-web-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
+                {"subPropertyOf": "hasTitle", "range": "Title"},
+                "hasTitle"
+              ]
+            },
+            "legalDate",
+            "version",
+            "marc:arrangedStatementForMusic",
+            "originDate"
+          ]
+        },
+        "Concept": {
+          "@id": "Concept-web-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "label", "termComponentList", "code"]}
+          ]
+        },
+        "Classification": {
+          "@id": "Classification-web-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Classification",
+          "showProperties": [ "code", "prefLabel" ]
+        }
+      }
+    },
     "formatters": {
       "termComponentList-format": {
+        "TODO": "fix vue-client and remove me",
         "@id": "termComponentList-format",
         "@type": "fresnel:Format",
         "fresnel:propertyFormatDomain": "termComponentList",
         "fresnel:valueFormat": {
           "fresnel:contentAfter": "--",
-         "fresnel:contentLast": ""
+          "fresnel:contentLast": ""
         }
+      }
+    }
+  },
+  "formatters": {
+    "termComponentList-format": {
+      "@id": "termComponentList-format",
+      "@type": "fresnel:Format",
+      "fresnel:propertyFormatDomain": "termComponentList",
+      "fresnel:valueFormat": {
+        "fresnel:contentAfter": "--",
+        "fresnel:contentLast": ""
+      }
+    },
+    "commaBeforeProperty-format": {
+      "TODO": "fullerFormOfName skrivs alltid med parenteser i libris nu, ska det vara så?",
+      "@id": "commaBeforeProperty-format",
+      "@type": "fresnel:Format",
+      "fresnel:propertyFormatDomain": [
+        "lifeSpan",
+        "familyName",
+        "givenName",
+        "name",
+        "marc:numeration",
+        "lifeSpan",
+        "marc:titlesAndOtherWordsAssociatedWithAName",
+        "fullerFormOfName"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": ", ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "agent-place-format": {
+      "@id": "agent-place-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Agent"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "place"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " (",
+        "fresnel:contentFirst": "(",
+        "fresnel:contentAfter": ")",
+        "fresnel:contentLast": ")"
+      }
+    },
+    "ProvisionActivity-comma-format": {
+      "@id": "ProvisionActivity-comma-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ProvisionActivity"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "place",
+        "year",
+        "startYear",
+        "date",
+        "marc:publicationStatus"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": ", ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "ProvisionActivity-endYear-format": {
+      "TODO": "endYear without startYear? fresnel:contentNoValue on startYear? but we only want it when endYear is present",
+      "@id": "ProvisionActivity-endYear-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ProvisionActivity"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "endYear"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": "-",
+        "fresnel:contentFirst": "-"
+      }
+    },
+    "ProvisionActivity-colon-before-agent-format": {
+      "@id": "ProvisionActivity-colon-before-agent-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ProvisionActivity"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "agent"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " : ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "ProvisionActivity-activity-separator-format": {
+      "NOTE": "",
+      "TODO": "this is in between prov activities, what about after other props? valueFormat on publication, manufacture?",
+      "@id": "ProvisionActivity-activity-separator-format",
+      "@type": "fresnel:Format",
+      "fresnel:propertyFormatDomain": [
+        "provisionActivity"
+      ],
+      "fresnel:valueFormat": {
+        "fresnel:contentBefore": "; ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "ProvisionActivity-hasPart-separator-format": {
+      "@id": "ProvisionActivity-hasPart-separator-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ProvisionActivity"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasPart",
+        "place"
+      ],
+      "fresnel:valueFormat": {
+        "fresnel:contentBefore": "; ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "subtitle-format": {
+      "@id": "subtitle-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Title"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "subtitle",
+        "titleRemainder"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " : ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "Contribution-role-format": {
+      "@id": "Contribution-role-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Contribution"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "role"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " (",
+        "fresnel:contentFirst": "(",
+        "fresnel:contentAfter": ")",
+        "fresnel:contentLast": ")"
+      }
+    },
+    "Meeting-format": {
+      "NOTE": "This ia a workaround for old MARC formatting inside the fields",
+      "@id": "Meeting-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Meeting"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "name",
+        "date",
+        "place"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": "",
+        "fresnel:contentFirst": "",
+        "fresnel:contentAfter": "",
+        "fresnel:contentLast": ""
+      }
+    },
+    "Family-format": {
+      "NOTE": "This ia a workaround for old MARC formatting inside the fields",
+      "@id": "Meeting-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Family"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "lifeSpan"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": "",
+        "fresnel:contentFirst": "",
+        "fresnel:contentAfter": "",
+        "fresnel:contentLast": ""
+      }
+    },
+    "ISNI-digits-format": {
+      "@id": "ISNI-digits-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "ISNI",
+        "ORCID"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "value"
+      ],
+      "fresnel:valueStyle": [
+        "isniGroupDigits()"
+      ]
+    },
+    "Identifier-format": {
+      "@id": "Identifier-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Identifier"
+      ],
+      "fresnel:resourceStyle": [
+        "displayType()"
+      ]
+    },
+    "genreForm-format": {
+      "@id": "genreForm-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Work"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "genreForm"
+      ],
+      "fresnel:propertyStyle": [
+        "pill",
+        "nolabel"
+      ]
+    },
+    "Agent-format": {
+      "@id": "Agent-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Agent"
+      ],
+      "fresnel:resourceStyle": [
+        "link"
+      ]
+    },
+    "Agent-hasVariant-format": {
+      "@id": "genreForm-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Agent"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasVariant"
+      ],
+      "fresnel:valueFormat": {
+        "fresnel:contentBefore": " • ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "Role-format": {
+      "@id": "Agent-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Role"
+      ],
+      "fresnel:resourceStyle": [
+        "definition"
+      ]
+    },
+    "Instance-self-x-format": {
+      "@id": "Instance-self-x-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Instance"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasTitle",
+        "identifiedBy",
+        "summary"
+      ],
+      "fresnel:propertyStyle": [
+        "nolabel"
+      ]
+    },
+    "Work-self-x-format": {
+      "@id": "Instance-self-x-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Work"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasTitle",
+        "identifiedBy",
+        "summary"
+      ],
+      "fresnel:propertyStyle": [
+        "nolabel"
+      ]
+    },
+    "ISBD-area-format": {
+      "@id": "ISBD-area-format",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Resource"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "hasTitle",
+        "editionStatement"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": ". — ",
+        "fresnel:contentFirst": ""
+      }
+    },
+    "default-separators": {
+      "@id": "default-separators",
+      "@type": "fresnel:Format",
+      "fresnel:classFormatDomain": [
+        "Resource"
+      ],
+      "fresnel:propertyFormatDomain": [
+        "*"
+      ],
+      "fresnel:propertyFormat": {
+        "fresnel:contentBefore": " • ",
+        "fresnel:contentFirst": ""
+      },
+      "fresnel:valueFormat": {
+        "fresnel:contentBefore": ", ",
+        "fresnel:contentFirst": ""
       }
     }
   }
