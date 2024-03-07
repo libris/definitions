@@ -178,8 +178,12 @@ class Compiler:
 
             meta = node.pop('meta', None)
             if meta:
+                if meta.get('@id', "").startswith('_:'):
+                    del meta['@id']
+
                 if 'created' in meta:
                     created_ms = timeutil.w3c_dtz_to_ms(meta.pop('created'))
+
                 if 'modified' in meta:
                     modified_ms = timeutil.w3c_dtz_to_ms(meta.pop('modified'))
 
