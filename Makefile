@@ -20,3 +20,6 @@ cache/ssif.csv: cache/ssif.xlsx
 
 source/ssif.jsonld: scripts/create_ssif_science_topic_data.py cache/ssif.csv
 	python3 $^ > $@
+
+source/ssif.ttl: source/ssif.jsonld
+	trld $^ -o ttl > $@
