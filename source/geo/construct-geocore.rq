@@ -1,0 +1,71 @@
+BASE <https://libris.kb.se/dataset/geo/sw/>
+PREFIX : <https://id.kb.se/vocab/>
+PREFIX idkbse: <https://id.kb.se/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX psv: <http://www.wikidata.org/prop/statement/value/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+CONSTRUCT {
+
+    ?type a :Concept ; :label ?typelabel .
+
+    ?place a :Place ;
+        :sameAs ?sameAs ;
+        :label ?label ;
+        :category ?type ;
+        :code ?swedishMunicipalityCode ;
+        :geo ?geo ;
+        :locatedIn ?locatedIn ;
+        :country <https://id.kb.se/country/sw> ;
+        :startDate ?foundingDate ;
+        :image ?image .
+
+    ?geo a :EarthGlobeCoordinate ;
+      :code ?geocode ;
+      :latitude ?lat ;
+      :longitude ?long ;
+      :geoPrecision ?geoPrecision .
+
+} WHERE {
+    ?wdplace a|wdt:P31 ?type ;
+      wdt:P17 wd:Q34 ;
+      rdfs:label ?label .
+
+    FILTER EXISTS { ?type wdt:P279* wd:Q914262  } # administrative territorial entity of Sweden
+    FILTER NOT EXISTS { ?wdplace wdt:P576 ?dissolutionDate }
+    OPTIONAL { ?wdplace wdt:P571 ?foundingDate }
+
+    ?type rdfs:label ?typelabel . FILTER(lang(?typelabel) IN ('sv', 'en'))
+
+    FILTER(lang(?label) IN ('sv', 'en'))
+
+    OPTIONAL {
+      ?wdplace wdt:P625 ?geocode .  # ^^:wktLiteral
+      OPTIONAL {
+        ?wdplace p:P625 ?qualifiedgeo .
+        ?qualifiedgeo psv:P625 [
+            wikibase:geoLatitude ?lat ;
+            wikibase:geoLongitude ?long ;
+            wikibase:geoPrecision ?geoPrecision ] .
+      }
+      BIND(BNODE(STR(COALESCE(?qualifiedgeo, ?geocode))) AS ?geo)
+    }
+
+    ?wdplace wdt:P131 ?wdLocatedIn .
+    OPTIONAL {
+      #?wdplace wdt:P525 ?swedishMunicipalityCode .
+      ?wdplace p:P525 ?qualifiedP525 .
+      ?qualifiedP525 ps:P525 ?swedishMunicipalityCode .
+      FILTER NOT EXISTS { ?qualifiedP525 pq:P582 ?endDate }
+      BIND(IRI(CONCAT(STR(<municipality/>), ENCODE_FOR_URI(?swedishMunicipalityCode))) AS ?dsId)
+      BIND(?wdplace AS ?sameAs)
+    }
+
+    BIND(IF(?wdLocatedIn = wd:Q34, idkbse:country\/sw, ?wdLocatedIn) AS ?locatedIn)
+    BIND(IF(BOUND(?dsId), ?dsId, ?wdplace) AS ?place)
+
+    OPTIONAL { ?wdplace wdt:P18 ?image }
+}
