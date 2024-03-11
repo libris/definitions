@@ -47,5 +47,5 @@ cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
 	cp "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv" $@
 
 cache/geocore.ttl: source/geo/construct-geocore.rq
-	scripts/rq.sh https://query.wikidata.org/sparql $^ | ./fmt.sh > $@
+	scripts/rq.sh https://query.wikidata.org/sparql $^ | scripts/fmt.sh > $@
 	#scripts/construct.py source/geo/modify-geocore.rq cache/wd-geocore.ttl  > $@
