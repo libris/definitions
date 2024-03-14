@@ -11,6 +11,7 @@
 :author a owl:ObjectProperty ;
     :category :shorthand, :pending ;
     owl:equivalentProperty <https://id.kb.se/relator/author> ;
+    rdfs:subPropertyOf :contributor ;
     skos:notation "FÖRF"^^:LibrisQueryCode ;
     owl:propertyChainAxiom (
             [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
@@ -21,53 +22,10 @@
 
 :isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
 
-##
-# Platform terms
-:and a owl:ObjectProperty ;
-    :category :platform, :pending ;
-    rdfs:label "and"@en, "och"@sv .
-
-:or a owl:ObjectProperty ;
-    :category :platform, :pending ;
-    rdfs:label "or"@en, "eller"@sv .
-
-:operator a owl:ObjectProperty ;
-    :category :platform, :pending ;
-    rdfs:label "operator"@en, "operator"@sv ;
-    rdfs:range :Operator .
-
-:Operator a owl:Class ;
-    :category :platform, :pending ;
-    rdfs:label "Operator"@en, "Operator"@sv .
-
-:Equal a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Equal to"@en, "Likamed"@sv ;
-    skos:altLabel "=" .
-
-:NotEqual a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Not equal to"@en, "Ej likamed"@sv ;
-    skos:altLabel "≠" .
-
-:GreaterThanOrEqual a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Greater than or equal to"@en, "Större än eller likamed"@sv ;
-    skos:altLabel ">=" .
-
-:GreaterThan a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Greater than"@en, "Större än"@sv ;
-    skos:altLabel ">" .
-
-:LessThanOrEqual a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Less than or equal to"@en, "Mindre än eller likamed"@sv ;
-    skos:altLabel "<=" .
-
-:LessThan a :Operator ;
-    :category :platform, :pending ;
-    rdfs:label "Less than"@en, "Mindre än"@sv ;
-    skos:altLabel "<" .
+:yearPublished a owl:DatatypeProperty ;
+    :category :shorthand, :pending ;
+    rdfs:subPropertyOf :year ;
+    rdfs:label "utgivningsår", "year of publication" ;
+    owl:propertyChainAxiom ( :publication :year ) .
 
 
