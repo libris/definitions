@@ -519,6 +519,12 @@
           "classLensDomain": "MediaObject",
           "showProperties": [ "uri" ]
         },
+        "ImageObject": {
+          "@id": "ImageObject-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ImageObject",
+          "showProperties": []
+        },
         "TemporalEntity": {
           "@id": "TemporalEntity-chips",
           "@type": "fresnel:Lens",
@@ -1048,6 +1054,10 @@
         },
         "MediaObject": {
           "fresnel:extends": {"@id": "MediaObject-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ImageObject": {
+          "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super" ]
         },
         "EntityContainer": {
