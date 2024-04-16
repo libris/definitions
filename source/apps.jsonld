@@ -51,6 +51,40 @@
       }
     },
     {
+      "@id": "https://beta.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "beta.libris.kb.se",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>BETA.LIBRIS.KB.SE</b>.</p>"
+      }
+    },
+    {
+      "@id": "https://beta.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://beta.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Libris sök", "en": "Libris Search"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["language"], "itemLimit": 100 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500 },
+          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 }
+        ]
+      }
+    },
+    {
       "@id": "https://id.kb.se/",
       "@type": "DataCatalog",
       "title": "ID.KB.SE",
