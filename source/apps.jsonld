@@ -45,8 +45,44 @@
           { "dimensionChain": ["instanceOf", "subject"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["meta", "bibliography"], "itemLimit": 100 },
-          { "dimensionChain": ["concerning", {"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 100, "connective": "OR", "_matchMissing": "concerning" },
+          { "dimensionChain": ["concerning", {"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000, "connective": "OR", "_matchMissing": "concerning" },
+          { "dimensionChain": ["concerning", "issuanceType"], "itemLimit": 100 },
           { "dimensionChain": ["category"], "itemLimit": 100, "connective": "OR", "_matchMissing": "category"}
+        ]
+      }
+    },
+    {
+      "@id": "https://beta.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "beta.libris.kb.se",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>BETA.LIBRIS.KB.SE</b>.</p>"
+      }
+    },
+    {
+      "@id": "https://beta.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://beta.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Libris sök", "en": "Libris Search"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["language"], "itemLimit": 100 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500 },
+          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 }
         ]
       }
     },

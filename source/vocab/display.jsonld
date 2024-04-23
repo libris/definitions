@@ -103,7 +103,7 @@
           "@id": "Resource-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Resource",
-          "showProperties": [ 
+          "showProperties": [
             {"alternateProperties": ["title", "prefLabel", "label", "name", "code", "uri"]},
             "isPartOf",
             "isDefinedBy"
@@ -276,7 +276,7 @@
           "showProperties": [
             {"alternateProperties": [ "value", "marc:hiddenValue" ]},
             "typeNote",
-            "hasNote" 
+            "hasNote"
           ]
         },
         "ImageBitDepth": {
@@ -519,6 +519,12 @@
           "classLensDomain": "MediaObject",
           "showProperties": [ "uri" ]
         },
+        "ImageObject": {
+          "@id": "ImageObject-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "ImageObject",
+          "showProperties": []
+        },
         "TemporalEntity": {
           "@id": "TemporalEntity-chips",
           "@type": "fresnel:Lens",
@@ -572,7 +578,7 @@
                 "label"
               ]
             },
-            "concerning" 
+            "concerning"
           ]
         }
       }
@@ -616,7 +622,8 @@
               "alternateProperties": [
                 {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
                 {"subPropertyOf": "hasTitle", "range": "Title"},
-                "hasTitle"
+                "hasTitle",
+                "identifiedBy"
               ]
             },
             "instanceOf",
@@ -689,7 +696,6 @@
             "cartographicAttributes",
             "isPartOf",
             {"inverseOf": "instanceOf"}
-
           ]
         },
         "DataCatalog": {
@@ -704,7 +710,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Dataset",
           "fresnel:extends": {"@id": "Dataset-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "contribution",
             "description",
@@ -753,7 +759,8 @@
             "classification",
             "subject",
             "summary",
-            "immediateAcquisition"
+            "immediateAcquisition",
+            "availability"
           ]
         },
         "StructuredValue": {
@@ -898,7 +905,7 @@
           "@id": "Person-cards",
           "classLensDomain": "Person",
           "fresnel:extends": {"@id": "Person-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -915,7 +922,7 @@
           "@id": "Family-cards",
           "classLensDomain": "Family",
           "fresnel:extends": {"@id": "Family-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasTypeOfFamily",
             "hasVariant",
@@ -931,7 +938,7 @@
           "@id": "Jurisdiction-cards",
           "classLensDomain": "Jurisdiction",
           "fresnel:extends": {"@id": "Jurisdiction-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -948,7 +955,7 @@
           "@id": "Meeting-cards",
           "classLensDomain": "Meeting",
           "fresnel:extends": {"@id": "Meeting-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
@@ -963,15 +970,15 @@
           "@id": "Organization-cards",
           "classLensDomain": "Organization",
           "fresnel:extends": {"@id": "Organization-chips"},
-          "showProperties": [ 
+          "showProperties": [
             "fresnel:super",
             "hasVariant",
             "seeAlso",
             "description",
             "disambiguatingDescription",
             "activityStartDate",
-            "activityEndDate", 
-            "identifiedBy", 
+            "activityEndDate",
+            "identifiedBy",
             "nationality" ]
         },
         "Concept": {
@@ -1048,6 +1055,10 @@
         },
         "MediaObject": {
           "fresnel:extends": {"@id": "MediaObject-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "ImageObject": {
+          "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super" ]
         },
         "EntityContainer": {
@@ -1129,6 +1140,7 @@
           "showProperties": [
             "instanceOf",
             "fresnel:super",
+            "hasTitle",
             "isPrimaryTopicOf",
             "electronicLocator",
             "hasNote",
@@ -1371,7 +1383,7 @@
       "lenses": {
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
-          "showProperties": [ "fresnel:super", "subject", "summary" ]
+          "showProperties": [ "fresnel:super", "subject", "summary", "hasComponent", "availability" ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-chips"},
@@ -1406,7 +1418,7 @@
       "lenses": {
         "Instance": {
           "fresnel:extends": {"@id": "Instance-cards"},
-          "showProperties": [ "fresnel:super", "appliedMaterial", "basematerial", "bookFormat", "colorContent", "hasNote", "mount", "polarity", "projection", "projectionCharacteristic", "productionMethod", "soundCharacteristic", "summary", "videoCharacteristic" ]
+          "showProperties": [ "fresnel:super", "appliedMaterial", "basematerial", "bookFormat", "colorContent", "hasNote", "mount", "polarity", "projection", "projectionCharacteristic", "productionMethod", "soundCharacteristic", "summary", "videoCharacteristic", "image" ]
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
@@ -1414,7 +1426,11 @@
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
-          "showProperties": [ "fresnel:super", "hasNote", "summary" ]
+          "showProperties": [ "fresnel:super", "hasNote", "summary", "image" ]
+        },
+        "Person": {
+          "fresnel:extends": {"@id": "Person-cards"},
+          "showProperties": [ "fresnel:super", "image" ]
         },
         "Concept": {
           "fresnel:extends": {"@id": "Concept-cards"},
@@ -1436,12 +1452,13 @@
     },
     "formatters": {
       "termComponentList-format": {
+        "TODO": "fix vue-client and remove me",
         "@id": "termComponentList-format",
         "@type": "fresnel:Format",
         "fresnel:propertyFormatDomain": "termComponentList",
         "fresnel:valueFormat": {
           "fresnel:contentAfter": "--",
-         "fresnel:contentLast": ""
+          "fresnel:contentLast": ""
         }
       }
     }
