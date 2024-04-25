@@ -76,12 +76,16 @@
       "titleByLang":  {"sv": "Libris sök", "en": "Libris Search"},
       "statistics": {
         "sliceList": [
+          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
           { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
-          { "dimensionChain": ["contributor"], "itemLimit": 20 },
           { "dimensionChain": ["language"], "itemLimit": 100 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["yearPublished"], "itemLimit": 500 },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 }
         ]
       }

@@ -29,3 +29,13 @@
     rdfs:label "Bibliotek"@sv, "Library"@en ;
     :category :shorthand, :pending ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
+
+:instanceOfType a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :instanceOf rdf:type ) .
+
+:hasInstanceType a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :hasInstance rdf:type ) .
