@@ -23,18 +23,27 @@ CONSTRUCT {
         :startDate ?foundingDate ;
         :image ?image .
 
-    ?geo a :EarthGlobeCoordinate ;
-      :code ?geocode ;
-      :latitude ?lat ;
-      :longitude ?long ;
+    ?geo a :EarthGlobeCoordinates ;
+      :value ?geocode ;
+      :geoLatitude ?lat ;
+      :geoLongitude ?long ;
       :geoPrecision ?geoPrecision .
 
 } WHERE {
     ?wdplace a|wdt:P31 ?type ;
-      wdt:P17 wd:Q34 ;
-      rdfs:label ?label .
+        wdt:P17 wd:Q34 .  # :country Sweden
 
-    FILTER EXISTS { ?type wdt:P279* wd:Q914262  } # administrative territorial entity of Sweden
+    FILTER EXISTS { ?type wdt:P279* wd:Q914262 } # administrative territorial entity of Sweden
+    #FILTER EXISTS {
+    #    {
+    #        ?type wdt:P279* wd:Q914262 # administrative territorial entity of Sweden
+    #    } UNION {
+    #        ?wdplace wdt:P1376 [] .  # :capital :label "centralort"@sv
+    #    }
+    #}
+
+    ?wdplace rdfs:label ?label .
+
     FILTER NOT EXISTS { ?wdplace wdt:P576 ?dissolutionDate }
     OPTIONAL { ?wdplace wdt:P571 ?foundingDate }
 
