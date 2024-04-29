@@ -21,6 +21,8 @@
 @prefix rdaz: <http://rdaregistry.info/Elements/z/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
+@prefix wikibase: <http://wikiba.se/ontology#> .
+
 @prefix : <https://id.kb.se/vocab/> .
 @prefix kbrel: <https://id.kb.se/relator/> .
 @prefix bulk: <https://id.kb.se/ns/bulk/> .
@@ -1539,6 +1541,25 @@
 :GeographicCoverage a owl:Class;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
     owl:equivalentClass bf2:GeographicCoverage .
+
+:geo a owl:ObjectProperty;
+    rdfs:label "Geographic coordinates"@en, "Geografiska koordinater"@sv;
+    sdo:domainIncludes :Place, :Library;
+    rdfs:range :GlobeCoordinates;
+    owl:equivalentProperty sdo:geo .
+
+:GlobeCoordinates a owl:Class ;
+  rdfs:subClassOf sdo:GeoCoordinates, wikibase:GlobecoordinateValue .
+
+:geoLatitude owl:equivalentProperty sdo:latitude, wikibase:geoLatitude .
+:geoLongitude owl:equivalentProperty sdo:longitude, wikibase:geoLongitude .
+:geoPrecision owl:equivalentProperty wikibase:geoPrecision .
+
+:EarthGlobeCoordinates a owl:Class ;
+    rdfs:label "Earth globe coordinates"@en, "jordglobskoordinater"@sv;
+    rdfs:subClassOf :GlobeCoordinates, [ a owl:Restriction;
+    owl:onProperty wikibase:geoGlobe ;
+    owl:hasValue <http://www.wikidata.org/entity/Q2> ] .
 
 :geographicCoverage a owl:ObjectProperty;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
