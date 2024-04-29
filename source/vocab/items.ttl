@@ -1,6 +1,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
+
 @prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -26,12 +28,32 @@
 # BF2 ITEM/HOLDING LOCATION
 
 :Item a owl:Class ;
-    rdfs:label "Item"@en, "Bestånd"@sv ;
+    rdfs:label "Item"@en, "Exemplar"@sv ;
+    ptg:abstract true ;
     :category marc:hold;
     rdfs:subClassOf :Embodiment;
     skos:closeMatch rdaent:Item;
     owl:equivalentClass bf2:Item, sdo:Product, holding:Item .
     #TODO?: owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
+
+:ItemHolding a owl:Class ;
+    rdfs:label "Item holding"@en, "Bestånd"@sv ;
+    owl:equivalentClass sdo:SomeProducts ;
+    rdfs:subClassOf :Item .
+
+:SomeItem a owl:Class ;
+    ptg:abstract true ;
+    rdfs:label "Some item"@en, "Något exemplar"@sv ;
+    rdfs:subClassOf :Item .
+
+:SingleItem a owl:Class ;
+    rdfs:label "Single item"@en, "Enskilt exemplar"@sv ;
+    rdfs:subClassOf :SomeItem .
+
+:itemUsed a owl:ObjectProperty ;
+    rdfs:label "Item used"@en, "Exemplaret som använts"@sv ;
+    rdfs:domain :ProvisionActivity ;
+    rdfs:range :SingleItem .
 
 :itemOf a owl:ObjectProperty ;
     rdfs:label "Holding for"@en, "bestånd på"@sv ;
@@ -250,9 +272,9 @@
     rdfs:label "has component"@en, "har komponent"@sv ;
     :category :compositional ;
     rdfs:subPropertyOf bf2:hasPart ;
-    rdfs:domain :Item ;
+    rdfs:domain :ItemHolding ;
     # TODO: rdfs:domain :SomeItems ;
-    rdfs:range :Item ;
+    rdfs:range :SomeItem ;
     skos:note "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
 
 :componentOf a owl:ObjectProperty ;
