@@ -523,7 +523,7 @@
           "@id": "ImageObject-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ImageObject",
-          "showProperties": []
+          "showProperties": [ "width", "height" ]
         },
         "TemporalEntity": {
           "@id": "TemporalEntity-chips",
@@ -1118,6 +1118,13 @@
           "classLensDomain": "AdministrativeAction",
           "fresnel:extends": {"@id": "AdministrativeAction-chips"},
           "showProperties": [ "representationAfter", "representationBefore", "comment", "concerning", "category", "agent", "descriptionCreator", "descriptionLastModifier" ]
+        },
+        "ImageObject": {
+          "@id": "ImageObject-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "ImageObject-chips"},
+          "classLensDomain": "ImageObject",
+          "showProperties": [ "fresnel:super", "thumbnail" ]
         }
       }
     },
@@ -1409,7 +1416,13 @@
           "classLensDomain": "HandleAction",
           "fresnel:extends": {"@id": "AdministrativeAction-chips"},
           "showProperties": [ "fresnel:super", "agent" ]
+        },
+        "ImageObject": {
+          "classLensDomain": "ImageObject",
+          "fresnel:extends": {"@id": "ImageObject-chips"},
+          "showProperties": [ "fresnel:super", "thumbnail" ]
         }
+
       }
     },
     "search-cards": {
