@@ -1,0 +1,599 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix sdo: <https://schema.org/>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+
+prefix kbv: <https://id.kb.se/vocab/>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+prefix div: <https://id.kb.se/term/div/>
+prefix s: <https://id.kb.se/term/sensory/>
+prefix t: <https://id.kb.se/term/type/>
+prefix f: <https://id.kb.se/term/form/>
+prefix g: <https://id.kb.se/term/genre/>
+
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+base <https://id.kb.se/term/div/>
+
+div:ephemera a :ConceptCollection ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Ephemera> ;
+  :exactMatch saogf:Efem\%C3\%A4rt\%20material ;
+  :prefLabel "Efemärt verk"@sv ,
+    "Efem\\%C3\\%A4rt\\%20material"@en .
+
+div:informative-work a :ConceptCollection ;
+  skos:relatedMatch <https://id.kb.se/term/fack> ;
+  :exactMatch saogf:Informativa\%20verk ;
+  :prefLabel "Informativt verk"@sv ,
+    "informative works"@en .
+
+kbv:Cartography a :Class ;
+  rdfs:subClassOf s:Visual ;
+  skos:editorialNote "TODO: restriction on Map for instanceOf; allValuesFrom this..."@en ;
+  :exactMatch saogf:Kartor ;
+  :narrowMatch kbv:Map ;
+  :prefLabel "Kartografiskt verk"@sv ,
+    "Cartography"@en .
+
+kbv:Text a :Class ;
+  :altLabel "Text"@en ,
+    "Text"@sv ;
+  :prefLabel "Linguistic work"@en ,
+    "Språkligt verk"@sv .
+
+kbv:StillImage a :Class ;
+  rdfs:subClassOf s:Visual ;
+  :exactMatch t:StillImage ,
+    saogf:Bilder ;
+  :prefLabel "Still Image"@en ,
+    "Stillbild"@sv ,
+    "Bild"@sv .
+
+kbv:Music a :Class ;
+  :exactMatch f:Music ;
+  :prefLabel "Music"@en ,
+    "Musik"@sv .
+
+kbv:MovingImage a :Class ;
+  rdfs:subClassOf s:Visual ;
+  :exactMatch t:MovingImage ;
+  :prefLabel "Moving Image"@en ,
+    "Rörlig bild"@sv .
+
+kbv:NotatedMusic a :Class ;
+  rdfs:subClassOf kbv:Music ;
+  :exactMatch saogf:Musikalier ;
+  :prefLabel "Musikalie"@sv ,
+    "Notated Music"@en .
+
+t:SerialPublication a :BasicType ;
+  rdfs:subClassOf t:Collection ;
+  :exactMatch saogf:Seriella\%20publikationer ;
+  :inCollection div:informative-work ;
+  :prefLabel "Seriell publikation"@sv ,
+    "Serial Publication"@en .
+
+t:IllustratedWork a :BasicType ;
+  rdfs:subClassOf s:Visual ;
+  :exactMatch saogf:Illustrerade\%20verk ;
+  :prefLabel "Illustrerat verk"@sv ,
+    "Illustrated Work"@en .
+
+t:Book a :BasicType ;
+  rdfs:subClassOf kbv:Text ;
+  :prefLabel "Book"@en ,
+    "Bok"@sv .
+
+t:NonBookText a :BasicType ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:Text ;
+  :prefLabel "Non-book text"@en ,
+    "Småtext"@sv .
+
+t:Issue a :BasicType ;
+  rdfs:subClassOf t:NonBookText ;
+  owl:equivalentClass bibo:Issue ;
+  :prefLabel "Tidskriftsnummer"@sv ,
+    "Periodical Issue"@en .
+
+t:Series a :BasicType ;
+  rdfs:subClassOf t:Collection ;
+  owl:equivalentClass bibo:Series ,
+    bf:Series ;
+  :prefLabel "Series"@en ,
+    "Serie"@sv .
+
+t:ObjectByPurpose a :BasicType ;
+  :prefLabel "Intensional Object"@en ,
+    "Syftesmässig sak"@sv .
+
+t:WrittenBook a :BasicType ;
+  rdfs:subClassOf t:Book ;
+  :prefLabel "Written book"@en ,
+    "Skriven bok"@sv .
+
+s:Audio a :SensoryForm ;
+  :exactMatch kbv:Audio ;
+  :prefLabel "Audio"@en ,
+    "Ljud"@sv .
+
+t:BookWithImages a :BasicType ;
+  rdfs:subClassOf t:WrittenBook ,
+    t:IllustratedWork ;
+  skos:editorialNote "TODO: PictorialWork?"@en ;
+  :broadMatch saogf:Bildverk ;
+  :narrowMatch barngf:Kapitelb\%C3\%B6cker ;
+  :prefLabel "Bok med bilder"@sv ,
+    "Book With Images"@en .
+
+t:Collection a :Class ;
+  :prefLabel "Collection"@en ,
+    "Samling"@sv .
+
+t:SoundBook a :BasicType ;
+  rdfs:subClassOf t:WrittenBook ,
+    s:Audio ,
+    s:MechanicalBook ;
+  :prefLabel "Bok med ljud"@sv ,
+    "Sound Book"@en .
+
+t:Periodical a :BasicType ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
+  rdfs:subClassOf t:SerialPublication ;
+  :exactMatch saogf:Periodika ;
+  :altLabel "Periodika"@sv ;
+  :prefLabel "Tidskrift"@sv ,
+    "Periodical"@en .
+
+s:Tactile a :SensoryForm ;
+  rdfs:subClassOf kbv:Tactile ;
+  :exactMatch saogf:Taktila\%20verk ;
+  :prefLabel "Tactile"@en ,
+    "Taktilt verk"@sv .
+
+t:Film a :BasicType ;
+  rdfs:subClassOf kbv:MovingImage ;
+  owl:equivalentClass bibo:Film ;
+  :exactMatch saogf:Filmer ;
+  :prefLabel "Film"@sv ,
+    "Film"@en .
+
+s:Visual a :SensoryForm ;
+  :exactMatch kbv:Visual ;
+  :prefLabel "Visual"@en ,
+    "Visuellt verk"@sv .
+
+t:Archive a :BasicType ;
+  rdfs:subClassOf t:Collection ;
+  :exactMatch saogf:Arkiv ;
+  :prefLabel "Arkiv"@sv ,
+    "Archive"@en .
+
+t:Article a :BasicType ;
+  rdfs:subClassOf t:NonBookText ;
+  owl:equivalentClass bibo:Article ;
+  :prefLabel "Artikel"@sv ,
+    "Article"@en .
+
+t:Audiobook a :BasicType ;
+  rdfs:subClassOf s:Audio ,
+    t:Book ,
+    bibo:AudioDocument ;
+  :exactMatch saogf:Ljudb\%C3\%B6cker ;
+  :prefLabel "Ljudbok"@sv ,
+    "Audiobook"@en .
+
+t:CollectedBook a :BasicType ;
+  rdfs:subClassOf t:CollectedWork ,
+    t:Book ;
+  :broadMatch bibo:CollectedDocument ;
+  :prefLabel "Collected book"@en ,
+    "Samlad bok"@sv .
+
+t:CollectedWork a :BasicType ;
+  rdfs:subClassOf t:Collection ;
+  skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, t:MultipartBook"@en ;
+  :exactMatch saogf:Samlingsverk ;
+  :inCollection div:informative-work ;
+  :prefLabel "Samlingsverk"@sv ,
+    "Collected Work"@en .
+
+t:Database a :BasicType ;
+  rdfs:subClassOf t:Collection ;
+  :exactMatch saogf:Databaser ;
+  :inCollection div:informative-work ;
+  :prefLabel "Databas"@sv ,
+    "Database"@en .
+
+t:TactileBook a :BasicType ;
+  rdfs:subClassOf t:Book ,
+    s:Tactile ;
+  skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
+  :broadMatch kbrda:TactileText ;
+  :exactMatch saogf:Punktskriftsb\%C3\%B6cker ;
+  :prefLabel "Tactile Book"@en ,
+    "Taktil bok"@sv .
+
+f:Almanac a :Form ;
+  rdfs:subClassOf t:SerialPublication ,
+    g:ReferenceWork ,
+    t:IllustratedWork ;
+  :exactMatch saogf:Almanackor ;
+  :prefLabel "Almanacka"@sv ,
+    "Almanac"@en .
+
+f:Atlas a :Form ;
+  rdfs:subClassOf kbv:Cartography ,
+    t:Book ;
+  :prefLabel "Atlas"@sv ,
+    "Atlas"@en .
+
+f:AudioProgram a :Form ;
+  rdfs:subClassOf f:NonMusicAudio ;
+  :prefLabel "Ljudprogram"@sv ,
+    "Audio Program"@en .
+
+f:NonMusicAudio a :Form ;
+  ptg:abstract true ;
+  rdfs:subClassOf s:Audio ;
+  :prefLabel "Non-music audio"@en ,
+    "Ljud men inte musik"@sv .
+
+f:BoardGame a :Form ;
+  rdfs:subClassOf f:PuzzleOrGame ;
+  :exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
+  :prefLabel "Brädspel"@sv ,
+    "Boardgame"@en .
+
+f:PuzzleOrGame a :Form ;
+  rdfs:subClassOf f:InteractiveObject ;
+  :exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
+  :prefLabel "Spel eller tankenötter"@sv ,
+    "Puzzle or game"@en .
+
+f:Broschure a :Form ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
+  :inCollection div:ephemera ;
+  :prefLabel "Broschyr"@sv ,
+    "Broschure"@en .
+
+f:Calendar a :Form ;
+  rdfs:subClassOf g:ReferenceWork ,
+    t:IllustratedWork ;
+  :exactMatch saogf:Kalendrar ;
+  :inCollection div:ephemera ;
+  :prefLabel "Kalender"@sv ,
+    "Calendar"@en .
+
+f:Catalogue a :Form ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Kataloger ;
+  :prefLabel "Katalog"@sv ,
+    "Catalogue"@en .
+
+f:Comic a :Form ;
+  rdfs:subClassOf g:GraphicLiterature ;
+  :exactMatch saogf:Serietidningar ;
+  :prefLabel "Serietidning"@sv ,
+    "Comic"@en .
+
+f:ComicIssue a :Form ;
+  rdfs:subClassOf f:Comic ,
+    t:Issue ;
+  owl:equivalentClass sdo:ComicIssue ;
+  :prefLabel "Serietidningsnummer"@sv ,
+    "Comic Issue"@en .
+
+f:ComicSeries a :Form ;
+  rdfs:comment "TODO: series of issues vs. arc of stories?" ;
+  rdfs:subClassOf f:Comic ,
+    t:Series ;
+  owl:equivalentClass sdo:ComicSeries ;
+  :prefLabel "Serietidningsserie"@sv ,
+    "Comic Series"@en .
+
+f:ComicStory a :Form ;
+  rdfs:subClassOf f:Comic, t:NonBookText ;
+  owl:equivalentClass sdo:ComicStory ;
+  :narrowMatch saogf:Serienoveller ;
+  :prefLabel "Serienovell"@sv ,
+    "Comic Story"@en .
+
+f:ComputerGame a :Form ;
+  rdfs:subClassOf f:PuzzleOrGame ;
+  :exactMatch saogf:Datorspel ;
+  :prefLabel "Datorspel"@sv ,
+    "Computer Game"@en .
+
+f:ControlledVocabulary a :Form ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Kontrollerade\%20vokabul\%C3\%A4rer ;
+  :prefLabel "Kontrollerad vokabulär"@sv ,
+    "Controlled Vocabulary"@en .
+
+f:Diagram a :Form ;
+  rdfs:subClassOf t:IllustratedWork ;
+  :exactMatch saogf:Diagram ;
+  :inCollection div:informative-work ;
+  :prefLabel "Diagram"@sv ,
+    "Diagram"@en .
+
+f:Encyclopedia a :Form ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Encyklopedier ;
+  :prefLabel "Encyklopedia"@sv ,
+    "Encyclopedia"@en .
+
+f:FormDocument a :Form ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Blanketter ;
+  :inCollection div:ephemera ,
+    div:informative-work ;
+  :prefLabel "Blankett"@sv ,
+    "Form Document"@en .
+
+f:Globe a :Form ;
+  rdfs:subClassOf kbv:Cartography ;
+  :prefLabel "Jord- eller månglob"@sv ,
+    "Globe"@en .
+
+f:GraphicNovel a :Form ;
+  rdfs:subClassOf f:Novel ,
+    t:BookWithImages ,
+    g:GraphicLiterature ;
+  :exactMatch saogf:Serieromaner ;
+  :prefLabel "Serieroman"@sv ,
+    "Graphic Novel"@en .
+
+f:Novel a :Form ;
+  rdfs:subClassOf g:Literature, t:Book ;
+  :exactMatch saogf:Romaner ;
+  :prefLabel "Roman"@sv ,
+    "Novel"@en .
+
+f:Handwriting a :Form ;
+  rdfs:subClassOf kbv:Manuscript ,
+    kbv:Text ;
+  :exactMatch saogf:Handskrifter ;
+  :prefLabel "Handskrift"@sv ,
+    "Handwriting"@en .
+
+f:Illustration a :Form ;
+  rdfs:subClassOf kbv:StillImage ;
+  :exactMatch saogf:Illustrationer ;
+  :prefLabel "Illustration"@sv ,
+    "Illustration"@en .
+
+f:InteractiveObject a :Form ;
+  rdfs:subClassOf t:ObjectByPurpose ;
+  :prefLabel "Interaktivt objekt"@sv ,
+  "InteractiveObject"@en .
+
+f:Lexicon a :Form ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Lexikon ;
+  :prefLabel "Lexikon"@sv ,
+    "Lexicon"@en .
+
+f:Manual a :Form ;
+  rdfs:subClassOf kbv:Text ,
+    g:TeachingMaterial ;
+  :closeMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc ;
+  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
+  :prefLabel "Manual"@sv ,
+    "Manual"@en .
+
+f:Map a :Form ;
+  rdfs:subClassOf kbv:Cartography ;
+  :prefLabel "Karta"@sv ,
+    "Map"@en .
+
+f:MechanicalBook a :Form ;
+  rdfs:subClassOf f:InteractiveObject ,
+    t:WrittenBook ;
+  :prefLabel "Mekanisk bok"@sv ,
+    "Mechanical Book"@en .
+
+f:NewsLetter a :Form ;
+  rdfs:subClassOf t:SerialPublication ;
+  :exactMatch saogf:Nyhetsbrev ;
+  :inCollection div:ephemera ;
+  :prefLabel "Nyhetsbrev"@sv ,
+    "Newsletter"@en .
+
+f:Note a :Form ;
+  rdfs:subClassOf t:NonBookText ;
+  owl:equivalentClass bibo:Note ;
+  :exactMatch saogf:Anteckningar ;
+  :prefLabel "Anteckning"@sv ,
+    "Note"@en .
+
+f:Painting a :Form ;
+  rdfs:subClassOf kbv:StillImage ;
+  :exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
+  :prefLabel "Målning"@sv ,
+    "Painting"@en .
+
+f:PerformedMusic a :Form ;
+  rdfs:subClassOf s:Audio ,
+    kbv:Music ;
+  :prefLabel "Performed Music"@en ,
+    "Framförd musik"@sv .
+
+f:Photobook a :Form ;
+  rdfs:subClassOf t:BookWithImages ,
+    t:Book ;
+  :exactMatch saogf:Fotob\%C3\%B6cker ;
+  :prefLabel "Fotobok"@sv ,
+    "Photobook"@en .
+
+f:Photograph a :Form ;
+  rdfs:subClassOf kbv:StillImage ;
+  :exactMatch saogf:Fotografier ;
+  :prefLabel "Fotografi"@sv ,
+    "Photograph"@en .
+
+f:Photoseries a :Form ;
+  rdfs:subClassOf g:GraphicLiterature ;
+  skos:editorialNote "TODO: this is an issue? (foto-serietidning)? Not a Collection?"@en ;
+  :exactMatch saogf:Fotoserier ;
+  :prefLabel "Fotoserie"@sv ,
+    "Photoseries"@en .
+
+f:PictureDictionary a :Form ;
+  rdfs:subClassOf t:Lexicon ,
+    t:BookWithImages ;
+  :exactMatch saogf:Bildlexikon ;
+  :prefLabel "Bildlexikon"@sv ,
+    "Picture Dictionary"@en .
+
+f:Postcard a :Form ;
+  rdfs:subClassOf t:IllustratedWork ;
+  :exactMatch saogf:Vykort ;
+  :inCollection div:ephemera ;
+  :prefLabel "Vykort"@sv ,
+    "Postcard"@en .
+
+f:Poster a :Form ;
+  rdfs:subClassOf t:IllustratedWork ;
+  owl:equivalentClass sdo:Poster ;
+  :exactMatch saogf:Affischer ;
+  :inCollection div:ephemera ,
+    div:informative-work ;
+  :prefLabel "Affisch"@sv ,
+    "Poster"@en .
+
+f:PublicationProgramme a :Form ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Program\%20\%28publikationer\%29 ;
+  :inCollection div:ephemera ,
+    div:informative-work ;
+  :prefLabel "Publikationsprogram"@sv ,
+    "Publication Programme"@en .
+
+f:Puzzle a :Form ;
+  rdfs:subClassOf f:PuzzleOrGame ;
+  :exactMatch saogf:Pussel ;
+  :prefLabel "Pussel"@sv ,
+    "Puzzle"@en .
+
+f:Register a :Form ;
+  rdfs:subClassOf t:Collection ;
+  :exactMatch saogf:F\%C3\%B6rteckningar ;
+  :inCollection div:informative-work ;
+  :prefLabel "Förteckning"@sv ,
+    "Register"@en .
+
+f:Review a :Form ;
+  rdfs:subClassOf t:NonBookText ;
+  owl:equivalentClass sdo:Review ;
+  :exactMatch saogf:Recensioner ;
+  :inCollection div:informative-work ;
+  :prefLabel "Recension"@sv ,
+    "Review"@en .
+
+f:Screenplay a :Form ;
+  rdfs:subClassOf kbv:Text ;
+  :exactMatch saogf:Filmmanus ;
+  :prefLabel "Filmmanus"@sv ,
+    "Screenplay"@en .
+
+f:Sculpture a :Form ;
+  rdfs:subClassOf t:ObjectByPurpose ;
+  :prefLabel "Skulptur"@sv ,
+    "Sculpture"@en .
+
+f:ShortStory a :Form ;
+  rdfs:subClassOf t:NonBookText ,
+    g:Literature ;
+  owl:equivalentClass sdo:ShortStory ;
+  :exactMatch saogf:Noveller ;
+  :prefLabel "Novell"@sv ,
+    "Short Story"@en .
+
+f:SpokenBook a :Form ;
+  rdfs:subClassOf t:Audiobook ,
+    f:SpokenWord ;
+  :exactMatch saogf:Talb\%C3\%B6cker ;
+  :prefLabel "Talbok"@sv ,
+    "Spoken Book"@en .
+
+f:SpokenWord a :Form ;
+  rdfs:subClassOf t:NonBookText ,
+    s:Audio ;
+  :prefLabel "Tal"@sv ,
+    "Spoken Word"@en .
+
+f:SpokenPaper a :Form ;
+  rdfs:subClassOf t:Periodical ,
+    f:SpokenWord ;
+  :exactMatch saogf:Taltidningar ;
+  :prefLabel "Taltidning"@sv ,
+    "Spoken Paper"@en .
+
+f:TVProgram a :Form ;
+  rdfs:subClassOf kbv:MovingImage ;
+  :exactMatch saogf:Tv-program ;
+  :prefLabel "Tv-program"@sv ,
+    "TV-Program"@en .
+
+f:TVSeries a :Form ;
+  rdfs:subClassOf f:TVProgram ,
+    t:Series ;
+  :exactMatch saogf:Tv-serier ;
+  :prefLabel "Tv-serie"@sv ,
+    "TV-Series"@en .
+
+f:Tables a :Form ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Tabeller ;
+  :prefLabel "Tabell"@sv ,
+    "Tables"@en .
+
+f:TactileCartography a :Form ;
+  rdfs:subClassOf kbv:Cartography ,
+    s:Tactile ;
+  skos:editorialNote "TODO: edge case? Force a choice of primary purpose of expression? This is not a11y, that's about the instance. Mixed purposes can be solved by primary purpose as type and additional \"color\" as genre."@en ;
+  :prefLabel "Taktilt kartografiskt verk"@sv ,
+    "Tactile Cartography"@en .
+
+f:Toy a :Form ;
+  rdfs:subClassOf f:InteractiveObject ;
+  :prefLabel "Leksak"@sv ,
+    "Toy"@en .
+
+f:Trailer a :Form ;
+  rdfs:subClassOf t:Film ;
+  :exactMatch saogf:Trailrar ;
+  :prefLabel "Trailer"@sv ,
+    "Trailer"@en .
+
+f:Website a :Form ;
+  rdfs:subClassOf kbv:OnlineResource ,
+    t:Collection ;
+  :exactMatch saogf:Webbplatser ;
+  :prefLabel "Webbplats"@sv ,
+    "Website"@en .
+
+# TODO:
+#f:BrailleBook a :CarrierForm ;
+#  rdfs:subClassOf t:TactileBook ;
+#  :prefLabel "Punktskriftsbok"@sv, "Braille Books"@en .
+
+# TODO:
+#cr:Leporello a :CarrierForm ;
+#  rdfs:subClassOf rdacarrier:NonVolumePrint ;
+#  :exactMatch saogf:Leporello .
+
+# TODO:
+#cr:MusicRecording a :CarrierForm ;
+#  rdfs:subClassOf kbv:SoundRecording, kbv:Music ;
+#  :exactMatch saogf:Musikinspelningar .

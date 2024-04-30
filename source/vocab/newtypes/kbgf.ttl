@@ -1,0 +1,330 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix sdo: <https://schema.org/>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+
+prefix kbv: <https://id.kb.se/vocab/>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+prefix div: <https://id.kb.se/term/div/>
+prefix s: <https://id.kb.se/term/sensory/>
+prefix t: <https://id.kb.se/term/type/>
+prefix f: <https://id.kb.se/term/form/>
+prefix g: <https://id.kb.se/term/genre/>
+
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+base <https://id.kb.se/term/div/>
+
+# It is a Genre if *either*:
+# - it is not enough to determine under which BasicType or Form it belongs (it is a base);
+# - *or* it represents a combination of BasicType or Form and a Genre (it adds a nuance).
+
+g:AbstractSummary a :Genre ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Sammanfattningar ;
+  :inCollection f:informative-work ;
+  :seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
+  :prefLabel "Sammanfattning"@sv ,
+    "Abstract Summary"@en .
+
+g:Blog a :Genre ;
+  rdfs:subClassOf f:Website ,
+    t:NonBookText ;
+  owl:equivalentClass sdo:Blog ;
+  :exactMatch saogf:Bloggar ;
+  :inCollection f:informative-work ;
+  :prefLabel "Blogg"@sv ,
+    "Blog"@en .
+
+g:ConferenceMaterial a :Genre ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Konferensmaterial ;
+  :inCollection div:ephemera ,
+    f:informative-work ;
+  :prefLabel "Konferensmaterial"@sv ,
+    "Conference Material"@en .
+
+g:CourseMaterial a :Genre ;
+  rdfs:subClassOf g:TeachingMaterial ;
+  :exactMatch saogf:Kursmaterial ;
+  :inCollection div:ephemera ;
+  :prefLabel "Kursmaterial"@sv ,
+    "Course Material"@en .
+
+g:TeachingMaterial a :Genre ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
+  :exactMatch saogf:L\%C3\%A4romedel ,
+    saogf:Instruktions-\%20och\%20undervisningsmaterial ;
+  :prefLabel "Läromedel"@sv ,
+    "Teaching Material"@en ,
+    "Instruktions- och undervisningsmaterial"@sv .
+
+g:GraphicLiterature a :Genre ;
+  rdfs:subClassOf t:IllustratedWork ,
+    g:Literature ;
+  :broadMatch kbrda:Text ,
+    kbrda:Image ;
+  :exactMatch saogf:Tecknade\%20serier ;
+  :prefLabel "Tecknad serie"@sv ,
+    "Graphic Literature"@en .
+
+g:HandSignedCommunication a :Genre ;
+  rdfs:subClassOf s:Visual, kbv:Text ;
+  :exactMatch saogf:TAKK ;
+  :prefLabel "TAKK"@sv ,
+    "Hand-signed Communication"@en .
+
+g:Literature a :Genre ;
+  rdfs:subClassOf kbv:Text ;
+  :prefLabel "Litteratur"@sv ,
+    "Literature"@en .
+
+g:Journal a :Genre ;
+  rdfs:subClassOf t:Periodical ;
+  :prefLabel "Vetenskaplig tidskrift"@sv ,
+    "Journal"@en .
+
+g:JournalIssue a :Genre ;
+  rdfs:subClassOf t:Issue ;
+  :broadMatch g:Journal ;
+  :prefLabel "Vetenskapstidskriftssnummer"@sv ,
+    "Journal Issue"@en .
+
+g:Lecture a :Genre ;
+  rdfs:subClassOf g:TeachingMaterial ;
+  :exactMatch saogf:F\%C3\%B6rel\%C3\%A4sningar ;
+  :prefLabel "Föreläsning"@sv ,
+    "Lecture"@en .
+
+g:Magazine a :Genre ;
+  rdfs:subClassOf t:Periodical ;
+  :prefLabel "Magasin"@sv ,
+    "Magazine"@en .
+
+g:MagazineIssue a :Genre ;
+  rdfs:subClassOf t:Issue ;
+  :broadMatch t:Magazine ;
+  :prefLabel "Magasin-nummer"@sv ,
+    "Magazine Issue"@en .
+
+g:MusicRadioProgram a :Genre ;
+  rdfs:subClassOf f:AudioProgram ,
+    kbv:Music ;
+  :prefLabel "Musikradioprogram"@sv ,
+    "Music Radio Program"@en .
+
+g:Newspaper a :Genre ;
+  rdfs:subClassOf t:Periodical ;
+  :exactMatch saogf:Dagstidningar ;
+  :prefLabel "Dagstidning"@sv ,
+    "Newspaper"@en .
+
+g:NewspaperIssue a :Genre ;
+  rdfs:subClassOf t:Issue ;
+  :broadMatch t:Newspaper ;
+  :prefLabel "Dagstidningsnummer"@sv ,
+    "Newspaper Issue"@en .
+
+g:Pamphlet a :Genre ;
+  rdfs:subClassOf f:Broschure ;
+  :exactMatch saogf:Pamfletter ;
+  :inCollection div:ephemera ;
+  :prefLabel "Pamflett"@sv ,
+    "Pamphlet"@en .
+
+g:Podcast a :Genre ;
+  rdfs:subClassOf f:AudioProgram ;
+  :prefLabel "Podcast"@sv ,
+    "Podcast"@en .
+
+g:RadioProgram a :Genre ;
+  rdfs:subClassOf f:AudioProgram ;
+  :exactMatch saogf:Radioprogram ;
+  :prefLabel "Radioprogram"@sv ,
+    "Radio Program"@en .
+
+g:ReferenceWork a :Genre ;
+  rdfs:subClassOf kbv:Text ;
+  owl:equivalentClass bibo:ReferenceSource ;
+  :exactMatch saogf:Referensverk ;
+  :inCollection f:informative-work ;
+  :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  :prefLabel "Referensverk"@sv ,
+    "Reference Work"@en .
+
+g:RolePlayingGame a :Genre ;
+  rdfs:subClassOf f:PuzzleOrGame ;
+  :exactMatch saogf:Rollspel ;
+  :prefLabel "Rollspel"@sv ,
+    "Roleplaying Game"@en .
+
+g:SoundEffectBook a :Genre ;
+  rdfs:subClassOf t:SoundBook ;
+  :exactMatch saogf:B\%C3\%B6cker\%20med\%20ljudeffekter ;
+  :prefLabel "Bok med ljudeffekt"@sv ,
+    "Sound-effect Book"@en .
+
+g:Standard a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;
+  owl:equivalentClass bibo:Standard ;
+  :exactMatch saogf:Standarder ;
+  :prefLabel "Standard"@sv ,
+    "Standard"@en .
+
+g:Statistics a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Statistik ;
+  :prefLabel "Statistik"@sv ,
+    "Statistics"@en .
+
+g:Timetable a :Genre ;
+  rdfs:subClassOf f:Tables ,
+    f:Ephemera ;
+  :exactMatch saogf:Tidtabeller ;
+  :prefLabel "Tidtabell"@sv ,
+    "Timetable"@en .
+
+#g:Patent
+#  :prefLabel "Patent"@sv, "Patent"@en .
+
+#g:LegalDocument
+#  :prefLabel "Juridiskt material"@sv, "Legal Document"@en .
+
+#g:LegalDocument a :Genre ;
+#  rdfs:subClassOf kbv:Text ;
+#  owl:equivalentClass bibo:LegalDocument ;
+#  :exactMatch saogf:Juridiskt\%20material .
+
+#g:Patent a :Genre ;
+#  rdfs:subClassOf kbv:Text ;
+#  owl:equivalentClass bibo:Patent ;
+#  :exactMatch saogf:Patent ;
+#  :inCollection <informative-work> .
+
+#g:RareText :exactMatch saogf:Texter .
+
+#g:Debate a :Genre ;
+#  rdfs:subClassOf t:NonBookText ;
+#  :exactMatch saogf:Debatter .
+
+#t:AdventCalendar a :Form ;
+#  :exactMatch saogf:Adventskalendrar ;
+#  rdfs:subClassOf t:Calendar .
+
+#g:ReligiousWork a :Form ;
+#  :exactMatch saogf:Religi\%C3\%B6sa\%20verk .
+
+#g:Biography a :Form ;
+#  :exactMatch saogf:Biografier .
+
+#g:Essay a :Form ;
+#  :exactMatch saogf:Ess\%C3\%A4er .
+
+# TODO: SerialPublication someValuesFrom t:Yearbook
+#t:Yearbook a :Form ;
+#  :exactMatch saogf:\%C3\%85rsb\%C3\%B6cker ;
+#  rdfs:subClassOf t:SerialPublication .
+
+#:PhraseBook a :Form ;
+#  :exactMatch saogf:Parl\%C3\%B6rer .
+
+#:Offentligt_tryck a :Form ;
+#  :exactMatch saogf:Offentligt\%20tryck .
+
+#:CommemorativeWork a :Form ;
+#  :exactMatch saogf:Minnesbevarande\%20verk .
+
+#:Debattinlägg a :Form ;
+#  :exactMatch saogf:Debattinl\%C3\%A4gg .
+
+#:RecordOrDeed a :Form ;
+#  :exactMatch saogf:Handlingar\%20\%28dokument\%29 .
+
+#:Examination a :Form ;
+#  :exactMatch saogf:Prov\%20och\%20examinationer .
+
+#:Lucköppningskalendrar a :Form ;
+#  :exactMatch saogf:Luck\%C3\%B6ppningskalendrar .
+
+#:PressAnnouncement a :Form ;
+#  :exactMatch saogf:Pressmeddelanden .
+
+#:MiniatureBook a :Form ;
+#  :exactMatch saogf:Miniatyrb\%C3\%B6cker .
+
+#:MechanicalBook a :Form ;
+#  :exactMatch saogf:Mekaniska\%20b\%C3\%B6cker .
+
+#:Pysselböcker a :Form ;
+#  :exactMatch saogf:Pysselb\%C3\%B6cker .
+
+#:Målarböcker a :Form ;
+#  :exactMatch saogf:Målarb\%C3\%B6cker .
+
+#:GuideBook a :Form ;
+#  :exactMatch saogf:Guideb\%C3\%B6cker .
+
+#:Samhällsinformation a :Form ;
+#  :exactMatch saogf:Samh\%C3\%A4llsinformation .
+
+#:Chronicle a :Form ;
+#  :exactMatch saogf:Annaler\%20och\%20kr\%C3\%B6nikor .
+
+#:RecreationalWork a :Form ;
+#  :exactMatch saogf:Tidsf\%C3\%B6rdriv .
+
+#:PopupBook a :Form ;
+#  :exactMatch saogf:Pop-up-b\%C3\%B6cker .
+
+#:Cookbook a :Form ;
+#  :exactMatch saogf:Kokb\%C3\%B6cker .
+
+#:Recept a :Form ;
+#  :exactMatch saogf:Recept .
+
+#:DiningMenu a :Form ;
+#  :exactMatch saogf:Matsedlar .
+
+#saogf:Dokument\%C3\%A4ra\%20serier a :GenreForm ;
+#  :prefLabel "Dokumentära serier" ;
+#  :broader saogf:Tecknade\%20serier .
+
+#t:RethoricalSpeech a :Form ;
+#  :exactMatch saogf:Tal\%20\%28retorik\%29 .
+
+#t:SourceMaterial a :Form ;
+#  :exactMatch saogf:K\%C3\%A4llmaterial ;
+#  :inCollection <informative-work> .
+
+#t:DiscursiveWork a :Form ;
+#  :closeMatch saogf:Verk\%20med\%20samtalsliknande\%20karakt\%C3\%A4r .
+
+#t:Interview a :Form ;
+#  owl:equivalentClass bibo:Interview ;
+#  :exactMatch saogf:Intervjuer .
+
+#t:Reportage a :Form ;
+#  owl:equivalentClass bibo:Report ;
+#  :exactMatch saogf:Reportage .
+
+#t:Survey a :Form ;
+#  :exactMatch saogf:Unders\%C3\%B6kningar ;
+#  :inCollection <informative-work> .
+
+#t:Correspondence a :Form ;
+#  :exactMatch saogf:Korrespondens .
+
+#t:Diary a :GenreForm ;
+#  rdfs:subClassOf kbv:Text ;
+#  :exactMatch saogf:Dagb\%C3\%B6cker .
+
+#t:Ballad a :GenreForm ;
+#  rdfs:subClassOf kbv:WorkHub ;
+#  :closeMatch saogf:Visor .
+
