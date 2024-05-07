@@ -28,9 +28,16 @@
 
 :language skos:notation "SPRÅK"^^:LibrisQueryCode . # See ./relations.ttl for full definition of :language
 
+:contributor skos:notation "MEDV"^^:LibrisQueryCode .
+
+:genreForm skos:notation "GENRE"^^:LibrisQueryCode .
+
+:subject skos:notation "ÄMNE"^^:LibrisQueryCode .
+
 :itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
     :category :shorthand, :pending ;
+    skos:notation "BIBL"^^:LibrisQueryCode ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 :instanceOfType a owl:ObjectProperty ;
