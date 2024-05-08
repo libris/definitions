@@ -21,18 +21,6 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 base <https://id.kb.se/term/div/>
 
-div:ephemera a :ConceptCollection ;
-  rdfs:seeAlso <https://en.wikipedia.org/wiki/Ephemera> ;
-  :exactMatch saogf:Efem\%C3\%A4rt\%20material ;
-  :prefLabel "Efemärt verk"@sv ,
-    "Efem\\%C3\\%A4rt\\%20material"@en .
-
-div:informative-work a :ConceptCollection ;
-  skos:relatedMatch <https://id.kb.se/term/fack> ;
-  :exactMatch saogf:Informativa\%20verk ;
-  :prefLabel "Informativt verk"@sv ,
-    "informative works"@en .
-
 kbv:Cartography a :Class ;
   rdfs:subClassOf s:Visual ;
   skos:editorialNote "TODO: restriction on Map for instanceOf; allValuesFrom this..."@en ;
@@ -75,7 +63,6 @@ kbv:NotatedMusic a :Class ;
 t:SerialPublication a :BasicType ;
   rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Seriella\%20publikationer ;
-  :inCollection div:informative-work ;
   :prefLabel "Seriell publikation"@sv ,
     "Serial Publication"@en .
 
@@ -209,15 +196,12 @@ t:CollectedWork a :BasicType ;
   rdfs:subClassOf t:CollectingResource ;
   skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, t:MultipartBook"@en ;
   :exactMatch saogf:Samlingsverk ;
-  :closeMatch bibo:CollectedDocument ;
-  :inCollection div:informative-work ;
   :prefLabel "Samlingsverk"@sv ,
     "Collected Work"@en .
 
 t:Database a :BasicType ;
   rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Databaser ;
-  :inCollection div:informative-work ;
   :prefLabel "Databas"@sv ,
     "Database"@en .
 
@@ -270,7 +254,6 @@ f:PuzzleOrGame a :Form ;
 f:Broschure a :Form ;
   rdfs:subClassOf t:NonBookText ;
   :exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
-  :inCollection div:ephemera ;
   :prefLabel "Broschyr"@sv ,
     "Broschure"@en .
 
@@ -278,7 +261,6 @@ f:Calendar a :Form ;
   rdfs:subClassOf g:ReferenceWork ,
     t:IllustratedWork ;
   :exactMatch saogf:Kalendrar ;
-  :inCollection div:ephemera ;
   :prefLabel "Kalender"@sv ,
     "Calendar"@en .
 
@@ -331,7 +313,6 @@ f:ControlledVocabulary a :Form ;
 f:Diagram a :Form ;
   rdfs:subClassOf t:IllustratedWork ;
   :exactMatch saogf:Diagram ;
-  :inCollection div:informative-work ;
   :prefLabel "Diagram"@sv ,
     "Diagram"@en .
 
@@ -345,8 +326,6 @@ f:FormDocument a :Form ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
   rdfs:subClassOf t:NonBookText ;
   :exactMatch saogf:Blanketter ;
-  :inCollection div:ephemera ,
-    div:informative-work ;
   :prefLabel "Blankett"@sv ,
     "Form Document"@en .
 
@@ -461,7 +440,6 @@ f:PictureDictionary a :Form ;
 f:Postcard a :Form ;
   rdfs:subClassOf t:IllustratedWork ;
   :exactMatch saogf:Vykort ;
-  :inCollection div:ephemera ;
   :prefLabel "Vykort"@sv ,
     "Postcard"@en .
 
@@ -469,16 +447,12 @@ f:Poster a :Form ;
   rdfs:subClassOf t:IllustratedWork ;
   owl:equivalentClass sdo:Poster ;
   :exactMatch saogf:Affischer ;
-  :inCollection div:ephemera ,
-    div:informative-work ;
   :prefLabel "Affisch"@sv ,
     "Poster"@en .
 
 f:PublicationProgramme a :Form ;
   rdfs:subClassOf t:NonBookText ;
   :exactMatch saogf:Program\%20\%28publikationer\%29 ;
-  :inCollection div:ephemera ,
-    div:informative-work ;
   :prefLabel "Programblad"@sv ,
     "Publication Programme"@en .
 
@@ -491,7 +465,6 @@ f:Puzzle a :Form ;
 f:Register a :Form ;
   rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:F\%C3\%B6rteckningar ;
-  :inCollection div:informative-work ;
   :prefLabel "Förteckning"@sv ,
     "Register"@en .
 
@@ -505,7 +478,6 @@ f:Review a :Form ;
   rdfs:subClassOf t:NonBookText ;
   owl:equivalentClass sdo:Review ;
   :exactMatch saogf:Recensioner ;
-  :inCollection div:informative-work ;
   :prefLabel "Recension"@sv ,
     "Review"@en .
 
