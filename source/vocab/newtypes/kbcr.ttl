@@ -1,0 +1,68 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix sdo: <https://schema.org/>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+
+prefix kbv: <https://id.kb.se/vocab/>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+
+prefix s: <https://id.kb.se/term/sensory/>
+prefix t: <https://id.kb.se/term/type/>
+prefix f: <https://id.kb.se/term/form/>
+prefix g: <https://id.kb.se/term/genre/>
+
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+kbv:Monograph a :Class ;
+  rdfs:subClassOf :Instance ;
+  ptg:abstract true .
+
+kbv:Volume a :Class ;
+  rdfs:subClassOf kbv:Monograph .
+
+kbv:PrintedVolume a :Class ;
+  rdfs:subClassOf kbv:Volume .
+
+kbv:PosterSheet a :Class ;
+  rdfs:subClassOf kbv:Monograph .
+
+kbv:BrailleResource a :Class ;
+  rdfs:subClassOf kbv:Monograph .
+
+kbv:BrailleVolume a :Class ;
+  rdfs:subClassOf kbv:BrailleResource ,
+    :Volume .
+
+kbv:DigitalResource a :Class ;
+  rdfs:subClassOf kbv:Monograph .
+
+#kbv:DigitalDocument a :Class ;
+#  rdfs:subClassOf kbv:DigitalResource .
+
+kbv:Electronic a :Class ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:Monograph .
+
+kbv:ChipCartridge a :Class ;
+  rdfs:subClassOf kbv:Electronic .
+
+kbv:SoundRecording a :Class ;
+  rdfs:subClassOf kbv:Electronic .
+
+kbv:AudioDisc a :Class ;
+  rdfs:subClassOf kbv:SoundRecording .
+
+kbv:AudioCassette a :Class ;
+  rdfs:subClassOf kbv:SoundRecording .
+
+kbv:VideoRecording a :Class ;
+  rdfs:subClassOf kbv:Electronic .
+
+kbv:VideoDisc a :Class ;
+  rdfs:subClassOf kbv:VideoRecording .
