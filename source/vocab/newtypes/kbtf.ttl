@@ -73,7 +73,7 @@ kbv:NotatedMusic a :Class ;
     "Notated Music"@en .
 
 t:SerialPublication a :BasicType ;
-  rdfs:subClassOf t:Collection ;
+  rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Seriella\%20publikationer ;
   :inCollection div:informative-work ;
   :prefLabel "Seriell publikation"@sv ,
@@ -94,7 +94,13 @@ t:NonBookText a :BasicType ;
   ptg:abstract true ;
   rdfs:subClassOf kbv:Text ;
   :prefLabel "Non-book text"@en ,
-    "Småtext"@sv .
+    "Enskild text"@sv .
+
+f:NonBookTextWithImages a :Form ;
+  rdfs:subClassOf t:NonBookText ,
+    t:IllustratedWork ;
+  :prefLabel "Enskild text med bilder"@sv ,
+    "Non-book With Images"@en .
 
 t:Issue a :BasicType ;
   rdfs:subClassOf t:NonBookText ;
@@ -102,12 +108,13 @@ t:Issue a :BasicType ;
   :prefLabel "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
-t:Series a :BasicType ;
-  rdfs:subClassOf t:Collection ;
+t:MonographicSeries a :BasicType ;
+  rdfs:subClassOf t:CollectingResource ;
   owl:equivalentClass bibo:Series ,
-    bf:Series ;
-  :prefLabel "Series"@en ,
-    "Serie"@sv .
+    bf:Series,
+    marc:MonographicSeries ;
+  :prefLabel "Monograph Series"@en ,
+    "Monografiserie"@sv .
 
 t:ObjectByPurpose a :BasicType ;
   :prefLabel "Intensional Object"@en ,
@@ -132,16 +139,25 @@ t:BookWithImages a :BasicType ;
   :prefLabel "Bok med bilder"@sv ,
     "Book With Images"@en .
 
+t:CollectingResource a :BasicType ;
+  ptg:abstract true ;
+  :prefLabel "Collecting Resource"@en ,
+    "Samlande resurs"@sv .
+
+t:MixedMaterial a :Class ;
+  rdfs:subClassOf t:CollectingResource ;
+  :prefLabel "Mixed Material"@en ,
+    "Blandat material"@sv .
+
+t:Kit a :Class ;
+  rdfs:subClassOf t:CollectingResource ;
+  :prefLabel "Kit"@en ,
+    "Kit"@sv .
+
 t:Collection a :Class ;
+  rdfs:subClassOf t:CollectingResource ;
   :prefLabel "Collection"@en ,
     "Samling"@sv .
-
-t:SoundBook a :BasicType ;
-  rdfs:subClassOf t:WrittenBook ,
-    s:Audio ,
-    s:MechanicalBook ;
-  :prefLabel "Bok med ljud"@sv ,
-    "Sound Book"@en .
 
 t:Periodical a :BasicType ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
@@ -170,7 +186,7 @@ s:Visual a :SensoryForm ;
     "Visuellt verk"@sv .
 
 t:Archive a :BasicType ;
-  rdfs:subClassOf t:Collection ;
+  rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Arkiv ;
   :prefLabel "Arkiv"@sv ,
     "Archive"@en .
@@ -189,23 +205,17 @@ t:Audiobook a :BasicType ;
   :prefLabel "Ljudbok"@sv ,
     "Audiobook"@en .
 
-t:CollectedBook a :BasicType ;
-  rdfs:subClassOf t:CollectedWork ,
-    t:Book ;
-  :broadMatch bibo:CollectedDocument ;
-  :prefLabel "Collected book"@en ,
-    "Samlad bok"@sv .
-
 t:CollectedWork a :BasicType ;
-  rdfs:subClassOf t:Collection ;
+  rdfs:subClassOf t:CollectingResource ;
   skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, t:MultipartBook"@en ;
   :exactMatch saogf:Samlingsverk ;
+  :closeMatch bibo:CollectedDocument ;
   :inCollection div:informative-work ;
   :prefLabel "Samlingsverk"@sv ,
     "Collected Work"@en .
 
 t:Database a :BasicType ;
-  rdfs:subClassOf t:Collection ;
+  rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Databaser ;
   :inCollection div:informative-work ;
   :prefLabel "Databas"@sv ,
@@ -294,7 +304,7 @@ f:ComicIssue a :Form ;
 f:ComicSeries a :Form ;
   rdfs:comment "TODO: series of issues vs. arc of stories?" ;
   rdfs:subClassOf f:Comic ,
-    t:Series ;
+    t:MonographicSeries ;
   owl:equivalentClass sdo:ComicSeries ;
   :prefLabel "Serietidningsserie"@sv ,
     "Comic Series"@en .
@@ -476,7 +486,7 @@ f:PublicationProgramme a :Form ;
   :exactMatch saogf:Program\%20\%28publikationer\%29 ;
   :inCollection div:ephemera ,
     div:informative-work ;
-  :prefLabel "Publikationsprogram"@sv ,
+  :prefLabel "Programblad"@sv ,
     "Publication Programme"@en .
 
 f:Puzzle a :Form ;
@@ -486,7 +496,7 @@ f:Puzzle a :Form ;
     "Puzzle"@en .
 
 f:Register a :Form ;
-  rdfs:subClassOf t:Collection ;
+  rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:F\%C3\%B6rteckningar ;
   :inCollection div:informative-work ;
   :prefLabel "Förteckning"@sv ,
@@ -547,7 +557,7 @@ f:TVProgram a :Form ;
 
 f:TVSeries a :Form ;
   rdfs:subClassOf f:TVProgram ,
-    t:Series ;
+    t:MonographicSeries ;
   :exactMatch saogf:Tv-serier ;
   :prefLabel "Tv-serie"@sv ,
     "TV-Series"@en .

@@ -165,10 +165,16 @@ g:RolePlayingGame a :Genre ;
     "Roleplaying Game"@en .
 
 g:SoundEffectBook a :Genre ;
-  rdfs:subClassOf t:SoundBook ;
+  rdfs:subClassOf f:MechanicalBook, s:Audio ;
   :exactMatch saogf:B\%C3\%B6cker\%20med\%20ljudeffekter ;
   :prefLabel "Bok med ljudeffekt"@sv ,
     "Sound-effect Book"@en .
+
+g:PopupBook a :Genre ;
+  rdfs:subClassOf t:BookWithImages ;
+  :exactMatch <saogf.Pop-up-b%C3%B6cker> ;
+  :prefLabel "Pop-up-bok"@sv ,
+    "Pop-up Book"@en .
 
 g:Standard a :Genre ;
   rdfs:subClassOf g:ReferenceWork ;
