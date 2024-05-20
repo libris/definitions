@@ -19,50 +19,360 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 prefix barngf: <https://id.kb.se/term/barngf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 
-kbv:Monograph a :Class ;
-  rdfs:subClassOf :Instance ;
-  ptg:abstract true .
 
-kbv:Volume a :Class ;
-  rdfs:subClassOf kbv:Monograph .
+#kbv:Instance a owl:Class ; ptg:abstract true .
+
+# TODO: RDA Issuance - mixin? are we crossing dimensions/aspects/modalities/purposes? Serial CD vs. 2 CDs...
+#kbv:SingleUnit a :AggregationType ;  # TODO: SingleUnit vs. Monograph as "purpose of instance"...
+#  rdfs:subClassOf kbv:Instance ;
+#  ptg:abstract true .
+#
+#kbv:MultipleUnits a :AggregationType ;
+#  rdfs:subClassOf kbv:Instance ;
+#  ptg:abstract true .
+
+
+# Unmediated
+
+kbv:Unmediated a :MediaType ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:Instance ;
+  :exactMatch kbrda:Unmediated .
+
+kbv:Print a owl:Class;
+  rdfs:subClassOf kbv:Unmediated .
+
+# TODO: Untenable: Printed vs. Handmade (Handwritten / Typewritten / Photocopied) ...
+kbv:Handmade a :Class; rdfs:subClassOf kbv:Unmediated .
+kbv:Handwritten a :Class; rdfs:subClassOf kbv:Handmade .
+kbv:Typewrittten a :Class; rdfs:subClassOf kbv:Handmade .
+kbv:Photocopied a :Class; rdfs:subClassOf kbv:Handmade ; :related marc:RegularPrintReproduction .
 
 kbv:PrintedVolume a :Class ;
-  rdfs:subClassOf kbv:Volume .
+  rdfs:subClassOf kbv:Print, kbv:Volume .
 
-kbv:PosterSheet a :Class ;
-  rdfs:subClassOf kbv:Monograph .
+kbv:HardcoverVolume a :Class;
+  rdfs:subClassOf kbv:PrintedVolume .
+
+kbv:PaperbackVolume a :Class;
+  rdfs:subClassOf kbv:PrintedVolume .
+
+kbv:HandmadeVolume a :Class ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:Volume, kbv:Handmade .
+
+
+kbv:Card a :CarrierType;
+  :exactMatch kbrda:Card ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:Flipchart a :CarrierType;
+  :exactMatch kbrda:Flipchart ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:Roll a :CarrierType;
+  :exactMatch kbrda:Roll ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:Sheet a :CarrierType;
+  :exactMatch kbrda:Sheet ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:PrintedSheet a :Class ;
+  rdfs:subClassOf kbv:Print, kbv:Sheet .
+
+kbv:HandmadeSheet a :Class ;
+  rdfs:subClassOf kbv:Handmade, kbv:Sheet .
+
+
+kbv:Volume a :CarrierType;
+  :exactMatch kbrda:Volume ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:Manuscript a owl:Class ;
+  rdfs:subClassOf :Handmade .
+
+
+kbv:PhysicalObject a owl:Class ;
+  :exactMatch kbrda:Object ;
+  rdfs:subClassOf kbv:Unmediated .
+
+# TODO: Every non-DigitalResource is actually physical ...
+#kbv:PhysicalGlobe a owl:Class ;
+#  rdfs:subClassOf kbv:PhysicalObject .
+
+
+kbv:Tactile a :Class ;
+  rdfs:subClassOf kbv:Unmediated .
 
 kbv:BrailleResource a :Class ;
-  rdfs:subClassOf kbv:Monograph .
+  :exactMatch marc:Braille ;
+  rdfs:subClassOf kbv:Tactile, kbv:Print .
 
 kbv:BrailleVolume a :Class ;
-  rdfs:subClassOf kbv:BrailleResource ,
-    :Volume .
+  rdfs:subClassOf kbv:BrailleResource, kbv:Volume .
 
-kbv:DigitalResource a :Class ;
-  rdfs:subClassOf kbv:Monograph .
 
-#kbv:DigitalDocument a :Class ;
-#  rdfs:subClassOf kbv:DigitalResource .
+# "Mediated"
 
-kbv:Electronic a :Class ;
+kbv:Electronic a owl:Class ;  # :MediaType ;
   ptg:abstract true ;
-  rdfs:subClassOf kbv:Monograph .
+  :exactMatch kbrda:Computer, marc:Electronic ;
+  rdfs:subClassOf kbv:Instance .
 
-kbv:ChipCartridge a :Class ;
+
+# TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
+kbv:StorageMedium a owl:Class ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:Instance .
+
+
+kbv:TapeCartridge a :Class ;
+  rdfs:subClassOf kbv:StorageMedium ;
+  ptg:abstract true ;
+  :exactMatch marc:TapeCartridge .
+
+kbv:TapeCassette a :Class ;
+  rdfs:subClassOf kbv:StorageMedium ;
+  ptg:abstract true ;
+  :exactMatch marc:TapeCassette .
+
+kbv:TapeReel a :Class ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:StorageMedium ;
+  :exactMatch marc:TapeReel .
+
+kbv:MagneticDisk a :CarrierType ;
+  :exactMatch marc:MagneticDisk ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:MagnetoOpticalDisc a :CarrierType ;
+  :exactMatch marc:MagnetoOpticalDisc ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:OpticalReel a :Class ;
+  ptg:abstract true ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:OpticalDisc a :CarrierType ;
+  :exactMatch marc:OpticalDisc ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:ElectronicStorageMedium a :Class ;
+  ptg:abstract true ;
+  :exactMatch marc:DirectElectronic ;
+  rdfs:subClassOf kbv:Electronic, kbv:StorageMedium .
+
+
+kbv:DigitalResource a :CarrierType ;
+  :broadMatch marc:Remote ;
+  :exactMatch marc:Online, kbrda:OnlineResource ;
   rdfs:subClassOf kbv:Electronic .
 
-kbv:SoundRecording a :Class ;
-  rdfs:subClassOf kbv:Electronic .
+kbv:ChipCartridge a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium ;
+  :exactMatch kbrda:ComputerChipCartridge, marc:ChipCartridge .
 
-kbv:AudioDisc a :Class ;
+kbv:ComputerCard a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium ;
+  :exactMatch kbrda:ComputerCard, marc:ComputerCard .
+
+kbv:ComputerDisc a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium ;
+  :broadMatch marc:MagneticDisk ;
+  :exactMatch kbrda:ComputerDisc, marc:ComputerDisc .
+
+kbv:ComputerDiscCartridge a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium ;
+  :exactMatch kbrda:ComputerDiscCartridge, marc:ComputerDiscCartridge ;
+  :narrowMatch marc:ComputerOpticalDiscCartridge .
+
+kbv:ComputerTapeCartridge a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium , kbv:TapeCartridge  ;
+  :exactMatch kbrda:ComputerTapeCartridge .
+
+kbv:ComputerTapeCassette a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium, kbv:TapeCassette ;
+  :exactMatch kbrda:ComputerTapeCassette .
+
+kbv:ComputerTapeReel a :CarrierType ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium, kbv:TapeReel ;
+  :exactMatch kbrda:ComputerTapeReel .
+
+
+kbv:StandaloneDevice a :CarrierType ;
+  :exactMatch marc:StandaloneDevice ;
+  rdfs:subClassOf kbv:ElectronicStorageMedium, kbv:PhysicalObject .
+
+
+# TODO: Is the content-as-media-type a "rebus" and enough if on the work?
+
+kbv:SoundRecording a :MediaType ;
+  ptg:abstract true ;
+  :exactMatch kbrda:Audio ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:AudioDisc a :CarrierType ;
+  rdfs:subClassOf kbv:SoundRecording ;
+  :exactMatch kbrda:AudioDisc .
+
+kbv:AudioCassette a :CarrierType ;
+  rdfs:subClassOf kbv:SoundRecording, kbv:TapeCassette ;
+  :exactMatch kbrda:Audiocassette .
+
+kbv:AudioCartridge a :CarrierType ;
+  :exactMatch kbrda:AudioCartridge ;
   rdfs:subClassOf kbv:SoundRecording .
 
-kbv:AudioCassette a :Class ;
+kbv:AudioCylinder a :CarrierType ;
+  :exactMatch kbrda:AudioCylinder ;
   rdfs:subClassOf kbv:SoundRecording .
 
-kbv:VideoRecording a :Class ;
-  rdfs:subClassOf kbv:Electronic .
+kbv:AudioRoll a :CarrierType ;
+  :exactMatch kbrda:AudioRoll;
+  rdfs:subClassOf kbv:SoundRecording .
 
-kbv:VideoDisc a :Class ;
+kbv:AudioTapeReel a :CarrierType ;
+  :exactMatch kbrda:AudiotapeReel;
+  rdfs:subClassOf kbv:SoundRecording, kbv:TapeReel .
+
+kbv:SoundTrackReel a :CarrierType ;
+  :exactMatch kbrda:SoundTrackReel;
+  rdfs:subClassOf kbv:SoundRecording .
+
+
+kbv:VideoRecording a :MediaType ;
+  ptg:abstract true ;
+  # TODO: deprecated baseclass kbv:MovingImageInstance ?
+  :broadMatch kbv:MovingImage ;
+  :exactMatch kbrda:Video ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:VideoDisc a :CarrierType ;
+  :exactMatch kbrda:Videodisc ;
   rdfs:subClassOf kbv:VideoRecording .
+
+kbv:VideoCartridge a :CarrierType ;
+  :exactMatch kbrda:VideoCartridge ;
+  rdfs:subClassOf kbv:VideoRecording .
+
+kbv:VideoCassette a :CarrierType ;
+  :exactMatch kbrda:Videocassette ;
+  rdfs:subClassOf kbv:VideoRecording, kbv:TapeCassette .
+
+kbv:VideoTapeReel a :CarrierType ;
+  :exactMatch kbrda:VideotapeReel ;
+  rdfs:subClassOf kbv:VideoRecording, kbv:TapeReel .
+
+
+kbv:Microform a :MediaType ;
+  ptg:abstract true ;
+  :exactMatch kbrda:Microform;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:Microfilm a :CarrierType ;
+  ptg:abstract true ;
+  :exactMatch marc:Microfilm ;
+  rdfs:subClassOf kbv:Microform .
+
+kbv:ApertureCard a :CarrierType ;
+  :exactMatch kbrda:ApertureCard ;
+  rdfs:subClassOf kbv:Microform .
+
+kbv:Microfiche a :CarrierType ;
+  :exactMatch kbrda:Microfiche ;
+  rdfs:subClassOf kbv:Microform, marc:Microfiche .
+
+kbv:MicroficheCassette a :CarrierType ;
+  :exactMatch kbrda:MicroficheCassette ;
+  rdfs:subClassOf kbv:Microform .
+
+kbv:MicrofilmCartridge a :CarrierType ;
+  :exactMatch kbrda:MicrofilmCartridge ;
+  rdfs:subClassOf kbv:Microfilm .
+
+kbv:MicrofilmCassette a :CarrierType ;
+  :exactMatch kbrda:MicrofilmCassette ;
+  rdfs:subClassOf kbv:Microfilm .
+
+kbv:MicrofilmReel a :CarrierType ;
+  :exactMatch kbrda:MicrofilmReel ;
+  rdfs:subClassOf kbv:Microfilm .
+
+kbv:MicrofilmRoll a :CarrierType ;
+  :exactMatch kbrda:MicrofilmRoll ;
+  rdfs:subClassOf kbv:Microfilm, kbv:VideoRecording .
+
+kbv:MicrofilmSlip a :CarrierType ;
+  :exactMatch kbrda:MicrofilmSlip ;
+  rdfs:subClassOf kbv:Microform .
+
+kbv:Microopaque a :CarrierType ;
+  :exactMatch kbrda:Microopaque ;
+  rdfs:subClassOf kbv:Microform, marc:Microopaque .
+
+
+kbv:Microscopic a :MediaType ;
+  ptg:abstract true ;
+  :exactMatch kbrda:Microscopic;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:MicroscopeSlide a :CarrierType ;
+  :exactMatch kbrda:MicroscopeSlide ;
+  rdfs:subClassOf kbv:Microscopic .
+
+
+kbv:Projected a :MediaType ;
+  ptg:abstract true ;
+  :exactMatch kbrda:Projected;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:FilmCartridge a :CarrierType ;
+  :exactMatch kbrda:FilmCartridge ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:FilmCassette a :CarrierType ;
+  :exactMatch kbrda:FilmCassette ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:FilmReel a :CarrierType ;
+  :exactMatch kbrda:FilmReel ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:FilmRoll a :CarrierType ;
+  :exactMatch kbrda:FilmRoll ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:Filmslip a :CarrierType ;
+  :exactMatch kbrda:Filmslip ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:Filmstrip a :CarrierType ;
+  :exactMatch kbrda:Filmstrip ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:FilmstripCartridge a :CarrierType ;
+  :exactMatch kbrda:FilmstripCartridge ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:OverheadTransparency a :CarrierType ;
+  :exactMatch kbrda:OverheadTransparency ;
+  rdfs:subClassOf kbv:Projected .
+
+kbv:Slide a :CarrierType ;
+  :exactMatch kbrda:Slide ;
+  rdfs:subClassOf kbv:Projected .
+
+
+kbv:Stereographic a :MediaType ;
+  ptg:abstract true ;
+  :exactMatch kbrda:Stereographic ;
+  rdfs:subClassOf kbv:StorageMedium .
+
+kbv:StereographCard a :CarrierType ;
+  :exactMatch kbrda:StereographCard;
+  rdfs:subClassOf kbv:Stereographic .
+
+kbv:StereographDisc a :CarrierType ;
+  :exactMatch kbrda:StereographDisc;
+  rdfs:subClassOf kbv:Stereographic .
