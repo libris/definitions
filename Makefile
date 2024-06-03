@@ -10,7 +10,9 @@ source/sab.ttl: scripts/extract_sab_data_from_docx.py cache/esab-2015_1.docx
 	# TODO 2: In XL, add precomposed usages (extract from usage in records)? See:
 	# ../librisxl/marc_export/src/main/resources/se/kb/libris/export/sabrub.txt # precomposed
 
-cache/geocore.ttl: source/geo/construct-geocore.rq
-	scripts/rq.sh https://query.wikidata.org/sparql $^ | scripts/fmt.sh > $@
-	#scripts/construct.py source/geo/modify-geocore.rq cache/wd-geocore.ttl  > $@
+cache/geocore.ttl: cache/remote-geocore.ttl
+	cat $^ | scripts/fmt.sh > $@
+	#scripts/construct.py source/geo/modify-geocore.rq $^ > $@
 
+cache/remote-geocore.ttl: source/geo/construct-geocore.rq
+	scripts/rq.sh https://query.wikidata.org/sparql $^ > $@
