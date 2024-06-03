@@ -19,6 +19,7 @@ CONSTRUCT {
         :code ?swedishMunicipalityCode ;
         :geo ?geo ;
         :locatedIn ?locatedIn ;
+        :principalPlace ?capital ;
         :country <https://id.kb.se/country/sw> ;
         :startDate ?foundingDate ;
         :image ?image .
@@ -33,14 +34,13 @@ CONSTRUCT {
     ?wdplace a|wdt:P31 ?type ;
         wdt:P17 wd:Q34 .  # :country Sweden
 
-    FILTER EXISTS { ?type wdt:P279* wd:Q914262 } # administrative territorial entity of Sweden
-    #FILTER EXISTS {
-    #    {
-    #        ?type wdt:P279* wd:Q914262 # administrative territorial entity of Sweden
-    #    } UNION {
-    #        ?wdplace wdt:P1376 [] .  # :capital :label "centralort"@sv
-    #    }
-    #}
+    FILTER EXISTS {
+      {
+        ?type wdt:P279* wd:Q914262  # administrative territorial entity of Sweden
+      } UNION {
+        ?type wdt:P279* wd:Q12813115  # urban area of Sweden
+      }
+    }
 
     ?wdplace rdfs:label ?label .
 
@@ -71,6 +71,12 @@ CONSTRUCT {
       FILTER NOT EXISTS { ?qualifiedP525 pq:P582 ?endDate }
       BIND(IRI(CONCAT(STR(<municipality/>), ENCODE_FOR_URI(?swedishMunicipalityCode))) AS ?dsId)
       BIND(?wdplace AS ?sameAs)
+    }
+
+    OPTIONAL {
+      ?wdplace wdt:P36 ?capital .
+      # :capital :label "centralort"@sv
+      # (Cf. wdt:P1376 == huvudstad.)
     }
 
     BIND(IF(?wdLocatedIn = wd:Q34, idkbse:country\/sw, ?wdLocatedIn) AS ?locatedIn)

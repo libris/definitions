@@ -46,6 +46,9 @@ cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
 	sed -i '/^60411.*\tBytt benämning\t/ s/Bytt benämning/Ny kod, Bytt benämning/' "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv"
 	cp "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv" $@
 
-cache/geocore.ttl: source/geo/construct-geocore.rq
-	scripts/rq.sh https://query.wikidata.org/sparql $^ | scripts/fmt.sh > $@
-	#scripts/construct.py source/geo/modify-geocore.rq cache/wd-geocore.ttl  > $@
+cache/geocore.ttl: cache/remote-geocore.ttl
+	cat $^ | scripts/fmt.sh > $@
+	#scripts/construct.py source/geo/modify-geocore.rq $^ > $@
+
+cache/remote-geocore.ttl: source/geo/construct-geocore.rq
+	scripts/rq.sh https://query.wikidata.org/sparql $^ > $@

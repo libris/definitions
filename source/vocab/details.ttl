@@ -1558,8 +1558,14 @@
 :EarthGlobeCoordinates a owl:Class ;
     rdfs:label "Earth globe coordinates"@en, "jordglobskoordinater"@sv;
     rdfs:subClassOf :GlobeCoordinates, [ a owl:Restriction;
-    owl:onProperty wikibase:geoGlobe ;
-    owl:hasValue <http://www.wikidata.org/entity/Q2> ] .
+        owl:onProperty wikibase:geoGlobe ;
+        owl:hasValue <http://www.wikidata.org/entity/Q2> ] .
+
+:principalPlace a owl:ObjectProperty;
+    rdfs:label "Principal place"@en, "Centralort"@sv;
+    rdfs:domain :Place;
+    rdfs:range :Place .
+    #owl:equivalentProperty wdt:P36 .
 
 :geographicCoverage a owl:ObjectProperty;
     rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
