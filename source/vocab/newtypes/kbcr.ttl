@@ -21,6 +21,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 
 #kbv:Instance a owl:Class ; ptg:abstract true .
+# NOTE: En del Instanser/bärarformer är mångfaldigbara (såsom Tryckt), en del är (i regel?) unika (såsom Canvas)?
 
 # TODO: RDA Issuance - mixin? are we crossing dimensions/aspects/modalities/purposes? Serial CD vs. 2 CDs...
 #kbv:SingleUnit a :AggregationType ;  # TODO: SingleUnit vs. Monograph as "purpose of instance"...
@@ -29,8 +30,14 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 #
 #kbv:MultipleUnits a :AggregationType ;
 #  rdfs:subClassOf kbv:Instance ;
+#  :closeMatch marc:MixedForms ;
+#  :narrowMatch marc:MonographicSeries ;
 #  ptg:abstract true .
 
+# TODO: For export-to-bf+rda or revert-to-marc; use type-like properties to
+# "bases" derived from exactMatch or broadMatch. For instance types, that
+# mostly means :carrierType (unless some enum types are kept as subclasses of
+# :GenreForm).
 
 # Unmediated
 
@@ -43,10 +50,22 @@ kbv:Print a owl:Class;
   rdfs:subClassOf kbv:Unmediated .
 
 # TODO: Untenable: Printed vs. Handmade (Handwritten / Typewritten / Photocopied) ...
-kbv:Handmade a :Class; rdfs:subClassOf kbv:Unmediated .
-kbv:Handwritten a :Class; rdfs:subClassOf kbv:Handmade .
-kbv:Typewrittten a :Class; rdfs:subClassOf kbv:Handmade .
-kbv:Photocopied a :Class; rdfs:subClassOf kbv:Handmade ; :related marc:RegularPrintReproduction .
+kbv:Handwritten a :Class; rdfs:subClassOf kbv:Unmediated .
+kbv:Typewrittten a :Class; rdfs:subClassOf kbv:Unmediated .
+
+# mer extraordinärt? Sitter på exemplar?
+#kbv:Photocopied a :Class; rdfs:subClassOf kbv:Unmediated ; :related marc:RegularPrintReproduction .
+
+kbv:Volume a :CarrierType;
+  #ptg:abstract true ;
+  :exactMatch kbrda:Volume ;
+  rdfs:subClassOf kbv:Unmediated .
+
+kbv:MassProducedVolume a :Class ;
+  rdfs:subClassOf kbv:MassProduced, kbv:Volume .
+
+kbv:RareVolume a :Class ;
+  rdfs:subClassOf kbv:Rare, kbv:Volume .
 
 kbv:PrintedVolume a :Class ;
   rdfs:subClassOf kbv:Print, kbv:Volume .
@@ -57,9 +76,9 @@ kbv:HardcoverVolume a :Class;
 kbv:PaperbackVolume a :Class;
   rdfs:subClassOf kbv:PrintedVolume .
 
-kbv:HandmadeVolume a :Class ;
-  ptg:abstract true ;
-  rdfs:subClassOf kbv:Volume, kbv:Handmade .
+
+kbv:Manuscript a owl:Class ;  # TODO: changed to Work in BF
+  rdfs:subClassOf :Unmediated .
 
 
 kbv:Card a :CarrierType;
@@ -81,25 +100,14 @@ kbv:Sheet a :CarrierType;
 kbv:PrintedSheet a :Class ;
   rdfs:subClassOf kbv:Print, kbv:Sheet .
 
-kbv:HandmadeSheet a :Class ;
-  rdfs:subClassOf kbv:Handmade, kbv:Sheet .
+kbv:NonPrintedSheet a :Class ;
+  rdfs:subClassOf kbv:Unmediated, kbv:Sheet .
 
 
-kbv:Volume a :CarrierType;
-  :exactMatch kbrda:Volume ;
-  rdfs:subClassOf kbv:Unmediated .
-
-kbv:Manuscript a owl:Class ;
-  rdfs:subClassOf :Handmade .
-
-
+# TODO: Every non-DigitalResource is physical of course; this is for "none of the others; actual purposeful 3d object"...
 kbv:PhysicalObject a owl:Class ;
   :exactMatch kbrda:Object ;
   rdfs:subClassOf kbv:Unmediated .
-
-# TODO: Every non-DigitalResource is actually physical ...
-#kbv:PhysicalGlobe a owl:Class ;
-#  rdfs:subClassOf kbv:PhysicalObject .
 
 
 kbv:Tactile a :Class ;
@@ -110,8 +118,12 @@ kbv:BrailleResource a :Class ;
   rdfs:subClassOf kbv:Tactile, kbv:Print .
 
 kbv:BrailleVolume a :Class ;
-  rdfs:subClassOf kbv:BrailleResource, kbv:Volume .
-
+  rdfs:subClassOf kbv:BrailleResource, kbv:Volume , [ a owl:Restriction ;
+      owl:onProperty kbv:instanceOf ;
+      owl:allValuesFrom t:TactileBook
+    ] ;
+  :exactMatch saogf:Punktskriftsb\%C3\%B6cker .
+#  :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
 
 # "Mediated"
 
@@ -166,7 +178,7 @@ kbv:ElectronicStorageMedium a :Class ;
 
 kbv:DigitalResource a :CarrierType ;
   :broadMatch marc:Remote ;
-  :exactMatch marc:Online, kbrda:OnlineResource ;
+  :exactMatch marc:Online, marc:OnlineResource, kbrda:OnlineResource ;
   rdfs:subClassOf kbv:Electronic .
 
 kbv:ChipCartridge a :CarrierType ;
@@ -205,65 +217,72 @@ kbv:StandaloneDevice a :CarrierType ;
   rdfs:subClassOf kbv:ElectronicStorageMedium, kbv:PhysicalObject .
 
 
-# TODO: Is the content-as-media-type a "rebus" and enough if on the work?
+# TODO: Is the content-as-media-type a "rebus" and enough if content is on the work? Or is the *unit for device capable of sound* encoded here (so "mode of provisioning", not the "purpose of provisioning")?
 
-kbv:SoundRecording a :MediaType ;
+kbv:SoundStorageMedium a :MediaType ;
+  owl:sameAs kbv:SoundRecording ;
   ptg:abstract true ;
   :exactMatch kbrda:Audio ;
   rdfs:subClassOf kbv:StorageMedium .
 
 kbv:AudioDisc a :CarrierType ;
-  rdfs:subClassOf kbv:SoundRecording ;
-  :exactMatch kbrda:AudioDisc .
+  rdfs:subClassOf kbv:SoundStorageMedium ;
+  :exactMatch kbrda:AudioDisc , marc:SoundDisc .
 
 kbv:AudioCassette a :CarrierType ;
-  rdfs:subClassOf kbv:SoundRecording, kbv:TapeCassette ;
-  :exactMatch kbrda:Audiocassette .
+  rdfs:subClassOf kbv:SoundStorageMedium, kbv:TapeCassette ;
+  :exactMatch kbrda:Audiocassette , marc:SoundCassette .
 
 kbv:AudioCartridge a :CarrierType ;
-  :exactMatch kbrda:AudioCartridge ;
-  rdfs:subClassOf kbv:SoundRecording .
+  :exactMatch kbrda:AudioCartridge , marc:SoundCartridge ;
+  rdfs:subClassOf kbv:SoundStorageMedium .
 
 kbv:AudioCylinder a :CarrierType ;
-  :exactMatch kbrda:AudioCylinder ;
-  rdfs:subClassOf kbv:SoundRecording .
+  :exactMatch kbrda:AudioCylinder, marc:Cylinder ;
+  rdfs:subClassOf kbv:SoundStorageMedium .
 
 kbv:AudioRoll a :CarrierType ;
-  :exactMatch kbrda:AudioRoll;
-  rdfs:subClassOf kbv:SoundRecording .
+  :exactMatch kbrda:AudioRoll , marc:Roll ;
+  rdfs:subClassOf kbv:SoundStorageMedium .
 
 kbv:AudioTapeReel a :CarrierType ;
   :exactMatch kbrda:AudiotapeReel;
-  rdfs:subClassOf kbv:SoundRecording, kbv:TapeReel .
+  rdfs:subClassOf kbv:SoundStorageMedium , kbv:TapeReel , marc:SoundTapeReel .
+
+# Zero uses in Libris...
+kbv:AudioWireRecording a :CarrierType ;
+  :exactMatch marc:WireRecording .
 
 kbv:SoundTrackReel a :CarrierType ;
-  :exactMatch kbrda:SoundTrackReel;
-  rdfs:subClassOf kbv:SoundRecording .
+  :exactMatch kbrda:SoundTrackReel, marc:SoundTrackFilm;
+  rdfs:subClassOf kbv:SoundStorageMedium .
 
 
-kbv:VideoRecording a :MediaType ;
+kbv:VideoStorageMedium a :MediaType ;
+  owl:sameAs kbv:VideoRecording ;
   ptg:abstract true ;
   # TODO: deprecated baseclass kbv:MovingImageInstance ?
-  :broadMatch kbv:MovingImage ;
   :exactMatch kbrda:Video ;
   rdfs:subClassOf kbv:StorageMedium .
 
 kbv:VideoDisc a :CarrierType ;
-  :exactMatch kbrda:Videodisc ;
-  rdfs:subClassOf kbv:VideoRecording .
+  :exactMatch kbrda:Videodisc, marc:Videodisc ;
+  rdfs:subClassOf kbv:VideoStorageMedium .
 
 kbv:VideoCartridge a :CarrierType ;
-  :exactMatch kbrda:VideoCartridge ;
-  rdfs:subClassOf kbv:VideoRecording .
+  :exactMatch kbrda:VideoCartridge, marc:Videocartridge ;
+  rdfs:subClassOf kbv:VideoStorageMedium .
 
 kbv:VideoCassette a :CarrierType ;
-  :exactMatch kbrda:Videocassette ;
-  rdfs:subClassOf kbv:VideoRecording, kbv:TapeCassette .
+  :exactMatch kbrda:Videocassette, marc:Videocassette ;
+  rdfs:subClassOf kbv:VideoStorageMedium, kbv:TapeCassette .
 
 kbv:VideoTapeReel a :CarrierType ;
-  :exactMatch kbrda:VideotapeReel ;
-  rdfs:subClassOf kbv:VideoRecording, kbv:TapeReel .
+  :exactMatch kbrda:VideotapeReel , marc:Videoreel ;
+  rdfs:subClassOf kbv:VideoStorageMedium, kbv:TapeReel .
 
+
+# TODO: restricted to some content forms (Visual, TextAsVisual...)
 
 kbv:Microform a :MediaType ;
   ptg:abstract true ;
@@ -276,7 +295,7 @@ kbv:Microfilm a :CarrierType ;
   rdfs:subClassOf kbv:Microform .
 
 kbv:ApertureCard a :CarrierType ;
-  :exactMatch kbrda:ApertureCard ;
+  :exactMatch kbrda:ApertureCard, marc:ApertureCard ;
   rdfs:subClassOf kbv:Microform .
 
 kbv:Microfiche a :CarrierType ;
@@ -284,27 +303,27 @@ kbv:Microfiche a :CarrierType ;
   rdfs:subClassOf kbv:Microform, marc:Microfiche .
 
 kbv:MicroficheCassette a :CarrierType ;
-  :exactMatch kbrda:MicroficheCassette ;
+  :exactMatch kbrda:MicroficheCassette, marc:MicroficheCassette ;
   rdfs:subClassOf kbv:Microform .
 
 kbv:MicrofilmCartridge a :CarrierType ;
-  :exactMatch kbrda:MicrofilmCartridge ;
+  :exactMatch kbrda:MicrofilmCartridge, marc:MicrofilmCartridge ;
   rdfs:subClassOf kbv:Microfilm .
 
 kbv:MicrofilmCassette a :CarrierType ;
-  :exactMatch kbrda:MicrofilmCassette ;
+  :exactMatch kbrda:MicrofilmCassette, marc:MicrofilmCassette ;
   rdfs:subClassOf kbv:Microfilm .
 
 kbv:MicrofilmReel a :CarrierType ;
-  :exactMatch kbrda:MicrofilmReel ;
+  :exactMatch kbrda:MicrofilmReel, marc:MicrofilmReel ;
   rdfs:subClassOf kbv:Microfilm .
 
 kbv:MicrofilmRoll a :CarrierType ;
-  :exactMatch kbrda:MicrofilmRoll ;
-  rdfs:subClassOf kbv:Microfilm, kbv:VideoRecording .
+  :exactMatch kbrda:MicrofilmRoll, marc:MicrofilmRoll ;
+  rdfs:subClassOf kbv:Microfilm, kbv:VideoStorageMedium .
 
 kbv:MicrofilmSlip a :CarrierType ;
-  :exactMatch kbrda:MicrofilmSlip ;
+  :exactMatch kbrda:MicrofilmSlip, marc:MicrofilmSlip ;
   rdfs:subClassOf kbv:Microform .
 
 kbv:Microopaque a :CarrierType ;
@@ -344,23 +363,25 @@ kbv:FilmRoll a :CarrierType ;
   rdfs:subClassOf kbv:Projected .
 
 kbv:Filmslip a :CarrierType ;
-  :exactMatch kbrda:Filmslip ;
+  :exactMatch kbrda:Filmslip, marc:Filmslip ;
   rdfs:subClassOf kbv:Projected .
 
+# TODO: Ensure difference between StillImage Projected and MovingImage Projected!
+# See e.g. <>
 kbv:Filmstrip a :CarrierType ;
-  :exactMatch kbrda:Filmstrip ;
+  :exactMatch kbrda:Filmstrip, marc:FilmstripRoll ;
   rdfs:subClassOf kbv:Projected .
 
 kbv:FilmstripCartridge a :CarrierType ;
-  :exactMatch kbrda:FilmstripCartridge ;
+  :exactMatch kbrda:FilmstripCartridge, marc:FilmstripCartridge ;
   rdfs:subClassOf kbv:Projected .
 
 kbv:OverheadTransparency a :CarrierType ;
-  :exactMatch kbrda:OverheadTransparency ;
+  :exactMatch kbrda:OverheadTransparency, marc:Transparency ;
   rdfs:subClassOf kbv:Projected .
 
 kbv:Slide a :CarrierType ;
-  :exactMatch kbrda:Slide ;
+  :exactMatch kbrda:Slide, marc:Slide ;
   rdfs:subClassOf kbv:Projected .
 
 
@@ -376,3 +397,14 @@ kbv:StereographCard a :CarrierType ;
 kbv:StereographDisc a :CarrierType ;
   :exactMatch kbrda:StereographDisc;
   rdfs:subClassOf kbv:Stereographic .
+
+
+## TODO: *when needed* for marc - map patterns to/from <enum-digest-start230304.trig> to some of these types...
+
+# TODO: ensure all of these (LHS) can be mapped to one specific type:
+# Then these deine a MARC rebus for its restriction on instanceOf (RHS):
+# kbv:StillImageInstance kbv:instanceOf kbv:StillImage .
+# kbv:MovingImageInstance kbv:instanceOf kbv:MovingImage .
+# kbv:ProjectedImageInstance kbv:instanceOf kbv:ProjectedImage .
+# kbv:NotatedMusicInstance kbv:instanceOf kbv:NotatedMusic .
+# kbv:KitInstance kbv:instanceOf kbv:Kit .
