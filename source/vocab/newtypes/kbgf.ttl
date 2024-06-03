@@ -25,6 +25,8 @@ base <https://id.kb.se/term/div/>
 # - it is not enough to determine under which BasicType or Form it belongs (it is a base);
 # - *or* it represents a combination of BasicType or Form and a Genre (it adds a nuance).
 
+# TODO: replace subClassOf with broader and equivalentClass with broadMatch
+
 g:AbstractSummary a :Genre ;
   rdfs:subClassOf t:NonBookText ;
   :exactMatch saogf:Sammanfattningar ;
@@ -42,6 +44,14 @@ g:Blog a :Genre ;
   :prefLabel "Blogg"@sv ,
     "Blog"@en .
 
+f:CollectedWork a :Genre ;  # :GenreForm
+  rdfs:subClassOf t:CollectingResource ;
+  skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, t:MultipartBook"@en ;
+  :exactMatch saogf:Samlingsverk ;
+  :closeMatch bibo:CollectedDocument ;
+  :prefLabel "Samlingsverk"@sv ,
+    "Collected Work"@en .
+
 g:ConferenceMaterial a :Genre ;
   rdfs:subClassOf t:NonBookText ;
   :exactMatch saogf:Konferensmaterial ;
@@ -50,12 +60,30 @@ g:ConferenceMaterial a :Genre ;
   :prefLabel "Konferensmaterial"@sv ,
     "Conference Material"@en .
 
+f:ControlledVocabulary a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Kontrollerade\%20vokabul\%C3\%A4rer ;
+  :prefLabel "Kontrollerad vokabulär"@sv ,
+    "Controlled Vocabulary"@en .
+
 g:CourseMaterial a :Genre ;
   rdfs:subClassOf g:TeachingMaterial ;
   :exactMatch saogf:Kursmaterial ;
   :inCollection div:ephemera ;
   :prefLabel "Kursmaterial"@sv ,
     "Course Material"@en .
+
+g:Encyclopedia a :Genre ;
+  rdfs:subClassOf g:ReferenceWork, t:Book ;
+  :exactMatch saogf:Encyklopedier ;
+  :prefLabel "Encyklopedia"@sv ,
+    "Encyclopedia"@en .
+
+g:Lexicon a :Genre ;
+  rdfs:subClassOf g:ReferenceWork, t:Book ;
+  :exactMatch saogf:Lexikon ;
+  :prefLabel "Lexikon"@sv ,
+    "Lexicon"@en .
 
 g:TeachingMaterial a :Genre ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
@@ -75,10 +103,47 @@ g:GraphicLiterature a :Genre ;
     "Graphic Literature"@en .
 
 g:HandSignedCommunication a :Genre ;
-  rdfs:subClassOf s:Visual, kbv:Text ;
+  :broadMatch kbv:Visual, kbv:Text ;
   :exactMatch saogf:TAKK ;
   :prefLabel "TAKK"@sv ,
     "Hand-signed Communication"@en .
+
+g:GraphicNovel a :Genre ;
+  rdfs:subClassOf g:Novel ,
+    t:BookWithImages ,
+    g:GraphicLiterature ;
+  :exactMatch saogf:Serieromaner ;
+  :prefLabel "Serieroman"@sv ,
+    "Graphic Novel"@en .
+
+g:ComicStory a :Genre ;
+  rdfs:subClassOf f:Comic, t:NonBookText ;
+  owl:equivalentClass sdo:ComicStory ;
+  :narrowMatch saogf:Serienoveller ;
+  :prefLabel "Serienovell"@sv ,
+    "Comic Story"@en .
+
+g:Photoseries a :Genre ;
+  rdfs:subClassOf g:GraphicLiterature ;
+  skos:editorialNote "TODO: this is an issue? (foto-serietidning)? Not a Collection?"@en ;
+  :exactMatch saogf:Fotoserier ;
+  :prefLabel "Fotoserie"@sv ,
+    "Photoseries"@en .
+
+g:Novel a :Genre ;
+  :broader g:Literature ;
+  :broadMatch t:Book ;
+  :exactMatch saogf:Romaner ;
+  :prefLabel "Roman"@sv ,
+    "Novel"@en .
+
+g:ShortStory a :Genre ;
+  rdfs:subClassOf t:NonBookText ,
+    g:Literature ;
+  owl:equivalentClass sdo:ShortStory ;
+  :exactMatch saogf:Noveller ;
+  :prefLabel "Novell"@sv ,
+    "Short Story"@en .
 
 g:Literature a :Genre ;
   rdfs:subClassOf kbv:Text ;
@@ -119,6 +184,12 @@ g:MusicRadioProgram a :Genre ;
   :prefLabel "Musikradioprogram"@sv ,
     "Music Radio Program"@en .
 
+g:MusicRecording a :Genre ;
+  rdfs:subClassOf kbv:Music ;
+  :exactMatch saogf:Musikinspelningar ;
+  :prefLabel "Musikrinspelning"@sv ,
+    "Music Recording"@en .
+
 g:NewsLetter a :Genre ;
   rdfs:subClassOf t:SerialPublication ;
   :exactMatch saogf:Nyhetsbrev ;
@@ -149,6 +220,12 @@ g:Podcast a :Genre ;
   rdfs:subClassOf f:AudioProgram ;
   :prefLabel "Podcast"@sv ,
     "Podcast"@en .
+
+g:PublicationProgramme a :Genre ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Program\%20\%28publikationer\%29 ;
+  :prefLabel "Programblad"@sv ,
+    "Publication Programme"@en .
 
 g:RadioProgram a :Genre ;
   rdfs:subClassOf f:AudioProgram ;
@@ -183,6 +260,19 @@ g:PopupBook a :Genre ;
   :prefLabel "Pop-up-bok"@sv ,
     "Pop-up Book"@en .
 
+g:Review a :Genre ;
+  rdfs:subClassOf t:NonBookText ;
+  owl:equivalentClass sdo:Review ;
+  :exactMatch saogf:Recensioner ;
+  :prefLabel "Recension"@sv ,
+    "Review"@en .
+
+g:Screenplay a :Genre ;
+  rdfs:subClassOf kbv:Text ;
+  :exactMatch saogf:Filmmanus ;
+  :prefLabel "Filmmanus"@sv ,
+    "Screenplay"@en .
+
 g:Standard a :Genre ;
   rdfs:subClassOf g:ReferenceWork ;
   owl:equivalentClass bibo:Standard ;
@@ -203,6 +293,19 @@ g:Timetable a :Genre ;
   :prefLabel "Tidtabell"@sv ,
     "Timetable"@en .
 
+g:ThreeDimensionalMovingImage a :Genre ;  # :ContentType
+  :exactMatch kbrda:ThreeDimensionalMovingImage;  # sameAs
+  rdfs:subClassOf kbv:MovingImage ;
+  :prefLabel "Tredimensionell rörlig bild"@sv ,
+    "Three-dimensional moving image"@en .
+
+g:TwoDimensionalMovingImage a :Genre ;  # :ContentType
+  :exactMatch kbrda:TwoDimensionalMovingImage;  # sameAs
+  rdfs:subClassOf kbv:MovingImage ;
+  :prefLabel "Tvådimensionell rörlig bild"@sv ,
+    "Two-dimensional moving image"@en .
+
+
 #g:Patent
 #  :prefLabel "Patent"@sv, "Patent"@en .
 
@@ -213,6 +316,10 @@ g:Timetable a :Genre ;
 #  rdfs:subClassOf kbv:Text ;
 #  owl:equivalentClass bibo:LegalDocument ;
 #  :exactMatch saogf:Juridiskt\%20material .
+
+#g:Leporello a :Genre ;
+#  rdfs:subClassOf f:NonBookTextWithImages ;
+#  :exactMatch saogf:Leporello .
 
 #g:Patent a :Genre ;
 #  rdfs:subClassOf kbv:Text ;
@@ -338,3 +445,65 @@ g:Timetable a :Genre ;
 #  rdfs:subClassOf kbv:WorkHub ;
 #  :closeMatch saogf:Visor .
 
+## TODO: Move these instance MARC-types and -genreForms to work (and drop on marcframe revert?)
+
+# Instans-genrer (från användning <instancegftree-start240313.rq>)
+
+# :Instance
+#     marc:Picture
+#     marc:Postcard
+#     marc:Poster
+#     marc:SingleMap
+#     tgm:Gravyrer
+#     tgm:Litografier
+#     tgm:M%C3%A5lningar
+#     tgm:Miniatyrer%20%28m%C3%A5lningar%29
+#     tgm:Tr%C3%A4gravyrer
+
+# :StillImageInstance
+#     tgm:Affischer
+#     tgm:Flyers%20%28efem%C3%A4rt%20tryck%29 < :Print
+#     marc:ActivityCard
+#     marc:Picture
+#     marc:Postcard
+#     marc:Poster
+#     marc:Drawing
+#     marc:FlashCard
+#     marc:Painting
+#     marc:Photograph
+#
+#     marc:Photonegative
+#     marc:Photoprint < :Print
+#           marc:PhotomechanicalPrint
+#               tgm:Fotomekaniska%20reproduktioner
+#     tgm:Fotografier%20p%C3%A5%20albuminpapper
+#     tgm:Glasnegativ
+
+# :Print
+#     marc:Print
+#     marc:PhotomechanicalPrint
+#     marc:Photoprint
+#     tgm:Ljustryck
+#     tgm:Plantryck
+#     tgm:Tryck
+
+# kbv:Globe kbv:instanceOf kbv:Cartography ;
+#   kbv:genreForm marc:GlobeMaterialType {| owl:oneOf
+#         marc:TerrestrialGlobe ,
+#         marc:PlanetaryOrLunarGlobe ,
+#         marc:CelestialGlobe ,
+#         marc:EarthMoonGlobe |} .
+
+# kbv:Map kbv:instanceOf kbv:Cartography ;
+#   kbv:genreForm marc:MapMaterialType {| owl:oneOf
+#         marc:Model ,
+#         marc:Section ,
+#         marc:Profile ,
+#         marc:MapATwoDimensionalMap ,
+#         marc:MapMaterialType-d ,  # marc:Atlas  # MapAsVolume
+#         marc:Diagram ,  # MapAsSheet?
+#         marc:View ,
+#         marc:RemoteSensingImage # tgm:Satellitbild
+#       |} .
+
+# kbv:RemoteSensingImage kbv:instanceOf kbv:Cartography .
