@@ -22,7 +22,6 @@
 # OTHER ITEM PROPERTIES AND CLASSES
 # RETAINED SCHEMA/BF1 MAPPINGS
 # EARLY LOCAL LIBRIS HOLDING TERMS
-# MODEL SUGGESTIONS
 
 ##
 # BF2 ITEM/HOLDING LOCATION
@@ -38,22 +37,18 @@
 
 :ItemHolding a owl:Class ;
     rdfs:label "Item holding"@en, "Bestånd"@sv ;
-    owl:equivalentClass sdo:SomeProducts ;
+    owl:equivalentClass sdo:Offer ;
     rdfs:subClassOf :Item .
 
-:SomeItem a owl:Class ;
-    ptg:abstract true ;
-    rdfs:label "Some item"@en, "Något exemplar"@sv ;
-    rdfs:subClassOf :Item .
+:MultipleItems a owl:Class ;
+    rdfs:subClassOf :Item ;
+    owl:equivalentClass sdo:SomeProducts ;
+    rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
 
 :SingleItem a owl:Class ;
-    rdfs:label "Single item"@en, "Enskilt exemplar"@sv ;
-    rdfs:subClassOf :SomeItem .
-
-:itemUsed a owl:ObjectProperty ;
-    rdfs:label "Item used"@en, "Exemplaret som använts"@sv ;
-    rdfs:domain :ProvisionActivity ;
-    rdfs:range :SingleItem .
+    rdfs:subClassOf :Item ;
+    owl:equivalentClass sdo:IndividualProduct ;
+    rdfs:label "Single item"@en, "Enskilt exemplar"@sv .
 
 :itemOf a owl:ObjectProperty ;
     rdfs:label "Holding for"@en, "bestånd på"@sv ;
@@ -271,10 +266,10 @@
 :hasComponent a owl:ObjectProperty ;
     rdfs:label "has component"@en, "har komponent"@sv ;
     :category :compositional ;
-    rdfs:subPropertyOf bf2:hasPart ;
+    rdfs:subPropertyOf bf2:hasPart, sdo:itemOffered ;
     rdfs:domain :ItemHolding ;
     # TODO: rdfs:domain :SomeItems ;
-    rdfs:range :SomeItem ;
+    rdfs:range :Item ;
     skos:note "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
 
 :componentOf a owl:ObjectProperty ;
@@ -327,16 +322,3 @@
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
     skos:example "Deckare", "Lagerlöf" .
-
-
-# MODEL SUGGESTIONS
-#
-# :MultipleItems a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass sdo:SomeProducts ;
-#     rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
-
-# :IndividualItem a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass sdo:IndividualProduct ;
-#     rdfs:label "Individual item"@en, "Enskilt exemplar"@sv .
