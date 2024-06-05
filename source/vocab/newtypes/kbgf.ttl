@@ -35,6 +35,13 @@ g:AbstractSummary a :Genre ;
   :prefLabel "Sammanfattning"@sv ,
     "Abstract Summary"@en .
 
+g:Almanac a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;  # inte alltid t:IllustratedWork ;
+  :related t:SerialPublication ;  # TODO: 
+  :exactMatch saogf:Almanackor ;
+  :prefLabel "Almanacka"@sv ,
+    "Almanac"@en .
+
 g:Blog a :Genre ;
   rdfs:subClassOf f:Website ,
     t:NonBookText ;
@@ -43,6 +50,18 @@ g:Blog a :Genre ;
   :inCollection f:informative-work ;
   :prefLabel "Blogg"@sv ,
     "Blog"@en .
+
+g:Calendar a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;  # inte alltid t:IllustratedWork ;
+  :exactMatch saogf:Kalendrar ;
+  :prefLabel "Kalender"@sv ,
+    "Calendar"@en .
+
+g:Catalogue a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Kataloger ;
+  :prefLabel "Katalog"@sv ,
+    "Catalogue"@en .
 
 f:CollectedWork a :Genre ;  # :GenreForm
   rdfs:subClassOf t:CollectingResource ;
@@ -233,6 +252,12 @@ g:RadioProgram a :Genre ;
   :prefLabel "Radioprogram"@sv ,
     "Radio Program"@en .
 
+g:RecordOrDeed a :Genre ;
+  rdfs:subClassOf t:NonBookText ;
+  :exactMatch saogf:Handlingar\%20\%28dokument\%29 ;
+  :prefLabel "Handlingar (dokument)"@sv ,
+  "Records (Documents)"@en .
+
 g:ReferenceWork a :Genre ;
   rdfs:subClassOf kbv:Text ;
   owl:equivalentClass bibo:ReferenceSource ;
@@ -241,6 +266,12 @@ g:ReferenceWork a :Genre ;
   :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
   :prefLabel "Referensverk"@sv ,
     "Reference Work"@en .
+
+g:Register a :Genre ;
+  rdfs:subClassOf t:CollectingResource ;
+  :exactMatch saogf:F\%C3\%B6rteckningar ;
+  :prefLabel "Förteckning"@sv ,
+    "Register"@en .
 
 g:RolePlayingGame a :Genre ;
   rdfs:subClassOf f:PuzzleOrGame ;
@@ -285,6 +316,13 @@ g:Statistics a :Genre ;
   :exactMatch saogf:Statistik ;
   :prefLabel "Statistik"@sv ,
     "Statistics"@en .
+
+g:Tables a :Genre ;
+  rdfs:subClassOf g:ReferenceWork ;
+  :exactMatch saogf:Tabeller ;
+  :related kbv:Dataset ;
+  :prefLabel "Tabell"@sv ,
+    "Tables"@en .
 
 g:Timetable a :Genre ;
   rdfs:subClassOf f:Tables ,
