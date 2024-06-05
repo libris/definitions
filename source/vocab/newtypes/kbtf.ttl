@@ -81,6 +81,7 @@ f:Globe a :Form ;
     "Globe"@en .
 
 # FIXME: move instancetype kbv:Map to work
+# TODO: == Cartography
 f:Map a :Form ;
   rdfs:subClassOf f:CartographicImage ;
   :prefLabel "Karta"@sv ,
@@ -324,14 +325,6 @@ t:TactileBook a :BasicType ;
   :prefLabel "Tactile Book"@en ,
     "Taktil bok"@sv .
 
-f:Almanac a :Form ;
-  rdfs:subClassOf t:SerialPublication ,
-    g:ReferenceWork ,
-    t:IllustratedWork ;
-  :exactMatch saogf:Almanackor ;
-  :prefLabel "Almanacka"@sv ,
-    "Almanac"@en .
-
 f:AudioProgram a :Form ;
   rdfs:subClassOf f:NonMusicAudio ;
   :prefLabel "Ljudprogram"@sv ,
@@ -361,19 +354,6 @@ f:Broschure a :Form ;
   :prefLabel "Broschyr"@sv ,
     "Broschure"@en .
 
-f:Calendar a :Form ;
-  rdfs:subClassOf g:ReferenceWork ,
-    t:IllustratedWork ;
-  :exactMatch saogf:Kalendrar ;
-  :prefLabel "Kalender"@sv ,
-    "Calendar"@en .
-
-f:Catalogue a :Form ;
-  rdfs:subClassOf g:ReferenceWork ;
-  :exactMatch saogf:Kataloger ;
-  :prefLabel "Katalog"@sv ,
-    "Catalogue"@en .
-
 f:Comic a :Form ;
   rdfs:subClassOf g:GraphicLiterature ;
   :exactMatch saogf:Serietidningar ;
@@ -387,10 +367,11 @@ f:ComicIssue a :Form ;
   :prefLabel "Serietidningsnummer"@sv ,
     "Comic Issue"@en .
 
-f:ComicSeries a :Form ;
+f:ComicSerial a :Form ;
   rdfs:comment "TODO: series of issues vs. arc of stories?" ;
   rdfs:subClassOf f:Comic ,
-    t:MonographicSeries ;
+    t:SerialPublication ;
+    # t:MonographicSeries ;  # TODO: Separate ComicSeries ?
   owl:equivalentClass sdo:ComicSeries ;
   :prefLabel "Serietidningsserie"@sv ,
     "Comic Series"@en .
@@ -474,7 +455,7 @@ f:Painting a :Form ;
   :prefLabel "Målning"@sv ,
     "Painting"@en .
 
-f:PerformedMusic a :Form ;
+t:PerformedMusic a :BasicType ;
   :exactMatch kbrda:PerformedMusic ;
   rdfs:subClassOf kbv:Audio ,
     kbv:Music ;
@@ -520,18 +501,6 @@ f:Puzzle a :Form ;
   :prefLabel "Pussel"@sv ,
     "Puzzle"@en .
 
-f:Register a :Form ;
-  rdfs:subClassOf t:CollectingResource ;
-  :exactMatch saogf:F\%C3\%B6rteckningar ;
-  :prefLabel "Förteckning"@sv ,
-    "Register"@en .
-
-f:RecordOrDeed a :Form ;
-  rdfs:subClassOf t:NonBookText ;
-  :exactMatch saogf:Handlingar\%20\%28dokument\%29 ;
-  :prefLabel "Handlingar (dokument)"@sv ,
-  "Records (Documents)"@en .
-
 f:Sculpture a :Form ;
   rdfs:subClassOf kbv:Object ;
   :prefLabel "Skulptur"@sv ,
@@ -570,12 +539,6 @@ f:TVSeries a :Form ;
   :exactMatch saogf:Tv-serier ;
   :prefLabel "Tv-serie"@sv ,
     "TV-Series"@en .
-
-f:Tables a :Form ;
-  rdfs:subClassOf g:ReferenceWork ;
-  :exactMatch saogf:Tabeller ;
-  :prefLabel "Tabell"@sv ,
-    "Tables"@en .
 
 f:Toy a :Form ;
   rdfs:subClassOf f:InteractiveObject ;
