@@ -40,32 +40,42 @@ kbv:Cartography a :Class ;
 
 f:CartographicDataset a :Form;
   owl:equivalentClass kbrda:CartographicDataset;
-  rdfs:subClassOf kbv:Cartography, kbv:Dataset .
+  rdfs:subClassOf kbv:Cartography, kbv:Dataset ;
+  rdfs:label "Kartografiskt dataset"@sv , "Cartographic dataset"@en .
+
 f:CartographicImage a :Form;
   owl:equivalentClass kbrda:CartographicImage;
-  rdfs:subClassOf kbv:Cartography, kbv:StillImage .
+  rdfs:subClassOf kbv:Cartography, kbv:StillImage ;
+  rdfs:label "Kartografisk bild"@sv , "Cartographic image"@en .
+
 f:CartographicMovingImage a :Form;
   owl:equivalentClass kbrda:CartographicMovingImage;
-  rdfs:subClassOf kbv:Cartography, kbv:MovingImage .
+  rdfs:subClassOf kbv:Cartography, kbv:MovingImage ;
+  rdfs:label "Kartografisk rörlig bild"@sv , "Cartographic moving image"@en .
+
 f:CartographicTactileImage a :Form;
   owl:equivalentClass kbrda:CartographicTactileImage;
-  rdfs:subClassOf kbv:Cartography, kbv:StillImage .
+  rdfs:subClassOf kbv:Cartography, kbv:StillImage ;
+  rdfs:label "Kartografisk taktil bild"@sv , "Cartographic tactile image"@en .
+
 f:CartographicTactileObject a :Form;
   owl:equivalentClass kbrda:CartographicTactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, kbv:TactileObject ;
-  rdfs:label "kartografiskt taktilt objekt"@sv ,
-     "cartographic tactile object"@en .
+  rdfs:label "Kartografiskt taktilt objekt"@sv ,
+     "Cartographic Tactile Object"@en .
+
 #f:TactileCartography a :Form ;
 #  rdfs:subClassOf kbv:Cartography ,
 #    kbv:Tactile ;
 #  skos:editorialNote "TODO: edge case? Force a choice of primary purpose of expression? This is not a11y, that's about the instance. Mixed purposes can be solved by primary purpose as type and additional \"color\" as genre."@en ;
 #  rdfs:label "Taktilt kartografiskt verk"@sv ,
 #    "Tactile Cartography"@en .
+
 f:CartographicObject a :Form;
   owl:equivalentClass kbrda:CartographicThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, kbv:Object ;
-  rdfs:label "kartografiskt objekt"@sv ,
-     "cartographic object"@en .
+  rdfs:label "Kartografiskt objekt"@sv ,
+     "Cartographic Object"@en .
 
 f:Atlas a :Form ;
   rdfs:subClassOf kbv:Cartography ,
@@ -94,22 +104,29 @@ kbv:Tactile a :SensoryForm ;
 
 f:TactileImage a :Form ;
   owl:equivalentClass kbrda:TactileImage;
-  rdfs:subClassOf kbv:StillImage, kbv:Tactile . # _:TactileInstanceRestriction .
+  rdfs:subClassOf kbv:StillImage, kbv:Tactile ; # _:TactileInstanceRestriction .
+  rdfs:label "Taktil bild"@sv , "Tactile image"@en .
 
 f:TactileNotatedMusic a :Form ;
   owl:equivalentClass kbrda:TactileNotatedMusic;
-  rdfs:subClassOf kbv:NotatedMusic, kbv:Tactile . # , _:TactileInstanceRestriction .
+  rdfs:subClassOf kbv:NotatedMusic, kbv:Tactile ; # , _:TactileInstanceRestriction .
+  rdfs:label "Taktil noterad musik"@sv , "Tactile notated music"@en .
+
 f:TactileNotatedMovement a :Form ;
   owl:equivalentClass kbrda:TactileNotatedMovement;
-  rdfs:subClassOf kbv:NotatedMovement, kbv:Tactile . # , _:TactileInstanceRestriction .
+  rdfs:subClassOf kbv:NotatedMovement, kbv:Tactile ; # , _:TactileInstanceRestriction .
+  rdfs:label "Taktil noterad rörelse"@sv , "Tactile notated movement"@en .
+
 f:TactileText a :Form ;
   owl:equivalentClass kbrda:TactileText;
-  rdfs:subClassOf kbv:Text, kbv:Tactile . # , _:TactileInstanceRestriction .
+  rdfs:subClassOf kbv:Text, kbv:Tactile ; # , _:TactileInstanceRestriction .
+  rdfs:label "Taktil text"@sv , "Tactile text"@en .
+
 f:TactileObject a :Form ;
   owl:equivalentClass kbrda:TactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Object, kbv:Tactile ; # , _:TactileInstanceRestriction ,
-  rdfs:label "kartografiskt taktilt objekt"@sv ,
-     "cartographic tactile object"@en .
+  rdfs:label "Taktilt objekt"@sv ,
+     "Tactile Object"@en .
 
 #_:TactileInstanceRestriction a owl:Restriction ;
 #  owl:onProperty kbv:hasInstance;
@@ -150,6 +167,14 @@ kbv:MovingImage a :Class ;
   rdfs:subClassOf kbv:Visual ;
   rdfs:label "Moving Image"@en ,
     "Rörlig bild"@sv .
+
+#kbv:ThreeDimensionalMovingImage
+#  skos:exactMatch kbrda:ThreeDimensionalMovingImage ;
+#  :prefLabel "Tredimensionell rörlig bild", "Three-dimensional moving image"@en .
+#
+#kbv:TwoDimensionalMovingImage
+#  skos:exactMatch kbrda:TwoDimensionalMovingImage ;
+#  :prefLabel "Tvådimensionell rörlig bild", "Two-dimensional moving image"@en .
 
 kbv:NotatedMusic a :Class ;
   skos:exactMatch kbrda:NotatedMusic ;
@@ -581,35 +606,3 @@ f:Website a :Form ;
   skos:exactMatch saogf:Webbplatser ;
   rdfs:label "Webbplats"@sv ,
     "Website"@en .
-
-## labels extracted from RDA data:
-f:CartographicDataset
-  rdfs:label "kartografiskt dataset"@sv ,
-     "cartographic dataset"@en .
-f:CartographicImage
-  rdfs:label "kartografisk bild"@sv ,
-     "cartographic image"@en .
-f:CartographicMovingImage
-  rdfs:label "kartografisk rörlig bild"@sv ,
-     "cartographic moving image"@en .
-f:CartographicTactileImage
-  rdfs:label "kartografisk taktil bild"@sv ,
-     "cartographic tactile image"@en .
-f:CartographicThreeDimensionalForm
-  rdfs:label "kartografisk tredimensionell form"@sv ,
-     "cartographic three-dimensional form"@en .
-f:TactileImage
-  rdfs:label "taktil bild"@sv ,
-     "tactile image"@en .
-f:TactileNotatedMovement
-  rdfs:label "taktil noterad rörelse"@sv ,
-    "tactile notated movement"@en .
-f:TactileNotatedMusic
-  rdfs:label "taktil noterad musik"@sv ,
-    "tactile notated music"@en .
-f:TactileText
-  rdfs:label "taktil text"@sv ,
-     "tactile text"@en .
-f:TactileThreeDimensionalForm
-  rdfs:label "taktil tredimensionell form"@sv ,
-     "tactile three-dimensional form"@en .
