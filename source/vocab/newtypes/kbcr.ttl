@@ -11,7 +11,6 @@ prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
 prefix s: <https://id.kb.se/term/sensory/>
-prefix t: <https://id.kb.se/term/type/>
 prefix f: <https://id.kb.se/term/form/>
 prefix g: <https://id.kb.se/term/genre/>
 
@@ -120,7 +119,7 @@ kbv:BrailleResource a :Class ;
 kbv:BrailleVolume a :Class ;
   rdfs:subClassOf kbv:BrailleResource, kbv:Volume , [ a owl:Restriction ;
       owl:onProperty kbv:instanceOf ;
-      owl:allValuesFrom t:TactileBook
+      owl:allValuesFrom kbv:TactileBook
     ] ;
   skos:exactMatch saogf:Punktskriftsb\%C3\%B6cker .
 #  :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
