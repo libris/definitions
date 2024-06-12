@@ -53,37 +53,37 @@ f:CartographicTactileImage a :Form;
 f:CartographicTactileObject a :Form;
   owl:equivalentClass kbrda:CartographicTactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, kbv:TactileObject ;
-  :prefLabel "kartografiskt taktilt objekt"@sv ,
+  rdfs:label "kartografiskt taktilt objekt"@sv ,
      "cartographic tactile object"@en .
 #f:TactileCartography a :Form ;
 #  rdfs:subClassOf kbv:Cartography ,
 #    kbv:Tactile ;
 #  skos:editorialNote "TODO: edge case? Force a choice of primary purpose of expression? This is not a11y, that's about the instance. Mixed purposes can be solved by primary purpose as type and additional \"color\" as genre."@en ;
-#  :prefLabel "Taktilt kartografiskt verk"@sv ,
+#  rdfs:label "Taktilt kartografiskt verk"@sv ,
 #    "Tactile Cartography"@en .
 f:CartographicObject a :Form;
   owl:equivalentClass kbrda:CartographicThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, kbv:Object ;
-  :prefLabel "kartografiskt objekt"@sv ,
+  rdfs:label "kartografiskt objekt"@sv ,
      "cartographic object"@en .
 
 f:Atlas a :Form ;
   rdfs:subClassOf kbv:Cartography ,
     kbv:Book ;
-  :prefLabel "Atlas"@sv ,
+  rdfs:label "Atlas"@sv ,
     "Atlas"@en .
 
 # FIXME: move instancetype kbv:Globe to work
 f:Globe a :Form ;
   rdfs:subClassOf f:CartographicObject ;
-  :prefLabel "Jord- eller månglob"@sv ,
+  rdfs:label "Jord- eller månglob"@sv ,
     "Globe"@en .
 
 # FIXME: move instancetype kbv:Map to work
 # TODO: == Cartography
 f:Map a :Form ;
   rdfs:subClassOf f:CartographicImage ;
-  :prefLabel "Karta"@sv ,
+  rdfs:label "Karta"@sv ,
     "Map"@en .
 
 
@@ -108,7 +108,7 @@ f:TactileText a :Form ;
 f:TactileObject a :Form ;
   owl:equivalentClass kbrda:TactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Object, kbv:Tactile ; # , _:TactileInstanceRestriction ,
-  :prefLabel "kartografiskt taktilt objekt"@sv ,
+  rdfs:label "kartografiskt taktilt objekt"@sv ,
      "cartographic tactile object"@en .
 
 #_:TactileInstanceRestriction a owl:Restriction ;
@@ -118,7 +118,7 @@ f:TactileObject a :Form ;
 
 kbv:Dataset a :Class ;
   rdfs:subClassOf f:Integrating ;
-  :prefLabel "Dataset"@en ,
+  rdfs:label "Dataset"@en ,
     "Dataset"@sv .
 
 f:ComputerDataset a :Form;
@@ -138,36 +138,36 @@ kbv:Text a :Class ;
 kbv:StillImage a :Class ;
   rdfs:subClassOf kbv:Visual ;
   skos:exactMatch kbrda:StillImage , saogf:Bilder  ;
-  :prefLabel "Still Image"@en ,
+  rdfs:label "Still Image"@en ,
     "Stillbild"@sv .
 
 kbv:Music a :Class ;
   skos:exactMatch f:Music ;
-  :prefLabel "Music"@en ,
+  rdfs:label "Music"@en ,
     "Musik"@sv .
 
 kbv:MovingImage a :Class ;
   rdfs:subClassOf kbv:Visual ;
-  :prefLabel "Moving Image"@en ,
+  rdfs:label "Moving Image"@en ,
     "Rörlig bild"@sv .
 
 kbv:NotatedMusic a :Class ;
   skos:exactMatch kbrda:NotatedMusic ;
   rdfs:subClassOf kbv:Music ;
   skos:exactMatch saogf:Musikalier ;
-  :prefLabel "Musikalie"@sv ,
+  skos:prefLabel "Musikalie"@sv ,
     "Notated Music"@en .
 
 kbv:NotatedMovement a :Class ;
   skos:exactMatch kbrda:NotatedMovement ;
-  :prefLabel "Notated movement"@en ,
+  rdfs:label "Notated movement"@en ,
     "Noterad rörelse"@sv .
 
 kbv:SerialPublication a :Class ;
   :category :pending, :concretetype ;
   rdfs:subClassOf kbv:CollectingResource ;
   skos:exactMatch saogf:Seriella\%20publikationer ;
-  :prefLabel "Seriell publikation"@sv ,
+  rdfs:label "Seriell publikation"@sv ,
     "Serial Publication"@en .
 
 kbv:IllustratedWork a :Class ;
@@ -175,43 +175,43 @@ kbv:IllustratedWork a :Class ;
   rdfs:subClassOf kbv:Visual ;
   skos:broadMatch kbrda:StillImage ;
   skos:exactMatch saogf:Illustrerade\%20verk ;
-  :prefLabel "Illustrerat verk"@sv ,
+  rdfs:label "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
 kbv:Book a :Class ;  # T:LargeText
   :category :pending, :concretetype ;
   owl:equivalentClass bibo:Book, sdo:Book ;
   rdfs:subClassOf kbv:Text ;
-  :prefLabel "Book"@en ,
+  rdfs:label "Book"@en ,
     "Bok"@sv .
 
 kbv:NonBookText a :Class ;
   :category :pending, :concretetype ;
   ptg:abstract true ;
   rdfs:subClassOf kbv:Text ;
-  :prefLabel "Non-book text"@en ,
+  rdfs:label "Non-book text"@en ,
     "Enskild text"@sv .
 
 kbv:Booklet a :Form ;  # kbv:MediumText
   :category :pending, :richtype ;
   rdfs:subClassOf kbv:NonBookText ;
-  :prefLabel "Texthäfte"@sv , "Booklet"@en .
+  rdfs:label "Texthäfte"@sv , "Booklet"@en .
 
 kbv:Textleaf a :Form ; # kbv:SmallText
   :category :pending, :richtype ;
   rdfs:subClassOf kbv:NonBookText ;
-  :prefLabel "Textblad"@sv , "Text leaf"@en .
+  rdfs:label "Textblad"@sv , "Text leaf"@en .
 
 f:NonBookTextWithImages a :Form ;
   rdfs:subClassOf kbv:NonBookText , kbv:IllustratedWork ;
-  :prefLabel "Enskild text med bilder"@sv ,
+  rdfs:label "Enskild text med bilder"@sv ,
     "Non-book With Images"@en .
 
 kbv:Issue a :Class ;
   :category :pending, :concretetype ;
   rdfs:subClassOf kbv:NonBookText ;
   owl:equivalentClass bibo:Issue ;
-  :prefLabel "Tidskriftsnummer"@sv ,
+  rdfs:label "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
 kbv:MonographicSeries a :Class ;
@@ -220,7 +220,7 @@ kbv:MonographicSeries a :Class ;
   owl:equivalentClass bibo:Series ,
     bf:Series,
     marc:MonographicSeries ;
-  :prefLabel "Monograph Series"@en ,
+  rdfs:label "Monograph Series"@en ,
     "Monografiserie"@sv .
 
 kbv:Object a :Class ;
@@ -234,12 +234,12 @@ kbv:WrittenBook a :Class ;
   :category :pending, :concretetype ;
   skos:broadMatch kbrda:Text ;
   rdfs:subClassOf kbv:Book ;
-  :prefLabel "Written book"@en ,
+  rdfs:label "Written book"@en ,
     "Skriven bok"@sv .
 
 kbv:Audio a :SensoryForm ;
   skos:exactMatch kbrda:Sounds ;
-  :prefLabel "Audio"@en ,
+  rdfs:label "Audio"@en ,
     "Ljud"@sv .
 
 kbv:BookWithImages a :Class ;
@@ -248,37 +248,37 @@ kbv:BookWithImages a :Class ;
   skos:editorialNote "TODO: PictorialWork?"@en ;
   skos:broadMatch saogf:Bildverk ;
   skos:narrowMatch barngf:Bilderb%C3%B6cker , barngf:Kapitelb\%C3\%B6cker ;
-  :prefLabel "Bok med bilder"@sv ,
+  rdfs:label "Bok med bilder"@sv ,
     "Book With Images"@en .
 
 kbv:CollectingResource a :Class ;
   :category :pending, :concretetype ;
   ptg:abstract true ;
-  :prefLabel "Collecting Resource"@en ,
+  rdfs:label "Collecting Resource"@en ,
     "Samlande resurs"@sv .
 
 kbv:MixedMaterial a :Class ;
   rdfs:subClassOf kbv:CollectingResource ;
-  :prefLabel "Mixed Material"@en ,
+  rdfs:label "Mixed Material"@en ,
     "Blandat material"@sv .
 
 kbv:Kit a :Class ;
   :category :pending, :richtype ;
   # rdfs:seeAlso <https://kbse.atlassian.net/browse/FMT-151> ;
   rdfs:subClassOf kbv:CollectingResource ;
-  :prefLabel "Kit"@en ,
+  rdfs:label "Kit"@en ,
     "Kit"@sv .
 
 kbv:Collection a :Class ;
   :category :pending, :richtype ;
   rdfs:subClassOf kbv:CollectingResource ;
-  :prefLabel "Collection"@en ,
+  rdfs:label "Collection"@en ,
     "Samling"@sv .
 
 f:Integrating a :Class ;
   ptg:abstract true ;
   rdfs:subClassOf kbv:CollectingResource ;
-  :prefLabel "Integrating"@en ,
+  rdfs:label "Integrating"@en ,
     "Integrerande"@sv .
 
 kbv:Periodical a :Class ;
@@ -287,7 +287,7 @@ kbv:Periodical a :Class ;
   rdfs:subClassOf kbv:SerialPublication ;
   skos:exactMatch saogf:Periodika ;
   :altLabel "Periodika"@sv ;
-  :prefLabel "Tidskrift"@sv ,
+  rdfs:label "Tidskrift"@sv ,
     "Periodical"@en .
 
 kbv:Film a :Class ;
@@ -295,7 +295,7 @@ kbv:Film a :Class ;
   rdfs:subClassOf kbv:MovingImage ;
   owl:equivalentClass bibo:Film ;
   skos:exactMatch saogf:Filmer ;
-  :prefLabel "Film"@sv ,
+  rdfs:label "Film"@sv ,
     "Film"@en .
 
 kbv:Visual a :SensoryForm ;
@@ -306,14 +306,14 @@ kbv:Archive a :Class ;
   :category :pending, :concretetype ;
   rdfs:subClassOf kbv:CollectingResource ;
   skos:exactMatch saogf:Arkiv ;
-  :prefLabel "Arkiv"@sv ,
+  rdfs:label "Arkiv"@sv ,
     "Archive"@en .
 
 kbv:Article a :Class ;
   :category :pending, :concretetype ;
   rdfs:subClassOf kbv:NonBookText ;
   owl:equivalentClass bibo:Article ;
-  :prefLabel "Artikel"@sv ,
+  rdfs:label "Artikel"@sv ,
     "Article"@en .
 
 kbv:Audiobook a :Class ;
@@ -322,7 +322,7 @@ kbv:Audiobook a :Class ;
     kbv:Book ,
     bibo:AudioDocument ;
   skos:exactMatch saogf:Ljudb\%C3\%B6cker ;
-  :prefLabel "Ljudbok"@sv ,
+  rdfs:label "Ljudbok"@sv ,
     "Audiobook"@en .
 
 kbv:Database a :Class ;
@@ -330,7 +330,7 @@ kbv:Database a :Class ;
   rdfs:subClassOf f:Integrating ;
   skos:exactMatch saogf:Databaser ;
   skos:narrowMatch marc:UpdatingDatabase ;
-  :prefLabel "Databas"@sv ,
+  rdfs:label "Databas"@sv ,
     "Database"@en .
 
 kbv:TactileBook a :Class ;
@@ -340,49 +340,49 @@ kbv:TactileBook a :Class ;
   skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
   skos:broadMatch kbrda:TactileText ;
   skos:narrowMatch saogf:Punktskriftsb\%C3\%B6cker ;
-  :prefLabel "Tactile Book"@en ,
+  rdfs:label "Tactile Book"@en ,
     "Taktil bok"@sv .
 
 f:AudioProgram a :Form ;
   rdfs:subClassOf f:NonMusicAudio ;
-  :prefLabel "Ljudprogram"@sv ,
+  rdfs:label "Ljudprogram"@sv ,
     "Audio Program"@en .
 
 f:NonMusicAudio a :Form ;
   ptg:abstract true ;
   rdfs:subClassOf kbv:Audio ;
-  :prefLabel "Non-music audio"@en ,
+  rdfs:label "Non-music audio"@en ,
     "Ljud men inte musik"@sv .
 
 f:BoardGame a :Form ;
   rdfs:subClassOf f:PuzzleOrGame ;
   skos:exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
-  :prefLabel "Brädspel"@sv ,
+  rdfs:label "Brädspel"@sv ,
     "Boardgame"@en .
 
 f:PuzzleOrGame a :Form ;
   rdfs:subClassOf f:InteractiveObject ;
   skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
-  :prefLabel "Spel eller tankenötter"@sv ,
+  rdfs:label "Spel eller tankenötter"@sv ,
     "Puzzle or game"@en .
 
 f:Broschure a :Form ;
   rdfs:subClassOf kbv:NonBookText ;
   skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
-  :prefLabel "Broschyr"@sv ,
+  rdfs:label "Broschyr"@sv ,
     "Broschure"@en .
 
 f:Comic a :Form ;
   rdfs:subClassOf g:GraphicLiterature ;
   skos:exactMatch saogf:Serietidningar ;
-  :prefLabel "Serietidning"@sv ,
+  rdfs:label "Serietidning"@sv ,
     "Comic"@en .
 
 f:ComicIssue a :Form ;
   rdfs:subClassOf f:Comic ,
     kbv:Issue ;
   owl:equivalentClass sdo:ComicIssue ;
-  :prefLabel "Serietidningsnummer"@sv ,
+  rdfs:label "Serietidningsnummer"@sv ,
     "Comic Issue"@en .
 
 f:ComicSerial a :Form ;
@@ -391,11 +391,11 @@ f:ComicSerial a :Form ;
     kbv:SerialPublication ;
     # kbv:MonographicSeries ;  # TODO: Separate ComicSeries ?
   owl:equivalentClass sdo:ComicSeries ;
-  :prefLabel "Serietidningsserie"@sv ,
+  rdfs:label "Serietidningsserie"@sv ,
     "Comic Series"@en .
 
 kbv:Multimedia a :Class ;
-  :prefLabel "Multimedia"@sv ,
+  rdfs:label "Multimedia"@sv ,
     "Multimedia"@en .
 
 kbv:Software a :Form ; # TODO: pending; integrate with ComputerGame, Application, ...
@@ -406,44 +406,44 @@ kbv:Software a :Form ; # TODO: pending; integrate with ComputerGame, Application
 f:ComputerProgram a :Form ;
   owl:equivalentClass kbrda:ComputerProgram;
   rdfs:subClassOf kbv:Multimedia ;
-  :prefLabel "Datorprogram"@sv ,
+  rdfs:label "Datorprogram"@sv ,
     "Computer Program"@en .
 
 f:ComputerGame a :Form ;
   rdfs:subClassOf f:PuzzleOrGame, f:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
-  :prefLabel "Datorspel"@sv ,
+  rdfs:label "Datorspel"@sv ,
     "Computer Game"@en .
 
 f:Diagram a :Form ;
   rdfs:subClassOf kbv:IllustratedWork ;
   skos:exactMatch saogf:Diagram ;
-  :prefLabel "Diagram"@sv ,
+  rdfs:label "Diagram"@sv ,
     "Diagram"@en .
 
 f:FormDocument a :Form ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
   rdfs:subClassOf kbv:NonBookText ;
   skos:exactMatch saogf:Blanketter ;
-  :prefLabel "Blankett"@sv ,
+  rdfs:label "Blankett"@sv ,
     "Form Document"@en .
 
 f:Handwriting a :Form ;
   rdfs:subClassOf kbv:Manuscript ,
     kbv:Text ;
   skos:exactMatch saogf:Handskrifter ;
-  :prefLabel "Handskrift"@sv ,
+  rdfs:label "Handskrift"@sv ,
     "Handwriting"@en .
 
 f:Illustration a :Form ;
   rdfs:subClassOf kbv:StillImage ;
   skos:exactMatch saogf:Illustrationer ;
-  :prefLabel "Illustration"@sv ,
+  rdfs:label "Illustration"@sv ,
     "Illustration"@en .
 
 f:InteractiveObject a :Form ;
   rdfs:subClassOf kbv:Object ;
-  :prefLabel "Interaktivt objekt"@sv ,
+  rdfs:label "Interaktivt objekt"@sv ,
   "InteractiveObject"@en .
 
 f:Manual a :Form ;
@@ -451,26 +451,26 @@ f:Manual a :Form ;
     g:TeachingMaterial ;
   skos:closeMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Manual> ;
-  :prefLabel "Manual"@sv ,
+  rdfs:label "Manual"@sv ,
     "Manual"@en .
 
 f:MechanicalBook a :Form ;
   rdfs:subClassOf f:InteractiveObject ,
     kbv:WrittenBook ;
-  :prefLabel "Mekanisk bok"@sv ,
+  rdfs:label "Mekanisk bok"@sv ,
     "Mechanical Book"@en .
 
 f:Note a :Form ;
   rdfs:subClassOf kbv:NonBookText ;
   owl:equivalentClass bibo:Note ;
   skos:exactMatch saogf:Anteckningar ;
-  :prefLabel "Anteckning"@sv ,
+  rdfs:label "Anteckning"@sv ,
     "Note"@en .
 
 f:Painting a :Form ;
   rdfs:subClassOf kbv:StillImage ;
   skos:exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
-  :prefLabel "Målning"@sv ,
+  rdfs:label "Målning"@sv ,
     "Painting"@en .
 
 kbv:PerformedMusic a :Class ;
@@ -478,33 +478,33 @@ kbv:PerformedMusic a :Class ;
   skos:exactMatch kbrda:PerformedMusic ;
   rdfs:subClassOf kbv:Audio ,
     kbv:Music ;
-  :prefLabel "Performed Music"@en ,
+  rdfs:label "Performed Music"@en ,
     "Framförd musik"@sv .
 
 f:Photobook a :Form ;
   rdfs:subClassOf kbv:BookWithImages ,
     kbv:Book ;
   skos:exactMatch saogf:Fotob\%C3\%B6cker ;
-  :prefLabel "Fotobok"@sv ,
+  rdfs:label "Fotobok"@sv ,
     "Photobook"@en .
 
 f:Photograph a :Form ;
   rdfs:subClassOf kbv:StillImage ;
   skos:exactMatch saogf:Fotografier ;
-  :prefLabel "Fotografi"@sv ,
+  rdfs:label "Fotografi"@sv ,
     "Photograph"@en .
 
 f:PictureDictionary a :Form ;
   rdfs:subClassOf kbv:Lexicon ,
     kbv:BookWithImages ;
   skos:exactMatch saogf:Bildlexikon ;
-  :prefLabel "Bildlexikon"@sv ,
+  rdfs:label "Bildlexikon"@sv ,
     "Picture Dictionary"@en .
 
 f:Postcard a :Form ;
   rdfs:subClassOf kbv:IllustratedWork ;
   skos:exactMatch saogf:Vykort ;
-  :prefLabel "Vykort"@sv ,
+  rdfs:label "Vykort"@sv ,
     "Postcard"@en .
 
 # TODO: GenreForm?
@@ -516,100 +516,100 @@ f:Poster a :Form ;
   rdfs:subClassOf kbv:IllustratedWork ;
   owl:equivalentClass sdo:Poster ;
   skos:exactMatch saogf:Affischer ;
-  :prefLabel "Affisch"@sv ,
+  rdfs:label "Affisch"@sv ,
     "Poster"@en .
 
 f:Puzzle a :Form ;
   rdfs:subClassOf f:PuzzleOrGame ;
   skos:exactMatch saogf:Pussel ;
-  :prefLabel "Pussel"@sv ,
+  rdfs:label "Pussel"@sv ,
     "Puzzle"@en .
 
 f:Sculpture a :Form ;
   rdfs:subClassOf kbv:Object ;
-  :prefLabel "Skulptur"@sv ,
+  rdfs:label "Skulptur"@sv ,
     "Sculpture"@en .
 
 f:SpokenBook a :Form ;
   rdfs:subClassOf kbv:Audiobook ,
     f:SpokenWord ;
   skos:exactMatch saogf:Talb\%C3\%B6cker ;
-  :prefLabel "Talbok"@sv ,
+  rdfs:label "Talbok"@sv ,
     "Spoken Book"@en .
 
 f:SpokenWord a :Form ;
   skos:exactMatch kbrda:SpokenWord ;
   rdfs:subClassOf kbv:Text ,
     kbv:Audio ;
-  :prefLabel "Tal"@sv ,
+  rdfs:label "Tal"@sv ,
     "Spoken Word"@en .
 
 f:SpokenPaper a :Form ;
   rdfs:subClassOf kbv:Periodical ,
     f:SpokenWord ;
   skos:exactMatch saogf:Taltidningar ;
-  :prefLabel "Taltidning"@sv ,
+  rdfs:label "Taltidning"@sv ,
     "Spoken Paper"@en .
 
 f:TVProgram a :Form ;
   rdfs:subClassOf kbv:MovingImage ;
   skos:exactMatch saogf:Tv-program ;
-  :prefLabel "Tv-program"@sv ,
+  rdfs:label "Tv-program"@sv ,
     "TV-Program"@en .
 
 f:TVSeries a :Form ;
   rdfs:subClassOf f:TVProgram ,
     kbv:MonographicSeries ;
   skos:exactMatch saogf:Tv-serier ;
-  :prefLabel "Tv-serie"@sv ,
+  rdfs:label "Tv-serie"@sv ,
     "TV-Series"@en .
 
 f:Toy a :Form ;
   rdfs:subClassOf f:InteractiveObject ;
-  :prefLabel "Leksak"@sv ,
+  rdfs:label "Leksak"@sv ,
     "Toy"@en .
 
 f:Trailer a :Form ;
   rdfs:subClassOf kbv:Film ;
   skos:exactMatch saogf:Trailrar ;
-  :prefLabel "Trailer"@sv ,
+  rdfs:label "Trailer"@sv ,
     "Trailer"@en .
 
 f:Website a :Form ;
   rdfs:subClassOf kbv:OnlineResource ,
     f:Integrating ;
   skos:exactMatch saogf:Webbplatser ;
-  :prefLabel "Webbplats"@sv ,
+  rdfs:label "Webbplats"@sv ,
     "Website"@en .
 
 ## labels extracted from RDA data:
 f:CartographicDataset
-  :prefLabel "kartografiskt dataset"@sv ,
+  rdfs:label "kartografiskt dataset"@sv ,
      "cartographic dataset"@en .
 f:CartographicImage
-  :prefLabel "kartografisk bild"@sv ,
+  rdfs:label "kartografisk bild"@sv ,
      "cartographic image"@en .
 f:CartographicMovingImage
-  :prefLabel "kartografisk rörlig bild"@sv ,
+  rdfs:label "kartografisk rörlig bild"@sv ,
      "cartographic moving image"@en .
 f:CartographicTactileImage
-  :prefLabel "kartografisk taktil bild"@sv ,
+  rdfs:label "kartografisk taktil bild"@sv ,
      "cartographic tactile image"@en .
 f:CartographicThreeDimensionalForm
-  :prefLabel "kartografisk tredimensionell form"@sv ,
+  rdfs:label "kartografisk tredimensionell form"@sv ,
      "cartographic three-dimensional form"@en .
 f:TactileImage
-  :prefLabel "taktil bild"@sv ,
+  rdfs:label "taktil bild"@sv ,
      "tactile image"@en .
 f:TactileNotatedMovement
-  :prefLabel "taktil noterad rörelse"@sv ,
+  rdfs:label "taktil noterad rörelse"@sv ,
     "tactile notated movement"@en .
 f:TactileNotatedMusic
-  :prefLabel "taktil noterad musik"@sv ,
+  rdfs:label "taktil noterad musik"@sv ,
     "tactile notated music"@en .
 f:TactileText
-  :prefLabel "taktil text"@sv ,
+  rdfs:label "taktil text"@sv ,
      "tactile text"@en .
 f:TactileThreeDimensionalForm
-  :prefLabel "taktil tredimensionell form"@sv ,
+  rdfs:label "taktil tredimensionell form"@sv ,
      "tactile three-dimensional form"@en .
