@@ -31,7 +31,7 @@ kbv:Arrangement a :Class ;
     "Arrangemang"@sv .
 
 
-kbv:Cartography a :Class ;
+kbv:Cartography a owl:Class ;
   rdfs:subClassOf kbv:Visual ;
   skos:editorialNote "TODO: restriction on Map for instanceOf; allValuesFrom this..."@en ;
   :exactMatch saogf:Kartor ;
@@ -165,44 +165,57 @@ kbv:NotatedMovement a :Class ;
   :prefLabel "Notated movement"@en ,
     "Noterad rörelse"@sv .
 
-t:SerialPublication a :BasicType ;
+t:SerialPublication a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Seriella\%20publikationer ;
   :prefLabel "Seriell publikation"@sv ,
     "Serial Publication"@en .
 
-t:IllustratedWork a :BasicType ;
+t:IllustratedWork a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf kbv:Visual ;
   :broadMatch kbrda:StillImage ;
   :exactMatch saogf:Illustrerade\%20verk ;
   :prefLabel "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
-t:Book a :BasicType ;
+t:Book a :Class ;  # T:LargeText
+  :category :OrderingType ;
   owl:equivalentClass bibo:Book, sdo:Book ;
   rdfs:subClassOf kbv:Text ;
   :prefLabel "Book"@en ,
     "Bok"@sv .
 
-t:NonBookText a :BasicType ;
+t:NonBookText a :Class ;
+  :category :OrderingType ;
   ptg:abstract true ;
   rdfs:subClassOf kbv:Text ;
   :prefLabel "Non-book text"@en ,
     "Enskild text"@sv .
 
+t:Booklet a :Form ;  # t:MediumText
+  rdfs:subClassOf t:NonBookText ;
+  :prefLabel "Texthäfte"@sv , "Booklet"@en .
+
+t:Textleaf a :Form ; # t:SmallText
+  rdfs:subClassOf t:NonBookText ;
+  :prefLabel "Textblad"@sv , "Text leaf"@en .
+
 f:NonBookTextWithImages a :Form ;
-  rdfs:subClassOf t:NonBookText ,
-    t:IllustratedWork ;
+  rdfs:subClassOf t:NonBookText , t:IllustratedWork ;
   :prefLabel "Enskild text med bilder"@sv ,
     "Non-book With Images"@en .
 
-t:Issue a :BasicType ;
+t:Issue a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:NonBookText ;
   owl:equivalentClass bibo:Issue ;
   :prefLabel "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
-t:MonographicSeries a :BasicType ;
+t:MonographicSeries a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:CollectingResource ;
   owl:equivalentClass bibo:Series ,
     bf:Series,
@@ -210,13 +223,15 @@ t:MonographicSeries a :BasicType ;
   :prefLabel "Monograph Series"@en ,
     "Monografiserie"@sv .
 
-kbv:Object a :BasicType ;
+kbv:Object a :Class ;
+  :category :OrderingType ;
   :broadMatch kbrda:ThreeDimensionalForm ;
   # TODO: rename or altLabel? owl:equivalentClass t:ObjectByPurpose ;
   :prefLabel "Intensional Object"@en ,
     "Syftesmässig sak"@sv .
 
-t:WrittenBook a :BasicType ;
+t:WrittenBook a :Class ;
+  :category :OrderingType ;
   :broadMatch kbrda:Text ;
   rdfs:subClassOf t:Book ;
   :prefLabel "Written book"@en ,
@@ -227,7 +242,8 @@ kbv:Audio a :SensoryForm ;
   :prefLabel "Audio"@en ,
     "Ljud"@sv .
 
-t:BookWithImages a :BasicType ;
+t:BookWithImages a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:WrittenBook , t:IllustratedWork ;
   skos:editorialNote "TODO: PictorialWork?"@en ;
   :broadMatch saogf:Bildverk ;
@@ -235,7 +251,8 @@ t:BookWithImages a :BasicType ;
   :prefLabel "Bok med bilder"@sv ,
     "Book With Images"@en .
 
-t:CollectingResource a :BasicType ;
+t:CollectingResource a :Class ;
+  :category :OrderingType ;
   ptg:abstract true ;
   :prefLabel "Collecting Resource"@en ,
     "Samlande resurs"@sv .
@@ -262,7 +279,8 @@ f:Integrating a :Class ;
   :prefLabel "Integrating"@en ,
     "Integrerande"@sv .
 
-t:Periodical a :BasicType ;
+t:Periodical a :Class ;
+  :category :OrderingType ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
   rdfs:subClassOf t:SerialPublication ;
   :exactMatch saogf:Periodika ;
@@ -270,7 +288,8 @@ t:Periodical a :BasicType ;
   :prefLabel "Tidskrift"@sv ,
     "Periodical"@en .
 
-t:Film a :BasicType ;
+t:Film a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf kbv:MovingImage ;
   owl:equivalentClass bibo:Film ;
   :exactMatch saogf:Filmer ;
@@ -281,19 +300,22 @@ kbv:Visual a :SensoryForm ;
   :prefLabel "Visual"@en ,
     "Visuellt verk"@sv .
 
-t:Archive a :BasicType ;
+t:Archive a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:CollectingResource ;
   :exactMatch saogf:Arkiv ;
   :prefLabel "Arkiv"@sv ,
     "Archive"@en .
 
-t:Article a :BasicType ;
+t:Article a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:NonBookText ;
   owl:equivalentClass bibo:Article ;
   :prefLabel "Artikel"@sv ,
     "Article"@en .
 
-t:Audiobook a :BasicType ;
+t:Audiobook a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf kbv:Audio ,
     t:Book ,
     bibo:AudioDocument ;
@@ -301,22 +323,16 @@ t:Audiobook a :BasicType ;
   :prefLabel "Ljudbok"@sv ,
     "Audiobook"@en .
 
-t:CollectedWork a :BasicType ;
-  rdfs:subClassOf t:CollectingResource ;
-  skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, t:MultipartBook"@en ;
-  :exactMatch saogf:Samlingsverk ;
-  :closeMatch bibo:CollectedDocument ;
-  :prefLabel "Samlingsverk"@sv ,
-    "Collected Work"@en .
-
-t:Database a :BasicType ;
+t:Database a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf f:Integrating ;
   :exactMatch saogf:Databaser ;
   :narrowMatch marc:UpdatingDatabase ;
   :prefLabel "Databas"@sv ,
     "Database"@en .
 
-t:TactileBook a :BasicType ;
+t:TactileBook a :Class ;
+  :category :OrderingType ;
   rdfs:subClassOf t:Book ,
     kbv:Tactile ;
   skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
@@ -455,7 +471,8 @@ f:Painting a :Form ;
   :prefLabel "Målning"@sv ,
     "Painting"@en .
 
-t:PerformedMusic a :BasicType ;
+t:PerformedMusic a :Class ;
+  :category :OrderingType ;
   :exactMatch kbrda:PerformedMusic ;
   rdfs:subClassOf kbv:Audio ,
     kbv:Music ;
@@ -487,6 +504,11 @@ f:Postcard a :Form ;
   :exactMatch saogf:Vykort ;
   :prefLabel "Vykort"@sv ,
     "Postcard"@en .
+
+# TODO: GenreForm?
+#f:PostcardBook a :Form ;
+#  rdfs:subClassOf f:Postcard , f:Book ;
+#  :exactMatch <https://id.kb.se/term/gmgpc/swe/Vykortsh%C3%A4ften> ;
 
 f:Poster a :Form ;
   rdfs:subClassOf t:IllustratedWork ;
