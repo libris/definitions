@@ -22,6 +22,9 @@ base <https://id.kb.se/term/div/>
 # TODO: make kbrda:* sameAs or bases for (basic) types (possibly abstract)?
 # *Some* are still better as "genreForm" though; so keep all as such (bound as genres for exact-matching types with a Restriction)?
 
+# TODO: s/a :Form/a :GenreFormClass/g
+# rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :genreForm ; owl:hasSelf true ] .
+
 
 # kbv:ArchivalUnit  # TODO: remove from vocab
 
@@ -60,7 +63,7 @@ f:CartographicTactileImage a :Form;
 
 f:CartographicTactileObject a :Form;
   owl:equivalentClass kbrda:CartographicTactileThreeDimensionalForm;
-  rdfs:subClassOf kbv:Cartography, kbv:TactileObject ;
+  rdfs:subClassOf kbv:Cartography, f:TactileObject ;
   rdfs:label "Kartografiskt taktilt objekt"@sv ,
      "Cartographic Tactile Object"@en .
 
@@ -424,13 +427,19 @@ kbv:Multimedia a :Class ;
     "Multimedia"@en .
 
 kbv:Software a :Form ; # TODO: pending; integrate with ComputerGame, Application, ...
+  ptg:abstract true ;
   rdfs:subClassOf kbv:Multimedia ;
   :prefLabel "Mjukvara"@sv ,
     "Software"@en .
 
+f:ComputerCode a :Form ;
+  rdfs:subClassOf kbv:Software ;
+  rdfs:label "Datorkod"@sv ,
+    "Computer Code"@en .
+
 f:ComputerProgram a :Form ;
   owl:equivalentClass kbrda:ComputerProgram;
-  rdfs:subClassOf kbv:Multimedia ;
+  rdfs:subClassOf kbv:Software ;
   rdfs:label "Datorprogram"@sv ,
     "Computer Program"@en .
 
@@ -441,7 +450,7 @@ f:ComputerGame a :Form ;
     "Computer Game"@en .
 
 f:Diagram a :Form ;
-  rdfs:subClassOf kbv:IllustratedWork ;
+  rdfs:subClassOf kbv:StillImage ;
   skos:exactMatch saogf:Diagram ;
   rdfs:label "Diagram"@sv ,
     "Diagram"@en .
@@ -527,7 +536,7 @@ f:PictureDictionary a :Form ;
     "Picture Dictionary"@en .
 
 f:Postcard a :Form ;
-  rdfs:subClassOf kbv:IllustratedWork ;
+  rdfs:subClassOf kbv:StillImage ;
   skos:exactMatch saogf:Vykort ;
   rdfs:label "Vykort"@sv ,
     "Postcard"@en .
@@ -538,11 +547,24 @@ f:Postcard a :Form ;
 #  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Vykortsh%C3%A4ften> ;
 
 f:Poster a :Form ;
-  rdfs:subClassOf kbv:IllustratedWork ;
+  rdfs:subClassOf kbv:StillImage ;
   owl:equivalentClass sdo:Poster ;
   skos:exactMatch saogf:Affischer ;
-  rdfs:label "Affisch"@sv ,
-    "Poster"@en .
+  rdfs:label "Affisch"@sv, "Poster"@en .
+
+f:ImagePoster a :Form ;
+  rdfs:subClassOf f:Poster ;
+  skos:broadMatch kbrda:StillImage ;
+  rdfs:label "Bildaffisch"@sv, "Image Poster"@en .
+
+f:TextPoster a :Form ;
+  rdfs:subClassOf f:Poster ;
+  skos:broadMatch kbrda:Text ;
+  rdfs:label "Textaffisch"@sv, "Text Poster"@en .
+
+f:ImageAndTextPoster a :Form ;
+  rdfs:subClassOf f:ImagePoster, f:TextPoster ;
+  rdfs:label "Bild- och textaffisch"@sv, "Image and Text Poster"@en .
 
 f:Puzzle a :Form ;
   rdfs:subClassOf f:PuzzleOrGame ;
