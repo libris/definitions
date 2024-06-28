@@ -29,7 +29,7 @@ HEADING_MAP = {
 
 ID = '@id'
 
-SAO_CODE = 'kssb'
+SAB_CODE = 'kssb'
 
 CODE_TYPE_MAP = {
     None: 'Subdivision',
@@ -62,6 +62,9 @@ class TableHandler:
     def handle_main_row(self, level, parts):
         current = self._stack[-1]
         node = self._make_node(parts, current=current)
+        if node is None:
+            return
+
         code = node['code']
 
         if node['@type'].endswith('Subdivision'):
@@ -123,6 +126,10 @@ class TableHandler:
         is_collection = '--' in code
         element_type = element_type or self._get_element_type(code)
 
+        if code[0] == '(' and ')' not in code:
+            #if debug: print(element_type, parts, file=sys.stderr)
+            return None
+
         node = None # TODO: USE self._index.get(code) OR merge in final step
         if not node:
             node = OrderedDict()
@@ -139,7 +146,7 @@ class TableHandler:
         else:
             node['@type'] = 'Classification'
 
-        node['inScheme'] = {ID: f'/term/{SAO_CODE}'}
+        node['inScheme'] = {ID: f'/term/{SAB_CODE}'}
 
         node_id = "%s" % quote(code.encode('utf-8'), safe=b'')
 
@@ -163,14 +170,14 @@ class TableHandler:
         if not is_collection and len(code) > 1:
 
             if re.match(r'^F[åb-z]\w*$', code): # Fb--Få
-                aux_elem = self._make_node(['=' + code[1:], parts[1]])
-                node.setdefault('related', []).append(aux_elem)
+                if aux_elem := self._make_node(['=' + code[1:], parts[1]]):
+                    node.setdefault('related', []).append(aux_elem)
 
             # TODO: if 'H', add relation to 'F' + code[1:] ?
 
             elif code.startswith('N'):
-                aux_elem = self._make_node(['-' + code[1:], parts[1]])
-                node.setdefault('related', []).append(aux_elem)
+                if aux_elem := self._make_node(['-' + code[1:], parts[1]]):
+                    node.setdefault('related', []).append(aux_elem)
 
             # TODO: if 'J', 'K' or 'M', add relation to 'N' + code[1:] ?
 
@@ -338,7 +345,7 @@ def flatten(data, results=None, broader=None):
     return {
         '@context': {
             '@vocab': 'https://id.kb.se/vocab/',
-            '@base': f'https://id.kb.se/term/{SAO_CODE}/',
+            '@base': f'https://id.kb.se/term/{SAB_CODE}/',
             'prefLabel': {'@language': 'sv'},
             'comment': {'@language': 'sv'},
         },
