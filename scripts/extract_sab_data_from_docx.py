@@ -274,8 +274,13 @@ def error_correct(parts):
     if parts[1] == 'Sjukhusbibliot ek':
         parts[1] = 'Sjukhusbibliotek'
 
-    if len(parts) > 2 and parts[-1] == '':
-        parts.pop()
+    if len(parts) > 2:
+        if parts[1] == '199' and parts[2] == '9 -':
+            parts[1] += parts.pop(2)
+        elif parts[1].isnumeric() and parts[2].startswith('-'):
+            parts[1] += ' ' + parts.pop(2)
+        elif parts[-1] == '':
+            parts.pop()
 
     return parts
 
