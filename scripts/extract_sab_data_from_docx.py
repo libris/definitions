@@ -308,9 +308,12 @@ def extract_sab(doc, debug=False):
 
         next_indent = INDENT_MAP.get(style, indent)
 
-        parts = []
-        for el in el.xpath('w:r/w:t', **ns):
-            parts.append(el.text)
+        parts = [
+            el.text
+            for el in el.xpath(
+                'w:r/w:t | w:smartTag/w:r/w:t | w:smartTag/w:smartTag/w:r/w:t', **ns
+            )
+        ]
 
         if not parts:
             continue

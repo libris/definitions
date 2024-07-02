@@ -343,7 +343,7 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "/LC" ;
   :prefLabel "Ljudupptagningar, optiska skivor"@sv ;
-  :comment "Hit ljudupptagningar lagrade på optiska skivor oavsett lagringsformat (CD-A, mp3 etc). Hit även ljudupptagningar, optiska skivor, i talboksemballage framställda efter Ljudupptagningar, optiska skivor, framställda enligt 17 § Upphovsrättslagen (eller dess föregång are) → /TC ."@sv .
+  :comment "Hit ljudupptagningar lagrade på optiska skivor oavsett lagringsformat (CD-A, mp3 etc). Hit även ljudupptagningar, optiska skivor, i talboksemballage framställda efter 2005-07-01. Ljudupptagningar, optiska skivor, framställda enligt 17 § Upphovsrättslagen (eller dess föregång are) → /TC ."@sv .
 
 <%2FLG> a :MediaSubdivision ;
   :inScheme </term/kssb> ;
@@ -464,7 +464,7 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "/TC" ;
   :prefLabel "Ljudupptagningar, optiska skivor, (enligt 17 § Upphovsrättslagen eller dess föregångare)"@sv ;
-  :comment "Hit DAISY på CD-R. Hit även ljudupptagningar på optiska skivor i andra lagringsformat. Hit DAISY där tal utgör dominerande del. Hit även DAISY med enbart talsyntes. Hit även ljudböcker, optiska skivor, i talboksemballage framställda före ”E-textböcker” och ”diskettböcker” → /DB. ”E-textböcker” och ”diskettböcker” för personer med funktionshinder framställda enligt 17 § Upphovsrättslagen → /TD. Ljudböcker, optiska skivor, i talboksemballage framställda och senare → /LC."@sv .
+  :comment "Hit DAISY på CD-R. Hit även ljudupptagningar på optiska skivor i andra lagringsformat. Hit DAISY där tal utgör dominerande del. Hit även DAISY med enbart talsyntes. Hit även ljudböcker, optiska skivor, i talboksemballage framställda före 2005-07-01. ”E-textböcker” och ”diskettböcker” → /DB. ”E-textböcker” och ”diskettböcker” för personer med funktionshinder framställda enligt 17 § Upphovsrättslagen → /TD. Ljudböcker, optiska skivor, i talboksemballage framställda 2005-07-01 och senare → /LC."@sv .
 
 <%2FTD> a :MediaSubdivision ;
   :inScheme </term/kssb> ;
@@ -482,7 +482,7 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "/TK" ;
   :prefLabel "Talböcker, kassetter, (enligt 17 § Upphovsrättslagen eller dess föregångare)."@sv ;
-  :comment "Hit även ljudböcker , kassetter, i talboksemballage framställda före Ljudböcker, kassetter, i talboksemballage framställda och senare → LK."@sv .
+  :comment "Hit även ljudböcker , kassetter, i talboksemballage framställda före 2005-07-01. Ljudböcker, kassetter, i talboksemballage framställda 2005-07-01 och senare → LK."@sv .
 
 <%2FTS> a :MediaSubdivision ;
   :inScheme </term/kssb> ;
@@ -12767,6 +12767,12 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "Hoam" ;
   :prefLabel "Bysantisk litteratur"@sv ;
+  :broader <Hoa> .
+
+<Hoa> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Hoa" ;
+  :prefLabel "Grekisk litteratur"@sv ;
   :broader <Ho> .
 
 <Hob> a :Classification ;
@@ -19982,6 +19988,12 @@ base <https://id.kb.se/term/kssb/>
   :prefLabel "1910 -"@sv ;
   :broader <Kl> .
 
+<Kl.6> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Kl.6" ;
+  :prefLabel "2000 -"@sv ;
+  :broader <Kl> .
+
 <Kly> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Kly" ;
@@ -26086,6 +26098,42 @@ base <https://id.kb.se/term/kssb/>
   :code "-ocb" ;
   :prefLabel "Thailand"@sv .
 
+<Nocca> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nocca" ;
+  :prefLabel "Malaysia"@sv ;
+  :related <-occa> ;
+  :broader <Nocc> .
+
+<-occa> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-occa" ;
+  :prefLabel "Malaysia"@sv .
+
+<Noccb> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Noccb" ;
+  :prefLabel "Singapore"@sv ;
+  :related <-occb> ;
+  :broader <Nocc> .
+
+<-occb> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-occb" ;
+  :prefLabel "Singapore"@sv .
+
+<Noccd> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Noccd" ;
+  :prefLabel "Brunei"@sv ;
+  :related <-occd> ;
+  :broader <Nocc> .
+
+<-occd> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-occd" ;
+  :prefLabel "Brunei"@sv .
+
 <Nocc> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nocc" ;
@@ -26097,6 +26145,18 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-occ" ;
   :prefLabel "Malaysia, Singapore och Brunei"@sv .
+
+<Nocda> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nocda" ;
+  :prefLabel "Laos"@sv ;
+  :related <-ocda> ;
+  :broader <Nocd> .
+
+<-ocda> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-ocda" ;
+  :prefLabel "Laos"@sv .
 
 <Nocdb> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27026,6 +27086,30 @@ base <https://id.kb.se/term/kssb/>
   :code "-peab" ;
   :prefLabel "Namibia"@sv .
 
+<Npeac> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npeac" ;
+  :prefLabel "Lesotho"@sv ;
+  :related <-peac> ;
+  :broader <Npea> .
+
+<-peac> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-peac" ;
+  :prefLabel "Lesotho"@sv .
+
+<Npead> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npead" ;
+  :prefLabel "Swaziland"@sv ;
+  :related <-pead> ;
+  :broader <Npea> .
+
+<-pead> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-pead" ;
+  :prefLabel "Swaziland"@sv .
+
 <Npea> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Npea" ;
@@ -27038,18 +27122,66 @@ base <https://id.kb.se/term/kssb/>
   :code "-pea" ;
   :prefLabel "Sydafrika, Namibia, Lesotho, Swaziland"@sv .
 
+<Npeb> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npeb" ;
+  :prefLabel "Botswana"@sv ;
+  :related <-peb> ;
+  :broader <Npe> .
+
+<-peb> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-peb" ;
+  :prefLabel "Botswana"@sv .
+
+<Npeca> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npeca" ;
+  :prefLabel "Zimbabwe"@sv ;
+  :related <-peca> ;
+  :broader <Npec> .
+
+<-peca> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-peca" ;
+  :prefLabel "Zimbabwe"@sv .
+
+<Npecb> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npecb" ;
+  :prefLabel "Zambia"@sv ;
+  :related <-pecb> ;
+  :broader <Npec> .
+
+<-pecb> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-pecb" ;
+  :prefLabel "Zambia"@sv .
+
+<Npecc> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Npecc" ;
+  :prefLabel "Malawi"@sv ;
+  :related <-pecc> ;
+  :broader <Npec> .
+
+<-pecc> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-pecc" ;
+  :prefLabel "Malawi"@sv .
+
 <Npec> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Npec" ;
-  :prefLabel ","@sv ;
-  :comment ","@sv ;
+  :prefLabel "Zimbabwe"@sv ;
+  :comment ", Zambia , Malawi"@sv ;
   :related <-pec> ;
   :broader <Npe> .
 
 <-pec> a :GeographicSubdivision ;
   :inScheme </term/kssb> ;
   :code "-pec" ;
-  :prefLabel ","@sv .
+  :prefLabel "Zimbabwe"@sv .
 
 <Nped> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27291,6 +27423,114 @@ base <https://id.kb.se/term/kssb/>
   :code "-p" ;
   :prefLabel "Afrika"@sv .
 
+<Nqaaa> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaaa" ;
+  :prefLabel "Maine"@sv ;
+  :related <-qaaa> ;
+  :broader <Nqa> .
+
+<-qaaa> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaaa" ;
+  :prefLabel "Maine"@sv .
+
+<Nqaab> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaab" ;
+  :prefLabel "New Hampshire"@sv ;
+  :related <-qaab> ;
+  :broader <Nqa> .
+
+<-qaab> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaab" ;
+  :prefLabel "New Hampshire"@sv .
+
+<Nqaac> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaac" ;
+  :prefLabel "Vermont"@sv ;
+  :related <-qaac> ;
+  :broader <Nqa> .
+
+<-qaac> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaac" ;
+  :prefLabel "Vermont"@sv .
+
+<Nqaad> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaad" ;
+  :prefLabel "Massachusetts"@sv ;
+  :related <-qaad> ;
+  :broader <Nqa> .
+
+<-qaad> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaad" ;
+  :prefLabel "Massachusetts"@sv .
+
+<Nqaae> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaae" ;
+  :prefLabel "Rhode Island"@sv ;
+  :related <-qaae> ;
+  :broader <Nqa> .
+
+<-qaae> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaae" ;
+  :prefLabel "Rhode Island"@sv .
+
+<Nqaaf> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaaf" ;
+  :prefLabel "Connecticut"@sv ;
+  :related <-qaaf> ;
+  :broader <Nqa> .
+
+<-qaaf> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaaf" ;
+  :prefLabel "Connecticut"@sv .
+
+<Nqaag> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaag" ;
+  :prefLabel "New York"@sv ;
+  :related <-qaag> ;
+  :broader <Nqa> .
+
+<-qaag> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaag" ;
+  :prefLabel "New York"@sv .
+
+<Nqaah> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaah" ;
+  :prefLabel "Pennsylvania"@sv ;
+  :related <-qaah> ;
+  :broader <Nqa> .
+
+<-qaah> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaah" ;
+  :prefLabel "Pennsylvania"@sv .
+
+<Nqaai> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaai" ;
+  :prefLabel "New Jersey"@sv ;
+  :related <-qaai> ;
+  :broader <Nqa> .
+
+<-qaai> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaai" ;
+  :prefLabel "New Jersey"@sv .
+
 <Nqaba> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nqaba" ;
@@ -27318,15 +27558,87 @@ base <https://id.kb.se/term/kssb/>
 <Nqabc> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nqabc" ;
-  :prefLabel "("@sv ;
-  :comment ")"@sv ;
+  :prefLabel "District of Columbia"@sv ;
+  :comment "( Washington D.C. )"@sv ;
   :related <-qabc> ;
   :broader <Nqab> .
 
 <-qabc> a :GeographicSubdivision ;
   :inScheme </term/kssb> ;
   :code "-qabc" ;
-  :prefLabel "("@sv .
+  :prefLabel "District of Columbia"@sv .
+
+<Nqabd> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabd" ;
+  :prefLabel "West Virginia"@sv ;
+  :related <-qabd> ;
+  :broader <Nqab> .
+
+<-qabd> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabd" ;
+  :prefLabel "West Virginia"@sv .
+
+<Nqabe> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabe" ;
+  :prefLabel "Virginia"@sv ;
+  :related <-qabe> ;
+  :broader <Nqab> .
+
+<-qabe> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabe" ;
+  :prefLabel "Virginia"@sv .
+
+<Nqabf> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabf" ;
+  :prefLabel "North Carolina"@sv ;
+  :related <-qabf> ;
+  :broader <Nqab> .
+
+<-qabf> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabf" ;
+  :prefLabel "North Carolina"@sv .
+
+<Nqabg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabg" ;
+  :prefLabel "South Carolina"@sv ;
+  :related <-qabg> ;
+  :broader <Nqab> .
+
+<-qabg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabg" ;
+  :prefLabel "South Carolina"@sv .
+
+<Nqabh> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabh" ;
+  :prefLabel "Georgia"@sv ;
+  :related <-qabh> ;
+  :broader <Nqab> .
+
+<-qabh> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabh" ;
+  :prefLabel "Georgia"@sv .
+
+<Nqabi> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqabi" ;
+  :prefLabel "Florida"@sv ;
+  :related <-qabi> ;
+  :broader <Nqab> .
+
+<-qabi> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qabi" ;
+  :prefLabel "Florida"@sv .
 
 <Nqab> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27340,6 +27652,102 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-qab" ;
   :prefLabel "Sydöstra staterna"@sv .
+
+<Nqaca> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaca" ;
+  :prefLabel "Alabama"@sv ;
+  :related <-qaca> ;
+  :broader <Nqac> .
+
+<-qaca> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaca" ;
+  :prefLabel "Alabama"@sv .
+
+<Nqacb> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqacb" ;
+  :prefLabel "Mississippi"@sv ;
+  :related <-qacb> ;
+  :broader <Nqac> .
+
+<-qacb> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qacb" ;
+  :prefLabel "Mississippi"@sv .
+
+<Nqacc> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqacc" ;
+  :prefLabel "Louisiana"@sv ;
+  :related <-qacc> ;
+  :broader <Nqac> .
+
+<-qacc> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qacc" ;
+  :prefLabel "Louisiana"@sv .
+
+<Nqacd> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqacd" ;
+  :prefLabel "Texas"@sv ;
+  :related <-qacd> ;
+  :broader <Nqac> .
+
+<-qacd> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qacd" ;
+  :prefLabel "Texas"@sv .
+
+<Nqacf> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqacf" ;
+  :prefLabel "Oklahoma"@sv ;
+  :related <-qacf> ;
+  :broader <Nqac> .
+
+<-qacf> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qacf" ;
+  :prefLabel "Oklahoma"@sv .
+
+<Nqacg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqacg" ;
+  :prefLabel "Arkansas"@sv ;
+  :related <-qacg> ;
+  :broader <Nqac> .
+
+<-qacg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qacg" ;
+  :prefLabel "Arkansas"@sv .
+
+<Nqach> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqach" ;
+  :prefLabel "Tennessee"@sv ;
+  :related <-qach> ;
+  :broader <Nqac> .
+
+<-qach> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qach" ;
+  :prefLabel "Tennessee"@sv .
+
+<Nqaci> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaci" ;
+  :prefLabel "Kentucky"@sv ;
+  :related <-qaci> ;
+  :broader <Nqac> .
+
+<-qaci> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaci" ;
+  :prefLabel "Kentucky"@sv .
 
 <Nqac> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27378,6 +27786,78 @@ base <https://id.kb.se/term/kssb/>
   :code "-qadb" ;
   :prefLabel "Indiana"@sv .
 
+<Nqadc> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqadc" ;
+  :prefLabel "Illinois"@sv ;
+  :related <-qadc> ;
+  :broader <Nqad> .
+
+<-qadc> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qadc" ;
+  :prefLabel "Illinois"@sv .
+
+<Nqadd> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqadd" ;
+  :prefLabel "Michigan"@sv ;
+  :related <-qadd> ;
+  :broader <Nqad> .
+
+<-qadd> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qadd" ;
+  :prefLabel "Michigan"@sv .
+
+<Nqade> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqade" ;
+  :prefLabel "Wisconsin"@sv ;
+  :related <-qade> ;
+  :broader <Nqad> .
+
+<-qade> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qade" ;
+  :prefLabel "Wisconsin"@sv .
+
+<Nqadf> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqadf" ;
+  :prefLabel "Minnesota"@sv ;
+  :related <-qadf> ;
+  :broader <Nqad> .
+
+<-qadf> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qadf" ;
+  :prefLabel "Minnesota"@sv .
+
+<Nqadg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqadg" ;
+  :prefLabel "Iowa"@sv ;
+  :related <-qadg> ;
+  :broader <Nqad> .
+
+<-qadg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qadg" ;
+  :prefLabel "Iowa"@sv .
+
+<Nqadh> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqadh" ;
+  :prefLabel "Missouri"@sv ;
+  :related <-qadh> ;
+  :broader <Nqad> .
+
+<-qadh> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qadh" ;
+  :prefLabel "Missouri"@sv .
+
 <Nqad> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nqad" ;
@@ -27415,6 +27895,78 @@ base <https://id.kb.se/term/kssb/>
   :code "-qaeb" ;
   :prefLabel "Nebraska"@sv .
 
+<Nqaec> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaec" ;
+  :prefLabel "South Dakota"@sv ;
+  :related <-qaec> ;
+  :broader <Nqae> .
+
+<-qaec> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaec" ;
+  :prefLabel "South Dakota"@sv .
+
+<Nqaed> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaed" ;
+  :prefLabel "North Dakota"@sv ;
+  :related <-qaed> ;
+  :broader <Nqae> .
+
+<-qaed> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaed" ;
+  :prefLabel "North Dakota"@sv .
+
+<Nqaef> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaef" ;
+  :prefLabel "Montana"@sv ;
+  :related <-qaef> ;
+  :broader <Nqae> .
+
+<-qaef> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaef" ;
+  :prefLabel "Montana"@sv .
+
+<Nqaeg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaeg" ;
+  :prefLabel "Wyoming"@sv ;
+  :related <-qaeg> ;
+  :broader <Nqae> .
+
+<-qaeg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaeg" ;
+  :prefLabel "Wyoming"@sv .
+
+<Nqaeh> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaeh" ;
+  :prefLabel "Colorado"@sv ;
+  :related <-qaeh> ;
+  :broader <Nqae> .
+
+<-qaeh> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaeh" ;
+  :prefLabel "Colorado"@sv .
+
+<Nqaei> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaei" ;
+  :prefLabel "New Mexico"@sv ;
+  :related <-qaei> ;
+  :broader <Nqae> .
+
+<-qaei> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaei" ;
+  :prefLabel "New Mexico"@sv .
+
 <Nqae> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nqae" ;
@@ -27427,6 +27979,18 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-qae" ;
   :prefLabel "Bergsstaterna"@sv .
+
+<Nqafa> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqafa" ;
+  :prefLabel "Arizona"@sv ;
+  :related <-qafa> ;
+  :broader <Nqaf> .
+
+<-qafa> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qafa" ;
+  :prefLabel "Arizona"@sv .
 
 <Nqafb> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27463,6 +28027,42 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-qafd" ;
   :prefLabel "Kalifornien"@sv .
+
+<Nqafe> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqafe" ;
+  :prefLabel "Oregon"@sv ;
+  :related <-qafe> ;
+  :broader <Nqaf> .
+
+<-qafe> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qafe" ;
+  :prefLabel "Oregon"@sv .
+
+<Nqaff> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqaff" ;
+  :prefLabel "Idaho"@sv ;
+  :related <-qaff> ;
+  :broader <Nqaf> .
+
+<-qaff> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qaff" ;
+  :prefLabel "Idaho"@sv .
+
+<Nqafg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqafg" ;
+  :prefLabel "Washington"@sv ;
+  :related <-qafg> ;
+  :broader <Nqaf> .
+
+<-qafg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qafg" ;
+  :prefLabel "Washington"@sv .
 
 <Nqafh> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27514,6 +28114,45 @@ base <https://id.kb.se/term/kssb/>
   :code "-qbb" ;
   :prefLabel "New Foundland"@sv .
 
+<Nqbc> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqbc" ;
+  :prefLabel "Prince Edward Island"@sv ;
+  :related <-qbc> ;
+  :inCollection <Nqbb--Nqbn> ;
+  :broader <Nqb> .
+
+<-qbc> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qbc" ;
+  :prefLabel "Prince Edward Island"@sv .
+
+<Nqbd> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqbd" ;
+  :prefLabel "Nova Scotia"@sv ;
+  :related <-qbd> ;
+  :inCollection <Nqbb--Nqbn> ;
+  :broader <Nqb> .
+
+<-qbd> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qbd" ;
+  :prefLabel "Nova Scotia"@sv .
+
+<Nqbe> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqbe" ;
+  :prefLabel "New Brunswick"@sv ;
+  :related <-qbe> ;
+  :inCollection <Nqbb--Nqbn> ;
+  :broader <Nqb> .
+
+<-qbe> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qbe" ;
+  :prefLabel "New Brunswick"@sv .
+
 <Nqbf> a :Classification ;
   :inScheme </term/kssb> ;
   :code "Nqbf" ;
@@ -27526,6 +28165,19 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-qbf" ;
   :prefLabel "Québec"@sv .
+
+<Nqbg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqbg" ;
+  :prefLabel "Ontario"@sv ;
+  :related <-qbg> ;
+  :inCollection <Nqbb--Nqbn> ;
+  :broader <Nqb> .
+
+<-qbg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qbg" ;
+  :prefLabel "Ontario"@sv .
 
 <Nqbh> a :Classification ;
   :inScheme </term/kssb> ;
@@ -27701,6 +28353,42 @@ base <https://id.kb.se/term/kssb/>
   :inScheme </term/kssb> ;
   :code "-qcd" ;
   :prefLabel "El Salvador"@sv .
+
+<Nqce> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqce" ;
+  :prefLabel "Nicaragua"@sv ;
+  :related <-qce> ;
+  :broader <Nqc> .
+
+<-qce> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qce" ;
+  :prefLabel "Nicaragua"@sv .
+
+<Nqcf> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqcf" ;
+  :prefLabel "Costa Rica"@sv ;
+  :related <-qcf> ;
+  :broader <Nqc> .
+
+<-qcf> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qcf" ;
+  :prefLabel "Costa Rica"@sv .
+
+<Nqcg> a :Classification ;
+  :inScheme </term/kssb> ;
+  :code "Nqcg" ;
+  :prefLabel "Panama"@sv ;
+  :related <-qcg> ;
+  :broader <Nqc> .
+
+<-qcg> a :GeographicSubdivision ;
+  :inScheme </term/kssb> ;
+  :code "-qcg" ;
+  :prefLabel "Panama"@sv .
 
 <Nqchaa> a :Classification ;
   :inScheme </term/kssb> ;
