@@ -258,6 +258,9 @@ def error_correct(parts):
     if parts[1] == ' ' and len(parts) > 2:
         return [code] + parts[2:]
 
+    if len(parts) > 2 and re.match(r' ?[a-zåäö]', parts[2]):
+        return [code] + [parts[1] + parts[2]] + parts[3:]
+
     return parts
 
 
