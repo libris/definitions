@@ -256,10 +256,26 @@ def error_correct(parts):
         return [code + parts[1] + last_part, text]
 
     if parts[1] == ' ' and len(parts) > 2:
-        return [code] + parts[2:]
+        parts = [code] + parts[2:]
 
     if len(parts) > 2 and re.match(r' ?[a-zåäö]', parts[2]):
-        return [code] + [parts[1] + parts[2]] + parts[3:]
+        parts = [code] + [parts[1] + parts[2]] + parts[3:]
+
+    if m := re.search(' (Hit|Används) ', parts[1]):
+        i = m.span()[0]
+        comment_chunk = parts[1][i:]
+        parts[1] = parts[1][0:i]
+        if len(parts) < 3:
+            parts.append('')
+        parts[2] = comment_chunk + parts[2]
+
+    parts = [re.sub(r' +', ' ', p.strip()) for p in parts]
+
+    if parts[1] == 'Sjukhusbibliot ek':
+        parts[1] = 'Sjukhusbibliotek'
+
+    if len(parts) > 2 and parts[-1] == '':
+        parts.pop()
 
     return parts
 
