@@ -23,7 +23,7 @@ base <https://id.kb.se/term/div/>
 # *Some* are still better as "genreForm" though; so keep all as such (bound as genres for exact-matching types with a Restriction)?
 
 # TODO: s/a :Form/a :GenreFormClass/g
-# rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :genreForm ; owl:hasSelf true ] .
+# ?gfcls a :GenreFormClass ; rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :genreForm ; owl:hasValue ?gfcls ] .
 
 
 # kbv:ArchivalUnit  # TODO: remove from vocab
@@ -33,36 +33,51 @@ kbv:Arrangement a :Class ;
     "Arrangemang"@sv .
 
 
+# TODO: replace with f:Cartography and compute on revert (an "!important" f:Cartography genreForm)
 kbv:Cartography a :Class ;
+  ptg:abstract true ;
   rdfs:subClassOf kbv:Visual ;
   skos:editorialNote "TODO: restriction on Map for instanceOf; allValuesFrom this..."@en ;
   skos:exactMatch saogf:Kartor ;
-  skos:narrowMatch kbv:Map ;
   :prefLabel "Kartografiskt verk"@sv ,
     "Cartography"@en .
 
 f:CartographicDataset a :Form;
-  owl:equivalentClass kbrda:CartographicDataset;
+  skos:exactMatch kbrda:CartographicDataset;
   rdfs:subClassOf kbv:Cartography, kbv:Dataset ;
   rdfs:label "Kartografiskt dataset"@sv , "Cartographic dataset"@en .
 
 f:CartographicImage a :Form;
-  owl:equivalentClass kbrda:CartographicImage;
+  skos:exactMatch kbrda:CartographicImage;
+  #skos:closeMatch kbv:Map ;
   rdfs:subClassOf kbv:Cartography, kbv:StillImage ;
-  rdfs:label "Kartografisk bild"@sv , "Cartographic image"@en .
+  rdfs:label "Kartografisk bild"@sv , "Cartographic image"@en ;
+  skos:altLabel "Karta"@sv, "Kartor in plano"@sv .
+
+# FIXME: remove instancetype kbv:Map ; compute on revert (if work is kbv:Cartography, prefer Map over all non-electronic?)
+# TODO: == Cartography
+#f:Map a :Form ;
+#  rdfs:subClassOf f:CartographicImage ;
+#  rdfs:label "Karta"@sv , "Map"@en .
+
+f:Atlas a :Form ;
+  rdfs:subClassOf kbv:Cartography ,
+    kbv:Book ;
+  rdfs:label "Atlas"@sv ,
+    "Atlas"@en .
 
 f:CartographicMovingImage a :Form;
-  owl:equivalentClass kbrda:CartographicMovingImage;
+  skos:exactMatch kbrda:CartographicMovingImage;
   rdfs:subClassOf kbv:Cartography, kbv:MovingImage ;
   rdfs:label "Kartografisk rörlig bild"@sv , "Cartographic moving image"@en .
 
 f:CartographicTactileImage a :Form;
-  owl:equivalentClass kbrda:CartographicTactileImage;
+  skos:exactMatch kbrda:CartographicTactileImage;
   rdfs:subClassOf kbv:Cartography, kbv:StillImage ;
   rdfs:label "Kartografisk taktil bild"@sv , "Cartographic tactile image"@en .
 
 f:CartographicTactileObject a :Form;
-  owl:equivalentClass kbrda:CartographicTactileThreeDimensionalForm;
+  skos:exactMatch kbrda:CartographicTactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, f:TactileObject ;
   rdfs:label "Kartografiskt taktilt objekt"@sv ,
      "Cartographic Tactile Object"@en .
@@ -75,16 +90,10 @@ f:CartographicTactileObject a :Form;
 #    "Tactile Cartography"@en .
 
 f:CartographicObject a :Form;
-  owl:equivalentClass kbrda:CartographicThreeDimensionalForm;
+  skos:exactMatch kbrda:CartographicThreeDimensionalForm;
   rdfs:subClassOf kbv:Cartography, kbv:Object ;
   rdfs:label "Kartografiskt objekt"@sv ,
      "Cartographic Object"@en .
-
-f:Atlas a :Form ;
-  rdfs:subClassOf kbv:Cartography ,
-    kbv:Book ;
-  rdfs:label "Atlas"@sv ,
-    "Atlas"@en .
 
 # FIXME: move instancetype kbv:Globe to work
 f:Globe a :Form ;
@@ -92,41 +101,33 @@ f:Globe a :Form ;
   rdfs:label "Jord- eller månglob"@sv ,
     "Globe"@en .
 
-# FIXME: move instancetype kbv:Map to work
-# TODO: == Cartography
-f:Map a :Form ;
-  rdfs:subClassOf f:CartographicImage ;
-  rdfs:label "Karta"@sv ,
-    "Map"@en .
-
-
 kbv:Tactile a :SensoryForm ;
   skos:exactMatch saogf:Taktila\%20verk ;
   :prefLabel "Tactile"@en ,
     "Taktilt verk"@sv .
 
 f:TactileImage a :Form ;
-  owl:equivalentClass kbrda:TactileImage;
+  skos:exactMatch kbrda:TactileImage;
   rdfs:subClassOf kbv:StillImage, kbv:Tactile ; # _:TactileInstanceRestriction .
   rdfs:label "Taktil bild"@sv , "Tactile image"@en .
 
 f:TactileNotatedMusic a :Form ;
-  owl:equivalentClass kbrda:TactileNotatedMusic;
+  skos:exactMatch kbrda:TactileNotatedMusic;
   rdfs:subClassOf kbv:NotatedMusic, kbv:Tactile ; # , _:TactileInstanceRestriction .
   rdfs:label "Taktil noterad musik"@sv , "Tactile notated music"@en .
 
 f:TactileNotatedMovement a :Form ;
-  owl:equivalentClass kbrda:TactileNotatedMovement;
+  skos:exactMatch kbrda:TactileNotatedMovement;
   rdfs:subClassOf kbv:NotatedMovement, kbv:Tactile ; # , _:TactileInstanceRestriction .
   rdfs:label "Taktil noterad rörelse"@sv , "Tactile notated movement"@en .
 
 f:TactileText a :Form ;
-  owl:equivalentClass kbrda:TactileText;
+  skos:exactMatch kbrda:TactileText;
   rdfs:subClassOf kbv:Text, kbv:Tactile ; # , _:TactileInstanceRestriction .
   rdfs:label "Taktil text"@sv , "Tactile text"@en .
 
 f:TactileObject a :Form ;
-  owl:equivalentClass kbrda:TactileThreeDimensionalForm;
+  skos:exactMatch kbrda:TactileThreeDimensionalForm;
   rdfs:subClassOf kbv:Object, kbv:Tactile ; # , _:TactileInstanceRestriction ,
   rdfs:label "Taktilt objekt"@sv ,
      "Tactile Object"@en .
@@ -142,7 +143,7 @@ kbv:Dataset a :Class ;
     "Dataset"@sv .
 
 f:ComputerDataset a :Form;
-  owl:equivalentClass kbrda:ComputerDataset;
+  skos:exactMatch kbrda:ComputerDataset;
   rdfs:subClassOf kbv:Dataset .
 
 kbv:Text a :Class ;
@@ -206,7 +207,8 @@ kbv:IllustratedWork a :Class ;
   rdfs:label "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
-kbv:Book a :Class ;  # T:LargeText
+kbv:Book a :Class ;
+  ptg:abstract true ;
   :category :pending, :concretetype ;
   owl:equivalentClass bibo:Book, sdo:Book ;
   rdfs:subClassOf kbv:Text ;
@@ -253,7 +255,7 @@ kbv:MonographicSeries a :Class ;
 
 kbv:Object a :Class ;
   :category :ConcreteType ;
-  skos:broadMatch kbrda:ThreeDimensionalForm ;
+  skos:exactMatch kbrda:ThreeDimensionalForm ;
   # TODO: rename or altLabel? owl:equivalentClass kbv:ObjectByPurpose ;
   :prefLabel "Intensional Object"@en ,
     "Syftesmässig sak"@sv .
@@ -263,7 +265,8 @@ kbv:WrittenBook a :Class ;
   skos:broadMatch kbrda:Text ;
   rdfs:subClassOf kbv:Book ;
   rdfs:label "Written book"@en ,
-    "Skriven bok"@sv .
+    "Skriven bok"@sv ;
+  skos:altLabel "Bok"@sv, "Book"@en .
 
 kbv:Audio a :SensoryForm ;
   skos:exactMatch kbrda:Sounds ;
@@ -438,7 +441,7 @@ f:ComputerCode a :Form ;
     "Computer Code"@en .
 
 f:ComputerProgram a :Form ;
-  owl:equivalentClass kbrda:ComputerProgram;
+  skos:exactMatch kbrda:ComputerProgram;
   rdfs:subClassOf kbv:Software ;
   rdfs:label "Datorprogram"@sv ,
     "Computer Program"@en .

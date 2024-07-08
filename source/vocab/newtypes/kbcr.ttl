@@ -43,10 +43,11 @@ kbv:Unmediated a :MediaType ;
   :altLabel "Fysisk resurs"@sv .
 
 
+# TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
 kbv:Print a owl:Class;
   rdfs:subClassOf kbv:Unmediated .
 
-# TODO: Untenable: Printed vs. Handmade (Handwritten / Typewritten / Photocopied) ...
+# Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
 #kbv:Handwritten a :Class; rdfs:subClassOf kbv:Unmediated .
 #kbv:Typewrittten a :Class; rdfs:subClassOf kbv:Unmediated .
 
@@ -56,6 +57,7 @@ kbv:Manuscript a owl:Class ;  # TODO: changed to Work in BF
 # mer extraordinärt? Sitter på exemplar?
 #kbv:Photocopied a :Class; rdfs:subClassOf kbv:Unmediated ; skos:related marc:RegularPrintReproduction .
 
+# fmt:LargeText a :Format ?
 
 kbv:Volume a :CarrierType;
   #ptg:abstract true ;
@@ -103,12 +105,12 @@ kbv:Sheet a :CarrierType;
 kbv:PrintedSheet a :Class ;
   rdfs:subClassOf kbv:Print, kbv:Sheet .
 
-kbv:NonPrintedSheet a :Class ;
+kbv:HandmadeSheet a :Class ;
   rdfs:subClassOf kbv:Unmediated, kbv:Sheet .
 
 
 # TODO: Every non-DigitalResource is physical of course; this is for "none of the others; actual purposeful 3d object"...
-kbv:PhysicalObject a owl:Class ;
+kbv:PhysicalObject a owl:Class ; # kbv:UnmediatedObject ?
   skos:exactMatch kbrda:Object ;
   rdfs:subClassOf kbv:Unmediated .
 
@@ -459,8 +461,3 @@ kbv:StereographDisc a :CarrierType ;
 # kbv:ProjectedImageInstance kbv:instanceOf kbv:ProjectedImage .
 # kbv:NotatedMusicInstance kbv:instanceOf kbv:NotatedMusic .
 # kbv:KitInstance kbv:instanceOf kbv:Kit .
-
-# Missing RDA equivalents:
-#kbrda:ComputerDataset :prefLabel "Computer dataset"@en .
-#kbrda:ComputerProgram :prefLabel "Datorprogram"@sv, "Computer program"@en .
-#kbrda:ThreeDimensionalForm :prefLabel "Tredimensionell form"@sv, "Three-dimensional form"@en .
