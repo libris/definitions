@@ -1,0 +1,13 @@
+prefix : <https://id.kb.se/vocab/>
+
+select distinct ?code (count(distinct ?x) as ?count) (sample(?rec) as ?sample) {
+  ?x ^:mainEntity ?rec ; :instanceOf? / :classification ?cls .
+  # NOTE: Excluding Item classification from precoordinated terms.
+  filter not exists { ?x :itemOf [] }
+  filter(isBLANK(?cls))
+  ?cls :code ?code ; :inScheme [ :code "kssb" ] .
+  filter(!regex(?code, "/[A-Z]+"))
+  # NOTE: Excluding "name forms".
+  #filter(!contains(?code, "z "))
+  filter(!contains(?code, " "))
+} order by desc(?count)

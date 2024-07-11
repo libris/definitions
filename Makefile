@@ -48,3 +48,10 @@ cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
 
 cache/lcgft.ttl.gz:
 	curl -sL "https://id.loc.gov/download/authorities/genreForms.skosrdf.ttl.gz" -o $@
+
+source/sab/precoordinated.ttl: scripts/make_precoordinated_sab_terms.py source/sab.ttl cache/sab-usages.tsv.gz
+	python3 $^ > $@ 2>logs/sab-unknown.tsv
+
+cache/sab-usages.tsv.gz: scripts/sab-usages.rq
+	curl -s https://libris.kb.se/sparql -HAccept:text/tab-separated-values --data-urlencode query@$^ | gzip - > /tmp/sab-usages.tsv.gz
+	cp /tmp/sab-usages.tsv.gz $@
