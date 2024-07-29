@@ -6,7 +6,7 @@ import re
 from zipfile import ZipFile
 import json
 from lxml import etree
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
@@ -61,17 +61,21 @@ class TableHandler:
 
     def handle_main_row(self, level, parts):
         current = self._stack[-1]
+
         node = self._make_node(parts, current=current)
         if node is None:
             return
 
         code = node['code']
 
+        dangling = False
+
         if node['@type'].endswith('Subdivision'):
             current.setdefault('element', []).append(node)
             return
         elif not level and not len(code) == 1:
-            return
+            # FIXME: we seem to lose parent 'B' from e.g. ':a' in HJÄLPTABELLER
+            dangling = True
 
         if node['@type'].endswith('Collection'):
             self._current_coll = [ node[ID] ] + code.split('--')
@@ -79,14 +83,18 @@ class TableHandler:
             # classification, instead of:
             #return
         elif self._current_coll:
-            # FIXME: _current_coll needs to be like _stack ...
+            # TODO 668fe2a3: _current_coll needs to be like _stack ...
             coll_id, coll_start, coll_end = self._current_coll
             if (len(code) == len(coll_start) and
                     code >= coll_start and code <= coll_end):
                 node['inCollection'] = {ID: coll_id}
 
-        if len(code) > len(current['code']):
-            # "Deeper" Collection nodes got lost otherwise (see FIXME though)
+        if dangling:
+            prev_parent = self._stack[-1]
+            if node['code'].startswith(prev_parent['code']):
+                prev_parent.setdefault('narrower', []).append(node)
+        elif len(code) > len(current['code']):
+            # "Deeper" Collection nodes got lost otherwise (but see 668fe2a3)
             if node['@type'].endswith('Collection'):
                 self.helptable.append(node)
             elif code.startswith(current['code']):
@@ -148,14 +156,14 @@ class TableHandler:
 
         node['inScheme'] = {ID: f'/term/{SAB_CODE}'}
 
-        node_id = "%s" % quote(code.encode('utf-8'), safe=b'')
+        node_id = "%s" % quote(code, safe='')
 
         # NOTE: Many local elements are similar to their top-level element, but
         # far from all (and special '.0' elements are always locally unique).
         if current and element_type:
             if code[0:2] != '.0':
                 node['broader'] = {ID: node_id}
-            node_id = current[ID] + code
+            node_id = quote(unquote(current[ID]) + code)
 
         node[ID] = node_id
 
@@ -330,7 +338,7 @@ def extract_sab(doc, debug=False):
             assert not indent
             in_section = HEADING_MAP.get(parts[0], in_section)
             if debug:
-                print("#", parts[0])
+                print("#", parts[0], '=>', in_section)
         else:
             if len(parts) > 2:
                 parts[2] = ' '.join(parts[2:])
@@ -347,7 +355,7 @@ def extract_sab(doc, debug=False):
 
             if debug:
                 print(indent, sep='', end='')
-                print(('%s =' % parts[0]), *parts[1:], sep='\t')
+                print(in_section, '%s =' % parts[0], *parts[1:], sep='\t')
 
     return flatten(thandler.get_results())
 
