@@ -580,6 +580,12 @@
             },
             "concerning"
           ]
+        },
+        "License": {
+          "@id": "License-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "License",
+          "showProperties": [ "title", "identifier" ]
         }
       }
     },
@@ -1122,6 +1128,13 @@
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "classLensDomain": "ImageObject",
           "showProperties": [ "fresnel:super", "thumbnail", "publisher", "usageAndAccessPolicy" ]
+        },
+        "License": {
+          "@id": "License-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "License-chips"},
+          "classLensDomain": "License",
+          "showProperties": [ "fresnel:super" ]
         }
       }
     },
@@ -1378,7 +1391,6 @@
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
-
       }
     },
     "search-chips": {
