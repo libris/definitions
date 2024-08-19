@@ -33,6 +33,12 @@
     owl:equivalentClass bf2:Item, sdo:Product, holding:Item .
     #TODO?: owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
 
+:SingleItem a owl:Class ;
+    rdfs:subClassOf :Item ;
+    :category marc:none ;
+    owl:equivalentClass sdo:IndividualProduct ;
+    rdfs:label "Single item"@en, "Exemplar"@sv .
+
 :itemOf a owl:ObjectProperty ;
     rdfs:label "Holding for"@en, "bestånd på"@sv ;
     owl:inverseOf :hasItem;
@@ -210,7 +216,7 @@
 :itemUsed a owl:ObjectProperty ;
     rdfs:label "Item used"@en, "Exemplaret som använts"@sv ;
     rdfs:domain :ProvisionActivity ;
-    rdfs:range :Item .
+    rdfs:range :SingleItem .
 
 :nonCodedLocationQualifier a owl:DatatypeProperty;
     rdfs:label "location qualifier"@en, "precisering av hyllplacering"@sv;
@@ -248,9 +254,10 @@
 
 :hasComponent a owl:ObjectProperty ;
     rdfs:label "has component"@en, "har komponent"@sv ;
-    :category :compositional ;
+    :category :compositional, :integral;
     rdfs:subPropertyOf bf2:hasPart ;
     rdfs:domain :Item ;
+    owl:inverseOf :componentOf ;
     # TODO: rdfs:domain :SomeItems ;
     rdfs:range :Item ;
     skos:note "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
