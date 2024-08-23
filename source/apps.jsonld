@@ -91,6 +91,30 @@
           { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
           { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
         ]
+      },
+      "filterAliases": [
+        { "alias": "excludeEplikt", "filter": "NOT bibliography:\"sigel:EPLK\"" },
+        { "alias": "includeEplikt", "filter": "NOT excludeEplikt" },
+        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")" },
+        { "alias": "includePreliminary", "filter": "NOT excludePreliminary" }
+      ],
+      "defaultSiteFilters": [
+        {"filter": "excludeEplikt"},
+        {"filter": "excludePreliminary"},
+        {"filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\""}
+      ],
+      "defaultSiteTypeFilters": [
+        {"filter": "\"rdf:type\":Work"}
+      ],
+      "optionalSiteFilters": [
+        { "filter": "includeEplikt", "prefLabelByLang": { "sv": "Inkludera e-plikt", "en": "Include electronic legal deposit" } },
+        { "filter": "includePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
+        { "filter": "image:*", "prefLabelByLang": { "sv": "Endast resurser med omslags-/miniatyrbild", "en": "Resources with cover/thumbnail only" } }
+      ],
+      "relationFilters": {
+        "Agent": [ "contributor", "subject", "publisher" ],
+        "Concept": [ "subject", "genreForm", "hasOccupation", "fieldOfActivity" ],
+        "Work": [ "subject" ]
       }
     },
     {
