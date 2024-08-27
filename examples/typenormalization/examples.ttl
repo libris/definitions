@@ -11,65 +11,66 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix : <https://id.kb.se/vocab/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix f: <https://id.kb.se/term/form/>
+prefix t: <https://id.kb.se/term/type/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix barngf: <https://id.kb.se/term/barngf/>
 prefix spec: <https://libris.kb.se/sys/spec/>
 
 <book01> a :Text ;
   :genreForm saogf:Romaner ;
-  spec:query 'ASK { <book01> a f:Book }' .
+  spec:query 'ASK { <book01> a t:Book }' .
 
 <book02> a :Audio ;
   :genreForm saogf:Romaner ;
-  spec:query 'ASK { <book02> a f:Audiobook }' .
+  spec:query 'ASK { <book02> a t:Audiobook }' .
 
 <book03> a :Audio ;
   :genreForm saogf:Ljudb\%C3\%B6cker ;
-  spec:query 'ASK { <book03> a f:Audiobook }' .
+  spec:query 'ASK { <book03> a t:Audiobook }' .
 
 <ebook01> a :Electronic ;
   :instanceOf <book01> ;
-  spec:query 'ASK { <ebook01> a f:EBook }' .
+  spec:query 'ASK { <ebook01> a t:EBook }' .
 
 <cdbook01> a :Electronic ;
   :carrierType kbrda:AudioDisc ;
   :instanceOf <book01> ;
-  spec:query 'ASK { <cdbook01> a f:CDBook }' .
+  spec:query 'ASK { <cdbook01> a t:CDBook }' .
 
 <computergame01> a :Multimedia ;
   :genreForm saogf:Datorspel ;
-  spec:query 'ASK { <computergame01> a f:ComputerGame }' .
+  spec:query 'ASK { <computergame01> a t:ComputerGame }' .
 
-<computergame02> a f:ComputerGame ;
+<computergame02> a t:ComputerGame ;
   spec:query 'ASK { <computergame02> a :Multimedia ; :genreForm saogf:Datorspel }' .
 
 <multimedia01> a :Multimedia ;
-  spec:query 'ASK { FILTER NOT EXISTS { <multimedia01> a f:ComputerGame } }' .
+  spec:query 'ASK { FILTER NOT EXISTS { <multimedia01> a t:ComputerGame } }' .
 
 <serial01> a :Serial ;
   :genreForm saogf:Datorspel ;
-  spec:query 'ASK { FILTER NOT EXISTS { <serial01> a f:ComputerGame } }' .
+  spec:query 'ASK { FILTER NOT EXISTS { <serial01> a t:ComputerGame } }' .
 
 <comicmagazine01> a :Text ;
   :genreForm saogf:Tecknade%20serier ;
-  spec:query 'ASK { <comicmagazine01> a f:ComicMagazine }' .
+  spec:query 'ASK { <comicmagazine01> a t:ComicMagazine }' .
 
 <comicmagazine02> a :Text ;
     :genreForm barngf:Tecknade%20serier ;
-  spec:query 'ASK { <comicmagazine02> a f:ComicMagazine }' ,
+  spec:query 'ASK { <comicmagazine02> a t:ComicMagazine }' ,
     'ASK { <comicmagazine02> :contentType kbrda:StillImage }' .
 
-<comicmagazine03> a f:ComicMagazine ;
-  spec:query 'ASK { <comicmagazine03> a :Text ; :contentType kbrda:StillImage }' ,
-  'ASK { FILTER NOT EXISTS { <comicmagazine03> :genreForm ?gf } }' .
+<comicmagazine03> a t:ComicMagazine ;
+  spec:query 'ASK { <comicmagazine03> a :Text ; :contentType kbrda:StillImage }' .
+  #'ASK { FILTER NOT EXISTS { <comicmagazine03> :genreForm ?gf } }' .
 
-<comicmagazine04> a f:ComicMagazine ;
+<comicmagazine04> a t:ComicMagazine ;
   spec:query 'ASK { <comicmagazine04> :contentType kbrda:StillImage }' .
 
 <graphicnovel01> a :Text ;
   :genreForm saogf:Serieromaner ;
-  spec:query 'ASK { <graphicnovel01> a f:GraphicNovel }' .
+  spec:query 'ASK { <graphicnovel01> a t:GraphicNovel }' .
 
-<graphicnovel02> a f:GraphicNovel ;
+<graphicnovel02> a t:GraphicNovel ;
   spec:query 'ASK { <graphicnovel02> a :Text ; :genreForm saogf:Serieromaner }' ,
     'ASK { <graphicnovel02> :genreForm saogf:Romaner }' .

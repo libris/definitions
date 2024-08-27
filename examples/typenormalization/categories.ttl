@@ -2,64 +2,77 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix : <https://id.kb.se/vocab/>
 prefix f: <https://id.kb.se/term/form/>
+prefix t: <https://id.kb.se/term/type/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix barngf: <https://id.kb.se/term/barngf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 base <http://libris.kb.se/>
 
-f:Book a owl:Class ;
+:narrower owl:inverseOf :broader .
+
+:genreForm owl:propertyChainAxiom (:genreForm :broader) .
+
+saogf:Serieromaner :broader saogf:Romaner .
+
+f:Book a :GenreForm ;
+  :narrower saogf:Romaner ,
+    saogf:Ljudb%C3%B6cker ,
+    barngf:Bilderb%F6cker ,
+    barngf:Kapitelb%F6cker .
+
+f:Comics a :GenreForm ;
+  :narrower saogf:Tecknade%20serier ,
+    barngf:Tecknade%20serier .
+
+t:Book a owl:Class ;
   owl:intersectionOf (
       :Text
-      [ owl:unionOf (
-          [ owl:onProperty :genreForm ; owl:hasValue saogf:Romaner ]
-          [ owl:onProperty :genreForm ; owl:hasValue [ :broaderTransitive saogf:Romaner ] ]
-          [ owl:onProperty :genreForm ; owl:hasValue barngf:Bilderb%F6cker ]
-          [ owl:onProperty :genreForm ; owl:hasValue barngf:Kapitelb%F6cker ]
-        ) ]
+      [ owl:onProperty :genreForm ;
+        owl:hasValue f:Book ]
     ) .
 
-f:Audiobook a owl:Class ;
+t:Audiobook a owl:Class ;
   owl:intersectionOf (
       :Audio
-      [ owl:unionOf (
-          [ owl:onProperty :genreForm ; owl:hasValue saogf:Romaner ]
-          [ owl:onProperty :genreForm ; owl:hasValue saogf:Ljudb\%C3\%B6cker ]
-        ) ]
+      [ owl:onProperty :genreForm ;
+        owl:hasValue f:Book ]
     ) .
 
-f:EBook a owl:Class ;
+t:EBook a owl:Class ;
   owl:intersectionOf (
       :Electronic
-      [ owl:onProperty :instanceOf ; owl:someValuesFrom f:Book ]
+      [ owl:onProperty :instanceOf ;
+        owl:someValuesFrom t:Book ]
     ) .
 
-f:CDBook a owl:Class ;
+t:CDBook a owl:Class ;
   owl:intersectionOf (
-      [ owl:onProperty :carrierType ; owl:hasValue kbrda:AudioDisc ]
-      [ owl:onProperty :instanceOf ; owl:someValuesFrom f:Book ]
+      [ owl:onProperty :carrierType ;
+        owl:hasValue kbrda:AudioDisc ]
+      [ owl:onProperty :instanceOf ;
+        owl:someValuesFrom t:Book ]
     ) .
 
-f:ComputerGame a owl:Class ;
+t:ComputerGame a owl:Class ;
   owl:intersectionOf (
       :Multimedia
-      [ owl:onProperty :genreForm ; owl:hasValue saogf:Datorspel ]
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Datorspel ]
     ) .
 
-f:ComicMagazine a owl:Class ;
-  rdfs:subClassOf [ owl:onProperty :contentType ; owl:hasValue kbrda:StillImage ] ;
+t:ComicMagazine a owl:Class ;
+  rdfs:subClassOf [ owl:onProperty :contentType ;
+    owl:hasValue kbrda:StillImage ] ;
   owl:intersectionOf (
       :Text
-      [ owl:unionOf (
-          [ owl:onProperty :genreForm ; owl:hasValue saogf:Tecknade%20serier ]
-          [ owl:onProperty :genreForm ; owl:hasValue barngf:Tecknade%20serier ]
-        ) ]
+      [ owl:onProperty :genreForm ;
+        owl:hasValue f:Comics ]
     ) .
 
-f:GraphicNovel a owl:Class ;
-  owl:equivalentClass [ owl:intersectionOf (
-        :Text
-        [ owl:onProperty :genreForm ; owl:hasValue saogf:Serieromaner ]
-      )
-    ] ;
-  rdfs:subClassOf f:ComicMagazine ,
-    [ owl:onProperty :genreForm ; owl:hasValue saogf:Romaner ] .
+t:GraphicNovel a owl:Class ;
+  rdfs:subClassOf t:ComicMagazine ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Serieromaner ]
+    ) .
