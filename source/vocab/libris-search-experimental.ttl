@@ -23,9 +23,22 @@
 
 :isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
 
-:yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en . # See ./details.ttl for full definition of :yearPublished
+:yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
+    skos:notation "ÅR"^^:LibrisQueryCode .
+
+:language skos:notation "SPRÅK"^^:LibrisQueryCode . # See ./relations.ttl for full definition of :language
 
 :itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
     :category :shorthand, :pending ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
+
+:instanceOfType a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :instanceOf rdf:type ) .
+
+:hasInstanceType a owl:ObjectProperty ;
+    rdfs:subPropertyOf rdf:type ;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :hasInstance rdf:type ) .

@@ -377,7 +377,7 @@
           "@id": "TransformedLanguageForm-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "TransformedLanguageForm",
-          "showProperties": [ "prefLabel", "inLanguage", "langTransformAccordingTo"]
+          "showProperties": [ "prefLabel", "inLanguage", {"alternateProperties": ["langTransformAccordingTo", "inLangScript"]} ]
         },
         "marc:LanguageNote": {
           "@id": "LanguageNote-chips",
@@ -523,7 +523,7 @@
           "@id": "ImageObject-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "ImageObject",
-          "showProperties": []
+          "showProperties": [ "width", "height" ]
         },
         "TemporalEntity": {
           "@id": "TemporalEntity-chips",
@@ -580,6 +580,12 @@
             },
             "concerning"
           ]
+        },
+        "License": {
+          "@id": "License-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "License",
+          "showProperties": [ "title", "identifier" ]
         }
       }
     },
@@ -659,6 +665,7 @@
             "usageAndAccessPolicy",
             "accessMode",
             "isIssueOf",
+            "isPartOf",
             "relatedTo",
             {"inverseOf": "itemOf"},
             {"inverseOf": "reproductionOf"},
@@ -760,7 +767,9 @@
             "subject",
             "summary",
             "immediateAcquisition",
-            "availability"
+            "availability",
+            { "inverseOf": "itemUsed" },
+            { "inverseOf": "hasComponent" }
           ]
         },
         "StructuredValue": {
@@ -1057,10 +1066,6 @@
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "showProperties": [ "fresnel:super" ]
         },
-        "ImageObject": {
-          "fresnel:extends": {"@id": "ImageObject-chips"},
-          "showProperties": [ "fresnel:super" ]
-        },
         "EntityContainer": {
           "@id": "EntityContainer-cards",
           "showProperties": [ "administeredBy", "membershipResource", "isMemberOfRelation", "memberClass", "slugProperty" ]
@@ -1118,6 +1123,20 @@
           "classLensDomain": "AdministrativeAction",
           "fresnel:extends": {"@id": "AdministrativeAction-chips"},
           "showProperties": [ "representationAfter", "representationBefore", "comment", "concerning", "category", "agent", "descriptionCreator", "descriptionLastModifier" ]
+        },
+        "ImageObject": {
+          "@id": "ImageObject-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "ImageObject-chips"},
+          "classLensDomain": "ImageObject",
+          "showProperties": [ "fresnel:super", "thumbnail", "publisher", "usageAndAccessPolicy" ]
+        },
+        "License": {
+          "@id": "License-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "License-chips"},
+          "classLensDomain": "License",
+          "showProperties": [ "fresnel:super" ]
         }
       }
     },
@@ -1374,7 +1393,6 @@
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
-
       }
     },
     "search-chips": {
@@ -1409,7 +1427,13 @@
           "classLensDomain": "HandleAction",
           "fresnel:extends": {"@id": "AdministrativeAction-chips"},
           "showProperties": [ "fresnel:super", "agent" ]
+        },
+        "ImageObject": {
+          "classLensDomain": "ImageObject",
+          "fresnel:extends": {"@id": "ImageObject-chips"},
+          "showProperties": [ "fresnel:super", "thumbnail" ]
         }
+
       }
     },
     "search-cards": {
