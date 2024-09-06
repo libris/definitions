@@ -735,23 +735,28 @@
 
 :DraftBulkChange a :BulkChangeStatusType ;
     :category :platform ;
-    skos:prefLabel "A draft bulk change that is not ready to be run"@en, "Ett utkast till massändring som inte är redo att köras"@sv .
+    rdfs:comment "A draft bulk change that is not ready to be run"@en, "Ett utkast till massändring som inte är redo att köras"@sv ;
+    skos:prefLabel "Draft"@en, "Utkast"@sv .
 
 :ReadyBulkChange a :BulkChangeStatusType ;
     :category :platform ;
-    skos:prefLabel "A bulk change that is ready to be run"@en, "En massändring som är redo att köras"@sv .
+    rdfs:comment "A bulk change that is ready to be run"@en, "En massändring som är redo att köras"@sv ;
+    skos:prefLabel "Ready"@en, "Redo"@sv .
 
 :RunningBulkChange a :BulkChangeStatusType ;
     :category :platform ;
-    skos:prefLabel "A bulk change that is running"@en, "En massändring som körs"@sv .
+    rdfs:comment "A bulk change that is running"@en, "En massändring som körs"@sv ;
+    skos:prefLabel "Running"@en, "Kör"@sv .
 
 :CompletedBulkChange a :BulkChangeStatusType ;
     :category :platform ;
-    skos:prefLabel "A bulk change that has already taken place"@en, "En massändring som redan kört klart"@sv .
+    rdfs:comment "A bulk change that has already taken place"@en, "En massändring som redan kört klart"@sv ;
+    skos:prefLabel "Completed"@en, "Avslutad"@sv .
 
 :FailedBulkChange a :BulkChangeStatusType ;
     :category :platform ;
-    skos:prefLabel "A bulk change that failed to complete"@en, "En massändring som misslyckats att köra klart"@sv .
+    rdfs:comment "A bulk change that failed to complete"@en, "En massändring som misslyckats att köra klart"@sv ;
+    skos:prefLabel "Failed"@en, "Misslyckad"@sv .
 
 :FormSpecification a owl:Class ;
     :category :platform ;
