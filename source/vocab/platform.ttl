@@ -686,3 +686,89 @@
 :Observation a owl:Class;
     :category :platform ;
     rdfs:subClassOf qb:Observation .
+
+##
+# Record history
+:changeSets a owl:ObjectProperty;
+    :category :platform ;
+    sdo:domainIncludes :BulkChangePreview ;
+    rdfs:range :ChangeSet .
+
+:ChangeSet a owl:Class;
+    :category :platform .
+
+##
+# Bulk changes
+:BulkChange a owl:Class ;
+    :category :platform ;
+    rdfs:label "Bulk change"@en, "Massändring"@sv ;
+    rdfs:subClassOf :GenerationProcess .
+
+:BulkChangeSpecification a owl:Class ;
+    :category :platform ;
+    ptg:abstract true;
+    rdfs:label "Change specification"@en, "Ändringsspecifikation"@sv .
+
+:BulkChangePreview a owl:Class ;
+    :category :platform ;
+    rdfs:label "Bulk change preview"@en, "Massändringsförhandsgranskning"@sv ;
+    rdfs:subClassOf :PartialCollectionView .
+
+:bulkChangeSpecification a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:label "change specification"@en, "ändringsspecifikation"@sv ;
+    rdfs:domain :BulkChange ;
+    rdfs:range :BulkChangeSpecification .
+
+:bulkChangeStatus a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:subPropertyOf :status;
+    rdfs:label "bulk change status"@en, "massändringsstatus"@sv ;
+    rdfs:domain :BulkChange ;
+    rdfs:range :BulkChangeStatusType .
+
+:BulkChangeStatusType a owl:Class ;
+    :category :platform ;
+    ptg:abstract true ;
+    rdfs:subClassOf :Status ;
+    skos:notation "BulkChangeStatusType" ;
+    skos:prefLabel "Bulk change status"@en, "Massändringsstatus"@sv .
+
+:DraftBulkChange a :BulkChangeStatusType ;
+    :category :platform ;
+    skos:prefLabel "A draft bulk change that is not ready to be run"@en, "Ett utkast till massändring som inte är redo att köras"@sv .
+
+:ReadyBulkChange a :BulkChangeStatusType ;
+    :category :platform ;
+    skos:prefLabel "A bulk change that is ready to be run"@en, "En massändring som är redo att köras"@sv .
+
+:RunningBulkChange a :BulkChangeStatusType ;
+    :category :platform ;
+    skos:prefLabel "A bulk change that is running"@en, "En massändring som körs"@sv .
+
+:CompletedBulkChange a :BulkChangeStatusType ;
+    :category :platform ;
+    skos:prefLabel "A bulk change that has already taken place"@en, "En massändring som redan kört klart"@sv .
+
+:FailedBulkChange a :BulkChangeStatusType ;
+    :category :platform ;
+    skos:prefLabel "A bulk change that failed to complete"@en, "En massändring som misslyckats att köra klart"@sv .
+
+:FormSpecification a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :BulkChangeSpecification ;
+    rdfs:comment "En deklarativ beskrivning av en ändring som ska utföras. Består av en form på data som ska matchas och en målform för ändringar."@sv ;
+    rdfs:label "Specification of bulk change form"@en, "Specifikation av form för massändring"@sv .
+
+:changeForm a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:domain :FormSpecification ;
+    rdfs:range :Resource .
+
+:matchForm a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:subPropertyOf :changeForm .
+
+:targetForm a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:subPropertyOf :changeForm .
