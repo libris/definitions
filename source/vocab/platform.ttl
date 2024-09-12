@@ -720,6 +720,30 @@
     rdfs:domain :BulkChange ;
     rdfs:range :BulkChangeSpecification .
 
+#TODO
+:bulkChangeMetaChanges a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:subPropertyOf :status;
+    rdfs:label "bulk change record changes"@en, "poständringar vid massändring"@sv ;
+    rdfs:domain :BulkChange ;
+    rdfs:range :BulkChangeMetaChangesType .
+
+:BulkChangeMetaChangesType a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :Status ;
+    skos:notation "BulkChangeStatusType" ;
+    skos:prefLabel "Bulk change record changes"@en, "Poständringar vid massändring"@sv .
+
+#TODO
+:LoudBulkChange a :BulkChangeMetaChangesType ;
+    :category :platform ;
+    skos:prefLabel "Loud"@en, "Högljudd"@sv .
+
+#TODO
+:SilentBulkChange a :BulkChangeMetaChangesType ;
+    :category :platform ;
+    skos:prefLabel "Silent"@en, "Tyst"@sv .
+
 :bulkChangeStatus a owl:ObjectProperty;
     :category :platform ;
     rdfs:subPropertyOf :status;
