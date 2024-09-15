@@ -1,0 +1,259 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix sdo: <https://schema.org/>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+
+prefix : <https://id.kb.se/vocab/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+prefix kbgf: <https://id.kb.se/term/form/>
+
+:ComplexClass rdfs:subClassOf owl:Class .
+
+# Complex Work Classes (Single Unit)
+
+:Book a owl:Class ;
+  ptg:abstract true ;
+  :category :pending ;
+  owl:equivalentClass bibo:Book, sdo:Book ;
+  :label "Book"@en ,
+    "Bok"@sv .
+
+:WrittenBook a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :Book ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Book ]
+    ) ;
+  :label "Written book"@en ,
+    "Skriven bok"@sv ;
+  :altLabel "Bok"@sv, "Book"@en .
+
+:Audiobook a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :Book ,
+    [ owl:onProperty :genreForm ;
+      owl:hasValue saogf:Ljudb%C3%B6cker ] ,
+    bibo:AudioDocument ;
+  owl:intersectionOf (
+      :Audio
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Book ]
+    ) ;
+  :label "Ljudbok"@sv ,
+    "Audiobook"@en .
+
+:TactileBook a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :Book ;
+  owl:intersectionOf (
+      :Tactile
+      [ owl:onProperty :genreForm ;
+        owl:hasValue [ skos:narrowMatch saogf:Punktskriftsb%C3%B6cker ] ]
+    ) ;
+  skos:editorialNote 'TODO: differentiate between "filtbok" och "punktskriftsbok"?'@en ;
+  :label "Tactile Book"@en ,
+    "Taktil bok"@sv .
+
+
+:NonBookText a :ComplexClass ;
+  :category :pending ;
+  ptg:abstract true ;
+  rdfs:subClassOf :Text ;
+  :label "Non-book text"@en ,
+    "Enskild text"@sv .
+
+:Article a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :NonBookText ;
+  owl:equivalentClass bibo:Article ;
+  :label "Artikel"@sv ,
+    "Article"@en .
+
+:Issue a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :NonBookText ;
+  owl:equivalentClass bibo:Issue ;
+  :label "Tidskriftsnummer"@sv ,
+    "Periodical Issue"@en .
+
+
+:IllustratedWork a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :ContainsImages ;
+  owl:intersectionOf (
+      :Visual
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Illustrerade%20verk ]
+    ) ;
+  :label "Illustrerat verk"@sv ,
+    "Illustrated Work"@en .
+
+:Brochure a :Form ;
+  rdfs:subClassOf :NonBookText ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue <https://id.kb.se/term/gmgpc/swe/Broschyrer> ]
+    ) ;
+  :label "Broschyr"@sv ,
+    "Brochure"@en .
+
+:Comic a :ComplexClass ;
+  rdfs:subClassOf :IllustratedWork ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Comics ]
+    ) ;
+  :label "Serietidning"@sv ,
+    "Comic"@en .
+
+:ComicIssue a :ComplexClass ;
+  owl:intersectionOf (
+      :Comic
+      :Issue
+    ) ;
+  :label "Serietidningsnummer"@sv ,
+    "Comic Issue"@en .
+
+:ComicStory a :ComplexClass ;
+  owl:intersectionOf (
+      :Comic
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:ShortStory ]
+    ) .
+
+:GraphicNovel a :ComplexClass ;
+  rdfs:subClassOf :ComicIssue ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Serieromaner ]
+    ) .
+
+
+# TODO:
+# * Link up *all* SAOGF-Musik(instrument) as hints for Music?
+
+:PerformedMusic a :ComplexClass ;
+  :category :pending ;
+  owl:intersectionOf (
+      :Music
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbrda:PerformedMusic ]
+    ) ;
+  :label "Performed Music"@en ,
+    "Framförd musik"@sv .
+
+
+:Film a :FormClass ;
+  :category :pending ;
+  owl:intersectionOf (
+      :MovingImage
+      [ owl:onProperty :genreForm ;
+      owl:hasValue saogf:Filmer ]
+    ) ;
+  owl:equivalentClass bibo:Film ;
+  :label "Film"@sv ,
+    "Film"@en .
+
+
+:ComputerGame a :ComplexClass ;
+  owl:intersectionOf (
+      :Multimedia
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Datorspel ]
+    ) .
+
+
+# Complex Instance Classes (Single Unit)
+
+:PrintedVolume a :ComplexClass ;
+  owl:intersectionOf (
+      :Print
+      [ owl:onProperty :carrierType ;
+        owl:hasValue kbrda:Volume ]
+    ) .
+
+:EBook a :ComplexClass ;
+  owl:intersectionOf (
+      :Electronic
+      [ owl:onProperty :instanceOf ;
+        owl:someValuesFrom :Book ]
+    ) .
+
+:CDBook a :ComplexClass ;
+  owl:intersectionOf (
+      [ owl:onProperty :carrierType ;
+        owl:hasValue kbrda:AudioDisc ]
+      [ owl:onProperty :instanceOf ;
+        owl:someValuesFrom :Book ]
+    ) .
+
+
+# Collecting Work Classes
+
+:CollectingResource a :Class ;
+  :category :pending ;
+  ptg:abstract true ;
+  :label "Collecting Resource"@en ,
+    "Samlande resurs"@sv .
+
+:Collection rdfs:subClassOf :CollectingResource .
+
+:Archive a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :CollectingResource ;
+  owl:intersectionOf (
+    :Collection
+    [ owl:onProperty :genreForm ;
+      owl:hasValue saogf:Arkiv ]
+    ) ;
+  :label "Arkiv"@sv ,
+    "Archive"@en .
+
+:Integrating rdfs:subClassOf :CollectingResource ;
+  ptg:abstract true .
+
+:Database a :ComplexClass ;
+  :category :pending ;
+  owl:intersectionOf (
+      :Integrating
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Databaser ]
+    ) ;
+  #skos:narrowMatch marc:UpdatingDatabase ;
+  :label "Databas"@sv ,
+    "Database"@en .
+
+# Serial Work Classes
+
+:SerialPublication a :ComplexClass ;
+  :category :pending ;
+  rdfs:subClassOf :CollectingResource ;  # Abstraction
+  owl:intersectionOf (
+      :Serial
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Seriella%20publikationer ]
+    ) ;
+  :label "Seriell publikation"@sv ,
+    "Serial Publication"@en .
+
+:Periodical a :ComplexClass ;
+  :category :pending ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
+  rdfs:subClassOf :SerialPublication ;
+  owl:intersectionOf (
+      :Serial
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Periodika ]
+    ) ;
+  :altLabel "Periodika"@sv ;
+  :label "Tidskrift"@sv ,
+    "Periodical"@en .
