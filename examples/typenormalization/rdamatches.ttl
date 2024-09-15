@@ -1,0 +1,85 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+prefix : <https://id.kb.se/vocab/>
+
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+base <https://id.kb.se/term/div/>
+
+# NOTE: just patterns to entail :contenType for RDA coordination.
+# (See classes in other documents!)
+
+# TODO: replace :contentType with :genreForm (and always infer)?
+
+:Text rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:Text ] .
+
+:ContainsImages owl:onProperty :contentType ; owl:hasValue kbrda:StillImage .
+
+:StillImage rdfs:subClassOf :ContainsImages .
+
+#:ThreeDimensionalMovingImage
+#  owl:hasValue kbrda:ThreeDimensionalMovingImage ;
+#
+#:TwoDimensionalMovingImage
+#  owl:hasValue kbrda:TwoDimensionalMovingImage ;
+
+:NotatedMusic rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:NotatedMusic ] .
+
+:NotatedMovement rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:NotatedMovement ] .
+
+:Object rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:ThreeDimensionalForm ] .
+
+:Audio rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:Sounds ] .
+
+:PerformedMusic rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:PerformedMusic ] .
+
+:SpokenWord rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:SpokenWord ] .
+
+:ComputerProgram rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:ComputerProgram] .
+
+:ComputerDataset rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:ComputerDataset ] .
+
+[ owl:intersectionOf (:Cartography :Dataset) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicDataset ] .
+
+[ owl:intersectionOf (:Cartography :StillImage) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicImage ] .
+
+[ owl:intersectionOf (:Cartography :MovingImage) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicMovingImage ] .
+
+[ owl:intersectionOf (:Cartography :StillImage :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicTactileImage ] .
+
+[ owl:intersectionOf (:Cartography :Tactile :Object) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicTactileThreeDimensionalForm ] .
+
+[ owl:intersectionOf (:Cartography :Object) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:CartographicThreeDimensionalForm ] .
+
+[ owl:intersectionOf (:StillImage :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:TactileImage ] .
+
+[ owl:intersectionOf (:NotatedMusic :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:TactileNotatedMusic ] .
+
+[ owl:intersectionOf (:NotatedMovement :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:TactileNotatedMovement ] .
+
+[ owl:intersectionOf (:Text :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:TactileText ] .
+
+[ owl:intersectionOf (:Object :Tactile) ] rdfs:subClassOf [ a owl:Restriction ;
+    owl:onProperty :contentType ; owl:hasValue kbrda:TactileThreeDimensionalForm ] .
