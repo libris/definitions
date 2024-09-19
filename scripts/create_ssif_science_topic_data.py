@@ -1,7 +1,12 @@
 # -*- coding: UTF-8 -*-
 import csv
 import json
+import re
 import sys
+from urllib.parse import urljoin
+
+SCHEME = "https://id.kb.se/term/ssif"
+BASE = f"{SCHEME}/"
 
 
 def create_data(fpath):
@@ -14,19 +19,33 @@ def create_data(fpath):
                 break
         else:
             continue
-        label_sv = columns[-2]
-        label_en = columns[-1]
+
+        label_sv, altlabel_sv, comment_sv = _parse_value(columns[-2])
+        label_en, altlabel_en, comment_en = _parse_value(columns[-1])
+
         item = {
-            '@id': code,
+            '@id': _iri(code),
             '@type': 'Classification',
-            'prefLabelByLang': {'sv': label_sv, 'en': label_en}
+            'inScheme': {'@id': SCHEME},
+            'code': code,
+            'prefLabelByLang': {'sv': label_sv, 'en': label_en},
         }
+
+        for prop, value, lang in [
+            ('altLabelByLang', altlabel_sv, 'sv'),
+            ('commentByLang', comment_sv, 'sv'),
+            ('altLabelByLang', altlabel_en, 'en'),
+            ('commentByLang', comment_en, 'en'),
+        ]:
+            if value:
+                bylang = item.setdefault(prop, {})
+                bylang[lang] = value
 
         while tree and len(tree[-1]) >= len(code):
             tree.pop()
 
         if tree and code.startswith(tree[-1]):
-            item['broader'] = {'@id': tree[-1]}
+            item['broader'] = {'@id': _iri(tree[-1])}
 
         if not tree or len(tree[-1]) < len(code):
             tree.append(code)
@@ -35,16 +54,52 @@ def create_data(fpath):
 
     return {
         "@context": {
-          "@vocab": "https://id.kb.se/vocab/",
-          "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
-          "@base": "https://id.kb.se/term/ssif/"
+            "@vocab": "https://id.kb.se/vocab/",
+            "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
+            "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
+            "commentByLang": {"@id": "comment", "@container": "@language"},
         },
-        "@graph": items
+        "@graph": items,
     }
 
 
-def read_csv_items(fpath, skip_first=True, skip_comment=False,
-        csv_dialect='excel-tab', size=0):
+def _iri(code: str) -> str:
+    return urljoin(BASE, code)
+
+
+def _parse_value(s: str) -> tuple[str, str | None, str | None]:
+    s = s.replace('\xa0', ' ')
+
+    if '(' not in s:
+        return s, None, None
+
+    label, rest = s.split('(', 1)
+    label = label.strip()
+    altlabel: str | None = ''
+    comment: str | None = ''
+
+    if ') (' in rest:
+        altlabel, comment = rest.split(') (', 1)
+        altlabel = altlabel.strip()
+        comment = comment.strip()
+        if comment.endswith(')'):
+            comment = comment[:-1]
+    else:
+        altlabel = rest
+        if altlabel.endswith(')'):
+            altlabel = altlabel[:-1]
+
+    if ' ' in altlabel:
+        parts = [p for p in altlabel.split(' ') if p.strip()]
+        if len(parts) > 2 or not parts[0].islower() and parts[1].islower():
+            altlabel, comment = None, altlabel
+
+    return label, altlabel or None, comment or None
+
+
+def read_csv_items(
+    fpath, skip_first=True, skip_comment=False, csv_dialect='excel-tab', size=0
+):
     with open(fpath, 'rt') as fp:
         reader = csv.reader(fp, csv_dialect)
         if skip_first is True:
@@ -64,5 +119,6 @@ if __name__ == '__main__':
 
     data = create_data(fpath)
 
-    print(json.dumps(data, indent=2, ensure_ascii=False,
-                     separators=(',', ': ')))
+    s = json.dumps(data, indent=2, ensure_ascii=False, separators=(',', ': '))
+    s = re.sub(r'{\s+(\S+: "[^"]*")\s+}', r'{\1}', s)
+    print(s)
