@@ -520,8 +520,8 @@
 
 :maxItems a owl:ObjectProperty;
     :category :platform ;
-    skos:definition "The maximum number of items that may be accessed through pagination. Might be smaller than totalItems"@en;
-    rdfs:domain :PartialCollectionView .
+    skos:definition "The maximum number of items in the collection/view/result. For paginated collections: the maximum number of items that may be accessed through pagination. Might be smaller than totalItems."@en;
+    sdo:domainIncludes :PartialCollectionView, :Slice .
 
 :first a owl:ObjectProperty;
     :category :platform ;
