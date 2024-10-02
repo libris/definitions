@@ -272,8 +272,13 @@ g:Register a :Genre ;
   :prefLabel "Förteckning"@sv ,
     "Register"@en .
 
+g:PuzzleOrGame a :Genre ;
+  skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
+  rdfs:label "Spel eller tankenötter"@sv ,
+    "Puzzle or game"@en .
+
 g:RolePlayingGame a :Genre ;
-  rdfs:subClassOf f:PuzzleOrGame ;
+  rdfs:subClassOf g:PuzzleOrGame ;
   skos:exactMatch saogf:Rollspel ;
   :prefLabel "Rollspel"@sv ,
     "Roleplaying Game"@en .
