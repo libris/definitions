@@ -386,16 +386,10 @@ f:NonMusicAudio a :Form ;
     "Ljud men inte musik"@sv .
 
 f:BoardGame a :Form ;
-  rdfs:subClassOf f:PuzzleOrGame ;
+  rdfs:subClassOf f:InteractiveObject , g:PuzzleOrGame ;
   skos:exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
   rdfs:label "Brädspel"@sv ,
     "Boardgame"@en .
-
-f:PuzzleOrGame a :Form ;
-  rdfs:subClassOf f:InteractiveObject ;
-  skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
-  rdfs:label "Spel eller tankenötter"@sv ,
-    "Puzzle or game"@en .
 
 f:Brochure a :Form ;
   rdfs:subClassOf kbv:NonBookText ;
@@ -447,7 +441,7 @@ f:ComputerProgram a :Form ;
     "Computer Program"@en .
 
 f:ComputerGame a :Form ;
-  rdfs:subClassOf f:PuzzleOrGame, f:ComputerProgram ;
+  rdfs:subClassOf g:PuzzleOrGame, f:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
   rdfs:label "Datorspel"@sv ,
     "Computer Game"@en .
@@ -570,7 +564,7 @@ f:ImageAndTextPoster a :Form ;
   rdfs:label "Bild- och textaffisch"@sv, "Image and Text Poster"@en .
 
 f:Puzzle a :Form ;
-  rdfs:subClassOf f:PuzzleOrGame ;
+  rdfs:subClassOf f:InteractiveObject, g:PuzzleOrGame ;
   skos:exactMatch saogf:Pussel ;
   rdfs:label "Pussel"@sv ,
     "Puzzle"@en .
