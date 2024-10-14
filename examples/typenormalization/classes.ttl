@@ -104,6 +104,15 @@ prefix kbgf: <https://id.kb.se/term/form/>
   :label "Broschyr"@sv ,
     "Brochure"@en .
 
+:Atlas a :ComplexClass ;
+  rdfs:subClassOf :Book, :Cartography ,
+    [ owl:intersectionOf (
+        [ a owl:Restriction ; owl:onProperty :contentType ;
+          owl:hasValue kbrda:Text ]
+        [ a owl:Restriction ; owl:onProperty :contentType ;
+          owl:hasValue kbrda:CartographicImage ]
+    ) ] .
+
 :Comic a :ComplexClass ;
   rdfs:subClassOf :IllustratedWork ;
   owl:intersectionOf (
