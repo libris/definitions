@@ -5,6 +5,10 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 
 # Stat numbers: Most GenreForm are tagged below (to aid prioritization).
 
+# TODO: "Primary?" means candidate as a basic Form (or a clear subclass thereof?).
+
+# TODO: what of these loc.gov-mappings are used by bibframe2marc to *produce* bib 008 values?
+
 # TODO: "Vad är skönlitteratur?" - <https://jira.kb.se/browse/LXL-4147>
 # marc:NotFictionNotFurtherSpecified .  # 8524469 # [also ssb]
 
@@ -59,6 +63,10 @@ marc:Yearbook  # [y] 6968 # [also ssb]
 
 marc:Index  # [i] 3941 # Primary? [also ssb]
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026112> . # "Indexes"@en .
+# TODO:
+# Either: Delete - Unlikely to have been consistently and correctly applied?
+# - How is it used in practise? "Sök i 008 minus Index för de som vill ha faktiskt innehåll"@sv?)
+# Or: << marc:Index :broadMatch saogf:Referensverk >> a :Suggestion ; :source kbstaff:viklun .
 
 marc:Statistics  # [s] 20197 # Primary? [also ssb]
     :closeMatch saogf:Statistik ;
@@ -81,6 +89,7 @@ marc:TechnicalReport  # [t] 466 # Primary? [also ssb]
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026093> . # "Technical reports"@en .
 
 marc:Filmography  # [q] 2269 # [also ssb]
+    :closeMatch saogf:Filmografi ;  # [new saogf->lcgft mapping 241015]
     :closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> . # "filmography"@en .
 
 marc:Directory  # [r] 2604 # Primary? [also ssb]
@@ -135,18 +144,23 @@ marc:PatentDocument  # [j] 661 # Primary? [also ssb]
 # marc:BooksBiographyType
 
 marc:FictionNotFurtherSpecified # [1]
+    :broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :PreferredGeneralization ; :source kbstaff:viklun |} ;
+    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
+
+marc:MixedForms  # [m] 4352 # Primary? [also ssb]
+    :broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :ErasedDifference ; :source kbstaff:viklun |} ;
+    #:replacedBy marc:FictionNotFurtherSpecified ; ~ _:x670e8a6d
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
 
 marc:HumorSatiresEtc  # [h] 3653 # [also ssb]
-    :closeMatch saogf:Humor ;
+    :narrowMatch saogf:Humor ; # ~ _:x670e8a3c
+    :narrowMatch saogf:Satir ; # ~ _:x670e8a3c {| a :Suggestion ; :source kbstaff:viklun |} ;
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> . # "Humor"@en .
 
 marc:Letter  # [i] 1436 # Primary? [also ssb]
     :closeMatch saogf:Korrespondens ;
+    # :narrowMatch saogf:Brev ; {| a :TooSpecic ; :source kbstaff:viklun |}
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> . # "Personal correspondence"@en .
-
-marc:MixedForms  # [m] 4352 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
 
 marc:Novel # [f]  # 248532 # Primary? [also ssb]
     :closeMatch saogf:Romaner ;
@@ -161,15 +175,24 @@ marc:Speech  # [s] 333 # Primary? [also ssb]
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> . # "Speeches"@en .
 
 # N/A in codeMaps:
-marc:Review :closeMatch saogf:Recensioner .  # 31024 # [also ssb]
-    # a :ContentType .  # 1 # [also ssb]
-marc:StandardsSpecification :closeMatch saogf:Standarder .  # 270 # Primary?
-# marc:AbstractsSummary  # 1324 # Primary? [also ssb]
+
+marc:Review # a :ContentType .  # 1 # [also ssb]
+    :closeMatch saogf:Recensioner .  # 31024 # [also ssb]
+
+marc:StandardsSpecification  # 270 # Primary?
+    :closeMatch saogf:Standarder .
+
+marc:AbstractsSummary  # 1324 # Primary? [also ssb]
     # a :ContentType .  # 4 # Primary? [also ssb]
+    :broadMatch saogf:Sammanfattningar . # {| :source kbkat:viklun |}
+
 # marc:ProgrammedText  # 192 # Primary? [also ssb]
     # a :ContentType .  # 21 # Primary? [also ssb]
-# marc:SurveysOfLiteratureInASubjectArea  # 448 # [also ssb]
+
+marc:SurveysOfLiteratureInASubjectArea  # 448 # [also ssb]
+    :closeMatch saogf:Forsknings%C3%B6versikter . # {| :source kbkat:viklun |}
     # a :ContentType .  # 1 # [also ssb]
+
 # marc:Offprint  # 65 # Primary?
 marc:Festschrift :closeMatch saogf:Festskrifter .  # 32382 # [also ssb]
 
@@ -271,9 +294,13 @@ marc:UpdatingLooseLeaf  # [l] 132 # Primary?
 
 marc:UpdatingDatabase  # [d] 2960 # Primary?
     # a :ContentType .  # 4 # Primary?
+    # TODO: remove; maybe implied from possible new type :Database
+    :closeMatch saogf:Databaser ; # {| :source kbkat:viklun |}
     :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/database> . # "database"@en .
 
 marc:UpdatingWebSite  # [w] 635 # Primary?
+    # TODO: remove; maybe implied from possible new type :Website
+    :closeMatch saogf:Webbplatser ; # {| :source kbkat:viklun |}
     :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/web> . # "web site"@en .
 
 # Missing in KB marc (only relvant *IF* we were to map to marc bib 008!)
@@ -303,7 +330,6 @@ marc:Realia  # [r] 34 # Primary?
 
 marc:MotionPicture  # [m] 11841 # Primary? [also ssb]
     # a :ContentType ;  # 1 # Primary? [also ssb]
-    :narrowMatch saogf:Filmografi ;
     :closeMatch saogf:Filmer ;
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026406> . # "Motion pictures"@en .
 
