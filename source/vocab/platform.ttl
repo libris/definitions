@@ -28,6 +28,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+@prefix bulk: <https://id.kb.se/bulk/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -691,7 +692,7 @@
 # Record history
 :changeSets a owl:ObjectProperty;
     :category :platform ;
-    sdo:domainIncludes :BulkChangePreview ;
+    sdo:domainIncludes bulk:Preview ;
     rdfs:range :ChangeSet .
 
 :ChangeSet a owl:Class;
@@ -699,105 +700,139 @@
 
 ##
 # Bulk changes
-:BulkChange a owl:Class ;
+bulk:Job a owl:Class ;
     :category :platform ;
-    rdfs:label "Bulk change"@en, "Massändring"@sv ;
+    rdfs:label "Job"@en, "Körning"@sv ;
     rdfs:subClassOf :GenerationProcess .
 
-:BulkChangeSpecification a owl:Class ;
+bulk:ChangeSpec a owl:Class ;
     :category :platform ;
-    ptg:abstract true;
+    ptg:abstract true ;
     rdfs:label "Change specification"@en, "Ändringsspecifikation"@sv .
 
-:BulkChangePreview a owl:Class ;
+bulk:Preview a owl:Class ;
     :category :platform ;
-    rdfs:label "Bulk change preview"@en, "Massändringsförhandsgranskning"@sv ;
+    rdfs:label "Preview"@en, "Förhandsgranskning"@sv ;
     rdfs:subClassOf :PartialCollectionView .
 
-:bulkChangeSpecification a owl:ObjectProperty;
+bulk:changeSpec a owl:ObjectProperty ;
     :category :platform ;
     rdfs:label "change specification"@en, "ändringsspecifikation"@sv ;
-    rdfs:domain :BulkChange ;
-    rdfs:range :BulkChangeSpecification .
+    rdfs:domain bulk:Job ;
+    rdfs:range bulk:ChangeSpec .
 
-#TODO
-:bulkChangeMetaChanges a owl:ObjectProperty;
+bulk:updateModifiedTimestamp a owl:DatatypeProperty ;
+    :category :platform ;
+    rdfs:label "update modified timestamp"@en, "uppdatera ändringstidsstämpel"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Update modified timestamp on changed records."@en, "Uppdatera ändringstidsstämpel för ändrade poster."@sv .
+
+bulk:status a owl:ObjectProperty ;
     :category :platform ;
     rdfs:subPropertyOf :status;
-    rdfs:label "bulk change record changes"@en, "poständringar vid massändring"@sv ;
-    rdfs:domain :BulkChange ;
-    rdfs:range :BulkChangeMetaChangesType .
+    rdfs:label "job status"@en, "körningsstatus"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range bulk:StatusType .
 
-:BulkChangeMetaChangesType a owl:Class ;
+bulk:StatusType a owl:Class ;
     :category :platform ;
     rdfs:subClassOf :Status ;
-    skos:notation "BulkChangeStatusType" ;
-    skos:prefLabel "Bulk change record changes"@en, "Poständringar vid massändring"@sv .
+    skos:prefLabel "Job status"@en, "Körningsstatus"@sv .
 
-#TODO
-:LoudBulkChange a :BulkChangeMetaChangesType ;
+bulk:Draft a bulk:StatusType ;
     :category :platform ;
-    skos:prefLabel "Loud"@en, "Högljudd"@sv .
-
-#TODO
-:SilentBulkChange a :BulkChangeMetaChangesType ;
-    :category :platform ;
-    skos:prefLabel "Silent"@en, "Tyst"@sv .
-
-:bulkChangeStatus a owl:ObjectProperty;
-    :category :platform ;
-    rdfs:subPropertyOf :status;
-    rdfs:label "bulk change status"@en, "massändringsstatus"@sv ;
-    rdfs:domain :BulkChange ;
-    rdfs:range :BulkChangeStatusType .
-
-:BulkChangeStatusType a owl:Class ;
-    :category :platform ;
-    rdfs:subClassOf :Status ;
-    skos:notation "BulkChangeStatusType" ;
-    skos:prefLabel "Bulk change status"@en, "Massändringsstatus"@sv .
-
-:DraftBulkChange a :BulkChangeStatusType ;
-    :category :platform ;
-    rdfs:comment "A draft bulk change that is not ready to be run"@en, "Ett utkast till massändring som inte är redo att köras"@sv ;
+    rdfs:comment "A draft job that is not ready to be run"@en, "Ett utkast till körning som inte är redo att köras"@sv ;
     skos:prefLabel "Draft"@en, "Utkast"@sv .
 
-:ReadyBulkChange a :BulkChangeStatusType ;
+bulk:Ready a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A bulk change that is ready to be run"@en, "En massändring som är redo att köras"@sv ;
+    rdfs:comment "A job that is ready to be run"@en, "En körning som är redo att köras"@sv ;
     skos:prefLabel "Ready"@en, "Redo"@sv .
 
-:RunningBulkChange a :BulkChangeStatusType ;
+bulk:Running a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A bulk change that is running"@en, "En massändring som körs"@sv ;
+    rdfs:comment "A job that is running"@en, "En körning som körs"@sv ;
     skos:prefLabel "Running"@en, "Kör"@sv .
 
-:CompletedBulkChange a :BulkChangeStatusType ;
+bulk:Completed a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A bulk change that has already taken place"@en, "En massändring som redan kört klart"@sv ;
+    rdfs:comment "A job that has been run"@en, "En körning som kört klart"@sv ;
     skos:prefLabel "Completed"@en, "Avslutad"@sv .
 
-:FailedBulkChange a :BulkChangeStatusType ;
+bulk:Failed a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A bulk change that failed to complete"@en, "En massändring som misslyckats att köra klart"@sv ;
+    rdfs:comment "A job that failed to complete"@en, "En körning som misslyckats"@sv ;
     skos:prefLabel "Failed"@en, "Misslyckad"@sv .
 
-:FormSpecification a owl:Class ;
+bulk:Update a owl:Class ;
     :category :platform ;
-    rdfs:subClassOf :BulkChangeSpecification ;
-    rdfs:comment "En deklarativ beskrivning av en ändring som ska utföras. Består av en form på data som ska matchas och en målform för ändringar."@sv ;
-    rdfs:label "Specification of bulk change form"@en, "Specifikation av form för massändring"@sv .
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form på data som ska matchas och en målform för uppdateringarna."@sv ;
+    rdfs:label "Update specification"@en, "Uppdateringsspecifikation"@sv .
 
-:changeForm a owl:ObjectProperty;
+bulk:Delete a owl:Class ;
     :category :platform ;
-    ptg:abstract true;
-    rdfs:domain :FormSpecification ;
-    rdfs:range :Resource .
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form på data som ska matchas."@sv ;
+    rdfs:label "Delete specification"@en, "Postraderingsspecifikation"@sv .
 
-:matchForm a owl:ObjectProperty;
+bulk:Create a owl:Class ;
     :category :platform ;
-    rdfs:subPropertyOf :changeForm .
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form för innehållet i poster som ska skapas."@sv ;
+    rdfs:label "Create specification"@en, "Postskapningsspecifikation"@sv .
 
-:targetForm a owl:ObjectProperty;
+bulk:matchForm a owl:ObjectProperty;
     :category :platform ;
-    rdfs:subPropertyOf :changeForm .
+    sdo:domainIncludes bulk:Update, bulk:Delete ;
+    rdfs:range :Form .
+
+bulk:targetForm a owl:ObjectProperty;
+    :category :platform ;
+    sdo:domainIncludes bulk:Update, bulk:Create ;
+    rdfs:range :Form .
+
+bulk:Form a owl:Class ;
+    :category :platform ;
+    owl:unionOf ( :Resource bulk:FormQualifier ) .
+
+bulk:FormQualifier a owl:Class ;
+    :category :platform ;
+    ptg:abstract true ;
+    rdfs:comment "This class is just a technicality for using extra Form properties on Resource" .
+
+bulk:idList a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormQualifier ;
+    rdfs:range bulk:Quantifier .
+
+bulk:Quantifier a owl:Class ;
+    :category :platform ;
+    ptg:abstract true .
+
+bulk:NoneOf a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:Quantifier.
+
+bulk:valueFrom a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:Quantifier .
+
+bulk:AnyOf a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:Quantifier .
+
+bulk:matchingMode a owl:DatatypeProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormQualifier ;
+    rdfs:range bulk:MatchingModeEnum .
+
+bulk:MatchingModeEnum a owl:Class ;
+    :category :platform .
+
+bulk:Exact a bulk:MatchingModeEnum ;
+    rdfs:comment "Match exact form"@en, "Matcha exakt form"@sv .
+
+bulk:Subtypes a bulk:MatchingModeEnum ;
+    rdfs:comment "Match all subtypes of a type."@en, "Matcha alla subtyper till en typ."@sv .
