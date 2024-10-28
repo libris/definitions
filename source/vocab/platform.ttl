@@ -28,7 +28,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
-@prefix bulk: <https://id.kb.se/bulk/> .
+@prefix bulk: <https://id.kb.se/ns/bulk/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -721,9 +721,9 @@ bulk:changeSpec a owl:ObjectProperty ;
     rdfs:domain bulk:Job ;
     rdfs:range bulk:ChangeSpec .
 
-bulk:updateModifiedTimestamp a owl:DatatypeProperty ;
+bulk:shouldUpdateModifiedTimestamp a owl:DatatypeProperty ;
     :category :platform ;
-    rdfs:label "update modified timestamp"@en, "uppdatera ändringstidsstämpel"@sv ;
+    rdfs:label "should update modified timestamp"@en, "ska uppdatera ändringstidsstämpel"@sv ;
     rdfs:domain bulk:Job ;
     rdfs:range xsd:boolean ;
     rdfs:comment "Update modified timestamp on changed records."@en, "Uppdatera ändringstidsstämpel för ändrade poster."@sv .
@@ -742,27 +742,27 @@ bulk:StatusType a owl:Class ;
 
 bulk:Draft a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A draft job that is not ready to be run"@en, "Ett utkast till körning som inte är redo att köras"@sv ;
+    rdfs:comment "A draft job that is not ready to be run."@en, "Ett utkast till körning som inte är redo att köras."@sv ;
     skos:prefLabel "Draft"@en, "Utkast"@sv .
 
 bulk:Ready a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A job that is ready to be run"@en, "En körning som är redo att köras"@sv ;
+    rdfs:comment "A job that is ready to be run."@en, "En körning som är redo att köras."@sv ;
     skos:prefLabel "Ready"@en, "Redo"@sv .
 
 bulk:Running a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A job that is running"@en, "En körning som körs"@sv ;
+    rdfs:comment "A job that is running."@en, "En körning som körs."@sv ;
     skos:prefLabel "Running"@en, "Kör"@sv .
 
 bulk:Completed a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A job that has been run"@en, "En körning som kört klart"@sv ;
+    rdfs:comment "A job that has been run."@en, "En körning som kört klart."@sv ;
     skos:prefLabel "Completed"@en, "Avslutad"@sv .
 
 bulk:Failed a bulk:StatusType ;
     :category :platform ;
-    rdfs:comment "A job that failed to complete"@en, "En körning som misslyckats"@sv ;
+    rdfs:comment "A job that failed to complete."@en, "En körning som misslyckats."@sv ;
     skos:prefLabel "Failed"@en, "Misslyckad"@sv .
 
 bulk:Update a owl:Class ;
@@ -795,16 +795,21 @@ bulk:targetForm a owl:ObjectProperty;
 
 bulk:Form a owl:Class ;
     :category :platform ;
-    owl:unionOf ( :Resource bulk:FormQualifier ) .
+    owl:unionOf ( :Resource bulk:FormExtraProperties ) .
 
-bulk:FormQualifier a owl:Class ;
+bulk:FormExtraProperties a owl:Class ;
     :category :platform ;
     ptg:abstract true ;
-    rdfs:comment "This class is just a technicality for using extra Form properties on Resource" .
+    rdfs:comment "This class is just a technicality used to define Form as Resource + some extra properties" .
 
-bulk:idList a owl:ObjectProperty ;
+bulk:formBlankNodeId a owl:DatatypeProperty ;
     :category :platform ;
-    rdfs:domain bulk:FormQualifier ;
+    rdfs:domain bulk:FormExtraProperties ;
+    rdfs:range rdfs:Literal .
+
+bulk:hasId a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormExtraProperties ;
     rdfs:range bulk:Quantifier .
 
 bulk:Quantifier a owl:Class ;
@@ -815,24 +820,24 @@ bulk:NoneOf a owl:Class ;
     :category :platform ;
     rdfs:subClassOf bulk:Quantifier.
 
-bulk:valueFrom a owl:ObjectProperty ;
-    :category :platform ;
-    rdfs:domain bulk:Quantifier .
-
 bulk:AnyOf a owl:Class ;
     :category :platform ;
     rdfs:subClassOf bulk:Quantifier .
 
+bulk:valueFrom a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:Quantifier .
+
 bulk:matchingMode a owl:DatatypeProperty ;
     :category :platform ;
-    rdfs:domain bulk:FormQualifier ;
+    rdfs:domain bulk:FormExtraProperties ;
     rdfs:range bulk:MatchingModeEnum .
 
-bulk:MatchingModeEnum a owl:Class ;
+bulk:MatchingModeType a owl:Class ;
     :category :platform .
 
-bulk:Exact a bulk:MatchingModeEnum ;
-    rdfs:comment "Match exact form"@en, "Matcha exakt form"@sv .
+bulk:Exact a bulk:MatchingModeType ;
+    rdfs:comment "Match exact form."@en, "Matcha exakt form."@sv .
 
-bulk:Subtypes a bulk:MatchingModeEnum ;
+bulk:Subtypes a bulk:MatchingModeType ;
     rdfs:comment "Match all subtypes of a type."@en, "Matcha alla subtyper till en typ."@sv .
