@@ -23,3 +23,14 @@ source/ssif.jsonld: scripts/create_ssif_science_topic_data.py cache/ssif.csv
 
 source/ssif.ttl: source/ssif.jsonld
 	trld $^ -o ttl > $@
+
+# ...,2 = Sheet 2 - see <https://wiki.documentfoundation.org/ReleaseNotes/7.2#Document_Conversion>
+cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
+	libreoffice --headless --convert-to csv:"Text - txt - csv (StarCalc)":"9,ANSI,90,,,true,true,false,false,,,2" cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx --outdir cache/
+	cp "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv" $@
+
+source/ssif-2025.jsonld: scripts/create_ssif_science_topic_data.py cache/ssif-2025.csv
+	python3 $^ > $@
+
+source/ssif-2025.ttl: source/ssif-2025.jsonld
+	trld $^ -o ttl > $@

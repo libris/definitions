@@ -3,30 +3,80 @@ import csv
 import json
 import re
 import sys
+from collections import namedtuple
 from urllib.parse import urljoin
 
-SCHEME = "https://id.kb.se/term/ssif"
-BASE = f"{SCHEME}/"
+KB_SCHEME = "https://id.kb.se/term/ssif"
+UKA_SCHEME = "https://begrepp.uka.se/SSIF"
+
+
+Row = namedtuple("Row", "code_2025, label_2025, label_en, code_2011, label_2011, change_type, comment, on_removal_see")
 
 
 def create_data(fpath):
     items = []
     tree = []
+
+    scheme_2025 = '2025' in fpath
+    concept_scheme =  UKA_SCHEME if scheme_2025 else KB_SCHEME
+
+    collect_included = False
+
+    def _iri(code: str) -> str:
+        return urljoin(f"{concept_scheme}/", code)
+
     for columns in read_csv_items(fpath):
-        for col in columns:
-            if col.strip().isdigit():
-                code = str(col)
-                break
+        if not scheme_2025:
+            for col in columns:
+                if col.strip().isdigit():
+                    code = str(col)
+                    break
+            else:
+                continue
+            row = Row(code, columns[-2], columns[-1], *(None,)*5)
         else:
+            row = Row(*columns)
+
+        if 'här ingår:' in row.label_2025.strip().lower():
+            collect_included = True
             continue
 
-        label_sv, altlabel_sv, comment_sv = _parse_value(columns[-2])
-        label_en, altlabel_en, comment_en = _parse_value(columns[-1])
+        code = row.code_2025
+
+        if not code or not code.isdigit():
+            if collect_included:
+                narrower = items[-1].setdefault('narrower', [])
+                narrower.append(
+                    {
+                        "@type": "Concept",
+                        "prefLabelByLang": {"sv": row.label_2025, "en": row.label_en}
+                    }
+                )
+
+            if row.on_removal_see:
+                item = {
+                    "@id": _iri(row.code_2011),
+                    "@type": "Classification",
+                    "code": row.code_2011,
+                    "label": row.label_2011,
+                }
+                items.append(item)
+                item['isReplacedBy'] = [
+                    {"@id": _iri(othercode.strip())}
+                    for othercode in row.on_removal_see.split(',')
+                ]
+
+            continue
+
+        collect_included = False
+
+        label_sv, altlabel_sv, comment_sv = _parse_value(row.label_2025)
+        label_en, altlabel_en, comment_en = _parse_value(row.label_en)
 
         item = {
             '@id': _iri(code),
             '@type': 'Classification',
-            'inScheme': {'@id': SCHEME},
+            'inScheme': {'@id': concept_scheme},
             'code': code,
             'prefLabelByLang': {'sv': label_sv, 'en': label_en},
         }
@@ -47,6 +97,26 @@ def create_data(fpath):
         if tree and code.startswith(tree[-1]):
             item['broader'] = {'@id': _iri(tree[-1])}
 
+        if row.change_type:
+            #"Nytt ämne"
+            #"Ny kod"
+            #"Bytt benämning"
+            ##
+            #"Sammanslagning av ämnen"
+            #"Uppdelning av ämne"
+            #"Bytt forskningsämnesgrupp"
+            #"Uppdelning av ämne, bytt forskningsämnesgrupp"
+            #"Bytt forskningsämnesgrupp, Uppdelning av ämne"
+            #"Annan"
+
+            if row.label_2011 and row.label_2011  != label_sv:
+                item['hiddenLabelByLang'] = {"sv": row.label_2011}
+
+            item['scopeNoteByLang'] = {"sv": row.change_type}
+
+        if row.comment:
+            item['historyNoteByLang'] = {"sv": row.comment}
+
         if not tree or len(tree[-1]) < len(code):
             tree.append(code)
 
@@ -58,13 +128,12 @@ def create_data(fpath):
             "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
             "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
             "commentByLang": {"@id": "comment", "@container": "@language"},
+            "hiddenLabelByLang": {"@id": "hiddenLabel", "@container": "@language"},
+            "scopeNoteByLang": {"@id": "scopeNote", "@container": "@language"},
+            "historyNoteByLang": {"@id": "historyNote", "@container": "@language"},
         },
         "@graph": items,
     }
-
-
-def _iri(code: str) -> str:
-    return urljoin(BASE, code)
 
 
 def _parse_value(s: str) -> tuple[str, str | None, str | None]:
