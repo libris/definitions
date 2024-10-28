@@ -1,21 +1,43 @@
 prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix barngf: <https://id.kb.se/term/barngf/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix marc: <https://id.kb.se/marc/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
-prefix kbgf: <https://id.kb.se/term/form/>
+prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Base Forms
 
-kbgf:Book a :GenreForm ;
+kbgf:LinguisticWork a :GenreForm ;
+  :altLabel "Literature"@en ,
+    "Litteratur"@sv ;
+  :prefLabel "Linguistic work"@en ,
+    "Språkligt verk"@sv .
+
+kbgf:Book a :GenreForm ; # BookForm
   :narrowMatch saogf:Romaner ,
     saogf:Ljudb%C3%B6cker ,
     barngf:Bilderb%F6cker ,
     barngf:Kapitelb%F6cker .
 
-kbgf:Comics a :GenreForm ;
+kbgf:Atlas a :GenreForm ; #AtlasForm
+  :exactMatch marc:Atlas, tgm:Atlaser .
+  #:narrowMatch tgm:Bilatlaser ; #:relatedMatch tgm:V\%C3\%A4gkartor .
+
+kbgf:Comic a :GenreForm ;
+  :prefLabel "Tecknad serie"@sv, "Comic"@en ;
   :narrowMatch saogf:Tecknade%20serier ,
     barngf:Tecknade%20serier .
 
 kbgf:ShortStory a :GenreForm ;
   :narrowMatch saogf:Noveller,
     saogf:Serienoveller .
+
+# TODO: trying to map *relevant* MARC GT...
+
+kbgf:Fiction a :GenreForm ;
+  :narrowMatch marc:Fiction ;  # 84678 # (SSB)
+  :narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+
+# <./marcmatches.ttl>
