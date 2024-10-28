@@ -9,6 +9,7 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix : <https://id.kb.se/vocab/>
+prefix kbgf: <https://id.kb.se/term/gf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix barngf: <https://id.kb.se/term/barngf/>
@@ -87,3 +88,15 @@ prefix spec: <https://libris.kb.se/sys/spec/>
   spec:query 'ASK { <graphicnovel02> a :Text ; :genreForm saogf:Serieromaner }' ,
     'ASK { <graphicnovel02> :genreForm saogf:Romaner }' ,
     'ASK { <graphicnovel02> a :Book }' .
+
+<atlas> a :Atlas ;
+  spec:query '''ASK {
+    <atlas> a :Text ;
+      :contentType kbrda:Text, kbrda:CartographicImage
+  }''' .
+
+<earthglobe> a :Globe ;
+  spec:query '''ASK {
+    <earthglobe> a :Cartography ;
+      :contentType kbrda:CartographicThreeDimensionalForm
+  }''' .

@@ -9,18 +9,34 @@ prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 
-prefix kbgf: <https://id.kb.se/term/form/>
+prefix kbgf: <https://id.kb.se/term/gf/>
 
 :ComplexClass rdfs:subClassOf owl:Class .
 
+:Text rdfs:subClassOf :TextContent .
+:StillImage rdfs:subClassOf :ImageContent .
+:TextWithImages rdfs:subClassOf :TextContent, :ImageContent .
+:ImageAndText rdfs:subClassOf :TextContent, :ImageContent .
+:NotatedMusic rdfs:subClassOf :NotatedMusicContent .
+:NotatedMovement rdfs:subClassOf :NotatedMovementContent .
+:Object rdfs:subClassOf :ObjectContent .
+:Audio rdfs:subClassOf :AudioContent .
+:PerformedMusic rdfs:subClassOf :PerformedMusicContent .
+:SpokenWord rdfs:subClassOf :SpokenWordContent .
+:ComputerProgram rdfs:subClassOf :ComputerProgramContent .
+:ComputerDataset rdfs:subClassOf :ComputerDatasetContent .
+
 # Complex Work Classes (Single Unit)
+
+# * Use intersections to say: "this combo *means* this class".
 
 :Book a owl:Class ;
   ptg:abstract true ;
-  :category :pending ;
+  :category :pending, :primary ;
   owl:equivalentClass bibo:Book, sdo:Book ;
   :label "Book"@en ,
-    "Bok"@sv .
+    "Bok"@sv ;
+  :pluralLabel "Böcker"@sv .
 
 :WrittenBook a :ComplexClass ;
   :category :pending ;
@@ -77,7 +93,7 @@ prefix kbgf: <https://id.kb.se/term/form/>
 
 :Issue a :ComplexClass ;
   :category :pending ;
-  rdfs:subClassOf :NonBookText ;
+  rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:equivalentClass bibo:Issue ;
   :label "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
@@ -85,7 +101,7 @@ prefix kbgf: <https://id.kb.se/term/form/>
 
 :IllustratedWork a :ComplexClass ;
   :category :pending ;
-  rdfs:subClassOf :ContainsImages ;
+  rdfs:subClassOf :ImageContent ;
   owl:intersectionOf (
       :Visual
       [ owl:onProperty :genreForm ;
@@ -95,7 +111,7 @@ prefix kbgf: <https://id.kb.se/term/form/>
     "Illustrated Work"@en .
 
 :Brochure a :Form ;
-  rdfs:subClassOf :NonBookText ;
+  rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:intersectionOf (
       :Text
       [ owl:onProperty :genreForm ;
@@ -105,20 +121,17 @@ prefix kbgf: <https://id.kb.se/term/form/>
     "Brochure"@en .
 
 :Atlas a :ComplexClass ;
-  rdfs:subClassOf :Book, :Cartography ,
-    [ owl:intersectionOf (
-        [ a owl:Restriction ; owl:onProperty :contentType ;
-          owl:hasValue kbrda:Text ]
-        [ a owl:Restriction ; owl:onProperty :contentType ;
-          owl:hasValue kbrda:CartographicImage ]
-    ) ] .
+  rdfs:subClassOf :WrittenBook, :Cartography, :ImageContent .
+
+:Globe a :ComplexClass ;
+  rdfs:subClassOf :Cartography, :ObjectContent .
 
 :Comic a :ComplexClass ;
   rdfs:subClassOf :IllustratedWork ;
   owl:intersectionOf (
       :Text
       [ owl:onProperty :genreForm ;
-        owl:hasValue kbgf:Comics ]
+        owl:hasValue kbgf:Comic ]
     ) ;
   :label "Serietidning"@sv ,
     "Comic"@en .
@@ -190,13 +203,6 @@ prefix kbgf: <https://id.kb.se/term/form/>
         owl:hasValue kbrda:Volume ]
     ) .
 
-:EBook a :ComplexClass ;
-  owl:intersectionOf (
-      :Electronic
-      [ owl:onProperty :instanceOf ;
-        owl:someValuesFrom :Book ]
-    ) .
-
 :CDBook a :ComplexClass ;
   owl:intersectionOf (
       [ owl:onProperty :carrierType ;
@@ -204,6 +210,23 @@ prefix kbgf: <https://id.kb.se/term/form/>
       [ owl:onProperty :instanceOf ;
         owl:someValuesFrom :Book ]
     ) .
+
+:EBook a :ComplexClass ;
+  owl:intersectionOf (
+      :Electronic # DigitalResource
+      [ owl:onProperty :instanceOf ;
+        owl:someValuesFrom :Book ]
+    ) .
+
+# TODO: used by whom? Not Webbsök...
+#:EAudioBook a :ComplexClass ;
+#  owl:intersectionOf (
+#      :Electronic
+#      [ owl:onProperty :instanceOf ;
+#        owl:someValuesFrom :AudioBook ]
+#    ) .
+
+# Multimedia AudioBook + WrittenBook Bundle ?
 
 
 # Collecting Work Classes
@@ -255,7 +278,7 @@ prefix kbgf: <https://id.kb.se/term/form/>
     "Serial Publication"@en .
 
 :Periodical a :ComplexClass ;
-  :category :pending ;
+  :category :pending, :primary ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
   rdfs:subClassOf :SerialPublication ;
   owl:intersectionOf (
@@ -263,6 +286,7 @@ prefix kbgf: <https://id.kb.se/term/form/>
       [ owl:onProperty :genreForm ;
         owl:hasValue saogf:Periodika ]
     ) ;
+  # TODO: :scopeNote Tidskrift vs. Tidning vs. Årsbok (<https://sv.wikipedia.org/wiki/Periodisk_skrift>)
   :altLabel "Periodika"@sv ;
   :label "Tidskrift"@sv ,
     "Periodical"@en .
