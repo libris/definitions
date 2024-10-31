@@ -28,7 +28,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Complex Work Classes (Single Unit)
 
-# * Use intersections to say: "this combo *means* this class".
+# * Uses intersections to say: "this combo *means* this class".
 
 :Book a owl:Class ;
   ptg:abstract true ;
@@ -99,6 +99,29 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Periodical Issue"@en .
 
 
+:Poster a :ComplexClass ;
+  :category :pending ;
+  # TODO: is a TextPoster a kind of ImagePoster?
+  #ptg:abstract true ;
+  #rdfs:subClassOf :StillImage ;
+  owl:equivalentClass sdo:Poster ;
+  owl:intersectionOf (
+      :Visual
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Affischer ]
+    ) ;
+  rdfs:label "Affisch"@sv, "Poster"@en ;
+  :pluralLabel "Affischer"@sv .
+
+:ImagePoster a :ComplexClass ;
+  rdfs:subClassOf :Poster , :ImageContent ;
+  rdfs:label "Bildaffisch"@sv, "Image Poster"@en .
+
+:TextPoster a :ComplexClass ;
+  rdfs:subClassOf :Poster , :TextContent ;
+  rdfs:label "Textaffisch"@sv, "Text Poster"@en .
+
+
 :IllustratedWork a :ComplexClass ;
   :category :pending ;
   rdfs:subClassOf :ImageContent ;
@@ -110,7 +133,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
-:Brochure a :Form ;
+:Brochure a :ComplexClass ;
   rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:intersectionOf (
       :Text
@@ -119,12 +142,6 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     ) ;
   :label "Broschyr"@sv ,
     "Brochure"@en .
-
-:Atlas a :ComplexClass ;
-  rdfs:subClassOf :WrittenBook, :Cartography, :ImageContent .
-
-:Globe a :ComplexClass ;
-  rdfs:subClassOf :Cartography, :ObjectContent .
 
 :Comic a :ComplexClass ;
   rdfs:subClassOf :IllustratedWork ;
@@ -158,6 +175,13 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue saogf:Serieromaner ]
     ) .
+
+
+:Atlas a :ComplexClass ;
+  rdfs:subClassOf :WrittenBook, :Cartography, :ImageContent .
+
+:Globe a :ComplexClass ;
+  rdfs:subClassOf :Cartography, :ObjectContent .
 
 
 # TODO:
@@ -290,3 +314,37 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :altLabel "Periodika"@sv ;
   :label "Tidskrift"@sv ,
     "Periodical"@en .
+
+##
+# Possible Serial combos:
+# (Or prefer :collectsType (or :containsType (== :contentType?))?)
+## Get associated GenreForm:
+#### PREFIX : <https://id.kb.se/vocab/>
+#### SELECT ?collectstype ?gf (COUNT(?serial)AS ?count) {
+####  ?serial a :Serial ; :collectsType ?collectstype ; :genreForm ?gf . FILTER isIRI(?gf)
+#### } GROUP BY ?collectstype ?gf ORDER BY ?collectstype DESC(?count)
+#
+#:TextSerial # 683169
+#  :WrittenBookSerial # 84
+#  :NotatedMusicSerial # 402
+#
+#:CartographySerial # 19
+#  :AtlasSerial # 2
+#  :SingleMapSerial # 20
+#
+#:AudioSerial # 13
+#
+#  :MusicSerial # 6
+#
+#  :AudioBookSerial # 20
+#  :SpokenWordSerial # 3
+#
+#:MovingImageSerial # 24
+#:StillImageSerial # 3
+#
+#:MultimediaSerial # 101
+#
+#:MixedMaterialSerial # 5
+#
+##:WorkSerial # 2
+##:ManuscriptTextSerial # 1
