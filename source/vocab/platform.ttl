@@ -783,6 +783,11 @@ bulk:Create a owl:Class ;
     rdfs:comment "Består av en form för innehållet i poster som ska skapas."@sv ;
     rdfs:label "Create specification"@en, "Postskapningsspecifikation"@sv .
 
+bulk:Merge a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:label "Merge specification"@en, "Postsammanslagningsspecifikation"@sv .
+
 bulk:matchForm a owl:ObjectProperty;
     :category :platform ;
     sdo:domainIncludes bulk:Update, bulk:Delete ;
@@ -792,6 +797,14 @@ bulk:targetForm a owl:ObjectProperty;
     :category :platform ;
     sdo:domainIncludes bulk:Update, bulk:Create ;
     rdfs:range :Form .
+
+bulk:deprecate a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:domain bulk:Merge .
+
+bulk:keep a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:domain bulk:Merge .
 
 bulk:Form a owl:Class ;
     :category :platform ;
