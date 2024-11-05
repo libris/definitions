@@ -800,11 +800,15 @@ bulk:targetForm a owl:ObjectProperty;
 
 bulk:deprecate a owl:ObjectProperty;
     :category :platform ;
-    rdfs:domain bulk:Merge .
+    rdfs:range :Resource ;
+    rdfs:domain bulk:Merge ;
+    rdfs:label "deprecate"@en, "deprekera"@sv .
 
 bulk:keep a owl:ObjectProperty;
     :category :platform ;
-    rdfs:domain bulk:Merge .
+    rdfs:range :Resource ;
+    rdfs:domain bulk:Merge ;
+    rdfs:label "keep"@en, "behåll"@sv .
 
 bulk:Form a owl:Class ;
     :category :platform ;
