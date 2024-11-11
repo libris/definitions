@@ -1,0 +1,84 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix : <https://id.kb.se/vocab/>
+prefix kbgf: <https://id.kb.se/term/gf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+
+<book01/cmp> { <book01> a :WrittenBook }
+<book01/exp> { <book01> a :Text ; :genreForm kbgf:Book ; :contentType kbrda:Text }
+<book01/cmp-ext> { <book01> a :WrittenBook; :genreForm saogf:Romaner }
+<book01/exp-ext> { <book01> a :Text ; :genreForm saogf:Romaner ; :contentType kbrda:Text }
+
+<audiobook01/cmp> { <audiobook01> a :Audiobook }
+<audiobook01/exp> { <audiobook01> a :Audio ; :genreForm kbgf:Book }
+<audiobook01/cmp-ext> { <audiobook01> a :Audiobook ; :genreForm saogf:Ljudb%C3%B6cker }
+<audiobook01/exp-ext> { <audiobook01> a :Audio ; :genreForm saogf:Ljudb%C3%B6cker }
+
+<ebook01/cmp> { <ebook01> a :EBook }
+<ebook01/exp> { <ebook01> a :Electronic ; :instanceOf [ a :Book ]  }
+
+<cdbook01/cmp> { <cdbook01> a :CDBook }
+<cdbook01/exp> { <cdbook01> a :Electronic ; :carrierType kbrda:AudioDisc ; :instanceOf [ a :Book ] }
+
+<computergame01/cmp> { <computergame01> a :ComputerGame }
+<computergame01/exp> { <computergame01> a :Multimedia ; :genreForm saogf:Datorspel }
+
+<multimedia01/exp> { <multimedia01> a :Multimedia }
+<multimedia01/exp-neg> { <multimedia01> a :ComputerGame }
+
+<serial01/cmp> { <serial01> a :Serial ; :genreForm saogf:Datorspel }
+<serial01/exp> { <serial01> a :Serial ; :genreForm saogf:Datorspel }
+<serial01/exp-neg> { <serial01> a :ComputerGame }
+
+<comicmagazine01/cmp> { <comicmagazine01> a :Comic ; :genreForm kbgf:Comic }
+<comicmagazine01/exp> { <comicmagazine01> a :Text ; :genreForm kbgf:Comic ; :contentType kbrda:StillImage }
+<comicmagazine01/cmp-ext> { <comicmagazine01> a :Comic ; :genreForm saogf:Tecknade%20serier }
+<comicmagazine01/exp-ext> { <comicmagazine01> a :Text ; :genreForm kbgf:Comic, saogf:Tecknade%20serier ; :contentType kbrda:StillImage }
+
+<comicmagazine03/cmp> { <comicmagazine03> a :ComicIssue }
+<comicmagazine03/exp> { <comicmagazine03> a :Text ; :genreForm kbgf:Comic, kbgf:Issue ; :contentType kbrda:StillImage }
+
+<serial02/exp> { <serial02> a :Serial ; :genreForm saogf:Tecknade%20serier }
+<serial02/exp-net> { <serial02> a :Comic }
+
+<graphicnovel01/cmp> { <graphicnovel01> a :GraphicNovel }
+<graphicnovel01/exp> { <graphicnovel01> a :Text, :Book ; :genreForm saogf:Serieromaner , saogf:Romaner }
+
+<atlas/cmp> { <atlas> a :Atlas }
+<atlas/exp> { <atlas> a :Cartography ; :genreForm kbgf:Book ; :contentType kbrda:Text, kbrda:CartographicImage }
+
+<earthglobe/cmp> { <earthglobe> a :Globe }
+<earthglobe/exp> { <earthglobe> a :Cartography ; :contentType kbrda:CartographicThreeDimensionalForm }
+
+<portraitphoto/cmp> { <portraitphoto> a :Photograph ; :genreForm saogf:Portr%C3%A4tt }
+<portraitphoto/exp> { <portraitphoto> a :StillImage ; :genreForm saogf:Fotografier, saogf:Portr%C3%A4tt ; :contentType kbrda:StillImage }
+
+# TODO: :BrailleVolume :instanceOf [a :WrittenBook ] .
+#<braillebook01> a :WrittenBook ;
+#  :genreForm saogf:Punktskriftsb%C3%B6cker ;
+#  spec:query 'ASK { <book03> a :TactileBook }' .
+#
+#<tactilefeltbook01> a :InteractiveObject ; :genreForm kbgf:TactileBook ;
+#  spec:query 'ASK { <tactilefeltbook01> a :TactileBook }' .
+
+# Instance Types
+
+# TODO: Handmade (vs. Printed)?
+#<66829ddb> a :Book ; :genreForm kbgf:Manuscript .
+#<66829d88> a :HandmadeVolume ; :instanceOf <66829ddb> .
+#
+#<66829def> a :Text ; :genreForm kbgf:Decree .
+#<66829d8a> a :HandmadeSheet ; :instanceOf <66829def> .
+#
+#<66829e07> a :StillImage ; :genreForm kbgf:ImagePoster .
+#<66829d8c> a :PrintedSheet ; :instanceOf <66829e07> .
+#
+#<66829e1d> a :StillImage ; :genreForm kbgf:Poster .
+#<66829d8f> a :PrintedSheet ; :instanceOf <66829e1d> .
+#<66829d92> a :DigitalSheet ; :instanceOf <66829e1d> .
+#
+#<66829d94> a :HandmadeSheet ; :instanceOf [ a :StillImage ; :genreForm kbgf:MapInPlano ] .
+#<66829d97> a :DigitalVolume ; :instanceOf [ a :Book ; :genreForm kbgf:Atlas ] .
+#<66829d98> a :DigitalVolume ; :instanceOf [ a :AudioBook ; :genreForm kbgf:SpokenBook ] .

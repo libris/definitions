@@ -8,8 +8,6 @@ prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 
-base <https://id.kb.se/term/div/>
-
 ##
 # Mixin classes to entail :contentType for RDA coordination.
 # See subclasses in other documents.
@@ -52,6 +50,7 @@ base <https://id.kb.se/term/div/>
 :ComputerDatasetContent a owl:Restriction ;
   owl:onProperty :contentType ; owl:hasValue kbrda:ComputerDataset .
 
+:CartographicContent a owl:Class .
 
 ## Articifial combos (patterns matching some of ComplexClass:es)
 
@@ -75,7 +74,7 @@ base <https://id.kb.se/term/div/>
 :CartographicTactileThreeDimensionalFormContent a owl:Restriction ;
   owl:onProperty :contentType ; owl:hasValue kbrda:CartographicTactileThreeDimensionalForm .
 
-[ owl:intersectionOf (:Cartography :ObjectContent) ] rdfs:subClassOf :CartographicThreeDimensionalFormContent .
+[ owl:intersectionOf (:CartographicContent :ObjectContent) ] owl:equivalentClass :CartographicThreeDimensionalFormContent .
 :CartographicThreeDimensionalFormContent a owl:Restriction ;
   owl:onProperty :contentType ; owl:hasValue kbrda:CartographicThreeDimensionalForm .
 
