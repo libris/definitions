@@ -11,8 +11,6 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 prefix kbgf: <https://id.kb.se/term/gf/>
 
-:ComplexClass rdfs:subClassOf owl:Class .
-
 :Text rdfs:subClassOf :TextContent .
 :StillImage rdfs:subClassOf :ImageContent .
 :TextWithImages rdfs:subClassOf :TextContent, :ImageContent .
@@ -38,8 +36,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Bok"@sv ;
   :pluralLabel "Böcker"@sv .
 
-:WrittenBook a :ComplexClass ;
-  :category :pending ;
+:WrittenBook a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :Book ;
   owl:intersectionOf (
       :Text
@@ -50,8 +48,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Skriven bok"@sv ;
   :altLabel "Bok"@sv, "Book"@en .
 
-:Audiobook a :ComplexClass ;
-  :category :pending ;
+:Audiobook a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :Book ,
     [ owl:onProperty :genreForm ;
       owl:hasValue saogf:Ljudb%C3%B6cker ] ,
@@ -64,8 +62,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Ljudbok"@sv ,
     "Audiobook"@en .
 
-:TactileBook a :ComplexClass ;
-  :category :pending ;
+:TactileBook a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :Book ;
   owl:intersectionOf (
       :Tactile
@@ -77,30 +75,35 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Taktil bok"@sv .
 
 
-:NonBookText a :ComplexClass ;
-  :category :pending ;
+:NonBookText a owl:Class ;
+  :category :pending, :complex ;
   ptg:abstract true ;
   rdfs:subClassOf :Text ;
   :label "Non-book text"@en ,
     "Enskild text"@sv .
 
-:Article a :ComplexClass ;
-  :category :pending ;
+:Article a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :NonBookText ;
   owl:equivalentClass bibo:Article ;
   :label "Artikel"@sv ,
     "Article"@en .
 
-:Issue a :ComplexClass ;
-  :category :pending ;
+:Issue a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:equivalentClass bibo:Issue ;
+  owl:intersectionOf (
+      :Text
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Issue ]
+    ) ;
   :label "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
 
-:Poster a :ComplexClass ;
-  :category :pending ;
+:Poster a owl:Class ;
+  :category :pending, :complex ;
   # TODO: is a TextPoster a kind of ImagePoster?
   #ptg:abstract true ;
   #rdfs:subClassOf :StillImage ;
@@ -113,17 +116,31 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   rdfs:label "Affisch"@sv, "Poster"@en ;
   :pluralLabel "Affischer"@sv .
 
-:ImagePoster a :ComplexClass ;
+:Photograph a owl:Class ;
+  :category :pending, :complex ;
+  #rdfs:subClassOf :StillImage ;
+  owl:equivalentClass sdo:Photograph ;
+  owl:intersectionOf (
+      :StillImage
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Fotografier ]
+    ) ;
+  rdfs:label "Fotografi"@sv, "Photograph"@en ;
+  :pluralLabel "Fotografier"@sv .
+
+:ImagePoster a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :Poster , :ImageContent ;
   rdfs:label "Bildaffisch"@sv, "Image Poster"@en .
 
-:TextPoster a :ComplexClass ;
+:TextPoster a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :Poster , :TextContent ;
   rdfs:label "Textaffisch"@sv, "Text Poster"@en .
 
 
-:IllustratedWork a :ComplexClass ;
-  :category :pending ;
+:IllustratedWork a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :ImageContent ;
   owl:intersectionOf (
       :Visual
@@ -133,7 +150,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
-:Brochure a :ComplexClass ;
+:Brochure a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:intersectionOf (
       :Text
@@ -143,7 +161,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Broschyr"@sv ,
     "Brochure"@en .
 
-:Comic a :ComplexClass ;
+:Comic a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :IllustratedWork ;
   owl:intersectionOf (
       :Text
@@ -153,7 +172,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Serietidning"@sv ,
     "Comic"@en .
 
-:ComicIssue a :ComplexClass ;
+:ComicIssue a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Comic
       :Issue
@@ -161,15 +181,17 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Serietidningsnummer"@sv ,
     "Comic Issue"@en .
 
-:ComicStory a :ComplexClass ;
+:ComicStory a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Comic
       [ owl:onProperty :genreForm ;
         owl:hasValue kbgf:ShortStory ]
     ) .
 
-:GraphicNovel a :ComplexClass ;
-  rdfs:subClassOf :ComicIssue ;
+:GraphicNovel a owl:Class ;
+  :category :pending, :complex ;
+  rdfs:subClassOf :ComicIssue ;  # TODO: really ComicIssue?
   owl:intersectionOf (
       :Text
       [ owl:onProperty :genreForm ;
@@ -177,18 +199,36 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     ) .
 
 
-:Atlas a :ComplexClass ;
-  rdfs:subClassOf :WrittenBook, :Cartography, :ImageContent .
+:Atlas a owl:Class ;
+  :category :pending, :complex ;
+  rdfs:subClassOf :WrittenBook, :Cartography ;
+  owl:intersectionOf (
+      #:WrittenBook
+      :Cartography
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Book ]
+      [ owl:onProperty :contentType ;
+        owl:hasValue kbrda:Text ]
+      [ owl:onProperty :contentType ;
+        owl:hasValue kbrda:CartographicImage ]
+    ) .
 
-:Globe a :ComplexClass ;
-  rdfs:subClassOf :Cartography, :ObjectContent .
+:Globe a owl:Class ;
+  :category :pending, :complex ;
+  # TODO: make these also imply the intersection?
+  #rdfs:subClassOf :Cartography, :ObjectContent ;
+  owl:intersectionOf (
+      :Cartography
+      [ owl:onProperty :contentType ;
+      owl:hasValue kbrda:CartographicThreeDimensionalForm ]
+    ) .
 
 
 # TODO:
 # * Link up *all* SAOGF-Musik(instrument) as hints for Music?
 
-:PerformedMusic a :ComplexClass ;
-  :category :pending ;
+:PerformedMusic a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Music
       [ owl:onProperty :genreForm ;
@@ -198,8 +238,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Framförd musik"@sv .
 
 
-:Film a :FormClass ;
-  :category :pending ;
+:Film a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :MovingImage
       [ owl:onProperty :genreForm ;
@@ -210,7 +250,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Film"@en .
 
 
-:ComputerGame a :ComplexClass ;
+:ComputerGame a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Multimedia
       [ owl:onProperty :genreForm ;
@@ -220,30 +261,35 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Complex Instance Classes (Single Unit)
 
-:PrintedVolume a :ComplexClass ;
+:PrintedVolume a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Print
       [ owl:onProperty :carrierType ;
         owl:hasValue kbrda:Volume ]
     ) .
 
-:CDBook a :ComplexClass ;
+:CDBook a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
+      :Electronic
       [ owl:onProperty :carrierType ;
         owl:hasValue kbrda:AudioDisc ]
       [ owl:onProperty :instanceOf ;
         owl:someValuesFrom :Book ]
     ) .
 
-:EBook a :ComplexClass ;
+:EBook a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
-      :Electronic # DigitalResource
+      :Electronic # :DigitalResource
       [ owl:onProperty :instanceOf ;
         owl:someValuesFrom :Book ]
     ) .
 
 # TODO: used by whom? Not Webbsök...
-#:EAudioBook a :ComplexClass ;
+#:EAudioBook a owl:Class ;
+#  :category :pending, :complex ;
 #  owl:intersectionOf (
 #      :Electronic
 #      [ owl:onProperty :instanceOf ;
@@ -255,7 +301,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Collecting Work Classes
 
-:CollectingResource a :Class ;
+:CollectingResource a owl:Class ;
   :category :pending ;
   ptg:abstract true ;
   :label "Collecting Resource"@en ,
@@ -263,8 +309,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 :Collection rdfs:subClassOf :CollectingResource .
 
-:Archive a :ComplexClass ;
-  :category :pending ;
+:Archive a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :CollectingResource ;
   owl:intersectionOf (
     :Collection
@@ -277,8 +323,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 :Integrating rdfs:subClassOf :CollectingResource ;
   ptg:abstract true .
 
-:Database a :ComplexClass ;
-  :category :pending ;
+:Database a owl:Class ;
+  :category :pending, :complex ;
   owl:intersectionOf (
       :Integrating
       [ owl:onProperty :genreForm ;
@@ -290,8 +336,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Serial Work Classes
 
-:SerialPublication a :ComplexClass ;
-  :category :pending ;
+:SerialPublication a owl:Class ;
+  :category :pending, :complex ;
   rdfs:subClassOf :CollectingResource ;  # Abstraction
   owl:intersectionOf (
       :Serial
@@ -301,8 +347,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :label "Seriell publikation"@sv ,
     "Serial Publication"@en .
 
-:Periodical a :ComplexClass ;
-  :category :pending, :primary ;
+:Periodical a owl:Class ;
+  :category :pending, :primary, :complex ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Periodical_literature> ;
   rdfs:subClassOf :SerialPublication ;
   owl:intersectionOf (

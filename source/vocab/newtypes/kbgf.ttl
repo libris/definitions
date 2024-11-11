@@ -20,11 +20,13 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 base <https://id.kb.se/term/div/>
 
+# FIXME: replace this file with genreforms.ttl !
+
 # It is a Genre if *either*:
 # - it is not enough to determine under which Class or Form it belongs (it is a base);
 # - *or* it represents a combination of Class or Form and a Genre (it adds a nuance).
 
-# TODO: replace subClassOf with broader and equivalentClass with broadMatch
+# TODO: replace subClassOf with broader and equivalentClass with closeMatch/broadMatch
 
 g:AbstractSummary a :Genre ;
   rdfs:subClassOf kbv:NonBookText ;
@@ -219,7 +221,8 @@ g:Newspaper a :Genre ;
   rdfs:subClassOf kbv:Periodical ;
   skos:exactMatch saogf:Dagstidningar ;
   :prefLabel "Dagstidning"@sv ,
-    "Newspaper"@en .
+    "Newspaper"@en ;
+  :pluralLabel "Dagstidningar"@sv .
 
 g:NewspaperIssue a :Genre ;
   rdfs:subClassOf kbv:Issue ;
