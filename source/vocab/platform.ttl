@@ -788,6 +788,11 @@ bulk:Merge a owl:Class ;
     rdfs:subClassOf bulk:ChangeSpec ;
     rdfs:label "Merge specification"@en, "Postsammanslagningsspecifikation"@sv .
 
+bulk:Other a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:label "Other specification"@en, "Annan specifikation"@sv .
+
 bulk:matchForm a owl:ObjectProperty;
     :category :platform ;
     sdo:domainIncludes bulk:Update, bulk:Delete ;
@@ -801,7 +806,7 @@ bulk:targetForm a owl:ObjectProperty;
 bulk:deprecate a owl:ObjectProperty;
     :category :platform ;
     rdfs:range :URI ;
-    rdfs:domain bulk:Merge ;
+    sdo:domainIncludes bulk:Merge, bulk:Other ;
     rdfs:label "deprecate"@en, "ta bort"@sv .
 
 bulk:keep a owl:ObjectProperty;
@@ -809,6 +814,15 @@ bulk:keep a owl:ObjectProperty;
     rdfs:range :URI ;
     rdfs:domain bulk:Merge ;
     rdfs:label "keep"@en, "behåll"@sv .
+
+bulk:add a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:range :Resource ;
+    rdfs:domain bulk:Other ;
+    rdfs:label "add"@en, "lägg till"@sv .
+
+#
+# Matching
 
 bulk:Form a owl:Class ;
     :category :platform ;
