@@ -732,7 +732,7 @@ bulk:status a owl:ObjectProperty ;
     :category :platform ;
     rdfs:subPropertyOf :status;
     rdfs:label "job status"@en, "körningsstatus"@sv ;
-    rdfs:domain bulk:Job ;
+    sdo:domainIncludes bulk:Job, bulk:Execution ;
     rdfs:range bulk:StatusType .
 
 bulk:StatusType a owl:Class ;
@@ -821,7 +821,7 @@ bulk:add a owl:ObjectProperty;
     rdfs:domain bulk:Other ;
     rdfs:label "add"@en, "lägg till"@sv .
 
-#
+##
 # Matching
 
 bulk:Form a owl:Class ;
@@ -877,3 +877,35 @@ bulk:Subtypes a bulk:MatchingModeType ;
 
 bulk:Any a owl:Class ;
     :category :platform .
+
+##
+# Execution / reports
+bulk:Execution a owl:Class ;
+    :category :platform ;
+    rdfs:label "Execution"@en, "Körningstillfälle"@sv .
+
+bulk:execution a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "execution"@en, "körningstillfälle"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range bulk:Execution .
+
+bulk:report a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "report"@en, "rapport"@sv ;
+    rdfs:domain bulk:Execution .
+
+bulk:numUpdated a :DatatypeProperty ;
+  rdfs:label "Number of updated records"@en, "Antal ändrade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
+
+bulk:numCreated a :DatatypeProperty ;
+  rdfs:label "Number of created records"@en, "Antal skapade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
+
+bulk:numDeleted a :DatatypeProperty ;
+  rdfs:label "Number of deleted records"@en, "Antal raderade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
