@@ -105,8 +105,8 @@
 :absorbedInPart a owl:ObjectProperty;
     rdfs:label "Absorbed in part"@en, "Har delvis införlivat"@sv;
     rdfs:subPropertyOf :precededBy;
-    rdfs:domain :Instance;
-    rdfs:range :Instance;
+    rdfs:domain :Creation;
+    rdfs:range :Creation;
     rdfs:comment "Work that has been partially incorporated into another work."@en;
     skos:closeMatch rdau:P60248, rdau:absorptionInPartOf.en ;
     owl:inverseOf :absorbedInPartBy .
@@ -115,8 +115,8 @@
 :absorbedInPartBy a owl:ObjectProperty;
     rdfs:label "Absorbed in part by"@en, "Har delvis uppgått i"@sv;
     rdfs:subPropertyOf :succeededBy;
-    rdfs:domain :Instance;
-    rdfs:range :Instance;
+    rdfs:domain :Creation;
+    rdfs:range :Creation;
     rdfs:comment "Work that incorporates part of the content of another work."@en;
     skos:closeMatch rdau:P60248, rdau:absorbedInPartBy.en ;
     owl:inverseOf :absorbedInPart .
@@ -124,8 +124,8 @@
 
 :precededInPartBy a owl:ObjectProperty;
     rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
-    rdfs:domain :Instance;
-    rdfs:range :Instance;
+    rdfs:domain :Creation;
+    rdfs:range :Creation;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :succeededInPartBy;
     skos:closeMatch rdau:P60479, rdau:replacementInPartOf.en ;
@@ -135,8 +135,8 @@
 :succeededInPartBy a owl:ObjectProperty;
     rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
     rdfs:subPropertyOf :succeededBy;
-    rdfs:domain :Instance;
-    rdfs:range :Instance;
+    rdfs:domain :Creation;
+    rdfs:range :Creation;
     owl:inverseOf :precededInPartBy;
     skos:closeMatch rdau:rdau:P60479, rdau:replacedInPartBy.en ;
     rdfs:comment "Later Work used in part in place of an earlier work, usually because the later work contains updated or new information."@en .
