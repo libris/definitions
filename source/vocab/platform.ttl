@@ -806,7 +806,7 @@ bulk:targetForm a owl:ObjectProperty;
 bulk:deprecate a owl:ObjectProperty;
     :category :platform ;
     rdfs:range :Resource ;
-    sdo:domainIncludes bulk:Merge, bulk:Other ;
+    rdfs:domain bulk:Merge ;
     rdfs:label "deprecate"@en, "ta bort"@sv .
 
 bulk:keep a owl:ObjectProperty;
@@ -815,11 +815,17 @@ bulk:keep a owl:ObjectProperty;
     rdfs:domain bulk:Merge ;
     rdfs:label "keep"@en, "behåll"@sv .
 
-bulk:add a owl:ObjectProperty;
+bulk:removeSubdivision a owl:ObjectProperty;
     :category :platform ;
-    rdfs:range :Resource ;
+    rdfs:range :Subdivision ;
     rdfs:domain bulk:Other ;
-    rdfs:label "add"@en, "lägg till"@sv .
+    rdfs:label "remove subdivision"@en, "ta bort underindelning"@sv .
+
+bulk:addSubject a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:range :Subject ;
+    rdfs:domain bulk.Other ;
+    rdfs:label "add subject"@en, "lägg till ämne"@sv .
 
 ##
 # Matching
