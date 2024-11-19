@@ -1143,6 +1143,10 @@
           "fresnel:extends": {"@id": "License-chips"},
           "classLensDomain": "License",
           "showProperties": [ "fresnel:super" ]
+        },
+        "bulk:Job": {
+          "fresnel:extends": {"@id": "Resource-cards"},
+          "showProperties": [ "fresnel:super", "bulk:status", "comment" ]
         }
       }
     },
@@ -1477,10 +1481,6 @@
         "AdministrativeAction": {
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
-        },
-        "bulk:Job": {
-          "fresnel:extends": {"@id": "Resource-cards"},
-          "showProperties": [ "fresnel:super", "bulk:status" ]
         }
       }
     },
