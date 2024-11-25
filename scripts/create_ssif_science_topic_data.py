@@ -131,14 +131,14 @@ def create_data(fpath: str, use_annots=True) -> dict:
                         "@id": _iri(row.code_2011),
                         "@type": "Classification",
                         "code": row.code_2011,
-                        "hiddenLabel": row.label_2011,
+                        "hiddenLabelByLang": {"sv":  row.label_2011},
                         "isReplacedBy": [{"@id": item_id, **annot}],
                     }
                 )
 
             if row.change_type == "Sammanslagning av ämnen":
                 # TODO: find those isReplacedBy this, and annotate that with this change.
-                handled = True
+                handled = False
 
             if row.change_type in {
                 "Bytt forskningsämnesgrupp, Uppdelning av ämne",
@@ -153,21 +153,26 @@ def create_data(fpath: str, use_annots=True) -> dict:
                             "@id": replaced_id,
                             "@type": "Classification",
                             "code": row.code_2011,
-                            "hiddenLabel": row.label_2011,
+                            "hiddenLabelByLang": {"sv":  row.label_2011},
                             "isReplacedBy": [],
                         }
                     )
                 item_map[replaced_id]["isReplacedBy"].append({"@id": item_id, **annot})
 
             if row.label_2011 and row.label_2011 != label_sv:
-                assert handled or row.change_type in {
-                    "Annan",
-                    "Bytt benämning",
-                    "Sammanslagning av ämnen",
-                }, row
-                item["hiddenLabelByLang"] = {"sv": row.label_2011}
+                if not handled:
+                    assert row.change_type in {
+                        "Annan",
+                        "Bytt benämning",
+                        "Sammanslagning av ämnen",
+                    }, row
+                    item["hiddenLabelByLang"] = {"sv": row.label_2011}
             elif not handled:
-                assert row.change_type in {"Nytt ämne", "Annan"}, row.change_type
+                assert row.change_type in {
+                    "Nytt ämne",
+                    "Annan",
+                    "Sammanslagning av ämnen",
+                }, row.change_type
 
             # TODO: also historyNoteByLang (reify with date; same as isReplacedBy annot)
             item["scopeNoteByLang"] = {"sv": row.change_type}
