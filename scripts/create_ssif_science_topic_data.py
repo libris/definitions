@@ -10,17 +10,33 @@ KB_SCHEME = "https://id.kb.se/term/ssif"
 UKA_SCHEME = "https://begrepp.uka.se/SSIF"
 
 
-Row = namedtuple("Row", "code_2025, label_2025, label_en, code_2011, label_2011, change_type, comment, on_removal_see")
+Row = namedtuple(
+    "Row",
+    "code_2025, label_2025, label_en, code_2011, label_2011, change_type, comment, on_removal_see",
+)
 
 
-def create_data(fpath):
-    items = []
-    tree = []
+def create_data(fpath: str, use_annots=True) -> dict:
+    item_map: dict = {}
+    tree: list = []
 
     scheme_2025 = '2025' in fpath
-    concept_scheme =  UKA_SCHEME if scheme_2025 else KB_SCHEME
+    concept_scheme = UKA_SCHEME if scheme_2025 else KB_SCHEME
 
     collect_included = False
+
+    last_item = None
+
+    def add_item(item):
+        nonlocal last_item
+        item_id = item["@id"]
+        if item_id in item_map:
+            given = item_map[item_id]
+            given_rel = given["isReplacedBy"]
+            related = item.setdefault("related", [])
+            related += given_rel
+        item_map[item_id] = item
+        last_item = item
 
     def _iri(code: str) -> str:
         return urljoin(f"{concept_scheme}/", code)
@@ -33,7 +49,7 @@ def create_data(fpath):
                     break
             else:
                 continue
-            row = Row(code, columns[-2], columns[-1], *(None,)*5)
+            row = Row(code, columns[-2], columns[-1], *(None,) * 5)
         else:
             row = Row(*columns)
 
@@ -45,26 +61,28 @@ def create_data(fpath):
 
         if not code or not code.isdigit():
             if collect_included:
-                narrower = items[-1].setdefault('narrower', [])
+                assert last_item
+                narrower = last_item.setdefault('narrower', [])
                 narrower.append(
                     {
                         "@type": "Concept",
-                        "prefLabelByLang": {"sv": row.label_2025, "en": row.label_en}
+                        "prefLabelByLang": {"sv": row.label_2025, "en": row.label_en},
                     }
                 )
 
             if row.on_removal_see:
-                item = {
-                    "@id": _iri(row.code_2011),
-                    "@type": "Classification",
-                    "code": row.code_2011,
-                    "label": row.label_2011,
-                }
-                items.append(item)
-                item['isReplacedBy'] = [
-                    {"@id": _iri(othercode.strip())}
-                    for othercode in row.on_removal_see.split(',')
-                ]
+                add_item(
+                    {
+                        "@id": _iri(row.code_2011),
+                        "@type": "Classification",
+                        "code": row.code_2011,
+                        "hiddenLabel": row.label_2011,
+                        "isReplacedBy": [
+                            {"@id": _iri(othercode.strip())}
+                            for othercode in row.on_removal_see.split(',')
+                        ],
+                    }
+                )
 
             continue
 
@@ -73,8 +91,9 @@ def create_data(fpath):
         label_sv, altlabel_sv, comment_sv = _parse_value(row.label_2025)
         label_en, altlabel_en, comment_en = _parse_value(row.label_en)
 
-        item = {
-            '@id': _iri(code),
+        item_id = _iri(code)
+        item: dict = {
+            '@id': item_id,
             '@type': 'Classification',
             'inScheme': {'@id': concept_scheme},
             'code': code,
@@ -88,7 +107,7 @@ def create_data(fpath):
             ('commentByLang', comment_en, 'en'),
         ]:
             if value:
-                bylang = item.setdefault(prop, {})
+                bylang: dict = item.setdefault(prop, {})
                 bylang[lang] = value
 
         while tree and len(tree[-1]) >= len(code):
@@ -98,29 +117,68 @@ def create_data(fpath):
             item['broader'] = {'@id': _iri(tree[-1])}
 
         if row.change_type:
-            #"Nytt ämne"
-            #"Ny kod"
-            #"Bytt benämning"
-            ##
-            #"Sammanslagning av ämnen"
-            #"Uppdelning av ämne"
-            #"Bytt forskningsämnesgrupp"
-            #"Uppdelning av ämne, bytt forskningsämnesgrupp"
-            #"Bytt forskningsämnesgrupp, Uppdelning av ämne"
-            #"Annan"
+            handled = False
+            annot = (
+                {"@annotation": {"commentByLang": {"sv": row.change_type}}}
+                if use_annots
+                else {}
+            )
 
-            if row.label_2011 and row.label_2011  != label_sv:
-                item['hiddenLabelByLang'] = {"sv": row.label_2011}
+            if row.change_type in {"Ny kod", "Bytt forskningsämnesgrupp"}:
+                handled = True
+                add_item(
+                    {
+                        "@id": _iri(row.code_2011),
+                        "@type": "Classification",
+                        "code": row.code_2011,
+                        "hiddenLabel": row.label_2011,
+                        "isReplacedBy": [{"@id": item_id, **annot}],
+                    }
+                )
 
-            item['scopeNoteByLang'] = {"sv": row.change_type}
+            if row.change_type == "Sammanslagning av ämnen":
+                # TODO: find those isReplacedBy this, and annotate that with this change.
+                handled = True
+
+            if row.change_type in {
+                "Bytt forskningsämnesgrupp, Uppdelning av ämne",
+                "Uppdelning av ämne",
+                "Uppdelning av ämne, bytt forskningsämnesgrupp",
+            }:
+                handled = True
+                replaced_id = _iri(row.code_2011)
+                if replaced_id not in item_map:
+                    add_item(
+                        {
+                            "@id": replaced_id,
+                            "@type": "Classification",
+                            "code": row.code_2011,
+                            "hiddenLabel": row.label_2011,
+                            "isReplacedBy": [],
+                        }
+                    )
+                item_map[replaced_id]["isReplacedBy"].append({"@id": item_id, **annot})
+
+            if row.label_2011 and row.label_2011 != label_sv:
+                assert handled or row.change_type in {
+                    "Annan",
+                    "Bytt benämning",
+                    "Sammanslagning av ämnen",
+                }, row
+                item["hiddenLabelByLang"] = {"sv": row.label_2011}
+            elif not handled:
+                assert row.change_type in {"Nytt ämne", "Annan"}, row.change_type
+
+            # TODO: also historyNoteByLang (reify with date; same as isReplacedBy annot)
+            item["scopeNoteByLang"] = {"sv": row.change_type}
 
         if row.comment:
-            item['historyNoteByLang'] = {"sv": row.comment}
+            item["historyNoteByLang"] = {"sv": row.comment}
 
         if not tree or len(tree[-1]) < len(code):
             tree.append(code)
 
-        items.append(item)
+        add_item(item)
 
     return {
         "@context": {
@@ -132,7 +190,7 @@ def create_data(fpath):
             "scopeNoteByLang": {"@id": "scopeNote", "@container": "@language"},
             "historyNoteByLang": {"@id": "historyNote", "@container": "@language"},
         },
-        "@graph": items,
+        "@graph": list(item_map.values()),
     }
 
 
