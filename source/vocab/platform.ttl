@@ -28,6 +28,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+@prefix bulk: <https://id.kb.se/ns/bulk/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -82,6 +83,7 @@
     owl:inverseOf :mainEntity;
     owl:equivalentProperty bf2:adminMetadata, foaf:isPrimaryTopicOf, sdo:mainEntityOfPage, xhv:meta ;
     rdfs:subPropertyOf :describedBy ;
+    sdo:domainIncludes :Identity, :Document ;
     rdfs:range :Record .
 
 :describedBy a owl:ObjectProperty;
@@ -520,8 +522,8 @@
 
 :maxItems a owl:ObjectProperty;
     :category :platform ;
-    skos:definition "The maximum number of items that may be accessed through pagination. Might be smaller than totalItems"@en;
-    rdfs:domain :PartialCollectionView .
+    skos:definition "The maximum number of items in the collection/view/result. For paginated collections: the maximum number of items that may be accessed through pagination. Might be smaller than totalItems."@en;
+    sdo:domainIncludes :PartialCollectionView, :Slice .
 
 :first a owl:ObjectProperty;
     :category :platform ;
@@ -686,3 +688,236 @@
 :Observation a owl:Class;
     :category :platform ;
     rdfs:subClassOf qb:Observation .
+
+##
+# Record history
+:changeSets a owl:ObjectProperty;
+    :category :platform ;
+    sdo:domainIncludes bulk:Preview ;
+    rdfs:range :ChangeSet .
+
+:ChangeSet a owl:Class;
+    :category :platform .
+
+##
+# Bulk changes
+bulk:Job a owl:Class ;
+    :category :platform ;
+    rdfs:label "Job"@en, "Körning"@sv ;
+    rdfs:subClassOf :GenerationProcess .
+
+bulk:ChangeSpec a owl:Class ;
+    :category :platform ;
+    ptg:abstract true ;
+    rdfs:label "Change specification"@en, "Ändringsspecifikation"@sv .
+
+bulk:Preview a owl:Class ;
+    :category :platform ;
+    rdfs:label "Preview"@en, "Förhandsgranskning"@sv ;
+    rdfs:subClassOf :PartialCollectionView .
+
+bulk:changeSpec a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "change specification"@en, "ändringsspecifikation"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range bulk:ChangeSpec .
+
+bulk:shouldUpdateModifiedTimestamp a owl:DatatypeProperty ;
+    :category :platform ;
+    rdfs:label "should update modified timestamp"@en, "ska uppdatera ändringstidsstämpel"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Update modified timestamp on changed records."@en, "Uppdatera ändringstidsstämpel för ändrade poster."@sv .
+
+bulk:status a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:subPropertyOf :status;
+    rdfs:label "job status"@en, "körningsstatus"@sv ;
+    sdo:domainIncludes bulk:Job, bulk:Execution ;
+    rdfs:range bulk:StatusType .
+
+bulk:StatusType a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf :Status ;
+    skos:prefLabel "Job status"@en, "Körningsstatus"@sv .
+
+bulk:Draft a bulk:StatusType ;
+    :category :platform ;
+    rdfs:comment "A draft job that is not ready to be run."@en, "Ett utkast till körning som inte är redo att köras."@sv ;
+    skos:prefLabel "Draft"@en, "Utkast"@sv .
+
+bulk:Ready a bulk:StatusType ;
+    :category :platform ;
+    rdfs:comment "A job that is ready to be run."@en, "En körning som är redo att köras."@sv ;
+    skos:prefLabel "Ready"@en, "Redo"@sv .
+
+bulk:Running a bulk:StatusType ;
+    :category :platform ;
+    rdfs:comment "A job that is running."@en, "En körning som körs."@sv ;
+    skos:prefLabel "Running"@en, "Kör"@sv .
+
+bulk:Completed a bulk:StatusType ;
+    :category :platform ;
+    rdfs:comment "A job that has been run."@en, "En körning som kört klart."@sv ;
+    skos:prefLabel "Completed"@en, "Avslutad"@sv .
+
+bulk:Failed a bulk:StatusType ;
+    :category :platform ;
+    rdfs:comment "A job that failed to complete."@en, "En körning som misslyckats."@sv ;
+    skos:prefLabel "Failed"@en, "Misslyckad"@sv .
+
+bulk:Update a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form på data som ska matchas och en målform för uppdateringarna."@sv ;
+    rdfs:label "Update specification"@en, "Uppdateringsspecifikation"@sv .
+
+bulk:Delete a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form på data som ska matchas."@sv ;
+    rdfs:label "Delete specification"@en, "Postraderingsspecifikation"@sv .
+
+bulk:Create a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:comment "Består av en form för innehållet i poster som ska skapas."@sv ;
+    rdfs:label "Create specification"@en, "Postskapningsspecifikation"@sv .
+
+bulk:Merge a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:label "Merge specification"@en, "Postsammanslagningsspecifikation"@sv .
+
+bulk:Other a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:ChangeSpec ;
+    rdfs:label "Other specification"@en, "Annan specifikation"@sv .
+
+bulk:matchForm a owl:ObjectProperty;
+    :category :platform ;
+    sdo:domainIncludes bulk:Update, bulk:Delete ;
+    rdfs:range :Form .
+
+bulk:targetForm a owl:ObjectProperty;
+    :category :platform ;
+    sdo:domainIncludes bulk:Update, bulk:Create ;
+    rdfs:range :Form .
+
+bulk:deprecate a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:range :Resource ;
+    rdfs:domain bulk:Merge ;
+    rdfs:label "deprecate"@en, "ta bort"@sv .
+
+bulk:keep a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:range :Resource ;
+    rdfs:domain bulk:Merge ;
+    rdfs:label "keep"@en, "behåll"@sv .
+
+bulk:removeSubdivision a owl:ObjectProperty;
+    :category :platform ;
+    rdfs:range :Subdivision ;
+    rdfs:domain bulk:Other ;
+    rdfs:label "remove subdivision"@en, "ta bort underindelning"@sv .
+
+bulk:addTerm a owl:ObjectProperty;
+    :category :platform ;
+    sdo:rangeIncludes :Subject, :GenreForm ;
+    rdfs:domain bulk:Other ;
+    rdfs:label "add term"@en, "lägg till term"@sv .
+
+##
+# Matching
+
+bulk:Form a owl:Class ;
+    :category :platform ;
+    owl:unionOf ( :Resource bulk:FormExtraProperties ) .
+
+bulk:FormExtraProperties a owl:Class ;
+    :category :platform ;
+    ptg:abstract true ;
+    rdfs:comment "This class is just a technicality used to define Form as Resource + some extra properties" .
+
+bulk:formBlankNodeId a owl:DatatypeProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormExtraProperties ;
+    rdfs:range rdfs:Literal .
+
+bulk:hasId a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormExtraProperties ;
+    rdfs:range bulk:Quantifier .
+
+bulk:Quantifier a owl:Class ;
+    :category :platform ;
+    ptg:abstract true .
+
+bulk:NoneOf a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:Quantifier.
+
+bulk:AnyOf a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bulk:Quantifier .
+
+bulk:valueFrom a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain bulk:Quantifier .
+
+bulk:matchingMode a owl:DatatypeProperty ;
+    :category :platform ;
+    rdfs:domain bulk:FormExtraProperties ;
+    rdfs:range bulk:MatchingModeType .
+
+bulk:MatchingModeType a owl:Class ;
+    :category :platform .
+
+bulk:Exact a bulk:MatchingModeType ;
+    :category :platform ;
+    rdfs:comment "Match exact form."@en, "Matcha exakt form."@sv .
+
+bulk:Subtypes a bulk:MatchingModeType ;
+    :category :platform ;
+    rdfs:comment "Match all subtypes of a type."@en, "Matcha alla subtyper till en typ."@sv .
+
+bulk:Any a owl:Class ;
+    :category :platform .
+
+##
+# Execution / reports
+bulk:Execution a owl:Class ;
+    :category :platform ;
+    rdfs:label "Execution"@en, "Körningstillfälle"@sv .
+
+bulk:execution a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "execution"@en, "körningstillfälle"@sv ;
+    rdfs:domain bulk:Job ;
+    rdfs:range bulk:Execution .
+
+bulk:report a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "report"@en, "rapport"@sv ;
+    rdfs:domain bulk:Execution .
+
+bulk:numUpdated a :DatatypeProperty ;
+  rdfs:label "Number of updated records"@en, "Antal ändrade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
+
+bulk:numCreated a :DatatypeProperty ;
+  rdfs:label "Number of created records"@en, "Antal skapade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
+
+bulk:numDeleted a :DatatypeProperty ;
+  rdfs:label "Number of deleted records"@en, "Antal raderade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
+
+bulk:numFailed a :DatatypeProperty ;
+  rdfs:label "Number of failed records"@en, "Antal misslyckade poster"@sv ;
+  rdfs:domain bulk:Execution ;
+  rdfs:range xsd:nonNegativeInteger .
