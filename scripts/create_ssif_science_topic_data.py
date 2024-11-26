@@ -131,7 +131,7 @@ def create_data(fpath: str, use_annots=True) -> dict:
                         "@id": _iri(row.code_2011),
                         "@type": "Classification",
                         "code": row.code_2011,
-                        "hiddenLabelByLang": {"sv":  row.label_2011},
+                        "hiddenLabelByLang": {"sv": row.label_2011},
                         "isReplacedBy": [{"@id": item_id, **annot}],
                     }
                 )
@@ -153,7 +153,7 @@ def create_data(fpath: str, use_annots=True) -> dict:
                             "@id": replaced_id,
                             "@type": "Classification",
                             "code": row.code_2011,
-                            "hiddenLabelByLang": {"sv":  row.label_2011},
+                            "hiddenLabelByLang": {"sv": row.label_2011},
                             "isReplacedBy": [],
                         }
                     )
@@ -169,8 +169,8 @@ def create_data(fpath: str, use_annots=True) -> dict:
                     item["hiddenLabelByLang"] = {"sv": row.label_2011}
             elif not handled:
                 assert row.change_type in {
-                    "Nytt ämne",
                     "Annan",
+                    "Nytt ämne",
                     "Sammanslagning av ämnen",
                 }, row.change_type
 
