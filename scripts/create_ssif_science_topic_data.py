@@ -59,6 +59,12 @@ def create_data(fpath: str, use_annots=True) -> dict:
 
         code = row.code_2025
 
+        on_removal_see_links = [
+            {"@id": _iri(othercode)}
+            for see in row.on_removal_see.split(',')
+            if (othercode := see.strip())
+        ]
+
         if not code or not code.isdigit():
             if collect_included:
                 assert last_item
@@ -77,10 +83,7 @@ def create_data(fpath: str, use_annots=True) -> dict:
                         "@type": "Classification",
                         "code": row.code_2011,
                         "hiddenLabel": row.label_2011,
-                        "isReplacedBy": [
-                            {"@id": _iri(othercode.strip())}
-                            for othercode in row.on_removal_see.split(',')
-                        ],
+                        "isReplacedBy": on_removal_see_links,
                     }
                 )
 
@@ -157,7 +160,19 @@ def create_data(fpath: str, use_annots=True) -> dict:
                             "isReplacedBy": [],
                         }
                     )
-                item_map[replaced_id]["isReplacedBy"].append({"@id": item_id, **annot})
+                replacements: list[dict] = item_map[replaced_id]["isReplacedBy"]
+
+                # Use explicit replacements if given, otherwise use current item.
+                if on_removal_see_links and not any(
+                    ref["@id"] == item_id for ref in on_removal_see_links
+                ):
+                    replacements += on_removal_see_links
+                else:
+                    replacements.append({"@id": item_id})
+
+                for repl in replacements:
+                    if "@annotation" not in repl:
+                        repl.update(annot)
 
             if row.label_2011 and row.label_2011 != label_sv:
                 if not handled:
