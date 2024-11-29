@@ -100,13 +100,21 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
         if not code or not code.isdigit():
             if collect_included:
                 assert last_item
-                narrower = last_item.setdefault('narrower', [])
-                narrower.append(
-                    {
-                        "@type": "Concept",
-                        "prefLabelByLang": {"sv": row.label_2025, "en": row.label_en},
-                    }
-                )
+                narrower: dict = {"@type": "Concept"}
+                preflabel = {lang: value
+                    for lang, value in [
+                        ("sv", row.label_2025),
+                        ("en", row.label_en),
+                    ] if value
+                }
+
+                hiddenlabel = {"sv": row.label_2011} if row.label_2011 else None
+                if preflabel:
+                    narrower["prefLabelByLang"] = preflabel
+                if hiddenlabel:
+                    narrower["hiddenLabelByLang"] = hiddenlabel
+                if preflabel or hiddenlabel:
+                    last_item.setdefault('narrower', []).append(narrower)
 
             if row.on_removal_see:
                 add_item(
