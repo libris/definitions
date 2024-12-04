@@ -19,7 +19,10 @@ Row = namedtuple(
 )
 
 
+# TODO: datatyped code? <https://dataportal.se/concepts/notation/nh-135>
 SHARED_CONTEXT = {
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "labelByLang": {"@id": "label", "@container": "@language"},
     "prefLabelByLang": {"@id": "prefLabel", "@container": "@language"},
     "altLabelByLang": {"@id": "altLabel", "@container": "@language"},
     "commentByLang": {"@id": "comment", "@container": "@language"},
@@ -30,10 +33,16 @@ SHARED_CONTEXT = {
 
 
 def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
-    item_map: dict = {}
+    item_map: dict[str, dict] = {}
     tree: list = []
+    annotation_map: dict[str, dict] = {}
+    annotation_refs: dict[str, list] = {}
+
+    redundant_history_notes: set[str] = set()
 
     scheme_2025 = '2025' in fpath
+
+    changedate = "2025"
 
     if simple_skos and scheme_2025:
         concept_scheme = UKA_SCHEME
@@ -41,9 +50,13 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
         context = SHARED_CONTEXT | {
             "@vocab": SKOS_IRI,
             "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
             "dct": "http://purl.org/dc/terms/",
+            "date": "dct:date",
             "ratio": "rdf:value",
-            "commentByLang": {"@id": "dct:comment", "@container": "@language"},
+            "code": "notation",
+            "labelByLang": {"@id": "rdfs:label", "@container": "@language"},
+            "commentByLang": {"@id": "rdfs:comment", "@container": "@language"},
             "isReplacedBy": "dct:isReplacedBy",
         }
     elif scheme_2025:
@@ -54,6 +67,16 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
         concept_scheme = KB_SCHEME
         term_type = "Classification"
         context = SHARED_CONTEXT | {"@vocab": KBV_IRI}
+
+    if use_annots:
+        context["as"] = "https://www.w3.org/ns/activitystreams#"
+
+    item_map[concept_scheme] = {
+        "@id": concept_scheme,
+        "@type": "ConceptScheme",
+        "code": "SSIF",
+        "prefLabelByLang": {"sv": "Standard för svensk indelning av forskningsämnen"},
+    }
 
     collect_included = False
 
@@ -72,6 +95,16 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
 
     def _iri(code: str) -> str:
         return urljoin(f"{concept_scheme}/", code)
+
+    def annotate(obj: dict, annot: dict) -> dict:
+        if annot:
+            annotation_map[annot["@id"]] = annot
+            annot_ref = {"@id": annot["@id"]}
+            annotation_refs.setdefault(annot["@id"], []).append(annot_ref)
+            if "@annotation" not in obj:
+                obj["@annotation"] = annot_ref
+
+        return obj
 
     for columns in read_csv_items(fpath):
         if not scheme_2025:
@@ -97,15 +130,40 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
             if (othercode := see.strip())
         ]
 
+        if row.change_type:
+            annot_name = f"_:change-{row.code_2011 or row.code_2025}"
+            change_type = {
+                "Annan": "as:Update",
+                "Bytt forskningsämnesgrupp": "as:Move",
+                "Bytt forskningsämnesgrupp, Uppdelning av ämne": "as:Move",
+                "Sammanslagning av ämnen": "as:Update",
+                "Uppdelning av ämne": "as:Update",  # Split
+                "Uppdelning av ämne, bytt forskningsämnesgrupp": "as:Move",
+                "Bytt benämning": "as:Update",
+                "Ny kod": "as:Move",
+                "Nytt ämne": "as:Create",
+                "Sammanslagning av ämnen": "as:Update",  # Merge
+            }.get(row.change_type, "as:Activity")
+            annot = {
+                "@id": annot_name,
+                "@type": change_type,
+                "date": changedate,
+                "commentByLang": {"sv": row.change_type},
+            }
+        else:
+            annot = {}
+
         if not code or not code.isdigit():
             if collect_included:
                 assert last_item
                 narrower: dict = {"@type": "Concept"}
-                preflabel = {lang: value
+                preflabel = {
+                    lang: value
                     for lang, value in [
                         ("sv", row.label_2025),
                         ("en", row.label_en),
-                    ] if value
+                    ]
+                    if value
                 }
 
                 hiddenlabel = {"sv": row.label_2011} if row.label_2011 else None
@@ -117,15 +175,20 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                     last_item.setdefault('narrower', []).append(narrower)
 
             if row.on_removal_see:
-                add_item(
-                    {
-                        "@id": _iri(row.code_2011),
-                        "@type": term_type,
-                        "code": row.code_2011,
-                        "hiddenLabel": row.label_2011,
-                        "isReplacedBy": on_removal_see_links,
-                    }
-                )
+                replaced_item = {
+                    "@id": _iri(row.code_2011),
+                    "@type": term_type,
+                    "code": row.code_2011,
+                    "owl:deprecated": True,
+                    "labelByLang": {"sv": row.label_2011},
+                    "isReplacedBy": [
+                        annotate(see, annot) for see in on_removal_see_links
+                    ],
+                }
+                _add_history_note(replaced_item, row.comment, annot, annotate)
+                redundant_history_notes.add(row.comment)
+
+                add_item(replaced_item)
 
             continue
 
@@ -145,9 +208,9 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
 
         for prop, value, lang in [
             ('altLabelByLang', altlabel_sv, 'sv'),
-            ('commentByLang', comment_sv, 'sv'),
+            ('scopeNoteByLang', comment_sv, 'sv'),
             ('altLabelByLang', altlabel_en, 'en'),
-            ('commentByLang', comment_en, 'en'),
+            ('scopeNoteByLang', comment_en, 'en'),
         ]:
             if value:
                 bylang: dict = item.setdefault(prop, {})
@@ -161,11 +224,6 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
 
         if row.change_type:
             handled = False
-            annot = (
-                {"@annotation": {"commentByLang": {"sv": row.change_type}}}
-                if use_annots
-                else {}
-            )
 
             if row.change_type in {"Ny kod", "Bytt forskningsämnesgrupp"}:
                 handled = True
@@ -174,13 +232,13 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                         "@id": _iri(row.code_2011),
                         "@type": term_type,
                         "code": row.code_2011,
-                        "hiddenLabelByLang": {"sv": row.label_2011},
-                        "isReplacedBy": [{"@id": item_id, **annot}],
+                        "owl:deprecated": True,
+                        "labelByLang": {"sv": row.label_2011},
+                        "isReplacedBy": [annotate({"@id": item_id}, annot)],
                     }
                 )
 
             if row.change_type == "Sammanslagning av ämnen":
-                # TODO: find those isReplacedBy this, and annotate that with this change.
                 handled = False
 
             if row.change_type in {
@@ -196,7 +254,8 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                             "@id": replaced_id,
                             "@type": term_type,
                             "code": row.code_2011,
-                            "hiddenLabelByLang": {"sv": row.label_2011},
+                            "owl:deprecated": True,
+                            "labelByLang": {"sv": row.label_2011},
                             "isReplacedBy": [],
                         }
                     )
@@ -213,8 +272,7 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                     replacements.append({"@id": item_id})
 
                 for repl in replacements:
-                    if "@annotation" not in repl:
-                        repl.update(annot)
+                    annotate(repl, annot)
 
             if row.label_2011 and row.label_2011 != label_sv:
                 if not handled:
@@ -231,11 +289,7 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                     "Sammanslagning av ämnen",
                 }, row.change_type
 
-            # TODO: also historyNoteByLang (reify with date; same as isReplacedBy annot)
-            item["scopeNoteByLang"] = {"sv": row.change_type}
-
-        if row.comment:
-            item["historyNoteByLang"] = {"sv": row.comment}
+        _add_history_note(item, row.comment, annot, annotate)
 
         if not tree or len(tree[-1]) < len(code):
             tree.append(code)
@@ -243,36 +297,84 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
         add_item(item)
 
     for item in item_map.values():
-        _add_replacement_matches(item, item_map, use_annots)
+        _add_replacement_matches(item, item_map, annotation_map, use_annots)
+        if not item.get("owl:deprecated"):
+            if hnote := item.get("historyNoteByLang"):
+                if hnote["sv"] in redundant_history_notes:
+                    del item["historyNoteByLang"]
+
+        if not use_annots:
+            for key, value in list(item.items()):
+                if key == "historyNote" and isinstance(value, dict):
+                    del item["historyNote"]
+                    item["historyNoteByLang"] = {value["@language"]: value["@value"]}
+                elif isinstance(value, list):
+                    for v in value:
+                        if isinstance(v, dict) and "@annotation" in v:
+                            del v["@annotation"]
+
+    for annot_name, refs in annotation_refs.items():
+        if use_annots:
+            annot = annotation_map.pop(annot_name)
+            refs[0].update(annot)
+            if len(refs) == 1:
+                del refs[0]["@id"]
+
+    if not use_annots:
+        annotation_map = {}
 
     return {
         "@context": context,
-        "@graph": list(item_map.values()),
+        "@graph": list(item_map.values()) + list(annotation_map.values()),
     }
 
 
+def _add_history_note(item, note: str, annot: dict, annotate) -> None:
+    if not note:
+        return
+
+    if annot:
+        item["historyNote"] = annotate(
+            {
+                "@language": "sv",
+                "@value": note,
+            },
+            annot,
+        )
+    else:
+        item["historyNoteByLang"] = {"sv": note}
+
+
 def _add_replacement_matches(
-    item: dict, item_map: dict[str, dict], use_annots=False
+    item: dict, item_map: dict[str, dict], annotation_map, use_annots=False
 ) -> None:
-    if 'hiddenLabelByLang' not in item:
+    if 'labelByLang' not in item:
         return
 
     closematches: list[dict] = []
     narrowmatches: list[dict] = []
 
-    item_label_sv = item['hiddenLabelByLang']['sv']
+    item_label_sv = item['labelByLang']['sv']
     for repl_ref in item.get('isReplacedBy', []):
+        comment = None
+        if annot_id := repl_ref["@annotation"].get("@id"):
+            comment = annotation_map[annot_id]["commentByLang"]["sv"]
+
         repl = item_map[repl_ref["@id"]]
         if not item['code'].startswith(repl['broader']["@id"].rsplit('/', 1)[-1]):
             continue
 
         repl_label_sv = repl['prefLabelByLang']['sv']
         ratio = likeness_ratio(item_label_sv, repl_label_sv)
-        if 0 < ratio < 1:
+        if 0.4 < ratio < 1:
             ref = {"@id": repl["@id"]}
             if use_annots:
                 ref["@annotation"] = {"ratio": ratio}
-            (closematches if ratio > 0.8 else narrowmatches).append(ref)
+
+            if ratio > 0.8:
+                closematches.append(ref)
+            elif comment not in {"Sammanslagning av ämnen", "Annan", "Bytt benämning"}:
+                narrowmatches.append(ref)
 
     if closematches:
         item['closeMatch'] = closematches
@@ -282,7 +384,7 @@ def _add_replacement_matches(
 
 def likeness_ratio(a: str, b: str) -> float:
     sm = SequenceMatcher(None, a, b)
-    return sm.ratio()
+    return round(sm.ratio(), 3)
 
 
 def _parse_value(s: str) -> tuple[str, str | None, str | None]:
