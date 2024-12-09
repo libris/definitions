@@ -221,6 +221,8 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
 
         if tree and code.startswith(tree[-1]):
             item['broader'] = {'@id': _iri(tree[-1])}
+        else:
+            item['topConceptOf'] = {"@id": concept_scheme}
 
         if row.change_type:
             handled = False
