@@ -23,6 +23,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix kbrel: <https://id.kb.se/relator/> .
+@prefix bulk: <https://id.kb.se/ns/bulk/> .
 
 ##--------------------------------#
 ## Title Information
@@ -806,7 +807,7 @@
     rdfs:label "start time"@en, "starttid"@sv.
 
 :endTime a owl:DatatypeProperty ;
-    rdfs:domain :MediaObject ; #for event and bitstream?
+    sdo:domainIncludes :MediaObject, bulk:Execution ; #for event and bitstream?
     owl:equivalentProperty sdo:endTime ;
     rdfs:label "end time"@en, "sluttid"@sv.
 

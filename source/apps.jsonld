@@ -79,18 +79,42 @@
           { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
           { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["language"], "itemLimit": 100 },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
-          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
           { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
           { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
         ]
+      },
+      "filterAliases": [
+        { "alias": "excludeEplikt", "filter": "NOT bibliography:\"sigel:EPLK\"" },
+        { "alias": "includeEplikt", "filter": "NOT excludeEplikt" },
+        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")" },
+        { "alias": "includePreliminary", "filter": "NOT excludePreliminary" }
+      ],
+      "defaultSiteFilters": [
+        {"filter": "excludeEplikt"},
+        {"filter": "excludePreliminary"},
+        {"filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\""}
+      ],
+      "defaultSiteTypeFilters": [
+        {"filter": "\"rdf:type\":Work"}
+      ],
+      "optionalSiteFilters": [
+        { "filter": "includeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit" } },
+        { "filter": "includePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
+        { "filter": "image:*", "prefLabelByLang": { "sv": "Endast resurser med omslags-/miniatyrbild", "en": "Resources with cover/thumbnail only" } }
+      ],
+      "relationFilters": {
+        "Agent": [ "contributor", "subject", "publisher" ],
+        "Concept": [ "subject", "genreForm", "hasOccupation", "fieldOfActivity", "termComponentList" ],
+        "Work": [ "subject" ]
       }
     },
     {
