@@ -4,10 +4,17 @@ source/cc-licenses.ttl: source/construct-cc-license-data.rq
 
 source/sab.ttl: scripts/extract_sab_data_from_docx.py cache/esab-2015_1.docx
 	python3 $^ | trld -ijsonld -ottl > $@
-	# TODO 1: enhance with DDC-mappings: scripts/create_sab_skos_data.py +
-	# ../librisxl/whelk-core/src/main/java/se/kb/libris/export/dewey/dewey_sab.txt
-	# TODO 2: In XL, add precomposed usages (extract from usage in records)? See:
-	# ../librisxl/marc_export/src/main/resources/se/kb/libris/export/sabrub.txt # precomposed
+# TODO: enhance with DDC-mappings (if allowed): scripts/create_sab_skos_data.py with
+# ../librisxl/whelk-core/src/main/java/se/kb/libris/export/dewey/dewey_sab.txt
+
+source/sab/precoordinated.ttl: scripts/make_precoordinated_sab_terms.py source/sab.ttl cache/sab-usages.tsv.gz
+	python3 $^ > $@ 2>logs/sab-unknown.tsv
+# TODO: Compare extracted precoordinated.ttl usages with:
+# ../librisxl/marc_export/src/main/resources/se/kb/libris/export/sabrub.txt # precomposed
+
+cache/sab-usages.tsv.gz: scripts/sab-usages.rq
+	curl -s https://libris.kb.se/sparql -HAccept:text/tab-separated-values --data-urlencode query@$^ | gzip - > /tmp/sab-usages.tsv.gz
+	cp /tmp/sab-usages.tsv.gz $@
 
 ## SSIF 2011 (Obsolete)
 #
