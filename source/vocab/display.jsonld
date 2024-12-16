@@ -377,7 +377,7 @@
           "@id": "TransformedLanguageForm-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "TransformedLanguageForm",
-          "showProperties": [ "prefLabel", "inLanguage", "langTransformAccordingTo"]
+          "showProperties": [ "prefLabel", "inLanguage", {"alternateProperties": ["langTransformAccordingTo", "inLangScript"]} ]
         },
         "marc:LanguageNote": {
           "@id": "LanguageNote-chips",
@@ -580,6 +580,18 @@
             },
             "concerning"
           ]
+        },
+        "License": {
+          "@id": "License-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "License",
+          "showProperties": [ "title", "identifier" ]
+        },
+        "bulk:Execution": {
+          "@id": "bulk:Execution-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bulk:Execution",
+          "showProperties": [ "bulk:status" ]
         }
       }
     },
@@ -761,7 +773,9 @@
             "subject",
             "summary",
             "immediateAcquisition",
-            "availability"
+            "availability",
+            { "inverseOf": "itemUsed" },
+            { "inverseOf": "hasComponent" }
           ]
         },
         "StructuredValue": {
@@ -1122,6 +1136,17 @@
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "classLensDomain": "ImageObject",
           "showProperties": [ "fresnel:super", "thumbnail", "publisher", "usageAndAccessPolicy" ]
+        },
+        "License": {
+          "@id": "License-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "License-chips"},
+          "classLensDomain": "License",
+          "showProperties": [ "fresnel:super" ]
+        },
+        "bulk:Job": {
+          "fresnel:extends": {"@id": "Resource-cards"},
+          "showProperties": [ "fresnel:super", "bulk:status", "comment" ]
         }
       }
     },
@@ -1378,7 +1403,6 @@
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
         }
-
       }
     },
     "search-chips": {
