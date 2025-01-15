@@ -20,13 +20,13 @@ base <https://id.kb.se/dataset/>
                 :dataQuery [ :uri "source/construct-rda-terms.rq" ] ;
                 :sourceData [ :uri 'source/rda-terms.ttl' ;
                               :representationOf <rdaterms> ] ,
-                    <http://rdaregistry.info/termList/RDAContentType.nt> ,
+                    <https://www.rdaregistry.info/nt/termList/RDAContentType.nt> ,
                     <http://id.loc.gov/vocabulary/contentTypes> ,
 
-                    <http://rdaregistry.info/termList/RDAMediaType.nt> ,
+                    <https://www.rdaregistry.info/nt/termList/RDAMediaType.nt> ,
                     <http://id.loc.gov/vocabulary/mediaTypes> ,
 
-                    <http://rdaregistry.info/termList/RDACarrierType.nt> ,
+                    <https://www.rdaregistry.info/nt/termList/RDACarrierType.nt> ,
                     <http://id.loc.gov/vocabulary/carriers> ,
 
                     #<http://rdaregistry.info/termList/ModeIssue> ,
@@ -42,7 +42,7 @@ base <https://id.kb.se/dataset/>
     :sourceData [ :uri "build/materials.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-materials.rq" ] ;
             :sourceData [ :uri 'source/materials.ttl'; :representationOf <materials> ],
-                <http://rdaregistry.info/termList/RDAMaterial.nt> ,
+                <https://www.rdaregistry.info/nt/termList/RDAMaterial.nt> ,
                 [ a :QueryConstruct ;
                     :dataQuery [ :uri "source/remote/construct-aat-materials.rq" ] ;
                     :representationOf <urn:x-cache:sparql:aat-materials> ]
@@ -55,7 +55,7 @@ base <https://id.kb.se/dataset/>
     :sourceData [ :uri "build/musnotationterms.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-musnotationsterms.rq" ] ;
             :sourceData [ :uri 'source/musicnotation.ttl' ; :representationOf <musnotationterms> ] ,
-                    <http://rdaregistry.info/termList/MusNotation.nt>
+                    <https://www.rdaregistry.info/nt/termList/MusNotation.nt>
         ] ] ;
     :uriSpace "/term/rda/musnotation/" ;
     :created "2021-05-21T23:59:01.337Z"^^xsd:dateTime .
@@ -65,7 +65,7 @@ base <https://id.kb.se/dataset/>
     :sourceData [ :uri "build/tacnotationterms.json.lines" ; :sourceData [ a :QueryConstruct ;
             :dataQuery [ :uri "source/construct-tacnotationterms.rq" ] ;
             :sourceData [ :uri 'source/tactilenotation.ttl' ; :representationOf <tacnotationterms> ],
-                <http://rdaregistry.info/termList/TacNotation.nt>
+                <https://www.rdaregistry.info/nt/termList/TacNotation.nt>
         ] ] ;
     :uriSpace "/term/rda/tacnotation/" ;
     :created "2021-05-21T23:59:10.456Z"^^xsd:dateTime .
