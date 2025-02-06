@@ -3,6 +3,7 @@ import shutil
 
 from lxltools.datacompiler import Compiler
 import syscore
+import maintenance
 import common
 import docs
 
@@ -21,6 +22,7 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
 if __name__ == '__main__':
     compiler.main()
     syscore.compiler.main()
+    maintenance.compiler.main()
     common.compiler.main()
     docs.compiler.main()
 

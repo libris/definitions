@@ -14,6 +14,8 @@ ID_BASE = "https://id.kb.se/"
 SCRIPT_DIR = os.path.dirname(__file__) or '.'
 
 
+# Används bara av vocab (? i den här filen iaf, _ borde antyda att den inte används annorstädes?)
+'''
 def _get_repo_version():
     try:
         with os.popen(
@@ -22,7 +24,7 @@ def _get_repo_version():
             return pipe.read().rstrip()
     except:
         return None
-
+'''
 
 compiler = Compiler(base_dir=SCRIPT_DIR,
                     dataset_id=LIBRIS_BASE + 'dataset/syscore',
@@ -49,7 +51,7 @@ def contexts():
         uripath = ID_BASE + str(docpath.relative_to(root).with_suffix(''))
         _write_context_record(compiler, docpath, uripath, contexts_ds_url)
 
-
+'''
 @compiler.handler
 def vocab():
     vocab_base = ID_BASE + 'vocab/'
@@ -126,7 +128,7 @@ def vocab():
 
     compiler.write(data, "vocab")
     compiler.write(display, 'vocab/display')
-
+'''
 
 @compiler.handler
 def apps():
@@ -140,6 +142,7 @@ def apps():
         compiler.write({'@graph': descriptions}, slug)
 
 
+# Kopierat in denna i maintenane :/
 def _insert_record(graph, created_ms, dataset_id):
     entity = graph[0]
     record = {'@type': 'SystemRecord'}
