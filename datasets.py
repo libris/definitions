@@ -26,8 +26,13 @@ if __name__ == '__main__':
     common.compiler.main()
     docs.compiler.main()
 
+    # Hela den här operationen fallerar!
+    # Jag hittar inte att några filer med namnet *.jsonld.lines skapts. :/
     out_dir = compiler.outdir
     with (out_dir / compiler.union).open('ab') as defs_f:
-        for mod in [syscore, common, docs]:
-            with (out_dir / mod.compiler.union).open('rb') as f:
-                shutil.copyfileobj(f, defs_f)
+        for mod in [maintenance, syscore, common, docs]:
+            try:
+                with (out_dir / mod.compiler.union).open('rb') as f:
+                    shutil.copyfileobj(f, defs_f)
+            except FileNotFoundError:
+                print("No union file found for", mod.__name__, ": ", mod.compiler.union)

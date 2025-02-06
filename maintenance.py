@@ -25,13 +25,13 @@ def _get_repo_version():
     
 # Kopierar denna från syscore
 compiler = Compiler(base_dir=SCRIPT_DIR,
-                    dataset_id=LIBRIS_BASE + 'dataset/vocabtest', # Vad skulle denna heta? fortf syscore?
+                    dataset_id=LIBRIS_BASE + 'dataset/vocab', # Vad skulle denna heta? fortf syscore?
                     created='2022-11-19T13:09:35.010Z', # Vad står datumet för?
                     tool_id=ID_BASE + 'generator/vocabtest_compiler', # Vad skulle denna heta? fortf syscore?
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
                     system_base_iri='',
-                    union='vocabtest.jsonld.lines')  # Vad skulle denna heta? fortf syscore?
+                    union='vocab.jsonld.lines')  # Vad skulle denna heta? fortf syscore?
 
 @compiler.handler
 def vocab():

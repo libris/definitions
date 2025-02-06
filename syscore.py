@@ -168,6 +168,10 @@ def _write_context_record(compiler, filepath, uripath, ds_url, alias=None):
     assert uripath.startswith(ID_BASE)
     compiler.write(ctx_data, uripath.replace(ID_BASE, ''))
 
+    # Lade till detta för att skapa en fil som datasets letar efter :/
+    #compiler.write(ctx_data, compiler.union)
+
+
 
 if __name__ == '__main__':
     compiler.main()
