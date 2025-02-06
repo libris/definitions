@@ -1,8 +1,11 @@
 import os
-from rdflib import Graph, RDF, Namespace
-from lxltools.datacompiler import Compiler, last_modified_ms
+#from rdflib import Graph, RDF, Namespace
+#from lxltools.datacompiler import Compiler, last_modified_ms
+from rdflib import Namespace
+from lxltools.datacompiler import Compiler
 from lxltools.timeutil import w3c_dtz_to_ms
 from urllib.parse import urljoin
+import maintenance
 
 
 SCRA = Namespace("http://purl.org/net/schemarama#")
@@ -117,14 +120,14 @@ def vocab():
     vocab_modified_ms = last_modified_ms(compiler.current_ds_resources)
     compiler._create_dataset_description(vocab_ds_url, vocab_created_ms, vocab_modified_ms)
 
-    _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
+    insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
     vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
         vocab_node['version'] = version
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
+    insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
     compiler.write(display, 'vocab/display')
@@ -138,26 +141,27 @@ def apps():
     for app in apps['@graph']:
         slug = app['@id']
         descriptions = [app]
-        _insert_record(descriptions, created_ms, ds_url)
+        compiler.insert_record(descriptions, created_ms, ds_url)
         compiler.write({'@graph': descriptions}, slug)
 
 
-# Kopierat in denna i maintenane :/
-def _insert_record(graph, created_ms, dataset_id):
+# Testade att lägga in denna i compiler för att inte behöva upprepa i maintenance. Vet ej om det passar? :/
+'''
+def insert_record(graph, created_ms, dataset_id):
     entity = graph[0]
     record = {'@type': 'SystemRecord'}
     record[compiler.record_thing_link] = {'@id': entity['@id']}
     graph.insert(0, record)
     record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
     record['inDataset'] = [{'@id': compiler.dataset_id}, {'@id': dataset_id}]
-
+'''
 
 def _write_context_record(compiler, filepath, uripath, ds_url, alias=None):
     ctx_data = compiler.load_json(filepath)
     ctx_created_ms = w3c_dtz_to_ms(ctx_data.pop('created'))
 
     ctx_data['@graph'] = [{"@id": uripath, "@type": "jsonld:Context"}]
-    _insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
+    compiler.insert_record(ctx_data['@graph'], ctx_created_ms, ds_url)
     if alias:
         ctx_data['@graph'][0]['sameAs'] = [{'@id': alias}]
 
@@ -167,3 +171,6 @@ def _write_context_record(compiler, filepath, uripath, ds_url, alias=None):
 
 if __name__ == '__main__':
     compiler.main()
+
+    # Ska syscore också innehålla maintenance?
+    maintenance.compiler.main()

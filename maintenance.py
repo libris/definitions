@@ -25,13 +25,13 @@ def _get_repo_version():
     
 # Kopierar denna från syscore
 compiler = Compiler(base_dir=SCRIPT_DIR,
-                    dataset_id=LIBRIS_BASE + 'dataset/syscore',
+                    dataset_id=LIBRIS_BASE + 'dataset/vocabtest', # Vad skulle denna heta? fortf syscore?
                     created='2022-11-19T13:09:35.010Z', # Vad står datumet för?
-                    tool_id=ID_BASE + 'generator/syscorecompiler',
+                    tool_id=ID_BASE + 'generator/vocabtest_compiler', # Vad skulle denna heta? fortf syscore?
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
                     system_base_iri='',
-                    union='syscore.jsonld.lines') 
+                    union='vocabtest.jsonld.lines')  # Vad skulle denna heta? fortf syscore?
 
 @compiler.handler
 def vocab():
@@ -99,26 +99,28 @@ def vocab():
     vocab_modified_ms = last_modified_ms(compiler.current_ds_resources)
     compiler._create_dataset_description(vocab_ds_url, vocab_created_ms, vocab_modified_ms)
 
-    _insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
+    compiler.insert_record(data['@graph'], vocab_created_ms, vocab_ds_url)
     vocab_node = data['@graph'][1]
     version = _get_repo_version()
     if version:
         vocab_node['version'] = version
 
     display = compiler.load_json('source/vocab/display.jsonld')
-    _insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
+    compiler.insert_record(display['@graph'], vocab_created_ms, vocab_ds_url)
 
     compiler.write(data, "vocab")
     compiler.write(display, 'vocab/display')
 
-# Synd att kopiera in den här från syscore, brode använda samma funktion
-def _insert_record(graph, created_ms, dataset_id):
+# Synd att kopiera in den här från syscore, brode använda samma funktion. Kunde det vara en metod i Compiler?
+'''
+def insert_record(graph, created_ms, dataset_id):
     entity = graph[0]
     record = {'@type': 'SystemRecord'}
     record[compiler.record_thing_link] = {'@id': entity['@id']}
     graph.insert(0, record)
     record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
     record['inDataset'] = [{'@id': compiler.dataset_id}, {'@id': dataset_id}]
+'''
 
 if __name__ == '__main__':
     compiler.main()

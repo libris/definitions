@@ -119,6 +119,15 @@ class Compiler:
         return ldutil.to_jsonld(graph,
                          "../" + self.context,
                          self.load_json(self.context))
+    
+    # Testade att lägga in denna här för att kunna dela
+    def insert_record(self, graph, created_ms, dataset_id):
+        entity = graph[0]
+        record = {'@type': 'SystemRecord'}
+        record[self.record_thing_link] = {'@id': entity['@id']}
+        graph.insert(0, record)
+        record['@id'] = self.generate_record_id(created_ms, entity['@id'])
+        record['inDataset'] = [{'@id': self.dataset_id}, {'@id': dataset_id}]
 
     def _compile_datasets(self, names):
         self._create_dataset_description(self.dataset_id,
@@ -192,6 +201,8 @@ class Compiler:
                     datasets=[self.dataset_id, ds_url])
             self.write(desc, fpath)
 
+    # Borde den här vara "privat" (underscore) när den används i syscore/maintenance?
+    # Undrar apropå insert_record
     def _create_dataset_description(self, ds_url, created_ms, modified_ms=None, label=None):
         if not label:
             label = ds_url.rsplit('/', 1)[-1]
