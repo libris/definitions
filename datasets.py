@@ -27,7 +27,9 @@ if __name__ == '__main__':
     docs.compiler.main()
 
     # Hela den här operationen fallerar!
-    # Jag hittar inte att några filer med namnet *.jsonld.lines skapts. :/
+    # Om jag inte först, innan jag datasets.py kör "datasets.py" (default: "--lines False"), kör "datasets.py --lines True"
+    # vilket skapar de *.jsonld.lines-filer som nedan eftersöker
+    # Underligt nog verkar  "datasets.py --lines True" enbart skapa dessa, och inga av de andra filerna som  "datasets.py" skapar
     out_dir = compiler.outdir
     with (out_dir / compiler.union).open('ab') as defs_f:
         for mod in [maintenance, syscore, common, docs]:
