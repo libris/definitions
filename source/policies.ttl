@@ -33,66 +33,12 @@ Det är du som användare som ansvarar för att ta reda på om materialet är up
     :seeAlso <https://www.kb.se/besok-och-anvand/kopiera-och-fotografera/upphovsratt/> ;
     :publisher <https://libris.kb.se/20dgd3zl56pmrzk#it> .
 
-# MTM inspirerad av policies ovan
-
-</policy/MTM/encryption> a :AccessPolicy ;
-skos:prefLabel "MTM:s policy för användning av kurslitteratur"@sv, "MTM's policy for the use of course literature"@en ;
-rdfs:comment "Filer kan krypteras vid nedladdning."@sv ;
+</policy/mtm/encryption-of-course-literature> a :AccessPolicy ;
+skos:prefLabel "Filer kan krypteras vid nedladdning."@sv, "Files may be encrypted during download."@en ;
 :seeAlso <https://www.legimus.se/anvaenda-legimus/kryptering-i-legimus> ;
 :publisher <https://www.mtm.se/> .
 
-</policy/MTM/restricted> a :AccessPolicy ;
-skos:prefLabel "Tillgänglig för personer med läsnedsättning enligt § 17 Upphovsrättslagen"@sv;
+</policy/mtm/restricted> a :AccessPolicy ;
+skos:prefLabel "Tillgänglig för personer med läsnedsättning enligt § 17 Upphovsrättslagen"@sv, "Available for persons with reading disabilities according to § 17 of the Copyright Act"@en;
 :seeAlso <https://www.mtm.se/om-oss/var-organisation/uppdrag-och-lagar/upphovsrattslagen/> ;
 :publisher <https://www.mtm.se/> .
-
-
-# MTM inspirerad av cc-licenses.ttl och policies
-
-<https://www.legimus.se/anvaenda-legimus/kryptering-i-legimus> a :AccessPolicy ;
-skos:prefLabel "MTM:s policy för användning av kurslitteratur"@sv, "MTM's policy for the use of course literature"@en ;
-:publisher <https://www.mtm.se/> .
-
-<https://www.mtm.se/om-oss/var-organisation/uppdrag-och-lagar/upphovsrattslagen/> a :AccessPolicy ;
-skos:prefLabel "Tillgänglig för personer med läsnedsättning enligt § 17 Upphovsrättslagen"@sv ;
-:publisher <https://www.mtm.se/> .
-
-
-# MTM inspirerad av cc-licenses.ttl
-
-<https://www.legimus.se/anvaenda-legimus/kryptering-i-legimus> a :AccessPolicy ;
-dcterms:title "MTM:s policy för användning av kurslitteratur"@sv, "MTM's policy for the use of course literature"@en ;
-dcterms:creator <https://www.mtm.se/> .
-
-<https://www.mtm.se/om-oss/var-organisation/uppdrag-och-lagar/upphovsrattslagen/> a :AccessPolicy ;
-dcterms:title "Tillgänglig för personer med läsnedsättning enligt § 17 Upphovsrättslagen"@sv ;
-dcterms:creator <https://www.mtm.se/> .
-
-
-
-# Frågor:
-# - Hur ska vi prefixa <http://purl.org/dc/terms/> -- dcterms eller dct? Kan vi göra det mer konsekvent?
-# - Hur ska vi uttrycka de nya villkoren från MTM? Är något av de tre förslagen ovan ovan bättre?
-# - Hur fomrulerar vi dem så att de visas bra i Libris Sök, och användaren ska kunna klicka sig vidare till den länkade texten? 
-# - Egenskaper som vi ser visas på postsidan i nya Libris Sök är :prefLabel, dcterms:title och dcterms:identifier
-# T.ex. https://beta.libris.kb.se/h1t7600t09w06w0#work-record, https://beta.libris.kb.se/zh22bp0bw6hpfz4t#work-record
-# :publisher på sådant som inte är instans? Samma sak som https://id.kb.se/relator/publisher?
-
-
-
-# CC Licence inspiration
-
-
-<https://creativecommons.org/licenses/by-nc-nd/4.0/> a cc:License ;
-    cc:permits cc:Distribution,
-        cc:Reproduction ;
-    cc:prohibits cc:CommercialUse ;
-    cc:requires cc:Attribution,
-        cc:Notice ;
-    dcterms:creator <https://creativecommons.org/> ;
-    dcterms:identifier "CC BY-NC-ND 4.0" ;
-    dcterms:title "Attribution-NonCommercial-NoDerivatives 4.0 International"@en,
-        "Erkännande-Ickekommersiell-IngaBearbetningar 4.0 Internationell"@sv ;
-    frbr:translation <https://creativecommons.org/licenses/by-nc-nd/4.0/deed.sv> ;
-    xhv:license <https://creativecommons.org/licenses/by/4.0/> ;
-    owl:sameAs <http://creativecommons.org/licenses/by-nc-nd/4.0/> .
