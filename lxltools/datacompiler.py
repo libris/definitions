@@ -69,7 +69,6 @@ class Compiler:
 
         args = argp.parse_args()
         
-        # Eftersom nedan inte uppfylls ("--lines True" läses in som args.datasets) så används args.datasets = {}, alltså inga datasets
         if not args.datasets and args.outdir:
             args.datasets = list(self.datasets)
 
@@ -101,8 +100,6 @@ class Compiler:
 
     def _run(self, names):
         try:
-            # När --lines True skippas alla dataset då names-variabeln innehåller "--lines True"
-            # Måste man specificera dataset för att kunna använda --lines True? Men hur gör man det med datasets.dp som inte har några Available datasets?
             self._compile_datasets(names)
         finally:
             if self.union_file:
@@ -112,7 +109,6 @@ class Compiler:
         self.datasets[func.__name__] = func, True
         return func
 
-    # Här läggs namnen på datasetsen in i self.datasets. @compiler.handler används i bla syscore.py. Varför sätts inte dataset-namnen i datasets.py?
     def handler(self, func):
         self.datasets[func.__name__] = func, False
         return func
