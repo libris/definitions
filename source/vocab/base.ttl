@@ -242,6 +242,12 @@ rdf:type a owl:ObjectProperty;
     :category :heuristicIdentifier ;
     owl:equivalentProperty rdfs:label, sdo:name .
 
+:pluralLabel a owl:DatatypeProperty;
+    rdfs:label "plural label"@en, "benämning i plural"@sv;
+    rdfs:domain :Resource ;
+    #:category :heuristicIdentifier ;
+    rdfs:subPropertyOf :label .
+
 :comment a owl:DatatypeProperty;
     rdfs:label "comment"@en, "kommentar"@sv;
     sdo:domainIncludes :Agent, :Title, :ToCEntry, :EAN, :UPC, :Language, :Script , :ChangeNote, :AdministrativeAction, bulk:Job;

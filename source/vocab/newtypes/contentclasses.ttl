@@ -12,7 +12,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 prefix kbgf: <https://id.kb.se/term/gf/>
 
 ##
-# This file depends on patterns defined in <./rdamatches.ttl> .
+# This file depends on patterns defined in <./rdacontentpatterns.ttl> .
 
 
 # Locally defined restriction shapes
@@ -25,9 +25,27 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Bok"@sv ;
   :pluralLabel "Böcker"@sv .
 
+:CartographyForm a owl:Restriction ;
+  owl:onProperty :genreForm ;
+  owl:hasValue saogf:Kartor ;
+  :note "SAOGF *is* this general, *not* just for planar maps." .
+
+:Tactile rdfs:subClassOf [ owl:onProperty :genreForm ; owl:hasValue saogf:Taktila\%20verk ] .
+
+:StillImage rdfs:subClassOf [ owl:onProperty :genreForm ; owl:hasValue saogf:Bilder ] .
+
+:NotatedMusic rdfs:subClassOf [ owl:onProperty :genreForm ; owl:hasValue saogf:Musikalier ] .
+
 
 # Extend existing classes
 
+# TODO:
+# * If only contentType kbrda:* will be used; these *need* to be intersections? Or "probably" :Text on revert?!
+#   We won't know what they are in bf either, unless e.g. a :Poster is a :Text, :Image ...
+# * RDA Content Types (some are rebuses with gf:s or even instance types)
+# * Some kbrda:* are "primary genreForm"; some could exact-match a type as a Restriction on genreForm or contentType
+
+:Cartography rdfs:subClassOf :Monograph, :CartographyForm, :CartographyContent .
 :Text rdfs:subClassOf :Monograph, :TextContent .
 :TextWithImages rdfs:subClassOf :Monograph, :TextContent, :ImageContent .
 :StillImage rdfs:subClassOf :Monograph, :ImageContent .
@@ -63,7 +81,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     ) ;
   :label "Written book"@en ,
     "Skriven bok"@sv ;
-  :altLabel "Bok"@sv, "Book"@en .
+  :altLabel "Bok"@sv, "Book"@en ;
+  :pluralLabel "Böcker"@sv .
 
 :Audiobook a owl:Class ;
   :category :pending, :complex ;
@@ -153,6 +172,11 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   rdfs:subClassOf :Poster , :TextContent ;
   rdfs:label "Textaffisch"@sv, "Text Poster"@en .
 
+:ImageAndTextPoster a owl:Class ;
+  :category :pending, :complex ;
+  rdfs:subClassOf :ImagePoster, :TextPoster ;
+  rdfs:label "Bild- och textaffisch"@sv, "Image and Text Poster"@en .
+
 
 :IllustratedWork a owl:Class ;
   :category :pending, :complex ;
@@ -214,6 +238,12 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     ) .
 
 
+# FIXME: remove instancetype :Map ; compute on revert (if work is :Cartography, prefer Map over all non-electronic?)
+# TODO: == Cartography
+#f:Map a :Form ;
+#  rdfs:subClassOf f:CartographicImage ;
+#  rdfs:label "Karta"@sv , "Map"@en .
+
 :Atlas a owl:Class ;
   ptg:abstract true ;
   :category :pending, :complex ;
@@ -240,6 +270,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 # * In SAOGF, link up *all* SAOGF-Musik[*instrument] as hints for "Music-content"?
 
 :PerformedMusic a owl:Class ;
+  # TODO: is this the "real" :Music (subClassOf :Audio), and :Music is more "genre"?
   :category :pending, :complex ;
   owl:intersectionOf (
       :Music
@@ -285,6 +316,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 :Database a owl:Class ;
   :category :pending, :complex ;
+  #rdfs:subClassOf :Dataset ;
   owl:intersectionOf (
       :Integrating
       [ owl:onProperty :genreForm ;
@@ -318,44 +350,10 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   # TODO: :scopeNote Tidskrift vs. Tidning vs. Årsbok (<https://sv.wikipedia.org/wiki/Periodisk_skrift>)
   :altLabel "Periodika"@sv ;
   :label "Tidskrift"@sv ,
-    "Periodical"@en .
+    "Periodical"@en ;
+  :pluralLabel "Tidskrifter"@sv .
 
-
-# Complex Instance Classes (Single Unit)
-
-:PrintedVolume a owl:Class ;
-  :category :pending, :complex ;
-  owl:intersectionOf (
-      :Print
-      [ owl:onProperty :carrierType ;
-        owl:hasValue kbrda:Volume ]
-    ) .
-
-:CDBook a owl:Class ;
-  :category :pending, :complex ;
-  owl:intersectionOf (
-      :Electronic
-      [ owl:onProperty :carrierType ;
-        owl:hasValue kbrda:AudioDisc ]
-      [ owl:onProperty :instanceOf ;
-        owl:someValuesFrom :BookForm ]
-    ) .
-
-:EBook a owl:Class ;
-  :category :pending, :complex ;
-  owl:intersectionOf (
-      :Electronic # :DigitalResource
-      [ owl:onProperty :instanceOf ;
-        owl:someValuesFrom :BookForm ]
-    ) .
-
-# TODO: used by whom? Not Webbsök...
-#:EAudioBook a owl:Class ;
-#  :category :pending, :complex ;
-#  owl:intersectionOf (
-#      :Electronic
-#      [ owl:onProperty :instanceOf ;
-#        owl:someValuesFrom :AudioBook ]
-#    ) .
-
-# Multimedia AudioBook + WrittenBook Bundle ?
+#:CreativeWorkSeries a owl:Class;
+#    owl:equivalentClass sdo:CreativeWorkSeries;
+#    rdfs:subClassOf :Serial;
+#    rdfs:label "Creative Work Series"@en, "Utgivningsserie"@sv .
