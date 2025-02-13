@@ -7,7 +7,7 @@ prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
 prefix kbgf: <https://id.kb.se/term/gf/>
 
-# Base Forms
+# Base Forms (Categories?! Nature of content, etc.)
 
 kbgf:LinguisticWork a :GenreForm ;
   :altLabel "Literature"@en ,
@@ -43,5 +43,9 @@ kbgf:Photograph :exactMatch saogf:Fotografier, tgm:Fotografier .
 kbgf:Fiction a :GenreForm ;
   :narrowMatch marc:Fiction ;  # 84678 # (SSB)
   :narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+
+# TODO: base GenreForm?
+#:Radio a :GenreForm ; :label "Radio"@sv .
+#:TV a :GenreForm ; :label "TV"@sv .
 
 # <./marcmatches.ttl>
