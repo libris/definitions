@@ -232,8 +232,9 @@
     rdfs:label "narrower match"@en, "smalare match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
-    owl:equivalentProperty skos:narrowMatch ;
-    owl:equivalentProperty madsrdf:hasNarrowerExternalAuthority .
+    owl:inverseOf :broadMatch ;
+    owl:equivalentProperty skos:narrowMatch ,
+        madsrdf:hasNarrowerExternalAuthority .
 
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "preferred label"@en, "föredragen benämning"@sv; #NOTE: föredragen term inom concept
@@ -411,6 +412,14 @@
  
 
 # Domain Specific Concept Classes
+
+:genreForm a owl:ObjectProperty;
+    rdfs:label "genre/form"@sv;
+    rdfs:range :GenreForm;
+    # NOTE: Very (too?) powerful; relied on for classes derived from KBVF.
+    owl:propertyChainAxiom (:genreForm :broader) ;
+    rdfs:subPropertyOf dc:type, sdo:genre ;
+    owl:equivalentProperty bf2:genreForm .
 
 :Topic a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
