@@ -68,11 +68,11 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 #MusicCD
 
 
-#---- FIXME: Either turn into :complex intersection patterns, or *just* move to (RDA) carriera or materials/formats...
+#---- FIXME: Either turn into :complex intersection patterns, or *just* move to (RDA) carriers or materials/formats...
 
 # Unmediated
 
-:Unmediated a :MediaType ;  # TODO: :PhysicalForm?
+:Unmediated a owl:Class, :MediaType ;  # TODO: :PhysicalForm?
   ptg:abstract true ;
   rdfs:subClassOf :Instance ;
   skos:exactMatch kbrda:Unmediated ;
@@ -106,7 +106,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 # fmt:LargeText a :Format ?
 
-:Volume a :CarrierType;
+:Volume a owl:Class, :CarrierType ;
   #ptg:abstract true ;
   skos:exactMatch kbrda:Volume ;
   rdfs:subClassOf :Unmediated ;
@@ -129,22 +129,22 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   rdfs:subClassOf :PrintedVolume .
 
 
-:Card a :CarrierType;
+:Card a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Card ;
   rdfs:subClassOf :Unmediated ;
   rdfs:label "Bildkort"@sv, "Card"@en .
 
-:Flipchart a :CarrierType;
+:Flipchart a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Flipchart ;
   rdfs:subClassOf :Unmediated ;
   rdfs:label "Blädderblock"@sv, "Flipchart"@en .
 
-:Roll a :CarrierType;
+:Roll a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Roll ;
   rdfs:subClassOf :Unmediated ;
   rdfs:label "Rulle"@sv, "Roll"@en .
 
-:Sheet a :CarrierType;
+:Sheet a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Sheet ;
   rdfs:subClassOf :Unmediated ;
   rdfs:label "Ark"@sv, "Sheet"@en .
@@ -206,11 +206,11 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   rdfs:subClassOf :StorageMedium ;
   skos:exactMatch marc:TapeReel .
 
-:MagneticDisk a :CarrierType ;
+:MagneticDisk a owl:Class, :CarrierType ;
   skos:exactMatch marc:MagneticDisk ;
   rdfs:subClassOf :StorageMedium .
 
-:MagnetoOpticalDisc a :CarrierType ;
+:MagnetoOpticalDisc a owl:Class, :CarrierType ;
   skos:exactMatch marc:MagnetoOpticalDisc ;
   rdfs:subClassOf :StorageMedium .
 
@@ -218,7 +218,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   ptg:abstract true ;
   rdfs:subClassOf :StorageMedium .
 
-:OpticalDisc a :CarrierType ;
+:OpticalDisc a owl:Class, :CarrierType ;
   skos:exactMatch marc:OpticalDisc ;
   rdfs:subClassOf :StorageMedium .
 
@@ -230,51 +230,51 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   rdfs:label "Elektroniskt lagringsmedium"@sv , "StorageMedium"@en .
 
 # TODO: rename to: DigitalForm? (Cf. PhysicalForm > PhysicalObject)
-:DigitalResource a :CarrierType ;
+:DigitalResource a owl:Class, :CarrierType ;
   skos:broadMatch marc:Remote ;
   skos:exactMatch marc:Online, marc:OnlineResource, kbrda:OnlineResource ;
   rdfs:subClassOf :Electronic ;
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en .
 
-:ChipCartridge a :CarrierType ;
+:ChipCartridge a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium ;
   skos:exactMatch kbrda:ComputerChipCartridge, marc:ChipCartridge ;
   rdfs:label "Computer chip cartridge"@en .
 
-:ComputerCard a :CarrierType ;
+:ComputerCard a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium ;
   skos:exactMatch kbrda:ComputerCard, marc:ComputerCard ;
   rdfs:label "Datorkort"@sv, "Computer card"@en .
 
-:ComputerDisc a :CarrierType ;
+:ComputerDisc a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium ;
   skos:broadMatch marc:MagneticDisk ;
   skos:exactMatch kbrda:ComputerDisc, marc:ComputerDisc ;
   rdfs:label "Datorskiva"@sv, "Computer Disc"@en .
 
-:ComputerDiscCartridge a :CarrierType ;
+:ComputerDiscCartridge a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium ;
   skos:exactMatch kbrda:ComputerDiscCartridge, marc:ComputerDiscCartridge ;
   skos:narrowMatch marc:ComputerOpticalDiscCartridge ;
   rdfs:label "Datorskivmagasin"@sv, "Computer disc cartridge"@en .
 
-:ComputerTapeCartridge a :CarrierType ;
+:ComputerTapeCartridge a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium , :TapeCartridge  ;
   skos:exactMatch kbrda:ComputerTapeCartridge ;
   rdfs:label "Datorbandmagasin"@sv, "Computer tape cartridge"@en .
 
-:ComputerTapeCassette a :CarrierType ;
+:ComputerTapeCassette a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium, :TapeCassette ;
   skos:exactMatch kbrda:ComputerTapeCassette ;
   rdfs:label "Datorkassett"@sv, "Computer tape cassette"@en .
 
-:ComputerTapeReel a :CarrierType ;
+:ComputerTapeReel a owl:Class, :CarrierType ;
   rdfs:subClassOf :ElectronicStorageMedium, :TapeReel ;
   skos:exactMatch kbrda:ComputerTapeReel ;
   rdfs:label "Datorbandspole"@sv, "Computer tape reel"@en .
 
 
-:StandaloneDevice a :CarrierType ;
+:StandaloneDevice a owl:Class, :CarrierType ;
   skos:exactMatch marc:StandaloneDevice ;
   rdfs:subClassOf :ElectronicStorageMedium, :PhysicalObject .
 
@@ -282,54 +282,54 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 # TODO: Is the content-as-media-type a "rebus" and enough if content is on the work?
 # Or is the *unit for device capable of sound* encoded here (so "mode of provisioning", not the "purpose of provisioning")?
 
-:SoundStorageMedium a :MediaType ;
+:SoundStorageMedium a owl:Class, :MediaType ;
   owl:sameAs :SoundRecording ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Audio ;
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Audio"@sv, "Audio"@en .
 
-:AudioDisc a :CarrierType ;
+:AudioDisc a owl:Class, :CarrierType ;
   rdfs:subClassOf :SoundStorageMedium ;
   skos:exactMatch kbrda:AudioDisc , marc:SoundDisc ;
   rdfs:label "Ljudskiva"@sv , "Audio Disc"@en .
 
-:AudioCassette a :CarrierType ;
+:AudioCassette a owl:Class, :CarrierType ;
   rdfs:subClassOf :SoundStorageMedium, :TapeCassette ;
   skos:exactMatch kbrda:Audiocassette , marc:SoundCassette ;
   rdfs:label "Ljudkassett"@sv , "Audio Cassette"@en .
 
-:AudioCartridge a :CarrierType ;
+:AudioCartridge a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:AudioCartridge , marc:SoundCartridge ;
   rdfs:subClassOf :SoundStorageMedium ;
   rdfs:label "Ljudmagasin"@sv, "Audio cartridge"@en .
 
-:AudioCylinder a :CarrierType ;
+:AudioCylinder a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:AudioCylinder, marc:Cylinder ;
   rdfs:subClassOf :SoundStorageMedium ;
   rdfs:label "Ljudcylinder"@sv, "Audio cylinder"@en .
 
-:AudioRoll a :CarrierType ;
+:AudioRoll a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:AudioRoll , marc:Roll ;
   rdfs:subClassOf :SoundStorageMedium ;
   rdfs:label "Ljudrulle"@sv, "Audio roll"@en .
 
-:AudioTapeReel a :CarrierType ;
+:AudioTapeReel a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:AudiotapeReel;
   rdfs:subClassOf :SoundStorageMedium , :TapeReel , marc:SoundTapeReel ;
   rdfs:label "Ljudspole"@sv, "Audiotape reel"@en .
 
 # Zero uses in Libris...
-:AudioWireRecording a :CarrierType ;
+:AudioWireRecording a owl:Class, :CarrierType ;
   skos:exactMatch marc:WireRecording .
 
-:SoundTrackReel a :CarrierType ;
+:SoundTrackReel a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:SoundTrackReel, marc:SoundTrackFilm;
   rdfs:subClassOf :SoundStorageMedium ;
   rdfs:label "Sound-track reel"@en .
 
 
-:VideoStorageMedium a :MediaType ;
+:VideoStorageMedium a owl:Class, :MediaType ;
   owl:sameAs :VideoRecording ;
   ptg:abstract true ;
   # TODO: deprecated baseclass :MovingImageInstance ?
@@ -337,22 +337,22 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Lagringsmedium för video"@sv, "Video Storage Medium"@en .
 
-:VideoDisc a :CarrierType ;
+:VideoDisc a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Videodisc, marc:Videodisc ;
   rdfs:subClassOf :VideoStorageMedium ;
   rdfs:label "Videoskiva"@sv , "Video Disc"@en .
 
-:VideoCartridge a :CarrierType ;
+:VideoCartridge a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:VideoCartridge, marc:Videocartridge ;
   rdfs:subClassOf :VideoStorageMedium ;
   rdfs:label "Videomagasin"@sv, "Video cartridge"@en .
 
-:VideoCassette a :CarrierType ;
+:VideoCassette a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Videocassette, marc:Videocassette ;
   rdfs:subClassOf :VideoStorageMedium, :TapeCassette ;
   rdfs:label "Videokassett"@sv, "Videocassette"@en .
 
-:VideoTapeReel a :CarrierType ;
+:VideoTapeReel a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:VideotapeReel , marc:Videoreel ;
   rdfs:subClassOf :VideoStorageMedium, :TapeReel ;
   rdfs:label "Videospole"@sv, "Videotape reel"@en .
@@ -360,141 +360,141 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 # TODO: restricted to some content forms (Visual, TextAsVisual...)
 
-:Microform a :MediaType ;
+:Microform a owl:Class, :MediaType ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Microform;
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Mikroform"@sv, "Microform"@en .
 
-:Microfilm a :CarrierType ;
+:Microfilm a owl:Class, :CarrierType ;
   ptg:abstract true ;
   skos:exactMatch marc:Microfilm ;
   rdfs:subClassOf :Microform .
 
-:ApertureCard a :CarrierType ;
+:ApertureCard a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:ApertureCard, marc:ApertureCard ;
   rdfs:subClassOf :Microform ;
   rdfs:label "Maskhålkort"@sv, "Aperture card"@en .
 
-:Microfiche a :CarrierType ;
+:Microfiche a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Microfiche ;
   rdfs:subClassOf :Microform, marc:Microfiche ;
   rdfs:label "Mikrofiche"@sv, "Microfiche"@en .
 
-:MicroficheCassette a :CarrierType ;
+:MicroficheCassette a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicroficheCassette, marc:MicroficheCassette ;
   rdfs:subClassOf :Microform ;
   rdfs:label "Mikrofichekassett"@sv, "Microfiche cassette"@en .
 
-:MicrofilmCartridge a :CarrierType ;
+:MicrofilmCartridge a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicrofilmCartridge, marc:MicrofilmCartridge ;
   rdfs:subClassOf :Microfilm ;
   rdfs:label "Mikrofilmsmagasin"@sv, "Microfilm cartridge"@en .
 
-:MicrofilmCassette a :CarrierType ;
+:MicrofilmCassette a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicrofilmCassette, marc:MicrofilmCassette ;
   rdfs:subClassOf :Microfilm ;
   rdfs:label "Mikrofilmskassett"@sv, "Microfilm cassette"@en .
 
-:MicrofilmReel a :CarrierType ;
+:MicrofilmReel a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicrofilmReel, marc:MicrofilmReel ;
   rdfs:subClassOf :Microfilm ;
   rdfs:label "Mikrofilmsspole"@sv, "Microfilm reel"@en .
 
-:MicrofilmRoll a :CarrierType ;
+:MicrofilmRoll a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicrofilmRoll, marc:MicrofilmRoll ;
   rdfs:subClassOf :Microfilm, :VideoStorageMedium ;
   rdfs:label "Mikrofilmsrulle"@sv, "Microfilm roll"@en .
 
-:MicrofilmSlip a :CarrierType ;
+:MicrofilmSlip a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicrofilmSlip, marc:MicrofilmSlip ;
   rdfs:subClassOf :Microform ;
   rdfs:label "Mikrofilmsremsa"@sv, "Microfilm slip"@en .
 
-:Microopaque a :CarrierType ;
+:Microopaque a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Microopaque ;
   rdfs:subClassOf :Microform, marc:Microopaque ;
   rdfs:label "Mikrokort"@sv, "Microopaque"@en .
 
 
-:Microscopic a :MediaType ;
+:Microscopic a owl:Class, :MediaType ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Microscopic;
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Mikroskopisk"@sv, "Microscopic"@en .
 
-:MicroscopeSlide a :CarrierType ;
+:MicroscopeSlide a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:MicroscopeSlide ;
   rdfs:subClassOf :Microscopic ;
   rdfs:label "Mikroskoperingspreparat"@sv, "Microscope slide"@en .
 
 
-:Projected a :MediaType ;
+:Projected a owl:Class, :MediaType ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Projected;
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Projicerad"@sv, "Projected"@en .
 
-:FilmCartridge a :CarrierType ;
+:FilmCartridge a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:FilmCartridge ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Filmmagasin"@sv, "Film cartridge"@en .
 
-:FilmCassette a :CarrierType ;
+:FilmCassette a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:FilmCassette ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Filmkassett"@sv, "Film cassette"@en .
 
-:FilmReel a :CarrierType ;
+:FilmReel a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:FilmReel ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Filmspole"@sv, "Film reel"@en .
 
-:FilmRoll a :CarrierType ;
+:FilmRoll a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:FilmRoll ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Filmrulle"@sv, "Film roll"@en .
 
-:Filmslip a :CarrierType ;
+:Filmslip a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Filmslip, marc:Filmslip ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Filmremsa"@sv, "Filmslip"@en .
 
 # TODO: Ensure difference between StillImage Projected and MovingImage Projected!
 # See e.g. <>
-:Filmstrip a :CarrierType ;
+:Filmstrip a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Filmstrip, marc:FilmstripRoll ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Bildband"@sv, "Filmstrip"@en .
 
-:FilmstripCartridge a :CarrierType ;
+:FilmstripCartridge a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:FilmstripCartridge, marc:FilmstripCartridge ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Bildbandsmagasin"@sv, "Filmstrip cartridge"@en .
 
-:OverheadTransparency a :CarrierType ;
+:OverheadTransparency a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:OverheadTransparency, marc:Transparency ;
   rdfs:subClassOf :Projected ;
   rdfs:label "OH-bild"@sv, "Overhead transparency"@en .
 
-:Slide a :CarrierType ;
+:Slide a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:Slide, marc:Slide ;
   rdfs:subClassOf :Projected ;
   rdfs:label "Diabild"@sv, "Slide"@en .
 
 
-:Stereographic a :MediaType ;
+:Stereographic a owl:Class, :MediaType ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Stereographic ;
   rdfs:subClassOf :StorageMedium ;
   rdfs:label "Stereografisk"@sv, "Stereographic"@en .
 
-:StereographCard a :CarrierType ;
+:StereographCard a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:StereographCard;
   rdfs:subClassOf :Stereographic ;
   rdfs:label "Stereografiskt kort"@sv, "Stereograph card"@en .
 
-:StereographDisc a :CarrierType ;
+:StereographDisc a owl:Class, :CarrierType ;
   skos:exactMatch kbrda:StereographDisc;
   rdfs:subClassOf :Stereographic ;
   rdfs:label "Stereografisk skiva"@sv, "Stereograph disc"@en .
