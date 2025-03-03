@@ -3,6 +3,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
 @prefix sdo: <http://schema.org/> .
 @prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix fresnel: <http://www.w3.org/2004/09/fresnel#> .
@@ -69,6 +71,11 @@
 :PlaceholderRecord a owl:Class;
     :category :platform ;
     rdfs:label "Platshållarpost"@sv, "Placeholder record"@en;
+    rdfs:subClassOf :Record .
+
+:VirtualRecord a owl:Class ;
+    :category :platform ;
+    rdfs:label "Virtuell post"@sv, "Virtual record"@en ;
     rdfs:subClassOf :Record .
 
 :mainEntity a owl:ObjectProperty;
@@ -176,6 +183,7 @@
     owl:equivalentProperty bf2:descriptionLanguage .
 
 :DescriptionConventions a owl:Class;
+    :category :heuristicIdentity;
     rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
     rdfs:subClassOf :AdminMetadata, :Standard ;
     owl:equivalentClass bf2:DescriptionConventions .
@@ -688,6 +696,13 @@
 :Observation a owl:Class;
     :category :platform ;
     rdfs:subClassOf qb:Observation .
+
+:SoftwareAgent a owl:Class;
+    :category :pending, :platform ;
+    rdfs:label "Software Agent"@en, "Körande programvara"@sv ;
+    rdfs:comment "Running software performing a service."@en ;
+    ptg:abstract true;
+    :rdfs:subClassOf :Agent , prov:SoftwareAgent .
 
 ##
 # Record history

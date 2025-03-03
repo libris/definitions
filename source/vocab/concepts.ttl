@@ -135,6 +135,13 @@
 #    owl:inverseOf :broaderTransitive;
 #    owl:equivalentProperty skos:narrowerTransitive .
 
+:topConceptOf a owl:ObjectProperty;
+    rdfs:label "top concept of"@en, "översta koncept i"@sv ;
+    rdfs:domain :Concept ;
+    rdfs:range :ConceptScheme ;
+    owl:equivalentProperty skos:topConceptOf ;
+    rdfs:subPropertyOf madsrdf:hasTopMemberOfMADSScheme .
+
 :broader a owl:ObjectProperty;
     rdfs:label "broader"@en, "bredare"@sv;
     sdo:domainIncludes :Concept, :Language ;

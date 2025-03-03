@@ -2,6 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <https://id.kb.se/vocab/> .
 @base <https://id.kb.se/term/enum/> .
 
 
@@ -31,3 +32,11 @@
     rdfs:label "Utlånas ej" ;
     skos:prefLabel "Not for check out"@en,
         "Utlånas ej"@sv .
+
+# Instances of DescriptionConventions
+
+<Rda> a :DescriptionConventions;
+    rdfs:label "RDA" ;
+    skos:prefLabel "RDA"@en, "RDA"@sv ;
+    :code "rda" ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/descriptionConventions/rda> .
