@@ -2,6 +2,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bibo: <http://purl.org/ontology/bibo/>
+prefix dc: <http://purl.org/dc/terms/>
 prefix sdo: <https://schema.org/>
 prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
 prefix bf: <http://id.loc.gov/ontologies/bibframe/>
@@ -70,14 +71,18 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 #---- FIXME: Either turn into :complex intersection patterns, or *just* move to (RDA) carriers or materials/formats...
 
+:PhysicalResource a owl:Class ;
+  rdfs:subClassOf :Instance , dc:PhysicalResource ;
+  rdfs:label "Fysisk resurs"@sv , "Physical resource"@en .
+  # NOTE: :transitiveBaseClassOf :PhysicalObject .
+
 # Unmediated
 
-:Unmediated a owl:Class, :MediaType ;  # TODO: :PhysicalForm?
+:Unmediated a owl:Class, :MediaType ;
   ptg:abstract true ;
-  rdfs:subClassOf :Instance ;
+  rdfs:subClassOf :PhysicalResource ;
   skos:exactMatch kbrda:Unmediated ;
-  rdfs:label "Omedierad resurs"@sv , "Unmediated"@en ;
-  :altLabel "Fysisk resurs"@sv .
+  rdfs:label "Omedierad resurs"@sv , "Unmediated"@en .
 
 # Vocab Macro for type-like on carrier...:
 # INSERT {
@@ -187,7 +192,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
 :StorageMedium a owl:Class ;
   ptg:abstract true ;
-  rdfs:subClassOf :Instance ;
+  rdfs:subClassOf :PhysicalResource ;
   rdfs:label "Lagringsmedium"@sv , "StorageMedium"@en .
 
 
@@ -229,7 +234,6 @@ prefix kbrda: <https://id.kb.se/term/rda/>
   rdfs:subClassOf :Electronic, :StorageMedium ;
   rdfs:label "Elektroniskt lagringsmedium"@sv , "StorageMedium"@en .
 
-# TODO: rename to: DigitalForm? (Cf. PhysicalForm > PhysicalObject)
 :DigitalResource a owl:Class, :CarrierType ;
   skos:broadMatch marc:Remote ;
   skos:exactMatch marc:Online, marc:OnlineResource, kbrda:OnlineResource ;
@@ -505,13 +509,13 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 :BaseMaterial rdfs:subClassOf :Material .
 
 :TactileMaterial rdfs:subClassOf :Material ;
-  :broadMatch marc:TacMaterialType .
+  skos:broadMatch marc:TacMaterialType .
 
 :ImageMaterial rdfs:subClassOf :Material ;
-  :broadMatch marc:NonProjectedType .
+  skos:broadMatch marc:NonProjectedType .
 
 :MapMaterial rdfs:subClassOf :Material ;
-  :broadMatch marc:MapMediumType .
+  skos:broadMatch marc:MapMediumType .
 
 # TODO: Upgrade some marc: properties to KBV going forward?
 #:videoCharacteristic
@@ -520,7 +524,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 #  sdo:rangeIncludes :VideoFormat .
 
 :VideoFormat rdfs:subClassOf :Material ;
-  :broadMatch marc:VideoFormatType .
+  skos:broadMatch marc:VideoFormatType .
 
 ## TODO: *when needed* for marc - map patterns to/from <enum-digest-start230304.trig> to some of these types...
 
