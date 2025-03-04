@@ -1,5 +1,6 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
 prefix sdo: <https://schema.org/>
 
@@ -7,74 +8,74 @@ prefix kbv: <https://id.kb.se/vocab/>
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
-prefix mat: <https://id.kb.se/term/materialformat/>
+prefix kbfmt: <https://id.kb.se/term/materialformat/>
 prefix carrier: <https://id.kb.se/term/smdb/carrier/>
 
-mat:BristolBoard a :BaseMaterial ;
-  :exactMatch marc:BristolBoard .
-mat:Canvas a :BaseMaterial ;
-  :exactMatch marc:Canvas .
-mat:CardboardIllustrationBoard a :BaseMaterial ;
-  :exactMatch marc:CardboardIllustrationBoard .
-mat:Glass a :BaseMaterial ;
-  :exactMatch marc:Glass .
-mat:Hardboard a :BaseMaterial ;
-  :exactMatch marc:Hardboard .
-mat:Leather a :BaseMaterial ;
-  :exactMatch marc:Leather .
-mat:Metal a :BaseMaterial ;
-  :exactMatch marc:Metal .
-mat:Parchment a :BaseMaterial ;
-  :exactMatch marc:Parchment .
-mat:Plaster a :BaseMaterial ;
-  :exactMatch marc:Plaster .
-mat:Porcelain a :BaseMaterial ;
-  :exactMatch marc:Porcelain .
-mat:Skin a :BaseMaterial ;
-  :exactMatch marc:Skin .
-mat:Stone a :BaseMaterial ;
-  :exactMatch marc:Stone .
-mat:Synthetic a :BaseMaterial ;
-  :exactMatch marc:Synthetic .
-mat:Textile a :BaseMaterial ;
-  :exactMatch marc:Textile .
-mat:Vellum a :BaseMaterial ;
-  :exactMatch marc:Vellum .
-mat:Vinyl a :BaseMaterial ;
-  :exactMatch marc:Vinyl .
-mat:Wood a :BaseMaterial ;
-  :exactMatch marc:Wood .
+kbfmt:BristolBoard a :BaseMaterial ;
+  skos:exactMatch marc:BristolBoard .
+kbfmt:Canvas a :BaseMaterial ;
+  skos:exactMatch marc:Canvas .
+kbfmt:CardboardIllustrationBoard a :BaseMaterial ;
+  skos:exactMatch marc:CardboardIllustrationBoard .
+kbfmt:Glass a :BaseMaterial ;
+  skos:exactMatch marc:Glass .
+kbfmt:Hardboard a :BaseMaterial ;
+  skos:exactMatch marc:Hardboard .
+kbfmt:Leather a :BaseMaterial ;
+  skos:exactMatch marc:Leather .
+kbfmt:Metal a :BaseMaterial ;
+  skos:exactMatch marc:Metal .
+kbfmt:Parchment a :BaseMaterial ;
+  skos:exactMatch marc:Parchment .
+kbfmt:Plaster a :BaseMaterial ;
+  skos:exactMatch marc:Plaster .
+kbfmt:Porcelain a :BaseMaterial ;
+  skos:exactMatch marc:Porcelain .
+kbfmt:Skin a :BaseMaterial ;
+  skos:exactMatch marc:Skin .
+kbfmt:Stone a :BaseMaterial ;
+  skos:exactMatch marc:Stone .
+kbfmt:Synthetic a :BaseMaterial ;
+  skos:exactMatch marc:Synthetic .
+kbfmt:Textile a :BaseMaterial ;
+  skos:exactMatch marc:Textile .
+kbfmt:Vellum a :BaseMaterial ;
+  skos:exactMatch marc:Vellum .
+kbfmt:Vinyl a :BaseMaterial ;
+  skos:exactMatch marc:Vinyl .
+kbfmt:Wood a :BaseMaterial ;
+  skos:exactMatch marc:Wood .
 
 ##marc:Other
 #marc:MixedCollection a :BaseMaterial .
 
 
-mat:MoonScript a :TactileMaterial ;
-  :exactMatch marc:Moon .
+kbfmt:MoonScript a :TactileMaterial ;
+  skos:exactMatch marc:Moon .
 
-mat:Braille a :TactileMaterial ;
-  :exactMatch marc:TacMaterialType-b .
+kbfmt:Braille a :TactileMaterial ;
+  skos:exactMatch marc:TacMaterialType-b .
 
-mat:TactileCombination a :TactileMaterial ;
-  :exactMatch marc:TacMaterialType-c .
+kbfmt:TactileCombination a :TactileMaterial ;
+  skos:exactMatch marc:TacMaterialType-c .
 
-mat:TactileWithNoWritingSystem a :TactileMaterial ;
-  :exactMatch marc:TactileWithNoWritingSystem .
+kbfmt:TactileWithNoWritingSystem a :TactileMaterial ;
+  skos:exactMatch marc:TactileWithNoWritingSystem .
 
 
-mat:ImageOnGlass a :ImageMaterial ;
-  :broader mat:Glass ;
-  :exactMatch marc:NonProjectedType-d .
+kbfmt:ImageOnGlass a :ImageMaterial ;
+  :broader kbfmt:Glass ;
+  skos:exactMatch marc:NonProjectedType-d .
 
-mat:ImageOnStone a :ImageMaterial ;
-  :broader mat:Stone ;
-  :exactMatch marc:NonProjectedType-s .
+kbfmt:ImageOnStone a :ImageMaterial ;
+  :broader kbfmt:Stone ;
+  skos:exactMatch marc:NonProjectedType-s .
 
-mat:ImageOnWood a :ImageMaterial ;
-  :exactMatch marc:NonProjectedType-t .
+kbfmt:ImageOnWood a :ImageMaterial ;
+  skos:exactMatch marc:NonProjectedType-t .
 
-mat:ImageOnMetal a :ImageMaterial ;
-  :exactMatch marc:NonProjectedType-h .
+kbfmt:ImageOnMetal a :ImageMaterial ;
+  skos:exactMatch marc:NonProjectedType-h .
 
 
 marc:FlexibleBasePhotographicPositive a :MapFormat .
@@ -84,59 +85,59 @@ marc:NonFlexibleBasePhotographicPositive a :MapFormat .
 
 # TODO: consolidate with smdbterms.ttl !
 
-mat:Beta12InVideocassette a :VideoFormat ;
-  :exactMatch marc:Beta12InVideocassette . # TODO: smdb
+kbfmt:Beta12InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:Beta12InVideocassette . # TODO: smdb
 
-mat:Betacam12InVideocassette a :VideoFormat ;
-  :exactMatch marc:Betacam12InVideocassette . # TODO: smdb
+kbfmt:Betacam12InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:Betacam12InVideocassette . # TODO: smdb
 
-mat:BetacamSp12InVideocassette a :VideoFormat ;
-  :exactMatch marc:BetacamSp12InVideocassette . # TODO: smdb
+kbfmt:BetacamSp12InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:BetacamSp12InVideocassette . # TODO: smdb
 
-mat:BluRayDisc a :VideoFormat ;
-  :exactMatch marc:BluRayDisc , carrier:Blu-ray_Disc_\%28BD\%29 .
+kbfmt:BluRayDisc a :VideoFormat ;
+  skos:exactMatch marc:BluRayDisc , carrier:Blu-ray_Disc_\%28BD\%29 .
 
-mat:D234InVideocassette a :VideoFormat ;
-  :exactMatch marc:D234InVideocassette . # TODO: smdb
+kbfmt:D234InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:D234InVideocassette . # TODO: smdb
 
-mat:SuperVhs12InVideocassette a :VideoFormat ;
-  :exactMatch marc:SuperVhs12InVideocassette, carrier:S-VHS .
+kbfmt:SuperVhs12InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:SuperVhs12InVideocassette, carrier:S-VHS .
 
-mat:Vhs12InVideocassette a :VideoFormat ;
-  :exactMatch marc:Vhs12InVideocassette , carrier:VHS .
+kbfmt:Vhs12InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:Vhs12InVideocassette , carrier:VHS .
 
-mat:Eiaj12InReel a :VideoFormat ;
-  :exactMatch marc:Eiaj12InReel ;
-  :narrowMatch carrier:\%C2\%BD_tum_Sony_AV_\%28EIAJ_Type_1\%29 ,
+kbfmt:Eiaj12InReel a :VideoFormat ;
+  skos:exactMatch marc:Eiaj12InReel ;
+  skos:narrowMatch carrier:\%C2\%BD_tum_Sony_AV_\%28EIAJ_Type_1\%29 ,
       carrier:EIAJ_Type_2_\%3B_\%C2\%BD_tum .
 
-mat:Hi8Mm a :VideoFormat ;
-  :exactMatch marc:Hi8Mm , carrier:Hi8 .
+kbfmt:Hi8Mm a :VideoFormat ;
+  skos:exactMatch marc:Hi8Mm , carrier:Hi8 .
 
-mat:Dvd a :VideoFormat ;
-  :exactMatch marc:Dvd , carrier:DVD .
+kbfmt:Dvd a :VideoFormat ;
+  skos:exactMatch marc:Dvd , carrier:DVD .
 
-mat:Laserdisc a :VideoFormat ;
-  :exactMatch marc:Laserdisc , carrier:Laserdisk .
+kbfmt:Laserdisc a :VideoFormat ;
+  skos:exactMatch marc:Laserdisc , carrier:Laserdisk .
 
-mat:UMatic34InVideocassette a :VideoFormat ;
-  :exactMatch marc:UMatic34InVideocassette , carrier:Umatic ;
-  :narrowMatch carrier:Umatic_HB, carrier:Umatic_LB, carrier:Umatic_SP .
+kbfmt:UMatic34InVideocassette a :VideoFormat ;
+  skos:exactMatch marc:UMatic34InVideocassette , carrier:Umatic ;
+  skos:narrowMatch carrier:Umatic_HB, carrier:Umatic_LB, carrier:Umatic_SP .
 
-mat:CedCapacitanceElectronicDiscVideodisc a :VideoFormat ;
-  :exactMatch marc:CedCapacitanceElectronicDiscVideodisc .
+kbfmt:CedCapacitanceElectronicDiscVideodisc a :VideoFormat ;
+  skos:exactMatch marc:CedCapacitanceElectronicDiscVideodisc .
 
-mat:Quadruplex1InOr2InReel a :VideoFormat ;
-  :exactMatch marc:Quadruplex1InOr2InReel ;
-  :narrowMatch carrier:2_tum_Quad .
+kbfmt:Quadruplex1InOr2InReel a :VideoFormat ;
+  skos:exactMatch marc:Quadruplex1InOr2InReel ;
+  skos:narrowMatch carrier:2_tum_Quad .
 
-mat:MIi12InVideocassette a :VideoFormat ;
-  :broadMatch carrier:MII ;
-  :exactMatch marc:MIi12InVideocassette .
+kbfmt:MIi12InVideocassette a :VideoFormat ;
+  skos:broadMatch carrier:MII ;
+  skos:exactMatch marc:MIi12InVideocassette .
 
-mat:TypeC1InReel a :VideoFormat ;
-  :exactMatch marc:TypeC1InReel .
+kbfmt:TypeC1InReel a :VideoFormat ;
+  skos:exactMatch marc:TypeC1InReel .
 
-mat:Video8Mm a :VideoFormat ;
-  :exactMatch marc:VideoFormatType-p . # :broadMatch marc:8Mm
+kbfmt:Video8Mm a :VideoFormat ;
+  skos:exactMatch marc:VideoFormatType-p . # skos:broadMatch marc:8Mm
   # TODO: carrier:Film_\%3B_8_mm ?
