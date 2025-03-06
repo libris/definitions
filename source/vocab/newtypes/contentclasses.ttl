@@ -21,7 +21,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   ptg:abstract true ;
   owl:onProperty :genreForm ;
   owl:hasValue kbgf:Book ;
-  :label "Book"@en ,
+  rdfs:label "Book"@en ,
     "Bok"@sv ;
   :pluralLabel "Böcker"@sv .
 
@@ -79,10 +79,16 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       :Text
       :BookForm
     ) ;
-  :label "Written book"@en ,
+  rdfs:label "Written book"@en ,
     "Skriven bok"@sv ;
-  :altLabel "Bok"@sv, "Book"@en ;
+  skos:altLabel "Bok"@sv, "Book"@en ;
   :pluralLabel "Böcker"@sv .
+
+:TextAndImagesBook a owl:Class ;
+  :category :pending, :complex ;
+  rdfs:subClassOf :BookForm, :ImageAndText ;
+  rdfs:label "Text- och bilderbok"@sv, "Picture book"@en .
+
 
 :Audiobook a owl:Class ;
   :category :pending, :complex ;
@@ -93,7 +99,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       :Audio
       :BookForm
     ) ;
-  :label "Ljudbok"@sv ,
+  rdfs:label "Ljudbok"@sv ,
     "Audiobook"@en .
 
 :TactileBook a owl:Class ;
@@ -105,7 +111,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
         owl:hasValue [ skos:narrowMatch saogf:Punktskriftsb%C3%B6cker ] ]
     ) ;
   skos:editorialNote 'TODO: differentiate between "filtbok" och "punktskriftsbok"?'@en ;
-  :label "Tactile Book"@en ,
+  rdfs:label "Tactile Book"@en ,
     "Taktil bok"@sv .
 
 
@@ -113,14 +119,14 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :category :pending, :complex ;
   ptg:abstract true ;
   rdfs:subClassOf :Text ;
-  :label "Non-book text"@en ,
+  rdfs:label "Non-book text"@en ,
     "Enskild text"@sv .
 
 :Article a owl:Class ;
   :category :pending, :complex ;
   rdfs:subClassOf :NonBookText ;
   owl:equivalentClass bibo:Article ;
-  :label "Artikel"@sv ,
+  rdfs:label "Artikel"@sv ,
     "Article"@en .
 
 :Issue a owl:Class ;
@@ -132,7 +138,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue kbgf:Issue ]
     ) ;
-  :label "Tidskriftsnummer"@sv ,
+  rdfs:label "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
 
@@ -186,7 +192,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue saogf:Illustrerade%20verk ]
     ) ;
-  :label "Illustrerat verk"@sv ,
+  rdfs:label "Illustrerat verk"@sv ,
     "Illustrated Work"@en .
 
 :Brochure a owl:Class ;
@@ -197,7 +203,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue <https://id.kb.se/term/gmgpc/swe/Broschyrer> ]
     ) ;
-  :label "Broschyr"@sv ,
+  rdfs:label "Broschyr"@sv ,
     "Brochure"@en .
 
 :Comic a owl:Class ;
@@ -208,7 +214,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue kbgf:Comic ]
     ) ;
-  :label "Serietidning"@sv ,
+  rdfs:label "Serietidning"@sv ,
     "Comic"@en .
 
 :ComicIssue a owl:Class ;
@@ -217,7 +223,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       :Comic
       :Issue
     ) ;
-  :label "Serietidningsnummer"@sv ,
+  rdfs:label "Serietidningsnummer"@sv ,
     "Comic Issue"@en .
 
 :ComicStory a owl:Class ;
@@ -239,10 +245,16 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 
 # FIXME: remove instancetype :Map ; compute on revert (if work is :Cartography, prefer Map over all non-electronic?)
-# TODO: == Cartography
-#f:Map a :Form ;
-#  rdfs:subClassOf f:CartographicImage ;
-#  rdfs:label "Karta"@sv , "Map"@en .
+:CartographicImage a owl:Class ;
+  ptg:abstract true ;
+  :category :pending, :complex ;
+  owl:intersectionOf (
+      :Cartography
+      :CartographicImageContent
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Map ]
+    ) ;
+  rdfs:label "Karta"@sv , "Map"@en .
 
 :Atlas a owl:Class ;
   ptg:abstract true ;
@@ -256,14 +268,17 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   rdfs:label "Atlas"@sv ,
     "Atlas"@en .
 
-:Globe a owl:Class ;
+:CartographicGlobe a owl:Class ;
   :category :pending, :complex ;
   owl:intersectionOf (
       :Cartography
       :CartographicThreeDimensionalFormContent
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Globe ]
     ) ;
-  rdfs:label "Jord- eller månglob"@sv ,
-    "Globe"@en .
+  rdfs:label "Kartglob"@sv ,
+    "Cartographic Globe"@en ;
+  skos:altLabel "Jord- eller månglob"@sv .
 
 
 # TODO:
@@ -277,7 +292,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue kbrda:PerformedMusic ]
     ) ;
-  :label "Performed Music"@en ,
+  rdfs:label "Performed Music"@en ,
     "Framförd musik"@sv .
 
 
@@ -286,10 +301,10 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   owl:intersectionOf (
       :MovingImage
       [ owl:onProperty :genreForm ;
-      owl:hasValue saogf:Filmer ]
+        owl:hasValue saogf:Filmer ]
     ) ;
   owl:equivalentClass bibo:Film ;
-  :label "Film"@sv ,
+  rdfs:label "Film"@sv ,
     "Film"@en .
 
 
@@ -311,7 +326,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     [ owl:onProperty :genreForm ;
       owl:hasValue saogf:Arkiv ]
     ) ;
-  :label "Arkiv"@sv ,
+  rdfs:label "Arkiv"@sv ,
     "Archive"@en .
 
 :Database a owl:Class ;
@@ -323,7 +338,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
         owl:hasValue saogf:Databaser ]
     ) ;
   #skos:narrowMatch marc:UpdatingDatabase ;
-  :label "Databas"@sv ,
+  rdfs:label "Databas"@sv ,
     "Database"@en .
 
 # Serial Work Classes
@@ -335,7 +350,7 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue saogf:Seriella%20publikationer ]
     ) ;
-  :label "Seriell publikation"@sv ,
+  rdfs:label "Seriell publikation"@sv ,
     "Serial Publication"@en .
 
 :Periodical a owl:Class ;
@@ -348,8 +363,8 @@ prefix kbgf: <https://id.kb.se/term/gf/>
         owl:hasValue saogf:Periodika ]
     ) ;
   # TODO: :scopeNote Tidskrift vs. Tidning vs. Årsbok (<https://sv.wikipedia.org/wiki/Periodisk_skrift>)
-  :altLabel "Periodika"@sv ;
-  :label "Tidskrift"@sv ,
+  skos:altLabel "Periodika"@sv ;
+  rdfs:label "Tidskrift"@sv ,
     "Periodical"@en ;
   :pluralLabel "Tidskrifter"@sv .
 
