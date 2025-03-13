@@ -15,7 +15,8 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 ##
 # marc:ConferencePublicationType
 #--
-# marc:ConferencePublication .  # 251347 # Primary? [also ssb]
+marc:ConferencePublication # 251347 # Primary? [also ssb]
+    :closeMatch saogf:Konferensmaterial .
 #  marc:ConferencePublication marc:ConferencePublicationType-1
 
 ##
@@ -74,7 +75,8 @@ marc:Statistics  # [s] 20197 # Primary? [also ssb]
 
 marc:Handbook  # [f] 8727 # Primary? [also ssb]
     # a :ContentType ;  # 2 # Primary? [also ssb]
-    :closeMatch saogf:Handb%C3%B6cker%2C%20manualer%20etc\; ;
+    #:closeMatch saogf:Handb%C3%B6cker%2C%20manualer%20etc\. ;
+    :closeMatch <https://id.kb.se/term/saogf/Handb%C3%B6cker%2C%20manualer%20etc.> ;
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026109> . # "Handbooks and manuals"@en .
 
 marc:Treaty  # [z] 1297 # [also ssb]
@@ -186,7 +188,8 @@ marc:AbstractsSummary  # 1324 # Primary? [also ssb]
     # a :ContentType .  # 4 # Primary? [also ssb]
     :broadMatch saogf:Sammanfattningar . # {| :source kbkat:viklun |}
 
-# marc:ProgrammedText  # 192 # Primary? [also ssb]
+marc:ProgrammedText  # 192 # Primary? [also ssb]
+  :broadMatch saogf:Instruktions-%20och%20undervisningsmaterial .
     # a :ContentType .  # 21 # Primary? [also ssb]
 
 marc:SurveysOfLiteratureInASubjectArea  # 448 # [also ssb]
@@ -212,7 +215,8 @@ marc:Essay  # [e] 4861 # [also ssb]
 
 # N/A in codeMaps:
 # marc:NotFictionNotFurtherSpecified marc:BooksLiteraryFormType-0
-# marc:ComicStrip marc:BooksLiteraryFormType-c  # 2773 # Primary? [also ssb]
+marc:ComicStrip # marc:BooksLiteraryFormType-c  # 2773 # Primary? [also ssb]
+  :broadMatch saogf:Tecknade%20serier .
 
 
 ##
@@ -446,6 +450,7 @@ marc:ComputerTypeOfFileType-h # [h] :broader marc:Sound  # 47 # marc:Sound Prima
 
 marc:ComputerTypeOfFileType-g # [g] :broader marc:Game  # 3803 # marc:Game Primary? [also ssb]  # 132 # Primary?
     # a :ContentType .  # 2 # marc:Game Primary? [also ssb]
+    :closeMatch saogf:Datorspel ;
     :closeMatch <http://id.loc.gov/vocabulary/marcgt/gam> . # "game"@en .
 
 marc:InteractiveMultimedia  # [i] 420 # Primary? [also ssb]
@@ -488,7 +493,8 @@ marc:View # = marc:MapMaterialType-y  # 3 # Primary?
     :closeMatch tgm:Vyer .
 
 #  marc:RemoteSensingImage marc:MapMaterialType-r  # 33 # Primary?
-#  marc:MapMaterialType-d UNDEF  # 2134 # marc:Atlas Primary? [also ssb]
+marc:MapMaterialType-d # UNDEF  # 2134 # marc:Atlas Primary? [also ssb]
+  :broadMatch tgm:Atlaser .
 #  marc:Profile marc:MapMaterialType-k
 #  marc:Diagram marc:MapMaterialType-g
 
@@ -538,7 +544,8 @@ marc:TerrestrialGlobe # = marc:GlobeMaterialType-c  # 59 # Primary?
 marc:Map :closeMatch tgm:Kartor .
 marc:Globe # = marc:MapsMaterialType-d  # 132 # Primary?
   :closeMatch  tgm:Glober .
-#  marc:Atlas marc:MapsMaterialType-e  # 2044 # Primary? [also ssb]
+marc:Atlas # marc:MapsMaterialType-e  # 2044 # Primary? [also ssb]
+    :closeMatch tgm:Atlaser .
 #  marc:SeparateMapSupplementToAnotherWork marc:MapsMaterialType-f  # 240 # Primary?
 #  marc:MapSeries marc:MapsMaterialType-b  # 1403 # Primary? [also ssb]
 #  marc:MapBoundAsPartOfAnotherWork marc:MapsMaterialType-g  # 260 # Primary?
@@ -740,6 +747,7 @@ marc:SquareDanceMusic # [sd]
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027111> . # "Square dance music"@en .
 
 marc:Opera  # [op] 950 # [also ssb]
+    :closeMatch saogf:Operor ;
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026976> . # "Operas"@en .
 
 marc:Ballet  # [bt] 57 #
@@ -747,6 +755,7 @@ marc:Ballet  # [bt] 57 #
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> . # "Ballets (Music)"@en .
 
 marc:FolkMusic  # [fm] 6899 # [also ssb]
+    :closeMatch saogf:Folkmusik ;
     :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026809> . # "Folk music"@en .
 
 marc:Chorale  # [ch] 11 #
@@ -785,7 +794,8 @@ marc:RagtimeMusic  # [rg] 6 #
 #  marc:UnknownIfItemIsGovernmentPublication marc:GovernmentPublicationType-u  # 14196 # [also ssb]
 #  marc:FederalNational marc:GovernmentPublicationType-f  # 34060 # [also ssb]
 #  marc:StateProvincialTerritorialDependentEtc marc:GovernmentPublicationType-s  # 11731 # [also ssb]
-#  marc:GovernmentPublicationLevelUndetermined marc:GovernmentPublicationType-o  # 666969 # [also ssb]
+marc:GovernmentPublicationLevelUndetermined # marc:GovernmentPublicationType-o  # 666969 # [also ssb]
+  :broadMatch saogf:Myndighetspublikationer . # FIXME: N/A
 #  marc:Local marc:GovernmentPublicationType-l  # 721 # [also ssb]
 #  marc:AutonomousOrSemiAutonomousComponent marc:GovernmentPublicationType-a  # 328 # Primary? [also ssb]
 
