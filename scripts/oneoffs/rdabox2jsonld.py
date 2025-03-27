@@ -46,8 +46,11 @@ def convert(doc, rtype):
                     label_sv = content[0].get('text')
 
                 definition_sv = None
-                if content := cells[3]['content'][0].get('content'):
-                    definition_sv = content[0]['text']
+
+                for p in cells[3]['content']:
+                    if content := p.get('content'):
+                        definition_sv = ''.join(x['text'] for x in content)
+                    break
 
                 matches = []
                 linkcells = set()
@@ -66,10 +69,13 @@ def convert(doc, rtype):
                         continue
                     for p in cell['content']:
                         if content := p.get('content'):
-                            notes.append(clean(content[0]['text']))
+                            notes.append(clean(''.join(
+                                x.get('text') or ('\n' if x['type'] == 'hard_break' else ' ')
+                                for x in content
+                            )))
 
                 id_label = clean(label_en) or clean(label_sv)
-                r_id = quote(id_label.title().replace(' ', ''))
+                r_id = quote(id_label.title().replace(' ', '').replace('-', ''))
                 item = {
                     "@id": r_id,
                     "@type": rtype,
