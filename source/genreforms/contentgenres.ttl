@@ -3,275 +3,247 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bibo: <http://purl.org/ontology/bibo/>
 prefix sdo: <https://schema.org/>
-prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
-prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 
-prefix kbv: <https://id.kb.se/vocab/>
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 prefix div: <https://id.kb.se/term/div/>
-prefix f: <https://id.kb.se/term/form/>
 prefix g: <https://id.kb.se/term/genre/>
+prefix kbgf: <https://id.kb.se/term/gf/>
 
 prefix saogf: <https://id.kb.se/term/saogf/>
-prefix barngf: <https://id.kb.se/term/barngf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 
-base <https://id.kb.se/term/div/>
+# FIXME: Add these facts to their SAOGF exactMatch:es!
 
-# FIXME: replace this file with genreforms.ttl !
+# It is a Genre if:
+# - it is does not belong to one broader ContentForm (it is topical).
+# It is a GenreForm if:
+# - it represents a combination of ContentForm and a Genre (it adds a topical nuance).
 
-# It is a Genre if *either*:
-# - it is not enough to determine under which Class or Form it belongs (it is a base);
-# - *or* it represents a combination of Class or Form and a Genre (it adds a nuance).
+# TODO: equivalentClass with closeMatch/broadMatch (or virtual class...)
 
-# TODO: replace subClassOf with broader and equivalentClass with closeMatch/broadMatch
+g:Fiction a :Genre ;
+  skos:narrowMatch marc:Fiction ;  # 84678 # (SSB)
+  skos:narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+
+g:Radio a :GenreForm ; :label "Radio"@sv .
+g:TV a :GenreForm ; :label "TV"@sv .
 
 g:AbstractSummary a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ;
+  skos:broader kbgf:NonBookText ;
   skos:exactMatch saogf:Sammanfattningar ;
-  :inCollection f:informative-work ;
+  :inCollection div:informative-work ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
-  :prefLabel "Sammanfattning"@sv ,
+  :singularLabel "Sammanfattning"@sv ,
     "Abstract Summary"@en .
 
-g:Almanac a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;  # inte alltid kbv:IllustratedWork ;
-  skos:related kbv:SerialPublication ;  # TODO: 
+g:Almanac a :GenreForm ;
+  skos:broader g:ReferenceWork ;  # inte alltid kbgf:IllustratedWork ;
+  skos:related kbgf:SerialPublication ;  # TODO: 
   skos:exactMatch saogf:Almanackor ;
-  :prefLabel "Almanacka"@sv ,
+  :singularLabel "Almanacka"@sv ,
     "Almanac"@en .
 
-g:Blog a :Genre ;
-  rdfs:subClassOf f:Website ,
-    kbv:NonBookText ;
-  owl:equivalentClass sdo:Blog ;
-  skos:exactMatch saogf:Bloggar ;
-  :inCollection f:informative-work ;
-  :prefLabel "Blogg"@sv ,
-    "Blog"@en .
-
-g:Calendar a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;  # inte alltid kbv:IllustratedWork ;
+g:Calendar a :GenreForm ;
+  skos:broader g:ReferenceWork ;  # inte alltid kbgf:IllustratedWork ;
   skos:exactMatch saogf:Kalendrar ;
-  :prefLabel "Kalender"@sv ,
+  :singularLabel "Kalender"@sv ,
     "Calendar"@en .
 
-g:Catalogue a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;
+g:Catalogue a :GenreForm ;
+  skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Kataloger ;
-  :prefLabel "Katalog"@sv ,
+  :singularLabel "Katalog"@sv ,
     "Catalogue"@en .
 
-f:CollectedWork a :Genre ;  # :GenreForm
-  rdfs:subClassOf kbv:CollectingResource ;
-  skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, kbv:MultipartBook"@en ;
+g:CollectedWork a :Genre ;  # :GenreForm
+  skos:broader kbgf:CollectingResource ;
+  skos:editorialNote "TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, kbgf:MultipartBook"@en ;
   skos:exactMatch saogf:Samlingsverk ;
-  skos:closeMatch bibo:CollectedDocument ;
-  :prefLabel "Samlingsverk"@sv ,
+  :singularLabel "Samlingsverk"@sv ,
     "Collected Work"@en .
 
 g:ConferenceMaterial a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ;
+  #skos:broader kbgf:NonBookText ;
   skos:exactMatch saogf:Konferensmaterial ;
   :inCollection div:ephemera ,
-    f:informative-work ;
-  :prefLabel "Konferensmaterial"@sv ,
+    div:informative-work ;
+  :singularLabel "Konferensmaterial"@sv ,
     "Conference Material"@en .
 
-f:ControlledVocabulary a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;
+g:ControlledVocabulary a :Genre ;
+  skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Kontrollerade\%20vokabul\%C3\%A4rer ;
-  :prefLabel "Kontrollerad vokabulär"@sv ,
+  :singularLabel "Kontrollerad vokabulär"@sv ,
     "Controlled Vocabulary"@en .
 
 g:CourseMaterial a :Genre ;
-  rdfs:subClassOf g:TeachingMaterial ;
+  skos:broader g:TeachingMaterial ;
   skos:exactMatch saogf:Kursmaterial ;
   :inCollection div:ephemera ;
-  :prefLabel "Kursmaterial"@sv ,
+  :singularLabel "Kursmaterial"@sv ,
     "Course Material"@en .
 
 g:Encyclopedia a :Genre ;
-  rdfs:subClassOf g:ReferenceWork, kbv:Book ;
+  skos:broader g:ReferenceWork, kbgf:Book ;
   skos:exactMatch saogf:Encyklopedier ;
-  :prefLabel "Encyklopedia"@sv ,
+  :singularLabel "Encyklopedia"@sv ,
     "Encyclopedia"@en .
 
 g:Lexicon a :Genre ;
-  rdfs:subClassOf g:ReferenceWork, kbv:Book ;
+  skos:broader g:ReferenceWork, kbgf:Book ;
   skos:exactMatch saogf:Lexikon ;
-  :prefLabel "Lexikon"@sv ,
+  :singularLabel "Lexikon"@sv ,
     "Lexicon"@en .
 
 g:TeachingMaterial a :Genre ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
   skos:exactMatch saogf:L\%C3\%A4romedel ,
     saogf:Instruktions-\%20och\%20undervisningsmaterial ;
-  :prefLabel "Instruktions- och undervisningsmaterial"@sv ,
+  :singularLabel "Instruktions- och undervisningsmaterial"@sv ,
     "Teaching Material"@en ;
   :altLabel "Läromedel"@sv .
 
-g:GraphicLiterature a :Genre ;
-  rdfs:subClassOf kbv:IllustratedWork ,
+g:GraphicLiterature a :GenreForm ;
+  skos:broader kbgf:IllustratedWork ,
     g:Literature ;
   skos:broadMatch kbrda:Text ,
     kbrda:Image ;
   skos:exactMatch saogf:Tecknade\%20serier ;
-  :prefLabel "Tecknad serie"@sv ,
+  :singularLabel "Tecknad serie"@sv ,
     "Graphic Literature"@en .
 
 g:HandSignedCommunication a :Genre ;
-  skos:broadMatch kbv:Visual, kbv:Text ;
+  skos:broadMatch kbgf:Visual, kbgf:Text ;
   skos:exactMatch saogf:TAKK ;
-  :prefLabel "TAKK"@sv ,
+  :singularLabel "TAKK"@sv ,
     "Hand-signed Communication"@en .
 
 g:GraphicNovel a :Genre ;
-  rdfs:subClassOf g:Novel ,
-    kbv:BookWithImages ,
+  skos:broader g:Novel ,
+    kbgf:BookWithImages ,
     g:GraphicLiterature ;
   skos:exactMatch saogf:Serieromaner ;
-  :prefLabel "Serieroman"@sv ,
+  :singularLabel "Serieroman"@sv ,
     "Graphic Novel"@en .
 
-g:ComicStory a :Genre ;
-  rdfs:subClassOf f:Comic, kbv:NonBookText ;
-  owl:equivalentClass sdo:ComicStory ;
-  skos:narrowMatch saogf:Serienoveller ;
-  :prefLabel "Serienovell"@sv ,
-    "Comic Story"@en .
-
 g:Photoseries a :Genre ;
-  rdfs:subClassOf g:GraphicLiterature ;
-  skos:editorialNote "TODO: this is an issue? (foto-serietidning)? Not a Collection?"@en ;
+  skos:broader g:GraphicLiterature ,
+    kbgf:CollectingResource ;
   skos:exactMatch saogf:Fotoserier ;
-  :prefLabel "Fotoserie"@sv ,
+  :singularLabel "Fotoserie"@sv ,
     "Photoseries"@en .
+
+g:Note a :Genre ;
+  skos:broader kbgf:NonBookText ;
+  skos:exactMatch saogf:Anteckningar .
 
 g:Novel a :Genre ;
   skos:broader g:Literature ;
-  skos:broadMatch kbv:Book ;
+  skos:broadMatch kbgf:Book ;
   skos:exactMatch saogf:Romaner ;
-  :prefLabel "Roman"@sv ,
+  :singularLabel "Roman"@sv ,
     "Novel"@en .
 
-g:ShortStory a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ,
-    g:Literature ;
-  owl:equivalentClass sdo:ShortStory ;
-  skos:exactMatch saogf:Noveller ;
-  :prefLabel "Novell"@sv ,
-    "Short Story"@en .
-
 g:Literature a :Genre ;
-  rdfs:subClassOf kbv:Text ;
-  :prefLabel "Litteratur"@sv ,
+  skos:broader kbgf:Text ;
+  :singularLabel "Litteratur"@sv ,
     "Literature"@en .
 
 g:Journal a :Genre ;
-  rdfs:subClassOf kbv:Periodical ;
-  :prefLabel "Vetenskaplig tidskrift"@sv ,
+  skos:broader kbgf:Periodical ;
+  :singularLabel "Vetenskaplig tidskrift"@sv ,
     "Journal"@en .
 
-g:JournalIssue a :Genre ;
-  rdfs:subClassOf kbv:Issue ;
-  skos:broadMatch g:Journal ;
-  :prefLabel "Vetenskapstidskriftssnummer"@sv ,
-    "Journal Issue"@en .
+#g:JournalIssue a :Genre ;
+#  skos:broader kbgf:Issue ;
+#  skos:broadMatch g:Journal ;
+#  :singularLabel "Vetenskapstidskriftssnummer"@sv ,
+#    "Journal Issue"@en .
 
 g:Lecture a :Genre ;
-  rdfs:subClassOf g:TeachingMaterial ;
+  skos:broader g:TeachingMaterial ;
   skos:exactMatch saogf:F\%C3\%B6rel\%C3\%A4sningar ;
-  :prefLabel "Föreläsning"@sv ,
+  :singularLabel "Föreläsning"@sv ,
     "Lecture"@en .
 
 g:Magazine a :Genre ;
-  rdfs:subClassOf kbv:Periodical ;
-  :prefLabel "Magasin"@sv ,
+  skos:broader kbgf:Periodical ;
+  :singularLabel "Magasin"@sv ,
     "Magazine"@en .
 
-g:MagazineIssue a :Genre ;
-  rdfs:subClassOf kbv:Issue ;
-  skos:broadMatch kbv:Magazine ;
-  :prefLabel "Magasin-nummer"@sv ,
-    "Magazine Issue"@en .
+#g:MagazineIssue a :Genre ;
+#  skos:broader kbgf:Issue ;
+#  skos:broadMatch g:Magazine ;
+#  :singularLabel "Magasin-nummer"@sv ,
+#    "Magazine Issue"@en .
 
 g:MusicRadioProgram a :Genre ;
-  rdfs:subClassOf f:AudioProgram ,
-    kbv:Music ;
-  :prefLabel "Musikradioprogram"@sv ,
+  skos:broader g:AudioProgram ,
+    kbgf:Music ;
+  :singularLabel "Musikradioprogram"@sv ,
     "Music Radio Program"@en .
 
 g:MusicRecording a :Genre ;
-  rdfs:subClassOf kbv:Music ;
+  skos:broader kbgf:Music ;
   skos:exactMatch saogf:Musikinspelningar ;
-  :prefLabel "Musikinspelning"@sv ,
+  :singularLabel "Musikinspelning"@sv ,
     "Music Recording"@en .
 
 g:NewsLetter a :Genre ;
-  rdfs:subClassOf kbv:SerialPublication ;
+  skos:broader kbgf:SerialPublication ;
   skos:exactMatch saogf:Nyhetsbrev ;
   :inCollection div:ephemera ;
-  :prefLabel "Nyhetsbrev"@sv ,
+  :singularLabel "Nyhetsbrev"@sv ,
     "Newsletter"@en .
 
 g:Newspaper a :Genre ;
-  rdfs:subClassOf kbv:Periodical ;
+  skos:broader kbgf:Periodical ;
   skos:exactMatch saogf:Dagstidningar ;
-  :prefLabel "Dagstidning"@sv ,
+  :singularLabel "Dagstidning"@sv ,
     "Newspaper"@en ;
   :pluralLabel "Dagstidningar"@sv .
 
-g:NewspaperIssue a :Genre ;
-  rdfs:subClassOf kbv:Issue ;
-  skos:broadMatch kbv:Newspaper ;
-  :prefLabel "Dagstidningsnummer"@sv ,
-    "Newspaper Issue"@en .
+#g:NewspaperIssue a :Genre ;
+#  skos:broader kbgf:Issue ;
+#  skos:broadMatch g:Newspaper ;
+#  :singularLabel "Dagstidningsnummer"@sv ,
+#    "Newspaper Issue"@en .
 
 g:Pamphlet a :Genre ;
-  rdfs:subClassOf f:Broschure ;
+  skos:broader g:Brochure ;
   skos:exactMatch saogf:Pamfletter ;
   :inCollection div:ephemera ;
-  :prefLabel "Pamflett"@sv ,
+  :singularLabel "Pamflett"@sv ,
     "Pamphlet"@en .
 
 g:Podcast a :Genre ;
-  rdfs:subClassOf f:AudioProgram ;
-  :prefLabel "Podcast"@sv ,
+  skos:broader g:AudioProgram ;
+  :singularLabel "Podcast"@sv ,
     "Podcast"@en .
 
 g:PublicationProgramme a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ;
+  skos:broader kbgf:NonBookText ;
   skos:exactMatch saogf:Program\%20\%28publikationer\%29 ;
-  :prefLabel "Programblad"@sv ,
+  :singularLabel "Programblad"@sv ,
     "Publication Programme"@en .
 
 g:RadioProgram a :Genre ;
-  rdfs:subClassOf f:AudioProgram ;
+  skos:broader g:AudioProgram ;
   skos:exactMatch saogf:Radioprogram ;
-  :prefLabel "Radioprogram"@sv ,
+  :singularLabel "Radioprogram"@sv ,
     "Radio Program"@en .
 
 g:RecordOrDeed a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ;
+  skos:broader kbgf:NonBookText ;
   skos:exactMatch saogf:Handlingar\%20\%28dokument\%29 ;
-  :prefLabel "Handlingar (dokument)"@sv ,
-  "Records (Documents)"@en .
-
-g:ReferenceWork a :Genre ;
-  rdfs:subClassOf kbv:Text ;
-  owl:equivalentClass bibo:ReferenceSource ;
-  skos:exactMatch saogf:Referensverk ;
-  :inCollection f:informative-work ;
-  rdfs:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
-  :prefLabel "Referensverk"@sv ,
-    "Reference Work"@en .
+  :singularLabel "Handling (dokument)"@sv ,
+  "Record (Document)"@en .
 
 g:Register a :Genre ;
-  rdfs:subClassOf kbv:CollectingResource ;
+  skos:broader kbgf:CollectingResource ;
   skos:exactMatch saogf:F\%C3\%B6rteckningar ;
-  :prefLabel "Förteckning"@sv ,
+  :singularLabel "Förteckning"@sv ,
     "Register"@en .
 
 g:PuzzleOrGame a :Genre ;
@@ -280,213 +252,199 @@ g:PuzzleOrGame a :Genre ;
     "Puzzle or game"@en .
 
 g:RolePlayingGame a :Genre ;
-  rdfs:subClassOf g:PuzzleOrGame ;
+  skos:broader g:PuzzleOrGame ;
   skos:exactMatch saogf:Rollspel ;
-  :prefLabel "Rollspel"@sv ,
+  :singularLabel "Rollspel"@sv ,
     "Roleplaying Game"@en .
 
-g:SoundEffectBook a :Genre ;
-  rdfs:subClassOf f:MechanicalBook, :Audio ;
+g:SoundEffectBook a :GenreForm ;
+  skos:broader g:MechanicalBook, kbgf:Audio ;
   skos:exactMatch saogf:B\%C3\%B6cker\%20med\%20ljudeffekter ;
-  :prefLabel "Bok med ljudeffekt"@sv ,
+  :singularLabel "Bok med ljudeffekt"@sv ,
     "Sound-effect Book"@en .
 
-g:PopupBook a :Genre ;
-  rdfs:subClassOf kbv:BookWithImages ;
-  skos:exactMatch <saogf.Pop-up-b%C3%B6cker> ;
-  :prefLabel "Pop-up-bok"@sv ,
+g:PopupBook a :GenreForm ;
+  skos:broader kbgf:BookWithImages ;
+  skos:exactMatch saogf:Pop-up-b\%C3\%B6cker ;
+  :singularLabel "Pop-up-bok"@sv ,
     "Pop-up Book"@en .
 
-g:Review a :Genre ;
-  rdfs:subClassOf kbv:NonBookText ;
-  owl:equivalentClass sdo:Review ;
-  skos:exactMatch saogf:Recensioner ;
-  :prefLabel "Recension"@sv ,
-    "Review"@en .
-
-g:Screenplay a :Genre ;
-  rdfs:subClassOf kbv:Text ;
+g:Screenplay a :GenreForm ;
+  skos:broader kbgf:Text ;
   skos:exactMatch saogf:Filmmanus ;
-  :prefLabel "Filmmanus"@sv ,
+  :singularLabel "Filmmanus"@sv ,
     "Screenplay"@en .
 
-g:Standard a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;
-  owl:equivalentClass bibo:Standard ;
-  skos:exactMatch saogf:Standarder ;
-  :prefLabel "Standard"@sv ,
-    "Standard"@en .
-
 g:Statistics a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;
+  skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Statistik ;
-  :prefLabel "Statistik"@sv ,
+  :singularLabel "Statistik"@sv ,
     "Statistics"@en .
 
 g:Tables a :Genre ;
-  rdfs:subClassOf g:ReferenceWork ;
+  skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Tabeller ;
-  skos:related kbv:Dataset ;
-  :prefLabel "Tabell"@sv ,
+  skos:related kbgf:Dataset ;
+  :singularLabel "Tabell"@sv ,
     "Tables"@en .
 
+g:Ephemera a :Genre ;
+  skos:exactMatch saogf:Efem%C3%A4rt%20material ;
+  skos:prefLabel "Efemärt material"@sv .
+
 g:Timetable a :Genre ;
-  rdfs:subClassOf f:Tables ,
-    f:Ephemera ;
+  skos:broader g:Tables ,
+    g:Ephemera ;
   skos:exactMatch saogf:Tidtabeller ;
-  :prefLabel "Tidtabell"@sv ,
+  :singularLabel "Tidtabell"@sv ,
     "Timetable"@en .
 
 g:ThreeDimensionalMovingImage a :Genre ;  # :ContentType
   skos:exactMatch kbrda:ThreeDimensionalMovingImage;  # sameAs
-  rdfs:subClassOf kbv:MovingImage ;
+  skos:broader kbgf:MovingImage ;
   :prefLabel "Tredimensionell rörlig bild"@sv ,
     "Three-dimensional moving image"@en .
 
 g:TwoDimensionalMovingImage a :Genre ;  # :ContentType
   skos:exactMatch kbrda:TwoDimensionalMovingImage;  # sameAs
-  rdfs:subClassOf kbv:MovingImage ;
+  skos:broader kbgf:MovingImage ;
   :prefLabel "Tvådimensionell rörlig bild"@sv ,
     "Two-dimensional moving image"@en .
 
 
 #g:Patent
-#  :prefLabel "Patent"@sv, "Patent"@en .
+#  :singularLabel "Patent"@sv, "Patent"@en .
 
 #g:LegalDocument
-#  :prefLabel "Juridiskt material"@sv, "Legal Document"@en .
+#  :singularLabel "Juridiskt material"@sv, "Legal Document"@en .
 
 #g:LegalDocument a :Genre ;
-#  rdfs:subClassOf kbv:Text ;
+#  skos:broader kbgf:Text ;
 #  owl:equivalentClass bibo:LegalDocument ;
 #  skos:exactMatch saogf:Juridiskt\%20material .
 
 #g:Leporello a :Genre ;
-#  rdfs:subClassOf f:NonBookTextWithImages ;
+#  skos:broader kbgf:NonBookTextWithImages ;
 #  skos:exactMatch saogf:Leporello .
 
 #g:Patent a :Genre ;
-#  rdfs:subClassOf kbv:Text ;
+#  skos:broader kbgf:Text ;
 #  owl:equivalentClass bibo:Patent ;
 #  skos:exactMatch saogf:Patent ;
-#  :inCollection <informative-work> .
+#  :inCollection div:informative-work .
 
 #g:RareText skos:exactMatch saogf:Texter .
 
 #g:Debate a :Genre ;
-#  rdfs:subClassOf kbv:NonBookText ;
+#  skos:broader kbgf:NonBookText ;
 #  skos:exactMatch saogf:Debatter .
 
-#t:AdventCalendar a :Form ;
+#t:AdventCalendar a :GenreForm ;
 #  skos:exactMatch saogf:Adventskalendrar ;
-#  rdfs:subClassOf kbv:Calendar .
+#  skos:broader g:Calendar .
 
-#g:ReligiousWork a :Form ;
+#g:ReligiousWork a :GenreForm ;
 #  skos:exactMatch saogf:Religi\%C3\%B6sa\%20verk .
 
-#g:Biography a :Form ;
+#g:Biography a :GenreForm ;
 #  skos:exactMatch saogf:Biografier .
 
-#g:Essay a :Form ;
+#g:Essay a :GenreForm ;
 #  skos:exactMatch saogf:Ess\%C3\%A4er .
 
-# TODO: SerialPublication someValuesFrom kbv:Yearbook
-#t:Yearbook a :Form ;
+# TODO: SerialPublication someValuesFrom g:Yearbook
+#g:Yearbook a :GenreForm ;
 #  skos:exactMatch saogf:\%C3\%85rsb\%C3\%B6cker ;
-#  rdfs:subClassOf kbv:SerialPublication .
+#  skos:broader kbgf:SerialPublication .
 
-#:PhraseBook a :Form ;
+#:PhraseBook a :GenreForm ;
 #  skos:exactMatch saogf:Parl\%C3\%B6rer .
 
-#:Offentligt_tryck a :Form ;
+#:Offentligt_tryck a :GenreForm ;
 #  skos:exactMatch saogf:Offentligt\%20tryck .
 
-#:CommemorativeWork a :Form ;
+#:CommemorativeWork a :GenreForm ;
 #  skos:exactMatch saogf:Minnesbevarande\%20verk .
 
-#:Debattinlägg a :Form ;
+#:Debattinlägg a :GenreForm ;
 #  skos:exactMatch saogf:Debattinl\%C3\%A4gg .
 
-#:Examination a :Form ;
+#:Examination a :GenreForm ;
 #  skos:exactMatch saogf:Prov\%20och\%20examinationer .
 
-#:Lucköppningskalendrar a :Form ;
+#:Lucköppningskalendrar a :GenreForm ;
 #  skos:exactMatch saogf:Luck\%C3\%B6ppningskalendrar .
 
-#:PressAnnouncement a :Form ;
+#:PressAnnouncement a :GenreForm ;
 #  skos:exactMatch saogf:Pressmeddelanden .
 
-#:MiniatureBook a :Form ;
+#:MiniatureBook a :GenreForm ;
 #  skos:exactMatch saogf:Miniatyrb\%C3\%B6cker .
 
-#:MechanicalBook a :Form ;
-#  skos:exactMatch saogf:Mekaniska\%20b\%C3\%B6cker .
-
-#:Pysselböcker a :Form ;
+#:Pysselböcker a :GenreForm ;
 #  skos:exactMatch saogf:Pysselb\%C3\%B6cker .
 
-#:Målarböcker a :Form ;
+#:Målarböcker a :GenreForm ;
 #  skos:exactMatch saogf:Målarb\%C3\%B6cker .
 
-#:GuideBook a :Form ;
+#:GuideBook a :GenreForm ;
 #  skos:exactMatch saogf:Guideb\%C3\%B6cker .
 
-#:Samhällsinformation a :Form ;
+#:Samhällsinformation a :GenreForm ;
 #  skos:exactMatch saogf:Samh\%C3\%A4llsinformation .
 
-#:Chronicle a :Form ;
+#:Chronicle a :GenreForm ;
 #  skos:exactMatch saogf:Annaler\%20och\%20kr\%C3\%B6nikor .
 
-#:RecreationalWork a :Form ;
+#:RecreationalWork a :GenreForm ;
 #  skos:exactMatch saogf:Tidsf\%C3\%B6rdriv .
 
-#:PopupBook a :Form ;
+#:PopupBook a :GenreForm ;
 #  skos:exactMatch saogf:Pop-up-b\%C3\%B6cker .
 
-#:Cookbook a :Form ;
+#:Cookbook a :GenreForm ;
 #  skos:exactMatch saogf:Kokb\%C3\%B6cker .
 
-#:Recept a :Form ;
+#:Recept a :GenreForm ;
 #  skos:exactMatch saogf:Recept .
 
-#:DiningMenu a :Form ;
+#:DiningMenu a :GenreForm ;
 #  skos:exactMatch saogf:Matsedlar .
 
 #saogf:Dokument\%C3\%A4ra\%20serier a :GenreForm ;
-#  :prefLabel "Dokumentära serier" ;
+#  :singularLabel "Dokumentär serie" ;
 #  skos:broader saogf:Tecknade\%20serier .
 
-#t:RethoricalSpeech a :Form ;
+#t:RethoricalSpeech a :GenreForm ;
 #  skos:exactMatch saogf:Tal\%20\%28retorik\%29 .
 
-#t:SourceMaterial a :Form ;
+#t:SourceMaterial a :GenreForm ;
 #  skos:exactMatch saogf:K\%C3\%A4llmaterial ;
-#  :inCollection <informative-work> .
+#  :inCollection div:informative-work .
 
-#t:DiscursiveWork a :Form ;
+#t:DiscursiveWork a :GenreForm ;
 #  skos:closeMatch saogf:Verk\%20med\%20samtalsliknande\%20karakt\%C3\%A4r .
 
-#t:Interview a :Form ;
+#t:Interview a :GenreForm ;
 #  owl:equivalentClass bibo:Interview ;
 #  skos:exactMatch saogf:Intervjuer .
 
-#t:Reportage a :Form ;
+#t:Reportage a :GenreForm ;
 #  owl:equivalentClass bibo:Report ;
 #  skos:exactMatch saogf:Reportage .
 
-#t:Survey a :Form ;
+#t:Survey a :GenreForm ;
 #  skos:exactMatch saogf:Unders\%C3\%B6kningar ;
-#  :inCollection <informative-work> .
+#  :inCollection div:informative-work .
 
-#t:Correspondence a :Form ;
+#t:Correspondence a :GenreForm ;
 #  skos:exactMatch saogf:Korrespondens .
 
 #t:Diary a :GenreForm ;
-#  rdfs:subClassOf kbv:Text ;
+#  skos:broader kbgf:Text ;
 #  skos:exactMatch saogf:Dagb\%C3\%B6cker .
 
 #t:Ballad a :GenreForm ;
-#  rdfs:subClassOf kbv:WorkHub ;
 #  skos:closeMatch saogf:Visor .
 
 ## TODO: Move these instance MARC-types and -genreForms to work (and drop on marcframe revert?)
@@ -531,23 +489,57 @@ g:TwoDimensionalMovingImage a :Genre ;  # :ContentType
 #     tgm:Plantryck
 #     tgm:Tryck
 
-# kbv:Globe kbv:instanceOf kbv:Cartography ;
-#   kbv:genreForm marc:GlobeMaterialType {| owl:oneOf
-#         marc:TerrestrialGlobe ,
-#         marc:PlanetaryOrLunarGlobe ,
-#         marc:CelestialGlobe ,
-#         marc:EarthMoonGlobe |} .
+# TODO: Define in saogf? And move these to marcmatches.ttl (to be remapped).
+g:TerrestrialGlobe skos:broader kbgf:Globe ; skos:closeMatch marc:TerrestrialGlobe .
+g:PlanetaryOrLunarGlobe skos:broader kbgf:Globe ; skos:closeMatch marc:PlanetaryOrLunarGlobe .
+g:CelestialGlobe skos:broader kbgf:Globe ; skos:closeMatch marc:CelestialGlobe .
+g:EarthMoonGlobe skos:broader kbgf:Globe ; skos:closeMatch marc:EarthMoonGlobe .
 
-# kbv:Map kbv:instanceOf kbv:Cartography ;
-#   kbv:genreForm marc:MapMaterialType {| owl:oneOf
-#         marc:Model ,
-#         marc:Section ,
-#         marc:Profile ,
-#         marc:MapATwoDimensionalMap ,
-#         marc:MapMaterialType-d ,  # marc:Atlas  # MapAsVolume
-#         marc:Diagram ,  # MapAsSheet?
-#         marc:View ,
-#         marc:RemoteSensingImage # tgm:Satellitbild
-#       |} .
+g:Model skos:broader kbgf:Map ; skos:closeMatch marc:Model .
+g:Section skos:broader kbgf:Map ; skos:closeMatch marc:Section .
+g:Profile skos:broader kbgf:Map ; skos:closeMatch marc:Profile .
+g:MapATwoDimensionalMap skos:broader kbgf:Map ; skos:closeMatch marc:MapATwoDimensionalMap .
+g:Diagram skos:broader kbgf:Map ; skos:closeMatch marc:Diagram .
 
-# kbv:RemoteSensingImage kbv:instanceOf kbv:Cartography .
+g:RemoteSensingImage skos:broader kbgf:Cartography .
+
+g:Blog a :Genre ;
+  skos:broader g:Website ,
+    kbgf:NonBookText ;
+  skos:exactMatch saogf:Bloggar ;
+  :inCollection div:informative-work ;
+  :singularLabel "Blogg"@sv ,
+    "Blog"@en .
+
+g:ShortStory a :Genre ;
+  skos:broader kbgf:NonBookText ,
+    g:Literature ;
+  skos:exactMatch saogf:Noveller ;
+  :singularLabel "Novell"@sv ,
+    "Short Story"@en .
+
+g:ComicStory a :Genre ;
+  skos:broader g:Comic, g:ShortStory ;
+  skos:narrowMatch saogf:Serienoveller ;
+  :singularLabel "Serienovell"@sv ,
+    "Comic Story"@en .
+
+g:ReferenceWork a :Genre ;
+  skos:broader kbgf:Text ;
+  skos:exactMatch saogf:Referensverk ;
+  :inCollection div:informative-work ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  :singularLabel "Referensverk"@sv ,
+    "Reference Work"@en .
+
+g:Review a :Genre ;
+  skos:broader kbgf:NonBookText ;
+  skos:exactMatch saogf:Recensioner ;
+  :singularLabel "Recension"@sv ,
+    "Review"@en .
+
+g:Standard a :Genre ;
+  skos:broader g:ReferenceWork ;
+  skos:exactMatch saogf:Standarder ;
+  :singularLabel "Standard"@sv ,
+    "Standard"@en .

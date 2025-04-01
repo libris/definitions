@@ -1,57 +1,203 @@
-prefix : <https://id.kb.se/vocab/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix saogf: <https://id.kb.se/term/saogf/>
-prefix barngf: <https://id.kb.se/term/barngf/>
-prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
-prefix marc: <https://id.kb.se/marc/>
-prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
+prefix : <https://id.kb.se/vocab/>
+prefix g: <https://id.kb.se/term/genre/>
 prefix kbgf: <https://id.kb.se/term/gf/>
 
-# Base Forms (Categories?! Nature of content, etc.)
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
 
-#kbgf:LinguisticWork a :GenreForm ;
-#  :altLabel "Literature"@en ,
-#    "Litteratur"@sv ;
-#  :prefLabel "Linguistic work"@en ,
-#    "Språkligt verk"@sv .
+g:Booklet a :GenreForm ;  # g:MediumText
+  :category :pending ;
+  skos:broader kbgf:NonBookText ;
+  rdfs:label "Texthäfte"@sv , "Booklet"@en .
 
-kbgf:Book a :GenreForm ; # BookForm
-  skos:narrowMatch saogf:Romaner ,
-    saogf:Ljudb%C3%B6cker ,
-    barngf:Bilderb%F6cker ,
-    barngf:Kapitelb%F6cker .
+g:Textleaf a :GenreForm ; # g:SmallText
+  :category :pending ;
+  skos:broader kbgf:NonBookText ;
+  rdfs:label "Textblad"@sv , "Text leaf"@en .
 
-kbgf:Map a :GenreForm ; #MapForm
-  skos:exactMatch marc:MapATwoDimensionalMap, tgm:Kartor .
+g:AudioProgram a :GenreForm ;
+  skos:broader kbgf:NonMusicAudio ;
+  rdfs:label "Ljudprogram"@sv ,
+    "Audio Program"@en .
 
-kbgf:Atlas a :GenreForm ; #AtlasForm
-  skos:exactMatch marc:Atlas, tgm:Atlaser .
+g:BoardGame a :GenreForm ;
+  skos:broader g:InteractiveObject , g:PuzzleOrGame ;
+  skos:exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
+  rdfs:label "Brädspel"@sv ,
+    "Boardgame"@en .
 
-kbgf:Globe a :GenreForm ; #GlobeForm
-  skos:exactMatch tgm:Glober .
+g:Brochure a :GenreForm ;
+  skos:broader kbgf:NonBookText ;
+  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
+  rdfs:label "Broschyr"@sv ,
+    "Brochure"@en .
 
-kbgf:Comic a :GenreForm ;
-  :prefLabel "Tecknad serie"@sv, "Comic"@en ;
-  skos:narrowMatch saogf:Tecknade%20serier ,
-    barngf:Tecknade%20serier .
+g:Comic a :GenreForm ;
+  skos:broader g:GraphicLiterature ;
+  skos:altLabel "Tecknad serie"@sv ;
+  skos:broadMatch saogf:Tecknade%20serier ,
+    barngf:Tecknade%20serier ;
+  skos:exactMatch saogf:Serietidningar ;
+  rdfs:label "Serietidning"@sv ,
+    "Comic"@en .
 
-kbgf:ShortStory a :GenreForm ;
-  skos:narrowMatch saogf:Noveller,
-    saogf:Serienoveller .
+g:ComputerCode a :GenreForm ;
+  skos:broader kbgf:Software ;
+  rdfs:label "Datorkod"@sv ,
+    "Computer Code"@en .
 
-kbgf:Issue a :GenreForm .  # TODO: matches...
+g:ComputerProgram a :GenreForm ;
+  skos:broadMatch kbrda:ComputerProgram ;
+  skos:broader kbgf:Software ;
+  rdfs:label "Datorprogram"@sv ,
+    "Computer Program"@en .
 
-kbgf:Photograph skos:exactMatch saogf:Fotografier, tgm:Fotografier .
+g:ComputerGame a :GenreForm ;
+  skos:broader g:PuzzleOrGame, g:ComputerProgram ;
+  skos:exactMatch saogf:Datorspel ;
+  rdfs:label "Datorspel"@sv ,
+    "Computer Game"@en .
 
-# TODO: trying to map *relevant* MARC GT...
+g:Diagram a :GenreForm ;
+  skos:broader kbgf:StillImage ;
+  skos:exactMatch saogf:Diagram ;
+  rdfs:label "Diagram"@sv ,
+    "Diagram"@en .
 
-kbgf:Fiction a :GenreForm ;
-  skos:narrowMatch marc:Fiction ;  # 84678 # (SSB)
-  skos:narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+g:FormDocument a :GenreForm ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
+  skos:broader kbgf:NonBookText ;
+  skos:exactMatch saogf:Blanketter ;
+  rdfs:label "Blankett"@sv ,
+    "Form Document"@en .
 
-# TODO: base GenreForm?
-#:Radio a :GenreForm ; :label "Radio"@sv .
-#:TV a :GenreForm ; :label "TV"@sv .
+g:Handwriting a :GenreForm ;
+  skos:broader kbgf:Manuscript ,
+    kbgf:Text ;
+  skos:exactMatch saogf:Handskrifter ;
+  rdfs:label "Handskrift"@sv ,
+    "Handwriting"@en ;
+  :pluralLabel "Handskrifter"@sv .
 
-# <./marcmatches.ttl>
+g:Illustration a :GenreForm ;
+  skos:broader kbgf:StillImage ;
+  skos:exactMatch saogf:Illustrationer ;
+  rdfs:label "Illustration"@sv ,
+    "Illustration"@en .
+
+g:InteractiveObject a :GenreForm ;
+  skos:broader kbgf:Object ;
+  rdfs:label "Interaktivt objekt"@sv ,
+  "InteractiveObject"@en .
+
+g:Manual a :GenreForm ;
+  skos:broader kbgf:Text ,
+    g:TeachingMaterial ;
+  skos:closeMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Manual> ;
+  rdfs:label "Manual"@sv ,
+    "Manual"@en .
+
+g:MechanicalBook a :GenreForm ;
+  skos:exactMatch saogf:Mekaniska\%20b\%C3\%B6cker ;
+  skos:broader g:InteractiveObject ,
+    kbgf:WrittenBook ;
+  rdfs:label "Mekanisk bok"@sv ,
+    "Mechanical Book"@en .
+
+g:Painting a :GenreForm ;
+  skos:broader kbgf:StillImage ;
+  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
+  rdfs:label "Målning"@sv ,
+    "Painting"@en .
+
+g:Photobook a :GenreForm ;
+  skos:broader kbgf:BookWithImages ,
+    kbgf:Book ;
+  skos:exactMatch saogf:Fotob\%C3\%B6cker ;
+  rdfs:label "Fotobok"@sv ,
+    "Photobook"@en .
+
+g:PictureDictionary a :GenreForm ;
+  skos:broader g:Lexicon ,
+    kbgf:BookWithImages ;
+  skos:exactMatch saogf:Bildlexikon ;
+  rdfs:label "Bildlexikon"@sv ,
+    "Picture Dictionary"@en .
+
+g:Postcard a :GenreForm ;
+  skos:broader kbgf:StillImage ;
+  skos:exactMatch saogf:Vykort ;
+  rdfs:label "Vykort"@sv ,
+    "Postcard"@en .
+
+g:PostcardBook a :GenreForm ;
+  skos:broader g:Postcard , kbgf:Book ;
+  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Vykortsh%C3%A4ften> .
+
+g:Puzzle a :GenreForm ;
+  skos:broader g:InteractiveObject, g:PuzzleOrGame ;
+  skos:exactMatch saogf:Pussel ;
+  rdfs:label "Pussel"@sv ,
+    "Puzzle"@en .
+
+g:Sculpture a :GenreForm ;
+  skos:broader kbgf:Object ;
+  rdfs:label "Skulptur"@sv ,
+    "Sculpture"@en .
+
+g:SpokenBook a :GenreForm ;
+  skos:broader kbgf:Audiobook ,
+    g:SpokenWord ;
+  skos:exactMatch saogf:Talb\%C3\%B6cker ;
+  rdfs:label "Talbok"@sv ,
+    "Spoken Book"@en .
+
+g:SpokenWord a :GenreForm ;
+  skos:broadMatch kbrda:SpokenWord ;
+  skos:broader kbgf:Text ,
+    kbgf:Audio ;
+  rdfs:label "Tal"@sv ,
+    "Spoken Word"@en .
+
+g:SpokenPaper a :GenreForm ;
+  skos:broader kbgf:Periodical ,
+    g:SpokenWord ;
+  skos:exactMatch saogf:Taltidningar ;
+  rdfs:label "Taltidning"@sv ,
+    "Spoken Paper"@en .
+
+g:TVProgram a :GenreForm ;
+  skos:broader kbgf:MovingImage ;
+  skos:exactMatch saogf:Tv-program ;
+  rdfs:label "Tv-program"@sv ,
+    "TV-Program"@en .
+
+g:TVSeries a :GenreForm ;
+  skos:broader g:TVProgram ,
+    kbgf:MonographicSeries ;
+  skos:exactMatch saogf:Tv-serier ;
+  rdfs:label "Tv-serie"@sv ,
+    "TV-Series"@en .
+
+g:Toy a :GenreForm ;
+  skos:broader g:InteractiveObject ;
+  rdfs:label "Leksak"@sv ,
+    "Toy"@en .
+
+g:Trailer a :GenreForm ;
+  skos:broader kbgf:Film ;
+  skos:exactMatch saogf:Trailrar ;
+  rdfs:label "Trailer"@sv ,
+    "Trailer"@en .
+
+g:Website a :GenreForm ;
+  skos:broader kbgf:OnlineResource ,
+    kbgf:Integrating ;
+  skos:exactMatch saogf:Webbplatser ;
+  rdfs:label "Webbplats"@sv ,
+    "Website"@en .
