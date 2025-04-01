@@ -1,9 +1,11 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+
 prefix bibo: <http://purl.org/ontology/bibo/>
 prefix sdo: <https://schema.org/>
-prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 
 prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
@@ -98,9 +100,17 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   owl:intersectionOf (
       :Audio
       :BookForm
-    ) ;
-  rdfs:label "Ljudbok"@sv ,
-    "Audiobook"@en .
+    ) .
+
+:CollectedDocument a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:CollectedDocument ;
+  owl:intersectionOf (
+      :Audio
+      :BookForm
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Samlingsverk ]
+    ) .
 
 :TactileBook a owl:Class ;
   :category :pending, :complex ;
@@ -115,23 +125,17 @@ prefix kbgf: <https://id.kb.se/term/gf/>
     "Taktil bok"@sv .
 
 
-:NonBookText a owl:Class ;
-  :category :pending, :complex ;
-  ptg:abstract true ;
-  rdfs:subClassOf :Text ;
-  rdfs:label "Non-book text"@en ,
-    "Enskild text"@sv .
-
 :Article a owl:Class ;
   :category :pending, :complex ;
-  rdfs:subClassOf :NonBookText ;
   owl:equivalentClass bibo:Article ;
-  rdfs:label "Artikel"@sv ,
-    "Article"@en .
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Article ]
+    ) .
 
 :Issue a owl:Class ;
   :category :pending, :complex ;
-  rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:equivalentClass bibo:Issue ;
   owl:intersectionOf (
       :Text
@@ -141,6 +145,43 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   rdfs:label "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
+
+:ComicIssue a owl:Class ;
+  :category :pending, :complex ;
+  rdfs:subClassOf :Issue ;
+  owl:equivalentClass sdo:ComicIssue ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:Issue ]
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Tecknade%20serier ]
+    ) ;
+  rdfs:label "Serietidningsnummer"@sv ,
+    "Comic Issue"@en .
+
+:ComicSerial a :GenreForm ;
+  :category :pending, :complex ;
+  rdfs:comment "TODO: series of issues vs. arc of stories?" ;
+  owl:equivalentClass sdo:ComicSeries ;
+  owl:intersectionOf (
+      :Serial
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Tecknade%20serier ]
+    ) ;
+  rdfs:label "Serietidningsserie"@sv ,
+    "Comic Series"@en .
+
+:Note a :GenreForm ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:Note ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Anteckningar ]
+    ) ;
+  rdfs:label "Anteckning"@sv ,
+    "Note"@en .
 
 :Poster a owl:Class ;
   :category :pending, :complex ;
@@ -153,6 +194,12 @@ prefix kbgf: <https://id.kb.se/term/gf/>
       [ owl:onProperty :genreForm ;
         owl:hasValue saogf:Affischer ]
     ) ;
+  # TODO: rewrite to shorthand classes:
+  #owl:intersectionOf (
+  #    :Monograph
+  #    [ owl:onProperty :category ;
+  #      owl:hasValue kbgf:Affisch]
+  #  ) ;
   rdfs:label "Affisch"@sv, "Poster"@en ;
   :pluralLabel "Affischer"@sv .
 
@@ -197,7 +244,6 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 
 :Brochure a owl:Class ;
   :category :pending, :complex ;
-  rdfs:subClassOf :NonBookText ;  # ambiguous; just :Text ?
   owl:intersectionOf (
       :Text
       [ owl:onProperty :genreForm ;
@@ -210,12 +256,10 @@ prefix kbgf: <https://id.kb.se/term/gf/>
   :category :pending, :complex ;
   rdfs:subClassOf :IllustratedWork ;
   owl:intersectionOf (
-      :Text
+      :Monograph
       [ owl:onProperty :genreForm ;
-        owl:hasValue kbgf:Comic ]
-    ) ;
-  rdfs:label "Serietidning"@sv ,
-    "Comic"@en .
+        owl:hasValue saogf:Serietidningar ]
+    ) .
 
 :ComicIssue a owl:Class ;
   :category :pending, :complex ;
@@ -372,3 +416,67 @@ prefix kbgf: <https://id.kb.se/term/gf/>
 #    owl:equivalentClass sdo:CreativeWorkSeries;
 #    rdfs:subClassOf :Serial;
 #    rdfs:label "Creative Work Series"@en, "Utgivningsserie"@sv .
+
+:MonographicSeries a owl:Class ;
+  :category :pending, :form ;
+  owl:equivalentClass bibo:Series ,
+    bf:Series ;
+  owl:intersectionOf (
+      :Serial
+      [ owl:onProperty :genreForm ;
+        owl:hasValue kbgf:MonographicSeries ]
+    ) .
+
+:Blog a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass sdo:Blog ;
+  owl:intersectionOf (
+      :Integrating
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Bloggar ]
+    ) .
+
+:ComicStory a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass sdo:ComicStory ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Serienoveller ]
+    ) .
+
+:ShortStory a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass sdo:ShortStory ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Noveller ]
+    ) .
+
+:ReferenceWork a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:ReferenceSource ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Referensverk ]
+    ) .
+
+:Review a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass sdo:Review ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Recensioner ]
+    ) .
+
+:Standard a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:Standard ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Standarder ]
+    ) .
