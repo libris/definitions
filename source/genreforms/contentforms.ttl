@@ -13,15 +13,13 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix marc: <https://id.kb.se/marc/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
-prefix term: <https://id.kb.se/term/>
 prefix kbgf: <https://id.kb.se/term/gf/>
 
 # Base Forms (Categories?! Nature of content, etc.)
 
-kbgf:Text a :ContentForm ;
-  :inCollection term:form .
+kbgf:Text a :ContentForm .
 #kbgf:LinguisticWork a :ContentForm ;
-#  :inCollection term:abstract ;
+#  ptg:abstract true ;
 #  :altLabel "Literature"@en ,
 #    "Litteratur"@sv ;
 #  :prefLabel "Linguistic work"@en ,
@@ -36,24 +34,25 @@ kbgf:Dataset a :ContentForm .
 kbgf:Integrating a :ContentForm ;
   skos:broader kbgf:CollectingResource .
 
-kbgf:Manuscript a :GenreForm .
+kbgf:MovingImage a :ContentForm ;
+  skos:broader kbgf:Visual .
 
-kbgf:MovingImage a :ContentForm .
-
-kbgf:Multimedia a :GenreForm .
+kbgf:Multimedia a :ContentForm .  # TODO: Too vague? :GenreForm (but still mapped to BF)?
 
 kbgf:Music a :ContentForm .
 
 kbgf:Object a :ContentForm .
 
 kbgf:StillImage a :ContentForm ;
+  skos:broader kbgf:Visual ;
   skos:closeMatch saogf:Bilder .
 
 kbgf:Tactile a :ContentForm .
 
-kbgf:CollectingResource a :GenreForm .
+kbgf:CollectingResource a :ContentForm .
 
-kbgf:IllustratedWork a :ContentForm .
+kbgf:IllustratedWork a :ContentForm ;
+  skos:broader kbgf:Visual .
 
 kbgf:NonBookText a :ContentForm ;  # kbgf:Document ??
   ptg:abstract true ;
@@ -63,41 +62,26 @@ kbgf:NonBookText a :ContentForm ;  # kbgf:Document ??
 
 kbgf:OnlineResource a :ContentForm .
 
-kbgf:SerialPublication a :GenreForm ;
-    skos:broader kbgf:CollectingResource .
-
 kbgf:Book a :ContentForm ;
-  :inCollection term:form ;
   skos:narrowMatch saogf:Romaner ,
     saogf:Ljudb%C3%B6cker ,
     barngf:Bilderb%C3%B6cker ,
     barngf:Kapitelb%C3%B6cker .
 
 kbgf:Cartography a :ContentForm ;
-  skos:closeMatch saogf:Kartor ;
-  :inCollection term:form .
+  skos:closeMatch saogf:Kartor .  # TODO: Kartografiskt material?
 
-kbgf:Map a :GenreForm ;
+kbgf:Map a :ContentForm ;
   skos:broader kbgf:Cartography ;
   skos:exactMatch marc:MapATwoDimensionalMap, tgm:Kartor .
 
-kbgf:Atlas a :GenreForm ;
-  skos:broader kbgf:Cartography, kbgf:Book ;
-  skos:exactMatch marc:Atlas, tgm:Atlaser .
-
-kbgf:Globe a :GenreForm ;
+kbgf:Globe a :ContentForm ;
   skos:broader kbgf:CartographicObject ;
   skos:exactMatch tgm:Glober .
 
-kbgf:MonographicSeries a :GenreForm ;
-  skos:broader kbgf:CollectingResource ;
-  skos:exactMatch marc:MonographicSeries ;
-  :singularLabel "Monograph Series"@en ,
-    "Monografiserie"@sv .
-
 kbgf:WrittenBook a :ContentForm ;
   skos:broader kbgf:Text, kbgf:Book ;
-  skos:narrowMatch barngf:Kapitelb\%C3\%B6cker ;
+  skos:narrowMatch barngf:Kapitelb%C3%B6cker ;
   :singularLabel "Written book"@en ,
     "Skriven bok"@sv ;
   :altLabel "Bok"@sv, "Book"@en .
@@ -120,7 +104,7 @@ kbgf:CartographicObject a :ContentForm;
 kbgf:Audiobook a :ContentForm ;
   skos:broader kbgf:Audio ,
     kbgf:Book ;
-  skos:exactMatch saogf:Ljudb\%C3\%B6cker ;
+  skos:exactMatch saogf:Ljudb%C3%B6cker ;
   :singularLabel "Ljudbok"@sv ,
     "Audiobook"@en .
 
@@ -131,19 +115,12 @@ kbgf:Database a :ContentForm ;
   :singularLabel "Databas"@sv ,
     "Database"@en .
 
-kbgf:Photograph a :ContentForm ;
-  skos:broader kbgf:StillImage ;
-  skos:exactMatch saogf:Fotografier ;
-  :singularLabel "Fotografi"@sv ,
-    "Photograph"@en ;
-  :pluralLabel "Fotografier"@sv .
-
 #kbgf:TactileBook a :ContentForm ;
 #  skos:broader kbgf:Book ,
 #    kbgf:Tactile ;
 #  skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
 #  skos:broadMatch kbrda:TactileText ;
-#  skos:narrowMatch saogf:Punktskriftsb\%C3\%B6cker ;
+#  skos:narrowMatch saogf:Punktskriftsb%C3%B6cker ;
 #  :singularLabel "Tactile Book"@en ,
 #    "Taktil bok"@sv .
 
@@ -167,27 +144,6 @@ kbgf:Software a :ContentForm ; # TODO: pending; integrate with ComputerGame, App
   skos:related kbgf:Multimedia ;
   :prefLabel "Mjukvara"@sv ,
     "Software"@en .
-
-kbgf:Issue a :GenreForm ;
-  skos:broader kbgf:NonBookText ;
-  :singularLabel "Tidskriftsnummer"@sv ,
-    "Periodical Issue"@en .
-
-kbgf:Photograph a :GenreForm ;
-  skos:exactMatch saogf:Fotografier, tgm:Fotografier .
-
-kbgf:Periodical a :GenreForm .
-
-kbgf:Film a :GenreForm ;
-  skos:broader kbgf:MovingImage ;
-  skos:exactMatch saogf:Filmer ;
-  :singularLabel "Film"@sv ,
-    "Film"@en .
-
-kbgf:Article a :GenreForm ;
-  skos:broader kbgf:NonBookText ;
-  :singularLabel "Artikel"@sv ,
-    "Article"@en .
 
 ## Just RDA content types (handled by rdamatches IF used by some concrete/complex type)
 #f:CartographicDataset a :ContentAspect;

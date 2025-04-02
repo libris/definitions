@@ -112,6 +112,42 @@ prefix kbgf: <https://id.kb.se/term/gf/>
         owl:hasValue saogf:Samlingsverk ]
     ) .
 
+:LegalDocument a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:LegalDocument ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Juridiskt\%20material ]
+    ) .
+
+:Patent a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:Patent ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Patent ]
+    ) .
+
+:Interview a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:Interview ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Intervjuer ]
+    ) .
+
+:Report a owl:Class ;
+  :category :pending, :complex ;
+  owl:equivalentClass bibo:Report ;
+  owl:intersectionOf (
+      :Monograph
+      [ owl:onProperty :genreForm ;
+        owl:hasValue saogf:Reportage ]
+    ) .
+
 :TactileBook a owl:Class ;
   :category :pending, :complex ;
   owl:intersectionOf (
