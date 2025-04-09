@@ -42,6 +42,6 @@ source/ssif-2025-kbv.jsonld: scripts/create_ssif_science_topic_data.py cache/ssi
 # ...,2 = Sheet 2 - see <https://wiki.documentfoundation.org/ReleaseNotes/7.2#Document_Conversion>
 cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
 	libreoffice --headless --convert-to csv:"Text - txt - csv (StarCalc)":"9,ANSI,90,,,true,true,false,false,,,2" cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx --outdir cache/
-	# Fix incorrect/incomplete change type
-	sed -i '/^60411.*\tBytt benämning\t/ s/Bytt benämning/Ny kod/' "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv"
+	# Fix incomplete change type
+	sed -i '/^60411.*\tBytt benämning\t/ s/Bytt benämning/Ny kod, Bytt benämning/' "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv"
 	cp "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv" $@
