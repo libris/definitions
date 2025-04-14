@@ -93,23 +93,23 @@
         ]
       },
       "filterAliases": [
-        { "alias": "excludeEplikt", "filter": "NOT bibliography:\"sigel:EPLK\"" },
-        { "alias": "includeEplikt", "filter": "NOT excludeEplikt" },
-        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")" },
-        { "alias": "includePreliminary", "filter": "NOT excludePreliminary" }
+        { "alias": "excludeEplikt", "filter": "NOT bibliography:\"sigel:EPLK\"", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
+        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
+        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
+        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Endast resurser med omslags-/miniatyrbild", "en": "Resources with cover/thumbnail only" } }
       ],
       "defaultSiteFilters": [
-        {"filter": "excludeEplikt"},
-        {"filter": "excludePreliminary"},
-        {"filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\""}
-      ],
-      "defaultSiteTypeFilters": [
-        {"filter": "\"rdf:type\":Work"}
+        { "filter": "excludeEplikt" },
+        { "filter": "excludePreliminary" },
+        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
+        { "filter": "\"rdf:type\":Work", "applyTo": "standardSearch" },
+        { "filter": "\"rdf:type\":(Work OR BibliographicAgent OR Concept)", "applyTo": "objectSearch" }
       ],
       "optionalSiteFilters": [
-        { "filter": "includeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit" } },
-        { "filter": "includePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
-        { "filter": "image:*", "prefLabelByLang": { "sv": "Endast resurser med omslags-/miniatyrbild", "en": "Resources with cover/thumbnail only" } }
+        { "filter": "includeEplikt" },
+        { "filter": "includePreliminary" },
+        { "filter": "existsImage" }
       ],
       "relationFilters": {
         "Agent": [ "contributor", "subject", "publisher" ],
