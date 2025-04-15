@@ -1,0 +1,67 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix kbgf: <https://id.kb.se/term/gf/>
+prefix g: <https://id.kb.se/term/genre/>
+prefix : <https://id.kb.se/vocab/>
+
+kbrda:CartographicDataset a :ContentType ;
+   skos:broadMatch kbgf:Dataset , kbgf:Cartography .
+kbrda:CartographicImage a :ContentType ;
+   skos:broadMatch kbrda:StillImage , kbgf:Cartography .
+kbrda:CartographicMovingImage a :ContentType ;
+   skos:broadMatch kbgf:Cartography , kbgf:MovingImage .
+kbrda:CartographicTactileImage a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbgf:Cartography , kbrda:StillImage .
+kbrda:CartographicTactileThreeDimensionalForm a :ContentType ;
+   skos:broadMatch kbrda:ThreeDimensionalForm , kbgf:Cartography , kbgf:Tactile .
+kbrda:CartographicThreeDimensionalForm a :ContentType ;
+   skos:broadMatch kbgf:Cartography, kbrda:ThreeDimensionalForm .
+
+kbrda:TactileImage a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbrda:StillImage .
+kbrda:TactileNotatedMovement a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbrda:NotatedMovement .
+kbrda:TactileNotatedMusic a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbrda:NotatedMusic .
+kbrda:TactileText a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbrda:Text .
+kbrda:TactileThreeDimensionalForm a :ContentType ;
+   skos:broadMatch kbgf:Tactile , kbrda:ThreeDimensionalForm .
+
+kbrda:ComputerDataset a :ContentType ;
+   skos:broadMatch kbgf:Multimedia, kbgf:Dataset .
+kbrda:ComputerProgram a :ContentType ;
+   skos:broadMatch kbgf:Multimedia .
+
+kbrda:NotatedMovement a :ContentType ;
+   skos:closeMatch kbgf:NotatedMovement ;
+   skos:broadMatch kbgf:Movement .
+
+kbrda:NotatedMusic a :ContentType ;
+   skos:broadMatch g:Music ;
+   skos:closeMatch kbgf:NotatedMusic .
+
+kbrda:PerformedMovement a :ContentType ;
+   skos:broadMatch kbgf:Movement .
+kbrda:PerformedMusic a :ContentType ;
+   skos:broadMatch kbgf:Audio, g:Music .
+
+kbrda:Sounds a :ContentType ;
+   skos:broadMatch kbgf:Audio .
+
+kbrda:SpokenWord a :ContentType ;
+   skos:broadMatch kbgf:Audio .
+
+kbrda:StillImage a :ContentType ;
+   skos:closeMatch kbgf:StillImage .
+
+kbrda:Text a :ContentType ;
+   skos:closeMatch kbgf:Text .
+
+kbrda:ThreeDimensionalForm a :ContentType ;
+   skos:closeMatch kbgf:Object .
+kbrda:ThreeDimensionalMovingImage a :ContentType ;
+   skos:broadMatch kbgf:MovingImage .
+
+kbrda:TwoDimensionalMovingImage a :ContentType ;
+   skos:broadMatch kbgf:MovingImage .
