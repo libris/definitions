@@ -13,46 +13,61 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix marc: <https://id.kb.se/marc/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+
 prefix kbgf: <https://id.kb.se/term/gf/>
+prefix g: <https://id.kb.se/term/genre/>
 
 # Base Forms (Categories?! Nature of content, etc.)
+# Applies to an *Expression*
 
-kbgf:Text a :ContentForm .
-#kbgf:LinguisticWork a :ContentForm ;
-#  ptg:abstract true ;
-#  :altLabel "Literature"@en ,
-#    "Litteratur"@sv ;
-#  :prefLabel "Linguistic work"@en ,
-#    "Språkligt verk"@sv .
+# TODO: ONLY Text, Image, Audio; *every* concrete is G/F? PerformedMusic, Cartographic{X}, ...
 
-kbgf:Visual a :ContentForm .
+# TODO:
+# - Will ContentForm be replaced by <rdacategories.ttl>?
+# - Or do we want to "GenreForm:ize" some of the RDA terms?
+# - Do we miss some, and/or want to leave open additions (called ContentForm)?
+# -Is there a sometimes necessary distinction between "contains" ContentType and "is" ContentForm?
 
-kbgf:Audio a :ContentForm .
-
-kbgf:Dataset a :ContentForm .
-
-kbgf:Integrating a :ContentForm ;
-  skos:broader kbgf:CollectingResource .
+kbgf:SpokenWord a :ContentForm ;
+  skos:broadMatch kbrda:SpokenWord ;
+  skos:broader kbgf:Text ,
+    kbgf:Audio ;
+  rdfs:label "Tal"@sv ,
+    "Spoken Word"@en .
 
 kbgf:MovingImage a :ContentForm ;
   skos:broader kbgf:Visual .
 
+kbgf:Text a :ContentForm .
+#  skos:broadMatch kbrda:Text . # see match in rdacategories.ttl
+
+kbgf:Visual a :ContentForm . # TODO: AbstractForm?
+
+kbgf:Audio a :ContentForm ;
+  skos:broadMatch kbrda:Audio .
+
+kbgf:Dataset a :ContentForm .
+
+kbgf:Integrating a :ContentForm ; # TODO: AbstractForm?
+  skos:broader g:CollectingResource .
+
 kbgf:Multimedia a :ContentForm .  # TODO: Too vague? :GenreForm (but still mapped to BF)?
 
-kbgf:Music a :ContentForm .
-
 kbgf:Object a :ContentForm .
+
+kbgf:WorkWithImages a :ContentForm ; # kbgf:IllustratedWork
+  skos:broader kbgf:StillImage ;
+  skos:closeMatch saogf:Bildverk .
 
 kbgf:StillImage a :ContentForm ;
   skos:broader kbgf:Visual ;
   skos:closeMatch saogf:Bilder .
 
-kbgf:Tactile a :ContentForm .
+kbgf:Tactile a :ContentForm ;
+  skos:prefLabel "Taktil"@sv .
 
-kbgf:CollectingResource a :ContentForm .
-
-kbgf:IllustratedWork a :ContentForm ;
-  skos:broader kbgf:Visual .
+kbgf:Movement a :ContentForm ;
+  skos:prefLabel "Rörelser"@sv .
 
 kbgf:NonBookText a :ContentForm ;  # kbgf:Document ??
   ptg:abstract true ;
@@ -60,24 +75,12 @@ kbgf:NonBookText a :ContentForm ;  # kbgf:Document ??
   skos:prefLabel "Non-book text"@en ,
     "Enskild text"@sv .
 
-kbgf:OnlineResource a :ContentForm .
-
-kbgf:Book a :ContentForm ;
+kbgf:Book a :ContentForm ; # TODO: AbstractForm ?
+  #skos:broader g:LinguisticWork ;
   skos:narrowMatch saogf:Romaner ,
     saogf:Ljudb%C3%B6cker ,
     barngf:Bilderb%C3%B6cker ,
     barngf:Kapitelb%C3%B6cker .
-
-kbgf:Cartography a :ContentForm ;
-  skos:closeMatch saogf:Kartor .  # TODO: Kartografiskt material?
-
-kbgf:Map a :ContentForm ;
-  skos:broader kbgf:Cartography, kbgf:StillImage ;
-  skos:exactMatch marc:MapATwoDimensionalMap, tgm:Kartor .
-
-kbgf:Globe a :ContentForm ;
-  skos:broader kbgf:CartographicObject ;
-  skos:exactMatch tgm:Glober .
 
 kbgf:WrittenBook a :ContentForm ;
   skos:broader kbgf:Text, kbgf:Book ;
@@ -86,21 +89,6 @@ kbgf:WrittenBook a :ContentForm ;
     "Skriven bok"@sv ;
   :altLabel "Bok"@sv, "Book"@en .
 
-kbgf:BookWithImages a :ContentForm ;
-  skos:broader kbgf:WrittenBook , kbgf:IllustratedWork ;
-  skos:editorialNote "TODO: PictorialWork?"@en ;
-  skos:scopeNote "Gör ingen skillnad mellan bilder som är integral del av verket (där nya bilder är ett nytt verk) och texter där bilderna är kompletterande (). Sådana skillnader kan anges som genre/form."@sv ;
-  skos:broadMatch saogf:Bildverk ;
-  skos:narrowMatch barngf:Bilderb%C3%B6cker ;
-  :singularLabel "Bok med bilder"@sv ,
-    "Book With Images"@en .
-
-kbgf:CartographicObject a :ContentForm;
-  skos:broadMatch kbrda:CartographicThreeDimensionalForm ;
-  skos:broader kbgf:Cartography, kbgf:Object ;
-  rdfs:label "Kartografiskt objekt"@sv ,
-     "Cartographic Object"@en .
-
 kbgf:Audiobook a :ContentForm ;
   skos:broader kbgf:Audio ,
     kbgf:Book ;
@@ -108,8 +96,27 @@ kbgf:Audiobook a :ContentForm ;
   :singularLabel "Ljudbok"@sv ,
     "Audiobook"@en .
 
-kbgf:Database a :ContentForm ;
-  skos:broader kbgf:Integrating ;
+kbgf:NonBookTextWithImages a :ContentForm ;
+  skos:broader kbgf:NonBookText , kbgf:WorkWithImages ;
+  rdfs:label "Text med bilder"@sv ,
+    "Text With Images"@en .
+
+kbgf:BookWithImages a :ContentForm ;
+  skos:broader kbgf:WrittenBook , kbgf:WorkWithImages ;
+  skos:editorialNote "TODO: PictorialWork?"@en ;
+  skos:scopeNote "Gör ingen skillnad mellan bilder som är integral del av verket (där nya bilder är ett nytt verk) och texter där bilderna är kompletterande (). Sådana skillnader kan anges som genre/form."@sv ;
+  skos:narrowMatch barngf:Bilderb%C3%B6cker ;
+  :singularLabel "Bilderbok"@sv ,
+    "Book With Images"@en .
+
+kbgf:CartographicObject a :ContentForm; # GenreForm?
+  skos:broadMatch kbrda:CartographicThreeDimensionalForm ;
+  skos:broader kbgf:Object , g:Cartography ;
+  rdfs:label "Kartografiskt objekt"@sv ,
+     "Cartographic Object"@en .
+
+kbgf:Database a :ContentForm ; # TODO: AbstractForm ?
+  skos:broader kbgf:Integrating, kbgf:ComputerDataset ;
   skos:exactMatch saogf:Databaser ;
   skos:narrowMatch marc:UpdatingDatabase ;
   :singularLabel "Databas"@sv ,
@@ -124,14 +131,9 @@ kbgf:Database a :ContentForm ;
 #  :singularLabel "Tactile Book"@en ,
 #    "Taktil bok"@sv .
 
-kbgf:ComputerDataset a :ContentForm ;
+kbgf:ComputerDataset a :ContentForm ; # GenreForm?
   skos:broadMatch kbrda:ComputerDataset ;
   skos:broader kbgf:Dataset .
-
-kbgf:NonBookTextWithImages a :ContentForm ;
-  skos:broader kbgf:NonBookText , kbgf:IllustratedWork ;
-  rdfs:label "Enskild text med bilder"@sv ,
-    "Non-book With Images"@en .
 
 kbgf:NonMusicAudio a :ContentForm ;
   ptg:abstract true ;
@@ -141,82 +143,7 @@ kbgf:NonMusicAudio a :ContentForm ;
 
 kbgf:Software a :ContentForm ; # TODO: pending; integrate with ComputerGame, Application, ...
   ptg:abstract true ;
+  # kbrda:ComputerProgram
   skos:related kbgf:Multimedia ;
   :prefLabel "Mjukvara"@sv ,
     "Software"@en .
-
-## Just RDA content types (handled by rdamatches IF used by some concrete/complex type)
-#f:CartographicDataset a :ContentAspect;
-#  skos:exactMatch kbrda:CartographicDataset;
-#  skos:broader kbgf:Cartography, kbgf:Dataset ;
-#  rdfs:label "Kartografiskt dataset"@sv , "Cartographic dataset"@en .
-#
-#f:CartographicImage a :ContentAspect;
-#  skos:exactMatch kbrda:CartographicImage;
-#  #skos:closeMatch kbgf:Map ;
-#  skos:broader kbgf:Cartography, kbgf:StillImage ;
-#  rdfs:label "Kartografisk bild"@sv , "Cartographic image"@en ;
-#  skos:altLabel "Karta"@sv, "Kartor in plano"@sv ;
-#  :pluralLabel "Kartor"@sv .
-#
-#f:CartographicMovingImage a :ContentAspect;
-#  skos:exactMatch kbrda:CartographicMovingImage;
-#  skos:broader kbgf:Cartography, kbgf:MovingImage ;
-#  rdfs:label "Kartografisk rörlig bild"@sv , "Cartographic moving image"@en .
-#
-#f:TactileCartography a :ContentAspect ;
-#  skos:broader kbgf:Cartography ,
-#    kbgf:Tactile ;
-#  skos:narrowMatch kbrda:CartographicTactileImage, kbdra:CartographicTactileThreeDimensionalForm ; #?
-#  skos:editorialNote "TODO: edge case? Force a choice of primary purpose of expression? This is not a11y, that's about the instance. Mixed purposes can be solved by primary purpose as type and additional \"color\" as genre."@en ;
-#  rdfs:label "Taktilt kartografiskt verk"@sv ,
-#    "Tactile Cartography"@en .
-#
-#f:CartographicTactileImage a :ContentAspect;
-#  skos:exactMatch kbrda:CartographicTactileImage;
-#  skos:broader kbgf:Cartography, kbgf:StillImage ;
-#  rdfs:label "Kartografisk taktil bild"@sv , "Cartographic tactile image"@en .
-#
-#f:CartographicTactileObject a :ContentAspect;
-#  skos:exactMatch kbrda:CartographicTactileThreeDimensionalForm;
-#  skos:broader kbgf:Cartography, f:TactileObject ;
-#  rdfs:label "Kartografiskt taktilt objekt"@sv ,
-#     "Cartographic Tactile Object"@en .
-#
-#f:TactileImage a :ContentAspect ;
-#  skos:exactMatch kbrda:TactileImage;
-#  skos:broader kbgf:StillImage, kbgf:Tactile ; # _:TactileInstanceRestriction .
-#  rdfs:label "Taktil bild"@sv , "Tactile image"@en .
-#
-#f:TactileNotatedMusic a :ContentAspect ;
-#  skos:exactMatch kbrda:TactileNotatedMusic;
-#  skos:broader kbgf:NotatedMusic, kbgf:Tactile ; # , _:TactileInstanceRestriction .
-#  rdfs:label "Taktil noterad musik"@sv , "Tactile notated music"@en .
-#
-#f:TactileNotatedMovement a :ContentAspect ;
-#  skos:exactMatch kbrda:TactileNotatedMovement;
-#  skos:broader kbgf:NotatedMovement, kbgf:Tactile ; # , _:TactileInstanceRestriction .
-#  rdfs:label "Taktil noterad rörelse"@sv , "Tactile notated movement"@en .
-#
-#f:TactileText a :ContentAspect ;
-#  skos:exactMatch kbrda:TactileText;
-#  skos:broader kbgf:Text, kbgf:Tactile ; # , _:TactileInstanceRestriction .
-#  rdfs:label "Taktil text"@sv , "Tactile text"@en .
-#
-#f:TactileObject a :ContentAspect ;
-#  skos:exactMatch kbrda:TactileThreeDimensionalForm;
-#  skos:broader kbgf:Object, kbgf:Tactile ; # , _:TactileInstanceRestriction ,
-#  rdfs:label "Taktilt objekt"@sv ,
-#     "Tactile Object"@en .
-#
-##_:TactileInstanceRestriction a owl:Restriction ;
-##  owl:onProperty :hasInstance;
-##  owl:allValueFrom kbgf:Tactile .
-#
-#:ThreeDimensionalMovingImage
-#  skos:exactMatch kbrda:ThreeDimensionalMovingImage ;
-#  :prefLabel "Tredimensionell rörlig bild", "Three-dimensional moving image"@en .
-#
-#:TwoDimensionalMovingImage
-#  skos:exactMatch kbrda:TwoDimensionalMovingImage ;
-#  :prefLabel "Tvådimensionell rörlig bild", "Two-dimensional moving image"@en .
