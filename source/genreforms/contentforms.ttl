@@ -1,149 +1,42 @@
 prefix : <https://id.kb.se/vocab/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
-
-prefix bibo: <http://purl.org/ontology/bibo/>
-prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 
 prefix saogf: <https://id.kb.se/term/saogf/>
-prefix barngf: <https://id.kb.se/term/barngf/>
-prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 prefix kbrda: <https://id.kb.se/term/rda/>
-prefix marc: <https://id.kb.se/marc/>
-prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+prefix div: <https://id.kb.se/term/div/>
+prefix ctf: <https://id.kb.se/term/contentform/>
 
-prefix kbgf: <https://id.kb.se/term/gf/>
-prefix g: <https://id.kb.se/term/genre/>
-
-# Base Forms (Categories?! Nature of content, etc.)
+# Base Forms
 # Applies to an *Expression*
 
-# TODO: ONLY Text, Image, Audio; *every* concrete is G/F? PerformedMusic, Cartographic{X}, ...
-
 # TODO:
-# - Will ContentForm be replaced by <rdacategories.ttl>?
-# - Or do we want to "GenreForm:ize" some of the RDA terms?
-# - Do we miss some, and/or want to leave open additions (called ContentForm)?
-# -Is there a sometimes necessary distinction between "contains" ContentType and "is" ContentForm?
+# - Replace ContentForm with ContentType and merge into <rdacategories.ttl>?
+# - Some RDA terms have broader Genre terms!
+# - Some are "SensoryForm" super-ContentType:s...
+# - Is there a sometimes necessary distinction between "contains" and "is"? If so, we reasonably should say that using a concrete GenreForm...
 
-kbgf:SpokenWord a :ContentForm ;
-  skos:broadMatch kbrda:SpokenWord ;
-  skos:broader kbgf:Text ,
-    kbgf:Audio ;
-  rdfs:label "Tal"@sv ,
-    "Spoken Word"@en .
+ctf:Visual a :ContentForm ;
+  :inCollection div:sensoryform .
 
-kbgf:MovingImage a :ContentForm ;
-  skos:broader kbgf:Visual .
+ctf:Audio a :ContentForm ;
+  :inCollection div:sensoryform .
 
-kbgf:Text a :ContentForm .
-#  skos:broadMatch kbrda:Text . # see match in rdacategories.ttl
-
-kbgf:Visual a :ContentForm . # TODO: AbstractForm?
-
-kbgf:Audio a :ContentForm ;
-  skos:broadMatch kbrda:Audio .
-
-kbgf:Dataset a :ContentForm .
-
-kbgf:Integrating a :ContentForm ; # TODO: AbstractForm?
-  skos:broader g:CollectingResource .
-
-kbgf:Multimedia a :ContentForm .  # TODO: Too vague? :GenreForm (but still mapped to BF)?
-
-kbgf:Object a :ContentForm .
-
-kbgf:WorkWithImages a :ContentForm ; # kbgf:IllustratedWork
-  skos:broader kbgf:StillImage ;
-  skos:closeMatch saogf:Bildverk .
-
-kbgf:StillImage a :ContentForm ;
-  skos:broader kbgf:Visual ;
-  skos:closeMatch saogf:Bilder .
-
-kbgf:Tactile a :ContentForm ;
+ctf:Tactile a :ContentForm ;
+  :inCollection div:sensoryform ;
+  skos:closeMatch saogf:Taktila%20verk ;
   skos:prefLabel "Taktil"@sv .
 
-kbgf:Movement a :ContentForm ;
+ctf:MovingImage a :ContentForm ;
+  skos:broader ctf:Visual .
+
+ctf:Dataset a :ContentForm .
+
+ctf:Object a :ContentForm .
+
+ctf:StillImage a :ContentForm ;
+  skos:broader ctf:Visual ;
+  skos:closeMatch saogf:Bilder .
+
+ctf:Movement a :ContentForm ;
   skos:prefLabel "Rörelser"@sv .
-
-kbgf:NonBookText a :ContentForm ;  # kbgf:Document ??
-  ptg:abstract true ;
-  skos:broader kbgf:Text ;
-  skos:prefLabel "Non-book text"@en ,
-    "Enskild text"@sv .
-
-kbgf:Book a :ContentForm ; # TODO: AbstractForm ?
-  #skos:broader g:LinguisticWork ;
-  skos:narrowMatch saogf:Romaner ,
-    saogf:Ljudb%C3%B6cker ,
-    barngf:Bilderb%C3%B6cker ,
-    barngf:Kapitelb%C3%B6cker .
-
-kbgf:WrittenBook a :ContentForm ;
-  skos:broader kbgf:Text, kbgf:Book ;
-  skos:narrowMatch barngf:Kapitelb%C3%B6cker ;
-  :singularLabel "Written book"@en ,
-    "Skriven bok"@sv ;
-  :altLabel "Bok"@sv, "Book"@en .
-
-kbgf:Audiobook a :ContentForm ;
-  skos:broader kbgf:Audio ,
-    kbgf:Book ;
-  skos:exactMatch saogf:Ljudb%C3%B6cker ;
-  :singularLabel "Ljudbok"@sv ,
-    "Audiobook"@en .
-
-kbgf:NonBookTextWithImages a :ContentForm ;
-  skos:broader kbgf:NonBookText , kbgf:WorkWithImages ;
-  rdfs:label "Text med bilder"@sv ,
-    "Text With Images"@en .
-
-kbgf:BookWithImages a :ContentForm ;
-  skos:broader kbgf:WrittenBook , kbgf:WorkWithImages ;
-  skos:editorialNote "TODO: PictorialWork?"@en ;
-  skos:scopeNote "Gör ingen skillnad mellan bilder som är integral del av verket (där nya bilder är ett nytt verk) och texter där bilderna är kompletterande (). Sådana skillnader kan anges som genre/form."@sv ;
-  skos:narrowMatch barngf:Bilderb%C3%B6cker ;
-  :singularLabel "Bilderbok"@sv ,
-    "Book With Images"@en .
-
-kbgf:CartographicObject a :ContentForm; # GenreForm?
-  skos:broadMatch kbrda:CartographicThreeDimensionalForm ;
-  skos:broader kbgf:Object , g:Cartography ;
-  rdfs:label "Kartografiskt objekt"@sv ,
-     "Cartographic Object"@en .
-
-kbgf:Database a :ContentForm ; # TODO: AbstractForm ?
-  skos:broader kbgf:Integrating, kbgf:ComputerDataset ;
-  skos:exactMatch saogf:Databaser ;
-  skos:narrowMatch marc:UpdatingDatabase ;
-  :singularLabel "Databas"@sv ,
-    "Database"@en .
-
-#kbgf:TactileBook a :ContentForm ;
-#  skos:broader kbgf:Book ,
-#    kbgf:Tactile ;
-#  skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
-#  skos:broadMatch kbrda:TactileText ;
-#  skos:narrowMatch saogf:Punktskriftsb%C3%B6cker ;
-#  :singularLabel "Tactile Book"@en ,
-#    "Taktil bok"@sv .
-
-kbgf:ComputerDataset a :ContentForm ; # GenreForm?
-  skos:broadMatch kbrda:ComputerDataset ;
-  skos:broader kbgf:Dataset .
-
-kbgf:NonMusicAudio a :ContentForm ;
-  ptg:abstract true ;
-  skos:broader kbgf:Audio ;
-  rdfs:label "Non-music audio"@en ,
-    "Ljud men inte musik"@sv .
-
-kbgf:Software a :ContentForm ; # TODO: pending; integrate with ComputerGame, Application, ...
-  ptg:abstract true ;
-  # kbrda:ComputerProgram
-  skos:related kbgf:Multimedia ;
-  :prefLabel "Mjukvara"@sv ,
-    "Software"@en .
