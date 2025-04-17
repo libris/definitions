@@ -1,8 +1,6 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix bibo: <http://purl.org/ontology/bibo/>
-prefix sdo: <https://schema.org/>
 
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
@@ -13,41 +11,57 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 
 prefix g: <https://id.kb.se/term/genre/>
 prefix gf: <https://id.kb.se/term/genreform/>
-prefix kbgf: <https://id.kb.se/term/gf/>
-
-# TODO: Is the plan to add these facts to SAOGF and remove g:?
+prefix ctf: <https://id.kb.se/term/contentform/>
 
 # It is a Genre if:
 # - it is independent of any broader ContentForm (it is "topical", "thematic", "style/method", and/or "purpose").
 
-# TODO: There are some "too concrete" GenreForm candidates left:
-# construct { ?x skos:broader ?y } { ?x skos:broader|skos:broadMatch ?y . filter(strstarts(str(?y), str(kbgf:))) }
+# TODO: The plan to add these facts to SAOGF and *remove* g: ...
 
-# TODO: Do we want to *suggest* a :ContentForm? (Using skos:relatedMatch?)
+# TODO: There are some "too concrete" GenreForm candidates left:
+# - construct { ?x skos:broader ?y } { ?x skos:broader|skos:broadMatch ?y . filter(strstarts(str(?y), str(gf:))) }
+
+# TODO: Do we want to *suggest* a :ContentForm (see commented kbgf)? (Using skos:relatedMatch?)
+
+# To find missing:
+# - select ?gf { ?x ?rel ?gf filter( strstarts(str(?gf), str(saogf:)) || strstarts(str(?gf), str(tgm:)) ) }
 
 g:Fiction a :Genre ;
   skos:narrowMatch marc:Fiction ;  # 84678 # (SSB)
   skos:narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
 
 g:LinguisticWork a :Genre ;
-  #ptg:abstract true ;
   :altLabel "Literature"@en ,
     "Litteratur"@sv ;
   :prefLabel "Linguistic work"@en ,
     "Språkligt verk"@sv .
 
 g:Literature a :Genre ;
-  #skos:broader kbgf:Text ;
+  skos:broader g:LinguisticWork ;
+  #skos:broader kbrda:Text ;
   :singularLabel "Litteratur"@sv ,
     "Literature"@en .
 
 g:Cartography a :Genre ;
-  skos:closeMatch saogf:Kartor .  # TODO: Kartografiskt material?
+  skos:closeMatch saogf:Kartor ;
+  :singularLabel "Kartografiskt material"@sv .
 
 g:Music a :Genre .
 
+g:Manuscript a :Genre .
+
+g:Software a :Genre ;
+  :prefLabel "Mjukvara"@sv ,
+    "Software"@en .
+
+g:Multimedia a :Genre ;
+  skos:broader g:Software .
+
+g:Integrating a :Genre ;
+  skos:broader g:CollectingResource .
+
 g:AbstractSummary a :Genre ;
-  #skos:broader kbgf:NonBookText ;
+  skos:broader gf:TextPiece ;
   skos:exactMatch saogf:Sammanfattningar ;
   :inCollection div:informative-work ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
@@ -55,14 +69,14 @@ g:AbstractSummary a :Genre ;
     "Abstract Summary"@en .
 
 g:Almanac a :Genre ;
-  skos:broader g:ReferenceWork ;  # inte alltid kbgf:WorkWithImages ;
+  skos:broader g:ReferenceWork ;  # inte alltid gf:WorkWithImages ;
   skos:related g:SerialPublication ;  # TODO: 
   skos:exactMatch saogf:Almanackor ;
   :singularLabel "Almanacka"@sv ,
     "Almanac"@en .
 
 g:Calendar a :Genre ;
-  skos:broader g:ReferenceWork ;  # inte alltid kbgf:WorkWithImages ;
+  skos:broader g:ReferenceWork ;  # inte alltid gf:WorkWithImages ;
   skos:exactMatch saogf:Kalendrar ;
   :singularLabel "Kalender"@sv ,
     "Calendar"@en .
@@ -76,6 +90,11 @@ g:Catalogue a :Genre ;
 g:CollectingResource a :Genre ;
   :singularLabel "Samlande resurs"@sv .
 
+g:Archive a :Genre ;
+  skos:broader g:CollectingResource , saogf:Arkiv ;
+  :singularLabel "Arkiv"@sv ,
+    "Archive"@en .
+
 g:MonographicSeries a :Genre ;
   skos:broader g:CollectingResource ;
   skos:exactMatch marc:MonographicSeries ;
@@ -84,13 +103,12 @@ g:MonographicSeries a :Genre ;
 
 g:CollectedWork a :Genre ;
   skos:broader g:CollectingResource ;
-  # TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, kbgf:MultipartBook
+  # TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, ctf:MultipartBook
   skos:exactMatch saogf:Samlingsverk ;
   :singularLabel "Samlingsverk"@sv ,
     "Collected Work"@en .
 
 g:ConferenceMaterial a :Genre ;
-  #skos:broader kbgf:NonBookText ;
   skos:exactMatch saogf:Konferensmaterial ;
   :inCollection div:ephemera ,
     div:informative-work ;
@@ -111,16 +129,13 @@ g:CourseMaterial a :Genre ;
     "Course Material"@en .
 
 g:Encyclopedia a :Genre ;
-  skos:broader g:ReferenceWork, kbgf:Book ;
+  skos:broader g:ReferenceWork, gf:Book ;
   skos:exactMatch saogf:Encyklopedier ;
   :singularLabel "Encyklopedia"@sv ,
     "Encyclopedia"@en .
 
-g:Lexicon a :Genre ;
-  skos:broader g:ReferenceWork, kbgf:Book ;
-  skos:exactMatch saogf:Lexikon ;
-  :singularLabel "Lexikon"@sv ,
-    "Lexicon"@en .
+g:Juridiskt%20material a :Genre ;
+  skos:exactMatch saogf:Juridiskt%20material .
 
 g:TeachingMaterial a :Genre ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
@@ -131,27 +146,29 @@ g:TeachingMaterial a :Genre ;
   :altLabel "Läromedel"@sv .
 
 g:HandSignedCommunication a :Genre ;
-  #skos:broadMatch kbgf:Visual, kbgf:Text ;
+  #skos:broadMatch ctf:Visual, kbgf:Text ;
   skos:exactMatch saogf:TAKK ;
   :singularLabel "TAKK"@sv ,
     "Hand-signed Communication"@en .
 
-g:Note a :Genre ;
-  skos:broader kbgf:NonBookText ;
-  skos:exactMatch saogf:Anteckningar .
-
 g:Novel a :Genre ;
   skos:broader g:Literature ;
-  skos:broadMatch kbgf:Book ;
+  skos:broadMatch gf:Book ;
   skos:exactMatch saogf:Romaner ;
   :singularLabel "Roman"@sv ,
     "Novel"@en .
 
 g:Periodical a :Genre ;
-  skos:broader g:CollectingResource .
+  skos:broader g:CollectingResource ;
+  skos:exactMatch saogf:Periodika ;
+  skos:altLabel "Periodika"@sv ;
+  rdfs:label "Tidskrift"@sv ,
+    "Periodical"@en ;
+  :pluralLabel "Tidskrifter"@sv .
 
 g:SerialPublication a :Genre ;
-    skos:broader g:CollectingResource .
+  skos:exactMatch saogf:Seriella%20publikationer ;
+  skos:broader g:CollectingResource .
 
 g:Journal a :Genre ;
   skos:broader g:Periodical ;
@@ -183,18 +200,6 @@ g:Newspaper a :Genre ;
     "Newspaper"@en ;
   :pluralLabel "Dagstidningar"@sv .
 
-g:PublicationProgramme a :Genre ;
-  skos:broader kbgf:NonBookText ;
-  skos:exactMatch saogf:Program\%20\%28publikationer\%29 ;
-  :singularLabel "Programblad"@sv ,
-    "Publication Programme"@en .
-
-g:RecordOrDeed a :Genre ;
-  skos:broader kbgf:NonBookText ;
-  skos:exactMatch saogf:Handlingar\%20\%28dokument\%29 ;
-  :singularLabel "Handling (dokument)"@sv ,
-  "Record (Document)"@en .
-
 g:Register a :Genre ;
   skos:broader g:CollectingResource ;
   skos:exactMatch saogf:F\%C3\%B6rteckningar ;
@@ -221,7 +226,7 @@ g:Statistics a :Genre ;
 g:Tables a :Genre ;
   skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Tabeller ;
-  skos:related kbgf:Dataset ;
+  skos:related ctf:Dataset ;
   :singularLabel "Tabell"@sv ,
     "Tables"@en .
 
@@ -244,22 +249,22 @@ g:Timetable a :Genre ;
 #  :singularLabel "Juridiskt material"@sv, "Legal Document"@en .
 
 #g:LegalDocument a :Genre ;
-#  skos:broader kbgf:Text ;
+#  skos:broader kbrda:Text ;
 #  skos:exactMatch saogf:Juridiskt\%20material .
 
 #g:Leporello a :Genre ;
-#  skos:broader kbgf:NonBookTextWithImages ;
+#  skos:broader ctf:NonBookTextWithImages ;
 #  skos:exactMatch saogf:Leporello .
 
-#g:Patent a :Genre ;
-#  skos:broader kbgf:Text ;
-#  skos:exactMatch saogf:Patent ;
-#  :inCollection div:informative-work .
+g:Patent a :Genre ;
+  #skos:broader kbrda:Text ;
+  skos:exactMatch saogf:Patent ;
+  :inCollection div:informative-work .
 
 #g:RareText skos:exactMatch saogf:Texter .
 
 #g:Debate a :Genre ;
-#  skos:broader kbgf:NonBookText ;
+#  skos:broader gf:TextPiece ;
 #  skos:exactMatch saogf:Debatter .
 
 #g:AdventCalendar a :Genre ;
@@ -309,11 +314,11 @@ g:Timetable a :Genre ;
 #g:DiscursiveWork a :Genre ;
 #  skos:closeMatch saogf:Verk\%20med\%20samtalsliknande\%20karakt\%C3\%A4r .
 
-#g:Interview a :Genre ;
-#  skos:exactMatch saogf:Intervjuer .
+g:Interview a :Genre ;
+  skos:exactMatch saogf:Intervjuer .
 
-#g:Reportage a :Genre ;
-#  skos:exactMatch saogf:Reportage .
+g:Reportage a :Genre ;
+  skos:exactMatch saogf:Reportage .
 
 #g:Survey a :Genre ;
 #  skos:exactMatch saogf:Unders\%C3\%B6kningar ;
@@ -323,25 +328,25 @@ g:Timetable a :Genre ;
 #  skos:exactMatch saogf:Korrespondens .
 
 #g:Diary a :Genre ;
-#  skos:broader kbgf:Text ;
+#  skos:broader kbrda:Text ;
 #  skos:exactMatch saogf:Dagb\%C3\%B6cker .
 
 #g:Ballad a :Genre ;
 #  skos:closeMatch saogf:Visor .
 
 g:ShortStory a :Genre ;
-  skos:broader # kbgf:NonBookText ,
+  skos:broader gf:TextPiece ,
     g:Literature ;
   skos:exactMatch saogf:Noveller ;
   :singularLabel "Novell"@sv ,
     "Short Story"@en .
 
 g:Offentligt_tryck a :Genre ;
-  skos:broader kbgf:Text ;
+  # skos:broader kbrda:Text ; (... could be images; but rarely *only* with image?)
   skos:exactMatch saogf:Offentligt%20tryck .
 
 g:ReferenceWork a :Genre ;
-  #skos:broader kbgf:Text ;
+  #skos:broader kbrda:Text ;
   skos:exactMatch saogf:Referensverk ;
   :inCollection div:informative-work ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
@@ -349,7 +354,7 @@ g:ReferenceWork a :Genre ;
     "Reference Work"@en .
 
 g:Review a :Genre ;
-  #skos:broader kbgf:NonBookText ;
+  #skos:broader gf:TextPiece ;
   skos:exactMatch saogf:Recensioner ;
   :singularLabel "Recension"@sv ,
     "Review"@en .
