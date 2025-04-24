@@ -8,85 +8,86 @@ base <https://libris.kb.se/library/>
 construct {
 
     ?library a ?libtype ;
-        :meta _:meta ;
+        :meta ?meta ;
         owl:sameAs ?bdb_id, ?sameas ;
         :sigel ?sigel ;
         :name ?name ;
         :url ?url ;
         :qualifier ?dept ;
-        :category ?registranturl .
-        #:place ?place .
+        :category ?registranturl ;
+        :locatedIn ?municipality ;
+        :geo ?geo ;
+        :country ?country .
 
-    _:meta :created ?created ; :modified ?modified .
+    ?meta :created ?created ; :modified ?modified .
 
-    # TODO: Model a proper place/adress relation.
-    # ?place a :Place ;
-    #     :label ?region ;
-    #     :code ?municipality_code ;
-    #     :isPartOf ?country ;
-    #     :latitude ?lat ;
-    #     :longitude ?long .
-    # 
-    # ?country a :Country ;
-    #     :code ?country_code .
+    ?geo :latitude ?lat ; :longitude ?long .
 
 } where {
 
     ?bdb_id
         bibdb:sigel ?sigel ;
         sdo:name ?name .
-        # :organisation, sdo:address
-
-    optional {
-        ?bdb_id bibdb:libris_reg ?reg . filter ( ?reg = true )
-        bind (iri('https://id.kb.se/term/bibdb/Registrant') as ?registranturl)
-    }
-
-    optional {
-        ?bdb_id bibdb:dept ?dept
-    }
-
-    optional {
-        ?bdb_id bibdb:date_created ?raw_created .
-        bind(concat(?raw_created, '.000Z') as ?created)
-    }
-    optional {
-        ?bdb_id bibdb:date_modified ?raw_modified .
-        bind(concat(?raw_modified, '.000Z') as ?modified)
-    }
 
     bind(encode_for_uri(replace(str(?sigel), "\\s+", "")) as ?sigelslug)
 
     optional { ?bdb_id a ?type }
-
-    optional {
-        ?bdb_id sdo:url ?url .
-        FILTER(?url != "" && ?url != "http://")
-    }
     bind(if(?type = sdo:Library, :Library, :Bibliography) as ?libtype)
 
-    # optional {
-    #     ?bdb_id bibdb:country_code ?country_code .
-    #     FILTER(?country_code != "")
-    # }
-    # 
-    # optional {
-    #     ?bdb_id bibdb:municipality_code ?municipality_code .
-    #     FILTER(?municipality_code != "")
-    # }
-    # 
-    # optional {
-    #     ?bdb_id bibdb:region ?region
-    # }
-    # 
-    # optional {
-    #     ?bdb_id sdo:latitude ?lat ; sdo:longitude ?long .
-    #     FILTER(?lat > 0 && ?long > 0)
-    # }
+    bind(iri(concat(str(</library/>), ?sigelslug)) as ?library)
 
-    # TODO: coalesce should not be necessary here, due to the else clause. RDFLib bug?
-    bind(iri(concat(str(coalesce(?uribase, </library/>)), ?sigelslug)) as ?library)
+    {
 
-    # bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
-    # bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
+        optional { ?bdb_id :organisation ?org }
+        optional { ?bdb_id bibdb:dept ?dept }
+        optional {
+            ?bdb_id bibdb:libris_reg ?reg . filter ( ?reg = true )
+            bind (<https://id.kb.se/term/bibdb/Registrant> as ?registranturl)
+        }
+
+        optional {
+            ?bdb_id bibdb:date_created ?raw_created .
+            bind(concat(?raw_created, '.000Z') as ?created)
+        }
+        optional {
+            ?bdb_id bibdb:date_modified ?raw_modified .
+            bind(concat(?raw_modified, '.000Z') as ?modified)
+        }
+        bind(bnode(coalesce(?created, ?modified)) as ?meta)
+
+        optional {
+            ?bdb_id sdo:url ?url .
+            FILTER(?url != "" && ?url != "http://")
+        }
+
+        optional {
+          ?bdb_id bibdb:country_code ?country_code .
+          FILTER(?country_code != "")
+        }
+        # TODO: tr, fi, ...
+        bind(if(?country_code = 'se', <https://id.kb.se/country/sw>, ?NO_country) as ?country)
+
+    } union {
+
+        ?bdb_id sdo:address [
+            sdo:streetAddress ?streetAddress ;
+            sdo:addressLocality ?city ;
+            sdo:postalCode ?zipCode
+            ] .
+        FILTER(!STRSTARTS(?streetAddress, "FE ") && !STRSTARTS(?streetAddress, "FE "))
+
+    } union {
+
+        ?bdb_id bibdb:municipality_code ?municipality_code .
+        FILTER(?municipality_code not in ('', '-'))
+        bind(IRI(CONCAT(STR(</dataset/geo/sw/municipality/>), ?municipality_code)) as ?municipality)
+
+    } union {
+
+        ?bdb_id sdo:latitude ?lat ; sdo:longitude ?long .
+        FILTER(?lat > 0 && ?long > 0)
+        bind(concat('POINT(', STR(?long), ' ', STR(?lat), ')') as ?geo)
+
+    }
+
 }

@@ -25,4 +25,4 @@ def to_w3c_dtz(ms: float):
 
 
 def to_http_date(s: float):
-    return datetime.utcfromtimestamp(s).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    return datetime.fromtimestamp(s, tz=timezone.utc).strftime('%a, %d %b %Y %H:%M:%S GMT')
