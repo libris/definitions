@@ -93,7 +93,7 @@
         ]
       },
       "filterAliases": [
-        { "alias": "excludeEplikt", "filter": "NOT bibliography:\"sigel:EPLK\"", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
+        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
         { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
         { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
         { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
