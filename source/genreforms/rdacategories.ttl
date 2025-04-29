@@ -4,6 +4,8 @@ prefix : <https://id.kb.se/vocab/>
 
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+
 prefix ctf: <https://id.kb.se/term/contentform/>
 prefix g: <https://id.kb.se/term/genre/>
 
@@ -49,7 +51,8 @@ kbrda:PerformedMusic a :ContentType ;
   skos:broadMatch ctf:Audio, g:Music .
 
 kbrda:Sounds a :ContentType ;
-   skos:broadMatch ctf:Audio .
+  skos:broadMatch ctf:Audio ;
+  skos:closeMatch marcgt:nos .
 
 kbrda:SpokenWord a :ContentType ;
   skos:broadMatch ctf:Audio ,

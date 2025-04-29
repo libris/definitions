@@ -8,6 +8,7 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 prefix barngf: <https://id.kb.se/term/barngf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
 prefix div: <https://id.kb.se/term/div/>
 prefix ctf: <https://id.kb.se/term/contentform/>
@@ -21,6 +22,7 @@ prefix g: <https://id.kb.se/term/genre/>
 #   - is an abstract workform shared by concrete GenreForm:s.
 
 gf:Book a :GenreForm ;
+  skos:closeMatch marcgt:boo ;
   #skos:broader g:LinguisticWork ;
   :inCollection div:workform .
 
@@ -93,6 +95,8 @@ gf:Poster a :GenreForm ;
 
 gf:Issue a :GenreForm ;
   skos:broader gf:TextPiece ;
+  skos:exactMatch <https://id.kb.se/term/repr/Issue> ;
+  skos:closeMatch marcgt:iss ;
   :singularLabel "Tidskriftsnummer"@sv ,
     "Periodical Issue"@en .
 
@@ -116,6 +120,7 @@ gf:Issue a :GenreForm ;
 
 gf:Film a :GenreForm ;
   skos:broader ctf:MovingImage ;
+  skos:closeMatch marcgt:art ;
   skos:exactMatch saogf:Filmer ;
   :singularLabel "Film"@sv ,
     "Film"@en .
@@ -265,8 +270,13 @@ gf:Note a :GenreForm ;
   skos:broader gf:TextPiece ;
   skos:exactMatch saogf:Anteckningar .
 
-gf:Screenplay a :GenreForm ;
+gf:Script a :GenreForm ;
   skos:broader kbrda:Text ;
+  :prefLabel "script"@en ;
+  skos:closeMatch marcgt:scr .
+
+gf:Screenplay a :GenreForm ;
+  skos:broader gf:Script ;
   skos:exactMatch saogf:Filmmanus ;
   :singularLabel "Filmmanus"@sv ,
     "Screenplay"@en .
@@ -485,6 +495,7 @@ gf:DocumentaryComic a :GenreForm ;
 
 gf:Map a :GenreForm ;
   skos:broader kbrda:CartographicImage ;
+  skos:closeMatch marcgt:map ;
   skos:exactMatch marc:MapATwoDimensionalMap, tgm:Kartor ;
   :singularLabel "Single map"@en ,
     "Enskild karta"@sv .
@@ -515,7 +526,11 @@ gf:EarthMoonGlobe a :GenreForm ;
   skos:closeMatch marc:EarthMoonGlobe .
 
 gf:Model a :GenreForm ;
-  skos:broader kbrda:CartographicThreeDimensionalForm ;
+  skos:broader ctf:Object ;
+  skos:broadMatch marcgt:mod .
+
+gf:MapModel a :GenreForm ;
+  skos:broader gf:Model , kbrda:CartographicThreeDimensionalForm ;
   skos:closeMatch marc:Model .
 
 gf:Section a :GenreForm ;
@@ -536,6 +551,7 @@ gf:MapDiagram a :GenreForm ;
 
 gf:RemoteSensingImage a :GenreForm ;
   skos:broader gf:Map ;
+  skos:closeMatch marcgt:rem ;
   skos:closeMatch marc:RemoteSensingImage .
 
 #---

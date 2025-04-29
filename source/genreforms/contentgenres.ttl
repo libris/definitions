@@ -8,6 +8,7 @@ prefix div: <https://id.kb.se/term/div/>
 
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
 prefix g: <https://id.kb.se/term/genre/>
 prefix gf: <https://id.kb.se/term/genreform/>
@@ -134,6 +135,10 @@ g:Encyclopedia a :Genre ;
   :singularLabel "Encyklopedia"@sv ,
     "Encyclopedia"@en .
 
+g:FindingAid a :GenreForm ;
+  :prefLabel "finding aid"@en ;
+  skos:closeMatch marcgt:fin .
+
 g:Juridiskt%20material a :Genre ;
   skos:exactMatch saogf:Juridiskt%20material .
 
@@ -172,6 +177,7 @@ g:SerialPublication a :Genre ;
 
 g:Journal a :Genre ;
   skos:broader g:Periodical ;
+  skos:closeMatch marcgt:jou ;
   :singularLabel "Vetenskaplig tidskrift"@sv ,
     "Journal"@en .
 
