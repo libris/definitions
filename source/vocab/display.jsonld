@@ -1144,6 +1144,13 @@
           "classLensDomain": "ImageObject",
           "showProperties": [ "fresnel:super", "thumbnail", "publisher", "usageAndAccessPolicy" ]
         },
+        "MediaObject": {
+          "@id": "MediaObject-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "MediaObject-chips"},
+          "classLensDomain": "MediaObject",
+          "showProperties": [ "fresnel:super" ]
+        },
         "License": {
           "@id": "License-cards",
           "@type": "fresnel:Lens",
@@ -1488,6 +1495,10 @@
         "AdministrativeAction": {
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
+        },
+        "MediaObject": {
+          "fresnel:extends": {"@id": "MediaObject-cards"},
+          "showProperties": [ "fresnel:super", "marc:publicNote" ]
         }
       }
     },
