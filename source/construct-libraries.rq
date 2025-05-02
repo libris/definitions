@@ -16,6 +16,7 @@ construct {
         :url ?url ;
         :qualifier ?dept ;
         idkbse_bibdb:ils ?ils ;
+        idkbse_bibdb:eodUri ?eodUri ;
         :category ?registranturl .
         #:place ?place .
 
@@ -87,6 +88,12 @@ construct {
             ?ils bibdb:opacsyntax_issn ?issnUri .
             FILTER(?issnUri != "")
         }
+    }
+
+    optional {
+        ?bdb_id bibdb:eod_url ?eodUri .
+        ?bdb_id bibdb:eod ?eod .
+        FILTER(?eodUri != "" && ?eod)
     }
 
     # optional {
