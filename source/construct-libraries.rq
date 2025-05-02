@@ -2,6 +2,7 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix sdo: <http://schema.org/>
 prefix bibdb: <http://libris.kb.se/def/lib#>
+prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
 prefix : <https://id.kb.se/vocab/>
 base <https://libris.kb.se/library/>
 
@@ -14,10 +15,16 @@ construct {
         :name ?name ;
         :url ?url ;
         :qualifier ?dept ;
+        idkbse_bibdb:ils ?ils ;
         :category ?registranturl .
         #:place ?place .
 
     _:meta :created ?created ; :modified ?modified .
+
+    ?ils a idkbse_bibdb:ILS ;
+        idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
+        idkbse_bibdb:isbnSearchUri ?isbnUri ;
+        idkbse_bibdb:issnSearchUri ?issnUri .
 
     # TODO: Model a proper place/adress relation.
     # ?place a :Place ;
@@ -64,6 +71,23 @@ construct {
         FILTER(?url != "" && ?url != "http://")
     }
     bind(if(?type = sdo:Library, :Library, :Bibliography) as ?libtype)
+
+    optional {
+        ?bdb_id bibdb:ils ?ils .
+
+        optional {
+            ?ils bibdb:opacsyntax_bibid ?bibIdUri .
+            FILTER(?bibIdUri != "")
+        }
+        optional {
+            ?ils bibdb:opacsyntax_isbn ?isbnUri .
+            FILTER(?isbnUri != "")
+        }
+        optional {
+            ?ils bibdb:opacsyntax_issn ?issnUri .
+            FILTER(?issnUri != "")
+        }
+    }
 
     # optional {
     #     ?bdb_id bibdb:country_code ?country_code .

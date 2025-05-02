@@ -31,6 +31,7 @@
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 @prefix bulk: <https://id.kb.se/ns/bulk/> .
+@prefix bibdb: <https://id.kb.se/ns/bibdb/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -936,3 +937,29 @@ bulk:numFailed a :DatatypeProperty ;
   rdfs:label "Number of failed records"@en, "Antal misslyckade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
+
+# BIBDB
+bibdb:ILS a owl:Class ;
+    :category :platform ;
+    rdfs:label "ILS"@en, "ILS"@sv .
+
+bibdb:ils a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:ILS ;
+    rdfs:label "ILS"@en, "ILS"@sv .
+
+bibdb:bibIdSearchUri a owl:DatatypeProperty;
+    rdfs:domain bibdb:ILS;
+    rdfs:subPropertyOf :uri;
+    rdfs:label "URI for searching resource by BibId"@en, "URI för att söka upp resurs via BibId"@sv .
+
+bibdb:isbnSearchUri a owl:DatatypeProperty;
+    rdfs:domain bibdb:ILS;
+    rdfs:subPropertyOf :uri ;
+    rdfs:label "URI for searching resource by ISBN"@en, "URI för att söka upp resurs via ISBN"@sv .
+
+bibdb:issnSearchUri a owl:DatatypeProperty;
+    rdfs:domain bibdb:ILS;
+    rdfs:subPropertyOf :uri ;
+    rdfs:label "URI for searching resource by ISSN"@en, "URI för att söka upp resurs via ISSN"@sv .
