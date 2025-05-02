@@ -949,17 +949,29 @@ bibdb:ils a owl:ObjectProperty ;
     rdfs:range bibdb:ILS ;
     rdfs:label "ILS"@en, "ILS"@sv .
 
+bibdb:templateUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:range xsd:string .
+
 bibdb:bibIdSearchUri a owl:DatatypeProperty;
-    rdfs:domain bibdb:ILS;
-    rdfs:subPropertyOf :uri;
+    :category :platform ;
+    rdfs:domain bibdb:ILS ;
+    rdfs:subPropertyOf bibdb:templateUri ;
     rdfs:label "URI for searching resource by BibId"@en, "URI för att söka upp resurs via BibId"@sv .
 
 bibdb:isbnSearchUri a owl:DatatypeProperty;
-    rdfs:domain bibdb:ILS;
-    rdfs:subPropertyOf :uri ;
+    :category :platform ;
+    rdfs:domain bibdb:ILS ;
+    rdfs:subPropertyOf bibdb:templateUri ;
     rdfs:label "URI for searching resource by ISBN"@en, "URI för att söka upp resurs via ISBN"@sv .
 
 bibdb:issnSearchUri a owl:DatatypeProperty;
+    :category :platform ;
     rdfs:domain bibdb:ILS;
-    rdfs:subPropertyOf :uri ;
+    rdfs:subPropertyOf bibdb:templateUri ;
     rdfs:label "URI for searching resource by ISSN"@en, "URI för att söka upp resurs via ISSN"@sv .
+
+bibdb:eodUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library;
+    rdfs:subPropertyOf bibdb:templateUri .
