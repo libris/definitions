@@ -10,22 +10,21 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
-prefix g: <https://id.kb.se/term/genre/>
-prefix gf: <https://id.kb.se/term/genreform/>
-prefix ctf: <https://id.kb.se/term/contentform/>
+prefix g: <https://id.kb.se/term/ktg/>
+prefix gf: <https://id.kb.se/term/ktg/>
+prefix ktg: <https://id.kb.se/term/ktg/>
 
 # It is a Genre if:
-# - it is independent of any broader ContentForm (it is "topical", "thematic", "style/method", and/or "purpose").
+# - it is independent of any expression category (it is "topical", "thematic", "style/method", and/or "purpose").
 
-# TODO: The plan to add these facts to SAOGF and *remove* g: ...
-
-# TODO: There are some "too concrete" GenreForm candidates left:
-# - construct { ?x skos:broader ?y } { ?x skos:broader|skos:broadMatch ?y . filter(strstarts(str(?y), str(gf:))) }
-
-# TODO: Do we want to *suggest* a :ContentForm (see commented kbgf)? (Using skos:relatedMatch?)
-
+# TODO: The plan is to add matching SAOGF terms for *all* in this file; and possibly remove these indirect terms ...
 # To find missing:
 # - select ?gf { ?x ?rel ?gf filter( strstarts(str(?gf), str(saogf:)) || strstarts(str(?gf), str(tgm:)) ) }
+
+# TODO: There are some "too concrete" GenreForm candidates left:
+# - construct { ?x skos:broader ?y } { ?x skos:broader|skos:broadMatch ?y . filter exists { ?x a :Genre . ?y a :GenreForm } }
+
+# TODO: For some, do we want to *suggest* an expression category (see commented kbgf)? (Using skos:relatedMatch?)
 
 g:Fiction a :Genre ;
   skos:narrowMatch marc:Fiction ;  # 84678 # (SSB)
@@ -104,7 +103,7 @@ g:MonographicSeries a :Genre ;
 
 g:CollectedWork a :Genre ;
   skos:broader g:CollectingResource ;
-  # TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, ctf:MultipartBook
+  # TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, ktg:MultipartBook
   skos:exactMatch saogf:Samlingsverk ;
   :singularLabel "Samlingsverk"@sv ,
     "Collected Work"@en .
@@ -151,7 +150,7 @@ g:TeachingMaterial a :Genre ;
   :altLabel "Läromedel"@sv .
 
 g:HandSignedCommunication a :Genre ;
-  #skos:broadMatch ctf:Visual, kbgf:Text ;
+  #skos:broadMatch ktg:Visual, kbgf:Text ;
   skos:exactMatch saogf:TAKK ;
   :singularLabel "TAKK"@sv ,
     "Hand-signed Communication"@en .
@@ -232,7 +231,7 @@ g:Statistics a :Genre ;
 g:Tables a :Genre ;
   skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Tabeller ;
-  skos:related ctf:Dataset ;
+  skos:related ktg:Dataset ;
   :singularLabel "Tabell"@sv ,
     "Tables"@en .
 
@@ -259,7 +258,7 @@ g:Timetable a :Genre ;
 #  skos:exactMatch saogf:Juridiskt\%20material .
 
 #g:Leporello a :Genre ;
-#  skos:broader ctf:NonBookTextWithImages ;
+#  skos:broader ktg:NonBookTextWithImages ;
 #  skos:exactMatch saogf:Leporello .
 
 g:Patent a :Genre ;

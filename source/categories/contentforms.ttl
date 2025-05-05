@@ -5,38 +5,37 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix div: <https://id.kb.se/term/div/>
-prefix ctf: <https://id.kb.se/term/contentform/>
+prefix ktg: <https://id.kb.se/term/ktg/>
 
-# Base Forms
-# Applies to an *Expression*
+# Base Category or ContentType applying to an *Expression*.
 
 # TODO:
-# - Replace ContentForm with ContentType and merge into <rdacategories.ttl>?
+# - Replace Category with ContentType and merge into <rdacategories.ttl>?
 # - Some RDA terms have broader Genre terms!
 # - Some are "SensoryForm" super-ContentType:s...
 # - Is there a sometimes necessary distinction between "contains" and "is"? If so, we reasonably should say that using a concrete GenreForm...
 
-ctf:Visual a :ContentForm ;
+ktg:Visual a :Category ;
   :inCollection div:sensoryform .
 
-ctf:Audio a :ContentForm ;
+ktg:Audio a :Category ;
   :inCollection div:sensoryform .
 
-ctf:Tactile a :ContentForm ;
+ktg:Tactile a :Category ;
   :inCollection div:sensoryform ;
   skos:closeMatch saogf:Taktila%20verk ;
   skos:prefLabel "Taktil"@sv .
 
-ctf:MovingImage a :ContentForm ;
-  skos:broader ctf:Visual .
+ktg:MovingImage a :Category ;
+  skos:broader ktg:Visual .
 
-ctf:Dataset a :ContentForm .
+ktg:Dataset a :Category .
 
-ctf:Object a :ContentForm .
+ktg:Object a :Category .
 
-ctf:StillImage a :ContentForm ;
-  skos:broader ctf:Visual ;
+ktg:StillImage a :Category ;
+  skos:broader ktg:Visual ;
   skos:closeMatch saogf:Bilder .
 
-ctf:Movement a :ContentForm ;
+ktg:Movement a :Category ;
   skos:prefLabel "Rörelser"@sv .
