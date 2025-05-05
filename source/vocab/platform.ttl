@@ -974,4 +974,56 @@ bibdb:issnSearchUri a owl:DatatypeProperty;
 bibdb:eodUri a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain :Library;
-    rdfs:subPropertyOf bibdb:templateUri .
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for ordering EOD"@en, "URI för att beställa EOD"@sv .
+
+# TODO just use straight schema.org for address stuff?
+bibdb:PostalAddress a owl:Class ;
+    :category :platform ;
+    owl:equivalentClass sdo:PostalAddress ;
+    rdfs:label "Address"@en, "Adress"@sv .
+
+bibdb:address a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:PostalAddress ;
+    rdfs:label "address"@en, "adress"@sv .
+
+# TODO define subclasses/value list instead
+bibdb:contactType a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:contactType ;
+    rdfs:label "Address type"@en, "Adresstyp"@sv .
+
+# Used for attention
+bibdb:extendedAddress a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:extendedAddress ;
+    rdfs:comment "Till exempel att. eller C/O."@sv;
+    rdfs:label "Address extension"@en, "Ytterligare addressinformation"@sv .
+
+bibdb:streetAddress a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:streetAddress ;
+    rdfs:label "Street address"@en, "Gatuadress"@sv .
+
+bibdb:postalCode a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:postalCode ;
+    rdfs:label "Postal code"@en, "Postnummer"@sv .
+
+bibdb:addressLocality a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:addressLocality ;
+    rdfs:label "Address locality code"@en, "Ort"@sv .
+
+bibdb:email a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:email ;
+    rdfs:label "Email"@en, "E-post"@sv .
+
+bibdb:telephone a owl:DatatypeProperty;
+    :category :platform ;
+    owl:equivalentProperty sdo:telephone ;
+    rdfs:label "Email"@en, "E-post"@sv .
+
