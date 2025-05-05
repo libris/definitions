@@ -11,9 +11,9 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
 prefix div: <https://id.kb.se/term/div/>
-prefix ctf: <https://id.kb.se/term/contentform/>
-prefix gf: <https://id.kb.se/term/genreform/>
-prefix g: <https://id.kb.se/term/genre/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix gf: <https://id.kb.se/term/ktg/>
+prefix g: <https://id.kb.se/term/ktg/>
 
 # It is a GenreForm if it:
 # - applies to an *Expression* (per ContentType/ContentForm); and
@@ -36,7 +36,7 @@ gf:WrittenBook a :GenreForm ;
 
 gf:Audiobook a :GenreForm ;
   :inCollection div:contentform ;
-  skos:broader ctf:Audio ,
+  skos:broader ktg:Audio ,
     gf:Book ;
   skos:exactMatch saogf:Ljudb%C3%B6cker ;
   :singularLabel "Ljudbok"@sv ,
@@ -48,9 +48,9 @@ gf:TextPiece a :GenreForm ;  # gf:Document ??
   skos:prefLabel "Text piece"@en ,
     "Kortare text"@sv . # "Textdel"@sv, "Textenhet"@sv .
 
-gf:WorkWithImages a :GenreForm ; # ctf:IllustratedWork
+gf:WorkWithImages a :GenreForm ; # ktg:IllustratedWork
   :inCollection div:contentform ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:closeMatch saogf:Bildverk . # saogf:Illustrerade%20verk
 
 gf:TextWithImages a :GenreForm ;
@@ -78,7 +78,7 @@ gf:Database a :GenreForm ;
 #gf:TactileBook a :GenreForm ;
 #  :inCollection div:contentform ;
 #  skos:broader gf:Book ,
-#    ctf:Tactile ;
+#    ktg:Tactile ;
 #  skos:editorialNote "TODO: differentiate between \"filtbok\" och \"punktskriftsbok\"?"@en ;
 #  skos:broadMatch kbrda:TactileText ;
 #  skos:narrowMatch saogf:Punktskriftsb%C3%B6cker ;
@@ -88,7 +88,7 @@ gf:Database a :GenreForm ;
 #--
 
 gf:Poster a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Affischer ;
   :singularLabel "Affisch"@sv, "Poster"@en ;
   :pluralLabel "Affischer"@sv .
@@ -119,7 +119,7 @@ gf:Issue a :GenreForm ;
 #    "Newspaper Issue"@en .
 
 gf:Film a :GenreForm ;
-  skos:broader ctf:MovingImage ;
+  skos:broader ktg:MovingImage ;
   skos:closeMatch marcgt:art ;
   skos:exactMatch saogf:Filmer ;
   :singularLabel "Film"@sv ,
@@ -136,11 +136,11 @@ gf:AudioProgram a :GenreForm ;
     "Audio Program"@en .
 
 g:Radio a :GenreForm ;
-  skos:broader ctf:Audio ;
+  skos:broader ktg:Audio ;
   skos:prefLabel "Radio"@sv, "Radio"@en  .
 
 g:TV a :GenreForm ;
-  skos:broader ctf:MovingImage ;
+  skos:broader ktg:MovingImage ;
   skos:prefLabel "TV"@sv, "TV"@en .
 
 gf:PictureBook a :GenreForm ;
@@ -192,19 +192,19 @@ gf:ComputerGame a :GenreForm ;
     "Computer Game"@en .
 
 gf:DesignDrawing a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch tgm:Ritningar ; # sao:Ritningar
   rdfs:label "Ritning"@sv ,
     "Design drawing"@en .
 
 gf:Diagram a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Diagram ;
   rdfs:label "Diagram"@sv ,
     "Diagram"@en .
 
 gf:Drawing a :GenreForm ;
-  skos:broader ctf:StillImage, g:Manuscript ;
+  skos:broader ktg:StillImage, g:Manuscript ;
   skos:exactMatch tgm:Teckningar ;
   :singularLabel "Teckning"@sv ,
     "Drawing"@en .
@@ -225,7 +225,7 @@ gf:Handwriting a :GenreForm ;
   :pluralLabel "Handskrifter"@sv .
 
 gf:Illustration a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Illustrationer ;
   rdfs:label "Illustration"@sv ,
     "Illustration"@en .
@@ -248,7 +248,7 @@ gf:GraphicNovel a :GenreForm ;
     "Graphic Novel"@en .
 
 gf:InteractiveObject a :GenreForm ;
-  skos:broader ctf:Object ;
+  skos:broader ktg:Object ;
   rdfs:label "Interaktivt objekt"@sv ,
   "InteractiveObject"@en .
 
@@ -301,7 +301,7 @@ gf:MusicRecording a :GenreForm ;
     "Music Recording"@en .
 
 gf:SoundEffectBook a :GenreForm ;
-  skos:broader gf:MechanicalBook, ctf:Audio ;
+  skos:broader gf:MechanicalBook, ktg:Audio ;
   skos:exactMatch saogf:B\%C3\%B6cker\%20med\%20ljudeffekter ;
   :singularLabel "Bok med ljudeffekt"@sv ,
     "Sound-effect Book"@en .
@@ -319,14 +319,14 @@ gf:Podcast a :GenreForm ;
     "Podcast"@en .
 
 gf:Photograph a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Fotografier, tgm:Fotografier ;
   :singularLabel "Fotografi"@sv ,
     "Photograph"@en ;
   :pluralLabel "Fotografier"@sv .
 
 gf:Painting a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
   rdfs:label "Målning"@sv ,
     "Painting"@en .
@@ -352,7 +352,7 @@ gf:PictureDictionary a :GenreForm ;
     "Picture Dictionary"@en .
 
 gf:Postcard a :GenreForm ;
-  skos:broader ctf:StillImage ;
+  skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Vykort ;
   rdfs:label "Vykort"@sv ,
     "Postcard"@en .
@@ -386,7 +386,7 @@ gf:RecordOrDeed a :GenreForm ;
   "Record (Document)"@en .
 
 gf:Sculpture a :GenreForm ;
-  skos:broader ctf:Object ;
+  skos:broader ktg:Object ;
   rdfs:label "Skulptur"@sv ,
     "Sculpture"@en .
 
@@ -405,7 +405,7 @@ gf:SpokenPaper a :GenreForm ;
     "Spoken Paper"@en .
 
 gf:TVProgram a :GenreForm ;
-  skos:broader ctf:MovingImage, g:TV ;
+  skos:broader ktg:MovingImage, g:TV ;
   skos:exactMatch saogf:Tv-program ;
   rdfs:label "Tv-program"@sv ,
     "TV-Program"@en .
@@ -429,8 +429,8 @@ gf:Trailer a :GenreForm ;
     "Trailer"@en .
 
 gf:Website a :GenreForm ;
-  skos:broader ctf:OnlineResource ,
-    ctf:Integrating ;
+  skos:broader ktg:OnlineResource ,
+    ktg:Integrating ;
   skos:exactMatch saogf:Webbplatser ;
   rdfs:label "Webbplats"@sv ,
     "Website"@en .
@@ -445,7 +445,7 @@ g:Blog a :GenreForm ;
 
 gf:Yearbook a :GenreForm ;
   skos:exactMatch saogf:%C3%85rsb%C3%B6cker ;
-  skos:broader ctf:SerialPublication ,
+  skos:broader ktg:SerialPublication ,
     gf:Book .
 
 gf:PhraseBook a :GenreForm ;
@@ -453,7 +453,7 @@ gf:PhraseBook a :GenreForm ;
   skos:exactMatch saogf:Parl%C3%B6rer .
 
 gf:Luck%C3%B6ppningskalendrar a :GenreForm ;
-  skos:broader ctf:Object ;
+  skos:broader ktg:Object ;
   skos:exactMatch saogf:Luck%C3%B6ppningskalendrar ;
   :singularLabel "Lucköppningskalender"@sv .
 
@@ -526,7 +526,7 @@ gf:EarthMoonGlobe a :GenreForm ;
   skos:closeMatch marc:EarthMoonGlobe .
 
 gf:Model a :GenreForm ;
-  skos:broader ctf:Object ;
+  skos:broader ktg:Object ;
   skos:broadMatch marcgt:mod .
 
 gf:MapModel a :GenreForm ;
@@ -571,39 +571,40 @@ gf:Textleaf a :GenreForm ; # gf:SmallText # TODO: CarrierGenreForm?
 # Instans-former (från användning <instancegftree-start240313.rq>)
 
 # :Instance
-#     marc:Picture
-#     marc:Postcard
-#     marc:Poster
-#     marc:SingleMap
-#     tgm:Gravyrer
-#     tgm:Litografier
-#     tgm:M%C3%A5lningar
-#     tgm:Miniatyrer%20%28m%C3%A5lningar%29
-#     tgm:Tr%C3%A4gravyrer
+#    marc:Picture
+#    marc:Postcard
+#    marc:Poster
+#    marc:SingleMap
+#    tgm:Gravyrer
+#    tgm:Litografier
+#    tgm:M%C3%A5lningar
+#    tgm:Miniatyrer%20%28m%C3%A5lningar%29
+#    tgm:Tr%C3%A4gravyrer
 
 # :StillImageInstance
-#     tgm:Affischer
-#     tgm:Flyers%20%28efem%C3%A4rt%20tryck%29 < :Print
-#     marc:ActivityCard
-#     marc:Picture
-#     marc:Postcard
-#     marc:Poster
-#     marc:Drawing
-#     marc:FlashCard
-#     marc:Painting
-#     marc:Photograph
-#
-#     marc:Photonegative
-#     marc:Photoprint < :Print
-#           marc:PhotomechanicalPrint
-#               tgm:Fotomekaniska%20reproduktioner
-#     tgm:Fotografier%20p%C3%A5%20albuminpapper
-#     tgm:Glasnegativ
+#    tgm:Affischer
+#    tgm:Flyers%20%28efem%C3%A4rt%20tryck%29 < :Print
+#    marc:ActivityCard
+#    marc:Picture
+#    marc:Postcard
+#    marc:Poster
+#    marc:Drawing
+#    marc:FlashCard
+#    marc:Painting
+#    marc:Photograph
+#  # .. keep as instance categories?
+#    marc:Photonegative
+#    marc:Photoprint < :Print
+#          marc:PhotomechanicalPrint
+#              tgm:Fotomekaniska%20reproduktioner
+#    tgm:Fotografier%20p%C3%A5%20albuminpapper
+#    tgm:Glasnegativ
 
 # :Print
-#     marc:Print
-#     marc:PhotomechanicalPrint
-#     marc:Photoprint
-#     tgm:Ljustryck
-#     tgm:Plantryck
-#     tgm:Tryck
+#  # .. keep as instance categories?
+#    marc:Print
+#    marc:PhotomechanicalPrint
+#    marc:Photoprint
+#    tgm:Ljustryck
+#    tgm:Plantryck
+#    tgm:Tryck
