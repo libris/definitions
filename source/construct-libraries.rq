@@ -23,6 +23,7 @@ construct {
     _:meta :created ?created ; :modified ?modified .
 
     ?ils a idkbse_bibdb:ILS ;
+        :url ?ils_url ;
         idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
         idkbse_bibdb:isbnSearchUri ?isbnUri ;
         idkbse_bibdb:issnSearchUri ?issnUri .
@@ -77,6 +78,11 @@ construct {
         ?bdb_id bibdb:ils ?ils .
 
         optional {
+            ?ils bibdb:catalogue_url ?ils_url .
+            FILTER(?ils_url != "" && ?ils_url != "http://")
+        }
+
+        optional {
             ?ils bibdb:opacsyntax_bibid ?bibIdUri .
             FILTER(?bibIdUri != "")
         }
@@ -88,6 +94,8 @@ construct {
             ?ils bibdb:opacsyntax_issn ?issnUri .
             FILTER(?issnUri != "")
         }
+
+        FILTER(?ils_url || ?bibIdUri || ?isbnUri || ?issnUri )
     }
 
     optional {
