@@ -145,15 +145,17 @@
 
 :ContentType a owl:Class;
     rdfs:label "Innehållstyp"@sv;
+    rdfs:subClassOf :Category ;
     owl:equivalentClass bf2:Content .
 
 :MediaType a owl:Class;
     rdfs:label "Medietyp"@sv;
+    rdfs:subClassOf :Category ;
     owl:equivalentClass bf2:Media, dc:MediaType .
 
 :CarrierType a owl:Class;
     rdfs:label "Bärartyp"@sv;
-    rdfs:subClassOf :MediaType ;
+    rdfs:subClassOf :MediaType, :Category ;
     owl:equivalentClass bf2:Carrier .
 
 :IssuanceType owl:equivalentClass bf2:Issuance;

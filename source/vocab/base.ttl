@@ -159,12 +159,17 @@ rdf:type a owl:ObjectProperty;
 
 
 ##
-# Categorization Of Terms
+# Categorization (looser typing) of Resources, including Terms
 
 :category a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
     sdo:domainIncludes :ChangeNote ;
+    sdo:rangeIncludes :Category ;
     owl:equivalentProperty sdo:category .
+
+:Category a owl:Class ;
+    #rdfs:subClassOf :Concept ;
+    rdfs:label "Category"@en, "Kategori"@sv .
 
 ##
 # These terms may also be "bibliographic", but the platform cannot work without
@@ -241,6 +246,12 @@ rdf:type a owl:ObjectProperty;
     rdfs:domain :Resource ;
     :category :heuristicIdentifier ;
     owl:equivalentProperty rdfs:label, sdo:name .
+
+:singularLabel a owl:DatatypeProperty;
+    rdfs:label "singular label"@en, "benämning i singular"@sv;
+    rdfs:domain :Resource ;
+    #:category :heuristicIdentifier ;
+    rdfs:subPropertyOf :label .
 
 :pluralLabel a owl:DatatypeProperty;
     rdfs:label "plural label"@en, "benämning i plural"@sv;
