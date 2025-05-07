@@ -30,7 +30,8 @@ def bibliographies():
 
 def _construct_bibdb_data(query):
     libraries = _fetch_libraries(f'https://bibdb.libris.kb.se/api?{query}')
-    bidb_context = 'https://bibdb.libris.kb.se/libdb/static/meta/context.jsonld'
+    #bidb_context = 'https://bibdb.libris.kb.se/libdb/static/meta/context.jsonld'
+    bidb_context = 'http://localhost:8180/static/context.jsonld'
     return compiler.construct(sources=[
             {
                 "dataset": BASE + "dataset/libraries",

@@ -9,7 +9,7 @@ base <https://libris.kb.se/library/>
 construct {
 
     ?library a ?libtype ;
-        :meta _:meta ;
+        :meta ?meta ;
         owl:sameAs ?bdb_id, ?sameas ;
         :sigel ?sigel ;
         :name ?name ;
@@ -18,25 +18,27 @@ construct {
         idkbse_bibdb:ils ?ils ;
         idkbse_bibdb:eodUri ?eodUri ;
         idkbse_bibdb:address ?address ;
+        idkbse_bibdb:lopac ?lopac ;
         :category ?registranturl .
         #:place ?place .
 
-    _:meta :created ?created ; :modified ?modified .
+    ?address a idkbse_bibdb:PostalAddress ;
+        idkbse_bibdb:contactType ?contactType ;
+        idkbse_bibdb:extendedAddress ?extendedAddress ;
+        idkbse_bibdb:streetAddress ?streetAddress ;
+        idkbse_bibdb:postalCode ?postalCode ;
+        idkbse_bibdb:addressLocality ?addressLocality ;
+        idkbse_bibdb:email ?email ;
+        idkbse_bibdb:telephone ?telephone .
 
     ?ils a idkbse_bibdb:ILS ;
-        :url ?ils_url ;
-        idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
-        idkbse_bibdb:isbnSearchUri ?isbnUri ;
-        idkbse_bibdb:issnSearchUri ?issnUri .
+       :url ?ils_url ;
+       idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
+       idkbse_bibdb:isbnSearchUri ?isbnUri ;
+       idkbse_bibdb:issnSearchUri ?issnUri .
 
-    ?address a idkbse_bibdb:PostalAddress .
-        #idkbse_bibdb:contactType ?contactType ;
-        #idkbse_bibdb:extendedAddress ?extendedAddress ;
-        #idkbse_bibdb:streetAddress ?streetAddress ;
-        #idkbse_bibdb:postalCode ?postalCode ;
-        #idkbse_bibdb:addressLocality ?addressLocality ;
-        #idkbse_bibdb:email ?email .
-        #idkbse_bibdb:telephone ?telephone .
+    ?lopac a idkbse_bibdb:LOPAC .
+        #:url ?ils_url ;
 
     # TODO: Model a proper place/adress relation.
     # ?place a :Place ;
@@ -49,6 +51,7 @@ construct {
     # ?country a :Country ;
     #     :code ?country_code .
 
+    ?meta :created ?created ; :modified ?modified .
 } where {
 
     ?bdb_id
@@ -111,42 +114,46 @@ construct {
     optional {
         ?bdb_id sdo:address ?address .
 
-        #optional {
-        #    ?address bibdb:contactType ?contactType .
-        #    FILTER(?contactType != "")
-        #}
-#
-        #optional {
-        #    ?address bibdb:attention_dept ?extendedAddress .
-        #    FILTER(?extendedAddress != "")
-        #}
-#
-        #optional {
-        #    ?address sdo:streetAddress ?streetAddress .
-        #    FILTER(?streetAddress != "")
-        #}
-#
-        #optional {
-        #    ?address sdo:postalCode ?postalCode .
-        #    FILTER(?postalCode != "")
-        #}
-#
-        #optional {
-        #    ?address sdo:addressLocality ?addressLocality .
-        #    FILTER(?addressLocality != "")
-        #}
-#
-        #optional {
-        #    ?address sdo:email ?email .
-        #    FILTER(?email != "")
-        #}
-#
-        #optional {
-        #    ?address sdo:telephone ?telephone .
-        #    FILTER(?telephone != "")
-        #}
+        optional {
+            ?address bibdb:address_type ?contactType .
+            FILTER(?contactType != "")
+        }
 
-        #FILTER(?ils_url || ?bibIdUri || ?isbnUri || ?issnUri )
+        optional {
+            ?address bibdb:attention_dept ?extendedAddress .
+            FILTER(?extendedAddress != "")
+        }
+
+        optional {
+            ?address sdo:streetAddress ?streetAddress .
+            FILTER(?streetAddress != "")
+        }
+
+        optional {
+            ?address sdo:postalCode ?postalCode .
+            FILTER(?postalCode != "")
+        }
+
+        optional {
+            ?address sdo:addressLocality ?addressLocality .
+            FILTER(?addressLocality != "")
+        }
+
+        optional {
+            ?address sdo:email ?email .
+            FILTER(?email != "")
+        }
+
+        optional {
+            ?address sdo:telephone ?telephone .
+            FILTER(?telephone != "")
+        }
+
+        #FILTER(?extendedAddress || ?streetAddress || ?postalCode || ?addressLocality || ?email || ?telephone)
+    }
+
+    optional {
+        ?bdb_id bibdb:lopac ?lopac .
     }
 
     optional {
@@ -179,4 +186,6 @@ construct {
 
     # bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
     # bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
+
+    bind(bnode(?sigelslug) as ?meta)
 }
