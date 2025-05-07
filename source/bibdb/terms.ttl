@@ -2,8 +2,89 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix kbv: <https://id.kb.se/vocab/>
+prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
 prefix : <https://id.kb.se/term/bibdb/>
 
 :Registrant a skos:Concept ;
     skos:prefLabel "Registrant"@en, "Registrerande"@sv ;
     rdfs:comment "Bibliotek i Librissamarbetet som skapar och underhåller metadata i den gemensamma datamängden."@sv .
+
+:natbib a idkbse_bibdb:LibraryType ;
+    kbv:code "natbib" ;
+    kbv:label "Nationalbibliotek"@sv .
+
+:folkbib a idkbse_bibdb:LibraryType ;
+    kbv:code "folkbib" ;
+    kbv:label "Folkbibliotek"@sv .
+
+:folkskolbib a idkbse_bibdb:LibraryType ;
+    kbv:code "folkskolbib" ;
+    kbv:label "Folk- och skolbibliotek"@sv .
+
+:specbib a idkbse_bibdb:LibraryType ;
+    kbv:code "specbib" ;
+    kbv:label "Specialbibliotek"@sv .
+
+:sjukbib a idkbse_bibdb:LibraryType ;
+    kbv:code "sjukbib" ;
+    kbv:label "Sjukhusbibliotek"@sv .
+
+:myndbib a idkbse_bibdb:LibraryType ;
+    kbv:code "myndbib" ;
+    kbv:label "Myndighetsbibliotek"@sv .
+
+:busbib a idkbse_bibdb:LibraryType ;
+    kbv:code "busbib" ;
+    kbv:label "Företagsbibliotek"@sv .
+
+:musbib a idkbse_bibdb:LibraryType ;
+    kbv:code "musbib" ;
+    kbv:label "Arkiv och museibibliotek"@sv .
+
+:muskom a idkbse_bibdb:LibraryType ;
+    kbv:code "muskom" ;
+    kbv:label "Kommunalt museibibliotek"@sv .
+
+:muslan a idkbse_bibdb:LibraryType ;
+    kbv:code "muslan" ;
+    kbv:label "Länsmuseibibliotek"@sv .
+
+:musstat a idkbse_bibdb:LibraryType ;
+    kbv:code "musstat" ;
+    kbv:label "Statligt museibibliotek"@sv .
+
+:skolbib a idkbse_bibdb:LibraryType ;
+    kbv:code "skolbib" ;
+    kbv:label "Skolbibliotek"@sv .
+
+:friskol a idkbse_bibdb:LibraryType ;
+    kbv:code "friskol" ;
+    kbv:label "Friskolebibliotek"@sv .
+
+:gymbib a idkbse_bibdb:LibraryType ;
+    kbv:code "gymbib" ;
+    kbv:label "Gymnasiebibliotek"@sv .
+
+:frisgym a idkbse_bibdb:LibraryType ;
+    kbv:code "frisgym" ;
+    kbv:label "Friskolegymnasiebibliotek"@sv .
+
+:statskol a idkbse_bibdb:LibraryType ;
+    kbv:code "statskol" ;
+    kbv:label "Statligt skolbibliotek"@sv .
+
+:vuxbib a idkbse_bibdb:LibraryType ;
+    kbv:code "vuxbib" ;
+    kbv:label "Bibliotek på komvux/lärcentra"@sv .
+
+:univbib a idkbse_bibdb:LibraryType ;
+    kbv:code "univbib" ;
+    kbv:label "Universitets- och högskolebibliotek"@sv .
+
+:folkhogbib a idkbse_bibdb:LibraryType ;
+    kbv:code "folkhogbib" ;
+    kbv:label "Folkhögskolebibliotek"@sv .
+
+:ovrbib a idkbse_bibdb:LibraryType ;
+    kbv:code "ovrbib" ;
+    kbv:label "Övriga"@sv .
