@@ -183,7 +183,7 @@ class Compiler:
                 if 'modified' in meta:
                     modified_ms = timeutil.w3c_dtz_to_ms(meta.pop('modified'))
 
-                assert not meta, f'meta {meta} was not exhausted {node}'
+                assert not meta, f'meta {meta} was not exhausted'
 
             desc = self._to_node_description(
                     node,
