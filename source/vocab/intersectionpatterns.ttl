@@ -1,0 +1,117 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix dc: <http://purl.org/dc/terms/>
+prefix sdo: <https://schema.org/>
+prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
+
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix g: <https://id.kb.se/term/ktg/>
+
+
+prefix : <https://id.kb.se/vocab/>
+
+##
+# Abstract classes entailed by categories (possibly in turn entailed).
+# Used for export-to-bf+rda (or revert-to-marc).
+
+## Work subclasses
+
+:Audio :abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Audio]) .
+
+:Cartography :abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue g:Cartography]) .
+
+:Dataset :abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Dataset]) .
+
+:Movement :abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Movement]) .
+
+:MovingImage :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:MovingImage]) .
+
+:Multimedia :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue g:Multimedia]) .
+
+:NotatedMovement :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement]) .
+
+:NotatedMusic :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMusic]) .
+
+:Tactile :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Tactile]) .
+
+:Text :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Text]) .
+
+## Instance subclasses
+
+# Coordinating categories defined in: <../categories/carrierforms.ttl>
+
+:Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Print]) .
+
+:Electronic owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:AbstractElectronic ]) .
+
+:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Manuscript ]) .
+
+# TODO:
+#:Archival owl:intersectionOf (:PhysicalResource [ ... ]) .
+#:Tactile owl:intersectionOf (:PhysicalResource [ ... ]) .
+
+# Complex Instance Classes
+
+:PhysicalResource a owl:Class ;
+  rdfs:subClassOf :Instance , dc:PhysicalResource ;
+  rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:minQualifiedCardinality 1 ;
+          owl:onClass [ owl:onProperty :broaderTransitive ;
+                        owl:hasValue ktg:PhysicalForm ] ] ;
+  rdfs:label "Fysisk resurs"@sv , "Physical resource"@en .
+
+:DigitalResource a owl:Class ;
+  rdfs:subClassOf :Instance ;
+  rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:minQualifiedCardinality 1 ;
+          owl:onClass [ owl:onProperty :broaderTransitive ;
+                        owl:hasValue ktg:DigitalForm ] ] ;
+  rdfs:label "Digital resurs"@sv , "Digital Resource"@en .
+
+
+# TODO:
+# Upgrade some marc: properties to KBV going forward?
+#:videoCharacteristic
+#  rdfs:subPropertyOf :format ;
+#  rdfs:domain :VideoStorageMedium ;
+#  sdo:rangeIncludes :VideoFormat .
+# - Or...
+# Replace subclasses below with complex patterns?
+# These richer types belong the discarded direct rich-type-design...
+
+:TactileMaterial rdfs:subClassOf :Material ;
+  skos:broadMatch marc:TacMaterialType .
+
+:ImageMaterial rdfs:subClassOf :Material ;
+  skos:broadMatch marc:NonProjectedType .
+
+:MapMaterial rdfs:subClassOf :Material ;
+  skos:broadMatch marc:MapMediumType .
+
+:VideoFormat rdfs:subClassOf :Material ;
+  skos:broadMatch marc:VideoFormatType .
+
+# TODO: ensure all of these (LHS) can be mapped to one specific type.
+# Purpose here is just to define a MARC "rebus" based in on instanceOf (RHS):
+
+# :StillImageInstance :instanceOf :StillImage .
+#:StillImageInstance
+#  ptg:abstract true ;
+#  owl:equivalentClass [ owl:onProperty :instanceOf ; owl:allValuesFrom :StillImage ] ;
+#  rdfs:subClassOf [ owl:onProperty :baseMaterial ; owl:someValuesFrom :ImageMaterial ]  .
+
+# :MovingImageInstance :instanceOf :MovingImage .
+# :ProjectedImageInstance :instanceOf :ProjectedImage .
+# :NotatedMusicInstance :instanceOf :NotatedMusic .
+# :KitInstance :instanceOf :Kit .

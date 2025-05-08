@@ -41,6 +41,8 @@
 ##: skos:hasTopConcept :Print .
 
 
+# NOTE: Some classes marked as :abstract may be entailed by a rule in <intersectionpatterns.ttl>.
+
 ##
 # Creative Works
 
@@ -81,6 +83,7 @@
 
 :Instance a owl:Class ;
     :category marc:bib ;
+    ptg:abstract true ;
     rdfs:label "Instance"@en, "Instans"@sv;
     rdfs:subClassOf :Creation, :Embodiment ;
     owl:equivalentClass bf2:Instance ;
@@ -519,7 +522,7 @@
     owl:equivalentClass bf2:Archival .
 
 :Electronic a owl:Class;
-    #ptg:abstract true ;
+    ptg:abstract true ;
     rdfs:label "Elektronisk"@sv;
     skos:definition "Resurs som är avsedd för manipulering av en dator, åtkomst direkt eller på distans."@sv;
     rdfs:subClassOf :Instance;
@@ -535,12 +538,14 @@
     owl:equivalentClass bf2:Manuscript, bibo:Manuscript .
 
 :Print a owl:Class;
+    :abstract true ;
     rdfs:label "Tryck"@sv;
     skos:definition "Resurs som är mångfaldigad genom tryck."@sv;
     rdfs:subClassOf :Instance;
     owl:equivalentClass bf2:Print .
 
 :Tactile a owl:Class;
+    :abstract true ;
     #:category :SensoryForm ;
     rdfs:label "Taktil resurs"@sv;
     skos:altLabel "Taktilt verk"@sv;
