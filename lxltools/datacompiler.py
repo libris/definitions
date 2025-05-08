@@ -525,6 +525,8 @@ def _construct(compiler, sources, query=None):
             graph += Graph().parse(str(sourcepath), format=fmt)
 
     if not query:
+        graph = Graph()
+        graph += dataset
         return graph
 
     with compiler.path(query).open() as fp:
