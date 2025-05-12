@@ -20,6 +20,7 @@ construct {
         idkbse_bibdb:eodUri ?eodUri ;
         idkbse_bibdb:address ?address ;
         idkbse_bibdb:lopac ?lopac ;
+        sdo:isPartOf ?org ;
         :category ?registranturl .
         #:place ?place .
 
@@ -39,6 +40,10 @@ construct {
 
     ?lopac a idkbse_bibdb:LOPAC .
         #:url ?ils_url ;
+
+    ?org a idkbse_bibdb:Organization ;
+        :name ?orgName ;
+        skos:notation ?orgCode .
 
     # TODO: Model a proper place/adress relation.
     # ?place a :Place ;
@@ -175,6 +180,15 @@ construct {
         ?bdb_id bibdb:eod_url ?eodUri .
         ?bdb_id bibdb:eod ?eod .
         FILTER(?eodUri != "" && ?eod)
+    }
+
+    optional {
+        ?bdb_id bibdb:organisation ?org_id .
+        ?org_id bibdb:code ?orgCode .
+        ?org_id sdo:name ?orgName .
+
+        bind(encode_for_uri(replace(str(?orgCode), "\\s+", "")) as ?orgSlug)
+        bind(iri(concat(str(coalesce(?uribase, </library/org/>)), ?orgSlug)) as ?org)
     }
 
     # optional {
