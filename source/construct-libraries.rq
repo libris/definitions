@@ -23,8 +23,7 @@ construct {
         :category ?registranturl .
         #:place ?place .
 
-    ?address a idkbse_bibdb:PostalAddress ;
-        idkbse_bibdb:contactType ?contactType ;
+    ?address a ?addressType ;
         idkbse_bibdb:extendedAddress ?extendedAddress ;
         idkbse_bibdb:streetAddress ?streetAddress ;
         idkbse_bibdb:postalCode ?postalCode ;
@@ -156,6 +155,16 @@ construct {
         }
 
         #FILTER(?extendedAddress || ?streetAddress || ?postalCode || ?addressLocality || ?email || ?telephone)
+
+        bind(
+            if(?contactType = "ill", idkbse_bibdb:ILLAddress,
+            if(?contactType = "del", idkbse_bibdb:DeliveryAddress,
+            if(?contactType = "vis", idkbse_bibdb:VisitingAddress,
+            if(?contactType = "inv", idkbse_bibdb:InvoicingAddress,
+            if(?contactType = "stat", idkbse_bibdb:StatisticalContactAddress,
+            idkbse_bibdb:PostalAddress )))))
+            AS ?addressType
+        )
     }
 
     optional {

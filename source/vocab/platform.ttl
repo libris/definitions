@@ -995,17 +995,36 @@ bibdb:PostalAddress a owl:Class ;
     owl:equivalentClass sdo:PostalAddress ;
     rdfs:label "Address"@en, "Adress"@sv .
 
+bibdb:ILLAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Interlibrary loan (ILL) address"@en, "Fjärrlåneadress"@sv .
+
+bibdb:DeliveryAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Delivery Address"@en, "Leveransadress"@sv .
+
+bibdb:VisitingAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Visiting Address"@en, "Besöksadress"@sv .
+
+bibdb:InvoicingAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Invoicing Address"@en, "Faktureringsadress"@sv .
+
+bibdb:StatisticalContactAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Statistical Contact Address"@en, "Statistik-kontaktadress"@sv .
+
 bibdb:address a owl:ObjectProperty ;
     :category :platform ;
     rdfs:domain :Library ;
     rdfs:range bibdb:PostalAddress ;
     rdfs:label "address"@en, "adress"@sv .
-
-# TODO define subclasses/value list instead
-bibdb:contactType a owl:DatatypeProperty;
-    :category :platform ;
-    owl:equivalentProperty sdo:contactType ;
-    rdfs:label "Address type"@en, "Adresstyp"@sv .
 
 # Used for attention
 bibdb:extendedAddress a owl:DatatypeProperty;
