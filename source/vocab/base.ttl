@@ -43,6 +43,10 @@
 rdf:type a owl:ObjectProperty;
     rdfs:label "type"@en, "typ"@sv .
 
+# TODO: Used for simplified rolification in property chain axioms.
+#:selfOfType rdfs:subPropertyOf [ owl:inverseOf owl:onProperty ] ;
+#  rdfs:range [ owl:onProperty owl:hasSelf ; owl:hasValue true ] .
+
 :Resource a owl:Class ;
     owl:equivalentClass rdfs:Resource;
     rdfs:label "Resurs"@sv, "Resource"@en;

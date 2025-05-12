@@ -75,6 +75,48 @@
     rdfs:subClassOf :BibliographicAgent;
     owl:equivalentClass bf2:Meeting, bibo:Conference .
 
+
+# Agent membership properties
+
+:hasMember a owl:ObjectProperty ;
+    rdfs:label "har medlem"@sv , "has member"@en ;
+    sdo:domainIncludes :Organization, :Family ;
+    sdo:rangeIncludes :Agent ;
+    owl:equivalentProperty sdo:member ;
+    owl:inverseOf :isMemberOf .
+
+:isMemberOf a owl:ObjectProperty ;
+    rdfs:label "är medlem av"@sv , "is member of"@en ;
+    sdo:domainIncludes :Agent ;
+    sdo:rangeIncludes :Organization, :Family ;
+    owl:equivalentProperty sdo:memberOf ;
+    owl:inverseOf :hasMember .
+
+## TODO: Tentative mapping axioms
+#
+#:hasFamilyMember a owl:ObjectProperty;
+#    rdfs:label "Har familjemedlem"@sv, "Has person member of family"@en ;
+#    rdfs:subPropertyOf :hasMember ;
+#    owl:equivalentProperty rdaa:P50056 ;
+#    owl:propertyChainAxiom ([:selfOfType :Family] :hasMember [:selfOfType :Person]) .
+#
+## "has person member of corporate body"
+#:hasPersonMemberOfCorporation owl:propertyChainAxiom ([:selfOfType :Corporation] :hasMember [:selfOfType :Person]) ;
+#    owl:equivalentProperty rdaa:P50030 .
+#
+## "is person member of corporate body of"
+#:isPersonMemberOfCorporation owl:propertyChainAxiom ([:selfOfType :Person] :isMemberOf [:selfOfType :Corporation]) ;
+#    owl:equivalentProperty rdaa:P50095 .
+#
+## "is corporate body member of corporate body of"
+#:isCorporationMemberOfCorporation owl:propertyChainAxiom ([:selfOfType :Corporation] :isMemberOf [:selfOfType :Corporation]) ;
+#    owl:equivalentProperty rdaa:P50230 .
+#
+## "has corporate body member of corporate body"
+#:hasCorporationMemberOfCorporation owl:propertyChainAxiom ([:selfOfType :Corporation] :hasMember [:selfOfType :Corporation]) ;
+#    owl:equivalentProperty rdaa:P50231 .
+
+
 ## Used by SwePub {{{
 
 :Collaboration a owl:Class ;
@@ -256,9 +298,10 @@
     rdfs:label "Type of family"@en, "Typ av släkt"@sv .
 
 :hasProminentFamilyMember a owl:ObjectProperty;
-    rdfs:label "Has Prominent Familymember"@en, "Har välkänd släktmedlem"@sv;
+    rdfs:label "Has prominent member of family"@en, "Har välkänd släktmedlem"@sv;
     rdfs:domain :Family;
     rdfs:range :Person;
+    #rdfs:subPropertyOf :hasFamilyMember ;
     owl:equivalentProperty rdaa:P50060, rdaa:prominentMemberOfFamily.en .
 
 :prominentFamilyMember a owl:DatatypeProperty;
