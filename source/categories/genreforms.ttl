@@ -429,11 +429,16 @@ gf:Trailer a :GenreForm ;
     "Trailer"@en .
 
 gf:Website a :GenreForm ;
-  skos:broader ktg:OnlineResource ,
+  skos:broader kbrda:OnlineResource ,
     ktg:Integrating ;
   skos:exactMatch saogf:Webbplatser ;
   rdfs:label "Webbplats"@sv ,
     "Website"@en .
+
+gf:LooseLeaf a :GenreForm ;
+  skos:broader ktg:Integrating ;
+  rdfs:label "Lösblad"@sv ,
+    "Loose-leaf"@en .
 
 g:Blog a :GenreForm ;
   skos:broader gf:Website ,
@@ -563,6 +568,22 @@ gf:Booklet a :GenreForm ;  # gf:MediumText# TODO: CarrierGenreForm?
 gf:Textleaf a :GenreForm ; # gf:SmallText # TODO: CarrierGenreForm?
   skos:broader gf:TextPiece ;
   rdfs:label "Textblad"@sv , "Text leaf"@en .
+
+# from <examples/typenormalization/marcmatches.ttl>
+gf:Lexicon skos:closeMatch marc:Dictionary .
+gf:Database skos:closeMatch marc:UpdatingDatabase .
+gf:Website skos:closeMatch marc:UpdatingWebSite .
+gf:Film skos:closeMatch marc:MotionPicture .
+gf:Postcard skos:closeMatch marc:PictureCardPostCard .
+gf:ComputerGame skos:closeMatch marc:ComputerTypeOfFileType-g .
+gf:Painting skos:closeMatch marc:Painting .
+gf:Drawing skos:closeMatch marc:Drawing .
+gf:Map skos:closeMatch marc:Map .
+gf:Globe skos:closeMatch marc:Globe .
+gf:Atlas skos:closeMatch marc:Atlas .
+gf:Diagram skos:closeMatch marc:NonProjMaterialType-n .
+gf:Photograph skos:closeMatch marc:Photograph .
+gf:Yearbook skos:closeMatch marc:Yearbook .
 
 #gf:OnlineResource a :CarrierForm . # TODO: move to carrierform...
 

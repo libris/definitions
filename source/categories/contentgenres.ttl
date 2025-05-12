@@ -159,6 +159,7 @@ g:Novel a :Genre ;
   skos:broader g:Literature ;
   skos:broadMatch gf:Book ;
   skos:exactMatch saogf:Romaner ;
+  skos:closeMatch marc:Novel ;
   :singularLabel "Roman"@sv ,
     "Novel"@en .
 
@@ -369,3 +370,17 @@ g:Standard a :Genre ;
   skos:exactMatch saogf:Standarder ;
   :singularLabel "Standard"@sv ,
     "Standard"@en .
+
+# from <examples/typenormalization/marcmatches.ttl>
+g:ConferenceMaterial skos:closeMatch marc:ConferencePublication .
+g:Statistics skos:closeMatch marc:Statistics .
+g:Encyclopedia skos:closeMatch marc:Encyclopedia .
+g:Catalogue skos:closeMatch marc:Catalog .
+g:Calendar skos:closeMatch marc:Calendar .
+g:Patent skos:closeMatch marc:PatentDocument .
+g:ShortStory skos:closeMatch marc:ShortStory .
+g:Review skos:closeMatch marc:Review .
+g:Standard skos:closeMatch marc:StandardsSpecification .
+g:Interview skos:closeMatch marc:Interview .
+g:Newspaper skos:closeMatch marc:Newspaper .
+g:Periodical skos:closeMatch marc:Periodical .
