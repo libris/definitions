@@ -17,6 +17,7 @@ construct {
         :url ?url ;
         :qualifier ?dept ;
         idkbse_bibdb:libraryType ?libraryTypeUri ;
+        idkbse_bibdb:libraryType ?librarySubTypeUri ;
         idkbse_bibdb:openingHours ?openHours ;
         idkbse_bibdb:address ?address ;
         idkbse_bibdb:ils ?ils ;
@@ -93,6 +94,11 @@ construct {
     optional {
         ?bdb_id bibdb:library_type ?libraryType .
         bind (iri(concat('https://id.kb.se/term/bibdb/', ?libraryType)) as ?libraryTypeUri)
+    }
+
+    optional {
+        ?bdb_id bibdb:library_subtype ?librarySubType .
+        bind (iri(concat('https://id.kb.se/term/bibdb/', ?librarySubType)) as ?librarySubTypeUri)
     }
 
     optional {
