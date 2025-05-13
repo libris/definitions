@@ -49,7 +49,17 @@ construct {
        rdfs:label ?linkResolverName ;
        :uri ?linkResolverUrl .
 
-    ?lopac a idkbse_bibdb:LOPAC .
+    ?lopac a idkbse_bibdb:LOPAC ;
+        idkbse_bibdb:bibIdSearchUri ?lopac_bibIdUri_sv ;
+        idkbse_bibdb:bibIdSearchUri ?lopac_bibIdUri_en ;
+        idkbse_bibdb:isbnSearchUri ?lopac_isbnUri_sv ;
+        idkbse_bibdb:isbnSearchUri ?lopac_isbnUri_en ;
+        idkbse_bibdb:issnSearchUri ?lopac_issnUri_sv ;
+        idkbse_bibdb:issnSearchUri ?lopac_issnUri_en ;
+        idkbse_bibdb:myLoansUri ?myLoans_sv ;
+        idkbse_bibdb:myLoansUri ?myLoans_en ;
+        idkbse_bibdb:patronRegistrationUri ?patronRegistration_sv ;
+        idkbse_bibdb:patronRegistrationUri ?patronRegistration_en .
         #:url ?ils_url ;
 
     ?org a idkbse_bibdb:Organization ;
@@ -195,6 +205,64 @@ construct {
 
     optional {
         ?bdb_id bibdb:lopac ?lopac .
+        ?lopac bibdb:active ?active .
+
+        optional {
+            ?lopac bibdb:syntax_bibid_swe ?bibIdUri_swe .
+            FILTER(?bibIdUri_swe != "")
+            BIND( STRLANG(str(?bibIdUri_swe), "sv") AS ?lopac_bibIdUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_bibid_eng ?bibIdUri_eng .
+            FILTER(?bibIdUri_eng != "")
+            BIND( STRLANG(str(?bibIdUri_eng), "en") AS ?lopac_bibIdUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:syntax_isbn_swe ?isbnUri_swe .
+            FILTER(?isbnUri_swe != "")
+            BIND( STRLANG(str(?isbnUri_swe), "sv") AS ?lopac_isbnUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_isbn_eng ?isbnUri_eng .
+            FILTER(?isbnUri_eng != "")
+            BIND( STRLANG(str(?isbnUri_eng), "en") AS ?lopac_isbnUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:syntax_issn_swe ?issnUri_swe .
+            FILTER(?issnUri_swe != "")
+            BIND( STRLANG(str(?issnUri_swe), "sv") AS ?lopac_issnUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_issn_eng ?issnUri_eng .
+            FILTER(?issnUri_eng != "")
+            BIND( STRLANG(str(?issnUri_eng), "en") AS ?lopac_issnUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:my_loans_swe ?myLoans_swe .
+            FILTER(?myLoans_swe != "")
+            BIND( STRLANG(str(?myLoans_swe), "sv") AS ?myLoans_sv ) .
+        }
+        optional {
+            ?lopac bibdb:my_loans_swe ?myLoans_eng .
+            FILTER(?myLoans_eng != "")
+            BIND( STRLANG(str(?myLoans_eng), "en") AS ?myLoans_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:librarycard_swe ?libraryCard_swe .
+            FILTER(?libraryCard_swe != "")
+            BIND( STRLANG(str(?libraryCard_swe), "sv") AS ?patronRegistration_sv ) .
+        }
+        optional {
+            ?lopac bibdb:librarycard_eng ?libraryCard_eng .
+            FILTER(?libraryCard_eng != "")
+            BIND( STRLANG(str(?libraryCard_eng), "en") AS ?patronRegistration_en ) .
+        }
+
+        filter(?active)
     }
 
     optional {
