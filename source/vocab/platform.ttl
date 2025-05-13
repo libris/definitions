@@ -954,6 +954,18 @@ bibdb:libraryType a owl:ObjectProperty ;
     rdfs:range bibdb:LibraryType ;
     rdfs:label "library type"@en, "bibliotekstyp"@sv .
 
+bibdb:linkresolver a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:LinkResolver ;
+    rdfs:label "link resolver"@en, "länkserver"@sv .
+
+bibdb:LinkResolver a owl:Class ;
+    :category :platform ;
+    rdfs:seeAlso <https://en.wikipedia.org/wiki/OpenURL>,
+                 <https://www.niso.org/publications/z3988-2004-r2010> ;
+    rdfs:label "Link resolver"@en, "Länkserver"@sv .
+
 bibdb:ILS a owl:Class ;
     :category :platform ;
     rdfs:label "ILS"@en, "ILS"@sv .

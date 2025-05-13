@@ -3,6 +3,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix sdo: <http://schema.org/>
 prefix bibdb: <http://libris.kb.se/def/lib#>
 prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix : <https://id.kb.se/vocab/>
 base <https://libris.kb.se/library/>
 
@@ -18,6 +19,7 @@ construct {
         idkbse_bibdb:libraryType ?libraryTypeUri ;
         idkbse_bibdb:ils ?ils ;
         idkbse_bibdb:eodUri ?eodUri ;
+        idkbse_bibdb:linkResolver ?linkResolver ;
         idkbse_bibdb:address ?address ;
         idkbse_bibdb:lopac ?lopac ;
         :isPartOf ?org ;
@@ -37,6 +39,10 @@ construct {
        idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
        idkbse_bibdb:isbnSearchUri ?isbnUri ;
        idkbse_bibdb:issnSearchUri ?issnUri .
+
+    ?linkResolver a idkbse_bibdb:LinkResolver ;
+       rdfs:label ?linkResolverName ;
+       :uri ?linkResolverUrl .
 
     ?lopac a idkbse_bibdb:LOPAC .
         #:url ?ils_url ;
@@ -181,6 +187,21 @@ construct {
         ?bdb_id bibdb:eod ?eod .
         FILTER(?eodUri != "" && ?eod)
     }
+
+    optional {
+        ?bdb_id bibdb:linkresolver_url ?linkResolverUrl .
+        FILTER(?linkResolverUrl != "")
+    }
+    optional {
+        ?bdb_id bibdb:linkresolver_name ?linkResolverName .
+        FILTER(?linkResolverName != "")
+    }
+    bind(
+        if(bound(?linkResolverUrl),
+            bnode(concat(str(?linkResolverUrl), str(?sigelslug))),
+            ?undefined
+        ) as ?linkResolver
+    )
 
     optional {
         ?bdb_id bibdb:organisation ?org_id .
