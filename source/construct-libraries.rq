@@ -17,10 +17,11 @@ construct {
         :url ?url ;
         :qualifier ?dept ;
         idkbse_bibdb:libraryType ?libraryTypeUri ;
+        idkbse_bibdb:openingHours ?openHours ;
+        idkbse_bibdb:address ?address ;
         idkbse_bibdb:ils ?ils ;
         idkbse_bibdb:eodUri ?eodUri ;
         idkbse_bibdb:linkResolver ?linkResolver ;
-        idkbse_bibdb:address ?address ;
         idkbse_bibdb:lopac ?lopac ;
         :isPartOf ?org ;
         :category ?registranturl .
@@ -125,6 +126,10 @@ construct {
         }
 
         FILTER(?ils_url || ?bibIdUri || ?isbnUri || ?issnUri )
+    }
+
+    optional {
+        ?bdb_id sdo:openingHoursSpecification ?openHours .
     }
 
     optional {

@@ -966,6 +966,12 @@ bibdb:LinkResolver a owl:Class ;
                  <https://www.niso.org/publications/z3988-2004-r2010> ;
     rdfs:label "Link resolver"@en, "Länkserver"@sv .
 
+#sdo:openingHoursSpecification requires structured data.
+#bibdb is just a string
+bibdb:openingHours a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:range xsd:string .
+
 bibdb:ILS a owl:Class ;
     :category :platform ;
     rdfs:label "ILS"@en, "ILS"@sv .
