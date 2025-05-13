@@ -44,7 +44,8 @@ construct {
        :url ?ils_url ;
        idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
        idkbse_bibdb:isbnSearchUri ?isbnUri ;
-       idkbse_bibdb:issnSearchUri ?issnUri .
+       idkbse_bibdb:issnSearchUri ?issnUri ;
+       idkbse_bibdb:itemStatusUri ?itemStatusUri .
 
     ?linkResolver a idkbse_bibdb:LinkResolver ;
        rdfs:label ?linkResolverName ;
@@ -143,6 +144,13 @@ construct {
         optional {
             ?ils bibdb:opacsyntax_issn ?issnUri .
             FILTER(?issnUri != "")
+        }
+
+        optional {
+            ?ils bibdb:item_status_url ?itemStatusUri .
+            ?ils bibdb:item_status_level ?itemStatusLevel .
+            ?ils bibdb:item_status_webbsok ?itemStatusInSearch .
+            FILTER(?itemStatusUri != "" && ?itemStatusLevel && ?itemStatusInSearch)
         }
 
         FILTER(?ils_url || ?bibIdUri || ?isbnUri || ?issnUri )
