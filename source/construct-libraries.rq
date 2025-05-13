@@ -185,7 +185,11 @@ construct {
     optional {
         ?bdb_id bibdb:organisation ?org_id .
         ?org_id bibdb:code ?orgCode .
-        ?org_id sdo:name ?orgName .
+
+        optional {
+            ?org_id sdo:name ?orgName .
+            FILTER(?orgName != ""@en)
+        }
 
         bind(encode_for_uri(replace(str(?orgCode), "\\s+", "")) as ?orgSlug)
         bind(iri(concat(str(coalesce(?uribase, </library/org/>)), ?orgSlug)) as ?org)
