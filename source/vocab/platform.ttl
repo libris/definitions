@@ -1050,32 +1050,49 @@ bibdb:address a owl:ObjectProperty ;
 # Used for attention
 bibdb:extendedAddress a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:extendedAddress ;
     rdfs:comment "Till exempel att. eller C/O."@sv;
     rdfs:label "Address extension"@en, "Ytterligare addressinformation"@sv .
 
 bibdb:streetAddress a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:streetAddress ;
     rdfs:label "Street address"@en, "Gatuadress"@sv .
 
 bibdb:postalCode a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:postalCode ;
     rdfs:label "Postal code"@en, "Postnummer"@sv .
 
 bibdb:addressLocality a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:addressLocality ;
     rdfs:label "Address locality code"@en, "Ort"@sv .
 
 bibdb:email a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:email ;
     rdfs:label "Email"@en, "E-post"@sv .
 
 bibdb:telephone a owl:DatatypeProperty;
     :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:telephone ;
     rdfs:label "Telephone"@en, "Telefon"@sv .
 
+bibdb:latitude a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library ;
+    owl:equivalentProperty sdo:latitude ;
+    rdfs:label "latitude"@en, "latitud"@sv .
+
+bibdb:longitude a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library ;
+    owl:equivalentProperty sdo:longitude ;
+    rdfs:label "longitude"@en, "longitud"@sv .

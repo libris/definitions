@@ -24,7 +24,11 @@ construct {
         idkbse_bibdb:linkResolver ?linkResolver ;
         idkbse_bibdb:lopac ?lopac ;
         :isPartOf ?org ;
-        :category ?registranturl .
+        :category ?registranturl ;
+        # TODO these should maybe be in :place
+        # TODO or group them similar to sdo:GeoCoordinates
+        idkbse_bibdb:latitude ?latitude ;
+        idkbse_bibdb:longitude ?longitude .
         #:place ?place .
 
     ?address a ?addressType ;
@@ -130,6 +134,12 @@ construct {
 
     optional {
         ?bdb_id sdo:openingHoursSpecification ?openHours .
+    }
+
+    optional {
+        ?bdb_id sdo:latitude ?latitude .
+        ?bdb_id sdo:longitude ?longitude .
+        FILTER(?latitude != 0 && ?longitude != 0)
     }
 
     optional {
