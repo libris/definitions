@@ -599,6 +599,18 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "bulk:Execution",
           "showProperties": [ "bulk:status" ]
+        },
+        "bibdb:LibraryOrganization": {
+          "@id": "bibdb:LibraryOrganization-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:LibraryOrganization",
+          "showProperties": [ "name", "code" ]
+        },
+        "bibdb:PostalAddress": {
+          "@id": "bibdb:PostalAddress-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:PostalAddress",
+          "showProperties": [ "bibdb:extendedAddress", "bibdb:streetAddress", "bibdb:postalCode", "bibdb:addressLocality" ]
         }
       }
     },
@@ -817,7 +829,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
           "fresnel:extends": {"@id": "Library-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "fresnel:super", "isPartOf", "bibdb:libraryType", "url" ]
         },
         "Bibliography": {
           "@id": "Bibliography-cards",
@@ -1348,7 +1360,13 @@
         },
         "Library": {
           "fresnel:extends": {"@id": "Library-cards"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [
+            "fresnel:super",
+            "bibdb:openingHours",
+            "bibdb:address",
+            "bibdb:latitude",
+            "bibdb:longitude"
+          ]
         },
         "MediaType": {
           "fresnel:extends": {"@id": "MediaType-cards"},
