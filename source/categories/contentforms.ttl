@@ -2,6 +2,7 @@ prefix : <https://id.kb.se/vocab/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
+prefix marc: <https://id.kb.se/marc/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix div: <https://id.kb.se/term/div/>
@@ -35,7 +36,7 @@ ktg:Object a :Category .
 
 ktg:StillImage a :Category ;
   skos:broader ktg:Visual ;
-  skos:closeMatch saogf:Bilder .
+  skos:closeMatch saogf:Bilder, marc:Picture .
 
 ktg:Movement a :Category ;
   skos:prefLabel "Rörelser"@sv .
