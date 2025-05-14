@@ -61,7 +61,8 @@ construct {
         idkbse_bibdb:myLoansUri ?myLoans_sv ;
         idkbse_bibdb:myLoansUri ?myLoans_en ;
         idkbse_bibdb:patronRegistrationUri ?patronRegistration_sv ;
-        idkbse_bibdb:patronRegistrationUri ?patronRegistration_en .
+        idkbse_bibdb:patronRegistrationUri ?patronRegistration_en ;
+        idkbse_bibdb:displayMode ?displayMode.
         #:url ?ils_url ;
 
     ?org a idkbse_bibdb:Organization ;
@@ -274,6 +275,11 @@ construct {
             ?lopac bibdb:librarycard_eng ?libraryCard_eng .
             FILTER(?libraryCard_eng != "")
             BIND( STRLANG(str(?libraryCard_eng), "en") AS ?patronRegistration_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:lightbox ?lightBoxBool .
+            bind(if(?lightBoxBool, idkbse_bibdb:Lightbox, idkbse_bibdb:Blank) as ?displayMode)
         }
 
         filter(?active)

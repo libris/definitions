@@ -983,16 +983,6 @@ bibdb:ils a owl:ObjectProperty ;
     rdfs:range bibdb:ILS ;
     rdfs:label "ILS"@en, "ILS"@sv .
 
-bibdb:LOPAC a owl:Class ;
-    :category :platform ;
-    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
-
-bibdb:lopac a owl:ObjectProperty ;
-    :category :platform ;
-    rdfs:domain :Library ;
-    rdfs:range bibdb:LOPAC ;
-    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
-
 bibdb:templateUri a owl:DatatypeProperty;
     :category :platform ;
     rdfs:range xsd:string .
@@ -1026,18 +1016,6 @@ bibdb:eodUri a owl:DatatypeProperty;
     rdfs:domain :Library;
     rdfs:subPropertyOf bibdb:templateUri ;
     rdfs:label "URI for ordering EOD"@en, "URI för att beställa EOD"@sv .
-
-bibdb:myLoansUri a owl:DatatypeProperty;
-    :category :platform ;
-    rdfs:domain bibdb:LOPAC;
-    rdfs:subPropertyOf bibdb:templateUri ;
-    rdfs:label "URI for My loans"@en, "URI för Mina lån"@sv .
-
-bibdb:patronRegistrationUri a owl:DatatypeProperty;
-    :category :platform ;
-    rdfs:domain bibdb:LOPAC;
-    rdfs:subPropertyOf bibdb:templateUri ;
-    rdfs:label "URI for patron registration"@en, "URL för Ansök om lånekort"@sv .
 
 # TODO just use straight schema.org for address stuff?
 bibdb:PostalAddress a owl:Class ;
@@ -1125,3 +1103,43 @@ bibdb:longitude a owl:DatatypeProperty;
     rdfs:domain :Library ;
     owl:equivalentProperty sdo:longitude ;
     rdfs:label "longitude"@en, "longitud"@sv .
+
+bibdb:LOPAC a owl:Class ;
+    :category :platform ;
+    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
+
+bibdb:lopac a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:LOPAC ;
+    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
+
+bibdb:myLoansUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for My loans"@en, "URI för Mina lån"@sv .
+
+bibdb:patronRegistrationUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for patron registration"@en, "URL för Ansök om lånekort"@sv .
+
+bibdb:displayMode a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "display mode"@en, "visningsläge"@sv ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:range bulk:StatusType .
+
+bibdb:DisplayMode a owl:Class ;
+    :category :platform ;
+    skos:prefLabel "Display mode"@en, "Visningsläge"@sv .
+
+bibdb:Blank a bibdb:DisplayMode ;
+    :category :platform ;
+    skos:prefLabel "New window"@en, "Nytt fönster"@sv .
+
+bibdb:Lightbox a bibdb:DisplayMode ;
+    :category :platform ;
+    skos:prefLabel "Lightbox"@en, "Lightbox"@sv .
