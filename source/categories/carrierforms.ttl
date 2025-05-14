@@ -18,6 +18,7 @@ ktg:PhysicalForm a :Category ;
 
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
 ktg:Print a :Category;
+  skos:exactMatch marc:Print ;
   skos:broader :Unmediated .
 
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
@@ -51,7 +52,7 @@ ktg:PrintedVolume a :Category ;
 
 
 ktg:PrintedSheet a :Category ;
-  skos:broader kbrda:Print, kbrda:Sheet .
+  skos:broader ktg:Print, kbrda:Sheet .
 
 ktg:HandmadeSheet a :Category ;
   skos:broader kbrda:Unmediated, kbrda:Sheet .
