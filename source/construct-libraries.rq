@@ -205,8 +205,6 @@ construct {
             FILTER(?telephone != "")
         }
 
-        #FILTER(?extendedAddress || ?streetAddress || ?postalCode || ?addressLocality || ?email || ?telephone)
-
         bind(
             if(?contactType = "ill", idkbse_bibdb:ILLAddress,
             if(?contactType = "del", idkbse_bibdb:DeliveryAddress,
@@ -215,6 +213,14 @@ construct {
             if(?contactType = "stat", idkbse_bibdb:StatisticalContactAddress,
             idkbse_bibdb:PostalAddress )))))
             AS ?addressType
+        )
+
+        FILTER(bound(?extendedAddress)
+            || bound(?streetAddress)
+            || bound(?postalCode)
+            || bound(?addressLocality)
+            || bound(?email)
+            || bound(?telephone)
         )
     }
 
