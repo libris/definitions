@@ -18,6 +18,7 @@
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 
 @prefix rdael: <http://rdvocab.info/Elements/> .
+@prefix rdam: <http://rdaregistry.info/Elements/m/> .
 @prefix rdaz: <http://rdaregistry.info/Elements/z/> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
 
@@ -1274,12 +1275,14 @@
     rdfs:label "Anmärkning om medverkan"@sv .
 
 :ContentAccessibility a owl:Class;
-    rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
+    rdfs:label "Content accessibility information"@en, "Information om innehållets tillgänglighet"@sv;
     owl:equivalentClass bf2:ContentAccessibility .
 
 :contentAccessibility a owl:ObjectProperty;
-    rdfs:label "Content accessibility information"@en, "Anmärkning om komplement för ökad tillgänglighet"@sv;
+    rdfs:label "Content accessibility information"@en, "information om innehållets tillgänglighet"@sv;
     rdfs:range :ContentAccessibility;
+    rdfs:comment "Information för personer med sensoriska funktionsnedsättningar om alternativa sätt och hjälpmedel för att ta till sig innehållet i en resurs."@sv ;
+    # skos:relatedMatch rdam:P30452 ; keep as comment until we can establish proper relationship.
     owl:equivalentProperty bf2:contentAccessibility .
 
 :CopyrightRegistration a owl:Class;
