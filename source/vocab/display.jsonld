@@ -1173,6 +1173,13 @@
         "bulk:Job": {
           "fresnel:extends": {"@id": "Resource-cards"},
           "showProperties": [ "fresnel:super", "bulk:status", "comment" ]
+        },
+        "bibdb:PostalAddress": {
+          "@id": "bibdb:PostalAddress-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:PostalAddress",
+          "fresnel:extends": {"@id": "PostalAddress-chips"},
+          "showProperties": [ "fresnel:super", "bibdb:email", "bibdb:telephone" ]
         }
       }
     },
@@ -1475,7 +1482,6 @@
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super", "thumbnail" ]
         }
-
       }
     },
     "search-cards": {
