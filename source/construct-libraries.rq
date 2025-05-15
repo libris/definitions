@@ -154,7 +154,12 @@ construct {
             FILTER(?itemStatusUri != "" && ?itemStatusLevel && ?itemStatusInSearch)
         }
 
-        FILTER(?ils_url || ?bibIdUri || ?isbnUri || ?issnUri )
+        FILTER(bound(?ils_url)
+            || bound(?bibIdUri)
+            || bound(?isbnUri)
+            || bound(?issnUri)
+            || bound(?itemStatusUri)
+        )
     }
 
     optional {
