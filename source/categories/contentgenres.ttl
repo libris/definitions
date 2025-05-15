@@ -27,8 +27,8 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 # TODO: For some, do we want to *suggest* an expression category (see commented kbgf)? (Using skos:relatedMatch?)
 
 g:Fiction a :Genre ;
-  skos:narrowMatch marc:Fiction ;  # 84678 # (SSB)
-  skos:narrowMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+  skos:broader g:Literature ;
+  skos:narrowMatch marc:Fiction .  # 84678 # (SSB) # NOTE: only Audio(?)
 
 g:LinguisticWork a :Genre ;
   skos:altLabel "Literature"@en ,
@@ -41,6 +41,13 @@ g:Literature a :Genre ;
   #skos:broader kbrda:Text ;
   :singularLabel "Litteratur"@sv ,
     "Literature"@en .
+
+#saogf:Litteraturtidskrifter skos:broader g:Literature .
+
+g:LiteraryFiction a :Genre ;
+  skos:broader g:Literature , g:Fiction ;
+  skos:exactMatch saogf:Sk%C3%B6nlitteratur ;
+  skos:closeMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
 
 g:Cartography a :Genre ;
   skos:closeMatch saogf:Kartor ;
