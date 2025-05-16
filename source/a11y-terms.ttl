@@ -99,8 +99,6 @@
 # A list of single or combined accessModes that are sufficient to understand 
 # all the intellectual content of a resource.
 
-#TODO: define logical combinations?
-
 <accessModeSufficient/auditory> a :AccessModeSufficient ;
     vs:term_status "unstable" ;
     skos:definition "Auditory perception is necessary to consume the information."@en ;
@@ -122,7 +120,15 @@
     skos:definition "Visual perception is necessary to consume the information."@en ;
     skos:notation "visual" .
 
+#TODO: define sufficient logical combinations? the following two from MTM-examples:
 
+<accessModeSufficient/textualVisual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:notation "textual, visual" .
+
+<accessModeSufficient/auditoryVisual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:notation "auditory, visual" .
 
 ### 3. accessibilityHazard
 
