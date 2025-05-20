@@ -68,6 +68,7 @@ gf:WrittenBookWithImages a :GenreForm ;
     "Book with Images"@en .
 
 gf:Database a :GenreForm ;
+  skos:closeMatch marc:UpdatingDatabase ;
   :inCollection div:workform ;
   skos:broader g:Integrating, kbrda:ComputerDataset ;
   skos:exactMatch saogf:Databaser ;
@@ -119,6 +120,7 @@ gf:Issue a :GenreForm ;
 #    "Newspaper Issue"@en .
 
 gf:Film a :GenreForm ;
+  skos:closeMatch marc:MotionPicture ;
   skos:broader ktg:MovingImage ;
   skos:exactMatch saogf:Filmer ;
   :singularLabel "Film"@sv ,
@@ -170,9 +172,16 @@ gf:Comic a :GenreForm ;
   skos:altLabel "Tecknad serie"@sv ;
   skos:broadMatch saogf:Tecknade%20serier ,
     barngf:Tecknade%20serier ;
-  skos:exactMatch saogf:Serietidningar ;
+  skos:exactMatch saogf:Serietidningar ,
+    marc:ComicOrGraphicNovel ;
   rdfs:label "Serietidning"@sv ,
     "Comic"@en .
+
+gf:ComicStrip a :GenreForm ;
+  skos:broader gf:GraphicLiterature ;
+  skos:exactMatch marc:ComicStrip ;
+  rdfs:label "Seriestripp"@sv ,
+    "Comic strip"@en .
 
 g:ComicStory a :GenreForm ;
   skos:broader gf:Comic, g:ShortStory ;
@@ -188,6 +197,7 @@ gf:ComputerCode a :GenreForm ;
 gf:ComputerGame a :GenreForm ;
   skos:broader g:PuzzleOrGame, kbrda:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
+  skos:closeMatch marc:ComputerTypeOfFileType-g ;
   rdfs:label "Datorspel"@sv ,
     "Computer Game"@en .
 
@@ -201,11 +211,14 @@ gf:Diagram a :GenreForm ;
   skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Diagram ;
   rdfs:label "Diagram"@sv ,
-    "Diagram"@en .
+    "Diagram"@en ;
+  skos:closeMatch marc:NonProjMaterialType-n ;
+  skos:narrowMatch marc:VisualMaterialType-n .
 
 gf:Drawing a :GenreForm ;
   skos:broader ktg:StillImage, g:Manuscript ;
   skos:exactMatch tgm:Teckningar ;
+  skos:closeMatch marc:Drawing ;
   :singularLabel "Teckning"@sv ,
     "Drawing"@en .
 
@@ -255,6 +268,7 @@ gf:InteractiveObject a :GenreForm ;
 gf:Lexicon a :GenreForm ;
   skos:broader g:ReferenceWork, gf:Book ;
   skos:exactMatch saogf:Lexikon ;
+  skos:closeMatch marc:Dictionary ;
   :singularLabel "Lexikon"@sv ,
     "Lexicon"@en .
 
@@ -320,7 +334,7 @@ gf:Podcast a :GenreForm ;
 
 gf:Photograph a :GenreForm ;
   skos:broader ktg:StillImage ;
-  skos:exactMatch saogf:Fotografier, tgm:Fotografier ;
+  skos:exactMatch saogf:Fotografier, tgm:Fotografier , marc:Photograph ;
   :singularLabel "Fotografi"@sv ,
     "Photograph"@en ;
   :pluralLabel "Fotografier"@sv .
@@ -328,6 +342,7 @@ gf:Photograph a :GenreForm ;
 gf:Painting a :GenreForm ;
   skos:broader ktg:StillImage ;
   skos:exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
+  skos:closeMatch marc:Painting ;
   rdfs:label "Målning"@sv ,
     "Painting"@en .
 
@@ -354,6 +369,7 @@ gf:PictureDictionary a :GenreForm ;
 gf:Postcard a :GenreForm ;
   skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Vykort ;
+  skos:closeMatch marc:PictureCardPostCard ;
   rdfs:label "Vykort"@sv ,
     "Postcard"@en .
 
@@ -432,6 +448,7 @@ gf:Website a :GenreForm ;
   skos:broader kbrda:OnlineResource ,
     ktg:Integrating ;
   skos:exactMatch saogf:Webbplatser ;
+  skos:closeMatch marc:UpdatingWebSite ;
   rdfs:label "Webbplats"@sv ,
     "Website"@en .
 
@@ -449,7 +466,7 @@ g:Blog a :GenreForm ;
     "Blog"@en .
 
 gf:Yearbook a :GenreForm ;
-  skos:exactMatch saogf:%C3%85rsb%C3%B6cker ;
+  skos:exactMatch saogf:%C3%85rsb%C3%B6cker , marc:Yearbook ;
   skos:broader ktg:SerialPublication ,
     gf:Book .
 
@@ -500,18 +517,20 @@ gf:DocumentaryComic a :GenreForm ;
 
 gf:Map a :GenreForm ;
   skos:broader kbrda:CartographicImage ;
-  skos:closeMatch marcgt:map ;
+  skos:closeMatch marcgt:map , marc:Map ;
   skos:exactMatch tgm:Kartor ;
   :singularLabel "Single map"@en ,
     "Enskild karta"@sv .
 
 gf:Globe a :GenreForm ;
   skos:broader kbrda:CartographicThreeDimensionalForm ;
-  skos:exactMatch tgm:Glober .
+  skos:exactMatch tgm:Glober ;
+  skos:closeMatch marc:Globe .
 
 gf:Atlas a :GenreForm ;
   skos:broader kbrda:CartographicImage, gf:WrittenBook ;
-  skos:exactMatch marc:Atlas, tgm:Atlaser .
+  skos:exactMatch marc:Atlas, tgm:Atlaser ;
+  skos:narrowMatch marc:MapMaterialType-d .
 
 # TODO: Define in saogf? And move these to marcmatches.ttl (to be remapped).
 gf:TerrestrialGlobe a :GenreForm ;
@@ -569,21 +588,6 @@ gf:Textleaf a :GenreForm ; # gf:SmallText # TODO: CarrierGenreForm?
   skos:broader gf:TextPiece ;
   rdfs:label "Textblad"@sv , "Text leaf"@en .
 
-# from <examples/typenormalization/marcmatches.ttl>
-gf:Lexicon skos:closeMatch marc:Dictionary .
-gf:Database skos:closeMatch marc:UpdatingDatabase .
-gf:Website skos:closeMatch marc:UpdatingWebSite .
-gf:Film skos:closeMatch marc:MotionPicture .
-gf:Postcard skos:closeMatch marc:PictureCardPostCard .
-gf:ComputerGame skos:closeMatch marc:ComputerTypeOfFileType-g .
-gf:Painting skos:closeMatch marc:Painting .
-gf:Drawing skos:closeMatch marc:Drawing .
-gf:Map skos:closeMatch marc:Map .
-gf:Globe skos:closeMatch marc:Globe .
-gf:Atlas skos:closeMatch marc:Atlas .
-gf:Diagram skos:closeMatch marc:NonProjMaterialType-n .
-gf:Photograph skos:closeMatch marc:Photograph .
-gf:Yearbook skos:closeMatch marc:Yearbook .
 
 #gf:OnlineResource a :CarrierForm . # TODO: move to carrierform...
 

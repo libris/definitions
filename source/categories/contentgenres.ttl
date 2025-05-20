@@ -47,6 +47,7 @@ g:Literature a :Genre ;
 g:LiteraryFiction a :Genre ;
   skos:broader g:Literature , g:Fiction ;
   skos:exactMatch saogf:Sk%C3%B6nlitteratur ;
+  skos:narrowMatch marc:MixedForms ;
   skos:closeMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
 
 g:Cartography a :Genre ;
@@ -70,6 +71,7 @@ g:Integrating a :Genre ;
 g:AbstractSummary a :Genre ;
   skos:broader gf:TextPiece ;
   skos:exactMatch saogf:Sammanfattningar ;
+  skos:exactMatch marc:AbstractsSummary ;
   :inCollection div:informative-work ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
   :singularLabel "Sammanfattning"@sv ,
@@ -83,12 +85,15 @@ g:Almanac a :Genre ;
     "Almanac"@en .
 
 g:Calendar a :Genre ;
+  skos:closeMatch marc:Calendar ;
   skos:broader g:ReferenceWork ;  # inte alltid gf:WorkWithImages ;
   skos:exactMatch saogf:Kalendrar ;
+  skos:narrowMatch marc:MapsFormatType-k ;
   :singularLabel "Kalender"@sv ,
     "Calendar"@en .
 
 g:Catalogue a :Genre ;
+  skos:closeMatch marc:Catalog ;
   skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Kataloger ;
   :singularLabel "Katalog"@sv ,
@@ -116,6 +121,7 @@ g:CollectedWork a :Genre ;
     "Collected Work"@en .
 
 g:ConferenceMaterial a :Genre ;
+  skos:closeMatch marc:ConferencePublication ;
   skos:exactMatch saogf:Konferensmaterial ;
   :inCollection div:ephemera ,
     div:informative-work ;
@@ -136,6 +142,7 @@ g:CourseMaterial a :Genre ;
     "Course Material"@en .
 
 g:Encyclopedia a :Genre ;
+  skos:closeMatch marc:Encyclopedia ;
   skos:broader g:ReferenceWork, gf:Book ;
   skos:exactMatch saogf:Encyklopedier ;
   :singularLabel "Encyklopedia"@sv ,
@@ -146,13 +153,18 @@ g:FindingAid a :GenreForm ;
   skos:closeMatch marcgt:fin .
 
 g:Juridiskt%20material a :Genre ;
-  skos:exactMatch saogf:Juridiskt%20material .
+  skos:exactMatch saogf:Juridiskt%20material ;
+  skos:narrowMatch marc:LegalArticle ,
+    marc:Legislation ,
+    marc:LawReportOrDigest ,
+    marc:LegalCaseOrCaseNote .
 
 g:TeachingMaterial a :Genre ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
   skos:exactMatch saogf:L\%C3\%A4romedel ,
     saogf:Instruktions-\%20och\%20undervisningsmaterial ;
   skos:closeMatch marc:ProgrammedText ;
+  skos:narrowMatch marc:Instruction ;
   :singularLabel "Instruktions- och undervisningsmaterial"@sv ,
     "Teaching Material"@en ;
   skos:altLabel "Läromedel"@sv .
@@ -172,6 +184,7 @@ g:Novel a :Genre ;
     "Novel"@en .
 
 g:Periodical a :Genre ;
+  skos:closeMatch marc:Periodical ;
   skos:broader g:CollectingResource ;
   skos:exactMatch saogf:Periodika ;
   skos:altLabel "Periodika"@sv ;
@@ -208,6 +221,7 @@ g:NewsLetter a :Genre ;
     "Newsletter"@en .
 
 g:Newspaper a :Genre ;
+  skos:closeMatch marc:Newspaper ;
   skos:broader g:Periodical ;
   skos:exactMatch saogf:Dagstidningar ;
   :singularLabel "Dagstidning"@sv ,
@@ -223,7 +237,10 @@ g:Register a :Genre ;
 g:PuzzleOrGame a :Genre ;
   skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
   rdfs:label "Spel eller tankenötter"@sv ,
-    "Puzzle or game"@en .
+    "Puzzle or game"@en ;
+  skos:narrowMatch marc:VisualMaterialType-g ,
+    marc:Game ,  # Sällskapsspel
+    marc:Puzzle .
 
 g:RolePlayingGame a :Genre ;
   skos:broader g:PuzzleOrGame ;
@@ -232,6 +249,7 @@ g:RolePlayingGame a :Genre ;
     "Roleplaying Game"@en .
 
 g:Statistics a :Genre ;
+  skos:closeMatch marc:Statistics ;
   skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Statistik ;
   :singularLabel "Statistik"@sv ,
@@ -271,6 +289,7 @@ g:Timetable a :Genre ;
 #  skos:exactMatch saogf:Leporello .
 
 g:Patent a :Genre ;
+  skos:closeMatch marc:PatentDocument ;
   #skos:broader kbrda:Text ;
   skos:exactMatch saogf:Patent ;
   :inCollection div:informative-work .
@@ -329,6 +348,7 @@ g:Patent a :Genre ;
 #  skos:closeMatch saogf:Verk\%20med\%20samtalsliknande\%20karakt\%C3\%A4r .
 
 g:Interview a :Genre ;
+  skos:closeMatch marc:Interview ;
   skos:exactMatch saogf:Intervjuer .
 
 g:Reportage a :Genre ;
@@ -349,6 +369,7 @@ g:Reportage a :Genre ;
 #  skos:closeMatch saogf:Visor .
 
 g:ShortStory a :Genre ;
+  skos:closeMatch marc:ShortStory ;
   skos:broader gf:TextPiece ,
     g:Literature ;
   skos:exactMatch saogf:Noveller ;
@@ -368,27 +389,16 @@ g:ReferenceWork a :Genre ;
     "Reference Work"@en .
 
 g:Review a :Genre ;
+  skos:closeMatch marc:Review ;
   #skos:broader gf:TextPiece ;
   skos:exactMatch saogf:Recensioner ;
   :singularLabel "Recension"@sv ,
     "Review"@en .
 
 g:Standard a :Genre ;
+  skos:closeMatch marc:StandardsSpecification ;
   skos:broader g:ReferenceWork ;
   skos:exactMatch saogf:Standarder ;
   :singularLabel "Standard"@sv ,
     "Standard"@en .
 
-# from <examples/typenormalization/marcmatches.ttl>
-g:ConferenceMaterial skos:closeMatch marc:ConferencePublication .
-g:Statistics skos:closeMatch marc:Statistics .
-g:Encyclopedia skos:closeMatch marc:Encyclopedia .
-g:Catalogue skos:closeMatch marc:Catalog .
-g:Calendar skos:closeMatch marc:Calendar .
-g:Patent skos:closeMatch marc:PatentDocument .
-g:ShortStory skos:closeMatch marc:ShortStory .
-g:Review skos:closeMatch marc:Review .
-g:Standard skos:closeMatch marc:StandardsSpecification .
-g:Interview skos:closeMatch marc:Interview .
-g:Newspaper skos:closeMatch marc:Newspaper .
-g:Periodical skos:closeMatch marc:Periodical .
