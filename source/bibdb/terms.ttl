@@ -2,8 +2,105 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix kbv: <https://id.kb.se/vocab/>
+prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
 prefix : <https://id.kb.se/term/bibdb/>
 
 :Registrant a skos:Concept ;
     skos:prefLabel "Registrant"@en, "Registrerande"@sv ;
     rdfs:comment "Bibliotek i Librissamarbetet som skapar och underhåller metadata i den gemensamma datamängden."@sv .
+
+
+# https://git.kb.se/libris/bibdb/-/blob/develop/libdb/models.py#L262
+:natbib a idkbse_bibdb:LibraryType ;
+    skos:notation "natbib" ;
+    rdfs:label "Nationalbibliotek"@sv .
+
+:folkbib a idkbse_bibdb:LibraryType ;
+    skos:notation "folkbib" ;
+    rdfs:label "Folkbibliotek"@sv .
+
+:folkskolbib a idkbse_bibdb:LibraryType ;
+    skos:notation "folkskolbib" ;
+    rdfs:label "Folk- och skolbibliotek"@sv .
+
+:specbib a idkbse_bibdb:LibraryType ;
+    skos:notation "specbib" ;
+    rdfs:label "Specialbibliotek"@sv .
+
+:sjukbib a idkbse_bibdb:LibraryType ;
+    skos:notation "sjukbib" ;
+    rdfs:label "Sjukhusbibliotek"@sv .
+
+:myndbib a idkbse_bibdb:LibraryType ;
+    skos:notation "myndbib" ;
+    rdfs:label "Myndighetsbibliotek"@sv .
+
+:busbib a idkbse_bibdb:LibraryType ;
+    skos:notation "busbib" ;
+    rdfs:label "Företagsbibliotek"@sv .
+
+:musbib a idkbse_bibdb:LibraryType ;
+    skos:notation "musbib" ;
+    rdfs:label "Arkiv och museibibliotek"@sv .
+
+:muskom a idkbse_bibdb:LibraryType ;
+    skos:notation "muskom" ;
+    rdfs:label "Kommunalt museibibliotek"@sv .
+
+:muslan a idkbse_bibdb:LibraryType ;
+    skos:notation "muslan" ;
+    rdfs:label "Länsmuseibibliotek"@sv .
+
+:musstat a idkbse_bibdb:LibraryType ;
+    skos:notation "musstat" ;
+    rdfs:label "Statligt museibibliotek"@sv .
+
+:skolbib a idkbse_bibdb:LibraryType ;
+    skos:notation "skolbib" ;
+    rdfs:label "Skolbibliotek"@sv .
+
+:friskol a idkbse_bibdb:LibraryType ;
+    skos:notation "friskol" ;
+    rdfs:label "Friskolebibliotek"@sv .
+
+:gymbib a idkbse_bibdb:LibraryType ;
+    skos:notation "gymbib" ;
+    rdfs:label "Gymnasiebibliotek"@sv .
+
+:frisgym a idkbse_bibdb:LibraryType ;
+    skos:notation "frisgym" ;
+    rdfs:label "Friskolegymnasiebibliotek"@sv .
+
+:statskol a idkbse_bibdb:LibraryType ;
+    skos:notation "statskol" ;
+    rdfs:label "Statligt skolbibliotek"@sv .
+
+:vuxbib a idkbse_bibdb:LibraryType ;
+    skos:notation "vuxbib" ;
+    rdfs:label "Bibliotek på komvux/lärcentra"@sv .
+
+:univbib a idkbse_bibdb:LibraryType ;
+    skos:notation "univbib" ;
+    rdfs:label "Universitets- och högskolebibliotek"@sv .
+
+:folkhogbib a idkbse_bibdb:LibraryType ;
+    skos:notation "folkhogbib" ;
+    rdfs:label "Folkhögskolebibliotek"@sv .
+
+:ovrbib a idkbse_bibdb:LibraryType ;
+    skos:notation "ovrbib" ;
+    rdfs:label "Övriga bibliotek"@sv .
+
+# "typ av folkbibliotek"
+# https://git.kb.se/libris/bibdb/-/blob/develop/libdb/models.py#L287
+:kommunbib a idkbse_bibdb:LibraryType ;
+    skos:notation "kommunbib" ;
+    rdfs:label "Kommunbibliotek"@sv .
+
+:lanecentral a idkbse_bibdb:LibraryType ;
+    skos:notation "lanecentral" ;
+    rdfs:label "Lånecentral"@sv .
+
+:lansbib a idkbse_bibdb:LibraryType ;
+    skos:notation "lansbib" ;
+    rdfs:label "Länsbibliotek"@sv .

@@ -605,6 +605,18 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "bulk:Execution",
           "showProperties": [ "bulk:status" ]
+        },
+        "bibdb:LibraryOrganization": {
+          "@id": "bibdb:LibraryOrganization-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:LibraryOrganization",
+          "showProperties": [ "name", "code" ]
+        },
+        "bibdb:PostalAddress": {
+          "@id": "bibdb:PostalAddress-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:PostalAddress",
+          "showProperties": [ "bibdb:extendedAddress", "bibdb:streetAddress", "bibdb:postalCode", "bibdb:addressLocality" ]
         }
       }
     },
@@ -824,7 +836,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
           "fresnel:extends": {"@id": "Library-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "fresnel:super", "isPartOf", "bibdb:libraryType", "url" ]
         },
         "Bibliography": {
           "@id": "Bibliography-cards",
@@ -1168,6 +1180,13 @@
         "bulk:Job": {
           "fresnel:extends": {"@id": "Resource-cards"},
           "showProperties": [ "fresnel:super", "bulk:status", "comment" ]
+        },
+        "bibdb:PostalAddress": {
+          "@id": "bibdb:PostalAddress-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:PostalAddress",
+          "fresnel:extends": {"@id": "bibdb:PostalAddress-chips"},
+          "showProperties": [ "fresnel:super", "bibdb:email", "bibdb:telephone" ]
         }
       }
     },
@@ -1357,7 +1376,13 @@
         },
         "Library": {
           "fresnel:extends": {"@id": "Library-cards"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [
+            "fresnel:super",
+            "bibdb:openingHours",
+            "bibdb:address",
+            "bibdb:latitude",
+            "bibdb:longitude"
+          ]
         },
         "MediaType": {
           "fresnel:extends": {"@id": "MediaType-cards"},
@@ -1466,7 +1491,6 @@
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super", "thumbnail" ]
         }
-
       }
     },
     "search-cards": {
