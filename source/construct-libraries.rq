@@ -2,22 +2,72 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix sdo: <http://schema.org/>
 prefix bibdb: <http://libris.kb.se/def/lib#>
+prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix : <https://id.kb.se/vocab/>
 base <https://libris.kb.se/library/>
 
 construct {
 
     ?library a ?libtype ;
-        :meta _:meta ;
+        :meta ?meta ;
         owl:sameAs ?bdb_id, ?sameas ;
         :sigel ?sigel ;
         :name ?name ;
         :url ?url ;
         :qualifier ?dept ;
-        :category ?registranturl .
+        idkbse_bibdb:libraryType ?libraryTypeUri ;
+        idkbse_bibdb:libraryType ?librarySubTypeUri ;
+        idkbse_bibdb:openingHours ?openHours ;
+        idkbse_bibdb:address ?address ;
+        idkbse_bibdb:ils ?ils ;
+        idkbse_bibdb:eodUri ?eodUri ;
+        idkbse_bibdb:linkResolver ?linkResolver ;
+        idkbse_bibdb:lopac ?lopac ;
+        :isPartOf ?org ;
+        :category ?registranturl ;
+        # TODO these should maybe be in :place
+        # TODO or group them similar to sdo:GeoCoordinates
+        idkbse_bibdb:latitude ?latitude ;
+        idkbse_bibdb:longitude ?longitude .
         #:place ?place .
 
-    _:meta :created ?created ; :modified ?modified .
+    ?address a ?addressType ;
+        idkbse_bibdb:extendedAddress ?extendedAddress ;
+        idkbse_bibdb:streetAddress ?streetAddress ;
+        idkbse_bibdb:postalCode ?postalCode ;
+        idkbse_bibdb:addressLocality ?addressLocality ;
+        idkbse_bibdb:email ?email ;
+        idkbse_bibdb:telephone ?telephone .
+
+    ?ils a idkbse_bibdb:ILS ;
+       :url ?ils_url ;
+       idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
+       idkbse_bibdb:isbnSearchUri ?isbnUri ;
+       idkbse_bibdb:issnSearchUri ?issnUri ;
+       idkbse_bibdb:itemStatusUri ?itemStatusUri .
+
+    ?linkResolver a idkbse_bibdb:LinkResolver ;
+       rdfs:label ?linkResolverName ;
+       :uri ?linkResolverUrl .
+
+    ?lopac a idkbse_bibdb:LOPAC ;
+        idkbse_bibdb:bibIdSearchUri ?lopac_bibIdUri_sv ;
+        idkbse_bibdb:bibIdSearchUri ?lopac_bibIdUri_en ;
+        idkbse_bibdb:isbnSearchUri ?lopac_isbnUri_sv ;
+        idkbse_bibdb:isbnSearchUri ?lopac_isbnUri_en ;
+        idkbse_bibdb:issnSearchUri ?lopac_issnUri_sv ;
+        idkbse_bibdb:issnSearchUri ?lopac_issnUri_en ;
+        idkbse_bibdb:myLoansUri ?myLoans_sv ;
+        idkbse_bibdb:myLoansUri ?myLoans_en ;
+        idkbse_bibdb:patronRegistrationUri ?patronRegistration_sv ;
+        idkbse_bibdb:patronRegistrationUri ?patronRegistration_en ;
+        idkbse_bibdb:displayMode ?displayMode.
+        #:url ?ils_url ;
+
+    ?org a idkbse_bibdb:Organization ;
+        :name ?orgName ;
+        skos:notation ?orgCode .
 
     # TODO: Model a proper place/adress relation.
     # ?place a :Place ;
@@ -30,6 +80,7 @@ construct {
     # ?country a :Country ;
     #     :code ?country_code .
 
+    ?meta :created ?created ; :modified ?modified .
 } where {
 
     ?bdb_id
@@ -40,6 +91,16 @@ construct {
     optional {
         ?bdb_id bibdb:libris_reg ?reg . filter ( ?reg = true )
         bind (iri('https://id.kb.se/term/bibdb/Registrant') as ?registranturl)
+    }
+
+    optional {
+        ?bdb_id bibdb:library_type ?libraryType .
+        bind (iri(concat('https://id.kb.se/term/bibdb/', ?libraryType)) as ?libraryTypeUri)
+    }
+
+    optional {
+        ?bdb_id bibdb:library_subtype ?librarySubType .
+        bind (iri(concat('https://id.kb.se/term/bibdb/', ?librarySubType)) as ?librarySubTypeUri)
     }
 
     optional {
@@ -65,6 +126,210 @@ construct {
     }
     bind(if(?type = sdo:Library, :Library, :Bibliography) as ?libtype)
 
+    optional {
+        ?bdb_id bibdb:ils ?ils .
+
+        optional {
+            ?ils bibdb:catalogue_url ?ils_url .
+            FILTER(?ils_url != "" && ?ils_url != "http://")
+        }
+
+        optional {
+            ?ils bibdb:opacsyntax_bibid ?bibIdUri .
+            FILTER(?bibIdUri != "")
+        }
+        optional {
+            ?ils bibdb:opacsyntax_isbn ?isbnUri .
+            FILTER(?isbnUri != "")
+        }
+        optional {
+            ?ils bibdb:opacsyntax_issn ?issnUri .
+            FILTER(?issnUri != "")
+        }
+
+        optional {
+            ?ils bibdb:item_status_url ?itemStatusUri .
+            ?ils bibdb:item_status_level ?itemStatusLevel .
+            ?ils bibdb:item_status_webbsok ?itemStatusInSearch .
+            FILTER(?itemStatusUri != "" && ?itemStatusLevel && ?itemStatusInSearch)
+        }
+
+        FILTER(bound(?ils_url)
+            || bound(?bibIdUri)
+            || bound(?isbnUri)
+            || bound(?issnUri)
+            || bound(?itemStatusUri)
+        )
+    }
+
+    optional {
+        ?bdb_id sdo:openingHoursSpecification ?openHours .
+    }
+
+    optional {
+        ?bdb_id sdo:latitude ?latitude .
+        ?bdb_id sdo:longitude ?longitude .
+        FILTER(?latitude != 0 && ?longitude != 0)
+    }
+
+    optional {
+        ?bdb_id sdo:address ?address .
+
+        optional {
+            ?address bibdb:address_type ?contactType .
+            FILTER(?contactType != "")
+        }
+
+        optional {
+            ?address bibdb:attention_dept ?extendedAddress .
+            FILTER(?extendedAddress != "")
+        }
+
+        optional {
+            ?address sdo:streetAddress ?streetAddress .
+            FILTER(?streetAddress != "")
+        }
+
+        optional {
+            ?address sdo:postalCode ?postalCode .
+            FILTER(?postalCode != "")
+        }
+
+        optional {
+            ?address sdo:addressLocality ?addressLocality .
+            FILTER(?addressLocality != "")
+        }
+
+        optional {
+            ?address sdo:email ?email .
+            FILTER(?email != "")
+        }
+
+        optional {
+            ?address sdo:telephone ?telephone .
+            FILTER(?telephone != "")
+        }
+
+        bind(
+            if(?contactType = "ill", idkbse_bibdb:ILLAddress,
+            if(?contactType = "del", idkbse_bibdb:DeliveryAddress,
+            if(?contactType = "vis", idkbse_bibdb:VisitingAddress,
+            if(?contactType = "inv", idkbse_bibdb:InvoicingAddress,
+            if(?contactType = "stat", idkbse_bibdb:StatisticalContactAddress,
+            idkbse_bibdb:PostalAddress )))))
+            AS ?addressType
+        )
+
+        FILTER(bound(?extendedAddress)
+            || bound(?streetAddress)
+            || bound(?postalCode)
+            || bound(?addressLocality)
+            || bound(?email)
+            || bound(?telephone)
+        )
+    }
+
+    optional {
+        ?bdb_id bibdb:lopac ?lopac .
+        ?lopac bibdb:active ?active .
+
+        optional {
+            ?lopac bibdb:syntax_bibid_swe ?bibIdUri_swe .
+            FILTER(?bibIdUri_swe != "")
+            BIND( STRLANG(str(?bibIdUri_swe), "sv") AS ?lopac_bibIdUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_bibid_eng ?bibIdUri_eng .
+            FILTER(?bibIdUri_eng != "")
+            BIND( STRLANG(str(?bibIdUri_eng), "en") AS ?lopac_bibIdUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:syntax_isbn_swe ?isbnUri_swe .
+            FILTER(?isbnUri_swe != "")
+            BIND( STRLANG(str(?isbnUri_swe), "sv") AS ?lopac_isbnUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_isbn_eng ?isbnUri_eng .
+            FILTER(?isbnUri_eng != "")
+            BIND( STRLANG(str(?isbnUri_eng), "en") AS ?lopac_isbnUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:syntax_issn_swe ?issnUri_swe .
+            FILTER(?issnUri_swe != "")
+            BIND( STRLANG(str(?issnUri_swe), "sv") AS ?lopac_issnUri_sv ) .
+        }
+        optional {
+            ?lopac bibdb:syntax_issn_eng ?issnUri_eng .
+            FILTER(?issnUri_eng != "")
+            BIND( STRLANG(str(?issnUri_eng), "en") AS ?lopac_issnUri_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:my_loans_swe ?myLoans_swe .
+            FILTER(?myLoans_swe != "")
+            BIND( STRLANG(str(?myLoans_swe), "sv") AS ?myLoans_sv ) .
+        }
+        optional {
+            ?lopac bibdb:my_loans_swe ?myLoans_eng .
+            FILTER(?myLoans_eng != "")
+            BIND( STRLANG(str(?myLoans_eng), "en") AS ?myLoans_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:librarycard_swe ?libraryCard_swe .
+            FILTER(?libraryCard_swe != "")
+            BIND( STRLANG(str(?libraryCard_swe), "sv") AS ?patronRegistration_sv ) .
+        }
+        optional {
+            ?lopac bibdb:librarycard_eng ?libraryCard_eng .
+            FILTER(?libraryCard_eng != "")
+            BIND( STRLANG(str(?libraryCard_eng), "en") AS ?patronRegistration_en ) .
+        }
+
+        optional {
+            ?lopac bibdb:lightbox ?lightBoxBool .
+            bind(if(?lightBoxBool, idkbse_bibdb:Lightbox, idkbse_bibdb:Blank) as ?displayMode)
+        }
+
+        filter(?active)
+    }
+
+    optional {
+        ?bdb_id bibdb:eod_url ?eodUri .
+        ?bdb_id bibdb:eod ?eod .
+        FILTER(?eodUri != "" && ?eod)
+    }
+
+    optional {
+        ?bdb_id bibdb:linkresolver_url ?linkResolverUrl .
+        FILTER(?linkResolverUrl != "")
+    }
+    optional {
+        ?bdb_id bibdb:linkresolver_name ?linkResolverName .
+        FILTER(?linkResolverName != "")
+    }
+    bind(
+        if(bound(?linkResolverUrl),
+            bnode(concat(str(?linkResolverUrl), str(?sigelslug))),
+            ?undefined
+        ) as ?linkResolver
+    )
+
+    optional {
+        ?bdb_id bibdb:organisation ?org_id .
+        ?org_id bibdb:code ?orgCode .
+
+        optional {
+            ?org_id sdo:name ?orgName .
+            FILTER(?orgName != ""@en)
+        }
+
+        bind(encode_for_uri(replace(str(?orgCode), "\\s+", "")) as ?orgSlug)
+        bind(iri(concat(str(coalesce(?uribase, </library/org/>)), ?orgSlug)) as ?org)
+    }
+
     # optional {
     #     ?bdb_id bibdb:country_code ?country_code .
     #     FILTER(?country_code != "")
@@ -89,4 +354,6 @@ construct {
 
     # bind(if(bound(?region) || bound(?lat), bnode(), ?NO_place) as ?place)
     # bind(if(bound(?place) && bound(?country_code), bnode(), ?NO_country) as ?country)
+
+    bind(bnode(?sigelslug) as ?meta)
 }

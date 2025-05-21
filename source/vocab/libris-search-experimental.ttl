@@ -38,13 +38,13 @@
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 :instanceOfType a owl:ObjectProperty ;
-    rdfs:subPropertyOf rdf:type ;
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( :instanceOf rdf:type ) .
 
 :hasInstanceType a owl:ObjectProperty ;
-    rdfs:subPropertyOf rdf:type ;
+    rdfs:label "format"@sv, "format"@en ;
+    skos:notation "FORMAT"^^:LibrisQueryCode ;
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .

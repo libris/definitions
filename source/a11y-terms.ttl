@@ -1,0 +1,417 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix : <https://id.kb.se/vocab/> .
+@base <https://id.kb.se/a11y/> .
+
+
+# OVERVIEW
+# 1. accessMode
+# 2. accessModeSufficient
+# 3. accessibilityHazard
+# 4. accesibilityFeatures
+#
+#
+# all terms marked with status unstable because current ongoing international work (2025-05-15) and might be subject to change or restructure .
+#
+# schema vocabulary https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20241209/
+# display guide https://www.w3.org/community/reports/publishingcg/CG-FINAL-a11y-display-guidelines-20250422/
+# crosswalks https://w3c.github.io/a11y-discov-vocab/crosswalk/
+# TODO: apply code sapdv https://id.loc.gov/vocabulary/accesscontentschemes/sapdv.html
+
+
+
+###
+# 1. accessMode 
+# The human sensory perceptual system or cognitive faculty
+# through which a person may process or perceive information.
+# TODO: coordination with RDA-types, see crosswalk for examples.
+
+## Vocabulary 
+
+<accessMode/auditory> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains information encoded in auditory form."@en ;
+    skos:notation "auditory" .
+
+<accessMode/tactile> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains information encoded in tactile form."@en ;
+    skos:notation "tactile" .
+
+<accessMode/textual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains information encoded in textual form."@en ;
+    skos:notation "textual" .
+
+<accessMode/visual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains information encoded in visual form."@en ;
+    skos:notation "visual" .
+
+## Visual content indicators
+#
+# https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20241209/#accessMode-visuals
+# Caution: Although user agents should infer a visual access mode when any of the values defined 
+# in this section is set, it is strongly recommended not to rely on this behaviour. 
+# Always set the value visual in addition to these indicators.
+
+
+<accessMode/chartOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains charts encoded in visual form."@en ;
+    skos:notation "chartOnVisual" .
+
+<accessMode/chemOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains chemical equations encoded in visual form."@en ;
+    skos:notation "chemOnVisual" .
+
+<accessMode/colorDependent> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains information encoded in such that color perception is necessary."@en ;
+    skos:notation "colorDependent" .
+
+<accessMode/diagramOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains diagrams encoded in visual form."@en ;
+    skos:notation "diagramOnVisual" .
+
+<accessMode/mathOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains mathematical notations encoded in visual form."@en ;
+    skos:notation "mathOnVisual" .
+
+<accessMode/musicOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains music encoded in visual form."@en ;
+    skos:notation "musicOnVisual" .
+
+<accessMode/textOnVisual> a :AccessMode ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource contains text encoded in visual form."@en ;
+    skos:notation "textOnVisual" .
+
+
+### 2. accessModeSufficient
+# A list of single or combined accessModes that are sufficient to understand 
+# all the intellectual content of a resource.
+
+<accessModeSufficient/auditory> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:definition "Auditory perception is necessary to consume the information."@en ;
+    skos:notation "auditory" .
+
+<accessModeSufficient/tactile> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:definition "Tactile perception is necessary to consume the information."@en ;
+    skos:notation "tactile" .
+
+<accessModeSufficient/textual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:definition "The ability to read textual content is necessary to consume the information."@en ;
+    #NOTE: Reading textual content does not require visual perception, as textual content can be rendered as audio using a text-to-speech capable device or assistive technology.
+    skos:notation "textual" .
+
+<accessModeSufficient/visual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:definition "Visual perception is necessary to consume the information."@en ;
+    skos:notation "visual" .
+
+#TODO: define sufficient logical combinations? the following two from MTM-examples:
+
+<accessModeSufficient/textualVisual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:notation "textual, visual" .
+
+<accessModeSufficient/auditoryVisual> a :AccessModeSufficient ;
+    vs:term_status "unstable" ;
+    skos:notation "auditory, visual" .
+
+### 3. accessibilityHazard
+
+# The hazards property vocabulary includes a value of unknown, which means the content creator of the metadata
+# explicitly acknowledges that the resource has not been checked for hazards.
+# This is different than providing no metadata for this property.
+#
+# This display field can be hidden if metadata is missing. 
+# Alternatively it can be stated that "No information is available".
+#
+# TODO: Each hazard also has an specified unknown, evaluate the logical/practical need for these before defining.
+# unknown in display guide equals could not be determined like:
+#
+# <accessibilityHazard/unknownFlashingHazard> a :AccessibilityHazard ; 
+#  skos:definitions "The presence of flashing content that can cause photosensitive seizures could not be determined"@en .
+#
+# <accessibilityHazard/unknownSoundHazard> a :AccessibilityHazard ;
+#  skos:definition "The presence of sounds that can cause sensitivity issues could not be determined" .
+#
+#<accessibilityHazard/unknownMotionSimulationHazard> a :AccessibilityHazard ;
+#  skos:definitions "The presence of motion simulations that can cause motion sickness could not be determined"@en .
+
+
+<accessibilityHazard/flashing> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "Flashing content"@en ;
+    skos:definition "The publication contains flashing content that can cause photosensitive seizures"@en ;
+    skos:notation "flashing" .
+
+<accessibilityHazard/noFlashingHazard> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "No flashing hazards"@en ;
+    skos:definition "The publication does not contain flashing content that can cause photosensitive seizures."@en ;
+    skos:notation "noFlashingHazard" .
+
+<accessibilityHazard/motionSimulation> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "Motion simulation"@en ;
+    skos:definition "The publication contains motion simulations that can cause motion sickness."@en ;
+    skos:notation "motionSimulation" .
+
+<accessibilityHazard/noMotionSimulationHazard> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "No motion simulation hazards"@en ;
+    skos:definition "The publication does not contain motion simulations that can cause motion sickness."@en ;
+    skos:notation "noMotionSimulationHazard" .
+
+<accessibilityHazard/sound> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "Sounds"@en ;
+    skos:definition "The publication contains sounds that can cause sensitivity issues."@en ;
+    skos:notation "sound" .
+
+<accessibilityHazard/noSoundHazard> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "No sound hazards"@en ;
+    skos:definition "The publication does not contain sounds that can cause sensitivity issues."@en ;
+    skos:notation "noSoundHazard" .
+
+<accessibilityHazard/unknown> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "The presence of hazards is unknown"@en ;
+    skos:definition "The publication has not been evaluated for hazard risks."@en ;
+    skos:notation "unknown" .
+
+<accessibilityHazard/none> a :AccessibilityHazard ;
+    vs:term_status "unstable" ;
+    rdfs:label "No hazards"@en ;
+    skos:definition "The publication contains no hazards."@en ;
+    skos:notation "none" .
+
+
+### 4. accessibilityFeature
+
+# TODO: Further grouping and restrictions on content especially mappings for ONIX. Also vetting usefulness. Currently only definitions for MTM-examples.
+# see also https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20241209/#accessibilityFeature
+
+# - Structure and navigation terms
+# identify navigation aids that are provided to simplify moving around within the media, such as the inclusion of a table of contents or an index.
+
+# - Adaptation terms
+# identify content features that provide alternate access to a resource. The inclusion of alternative text in an [HTML] alt attribute is one of the most commonly identifiable augmentation features.
+
+# - Rendering control terms
+# identify content rendering features that users have access to or can control. The ability to modify the appearance of the text is one example.
+
+# - Specialized markup terms
+# identify that content is encoded using domain-specific grammars like MathML and ChemML that can provide users a richer reading experience.
+
+# - Clarity terms
+# identify ways that the content has been enhanced for clearer readability. Audio with minimized background noise is one example, while content formatted for large print reading is another.
+
+# - Tactile terms
+# identify content that is formatted for tactile use, such as graphics and objects.
+
+# - Internationalization terms
+
+
+<accessibilityFeature/annotations> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "annotations" .
+
+<accessibilityFeature/ARIA> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "ARIA" .
+
+# In MTM-examples
+<accessibilityFeature/alternativeText> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "Alternative text is provided for visual content (e.g., via the [HTML] alt attribute)."@en ;
+    skos:notation "alternativeText" .
+
+<accessibilityFeature/audioDescription> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "audioDescription" .
+
+# TODO: sync with existing tactilenotation.ttl before defining new braille!
+#<accessibilityFeature/braille> a :AccessibilityFeature ;
+#    vs:term_status "unstable" ;
+#    skos:definition "[1] The content is in braille format, or [2] alternatives are available in braille."@en ;
+#    skos:notation "braille" .
+
+<accessibilityFeature/closedCaptions> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "closedCaptions" .
+
+<accessibilityFeature/ChemML> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "ChemML" .
+
+<accessibilityFeature/describedMath> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "describedMath" .
+
+# In MTM-examples
+<accessibilityFeature/displayTransformability> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "Display properties are controllable by the user. This property can be set, for example, if custom CSS style sheets can be applied to the content to control the appearance. It can also be used to indicate that styling in document formats like Word and PDF can be modified."@en ;
+    skos:notation "displayTransformability" .
+
+<accessibilityFeature/fullRubyAnnotations> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "fullRubyAnnotations" .
+
+<accessibilityFeature/highContrastAudio> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "highContrastAudio" .
+
+<accessibilityFeature/highContrastDisplay> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "highContrastDisplay" .
+
+<accessibilityFeature/horizontalWriting> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "horizontalWriting" .
+
+<accessibilityFeature/index> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "index" .
+
+# about Print edition
+# <accessibilityFeature/largePrint> a :AccessibilityFeature ;
+#     vs:term_status "unstable" ;
+#     skos:notation "largePrint" .
+
+<accessibilityFeature/latex> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "latex" .
+
+<accessibilityFeature/latex-chemistry> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "latex-chemistry" .
+
+# In MTM-examples
+<accessibilityFeature/longDescription> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "Descriptions are provided for image-based visual content and/or complex structures such as tables, mathematics, diagrams, and charts."@en ;
+    skos:notation "longDescription" .
+
+<accessibilityFeature/MathML> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "MathML" .
+
+<accessibilityFeature/MathML-chemistry> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "MathML-chemistry" .
+
+<accessibilityFeature/none> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource does not contain any accessibility features."@en ;
+    #TODO: Restrict/validate - The none value must not be set with any other feature value.
+    skos:notation "none" .
+
+<accessibilityFeature/openCaptions> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "openCaptions" .
+
+<accessibilityFeature/pageBreakMarkers> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "pageBreakMarkers" .
+
+<accessibilityFeature/pageBreakSource> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "pageBreakSource" .
+
+# In MTM-examples
+<accessibilityFeature/pageNavigation> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "The resource includes a means of navigating to static page break locations."@en ;
+    skos:notation "pageNavigation" .
+
+# In MTM-examples
+<accessibilityFeature/readingOrder> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "The reading order of the content is clearly defined in the markup (e.g., figures, sidebars and other secondary content has been marked up to allow it to be skipped automatically and/or manually escaped from."@en ;
+    skos:notation "readingOrder" .
+
+<accessibilityFeature/rubyAnnotations> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "rubyAnnotations" .
+
+<accessibilityFeature/signLanguage> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "signLanguage" .
+
+# In MTM-examples
+<accessibilityFeature/structuralNavigation> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "The use of headings in the work fully and accurately reflects the document hierarchy, allowing navigation by assistive technologies."@en ;
+    skos:notation "structuralNavigation" .
+
+# In MTM-examples
+<accessibilityFeature/synchronizedAudioText> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "Describes a resource that offers both audio and text, with information that allows them to be rendered simultaneously. The granularity of the synchronization is not specified. This term is not recommended when the only material that is synchronized is the document headings."@en ;
+    skos:notation "synchronizedAudioText" .
+
+# In MTM-examples
+<accessibilityFeature/tableOfContents> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:definition "The work includes a table of contents that provides links to the major sections of the content."@en ;
+    skos:notation "tableOfContents" .
+
+<accessibilityFeature/tactileGraphic> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "tactileGraphic" .
+
+<accessibilityFeature/tactileObject> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "tactileObject" .
+
+<accessibilityFeature/taggedPDF> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "taggedPDF" .
+
+<accessibilityFeature/timingControl> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "timingControl" .
+
+<accessibilityFeature/transcript> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "transcript" .
+
+<accessibilityFeature/ttsMarkup> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "ttsMarkup" .
+
+<accessibilityFeature/unknown> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "unknown" .
+
+<accessibilityFeature/unlocked> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "unlocked" .
+
+<accessibilityFeature/verticalWriting> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "verticalWriting" .
+
+<accessibilityFeature/withAdditionalWordSegmentation> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "withAdditionalWordSegmentation" .
+
+<accessibilityFeature/withoutAdditionalWordSegmentation> a :AccessibilityFeature ;
+    vs:term_status "unstable" ;
+    skos:notation "withoutAdditionalWordSegmentation" .
