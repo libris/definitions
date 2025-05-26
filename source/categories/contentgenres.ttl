@@ -44,11 +44,31 @@ g:Literature a :Genre ;
 
 #saogf:Litteraturtidskrifter skos:broader g:Literature .
 
+g:NonFiction a :Genre ;
+  :category :pending ;
+  skos:broader g:Literature ;
+  skos:closeMatch marc:NotFictionNotFurtherSpecified ;  # 9287608
+  skos:prefLabel "Övrig litteratur"@sv, "Other literature"@en .
+# marc:NotFictionNotFurtherSpecified
+# (may be)
+#   marc:ComicStrip
+#   marc:Essay
+#   marc:HumorSatiresEtc
+#   marc:Letter
+#   marc:MixedForms
+#   marc:Speech
+
 g:LiteraryFiction a :Genre ;
   skos:broader g:Literature , g:Fiction ;
   skos:exactMatch saogf:Sk%C3%B6nlitteratur ;
   skos:narrowMatch marc:MixedForms ;
   skos:closeMatch marc:FictionNotFurtherSpecified .  # 573355 # (SSB)
+# marc:FictionNotFurtherSpecified
+# (may be)
+#   marc:Drama
+#   marc:Poetry
+#   marc:Novel
+#   marc:ShortStory
 
 g:Cartography a :Genre ;
   skos:closeMatch saogf:Kartor ;
@@ -63,9 +83,12 @@ g:Software a :Genre ;
     "Software"@en .
 
 g:Multimedia a :Genre ;
+  skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
   skos:broader g:Software .
 
+# TODO: superfluous?
 g:Integrating a :Genre ;
+  :category :pending ;
   skos:broader g:CollectingResource .
 
 g:AbstractSummary a :Genre ;
@@ -307,8 +330,23 @@ g:Patent a :Genre ;
 #g:ReligiousWork a :Genre ;
 #  skos:exactMatch saogf:Religi\%C3\%B6sa\%20verk .
 
-#g:Biography a :Genre ;
-#  skos:exactMatch saogf:Biografier .
+g:Biography a :Genre ;
+  skos:exactMatch saogf:Biografier ;
+  :singularLabel "Biografi"@sv, "Biography"@en .
+
+# marc:ContainsBiographicalInformation (är varken IndividualBiography eller CollectiveBiography, men är en g:Biography ...)
+# Kan raderas, eller skos:broadMatch g:Biography; eller "instansen kommer med lite biografisk information"...
+
+g:IndividualBiography a :Genre ;
+  :category :pending ;
+  skos:broader g:Biography ;
+  skos:exactMatch marc:IndividualBiography ; #     69893
+  :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
+
+g:CollectiveBiography a :Genre ;
+  skos:broader g:Biography ;
+  skos:exactMatch marc:CollectiveBiography ; #     17453
+  :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
 
 #g:Essay a :Genre ;
 #  skos:exactMatch saogf:Ess\%C3\%A4er .
@@ -376,9 +414,18 @@ g:ShortStory a :Genre ;
   :singularLabel "Novell"@sv ,
     "Short Story"@en .
 
-g:Offentligt_tryck a :Genre ;
+g:GovPublication a :Genre ;
   # skos:broader kbrda:Text ; (... could be images; but rarely *only* with image?)
-  skos:exactMatch saogf:Offentligt%20tryck .
+  skos:exactMatch saogf:Offentligt%20tryck ;
+  skos:closeMatch marc:GovernmentPublicationLevelUndetermined ;  # 686248
+  skos:narrowMatch
+    marc:FederalNational ,  # 34270
+    marc:InternationalIntergovernmental ,  # 27407
+    marc:StateProvincialTerritorialDependentEtc ,  # 11704
+    marc:Local ,  # 727
+    marc:AutonomousOrSemiAutonomousComponent ;  # 329
+    :singularLabel "Offentlig resurs"@sv , "Government publication"@en .
+# DELETE: marc:UnknownIfItemIsGovernmentPublication ,  # 14175
 
 g:ReferenceWork a :Genre ;
   #skos:broader kbrda:Text ;
