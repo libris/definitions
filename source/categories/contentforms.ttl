@@ -1,0 +1,43 @@
+prefix : <https://id.kb.se/vocab/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+prefix marc: <https://id.kb.se/marc/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix div: <https://id.kb.se/term/div/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+
+# Base Category or ContentType applying to an *Expression*.
+
+# TODO:
+# - Replace Category with ContentType and merge into <rdacategories.ttl>?
+# - Some RDA terms have broader Genre terms!
+# - Some are "SensoryForm" super-ContentType:s...
+# - Is there a sometimes necessary distinction between "contains" and "is"? If so, we reasonably should say that using a concrete GenreForm...
+
+ktg:Visual a :Category ;
+  :inCollection div:sensoryform .
+
+ktg:Audio a :Category ;
+  :inCollection div:sensoryform .
+
+ktg:Tactile a :Category ;
+  :inCollection div:sensoryform ;
+  skos:closeMatch saogf:Taktila%20verk ;
+  skos:prefLabel "Taktil"@sv .
+
+ktg:MovingImage a :Category ;
+  skos:broader ktg:Visual .
+
+ktg:Dataset a :Category .
+
+ktg:Object a :Category .
+
+ktg:StillImage a :Category ;
+  skos:broader ktg:Visual ;
+  skos:closeMatch saogf:Bilder, tgm:Bilder, marc:Picture .
+
+ktg:Movement a :Category ;
+  skos:prefLabel "Rörelser"@sv .
