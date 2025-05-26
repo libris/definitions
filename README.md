@@ -19,7 +19,7 @@ Install the Python-based dependencies:
 
 ## Usage
 
-See the files in `source/datasets/' for definitions of what is included in each
+See the files in `source/datasets/` for definitions of what is included in each
 (set of) datasets.
 
 Run the following to build the full set of datasets:

@@ -141,6 +141,7 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                 "Uppdelning av ämne, bytt forskningsämnesgrupp": "as:Move",
                 "Bytt benämning": "as:Update",
                 "Ny kod": "as:Move",
+                "Ny kod, Bytt benämning": "as:Move",
                 "Nytt ämne": "as:Create",
                 "Sammanslagning av ämnen": "as:Update",  # Merge
             }.get(row.change_type, "as:Activity")
@@ -227,7 +228,7 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
         if row.change_type:
             handled = False
 
-            if row.change_type in {"Ny kod", "Bytt forskningsämnesgrupp"}:
+            if row.change_type in {"Ny kod", "Bytt forskningsämnesgrupp", "Ny kod, Bytt benämning"}:
                 handled = True
                 add_item(
                     {
@@ -239,6 +240,8 @@ def create_data(fpath: str, simple_skos=True, use_annots=True) -> dict:
                         "isReplacedBy": [annotate({"@id": item_id}, annot)],
                     }
                 )
+                if row.change_type == "Ny kod, Bytt benämning" and row.label_2011 and row.label_2011 != label_sv:
+                    item["hiddenLabelByLang"] = {"sv": row.label_2011}
 
             if row.change_type == "Sammanslagning av ämnen":
                 handled = False
