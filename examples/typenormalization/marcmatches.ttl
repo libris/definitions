@@ -1,3 +1,6 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 prefix saogf: <https://id.kb.se/term/saogf/>
@@ -16,263 +19,265 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 # marc:ConferencePublicationType
 #--
 marc:ConferencePublication # 251347 # Primary? [also ssb]
-    :closeMatch saogf:Konferensmaterial .
+    skos:closeMatch saogf:Konferenser .
+    #skos:relatedMatch saogf:Konferensmaterial . # efemärt material från konferenser!
+    #skos:closeMatch saogf:Konferensmaterial .
 #  marc:ConferencePublication marc:ConferencePublicationType-1
 
 ##
 # marc:BooksBiographyType
 
 marc:Autobiography # [a] also mac:MusicTextType  # 41138 # [also ssb]
-    :closeMatch saogf:Sj%C3%A4lvbiografier ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> . # "Autobiographies"@en .
+    skos:closeMatch saogf:Sj%C3%A4lvbiografier ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> . # "Autobiographies"@en .
 
 marc:IndividualBiography  # [b] 69428 # [also ssb]
-    :broadMatch saogf:Biografier ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
+    skos:broadMatch saogf:Biografier ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
 
 marc:CollectiveBiography  # [c] 17177 # Primary? [also ssb]
-    :broadMatch saogf:Biografier ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
+    skos:broadMatch saogf:Biografier ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
 
 marc:ContainsBiographicalInformation  # [d] 43201 # [also ssb]
-    :broadMatch saogf:Biografier ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
+    skos:broadMatch saogf:Biografier ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
 
 ##
 # Books and Serials (continuing) -- marc:BooksContentsType | marc:SerialsNatureType | marc:SerialsContentsType
 
 marc:LegalArticle  # [g] 642 # Primary? [also ssb]
-    :broadMatch saogf:Juridiskt%20material ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
+    skos:broadMatch saogf:Juridiskt%20material ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
 
 marc:Legislation  # [l] 5196 # [also ssb]
-    :broadMatch saogf:Juridiskt%20material ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
+    skos:broadMatch saogf:Juridiskt%20material ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
 
 marc:SerialsNatureType-h  # [h] 561 # [on Serials]; marc:Biography Primary? [also ssb]
-    :broadMatch saogf:Biografier ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
+    skos:broadMatch saogf:Biografier ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
 
 marc:LawReportOrDigest  # [w] 326 # Primary?
-    :broadMatch saogf:Juridiskt%20material ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
+    skos:broadMatch saogf:Juridiskt%20material ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
 
 marc:Yearbook  # [y] 6968 # [also ssb]
     # a :ContentType ;  # 1 # [also ssb]
-    :closeMatch saogf:%C3%85rsb%C3%B6cker ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026208> . # "Yearbooks"@en .
+    skos:closeMatch saogf:%C3%85rsb%C3%B6cker ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026208> . # "Yearbooks"@en .
 
 marc:Index  # [i] 3941 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026112> . # "Indexes"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026112> . # "Indexes"@en .
 # TODO:
 # Either: Delete - Unlikely to have been consistently and correctly applied?
 # - How is it used in practise? "Sök i 008 minus Index för de som vill ha faktiskt innehåll"@sv?)
-# Or: << marc:Index :broadMatch saogf:Referensverk >> a :Suggestion ; :source kbstaff:viklun .
+# Or: << marc:Index skos:broadMatch saogf:Referensverk >> a :Suggestion ; :source kbstaff:viklun .
 
 marc:Statistics  # [s] 20197 # Primary? [also ssb]
-    :closeMatch saogf:Statistik ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026181> . # "Statistics"@en .
+    skos:closeMatch saogf:Statistik ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026181> . # "Statistics"@en .
 
 marc:Handbook  # [f] 8727 # Primary? [also ssb]
     # a :ContentType ;  # 2 # Primary? [also ssb]
     #:closeMatch saogf:Handb%C3%B6cker%2C%20manualer%20etc\. ;
-    :closeMatch <https://id.kb.se/term/saogf/Handb%C3%B6cker%2C%20manualer%20etc.> ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026109> . # "Handbooks and manuals"@en .
+    skos:closeMatch <https://id.kb.se/term/saogf/Handb%C3%B6cker%2C%20manualer%20etc.> ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026109> . # "Handbooks and manuals"@en .
 
 marc:Treaty  # [z] 1297 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026707> . # "Treaties"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026707> . # "Treaties"@en .
 
 marc:Discography  # [k] 2287 # Primary? [also ssb]
-    :closeMatch saogf:Diskografier ;
-    :closeMatch <http://id.loc.gov/vocabulary/msupplcont/discography> . # "discography"@en .
+    skos:closeMatch saogf:Diskografier ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/msupplcont/discography> . # "discography"@en .
 
 marc:TechnicalReport  # [t] 466 # Primary? [also ssb]
     # a :ContentType .  # 2 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026093> . # "Technical reports"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026093> . # "Technical reports"@en .
 
 marc:Filmography  # [q] 2269 # [also ssb]
-    :closeMatch saogf:Filmografi ;  # [new saogf->lcgft mapping 241015]
-    :closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> . # "filmography"@en .
+    skos:closeMatch saogf:Filmografi ;  # [new saogf->lcgft mapping 241015]
+    skos:closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> . # "filmography"@en .
 
 marc:Directory  # [r] 2604 # Primary? [also ssb]
-    :closeMatch saogf:Adresskalendrar ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026087> . # "Directories"@en .
+    skos:closeMatch saogf:Adresskalendrar ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026087> . # "Directories"@en .
 
 marc:Encyclopedia  # [e] 9137 # [also ssb]
-    :closeMatch saogf:Encyklopedier ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026092> . # "Encyclopedias"@en .
+    skos:closeMatch saogf:Encyklopedier ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026092> . # "Encyclopedias"@en .
 
 marc:ComicOrGraphicNovel  # [6] 17902 # Primary? [also ssb]
     # a :ContentType ;  # 20 # Primary? [also ssb]
-    :broadMatch saogf:Tecknade%20serier ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026266> . # "Comics (Graphic works)"@en .
+    skos:broadMatch saogf:Tecknade%20serier ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026266> . # "Comics (Graphic works)"@en .
 
 marc:LegalCaseOrCaseNote  # [v] 431 # Primary?
     # a :ContentType ;  # 1 # Primary?
-    :broadMatch saogf:Juridiskt%20material ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
+    skos:broadMatch saogf:Juridiskt%20material ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026351> . # "Law materials"@en .
 
 marc:Catalog  # [c] 61570 # Primary? [also ssb]
     # a :ContentType ;  # 4 # Primary? [also ssb]
-    :closeMatch saogf:Kataloger , tgm:Kataloger ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026057> . # "Catalogs"@en .
+    skos:closeMatch saogf:Kataloger , tgm:Kataloger ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026057> . # "Catalogs"@en .
 
 marc:Thesis
-    :closeMatch saogf:Avhandlingar ;
+    skos:closeMatch saogf:Avhandlingar ;
     # a :ContentType .  # 16 # Primary? [also ssb]   326407# Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026039>; :code "m"; :label "Academic theses" .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026039>; skos:notation "m"; rdfs:label "Academic theses" .
 
 marc:Dictionary  # [d] 14033 # Primary? [also ssb]
     # a :ContentType ;  # 1 # Primary? [also ssb]
-    :closeMatch saogf:Lexikon ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026086> . # "Dictionaries"@en .
+    skos:closeMatch saogf:Lexikon ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026086> . # "Dictionaries"@en .
 
 marc:Bibliography # [b]
     # a :ContentType .  # 5 # [also ssb]   424362# [also ssb]
-    :closeMatch saogf:Bibliografier ;
-    :closeMatch <http://id.loc.gov/vocabulary/msupplcont/bibliography> . # "bibliography"@en .
+    skos:closeMatch saogf:Bibliografier ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/msupplcont/bibliography> . # "bibliography"@en .
 
 marc:Calendar # [x5]
     # a :ContentType .  # 2 # Primary?
-    :closeMatch saogf:Kalendrar ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> . # "Calendars"@en .
+    skos:closeMatch saogf:Kalendrar ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> . # "Calendars"@en .
 
 marc:PatentDocument  # [j] 661 # Primary? [also ssb]
-    :closeMatch saogf:Patent ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026438> . # "Patents"@en .
+    skos:closeMatch saogf:Patent ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026438> . # "Patents"@en .
 
 
 ##
 # marc:BooksBiographyType
 
 marc:FictionNotFurtherSpecified # [1]
-    :broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :PreferredGeneralization ; :source kbstaff:viklun |} ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
+    skos:broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :PreferredGeneralization ; :source kbstaff:viklun |} ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
 
 marc:MixedForms  # [m] 4352 # Primary? [also ssb]
-    :broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :ErasedDifference ; :source kbstaff:viklun |} ;
+    skos:broadMatch saogf:Sk%C3%B6nlitteratur ; # ~ _:x670e8a6d {| a :ErasedDifference ; :source kbstaff:viklun |} ;
     #:replacedBy marc:FictionNotFurtherSpecified ; ~ _:x670e8a6d
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
 
 marc:HumorSatiresEtc  # [h] 3653 # [also ssb]
-    :narrowMatch saogf:Humor ; # ~ _:x670e8a3c
-    :narrowMatch saogf:Satir ; # ~ _:x670e8a3c {| a :Suggestion ; :source kbstaff:viklun |} ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> . # "Humor"@en .
+    skos:narrowMatch saogf:Humor ; # ~ _:x670e8a3c
+    skos:narrowMatch saogf:Satir ; # ~ _:x670e8a3c {| a :Suggestion ; :source kbstaff:viklun |} ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> . # "Humor"@en .
 
 marc:Letter  # [i] 1436 # Primary? [also ssb]
-    :closeMatch saogf:Korrespondens ;
-    # :narrowMatch saogf:Brev ; {| a :TooSpecic ; :source kbstaff:viklun |}
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> . # "Personal correspondence"@en .
+    skos:closeMatch saogf:Korrespondens ;
+    # skos:narrowMatch saogf:Brev ; {| a :TooSpecic ; :source kbstaff:viklun |}
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> . # "Personal correspondence"@en .
 
 marc:Novel # [f]  # 248532 # Primary? [also ssb]
-    :closeMatch saogf:Romaner ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026020> . # "Novels"@en .
+    skos:closeMatch saogf:Romaner ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026020> . # "Novels"@en .
 
 marc:ShortStory  # [j] 26024 # Primary? [also ssb]
-    :closeMatch saogf:Noveller ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026542> . # "Short stories"@en .
+    skos:closeMatch saogf:Noveller ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026542> . # "Short stories"@en .
 
 marc:Speech  # [s] 333 # Primary? [also ssb]
-    :closeMatch saogf:Tal%20%28retorik%29 ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> . # "Speeches"@en .
+    skos:closeMatch saogf:Tal%20%28retorik%29 ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> . # "Speeches"@en .
 
 # N/A in codeMaps:
 
 marc:Review # a :ContentType .  # 1 # [also ssb]
-    :closeMatch saogf:Recensioner .  # 31024 # [also ssb]
+    skos:closeMatch saogf:Recensioner .  # 31024 # [also ssb]
 
 marc:StandardsSpecification  # 270 # Primary?
-    :closeMatch saogf:Standarder .
+    skos:closeMatch saogf:Standarder .
 
 marc:AbstractsSummary  # 1324 # Primary? [also ssb]
     # a :ContentType .  # 4 # Primary? [also ssb]
-    :broadMatch saogf:Sammanfattningar . # {| :source kbkat:viklun |}
+    skos:broadMatch saogf:Sammanfattningar . # {| :source kbkat:viklun |}
 
 marc:ProgrammedText  # 192 # Primary? [also ssb]
-  :broadMatch saogf:Instruktions-%20och%20undervisningsmaterial .
+  skos:broadMatch saogf:Instruktions-%20och%20undervisningsmaterial .
     # a :ContentType .  # 21 # Primary? [also ssb]
 
 marc:SurveysOfLiteratureInASubjectArea  # 448 # [also ssb]
-    :closeMatch saogf:Forsknings%C3%B6versikter . # {| :source kbkat:viklun |}
+    skos:closeMatch saogf:Forsknings%C3%B6versikter . # {| :source kbkat:viklun |}
     # a :ContentType .  # 1 # [also ssb]
 
 # marc:Offprint  # 65 # Primary?
-marc:Festschrift :closeMatch saogf:Festskrifter .  # 32382 # [also ssb]
+marc:Festschrift skos:closeMatch saogf:Festskrifter .  # 32382 # [also ssb]
 
 
 ##
 # marc:BooksBiographyType AND marc:MusicTextType
 
 marc:Poetry  # [p] 51022 # [also ssb]
-    :closeMatch saogf:Poesi ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> . # "Poetry"@en .
+    skos:closeMatch saogf:Poesi ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> . # "Poetry"@en .
 marc:Drama  # [d] 17418 # [also ssb]
-    :closeMatch saogf:Dramatik ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> . # "Drama"@en .
+    skos:closeMatch saogf:Dramatik ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> . # "Drama"@en .
 marc:Essay  # [e] 4861 # [also ssb]
-    :closeMatch saogf:Ess%C3%A4er ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> . # "Essays"@en .
+    skos:closeMatch saogf:Ess%C3%A4er ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> . # "Essays"@en .
 
 # N/A in codeMaps:
 # marc:NotFictionNotFurtherSpecified marc:BooksLiteraryFormType-0
 marc:ComicStrip # marc:BooksLiteraryFormType-c  # 2773 # Primary? [also ssb]
-  :broadMatch saogf:Tecknade%20serier .
+  skos:broadMatch saogf:Tecknade%20serier .
 
 
 ##
 # marc:MusicTextType
 
 marc:Interview  # [t] 69 # [also ssb]
-    :closeMatch saogf:Intervjuer ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026115> . # "Interviews"@en .
+    skos:closeMatch saogf:Intervjuer ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026115> . # "Interviews"@en .
 
 marc:Memoir  # [m] 99 # [also ssb]
-    :closeMatch saogf:Sj%C3%A4lvbiografier ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> . # "Autobiographies"@en .
+    skos:closeMatch saogf:Sj%C3%A4lvbiografier ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> . # "Autobiographies"@en .
 
 marc:History  # [h] 110 # [also ssb]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/his> . # "history"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/his> . # "history"@en .
 
 marc:Biography # [b]
-    :closeMatch saogf:Biografier ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
+    skos:closeMatch saogf:Biografier ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> . # "Biographies"@en .
 #marc:SerialsContentsType-h :broader marc:Biography . # in construct-enums.tq  # 848 # marc:Biography Primary? [also ssb]  # 290 # [also ssb]
 
 marc:Rehearsal # [r]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/reh> . # "rehearsals"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/reh> . # "rehearsals"@en .
 
 marc:Folktale  # [o] 46 # [also ssb]
-    :closeMatch saogf:Folksagor ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> . # "Folk tales"@en .
+    skos:closeMatch saogf:Folksagor ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> . # "Folk tales"@en .
 
 marc:LecturesSpeech  # [l] 110 # Primary? [also ssb]
-    :broadMatch saogf:Tal%20%28retorik%29 ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> . # "Speeches"@en .
+    skos:broadMatch saogf:Tal%20%28retorik%29 ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> . # "Speeches"@en .
 
 marc:Fiction # [f]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> . # "Fiction"@en .
 
 marc:Sound # [s]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026594> . # "Sound recordings"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026594> . # "Sound recordings"@en .
 
 marc:Reporting  # [g] 33 # [also ssb]
-    :broadMatch saogf:Informativa%20verk ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026113> . # "Informational works"@en .
+    skos:broadMatch saogf:Informativa%20verk ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026113> . # "Informational works"@en .
 
 marc:ConferenceProceeding  # [c] 9 # Primary?
-    :closeMatch saogf:Konferenser ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026068> . # "Conference papers and proceedings"@en .
+    # Konferensinspelningar!!!
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026068> . # "Conference papers and proceedings"@en .
 
 marc:Instruction  # [i] 19 # Primary?
-    :broadMatch saogf:Instruktions-%20och%20undervisningsmaterial ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026114> . # "Instructional and educational works"@en .
+    skos:broadMatch saogf:Instruktions-%20och%20undervisningsmaterial ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026114> . # "Instructional and educational works"@en .
 
 marc:LanguageInstruction  # [j] 113 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/lan> . # "language instruction"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/lan> . # "language instruction"@en .
 
 marc:Comedy  # [k] 17 # [also ssb]
-    :broadMatch saogf:Humor ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> . # "Humor"@en .
+    skos:broadMatch saogf:Humor ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> . # "Humor"@en .
 
 # N/A in codeMaps:
 # marc:ItemIsAMusicalSoundRecording marc:MusicTextType-_  # 1 # Primary?
@@ -282,93 +287,93 @@ marc:Comedy  # [k] 17 # [also ssb]
 # marc:SerialsTypeOfSerialType
 
 marc:MonographicSeries  # [m] 94048 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/monoseries> . # "monographic series"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/monoseries> . # "monographic series"@en .
 
 marc:Newspaper  # [n] 9076 # Primary? [also ssb]
-    :closeMatch saogf:Dagstidningar ;
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/newspaper> . # "newspaper"@en .
+    skos:closeMatch saogf:Dagstidningar ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/newspaper> . # "newspaper"@en .
 
 marc:Periodical
    # a :ContentType ;  # 1 # Primary? [also ssb]   565338# Primary? [also ssb]
-    :closeMatch saogf:Periodika ;
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/periodical>; :code "p"; :label "periodical" .
+    skos:closeMatch saogf:Periodika ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/periodical>; skos:notation "p"; rdfs:label "periodical" .
 
 marc:UpdatingLooseLeaf  # [l] 132 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/looseleaf> . # "loose leaf"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/looseleaf> . # "loose leaf"@en .
 
 marc:UpdatingDatabase  # [d] 2960 # Primary?
     # a :ContentType .  # 4 # Primary?
     # TODO: remove; maybe implied from possible new type :Database
-    :closeMatch saogf:Databaser ; # {| :source kbkat:viklun |}
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/database> . # "database"@en .
+    skos:closeMatch saogf:Databaser ; # {| :source kbkat:viklun |}
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/database> . # "database"@en .
 
 marc:UpdatingWebSite  # [w] 635 # Primary?
     # TODO: remove; maybe implied from possible new type :Website
-    :closeMatch saogf:Webbplatser ; # {| :source kbkat:viklun |}
-    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/web> . # "web site"@en .
+    skos:closeMatch saogf:Webbplatser ; # {| :source kbkat:viklun |}
+    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/web> . # "web site"@en .
 
 # Missing in KB marc (only relvant *IF* we were to map to marc bib 008!)
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/mag>; :code "g"; :label "magazine" .
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/blog>; :code "h"; :label "blog" .
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/journal>; :code "j"; :label "journal" .
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/repo>; :code "r"; :label "repository" .
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/newsletter>; :code "s"; :label "newsletter" .
-#    :closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/direct>; :code "t"; :label "directory" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/mag>; skos:notation "g"; rdfs:label "magazine" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/blog>; skos:notation "h"; rdfs:label "blog" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/journal>; skos:notation "j"; rdfs:label "journal" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/repo>; skos:notation "r"; rdfs:label "repository" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/newsletter>; skos:notation "s"; rdfs:label "newsletter" .
+#    skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/direct>; skos:notation "t"; rdfs:label "directory" .
 
 
 ##
 # marc:VisualMaterialType
 
 marc:VisualMaterialType-b # [b] :broader marc:Kit ;  # 1745 # marc:Kit Primary? [also ssb]
-    :broadMatch <http://id.loc.gov/vocabulary/marcgt/kit> . # "kit"@en .
+    skos:broadMatch <http://id.loc.gov/vocabulary/marcgt/kit> . # "kit"@en .
 
 marc:Videorecording # [v]
     # a :ContentType .  # 1 # Primary? [also ssb]   531734# Primary? [also ssb] SHOULD_BE_INSTANCE
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026723> . # "Video recordings"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026723> . # "Video recordings"@en .
 
 marc:MicroscopeSlide # [p]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/mic> . # "microscope slide"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/mic> . # "microscope slide"@en .
 
 marc:Realia  # [r] 34 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/rea> . # "realia"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/rea> . # "realia"@en .
 
 marc:MotionPicture  # [m] 11841 # Primary? [also ssb]
     # a :ContentType ;  # 1 # Primary? [also ssb]
-    :closeMatch saogf:Filmer ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026406> . # "Motion pictures"@en .
+    skos:closeMatch saogf:Filmer ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026406> . # "Motion pictures"@en .
 
 marc:Graphic  # [k] 8053 # Primary?
     # a :ContentType .  # 2 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/gra> . # "graphic"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/gra> . # "graphic"@en .
 
 marc:ArtOriginal  # [a] 116 # Primary?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027218> . # "Art"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027218> . # "Art"@en .
 
 marc:Filmstrip  # [f] 10 # Primary? [also ssb]
     # a :ContentType .  # 2 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/fls> . # "filmstrip"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/fls> . # "filmstrip"@en .
 
 marc:ArtReproduction  # [c] 31 # Primary?
     # a :ContentType ;  # 5 # Primary?
-    :closeMatch tgm:Konstreproduktioner ;
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/art> . # "art reproduction"@en .
+    skos:closeMatch tgm:Konstreproduktioner ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/art> . # "art reproduction"@en .
 
 marc:VisualMaterialType-n # [n] :broader marc:Chart
     # a :ContentType ;  # 68 # marc:Chart
-    :broadMatch saogf:Diagram ;
-    :narrowMatch tgm:Diagram%20och%20tabeller ;
-    :broadMatch <http://id.loc.gov/vocabulary/marcgt/cha> . # "chart"@en .
+    skos:broadMatch saogf:Diagram ;
+    skos:narrowMatch tgm:Diagram%20och%20tabeller ;
+    skos:broadMatch <http://id.loc.gov/vocabulary/marcgt/cha> . # "chart"@en .
 
 marc:VisualMaterialType-g # [g] :broader marc:Game  # 194 # marc:Game Primary?
     # a :ContentType ;  # 32 # marc:Game Primary?
-    :broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
+    skos:broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
 
 marc:Diorama  # [d] 739 #
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/dio> . # "diorama"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/dio> . # "diorama"@en .
 
 marc:Toy  # [w] 3 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/toy> . # "toy"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/toy> . # "toy"@en .
 
 
 ##
@@ -376,102 +381,102 @@ marc:Toy  # [w] 3 # Primary?
 
 marc:TechnicalDrawing  # [l] 109 # Primary?
     # a :ContentType .  # 6 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/ted> . # "technical drawing"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/ted> . # "technical drawing"@en .
 
 marc:FlashCard  # [o] 60 # Primary?
     # a :ContentType .  # 2 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/fla> . # "flash card"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/fla> . # "flash card"@en .
 
 marc:Picture  # [i] 105262 # Primary?
     # a :ContentType ;  # 86 # Primary?
-    :closeMatch tgm:Bilder ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027251> . # "Pictures"@en .
+    skos:closeMatch tgm:Bilder ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027251> . # "Pictures"@en .
 
 marc:Transparency  # [t] 71 # Primary?
     # a :ContentType ;  # 6 # Primary?
-    :closeMatch tgm:Genomsiktsbilder ;
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/tra> . # "transparency"@en .
+    skos:closeMatch tgm:Genomsiktsbilder ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/tra> . # "transparency"@en .
 
 marc:Slide  # [s] 11 # Primary?
-    :closeMatch tgm:Diabilder ;
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/sli> . # "slide"@en .
+    skos:closeMatch tgm:Diabilder ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/sli> . # "slide"@en .
 
 marc:Model # [q]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027245> . # "Models (Representations)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027245> . # "Models (Representations)"@en .
 
 
 ##
 # marc:MapsFormatType
 
 marc:PlayingCard # [p]
-    :closeMatch tgm:Spelkort ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027252> . # "Playing cards"@en .
+    skos:closeMatch tgm:Spelkort ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027252> . # "Playing cards"@en .
 
 marc:WallMap  # [o] 350 # Primary?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026728> . # "Wall maps"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026728> . # "Wall maps"@en .
 
 marc:LooseLeaf  # [r] 13 # Primary?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> . # "Loose-leaf services"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> . # "Loose-leaf services"@en .
 
 marc:Game # [n]
-    :broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
+    skos:broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
 
 marc:PictureCardPostCard # [j]
-    :closeMatch saogf:Vykort ;
-    :closeMatch tgm:Vykort ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026151> . # "Postcards"@en .
+    skos:closeMatch saogf:Vykort ;
+    skos:closeMatch tgm:Vykort ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026151> . # "Postcards"@en .
 
 marc:Manuscript  # [e] 967 # Primary?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026385> . # "Manuscript maps"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026385> . # "Manuscript maps"@en .
 
 marc:Puzzle  # [l] 8 # Primary?
-    :broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
-    :narrowMatch tgm:Ord-%20och%20bildg%C3%A5tor ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
+    skos:broadMatch saogf:Spel%20och%20tanken%C3%B6tter ;
+    skos:narrowMatch tgm:Ord-%20och%20bildg%C3%A5tor ;
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> . # "Puzzles and games"@en .
 
 marc:MapsFormatType-k # [k] # [on Maps]; :broader marc:Calendar  # 10 # marc:Calendar Primary?  # 57 # Primary?
-    :broadMatch tgm:Almanackor ,
+    skos:broadMatch tgm:Almanackor ,
         saogf:Kalendrar ;
-    :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> . # "Calendars"@en .
+    skos:broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> . # "Calendars"@en .
 
 
 ##
 # marc:ComputerTypeOfFileType
 
 marc:Representational  # [c] 13197 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/rep> . # "representational"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/rep> . # "representational"@en .
 
 marc:OnlineSystemOrService  # [j] 135687 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/ons> . # "online system or service"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/ons> . # "online system or service"@en .
 
 marc:ComputerTypeOfFileType-h # [h] :broader marc:Sound  # 47 # marc:Sound Primary?  # 26 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/sou> . # "sound"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/sou> . # "sound"@en .
 
 marc:ComputerTypeOfFileType-g # [g] :broader marc:Game  # 3803 # marc:Game Primary? [also ssb]  # 132 # Primary?
     # a :ContentType .  # 2 # marc:Game Primary? [also ssb]
-    :closeMatch saogf:Datorspel ;
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/gam> . # "game"@en .
+    skos:closeMatch saogf:Datorspel ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/gam> . # "game"@en .
 
 marc:InteractiveMultimedia  # [i] 420 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/inm> . # "interactive multimedia"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/inm> . # "interactive multimedia"@en .
 
 marc:ComputerProgram  # [b] 34 # Primary?
     # a :ContentType .  # 24 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/com> . # "computer program"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/com> . # "computer program"@en .
 
 marc:Font # [f]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/fon> . # "font"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/fon> . # "font"@en .
 
 marc:Document  # [d] 2885 # Primary? [also ssb]
-    :broadMatch tgm:Dokument ;
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/doc> . # "document (computer)"@en .
+    skos:broadMatch tgm:Dokument ;
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/doc> . # "document (computer)"@en .
 
 marc:BibliographicData # [e]
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/bda> . # "bibliographic data"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/bda> . # "bibliographic data"@en .
 
 marc:NumericData  # [a] 22 # Primary?
-    :closeMatch <http://id.loc.gov/vocabulary/marcgt/num> . # "numeric data"@en .
+    skos:closeMatch <http://id.loc.gov/vocabulary/marcgt/num> . # "numeric data"@en .
 
 # N/A in codeMaps:
 # marc:Combination marc:ComputerTypeOfFileType-m  # 28574 # Primary? [also ssb]
@@ -487,15 +492,15 @@ marc:NumericData  # [a] 22 # Primary?
 #  marc:MapATwoDimensionalMap marc:MapMaterialType-j  # 20157 # Primary? [also ssb]
 
 marc:Section # ? marc:MapMaterialType-s  # 9 # Primary? [also ssb]
-    :closeMatch tgm:Sektionsritningar .
+    skos:closeMatch tgm:Sektionsritningar .
 
 marc:View # = marc:MapMaterialType-y  # 3 # Primary?
-    :closeMatch tgm:Vyer .
+    skos:closeMatch tgm:Vyer .
 
 marc:RemoteSensingImage
-  :broadMatch tgm:Satellitbilder . # marc:MapMaterialType-r  # 33 # Primary?
+  skos:broadMatch tgm:Satellitbilder . # marc:MapMaterialType-r  # 33 # Primary?
 marc:MapMaterialType-d # UNDEF  # 2134 # marc:Atlas Primary? [also ssb]
-  :broadMatch tgm:Atlaser .
+  skos:broadMatch tgm:Atlaser .
 #  marc:Profile marc:MapMaterialType-k
 #  marc:Diagram marc:MapMaterialType-g
 
@@ -506,26 +511,26 @@ marc:MapMaterialType-d # UNDEF  # 2134 # marc:Atlas Primary? [also ssb]
 #  marc:Poster marc:NonProjMaterialType-k  # 620 # Primary?
 #  marc:ActivityCard marc:NonProjMaterialType-a
 marc:PhotomechanicalPrint # = marc:NonProjMaterialType-f  # 156 # Primary?
-    :closeMatch tgm:Fotomekaniska%20reproduktioner .
+    skos:closeMatch tgm:Fotomekaniska%20reproduktioner .
 
 marc:Print # = marc:NonProjMaterialType-j  # 15526 # Primary?
-    :closeMatch tgm:Tryck .
+    skos:closeMatch tgm:Tryck .
 
 marc:Painting # = marc:NonProjMaterialType-e  # 627 # Primary?
-    :closeMatch tgm:M%C3%A5lningar .
+    skos:closeMatch tgm:M%C3%A5lningar .
 
 #  marc:Radiograph marc:NonProjMaterialType-r  # 1 # Primary?
 #  marc:Photoprint marc:NonProjMaterialType-h  # 37816 # Primary?
 #  marc:StudyPrint marc:NonProjMaterialType-s  # 1 # Primary? [also ssb]
 
 marc:Collage # = marc:NonProjMaterialType-c
-    :closeMatch tgm:Collage .
+    skos:closeMatch tgm:Collage .
 
 #  marc:NonProjMaterialType-n UNDEF
 #  marc:Postcard marc:NonProjMaterialType-p  # 236 # Primary?
 
 marc:Drawing # = marc:NonProjMaterialType-d  # 7018 # Primary? [also ssb]
-    :closeMatch tgm:Teckningar .
+    skos:closeMatch tgm:Teckningar .
 
 #  marc:NonProjMaterialType-v UNDEF  # 57 # = marc:Photograph Primary?
 #  marc:Icon marc:NonProjMaterialType-q
@@ -533,20 +538,20 @@ marc:Drawing # = marc:NonProjMaterialType-d  # 7018 # Primary? [also ssb]
 
 # marc:GlobeMaterialType (missing in lcMarc2bfCodeMap?)
 marc:CelestialGlobe # = marc:GlobeMaterialType-a ; a marc:GlobeMaterialType
-  :closeMatch tgm:Himmelsglober .
+  skos:closeMatch tgm:Himmelsglober .
 marc:TerrestrialGlobe # = marc:GlobeMaterialType-c  # 59 # Primary?
-  :closeMatch tgm:Jordglober .
+  skos:closeMatch tgm:Jordglober .
 #  marc:PlanetaryOrLunarGlobe marc:GlobeMaterialType-b
 #  marc:EarthMoonGlobe marc:GlobeMaterialType-e
 
 ##
 # marc:MapsMaterialType -- some are serials (see marcframe TODO)
 # (missing in lcMarc2bfCodeMap?)
-marc:Map :closeMatch tgm:Kartor .
+marc:Map skos:closeMatch tgm:Kartor .
 marc:Globe # = marc:MapsMaterialType-d  # 132 # Primary?
-  :closeMatch  tgm:Glober .
+  skos:closeMatch  tgm:Glober .
 marc:Atlas # marc:MapsMaterialType-e  # 2044 # Primary? [also ssb]
-    :closeMatch tgm:Atlaser .
+    skos:closeMatch tgm:Atlaser .
 #  marc:SeparateMapSupplementToAnotherWork marc:MapsMaterialType-f  # 240 # Primary?
 #  marc:MapSeries marc:MapsMaterialType-b  # 1403 # Primary? [also ssb]
 #  marc:MapBoundAsPartOfAnotherWork marc:MapsMaterialType-g  # 260 # Primary?
@@ -556,7 +561,7 @@ marc:Atlas # marc:MapsMaterialType-e  # 2044 # Primary? [also ssb]
 ####################
 # Instance forms (not on works; but some should be):
 marc:Diagram  # 28 # Primary?
-    :closeMatch tgm:Diagram%20och%20tabeller .
+    skos:closeMatch tgm:Diagram%20och%20tabeller .
 # marc:BibliographicData .  # 26 #
 # marc:Photonegative .  # 16 # Primary?
 # marc:CelestialGlobe .  # 15 # Primary?
@@ -565,218 +570,218 @@ marc:Diagram  # 28 # Primary?
 # marc:Profile .  # 3 # Primary?
 # marc:Collage .  # 2 # Primary?
 marc:NonProjMaterialType-n # 1 # marc:Chart Primary?
-    :closeMatch saogf:Diagram .
+    skos:closeMatch saogf:Diagram .
 # marc:ActivityCard .  # 1 # Primary?
 
 ##
 # marc:MusicCompositionType
 
 marc:CanonOrRound  # [cn] 18 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026687> . # "Canons (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026687> . # "Canons (Music)"@en .
 
 marc:Fantasia  # [ft] 56 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026018> . # "Fantasias (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026018> . # "Fantasias (Music)"@en .
 
 marc:Rondo  # [rd] 10 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027057> . # "Rondos"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027057> . # "Rondos"@en .
 
 marc:Rhapsody  # [rp] 5 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027051> . # "Rhapsodies (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027051> . # "Rhapsodies (Music)"@en .
 
 marc:Waltz  # [wz] 68 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027167> . # "Waltzes (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027167> . # "Waltzes (Music)"@en .
 
 marc:Overture  # [ov] 70 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026980> . # "Overtures"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026980> . # "Overtures"@en .
 
 marc:Fugue  # [fg] 18 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026818> . # "Fugues"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026818> . # "Fugues"@en .
 
 marc:Ricercar  # [ri] 1 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026128> . # "Ricercars"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026128> . # "Ricercars"@en .
 
 marc:Chaconne  # [ca] 3 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026701> . # "Chaconnes"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026701> . # "Chaconnes"@en .
 
 marc:Oratorio  # [or] 54 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026977> . # "Oratorios"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026977> . # "Oratorios"@en .
 
 marc:Requiem  # [rq] 33 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027048> . # "Requiems"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027048> . # "Requiems"@en .
 
 marc:PartSong  # [pt] 62 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026984> . # "Part songs"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026984> . # "Part songs"@en .
 
 marc:Suite  # [su] 213 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> . # "Suites"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> . # "Suites"@en .
 
 marc:DanceForm  # [df] 99 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026753> . # "Dance music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026753> . # "Dance music"@en .
 
 marc:Canzona  # [cz] 14 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026012> . # "Canzonas (Instrumental music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026012> . # "Canzonas (Instrumental music)"@en .
 
 marc:ProgramMusic  # [pg] 2 # Primary?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027017> . # "Program music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027017> . # "Program music"@en .
 
 marc:Minuet  # [mi] 8 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026940> . # "Minuets (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026940> . # "Minuets (Music)"@en .
 
 marc:ChantsOtherReligion  # [cb] 4 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> . # "Chants"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> . # "Chants"@en .
 
 marc:Variation  # [vr] 69 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027156> . # "Variations (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027156> . # "Variations (Music)"@en .
 
 marc:Cantata  # [ct] 249 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026688> . # "Cantatas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026688> . # "Cantatas"@en .
 
 marc:Ballad  # [bd] 10 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026648> . # "Ballads"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026648> . # "Ballads"@en .
 
 marc:Anthem  # [an] 38 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026635> . # "Anthems"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026635> . # "Anthems"@en .
 
 marc:Nocturne  # [nc] 22 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026144> . # "Nocturnes (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026144> . # "Nocturnes (Music)"@en .
 
 marc:Blues  # [bl] 32 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026665> . # "Blues (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026665> . # "Blues (Music)"@en .
 
 marc:Mass  # [ms] 130 #
-    :narrowMatch saogf:Flerst%C3%A4mmiga%20m%C3%A4ssor ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026926> . # "Masses"@en .
+    skos:narrowMatch saogf:Flerst%C3%A4mmiga%20m%C3%A4ssor ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026926> . # "Masses"@en .
 
 marc:Pavan  # [pv] 5 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026994> . # "Pavans (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026994> . # "Pavans (Music)"@en .
 
 marc:Hymn  # [hy] 39 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026872> . # "Hymns"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026872> . # "Hymns"@en .
 
 marc:DivertimentosSerenadesCassationsDivertissementsNotturni  # [dv] 29 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> . # "Suites"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> . # "Suites"@en .
 
 marc:Jazz  # [jz] 263 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026879> . # "Jazz"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026879> . # "Jazz"@en .
 
 marc:MotionPictureMusic  # [mp] 76 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026950> . # "Motion picture music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026950> . # "Motion picture music"@en .
 
 marc:TrioSonata  # [ts] 38 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> . # "Sonatas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> . # "Sonatas"@en .
 
 marc:ChanceComposition  # [cs] 19 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026624> . # "Aleatory music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026624> . # "Aleatory music"@en .
 
 marc:Flamenco # [fl]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026806> . # "Flamenco music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026806> . # "Flamenco music"@en .
 
 marc:ChantChristian  # [cc] 46 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> . # "Chants"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> . # "Chants"@en .
 
 marc:Motet  # [mo] 90 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026949> . # "Motets"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026949> . # "Motets"@en .
 
 marc:Mazurka  # [mz] 13 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026928> . # "Mazurkas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026928> . # "Mazurkas"@en .
 
 marc:March  # [mr] 26 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026922> . # "Marches (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026922> . # "Marches (Music)"@en .
 
 marc:MusicalRevueOrComedy  # [mc] 103 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027050> . # "Revues"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027050> . # "Revues"@en .
 
 marc:Zarzuela  # [za] 1 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2016026059> . # "Zarzuelas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2016026059> . # "Zarzuelas"@en .
 
 marc:ConcertiGrossi  # [cg] 19 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026724> . # "Concerti grossi"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026724> . # "Concerti grossi"@en .
 
 marc:CountryMusic  # [cy] 21 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026739> . # "Country music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026739> . # "Country music"@en .
 
 marc:Carol  # [cr] 27 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026695> . # "Carols"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026695> . # "Carols"@en .
 
 marc:GospelMusic  # [gm] 16 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026839> . # "Gospel music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026839> . # "Gospel music"@en .
 
 marc:StudyOrExercise  # [st] 282 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027115> . # "Studies (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027115> . # "Studies (Music)"@en .
 
 marc:Toccata  # [tc] 15 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027140> . # "Toccatas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027140> . # "Toccatas"@en .
 
 marc:Concerto  # [co] 370 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026725> . # "Concertos"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026725> . # "Concertos"@en .
 
 marc:Villancico # [vi] mismatcing code "vl"?
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026025> . # "Villancicos (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026025> . # "Villancicos (Music)"@en .
 
 marc:SymphonicPoem  # [sp] 38 #
-    :closeMatch saogf:Symfoniska%20dikter ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027120> . # "Symphonic poems"@en .
+    skos:closeMatch saogf:Symfoniska%20dikter ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027120> . # "Symphonic poems"@en .
 
 marc:RockMusic  # [rc] 250 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027054> . # "Rock music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027054> . # "Rock music"@en .
 
 marc:Song  # [sg] 689 # Primary? [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027103> . # "Songs"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027103> . # "Songs"@en .
 
 marc:Passacaglia  # [ps] 16 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026989> . # "Passacaglias"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026989> . # "Passacaglias"@en .
 
 marc:Polonaise  # [po] 7 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027005> . # "Polonaises (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027005> . # "Polonaises (Music)"@en .
 
 marc:Symphony  # [sy] 254 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027121> . # "Symphonies"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027121> . # "Symphonies"@en .
 
 marc:Prelude  # [pr] 42 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027013> . # "Preludes (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027013> . # "Preludes (Music)"@en .
 
 marc:ChoralePrelude  # [cl] 15 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026712> . # "Chorale preludes"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026712> . # "Chorale preludes"@en .
 
 marc:Sonata  # [sn] 370 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> . # "Sonatas"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> . # "Sonatas"@en .
 
 marc:Madrigal  # [md] 49 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026915> . # "Madrigals (Music)"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026915> . # "Madrigals (Music)"@en .
 
 marc:SquareDanceMusic # [sd]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027111> . # "Square dance music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027111> . # "Square dance music"@en .
 
 marc:Opera  # [op] 950 # [also ssb]
-    :closeMatch saogf:Operor ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026976> . # "Operas"@en .
+    skos:closeMatch saogf:Operor ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026976> . # "Operas"@en .
 
 marc:Ballet  # [bt] 57 #
-    :closeMatch saogf:Baletter ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> . # "Ballets (Music)"@en .
+    skos:closeMatch saogf:Baletter ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> . # "Ballets (Music)"@en .
 
 marc:FolkMusic  # [fm] 6899 # [also ssb]
-    :closeMatch saogf:Folkmusik ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026809> . # "Folk music"@en .
+    skos:closeMatch saogf:Folkmusik ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026809> . # "Folk music"@en .
 
 marc:Chorale  # [ch] 11 #
-    :closeMatch saogf:Koraler ;
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026713> . # "Chorales"@en .
+    skos:closeMatch saogf:Koraler ;
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026713> . # "Chorales"@en .
 
 marc:PassionMusic  # [pm] 15 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026861> . # "Holy Week music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026861> . # "Holy Week music"@en .
 
 marc:BluegrassMusic  # [bg] 10 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026664> . # "Bluegrass music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026664> . # "Bluegrass music"@en .
 
 marc:ChansonsPolyphonic  # [cp] 3 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027007> . # "Polyphonic chansons"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027007> . # "Polyphonic chansons"@en .
 
 marc:PopularMusic  # [pp] 220 # [also ssb]
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027009> . # "Popular music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027009> . # "Popular music"@en .
 
 marc:RagtimeMusic  # [rg] 6 #
-    :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027034> . # "Ragtime music"@en .
+    skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027034> . # "Ragtime music"@en .
 
 # marc:TeatroLirico .  # 1 #
 
@@ -796,31 +801,31 @@ marc:RagtimeMusic  # [rg] 6 #
 #  marc:FederalNational marc:GovernmentPublicationType-f  # 34060 # [also ssb]
 #  marc:StateProvincialTerritorialDependentEtc marc:GovernmentPublicationType-s  # 11731 # [also ssb]
 marc:GovernmentPublicationLevelUndetermined # marc:GovernmentPublicationType-o  # 666969 # [also ssb]
-  :broadMatch saogf:Myndighetspublikationer . # FIXME: N/A
+  skos:broadMatch saogf:Myndighetspublikationer . # FIXME: N/A
 #  marc:Local marc:GovernmentPublicationType-l  # 721 # [also ssb]
 #  marc:AutonomousOrSemiAutonomousComponent marc:GovernmentPublicationType-a  # 328 # Primary? [also ssb]
 
 
 # Others (not mapped to genreForm or contentType; no statistical usage)
-marc:CoatsOfArms :closeMatch tgm:Vapensk%C3%B6ldar%20%28bilder%29 .
-marc:Facsimile :closeMatch tgm:Faksimil .
-marc:GenealogicalTable :closeMatch saogf:Genealogiskt%20material .
-marc:Illumination :closeMatch tgm:Bokm%C3%A5leri .
-marc:Illustration :closeMatch tgm:Illustrationer .
-marc:MusicMatterType-a :closeMatch saogf:Diskografier .
-marc:Photograph :closeMatch tgm:Fotografier .
-marc:Plan :closeMatch tgm:Planritningar .
-marc:Portrait :closeMatch saogf:Portr%C3%A4tt .
+marc:CoatsOfArms skos:closeMatch tgm:Vapensk%C3%B6ldar%20%28bilder%29 .
+marc:Facsimile skos:closeMatch tgm:Faksimil .
+marc:GenealogicalTable skos:closeMatch saogf:Genealogiskt%20material .
+marc:Illumination skos:closeMatch tgm:Bokm%C3%A5leri .
+marc:Illustration skos:closeMatch tgm:Illustrationer .
+marc:MusicMatterType-a skos:closeMatch saogf:Diskografier .
+marc:Photograph skos:closeMatch tgm:Fotografier .
+marc:Plan skos:closeMatch tgm:Planritningar .
+marc:Portrait skos:closeMatch saogf:Portr%C3%A4tt .
 
 # Instance/Carrier
-marc:Microfiche :closeMatch tgm:Mikroficher .
-marc:Microfilm :closeMatch tgm:Mikrofilmer .
-marc:MicroformMaterialType-e :closeMatch tgm:Mikroficher .
-marc:MicroformMaterialType-g :closeMatch tgm:Mikrokort .
-marc:Microopaque :closeMatch tgm:Mikrokort .
-marc:Negative :closeMatch tgm:Negativ .
-marc:Photocopy :closeMatch tgm:Elektrostatkopior .
-marc:ReproductionType-f :closeMatch saogf:Faksimiler .
-marc:Sample :closeMatch tgm:Provexemplar .
-marc:Videodisc :closeMatch tgm:Bildskivor .
-marc:VideoMaterialType-d :closeMatch tgm:Bildskivor .
+marc:Microfiche skos:closeMatch tgm:Mikroficher .
+marc:Microfilm skos:closeMatch tgm:Mikrofilmer .
+marc:MicroformMaterialType-e skos:closeMatch tgm:Mikroficher .
+marc:MicroformMaterialType-g skos:closeMatch tgm:Mikrokort .
+marc:Microopaque skos:closeMatch tgm:Mikrokort .
+marc:Negative skos:closeMatch tgm:Negativ .
+marc:Photocopy skos:closeMatch tgm:Elektrostatkopior .
+marc:ReproductionType-f skos:closeMatch saogf:Faksimiler .
+marc:Sample skos:closeMatch tgm:Provexemplar .
+marc:Videodisc skos:closeMatch tgm:Bildskivor .
+marc:VideoMaterialType-d skos:closeMatch tgm:Bildskivor .
