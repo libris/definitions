@@ -6,6 +6,7 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
+prefix div: <https://id.kb.se/term/div/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 
 kbrda:CartographicDataset a :ContentType ;
@@ -40,6 +41,7 @@ kbrda:NotatedMovement a :ContentType ;
    skos:broadMatch ktg:Movement .
 
 kbrda:NotatedMusic a :ContentType ;
+  :inCollection div:find ;
    skos:broadMatch ktg:Music ;
    skos:closeMatch ktg:NotatedMusic .
 
@@ -47,6 +49,8 @@ kbrda:PerformedMovement a :ContentType ;
    skos:broadMatch ktg:Movement .
 
 kbrda:PerformedMusic a :ContentType ;
+  :inCollection div:find ;
+  skos:closeMatch saogf:Musikinspelningar ;
   skos:broadMatch ktg:Audio, ktg:Music .
 
 kbrda:Sounds a :ContentType ;
