@@ -80,13 +80,11 @@ g:FictionLiterature a :Genre ;
   skos:prefLabel "Fiction literature"@en ,
     "Skönlitteratur"@sv .
 # (may be) narrower
-#   g:Drama
-#   g:Poetry
-#   g:Novel
-#   g:ShortStory
+#   marc:Essay
 
 g:Essay a :Genre ;
   :inCollection div:find ;
+  skos:broader g:Literature ;
   skos:exactMatch saogf:Ess%C3%A4er ;
   skos:closeMatch marc:Essay ,
     <http://id.loc.gov/authorities/genreForms/gf2014026094> ;
@@ -94,6 +92,7 @@ g:Essay a :Genre ;
 
 g:Drama a :Genre ;
   :inCollection div:find ;
+  skos:broader g:FictionLiterature ;
   skos:exactMatch saogf:Dramatik ;
   skos:closeMatch marc:Drama ,
     <http://id.loc.gov/authorities/genreForms/gf2014026297> ;
@@ -101,6 +100,7 @@ g:Drama a :Genre ;
 
 g:Poetry a :Genre ;
   :inCollection div:find ;
+  skos:broader g:FictionLiterature ;
   skos:exactMatch saogf:Poesi ;
   skos:closeMatch marc:Poetry ,
     <http://id.loc.gov/authorities/genreForms/gf2014026481> ;
@@ -478,7 +478,7 @@ g:ShortStory a :Genre ;
   :inCollection div:find ;
   skos:closeMatch marc:ShortStory ;
   skos:broader gf:TextPiece ,
-    g:Literature ;
+    g:FictionLiterature ;
   skos:exactMatch saogf:Noveller ;
   :singularLabel "Novell"@sv ,
     "Short Story"@en .
