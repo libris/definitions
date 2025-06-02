@@ -32,7 +32,9 @@ g:Fiction a :Genre ;
     "Fiktion"@sv .
 
 g:NonFiction a :Genre ;
-  :category :pending .
+  :category :pending ;
+  skos:prefLabel "Non- fiction"@en ,
+    "Icke-fiktion"@sv .
 
 g:LinguisticWork a :Genre ;
   skos:altLabel "Literature"@en ,
@@ -61,10 +63,11 @@ g:NonFictionLiterature a :Genre ;
 #   marc:Letter
 #   marc:Speech
 
-g:InformativeWorks a :Genre ;
+g:InformativeWork a :Genre ;
   :inCollection div:find ;
   skos:exactMatch saogf:Informativa%20verk ;
-  skos:broader g:NonFiction .
+  skos:broader g:NonFiction ;
+  :singularLabel "Informativt verk"@sv, "Informative Work"@en .
 
 #g:FactLiterature a :Genre ;
 #  skos:exactMatch saogf:Facklitteratur ;
@@ -84,7 +87,7 @@ g:FictionLiterature a :Genre ;
 
 g:Essay a :Genre ;
   :inCollection div:find ;
-  skos:broader g:Literature ;
+  skos:broader g:Literature , g:InformativeWork ;
   skos:exactMatch saogf:Ess%C3%A4er ;
   skos:closeMatch marc:Essay ,
     <http://id.loc.gov/authorities/genreForms/gf2014026094> ;
@@ -111,9 +114,13 @@ g:Cartography a :Genre ;
   skos:closeMatch saogf:Kartor ;
   :singularLabel "Kartografiskt material"@sv .
 
-g:Music a :Genre .
+g:Music a :Genre ;
+  skos:prefLabel "Musik"@sv , "Music"@en .
 
-g:Manuscript a :Genre .
+g:Manuscript a :Genre ;
+  skos:closeMatch marc:Manuscript ;
+  skos:prefLabel "Manuskript"@sv ,  # Skilj på mestadels antikt verk: Handskrift ?
+    "Manuscript"@en .
 
 g:Software a :Genre ;
   skos:prefLabel "Mjukvara"@sv ,
@@ -141,7 +148,9 @@ ktg:Kit a :Category ;
 # TODO: superfluous?
 g:Integrating a :Genre ;
   :category :pending ;
-  skos:broader g:CollectingResource .
+  skos:broader g:CollectingResource ;
+  skos:prefLabel "Integrerande resurs"@sv ,
+    "Integrating resource"@en .
 
 g:AbstractSummary a :Genre ;
   skos:broader gf:TextPiece ;
@@ -233,12 +242,13 @@ g:FindingAid a :GenreForm ;
   skos:prefLabel "finding aid"@en ;
   skos:closeMatch marcgt:fin .
 
-g:Juridiskt%20material a :Genre ;
+g:LegalMaterial a :Genre ;
   skos:exactMatch saogf:Juridiskt%20material ;
   skos:narrowMatch marc:LegalArticle ,
     marc:Legislation ,
     marc:LawReportOrDigest ,
-    marc:LegalCaseOrCaseNote .
+    marc:LegalCaseOrCaseNote ;
+  skos:prefLabel "Juridiskt material"@sv, "Legal material"@en .
 
 g:InstructionalMaterial a :Genre ;
   :inCollection div:find ;
@@ -263,7 +273,7 @@ g:HandSignedCommunication a :Genre ;
 
 g:Novel a :Genre ;
   :inCollection div:find ;
-  skos:broader g:Literature ;
+  skos:broader g:FictionLiterature ;
   skos:broadMatch gf:Book ;
   skos:exactMatch saogf:Romaner ;
   skos:closeMatch marc:Novel ;
@@ -275,14 +285,16 @@ g:Periodical a :Genre ;
   skos:closeMatch marc:Periodical ;
   skos:broader g:CollectingResource ;
   skos:exactMatch saogf:Periodika ;
-  skos:altLabel "Periodika"@sv ;
-  rdfs:label "Tidskrift"@sv ,
+  :singularLabel "Tidskrift"@sv ,
     "Periodical"@en ;
-  :pluralLabel "Tidskrifter"@sv .
+  :pluralLabel "Tidskrifter"@sv ;
+  skos:altLabel "Periodika"@sv .
 
 g:SerialPublication a :Genre ;
   skos:exactMatch saogf:Seriella%20publikationer ;
-  skos:broader g:CollectingResource .
+  skos:broader g:CollectingResource ;
+  :singularLabel "Seriella publikationer"@sv ,
+    "Serial publication"@en .
 
 g:Journal a :Genre ;
   skos:broader g:Periodical ;
@@ -325,8 +337,10 @@ g:Register a :Genre ;
 
 g:PuzzleOrGame a :Genre ;
   skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
-  rdfs:label "Spel eller tankenötter"@sv ,
+  :singularLabel "Spel eller tankenöt"@sv ,
     "Puzzle or game"@en ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> ,
+    marc:VisualMaterialType-g ;
   skos:narrowMatch marc:VisualMaterialType-g ,
     marc:Game ,  # Sällskapsspel
     marc:Puzzle .
@@ -382,7 +396,8 @@ g:Patent a :Genre ;
   skos:closeMatch marc:PatentDocument ;
   #skos:broader kbrda:Text ;
   skos:exactMatch saogf:Patent ;
-  :inCollection div:informative-work .
+  :inCollection div:informative-work ;
+  skos:prefLabel "Patent"@sv, "Patent"@en .
 
 #g:RareText skos:exactMatch saogf:Texter .
 
@@ -399,7 +414,10 @@ g:Patent a :Genre ;
 
 g:Biography a :Genre ;
   :inCollection div:find ;
+  skos:broader g:InformativeWork ;
   skos:exactMatch saogf:Biografier ;
+  skos:closeMatch marc:Biography ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ;
   :singularLabel "Biografi"@sv, "Biography"@en .
 
 # marc:ContainsBiographicalInformation (är varken IndividualBiography eller CollectiveBiography, men är en g:Biography ...)
@@ -416,8 +434,13 @@ g:CollectiveBiography a :Genre ;
   skos:exactMatch marc:CollectiveBiography ; #     17453
   :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
 
-#g:Essay a :Genre ;
-#  skos:exactMatch saogf:Ess\%C3\%A4er .
+gf:Autobiography a :Genre ;
+  skos:broader g:Biography ;
+  skos:closeMatch saogf:Sj%C3%A4lvbiografier ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026047> ,
+    marc:Autobiography ;
+  skos:narrowMatch marc:Memoir ;
+  :singularLabel "Självbiografi"@sv, "Autobiography"@en .
 
 #g:CommemorativeWork a :Genre;
 #  skos:exactMatch saogf:Minnesbevarande\%20verk .
@@ -440,8 +463,11 @@ g:CollectiveBiography a :Genre ;
 #g:Recept a :Genre;
 #  skos:exactMatch saogf:Recept .
 
-#g:RethoricalSpeech a :Genre ;
-#  skos:exactMatch saogf:Tal\%20\%28retorik\%29 .
+g:RethoricalSpeech a :Genre ;
+  skos:exactMatch saogf:Tal\%20\%28retorik\%29 ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ,
+    marc:Speech ;
+  skos:prefLabel "Retoriskt tal"@sv, "Rethorical speech"@en .
 
 #g:SourceMaterial a :Genre ;
 #  skos:exactMatch saogf:K\%C3\%A4llmaterial ;
@@ -455,10 +481,12 @@ g:CollectiveBiography a :Genre ;
 
 g:Interview a :Genre ;
   skos:closeMatch marc:Interview ;
-  skos:exactMatch saogf:Intervjuer .
+  skos:exactMatch saogf:Intervjuer ;
+  skos:prefLabel "Intervju"@sv, "Interview"@en .
 
 g:Reportage a :Genre ;
-  skos:exactMatch saogf:Reportage .
+  skos:exactMatch saogf:Reportage ;
+  skos:prefLabel "Reportage"@sv, "Reportage"@en .
 
 #g:Survey a :Genre ;
 #  skos:exactMatch saogf:Unders\%C3\%B6kningar ;
@@ -498,7 +526,7 @@ g:GovPublication a :Genre ;
 
 g:ReferenceWork a :Genre ;
   :inCollection div:find ;
-  #skos:broader kbrda:Text ;
+  skos:broader g:InformativeWork ;
   skos:exactMatch saogf:Referensverk ;
   :inCollection div:informative-work ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;

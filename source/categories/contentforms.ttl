@@ -18,10 +18,13 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 # - Is there a sometimes necessary distinction between "contains" and "is"? If so, we reasonably should say that using a concrete GenreForm...
 
 ktg:Visual a :Category ;
-  :inCollection div:sensoryform .
+  :inCollection div:sensoryform ;
+  skos:prefLabel "Visuell"@sv, "Visual"@en .
 
 ktg:Audio a :Category ;
-  :inCollection div:sensoryform .
+  #:inCollection div:find ;
+  :inCollection div:sensoryform ;
+  skos:prefLabel "Ljud"@sv, "Audio"@en .
 
 ktg:Tactile a :Category ;
   :inCollection div:sensoryform ;
@@ -29,21 +32,21 @@ ktg:Tactile a :Category ;
   skos:prefLabel "Taktil"@sv .
 
 ktg:MovingImage a :Category ;
-  skos:broader ktg:Visual .
+  skos:broader ktg:Visual ;
+  skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
 
-ktg:Dataset a :Category .
+ktg:Dataset a :Category ;
+  skos:prefLabel "Datamängd"@sv, "Dataset"@en .
 
-ktg:Object a :Category .
+ktg:Object a :Category ;
+  skos:prefLabel "Föremål"@sv, "Object"@en .
 
 ktg:StillImage a :Category ;
   :inCollection div:find ;
   skos:broader ktg:Visual ;
   skos:closeMatch saogf:Bilder, tgm:Bilder, marc:Picture ;
-  skos:narrowMatch marc:Graphic . # 8048
+  skos:narrowMatch marc:Graphic ; # 8048
+  skos:prefLabel "Stillbild"@sv, "Still image"@en .
 
 ktg:Movement a :Category ;
   skos:prefLabel "Rörelser"@sv .
-
-ktg:Datorgrafik a :Category ;
-  :category :pending, :glutamate ;
-  skos:exactMatch tgm:Datorgrafik , marc:Representational .
