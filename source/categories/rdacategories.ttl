@@ -2,6 +2,7 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix : <https://id.kb.se/vocab/>
 
+prefix marc: <https://id.kb.se/marc/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
@@ -10,19 +11,19 @@ prefix div: <https://id.kb.se/term/div/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 
 kbrda:CartographicDataset a :ContentType ;
-   skos:broadMatch ktg:Dataset , ktg:Cartography .
+  skos:broadMatch ktg:Dataset , ktg:Cartography .
 
 kbrda:CartographicImage a :ContentType ;
-   skos:broadMatch kbrda:StillImage , ktg:Cartography .
+  skos:broadMatch kbrda:StillImage , ktg:Cartography .
 
 kbrda:CartographicMovingImage a :ContentType ;
-   skos:broadMatch ktg:Cartography , ktg:MovingImage .
+  skos:broadMatch ktg:Cartography , ktg:MovingImage .
 
 kbrda:CartographicTactileImage a :ContentType ;
-   skos:broadMatch ktg:Tactile , ktg:Cartography , kbrda:StillImage .
+  skos:broadMatch ktg:Tactile , ktg:Cartography , kbrda:StillImage .
 
 kbrda:CartographicTactileThreeDimensionalForm a :ContentType ;
-   skos:broadMatch kbrda:CartographicThreeDimensionalForm , ktg:Tactile .
+  skos:broadMatch kbrda:CartographicThreeDimensionalForm , ktg:Tactile .
 
 kbrda:CartographicThreeDimensionalForm a :ContentType ;
   owl:sameAs ktg:CartographicObject ;
@@ -31,22 +32,23 @@ kbrda:CartographicThreeDimensionalForm a :ContentType ;
      "Cartographic Object"@en .
 
 kbrda:ComputerDataset a :ContentType ;
-   skos:broadMatch ktg:Multimedia, ktg:Dataset .
+  skos:broadMatch ktg:Multimedia, ktg:Dataset .
 
 kbrda:ComputerProgram a :ContentType ;
-   skos:broadMatch ktg:Software .
+  skos:closeMatch marc:ComputerProgram ;
+  skos:broadMatch ktg:Software .
 
 kbrda:NotatedMovement a :ContentType ;
-   skos:closeMatch ktg:NotatedMovement ;
-   skos:broadMatch ktg:Movement .
+  skos:closeMatch ktg:NotatedMovement ;
+  skos:broadMatch ktg:Movement .
 
 kbrda:NotatedMusic a :ContentType ;
   :inCollection div:find ;
-   skos:broadMatch ktg:Music ;
-   skos:closeMatch ktg:NotatedMusic .
+  skos:broadMatch ktg:Music ;
+  skos:closeMatch ktg:NotatedMusic .
 
 kbrda:PerformedMovement a :ContentType ;
-   skos:broadMatch ktg:Movement .
+  skos:broadMatch ktg:Movement .
 
 kbrda:PerformedMusic a :ContentType ;
   :inCollection div:find ;
@@ -62,32 +64,32 @@ kbrda:SpokenWord a :ContentType ;
     ktg:LinguisticWork .
 
 kbrda:StillImage a :ContentType ;
-   skos:closeMatch ktg:StillImage .
+  skos:closeMatch ktg:StillImage .
 
 kbrda:Text a :ContentType ;
   skos:broadMatch ktg:LinguisticWork .
 
 kbrda:ThreeDimensionalForm a :ContentType ;
-   skos:closeMatch ktg:Object .
+  skos:closeMatch ktg:Object .
 
 kbrda:ThreeDimensionalMovingImage a :ContentType ;
-   skos:broadMatch ktg:MovingImage .
+  skos:broadMatch ktg:MovingImage .
 
 kbrda:TwoDimensionalMovingImage a :ContentType ;
-   skos:broadMatch ktg:MovingImage .
+  skos:broadMatch ktg:MovingImage .
 
 kbrda:TactileImage a :ContentType ;
-   skos:broadMatch ktg:Tactile , kbrda:StillImage .
+  skos:broadMatch ktg:Tactile , kbrda:StillImage .
 
 kbrda:TactileNotatedMovement a :ContentType ;
-   skos:broadMatch ktg:Tactile , kbrda:NotatedMovement .
+  skos:broadMatch ktg:Tactile , kbrda:NotatedMovement .
 
 kbrda:TactileNotatedMusic a :ContentType ;
-   skos:closeMatch saogf:Musikalier ;
-   skos:broadMatch ktg:Tactile , kbrda:NotatedMusic .
+  skos:closeMatch saogf:Musikalier ;
+  skos:broadMatch ktg:Tactile , kbrda:NotatedMusic .
 
 kbrda:TactileText a :ContentType ;
-   skos:broadMatch ktg:Tactile , kbrda:Text .
+  skos:broadMatch ktg:Tactile , kbrda:Text .
 
 kbrda:TactileThreeDimensionalForm a :ContentType ;
-   skos:broadMatch ktg:Tactile , kbrda:ThreeDimensionalForm .
+  skos:broadMatch ktg:Tactile , kbrda:ThreeDimensionalForm .
