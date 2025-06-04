@@ -39,20 +39,21 @@ kbrda:ComputerProgram a :ContentType ;
   skos:broadMatch ktg:Software .
 
 kbrda:NotatedMovement a :ContentType ;
-  skos:closeMatch ktg:NotatedMovement ;
+  #skos:closeMatch ktg:NotatedMovement ;
   skos:broadMatch ktg:Movement .
 
 kbrda:NotatedMusic a :ContentType ;
   :inCollection div:find ;
   skos:broadMatch ktg:Music ;
-  skos:closeMatch ktg:NotatedMusic .
+  skos:closeMatch saogf:Musikalier .
+  #skos:closeMatch ktg:NotatedMusic .
 
 kbrda:PerformedMovement a :ContentType ;
   skos:broadMatch ktg:Movement .
 
 kbrda:PerformedMusic a :ContentType ;
   :inCollection div:find ;
-  skos:closeMatch saogf:Musikinspelningar ;
+  #skos:narrowMatch saogf:Musikinspelningar ;
   skos:broadMatch ktg:Audio, ktg:Music .
 
 kbrda:Sounds a :ContentType ;
@@ -64,7 +65,7 @@ kbrda:SpokenWord a :ContentType ;
     ktg:LinguisticWork .
 
 kbrda:StillImage a :ContentType ;
-  skos:closeMatch ktg:StillImage .
+  skos:narrowMatch ktg:StillImage .
 
 kbrda:Text a :ContentType ;
   skos:broadMatch ktg:LinguisticWork .
@@ -85,7 +86,6 @@ kbrda:TactileNotatedMovement a :ContentType ;
   skos:broadMatch ktg:Tactile , kbrda:NotatedMovement .
 
 kbrda:TactileNotatedMusic a :ContentType ;
-  skos:closeMatch saogf:Musikalier ;
   skos:broadMatch ktg:Tactile , kbrda:NotatedMusic .
 
 kbrda:TactileText a :ContentType ;
