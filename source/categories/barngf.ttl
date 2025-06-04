@@ -1,0 +1,710 @@
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+prefix : <https://id.kb.se/vocab/>
+
+prefix barngf: <https://id.kb.se/term/barngf/>
+
+prefix ktg: <https://id.kb.se/term/ktg/>
+
+# TODO: Tentative; needs singularLabel, probably english slugs, etc.
+# OR: Incorporate the mapping links into the official barngf (to make it a tree).
+
+ktg:ChildrensFictionLiterature a :Genre ;
+  skos:exactMatch barngf:Barn-%20och%20ungdomslitteratur ;
+  skos:broader ktg:FictionLiterature ;
+  :singularLabel "Barn- och ungdomslitteratur"@sv .
+
+ktg:Bildromaner a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Bildromaner, ktg:WorkWithImages ;
+  skos:prefLabel "Bildromaner"@sv .
+
+ktg:Manga a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature, ktg:WorkWithImages ;
+  skos:exactMatch barngf:Manga ;
+  skos:broadMatch saogf:Manga ;
+  skos:prefLabel "Manga"@sv ,
+    "Manga"@en .
+
+ktg:Parafraser a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Parafraser ;
+  skos:exactMatch barngf:Parafraser ;
+  skos:prefLabel "Parafraser"@sv .
+
+ktg:Versromaner a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Versromaner ;
+  skos:prefLabel "Versromaner"@sv .
+
+ktg:Bildordb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Bildordb%C3%B6cker, ktg:WorkWithImages ;
+  skos:prefLabel "Bildordböcker"@sv .
+
+ktg:Urban%20fantasy a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Urban%20fantasy ;
+  skos:broadMatch saogf:Urban%20fantasy ;
+  skos:prefLabel "Urban fantasy"@sv .
+
+ktg:All%C3%A5ldersb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:All%C3%A5ldersb%C3%B6cker ;
+  skos:prefLabel "Allåldersböcker"@sv .
+
+ktg:Reklamtryck a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Reklamtryck ;
+  skos:broadMatch saogf:Reklamtryck ;
+  skos:prefLabel "Reklamtryck"@sv .
+
+ktg:Ritsagor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Ritsagor ;
+  skos:prefLabel "Ritsagor"@sv .
+
+ktg:Kartongb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Kartongb%C3%B6cker ;
+  skos:prefLabel "Kartongböcker"@sv .
+
+ktg:%C3%84ventyrsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:%C3%84ventyrsb%C3%B6cker ;
+  skos:prefLabel "Äventyrsböcker"@sv .
+
+ktg:Filmade%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Filmade%20b%C3%B6cker ;
+  skos:prefLabel "Filmade böcker"@sv .
+
+ktg:Leta%20i%20bilden a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Leta%20i%20bilden ;
+  skos:prefLabel "Leta i bilden"@sv .
+
+ktg:Taktila%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Taktila%20b%C3%B6cker ;
+  skos:prefLabel "Taktila böcker"@sv .
+
+ktg:TAKK a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:TAKK ;
+  skos:exactMatch barngf:TAKK ;
+  skos:prefLabel "TAKK"@sv .
+
+ktg:Tecken%20som%20st%C3%B6d%20till%20talet a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Tecken%20som%20st%C3%B6d%20till%20talet ;
+  skos:prefLabel "Tecken som stöd till talet"@sv .
+
+ktg:Minnesb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Minnesb%C3%B6cker ;
+  skos:prefLabel "Minnesböcker"@sv .
+
+ktg:S%C3%A5nglekar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:S%C3%A5nglekar ;
+  skos:prefLabel "Sånglekar"@sv .
+
+ktg:Kortspel a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Kortspel ;
+  skos:prefLabel "Kortspel"@sv .
+
+ktg:Skr%C3%A4ckber%C3%A4ttelser a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Skr%C3%A4ckber%C3%A4ttelser ;
+  skos:prefLabel "Skräckberättelser"@sv .
+
+ktg:Handb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Handb%C3%B6cker ;
+  skos:prefLabel "Handböcker"@sv .
+
+ktg:Textl%C3%B6sa%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Textl%C3%B6sa%20b%C3%B6cker ;
+  skos:prefLabel "Textlösa böcker"@sv .
+
+ktg:Pusselb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Pusselb%C3%B6cker ;
+  skos:prefLabel "Pusselböcker"@sv .
+
+ktg:Pysselb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Pysselb%C3%B6cker ;
+  skos:broadMatch saogf:Pysselb%C3%B6cker ;
+  skos:prefLabel "Pysselböcker"@sv .
+
+ktg:Rim%20och%20ramsor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Rim%20och%20ramsor ;
+  skos:prefLabel "Rim och ramsor"@sv .
+
+ktg:Taktila%20illustrationer a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Taktila%20illustrationer ;
+  skos:prefLabel "Taktila illustrationer"@sv .
+
+ktg:Titth%C3%A5lsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Titth%C3%A5lsb%C3%B6cker ;
+  skos:prefLabel "Titthålsböcker"@sv .
+
+ktg:Verklighetsbaserade%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Verklighetsbaserade%20b%C3%B6cker ;
+  skos:prefLabel "Verklighetsbaserade böcker"@sv .
+
+ktg:Barn%20och%20ungdomar%20illustrerar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Barn%20och%20ungdomar%20illustrerar ;
+  skos:prefLabel "Barn och ungdomar illustrerar"@sv .
+
+ktg:Uppslagsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Uppslagsb%C3%B6cker ;
+  skos:prefLabel "Uppslagsböcker"@sv .
+
+ktg:Teckenspr%C3%A5k a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Teckenspr%C3%A5k ;
+  skos:prefLabel "Teckenspråk"@sv .
+
+ktg:Citatsamlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Citatsamlingar ;
+  skos:prefLabel "Citatsamlingar"@sv .
+
+ktg:Barn%20och%20ungdomar%20skriver a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Barn%20och%20ungdomar%20skriver ;
+  skos:prefLabel "Barn och ungdomar skriver"@sv .
+
+ktg:H%C3%A4stb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:H%C3%A4stb%C3%B6cker ;
+  skos:prefLabel "Hästböcker"@sv .
+
+ktg:Samlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Samlingar ;
+  skos:prefLabel "Samlingar"@sv .
+
+ktg:Visor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Visor ;
+  skos:exactMatch barngf:Visor ;
+  skos:prefLabel "Visor"@sv .
+
+ktg:Biografiska%20ber%C3%A4ttelser a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Biografiska%20ber%C3%A4ttelser ;
+  skos:prefLabel "Biografiska berättelser"@sv .
+
+ktg:V%C3%A4ndbara%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:V%C3%A4ndbara%20b%C3%B6cker ;
+  skos:prefLabel "Vändbara böcker"@sv .
+
+ktg:Barndomsskildringar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Barndomsskildringar ;
+  skos:exactMatch barngf:Barndomsskildringar ;
+  skos:prefLabel "Barndomsskildringar"@sv .
+
+ktg:Barn-%20och%20ungdomslitteratur a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Barn-%20och%20ungdomslitteratur ;
+  skos:prefLabel "Barn- och ungdomslitteratur"@sv .
+
+ktg:Mellan%C3%A5ldersb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Mellan%C3%A5ldersb%C3%B6cker ;
+  skos:prefLabel "Mellanåldersböcker"@sv .
+
+ktg:B%C3%B6rja%20l%C3%A4sa a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:B%C3%B6rja%20l%C3%A4sa ;
+  skos:prefLabel "Börja läsa"@sv .
+
+ktg:Bilderb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Bilderb%C3%B6cker, ktg:WorkWithImages ;
+  skos:prefLabel "Bilderböcker"@sv .
+
+ktg:Faktab%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Faktab%C3%B6cker ;
+  skos:prefLabel "Faktaböcker"@sv .
+
+ktg:Historiska%20ber%C3%A4ttelser a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Historiska%20ber%C3%A4ttelser ;
+  skos:prefLabel "Historiska berättelser"@sv .
+
+ktg:Kalenderb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Kalenderb%C3%B6cker ;
+  skos:prefLabel "Kalenderböcker"@sv .
+
+ktg:Kapitelb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Kapitelb%C3%B6cker ;
+  skos:prefLabel "Kapitelböcker"@sv .
+
+ktg:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker ;
+  skos:prefLabel "Lättlästa böcker"@sv .
+
+ktg:Parallelltext a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Parallelltext ;
+  skos:prefLabel "Parallelltext"@sv .
+
+ktg:Pekb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Pekb%C3%B6cker ;
+  skos:prefLabel "Pekböcker"@sv .
+
+ktg:Rim a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Rim ;
+  skos:prefLabel "Rim"@sv .
+
+ktg:S%C3%A5ngb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:S%C3%A5ngb%C3%B6cker ;
+  skos:prefLabel "Sångböcker"@sv .
+
+ktg:Sm%C3%A5barnsbilderb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Sm%C3%A5barnsbilderb%C3%B6cker ;
+  skos:prefLabel "Småbarnsbilderböcker"@sv .
+
+ktg:Unga%20vuxna a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Unga%20vuxna ;
+  skos:prefLabel "Unga vuxna"@sv .
+
+ktg:Ungdomsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Ungdomsb%C3%B6cker ;
+  skos:prefLabel "Ungdomsböcker"@sv .
+
+ktg:Versaler a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Versaler ;
+  skos:prefLabel "Versaler"@sv .
+
+ktg:Interaktiva%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Interaktiva%20b%C3%B6cker ;
+  skos:prefLabel "Interaktiva böcker"@sv .
+
+ktg:Fotografiska%20illustrationer a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Fotografiska%20illustrationer ;
+  skos:prefLabel "Fotografiska illustrationer"@sv .
+
+ktg:S%C3%A4gner a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:S%C3%A4gner ;
+  skos:broadMatch saogf:S%C3%A4gner ;
+  skos:prefLabel "Sägner"@sv .
+
+ktg:G%C3%A5tsamlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:G%C3%A5tsamlingar ;
+  skos:prefLabel "Gåtsamlingar"@sv .
+
+ktg:Religi%C3%B6sa%20ber%C3%A4ttelser a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Religi%C3%B6sa%20ber%C3%A4ttelser ;
+  skos:prefLabel "Religiösa berättelser"@sv .
+
+ktg:Framtidsskildringar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Framtidsskildringar ;
+  skos:broadMatch saogf:Framtidsskildringar ;
+  skos:prefLabel "Framtidsskildringar"@sv .
+
+ktg:Djur%20ber%C3%A4ttar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Djur%20ber%C3%A4ttar ;
+  skos:prefLabel "Djur berättar"@sv .
+
+ktg:Dilemmasagor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Dilemmasagor ;
+  skos:prefLabel "Dilemmasagor"@sv .
+
+ktg:ABC-b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:ABC-b%C3%B6cker ;
+  skos:prefLabel "ABC-böcker"@sv .
+
+ktg:Isl%C3%A4ndska%20sagor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Isl%C3%A4ndska%20sagor ;
+  skos:exactMatch barngf:Isl%C3%A4ndska%20sagor ;
+  skos:prefLabel "Isländska sagor"@sv .
+
+ktg:Skolplanscher a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Skolplanscher ;
+  skos:prefLabel "Skolplanscher"@sv .
+
+ktg:Taltr%C3%A4ningsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Taltr%C3%A4ningsb%C3%B6cker ;
+  skos:prefLabel "Talträningsböcker"@sv .
+
+ktg:Upprepningssagor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Upprepningssagor ;
+  skos:prefLabel "Upprepningssagor"@sv .
+
+ktg:Andaktsb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Andaktsb%C3%B6cker ;
+  skos:exactMatch barngf:Andaktsb%C3%B6cker ;
+  skos:prefLabel "Andaktsböcker"@sv .
+
+ktg:Fotografiska%20seriealbum a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Fotografiska%20seriealbum ;
+  skos:prefLabel "Fotografiska seriealbum"@sv .
+
+ktg:Personliga%20b%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Personliga%20b%C3%B6cker ;
+  skos:prefLabel "Personliga böcker"@sv .
+
+ktg:Pastischer a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Pastischer ;
+  skos:exactMatch barngf:Pastischer ;
+  skos:prefLabel "Pastischer"@sv .
+
+ktg:Bliss%20%28symbolspr%C3%A5k%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Bliss%20%28symbolspr%C3%A5k%29 ;
+  skos:prefLabel "Bliss (symbolspråk)"@sv .
+
+ktg:Widgit%20%28symbolspr%C3%A5k%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Widgit%20%28symbolspr%C3%A5k%29 ;
+  skos:prefLabel "Widgit (symbolspråk)"@sv .
+
+ktg:Bildst%C3%B6d a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Bildst%C3%B6d, ktg:WorkWithImages ;
+  skos:prefLabel "Bildstöd"@sv .
+
+ktg:Ordb%C3%B6cker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Ordb%C3%B6cker ;
+  skos:prefLabel "Ordböcker"@sv .
+
+ktg:Manhwa a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Manhwa ;
+  skos:prefLabel "Manhwa"@sv .
+
+ktg:B%C3%B6cker%20med%20ljuseffekter a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:B%C3%B6cker%20med%20ljuseffekter ;
+  skos:prefLabel "Böcker med ljuseffekter"@sv .
+
+ktg:Fairy%20tales a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Sagor ;
+  skos:exactMatch barngf:Sagor ;
+  skos:prefLabel "Fairy tales"@en ,
+    "Sagor"@sv .
+
+ktg:Diaries a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Dagb%C3%B6cker ;
+  skos:exactMatch barngf:Dagb%C3%B6cker ;
+  skos:prefLabel "Dagböcker"@sv ,
+    "Diaries"@en .
+
+ktg:Drama a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Dramatik ;
+  skos:exactMatch barngf:Dramatik ;
+  skos:prefLabel "Dramatik"@sv ,
+    "Drama"@en .
+
+ktg:Dystopian%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Dystopier ;
+  skos:broadMatch saogf:Dystopier ;
+  skos:prefLabel "Dystopian fiction"@en ,
+    "Dystopier"@sv .
+
+ktg:Legends a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Legender ;
+  skos:broadMatch saogf:Legender ;
+  skos:prefLabel "Legender"@sv ,
+    "Legends"@en .
+
+ktg:Satirical%20literature a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Satir ;
+  skos:exactMatch barngf:Satir ;
+  skos:prefLabel "Satir"@sv ,
+    "Satirical literature"@en .
+
+ktg:Utopian%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Utopier ;
+  skos:exactMatch barngf:Utopier ;
+  skos:prefLabel "Utopian fiction"@en ,
+    "Utopier"@sv .
+
+ktg:Readers%20%28Publications%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:L%C3%A4seb%C3%B6cker ;
+  skos:exactMatch barngf:L%C3%A4seb%C3%B6cker ;
+  skos:prefLabel "Readers (Publications)"@en ,
+    "Läseböcker"@sv .
+
+ktg:Bible%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Bibliska%20ber%C3%A4ttelser ;
+  skos:exactMatch barngf:Bibliska%20ber%C3%A4ttelser ;
+  skos:prefLabel "Bibliska berättelser"@sv ,
+    "Bible fiction"@en .
+
+ktg:Bible%20stories a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Bibliska%20ber%C3%A4ttelser ;
+  skos:exactMatch barngf:Bibliska%20ber%C3%A4ttelser ;
+  skos:prefLabel "Bible stories"@en ,
+    "Bibliska berättelser"@sv .
+
+ktg:Puns a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Roliga%20historier ;
+  skos:broadMatch saogf:Roliga%20historier ;
+  skos:prefLabel "Puns"@en ,
+    "Roliga historier"@sv .
+
+ktg:Toy%20and%20movable%20books a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Mekaniska%20b%C3%B6cker ;
+  skos:exactMatch barngf:Mekaniska%20b%C3%B6cker ;
+  skos:prefLabel "Toy and movable books"@en ,
+    "Mekaniska böcker"@sv .
+
+ktg:Epistolary%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Brevromaner ;
+  skos:broadMatch saogf:Brevromaner ;
+  skos:prefLabel "Epistolary fiction"@en ,
+    "Brevromaner"@sv .
+
+ktg:Novels a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Brevromaner ;
+  skos:broadMatch saogf:Brevromaner ;
+  skos:prefLabel "Novels"@en ,
+    "Brevromaner"@sv .
+
+ktg:Sound%20books a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:B%C3%B6cker%20med%20ljudeffekter ;
+  skos:exactMatch barngf:B%C3%B6cker%20med%20ljudeffekter ;
+  skos:prefLabel "Sound books"@en ,
+    "Böcker med ljudeffekter"@sv .
+
+ktg:Parodies%20%28Literature%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Parodier ;
+  skos:exactMatch barngf:Parodier ;
+  skos:prefLabel "Parodier"@sv ,
+    "Parodies (Literature)"@en .
+
+ktg:Pop-up%20books a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Pop-up-b%C3%B6cker ;
+  skos:exactMatch barngf:Pop-up-b%C3%B6cker ;
+  skos:prefLabel "Pop-up books"@en ,
+    "Pop-up-böcker"@sv .
+
+ktg:Screenplays a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Filmmanus ;
+  skos:exactMatch barngf:Filmmanus ;
+  skos:prefLabel "Filmmanus"@sv ,
+    "Screenplays"@en .
+
+ktg:Fantasy%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Fantasy ;
+  skos:exactMatch barngf:Fantasy ;
+  skos:prefLabel "Fantasy fiction"@en ,
+    "Fantasy"@sv .
+
+ktg:Detective%20and%20mystery%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Deckare ;
+  skos:exactMatch barngf:Deckare ;
+  skos:prefLabel "Deckare"@sv ,
+    "Detective and mystery fiction"@en .
+
+ktg:Noir%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Deckare ;
+  skos:exactMatch barngf:Deckare ;
+  skos:prefLabel "Deckare"@sv ,
+    "Noir fiction"@en .
+
+ktg:Audiobooks a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Ljudb%C3%B6cker ;
+  skos:exactMatch barngf:Ljudb%C3%B6cker ;
+  skos:prefLabel "Ljudböcker"@sv ,
+    "Audiobooks"@en .
+
+ktg:Short%20stories a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Noveller ;
+  skos:exactMatch barngf:Noveller ;
+  skos:prefLabel "Noveller"@sv ,
+    "Short stories"@en .
+
+ktg:Cookbooks a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Kokb%C3%B6cker ;
+  skos:broadMatch saogf:Kokb%C3%B6cker ;
+  skos:prefLabel "Cookbooks"@en ,
+    "Kokböcker"@sv .
+
+ktg:Comics%20%28Graphic%20works%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Tecknade%20serier ;
+  skos:exactMatch barngf:Tecknade%20serier ;
+  skos:prefLabel "Tecknade serier"@sv ,
+    "Comics (Graphic works)"@en .
+
+ktg:Poetry a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Poesi ;
+  skos:exactMatch barngf:Poesi ;
+  skos:prefLabel "Poesi"@sv ,
+    "Poetry"@en .
+
+ktg:Folk%20tales a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Folksagor ;
+  skos:exactMatch barngf:Folksagor ;
+  skos:prefLabel "Folksagor"@sv ,
+    "Folk tales"@en .
+
+ktg:Thrillers%20%28Fiction%29 a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Thrillers ;
+  skos:exactMatch barngf:Thrillers ;
+  skos:prefLabel "Thrillers (Fiction)"@en ,
+    "Thrillers"@sv .
+
+ktg:Fables a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Fabler ;
+  skos:exactMatch barngf:Fabler ;
+  skos:prefLabel "Fabler"@sv ,
+    "Fables"@en .
+
+ktg:Dialect%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch saogf:Dialektlitteratur ;
+  skos:exactMatch barngf:Dialektlitteratur ;
+  skos:prefLabel "Dialektlitteratur"@sv ,
+    "Dialect fiction"@en .
+
+ktg:Role-playing%20games a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Rollspel ;
+  skos:broadMatch saogf:Rollspel ;
+  skos:prefLabel "Rollspel"@sv ,
+    "Role-playing games"@en .
+
+ktg:Robinsonades a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Robinsonader ;
+  skos:broadMatch saogf:Robinsonader ;
+  skos:prefLabel "Robinsonades"@en ,
+    "Robinsonader"@sv .
+
+# Genre (is about?) ...
+
+ktg:Mytologi a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Mytologi ;
+  skos:prefLabel "Mytologi"@sv .
+
+ktg:Faction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Faction ;
+  skos:prefLabel "Faction"@sv .
+
+ktg:Science%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Science%20fiction ;
+  skos:broadMatch saogf:Science%20fiction ;
+  skos:prefLabel "Science fiction"@sv ,
+    "Science fiction"@en .
+
+ktg:Steampunk%20fiction a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Steampunk ;
+  skos:broadMatch saogf:Steampunk ;
+  skos:prefLabel "Steampunk"@sv ,
+    "Steampunk fiction"@en .
+
+ktg:Sm%C3%A5barnsfakta a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Sm%C3%A5barnsfakta ;
+  skos:prefLabel "Småbarnsfakta"@sv .
+
+ktg:Klassiker a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Klassiker ;
+  skos:prefLabel "Klassiker"@sv .
+
+ktg:Alternativa%20handlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Alternativa%20handlingar ;
+  skos:prefLabel "Alternativa handlingar"@sv .
+
+ktg:Vaggvisor a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Vaggvisor ;
+  skos:prefLabel "Vaggvisor"@sv .
+
+ktg:Rysare a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Rysare ;
+  skos:prefLabel "Rysare"@sv .
+
+ktg:Dark%20academia a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Dark%20academia ;
+  skos:prefLabel "Dark academia"@sv .
