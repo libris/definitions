@@ -55,7 +55,7 @@ gf:TextPiece a :GenreForm ;  # gf:Document ??
 
 gf:WorkWithImages a :GenreForm ; # ktg:IllustratedWork
   :inCollection div:contentform ;
-  skos:broader ktg:StillImage ;
+  skos:broader kbrda:StillImage ;
   skos:closeMatch saogf:Bildverk ; # saogf:Illustrerade%20verk
   :singularLabel "Illustrerad verk"@sv ,
     "Illustrated work"@en .
@@ -160,11 +160,13 @@ gf:PictureBook a :GenreForm ;
   :inCollection div:find ;
   skos:exactMatch barngf:Bilderb%C3%B6cker ;
   skos:broader gf:WrittenBookWithImages ;
+  skos:broader ktg:ChildrensFictionLiterature ;
   :singularLabel "Bilderbok"@sv ,
     "Picture Book"@en .
 
 gf:ChapterBook a :GenreForm ;
   :inCollection div:find ;
+  skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Kapitelb%C3%B6cker ;
   skos:broader gf:WrittenBookWithImages ;
   :singularLabel "Kapitelbok"@sv ,
@@ -211,6 +213,7 @@ gf:ComputerCode a :GenreForm ;
 
 gf:ComputerGame a :GenreForm ;
   :inCollection div:find ;
+  :inCollection div:form ;
   skos:broader g:PuzzleOrGame, kbrda:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
   skos:closeMatch marc:ComputerTypeOfFileType-g ;
