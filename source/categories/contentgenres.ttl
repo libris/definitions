@@ -43,6 +43,7 @@ g:LinguisticWork a :Genre ;
     "Språkligt verk"@sv .
 
 g:Literature a :Genre ;
+  :inCollection div:find ;
   skos:broader g:LinguisticWork ;
   #skos:broader kbrda:Text ;
   :singularLabel "Litteratur"@sv ,
@@ -64,7 +65,7 @@ g:NonFictionLiterature a :Genre ;
 #   marc:Speech
 
 g:InformativeWork a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:exactMatch saogf:Informativa%20verk ;
   skos:broader g:NonFiction ;
   :singularLabel "Informativt verk"@sv, "Informative Work"@en .
@@ -74,7 +75,7 @@ g:InformativeWork a :Genre ;
 #  skos:broader g:NonFiction, g:Literatur .
 
 g:FictionLiterature a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:Literature , g:Fiction ;
   skos:exactMatch saogf:Sk%C3%B6nlitteratur ; # NOTE 6836c1b3: genre-issue resolved: not "practically" broader
   skos:narrowMatch marc:MixedForms ;
@@ -86,7 +87,7 @@ g:FictionLiterature a :Genre ;
 #   marc:Essay
 
 g:Essay a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:Literature , g:InformativeWork ;
   skos:exactMatch saogf:Ess%C3%A4er ;
   skos:closeMatch marc:Essay ,
@@ -94,7 +95,7 @@ g:Essay a :Genre ;
   skos:prefLabel "Essäer"@sv , "Essay"@en .
 
 g:Drama a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:FictionLiterature ;
   skos:exactMatch saogf:Dramatik ;
   skos:closeMatch marc:Drama ,
@@ -102,7 +103,7 @@ g:Drama a :Genre ;
   skos:prefLabel "Dramatik"@sv , "Drama"@en .
 
 g:Poetry a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:FictionLiterature ;
   skos:exactMatch saogf:Poesi ;
   skos:closeMatch marc:Poetry ,
@@ -111,10 +112,12 @@ g:Poetry a :Genre ;
 
 g:Cartography a :Genre ;
   :inCollection div:find ;
+  #:inCollection div:identify ;
   skos:closeMatch saogf:Kartor ;
   :singularLabel "Kartografiskt material"@sv .
 
 g:Music a :Genre ;
+  :inCollection div:find ;
   skos:prefLabel "Musik"@sv , "Music"@en .
 
 g:Manuscript a :Genre ;
@@ -123,23 +126,24 @@ g:Manuscript a :Genre ;
     "Manuscript"@en .
 
 g:Software a :Genre ;
+  :inCollection div:find ;
   skos:prefLabel "Mjukvara"@sv ,
     "Software"@en .
 
 g:Multimedia a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
   skos:broader g:Software ;
   skos:prefLabel "Multimedia"@sv ,
     "Multimedia"@en .
 
 ktg:MixedMaterial a :Category ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:prefLabel "Blandat material"@sv ,
     "Mixed material"@en .
 
 ktg:Kit a :Category ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader ktg:MixedMaterial ;
   #skos:related Education ;
   skos:prefLabel "Paket"@sv ,
@@ -251,14 +255,14 @@ g:LegalMaterial a :Genre ;
   skos:prefLabel "Juridiskt material"@sv, "Legal material"@en .
 
 g:InstructionalMaterial a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
   skos:exactMatch saogf:Instruktions-\%20och\%20undervisningsmaterial ;
   skos:narrowMatch marc:Instruction ;
   skos:prefLabel "Instruktions- och undervisningsmaterial"@sv .
 
 g:TeachingMaterial a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:InstructionalMaterial ;
   skos:exactMatch saogf:L\%C3\%A4romedel ;
   skos:closeMatch marc:ProgrammedText ;
@@ -272,7 +276,7 @@ g:HandSignedCommunication a :Genre ;
     "Hand-signed Communication"@en .
 
 g:Novel a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:FictionLiterature ;
   skos:broadMatch gf:Book ;
   skos:exactMatch saogf:Romaner ;
@@ -281,9 +285,9 @@ g:Novel a :Genre ;
     "Novel"@en .
 
 g:Periodical a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:closeMatch marc:Periodical ;
-  skos:broader g:CollectingResource ;
+  skos:broader g:CollectingResource, g:Literature ;
   skos:exactMatch saogf:Periodika ;
   :singularLabel "Tidskrift"@sv ,
     "Periodical"@en ;
@@ -321,7 +325,7 @@ g:NewsLetter a :Genre ;
     "Newsletter"@en .
 
 g:Newspaper a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:closeMatch marc:Newspaper ;
   skos:broader g:Periodical ;
   skos:exactMatch saogf:Dagstidningar ;
@@ -366,7 +370,7 @@ g:Tables a :Genre ;
     "Tables"@en .
 
 g:Ephemera a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:exactMatch saogf:Efem%C3%A4rt%20material ;
   skos:prefLabel "Efemärt material"@sv .
 
@@ -413,7 +417,7 @@ g:Patent a :Genre ;
 #  skos:exactMatch saogf:Religi\%C3\%B6sa\%20verk .
 
 g:Biography a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:InformativeWork ;
   skos:exactMatch saogf:Biografier ;
   skos:closeMatch marc:Biography ;
@@ -503,7 +507,7 @@ g:Reportage a :Genre ;
 #  skos:closeMatch saogf:Visor .
 
 g:ShortStory a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:closeMatch marc:ShortStory ;
   skos:broader gf:TextPiece ,
     g:FictionLiterature ;
@@ -525,7 +529,7 @@ g:GovPublication a :Genre ;
 # DELETE: marc:UnknownIfItemIsGovernmentPublication ,  # 14175
 
 g:ReferenceWork a :Genre ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader g:InformativeWork ;
   skos:exactMatch saogf:Referensverk ;
   :inCollection div:informative-work ;

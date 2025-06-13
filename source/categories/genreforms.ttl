@@ -23,7 +23,8 @@ prefix g: <https://id.kb.se/term/ktg/>
 
 # TODO: replace with / imply Literature?
 gf:Book a :GenreForm ;
-  #:inCollection div:find ;
+  #:inCollection div:identify ;
+  skos:broader g:Literature ; # Really? If not though, do all subclasses have *some* broader inCollection div:find?
   skos:closeMatch marcgt:boo ;
   #skos:broader g:LinguisticWork ;
   :inCollection div:workform ;
@@ -39,7 +40,7 @@ gf:WrittenBook a :GenreForm ;
   skos:altLabel "Bok"@sv, "Book"@en .
 
 gf:Audiobook a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   :inCollection div:contentform ;
   skos:broader ktg:Audio ,
     gf:Book ;
@@ -76,7 +77,7 @@ gf:WrittenBookWithImages a :GenreForm ;
     "Book with Images"@en .
 
 gf:Database a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:closeMatch marc:UpdatingDatabase ;
   :inCollection div:workform ;
   skos:broader g:Integrating, kbrda:ComputerDataset , g:InformativeWork ;
@@ -98,9 +99,9 @@ gf:Database a :GenreForm ;
 #--
 
 gf:Poster a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader ktg:StillImage ;
-  skos:exactMatch saogf:Affischer ;
+  skos:exactMatch saogf:Affischer, tgm:Affischer ;
   :singularLabel "Affisch"@sv, "Poster"@en ;
   :pluralLabel "Affischer"@sv .
 
@@ -130,7 +131,7 @@ gf:Issue a :GenreForm ;
 #    "Newspaper Issue"@en .
 
 gf:Film a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:closeMatch marc:MotionPicture ;
   skos:broader ktg:MovingImage ;
   skos:exactMatch saogf:Filmer ;
@@ -157,7 +158,7 @@ g:TV a :GenreForm ;
   skos:prefLabel "TV"@sv, "TV"@en .
 
 gf:PictureBook a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:exactMatch barngf:Bilderb%C3%B6cker ;
   skos:broader gf:WrittenBookWithImages ;
   skos:broader ktg:ChildrensFictionLiterature ;
@@ -165,7 +166,7 @@ gf:PictureBook a :GenreForm ;
     "Picture Book"@en .
 
 gf:ChapterBook a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Kapitelb%C3%B6cker ;
   skos:broader gf:WrittenBookWithImages ;
@@ -212,8 +213,8 @@ gf:ComputerCode a :GenreForm ;
     "Computer Code"@en .
 
 gf:ComputerGame a :GenreForm ;
-  :inCollection div:find ;
-  :inCollection div:form ;
+  :inCollection div:identify ;
+  #:inCollection div:find ;
   skos:broader g:PuzzleOrGame, kbrda:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
   skos:closeMatch marc:ComputerTypeOfFileType-g ;
@@ -264,7 +265,7 @@ gf:Illustration a :GenreForm ;
     "Illustration"@en .
 
 gf:GraphicLiterature a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader gf:WorkWithImages ,
     g:FictionLiterature ;
   skos:broadMatch kbrda:Text ,
@@ -294,7 +295,7 @@ gf:Lexicon a :GenreForm ;
     "Lexicon"@en .
 
 gf:Manual a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader kbrda:Text ,
     g:InstructionalMaterial ;
   skos:closeMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc ;
@@ -394,7 +395,7 @@ gf:PictureDictionary a :GenreForm ;
     "Picture Dictionary"@en .
 
 gf:Postcard a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader ktg:StillImage ;
   skos:exactMatch saogf:Vykort ;
   skos:closeMatch marc:PictureCardPostCard ;
@@ -451,7 +452,7 @@ gf:SpokenPaper a :GenreForm ;
     "Spoken Paper"@en .
 
 gf:TVProgram a :GenreForm ;
-  skos:broader ktg:MovingImage, g:TV ;
+  skos:broader g:TV ;
   skos:exactMatch saogf:Tv-program ;
   :singularLabel "Tv-program"@sv ,
     "TV-Program"@en .
@@ -553,7 +554,7 @@ gf:PopupBook a :GenreForm ;
     "Pop-up bOok"@en .
 
 gf:Cookbook a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader gf:Book , g:InformativeWork ;
   skos:exactMatch saogf:Kokb%C3%B6cker ;
   :singularLabel "Kokbok"@sv ,
@@ -571,15 +572,15 @@ gf:DocumentaryComic a :GenreForm ;
   skos:exactMatch saogf:Dokument%C3%A4ra%20serier .
 
 gf:Map a :GenreForm ;
-  :inCollection div:find ;
-  skos:broader kbrda:CartographicImage ;
+  :inCollection div:identify ;
+  skos:broadMatch kbrda:CartographicImage ;
   skos:closeMatch marcgt:map , marc:Map ;
   skos:exactMatch marc:SingleMap, tgm:Kartor ;
   :singularLabel "Single map"@en ,
     "Enskild karta"@sv .
 
 gf:Globe a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:identify ;
   skos:broader kbrda:CartographicThreeDimensionalForm ;
   skos:exactMatch tgm:Glober ;
   skos:closeMatch marc:Globe ;
