@@ -48,3 +48,10 @@
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .
+
+:originalLanguage a owl:ObjectProperty ;
+    rdfs:label "originalspråk"@sv, "original language"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Work ;
+    rdfs:range :Language ;
+    owl:propertyChainAxiom ( :translationOf :language ) .
