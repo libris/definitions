@@ -20,7 +20,7 @@ ktg:PhysicalForm a :Category ;
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
 ktg:Print a :Category;
   skos:exactMatch marc:Print ;
-  skos:broader :Unmediated ;
+  skos:broader kbrda:Unmediated ;
   rdfs:label "Tryck"@sv, "Print"@en .
 
 ktg:ManuscriptForm a :Category ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
@@ -28,9 +28,9 @@ ktg:ManuscriptForm a :Category ;  # NOTE: the type changed to Work in BF; this i
 
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
 ktg:Handwritten a :Category;
-  skos:broader :Unmediated, ktg:ManuscriptForm .
+  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
 ktg:Typewritten a :Category;
-  skos:broader :Unmediated, ktg:ManuscriptForm .
+  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
 
 # mer extraordinärt? Sitter på exemplar?
 #ktg:Photocopied a :Category; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
