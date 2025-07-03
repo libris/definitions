@@ -6,7 +6,10 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
-Requires Python 3.7+. (Use PyPy for a general speed improvement.)
+Requires Python 3.9+. (Use PyPy for a general speed improvement.)
+
+If you have [uv](https://github.com/astral-sh/uv) installed, just prepend
+`uv run` to the commands under "Usage" and skip the following. Otherwise:
 
 Preferably set up a virtualenv:
 
