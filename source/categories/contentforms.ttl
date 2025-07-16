@@ -15,11 +15,31 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 # - Replace Category with ContentType and merge into <rdacategories.ttl>?
 # - Some RDA terms have broader Genre terms!
 # - Some are "SensoryForm" super-ContentType:s...
-# - Is there a sometimes necessary distinction between "contains" and "is"? If so, we reasonably should say that using a concrete GenreForm...
+
+# TODO: Is there a sometimes necessary distinction between "contains" and "is"? If so, we should reasonably say that using a concrete GenreForm...
+
+ktg:LinguisticWork a :Category ;
+  # pending?
+  skos:altLabel "Literature"@en ,
+    "Litteratur"@sv ;
+  skos:prefLabel "Linguistic work"@en ,
+    "Språkligt verk"@sv .
+
+ktg:Literature a :Category ;
+  :inCollection div:find ;
+  skos:broader ktg:LinguisticWork ;
+  #skos:broader ktg:Text ;
+  :singularLabel "Litteratur"@sv ,
+    "Literature"@en .
 
 ktg:Visual a :Category ;
   :inCollection div:sensoryform ;
   skos:prefLabel "Visuell"@sv, "Visual"@en .
+
+ktg:Text a :Category ;
+  :inCollection div:basic ;
+  skos:broadMatch kbrda:StillImage ;
+  skos:prefLabel "Text"@sv, "Text"@en .
 
 ktg:Audio a :Category ;
   :inCollection div:basic ;
