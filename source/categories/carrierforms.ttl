@@ -26,6 +26,7 @@ ktg:Print a :Category;
 ktg:ManuscriptForm a :Category ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
   rdfs:label "Handskrift"@sv, "Manuscript"@en .
 
+# Rather :productionMethod?
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
 ktg:Handwritten a :Category;
   skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
@@ -34,8 +35,6 @@ ktg:Typewritten a :Category;
 
 # mer extraordinärt? Sitter på exemplar?
 #ktg:Photocopied a :Category; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
-
-# fmt:LargeText a :Format ?
 
 #ktg:MassProducedVolume a :Category ;
 #  rdfs:subClassOf ktg:MassProduced, kbrda:Volume .
@@ -69,6 +68,9 @@ ktg:PhysicalObject a :Category ; # :UnmediatedObject ?
   skos:prefLabel "Föremål"@sv , "Physical object"@en .
 
 
+# Cf. notation
+# fmt:LargeText a :Format ?
+
 # TODO: Lift these from marc to KBV?
 # If so we need a clear delineation between "braille notation" and "to be experienced with touch".
 #ktg:TactileForm a :Category ;
@@ -99,22 +101,24 @@ ktg:StorageMedium a :Category ;
 
 
 ktg:TapeCartridge a :Category ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader ktg:ElectronicStorageMedium ;
   ptg:abstract true ;
   skos:exactMatch marc:TapeCartridge ;
   skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
 
 ktg:TapeCassette a :Category ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader ktg:ElectronicStorageMedium ;
   ptg:abstract true ;
   skos:exactMatch marc:TapeCassette ;
   skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
 
 ktg:TapeReel a :Category ;
   ptg:abstract true ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader ktg:ElectronicStorageMedium ;
   skos:exactMatch marc:TapeReel ;
   skos:prefLabel "Datorbandspole"@sv, "Tape reel"@en .
+
+# TODO: why not change most ktg:StorageMedium to ktg:ElectronicStorageMedium ?
 
 ktg:MagneticDisk a :Category ;
   skos:exactMatch marc:MagneticDisk ;
@@ -179,7 +183,7 @@ ktg:ElectronicStorageMedium a :Category ;
 
 ktg:StandaloneDevice a :Category ;
   skos:exactMatch marc:StandaloneDevice ;
-  skos:broader ktg:ElectronicStorageMedium, ktg:PhysicalObject .
+  skos:broader ktg:ElectronicStorageMedium . # Not: ktg:PhysicalObject (that's Unmediated)
 
 
 # TODO: Is the media type aspect superfluous if content is on the work?
