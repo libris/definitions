@@ -1549,7 +1549,16 @@
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
-          "showProperties": [ "fresnel:super", "hasNote", "summary", "image" ]
+          "showProperties": [
+            "fresnel:super",
+            "hasNote",
+            "summary",
+            "image",
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "in::instanceOf/*/responsibilityStatement"
+            }
+          ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-cards"},
