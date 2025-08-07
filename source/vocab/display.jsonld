@@ -1532,6 +1532,16 @@
           "classLensDomain": "ImageObject",
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super", "thumbnail" ]
+        },
+        "TableOfContents": {
+          "classLensDomain": "TableOfContents",
+          "fresnel:extends": {"@id": "TableOfContents-chips"},
+          "showProperties": [ "fresnel:super", "hasPart" ]
+        },
+        "ToCEntry": {
+          "classLensDomain": "ToCEntry",
+          "fresnel:extends": {"@id": "ToCEntry-chips"},
+          "showProperties": [ "fresnel:super", "responsibilityStatement" ]
         }
       }
     },
@@ -1557,6 +1567,10 @@
             {
               "@type": "fresnel:fslselector",
               "@value": "in::instanceOf/*/responsibilityStatement"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "in::instanceOf/*/tableOfContents"
             }
           ]
         },
