@@ -27,43 +27,6 @@
     {"@id": "https://id.kb.se/vocab/display"}
   ],
   "lensGroups": {
-    "search-tokens": {
-      "@id": "search-tokens",
-      "@type": "fresnel:Group",
-      "lenses": {
-        "Creation": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Creation",
-          "showProperties": [
-            {
-              "alternateProperties": [
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/KeyTitle/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/Title/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/*/mainTitle"
-                }
-              ]
-            }
-          ]
-        },
-        "Person": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Person",
-          "showProperties": [
-            "givenName",
-            "familyName",
-            "name"
-          ]
-        }
-      }
-    },
     "tokens": {
       "@id": "tokens",
       "@type": "fresnel:Group",
@@ -1492,6 +1455,43 @@
         "AdministrativeAction": {
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
+        }
+      }
+    },
+    "search-tokens": {
+      "@id": "search-tokens",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Creation": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Creation",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/KeyTitle/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/Title/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/*/mainTitle"
+                }
+              ]
+            }
+          ]
+        },
+        "Person": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Person",
+          "showProperties": [
+            "givenName",
+            "familyName",
+            "name"
+          ]
         }
       }
     },
