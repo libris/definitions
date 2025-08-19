@@ -68,6 +68,7 @@
     rdfs:subClassOf :Endeavour .
 
 :WorkHub a owl:Class ;
+    :category :pending ;
     rdfs:label "Work Hub"@en, "Verkshubb"@sv ;  # TODO: Naming things...
     skos:altLabel "Verksnav"@sv ;
     rdfs:subClassOf :Work ;
@@ -533,6 +534,7 @@
 #    rdfs:subClassOf :Monograph, :ComponentPart .
 #
 :SerialComponentPart a owl:Class ;
+    :category :pending ;
     owl:deprecated true ;  # {| rdfs:label "Ersatt av Monograph."@sv |}  # TODO: Är dessa *faktiskt* ComponentPart?
     rdfs:label "Serial Component Part"@en, "Del av sammansatt seriell resurs"@sv;
     rdfs:subClassOf :Serial, :ComponentPart  .
@@ -583,7 +585,6 @@
 
 :Print a owl:Class;
     :category :pending ;
-    :category :pending ;
     :abstract true ;
     rdfs:label "Tryck"@sv;
     skos:definition "Resurs som är mångfaldigad genom tryck."@sv;
@@ -613,6 +614,7 @@
 # Combined "Instance with restricted Work" types from MARC (007)
 
 :StillImageInstance a owl:Class;
+    :category :pending ;
     owl:deprecated true ;
     rdfs:label "Still Image Instance"@en, "Instans av stillbild"@sv;
     rdfs:subClassOf :Instance ;
