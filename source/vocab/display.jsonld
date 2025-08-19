@@ -1458,6 +1458,43 @@
         }
       }
     },
+    "search-tokens": {
+      "@id": "search-tokens",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Creation": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Creation",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/KeyTitle/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/Title/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/*/mainTitle"
+                }
+              ]
+            }
+          ]
+        },
+        "Person": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Person",
+          "showProperties": [
+            "givenName",
+            "familyName",
+            "name"
+          ]
+        }
+      }
+    },
     "search-chips": {
       "@id": "search-chips",
       "@type": "fresnel:Group",
@@ -1495,6 +1532,16 @@
           "classLensDomain": "ImageObject",
           "fresnel:extends": {"@id": "ImageObject-chips"},
           "showProperties": [ "fresnel:super", "thumbnail" ]
+        },
+        "TableOfContents": {
+          "classLensDomain": "TableOfContents",
+          "fresnel:extends": {"@id": "TableOfContents-chips"},
+          "showProperties": [ "fresnel:super", "hasPart" ]
+        },
+        "ToCEntry": {
+          "classLensDomain": "ToCEntry",
+          "fresnel:extends": {"@id": "ToCEntry-chips"},
+          "showProperties": [ "fresnel:super", "responsibilityStatement" ]
         }
       }
     },
@@ -1512,7 +1559,20 @@
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
-          "showProperties": [ "fresnel:super", "hasNote", "summary", "image" ]
+          "showProperties": [
+            "fresnel:super",
+            "hasNote",
+            "summary",
+            "image",
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "in::instanceOf/*/responsibilityStatement"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "in::instanceOf/*/tableOfContents"
+            }
+          ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-cards"},
