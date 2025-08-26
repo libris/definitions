@@ -1551,7 +1551,24 @@
       "lenses": {
         "Instance": {
           "fresnel:extends": {"@id": "Instance-cards"},
-          "showProperties": [ "fresnel:super", "appliedMaterial", "basematerial", "bookFormat", "colorContent", "hasNote", "mount", "polarity", "projection", "projectionCharacteristic", "productionMethod", "soundCharacteristic", "summary", "videoCharacteristic", "image" ]
+          "showProperties": [
+            "fresnel:super",
+            "appliedMaterial",
+            "basematerial",
+            "bookFormat",
+            "colorContent",
+            "hasNote",
+            "mount",
+            "polarity",
+            "projection",
+            "projectionCharacteristic",
+            "productionMethod",
+            "soundCharacteristic",
+            "summary",
+            "tableOfContents",
+            "videoCharacteristic",
+            "image"
+          ]
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
@@ -1563,15 +1580,7 @@
             "fresnel:super",
             "hasNote",
             "summary",
-            "image",
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "in::instanceOf/*/responsibilityStatement"
-            },
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "in::instanceOf/*/tableOfContents"
-            }
+            "image"
           ]
         },
         "Person": {
