@@ -318,6 +318,9 @@ construct {
     )
 
     optional {
+        # No organizations for Bibliographies for now
+        FILTER(?libtype = :Library)
+
         ?bdb_id bibdb:organisation ?org_id .
         ?org_id bibdb:code ?orgCode .
 
