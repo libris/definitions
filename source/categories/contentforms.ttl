@@ -12,60 +12,60 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 # Base Category or ContentType applying to an *Expression*.
 
 # TODO:
-# - Replace Category with ContentType and merge into <rdacategories.ttl>?
+# - Replace ContentForm with ContentType and merge into <rdacategories.ttl>?
 # - Some RDA terms have broader Genre terms!
 # - Some are "SensoryForm" super-ContentType:s...
 
 # TODO: Is there a sometimes necessary distinction between "contains" and "is"? If so, we should reasonably say that using a concrete GenreForm...
 
-ktg:LinguisticWork a :Category ;
+ktg:LinguisticWork a :ContentForm ;
   # pending?
   skos:altLabel "Literature"@en ,
     "Litteratur"@sv ;
   skos:prefLabel "Linguistic work"@en ,
     "Språkligt verk"@sv .
 
-ktg:Literature a :Category ;
+ktg:Literature a :ContentForm ;
   :inCollection div:find ;
   skos:broader ktg:LinguisticWork ;
   #skos:broader ktg:Text ;
   :singularLabel "Litteratur"@sv ,
     "Literature"@en .
 
-ktg:Visual a :Category ;
+ktg:Visual a :ContentForm ;
   :inCollection div:sensoryform ;
   skos:prefLabel "Visuell"@sv, "Visual"@en .
 
-ktg:Text a :Category ;
+ktg:Text a :ContentForm ;
   :inCollection div:basic ;
   skos:broadMatch kbrda:StillImage ;
   skos:prefLabel "Text"@sv, "Text"@en .
 
-ktg:Audio a :Category ;
+ktg:Audio a :ContentForm ;
   :inCollection div:basic ;
   :inCollection div:sensoryform ;
   skos:prefLabel "Ljud"@sv, "Audio"@en .
 
-ktg:Tactile a :Category ;
+ktg:Tactile a :ContentForm ;
   :inCollection div:sensoryform ;
   skos:closeMatch saogf:Taktila%20verk ;
   skos:prefLabel "Taktil"@sv .
 
-ktg:MovingImage a :Category ;
+ktg:MovingImage a :ContentForm ;
   :inCollection div:basic ;
   :inCollection div:find ;
   skos:broader ktg:Visual ;
   skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
 
-ktg:Dataset a :Category ;
+ktg:Dataset a :ContentForm ;
   #:inCollection div:find ;
   skos:prefLabel "Datamängd"@sv, "Dataset"@en .
 
-ktg:Object a :Category ;
+ktg:Object a :ContentForm ;
   :inCollection div:find ;
   skos:prefLabel "Föremål"@sv, "Object"@en .
 
-ktg:StillImage a :Category ;
+ktg:StillImage a :ContentForm ;
   :inCollection div:basic ;
   :inCollection div:find ;
   #:inCollection div:identify ;
@@ -75,5 +75,5 @@ ktg:StillImage a :Category ;
   skos:narrowMatch marc:Graphic ; # 8048
   skos:prefLabel "Stillbild"@sv, "Still image"@en .
 
-ktg:Movement a :Category ;
+ktg:Movement a :ContentForm ;
   skos:prefLabel "Rörelser"@sv .
