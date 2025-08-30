@@ -1,0 +1,40 @@
+# About id.kb.se
+
+## Introduction
+
+**id.kb.se** is a service that provides both human and machine-readable access to building blocks the National Library of Sweden (KB) uses to publish structured, [linked data](https://en.wikipedia.org/wiki/Linked_data). Here are common definitions and concepts that help coordinate descriptions of our material. These are based on and mappings to international ontologies, controlled vocabularies, and other lists for bibliographic description.
+
+Linked data is a method of publishing structured data in a way that enables machines to create connections between different information objects and data sources. KB has a lot of data that can be linked to other data on the Internet, thus enabling the data to be enriched in both directions.
+
+## Identifers
+
+Each concept, such as a subject heading, is identified by an HTTP URI. The URI consists of an address and a text string that together constitute the unique identifier of the term. Example: 'https://libris.kb.se/rp354vn9510f7x9'. 
+
+If you use the concepts in your own systems, you should store the complete strings ('https://...') in your database.
+
+Some concepts also get a more "readable" identifier based on the preferred term for the term. The example above, which identifies the Swedish subject heading "Kommunikation", has been given the alternative identifier: 'https://id.kb.se/term/sao/Kommunikation'.
+
+## Metadataformats
+
+Under the Base vocabulary and MARC mappings sections, the format is displayed from different perspectives.
+
+Underlying metadata is currently presented in 3 different syntaxes:
+
+* [JSON-LD](http://json-ld.org/) (JavaScript Object Notation for Linked Data), Often prefered serialization for web-developers.
+* [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/), a serialization to express RDF in XML.
+* [Turtle](http://www.w3.org/TR/turtle/) (Terse RDF Triple Language), a serialization to express RDF in a human friendly syntax similar to SPARQL.
+
+Our metadata is currently expressed in a vocabulary based on [BIBFRAME 2.0](http://www.loc.gov/bibframe/docs/index.html), complemented by established standards like:
+
+[Dublin Core](http://purl.org/dc/terms/),
+[SKOS](http://www.w3.org/2004/02/skos/core#) and
+[MADS/RDF](http://www.loc.gov/mads/rdf/v1#).
+
+These are distinguished in metadata with various prefixes such as `bf:`, `dc:`, `skos:`, and `madsrdf:`. Most of the vocabulary is constructed in a way that makes it possible to get data in several different established standards.
+
+Some properties which is of a more administrative nature and we have not yet found the corresponding equivalent in a standard vocabulary has been given "local" prefixes such as `marc:` and `kbv:`. Terms that have the prefix `marc:` will not be maintained for persistence over time while the KBV terms can be counted as more stable. Note that these may also include categories for experimental designs. For more details about it and the data model we use, see the article [Data Model](https://github.com/libris/definitions/wiki/Data-Model).
+
+For similar linked data services see [id.loc.gov](https://id.loc.gov), [finto.fi](https://finto.fi), [dnb.de](https://www.dnb.de/EN/Professionell/Metadatendienste/Datenbezug/LDS/lds_node.html).
+
+
+
