@@ -79,14 +79,14 @@
           { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
           { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 20 },
           { "dimensionChain": ["genreForm"], "itemLimit": 100 },
           { "dimensionChain": ["subject"], "itemLimit": 100 },
-          { "dimensionChain": ["language"], "itemLimit": 100 },
-          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
           { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
           { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
@@ -97,7 +97,7 @@
         { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
         { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
         { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
-        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Endast resurser med omslags-/miniatyrbild", "en": "Resources with cover/thumbnail only" } },
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "freeOnline", "filter": "hasInstanceType:Electronic AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
       "defaultSiteFilters": [
@@ -116,7 +116,8 @@
       "relationFilters": {
         "Agent": [ "contributor", "subject", "publisher" ],
         "Concept": [ "subject", "genreForm", "hasOccupation", "fieldOfActivity", "termComponentList" ],
-        "Work": [ "subject" ]
+        "Work": [ "subject", "isPartOf" ],
+        "Instance": [ "subject", "isPartOf" ]
       }
     },
     {

@@ -31,6 +31,7 @@
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
 @prefix bulk: <https://id.kb.se/ns/bulk/> .
+@prefix bibdb: <https://id.kb.se/ns/bibdb/> .
 
 
 #:platform a :Category ; rdfs:comment " ... "@en .
@@ -522,13 +523,13 @@
     rdfs:range :PartialCollectionView;
     owl:equivalentProperty hydra:view .
 
-:totalItems a owl:ObjectProperty;
+:totalItems a owl:DatatypeProperty;
     :category :platform ;
     #rdfs:domain :Collection;
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
 
-:maxItems a owl:ObjectProperty;
+:maxItems a owl:DatatypeProperty;
     :category :platform ;
     skos:definition "The maximum number of items in the collection/view/result. For paginated collections: the maximum number of items that may be accessed through pagination. Might be smaller than totalItems."@en;
     sdo:domainIncludes :PartialCollectionView, :Slice .
@@ -936,3 +937,209 @@ bulk:numFailed a :DatatypeProperty ;
   rdfs:label "Number of failed records"@en, "Antal misslyckade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
+
+# BIBDB
+bibdb:Organization a owl:Class ;
+    :category :platform ;
+    rdfs:label "Library organization"@en, "Bibliotekshuvudorganisation"@sv .
+
+# TODO "Library category"s instead ?
+bibdb:LibraryType a owl:Class ;
+    :category :platform ;
+    rdfs:label "Library type"@en, "Bibliotekstyp"@sv .
+
+bibdb:libraryType a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:LibraryType ;
+    rdfs:label "library type"@en, "bibliotekstyp"@sv .
+
+bibdb:linkresolver a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:LinkResolver ;
+    rdfs:label "link resolver"@en, "länkserver"@sv .
+
+bibdb:LinkResolver a owl:Class ;
+    :category :platform ;
+    rdfs:seeAlso <https://en.wikipedia.org/wiki/OpenURL>,
+                 <https://www.niso.org/publications/z3988-2004-r2010> ;
+    rdfs:label "Link resolver"@en, "Länkserver"@sv .
+
+#sdo:openingHoursSpecification requires structured data.
+#bibdb is just a string
+bibdb:openingHours a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:range xsd:string ;
+    rdfs:label "Opening hours"@en, "Öppettider"@sv .
+
+bibdb:ILS a owl:Class ;
+    :category :platform ;
+    rdfs:label "ILS"@en, "ILS"@sv .
+
+bibdb:ils a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:ILS ;
+    rdfs:label "ILS"@en, "ILS"@sv .
+
+bibdb:templateUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:range xsd:string .
+
+bibdb:bibIdSearchUri a owl:DatatypeProperty;
+    :category :platform ;
+    sdo:domainIncludes bibdb:ILS, bibdb:LOPAC ;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for searching resource by BibId"@en, "URI för att söka upp resurs via BibId"@sv .
+
+bibdb:isbnSearchUri a owl:DatatypeProperty;
+    :category :platform ;
+    sdo:domainIncludes bibdb:ILS, bibdb:LOPAC ;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for searching resource by ISBN"@en, "URI för att söka upp resurs via ISBN"@sv .
+
+bibdb:issnSearchUri a owl:DatatypeProperty;
+    :category :platform ;
+    sdo:domainIncludes bibdb:ILS, bibdb:LOPAC ;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for searching resource by ISSN"@en, "URI för att söka upp resurs via ISSN"@sv .
+
+bibdb:itemStatusUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:ILS ;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for item status"@en, "URI till lånestatus"@sv .
+
+bibdb:eodUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for ordering EOD"@en, "URI för att beställa EOD"@sv .
+
+# TODO just use straight schema.org for address stuff?
+bibdb:PostalAddress a owl:Class ;
+    :category :platform ;
+    owl:equivalentClass sdo:PostalAddress ;
+    rdfs:label "Address"@en, "Adress"@sv .
+
+bibdb:ILLAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Interlibrary loan (ILL) address"@en, "Fjärrlåneadress"@sv .
+
+bibdb:DeliveryAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Delivery Address"@en, "Leveransadress"@sv .
+
+bibdb:VisitingAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Visiting Address"@en, "Besöksadress"@sv .
+
+bibdb:InvoicingAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Invoicing Address"@en, "Faktureringsadress"@sv .
+
+bibdb:StatisticalContactAddress a owl:Class ;
+    :category :platform ;
+    rdfs:subClassOf bibdb:PostalAddress ;
+    rdfs:label "Statistical Contact Address"@en, "Statistik-kontaktadress"@sv .
+
+bibdb:address a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:PostalAddress ;
+    rdfs:label "address"@en, "adress"@sv .
+
+# Used for attention
+bibdb:extendedAddress a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:extendedAddress ;
+    rdfs:comment "Till exempel att. eller C/O."@sv;
+    rdfs:label "Address extension"@en, "Ytterligare addressinformation"@sv .
+
+bibdb:streetAddress a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:streetAddress ;
+    rdfs:label "Street address"@en, "Gatuadress"@sv .
+
+bibdb:postalCode a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:postalCode ;
+    rdfs:label "Postal code"@en, "Postnummer"@sv .
+
+bibdb:addressLocality a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:addressLocality ;
+    rdfs:label "Address locality code"@en, "Ort"@sv .
+
+bibdb:email a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:email ;
+    rdfs:label "Email"@en, "E-post"@sv .
+
+bibdb:telephone a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:PostalAddress ;
+    owl:equivalentProperty sdo:telephone ;
+    rdfs:label "Telephone"@en, "Telefon"@sv .
+
+bibdb:latitude a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library ;
+    owl:equivalentProperty sdo:latitude ;
+    rdfs:label "latitude"@en, "latitud"@sv .
+
+bibdb:longitude a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain :Library ;
+    owl:equivalentProperty sdo:longitude ;
+    rdfs:label "longitude"@en, "longitud"@sv .
+
+bibdb:LOPAC a owl:Class ;
+    :category :platform ;
+    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
+
+bibdb:lopac a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:domain :Library ;
+    rdfs:range bibdb:LOPAC ;
+    rdfs:label "LOPAC settings"@en, "LOPAC-inställningar"@sv .
+
+bibdb:myLoansUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for My loans"@en, "URI för Mina lån"@sv .
+
+bibdb:patronRegistrationUri a owl:DatatypeProperty;
+    :category :platform ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:subPropertyOf bibdb:templateUri ;
+    rdfs:label "URI for patron registration"@en, "URL för Ansök om lånekort"@sv .
+
+bibdb:displayMode a owl:ObjectProperty ;
+    :category :platform ;
+    rdfs:label "display mode"@en, "visningsläge"@sv ;
+    rdfs:domain bibdb:LOPAC;
+    rdfs:range bulk:StatusType .
+
+bibdb:DisplayMode a owl:Class ;
+    :category :platform ;
+    skos:prefLabel "Display mode"@en, "Visningsläge"@sv .
+
+bibdb:Blank a bibdb:DisplayMode ;
+    :category :platform ;
+    skos:prefLabel "New window"@en, "Nytt fönster"@sv .
+
+bibdb:Lightbox a bibdb:DisplayMode ;
+    :category :platform ;
+    skos:prefLabel "Lightbox"@en, "Lightbox"@sv .

@@ -22,6 +22,7 @@
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
+@prefix bibdb: <https://id.kb.se/ns/bibdb/> .
 
 :license a owl:ObjectProperty;
     rdfs:label "licens"@sv, "license"@en ;
@@ -63,8 +64,8 @@
 
 :isPartOf a owl:ObjectProperty;
     #TODO: After remodelling Meeting, domainIncludes and rangeIncludes will also apply to Meeting
-    sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
-    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction, :Place;
+    sdo:domainIncludes :Endeavour, :Organization, :Jurisdiction, :Place, :Library;
+    sdo:rangeIncludes :Endeavour, :Organization, :Jurisdiction, :Place, bibdb:Organization;
     rdfs:label "är del av"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :hasPart;
@@ -628,6 +629,7 @@
     :category :shorthand;
     rdfs:label "Author/Contributor"@en, "Författare/upphov"@sv;
     sdo:domainIncludes :Endeavour, :MediaObject ;
+    sdo:rangeIncludes :BibliographicAgent;
     owl:equivalentProperty dc:contributor;
     rdfs:subPropertyOf prov:wasAttributedTo;
     owl:propertyChainAxiom ( :contribution :agent ) .
