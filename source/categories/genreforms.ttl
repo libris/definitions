@@ -218,15 +218,20 @@ ktg:Brochure a :GenreForm ;
   :singularLabel "Broschyr"@sv ,
     "Brochure"@en .
 
-ktg:Comic a :GenreForm ;
-  skos:broader ktg:GraphicLiterature ;
-  skos:altLabel "Tecknad serie"@sv ;
-  skos:broadMatch saogf:Tecknade%20serier ,
-    barngf:Tecknade%20serier ;
-  skos:exactMatch saogf:Serietidningar ,
-    marc:ComicOrGraphicNovel ;
-  :singularLabel "Serietidning"@sv ,
-    "Comic"@en .
+ktg:ComicOrGraphicNovel a :GenreForm ;
+  skos:exactMatch saogf:Tecknade%20serier;
+  skos:closeMatch marc:ComicOrGraphicNovel .
+
+# Commented out the below which equated Serietidningar with the broader Tecknade serier
+#ktg:Comic a :GenreForm ;
+#  skos:broader ktg:GraphicLiterature ;
+#  skos:altLabel "Tecknad serie"@sv ;
+#  skos:broadMatch saogf:Tecknade%20serier ,
+#    barngf:Tecknade%20serier ;
+#  skos:exactMatch saogf:Serietidningar ,
+#    marc:ComicOrGraphicNovel ;
+#  :singularLabel "Serietidning"@sv ,
+#    "Comic"@en .
 
 ktg:ComicStrip a :GenreForm ;
   skos:broader ktg:GraphicLiterature ;
@@ -345,6 +350,7 @@ ktg:ShortStory a :GenreForm ;
   skos:exactMatch saogf:Noveller ;
   :singularLabel "Novell"@sv ,
     "Short Story"@en .
+
 
 ktg:Drama a :GenreForm ; # TODO: differentiate frm Drama (Film, Play, Performance, Music, ....)
   :inCollection div:identify ;
@@ -724,6 +730,7 @@ ktg:DocumentaryComic a :GenreForm ;
 ktg:Map a :GenreForm ;
   :inCollection div:identify ;
   skos:broadMatch kbrda:CartographicImage ;
+  skos:exactMatch saogf:Kartor ;
   skos:closeMatch marcgt:map , marc:Map ;
   skos:exactMatch marc:SingleMap, tgm:Kartor ;
   :singularLabel "Single map"@en ,
