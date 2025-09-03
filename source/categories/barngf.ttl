@@ -8,6 +8,8 @@ prefix barngf: <https://id.kb.se/term/barngf/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 
+# FIXME: most of these are GenreForm; if we single out Genre for *complementary aspects* (those who are "precoordinated" notions, rather than "subject is enough"...)
+
 # TODO: Tentative; needs singularLabel, probably english slugs, etc.
 # OR: Incorporate the mapping links into the official barngf (to make it a tree).
 
@@ -188,7 +190,8 @@ ktg:S%C3%A5nglekar a :Genre ;
   :singularLabel "Sånglek"@sv .
 
 ktg:Kortspel a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  #skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Kortspel ;
   skos:prefLabel "Kortspel"@sv .
 
@@ -215,7 +218,8 @@ ktg:Pusselb%C3%B6cker a :Genre ;
 
 ktg:Pysselb%C3%B6ckerBarn a :Genre ;
   skos:broadMatch saogf:Pysselb%C3%B6cker ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  #skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Pysselb%C3%B6cker ;
   :pluralLabel "Pysselböcker för barn"@sv ;
   :singularLabel "Pysselbok för barn"@sv .
@@ -228,7 +232,9 @@ ktg:Rim%20och%20ramsor a :Genre ;
   :singularLabel "Rim och ramsa"@sv .
 
 ktg:Taktila%20illustrationer a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broadMatch ktg:WorkWithImages ;
+  #skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Taktila%20illustrationer ;
   skos:prefLabel "Taktila illustrationer"@sv ;
   :pluralLabel "Taktila illustrationer"@sv ;
@@ -247,7 +253,8 @@ ktg:Teckenspr%C3%A5k a :Genre ;
   skos:prefLabel "Teckenspråk"@sv .
 
 ktg:Samlingar a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  #skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Samlingar ;
   skos:prefLabel "Samlingar"@sv ;
   :pluralLabel "Samlingar"@sv ;
