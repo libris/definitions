@@ -1,0 +1,272 @@
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix marc: <https://id.kb.se/marc/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix : <https://id.kb.se/vocab/>
+
+# FIXME: Is this just a construct from (what was left in) <examples/typenormalization/marcmatches.ttl>? I've written "Move remainder to term declaration!"...
+# Need to: check which of these are not already mapped; check if they're *used*, map them (even mint terms for them)?
+
+ktg:Index # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026112> ,
+    marc:Index .
+
+ktg:Treaty # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026707> ,
+    marc:Treaty .
+
+ktg:Discography # a :GenreForm ;
+  skos:closeMatch saogf:Diskografier ,
+    <http://id.loc.gov/vocabulary/msupplcont/discography> ,
+    marc:Discography .
+
+ktg:TechnicalReport # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026093> ,
+    marc:TechnicalReport .
+
+ktg:Filmography # a :GenreForm ;
+  skos:closeMatch saogf:Filmografi ,
+    <http://id.loc.gov/vocabulary/msupplcont/film> ,
+    marc:Filmography .
+
+ktg:Directory # a :GenreForm ;
+  skos:closeMatch saogf:Adresskalendrar ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026087> ,
+    marc:Directory .
+
+ktg:Thesis # a :GenreForm ;
+  skos:closeMatch saogf:Avhandlingar ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
+    marc:Thesis .
+
+ktg:MixedForms # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
+    marc:MixedForms .
+
+ktg:HumorSatiresEtc # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026110> ,
+    marc:HumorSatiresEtc .
+
+ktg:Letter # a :GenreForm ;
+  skos:closeMatch saogf:Korrespondens ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
+    marc:Letter .
+
+ktg:SurveysOfLiteratureInASubjectArea # a :GenreForm ;
+  skos:closeMatch saogf:Forsknings%C3%B6versikter ,
+    marc:SurveysOfLiteratureInASubjectArea .
+
+ktg:Festschrift # a :GenreForm ;
+  skos:closeMatch saogf:Festskrifter ,
+    marc:Festschrift .
+
+ktg:History # a :GenreForm ;
+  skos:closeMatch marcgt:his ,
+    marc:History .
+
+ktg:Rehearsal # a :GenreForm ;
+  skos:closeMatch marcgt:reh ,
+    marc:Rehearsal .
+
+ktg:Folktale # a :GenreForm ;
+  skos:closeMatch saogf:Folksagor ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
+    marc:Folktale .
+
+ktg:Fiction # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
+    marc:Fiction .
+
+ktg:Sound # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026594> ,
+    marc:Sound .
+
+ktg:ConferenceProceeding # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026068> ,
+    marc:ConferenceProceeding .
+
+ktg:LanguageInstruction # a :GenreForm ;
+  skos:closeMatch marcgt:lan ,
+    marc:LanguageInstruction .
+
+ktg:Graphic # a :GenreForm ;
+  skos:closeMatch marcgt:gra ,
+    marc:Graphic .
+
+ktg:Diorama # a :GenreForm ;
+  skos:closeMatch marcgt:dio ,
+    marc:Diorama .
+
+ktg:TechnicalDrawing # a :GenreForm ;
+  skos:closeMatch marcgt:ted ,
+    marc:TechnicalDrawing .
+
+ktg:FlashCard # a :GenreForm ;
+  skos:closeMatch marcgt:fla ,
+    marc:FlashCard .
+
+ktg:Transparency # a :GenreForm ;
+  skos:closeMatch tgm:Genomsiktsbilder ,
+    marcgt:tra ,
+    marc:Transparency .
+
+ktg:Slide # a :GenreForm ;
+  skos:closeMatch tgm:Diabilder ,
+    marcgt:sli ,
+    marc:Slide .
+
+ktg:PlayingCard # a :GenreForm ;
+  skos:closeMatch tgm:Spelkort ,
+    <http://id.loc.gov/authorities/genreForms/gf2017027252> ,
+    marc:PlayingCard .
+
+# == Handritad karta
+ktg:Manuscript # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026385> ,
+    marc:Manuscript .
+
+ktg:OnlineSystemOrService # a :GenreForm ;
+  skos:closeMatch marcgt:ons ,
+    marc:OnlineSystemOrService .
+
+ktg:ComputerTypeOfFileType-h # a :GenreForm ;
+  skos:closeMatch marcgt:sou ,
+    marc:ComputerTypeOfFileType-h .
+
+ktg:InteractiveMultimedia # a :GenreForm ;
+  skos:closeMatch marcgt:inm ,
+    marc:InteractiveMultimedia .
+
+ktg:Font # a :GenreForm ;
+  skos:closeMatch marcgt:fon ,
+    marc:Font .
+
+ktg:Document # a :GenreForm ;
+  skos:closeMatch marcgt:doc ,
+    marc:Document .
+
+# Not used...
+#ktg:BibliographicData # a :GenreForm ;
+#  skos:closeMatch marcgt:bda ,
+#    marc:BibliographicData .
+
+ktg:NumericData # a :GenreForm ;
+  skos:closeMatch marcgt:num ,
+    marc:NumericData .
+
+ktg:View # a :GenreForm ;
+  skos:closeMatch tgm:Vyer ,
+    marc:View .
+
+ktg:Collage # a :GenreForm ;
+  skos:closeMatch tgm:Collage ,
+    marc:Collage .
+
+ktg:CoatsOfArms # a :GenreForm ;
+  skos:closeMatch tgm:Vapensk%C3%B6ldar%20%28bilder%29 ,
+    marc:CoatsOfArms .
+
+ktg:Facsimile # a :GenreForm ;
+  skos:closeMatch tgm:Faksimil ,
+    marc:Facsimile .
+
+ktg:GenealogicalTable # a :GenreForm ;
+  skos:closeMatch saogf:Genealogiskt%20material ,
+    marc:GenealogicalTable .
+
+ktg:Illumination # a :GenreForm ;
+  skos:closeMatch tgm:Bokm%C3%A5leri ,
+    marc:Illumination .
+
+ktg:MusicMatterType-a # a :GenreForm ;
+  skos:closeMatch saogf:Diskografier ,
+    marc:MusicMatterType-a .
+
+ktg:Plan # a :GenreForm ;
+  skos:closeMatch tgm:Planritningar ,
+    marc:Plan .
+
+ktg:Portrait # a :GenreForm ;
+  skos:closeMatch saogf:Portr%C3%A4tt ,
+    marc:Portrait .
+
+# ...
+
+ktg:ArtOriginal # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027218> ,
+    marc:ArtOriginal .
+
+ktg:ArtReproduction # a :GenreForm ;
+  skos:closeMatch tgm:Konstreproduktioner ,
+    marcgt:art ,
+    marc:ArtReproduction .
+
+ktg:WallMap # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026728> ,
+    marc:WallMap .
+
+ktg:PhotomechanicalPrint # a :GenreForm ;
+  skos:closeMatch tgm:Fotomekaniska%20reproduktioner ,
+    marc:PhotomechanicalPrint .
+
+ktg:UpdatingLooseLeaf # a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/vocabulary/mserialpubtype/looseleaf> ,
+    marc:UpdatingLooseLeaf .
+
+ktg:MicroscopeSlide # a :GenreForm ;
+  skos:closeMatch marcgt:mic ,
+    marc:MicroscopeSlide .
+
+ktg:Realia # a :GenreForm ;
+  skos:closeMatch marcgt:rea ,
+    marc:Realia .
+
+ktg:Filmstrip # a :GenreForm ;
+  skos:closeMatch marcgt:fls ,
+    marc:Filmstrip .
+
+## carriercategories {{{
+
+ktg:Microfiche # a :GenreForm ;
+  skos:closeMatch tgm:Mikroficher ,
+    marc:Microfiche .
+
+ktg:MicroformMaterialType-e # a :GenreForm ;
+  skos:closeMatch tgm:Mikroficher ,
+    marc:MicroformMaterialType-e .
+
+ktg:MicroformMaterialType-g # a :GenreForm ;
+  skos:closeMatch tgm:Mikrokort ,
+    marc:MicroformMaterialType-g .
+
+ktg:Microopaque # a :GenreForm ;
+  skos:closeMatch tgm:Mikrokort ,
+    marc:Microopaque .
+
+ktg:Negative # a :GenreForm ;
+  skos:closeMatch tgm:Negativ ,
+    marc:Negative .
+
+ktg:Photocopy # a :GenreForm ;
+  skos:closeMatch tgm:Elektrostatkopior ,
+    marc:Photocopy .
+
+ktg:ReproductionType-f # a :GenreForm ;
+  skos:closeMatch saogf:Faksimiler ,
+    marc:ReproductionType-f .
+
+ktg:Sample # a :GenreForm ;
+  skos:closeMatch tgm:Provexemplar ,
+    marc:Sample .
+
+ktg:Videodisc # a :GenreForm ;
+  skos:closeMatch tgm:Bildskivor ,
+    marc:Videodisc .
+
+ktg:VideoMaterialType-d # a :GenreForm ;
+  skos:closeMatch tgm:Bildskivor ,
+    marc:VideoMaterialType-d .
+
+# }}}
