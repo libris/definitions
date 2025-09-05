@@ -219,29 +219,30 @@ ktg:Brochure a :GenreForm ;
     "Brochure"@en .
 
 ktg:ComicOrGraphicNovel a :GenreForm ;
-  skos:exactMatch saogf:Tecknade%20serier;
-  skos:closeMatch marc:ComicOrGraphicNovel .
+  :inCollection div:identify ;
+  skos:broader ktg:GraphicLiterature ;
+  skos:exactMatch saogf:Tecknade%20serier ,
+    barngf:Tecknade%20serier ,
+    marc:ComicOrGraphicNovel ;
+  skos:altLabel "Serier"@sv ;
+  :singularLabel "Tecknad serie"@sv ,
+    "Comic or graphic novel"@en .
 
-# Commented out the below which equated Serietidningar with the broader Tecknade serier
-#ktg:Comic a :GenreForm ;
-#  skos:broader ktg:GraphicLiterature ;
-#  skos:altLabel "Tecknad serie"@sv ;
-#  skos:broadMatch saogf:Tecknade%20serier ,
-#    barngf:Tecknade%20serier ;
-#  skos:exactMatch saogf:Serietidningar ,
-#    marc:ComicOrGraphicNovel ;
-#  :singularLabel "Serietidning"@sv ,
-#    "Comic"@en .
+ktg:Comic a :GenreForm ;
+  skos:broader ktg:ComicOrGraphicNovel ;
+  skos:exactMatch saogf:Serietidningar ;
+  :singularLabel "Serietidning"@sv ,
+    "Comic magazine"@en .
 
 ktg:ComicStrip a :GenreForm ;
-  skos:broader ktg:GraphicLiterature ;
+  skos:broader ktg:ComicOrGraphicNovel ;
   skos:exactMatch marc:ComicStrip ;
   :singularLabel "Seriestripp"@sv ,
     "Comic strip"@en .
 
-ktg:ComicStory a :GenreForm ;
-  skos:broader ktg:Comic, ktg:ShortStory ;
-  skos:narrowMatch saogf:Serienoveller ;
+ktg:GraphicShortStory a :GenreForm ;
+  skos:broader ktg:ComicOrGraphicNovel, ktg:ShortStory ;
+  skos:exactMatch saogf:Serienoveller ;
   :singularLabel "Serienovell"@sv ,
     "Comic Story"@en .
 
@@ -407,19 +408,17 @@ ktg:Magazine a :GenreForm ;
     "Magazine"@en .
 
 ktg:GraphicLiterature a :GenreForm ;
-  :inCollection div:identify ;
   skos:broader ktg:WorkWithImages ,
     ktg:FictionLiterature ;
   skos:broadMatch kbrda:Text ,
     kbrda:StillImage ;
-  skos:exactMatch saogf:Tecknade%20serier ;
-  :singularLabel "Tecknad serie"@sv ,
-    "Graphic Literature"@en .
+  :singularLabel "Grafisk litteratur"@sv ,
+    "Graphic literature"@en .
 
 ktg:GraphicNovel a :GenreForm ;
   skos:broader ktg:Novel ,
     ktg:WrittenBookWithImages ,
-    ktg:GraphicLiterature ;
+    ktg:ComicOrGraphicNovel ;
   skos:exactMatch saogf:Serieromaner ;
   :singularLabel "Serieroman"@sv ,
     "Graphic Novel"@en .
