@@ -33,26 +33,23 @@ ktg:Literature a :ContentForm ;
     "Literature"@en .
 
 ktg:Visual a :ContentForm ;
-  :inCollection div:sensoryform ;
+  #:inCollection div:sensoryform ;  # See
   skos:prefLabel "Visuell"@sv, "Visual"@en .
 
 ktg:Text a :ContentForm ;
-  :inCollection div:basic ;
   skos:broadMatch kbrda:StillImage ;
   skos:prefLabel "Text"@sv, "Text"@en .
 
 ktg:Audio a :ContentForm ;
-  :inCollection div:basic ;
-  :inCollection div:sensoryform ;
+  #:inCollection div:sensoryform ;  # Hear
   skos:prefLabel "Ljud"@sv, "Audio"@en .
 
 ktg:Tactile a :ContentForm ;
-  :inCollection div:sensoryform ;
+  #:inCollection div:sensoryform ;  # Feel
   skos:closeMatch saogf:Taktila%20verk ;
   skos:prefLabel "Taktil"@sv .
 
 ktg:MovingImage a :ContentForm ;
-  :inCollection div:basic ;
   :inCollection div:find ;
   skos:broader ktg:Visual ;
   skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
@@ -66,7 +63,6 @@ ktg:Object a :ContentForm ;
   skos:prefLabel "Föremål"@sv, "Object"@en .
 
 ktg:StillImage a :ContentForm ;
-  :inCollection div:basic ;
   :inCollection div:find ;
   #:inCollection div:identify ;
   skos:broader ktg:Visual ;
