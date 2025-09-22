@@ -8,10 +8,13 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 
 construct {
-  ?saogf_s ?p ?target_o .  #; owl:sameAs ?ktg_s (only needed if ktg is published)
+  ?saogf_s ?target_p ?target_o .
   ?unmapped_s :editorialNote "UNMAPPED" .
 } {
   ?s ?p ?o .
+  bind( if( strstarts(str(?p), str(skos:)),
+            IRI(concat(str(:), strafter(str(?p), str(skos:)))),
+            ?p) as ?target_p )
   optional {
     ?s skos:exactMatch ?saogf_s .
     filter strstarts(str(?s), str(ktg:))
@@ -27,5 +30,4 @@ construct {
   }
   bind(coalesce(?saogf_o, ?o) as ?target_o)
   filter(?target_o != ?saogf_s)
-
 }
