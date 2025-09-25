@@ -298,16 +298,6 @@ rdf:type a owl:ObjectProperty;
     rdfs:range :Resource;
     rdfs:subPropertyOf rdfs:seeAlso ;
     owl:equivalentProperty madsrdf:see .
-# Range restrictions:
-:Concept rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :seeAlso;
-            owl:allValuesFrom :Concept ] .
-:Agent rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :seeAlso;
-            owl:allValuesFrom :BibliographicAgent ] .
-:Work rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :seeAlso;
-            owl:allValuesFrom :Work ] .
 
 :sameAs a owl:ObjectProperty;
     rdfs:label "same as"@en, "samma sak som"@sv;

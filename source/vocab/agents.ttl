@@ -46,7 +46,13 @@
     rdfs:label "Agent"@sv;
     owl:equivalentClass bf2:Agent ;
     rdfs:subClassOf :Identity;
-    rdfs:subClassOf foaf:Agent, prov:Agent .
+    rdfs:subClassOf foaf:Agent, prov:Agent ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :BibliographicAgent ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :BibliographicAgent ] .
 
 # To be able to restrict Contribution :agent
 :BibliographicAgent a owl:Class;

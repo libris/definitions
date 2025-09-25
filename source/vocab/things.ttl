@@ -80,7 +80,16 @@
     rdfs:subClassOf :Identity, :Creation ;
     rdfs:subClassOf sdo:CreativeWork, sdo:ProductModel ; #, rdfa:Pattern, skos:Concept;
     skos:narrowMatch rdaent:Work, rdaent:Expression ;
-    rdfs:label "Verk"@sv .
+    rdfs:label "Verk"@sv ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Work ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Work ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :category ;
+        owl:allValuesFrom :WorkCategory ] .
 
 :Instance a owl:Class ;
     :category marc:bib ;
@@ -88,7 +97,10 @@
     rdfs:label "Instance"@en, "Instans"@sv;
     rdfs:subClassOf :Creation, :Embodiment ;
     owl:equivalentClass bf2:Instance ;
-    skos:closeMatch sdo:Product, rdaent:Manifestation .
+    skos:closeMatch sdo:Product, rdaent:Manifestation ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :category ;
+        owl:allValuesFrom :InstanceCategory ] .
 
 :instanceOf a owl:ObjectProperty ;
     :category :integral ;
@@ -146,19 +158,30 @@
     # ", på vilket sätt den uppdateras, och dess tänkta avslutning."@sv;  # NOTE: This is now an aspect of Work type!
     rdfs:subPropertyOf rdf:type, rdau:P60051 . # <http://rdaregistry.info/Elements/u/modeOfIssuance.en>
 
+:WorkCategory a owl:Class ;
+    ptg:abstract true ;
+    rdfs:subClassOf :Category ;
+    rdfs:label "Work Category"@en, "Verkskategori"@sv .
+
+:InstanceCategory a owl:Class ;
+    ptg:abstract true ;
+    rdfs:subClassOf :Category ;
+    rdfs:label "Instance Category"@en, "Instanskategori"@sv .
+
 :ContentType a owl:Class;
     rdfs:label "Innehållstyp"@sv;
-    rdfs:subClassOf :Category ;
+    rdfs:subClassOf :WorkCategory ;
     owl:equivalentClass bf2:Content .
 
 :MediaType a owl:Class;
+    # ptg:abstract true ;
     rdfs:label "Medietyp"@sv;
-    rdfs:subClassOf :Category ;
+    rdfs:subClassOf :InstanceCategory ;
     owl:equivalentClass bf2:Media, dc:MediaType .
 
 :CarrierType a owl:Class;
     rdfs:label "Bärartyp"@sv;
-    rdfs:subClassOf :MediaType ; # May be contentious. Better as a direct subClass of :Category?
+    rdfs:subClassOf :InstanceCategory ; # Instances can have a broader relation to a MediaType, but *is* not a MediaType.
     owl:equivalentClass bf2:Carrier .
 
 :IssuanceType owl:equivalentClass bf2:Issuance;
@@ -205,7 +228,7 @@
     rdfs:label "format för noterad musik"@sv .
 
 :MusicFormat a owl:Class; # TODO: =~ marc:MusicFormatType (?)
-    owl:euivalentClass bf2:MusicFormat;
+    owl:equivalentClass bf2:MusicFormat;
     rdfs:label "Notated music format"@en, "Format för noterad musik"@sv .
 
 
@@ -325,8 +348,7 @@
     :category :pending ;
     owl:sameAs :NonMusicAudio ;
     owl:equivalentClass bf2:NonMusicAudio ;
-    rdfs:subClassOf :Audio ;
-    :category :pending .
+    rdfs:subClassOf :Audio .
 ## }}}
 
 :NotatedMovement a owl:Class;
