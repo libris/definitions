@@ -87,9 +87,6 @@ def vocab():
 
     for part in compiler.path('source/marc').glob('**/*.ttl'):
         graph.parse(str(part), format='turtle')
-    
-    for part in compiler.path('source/categories').glob('**/*.ttl'):
-        graph.parse(str(part), format='turtle')
 
     graph.parse(str(compiler.path('source/swepub/vocab.ttl')), format='turtle')
 
