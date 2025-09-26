@@ -5,13 +5,14 @@ prefix dc: <http://purl.org/dc/terms/>
 prefix sdo: <https://schema.org/>
 prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#>
 
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
 prefix kbrda: <https://id.kb.se/term/rda/>
-prefix ktg: <https://id.kb.se/term/ktg/>
-prefix g: <https://id.kb.se/term/ktg/>
-
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix ktg: <https://id.kb.se/term/ktg/>  # TODO: replace with saogf equivs once those are defined.
 
 prefix : <https://id.kb.se/vocab/>
 
@@ -21,53 +22,60 @@ prefix : <https://id.kb.se/vocab/>
 
 ## Work subclasses
 
-:Audio :abstract true ;
+:Audio ptg:abstract true ;
   owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Audio]) .
 
-:Cartography :abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue g:Cartography]) .
+:Cartography ptg:abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Cartography]) .
 
-:Dataset :abstract true ;
+:Dataset ptg:abstract true ;
   owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Dataset]) .
 
-:Movement :abstract true ;
+:MixedMaterial ptg:abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:MixedMaterial]) .
+
+:Kit ptg:abstract true ;
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Kit]) .
+
+:Movement ptg:abstract true ;
   owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Movement]) .
 
-:MovingImage :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:MovingImage]) .
+:MovingImage ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:MovingImage]) .
 
-:Multimedia :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue g:Multimedia]) .
+:Multimedia ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Multimedia]) .
 
-:Music :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Music]) .
+:Music ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Music]) .
 
-:NonMusicalAudio :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Sounds]) .
+:NonMusicAudio ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Sounds]) .
 
-:NotatedMovement :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement]) .
+:NotatedMovement ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement]) .
 
-:NotatedMusic :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMusic]) .
+:NotatedMusic ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMusic]) .
 
-:PerformedMusic :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:PerformedMusic]) .
+:PerformedMusic ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:PerformedMusic]) .
 
-:StillImage :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:StillImage]) .
+:StillImage ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:StillImage]) .
 
-:Tactile :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Tactile]) .
+:Tactile ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Tactile]) .
 
-:Text :abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Text]) .
+:Text ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Text ] ) .
 
 ## Instance subclasses
 
 # Coordinating categories defined in: <../categories/carrierforms.ttl>
 
+# TODO: Deprecate these Instance subclasses; and define blank mappings to just BF base classes (only for TVM)...
+
 :Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Print]) .
 
 :Electronic owl:intersectionOf (:Instance [ owl:onProperty :category ; owl:hasValue ktg:AbstractElectronic ]) .
 
-:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Manuscript ]) .
+:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saogf:Handskrifter ]) .
 
 :Microform owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue kbrda:Microform ]) .
 
-# TODO: missing 2:
+# TODO: Ensure this is fully dropped!
 #:Archival owl:intersectionOf (:PhysicalResource [ ... ]) .
-#:Tactile owl:intersectionOf (:PhysicalResource [ ... ]) .
 
 # Complex Instance Classes
 

@@ -1,6 +1,7 @@
 prefix : <https://id.kb.se/vocab/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
 prefix marc: <https://id.kb.se/marc/>
 prefix saogf: <https://id.kb.se/term/saogf/>
@@ -9,67 +10,29 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 prefix div: <https://id.kb.se/term/div/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 
-# Base Category or ContentType applying to an *Expression*.
+# Abstract ExpressionForms for ContentTypes, applying to *Expression*-level Works.
 
-# TODO:
-# - Replace ContentForm with ContentType and merge into <rdacategories.ttl>?
-# - Some RDA terms have broader Genre terms!
-# - Some are "SensoryForm" super-ContentType:s...
-
-# TODO: Is there a sometimes necessary distinction between "contains" and "is"? If so, we should reasonably say that using a concrete GenreForm...
-
-ktg:LinguisticWork a :ContentForm ;
-  # pending?
-  skos:altLabel "Literature"@en ,
-    "Litteratur"@sv ;
-  skos:prefLabel "Linguistic work"@en ,
-    "Språkligt verk"@sv .
-
-ktg:Literature a :ContentForm ;
-  :inCollection div:find ;
-  skos:broader ktg:LinguisticWork ;
-  #skos:broader ktg:Text ;
-  :singularLabel "Litteratur"@sv ,
-    "Literature"@en .
-
-ktg:Visual a :ContentForm ;
-  #:inCollection div:sensoryform ;  # See
-  skos:prefLabel "Visuell"@sv, "Visual"@en .
-
-ktg:Text a :ContentForm ;
-  skos:broadMatch kbrda:StillImage ;
-  skos:prefLabel "Text"@sv, "Text"@en .
-
-ktg:Audio a :ContentForm ;
-  #:inCollection div:sensoryform ;  # Hear
+ktg:Audio a :ExpressionForm ;
+  :catgory :abstract ;  # div:sensoryform ;  # Hear
   skos:prefLabel "Ljud"@sv, "Audio"@en .
 
-ktg:Tactile a :ContentForm ;
+ktg:MovingImage a :ExpressionForm ;
+  :category div:abstract ;
+  :inCollection div:find ;
+  skos:broader ktg:VisualWork ;
+  skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
+
+ktg:Tactile a :ExpressionForm ;
+  :category div:abstract ;
   #:inCollection div:sensoryform ;  # Feel
   skos:closeMatch saogf:Taktila%20verk ;
   skos:prefLabel "Taktil"@sv .
 
-ktg:MovingImage a :ContentForm ;
-  :inCollection div:find ;
-  skos:broader ktg:Visual ;
-  skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
+ktg:VisualWork a :ExpressionForm ;
+  :category div:abstract ;  # ContentForm
+  #:inCollection div:sensoryform ;  # See
+  skos:prefLabel "Visuellt verk"@sv, "Visual work"@en .
 
-ktg:Dataset a :ContentForm ;
-  #:inCollection div:find ;
-  skos:prefLabel "Datamängd"@sv, "Dataset"@en .
-
-ktg:Object a :ContentForm ;
-  :inCollection div:find ;
-  skos:prefLabel "Föremål"@sv, "Object"@en .
-
-ktg:StillImage a :ContentForm ;
-  :inCollection div:find ;
-  #:inCollection div:identify ;
-  skos:broader ktg:Visual ;
-  skos:broadMatch kbrda:StillImage ;
-  skos:closeMatch saogf:Bilder, tgm:Bilder, marc:Picture ;
-  skos:narrowMatch marc:Graphic ; # 8048
-  skos:prefLabel "Stillbild"@sv, "Still image"@en .
-
-ktg:Movement a :ContentForm ;
+ktg:Movement a :ExpressionForm ;
+  :category div:abstract ;  # ContentForm
   skos:prefLabel "Rörelser"@sv .

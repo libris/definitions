@@ -12,60 +12,60 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 
 
-ktg:PhysicalForm a :CarrierForm ;
+ktg:PhysicalForm a :ManifestationForm ;
   ptg:abstract true ;
   skos:prefLabel "Fysisk form"@sv, "Physical form"@en .
 
 
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
-ktg:Print a :CarrierForm;
+ktg:Print a :ManifestationForm;
   skos:exactMatch marc:Print ;
   skos:broader kbrda:Unmediated ;
   rdfs:label "Tryck"@sv, "Print"@en .
 
-ktg:ManuscriptForm a :CarrierForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
+ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
   rdfs:label "Handskrift"@sv, "Manuscript"@en .
 
 # Rather :productionMethod?
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
-ktg:Handwritten a :CarrierForm;
-  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
-ktg:Typewritten a :CarrierForm;
-  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
+#ktg:Handwritten a :ManifestationForm;
+#  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
+#ktg:Typewritten a :ManifestationForm;
+#  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
 
 # mer extraordinärt? Sitter på exemplar?
-#ktg:Photocopied a :CarrierForm; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
+#ktg:Photocopied a :ManifestationForm; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
 
-#ktg:MassProducedVolume a :CarrierForm ;
+#ktg:MassProducedVolume a :ManifestationForm ;
 #  rdfs:subClassOf ktg:MassProduced, kbrda:Volume .
 #
-#ktg:RareVolume a :CarrierForm ;
+#ktg:RareVolume a :ManifestationForm ;
 #  rdfs:subClassOf ktg:Rare, kbrda:Volume .
 
 
-ktg:PrintedVolume a :CarrierForm ;
+ktg:PrintedVolume a :ManifestationForm ;
   skos:broadMatch ktg:Print, kbrda:Volume ;
   rdfs:label "Tryckt volym"@sv , "Printed Volume"@en .
 
-#ktg:HardcoverVolume a :CarrierForm;
+#ktg:HardcoverVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
 #
-#ktg:PaperbackVolume a :CarrierForm;
+#ktg:PaperbackVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
 
 
-ktg:PrintedSheet a :CarrierForm ;
+ktg:PrintedSheet a :ManifestationForm ;
   skos:broader ktg:Print, kbrda:Sheet ;
   rdfs:label "Tryckt lösblad"@sv , "Printed Sheet"@en .
 
-ktg:HandmadeSheet a :CarrierForm ;
+ktg:HandmadeSheet a :ManifestationForm ;
   skos:broader kbrda:Unmediated, kbrda:Sheet .
 
 
-ktg:PhysicalObject a :CarrierForm ; # :UnmediatedObject ?
+ktg:PhysicalObject a :ManifestationForm ; # :UnmediatedObject ?
   skos:exactMatch kbrda:Object ;
   skos:broader kbrda:Unmediated ;
-  skos:prefLabel "Föremål"@sv , "Physical object"@en .
+  skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
 
 
 # Cf. notation
@@ -73,18 +73,18 @@ ktg:PhysicalObject a :CarrierForm ; # :UnmediatedObject ?
 
 # TODO: Lift these from marc to KBV?
 # If so we need a clear delineation between "braille notation" and "to be experienced with touch".
-#ktg:TactileForm a :CarrierForm ;
+#ktg:TactileForm a :ManifestationForm ;
 #  skos:broader kbrda:Unmediated ;
 #  rdfs:subClassOf [
 #    owl:onProperty :format ;
 #    owl:someValuesFrom :TactileMaterial ] .
 
-ktg:BrailleForm a :CarrierForm ;
+ktg:BrailleForm a :ManifestationForm ;
   skos:exactMatch marc:Braille, marc:TextMaterialType-c ;
   skos:broader ktg:TactileForm, ktg:Print ;
   skos:prefLabel "Punktskriftsform"@sv, "Braille form"@en .
 
-ktg:BrailleVolume a :CarrierForm ;
+ktg:BrailleVolume a :ManifestationForm ;
   skos:broader ktg:BrailleForm, kbrda:Volume ;
   skos:exactMatch saogf:Punktskriftsb%C3%B6cker ;
   :singularLabel "Punktskriftsbok"@sv, "Braille volume"@en .
@@ -94,25 +94,25 @@ ktg:BrailleVolume a :CarrierForm ;
 # "Mediated"
 
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
-ktg:StorageMedium a :CarrierForm ;
+ktg:StorageMedium a :ManifestationForm ;
   ptg:abstract true ;
   skos:broader ktg:PhysicalForm ;
   rdfs:label "Lagringsmedium"@sv , "StorageMedium"@en .
 
 
-ktg:TapeCartridge a :CarrierForm ;
+ktg:TapeCartridge a :ManifestationForm ;
   skos:broader ktg:ElectronicStorageMedium ;
   ptg:abstract true ;
   skos:exactMatch marc:TapeCartridge ;
   skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
 
-ktg:TapeCassette a :CarrierForm ;
+ktg:TapeCassette a :ManifestationForm ;
   skos:broader ktg:ElectronicStorageMedium ;
   ptg:abstract true ;
   skos:exactMatch marc:TapeCassette ;
   skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
 
-ktg:TapeReel a :CarrierForm ;
+ktg:TapeReel a :ManifestationForm ;
   ptg:abstract true ;
   skos:broader ktg:ElectronicStorageMedium ;
   skos:exactMatch marc:TapeReel ;
@@ -120,26 +120,26 @@ ktg:TapeReel a :CarrierForm ;
 
 # TODO: why not change most ktg:StorageMedium to ktg:ElectronicStorageMedium ?
 
-ktg:MagneticDisk a :CarrierForm ;
+ktg:MagneticDisk a :ManifestationForm ;
   skos:exactMatch marc:MagneticDisk ;
   skos:broader ktg:StorageMedium ;
   skos:prefLabel "Skiva för magnetisk lagring (disketter)"@sv, "Magnetic disk"@en .
 
-ktg:MagnetoOpticalDisc a :CarrierForm ;
+ktg:MagnetoOpticalDisc a :ManifestationForm ;
   skos:exactMatch marc:MagnetoOpticalDisc ;
   skos:broader ktg:StorageMedium ;
   skos:prefLabel "Magnet-optisk skiva"@sv, "Magneto-optical disc"@en .
 
-ktg:OpticalReel a :CarrierForm ;
+ktg:OpticalReel a :ManifestationForm ;
   ptg:abstract true ;
   skos:broader ktg:StorageMedium .
 
-ktg:OpticalDisc a :CarrierForm ;
+ktg:OpticalDisc a :ManifestationForm ;
   skos:exactMatch marc:OpticalDisc ;
   skos:broader ktg:StorageMedium ;  # ktg:ElectronicStorageMedium ?
   skos:prefLabel "Optisk skiva (CD-A, CD-R, CD-ROM)"@sv, "Optical disc"@en .
 
-ktg:CDBook a :CarrierForm ;
+ktg:CDBook a :ManifestationForm ;
   skos:broadMatch ktg:ComputerDisc, kbrda:AudioDisc ;
   :singularLabel "CD-bok"@sv .
 
@@ -157,23 +157,23 @@ ktg:CDBook a :CarrierForm ;
 #MusicCD
 
 
-ktg:AbstractElectronic a :CarrierForm ;
+ktg:AbstractElectronic a :ManifestationForm ;
   ptg:abstract true ;
   skos:closeMatch marc:Electronic ;
   skos:prefLabel "Elektronisk eller digital resurs"@sv, "Electronic or digital resource"@en ;
   rdfs:comment "A digital or electronically mediated resource."@en .
 
-ktg:DigitalForm a :CarrierForm ;
+ktg:DigitalForm a :ManifestationForm ;
   skos:broader ktg:AbstractElectronic ;
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en ;
   rdfs:comment 'Kallas ibland "E-resurs"'@sv .
 
-ktg:EBook a :CarrierForm ;
+ktg:EBook a :ManifestationForm ;
   skos:broader ktg:DigitalForm ;
   :singularLabel "E-bok"@sv .
 
 
-ktg:ElectronicStorageMedium a :CarrierForm ;
+ktg:ElectronicStorageMedium a :ManifestationForm ;
   ptg:abstract true ;
   skos:closeMatch kbrda:Computer ;
   skos:exactMatch marc:DirectElectronic ;
@@ -181,16 +181,16 @@ ktg:ElectronicStorageMedium a :CarrierForm ;
       ktg:AbstractElectronic ;   # Kallas ibland "Elektronisk bärare".
   rdfs:label "Elektroniskt lagringsmedium"@sv , "StorageMedium"@en .
 
-ktg:StandaloneDevice a :CarrierForm ;
+ktg:StandaloneDevice a :ManifestationForm ;
   skos:exactMatch marc:StandaloneDevice ;
-  skos:broader ktg:ElectronicStorageMedium . # Not: ktg:PhysicalObject (that's Unmediated)
+  skos:broader ktg:ElectronicStorageMedium . # Not: PhysicalObject (that's Unmediated)
 
 
 # TODO: Is the media type aspect superfluous if content is on the work?
 # Or is the *unit for device capable of sound* encoded here (as "mode" of provisioning, not the "purpose" thereof)?
 # See also accesibility concerns.
 
-ktg:SoundStorageMedium a :CarrierForm ;
+ktg:SoundStorageMedium a :ManifestationForm ;
   owl:sameAs kbrda:SoundRecording ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Audio ;
@@ -198,10 +198,10 @@ ktg:SoundStorageMedium a :CarrierForm ;
   rdfs:label "Audio"@sv, "Audio"@en .
 
 # Zero uses in Libris...
-ktg:AudioWireRecording a :CarrierForm ;
+ktg:AudioWireRecording a :ManifestationForm ;
   skos:exactMatch marc:WireRecording .
 
-ktg:VideoStorageMedium a :CarrierForm ;
+ktg:VideoStorageMedium a :ManifestationForm ;
   owl:sameAs :VideoRecording ;
   ptg:abstract true ;
   skos:exactMatch kbrda:Video ;
@@ -209,7 +209,7 @@ ktg:VideoStorageMedium a :CarrierForm ;
   skos:broader ktg:StorageMedium ;
   rdfs:label "Lagringsmedium för video"@sv, "Video Storage Medium"@en .
 
-ktg:Microfilm a :CarrierForm ;
+ktg:Microfilm a :ManifestationForm ;
   skos:exactMatch marc:Microfilm ;
   skos:broader kbrda:Microform ;
   skos:prefLabel "Mikrofilm"@sv, "Microfilm"@en .

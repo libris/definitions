@@ -36,16 +36,12 @@ ktg:InformativeWork a :Genre ;
   skos:broader ktg:NonFiction ;
   :singularLabel "Informativt verk"@sv, "Informative Work"@en .
 
-ktg:Music a :Genre ;  # TODO: GenreForm? No, because this is WEMI Work level? (Abstract, may be *expressed* in notation *or* preformed...)
-  :inCollection div:find ;
-  skos:prefLabel "Musik"@sv , "Music"@en .
-
-# TODO: superfluous?
-ktg:Integrating a :Genre ;
-  :category :pending ;
-  skos:broader ktg:CollectingResource ;
-  skos:prefLabel "Integrerande resurs"@sv ,
-    "Integrating resource"@en .
+# TODO: superfluous? WorkCategory? (cf. RDA aggregates - terminating/non-terminating, ...)
+#ktg:Integrating a :Genre ;
+#  :category :pending ;
+#  skos:broader ktg:CollectingResource ;
+#  skos:prefLabel "Integrerande resurs"@sv ,
+#    "Integrating resource"@en .
 
 ktg:AbstractSummary a :Genre ;
   #skos:broader ktg:TextPiece ;
@@ -95,7 +91,8 @@ ktg:CollectingResource a :Genre ;
   :singularLabel "Samlande resurs"@sv .
 
 ktg:Archive a :Genre ;
-  skos:broader ktg:CollectingResource , saogf:Arkiv ;
+  skos:exactMatch saogf:Arkiv ;
+  skos:broader ktg:CollectingResource ;
   :singularLabel "Arkiv"@sv ,
     "Archive"@en .
 
@@ -151,7 +148,7 @@ ktg:InstructionalMaterial a :Genre ;
   skos:narrowMatch marc:Instruction ;
   skos:prefLabel "Instruktions- och undervisningsmaterial"@sv .
 
-ktg:TeachingMaterial a :Genre ;
+ktg:TeachingMaterial a :Genre ;  # TODO: GenreOrForm
   :inCollection div:identify ;
   skos:broader ktg:InstructionalMaterial ;
   skos:exactMatch saogf:L\%C3\%A4romedel ;
@@ -200,24 +197,10 @@ ktg:Statistics a :Genre ;
   :singularLabel "Statistik"@sv ,
     "Statistics"@en .
 
-ktg:Tables a :Genre ;
-  skos:broader ktg:ReferenceWork ;
-  skos:exactMatch saogf:Tabeller ;
-  skos:related ktg:Dataset ;
-  :singularLabel "Tabell"@sv ,
-    "Tables"@en .
-
 ktg:Ephemera a :Genre ;
   :inCollection div:identify ;
   skos:exactMatch saogf:Efem%C3%A4rt%20material ;
   skos:prefLabel "Efemärt material"@sv .
-
-ktg:Timetable a :Genre ;
-  skos:broader ktg:Tables ,
-    ktg:Ephemera ;
-  skos:exactMatch saogf:Tidtabeller ;
-  :singularLabel "Tidtabell"@sv ,
-    "Timetable"@en .
 
 
 #ktg:Patent
@@ -278,9 +261,9 @@ ktg:CollectiveBiography a :Genre ;
 
 ktg:Autobiography a :Genre ;
   skos:broader ktg:Biography ;
-  skos:closeMatch saogf:Sj%C3%A4lvbiografier ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026047> ,
+  skos:exactMatch saogf:Sj%C3%A4lvbiografier ,
     marc:Autobiography ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
   skos:narrowMatch marc:Memoir ;
   :singularLabel "Självbiografi"@sv, "Autobiography"@en .
 

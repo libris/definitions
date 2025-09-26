@@ -191,6 +191,19 @@
     sdo:domainIncludes :ContentType, :MediaType, :CarrierType ;
     rdfs:label "Termgroup"@en, "Termgrupp"@sv .
 
+:ExpressionForm a owl:Class ;
+    rdfs:label "Expression Form"@en, "Uttrycksform"@sv ;
+    rdfs:subClassOf :GenreForm ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :broader ;
+          owl:someValuesFrom :ContentType ] .
+
+:ManifestationForm a owl:Class ;
+    rdfs:label "Manifestation Form"@en, "Manifestationsform"@sv ;
+    rdfs:subClassOf :InstanceCategory ;
+    rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :broader ;
+          owl:someValuesFrom :CarrierType ] .
 
 # Detailed Carrier Enumeration Properties and Types
 
@@ -344,9 +357,9 @@
     owl:equivalentClass bf2:Multimedia .
 
 ## Originally defined for SwePub; now mapped to BF (and via category to RDA) {{{
-:NonMusicalAudio a owl:Class ;
+:NonMusicAudio a owl:Class ;
     :category :pending ;
-    owl:sameAs :NonMusicAudio ;
+    owl:sameAs :NonMusicalAudio ; # What it is called in SwePub
     owl:equivalentClass bf2:NonMusicAudio ;
     rdfs:subClassOf :Audio .
 ## }}}
@@ -467,55 +480,6 @@
             owl:onProperty :hasInstance;
             owl:allValuesFrom :Manuscript # Also Electronic, add genreForm Manuscript?
         ] .
-
-# Combined Content Types
-
-#:CartographicDataset a owl:Class;
-#    rdfs:label "Kartografisk bild"@sv;
-#    skos:exactMatch rdacontent:1001 ; # "cartographic dataset"
-#    rdfs:subClassOf :Cartography, :Dataset .
-#
-#:CartographicImage a owl:Class;
-#    rdfs:label "Kartografisk bild"@sv;
-#    skos:exactMatch rdacontent:1002 ; # "cartographic image"
-#    rdfs:subClassOf :Cartography, :Visual  .
-#
-#:CartographicMovingImage a owl:Class;
-#    rdfs:label "Kartografisk rörlig bild"@sv;
-#    skos:exactMatch rdacontent:1003 ; # "cartographic moving image"
-#    rdfs:subClassOf :Cartography, :MovingImage .
-#
-#:CartographicTactileImage a owl:Class;
-#    rdfs:label "Kartografisk taktil bild"@sv;
-#    skos:exactMatch rdacontent:1004 ; # "cartographic tactile image"
-#    rdfs:subClassOf :Cartography, :Tactile, :Visual  .
-#
-#:CartographicObject a owl:Class;
-#    rdfs:label "Kartografiskt objekt"@sv;
-#    skos:exactMatch rdacontent:1006 ; # "cartographic three-dimensional form"
-#    rdfs:subClassOf :Cartography, :Object .
-#
-#:CartographicTactileObject a owl:Class;
-#    rdfs:label "Kartografiskt taktilt objekt"@sv;
-#    skos:exactMatch rdacontent:1005 ; # "cartographic tactile three-dimensional form"
-#    rdfs:subClassOf :Cartography, :Object, :Tactile .
-#
-#:MultimediaDataset a owl:Class;
-#    rdfs:label "Digitalt dataset"@sv;
-#    skos:exactMatch rdacontent:1007 ; # "computer dataset"
-#    rdfs:subClassOf :Multimedia, :Dataset .
-
-
-# TODO: missing rdacontent mappings:
-#    skos:exactMatch rdacontent:1008 ; # "computer program"
-#    skos:exactMatch rdacontent:1011 ; # "performed music"
-#    skos:exactMatch rdacontent:1012 ; # "sounds"
-#    skos:exactMatch rdacontent:1013 ; # "spoken word"
-#    skos:exactMatch rdacontent:1015 ; # "tactile image"
-#    skos:exactMatch rdacontent:1016 ; # "tactile notated music"
-#    skos:exactMatch rdacontent:1017 ; # "tactile notated movement"
-#    skos:exactMatch rdacontent:1018 ; # "tactile text"
-#    skos:exactMatch rdacontent:1019 ; # "tactile three-dimensional form"
 
 
 # Mereological Dimensions (Issuance / Composition)
