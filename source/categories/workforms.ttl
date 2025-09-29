@@ -46,24 +46,6 @@ ktg:Dataset a :GenreForm ;
 ##
 # Abstract ExpressionForms for ContentTypes, applying to WEMI *Expression*-level Works.
 
-ktg:Multimedia a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
-  skos:broader ktg:Software ;
-  skos:prefLabel "Multimedia"@sv ,
-    "Multimedia"@en .
-
-ktg:MixedMaterial a :ExpressionForm ;
-  :inCollection div:find ;
-  skos:prefLabel "Blandat material"@sv ,
-    "Mixed material"@en .
-
-ktg:Kit a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:broader ktg:MixedMaterial ;
-  skos:prefLabel "Paket"@sv ,
-    "Kit"@en .
-
 ktg:Audio a :ExpressionForm ;
   :catgory div:abstract ;  # div:sensoryform ;  # Hear
   skos:prefLabel "Ljud"@sv, "Audio"@en .
@@ -88,3 +70,23 @@ ktg:VisualWork a :ExpressionForm ;
 ktg:Movement a :ExpressionForm ;
   :category div:abstract ;  # ContentForm
   skos:prefLabel "Rörelser"@sv .
+
+# Idiomatic ExpressionForms
+
+ktg:Multimedia a :ExpressionForm ;
+  :inCollection div:identify ;
+  skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
+  skos:broader ktg:Software ;
+  skos:prefLabel "Multimedia"@sv ,
+    "Multimedia"@en .
+
+ktg:MixedMaterial a :ExpressionForm ;
+  :inCollection div:find ;
+  skos:prefLabel "Blandat material"@sv ,
+    "Mixed material"@en .
+
+ktg:Kit a :ExpressionForm ;
+  :inCollection div:identify ;
+  skos:broader ktg:MixedMaterial ;
+  skos:prefLabel "Paket"@sv ,
+    "Kit"@en .

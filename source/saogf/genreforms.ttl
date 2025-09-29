@@ -13,12 +13,9 @@ prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 prefix div: <https://id.kb.se/term/div/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 
-# TODO: This is either abstract WorkForm, generic GenreForm (contains abstract Genre), or ExpressionForm (GenreFormAndContentForm)
-# It is a -||- if it:
-# - applies to an *Expression* (per ContentType/ContentForm); and
-# - either:
-#   - incorporates a Genre (it adds a topical/thematic nuance), or
-#   - is an abstract workform shared by concrete GenreForm:s. NO that's GenreOrForm?
+# A term is either generic GenreForm, or ExpressionForm (GenreForm & ContentType).
+# An ExpressionForm applies to a WEMI Expression (regularly implies a # ContentType);
+# and incorporates a Genre (it adds a topical/thematic nuance) or a more concrete Form.
 
 ktg:NonFictionLiterature a :GenreForm ;
   :category :pending ;
@@ -242,6 +239,25 @@ ktg:Timetable a :GenreForm ;
 
 #---
 
+ktg:Screenplay a ::GenreForm ; # :ExpressionForm
+  skos:broader ktg:Script ;
+  skos:exactMatch saogf:Filmmanus ;
+  :singularLabel "Filmmanus"@sv ,
+    "Screenplay"@en .
+
+ktg:GuideBook a :GenreForm ; # :ExpressionForm
+  #skos:broader ktg:Book ;
+  skos:exactMatch saogf:Guideb%C3%B6cker ;
+  :singularLabel "Guidebok"@sv ,
+    "Guide book"@en .
+
+ktg:Cookbook a :GenreForm ; # :ExpressionForm
+  :inCollection div:identify ;
+  skos:broader ktg:Book , ktg:InformativeWork ;
+  skos:exactMatch saogf:Kokb%C3%B6cker ;
+  :singularLabel "Kokbok"@sv ,
+    "Cookbook"@en .
+
 #ktg:WrittenBook a :ExpressionForm ;
 #  skos:broader kbrda:Text, ktg:Book ;
 #  :singularLabel "Written book"@en ,
@@ -313,6 +329,7 @@ ktg:ChapterBook a :ExpressionForm ;
   skos:broadMatch kbrda:Text ;
   :singularLabel "Kapitelbok"@sv ,
     "Chapter Book"@en .
+
 
 #ktg:WrittenBookWithImages a :ExpressionForm ;
 #  :category div:abstract ;
@@ -445,12 +462,6 @@ ktg:Script a :ExpressionForm ;
   skos:broader kbrda:Text ;
   skos:prefLabel "script"@en ;
   skos:closeMatch marcgt:scr .
-
-ktg:Screenplay a :ExpressionForm ;
-  skos:broader ktg:Script ;
-  skos:exactMatch saogf:Filmmanus ;
-  :singularLabel "Filmmanus"@sv ,
-    "Screenplay"@en .
 
 ktg:MechanicalBook a :ExpressionForm ;
   skos:exactMatch saogf:Mekaniska\%20b\%C3\%B6cker ;
@@ -646,24 +657,12 @@ ktg:M%C3%A5larböcker a :ExpressionForm ;
   skos:exactMatch saogf:M%C3%A5larb%C3%B6cker ;
   :singularLabel "Målarbok"@sv .
 
-ktg:GuideBook a :GenreForm ; # :ExpressionForm
-  #skos:broader ktg:Book ;
-  skos:exactMatch saogf:Guideb%C3%B6cker ;
-  :singularLabel "Guidebok"@sv ,
-    "Guide book"@en .
-
 ktg:PopupBook a :ExpressionForm ;
   skos:broader ktg:WrittenBookWithImages, ktg:MechanicalBook ;
   skos:exactMatch saogf:Pop-up-b%C3%B6cker ;
   :singularLabel "Pop-up-bok"@sv ,
     "Pop-up bOok"@en .
 
-ktg:Cookbook a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:broader ktg:Book , ktg:InformativeWork ;
-  skos:exactMatch saogf:Kokb%C3%B6cker ;
-  :singularLabel "Kokbok"@sv ,
-    "Cookbook"@en .
 
 ktg:DiningMenu a :ExpressionForm ;
   skos:broader ktg:TextPiece ;
