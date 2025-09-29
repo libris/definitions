@@ -20,26 +20,6 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 #   - incorporates a Genre (it adds a topical/thematic nuance), or
 #   - is an abstract workform shared by concrete GenreForm:s. NO that's GenreOrForm?
 
-ktg:Literature a :GenreForm ;  # ^ (Written OR Spoken...) Just GenreForm?
-  :category div:abstract ; # may be *expressed* in text *or* spoken...
-  :inCollection div:find ;
-  :singularLabel "Litteratur"@sv ,
-    "Literature"@en ;
-  skos:altLabel "Linguistic work"@en ,
-    "Språkligt verk"@sv .
-
-ktg:Music a :GenreForm ; # TODO: WorkForm; because this is WEMI Work level?
-  :category div:abstract ; # may be *expressed* in notation *or* preformed...
-  :inCollection div:find ;
-  skos:prefLabel "Musik"@sv , "Music"@en .
-
-ktg:Cartography a :GenreForm ;
-  :category div:abstract ;
-  :inCollection div:find ;
-  :singularLabel "Kartografiskt material"@sv,
-    "Cartographic material"@en .
-
-
 ktg:NonFictionLiterature a :GenreForm ;
   :category :pending ;
   skos:broader ktg:Literature , ktg:NonFiction ;
@@ -207,7 +187,7 @@ ktg:Manual a :GenreForm ;
   :inCollection div:identify ;
   skos:broader kbrda:Text ,
     ktg:InstructionalMaterial ;
-  skos:exactMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc ;
+  skos:exactMatch saogf:Handb\%C3\%B6cker\%2C\%20manualer\%20etc\. ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Manual> ;
   skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026109> ,
     marc:Handbook ;
@@ -227,12 +207,6 @@ ktg:Blog a :GenreForm ;
   :singularLabel "Blogg"@sv ,
     "Blog"@en .
 
-ktg:Software a :GenreForm ;
-  :inCollection div:find ;
-  skos:prefLabel "Mjukvara"@sv ,
-    "Software"@en ;
-  skos:altLabel "Datorspel, program och multimedia"@sv .
-
 ktg:Yearbook a :GenreForm ;
   skos:exactMatch saogf:%C3%85rsb%C3%B6cker , marc:Yearbook ;
   skos:broader ktg:SerialPublication ,
@@ -251,10 +225,6 @@ ktg:PhraseBook a :GenreForm ;
   skos:exactMatch saogf:Parl%C3%B6rer ;
   :singularLabel "Parlör"@sv ,
     "Phrase book"@en .
-
-ktg:Dataset a :GenreForm ;
-  #:inCollection div:find ;
-  skos:prefLabel "Datamängd"@sv, "Dataset"@en .
 
 ktg:Tables a :GenreForm ;
   skos:broader ktg:ReferenceWork ;
@@ -301,25 +271,6 @@ ktg:Database a :ExpressionForm ;
   skos:narrowMatch marc:UpdatingDatabase ;
   :singularLabel "Databas"@sv ,
     "Database"@en .
-
-ktg:Multimedia a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
-  skos:broader ktg:Software ;
-  skos:prefLabel "Multimedia"@sv ,
-    "Multimedia"@en .
-
-ktg:MixedMaterial a :ExpressionForm ;
-  :inCollection div:find ;
-  skos:prefLabel "Blandat material"@sv ,
-    "Mixed material"@en .
-
-ktg:Kit a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:broader ktg:MixedMaterial ;
-  #skos:related Education ;
-  skos:prefLabel "Paket"@sv ,
-    "Kit"@en .
 
 ktg:Poster a :ExpressionForm ;
   :inCollection div:identify ;
@@ -723,7 +674,8 @@ ktg:DiningMenu a :ExpressionForm ;
 ktg:DocumentaryComic a :ExpressionForm ;
   :singularLabel "Dokumentär serie" ;
   skos:broader ktg:Comic ;
-  skos:exactMatch saogf:Dokument%C3%A4ra%20serier .
+  #skos:exactMatch saogf:Dokument%C3%A4ra%20serier ;
+  skos:broadMatch saogf:Dokument%C3%A4ra%20skildringar .
 
 ktg:Map a :ExpressionForm ;
   :inCollection div:identify ;

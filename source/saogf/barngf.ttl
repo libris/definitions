@@ -17,18 +17,18 @@ ktg:YoungAudience a :Genre ;
   :inCollection div:targetaudience ;
   skos:prefLabel "Målgrupp: barn/ungdom"@sv, "Audience: children/adolecent"@en .
 
-ktg:ChildrensLiterature a :Genre ;
-  skos:broader ktg:FictionLiterature, ktg:YoungAudience ;
+ktg:ChildrensLiterature a :GenreForm ;
+  skos:broader saogf:Sk%C3%B6nlitteratur, ktg:YoungAudience ;
   skos:exactMatch barngf:Barn-%20och%20ungdomslitteratur ;
   :singularLabel "Barn- och ungdomslitteratur"@sv .
 
-ktg:ChildrensFictionLiterature a :Genre ;
+ktg:ChildrensFictionLiterature a :GenreForm ;
   :inCollection div:subdivision ;
-  skos:broadMatch ktg:FictionLiterature ;
+  skos:broadMatch saogf:Sk%C3%B6nlitteratur ;
   skos:broader ktg:ChildrensLiterature ;
   :singularLabel "Barn- och ungdomslitteratur"@sv .
 
-ktg:ChildrensGenreLiterature a :Genre ;
+ktg:ChildrensGenreLiterature a :GenreForm ;
   :inCollection div:subdivision ;
   #skos:broadMatch ktg:GenreLiterature ;
   skos:broader ktg:ChildrensFictionLiterature ;
@@ -36,21 +36,26 @@ ktg:ChildrensGenreLiterature a :Genre ;
     "Genrelitteratur"@sv .
 
 
-ktg:ReklamtryckBarn a :Genre ;
+# TODO: Moved from genreforms.ttl ; so this file misses some barngf terms...
+barngf:Kapitelb%C3%B6cker skos:broadMatch ktg:WrittenBook .
+
+barngf:Bilderb%C3%B6cker skos:broadMatch ktg:WrittenBookWithImages .
+
+ktg:ReklamtryckBarn a :GenreForm ;
   skos:broadMatch saogf:Reklamtryck ;
   skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Reklamtryck ;
   skos:prefLabel "Reklamtryck för barn"@sv .
 
 
-ktg:Kartongb%C3%B6cker a :Genre ;
+ktg:Kartongb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Kartongb%C3%B6cker ;
   skos:prefLabel "Kartongböcker"@sv ;
   :pluralLabel "Kartongböcker"@sv ;
   :singularLabel "Kartongbok"@sv .
 
-ktg:Bildordb%C3%B6cker a :Genre ;
+ktg:Bildordb%C3%B6cker a :GenreForm ;
   skos:broadMatch ktg:WorkWithImages ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Bildordb%C3%B6cker ;
@@ -58,66 +63,66 @@ ktg:Bildordb%C3%B6cker a :Genre ;
   :pluralLabel "Bildordböcker"@sv ;
   :singularLabel "Bildordbok"@sv .
 
-ktg:TAKKBarn a :Genre ;
+ktg:TAKKBarn a :GenreForm ;
   skos:broadMatch saogf:TAKK ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:TAKK ;
   skos:prefLabel "TAKK för barn"@sv .
 
-ktg:Tecken%20som%20st%C3%B6d%20till%20talet a :Genre ;
+ktg:Tecken%20som%20st%C3%B6d%20till%20talet a :GenreForm ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Tecken%20som%20st%C3%B6d%20till%20talet ;
   skos:prefLabel "Tecken som stöd till talet"@sv .
 
-ktg:Faktab%C3%B6cker a :Genre ;
-  skos:broadMatch ktg:InformativeWork ;
+ktg:Faktab%C3%B6cker a :GenreForm ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Faktab%C3%B6cker ;
   skos:prefLabel "Faktaböcker"@sv ;
   :pluralLabel "Faktaböcker"@sv ;
   :singularLabel "Faktabok"@sv .
 
-ktg:Sm%C3%A5barnsfakta a :Genre ;
-  skos:broadMatch ktg:InformativeWork ;
+ktg:Sm%C3%A5barnsfakta a :GenreForm ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Sm%C3%A5barnsfakta ;
   skos:prefLabel "Småbarnsfakta"@sv .
 
-ktg:Ordb%C3%B6cker a :Genre ;
-  skos:broadMatch ktg:InformativeWork ;
+ktg:Ordb%C3%B6cker a :GenreForm ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Ordb%C3%B6cker ;
   skos:prefLabel "Ordböcker"@sv ;
   :pluralLabel "Ordböcker"@sv ;
   :singularLabel "Ordbok"@sv .
 
-ktg:Uppslagsb%C3%B6ckerBarn a :Genre ;
+ktg:Uppslagsb%C3%B6ckerBarn a :GenreForm ;
   skos:broadMatch saogf:Lexikon ;
-  skos:broadMatch ktg:InformativeWork ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Uppslagsb%C3%B6cker ;
   skos:prefLabel "Uppslagsböcker för barn"@sv ;
   :pluralLabel "Uppslagsböcker för barn"@sv ;
   :singularLabel "Uppslagsbok för barn"@sv .
 
-ktg:ChildrensCookbook a :Genre ;
+ktg:ChildrensCookbook a :GenreForm ;
   skos:broadMatch saogf:Kokb%C3%B6cker ;
-  skos:broadMatch ktg:InformativeWork ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Kokb%C3%B6cker ;
   :pluralLabel "Kokböcker för barn"@sv ;
   :singularLabel "Kokbok för barn"@sv .
 
-ktg:Handb%C3%B6cker a :Genre ;
-  skos:broadMatch ktg:InformativeWork ;
+ktg:Handb%C3%B6cker a :GenreForm ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Handb%C3%B6cker ;
   skos:prefLabel "Handböcker"@sv ;
   :pluralLabel "Handböcker"@sv ;
   :singularLabel "Handbok"@sv .
 
-ktg:Taltr%C3%A4ningsb%C3%B6cker a :Genre ;
-  skos:broadMatch ktg:InformativeWork ;
+ktg:Taltr%C3%A4ningsb%C3%B6cker a :GenreForm ;
+  skos:broadMatch saogf:Informativa%20verk ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Taltr%C3%A4ningsb%C3%B6cker ;
   skos:prefLabel "Talträningsböcker"@sv ;
@@ -125,15 +130,15 @@ ktg:Taltr%C3%A4ningsb%C3%B6cker a :Genre ;
   :singularLabel "Talträningsbok"@sv .
 
 
-ktg:Andaktsb%C3%B6ckerBarn a :Genre ;
+ktg:Andaktsb%C3%B6ckerBarn a :GenreForm ;
   skos:broadMatch saogf:Andaktsb%C3%B6cker ;
   skos:broader ktg:ChildrensLiterature ;
   skos:exactMatch barngf:Andaktsb%C3%B6cker ;
   :pluralLabel "Andaktsböcker för barn"@sv ;
   :singularLabel "Andaktsbok för barn"@sv .
 
-ktg:Religi%C3%B6sa%20ber%C3%A4ttelser a :Genre ;
-  skos:broader ktg:ChildrensLiterature ;
+ktg:Religi%C3%B6sa%20ber%C3%A4ttelser a :GenreForm ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Religi%C3%B6sa%20ber%C3%A4ttelser ;
   skos:prefLabel "Religiösa berättelser"@sv ;
   :pluralLabel "Religiösa berättelser"@sv ;
@@ -141,7 +146,7 @@ ktg:Religi%C3%B6sa%20ber%C3%A4ttelser a :Genre ;
 
 
 
-ktg:ChildrensRolePlayingGame a :Genre ;
+ktg:ChildrensRolePlayingGame a :GenreForm ;
   skos:broadMatch saogf:Rollspel ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Rollspel ;
@@ -149,33 +154,33 @@ ktg:ChildrensRolePlayingGame a :Genre ;
     "Children's role-playing game"@en .
 
 
-ktg:All%C3%A5ldersb%C3%B6cker a :Genre ;
+ktg:All%C3%A5ldersb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:All%C3%A5ldersb%C3%B6cker ;
   skos:prefLabel "Allåldersböcker"@sv ;
   :pluralLabel "Allåldersböcker"@sv ;
   :singularLabel "Allåldersbok"@sv .
 
-ktg:Filmade%20b%C3%B6cker a :Genre ;
+ktg:Filmade%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Filmade%20b%C3%B6cker ;
   skos:prefLabel "Filmade böcker"@sv ;
   :pluralLabel "Filmade böcker"@sv ;
   :singularLabel "Filmad bok"@sv .
 
-ktg:Leta%20i%20bilden a :Genre ;
+ktg:Leta%20i%20bilden a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Leta%20i%20bilden ;
   skos:prefLabel "Leta i bilden"@sv .
 
-ktg:Taktila%20b%C3%B6cker a :Genre ;
+ktg:Taktila%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Taktila%20b%C3%B6cker ;
   skos:prefLabel "Taktila böcker"@sv ;
   :pluralLabel "Taktila böcker"@sv ;
   :singularLabel "Taktil bok"@sv .
 
-ktg:Minnesb%C3%B6cker a :Genre ;
+ktg:Minnesb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Minnesb%C3%B6cker ;
   skos:prefLabel "Minnesböcker"@sv ;
@@ -183,40 +188,40 @@ ktg:Minnesb%C3%B6cker a :Genre ;
   :singularLabel "Minnesbok"@sv .
 
 ktg:S%C3%A5nglekar a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:S%C3%A5nglekar ;
   skos:prefLabel "Sånglekar"@sv ;
   :pluralLabel "Sånglekar"@sv ;
   :singularLabel "Sånglek"@sv .
 
-ktg:Kortspel a :Genre ;
+ktg:Kortspel a :GenreForm ;
   #skos:broader ktg:ChildrensFictionLiterature ;
   skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Kortspel ;
   skos:prefLabel "Kortspel"@sv .
 
 ktg:Skr%C3%A4ckber%C3%A4ttelser a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:broader ktg:YoungAudience ;
   skos:exactMatch barngf:Skr%C3%A4ckber%C3%A4ttelser ;
   skos:prefLabel "Skräckberättelser"@sv ;
   :pluralLabel "Skräckberättelser"@sv ;
   :singularLabel "Skräckberättelse"@sv .
 
-ktg:Textl%C3%B6sa%20b%C3%B6cker a :Genre ;
+ktg:Textl%C3%B6sa%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Textl%C3%B6sa%20b%C3%B6cker ;
   skos:prefLabel "Textlösa böcker"@sv ;
   :pluralLabel "Textlösa böcker"@sv ;
   :singularLabel "Textlös bok"@sv .
 
-ktg:Pusselb%C3%B6cker a :Genre ;
+ktg:Pusselb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Pusselb%C3%B6cker ;
   skos:prefLabel "Pusselböcker"@sv ;
   :pluralLabel "Pusselböcker"@sv ;
   :singularLabel "Pusselbok"@sv .
 
-ktg:Pysselb%C3%B6ckerBarn a :Genre ;
+ktg:Pysselb%C3%B6ckerBarn a :GenreForm ;
   skos:broadMatch saogf:Pysselb%C3%B6cker ;
   #skos:broader ktg:ChildrensFictionLiterature ;
   skos:broader ktg:YoungAudience ;
@@ -224,14 +229,14 @@ ktg:Pysselb%C3%B6ckerBarn a :Genre ;
   :pluralLabel "Pysselböcker för barn"@sv ;
   :singularLabel "Pysselbok för barn"@sv .
 
-ktg:Rim%20och%20ramsor a :Genre ;
+ktg:Rim%20och%20ramsor a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Rim%20och%20ramsor ;
   skos:prefLabel "Rim och ramsor"@sv ;
   :pluralLabel "Rim och ramsor"@sv ;
   :singularLabel "Rim och ramsa"@sv .
 
-ktg:Taktila%20illustrationer a :Genre ;
+ktg:Taktila%20illustrationer a :GenreForm ;
   skos:broadMatch ktg:WorkWithImages ;
   #skos:broader ktg:ChildrensFictionLiterature ;
   skos:broader ktg:YoungAudience ;
@@ -240,14 +245,14 @@ ktg:Taktila%20illustrationer a :Genre ;
   :pluralLabel "Taktila illustrationer"@sv ;
   :singularLabel "Taktil illustration"@sv .
 
-ktg:Titth%C3%A5lsb%C3%B6cker a :Genre ;
+ktg:Titth%C3%A5lsb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Titth%C3%A5lsb%C3%B6cker ;
   skos:prefLabel "Titthålsböcker"@sv ;
   :pluralLabel "Titthålsböcker"@sv ;
   :singularLabel "Titthålsbok"@sv .
 
-ktg:Teckenspr%C3%A5k a :Genre ;
+ktg:Teckenspr%C3%A5k a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Teckenspr%C3%A5k ;
   skos:prefLabel "Teckenspråk"@sv .
@@ -260,52 +265,52 @@ ktg:Samlingar a :Genre ;
   :pluralLabel "Samlingar"@sv ;
   :singularLabel "Samling"@sv .
 
-ktg:V%C3%A4ndbara%20b%C3%B6cker a :Genre ;
+ktg:V%C3%A4ndbara%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:V%C3%A4ndbara%20b%C3%B6cker ;
   skos:prefLabel "Vändbara böcker"@sv ;
   :pluralLabel "Vändbara böcker"@sv ;
   :singularLabel "Vändbar bok"@sv .
 
-ktg:Mellan%C3%A5ldersb%C3%B6cker a :Genre ;
+ktg:Mellan%C3%A5ldersb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Mellan%C3%A5ldersb%C3%B6cker ;
   skos:prefLabel "Mellanåldersböcker"@sv ;
   :pluralLabel "Mellanåldersböcker"@sv ;
   :singularLabel "Mellanåldersbok"@sv .
 
-ktg:B%C3%B6rja%20l%C3%A4sa a :Genre ;
+ktg:B%C3%B6rja%20l%C3%A4sa a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:B%C3%B6rja%20l%C3%A4sa ;
   skos:prefLabel "Börja läsa"@sv .
 
-ktg:Historiska%20ber%C3%A4ttelser a :Genre ;
+ktg:Historiska%20ber%C3%A4ttelser a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Historiska%20ber%C3%A4ttelser ;
   skos:prefLabel "Historiska berättelser"@sv ;
   :pluralLabel "Historiska berättelser"@sv ;
   :singularLabel "Historisk berättelse"@sv .
 
-ktg:Kalenderb%C3%B6cker a :Genre ;
+ktg:Kalenderb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Kalenderb%C3%B6cker ;
   skos:prefLabel "Kalenderböcker"@sv ;
   :pluralLabel "Kalenderböcker"@sv ;
   :singularLabel "Kalenderbok"@sv .
 
-ktg:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker a :Genre ;
+ktg:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker ;
   skos:prefLabel "Lättlästa böcker"@sv ;
   :pluralLabel "Lättlästa böcker"@sv ;
   :singularLabel "Lättläst bok"@sv .
 
-ktg:Parallelltext a :Genre ;
+ktg:Parallelltext a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Parallelltext ;
   skos:prefLabel "Parallelltext"@sv .
 
-ktg:Pekb%C3%B6cker a :Genre ;
+ktg:Pekb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:broadMatch ktg:WorkWithImages ;
   skos:exactMatch barngf:Pekb%C3%B6cker ;
@@ -313,36 +318,36 @@ ktg:Pekb%C3%B6cker a :Genre ;
   :pluralLabel "Pekböcker"@sv ;
   :singularLabel "Pekbok"@sv .
 
-ktg:ABC-b%C3%B6cker a :Genre ;
+ktg:ABC-b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:ABC-b%C3%B6cker ;
   skos:prefLabel "ABC-böcker"@sv ;
   :pluralLabel "ABC-böcker"@sv ;
   :singularLabel "ABC-bok"@sv .
 
-ktg:S%C3%A5ngb%C3%B6cker a :Genre ;
+ktg:S%C3%A5ngb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:S%C3%A5ngb%C3%B6cker ;
   skos:prefLabel "Sångböcker"@sv ;
   :pluralLabel "Sångböcker"@sv ;
   :singularLabel "Sångbok"@sv .
 
-ktg:Sm%C3%A5barnsbilderb%C3%B6cker a :Genre ;
+ktg:Sm%C3%A5barnsbilderb%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
-  skos:broadMatch ktg:PictureBook ;
+  skos:broader barngf:Bilderb%C3%B6cker ;
   skos:exactMatch barngf:Sm%C3%A5barnsbilderb%C3%B6cker ;
   skos:prefLabel "Småbarnsbilderböcker"@sv ;
   :pluralLabel "Småbarnsbilderböcker"@sv ;
   :singularLabel "Småbarnsbilderbok"@sv .
 
-ktg:Interaktiva%20b%C3%B6cker a :Genre ;
+ktg:Interaktiva%20b%C3%B6cker a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Interaktiva%20b%C3%B6cker ;
   skos:prefLabel "Interaktiva böcker"@sv ;
   :pluralLabel "Interaktiva böcker"@sv ;
   :singularLabel "Interaktiv bok"@sv .
 
-ktg:Fotografiska%20illustrationer a :Genre ;
+ktg:Fotografiska%20illustrationer a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Fotografiska%20illustrationer ;
   skos:prefLabel "Fotografiska illustrationer"@sv ;
@@ -350,14 +355,14 @@ ktg:Fotografiska%20illustrationer a :Genre ;
   :singularLabel "Fotografisk illustration"@sv .
 
 
-ktg:Skolplanscher a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
+ktg:Skolplanscher a :GenreForm ;
+  skos:broader ktg:ChildrensFictionLiterature ; # TODO: not literature?
   skos:exactMatch barngf:Skolplanscher ;
   skos:prefLabel "Skolplanscher"@sv ;
   :pluralLabel "Skolplanscher"@sv ;
   :singularLabel "Skolplansch"@sv .
 
-ktg:Fotografiska%20seriealbum a :Genre ;
+ktg:Fotografiska%20seriealbum a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Fotografiska%20seriealbum ;
   skos:prefLabel "Fotografiska seriealbum"@sv ;
@@ -365,58 +370,58 @@ ktg:Fotografiska%20seriealbum a :Genre ;
   :singularLabel "Fotografiskt seriealbum"@sv .
 
 
-ktg:Bliss%20%28symbolspr%C3%A5k%29 a :Genre ;
+ktg:Bliss%20%28symbolspr%C3%A5k%29 a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Bliss%20%28symbolspr%C3%A5k%29 ;
   skos:prefLabel "Bliss (symbolspråk)"@sv .
 
-ktg:Widgit%20%28symbolspr%C3%A5k%29 a :Genre ;
+ktg:Widgit%20%28symbolspr%C3%A5k%29 a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Widgit%20%28symbolspr%C3%A5k%29 ;
   skos:prefLabel "Widgit (symbolspråk)"@sv .
 
-ktg:Bildst%C3%B6d a :Genre ;
+ktg:Bildst%C3%B6d a :GenreForm ;
   skos:broadMatch ktg:WorkWithImages ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Bildst%C3%B6d ;
   skos:prefLabel "Bildstöd"@sv .
 
-ktg:B%C3%B6cker%20med%20ljuseffekter a :Genre ;
+ktg:B%C3%B6cker%20med%20ljuseffekter a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:B%C3%B6cker%20med%20ljuseffekter ;
   skos:prefLabel "Böcker med ljuseffekter"@sv ;
   :pluralLabel "Böcker med ljuseffekter"@sv ;
   :singularLabel "Bok med ljuseffekt"@sv .
 
-ktg:ChildrensReadersBook a :Genre ;
+ktg:ChildrensReadersBook a :GenreForm ;
   skos:broadMatch saogf:L%C3%A4seb%C3%B6cker ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:L%C3%A4seb%C3%B6cker ;
   :pluralLabel "Läseböcker för barn"@sv ;
   :singularLabel "Läsebok för barn"@sv .
 
-ktg:Toy%20or%20movable%20book a :Genre ;
+ktg:Toy%20or%20movable%20book a :GenreForm ;
   skos:broadMatch saogf:Mekaniska%20b%C3%B6cker ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Mekaniska%20b%C3%B6cker ;
   :pluralLabel "Mekaniska böcker för barn"@sv ;
   :singularLabel "Mekanisk bok för barn"@sv .
 
-ktg:ChildrensSound%20book a :Genre ;
+ktg:ChildrensSound%20book a :GenreForm ;
   skos:broadMatch saogf:B%C3%B6cker%20med%20ljudeffekter ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:B%C3%B6cker%20med%20ljudeffekter ;
   :pluralLabel "Böcker med ljudeffekter för barn"@sv ;
   :singularLabel "Bok med ljudeffekt för barn"@sv .
 
-ktg:ChildrensPop-up%20books a :Genre ;
+ktg:ChildrensPop-up%20books a :GenreForm ;
   skos:broadMatch saogf:Pop-up-b%C3%B6cker ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Pop-up-b%C3%B6cker ;
   :pluralLabel "Pop-up-böcker för barn"@sv ;
   :singularLabel "Pop-up-bok för barn"@sv .
 
-ktg:ChildrensAudiobook a :Genre ;
+ktg:ChildrensAudiobook a :GenreForm ;
   skos:broadMatch saogf:Ljudb%C3%B6cker ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Ljudb%C3%B6cker ;
@@ -424,64 +429,109 @@ ktg:ChildrensAudiobook a :Genre ;
   :singularLabel "Ljudbok för barn"@sv .
 
 
-ktg:ChildrensScreenplay a :Genre ;
+ktg:ChildrensScreenplay a :GenreForm ;
   skos:broadMatch saogf:Filmmanus ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Filmmanus ;
   :singularLabel "Filmmanus för barn"@sv .
 
 
-ktg:ChildrensComic a :Genre ;
+ktg:ChildrensComic a :GenreForm ;
   skos:broadMatch saogf:Tecknade%20serier ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Tecknade%20serier ;
   :pluralLabel "Tecknade serier för barn"@sv ;
   :singularLabel "Tecknad serie för barn"@sv .
 
-ktg:ChildrensManga a :Genre ;
+ktg:ChildrensManga a :GenreForm ;
   skos:broadMatch saogf:Manga ,
     ktg:WorkWithImages ;
   skos:broader ktg:ChildrensComic ;
   skos:exactMatch barngf:Manga ;
   skos:prefLabel "Manga för barn"@sv .
 
-ktg:ChildrensManhwa a :Genre ;
+ktg:ChildrensManhwa a :GenreForm ;
   skos:broader ktg:ChildrensComic ;
   skos:exactMatch barngf:Manhwa ;
   skos:prefLabel "Manhwa för barn"@sv .
 
 
-ktg:ChildrensShort%20story a :Genre ;
+ktg:ChildrensShort%20story a :GenreForm ;
   skos:broadMatch saogf:Noveller ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Noveller ;
   :pluralLabel "Noveller för barn"@sv ;
   :singularLabel "Novell för barn"@sv .
 
-ktg:ChildrensEpistolary%20fiction a :Genre ;
+ktg:ChildrensEpistolary%20fiction a :GenreForm ;
   skos:broadMatch saogf:Brevromaner ;
-  skos:broadMatch ktg:Novel ;
+  skos:broadMatch saogf:Romaner ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Brevromaner ;
   :pluralLabel "Brevromaner för barn"@sv ;
   :singularLabel "Brevroman för barn"@sv .
 
-ktg:Bildromaner a :Genre ;
-  skos:broadMatch ktg:WorkWithImages, ktg:Novel ;
+ktg:Bildromaner a :GenreForm ;
+  skos:broadMatch ktg:WorkWithImages, saogf:Romaner ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Bildromaner ;
   skos:prefLabel "Bildromaner"@sv ;
   :pluralLabel "Bildromaner"@sv ;
   :singularLabel "Bildroman"@sv .
 
-ktg:Versromaner a :Genre ;
+ktg:Versromaner a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
-  skos:broadMatch ktg:Novel ;
+  skos:broadMatch saogf:Romaner ;
   skos:exactMatch barngf:Versromaner ;
   skos:prefLabel "Versromaner"@sv ;
   :pluralLabel "Versromaner"@sv ;
   :singularLabel "Versroman"@sv .
 
+
+ktg:Citatsamlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Citatsamlingar ;
+  skos:prefLabel "Citatsamlingar"@sv ;
+  :pluralLabel "Citatsamlingar"@sv ;
+  :singularLabel "Citatsamling"@sv .
+
+ktg:G%C3%A5tsamlingar a :Genre ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:G%C3%A5tsamlingar ;
+  skos:prefLabel "Gåtsamlingar"@sv ;
+  :pluralLabel "Gåtsamlingar"@sv ;
+  :singularLabel "Gåtsamling"@sv .
+
+ktg:Ungdomsb%C3%B6cker a :GenreForm ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Ungdomsb%C3%B6cker ;
+  skos:prefLabel "Ungdomsböcker"@sv ;
+  :pluralLabel "Ungdomsböcker"@sv ;
+  :singularLabel "Ungdomsbok"@sv .
+
+ktg:H%C3%A4stb%C3%B6cker a :GenreForm ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:H%C3%A4stb%C3%B6cker ;
+  skos:prefLabel "Hästböcker"@sv ;
+  :pluralLabel "Hästböcker"@sv ;
+  :singularLabel "Hästbok"@sv .
+
+ktg:Verklighetsbaserade%20b%C3%B6cker a :GenreForm ;
+  skos:broader ktg:ChildrensFictionLiterature ;
+  skos:exactMatch barngf:Verklighetsbaserade%20b%C3%B6cker ;
+  skos:prefLabel "Verklighetsbaserade böcker"@sv ;
+  :pluralLabel "Verklighetsbaserade böcker"@sv ;
+  :singularLabel "Verklighetsbaserad bok"@sv .
+
+ktg:%C3%84ventyrsb%C3%B6cker a :GenreForm ;
+  skos:broader ktg:ChildrensGenreLiterature ;
+  skos:exactMatch barngf:%C3%84ventyrsb%C3%B6cker ;
+  skos:prefLabel "Äventyrsböcker"@sv ;
+  :pluralLabel "Äventyrsböcker"@sv ;
+  :singularLabel "Äventyrsbok"@sv .
+
+
+## Only Genre below? Not Literature?
 
 ktg:ChildrensDialect%20fiction a :Genre ;
   skos:broadMatch saogf:Dialektlitteratur ;
@@ -497,54 +547,54 @@ ktg:ChildrensPoetry a :Genre ;
   skos:exactMatch barngf:Poesi ;
   skos:prefLabel "Poesi för barn"@sv .
 
-ktg:ChildrensFairy%20tale a :Genre ;
+ktg:ChildrensFairy%20tale a :GenreForm ;
   skos:broadMatch saogf:Sagor ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Sagor ;
   :pluralLabel "Sagor för barn"@sv ;
   :singularLabel "Saga för barn"@sv .
 
-ktg:ChildrensFolk%20tale a :Genre ;
+ktg:ChildrensFolk%20tale a :GenreForm ;
   skos:broadMatch saogf:Folksagor ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Folksagor ;
   :pluralLabel "Folksagor för barn"@sv ;
   :singularLabel "Folksaga för barn"@sv .
 
-ktg:Ritsagor a :Genre ;
+ktg:Ritsagor a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Ritsagor ;
   skos:prefLabel "Ritsagor"@sv ;
   :pluralLabel "Ritsagor"@sv ;
   :singularLabel "Ritsaga"@sv .
 
-ktg:Dilemmasagor a :Genre ;
+ktg:Dilemmasagor a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Dilemmasagor ;
   skos:prefLabel "Dilemmasagor"@sv ;
   :pluralLabel "Dilemmasagor"@sv ;
   :singularLabel "Dilemmasaga"@sv .
 
-ktg:Isl%C3%A4ndska%20sagorBarn a :Genre ;
+ktg:Isl%C3%A4ndska%20sagorBarn a :GenreForm ;
   skos:broadMatch saogf:Isl%C3%A4ndska%20sagor ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Isl%C3%A4ndska%20sagor ;
   :pluralLabel "Isländska sagor för barn"@sv ;
   :singularLabel "Isländsk saga för barn"@sv .
 
-ktg:Upprepningssagor a :Genre ;
+ktg:Upprepningssagor a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Upprepningssagor ;
   skos:prefLabel "Upprepningssagor"@sv ;
   :pluralLabel "Upprepningssagor"@sv ;
   :singularLabel "Upprepningssaga"@sv .
 
-ktg:Djur%20ber%C3%A4ttar a :Genre ;
+ktg:Djur%20ber%C3%A4ttar a :GenreForm ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Djur%20ber%C3%A4ttar ;
   skos:prefLabel "Djur berättar"@sv .
 
-ktg:ChildrensFable a :Genre ;
+ktg:ChildrensFable a :GenreForm ;
   skos:broadMatch saogf:Fabler ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Fabler ;
@@ -625,26 +675,12 @@ ktg:Rim a :Genre ;
   skos:exactMatch barngf:Rim ;
   skos:prefLabel "Rim"@sv .
 
-ktg:Citatsamlingar a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:Citatsamlingar ;
-  skos:prefLabel "Citatsamlingar"@sv ;
-  :pluralLabel "Citatsamlingar"@sv ;
-  :singularLabel "Citatsamling"@sv .
-
 ktg:VisorBarn a :Genre ;
   skos:broadMatch saogf:Visor ;
   skos:broader ktg:ChildrensFictionLiterature ;
   skos:exactMatch barngf:Visor ;
   skos:prefLabel "Visor för barn"@sv .
   #:singularLabel "Visa för barn"@sv .
-
-ktg:G%C3%A5tsamlingar a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:G%C3%A5tsamlingar ;
-  skos:prefLabel "Gåtsamlingar"@sv ;
-  :pluralLabel "Gåtsamlingar"@sv ;
-  :singularLabel "Gåtsamling"@sv .
 
 
 ktg:Unga%20vuxna a :Genre ;
@@ -654,19 +690,6 @@ ktg:Unga%20vuxna a :Genre ;
   :pluralLabel "Unga vuxna"@sv ;
   :singularLabel "Ung vuxen"@sv .
 
-ktg:Ungdomsb%C3%B6cker a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:Ungdomsb%C3%B6cker ;
-  skos:prefLabel "Ungdomsböcker"@sv ;
-  :pluralLabel "Ungdomsböcker"@sv ;
-  :singularLabel "Ungdomsbok"@sv .
-
-ktg:H%C3%A4stb%C3%B6cker a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:H%C3%A4stb%C3%B6cker ;
-  skos:prefLabel "Hästböcker"@sv ;
-  :pluralLabel "Hästböcker"@sv ;
-  :singularLabel "Hästbok"@sv .
 
 ktg:Biografiska%20ber%C3%A4ttelser a :Genre ;
   skos:broader ktg:ChildrensFictionLiterature ;
@@ -681,13 +704,6 @@ ktg:BarndomsskildringBarn a :Genre ;
   skos:exactMatch barngf:Barndomsskildringar ;
   :pluralLabel "Barndomsskildringar för barn"@sv ;
   :singularLabel "Barndomsskildring för barn"@sv .
-
-ktg:Verklighetsbaserade%20b%C3%B6cker a :Genre ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:Verklighetsbaserade%20b%C3%B6cker ;
-  skos:prefLabel "Verklighetsbaserade böcker"@sv ;
-  :pluralLabel "Verklighetsbaserade böcker"@sv ;
-  :singularLabel "Verklighetsbaserad bok"@sv .
 
 ktg:Barn%20och%20ungdomar%20illustrerar a :Genre ;
   skos:broader ktg:ChildrensFictionLiterature ;
@@ -830,10 +846,3 @@ ktg:Dark%20academia a :Genre ;
   skos:broader ktg:ChildrensGenreLiterature ;
   skos:exactMatch barngf:Dark%20academia ;
   skos:prefLabel "Dark academia"@sv .
-
-ktg:%C3%84ventyrsb%C3%B6cker a :Genre ;
-  skos:broader ktg:ChildrensGenreLiterature ;
-  skos:exactMatch barngf:%C3%84ventyrsb%C3%B6cker ;
-  skos:prefLabel "Äventyrsböcker"@sv ;
-  :pluralLabel "Äventyrsböcker"@sv ;
-  :singularLabel "Äventyrsbok"@sv .

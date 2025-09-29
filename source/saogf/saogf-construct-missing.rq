@@ -1,24 +1,29 @@
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix div: <https://id.kb.se/term/div/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 
-insert {
-  ?s skos:exactMatch ?new_saogf_match ;
-    skos:editorialNote "CONSTRUCTED" .
+construct {
+  ?s skos:exactMatch ?new_mapped_match ;
+    :inCollection div:constructed .
+  ?s ?p ?o .
 } where {
+  values ?scheme { saogf: }
+
   ?s ?p ?o .
 
   filter not exists {
-    ?s skos:exactMatch ?saogf_s .
+    ?s skos:exactMatch ?mapped_s .
     filter strstarts(str(?s), str(ktg:))
-    filter strstarts(str(?saogf_s), str(saogf:))
+    filter strstarts(str(?mapped_s), str(?scheme))
   }
 
   ?s skos:prefLabel|:singularLabel ?label .
   filter(langmatches(lang(?label), 'sv'))
 
-  bind(IRI(concat(str(saogf:),
-            encode_for_uri(?label))) as ?new_saogf_match)
+  bind(IRI(concat(str(?scheme),
+            encode_for_uri(?label))) as ?new_mapped_match)
 }

@@ -1,0 +1,32 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix : <https://id.kb.se/vocab/>
+
+construct {
+  ?mapped_s ?target_p ?target_o .
+  ?unmapped_s :inCollection owl:Nothing .
+} {
+  values ?scheme { saogf: }
+
+  ?s ?p ?o .
+  bind( if( strstarts(str(?p), str(skos:)),
+            IRI(concat(str(:), strafter(str(?p), str(skos:)))),
+            ?p) as ?target_p )
+  optional {
+    ?s skos:exactMatch ?mapped_s .
+    filter strstarts(str(?s), str(ktg:))
+    filter strstarts(str(?mapped_s), str(?scheme))
+  }
+  bind(if(!bound(?mapped_s), ?s, ?_) as ?unmapped_s)  # "Should Not Happen(TM)"
+
+  optional {
+    ?o skos:exactMatch ?mapped_o .
+    filter strstarts(str(?o), str(ktg:))
+    filter strstarts(str(?mapped_o), str(?scheme))
+  }
+  bind(coalesce(?mapped_o, ?o) as ?target_o)
+  filter(?target_o != ?mapped_s)
+}
