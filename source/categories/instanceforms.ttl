@@ -53,7 +53,6 @@ ktg:PrintedVolume a :ManifestationForm ;
 #ktg:PaperbackVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
 
-
 ktg:PrintedSheet a :ManifestationForm ;
   skos:broader ktg:Print, kbrda:Sheet ;
   rdfs:label "Tryckt lösblad"@sv , "Printed Sheet"@en .
@@ -66,6 +65,10 @@ ktg:PhysicalObject a :ManifestationForm ; # :UnmediatedObject ?
   skos:exactMatch kbrda:Object ;
   skos:broader kbrda:Unmediated ;
   skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
+
+
+ktg:ComponentPart a :ManifestationForm ;
+  skos:prefLabel "Bidrag"@sv, "Component Part"@en .
 
 
 # Cf. notation
