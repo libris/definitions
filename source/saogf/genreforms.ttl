@@ -61,7 +61,9 @@ ktg:Book a :GenreForm ;
 ktg:TextPiece a :GenreForm ;  # ktg:Document ??
   :category div:abstract ;
   skos:broader ktg:Literature ; # kbrda:Text # NO, "LiteraturePiece"
-  skos:prefLabel "Text piece"@en ,
+  skos:prefLabel "Text pieces"@en ,
+    "Kortare texter"@sv ; # "Textdel"@sv, "Textenhet"@sv .
+  :singularLabel "Text piece"@en ,
     "Kortare text"@sv . # "Textdel"@sv, "Textenhet"@sv .
 
 ktg:Issue a :GenreForm ;
@@ -244,7 +246,7 @@ ktg:Timetable a :GenreForm ;
 #---
 
 ktg:Screenplay a ::GenreForm ; # :ExpressionForm
-  skos:broader ktg:Script ;
+  #skos:broadMatch kbrda:Text ,  ktg:Manuscript ;
   skos:exactMatch saogf:Filmmanus ;
   :singularLabel "Filmmanus"@sv ,
     "Screenplay"@en .
@@ -286,7 +288,7 @@ ktg:IllustratedWork a :ExpressionForm ;
 ktg:Database a :ExpressionForm ;
   :inCollection div:identify ;
   skos:closeMatch marc:UpdatingDatabase ;
-  skos:broader ktg:Integrating, ktg:ComputerDataset , ktg:InformativeWork ;
+  skos:broader ktg:CollectingResource, kbrda:ComputerDataset , ktg:InformativeWork ; # Integrating
   skos:exactMatch saogf:Databaser ;
   skos:narrowMatch marc:UpdatingDatabase ;
   :singularLabel "Databas"@sv ,
@@ -302,19 +304,19 @@ ktg:Poster a :ExpressionForm ;
 ktg:Film a :ExpressionForm ;
   :inCollection div:identify ;
   skos:closeMatch marc:MotionPicture ;
-  skos:broader ktg:MovingImage ;
+  skos:broader kbrda:MovingImage ;
   skos:exactMatch saogf:Filmer ;
   :singularLabel "Film"@sv ,
     "Film"@en .
 
 ktg:AudioProgram a :ExpressionForm ;
-  skos:broader ktg:Sounds ;
+  skos:broader kbrda:Sounds ;
   skos:prefLabel "Ljudprogram"@sv ,
     "Audio Program"@en .
 
 ktg:TV a :ExpressionForm ;
   :category div:abstract ;
-  skos:broader ktg:MovingImage ;
+  skos:broader kbrda:MovingImage ;
   skos:prefLabel "TV"@sv, "TV"@en .
 
 ktg:PictureBook a :ExpressionForm ;
@@ -351,6 +353,8 @@ ktg:BoardGame a :ExpressionForm ;
 ktg:Brochure a :ExpressionForm ;
   skos:broader ktg:TextPiece ;
   skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
+  skos:prefLabel "Broschyrer"@sv ,
+    "Brochures"@en ;
   :singularLabel "Broschyr"@sv ,
     "Brochure"@en .
 
@@ -388,9 +392,9 @@ ktg:ComputerCode a :ExpressionForm ;
     "Computer Code"@en .
 
 ktg:ComputerGame a :ExpressionForm ;
-  :inCollection div:identify,
+  :inCollection div:identify, # TODO: div:find ;
     div:promoted ;
-  skos:broader ktg:Software, ktg:PuzzleOrGame, ktg:ComputerProgram ;
+  skos:broader ktg:Software, ktg:PuzzleOrGame, kbrda:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
   skos:closeMatch marc:ComputerTypeOfFileType-g ;
   :singularLabel "Datorspel"@sv ,
@@ -427,7 +431,7 @@ ktg:FormDocument a :ExpressionForm ;
     "Form Document"@en .
 
 ktg:Handwriting a :ExpressionForm ;
-  skos:broader ktg:Manuscript ,
+  skos:broader # ktg:Manuscript ,
     kbrda:Text ;
   skos:exactMatch saogf:Handskrifter ;
   :singularLabel "Handskrift"@sv ,
@@ -458,16 +462,11 @@ ktg:GraphicNovel a :ExpressionForm ;
     "Graphic Novel"@en .
 
 ktg:InteractiveObject a :ExpressionForm ;
-  skos:broader ktg:Object ;
+  skos:broader kbrda:ThreeDimensionalForm ;
   skos:prefLabel "Interaktiva objekt"@sv ,
   "Interactive objects"@en ;
   :singularLabel "Interaktivt objekt"@sv ,
   "Interactive object"@en .
-
-ktg:Script a :ExpressionForm ;
-  skos:broader kbrda:Text ;
-  skos:prefLabel "script"@en ;
-  skos:closeMatch marcgt:scr .
 
 ktg:MechanicalBook a :ExpressionForm ;
   skos:exactMatch saogf:Mekaniska\%20b\%C3\%B6cker ;
@@ -575,7 +574,7 @@ ktg:RecordOrDeed a :ExpressionForm ;
   "Record (Document)"@en .
 
 ktg:Sculpture a :ExpressionForm ;
-  skos:broader ktg:Object ;
+  skos:broader kbrda:ThreeDimensionalForm ;
   skos:prefLabel "Skulpturer"@sv ,
     "Sculptures"@en ;
   :singularLabel "Skulptur"@sv ,
@@ -634,7 +633,7 @@ ktg:Trailer a :ExpressionForm ;
     "Trailer"@en .
 
 ktg:Website a :ExpressionForm ;
-  skos:broader ktg:Integrating ;
+  skos:broader ktg:CollectingResource ; # Integrating
   skos:exactMatch saogf:Webbplatser ;
   skos:relatedMatch kbrda:OnlineResource ;  # Carrier...
   skos:closeMatch marc:UpdatingWebSite ;
@@ -648,7 +647,7 @@ ktg:Datorgrafik a :ExpressionForm ;
   skos:prefLabel "Datorgrafik"@sv, "Computer graphics"@en .
 
 ktg:Luck%C3%B6ppningskalendrar a :ExpressionForm ;
-  skos:broader ktg:Object ;
+  skos:broader kbrda:ThreeDimensionalForm ;
   skos:exactMatch saogf:Luck%C3%B6ppningskalendrar ;
   :singularLabel "Lucköppningskalender"@sv .
 
@@ -665,12 +664,12 @@ ktg:PuzzleBook a :ExpressionForm ;
     "Puzzle book"@en .
 
 ktg:M%C3%A5larböcker a :ExpressionForm ;
-  skos:broader ktg:WrittenBookWithImages ;
+  skos:broader ktg:Book , ktg:IllustratedWork ;
   skos:exactMatch saogf:M%C3%A5larb%C3%B6cker ;
   :singularLabel "Målarbok"@sv .
 
 ktg:PopupBook a :ExpressionForm ;
-  skos:broader ktg:WrittenBookWithImages, ktg:MechanicalBook ;
+  skos:broader ktg:IllustratedWork , ktg:MechanicalBook ;
   skos:exactMatch saogf:Pop-up-b%C3%B6cker ;
   :singularLabel "Pop-up-bok"@sv ,
     "Pop-up bOok"@en .
@@ -700,9 +699,11 @@ ktg:Map a :ExpressionForm ;
 
 ktg:Globe a :ExpressionForm ;
   :inCollection div:identify ;
-  skos:broader ktg:CartographicObject ;
+  skos:broader kbrda:CartographicThreeDimensionalForm ;
   skos:exactMatch tgm:Glober ;
   skos:closeMatch marc:Globe ;
+  skos:prefLabel "Cartographic globes"@en ,
+    "Kartglober"@sv ;
   :singularLabel "Cartographic globe"@en ,
     "Kartglob"@sv .
 
@@ -740,13 +741,13 @@ ktg:EarthMoonGlobe a :ExpressionForm ;
   :singularLabel "Månglob"@sv, "Moon globe"@en .
 
 ktg:Model a :ExpressionForm ;
-  skos:broader ktg:Object ;
+  skos:broader kbrda:ThreeDimensionalForm ;
   skos:broadMatch marcgt:mod ;
   skos:prefLabel "Modeller"@sv, "Models"@en ;
   :singularLabel "Modell"@sv, "Model"@en .
 
 ktg:MapModel a :ExpressionForm ;
-  skos:broader ktg:Model , ktg:CartographicObject ;
+  skos:broader ktg:Model , kbrda:CartographicThreeDimensionalForm ;
   skos:closeMatch marc:Model , marc:VisualMaterialType-q ;
   skos:prefLabel "Kartmodeller"@sv, "Map models"@en ;
   :singularLabel "Kartmodell"@sv, "Map model"@en .
@@ -789,7 +790,7 @@ ktg:RemoteSensingImage a :ExpressionForm ;
   :singularLabel "Fjärranalysbild"@sv, "Remote-sensing image"@en .
 
 ktg:Videorecording a :ExpressionForm ;
-  skos:broader ktg:MovingImage ;
+  skos:broader kbrda:MovingImage ;
   # NOT :inCollection "generally useful" ;
   # TODO: to be proposed: skos:exactMatch saogf:Videoinspelning ;
   skos:closeMatch marc:Videorecording ;
@@ -806,7 +807,7 @@ ktg:Textleaf a :ExpressionForm ;
   skos:prefLabel "Textblad"@sv , "Text leaf"@en .
 
 ktg:LooseLeaf a :ExpressionForm ;
-  skos:broader ktg:Integrating ;
+  skos:broader ktg:CollectingResource ; # Integrating
   skos:closeMatch  marc:LooseLeaf ;
   skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> ;
   skos:prefLabel "Lösblad"@sv ,
