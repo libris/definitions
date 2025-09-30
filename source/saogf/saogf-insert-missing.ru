@@ -6,10 +6,9 @@ prefix barngf: <https://id.kb.se/term/barngf/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 
-construct {
+insert {
   ?s skos:exactMatch ?new_mapped_match ;
     :inCollection div:constructed .
-  ?s ?p ?o .
 } where {
   values ?scheme { saogf: }
 

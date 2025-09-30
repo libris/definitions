@@ -1,13 +1,9 @@
 .PHONY: saogf
 
-saogf: build/saogf-new.ttl build/saogf-patch.ttl
-
-build/saogf-new.ttl: build saogf-construct-missing.rq saogf-from-ktg.rq
-	oxrq -f saogf-construct-missing.rq genres.ttl genreforms.ttl | oxrq -f saogf-from-ktg.rq | trld -ittl -ottl > $@.TMP
-	mv $@.TMP $@
+saogf: build/saogf-patch.ttl
 
 build/saogf-patch.ttl: build saogf-from-ktg.rq
-	oxrq -f saogf-from-ktg.rq genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl | trld -ittl -ottl > $@.TMP
+	(cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq | trld -ittl -rottl > $@.TMP
 	mv $@.TMP $@
 
 #build/barngf-new.ttl: build
