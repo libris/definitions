@@ -53,6 +53,8 @@ ktg:Book a :GenreForm ;
   :category div:abstract ;
   skos:broader ktg:Literature ; # Really? If not, do all subclasses have *some* broader inCollection div:find?
   skos:closeMatch marcgt:boo ;
+  skos:prefLabel "Books"@en ,
+    "Böcker"@sv ;
   :singularLabel "Book"@en ,
     "Bok"@sv .
 
@@ -90,6 +92,8 @@ ktg:Issue a :GenreForm ;
 ktg:Article a :GenreForm ;
   skos:broader ktg:TextPiece ;
   skos:closeMatch marcgt:art ;
+  skos:prefLabel "Artiklar"@sv ,
+    "Articles"@en ;
   :singularLabel "Artikel"@sv ,
     "Article"@en .
 
@@ -161,10 +165,10 @@ ktg:Journal a :GenreForm ;
   :singularLabel "Vetenskaplig tidskrift"@sv ,
     "Journal"@en .
 
-ktg:Magazine a :GenreForm ;
-  skos:broader ktg:Periodical ;
-  :singularLabel "Magasin"@sv ,
-    "Magazine"@en .
+#ktg:Magazine a :GenreForm ;
+#  skos:broader ktg:Periodical ;
+#  :singularLabel "Magasin"@sv ,
+#    "Magazine"@en .
 
 ktg:Encyclopedia a :GenreForm ;
   skos:closeMatch marc:Encyclopedia ;
@@ -380,7 +384,7 @@ ktg:GraphicShortStory a :ExpressionForm ;
 
 ktg:ComputerCode a :ExpressionForm ;
   skos:broader ktg:Software ;
-  :singularLabel "Datorkod"@sv ,
+  skos:prefLabel "Datorkod"@sv ,
     "Computer Code"@en .
 
 ktg:ComputerGame a :ExpressionForm ;
@@ -442,7 +446,7 @@ ktg:GraphicLiterature a :ExpressionForm ;
     ktg:FictionLiterature ;
   skos:broadMatch kbrda:Text ,
     kbrda:StillImage ;
-  :singularLabel "Grafisk litteratur"@sv ,
+  skos:prefLabel "Grafisk litteratur"@sv ,
     "Graphic literature"@en .
 
 ktg:GraphicNovel a :ExpressionForm ;
@@ -455,8 +459,10 @@ ktg:GraphicNovel a :ExpressionForm ;
 
 ktg:InteractiveObject a :ExpressionForm ;
   skos:broader ktg:Object ;
+  skos:prefLabel "Interaktiva objekt"@sv ,
+  "Interactive objects"@en ;
   :singularLabel "Interaktivt objekt"@sv ,
-  "InteractiveObject"@en .
+  "Interactive object"@en .
 
 ktg:Script a :ExpressionForm ;
   skos:broader kbrda:Text ;
@@ -473,7 +479,7 @@ ktg:MechanicalBook a :ExpressionForm ;
 ktg:MusicRadioProgram a :ExpressionForm ;
   skos:broader ktg:AudioProgram ,
     kbrda:PerformedMusic ;
-  :singularLabel "Musikradioprogram"@sv ,
+  skos:prefLabel "Musikradioprogram"@sv ,
     "Music Radio Program"@en .
 
 ktg:MusicRecording a :ExpressionForm ;
@@ -496,6 +502,8 @@ ktg:Pamphlet a :ExpressionForm ;
 
 ktg:Podcast a :ExpressionForm ;
   skos:broader ktg:AudioProgram, kbrda:SpokenWord ;
+  skos:prefLabel "Poddar"@sv ,
+    "Podcasts"@en ;
   :singularLabel "Podcast"@sv ,
     "Podcast"@en .
 
@@ -568,6 +576,8 @@ ktg:RecordOrDeed a :ExpressionForm ;
 
 ktg:Sculpture a :ExpressionForm ;
   skos:broader ktg:Object ;
+  skos:prefLabel "Skulpturer"@sv ,
+    "Sculptures"@en ;
   :singularLabel "Skulptur"@sv ,
     "Sculpture"@en .
 
@@ -612,6 +622,8 @@ ktg:Toy a :ExpressionForm ;
   skos:broader ktg:InteractiveObject ;
   skos:closeMatch marc:Toy ;
   skos:closeMatch marcgt:toy ;
+  skos:prefLabel "Leksaker"@sv ,
+    "Toys"@en ;
   :singularLabel "Leksak"@sv ,
     "Toy"@en .
 
@@ -670,11 +682,12 @@ ktg:DiningMenu a :ExpressionForm ;
   :singularLabel "Matsedel"@sv ,
     "Dining menu"@en .
 
-ktg:DocumentaryComic a :ExpressionForm ;
-  :singularLabel "Dokumentär serie" ;
-  skos:broader ktg:Comic ;
-  #skos:exactMatch saogf:Dokument%C3%A4ra%20serier ;
-  skos:broadMatch saogf:Dokument%C3%A4ra%20skildringar .
+#ktg:DocumentaryComic a :ExpressionForm ;
+#  skos:prefLabel "Dokumentära serier" ;
+#  :singularLabel "Dokumentär serie" ;
+#  skos:broader ktg:Comic ;
+#  #skos:exactMatch saogf:Dokument%C3%A4ra%20serier ;
+#  skos:broadMatch saogf:Dokument%C3%A4ra%20skildringar .
 
 ktg:Map a :ExpressionForm ;
   :inCollection div:identify ;
@@ -693,84 +706,99 @@ ktg:Globe a :ExpressionForm ;
   :singularLabel "Cartographic globe"@en ,
     "Kartglob"@sv .
 
+# TODO: Really define all in saogf? Cf. TGM
+
 ktg:Atlas a :ExpressionForm ;
   skos:broader kbrda:CartographicImage, kbrda:Text ; # ktg:WrittenBook ;
   skos:exactMatch marc:Atlas, tgm:Atlaser ;
   skos:narrowMatch marc:MapMaterialType-d ;
-  :singularLabel "Atlas"@en ,
-    "Kartbok"@sv .
+  skos:prefLabel "Atlases"@en , "Kartböcker"@sv ;
+  :singularLabel "Atlas"@en , "Kartbok"@sv .
 
-# TODO: Define in saogf? And move these to marcmatches.ttl (to be remapped).
 ktg:TerrestrialGlobe a :ExpressionForm ;
   skos:broader ktg:Globe ;
   skos:closeMatch marc:TerrestrialGlobe ;
+  skos:prefLabel "Jordglober"@sv, "Terrestial globes"@en ;
   :singularLabel "Jordglob"@sv, "Terrestial globe"@en .
 
 ktg:PlanetaryOrLunarGlobe a :ExpressionForm ;
   skos:broader ktg:Globe ;
   skos:closeMatch marc:PlanetaryOrLunarGlobe ;
+  skos:prefLabel "Himlakroppsglober"@sv, "Celestial body globes"@en ;
   :singularLabel "Himlakroppsglob"@sv, "Celestial body globe"@en .
 
 ktg:CelestialGlobe a :ExpressionForm ;
   skos:broader ktg:Globe ;
   skos:closeMatch marc:CelestialGlobe ;
+  skos:prefLabel "Himlaglober"@sv, "Celestial globes"@en ;
   :singularLabel "Himlaglob"@sv, "Celestial globe"@en .
 
 ktg:EarthMoonGlobe a :ExpressionForm ;
   skos:broader ktg:Globe ;
   skos:closeMatch marc:EarthMoonGlobe ;
+  skos:prefLabel "Månglober"@sv, "Moon globes"@en ;
   :singularLabel "Månglob"@sv, "Moon globe"@en .
 
 ktg:Model a :ExpressionForm ;
   skos:broader ktg:Object ;
   skos:broadMatch marcgt:mod ;
+  skos:prefLabel "Modeller"@sv, "Models"@en ;
   :singularLabel "Modell"@sv, "Model"@en .
 
 ktg:MapModel a :ExpressionForm ;
   skos:broader ktg:Model , ktg:CartographicObject ;
   skos:closeMatch marc:Model , marc:VisualMaterialType-q ;
+  skos:prefLabel "Kartmodeller"@sv, "Map models"@en ;
   :singularLabel "Kartmodell"@sv, "Map model"@en .
 
 ktg:Section a :ExpressionForm ;
   skos:broader ktg:Map ;
   skos:closeMatch marc:Section ;
-  :singularLabel "Kartsektion"@sv, "Map Section"@en .
+  skos:prefLabel "Kartsektioner"@sv, "Map sections"@en ;
+  :singularLabel "Kartsektion"@sv, "Map section"@en .
 
 ktg:ProfileMap a :ExpressionForm ;
   skos:broader ktg:Map ;
   skos:closeMatch marc:Profile ;
-  :singularLabel "Kartprofil"@sv, "Map Profile"@en .
+  skos:prefLabel "Kartprofiler"@sv, "Map profiles"@en ;
+  :singularLabel "Kartprofil"@sv, "Map profile"@en .
 
 ktg:MapATwoDimensionalMap a :ExpressionForm ;
   skos:broader ktg:Map ;
   skos:exactMatch marc:MapATwoDimensionalMap ;
-  :singularLabel "Karta"@sv, "Map A two-dimensional map."@en .
+  skos:prefLabel "Enskilda kartor"@sv, "Two-dimensional map"@en ;
+  :singularLabel "Enskild karta"@sv, "Two-dimensional map"@en .
 
 ktg:MapDiagram a :ExpressionForm ;
   skos:broader ktg:Map, ktg:Diagram ;
   skos:closeMatch marc:Diagram ;
-  :singularLabel "Enkel karta i diagramform"@sv, "Diagram"@en .
+  skos:prefLabel "Kartor i diagramform"@sv, "Map diagrams"@en ;
+  :singularLabel "Karta i diagramform"@sv, "Map diagram"@en .
 
 ktg:MapView a :ExpressionForm ;
   skos:broader ktg:Map ;
   skos:closeMatch marc:View ;
+  skos:prefLabel "Perspektivbilder"@sv, "Perspectice views"@en ;
   :singularLabel "Perspektivbild"@sv, "Perspectice view"@en .
 
 ktg:RemoteSensingImage a :ExpressionForm ;
   skos:broader ktg:Map ;
   skos:closeMatch marcgt:rem ;
   skos:closeMatch marc:RemoteSensingImage ;
-  skos:prefLabel "Fjärranalysbild"@sv, "Remote-sensing image"@en .
+  skos:prefLabel "Fjärranalysbilder"@sv , "Remote-sensing images"@en ;
+  :singularLabel "Fjärranalysbild"@sv, "Remote-sensing image"@en .
 
 ktg:Videorecording a :ExpressionForm ;
   skos:broader ktg:MovingImage ;
   # NOT :inCollection "generally useful" ;
   # TODO: to be proposed: skos:exactMatch saogf:Videoinspelning ;
   skos:closeMatch marc:Videorecording ;
-  skos:prefLabel "Videoupptagning"@sv, "Videorecording"@en .
+  skos:prefLabel "Videoupptagningar"@sv, "Videorecordings"@en ;
+  :singularLabel "Videoupptagning"@sv, "Videorecording"@en .
 
 ktg:Booklet a :ExpressionForm ;
   skos:broader ktg:TextPiece, kbrda:Text ;
+  skos:prefLabel "Texthäften"@sv , "Booklets"@en ;
   :singularLabel "Texthäfte"@sv , "Booklet"@en .
 
 ktg:Textleaf a :ExpressionForm ;
