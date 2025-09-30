@@ -21,7 +21,7 @@ construct {
     filter strstarts(str(?mapped_s), str(?scheme))
   }
 
-  ?s skos:prefLabel|:singularLabel ?label .
+  ?s skos:prefLabel ?label .
   filter(langmatches(lang(?label), 'sv'))
 
   bind(IRI(concat(str(?scheme),
