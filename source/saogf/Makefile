@@ -1,9 +1,13 @@
+# TODO: Requires *dev*-installations of trld and oxrq;
+# replace with pyoxigraph-based script?
+# This is a "one-off" conversion though; so we might get by...
+
 .PHONY: saogf
 
 saogf: build/saogf-patch.ttl
 
-build/saogf-patch.ttl: build saogf-from-ktg.rq
-	(cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq | trld -ittl -rottl > $@.TMP
+build/saogf-patch.ttl: build saogf-from-ktg.rq saogf-insert-missing.ru genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl
+	((cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq ; cat saogf-patches.ttl > /dev/null ) | trld -ittl -rottl > $@.TMP # deactivated tentative patch with null redir!
 	mv $@.TMP $@
 
 #build/barngf-new.ttl: build
