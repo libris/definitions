@@ -256,6 +256,13 @@
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
 
+:relatedMatch a owl:ObjectProperty;
+    rdfs:label "related match"@en, "relaterad match"@sv;
+    sdo:domainIncludes :Concept ;
+    rdfs:range :Concept;
+    owl:equivalentProperty skos:relatedMatch ;
+    owl:equivalentProperty madsrdf:hasReciprocalExternalAuthority .
+
 :isReplacedBy a owl:ObjectProperty ;
     rdfs:label "replaced by"@en, "ersatt av"@sv ;
     rdfs:domain :Concept ;
