@@ -69,15 +69,15 @@ kbrda:Sounds a bf:Content ;
 
 kbrda:SpokenWord a bf:Content ;
   #skos:closeMatch ktg:SpokenWord ;
-  skos:broadMatch ktg:Audio ,
-    ktg:Literature .
+  skos:broadMatch ktg:Audio . #, ktg:LinguisticWork
 
 kbrda:StillImage a bf:Content ;
   #skos:closeMatch ktg:StillImage ;
   :inCollection div:find ;
   #:inCollection div:identify ;
   skos:broader ktg:VisualWork ;
-  skos:broadMatch saogf:Bilder, tgm:Bilder, marc:Picture ;
+  #skos:broadMatch saogf:Bilder, tgm:Bilder ;
+  skos:closeMatch marc:Picture ;
   skos:narrowMatch marc:Graphic . # 8048
 
 kbrda:Text a bf:Content ;
