@@ -6,10 +6,14 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 
 construct {
-  ?mapped_s ?target_p ?target_o .
+  ?mapped_s ?target_p ?target_o ;
+    :inScheme ?scheme .
+
   ?unmapped_s :inCollection owl:Nothing .
 } {
-  values ?scheme { saogf: }
+  values (?prefix ?scheme) {
+    (saogf: <https://id.kb.se/term/saogf>)
+  }
 
   ?s ?p ?o .
   bind( if( strstarts(str(?p), str(skos:)),
@@ -18,14 +22,14 @@ construct {
   optional {
     ?s skos:exactMatch ?mapped_s .
     filter strstarts(str(?s), str(ktg:))
-    filter strstarts(str(?mapped_s), str(?scheme))
+    filter strstarts(str(?mapped_s), str(?prefix))
   }
   bind(if(!bound(?mapped_s), ?s, ?_) as ?unmapped_s)  # "Should Not Happen(TM)"
 
   optional {
     ?o skos:exactMatch ?mapped_o .
     filter strstarts(str(?o), str(ktg:))
-    filter strstarts(str(?mapped_o), str(?scheme))
+    filter strstarts(str(?mapped_o), str(?prefix))
   }
   bind(coalesce(?mapped_o, ?o) as ?target_o)
   filter(?target_o != ?mapped_s)

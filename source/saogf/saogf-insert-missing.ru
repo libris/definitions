@@ -10,19 +10,19 @@ insert {
   ?s skos:exactMatch ?new_mapped_match ;
     :inCollection div:constructed .
 } where {
-  values ?scheme { saogf: }
+  values ?prefix { saogf: }
 
   ?s ?p ?o .
 
   filter not exists {
     ?s skos:exactMatch ?mapped_s .
     filter strstarts(str(?s), str(ktg:))
-    filter strstarts(str(?mapped_s), str(?scheme))
+    filter strstarts(str(?mapped_s), str(?prefix))
   }
 
   ?s skos:prefLabel ?label .
   filter(langmatches(lang(?label), 'sv'))
 
-  bind(IRI(concat(str(?scheme),
+  bind(IRI(concat(str(?prefix),
             encode_for_uri(?label))) as ?new_mapped_match)
 }
