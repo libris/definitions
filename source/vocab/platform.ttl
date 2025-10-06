@@ -523,13 +523,13 @@
     rdfs:range :PartialCollectionView;
     owl:equivalentProperty hydra:view .
 
-:totalItems a owl:ObjectProperty;
+:totalItems a owl:DatatypeProperty;
     :category :platform ;
     #rdfs:domain :Collection;
     sdo:domainIncludes :Collection, :PartialCollectionView;
     owl:equivalentProperty hydra:totalItems .
 
-:maxItems a owl:ObjectProperty;
+:maxItems a owl:DatatypeProperty;
     :category :platform ;
     skos:definition "The maximum number of items in the collection/view/result. For paginated collections: the maximum number of items that may be accessed through pagination. Might be smaller than totalItems."@en;
     sdo:domainIncludes :PartialCollectionView, :Slice .

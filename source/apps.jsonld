@@ -87,7 +87,7 @@
           { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
           { "dimensionChain": ["instanceOfCategory"], "itemLimit": 100 },
           { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
-          { "dimensionChain": ["language"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
           { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 20 },
@@ -125,7 +125,8 @@
       "relationFilters": {
         "Agent": [ "contributor", "subject", "publisher" ],
         "Concept": [ "subject", "genreForm", "category", "hasOccupation", "fieldOfActivity", "termComponentList" ],
-        "Work": [ "subject" ]
+        "Work": [ "subject", "isPartOf" ],
+        "Instance": [ "subject", "isPartOf" ]
       }
     },
     {

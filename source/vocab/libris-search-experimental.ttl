@@ -1,5 +1,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix : <https://id.kb.se/vocab/> .
 
@@ -30,11 +31,13 @@
 
 :language skos:notation "SPRÅK"^^:LibrisQueryCode . # See ./relations.ttl for full definition of :language
 
+:controlNumber skos:notation "ONR"^^:LibrisQueryCode . # See ./platform.ttl for full definition of :controlNumber
+
 :itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
-    rdfs:range :Item ;
+    sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 :instanceOfType a owl:ObjectProperty ;
@@ -60,3 +63,10 @@
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance :category ) .
+
+:originalLanguage a owl:ObjectProperty ;
+    rdfs:label "originalspråk"@sv, "original language"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Work ;
+    rdfs:range :Language ;
+    owl:propertyChainAxiom ( :translationOf :language ) .
