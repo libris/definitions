@@ -1,15 +1,15 @@
 prefix : <https://id.kb.se/vocab/>
-prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
-prefix bibo: <http://purl.org/ontology/bibo/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix marc: <https://id.kb.se/marc/>
-prefix barngf: <https://id.kb.se/term/barngf/>
-prefix div: <https://id.kb.se/term/div/>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
-prefix ktg: <https://id.kb.se/term/ktg/>
-prefix kbrda: <https://id.kb.se/term/rda/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix barngf: <https://id.kb.se/term/barngf/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix div: <https://id.kb.se/term/div/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix marc: <https://id.kb.se/marc/>
 
 saogf:Fiktion :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
     marc:Fiction ;
@@ -80,7 +80,7 @@ saogf:Ljudprogram :inCollection div:constructed ;
 
 saogf:TV :inCollection div:constructed ;
   a :ExpressionForm ;
-  :broader kbrda:MovingImage ;
+  :broader ktg:MovingImage ;
   :category div:abstract ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "TV"@en ,
@@ -365,7 +365,7 @@ saogf:Fj%C3%A4rranalysbilder :inCollection div:constructed ;
 
 saogf:Videoupptagningar :inCollection div:constructed ;
   a :ExpressionForm ;
-  :broader kbrda:MovingImage ;
+  :broader ktg:MovingImage ;
   :closeMatch marc:Videorecording ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Videorecordings"@en ,
@@ -469,7 +469,7 @@ saogf:Trailrar a :ExpressionForm ;
     "Trailer"@sv .
 
 saogf:Filmer a :ExpressionForm ;
-  :broader kbrda:MovingImage ;
+  :broader ktg:MovingImage ;
   :closeMatch marc:MotionPicture ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
