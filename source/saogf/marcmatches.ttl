@@ -18,7 +18,7 @@ ktg:Treaty # a :GenreForm ;
     marc:Treaty .
 
 ktg:Discography # a :GenreForm ;
-  skos:closeMatch saogf:Diskografier ,
+  skos:exactMatch saogf:Diskografier ,
     <http://id.loc.gov/vocabulary/msupplcont/discography> ,
     marc:Discography .
 
@@ -27,17 +27,17 @@ ktg:TechnicalReport # a :GenreForm ;
     marc:TechnicalReport .
 
 ktg:Filmography # a :GenreForm ;
-  skos:closeMatch saogf:Filmografi ,
+  skos:exactMatch saogf:Filmografi ,
     <http://id.loc.gov/vocabulary/msupplcont/film> ,
     marc:Filmography .
 
 ktg:Directory # a :GenreForm ;
-  skos:closeMatch saogf:Adresskalendrar ,
+  skos:narrowMatch saogf:Adresskalendrar ,
     <http://id.loc.gov/authorities/genreForms/gf2014026087> ,
     marc:Directory .
 
 ktg:Thesis # a :GenreForm ;
-  skos:closeMatch saogf:Avhandlingar ,
+  skos:exactMatch saogf:Avhandlingar ,
     <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
     marc:Thesis .
 
@@ -50,16 +50,16 @@ ktg:HumorSatiresEtc # a :GenreForm ;
     marc:HumorSatiresEtc .
 
 ktg:Letter # a :GenreForm ;
-  skos:closeMatch saogf:Korrespondens ,
+  skos:exactMatch saogf:Korrespondens , # TODO: saogf:Brev seems too narrowly defined?
     <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
     marc:Letter .
 
 ktg:SurveysOfLiteratureInASubjectArea # a :GenreForm ;
-  skos:closeMatch saogf:Forsknings%C3%B6versikter ,
+  skos:broadMatch saogf:Forsknings%C3%B6versikter , # NOTE: inverse added in saogf-patches.ttl
     marc:SurveysOfLiteratureInASubjectArea .
 
 ktg:Festschrift # a :GenreForm ;
-  skos:closeMatch saogf:Festskrifter ,
+  skos:exactMatch saogf:Festskrifter ,
     marc:Festschrift .
 
 ktg:History # a :GenreForm ;
@@ -71,7 +71,7 @@ ktg:Rehearsal # a :GenreForm ;
     marc:Rehearsal .
 
 ktg:Folktale # a :GenreForm ;
-  skos:closeMatch saogf:Folksagor ,
+  skos:exactMatch saogf:Folksagor ,
     <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
     marc:Folktale .
 
@@ -173,7 +173,7 @@ ktg:Facsimile # a :GenreForm ;
     marc:Facsimile .
 
 ktg:GenealogicalTable # a :GenreForm ;
-  skos:closeMatch saogf:Genealogiskt%20material ,
+  skos:exactMatch saogf:Genealogiskt%20material ,
     marc:GenealogicalTable .
 
 ktg:Illumination # a :GenreForm ;
@@ -181,7 +181,7 @@ ktg:Illumination # a :GenreForm ;
     marc:Illumination .
 
 ktg:MusicMatterType-a # a :GenreForm ;
-  skos:closeMatch saogf:Diskografier ,
+  skos:broadMatch saogf:Diskografier , # NOTE: inverse added in saogf-patches.ttl
     marc:MusicMatterType-a .
 
 ktg:Plan # a :GenreForm ;
@@ -189,7 +189,7 @@ ktg:Plan # a :GenreForm ;
     marc:Plan .
 
 ktg:Portrait # a :GenreForm ;
-  skos:closeMatch saogf:Portr%C3%A4tt ,
+  skos:exactMatch saogf:Portr%C3%A4tt ,
     marc:Portrait .
 
 # ...
@@ -254,7 +254,7 @@ ktg:Photocopy # a :GenreForm ;
     marc:Photocopy .
 
 ktg:ReproductionType-f # a :GenreForm ;
-  skos:closeMatch saogf:Faksimiler ,
+  skos:exactMatch saogf:Faksimiler ,
     marc:ReproductionType-f .
 
 ktg:Sample # a :GenreForm ;

@@ -1,7 +1,7 @@
 prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix saogf: <https://id.kb.se/term/saogf/>
-prefix barngf: <https://id.kb.se/term/barngf/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 
@@ -18,7 +18,7 @@ construct {
   ?s ?p ?o .
   bind( if( strstarts(str(?p), str(skos:)),
             IRI(concat(str(:), strafter(str(?p), str(skos:)))),
-            ?p) as ?target_p )
+            if(?p = rdfs:seeAlso, :seeAlso, ?p)) as ?target_p )
   optional {
     ?s skos:exactMatch ?mapped_s .
     filter strstarts(str(?s), str(ktg:))

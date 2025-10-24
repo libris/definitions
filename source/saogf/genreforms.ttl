@@ -6,7 +6,6 @@ prefix marc: <https://id.kb.se/marc/>
 
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
-prefix barngf: <https://id.kb.se/term/barngf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 
@@ -19,6 +18,7 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 
 ktg:NonFictionLiterature a :GenreForm ;
   #:category :pending ;
+  :inCollection div:identify ;
   skos:broader ktg:Literature , ktg:NonFiction ;
   skos:closeMatch marc:NotFictionNotFurtherSpecified ;  # 9287608
   skos:prefLabel "Ej skönlitteratur"@sv, "Non-fiction literature"@en .
@@ -52,7 +52,7 @@ ktg:FictionLiterature a :GenreForm ;
 ktg:Book a :GenreForm ;
   :category div:abstract ;
   skos:broader ktg:Literature ; # Really? If not, do all subclasses have *some* broader inCollection div:find?
-  skos:closeMatch marcgt:boo ;
+  skos:closeMatch marcgt:boo ; # ALSO tgm:B%C3%B6cker
   skos:prefLabel "Books"@en ,
     "Böcker"@sv ;
   :singularLabel "Book"@en ,
@@ -68,10 +68,11 @@ ktg:TextPiece a :GenreForm ;  # ktg:Document ??
 
 ktg:Issue a :GenreForm ;
   skos:broader ktg:TextPiece ;
-  skos:exactMatch <https://id.kb.se/term/repr/Issue> ;
+  skos:exactMatch <https://id.kb.se/term/repr/Issue> ; # TODO: used on... Representations in datakbse?
   skos:closeMatch marcgt:iss ;
-  :singularLabel "Tidskriftsnummer"@sv ,
-    "Periodical Issue"@en .
+  skos:prefLabel "Tidskriftsnummer"@sv ,
+    "Periodical Issue"@en ;
+  :singularLabel "Periodical Issue"@en .
 
 #ktg:JournalIssue a :GenreForm ;
 #  skos:broader ktg:Issue ;
@@ -245,8 +246,8 @@ ktg:Timetable a :GenreForm ;
 
 #---
 
-ktg:Screenplay a ::GenreForm ; # :ExpressionForm
-  #skos:broadMatch kbrda:Text ,  ktg:Manuscript ;
+ktg:Screenplay a :GenreForm ; # :ExpressionForm
+  #skos:broader kbrda:Text ,  ktg:Manuscript ;
   skos:exactMatch saogf:Filmmanus ;
   :singularLabel "Filmmanus"@sv ,
     "Screenplay"@en .
@@ -272,18 +273,39 @@ ktg:Cookbook a :GenreForm ; # :ExpressionForm
 
 ktg:Audiobook a :ExpressionForm ;
   :inCollection div:identify ;
-  skos:broader ktg:Audio ,
+  skos:broader kbrda:SpokenWord ,
     ktg:Book ;
   skos:exactMatch saogf:Ljudb%C3%B6cker ;
   :singularLabel "Ljudbok"@sv ,
     "Audiobook"@en .
 
+# TODO: A bit of a mixin?
 ktg:IllustratedWork a :ExpressionForm ;
   skos:broader kbrda:StillImage ;
-  skos:closeMatch saogf:Bildverk ;
   skos:exactMatch saogf:Illustrerade%20verk ;
   :singularLabel "Illustrerat verk"@sv ,
     "Illustrated work"@en .
+
+# TODO: är detta samma sak som saogf:Bilder ?
+# TODO: Bildmaterial
+saogf:Bildverk a :ExpressionForm ;
+  skos:related saogf:Bilder ;
+  skos:broader kbrda:StillImage .
+
+ktg:Picture a :ExpressionForm ;
+  skos:exactMatch saogf:Bilder ;
+  skos:broader kbrda:StillImage , saogf:Bildverk ;
+  :singularLabel "Bild"@sv ,
+    "Grapphical literature"@en .
+
+# TODO: Serier, Fotobok, Bildlexikon (se alla under saogf:Illustrerade%20verk!)
+ktg:GraphicLiterature a :ExpressionForm ;
+  skos:broader ktg:Literature ;
+  skos:broader ktg:IllustratedWork ; # 
+  skos:broader kbrda:Text ; # TODO: not necessarily true
+  skos:broader kbrda:StillImage ;
+  skos:prefLabel "Grafisk litteratur"@sv ,
+    "Graphic literature"@en .
 
 ktg:Database a :ExpressionForm ;
   :inCollection div:identify ;
@@ -296,7 +318,7 @@ ktg:Database a :ExpressionForm ;
 
 ktg:Poster a :ExpressionForm ;
   :inCollection div:identify ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch saogf:Affischer, tgm:Affischer ;
   :singularLabel "Affisch"@sv, "Poster"@en ;
   :pluralLabel "Affischer"@sv .
@@ -316,26 +338,8 @@ ktg:AudioProgram a :ExpressionForm ;
 
 ktg:TV a :ExpressionForm ;
   :category div:abstract ;
-  skos:broader ktg:MovingImage ;
+  skos:broader kbrda:MovingImage ;
   skos:prefLabel "TV"@sv, "TV"@en .
-
-ktg:PictureBook a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:exactMatch barngf:Bilderb%C3%B6cker ;
-  skos:broader ktg:IllustratedWork ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  :singularLabel "Bilderbok"@sv ,
-    "Picture Book"@en .
-
-ktg:ChapterBook a :ExpressionForm ;
-  :inCollection div:identify ;
-  skos:broader ktg:ChildrensFictionLiterature ;
-  skos:exactMatch barngf:Kapitelb%C3%B6cker ;
-  skos:broader ktg:IllustratedWork ;
-  skos:broadMatch kbrda:Text ;
-  :singularLabel "Kapitelbok"@sv ,
-    "Chapter Book"@en .
-
 
 #ktg:WrittenBookWithImages a :ExpressionForm ;
 #  :category div:abstract ;
@@ -346,13 +350,15 @@ ktg:ChapterBook a :ExpressionForm ;
 
 ktg:BoardGame a :ExpressionForm ;
   skos:broader ktg:InteractiveObject , ktg:PuzzleOrGame ;
-  skos:exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
-  :singularLabel "Brädspel"@sv ,
-    "Board game"@en .
+  skos:exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ; # TODO: not used as gf; no point in mapping?
+  skos:prefLabel "Brädspel"@sv ,
+    "Board games"@en ;
+  :singularLabel "Board game"@en .
 
 ktg:Brochure a :ExpressionForm ;
+  :inCollection div:identify ; # TODO: OK?
   skos:broader ktg:TextPiece ;
-  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Broschyrer> ;
+  skos:exactMatch tgm:Broschyrer ;
   skos:prefLabel "Broschyrer"@sv ,
     "Brochures"@en ;
   :singularLabel "Broschyr"@sv ,
@@ -362,7 +368,6 @@ ktg:ComicOrGraphicNovel a :ExpressionForm ;
   :inCollection div:identify ;
   skos:broader ktg:GraphicLiterature ;
   skos:exactMatch saogf:Tecknade%20serier ,
-    barngf:Tecknade%20serier ,
     marc:ComicOrGraphicNovel ;
   skos:altLabel "Serier"@sv ;
   :singularLabel "Tecknad serie"@sv ,
@@ -376,7 +381,9 @@ ktg:Comic a :ExpressionForm ;
 
 ktg:ComicStrip a :ExpressionForm ;
   skos:broader ktg:ComicOrGraphicNovel ;
-  skos:exactMatch marc:ComicStrip ;
+  skos:exactMatch marc:ComicStrip ; # TODO: narrowMatch? How different in use from marc:ComicOrGraphicNovel?
+  skos:prefLabel "Seriestrippar"@sv ,
+    "Comic strips"@en ;
   :singularLabel "Seriestripp"@sv ,
     "Comic strip"@en .
 
@@ -396,18 +403,20 @@ ktg:ComputerGame a :ExpressionForm ;
     div:promoted ;
   skos:broader ktg:Software, ktg:PuzzleOrGame, kbrda:ComputerProgram ;
   skos:exactMatch saogf:Datorspel ;
-  skos:closeMatch marc:ComputerTypeOfFileType-g ;
+  skos:exactMatch marc:ComputerTypeOfFileType-g ;
   :singularLabel "Datorspel"@sv ,
     "Computer Game"@en .
 
 ktg:DesignDrawing a :ExpressionForm ;
-  skos:broader kbrda:StillImage ; # ktg:Design (Genre) TODO: ktg:Drawing (is that in general or "hand-drawing"?
+  skos:broader saogf:Bilder ; # ktg:Design (Genre) TODO: ktg:Drawing (is that in general or "hand-drawing"?
   skos:exactMatch tgm:Ritningar ; # sao:Ritningar
+  skos:prefLabel "Ritningar"@sv ,
+    "Design drawings"@en ;
   :singularLabel "Ritning"@sv ,
     "Design drawing"@en .
 
 ktg:Diagram a :ExpressionForm ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch saogf:Diagram ;
   :singularLabel "Diagram"@sv ,
     "Diagram"@en ;
@@ -415,9 +424,11 @@ ktg:Diagram a :ExpressionForm ;
   skos:narrowMatch marc:VisualMaterialType-n .
 
 ktg:Drawing a :ExpressionForm ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch tgm:Teckningar ;
   skos:closeMatch marc:Drawing ;
+  skos:prefLabel "Teckningar"@sv ,
+    "Drawingar"@en ;
   :singularLabel "Teckning"@sv ,
     "Drawing"@en .
 
@@ -431,30 +442,21 @@ ktg:FormDocument a :ExpressionForm ;
     "Form Document"@en .
 
 ktg:Handwriting a :ExpressionForm ;
-  skos:broader # ktg:Manuscript ,
-    kbrda:Text ;
+  skos:broader kbrda:Text ; # ktg:Manuscript ,
   skos:exactMatch saogf:Handskrifter ;
   :singularLabel "Handskrift"@sv ,
     "Handwriting"@en ;
   :pluralLabel "Handskrifter"@sv .
 
 ktg:Illustration a :ExpressionForm ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch saogf:Illustrationer ;
   skos:closeMatch marc:Illustration ;
   :singularLabel "Illustration"@sv ,
     "Illustration"@en .
 
-ktg:GraphicLiterature a :ExpressionForm ;
-  skos:broader ktg:IllustratedWork ,
-    ktg:FictionLiterature ;
-  skos:broadMatch kbrda:Text ,
-    kbrda:StillImage ;
-  skos:prefLabel "Grafisk litteratur"@sv ,
-    "Graphic literature"@en .
-
 ktg:GraphicNovel a :ExpressionForm ;
-  skos:broadMatch kbrda:Text ;
+  skos:broader kbrda:Text ;
   skos:broader ktg:Novel ,
     ktg:ComicOrGraphicNovel ;
   skos:exactMatch saogf:Serieromaner ;
@@ -507,7 +509,7 @@ ktg:Podcast a :ExpressionForm ;
     "Podcast"@en .
 
 ktg:Photograph a :ExpressionForm ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch saogf:Fotografier, tgm:Fotografier , marc:Photograph ;
   skos:narrowMatch marc:Photoprint ;  # Positive; *not* Negative
   :singularLabel "Fotografi"@sv ,
@@ -515,14 +517,16 @@ ktg:Photograph a :ExpressionForm ;
   :pluralLabel "Fotografier"@sv .
 
 ktg:Painting a :ExpressionForm ;
-  skos:broader kbrda:StillImage ;
-  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/M%C3%A5lningar> ;
+  skos:broader saogf:Bilder ;
+  skos:exactMatch tgm:M%C3%A5lningar ;
   skos:closeMatch marc:Painting ;
+  skos:prefLabel "Målningar"@sv ,
+    "Paintings"@en ;
   :singularLabel "Målning"@sv ,
     "Painting"@en .
 
 ktg:Photobook a :ExpressionForm ;
-  skos:broader kbrda:StillImage ; # ktg:WrittenBookWithImages ;
+  skos:broader ktg:GraphicLiterature ; # ktg:WrittenBookWithImages ;
   skos:exactMatch saogf:Fotob\%C3\%B6cker ;
   :singularLabel "Fotobok"@sv ,
     "Photobook"@en .
@@ -535,14 +539,15 @@ ktg:Photoseries a :ExpressionForm ;
     "Photoseries"@en .
 
 ktg:PictureDictionary a :ExpressionForm ;
-  skos:broader kbrda:StillImage , ktg:Lexicon ; # ktg:WrittenBookWithImages
+  skos:broader ktg:GraphicLiterature , ktg:Lexicon ; # ktg:WrittenBookWithImages
   skos:exactMatch saogf:Bildlexikon ;
   :singularLabel "Bildlexikon"@sv ,
     "Picture Dictionary"@en .
 
+# TODO: patch tgm:Vykort with :broader saogf:Vykort, or *replace* tgm ?
 ktg:Postcard a :ExpressionForm ;
   :inCollection div:identify ;
-  skos:broader kbrda:StillImage ;
+  skos:broader saogf:Bilder ;
   skos:exactMatch saogf:Vykort ;
   skos:closeMatch marc:PictureCardPostCard ;
   :singularLabel "Vykort"@sv ,
@@ -551,7 +556,9 @@ ktg:Postcard a :ExpressionForm ;
 ktg:PostcardBook a :ExpressionForm ;
   skos:broader ktg:Book , # Does imply Literature ...
     ktg:Postcard ; # not really *is*; works if category is "sort-of-is"...
-  skos:exactMatch <https://id.kb.se/term/gmgpc/swe/Vykortsh%C3%A4ften> ;
+  skos:exactMatch tgm:Vykortsh%C3%A4ften ;
+  skos:prefLabel "Vykortsböcker"@sv ,
+    "Postcard books"@en ;
   :singularLabel "Vykortsbok"@sv ,
     "Postcard book"@en .
 
@@ -690,7 +697,7 @@ ktg:DiningMenu a :ExpressionForm ;
 
 ktg:Map a :ExpressionForm ;
   :inCollection div:identify ;
-  skos:broadMatch kbrda:CartographicImage ;
+  skos:broader kbrda:CartographicImage ;
   skos:exactMatch saogf:Kartor ;
   skos:closeMatch marcgt:map , marc:Map ;
   skos:exactMatch marc:SingleMap, tgm:Kartor ;
@@ -707,7 +714,7 @@ ktg:Globe a :ExpressionForm ;
   :singularLabel "Cartographic globe"@en ,
     "Kartglob"@sv .
 
-# TODO: Really define all in saogf? Cf. TGM
+# NOTE: Define new in saogf also for those matching TGM!
 
 ktg:Atlas a :ExpressionForm ;
   skos:broader kbrda:CartographicImage, kbrda:Text ; # ktg:WrittenBook ;
