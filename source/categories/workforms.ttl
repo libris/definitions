@@ -1,0 +1,92 @@
+prefix : <https://id.kb.se/vocab/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+
+prefix marc: <https://id.kb.se/marc/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix div: <https://id.kb.se/term/div/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+
+##
+# Abstract Forms, applying to WEMI *Work*-level Works.
+
+ktg:Literature a :GenreForm ;
+  :category div:abstract ; # may be *expressed* as written text *or* spoken form...
+  :inCollection div:find ;
+  :singularLabel "Litteratur"@sv ,
+    "Literature"@en ;
+  skos:altLabel "Linguistic work"@en ,
+    "Språkligt verk"@sv .
+
+ktg:Music a :GenreForm ;
+  :category div:abstract ; # may be *expressed* in notation *or* preformed...
+  :inCollection div:find ;
+  skos:prefLabel "Musik"@sv , "Music"@en .
+
+ktg:Cartography a :GenreForm ;
+  :category div:abstract ;
+  :inCollection div:find ;
+  :singularLabel "Kartografiskt material"@sv,
+    "Cartographic material"@en .
+
+ktg:Software a :GenreForm ;
+  :inCollection div:find ;
+  skos:prefLabel "Mjukvara"@sv ,
+    "Software"@en ;
+  #:pluralLabel
+  skos:altLabel "Datorspel, program och multimedia"@sv .
+
+ktg:Dataset a :GenreForm ;
+  #:inCollection div:find ;
+  skos:prefLabel "Datamängd"@sv, "Dataset"@en .
+
+##
+# Abstract ExpressionForms for ContentTypes, applying to WEMI *Expression*-level Works.
+
+ktg:Audio a :ExpressionForm ;
+  :catgory div:abstract ;  # div:sensoryform ;  # Hear
+  skos:prefLabel "Ljud"@sv, "Audio"@en .
+
+ktg:MovingImage a :ExpressionForm ;
+  :category div:abstract ;
+  :inCollection div:find ;
+  skos:broader ktg:VisualWork ;
+  skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
+
+ktg:Tactile a :ExpressionForm ;
+  :category div:abstract ;
+  #:inCollection div:sensoryform ;  # Feel
+  skos:closeMatch saogf:Taktila%20verk ;
+  skos:prefLabel "Taktil"@sv .
+
+ktg:VisualWork a :ExpressionForm ;
+  :category div:abstract ;  # ContentForm
+  #:inCollection div:sensoryform ;  # See
+  skos:prefLabel "Visuellt verk"@sv, "Visual work"@en .
+
+ktg:Movement a :ExpressionForm ;
+  :category div:abstract ;  # ContentForm
+  skos:prefLabel "Rörelser"@sv .
+
+# Idiomatic ExpressionForms
+
+ktg:Multimedia a :ExpressionForm ;
+  :inCollection div:identify ;
+  skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
+  skos:broader ktg:Software ;
+  skos:prefLabel "Multimedia"@sv ,
+    "Multimedia"@en .
+
+ktg:MixedMaterial a :ExpressionForm ;
+  :inCollection div:find ;
+  skos:prefLabel "Blandat material"@sv ,
+    "Mixed material"@en .
+
+ktg:Kit a :ExpressionForm ;
+  :inCollection div:identify ;
+  skos:broader ktg:MixedMaterial ;
+  skos:prefLabel "Paket"@sv ,
+    "Kit"@en .

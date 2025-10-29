@@ -52,6 +52,18 @@
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .
 
+:instanceOfCategory a owl:ObjectProperty ;
+    rdfs:label "kategori på verket"@sv, "category of work"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Instance ;
+    owl:propertyChainAxiom ( :instanceOf :category ) .
+
+:hasInstanceCategory a owl:ObjectProperty ;
+    rdfs:label "kategori"@sv, "category"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Work ;
+    owl:propertyChainAxiom ( :hasInstance :category ) .
+
 :originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
     :category :shorthand, :pending ;

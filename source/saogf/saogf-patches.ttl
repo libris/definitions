@@ -1,0 +1,255 @@
+prefix : <https://id.kb.se/vocab/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix marc: <https://id.kb.se/marc/>
+
+## OBS! Kolla användningssiffrorna först; *ta bort* många "få"-använda? (Om de inte är nya och "rimliga"?)
+
+# Lägg på :broader
+
+saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
+
+saogf:Offentligt\%20tryck a :GenreForm .
+
+saogf:Offentligt%20tryck%20%28tidskrifter%29
+  :broader saogf:Periodika ,
+    saogf:Samh%C3%A4llsinformation .
+
+# Retain as obsoleted term (do not use):
+saogf:%C3%96vriga%20tidskrifter a :Resource ; :isReplacedBy saogf:Periodika .
+
+# TODO: merge uses with saogf:Offentligt%20tryck%20%28tidskrifter%29
+saogf:Samh%C3%A4llsinformation a :Genre ;
+  :broader saogf:Periodika .
+
+## NLT-termer: # NOTE: not all 40! Some are to be generalized.
+saogf:Kulturtidskrifter :broader saogf:Periodika .
+saogf:Organisationspress :broader saogf:Periodika .
+saogf:Religi%C3%B6sa%20tidskrifter :broader saogf:Periodika .
+saogf:Hembygdstidskrifter :broader saogf:Periodika .
+saogf:Patienttidskrifter :broader saogf:Periodika .
+saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
+saogf:Nyhetsmagasin :broader saogf:Periodika .
+saogf:Studenttidningar :broader saogf:Periodika .
+saogf:Litteraturtidskrifter :broader saogf:Periodika .
+saogf:Bibliografiska%20tidskrifter :broader saogf:Periodika .
+saogf:Herrtidningar :broader saogf:Periodika .
+saogf:Familjetidningar :broader saogf:Periodika .
+saogf:Korsordstidningar :broader saogf:Periodika .
+saogf:Frikyrkliga%20tidskrifter :broader saogf:Periodika .
+saogf:Sporttidskrifter :broader saogf:Periodika .
+saogf:Personaltidningar :broader saogf:Periodika .
+saogf:Partipress :broader saogf:Periodika .
+saogf:Branschtidningar :broader saogf:Periodika .
+saogf:Vetenskapliga%20tidskrifter :broader saogf:Periodika .
+saogf:Damtidningar :broader saogf:Periodika .
+saogf:Fanziner :broader saogf:Periodika .
+saogf:Musiktidskrifter :broader saogf:Periodika .
+saogf:Modetidningar :broader saogf:Periodika .
+saogf:Porrtidningar :broader saogf:Periodika .
+saogf:Kundtidningar :broader saogf:Periodika .
+saogf:Specialtidningar :broader saogf:Periodika .
+saogf:Fackf%C3%B6rbundspress :broader saogf:Periodika .
+saogf:Ungdomstidningar :broader saogf:Periodika .
+saogf:Barntidningar :broader saogf:Periodika .
+saogf:Serietidningar :broader saogf:Periodika .
+saogf:Jultidningar :broader saogf:Periodika .
+saogf:Politiska%20tidskrifter :broader saogf:Periodika .
+saogf:Popul%C3%A4rpress :broader saogf:Periodika .
+saogf:Skoltidningar :broader saogf:Periodika .
+saogf:Annonstidningar :broader saogf:Periodika .
+saogf:Sk%C3%A4mttidningar :broader saogf:Periodika .
+
+saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
+  # TODO: add målgrupp?
+
+
+# :GenreForm; men ej allmäna/"överspecialiserade"; markera enbart "bra" allmäna (med identify; restern är under brusnivån?)
+saogf:Experimentell%20sk%C3%B6nlitteratur a :GenreForm .
+saogf:Dialektlitteratur a :GenreForm .
+
+
+## Ändra typ till :Genre
+
+saogf:Sagor a :Genre .
+saogf:Folksagor a :Genre .
+saogf:Konstsagor a :Genre .
+saogf:Parafraser a :Genre .
+saogf:Kortprosa a :Genre .
+saogf:Pastischer a :Genre .
+saogf:F%C3%B6ljetonger a :Genre .
+saogf:Ramber%C3%A4ttelser a :Genre .
+
+saogf:Dramatik a :Genre .
+saogf:Tragedier a :Genre .  # NY... (en viss LLM hallucinerade fram den)
+saogf:Satir a :Genre .
+saogf:Komedier a :Genre .
+saogf:Farser a :Genre .
+
+saogf:Erotiska%20skildringar a :Genre .
+saogf:Homoerotiska%20skildringar a :Genre .
+saogf:Gotiska%20ber%C3%A4ttelser a :Genre .
+saogf:Humoristiska%20skildringar a :Genre .
+
+saogf:Skr%C3%A4ck a :Genre .
+saogf:Sp%C3%B6khistorier a :Genre .
+saogf:Deckare a :Genre .
+saogf:Fantasy a :Genre .
+saogf:Urban%20fantasy a :Genre .
+saogf:Science%20fiction a :Genre .
+
+saogf:Dystopier a :Genre .
+saogf:Utopier a :Genre .
+saogf:Rymdopera a :Genre .
+saogf:Steampunk a :Genre .
+saogf:Cyberpunk a :Genre .
+saogf:Fabler a :Genre .
+saogf:V%C3%A4sternskildringar a :Genre .
+saogf:Apokalyptiska%20skildringar a :Genre .
+saogf:Dokument%C3%A4ra%20skildringar a :Genre .
+saogf:Framtidsskildringar a :Genre .
+saogf:Arbetarskildringar a :Genre .
+saogf:Versber%C3%A4ttelser a :Genre .
+saogf:Sjukdomsskildringar a :Genre .
+saogf:Relationsskildringar a :Genre .
+saogf:K%C3%A4rleksskildringar a :Genre .
+saogf:Samh%C3%A4llskritiska%20skildringar a :Genre .
+saogf:Djurskildringar a :Genre .
+saogf:Sedeskildringar a :Genre .
+saogf:Kontrafaktisk%20historia a :Genre .
+saogf:Sj%C3%B6ber%C3%A4ttelser a :Genre .
+saogf:Religi%C3%B6sa%20skildringar a :Genre .
+saogf:Bibliska%20ber%C3%A4ttelser a :Genre .
+saogf:Sl%C3%A4ktber%C3%A4ttelser a :Genre .
+saogf:%C3%84ventyrsskildringar a :Genre .
+saogf:Psykologiska%20skildringar a :Genre .
+
+saogf:Barndomsskildringar a :Genre .
+saogf:Familjeskildringar a :Genre .
+saogf:Politiska%20skildringar a :Genre .
+saogf:Magisk%20realism a :Genre .
+saogf:Samh%C3%A4llsskildringar a :Genre .
+saogf:Robinsonader a :Genre .
+saogf:Historiska%20skildringar a :Genre .
+saogf:Episka%20skildringar a :Genre .
+saogf:Krigsskildringar a :Genre .
+saogf:Sl%C3%A4ktskildringar a :Genre .
+saogf:Biografiska%20skildringar a :Genre .
+saogf:Sj%C3%A4lvbiografiska%20skildringar a :Genre .
+saogf:Jaktskildringar a :Genre .
+saogf:Folkdiktning a :Genre .
+saogf:Ballader a :Genre .
+saogf:S%C3%A4gner a :Genre .
+saogf:Legender a :Genre .
+saogf:Allegorier a :Genre .
+saogf:Parodier a :Genre .
+saogf:Burlesker a :Genre .
+
+# GenreFormAndTopic (lägg på :broadMatch (some :Topic)?)
+saogf:Dagboksromaner a :GenreForm .
+saogf:Utvecklingsromaner a :GenreForm .
+saogf:Serieromaner a :GenreForm .
+saogf:Kortromaner a :GenreForm .
+saogf:Pikareskromaner a :GenreForm .
+saogf:Kollektivromaner a :GenreForm .
+saogf:Kollektivpoesi a :GenreForm .
+saogf:Brev a :GenreForm .
+saogf:Brevromaner a :GenreForm .
+saogf:Nyckelromaner a :GenreForm .
+saogf:Tillf%C3%A4llespoesi a :GenreForm .
+saogf:Konkret%20poesi a :GenreForm .
+saogf:Visuell%20poesi a :GenreForm .
+
+# *Vanligen* Form?
+saogf:Almanackor a :Genre .
+saogf:Kalendrar a :Genre .
+saogf:Kataloger a :Genre .
+saogf:Spel\%20och\%20tanken\%C3\%B6tter a :Genre .
+saogf:Rollspel a :Genre .
+saogf:TAKK a :Genre . # Teckenspråktecken - ConentAccessibility ...
+
+# Litteraturnära.. (OBS! *Ta bort* bredare till t.ex. Litteratur?! Eller ändra tillbaks litteratur till "genre"? Eller behålla vissa som GenreForm...)
+
+# Ändra tillbaks till :GenreForm?
+saogf:Tabeller a :Genre .
+saogf:Efem\%C3\%A4rt\%20material a :Genre .
+saogf:Tidtabeller a :Genre .
+
+# Litteraturnära men även på annat?
+saogf:Parafraser a :Genre .
+saogf:Informativa\%20verk a :Genre .
+saogf:Sammanfattningar a :Genre .
+saogf:Seriella\%20publikationer a :Genre .
+saogf:Bibliografier a :Genre .
+saogf:Samlingsverk a :Genre .
+saogf:Konferensmaterial a :Genre .
+saogf:Kontrollerade\%20vokabul\%C3\%A4rer a :Genre .
+saogf:Kursmaterial a :Genre .
+saogf:Juridiskt\%20material a :Genre .
+saogf:Instruktions-\%20och\%20undervisningsmaterial a :Genre .
+saogf:L\%C3\%A4romedel a :Genre .
+saogf:F\%C3\%B6rel\%C3\%A4sningar a :Genre .
+saogf:F\%C3\%B6rteckningar a :Genre .
+saogf:Statistik a :Genre .
+saogf:Patent a :Genre .
+saogf:Biografier a :Genre .
+saogf:Tal\%20\%28retorik\%29 a :Genre .
+saogf:Intervjuer a :Genre .
+saogf:Reportage a :Genre .
+saogf:Referensverk a :Genre .
+saogf:Recensioner a :Genre .
+saogf:Standarder a :Genre .
+
+## Nya: (överspecialiseringar kan tas bort om ej använda)
+saogf:%C3%84ventyr a :Genre .
+saogf:%C3%84ventyrsskildringar :broader saogf:%C3%84ventyr, saogf:Fiktion . # (bredda eller behåll att denna implicerar Litteraturform?)
+saogf:Sanna%20%C3%A4ventyrsber%C3%A4ttelser :broader saogf:%C3%84ventyrsskildringar . # TODO: saogf:Sakprosa | Ej skönlitteratur? # (bredda eller behåll att denna implicerar Litteraturform?)
+saogf:%C3%84ventyrsfilmer :broader saogf:%C3%84ventyr .
+saogf:%C3%84ventyrsspel :broader saogf:%C3%84ventyr .
+
+saogf:Reality-tv :broader saogf:TV .
+saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
+saogf:Tv-serier :broader saogf:TV .
+saogf:Tv-program :broader saogf:TV .
+saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
+saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
+
+# Replace equivalents in TGM (TODO: *really* equiv.? Check their definitions % use!)
+saogf:Adventskalendrar :exactMatch tgm:Adventskalendrar .
+saogf:Affischer :exactMatch tgm:Affischer .
+saogf:Almanackor :exactMatch tgm:Almanackor .
+saogf:Autografer :exactMatch tgm:Autografer .
+saogf:Bilder :exactMatch tgm:Bilder .
+saogf:Blanketter :exactMatch tgm:Blanketter .
+saogf:Evighetskalendrar :exactMatch tgm:Evighetskalendrar .
+saogf:Fotografier :exactMatch tgm:Fotografier .
+saogf:Illustrationer :exactMatch tgm:Illustrationer .
+saogf:Kartor :exactMatch tgm:Kartor .
+saogf:Kataloger :exactMatch tgm:Kataloger .
+saogf:Matsedlar :exactMatch tgm:Matsedlar .
+saogf:Mellanh%C3%B6g%20r%C3%B6st%20och%20piano :exactMatch <https://libris.kb.se/42gks6hn218vr88#it> .
+saogf:Portr%C3%A4tt :exactMatch tgm:Portr%C3%A4tt .
+saogf:Produktkataloger :exactMatch tgm:Produktkataloger .
+saogf:Rebusar :exactMatch tgm:Rebusar .
+saogf:Risografier :exactMatch tgm:Risografier .
+saogf:Screentryck :exactMatch tgm:Screentryck .
+saogf:Serietidningar :exactMatch tgm:Serietidningar .
+saogf:Sj%C3%A4lvportr%C3%A4tt :exactMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
+saogf:Skisser :exactMatch tgm:Skisser .
+saogf:Teaterprogram :exactMatch tgm:Teaterprogram .
+saogf:Tecknade%20serier :exactMatch tgm:Tecknade%20serier .
+saogf:Tidtabeller :exactMatch tgm:Tidtabeller .
+saogf:Urklipp :exactMatch tgm:Urklipp .
+saogf:Utst%C3%A4llningskataloger :exactMatch tgm:Utst%C3%A4llningskataloger .
+saogf:Violone :exactMatch <https://libris.kb.se/sq47gb6b3x14v12#it> .
+saogf:Vykort :exactMatch tgm:Vykort .
+
+saogf:Diskografier a :GenreForm ;
+  :narrowMatch marc:MusicMatterType-a .
+
+saogf:Forsknings%C3%B6versikter a :GenreForm ;
+  :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
+
+##
+# REMAINING: # TODO: Handle those not implying find or identify (by making them either Genre or linking them up):
+# $ oxrq 'select distinct ?term { ?term a :GenreForm . filter isIRI(?term) filter not exists { ?term (:broader*|:broadMatch*|skos:broader*|skos:broadMatch*)/:inCollection ?coll. filter (?coll in (div:find, div:identity)) } }' source/rda/categorization.ttl source/categories/workforms.ttl source/saogf/build/saogf-patch.ttl source/saogf/cache/saogf-nonmusik.ttl

@@ -98,7 +98,13 @@
 :Concept a owl:Class;
     rdfs:label "Concept"@en, "Koncept"@sv;
     rdfs:subClassOf :Identity;
-    owl:equivalentClass skos:Concept .
+    owl:equivalentClass skos:Concept ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :seeAlso;
+            owl:allValuesFrom :Concept ] ;
+    rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :hasVariant;
+            owl:allValuesFrom :Concept ] .
 
 :ConceptCollection a owl:Class;
     rdfs:label "Concept Collection"@en, "Konceptsamling"@sv;
@@ -209,16 +215,6 @@
     rdfs:subPropertyOf :source;
     owl:equivalentProperty skos:inScheme ;
     owl:equivalentProperty madsrdf:isMemberOfMADSScheme .
-# Range restrictions:
-:Classification rdfs:subClassOf [ a owl:Restriction;
-         owl:onProperty :inScheme;
-         owl:someValuesFrom :ClassificationScheme ] .
-:GenreForm rdfs:subClassOf [ a owl:Restriction;
-         owl:onProperty :inScheme;
-         owl:someValuesFrom :GenreFormScheme ] .
-:Subject rdfs:subClassOf [ a owl:Restriction;
-         owl:onProperty :inScheme;
-         owl:someValuesFrom :TopicScheme ] .
 
 :narrower a owl:ObjectProperty;
     rdfs:label "narrower"@en, "smalare"@sv;
@@ -232,8 +228,9 @@
     rdfs:label "narrower match"@en, "smalare match"@sv;
     sdo:domainIncludes :Identity ;
     rdfs:range :Concept ;
-    owl:equivalentProperty skos:narrowMatch ;
-    owl:equivalentProperty madsrdf:hasNarrowerExternalAuthority .
+    owl:inverseOf :broadMatch ;
+    owl:equivalentProperty skos:narrowMatch ,
+        madsrdf:hasNarrowerExternalAuthority .
 
 :prefLabel a owl:DatatypeProperty;
     rdfs:label "preferred label"@en, "föredragen benämning"@sv; #NOTE: föredragen term inom concept
@@ -259,6 +256,13 @@
     owl:equivalentProperty skos:related ;
     owl:equivalentProperty madsrdf:hasReciprocalAuthority .
 
+:relatedMatch a owl:ObjectProperty;
+    rdfs:label "related match"@en, "relaterad match"@sv;
+    sdo:domainIncludes :Concept ;
+    rdfs:range :Concept;
+    owl:equivalentProperty skos:relatedMatch ;
+    owl:equivalentProperty madsrdf:hasReciprocalExternalAuthority .
+
 :isReplacedBy a owl:ObjectProperty ;
     rdfs:label "replaced by"@en, "ersatt av"@sv ;
     rdfs:domain :Concept ;
@@ -273,16 +277,6 @@
     rdfs:subPropertyOf skos:related ;
     skos:closeMatch skos:exactMatch ;
     owl:propertyChainAxiom (madsrdf:hasVariant madsrdf:identifiesRWO) .
-# Range restrictions:
-:Concept rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :hasVariant;
-            owl:allValuesFrom :Concept ] .
-:Agent rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :hasVariant;
-            owl:allValuesFrom :BibliographicAgent ] .
-:Work rdfs:subClassOf [ a owl:Restriction;
-            owl:onProperty :hasVariant;
-            owl:allValuesFrom :Work ] .
 
 :scopeNote a owl:DatatypeProperty;
     rdfs:label "scope note"@en, "anmärkning om användning"@sv;
@@ -343,8 +337,11 @@
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
     owl:equivalentClass bf2:Classification;
-    rdfs:label "Klassifikation"@sv .
-    
+    rdfs:label "Klassifikation"@sv ;
+    rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :ClassificationScheme ] .
+
 :ClassificationDdc a owl:Class;
     rdfs:label "DDC Classification"@en, "DDK-klassifikation"@sv;
     rdfs:subClassOf :Classification;
@@ -412,6 +409,14 @@
 
 # Domain Specific Concept Classes
 
+:genreForm a owl:ObjectProperty;
+    rdfs:label "genre/form"@sv;
+    rdfs:range :GenreForm;
+    # NOTE: Very (too?) powerful; relied on for classes derived from KBVF.
+    owl:propertyChainAxiom (:genreForm :broader) ;
+    rdfs:subPropertyOf dc:type, sdo:genre ;
+    owl:equivalentProperty bf2:genreForm .
+
 :Topic a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
     owl:equivalentClass bf2:Topic, madsrdf:Topic;
@@ -419,8 +424,15 @@
 
 :GenreForm a owl:Class;
     rdfs:label "Genre/form"@sv;
-    rdfs:subClassOf :Concept;
-    owl:equivalentClass bf2:GenreForm, madsrdf:GenreForm .
+    rdfs:subClassOf :Concept, :WorkCategory ; # No longer applicable to InstanceCategory!
+    owl:equivalentClass bf2:GenreForm, madsrdf:GenreForm ;
+    rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :GenreFormScheme ] .
+
+:Genre a owl:Class;
+    rdfs:label "Genre"@sv;
+    rdfs:subClassOf :GenreForm . #, :WorkCategory .
 
 :GenreFormScheme a owl:Class;
     rdfs:label "Genre/Form scheme"@en, "Genre/form-system"@sv;
@@ -450,7 +462,11 @@
     rdfs:label "Subject"@en, "Ämne"@sv;
     owl:equivalentClass madsrdf:MADSType;
     rdfs:subClassOf :Concept;
-    foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> .
+    foaf:isPrimaryTopicOf <https://en.wikipedia.org/wiki/Index_term> ;
+    rdfs:subClassOf [ a owl:Restriction;
+         owl:onProperty :inScheme;
+         owl:someValuesFrom :TopicScheme ] .
+
 
 :ComplexSubject a owl:Class;
     rdfs:subClassOf :Subject;

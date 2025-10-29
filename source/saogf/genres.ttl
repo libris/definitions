@@ -1,0 +1,366 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bibo: <http://purl.org/ontology/bibo/>
+
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+prefix div: <https://id.kb.se/term/div/>
+
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+
+prefix ktg: <https://id.kb.se/term/ktg/>
+
+# It is a Genre if:
+# - it is independent of any expression category (it is "topical", "thematic", "style/method", and/or "purpose").
+
+# TODO: The plan is to add matching SAOGF terms for *all* in this file; and possibly remove these indirect terms ...
+# To find missing:
+# - select ?gf { ?x ?rel ?gf filter( strstarts(str(?gf), str(saogf:)) || strstarts(str(?gf), str(tgm:)) ) }
+
+# TODO: For some, do we want to *suggest* an expression category (see commented kbgf)? (Using skos:relatedMatch?)
+
+ktg:Fiction a :Genre ;
+  skos:prefLabel "Fiction"@en ,
+    "Fiktion"@sv .
+
+ktg:NonFiction a :Genre ;
+  #:category :pending ;
+  skos:prefLabel "Non- fiction"@en ,
+    "Icke-fiktion"@sv .
+
+ktg:InformativeWork a :Genre ;
+  :inCollection div:identify ;
+  skos:exactMatch saogf:Informativa%20verk ;
+  skos:broader ktg:NonFiction ;
+  :singularLabel "Informativt verk"@sv, "Informative Work"@en .
+
+# TODO: superfluous? WorkCategory? (cf. RDA aggregates - terminating/non-terminating, ...)
+#ktg:Integrating a :Genre ;
+#  :category :pending ;
+#  skos:broader ktg:CollectingResource ;
+#  skos:prefLabel "Integrerande resurs"@sv ,
+#    "Integrating resource"@en .
+
+ktg:AbstractSummary a :Genre ;
+  #skos:broader ktg:TextPiece ;
+  skos:exactMatch saogf:Sammanfattningar ;
+  skos:exactMatch marc:AbstractsSummary ;
+  #:inCollection div:informative-work ; # TODO: :broader ?
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
+  :singularLabel "Sammanfattning"@sv ,
+    "Abstract Summary"@en .
+
+ktg:SerialPublication a :Genre ;
+  #:inCollection div:find ;
+  skos:exactMatch saogf:Seriella%20publikationer ;
+  skos:broader ktg:CollectingResource ;
+  :singularLabel "Seriella publikationer"@sv ,
+    "Serial publication"@en .
+
+ktg:Almanac a :Genre ;
+  skos:broader ktg:ReferenceWork ;  # inte alltid ktg:WorkWithImages ;
+  skos:related ktg:SerialPublication ;  # TODO: 
+  skos:exactMatch saogf:Almanackor ;
+  :singularLabel "Almanacka"@sv ,
+    "Almanac"@en .
+
+ktg:Bibliography a :Genre ;
+  skos:exactMatch saogf:Bibliografier ;
+  skos:narrowMatch marc:Bibliography ; # [b] # 5 # [also ssb]   424362# [also ssb]
+  :singularLabel "Bibliografi"@sv ,
+    "Bibliography"@en .
+
+ktg:Calendar a :Genre ;
+  skos:closeMatch marc:Calendar ;
+  skos:broader ktg:ReferenceWork ;  # inte alltid ktg:WorkWithImages ;
+  skos:exactMatch saogf:Kalendrar ;
+  skos:narrowMatch marc:MapsFormatType-k ;
+  :singularLabel "Kalender"@sv ,
+    "Calendar"@en .
+
+ktg:Catalogue a :Genre ;
+  skos:closeMatch marc:Catalog ;
+  skos:broader ktg:ReferenceWork ;
+  skos:exactMatch saogf:Kataloger ;
+  :singularLabel "Katalog"@sv ,
+    "Catalogue"@en .
+
+ktg:CollectingResource a :Genre ;
+  skos:prefLabel "Samlande resurser"@sv ;
+  :singularLabel "Samlande resurs"@sv .
+
+ktg:Archive a :Genre ;
+  skos:exactMatch saogf:Arkiv ;
+  skos:broader ktg:CollectingResource ;
+  :singularLabel "Arkiv"@sv ,
+    "Archive"@en .
+
+ktg:MonographicSeries a :Genre ;
+  skos:broader ktg:SerialPublication ;
+  skos:exactMatch marc:MonographicSeries ;
+  :singularLabel "Monograph Series"@en ,
+    "Monografiserie"@sv .
+
+ktg:CollectedWork a :Genre ;
+  skos:broader ktg:CollectingResource ;
+  # TODO: CollectedPart vs. CollectingWork! Cf. bibo:CollectedDocument, bibo:MultiVolumeBook, ktg:MultipartBook
+  skos:exactMatch saogf:Samlingsverk ;
+  :singularLabel "Samlingsverk"@sv ,
+    "Collected Work"@en .
+
+ktg:ConferenceMaterial a :Genre ;
+  skos:closeMatch marc:ConferencePublication ;
+  skos:exactMatch saogf:Konferensmaterial ;
+  #:inCollection div:ephemera , div:informative-work ; # TODO: :broader ?
+  :singularLabel "Konferensmaterial"@sv ,
+    "Conference Material"@en .
+
+ktg:ControlledVocabulary a :Genre ;
+  skos:broader ktg:ReferenceWork ;
+  skos:exactMatch saogf:Kontrollerade\%20vokabul\%C3\%A4rer ;
+  :singularLabel "Kontrollerad vokabulär"@sv ,
+    "Controlled Vocabulary"@en .
+
+ktg:CourseMaterial a :Genre ;
+  skos:broader ktg:TeachingMaterial ;
+  skos:exactMatch saogf:Kursmaterial ;
+  #:inCollection div:ephemera ; # TODO: broader ?
+  :singularLabel "Kursmaterial"@sv ,
+    "Course Material"@en .
+
+#ktg:FindingAid a :Genre ;
+#  skos:prefLabel "finding aid"@en ;
+#  skos:closeMatch marcgt:fin .
+
+ktg:LegalMaterial a :Genre ;
+  skos:exactMatch saogf:Juridiskt%20material ;
+  skos:narrowMatch marc:LegalArticle ,
+    marc:Legislation ,
+    marc:LawReportOrDigest ,
+    marc:LegalCaseOrCaseNote ;
+  skos:prefLabel "Juridiskt material"@sv, "Legal material"@en .
+
+ktg:InstructionalMaterial a :Genre ;
+  :inCollection div:identify ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
+  skos:exactMatch saogf:Instruktions-\%20och\%20undervisningsmaterial ;
+  skos:narrowMatch marc:Instruction ;
+  skos:prefLabel "Instruktions- och undervisningsmaterial"@sv .
+
+ktg:TeachingMaterial a :Genre ;  # TODO: GenreOrForm
+  :inCollection div:identify ;
+  skos:broader ktg:InstructionalMaterial ;
+  skos:exactMatch saogf:L\%C3\%A4romedel ;
+  skos:closeMatch marc:ProgrammedText ;
+  :singularLabel "Läromedel"@sv ,
+    "Teaching Material"@en .
+
+ktg:HandSignedCommunication a :Genre ;
+  #skos:broadMatch ktg:Visual, kbgf:Text ;
+  skos:exactMatch saogf:TAKK ;
+  :singularLabel "TAKK"@sv ,
+    "Hand-signed Communication"@en .
+
+ktg:Lecture a :Genre ;
+  skos:broader ktg:TeachingMaterial ;
+  skos:exactMatch saogf:F\%C3\%B6rel\%C3\%A4sningar ;
+  :singularLabel "Föreläsning"@sv ,
+    "Lecture"@en .
+
+ktg:Register a :Genre ;
+  skos:broader ktg:CollectingResource ;
+  skos:exactMatch saogf:F\%C3\%B6rteckningar ;
+  :singularLabel "Förteckning"@sv ,
+    "Register"@en .
+
+ktg:PuzzleOrGame a :Genre ;
+  skos:exactMatch saogf:Spel\%20och\%20tanken\%C3\%B6tter ;
+  :singularLabel "Spel eller tankenöt"@sv ,
+    "Puzzle or game"@en ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026158> ,
+    marc:VisualMaterialType-g ;
+  skos:narrowMatch marc:VisualMaterialType-g ,
+    marc:Game ,  # Sällskapsspel
+    marc:Puzzle .
+
+ktg:RolePlayingGame a :Genre ;
+  skos:broader ktg:PuzzleOrGame ;
+  skos:exactMatch saogf:Rollspel ;
+  :singularLabel "Rollspel"@sv ,
+    "Roleplaying Game"@en .
+
+ktg:Statistics a :Genre ;
+  skos:closeMatch marc:Statistics ;
+  skos:broader ktg:ReferenceWork ;
+  skos:exactMatch saogf:Statistik ;
+  :singularLabel "Statistik"@sv ,
+    "Statistics"@en .
+
+ktg:Ephemera a :Genre ;
+  :inCollection div:identify ;
+  skos:exactMatch saogf:Efem%C3%A4rt%20material ;
+  skos:prefLabel "Efemärt material"@sv .
+
+
+#ktg:Patent
+#  :singularLabel "Patent"@sv, "Patent"@en .
+
+#ktg:LegalDocument
+#  :singularLabel "Juridiskt material"@sv, "Legal Document"@en .
+
+#ktg:LegalDocument a :Genre ;
+#  skos:broader kbrda:Text ;
+#  skos:exactMatch saogf:Juridiskt\%20material .
+
+#ktg:Leporello a :Genre ;
+#  skos:broader ktg:NonBookTextWithImages ;
+#  skos:exactMatch saogf:Leporello .
+
+ktg:Patent a :Genre ;
+  skos:closeMatch marc:PatentDocument ;
+  #skos:broader kbrda:Text ;
+  skos:exactMatch saogf:Patent ;
+  #:inCollection div:informative-work ; # TODO: broader ?
+  skos:prefLabel "Patent"@sv, "Patent"@en .
+
+#ktg:RareText skos:exactMatch saogf:Texter .
+
+#ktg:Debate a :Genre ;
+#  skos:broader ktg:TextPiece ;
+#  skos:exactMatch saogf:Debatter .
+
+#ktg:AdventCalendar a :Genre ;
+#  skos:exactMatch saogf:Adventskalendrar ;
+#  skos:broader ktg:Calendar .
+
+#ktg:ReligiousWork a :Genre ;
+#  skos:exactMatch saogf:Religi\%C3\%B6sa\%20verk .
+
+ktg:Biography a :Genre ;
+  :inCollection div:identify ;
+  skos:broader ktg:InformativeWork ;
+  skos:exactMatch saogf:Biografier ;
+  skos:closeMatch marc:Biography ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ;
+  :singularLabel "Biografi"@sv, "Biography"@en .
+
+# marc:ContainsBiographicalInformation (är varken IndividualBiography eller CollectiveBiography, men är en ktg:Biography ...)
+# Kan raderas, eller skos:broadMatch ktg:Biography; eller "instansen kommer med lite biografisk information"...
+
+ktg:IndividualBiography a :Genre ;
+  #:category :pending ;
+  skos:broader ktg:Biography ;
+  skos:exactMatch marc:IndividualBiography ; #     69893
+  :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
+
+ktg:CollectiveBiography a :Genre ;
+  skos:broader ktg:Biography ;
+  skos:exactMatch marc:CollectiveBiography ; #     17453
+  :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
+
+ktg:Autobiography a :Genre ;
+  skos:broader ktg:Biography ;
+  skos:exactMatch saogf:Sj%C3%A4lvbiografier ,
+    marc:Autobiography ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
+  skos:narrowMatch marc:Memoir ;
+  :singularLabel "Självbiografi"@sv, "Autobiography"@en .
+
+#ktg:CommemorativeWork a :Genre;
+#  skos:exactMatch saogf:Minnesbevarande\%20verk .
+
+#ktg:Debattinlägg a :Genre;
+#  skos:exactMatch saogf:Debattinl\%C3\%A4gg .
+
+#ktg:Examination a :Genre;
+#  skos:exactMatch saogf:Prov\%20och\%20examinationer .
+
+#ktg:PressAnnouncement a :Genre;
+#  skos:exactMatch saogf:Pressmeddelanden .
+
+#ktg:Samhällsinformation a :Genre;
+#  skos:exactMatch saogf:Samh\%C3\%A4llsinformation .
+
+#ktg:Chronicle a :Genre;
+#  skos:exactMatch saogf:Annaler\%20och\%20kr\%C3\%B6nikor .
+
+#ktg:Recept a :Genre;
+#  skos:exactMatch saogf:Recept .
+
+ktg:RethoricalSpeech a :Genre ;
+  skos:exactMatch saogf:Tal\%20\%28retorik\%29 ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ,
+    marc:Speech ;
+  skos:prefLabel "Retoriskt tal"@sv, "Rethorical speech"@en .
+
+#ktg:SourceMaterial a :Genre ;
+#  skos:exactMatch saogf:K\%C3\%A4llmaterial ;
+#  :inCollection div:informative-work .
+
+#ktg:RecreationalWork a :Genre ;
+#  skos:exactMatch saogf:Tidsf\%C3\%B6rdriv .
+
+#ktg:DiscursiveWork a :Genre ;
+#  skos:closeMatch saogf:Verk\%20med\%20samtalsliknande\%20karakt\%C3\%A4r .
+
+ktg:Interview a :Genre ;
+  skos:closeMatch marc:Interview ;
+  skos:exactMatch saogf:Intervjuer ;
+  :singularLabel "Intervju"@sv, "Interview"@en .
+
+ktg:Reportage a :Genre ;
+  skos:exactMatch saogf:Reportage ;
+  skos:prefLabel "Reportage"@sv, "Reportage"@en .
+
+#ktg:Survey a :Genre ;
+#  skos:exactMatch saogf:Unders\%C3\%B6kningar ;
+#  :inCollection div:informative-work .
+
+#ktg:Correspondence a :Genre ;
+#  skos:exactMatch saogf:Korrespondens .
+
+#ktg:Diary a :Genre ;
+#  skos:broader kbrda:Text ;
+#  skos:exactMatch saogf:Dagb\%C3\%B6cker .
+
+#ktg:Ballad a :Genre ;
+#  skos:closeMatch saogf:Visor .
+
+ktg:GovPublication a :Genre ;
+  # skos:broader kbrda:Text ; (... could be images; but rarely *only* with image?)
+  skos:exactMatch saogf:Offentligt%20tryck ;
+  skos:closeMatch marc:GovernmentPublicationLevelUndetermined ;  # 686248
+  skos:narrowMatch
+    marc:FederalNational ,  # 34270
+    marc:InternationalIntergovernmental ,  # 27407
+    marc:StateProvincialTerritorialDependentEtc ,  # 11704
+    marc:Local ,  # 727
+    marc:AutonomousOrSemiAutonomousComponent ;  # 329
+    :singularLabel "Offentlig resurs"@sv , "Government publication"@en .
+# DELETE: marc:UnknownIfItemIsGovernmentPublication ,  # 14175
+
+ktg:ReferenceWork a :Genre ;
+  :inCollection div:identify ;
+  skos:exactMatch saogf:Referensverk ;
+  #:inCollection div:informative-work ; # TODO: broader enough?
+  skos:broader ktg:InformativeWork ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  :singularLabel "Referensverk"@sv ,
+    "Reference Work"@en .
+
+ktg:Review a :Genre ;
+  skos:closeMatch marc:Review ;
+  #skos:broader ktg:TextPiece ;
+  skos:exactMatch saogf:Recensioner ;
+  :singularLabel "Recension"@sv ,
+    "Review"@en .
+
+ktg:Standard a :Genre ;
+  skos:closeMatch marc:StandardsSpecification ;
+  skos:broader ktg:ReferenceWork ;
+  skos:exactMatch saogf:Standarder ;
+  :singularLabel "Standard"@sv ,
+    "Standard"@en .
+

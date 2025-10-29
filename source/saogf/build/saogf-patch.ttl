@@ -1,0 +1,1475 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix div: <https://id.kb.se/term/div/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix : <https://id.kb.se/vocab/>
+prefix marc: <https://id.kb.se/marc/>
+base <file:genres.ttl>
+
+saogf:%C3%84ventyr a :Genre .
+
+saogf:%C3%84ventyrsfilmer :broader saogf:%C3%84ventyr .
+
+saogf:%C3%84ventyrsskildringar a :Genre ;
+  :broader saogf:%C3%84ventyr ,
+    saogf:Fiktion .
+
+saogf:Fiktion :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
+    marc:Fiction ;
+  :inCollection div:constructed ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Fiktion"@sv ,
+    "Fiction"@en .
+
+saogf:%C3%84ventyrsspel :broader saogf:%C3%84ventyr .
+
+saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Seriella%20publikationer ;
+  :exactMatch marc:Yearbook ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Yearbook"@en ,
+    "Årsbok"@sv .
+
+saogf:B%C3%B6cker :inCollection div:constructed ;
+  a :GenreForm ;
+  :broader ktg:Literature ;
+  :category div:abstract ;
+  :closeMatch marcgt:boo ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Böcker"@sv ,
+    "Books"@en ;
+  :singularLabel "Bok"@sv ,
+    "Book"@en .
+
+saogf:Seriella%20publikationer a :Genre ;
+  :broader saogf:Samlande%20resurser ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Serial publication"@en ,
+    "Seriella publikationer"@sv .
+
+saogf:%C3%96vriga%20tidskrifter a :Resource ;
+  :isReplacedBy saogf:Periodika .
+
+saogf:Periodika a :GenreForm ;
+  :altLabel "Periodika"@sv ;
+  :broader ktg:Literature ,
+    saogf:Samlande%20resurser ;
+  :closeMatch marc:Periodical ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :pluralLabel "Tidskrifter"@sv ;
+  :singularLabel "Periodical"@en ,
+    "Tidskrift"@sv .
+
+saogf:Adventskalendrar :exactMatch tgm:Adventskalendrar .
+
+saogf:Affischer a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :exactMatch tgm:Affischer ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :pluralLabel "Affischer"@sv ;
+  :singularLabel "Poster"@en ,
+    "Affisch"@sv .
+
+saogf:Bilder a :ExpressionForm ;
+  :broader saogf:Bildverk ,
+    kbrda:StillImage ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Grapphical literature"@en ,
+    "Bild"@sv ;
+  :exactMatch tgm:Bilder .
+
+saogf:Allegorier a :Genre .
+
+saogf:Almanackor a :Genre ;
+  :broader saogf:Referensverk ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :related saogf:Seriella%20publikationer ;
+  :singularLabel "Almanac"@en ,
+    "Almanacka"@sv ;
+  :exactMatch tgm:Almanackor .
+
+saogf:Referensverk a :Genre ;
+  :broader saogf:Informativa%20verk ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  :singularLabel "Reference Work"@en ,
+    "Referensverk"@sv .
+
+saogf:Annonstidningar :broader saogf:Periodika .
+
+saogf:Anteckningar a :GenreForm ;
+  :broader saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Note"@en ,
+    "Anteckning"@sv .
+
+saogf:Kortare%20texter :inCollection div:constructed ;
+  a :GenreForm ;
+  :broader ktg:Literature ;
+  :category div:abstract ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Kortare texter"@sv ,
+    "Text pieces"@en ;
+  :singularLabel "Kortare text"@sv ,
+    "Text piece"@en .
+
+saogf:Apokalyptiska%20skildringar a :Genre .
+
+saogf:Arbetarskildringar a :Genre .
+
+saogf:Arkiv a :Genre ;
+  :broader saogf:Samlande%20resurser ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Archive"@en ,
+    "Arkiv"@sv .
+
+saogf:Samlande%20resurser :inCollection div:constructed ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Samlande resurser"@sv ;
+  :singularLabel "Samlande resurs"@sv .
+
+saogf:Artiklar :inCollection div:constructed ;
+  a :GenreForm ;
+  :broader saogf:Kortare%20texter ;
+  :closeMatch marcgt:art ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Articles"@en ,
+    "Artiklar"@sv ;
+  :singularLabel "Article"@en ,
+    "Artikel"@sv .
+
+saogf:Autografer :exactMatch tgm:Autografer .
+
+saogf:Avhandlingar :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
+    marc:Thesis ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:B%C3%B6cker%20med%20ljudeffekter a :ExpressionForm ;
+  :broader ktg:Audio ,
+    saogf:Mekaniska%20b%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Sound-effect Book"@en ,
+    "Bok med ljudeffekt"@sv .
+
+saogf:Mekaniska%20b%C3%B6cker a :ExpressionForm ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Interaktiva%20objekt ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Mechanical Book"@en ,
+    "Mekanisk bok"@sv .
+
+saogf:Ballader a :Genre .
+
+saogf:Barndomsskildringar a :Genre .
+
+saogf:Barntidningar :broader saogf:Periodika .
+
+saogf:Bibliografier a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Bibliography ;
+  :singularLabel "Bibliography"@en ,
+    "Bibliografi"@sv .
+
+saogf:Bibliografiska%20tidskrifter :broader saogf:Periodika .
+
+saogf:Bibliska%20ber%C3%A4ttelser a :Genre .
+
+saogf:Bildlexikon a :ExpressionForm ;
+  :broader saogf:Lexikon ,
+    saogf:Grafisk%20litteratur ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Picture Dictionary"@en ,
+    "Bildlexikon"@sv .
+
+saogf:Lexikon a :GenreForm ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Referensverk ;
+  :closeMatch marc:Dictionary ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Lexicon"@en ,
+    "Lexikon"@sv .
+
+saogf:Grafisk%20litteratur :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:StillImage ,
+    kbrda:Text ,
+    saogf:Illustrerade%20verk ,
+    ktg:Literature ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Graphic literature"@en ,
+    "Grafisk litteratur"@sv .
+
+saogf:Biografier a :Genre ;
+  :broader saogf:Informativa%20verk ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ,
+    marc:Biography ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Biography"@en ,
+    "Biografi"@sv .
+
+saogf:Informativa%20verk a :Genre ;
+  :broader saogf:Icke-fiktion ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Informative Work"@en ,
+    "Informativt verk"@sv .
+
+saogf:Biografiska%20skildringar a :Genre .
+
+saogf:Blanketter a :ExpressionForm ;
+  :broader saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
+  :singularLabel "Form Document"@en ,
+    "Blankett"@sv ;
+  :exactMatch tgm:Blanketter .
+
+saogf:Bloggar a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :related saogf:Webbplatser ;
+  :singularLabel "Blog"@en ,
+    "Blogg"@sv .
+
+saogf:Webbplatser a :ExpressionForm ;
+  :broader saogf:Samlande%20resurser ;
+  :closeMatch marc:UpdatingWebSite ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :relatedMatch kbrda:OnlineResource ;
+  :singularLabel "Website"@en ,
+    "Webbplats"@sv .
+
+saogf:Br%C3%A4dspel :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:Interaktiva%20objekt ;
+  :exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Board games"@en ,
+    "Brädspel"@sv ;
+  :singularLabel "Board game"@en .
+
+saogf:Spel%20och%20tanken%C3%B6tter a :Genre ;
+  :closeMatch marc:VisualMaterialType-g ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026158> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Puzzle ,
+    marc:Game ,
+    marc:VisualMaterialType-g ;
+  :singularLabel "Puzzle or game"@en ,
+    "Spel eller tankenöt"@sv .
+
+saogf:Interaktiva%20objekt :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:ThreeDimensionalForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Interactive objects"@en ,
+    "Interaktiva objekt"@sv ;
+  :singularLabel "Interactive object"@en ,
+    "Interaktivt objekt"@sv .
+
+saogf:Branschtidningar :broader saogf:Periodika .
+
+saogf:Brev a :GenreForm .
+
+saogf:Brevromaner a :GenreForm .
+
+saogf:Broschyrer :inCollection div:constructed ,
+    div:identify ;
+  a :ExpressionForm ;
+  :broader saogf:Kortare%20texter ;
+  :exactMatch tgm:Broschyrer ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Brochures"@en ,
+    "Broschyrer"@sv ;
+  :singularLabel "Brochure"@en ,
+    "Broschyr"@sv .
+
+saogf:Burlesker a :Genre .
+
+saogf:Cyberpunk a :Genre .
+
+saogf:Dagboksromaner a :GenreForm .
+
+saogf:Dagstidningar a :GenreForm ;
+  :broader saogf:Periodika ;
+  :closeMatch marc:Newspaper ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :pluralLabel "Dagstidningar"@sv ;
+  :singularLabel "Newspaper"@en ,
+    "Dagstidning"@sv .
+
+saogf:Damtidningar :broader saogf:Periodika .
+
+saogf:Databaser a :ExpressionForm ;
+  :broader saogf:Informativa%20verk ,
+    kbrda:ComputerDataset ,
+    saogf:Samlande%20resurser ;
+  :closeMatch marc:UpdatingDatabase ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:UpdatingDatabase ;
+  :singularLabel "Database"@en ,
+    "Databas"@sv .
+
+saogf:Datorgrafik :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader ktg:Multimedia ,
+    ktg:VisualWork ;
+  :exactMatch marc:Representational ,
+    tgm:Datorgrafik ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Computer graphics"@en ,
+    "Datorgrafik"@sv .
+
+saogf:Datorkod :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader ktg:Software ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Computer Code"@en ,
+    "Datorkod"@sv .
+
+saogf:Datorspel a :ExpressionForm ;
+  :broader kbrda:ComputerProgram ,
+    saogf:Spel%20och%20tanken%C3%B6tter ,
+    ktg:Software ;
+  :exactMatch marc:ComputerTypeOfFileType-g ;
+  :inCollection div:promoted ,
+    div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Computer Game"@en ,
+    "Datorspel"@sv .
+
+saogf:Deckare a :Genre .
+
+saogf:Diagram a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:NonProjMaterialType-n ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:VisualMaterialType-n ;
+  :singularLabel "Diagram"@en ,
+    "Diagram"@sv .
+
+saogf:Dialektlitteratur a :GenreForm .
+
+saogf:Diskografier :exactMatch <http://id.loc.gov/vocabulary/msupplcont/discography> ,
+    marc:Discography ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  a :GenreForm ;
+  :narrowMatch marc:MusicMatterType-a .
+
+saogf:Djurskildringar a :Genre .
+
+saogf:Dokument%C3%A4ra%20skildringar a :Genre .
+
+saogf:Dramatik a :GenreForm ,
+    :Genre ;
+  :broader saogf:Sk%C3%B6nlitteratur ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> ,
+    marc:Drama ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Drama"@en ,
+    "Dramatik"@sv .
+
+saogf:Sk%C3%B6nlitteratur a :GenreForm ;
+  :broader saogf:Fiktion ,
+    ktg:Literature ;
+  :closeMatch marc:FictionNotFurtherSpecified ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Fiction ,
+    marc:MixedForms ;
+  :prefLabel "Skönlitteratur"@sv ,
+    "Fiction literature"@en .
+
+saogf:Dystopier a :Genre .
+
+saogf:Efem%C3%A4rt%20material a :Genre ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Efemärt material"@sv .
+
+saogf:Ej%20sk%C3%B6nlitteratur :inCollection div:constructed ,
+    div:identify ;
+  a :GenreForm ;
+  :broader saogf:Icke-fiktion ,
+    ktg:Literature ;
+  :closeMatch marc:NotFictionNotFurtherSpecified ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Non-fiction literature"@en ,
+    "Ej skönlitteratur"@sv .
+
+saogf:Icke-fiktion :inCollection div:constructed ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Icke-fiktion"@sv ,
+    "Non- fiction"@en .
+
+saogf:Encyklopedier a :GenreForm ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Referensverk ;
+  :closeMatch marc:Encyclopedia ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Encyclopedia"@en ,
+    "Encyklopedia"@sv .
+
+saogf:Enskilda%20kartor :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartor ;
+  :exactMatch marc:MapATwoDimensionalMap ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Two-dimensional map"@en ,
+    "Enskilda kartor"@sv ;
+  :singularLabel "Two-dimensional map"@en ,
+    "Enskild karta"@sv .
+
+saogf:Kartor a :ExpressionForm ;
+  :broader kbrda:CartographicImage ;
+  :closeMatch marc:Map ,
+    marcgt:map ;
+  :exactMatch tgm:Kartor ,
+    marc:SingleMap ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Enskild karta"@sv ,
+    "Single map"@en .
+
+saogf:Episka%20skildringar a :Genre .
+
+saogf:Erotiska%20skildringar a :Genre .
+
+saogf:Ess%C3%A4er a :GenreForm ;
+  :broader saogf:Informativa%20verk ,
+    ktg:Literature ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> ,
+    marc:Essay ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Essay"@en ,
+    "Essäer"@sv .
+
+saogf:Evighetskalendrar :exactMatch tgm:Evighetskalendrar .
+
+saogf:Experimentell%20sk%C3%B6nlitteratur a :GenreForm .
+
+saogf:F%C3%B6ljetonger a :Genre .
+
+saogf:F%C3%B6rel%C3%A4sningar a :Genre ;
+  :broader saogf:L%C3%A4romedel ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Lecture"@en ,
+    "Föreläsning"@sv .
+
+saogf:L%C3%A4romedel a :Genre ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
+  :closeMatch marc:ProgrammedText ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Teaching Material"@en ,
+    "Läromedel"@sv .
+
+saogf:F%C3%B6rteckningar a :Genre ;
+  :broader saogf:Samlande%20resurser ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Register"@en ,
+    "Förteckning"@sv .
+
+saogf:Fabler a :Genre .
+
+saogf:Fackf%C3%B6rbundspress :broader saogf:Periodika .
+
+saogf:Faksimiler :exactMatch marc:ReproductionType-f ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Familjeskildringar a :Genre .
+
+saogf:Familjetidningar :broader saogf:Periodika .
+
+saogf:Fantasy a :Genre .
+
+saogf:Fanziner :broader saogf:Periodika .
+
+saogf:Farser a :Genre .
+
+saogf:Festskrifter :exactMatch marc:Festschrift ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
+
+saogf:Filmer a :ExpressionForm ;
+  :broader ktg:MovingImage ;
+  :closeMatch marc:MotionPicture ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Film"@en ,
+    "Film"@sv .
+
+saogf:Filmmanus a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Screenplay"@en ,
+    "Filmmanus"@sv .
+
+saogf:Filmografi :exactMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
+    marc:Filmography ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fj%C3%A4rranalysbilder :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:RemoteSensingImage ,
+    marcgt:rem ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Remote-sensing images"@en ,
+    "Fjärranalysbilder"@sv ;
+  :singularLabel "Remote-sensing image"@en ,
+    "Fjärranalysbild"@sv .
+
+saogf:Folkdiktning a :Genre .
+
+saogf:Folksagor :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
+    marc:Folktale ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  a :Genre .
+
+saogf:Forsknings%C3%B6versikter a :GenreForm ;
+  :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
+
+saogf:Fotob%C3%B6cker a :ExpressionForm ;
+  :broader saogf:Grafisk%20litteratur ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Photobook"@en ,
+    "Fotobok"@sv .
+
+saogf:Fotografier a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :exactMatch marc:Photograph ,
+    tgm:Fotografier ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Photoprint ;
+  :pluralLabel "Fotografier"@sv ;
+  :singularLabel "Photograph"@en ,
+    "Fotografi"@sv .
+
+saogf:Fotoserier a :ExpressionForm ;
+  :broader saogf:Samlande%20resurser ,
+    saogf:Grafisk%20litteratur ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Photoseries"@en ,
+    "Fotoserie"@sv .
+
+saogf:Framtidsskildringar a :Genre .
+
+saogf:Frikyrkliga%20tidskrifter :broader saogf:Periodika .
+
+saogf:Genealogiskt%20material :exactMatch marc:GenealogicalTable ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Gotiska%20ber%C3%A4ttelser a :Genre .
+
+saogf:Illustrerade%20verk a :ExpressionForm ;
+  :broader kbrda:StillImage ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Illustrated work"@en ,
+    "Illustrerat verk"@sv .
+
+saogf:Guideb%C3%B6cker a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Guide book"@en ,
+    "Guidebok"@sv .
+
+saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial ,
+    kbrda:Text ;
+  :closeMatch marc:Handbook ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
+  :singularLabel "Manual"@en ,
+    "Handbok eller manual"@sv .
+
+saogf:Instruktions-%20och%20undervisningsmaterial a :Genre ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Instruction ;
+  :prefLabel "Instruktions- och undervisningsmaterial"@sv ;
+  :seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
+
+saogf:Handlingar%20%28dokument%29 a :ExpressionForm ;
+  :broader saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Record (Document)"@en ,
+    "Handling (dokument)"@sv .
+
+saogf:Handskrifter a :ExpressionForm ;
+  :broader kbrda:Text ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :pluralLabel "Handskrifter"@sv ;
+  :singularLabel "Handwriting"@en ,
+    "Handskrift"@sv .
+
+saogf:Hembygdstidskrifter :broader saogf:Periodika .
+
+saogf:Herrtidningar :broader saogf:Periodika .
+
+saogf:Himlaglober :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:CelestialGlobe ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Celestial globes"@en ,
+    "Himlaglober"@sv ;
+  :singularLabel "Celestial globe"@en ,
+    "Himlaglob"@sv .
+
+saogf:Kartglober :inCollection div:constructed ,
+    div:identify ;
+  a :ExpressionForm ;
+  :broader kbrda:CartographicThreeDimensionalForm ;
+  :closeMatch marc:Globe ;
+  :exactMatch tgm:Glober ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Kartglober"@sv ,
+    "Cartographic globes"@en ;
+  :singularLabel "Kartglob"@sv ,
+    "Cartographic globe"@en .
+
+saogf:Himlakroppsglober :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:PlanetaryOrLunarGlobe ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Celestial body globes"@en ,
+    "Himlakroppsglober"@sv ;
+  :singularLabel "Celestial body globe"@en ,
+    "Himlakroppsglob"@sv .
+
+saogf:Historiska%20skildringar a :Genre .
+
+saogf:Homoerotiska%20skildringar a :Genre .
+
+saogf:Humoristiska%20skildringar a :Genre .
+
+saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
+
+saogf:TV :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:MovingImage ;
+  :category div:abstract ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "TV"@en ,
+    "TV"@sv .
+
+saogf:Illustrationer a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:Illustration ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Illustration"@en ,
+    "Illustration"@sv ;
+  :exactMatch tgm:Illustrationer .
+
+saogf:Intervjuer a :Genre ;
+  :closeMatch marc:Interview ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Interview"@en ,
+    "Intervju"@sv .
+
+saogf:Jaktskildringar a :Genre .
+
+saogf:Jordglober :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:TerrestrialGlobe ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Terrestial globes"@en ,
+    "Jordglober"@sv ;
+  :singularLabel "Terrestial globe"@en ,
+    "Jordglob"@sv .
+
+saogf:Jultidningar :broader saogf:Periodika .
+
+saogf:Juridiskt%20material a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:LegalCaseOrCaseNote ,
+    marc:LawReportOrDigest ,
+    marc:Legislation ,
+    marc:LegalArticle ;
+  :prefLabel "Legal material"@en ,
+    "Juridiskt material"@sv .
+
+saogf:K%C3%A4rleksskildringar a :Genre .
+
+saogf:Kalendrar a :Genre ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Calendar ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:MapsFormatType-k ;
+  :singularLabel "Calendar"@en ,
+    "Kalender"@sv .
+
+saogf:Kartb%C3%B6cker :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:Text ,
+    kbrda:CartographicImage ;
+  :exactMatch tgm:Atlaser ,
+    marc:Atlas ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:MapMaterialType-d ;
+  :prefLabel "Kartböcker"@sv ,
+    "Atlases"@en ;
+  :singularLabel "Kartbok"@sv ,
+    "Atlas"@en .
+
+saogf:Kartmodeller :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:CartographicThreeDimensionalForm ,
+    saogf:Modeller ;
+  :closeMatch marc:Model ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Map models"@en ,
+    "Kartmodeller"@sv ;
+  :singularLabel "Map model"@en ,
+    "Kartmodell"@sv .
+
+saogf:Modeller :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broadMatch marcgt:mod ;
+  :broader kbrda:ThreeDimensionalForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Models"@en ,
+    "Modeller"@sv ;
+  :singularLabel "Model"@en ,
+    "Modell"@sv .
+
+saogf:Kartor%20i%20diagramform :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Diagram ,
+    saogf:Kartor ;
+  :closeMatch marc:Diagram ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Map diagrams"@en ,
+    "Kartor i diagramform"@sv ;
+  :singularLabel "Map diagram"@en ,
+    "Karta i diagramform"@sv .
+
+saogf:Kartprofiler :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:Profile ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Map profiles"@en ,
+    "Kartprofiler"@sv ;
+  :singularLabel "Map profile"@en ,
+    "Kartprofil"@sv .
+
+saogf:Kartsektioner :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:Section ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Map sections"@en ,
+    "Kartsektioner"@sv ;
+  :singularLabel "Map section"@en ,
+    "Kartsektion"@sv .
+
+saogf:Kataloger a :Genre ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Catalog ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Catalogue"@en ,
+    "Katalog"@sv ;
+  :exactMatch tgm:Kataloger .
+
+saogf:Kokb%C3%B6cker a :GenreForm ;
+  :broader saogf:Informativa%20verk ,
+    saogf:B%C3%B6cker ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Cookbook"@en ,
+    "Kokbok"@sv .
+
+saogf:Kollektivpoesi a :GenreForm .
+
+saogf:Kollektivromaner a :GenreForm .
+
+saogf:Komedier a :Genre .
+
+saogf:Konferensmaterial a :Genre ;
+  :closeMatch marc:ConferencePublication ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Conference Material"@en ,
+    "Konferensmaterial"@sv .
+
+saogf:Konkret%20poesi a :GenreForm .
+
+saogf:Konstsagor a :Genre .
+
+saogf:Kontrafaktisk%20historia a :Genre .
+
+saogf:Kontrollerade%20vokabul%C3%A4rer a :Genre ;
+  :broader saogf:Referensverk ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Controlled Vocabulary"@en ,
+    "Kontrollerad vokabulär"@sv .
+
+saogf:Korrespondens :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
+    marc:Letter ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Korsordstidningar :broader saogf:Periodika .
+
+saogf:Kortprosa a :Genre .
+
+saogf:Kortromaner a :GenreForm .
+
+saogf:Krigsskildringar a :Genre .
+
+saogf:Kulturtidskrifter :broader saogf:Periodika .
+
+saogf:Kundtidningar :broader saogf:Periodika .
+
+saogf:Kursmaterial a :Genre ;
+  :broader saogf:L%C3%A4romedel ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Course Material"@en ,
+    "Kursmaterial"@sv .
+
+saogf:L%C3%B6sblad a :ExpressionForm ;
+  :broader saogf:Samlande%20resurser ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> ,
+    marc:LooseLeaf ;
+  :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Loose-leaf"@en ,
+    "Lösblad"@sv .
+
+saogf:Legender a :Genre .
+
+saogf:Leksaker :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Interaktiva%20objekt ;
+  :closeMatch marcgt:toy ,
+    marc:Toy ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Toys"@en ,
+    "Leksaker"@sv ;
+  :singularLabel "Toy"@en ,
+    "Leksak"@sv .
+
+saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
+
+saogf:Litteraturtidskrifter :broader saogf:Periodika .
+
+saogf:Ljudb%C3%B6cker a :ExpressionForm ;
+  :broader saogf:B%C3%B6cker ,
+    kbrda:SpokenWord ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Audiobook"@en ,
+    "Ljudbok"@sv .
+
+saogf:Ljudprogram :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:Sounds ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Audio Program"@en ,
+    "Ljudprogram"@sv .
+
+saogf:Luck%C3%B6ppningskalendrar a :ExpressionForm ;
+  :broader kbrda:ThreeDimensionalForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Lucköppningskalender"@sv .
+
+saogf:M%C3%A5larb%C3%B6cker a :ExpressionForm ;
+  :broader saogf:Illustrerade%20verk ,
+    saogf:B%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Målarbok"@sv .
+
+saogf:M%C3%A5lningar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:Painting ;
+  :exactMatch tgm:M%C3%A5lningar ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Paintings"@en ,
+    "Målningar"@sv ;
+  :singularLabel "Painting"@en ,
+    "Målning"@sv .
+
+saogf:M%C3%A5nglober :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:EarthMoonGlobe ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Moon globes"@en ,
+    "Månglober"@sv ;
+  :singularLabel "Moon globe"@en ,
+    "Månglob"@sv .
+
+saogf:Magisk%20realism a :Genre .
+
+saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
+
+saogf:Matsedlar a :ExpressionForm ;
+  :broader saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Dining menu"@en ,
+    "Matsedel"@sv ;
+  :exactMatch tgm:Matsedlar .
+
+saogf:Mellanh%C3%B6g%20r%C3%B6st%20och%20piano :exactMatch <https://libris.kb.se/42gks6hn218vr88#it> .
+
+saogf:Miniatyrb%C3%B6cker a :ExpressionForm ;
+  :broader saogf:B%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Miniature book"@en ,
+    "Miniatyrbok"@sv .
+
+saogf:Modetidningar :broader saogf:Periodika .
+
+saogf:Musikinspelningar a :ExpressionForm ;
+  :broader kbrda:PerformedMusic ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Music Recording"@en ,
+    "Musikinspelning"@sv .
+
+saogf:Musikradioprogram :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:PerformedMusic ,
+    saogf:Ljudprogram ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Music Radio Program"@en ,
+    "Musikradioprogram"@sv .
+
+saogf:Musiktidskrifter :broader saogf:Periodika .
+
+saogf:Noveller a :GenreForm ;
+  :broader saogf:Sk%C3%B6nlitteratur ,
+    saogf:Kortare%20texter ;
+  :closeMatch marc:ShortStory ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Short Story"@en ,
+    "Novell"@sv .
+
+saogf:Nyckelromaner a :GenreForm .
+
+saogf:Nyhetsbrev a :GenreForm ;
+  :broader saogf:Kortare%20texter ,
+    saogf:Seriella%20publikationer ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Newsletter"@en ,
+    "Nyhetsbrev"@sv .
+
+saogf:Nyhetsmagasin :broader saogf:Periodika .
+
+saogf:Offentligt%20tryck a :Genre ,
+    :GenreForm ;
+  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
+    marc:Local ,
+    marc:StateProvincialTerritorialDependentEtc ,
+    marc:InternationalIntergovernmental ,
+    marc:FederalNational ;
+  :singularLabel "Government publication"@en ,
+    "Offentlig resurs"@sv .
+
+saogf:Offentligt%20tryck%20%28tidskrifter%29 :broader saogf:Periodika ,
+    saogf:Samh%C3%A4llsinformation .
+
+saogf:Samh%C3%A4llsinformation a :Genre ;
+  :broader saogf:Periodika .
+
+saogf:Organisationspress :broader saogf:Periodika .
+
+saogf:Pamfletter a :ExpressionForm ;
+  :broader saogf:Broschyrer ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Pamphlet"@en ,
+    "Pamflett"@sv .
+
+saogf:Parafraser a :Genre .
+
+saogf:Parl%C3%B6rer a :GenreForm ;
+  :broader saogf:B%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Phrase book"@en ,
+    "Parlör"@sv .
+
+saogf:Parodier a :Genre .
+
+saogf:Partipress :broader saogf:Periodika .
+
+saogf:Pastischer a :Genre .
+
+saogf:Patent a :Genre ;
+  :closeMatch marc:PatentDocument ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Patent"@en ,
+    "Patent"@sv .
+
+saogf:Patienttidskrifter :broader saogf:Periodika .
+
+saogf:Personaltidningar :broader saogf:Periodika .
+
+saogf:Perspektivbilder :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:View ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Perspectice views"@en ,
+    "Perspektivbilder"@sv ;
+  :singularLabel "Perspectice view"@en ,
+    "Perspektivbild"@sv .
+
+saogf:Pikareskromaner a :GenreForm .
+
+saogf:Poddar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:SpokenWord ,
+    saogf:Ljudprogram ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Podcasts"@en ,
+    "Poddar"@sv ;
+  :singularLabel "Podcast"@en ,
+    "Podcast"@sv .
+
+saogf:Poesi a :GenreForm ;
+  :broader saogf:Sk%C3%B6nlitteratur ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> ,
+    marc:Poetry ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Poetry"@en ,
+    "Poesi"@sv .
+
+saogf:Politiska%20skildringar a :Genre .
+
+saogf:Politiska%20tidskrifter :broader saogf:Periodika .
+
+saogf:Pop-up-b%C3%B6cker a :ExpressionForm ;
+  :broader saogf:Mekaniska%20b%C3%B6cker ,
+    saogf:Illustrerade%20verk ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Pop-up bOok"@en ,
+    "Pop-up-bok"@sv .
+
+saogf:Popul%C3%A4rpress :broader saogf:Periodika .
+
+saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
+
+saogf:Porrtidningar :broader saogf:Periodika .
+
+saogf:Portr%C3%A4tt :exactMatch marc:Portrait ,
+    tgm:Portr%C3%A4tt ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Produktkataloger :exactMatch tgm:Produktkataloger .
+
+saogf:Program%20%28publikationer%29 a :ExpressionForm ;
+  :broader saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Publication Programme"@en ,
+    "Programblad"@sv .
+
+saogf:Psykologiska%20skildringar a :Genre .
+
+saogf:Pussel a :ExpressionForm ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:Interaktiva%20objekt ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Puzzle"@en ,
+    "Pussel"@sv .
+
+saogf:Pysselb%C3%B6cker a :ExpressionForm ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:B%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Puzzle book"@en ,
+    "Pysselbok"@sv .
+
+saogf:Radio :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader ktg:Audio ;
+  :category div:abstract ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Radio"@en ,
+    "Radio"@sv .
+
+saogf:Radioprogram a :ExpressionForm ;
+  :broader saogf:Radio ,
+    saogf:Ljudprogram ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Radio Program"@en ,
+    "Radioprogram"@sv .
+
+saogf:Ramber%C3%A4ttelser a :Genre .
+
+saogf:Reality-tv :broader saogf:TV .
+
+saogf:Rebusar :exactMatch tgm:Rebusar .
+
+saogf:Recensioner a :Genre ;
+  :closeMatch marc:Review ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Review"@en ,
+    "Recension"@sv .
+
+saogf:Relationsskildringar a :Genre .
+
+saogf:Religi%C3%B6sa%20skildringar a :Genre .
+
+saogf:Religi%C3%B6sa%20tidskrifter :broader saogf:Periodika .
+
+saogf:Reportage a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Reportage"@en ,
+    "Reportage"@sv .
+
+saogf:Risografier :exactMatch tgm:Risografier .
+
+saogf:Ritningar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :exactMatch tgm:Ritningar ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Design drawings"@en ,
+    "Ritningar"@sv ;
+  :singularLabel "Design drawing"@en ,
+    "Ritning"@sv .
+
+saogf:Robinsonader a :Genre .
+
+saogf:Rollspel a :Genre ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Roleplaying Game"@en ,
+    "Rollspel"@sv .
+
+saogf:Romaner a :GenreForm ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Sk%C3%B6nlitteratur ;
+  :closeMatch marc:Novel ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Novel"@en ,
+    "Roman"@sv .
+
+saogf:Rymdopera a :Genre .
+
+saogf:S%C3%A4gner a :Genre .
+
+saogf:Sagor a :Genre .
+
+saogf:Samh%C3%A4llskritiska%20skildringar a :Genre .
+
+saogf:Samh%C3%A4llsskildringar a :Genre .
+
+saogf:Samlingsverk a :Genre ;
+  :broader saogf:Samlande%20resurser ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Collected Work"@en ,
+    "Samlingsverk"@sv .
+
+saogf:Sammanfattningar a :Genre ;
+  :exactMatch marc:AbstractsSummary ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
+  :singularLabel "Abstract Summary"@en ,
+    "Sammanfattning"@sv .
+
+saogf:Sanna%20%C3%A4ventyrsber%C3%A4ttelser :broader saogf:%C3%84ventyrsskildringar .
+
+saogf:Satir a :Genre .
+
+saogf:Science%20fiction a :Genre .
+
+saogf:Screentryck :exactMatch tgm:Screentryck .
+
+saogf:Sedeskildringar a :Genre .
+
+saogf:Serienoveller a :ExpressionForm ;
+  :broader saogf:Noveller ,
+    saogf:Tecknade%20serier ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Comic Story"@en ,
+    "Serienovell"@sv .
+
+saogf:Tecknade%20serier a :ExpressionForm ;
+  :altLabel "Serier"@sv ;
+  :broader saogf:Grafisk%20litteratur ;
+  :exactMatch marc:ComicOrGraphicNovel ,
+    tgm:Tecknade%20serier ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Comic or graphic novel"@en ,
+    "Tecknad serie"@sv .
+
+saogf:Serieromaner a :ExpressionForm ,
+    :GenreForm ;
+  :broader saogf:Tecknade%20serier ,
+    saogf:Romaner ,
+    kbrda:Text ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Graphic Novel"@en ,
+    "Serieroman"@sv .
+
+saogf:Seriestrippar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Tecknade%20serier ;
+  :exactMatch marc:ComicStrip ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Comic strips"@en ,
+    "Seriestrippar"@sv ;
+  :singularLabel "Comic strip"@en ,
+    "Seriestripp"@sv .
+
+saogf:Serietidningar a :ExpressionForm ;
+  :broader saogf:Tecknade%20serier ,
+    saogf:Periodika ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Comic magazine"@en ,
+    "Serietidning"@sv ;
+  :exactMatch tgm:Serietidningar .
+
+saogf:Sj%C3%A4lvbiografier a :Genre ;
+  :broader saogf:Biografier ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
+  :exactMatch marc:Autobiography ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:Memoir ;
+  :singularLabel "Autobiography"@en ,
+    "Självbiografi"@sv .
+
+saogf:Sj%C3%A4lvbiografiska%20skildringar a :Genre .
+
+saogf:Sj%C3%A4lvportr%C3%A4tt :exactMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
+
+saogf:Sj%C3%B6ber%C3%A4ttelser a :Genre .
+
+saogf:Sjukdomsskildringar a :Genre .
+
+saogf:Sk%C3%A4mttidningar :broader saogf:Periodika .
+
+saogf:Skisser :exactMatch tgm:Skisser .
+
+saogf:Skoltidningar :broader saogf:Periodika .
+
+saogf:Skr%C3%A4ck a :Genre .
+
+saogf:Skulpturer :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:ThreeDimensionalForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Sculptures"@en ,
+    "Skulpturer"@sv ;
+  :singularLabel "Sculpture"@en ,
+    "Skulptur"@sv .
+
+saogf:Sl%C3%A4ktber%C3%A4ttelser a :Genre .
+
+saogf:Sl%C3%A4ktskildringar a :Genre .
+
+saogf:Sp%C3%B6khistorier a :Genre .
+
+saogf:Specialtidningar :broader saogf:Periodika .
+
+saogf:Sporttidskrifter :broader saogf:Periodika .
+
+saogf:Standarder a :Genre ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:StandardsSpecification ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Standard"@en ,
+    "Standard"@sv .
+
+saogf:Statistik a :Genre ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Statistics ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Statistics"@en ,
+    "Statistik"@sv .
+
+saogf:Steampunk a :Genre .
+
+saogf:Studenttidningar :broader saogf:Periodika .
+
+saogf:TAKK a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Hand-signed Communication"@en ,
+    "TAKK"@sv .
+
+saogf:Tabeller a :GenreForm ,
+    :Genre ;
+  :broader saogf:Referensverk ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :related ktg:Dataset ;
+  :singularLabel "Tables"@en ,
+    "Tabell"@sv .
+
+saogf:Tal%20%28retorik%29 a :Genre ;
+  :closeMatch marc:Speech ,
+    <http://id.loc.gov/authorities/genreForms/gf2011026363> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Rethorical speech"@en ,
+    "Retoriskt tal"@sv .
+
+saogf:Talb%C3%B6cker a :ExpressionForm ;
+  :broader kbrda:SpokenWord ,
+    saogf:Ljudb%C3%B6cker ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Spoken Book"@en ,
+    "Talbok"@sv .
+
+saogf:Taltidningar a :ExpressionForm ;
+  :broader kbrda:SpokenWord ,
+    saogf:Periodika ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Spoken Paper"@en ,
+    "Taltidning"@sv .
+
+saogf:Teaterprogram :exactMatch tgm:Teaterprogram .
+
+saogf:Teckningar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:Drawing ;
+  :exactMatch tgm:Teckningar ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Drawingar"@en ,
+    "Teckningar"@sv ;
+  :singularLabel "Drawing"@en ,
+    "Teckning"@sv .
+
+saogf:Textblad :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:Text ,
+    saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Text leaf"@en ,
+    "Textblad"@sv .
+
+saogf:Texth%C3%A4ften :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader kbrda:Text ,
+    saogf:Kortare%20texter ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Booklets"@en ,
+    "Texthäften"@sv ;
+  :singularLabel "Booklet"@en ,
+    "Texthäfte"@sv .
+
+saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
+
+saogf:Tidskriftsnummer :inCollection div:constructed ;
+  a :GenreForm ;
+  :broader saogf:Kortare%20texter ;
+  :closeMatch marcgt:iss ;
+  :exactMatch <https://id.kb.se/term/repr/Issue> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Periodical Issue"@en ,
+    "Tidskriftsnummer"@sv ;
+  :singularLabel "Periodical Issue"@en .
+
+saogf:Tidtabeller a :GenreForm ,
+    :Genre ;
+  :broader saogf:Efem%C3%A4rt%20material ,
+    saogf:Tabeller ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Timetable"@en ,
+    "Tidtabell"@sv ;
+  :exactMatch tgm:Tidtabeller .
+
+saogf:Tillf%C3%A4llespoesi a :GenreForm .
+
+saogf:Tragedier a :Genre .
+
+saogf:Trailrar a :ExpressionForm ;
+  :broader saogf:Filmer ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Trailer"@en ,
+    "Trailer"@sv .
+
+saogf:Tv-program a :ExpressionForm ;
+  :broader saogf:TV ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "TV-Program"@en ,
+    "Tv-program"@sv .
+
+saogf:Tv-serier a :ExpressionForm ;
+  :broader saogf:TV ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "TV-Series"@en ,
+    "Tv-serie"@sv .
+
+saogf:Ungdomstidningar :broader saogf:Periodika .
+
+saogf:Urban%20fantasy a :Genre .
+
+saogf:Urklipp :exactMatch tgm:Urklipp .
+
+saogf:Utopier a :Genre .
+
+saogf:Utst%C3%A4llningskataloger :exactMatch tgm:Utst%C3%A4llningskataloger .
+
+saogf:Utvecklingsromaner a :GenreForm .
+
+saogf:V%C3%A4sternskildringar a :Genre .
+
+saogf:Versber%C3%A4ttelser a :Genre .
+
+saogf:Vetenskapliga%20tidskrifter a :GenreForm ;
+  :broader saogf:Periodika ;
+  :closeMatch marcgt:jou ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Journal"@en ,
+    "Vetenskaplig tidskrift"@sv .
+
+saogf:Videoupptagningar :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader ktg:MovingImage ;
+  :closeMatch marc:Videorecording ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Videorecordings"@en ,
+    "Videoupptagningar"@sv ;
+  :singularLabel "Videorecording"@en ,
+    "Videoupptagning"@sv .
+
+saogf:Violone :exactMatch <https://libris.kb.se/sq47gb6b3x14v12#it> .
+
+saogf:Visuell%20poesi a :GenreForm .
+
+saogf:Vykort a :ExpressionForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:PictureCardPostCard ;
+  :inCollection div:identify ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :singularLabel "Postcard"@en ,
+    "Vykort"@sv ;
+  :exactMatch tgm:Vykort .
+
+saogf:Vykortsb%C3%B6cker :inCollection div:constructed ;
+  a :ExpressionForm ;
+  :broader saogf:Vykort ,
+    saogf:B%C3%B6cker ;
+  :exactMatch tgm:Vykortsh%C3%A4ften ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Postcard books"@en ,
+    "Vykortsböcker"@sv ;
+  :singularLabel "Postcard book"@en ,
+    "Vykortsbok"@sv .
