@@ -9,16 +9,16 @@ prefix marc: <https://id.kb.se/marc/>
 
 saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
 
+# FIXME ! Offentligt Tryck kvar inScheme och beskrivning från NLTs Offenligt tryck (tidskrifter). Fixa båda!
 saogf:Offentligt\%20tryck a :GenreForm .
-
 saogf:Offentligt%20tryck%20%28tidskrifter%29
-  :broader saogf:Periodika ,
-    saogf:Samh%C3%A4llsinformation .
+  :broader saogf:Periodika .
 
 # Retain as obsoleted term (do not use):
 saogf:%C3%96vriga%20tidskrifter a :Resource ; :isReplacedBy saogf:Periodika .
 
 # TODO: merge uses with saogf:Offentligt%20tryck%20%28tidskrifter%29
+# Vad betyder todo:n? SAORed ändrar prefLabel till Samhällsinformation (tidskrifter) för att undvika förvirring
 saogf:Samh%C3%A4llsinformation a :Genre ;
   :broader saogf:Periodika .
 
@@ -61,27 +61,27 @@ saogf:Annonstidningar :broader saogf:Periodika .
 saogf:Sk%C3%A4mttidningar :broader saogf:Periodika .
 
 saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
-  # TODO: add målgrupp?
+  # TODO: add målgrupp? Nej, det är inte så denna term används./SAORed
 
 
 # :GenreForm; men ej allmäna/"överspecialiserade"; markera enbart "bra" allmäna (med identify; restern är under brusnivån?)
+# Det verkar inte som att anteckningen ovan kräver någon handling.
 saogf:Experimentell%20sk%C3%B6nlitteratur a :GenreForm .
 saogf:Dialektlitteratur a :GenreForm .
 
 
 ## Ändra typ till :Genre
-
 saogf:Sagor a :Genre .
 saogf:Folksagor a :Genre .
 saogf:Konstsagor a :Genre .
 saogf:Parafraser a :Genre .
-saogf:Kortprosa a :Genre .
+# saogf:Kortprosa a :Genre . Snarare GenreForm enl SAORed mfl
 saogf:Pastischer a :Genre .
 saogf:F%C3%B6ljetonger a :Genre .
 saogf:Ramber%C3%A4ttelser a :Genre .
 
 saogf:Dramatik a :Genre .
-saogf:Tragedier a :Genre .  # NY... (en viss LLM hallucinerade fram den)
+# saogf:Tragedier a :Genre .  # NY... (en viss LLM hallucinerade fram den) Behövs troligen inte för annat än dramatik just nu. /SAOred mfl
 saogf:Satir a :Genre .
 saogf:Komedier a :Genre .
 saogf:Farser a :Genre .
@@ -146,6 +146,7 @@ saogf:Parodier a :Genre .
 saogf:Burlesker a :Genre .
 
 # GenreFormAndTopic (lägg på :broadMatch (some :Topic)?)
+# Osäkra på kommentaren ovan. Men det nedan ser bra ut. /SAOred mfl
 saogf:Dagboksromaner a :GenreForm .
 saogf:Utvecklingsromaner a :GenreForm .
 saogf:Serieromaner a :GenreForm .
