@@ -79,9 +79,10 @@
       "statistics": {
         "sliceList": [
           { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["_categoryByCollection", "find"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["_categoryByCollection", "identify"], "itemLimit": 50 }
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
           },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
