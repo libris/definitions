@@ -82,7 +82,7 @@
           { "dimensionChain": ["findCategory"], "itemLimit": 20,
             "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
           },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["category"] },
           { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000, "connective": "OR" },
