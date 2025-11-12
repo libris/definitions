@@ -98,7 +98,8 @@ def vocab():
             defaulted[uri] = pfx
         else:
             preferred[uri] = pfx
-    for default_pfx, uri in defaulted.items():
+    # TODO: Remove?
+    for uri, default_pfx in defaulted.items():
         if uri in preferred:
             graph.namespace_manager.bind(preferred[uri], uri, override=True)
 
