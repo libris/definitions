@@ -3,6 +3,11 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 prefix marc: <https://id.kb.se/marc/>
 
+# SAOGF-red och KBV-representant har gått igenom dessa utifrån följande antaganden:
+# Det är bra att "err on the side of caution" och låta termer behålla typen GenreForm när vi inte känner oss säkra på att de borde vara Genre
+# Om termen har en bredare-relation till en RDA-innehållstyp bör den sannolikt vara en GenreForm 
+# Om en term kan kombineras med flera olika RDA-innehållstyper, i både "teori" och praxis, är det generellt en Genre
+
 ## OBS! Kolla användningssiffrorna först; *ta bort* många "få"-använda? (Om de inte är nya och "rimliga"?)
 
 # Lägg på :broader
@@ -180,12 +185,13 @@ saogf:Efem\%C3\%A4rt\%20material a :GenreForm .
 saogf:Tidtabeller a :GenreForm .
 
 # Litteraturnära men även på annat?
+# SAOGF-red mfl har gått igenom och kommenterat ut vissa som vi bedömer mer formiga.
 saogf:Parafraser a :Genre . # Se även rad 77. SAOred kommer lägga broader Härleddda verk istället för Litteratur.
 saogf:Informativa\%20verk a :Genre .
 saogf:Sammanfattningar a :Genre .
-saogf:Seriella\%20publikationer a :Genre .
-saogf:Bibliografier a :Genre .
-saogf:Samlingsverk a :Genre .
+#saogf:Seriella\%20publikationer a :Genre .
+#saogf:Bibliografier a :Genre .
+#saogf:Samlingsverk a :Genre .
 saogf:Konferensmaterial a :Genre .
 saogf:Kontrollerade\%20vokabul\%C3\%A4rer a :Genre .
 saogf:Kursmaterial a :Genre .
@@ -193,25 +199,26 @@ saogf:Juridiskt\%20material a :Genre .
 saogf:Instruktions-\%20och\%20undervisningsmaterial a :Genre .
 saogf:L\%C3\%A4romedel a :Genre .
 saogf:F\%C3\%B6rel\%C3\%A4sningar a :Genre .
-saogf:F\%C3\%B6rteckningar a :Genre .
-saogf:Statistik a :Genre .
-saogf:Patent a :Genre .
-saogf:Biografier a :Genre .
+#saogf:F\%C3\%B6rteckningar a :Genre .
+#saogf:Statistik a :Genre .
+#saogf:Patent a :Genre .
+#saogf:Biografier a :Genre .
 saogf:Tal\%20\%28retorik\%29 a :Genre .
 saogf:Intervjuer a :Genre .
 saogf:Reportage a :Genre .
-saogf:Referensverk a :Genre .
+#saogf:Referensverk a :Genre .
 saogf:Recensioner a :Genre .
-saogf:Standarder a :Genre .
+#saogf:Standarder a :Genre .
 
 ## Nya: (överspecialiseringar kan tas bort om ej använda)
-saogf:%C3%84ventyr a :Genre .
-saogf:%C3%84ventyrsskildringar :broader saogf:%C3%84ventyr, saogf:Fiktion . # (bredda eller behåll att denna implicerar Litteraturform?)
-saogf:Sanna%20%C3%A4ventyrsber%C3%A4ttelser :broader saogf:%C3%84ventyrsskildringar . # TODO: saogf:Sakprosa | Ej skönlitteratur? # (bredda eller behåll att denna implicerar Litteraturform?)
-saogf:%C3%84ventyrsfilmer :broader saogf:%C3%84ventyr .
-saogf:%C3%84ventyrsspel :broader saogf:%C3%84ventyr .
+# Detta är en bra idé som vi tar senare. /SAO-red mfl
+#saogf:%C3%84ventyr a :Genre .
+#saogf:%C3%84ventyrsskildringar :broader saogf:%C3%84ventyr, saogf:Fiktion . # (bredda eller behåll att denna implicerar Litteraturform?)
+#saogf:Sanna%20%C3%A4ventyrsber%C3%A4ttelser :broader saogf:%C3%84ventyrsskildringar . # TODO: saogf:Sakprosa | Ej skönlitteratur? # (bredda eller behåll att denna implicerar Litteraturform?)
+#saogf:%C3%84ventyrsfilmer :broader saogf:%C3%84ventyr .
+#saogf:%C3%84ventyrsspel :broader saogf:%C3%84ventyr .
 
-saogf:Reality-tv :broader saogf:TV .
+saogf:Reality-tv :broader saogf:TV . # Ok att skapa en ny term, men behöver då göras ordentligt!
 saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
 saogf:Tv-serier :broader saogf:TV .
 saogf:Tv-program :broader saogf:TV .
