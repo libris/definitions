@@ -2,8 +2,18 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix marc: <https://id.kb.se/marc/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix : <https://id.kb.se/vocab/>
 
 # FIXME: see <marcmatches.ttl> and <saogf-musik-patches.ttl>!
+
+# FIXME
+# - Make the type :GenreForm
+# - Change the relationship to exactMatch for MARC and SAOGF (so that they get transformed into SOAGF)
+# - See ktg:Ballet for an example 
+
+ktg:Ballet a :GenreForm ;
+  skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> ;
+    skos:exactMatch saogf:Baletter , marc:Ballet .
 
 ktg:CanonOrRound a skos:GenreForm ;
   skos:closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026687> ,
@@ -242,11 +252,6 @@ ktg:Opera a skos:GenreForm ;
   skos:closeMatch saogf:Operor ,
     <http://id.loc.gov/authorities/genreForms/gf2014026976> ,
     marc:Opera .
-
-ktg:Ballet a skos:GenreForm ;
-  skos:closeMatch saogf:Baletter ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026650> ,
-    marc:Ballet .
 
 ktg:FolkMusic a skos:GenreForm ;
   skos:closeMatch saogf:Folkmusik ,
