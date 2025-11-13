@@ -23,31 +23,6 @@
             :agent
         ) .
 
-:findCategory rdfs:subPropertyOf :category ;
-    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] .
-
-:identifyCategory rdfs:subPropertyOf :category ;
-    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] .
-
-:NoneCategoryThing a owl:Class ;
-    owl:equivalentClass [
-        a owl:Class ;
-        owl:complementOf [
-            a owl:Class ;
-            owl:unionOf (
-                [ a owl:Restriction ;
-                  owl:onProperty :inCollection ;
-                  owl:hasValue <https://id.kb.se/term/div/find> ]
-                [ a owl:Restriction ;
-                  owl:onProperty :inCollection ;
-                  owl:hasValue <https://id.kb.se/term/div/identify> ]
-            )
-        ]
-    ] .
-
-:noneCategory rdfs:subPropertyOf :category ;
-    rdfs:range :NoneCategoryThing .
-
 :isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
 
 :yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
