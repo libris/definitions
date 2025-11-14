@@ -7,7 +7,7 @@
 saogf: build/saogf-patch.ttl
 
 build/saogf-patch.ttl: build saogf-from-ktg.rq saogf-insert-missing.ru genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl saogf-musik-patches.ttl
-	((cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq ; cat saogf-patches.ttl ) | trld -ittl -rottl --sorted > $@.TMP # deactivated tentative patch with null redir!
+	((cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq ; cat saogf-patches.ttl ) | trld -ittl -ottl > $@.TMP # deactivated tentative patch with null redir!
 	mv $@.TMP $@
 
 #test: saogf cache/saogf.ttl
