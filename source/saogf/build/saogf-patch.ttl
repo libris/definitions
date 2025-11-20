@@ -9,1463 +9,3752 @@ prefix kbrda: <https://id.kb.se/term/rda/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
-base <file:genres.ttl>
-
-saogf:%C3%84ventyr a :Genre .
-
-saogf:%C3%84ventyrsfilmer :broader saogf:%C3%84ventyr .
-
-saogf:%C3%84ventyrsskildringar a :Genre ;
-  :broader saogf:%C3%84ventyr ,
-    saogf:Fiktion .
-
-saogf:Fiktion :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
-    marc:Fiction ;
-  :inCollection div:constructed ;
-  a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Fiktion"@sv ,
-    "Fiction"@en .
-
-saogf:%C3%84ventyrsspel :broader saogf:%C3%84ventyr .
-
-saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Seriella%20publikationer ;
-  :exactMatch marc:Yearbook ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Yearbook"@en ,
-    "Årsbok"@sv .
-
-saogf:B%C3%B6cker :inCollection div:constructed ;
-  a :GenreForm ;
-  :broader ktg:Literature ;
-  :category div:abstract ;
-  :closeMatch marcgt:boo ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Böcker"@sv ,
-    "Books"@en ;
-  :singularLabel "Bok"@sv ,
-    "Book"@en .
-
-saogf:Seriella%20publikationer a :Genre ;
-  :broader saogf:Samlande%20resurser ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Serial publication"@en ,
-    "Seriella publikationer"@sv .
-
-saogf:%C3%96vriga%20tidskrifter a :Resource ;
-  :isReplacedBy saogf:Periodika .
-
-saogf:Periodika a :GenreForm ;
-  :altLabel "Periodika"@sv ;
-  :broader ktg:Literature ,
-    saogf:Samlande%20resurser ;
-  :closeMatch marc:Periodical ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Tidskrifter"@sv ;
-  :singularLabel "Periodical"@en ,
-    "Tidskrift"@sv .
-
-saogf:Adventskalendrar :exactMatch tgm:Adventskalendrar .
-
-saogf:Affischer a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :exactMatch tgm:Affischer ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Affischer"@sv ;
-  :singularLabel "Poster"@en ,
-    "Affisch"@sv .
-
-saogf:Bilder a :ExpressionForm ;
-  :broader saogf:Bildverk ,
-    kbrda:StillImage ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Grapphical literature"@en ,
-    "Bild"@sv ;
-  :exactMatch tgm:Bilder .
-
-saogf:Allegorier a :Genre .
-
-saogf:Almanackor a :Genre ;
-  :broader saogf:Referensverk ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :related saogf:Seriella%20publikationer ;
-  :singularLabel "Almanac"@en ,
-    "Almanacka"@sv ;
-  :exactMatch tgm:Almanackor .
-
-saogf:Referensverk a :Genre ;
-  :broader saogf:Informativa%20verk ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
-  :singularLabel "Reference Work"@en ,
-    "Referensverk"@sv .
-
-saogf:Annonstidningar :broader saogf:Periodika .
-
-saogf:Anteckningar a :GenreForm ;
-  :broader saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Note"@en ,
-    "Anteckning"@sv .
-
-saogf:Kortare%20texter :inCollection div:constructed ;
-  a :GenreForm ;
-  :broader ktg:Literature ;
-  :category div:abstract ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Kortare texter"@sv ,
-    "Text pieces"@en ;
-  :singularLabel "Kortare text"@sv ,
-    "Text piece"@en .
-
-saogf:Apokalyptiska%20skildringar a :Genre .
-
-saogf:Arbetarskildringar a :Genre .
-
-saogf:Arkiv a :Genre ;
-  :broader saogf:Samlande%20resurser ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Archive"@en ,
-    "Arkiv"@sv .
-
-saogf:Samlande%20resurser :inCollection div:constructed ;
-  a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Samlande resurser"@sv ;
-  :singularLabel "Samlande resurs"@sv .
-
-saogf:Artiklar :inCollection div:constructed ;
-  a :GenreForm ;
-  :broader saogf:Kortare%20texter ;
-  :closeMatch marcgt:art ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Articles"@en ,
-    "Artiklar"@sv ;
-  :singularLabel "Article"@en ,
-    "Artikel"@sv .
-
-saogf:Autografer :exactMatch tgm:Autografer .
-
-saogf:Avhandlingar :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
-    marc:Thesis ;
-  :inScheme <https://id.kb.se/term/saogf> .
-
-saogf:B%C3%B6cker%20med%20ljudeffekter a :ExpressionForm ;
-  :broader ktg:Audio ,
-    saogf:Mekaniska%20b%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Sound-effect Book"@en ,
-    "Bok med ljudeffekt"@sv .
-
-saogf:Mekaniska%20b%C3%B6cker a :ExpressionForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Interaktiva%20objekt ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Mechanical Book"@en ,
-    "Mekanisk bok"@sv .
-
-saogf:Ballader a :Genre .
-
-saogf:Barndomsskildringar a :Genre .
-
-saogf:Barntidningar :broader saogf:Periodika .
-
-saogf:Bibliografier a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Bibliography ;
-  :singularLabel "Bibliography"@en ,
-    "Bibliografi"@sv .
-
-saogf:Bibliografiska%20tidskrifter :broader saogf:Periodika .
-
-saogf:Bibliska%20ber%C3%A4ttelser a :Genre .
-
-saogf:Bildlexikon a :ExpressionForm ;
-  :broader saogf:Lexikon ,
-    saogf:Grafisk%20litteratur ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Picture Dictionary"@en ,
-    "Bildlexikon"@sv .
-
-saogf:Lexikon a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Referensverk ;
-  :closeMatch marc:Dictionary ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Lexicon"@en ,
-    "Lexikon"@sv .
-
-saogf:Grafisk%20litteratur :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:StillImage ,
-    kbrda:Text ,
-    saogf:Illustrerade%20verk ,
-    ktg:Literature ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Graphic literature"@en ,
-    "Grafisk litteratur"@sv .
-
-saogf:Biografier a :Genre ;
-  :broader saogf:Informativa%20verk ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ,
-    marc:Biography ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Biography"@en ,
-    "Biografi"@sv .
-
-saogf:Informativa%20verk a :Genre ;
-  :broader saogf:Icke-fiktion ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Informative Work"@en ,
-    "Informativt verk"@sv .
-
-saogf:Biografiska%20skildringar a :Genre .
-
-saogf:Blanketter a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
-  :singularLabel "Form Document"@en ,
-    "Blankett"@sv ;
-  :exactMatch tgm:Blanketter .
-
-saogf:Bloggar a :GenreForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :related saogf:Webbplatser ;
-  :singularLabel "Blog"@en ,
-    "Blogg"@sv .
-
-saogf:Webbplatser a :ExpressionForm ;
-  :broader saogf:Samlande%20resurser ;
-  :closeMatch marc:UpdatingWebSite ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :relatedMatch kbrda:OnlineResource ;
-  :singularLabel "Website"@en ,
-    "Webbplats"@sv .
-
-saogf:Br%C3%A4dspel :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
-    saogf:Interaktiva%20objekt ;
-  :exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Board games"@en ,
-    "Brädspel"@sv ;
-  :singularLabel "Board game"@en .
-
-saogf:Spel%20och%20tanken%C3%B6tter a :Genre ;
-  :closeMatch marc:VisualMaterialType-g ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026158> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Puzzle ,
-    marc:Game ,
-    marc:VisualMaterialType-g ;
-  :singularLabel "Puzzle or game"@en ,
-    "Spel eller tankenöt"@sv .
-
-saogf:Interaktiva%20objekt :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Interactive objects"@en ,
-    "Interaktiva objekt"@sv ;
-  :singularLabel "Interactive object"@en ,
-    "Interaktivt objekt"@sv .
-
-saogf:Branschtidningar :broader saogf:Periodika .
-
-saogf:Brev a :GenreForm .
-
-saogf:Brevromaner a :GenreForm .
-
-saogf:Broschyrer :inCollection div:constructed ,
-    div:identify ;
-  a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
-  :exactMatch tgm:Broschyrer ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Brochures"@en ,
-    "Broschyrer"@sv ;
-  :singularLabel "Brochure"@en ,
-    "Broschyr"@sv .
-
-saogf:Burlesker a :Genre .
-
-saogf:Cyberpunk a :Genre .
-
-saogf:Dagboksromaner a :GenreForm .
-
-saogf:Dagstidningar a :GenreForm ;
-  :broader saogf:Periodika ;
-  :closeMatch marc:Newspaper ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Dagstidningar"@sv ;
-  :singularLabel "Newspaper"@en ,
-    "Dagstidning"@sv .
-
-saogf:Damtidningar :broader saogf:Periodika .
-
-saogf:Databaser a :ExpressionForm ;
-  :broader saogf:Informativa%20verk ,
-    kbrda:ComputerDataset ,
-    saogf:Samlande%20resurser ;
-  :closeMatch marc:UpdatingDatabase ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:UpdatingDatabase ;
-  :singularLabel "Database"@en ,
-    "Databas"@sv .
-
-saogf:Datorgrafik :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader ktg:Multimedia ,
-    ktg:VisualWork ;
-  :exactMatch marc:Representational ,
-    tgm:Datorgrafik ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Computer graphics"@en ,
-    "Datorgrafik"@sv .
-
-saogf:Datorkod :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader ktg:Software ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Computer Code"@en ,
-    "Datorkod"@sv .
-
-saogf:Datorspel a :ExpressionForm ;
-  :broader kbrda:ComputerProgram ,
-    saogf:Spel%20och%20tanken%C3%B6tter ,
-    ktg:Software ;
-  :exactMatch marc:ComputerTypeOfFileType-g ;
-  :inCollection div:promoted ,
-    div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Computer Game"@en ,
-    "Datorspel"@sv .
-
-saogf:Deckare a :Genre .
-
-saogf:Diagram a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:NonProjMaterialType-n ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:VisualMaterialType-n ;
-  :singularLabel "Diagram"@en ,
-    "Diagram"@sv .
-
-saogf:Dialektlitteratur a :GenreForm .
 
 saogf:Diskografier :exactMatch <http://id.loc.gov/vocabulary/msupplcont/discography> ,
     marc:Discography ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  a :GenreForm ;
-  :narrowMatch marc:MusicMatterType-a .
-
-saogf:Djurskildringar a :Genre .
-
-saogf:Dokument%C3%A4ra%20skildringar a :Genre .
-
-saogf:Dramatik a :Genre ;
-  :broader saogf:Sk%C3%B6nlitteratur ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> ,
-    marc:Drama ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Drama"@en ,
-    "Dramatik"@sv .
-
-saogf:Sk%C3%B6nlitteratur a :GenreForm ;
-  :broader saogf:Fiktion ,
-    ktg:Literature ;
-  :closeMatch marc:FictionNotFurtherSpecified ;
-  :inCollection div:find ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Fiction ,
-    marc:MixedForms ;
-  :prefLabel "Skönlitteratur"@sv ,
-    "Fiction literature"@en .
-
-saogf:Dystopier a :Genre .
-
-saogf:Efem%C3%A4rt%20material a :Genre ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Efemärt material"@sv .
-
-saogf:Ej%20sk%C3%B6nlitteratur :inCollection div:constructed ,
-    div:find ;
-  a :GenreForm ;
-  :broader saogf:Icke-fiktion ,
-    ktg:Literature ;
-  :closeMatch marc:NotFictionNotFurtherSpecified ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Non-fiction literature"@en ,
-    "Facklitteratur"@sv .
-
-saogf:Icke-fiktion :inCollection div:constructed ;
-  a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Icke-fiktion"@sv ,
-    "Non- fiction"@en .
-
-saogf:Encyklopedier a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Referensverk ;
-  :closeMatch marc:Encyclopedia ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Encyclopedia"@en ,
-    "Encyklopedia"@sv .
-
-saogf:Enskilda%20kartor :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :exactMatch marc:MapATwoDimensionalMap ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Two-dimensional map"@en ,
-    "Enskilda kartor"@sv ;
-  :singularLabel "Two-dimensional map"@en ,
-    "Enskild karta"@sv .
-
-saogf:Kartor a :ExpressionForm ;
-  :broader kbrda:CartographicImage ;
-  :closeMatch marc:Map ,
-    marcgt:map ;
-  :exactMatch tgm:Kartor ,
-    marc:SingleMap ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Enskild karta"@sv ,
-    "Single map"@en .
-
-saogf:Episka%20skildringar a :Genre .
-
-saogf:Erotiska%20skildringar a :Genre .
-
-saogf:Ess%C3%A4er a :GenreForm ;
-  :broader saogf:Informativa%20verk ,
-    ktg:Literature ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> ,
-    marc:Essay ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Essay"@en ,
-    "Essäer"@sv .
-
-saogf:Evighetskalendrar :exactMatch tgm:Evighetskalendrar .
-
-saogf:Experimentell%20sk%C3%B6nlitteratur a :GenreForm .
-
-saogf:F%C3%B6ljetonger a :Genre .
-
-saogf:F%C3%B6rel%C3%A4sningar a :Genre ;
-  :broader saogf:L%C3%A4romedel ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Lecture"@en ,
-    "Föreläsning"@sv .
-
-saogf:L%C3%A4romedel a :Genre ;
-  :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
-  :closeMatch marc:ProgrammedText ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Teaching Material"@en ,
-    "Läromedel"@sv .
-
-saogf:F%C3%B6rteckningar a :Genre ;
-  :broader saogf:Samlande%20resurser ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Register"@en ,
-    "Förteckning"@sv .
-
-saogf:Fabler a :Genre .
-
-saogf:Fackf%C3%B6rbundspress :broader saogf:Periodika .
-
-saogf:Faksimiler :exactMatch marc:ReproductionType-f ;
   :inScheme <https://id.kb.se/term/saogf> .
-
-saogf:Familjeskildringar a :Genre .
-
-saogf:Familjetidningar :broader saogf:Periodika .
-
-saogf:Fantasy a :Genre .
-
-saogf:Fanziner :broader saogf:Periodika .
-
-saogf:Farser a :Genre .
-
-saogf:Festskrifter :exactMatch marc:Festschrift ;
-  :inScheme <https://id.kb.se/term/saogf> .
-
-saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
-
-saogf:Filmer a :ExpressionForm ;
-  :broader ktg:MovingImage ;
-  :closeMatch marc:MotionPicture ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Film"@en ,
-    "Film"@sv .
-
-saogf:Filmmanus a :GenreForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Screenplay"@en ,
-    "Filmmanus"@sv .
 
 saogf:Filmografi :exactMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
     marc:Filmography ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Fj%C3%A4rranalysbilder :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:RemoteSensingImage ,
-    marcgt:rem ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Remote-sensing images"@en ,
-    "Fjärranalysbilder"@sv ;
-  :singularLabel "Remote-sensing image"@en ,
-    "Fjärranalysbild"@sv .
-
-saogf:Folkdiktning a :Genre .
-
-saogf:Folksagor :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
-    marc:Folktale ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  a :Genre .
-
-saogf:Forsknings%C3%B6versikter a :GenreForm ;
-  :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
-
-saogf:Fotob%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Grafisk%20litteratur ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Photobook"@en ,
-    "Fotobok"@sv .
-
-saogf:Fotografier a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :exactMatch marc:Photograph ,
-    tgm:Fotografier ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Photoprint ;
-  :pluralLabel "Fotografier"@sv ;
-  :singularLabel "Photograph"@en ,
-    "Fotografi"@sv .
-
-saogf:Fotoserier a :ExpressionForm ;
-  :broader saogf:Samlande%20resurser ,
-    saogf:Grafisk%20litteratur ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Photoseries"@en ,
-    "Fotoserie"@sv .
-
-saogf:Framtidsskildringar a :Genre .
-
-saogf:Frikyrkliga%20tidskrifter :broader saogf:Periodika .
-
-saogf:Genealogiskt%20material :exactMatch marc:GenealogicalTable ;
+saogf:Avhandlingar :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
+    marc:Thesis ;
   :inScheme <https://id.kb.se/term/saogf> .
-
-saogf:Gotiska%20ber%C3%A4ttelser a :Genre .
-
-saogf:Illustrerade%20verk a :ExpressionForm ;
-  :broader kbrda:StillImage ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Illustrated work"@en ,
-    "Illustrerat verk"@sv .
-
-saogf:Guideb%C3%B6cker a :GenreForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Guide book"@en ,
-    "Guidebok"@sv .
-
-saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
-  :broader saogf:Instruktions-%20och%20undervisningsmaterial ,
-    kbrda:Text ;
-  :closeMatch marc:Handbook ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
-  :singularLabel "Manual"@en ,
-    "Handbok eller manual"@sv .
-
-saogf:Instruktions-%20och%20undervisningsmaterial a :Genre ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Instruction ;
-  :prefLabel "Instruktions- och undervisningsmaterial"@sv ;
-  :seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
-
-saogf:Handlingar%20%28dokument%29 a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Record (Document)"@en ,
-    "Handling (dokument)"@sv .
-
-saogf:Handskrifter a :ExpressionForm ;
-  :broader kbrda:Text ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Handskrifter"@sv ;
-  :singularLabel "Handwriting"@en ,
-    "Handskrift"@sv .
-
-saogf:Hembygdstidskrifter :broader saogf:Periodika .
-
-saogf:Herrtidningar :broader saogf:Periodika .
-
-saogf:Himlaglober :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:CelestialGlobe ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Celestial globes"@en ,
-    "Himlaglober"@sv ;
-  :singularLabel "Celestial globe"@en ,
-    "Himlaglob"@sv .
-
-saogf:Kartglober :inCollection div:constructed ,
-    div:identify ;
-  a :ExpressionForm ;
-  :broader kbrda:CartographicThreeDimensionalForm ;
-  :closeMatch marc:Globe ;
-  :exactMatch tgm:Glober ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Kartglober"@sv ,
-    "Cartographic globes"@en ;
-  :singularLabel "Kartglob"@sv ,
-    "Cartographic globe"@en .
-
-saogf:Himlakroppsglober :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:PlanetaryOrLunarGlobe ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Celestial body globes"@en ,
-    "Himlakroppsglober"@sv ;
-  :singularLabel "Celestial body globe"@en ,
-    "Himlakroppsglob"@sv .
-
-saogf:Historiska%20skildringar a :Genre .
-
-saogf:Homoerotiska%20skildringar a :Genre .
-
-saogf:Humoristiska%20skildringar a :Genre .
-
-saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
-
-saogf:TV :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader ktg:MovingImage ;
-  :category div:abstract ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "TV"@en ,
-    "TV"@sv .
-
-saogf:Illustrationer a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:Illustration ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Illustration"@en ,
-    "Illustration"@sv ;
-  :exactMatch tgm:Illustrationer .
-
-saogf:Intervjuer a :Genre ;
-  :closeMatch marc:Interview ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Interview"@en ,
-    "Intervju"@sv .
-
-saogf:Jaktskildringar a :Genre .
-
-saogf:Jordglober :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:TerrestrialGlobe ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Terrestial globes"@en ,
-    "Jordglober"@sv ;
-  :singularLabel "Terrestial globe"@en ,
-    "Jordglob"@sv .
-
-saogf:Jultidningar :broader saogf:Periodika .
-
-saogf:Juridiskt%20material a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:LegalCaseOrCaseNote ,
-    marc:LawReportOrDigest ,
-    marc:Legislation ,
-    marc:LegalArticle ;
-  :prefLabel "Legal material"@en ,
-    "Juridiskt material"@sv .
-
-saogf:K%C3%A4rleksskildringar a :Genre .
-
-saogf:Kalendrar a :Genre ;
-  :broader saogf:Referensverk ;
-  :closeMatch marc:Calendar ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:MapsFormatType-k ;
-  :singularLabel "Calendar"@en ,
-    "Kalender"@sv .
-
-saogf:Kartb%C3%B6cker :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:Text ,
-    kbrda:CartographicImage ;
-  :exactMatch tgm:Atlaser ,
-    marc:Atlas ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:MapMaterialType-d ;
-  :prefLabel "Kartböcker"@sv ,
-    "Atlases"@en ;
-  :singularLabel "Kartbok"@sv ,
-    "Atlas"@en .
-
-saogf:Kartmodeller :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:CartographicThreeDimensionalForm ,
-    saogf:Modeller ;
-  :closeMatch marc:Model ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Map models"@en ,
-    "Kartmodeller"@sv ;
-  :singularLabel "Map model"@en ,
-    "Kartmodell"@sv .
-
-saogf:Modeller :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broadMatch marcgt:mod ;
-  :broader kbrda:ThreeDimensionalForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Models"@en ,
-    "Modeller"@sv ;
-  :singularLabel "Model"@en ,
-    "Modell"@sv .
-
-saogf:Kartor%20i%20diagramform :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Diagram ,
-    saogf:Kartor ;
-  :closeMatch marc:Diagram ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Map diagrams"@en ,
-    "Kartor i diagramform"@sv ;
-  :singularLabel "Map diagram"@en ,
-    "Karta i diagramform"@sv .
-
-saogf:Kartprofiler :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:Profile ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Map profiles"@en ,
-    "Kartprofiler"@sv ;
-  :singularLabel "Map profile"@en ,
-    "Kartprofil"@sv .
-
-saogf:Kartsektioner :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:Section ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Map sections"@en ,
-    "Kartsektioner"@sv ;
-  :singularLabel "Map section"@en ,
-    "Kartsektion"@sv .
-
-saogf:Kataloger a :Genre ;
-  :broader saogf:Referensverk ;
-  :closeMatch marc:Catalog ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Catalogue"@en ,
-    "Katalog"@sv ;
-  :exactMatch tgm:Kataloger .
-
-saogf:Kokb%C3%B6cker a :GenreForm ;
-  :broader saogf:Informativa%20verk ,
-    saogf:B%C3%B6cker ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Cookbook"@en ,
-    "Kokbok"@sv .
-
-saogf:Kollektivpoesi a :GenreForm .
-
-saogf:Kollektivromaner a :GenreForm .
-
-saogf:Komedier a :Genre .
-
-saogf:Konferensmaterial a :Genre ;
-  :closeMatch marc:ConferencePublication ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Conference Material"@en ,
-    "Konferensmaterial"@sv .
-
-saogf:Konkret%20poesi a :GenreForm .
-
-saogf:Konstsagor a :Genre .
-
-saogf:Kontrafaktisk%20historia a :Genre .
-
-saogf:Kontrollerade%20vokabul%C3%A4rer a :Genre ;
-  :broader saogf:Referensverk ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Controlled Vocabulary"@en ,
-    "Kontrollerad vokabulär"@sv .
 
 saogf:Korrespondens :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
     marc:Letter ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Korsordstidningar :broader saogf:Periodika .
+saogf:Festskrifter :exactMatch marc:Festschrift ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Kortprosa a :Genre .
+saogf:Folksagor :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
+    marc:Folktale ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Kortromaner a :GenreForm .
+saogf:Fiktion :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
+    marc:Fiction .
 
-saogf:Krigsskildringar a :Genre .
+saogf:Genealogiskt%20material :exactMatch marc:GenealogicalTable ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Kulturtidskrifter :broader saogf:Periodika .
+saogf:Portr%C3%A4tt :exactMatch marc:Portrait ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Kundtidningar :broader saogf:Periodika .
+saogf:Faksimiler :exactMatch marc:ReproductionType-f ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Kursmaterial a :Genre ;
-  :broader saogf:L%C3%A4romedel ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Course Material"@en ,
-    "Kursmaterial"@sv .
+saogf:Baletter a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> ;
+  :exactMatch marc:Ballet ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:L%C3%B6sblad a :ExpressionForm ;
-  :broader saogf:Samlande%20resurser ;
+saogf:Kanons a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026687> ;
+  :exactMatch marc:CanonOrRound ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fantasier%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026018> ;
+  :exactMatch marc:Fantasia ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Rondon a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027057> ;
+  :exactMatch marc:Rondo ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Rapsodier%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027051> ;
+  :exactMatch marc:Rhapsody ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Valser a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027167> ;
+  :exactMatch marc:Waltz ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Uvertyrer a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026980> ;
+  :exactMatch marc:Overture ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fugor a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026818> ;
+  :exactMatch marc:Fugue ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ricercari a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026128> ;
+  :exactMatch marc:Ricercar ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Chaconner a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026701> ;
+  :exactMatch marc:Chaconne ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Oratorier a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026977> ;
+  :exactMatch marc:Oratorio ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Rekviem%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027048> ;
+  :exactMatch marc:Requiem ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Sviter a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> ;
+  :exactMatch marc:Suite ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Danser%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026753> ;
+  :exactMatch marc:DanceForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Canzone a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026012> ;
+  :exactMatch marc:Canzona ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Programmusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027017> ;
+  :exactMatch marc:ProgramMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Menuetter a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026940> ;
+  :exactMatch marc:Minuet ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Liturgisk%20s%C3%A5ng :exactMatch marc:ChantsOtherReligion .
+
+saogf:Tema%20med%20variationer a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027156> ;
+  :exactMatch marc:Variation ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kantater a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026688> ;
+  :exactMatch marc:Cantata ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ballader%20%28vokalmusik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026648> ;
+  :exactMatch marc:Ballad ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Anthems a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026635> ;
+  :exactMatch marc:Anthem ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Nocturner a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026144> ;
+  :exactMatch marc:Nocturne ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Blues a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026665> ;
+  :exactMatch marc:Blues ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:M%C3%A4ssor%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026926> ;
+  :exactMatch marc:Mass ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Pavaner a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026994> ;
+  :exactMatch marc:Pavan ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Karakt%C3%A4rsstycken a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> ;
+  :exactMatch marc:DivertimentosSerenadesCassationsDivertissementsNotturni ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Jazz a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026879> ;
+  :exactMatch marc:Jazz ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Filmmusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026950> ;
+  :exactMatch marc:MotionPictureMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Triosonater a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> ;
+  :exactMatch marc:TrioSonata ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Slumpmusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026624> ;
+  :exactMatch marc:ChanceComposition ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Flamenco%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026806> ;
+  :exactMatch marc:Flamenco ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Liturgisk%20s%C3%A5ng a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> ;
+  :exactMatch marc:ChantChristian ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Motetter a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026949> ;
+  :exactMatch marc:Motet ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Mazurkor a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026928> ;
+  :exactMatch marc:Mazurka ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Marscher a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026922> ;
+  :exactMatch marc:March ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Revyer a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027050> ;
+  :exactMatch marc:MusicalRevueOrComedy ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Zarzuelas a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2016026059> ;
+  :exactMatch marc:Zarzuela ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Concerti%20grossi a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026724> ;
+  :exactMatch marc:ConcertiGrossi ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Countrymusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026739> ;
+  :exactMatch marc:CountryMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Carols a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026695> ;
+  :exactMatch marc:Carol ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Gospel a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026839> ;
+  :exactMatch marc:GospelMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Etyder%20%28%C3%B6vningar%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027115> ;
+  :exactMatch marc:StudyOrExercise ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Toccator a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027140> ;
+  :exactMatch marc:Toccata ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Konserter%20%28form%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026725> ;
+  :exactMatch marc:Concerto ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Villancicos a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026025> ;
+  :exactMatch marc:Villancico ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Symfoniska%20dikter a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027120> ;
+  :exactMatch marc:SymphonicPoem ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Rock a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027054> ;
+  :exactMatch marc:RockMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:S%C3%A5nger a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027103> ;
+  :exactMatch marc:Song ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Passacaglior a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026989> ;
+  :exactMatch marc:Passacaglia ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Polon%C3%A4ser a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027005> ;
+  :exactMatch marc:Polonaise ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Symfonier a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027121> ;
+  :exactMatch marc:Symphony ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Preludier a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027013> ;
+  :exactMatch marc:Prelude ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Sonater a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> ;
+  :exactMatch marc:Sonata ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Madrigaler a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026915> ;
+  :exactMatch marc:Madrigal ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Square%20dance%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027111> ;
+  :exactMatch marc:SquareDanceMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Operor a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026976> ;
+  :exactMatch marc:Opera ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Folkmusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026809> ;
+  :exactMatch marc:FolkMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Koraler a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026713> ;
+  :exactMatch marc:Chorale ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Passioner%20%28musik%29 a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026861> ;
+  :exactMatch marc:PassionMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Bluegrass a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026664> ;
+  :exactMatch marc:BluegrassMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:K%C3%B6rs%C3%A5ng a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027007> ;
+  :exactMatch marc:ChansonsPolyphonic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Popul%C3%A4rmusik a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027009> ;
+  :exactMatch marc:PopularMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ragtime a :GenreForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027034> ;
+  :exactMatch marc:RagtimeMusic ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fiktion :inCollection div:constructed .
+
+saogf:Icke-fiktion :inCollection div:constructed .
+
+saogf:Samlande%20resurser :inCollection div:constructed .
+
+saogf:Ej%20sk%C3%B6nlitteratur :inCollection div:constructed .
+
+saogf:B%C3%B6cker :inCollection div:constructed .
+
+saogf:Kortare%20texter :inCollection div:constructed .
+
+saogf:Tidskriftsnummer :inCollection div:constructed .
+
+saogf:Artiklar :inCollection div:constructed .
+
+saogf:Grafisk%20litteratur :inCollection div:constructed .
+
+saogf:Ljudprogram :inCollection div:constructed .
+
+saogf:TV :inCollection div:constructed .
+
+saogf:Br%C3%A4dspel :inCollection div:constructed .
+
+saogf:Broschyrer :inCollection div:constructed .
+
+saogf:Seriestrippar :inCollection div:constructed .
+
+saogf:Datorkod :inCollection div:constructed .
+
+saogf:Ritningar :inCollection div:constructed .
+
+saogf:Teckningar :inCollection div:constructed .
+
+saogf:Interaktiva%20objekt :inCollection div:constructed .
+
+saogf:Musikradioprogram :inCollection div:constructed .
+
+saogf:Poddar :inCollection div:constructed .
+
+saogf:M%C3%A5lningar :inCollection div:constructed .
+
+saogf:Vykortsb%C3%B6cker :inCollection div:constructed .
+
+saogf:Skulpturer :inCollection div:constructed .
+
+saogf:Radio :inCollection div:constructed .
+
+saogf:Leksaker :inCollection div:constructed .
+
+saogf:Datorgrafik :inCollection div:constructed .
+
+saogf:Kartglober :inCollection div:constructed .
+
+saogf:Kartb%C3%B6cker :inCollection div:constructed .
+
+saogf:Jordglober :inCollection div:constructed .
+
+saogf:Himlakroppsglober :inCollection div:constructed .
+
+saogf:Himlaglober :inCollection div:constructed .
+
+saogf:M%C3%A5nglober :inCollection div:constructed .
+
+saogf:Modeller :inCollection div:constructed .
+
+saogf:Kartmodeller :inCollection div:constructed .
+
+saogf:Kartsektioner :inCollection div:constructed .
+
+saogf:Kartprofiler :inCollection div:constructed .
+
+saogf:Enskilda%20kartor :inCollection div:constructed .
+
+saogf:Kartor%20i%20diagramform :inCollection div:constructed .
+
+saogf:Perspektivbilder :inCollection div:constructed .
+
+saogf:Fj%C3%A4rranalysbilder :inCollection div:constructed .
+
+saogf:Videoupptagningar :inCollection div:constructed .
+
+saogf:Texth%C3%A4ften :inCollection div:constructed .
+
+saogf:Textblad :inCollection div:constructed .
+
+saogf:L%C3%B6sblad :inCollection div:constructed ;
+  :prefLabel "Loose-leaf"@en ,
+    "Lösblad"@sv ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> ,
     marc:LooseLeaf ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Loose-leaf"@en ,
-    "Lösblad"@sv .
-
-saogf:Legender a :Genre .
-
-saogf:Leksaker :inCollection div:constructed ;
+  :broader saogf:Samlande%20resurser ;
   a :ExpressionForm ;
-  :broader saogf:Interaktiva%20objekt ;
-  :closeMatch marcgt:toy ,
-    marc:Toy ;
-  :inScheme <https://id.kb.se/term/saogf> ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Textblad :prefLabel "Text leaf"@en ,
+    "Textblad"@sv ;
+  :broader kbrda:Text ,
+    saogf:Kortare%20texter ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Texth%C3%A4ften :singularLabel "Booklet"@en ,
+    "Texthäfte"@sv ;
+  :prefLabel "Booklets"@en ,
+    "Texthäften"@sv ;
+  :broader kbrda:Text ,
+    saogf:Kortare%20texter ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Videoupptagningar :singularLabel "Videorecording"@en ,
+    "Videoupptagning"@sv ;
+  :prefLabel "Videorecordings"@en ,
+    "Videoupptagningar"@sv ;
+  :closeMatch marc:Videorecording ;
+  :broader ktg:MovingImage ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fj%C3%A4rranalysbilder :singularLabel "Remote-sensing image"@en ,
+    "Fjärranalysbild"@sv ;
+  :prefLabel "Remote-sensing images"@en ,
+    "Fjärranalysbilder"@sv ;
+  :closeMatch marc:RemoteSensingImage ,
+    marcgt:rem ;
+  :broader saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Perspektivbilder :singularLabel "Perspectice view"@en ,
+    "Perspektivbild"@sv ;
+  :prefLabel "Perspectice views"@en ,
+    "Perspektivbilder"@sv ;
+  :closeMatch marc:View ;
+  :broader saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartor%20i%20diagramform :singularLabel "Map diagram"@en ,
+    "Karta i diagramform"@sv ;
+  :prefLabel "Map diagrams"@en ,
+    "Kartor i diagramform"@sv ;
+  :closeMatch marc:Diagram ;
+  :broader saogf:Diagram ,
+    saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Enskilda%20kartor :singularLabel "Two-dimensional map"@en ,
+    "Enskild karta"@sv ;
+  :prefLabel "Two-dimensional map"@en ,
+    "Enskilda kartor"@sv ;
+  :exactMatch marc:MapATwoDimensionalMap ;
+  :broader saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartprofiler :singularLabel "Map profile"@en ,
+    "Kartprofil"@sv ;
+  :prefLabel "Map profiles"@en ,
+    "Kartprofiler"@sv ;
+  :closeMatch marc:Profile ;
+  :broader saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartsektioner :singularLabel "Map section"@en ,
+    "Kartsektion"@sv ;
+  :prefLabel "Map sections"@en ,
+    "Kartsektioner"@sv ;
+  :closeMatch marc:Section ;
+  :broader saogf:Kartor ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartmodeller :singularLabel "Map model"@en ,
+    "Kartmodell"@sv ;
+  :prefLabel "Map models"@en ,
+    "Kartmodeller"@sv ;
+  :closeMatch marc:Model ;
+  :broader kbrda:CartographicThreeDimensionalForm ,
+    saogf:Modeller ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Modeller :singularLabel "Model"@en ,
+    "Modell"@sv ;
+  :prefLabel "Models"@en ,
+    "Modeller"@sv ;
+  :broadMatch marcgt:mod ;
+  :broader kbrda:ThreeDimensionalForm ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:M%C3%A5nglober :singularLabel "Moon globe"@en ,
+    "Månglob"@sv ;
+  :prefLabel "Moon globes"@en ,
+    "Månglober"@sv ;
+  :closeMatch marc:EarthMoonGlobe ;
+  :broader saogf:Kartglober ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Himlaglober :singularLabel "Celestial globe"@en ,
+    "Himlaglob"@sv ;
+  :prefLabel "Celestial globes"@en ,
+    "Himlaglober"@sv ;
+  :closeMatch marc:CelestialGlobe ;
+  :broader saogf:Kartglober ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Himlakroppsglober :singularLabel "Celestial body globe"@en ,
+    "Himlakroppsglob"@sv ;
+  :prefLabel "Celestial body globes"@en ,
+    "Himlakroppsglober"@sv ;
+  :closeMatch marc:PlanetaryOrLunarGlobe ;
+  :broader saogf:Kartglober ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Jordglober :singularLabel "Terrestial globe"@en ,
+    "Jordglob"@sv ;
+  :prefLabel "Terrestial globes"@en ,
+    "Jordglober"@sv ;
+  :closeMatch marc:TerrestrialGlobe ;
+  :broader saogf:Kartglober ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartb%C3%B6cker :singularLabel "Kartbok"@sv ,
+    "Atlas"@en ;
+  :prefLabel "Kartböcker"@sv ,
+    "Atlases"@en ;
+  :narrowMatch marc:MapMaterialType-d ;
+  :exactMatch tgm:Atlaser ,
+    marc:Atlas ;
+  :broader kbrda:Text ,
+    kbrda:CartographicImage ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartglober :singularLabel "Kartglob"@sv ,
+    "Cartographic globe"@en ;
+  :prefLabel "Kartglober"@sv ,
+    "Cartographic globes"@en ;
+  :closeMatch marc:Globe ;
+  :exactMatch tgm:Glober ;
+  :broader kbrda:CartographicThreeDimensionalForm ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kartor :singularLabel "Enskild karta"@sv ,
+    "Single map"@en ;
+  :exactMatch tgm:Kartor ,
+    marc:SingleMap ;
+  :closeMatch marc:Map ,
+    marcgt:map ;
+  :broader kbrda:CartographicImage ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Matsedlar :singularLabel "Dining menu"@en ,
+    "Matsedel"@sv ;
+  :broader saogf:Kortare%20texter ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Pop-up-b%C3%B6cker :singularLabel "Pop-up bOok"@en ,
+    "Pop-up-bok"@sv ;
+  :broader saogf:Mekaniska%20b%C3%B6cker ,
+    saogf:Illustrerade%20verk ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:M%C3%A5larb%C3%B6cker :singularLabel "Målarbok"@sv ;
+  :broader saogf:Illustrerade%20verk ,
+    saogf:B%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Pysselb%C3%B6cker :singularLabel "Puzzle book"@en ,
+    "Pysselbok"@sv ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:B%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Miniatyrb%C3%B6cker :singularLabel "Miniature book"@en ,
+    "Miniatyrbok"@sv ;
+  :broader saogf:B%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Luck%C3%B6ppningskalendrar :singularLabel "Lucköppningskalender"@sv ;
+  :broader kbrda:ThreeDimensionalForm ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Datorgrafik :prefLabel "Computer graphics"@en ,
+    "Datorgrafik"@sv ;
+  :exactMatch marc:Representational ,
+    tgm:Datorgrafik ;
+  :broader ktg:Multimedia ,
+    ktg:VisualWork ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Webbplatser :singularLabel "Website"@en ,
+    "Webbplats"@sv ;
+  :closeMatch marc:UpdatingWebSite ;
+  :relatedMatch kbrda:OnlineResource ;
+  :broader saogf:Samlande%20resurser ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Trailrar :singularLabel "Trailer"@en ,
+    "Trailer"@sv ;
+  :broader saogf:Filmer ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Leksaker :singularLabel "Toy"@en ,
+    "Leksak"@sv ;
   :prefLabel "Toys"@en ,
     "Leksaker"@sv ;
-  :singularLabel "Toy"@en ,
-    "Leksak"@sv .
+  :closeMatch marcgt:toy ,
+    marc:Toy ;
+  :broader saogf:Interaktiva%20objekt ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
+saogf:Tv-serier :singularLabel "TV-Series"@en ,
+    "Tv-serie"@sv ;
+  :broader saogf:TV ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Litteraturtidskrifter :broader saogf:Periodika .
+saogf:Tv-program :singularLabel "TV-Program"@en ,
+    "Tv-program"@sv ;
+  :broader saogf:TV ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Ljudb%C3%B6cker a :ExpressionForm ;
+saogf:Radioprogram :singularLabel "Radio Program"@en ,
+    "Radioprogram"@sv ;
+  :broader saogf:Radio ,
+    saogf:Ljudprogram ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Radio :prefLabel "Radio"@en ,
+    "Radio"@sv ;
+  :broader ktg:Audio ;
+  :category div:abstract ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Taltidningar :singularLabel "Spoken Paper"@en ,
+    "Taltidning"@sv ;
+  :broader kbrda:SpokenWord ,
+    saogf:Periodika ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Talb%C3%B6cker :singularLabel "Spoken Book"@en ,
+    "Talbok"@sv ;
+  :broader kbrda:SpokenWord ,
+    saogf:Ljudb%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Skulpturer :singularLabel "Sculpture"@en ,
+    "Skulptur"@sv ;
+  :prefLabel "Sculptures"@en ,
+    "Skulpturer"@sv ;
+  :broader kbrda:ThreeDimensionalForm ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Handlingar%20%28dokument%29 :singularLabel "Record (Document)"@en ,
+    "Handling (dokument)"@sv ;
+  :broader saogf:Kortare%20texter ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Pussel :singularLabel "Puzzle"@en ,
+    "Pussel"@sv ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:Interaktiva%20objekt ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Program%20%28publikationer%29 :singularLabel "Publication Programme"@en ,
+    "Programblad"@sv ;
+  :broader saogf:Kortare%20texter ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Vykortsb%C3%B6cker :singularLabel "Postcard book"@en ,
+    "Vykortsbok"@sv ;
+  :prefLabel "Postcard books"@en ,
+    "Vykortsböcker"@sv ;
+  :exactMatch tgm:Vykortsh%C3%A4ften ;
+  :broader saogf:Vykort ,
+    saogf:B%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Vykort :singularLabel "Postcard"@en ,
+    "Vykort"@sv ;
+  :closeMatch marc:PictureCardPostCard ;
+  :broader saogf:Bilder ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Bildlexikon :singularLabel "Picture Dictionary"@en ,
+    "Bildlexikon"@sv ;
+  :broader saogf:Lexikon ,
+    saogf:Grafisk%20litteratur ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fotoserier :singularLabel "Photoseries"@en ,
+    "Fotoserie"@sv ;
+  :broader saogf:Samlande%20resurser ,
+    saogf:Grafisk%20litteratur ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fotob%C3%B6cker :singularLabel "Photobook"@en ,
+    "Fotobok"@sv ;
+  :broader saogf:Grafisk%20litteratur ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:M%C3%A5lningar :singularLabel "Painting"@en ,
+    "Målning"@sv ;
+  :prefLabel "Paintings"@en ,
+    "Målningar"@sv ;
+  :closeMatch marc:Painting ;
+  :exactMatch tgm:M%C3%A5lningar ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fotografier :pluralLabel "Fotografier"@sv ;
+  :singularLabel "Photograph"@en ,
+    "Fotografi"@sv ;
+  :narrowMatch marc:Photoprint ;
+  :exactMatch marc:Photograph ,
+    tgm:Fotografier ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Poddar :singularLabel "Podcast"@en ,
+    "Podcast"@sv ;
+  :prefLabel "Podcasts"@en ,
+    "Poddar"@sv ;
+  :broader kbrda:SpokenWord ,
+    saogf:Ljudprogram ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Pamfletter :singularLabel "Pamphlet"@en ,
+    "Pamflett"@sv ;
+  :broader saogf:Broschyrer ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:B%C3%B6cker%20med%20ljudeffekter :singularLabel "Sound-effect Book"@en ,
+    "Bok med ljudeffekt"@sv ;
+  :broader ktg:Audio ,
+    saogf:Mekaniska%20b%C3%B6cker ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Musikinspelningar :singularLabel "Music Recording"@en ,
+    "Musikinspelning"@sv ;
+  :broader kbrda:PerformedMusic ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Musikradioprogram :prefLabel "Music Radio Program"@en ,
+    "Musikradioprogram"@sv ;
+  :broader kbrda:PerformedMusic ,
+    saogf:Ljudprogram ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Mekaniska%20b%C3%B6cker :singularLabel "Mechanical Book"@en ,
+    "Mekanisk bok"@sv ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Interaktiva%20objekt ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Interaktiva%20objekt :singularLabel "Interactive object"@en ,
+    "Interaktivt objekt"@sv ;
+  :prefLabel "Interactive objects"@en ,
+    "Interaktiva objekt"@sv ;
+  :broader kbrda:ThreeDimensionalForm ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Serieromaner :singularLabel "Graphic Novel"@en ,
+    "Serieroman"@sv ;
+  :broader saogf:Tecknade%20serier ,
+    saogf:Romaner ,
+    kbrda:Text ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Illustrationer :singularLabel "Illustration"@en ,
+    "Illustration"@sv ;
+  :closeMatch marc:Illustration ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Handskrifter :pluralLabel "Handskrifter"@sv ;
+  :singularLabel "Handwriting"@en ,
+    "Handskrift"@sv ;
+  :broader kbrda:Text ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Blanketter :singularLabel "Form Document"@en ,
+    "Blankett"@sv ;
+  :broader saogf:Kortare%20texter ;
+  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Teckningar :singularLabel "Drawing"@en ,
+    "Teckning"@sv ;
+  :prefLabel "Drawingar"@en ,
+    "Teckningar"@sv ;
+  :closeMatch marc:Drawing ;
+  :exactMatch tgm:Teckningar ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Diagram :narrowMatch marc:VisualMaterialType-n ;
+  :closeMatch marc:NonProjMaterialType-n ;
+  :singularLabel "Diagram"@en ,
+    "Diagram"@sv ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ritningar :singularLabel "Design drawing"@en ,
+    "Ritning"@sv ;
+  :prefLabel "Design drawings"@en ,
+    "Ritningar"@sv ;
+  :exactMatch tgm:Ritningar ;
+  :broader saogf:Bilder ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Datorspel :singularLabel "Computer Game"@en ,
+    "Datorspel"@sv ;
+  :exactMatch marc:ComputerTypeOfFileType-g ;
+  :broader kbrda:ComputerProgram ,
+    saogf:Spel%20och%20tanken%C3%B6tter ,
+    ktg:Software ;
+  :inCollection div:promoted ,
+    div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Datorkod :prefLabel "Computer Code"@en ,
+    "Datorkod"@sv ;
+  :broader ktg:Software ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Serienoveller :singularLabel "Comic Story"@en ,
+    "Serienovell"@sv ;
+  :broader saogf:Noveller ,
+    saogf:Tecknade%20serier ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Seriestrippar :singularLabel "Comic strip"@en ,
+    "Seriestripp"@sv ;
+  :prefLabel "Comic strips"@en ,
+    "Seriestrippar"@sv ;
+  :exactMatch marc:ComicStrip ;
+  :broader saogf:Tecknade%20serier ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Serietidningar :singularLabel "Comic magazine"@en ,
+    "Serietidning"@sv ;
+  :broader saogf:Tecknade%20serier ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Tecknade%20serier :singularLabel "Comic or graphic novel"@en ,
+    "Tecknad serie"@sv ;
+  :altLabel "Serier"@sv ;
+  :exactMatch marc:ComicOrGraphicNovel ;
+  :broader saogf:Grafisk%20litteratur ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Broschyrer :singularLabel "Brochure"@en ,
+    "Broschyr"@sv ;
+  :prefLabel "Brochures"@en ,
+    "Broschyrer"@sv ;
+  :exactMatch tgm:Broschyrer ;
+  :broader saogf:Kortare%20texter ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Br%C3%A4dspel :singularLabel "Board game"@en ;
+  :prefLabel "Board games"@en ,
+    "Brädspel"@sv ;
+  :exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:Interaktiva%20objekt ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:TV :prefLabel "TV"@en ,
+    "TV"@sv ;
+  :broader ktg:MovingImage ;
+  :category div:abstract ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ljudprogram :prefLabel "Audio Program"@en ,
+    "Ljudprogram"@sv ;
+  :broader kbrda:Sounds ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Filmer :singularLabel "Film"@en ,
+    "Film"@sv ;
+  :broader ktg:MovingImage ;
+  :closeMatch marc:MotionPicture ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Affischer :pluralLabel "Affischer"@sv ;
+  :singularLabel "Poster"@en ,
+    "Affisch"@sv ;
+  :exactMatch tgm:Affischer ;
+  :broader saogf:Bilder ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Databaser :singularLabel "Database"@en ,
+    "Databas"@sv ;
+  :narrowMatch marc:UpdatingDatabase ;
+  :broader saogf:Informativa%20verk ,
+    kbrda:ComputerDataset ,
+    saogf:Samlande%20resurser ;
+  :closeMatch marc:UpdatingDatabase ;
+  :inCollection div:identify ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Grafisk%20litteratur :prefLabel "Graphic literature"@en ,
+    "Grafisk litteratur"@sv ;
+  :broader kbrda:StillImage ,
+    kbrda:Text ,
+    saogf:Illustrerade%20verk ,
+    ktg:Literature ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Bilder :singularLabel "Grapphical literature"@en ,
+    "Bild"@sv ;
+  :broader saogf:Bildverk ,
+    kbrda:StillImage ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Illustrerade%20verk :singularLabel "Illustrated work"@en ,
+    "Illustrerat verk"@sv ;
+  :broader kbrda:StillImage ;
+  a :ExpressionForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ljudb%C3%B6cker :singularLabel "Audiobook"@en ,
+    "Ljudbok"@sv ;
   :broader saogf:B%C3%B6cker ,
     kbrda:SpokenWord ;
   :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Audiobook"@en ,
-    "Ljudbok"@sv .
-
-saogf:Ljudprogram :inCollection div:constructed ;
   a :ExpressionForm ;
-  :broader kbrda:Sounds ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Audio Program"@en ,
-    "Ljudprogram"@sv .
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Luck%C3%B6ppningskalendrar a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Lucköppningskalender"@sv .
-
-saogf:M%C3%A5larb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Illustrerade%20verk ,
+saogf:Kokb%C3%B6cker :singularLabel "Cookbook"@en ,
+    "Kokbok"@sv ;
+  :broader saogf:Informativa%20verk ,
     saogf:B%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Målarbok"@sv .
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:M%C3%A5lningar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:Painting ;
-  :exactMatch tgm:M%C3%A5lningar ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Paintings"@en ,
-    "Målningar"@sv ;
-  :singularLabel "Painting"@en ,
-    "Målning"@sv .
+saogf:Guideb%C3%B6cker :singularLabel "Guide book"@en ,
+    "Guidebok"@sv ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:M%C3%A5nglober :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:EarthMoonGlobe ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Moon globes"@en ,
-    "Månglober"@sv ;
-  :singularLabel "Moon globe"@en ,
-    "Månglob"@sv .
+saogf:Filmmanus :singularLabel "Screenplay"@en ,
+    "Filmmanus"@sv ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Magisk%20realism a :Genre .
+saogf:Tidtabeller :singularLabel "Timetable"@en ,
+    "Tidtabell"@sv ;
+  :broader saogf:Efem%C3%A4rt%20material ,
+    saogf:Tabeller ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
+saogf:Tabeller :singularLabel "Tables"@en ,
+    "Tabell"@sv ;
+  :related ktg:Dataset ;
+  :broader saogf:Referensverk ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Matsedlar a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Dining menu"@en ,
-    "Matsedel"@sv ;
-  :exactMatch tgm:Matsedlar .
-
-saogf:Mellanh%C3%B6g%20r%C3%B6st%20och%20piano :exactMatch <https://libris.kb.se/42gks6hn218vr88#it> .
-
-saogf:Miniatyrb%C3%B6cker a :ExpressionForm ;
+saogf:Parl%C3%B6rer :singularLabel "Phrase book"@en ,
+    "Parlör"@sv ;
   :broader saogf:B%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Miniature book"@en ,
-    "Miniatyrbok"@sv .
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Modetidningar :broader saogf:Periodika .
+saogf:Nyhetsbrev :singularLabel "Newsletter"@en ,
+    "Nyhetsbrev"@sv ;
+  :broader saogf:Kortare%20texter ,
+    saogf:Seriella%20publikationer ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Musikinspelningar a :ExpressionForm ;
-  :broader kbrda:PerformedMusic ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Music Recording"@en ,
-    "Musikinspelning"@sv .
+saogf:%C3%85rsb%C3%B6cker :singularLabel "Yearbook"@en ,
+    "Årsbok"@sv ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Seriella%20publikationer ;
+  :exactMatch marc:Yearbook ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Musikradioprogram :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:PerformedMusic ,
-    saogf:Ljudprogram ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Music Radio Program"@en ,
-    "Musikradioprogram"@sv .
+saogf:Bloggar :singularLabel "Blog"@en ,
+    "Blogg"@sv ;
+  :related saogf:Webbplatser ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Musiktidskrifter :broader saogf:Periodika .
+saogf:Anteckningar :singularLabel "Note"@en ,
+    "Anteckning"@sv ;
+  :broader saogf:Kortare%20texter ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Noveller a :GenreForm ;
+saogf:Handb%C3%B6cker%2C%20manualer%20etc\. :singularLabel "Manual"@en ,
+    "Handbok eller manual"@sv ;
+  :closeMatch marc:Handbook ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
+  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial ,
+    kbrda:Text ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Lexikon :singularLabel "Lexicon"@en ,
+    "Lexikon"@sv ;
+  :closeMatch marc:Dictionary ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Referensverk ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Encyklopedier :singularLabel "Encyclopedia"@en ,
+    "Encyklopedia"@sv ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Referensverk ;
+  :closeMatch marc:Encyclopedia ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Vetenskapliga%20tidskrifter :singularLabel "Journal"@en ,
+    "Vetenskaplig tidskrift"@sv ;
+  :closeMatch marcgt:jou ;
+  :broader saogf:Periodika ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Dagstidningar :pluralLabel "Dagstidningar"@sv ;
+  :singularLabel "Newspaper"@en ,
+    "Dagstidning"@sv ;
+  :broader saogf:Periodika ;
+  :closeMatch marc:Newspaper ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Periodika :altLabel "Periodika"@sv ;
+  :pluralLabel "Tidskrifter"@sv ;
+  :singularLabel "Periodical"@en ,
+    "Tidskrift"@sv ;
+  :broader ktg:Literature ,
+    saogf:Samlande%20resurser ;
+  :closeMatch marc:Periodical ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ess%C3%A4er :prefLabel "Essay"@en ,
+    "Essäer"@sv ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> ,
+    marc:Essay ;
+  :broader saogf:Informativa%20verk ,
+    ktg:Literature ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Poesi :prefLabel "Poetry"@en ,
+    "Poesi"@sv ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> ,
+    marc:Poetry ;
+  :broader saogf:Sk%C3%B6nlitteratur ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Dramatik :prefLabel "Drama"@en ,
+    "Dramatik"@sv ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> ,
+    marc:Drama ;
+  :broader saogf:Sk%C3%B6nlitteratur ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Noveller :singularLabel "Short Story"@en ,
+    "Novell"@sv ;
   :broader saogf:Sk%C3%B6nlitteratur ,
     saogf:Kortare%20texter ;
   :closeMatch marc:ShortStory ;
   :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Short Story"@en ,
-    "Novell"@sv .
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Nyckelromaner a :GenreForm .
+saogf:Romaner :singularLabel "Novel"@en ,
+    "Roman"@sv ;
+  :closeMatch marc:Novel ;
+  :broader saogf:B%C3%B6cker ,
+    saogf:Sk%C3%B6nlitteratur ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Nyhetsbrev a :GenreForm ;
-  :broader saogf:Kortare%20texter ,
-    saogf:Seriella%20publikationer ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Newsletter"@en ,
-    "Nyhetsbrev"@sv .
+saogf:Artiklar :singularLabel "Article"@en ,
+    "Artikel"@sv ;
+  :prefLabel "Articles"@en ,
+    "Artiklar"@sv ;
+  :closeMatch marcgt:art ;
+  :broader saogf:Kortare%20texter ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Nyhetsmagasin :broader saogf:Periodika .
+saogf:Tidskriftsnummer :singularLabel "Periodical Issue"@en ;
+  :prefLabel "Periodical Issue"@en ,
+    "Tidskriftsnummer"@sv ;
+  :closeMatch marcgt:iss ;
+  :exactMatch <https://id.kb.se/term/repr/Issue> ;
+  :broader saogf:Kortare%20texter ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-# FIXME Collision with the entity previously known as Offentligt tryck
-saogf:Offentligt%20tryck2 a :GenreForm ;
-  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
-  :inScheme <https://id.kb.se/term/saogf> ;
+saogf:Kortare%20texter :singularLabel "Kortare text"@sv ,
+    "Text piece"@en ;
+  :prefLabel "Kortare texter"@sv ,
+    "Text pieces"@en ;
+  :broader ktg:Literature ;
+  :category div:abstract ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:B%C3%B6cker :singularLabel "Bok"@sv ,
+    "Book"@en ;
+  :prefLabel "Böcker"@sv ,
+    "Books"@en ;
+  :closeMatch marcgt:boo ;
+  :broader ktg:Literature ;
+  :category div:abstract ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Sk%C3%B6nlitteratur :prefLabel "Skönlitteratur"@sv ,
+    "Fiction literature"@en ;
+  :closeMatch marc:FictionNotFurtherSpecified ;
+  :narrowMatch marc:Fiction ,
+    marc:MixedForms ;
+  :broader saogf:Fiktion ,
+    ktg:Literature ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Ej%20sk%C3%B6nlitteratur :prefLabel "Non-fiction literature"@en ,
+    "Ej skönlitteratur"@sv ;
+  :closeMatch marc:NotFictionNotFurtherSpecified ;
+  :broader saogf:Icke-fiktion ,
+    ktg:Literature ;
+  :inCollection div:identify ;
+  a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Standarder :singularLabel "Standard"@en ,
+    "Standard"@sv ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:StandardsSpecification ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Recensioner :singularLabel "Review"@en ,
+    "Recension"@sv ;
+  :closeMatch marc:Review ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Referensverk :singularLabel "Reference Work"@en ,
+    "Referensverk"@sv ;
+  :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  :broader saogf:Informativa%20verk ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Offentligt%20tryck :singularLabel "Government publication"@en ,
+    "Offentlig resurs"@sv ;
   :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
     marc:Local ,
     marc:StateProvincialTerritorialDependentEtc ,
     marc:InternationalIntergovernmental ,
     marc:FederalNational ;
-  :singularLabel "Government publication"@en ,
-    "Offentlig resurs"@sv .
+  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Offentligt%20tryck%20%28tidskrifter%29 :broader saogf:Periodika ,
-    saogf:Samh%C3%A4llsinformation .
+saogf:Reportage :prefLabel "Reportage"@en ,
+    "Reportage"@sv ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Intervjuer :singularLabel "Interview"@en ,
+    "Intervju"@sv ;
+  :closeMatch marc:Interview ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Tal%20%28retorik%29 :prefLabel "Rethorical speech"@en ,
+    "Retoriskt tal"@sv ;
+  :closeMatch marc:Speech ,
+    <http://id.loc.gov/authorities/genreForms/gf2011026363> ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Sj%C3%A4lvbiografier :singularLabel "Autobiography"@en ,
+    "Självbiografi"@sv ;
+  :narrowMatch marc:Memoir ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
+  :exactMatch marc:Autobiography ;
+  :broader saogf:Biografier ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Biografier :singularLabel "Biography"@en ,
+    "Biografi"@sv ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ,
+    marc:Biography ;
+  :broader saogf:Informativa%20verk ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Patent :prefLabel "Patent"@en ,
+    "Patent"@sv ;
+  :closeMatch marc:PatentDocument ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Efem%C3%A4rt%20material :prefLabel "Efemärt material"@sv ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Statistik :singularLabel "Statistics"@en ,
+    "Statistik"@sv ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Statistics ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Rollspel :singularLabel "Roleplaying Game"@en ,
+    "Rollspel"@sv ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Spel%20och%20tanken%C3%B6tter :narrowMatch marc:Puzzle ,
+    marc:Game ,
+    marc:VisualMaterialType-g ;
+  :closeMatch marc:VisualMaterialType-g ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026158> ;
+  :singularLabel "Puzzle or game"@en ,
+    "Spel eller tankenöt"@sv ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:F%C3%B6rteckningar :singularLabel "Register"@en ,
+    "Förteckning"@sv ;
+  :broader saogf:Samlande%20resurser ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:F%C3%B6rel%C3%A4sningar :singularLabel "Lecture"@en ,
+    "Föreläsning"@sv ;
+  :broader saogf:L%C3%A4romedel ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:TAKK :singularLabel "Hand-signed Communication"@en ,
+    "TAKK"@sv ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:L%C3%A4romedel :singularLabel "Teaching Material"@en ,
+    "Läromedel"@sv ;
+  :closeMatch marc:ProgrammedText ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Instruktions-%20och%20undervisningsmaterial :prefLabel "Instruktions- och undervisningsmaterial"@sv ;
+  :narrowMatch marc:Instruction ;
+  :seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Juridiskt%20material :prefLabel "Legal material"@en ,
+    "Juridiskt material"@sv ;
+  :narrowMatch marc:LegalCaseOrCaseNote ,
+    marc:LawReportOrDigest ,
+    marc:Legislation ,
+    marc:LegalArticle ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kursmaterial :singularLabel "Course Material"@en ,
+    "Kursmaterial"@sv ;
+  :broader saogf:L%C3%A4romedel ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kontrollerade%20vokabul%C3%A4rer :singularLabel "Controlled Vocabulary"@en ,
+    "Kontrollerad vokabulär"@sv ;
+  :broader saogf:Referensverk ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Konferensmaterial :singularLabel "Conference Material"@en ,
+    "Konferensmaterial"@sv ;
+  :closeMatch marc:ConferencePublication ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Samlingsverk :singularLabel "Collected Work"@en ,
+    "Samlingsverk"@sv ;
+  :broader saogf:Samlande%20resurser ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Arkiv :singularLabel "Archive"@en ,
+    "Arkiv"@sv ;
+  :broader saogf:Samlande%20resurser ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Samlande%20resurser :singularLabel "Samlande resurs"@sv ;
+  :prefLabel "Samlande resurser"@sv ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kataloger :singularLabel "Catalogue"@en ,
+    "Katalog"@sv ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Catalog ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Kalendrar :singularLabel "Calendar"@en ,
+    "Kalender"@sv ;
+  :narrowMatch marc:MapsFormatType-k ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Calendar ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Bibliografier :singularLabel "Bibliography"@en ,
+    "Bibliografi"@sv ;
+  :narrowMatch marc:Bibliography ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Almanackor :singularLabel "Almanac"@en ,
+    "Almanacka"@sv ;
+  :related saogf:Seriella%20publikationer ;
+  :broader saogf:Referensverk ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Seriella%20publikationer :singularLabel "Serial publication"@en ,
+    "Seriella publikationer"@sv ;
+  :broader saogf:Samlande%20resurser ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Sammanfattningar :singularLabel "Abstract Summary"@en ,
+    "Sammanfattning"@sv ;
+  :seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
+  :exactMatch marc:AbstractsSummary ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Informativa%20verk :singularLabel "Informative Work"@en ,
+    "Informativt verk"@sv ;
+  :broader saogf:Icke-fiktion ;
+  :inCollection div:identify ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Icke-fiktion :prefLabel "Icke-fiktion"@sv ,
+    "Non- fiction"@en ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Fiktion :prefLabel "Fiktion"@sv ,
+    "Fiction"@en ;
+  a :Genre ;
+  :inScheme <https://id.kb.se/term/saogf> .
+
+saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
+
+saogf:Offentligt%20tryck a :GenreForm .
+
+saogf:Offentligt%20tryck%20%28tidskrifter%29 :broader saogf:Periodika .
+
+saogf:%C3%96vriga%20tidskrifter a :Resource ;
+  :isReplacedBy saogf:Periodika .
 
 saogf:Samh%C3%A4llsinformation a :Genre ;
   :broader saogf:Periodika .
 
+saogf:Kulturtidskrifter :broader saogf:Periodika .
+
 saogf:Organisationspress :broader saogf:Periodika .
-
-saogf:Pamfletter a :ExpressionForm ;
-  :broader saogf:Broschyrer ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Pamphlet"@en ,
-    "Pamflett"@sv .
-
-saogf:Parafraser a :Genre .
-
-saogf:Parl%C3%B6rer a :GenreForm ;
-  :broader saogf:B%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Phrase book"@en ,
-    "Parlör"@sv .
-
-saogf:Parodier a :Genre .
-
-saogf:Partipress :broader saogf:Periodika .
-
-saogf:Pastischer a :Genre .
-
-saogf:Patent a :Genre ;
-  :closeMatch marc:PatentDocument ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Patent"@en ,
-    "Patent"@sv .
-
-saogf:Patienttidskrifter :broader saogf:Periodika .
-
-saogf:Personaltidningar :broader saogf:Periodika .
-
-saogf:Perspektivbilder :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:View ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Perspectice views"@en ,
-    "Perspektivbilder"@sv ;
-  :singularLabel "Perspectice view"@en ,
-    "Perspektivbild"@sv .
-
-saogf:Pikareskromaner a :GenreForm .
-
-saogf:Poddar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Ljudprogram ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Podcasts"@en ,
-    "Poddar"@sv ;
-  :singularLabel "Podcast"@en ,
-    "Podcast"@sv .
-
-saogf:Poesi a :GenreForm ;
-  :broader saogf:Sk%C3%B6nlitteratur ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> ,
-    marc:Poetry ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Poetry"@en ,
-    "Poesi"@sv .
-
-saogf:Politiska%20skildringar a :Genre .
-
-saogf:Politiska%20tidskrifter :broader saogf:Periodika .
-
-saogf:Pop-up-b%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Mekaniska%20b%C3%B6cker ,
-    saogf:Illustrerade%20verk ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Pop-up bOok"@en ,
-    "Pop-up-bok"@sv .
-
-saogf:Popul%C3%A4rpress :broader saogf:Periodika .
-
-saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
-
-saogf:Porrtidningar :broader saogf:Periodika .
-
-saogf:Portr%C3%A4tt :exactMatch marc:Portrait ,
-    tgm:Portr%C3%A4tt ;
-  :inScheme <https://id.kb.se/term/saogf> .
-
-saogf:Produktkataloger :exactMatch tgm:Produktkataloger .
-
-saogf:Program%20%28publikationer%29 a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Publication Programme"@en ,
-    "Programblad"@sv .
-
-saogf:Psykologiska%20skildringar a :Genre .
-
-saogf:Pussel a :ExpressionForm ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
-    saogf:Interaktiva%20objekt ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Puzzle"@en ,
-    "Pussel"@sv .
-
-saogf:Pysselb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
-    saogf:B%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Puzzle book"@en ,
-    "Pysselbok"@sv .
-
-saogf:Radio :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader ktg:Audio ;
-  :category div:abstract ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Radio"@en ,
-    "Radio"@sv .
-
-saogf:Radioprogram a :ExpressionForm ;
-  :broader saogf:Radio ,
-    saogf:Ljudprogram ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Radio Program"@en ,
-    "Radioprogram"@sv .
-
-saogf:Ramber%C3%A4ttelser a :Genre .
-
-saogf:Reality-tv :broader saogf:TV .
-
-saogf:Rebusar :exactMatch tgm:Rebusar .
-
-saogf:Recensioner a :Genre ;
-  :closeMatch marc:Review ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Review"@en ,
-    "Recension"@sv .
-
-saogf:Relationsskildringar a :Genre .
-
-saogf:Religi%C3%B6sa%20skildringar a :Genre .
 
 saogf:Religi%C3%B6sa%20tidskrifter :broader saogf:Periodika .
 
-saogf:Reportage a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Reportage"@en ,
-    "Reportage"@sv .
+saogf:Hembygdstidskrifter :broader saogf:Periodika .
 
-saogf:Risografier :exactMatch tgm:Risografier .
+saogf:Patienttidskrifter :broader saogf:Periodika .
 
-saogf:Ritningar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :exactMatch tgm:Ritningar ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Design drawings"@en ,
-    "Ritningar"@sv ;
-  :singularLabel "Design drawing"@en ,
-    "Ritning"@sv .
+saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
 
-saogf:Robinsonader a :Genre .
-
-saogf:Rollspel a :Genre ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Roleplaying Game"@en ,
-    "Rollspel"@sv .
-
-saogf:Romaner a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Sk%C3%B6nlitteratur ;
-  :closeMatch marc:Novel ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Novel"@en ,
-    "Roman"@sv .
-
-saogf:Rymdopera a :Genre .
-
-saogf:S%C3%A4gner a :Genre .
-
-saogf:Sagor a :Genre .
-
-saogf:Samh%C3%A4llskritiska%20skildringar a :Genre .
-
-saogf:Samh%C3%A4llsskildringar a :Genre .
-
-saogf:Samlingsverk a :Genre ;
-  :broader saogf:Samlande%20resurser ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Collected Work"@en ,
-    "Samlingsverk"@sv .
-
-saogf:Sammanfattningar a :Genre ;
-  :exactMatch marc:AbstractsSummary ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
-  :singularLabel "Abstract Summary"@en ,
-    "Sammanfattning"@sv .
-
-saogf:Sanna%20%C3%A4ventyrsber%C3%A4ttelser :broader saogf:%C3%84ventyrsskildringar .
-
-saogf:Satir a :Genre .
-
-saogf:Science%20fiction a :Genre .
-
-saogf:Screentryck :exactMatch tgm:Screentryck .
-
-saogf:Sedeskildringar a :Genre .
-
-saogf:Serienoveller a :ExpressionForm ;
-  :broader saogf:Noveller ,
-    saogf:Tecknade%20serier ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Comic Story"@en ,
-    "Serienovell"@sv .
-
-saogf:Tecknade%20serier a :ExpressionForm ;
-  :altLabel "Serier"@sv ;
-  :broader saogf:Grafisk%20litteratur ;
-  :exactMatch marc:ComicOrGraphicNovel ,
-    tgm:Tecknade%20serier ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Comic or graphic novel"@en ,
-    "Tecknad serie"@sv .
-
-saogf:Serieromaner a :GenreForm ;
-  :broader saogf:Tecknade%20serier ,
-    saogf:Romaner ,
-    kbrda:Text ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Graphic Novel"@en ,
-    "Serieroman"@sv .
-
-saogf:Seriestrippar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Tecknade%20serier ;
-  :exactMatch marc:ComicStrip ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Comic strips"@en ,
-    "Seriestrippar"@sv ;
-  :singularLabel "Comic strip"@en ,
-    "Seriestripp"@sv .
-
-saogf:Serietidningar a :ExpressionForm ;
-  :broader saogf:Tecknade%20serier ,
-    saogf:Periodika ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Comic magazine"@en ,
-    "Serietidning"@sv ;
-  :exactMatch tgm:Serietidningar .
-
-saogf:Sj%C3%A4lvbiografier a :Genre ;
-  :broader saogf:Biografier ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
-  :exactMatch marc:Autobiography ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Memoir ;
-  :singularLabel "Autobiography"@en ,
-    "Självbiografi"@sv .
-
-saogf:Sj%C3%A4lvbiografiska%20skildringar a :Genre .
-
-saogf:Sj%C3%A4lvportr%C3%A4tt :exactMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
-
-saogf:Sj%C3%B6ber%C3%A4ttelser a :Genre .
-
-saogf:Sjukdomsskildringar a :Genre .
-
-saogf:Sk%C3%A4mttidningar :broader saogf:Periodika .
-
-saogf:Skisser :exactMatch tgm:Skisser .
-
-saogf:Skoltidningar :broader saogf:Periodika .
-
-saogf:Skr%C3%A4ck a :Genre .
-
-saogf:Skulpturer :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Sculptures"@en ,
-    "Skulpturer"@sv ;
-  :singularLabel "Sculpture"@en ,
-    "Skulptur"@sv .
-
-saogf:Sl%C3%A4ktber%C3%A4ttelser a :Genre .
-
-saogf:Sl%C3%A4ktskildringar a :Genre .
-
-saogf:Sp%C3%B6khistorier a :Genre .
-
-saogf:Specialtidningar :broader saogf:Periodika .
-
-saogf:Sporttidskrifter :broader saogf:Periodika .
-
-saogf:Standarder a :Genre ;
-  :broader saogf:Referensverk ;
-  :closeMatch marc:StandardsSpecification ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Standard"@en ,
-    "Standard"@sv .
-
-saogf:Statistik a :Genre ;
-  :broader saogf:Referensverk ;
-  :closeMatch marc:Statistics ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Statistics"@en ,
-    "Statistik"@sv .
-
-saogf:Steampunk a :Genre .
+saogf:Nyhetsmagasin :broader saogf:Periodika .
 
 saogf:Studenttidningar :broader saogf:Periodika .
 
-saogf:TAKK a :Genre ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Hand-signed Communication"@en ,
-    "TAKK"@sv .
+saogf:Litteraturtidskrifter :broader saogf:Periodika .
 
-saogf:Tabeller a :GenreForm ;
-  :broader saogf:Referensverk ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :related ktg:Dataset ;
-  :singularLabel "Tables"@en ,
-    "Tabell"@sv .
+saogf:Bibliografiska%20tidskrifter :broader saogf:Periodika .
 
-saogf:Tal%20%28retorik%29 a :Genre ;
-  :closeMatch marc:Speech ,
-    <http://id.loc.gov/authorities/genreForms/gf2011026363> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Rethorical speech"@en ,
-    "Retoriskt tal"@sv .
+saogf:Herrtidningar :broader saogf:Periodika .
 
-saogf:Talb%C3%B6cker a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Ljudb%C3%B6cker ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Spoken Book"@en ,
-    "Talbok"@sv .
+saogf:Familjetidningar :broader saogf:Periodika .
 
-saogf:Taltidningar a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Periodika ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Spoken Paper"@en ,
-    "Taltidning"@sv .
+saogf:Korsordstidningar :broader saogf:Periodika .
 
-saogf:Teaterprogram :exactMatch tgm:Teaterprogram .
+saogf:Frikyrkliga%20tidskrifter :broader saogf:Periodika .
 
-saogf:Teckningar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:Drawing ;
-  :exactMatch tgm:Teckningar ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Drawingar"@en ,
-    "Teckningar"@sv ;
-  :singularLabel "Drawing"@en ,
-    "Teckning"@sv .
+saogf:Sporttidskrifter :broader saogf:Periodika .
 
-saogf:Textblad :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:Text ,
-    saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Text leaf"@en ,
-    "Textblad"@sv .
+saogf:Personaltidningar :broader saogf:Periodika .
 
-saogf:Texth%C3%A4ften :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader kbrda:Text ,
-    saogf:Kortare%20texter ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Booklets"@en ,
-    "Texthäften"@sv ;
-  :singularLabel "Booklet"@en ,
-    "Texthäfte"@sv .
+saogf:Partipress :broader saogf:Periodika .
 
-saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
+saogf:Branschtidningar :broader saogf:Periodika .
 
-saogf:Tidskriftsnummer :inCollection div:constructed ;
-  a :GenreForm ;
-  :broader saogf:Kortare%20texter ;
-  :closeMatch marcgt:iss ;
-  :exactMatch <https://id.kb.se/term/repr/Issue> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Periodical Issue"@en ,
-    "Tidskriftsnummer"@sv ;
-  :singularLabel "Periodical Issue"@en .
+saogf:Vetenskapliga%20tidskrifter :broader saogf:Periodika .
 
-saogf:Tidtabeller a :GenreForm ;
-  :broader saogf:Efem%C3%A4rt%20material ,
-    saogf:Tabeller ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Timetable"@en ,
-    "Tidtabell"@sv ;
-  :exactMatch tgm:Tidtabeller .
+saogf:Damtidningar :broader saogf:Periodika .
 
-saogf:Tillf%C3%A4llespoesi a :GenreForm .
+saogf:Fanziner :broader saogf:Periodika .
 
-saogf:Tragedier a :Genre .
+saogf:Musiktidskrifter :broader saogf:Periodika .
 
-saogf:Trailrar a :ExpressionForm ;
-  :broader saogf:Filmer ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Trailer"@en ,
-    "Trailer"@sv .
+saogf:Modetidningar :broader saogf:Periodika .
 
-saogf:Tv-program a :ExpressionForm ;
-  :broader saogf:TV ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "TV-Program"@en ,
-    "Tv-program"@sv .
+saogf:Porrtidningar :broader saogf:Periodika .
 
-saogf:Tv-serier a :ExpressionForm ;
-  :broader saogf:TV ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "TV-Series"@en ,
-    "Tv-serie"@sv .
+saogf:Kundtidningar :broader saogf:Periodika .
+
+saogf:Specialtidningar :broader saogf:Periodika .
+
+saogf:Fackf%C3%B6rbundspress :broader saogf:Periodika .
 
 saogf:Ungdomstidningar :broader saogf:Periodika .
 
+saogf:Barntidningar :broader saogf:Periodika .
+
+saogf:Serietidningar :broader saogf:Periodika .
+
+saogf:Jultidningar :broader saogf:Periodika .
+
+saogf:Politiska%20tidskrifter :broader saogf:Periodika .
+
+saogf:Popul%C3%A4rpress :broader saogf:Periodika .
+
+saogf:Skoltidningar :broader saogf:Periodika .
+
+saogf:Annonstidningar :broader saogf:Periodika .
+
+saogf:Sk%C3%A4mttidningar :broader saogf:Periodika .
+
+saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
+
+saogf:Experimentell%20sk%C3%B6nlitteratur a :GenreForm .
+
+saogf:Dialektlitteratur a :GenreForm .
+
+saogf:Sagor a :Genre .
+
+saogf:Folksagor a :Genre .
+
+saogf:Konstsagor a :Genre .
+
+saogf:Parafraser a :Genre .
+
+saogf:Pastischer a :Genre .
+
+saogf:F%C3%B6ljetonger a :Genre .
+
+saogf:Ramber%C3%A4ttelser a :Genre .
+
+saogf:Dramatik a :Genre .
+
+saogf:Satir a :Genre .
+
+saogf:Komedier a :Genre .
+
+saogf:Farser a :Genre .
+
+saogf:Erotiska%20skildringar a :Genre .
+
+saogf:Homoerotiska%20skildringar a :Genre .
+
+saogf:Gotiska%20ber%C3%A4ttelser a :Genre .
+
+saogf:Humoristiska%20skildringar a :Genre .
+
+saogf:Skr%C3%A4ck a :Genre .
+
+saogf:Sp%C3%B6khistorier a :Genre .
+
+saogf:Deckare a :Genre .
+
+saogf:Fantasy a :Genre .
+
 saogf:Urban%20fantasy a :Genre .
 
-saogf:Urklipp :exactMatch tgm:Urklipp .
+saogf:Science%20fiction a :Genre .
+
+saogf:Dystopier a :Genre .
 
 saogf:Utopier a :Genre .
 
-saogf:Utst%C3%A4llningskataloger :exactMatch tgm:Utst%C3%A4llningskataloger .
+saogf:Rymdopera a :Genre .
 
-saogf:Utvecklingsromaner a :GenreForm .
+saogf:Steampunk a :Genre .
+
+saogf:Cyberpunk a :Genre .
+
+saogf:Fabler a :Genre .
 
 saogf:V%C3%A4sternskildringar a :Genre .
 
+saogf:Apokalyptiska%20skildringar a :Genre .
+
+saogf:Dokument%C3%A4ra%20skildringar a :Genre .
+
+saogf:Framtidsskildringar a :Genre .
+
+saogf:Arbetarskildringar a :Genre .
+
 saogf:Versber%C3%A4ttelser a :Genre .
 
-saogf:Vetenskapliga%20tidskrifter a :GenreForm ;
-  :broader saogf:Periodika ;
-  :closeMatch marcgt:jou ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Journal"@en ,
-    "Vetenskaplig tidskrift"@sv .
+saogf:Sjukdomsskildringar a :Genre .
 
-saogf:Videoupptagningar :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader ktg:MovingImage ;
-  :closeMatch marc:Videorecording ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Videorecordings"@en ,
-    "Videoupptagningar"@sv ;
-  :singularLabel "Videorecording"@en ,
-    "Videoupptagning"@sv .
+saogf:Relationsskildringar a :Genre .
 
-saogf:Violone :exactMatch <https://libris.kb.se/sq47gb6b3x14v12#it> .
+saogf:K%C3%A4rleksskildringar a :Genre .
+
+saogf:Samh%C3%A4llskritiska%20skildringar a :Genre .
+
+saogf:Djurskildringar a :Genre .
+
+saogf:Sedeskildringar a :Genre .
+
+saogf:Kontrafaktisk%20historia a :Genre .
+
+saogf:Sj%C3%B6ber%C3%A4ttelser a :Genre .
+
+saogf:Religi%C3%B6sa%20skildringar a :Genre .
+
+saogf:Bibliska%20ber%C3%A4ttelser a :Genre .
+
+saogf:Sl%C3%A4ktber%C3%A4ttelser a :Genre .
+
+saogf:%C3%84ventyrsskildringar a :Genre .
+
+saogf:Psykologiska%20skildringar a :Genre .
+
+saogf:Barndomsskildringar a :Genre .
+
+saogf:Familjeskildringar a :Genre .
+
+saogf:Politiska%20skildringar a :Genre .
+
+saogf:Magisk%20realism a :Genre .
+
+saogf:Samh%C3%A4llsskildringar a :Genre .
+
+saogf:Robinsonader a :Genre .
+
+saogf:Historiska%20skildringar a :Genre .
+
+saogf:Episka%20skildringar a :Genre .
+
+saogf:Krigsskildringar a :Genre .
+
+saogf:Sl%C3%A4ktskildringar a :Genre .
+
+saogf:Biografiska%20skildringar a :Genre .
+
+saogf:Sj%C3%A4lvbiografiska%20skildringar a :Genre .
+
+saogf:Jaktskildringar a :Genre .
+
+saogf:Folkdiktning a :Genre .
+
+saogf:Ballader a :Genre .
+
+saogf:S%C3%A4gner a :Genre .
+
+saogf:Legender a :Genre .
+
+saogf:Allegorier a :Genre .
+
+saogf:Parodier a :Genre .
+
+saogf:Burlesker a :Genre .
+
+saogf:Dagboksromaner a :GenreForm .
+
+saogf:Utvecklingsromaner a :GenreForm .
+
+saogf:Serieromaner a :GenreForm .
+
+saogf:Kortromaner a :GenreForm .
+
+saogf:Pikareskromaner a :GenreForm .
+
+saogf:Kollektivromaner a :GenreForm .
+
+saogf:Kollektivpoesi a :GenreForm .
+
+saogf:Brev a :GenreForm .
+
+saogf:Brevromaner a :GenreForm .
+
+saogf:Nyckelromaner a :GenreForm .
+
+saogf:Tillf%C3%A4llespoesi a :GenreForm .
+
+saogf:Konkret%20poesi a :GenreForm .
 
 saogf:Visuell%20poesi a :GenreForm .
 
-saogf:Vykort a :ExpressionForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:PictureCardPostCard ;
-  :inCollection div:identify ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Postcard"@en ,
-    "Vykort"@sv ;
-  :exactMatch tgm:Vykort .
+saogf:Almanackor a :GenreForm .
 
-saogf:Vykortsb%C3%B6cker :inCollection div:constructed ;
-  a :ExpressionForm ;
-  :broader saogf:Vykort ,
-    saogf:B%C3%B6cker ;
-  :exactMatch tgm:Vykortsh%C3%A4ften ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Postcard books"@en ,
-    "Vykortsböcker"@sv ;
-  :singularLabel "Postcard book"@en ,
-    "Vykortsbok"@sv .
+saogf:Kalendrar a :GenreForm .
+
+saogf:Kataloger a :GenreForm .
+
+saogf:Spel%20och%20tanken%C3%B6tter a :GenreForm .
+
+saogf:Rollspel a :GenreForm .
+
+saogf:TAKK a :GenreForm .
+
+saogf:Tabeller a :GenreForm .
+
+saogf:Efem%C3%A4rt%20material a :GenreForm .
+
+saogf:Tidtabeller a :GenreForm .
+
+saogf:Parafraser a :Genre .
+
+saogf:Informativa%20verk a :Genre .
+
+saogf:Sammanfattningar a :Genre .
+
+saogf:Konferensmaterial a :Genre .
+
+saogf:Kontrollerade%20vokabul%C3%A4rer a :Genre .
+
+saogf:Kursmaterial a :Genre .
+
+saogf:Juridiskt%20material a :Genre .
+
+saogf:Instruktions-%20och%20undervisningsmaterial a :Genre .
+
+saogf:L%C3%A4romedel a :Genre .
+
+saogf:F%C3%B6rel%C3%A4sningar a :Genre .
+
+saogf:Statistik a :GenreForm .
+
+saogf:Tal%20%28retorik%29 a :Genre .
+
+saogf:Intervjuer a :Genre .
+
+saogf:Reportage a :Genre .
+
+saogf:Recensioner a :Genre .
+
+saogf:Reality-tv :broader saogf:TV .
+
+saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
+
+saogf:Tv-serier :broader saogf:TV .
+
+saogf:Tv-program :broader saogf:TV .
+
+saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
+
+saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
+
+saogf:Adventskalendrar :exactMatch tgm:Adventskalendrar .
+
+saogf:Autografer :exactMatch tgm:Autografer .
+
+saogf:Bilder :exactMatch tgm:Bilder .
+
+saogf:Blanketter :exactMatch tgm:Blanketter .
+
+saogf:Evighetskalendrar :exactMatch tgm:Evighetskalendrar .
+
+saogf:Fotografier :exactMatch tgm:Fotografier .
+
+saogf:Illustrationer :exactMatch tgm:Illustrationer .
+
+saogf:Kataloger :exactMatch tgm:Kataloger .
+
+saogf:Matsedlar :exactMatch tgm:Matsedlar .
+
+saogf:Mellanh%C3%B6g%20r%C3%B6st%20och%20piano :exactMatch <https://libris.kb.se/42gks6hn218vr88#it> .
+
+saogf:Portr%C3%A4tt :exactMatch tgm:Portr%C3%A4tt .
+
+saogf:Produktkataloger :exactMatch tgm:Produktkataloger .
+
+saogf:Rebusar :exactMatch tgm:Rebusar .
+
+saogf:Risografier :exactMatch tgm:Risografier .
+
+saogf:Screentryck :exactMatch tgm:Screentryck .
+
+saogf:Serietidningar :exactMatch tgm:Serietidningar .
+
+saogf:Sj%C3%A4lvportr%C3%A4tt :exactMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
+
+saogf:Skisser :exactMatch tgm:Skisser .
+
+saogf:Teaterprogram :exactMatch tgm:Teaterprogram .
+
+saogf:Tecknade%20serier :exactMatch tgm:Tecknade%20serier .
+
+saogf:Tidtabeller :exactMatch tgm:Tidtabeller .
+
+saogf:Urklipp :exactMatch tgm:Urklipp .
+
+saogf:Utst%C3%A4llningskataloger :exactMatch tgm:Utst%C3%A4llningskataloger .
+
+saogf:Violone :exactMatch <https://libris.kb.se/sq47gb6b3x14v12#it> .
+
+saogf:Vykort :exactMatch tgm:Vykort .
+
+saogf:Diskografier a :GenreForm ;
+  :narrowMatch marc:MusicMatterType-a .
+
+saogf:Forsknings%C3%B6versikter a :GenreForm ;
+  :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
+
+saogf:Musik a :Genre ;
+  :broader ktg:Music .
+
+saogf:Musikfilmer a :GenreForm ;
+  :broader saogf:Musik .
+
+saogf:Musikvideor a :GenreForm ;
+  :broader saogf:Musik .
+
+saogf:Musikspel :broader saogf:Musik .
+
+saogf:Musikrecensioner a :Genre .
+
+saogf:Julmusik :broader saogf:Musik .
+
+saogf:Pianokonserter :broader saogf:Musik .
+
+saogf:Skolorkestrar :broader saogf:Musik .
+
+saogf:Str%C3%A5korkester :broader saogf:Musik .
+
+saogf:Sviter :broader saogf:Musik .
+
+saogf:Danser%20%28musik%29 :broader saogf:Musik .
+
+saogf:Elektroakustisk%20musik :broader saogf:Musik .
+
+saogf:Filmmusik :broader saogf:Musik .
+
+saogf:Folkmusik :broader saogf:Musik .
+
+saogf:Gitarr :broader saogf:Musik .
+
+saogf:Gitarrskolor :broader saogf:Musik .
+
+saogf:Icke-v%C3%A4sterl%C3%A4ndska%20kulturers%20musik :broader saogf:Musik .
+
+saogf:Intermezzi%20%28lyriska%20instrumentalstycken%29 :broader saogf:Musik .
+
+saogf:Jazz :broader saogf:Musik .
+
+saogf:Luta :broader saogf:Musik .
+
+saogf:Piano%20%284%20h%C3%A4nder%29 :broader saogf:Musik .
+
+saogf:Slagverk :broader saogf:Musik .
+
+saogf:Storbandsjazz :broader saogf:Musik .
+
+saogf:Bas%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Tenor%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Pavaner :broader saogf:Musik .
+
+saogf:Chansoner :broader saogf:Musik .
+
+saogf:Diskantk%C3%B6r :broader saogf:Musik .
+
+saogf:Christmas%20carols :broader saogf:Musik .
+
+saogf:Tr%C3%A4bl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:Arior :broader saogf:Musik .
+
+saogf:Bleckbl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:Euphonium :broader saogf:Musik .
+
+saogf:Trombon :broader saogf:Musik .
+
+saogf:Tuba :broader saogf:Musik .
+
+saogf:Allemander :broader saogf:Musik .
+
+saogf:Intrada :broader saogf:Musik .
+
+saogf:Saltareller :broader saogf:Musik .
+
+saogf:Horn%20%28valthorn%29 :broader saogf:Musik .
+
+saogf:Latin%20music :broader saogf:Musik .
+
+saogf:Nocturner :broader saogf:Musik .
+
+saogf:Nonetter :broader saogf:Musik .
+
+saogf:Oboe :broader saogf:Musik .
+
+saogf:Revymusik :broader saogf:Musik .
+
+saogf:Violoncell%20och%20piano :broader saogf:Musik .
+
+saogf:Ensembler%20med%20tangentinstrument%2C%20str%C3%A5kinstrument%2C%20bl%C3%A5sinstrument%20och%20slagverk :broader saogf:Musik .
+
+saogf:Saxofonskolor :broader saogf:Musik .
+
+saogf:Countrymusik :broader saogf:Musik .
+
+saogf:Fantasier%20%28musik%29 :broader saogf:Musik .
+
+saogf:Kanons :broader saogf:Musik .
+
+saogf:Rapsodier%20%28musik%29 :broader saogf:Musik .
+
+saogf:Religi%C3%B6s%20musik :broader saogf:Musik .
+
+saogf:Violinsonater :broader saogf:Musik .
+
+saogf:Legendspel :broader saogf:Musik .
+
+saogf:Mysteriespel%20%28musik%29 :broader saogf:Musik .
+
+saogf:Ensembler%20med%20bl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:Ensembler%20med%20tangentinstrument%2C%20str%C3%A5kinstrument%20och%20bl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:Rondon :broader saogf:Musik .
+
+saogf:Vokalensemble :broader saogf:Musik .
+
+saogf:Elektronisk%20musik :broader saogf:Musik .
+
+saogf:Maria-antifoner :broader saogf:Musik .
+
+saogf:Fl%C3%B6jtkonserter :broader saogf:Musik .
+
+saogf:Humor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Sketcher :broader saogf:Musik .
+
+saogf:Toccator :broader saogf:Musik .
+
+saogf:Violoncellkonserter :broader saogf:Musik .
+
+saogf:Boogie-woogie :broader saogf:Musik .
+
+saogf:Polkor :broader saogf:Musik .
+
+saogf:Ballader%20%28instrumentalmusik%29 :broader saogf:Musik .
+
+saogf:Koralbearbetningar :broader saogf:Musik .
+
+saogf:Adventsmusik :broader saogf:Musik .
+
+saogf:Klarinettkonserter :broader saogf:Musik .
+
+saogf:Trumma :broader saogf:Musik .
+
+saogf:Bassetthorn :broader saogf:Musik .
+
+saogf:Hambo :broader saogf:Musik .
+
+saogf:Preludium%20och%20fuga :broader saogf:Musik .
+
+saogf:Tersetter :broader saogf:Musik .
+
+saogf:Inventioner%20%28musik%29 :broader saogf:Musik .
+
+saogf:Violone :broader saogf:Musik .
+
+saogf:Hardangerfela :broader saogf:Musik .
+
+saogf:Polskor :broader saogf:Musik .
+
+saogf:Reel :broader saogf:Musik .
+
+saogf:Concerti%20grossi :broader saogf:Musik .
+
+saogf:Black%20metal :broader saogf:Musik .
+
+saogf:Nationals%C3%A5nger :broader saogf:Musik .
+
+saogf:Modernism%20%28musik%29 :broader saogf:Musik .
+
+saogf:Ensembler%20med%20bl%C3%A5sinstrument%20och%20slagverk :broader saogf:Musik .
+
+saogf:Tv-musik :broader saogf:Musik .
+
+saogf:Pastoraler :broader saogf:Musik .
+
+saogf:Str%C3%A4nginstrument :broader saogf:Musik .
+
+saogf:Positiv%20%28vevpositiv%29 :broader saogf:Musik .
+
+saogf:Studentspex%20%28musik%29 :broader saogf:Musik .
+
+saogf:Signaler%20%28musik%29 :broader saogf:Musik .
+
+saogf:Vesper :broader saogf:Musik .
+
+saogf:Bicinier :broader saogf:Musik .
+
+saogf:Responsorier :broader saogf:Musik .
+
+saogf:Altsaxofon :broader saogf:Musik .
+
+saogf:F%C3%A4ltinspelningar :broader saogf:Musik .
+
+saogf:Melodramer%20%28musik%29 :broader saogf:Musik .
+
+saogf:Instrumentalensembler :broader saogf:Musik .
+
+saogf:Romersk-katolsk%20kyrkomusik :broader saogf:Musik .
+
+saogf:Melodipsalmb%C3%B6cker :broader saogf:Musik .
+
+saogf:Sagospel :broader saogf:Musik .
+
+saogf:Vissling :broader saogf:Musik .
+
+saogf:Jazzfunk :broader saogf:Musik .
+
+saogf:Operettlibretton :broader saogf:Musik .
+
+saogf:Tideg%C3%A4rd%20%28musik%29 :broader saogf:Musik .
+
+saogf:Lamentationer :broader saogf:Musik .
+
+saogf:Meditationsmusik :broader saogf:Musik .
+
+saogf:Harpkonserter :broader saogf:Musik .
+
+saogf:Canzonette :broader saogf:Musik .
+
+saogf:Capoeira%20%28musik%29 :broader saogf:Musik .
+
+saogf:Klostermusik :broader saogf:Musik .
+
+saogf:Mandola :broader saogf:Musik .
+
+saogf:Gloria%20%28musik%29 :broader saogf:Musik .
+
+saogf:Signalhorn :broader saogf:Musik .
+
+saogf:Square%20dance%20%28musik%29 :broader saogf:Musik .
+
+saogf:Signaltrumpet :broader saogf:Musik .
+
+saogf:Lundum :broader saogf:Musik .
+
+saogf:Springar :broader saogf:Musik .
+
+saogf:Mizmar :broader saogf:Musik .
+
+saogf:B%C3%A4lginstrument :broader saogf:Musik .
+
+saogf:Dobro :broader saogf:Musik .
+
+saogf:Francaiser :broader saogf:Musik .
+
+saogf:Kayakeum :broader saogf:Musik .
+
+saogf:Kebyar :broader saogf:Musik .
+
+saogf:Kecak :broader saogf:Musik .
+
+saogf:Keman :broader saogf:Musik .
+
+saogf:Credo%20%28musik%29 :broader saogf:Musik .
+
+saogf:Durspel :broader saogf:Musik .
+
+saogf:Erhu :broader saogf:Musik .
+
+saogf:Helikon :broader saogf:Musik .
+
+saogf:Kammarsymfonier :broader saogf:Musik .
+
+saogf:Offertorium%20%28musik%29 :broader saogf:Musik .
+
+saogf:Glasharpa :broader saogf:Musik .
+
+saogf:Programsignaturer%20%28musik%29 :broader saogf:Musik .
+
+saogf:Polsktrall :broader saogf:Musik .
+
+saogf:Cancan :broader saogf:Musik .
+
+saogf:Cirkusmusik :broader saogf:Musik .
+
+saogf:Kabar%C3%A9musik :broader saogf:Musik .
+
+saogf:Serpent :broader saogf:Musik .
+
+saogf:Balalajkakonserter :broader saogf:Musik .
+
+saogf:Calves :broader saogf:Musik .
+
+saogf:Cimbalom :broader saogf:Musik .
+
+saogf:Kugak :broader saogf:Musik .
+
+saogf:Vit%20makt-musik :broader saogf:Musik .
+
+saogf:Impressionism%20%28musik%29 :broader saogf:Musik .
+
+saogf:Kroncong :broader saogf:Musik .
+
+saogf:Marintrumpet :broader saogf:Musik .
+
+saogf:Marionettoperor :broader saogf:Musik .
+
+saogf:Congas :broader saogf:Musik .
+
+saogf:I%20ching%20%28musik%29 :broader saogf:Musik .
+
+saogf:Musikb%C3%A5ge :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20accordeon :broader saogf:Musik .
+
+saogf:Sarangi :broader saogf:Musik .
+
+saogf:Djembe :broader saogf:Musik .
+
+saogf:Jazzbalettmusik :broader saogf:Musik .
+
+saogf:Visselpipa :broader saogf:Musik .
+
+saogf:Tambura :broader saogf:Musik .
+
+saogf:Sorgmarscher :broader saogf:Musik .
+
+saogf:Klockspel%20%28fasta%29 :broader saogf:Musik .
+
+saogf:Kassationer :broader saogf:Musik .
+
+saogf:Kastanjetter :broader saogf:Musik .
+
+saogf:Cembaloinstrument :broader saogf:Musik .
+
+saogf:Emigrantvisor :broader saogf:Musik .
+
+saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
+
+saogf:Blues :broader saogf:Musik .
+
+saogf:Orgel :broader saogf:Musik .
+
+saogf:Ambient%20musik :broader saogf:Musik .
+
+saogf:Blockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Duetter :broader saogf:Musik .
+
+saogf:Duor :broader saogf:Musik .
+
+saogf:Folkdans%20%28musik%29 :broader saogf:Musik .
+
+saogf:Galliarder :broader saogf:Musik .
+
+saogf:Kvartetter :broader saogf:Musik .
+
+saogf:Munspel :broader saogf:Musik .
+
+saogf:Trior :broader saogf:Musik .
+
+saogf:Trumpet%20och%20piano :broader saogf:Musik .
+
+saogf:Violinkonserter :broader saogf:Musik .
+
+saogf:Sopran%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Sopranblockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Elegier%20%28musik%29 :broader saogf:Musik .
+
+saogf:Koraler :broader saogf:Musik .
+
+saogf:Kyrkomusik :broader saogf:Musik .
+
+saogf:Bleckbl%C3%A5sensembler :broader saogf:Musik .
+
+saogf:Preparerat%20piano :broader saogf:Musik .
+
+saogf:Sextetter :broader saogf:Musik .
+
+saogf:Sk%C3%A5despelsmusik :broader saogf:Musik .
+
+saogf:Trumset :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20gitarr :broader saogf:Musik .
+
+saogf:Religi%C3%B6s%20k%C3%B6rmusik :broader saogf:Musik .
+
+saogf:Violinskolor :broader saogf:Musik .
+
+saogf:Br%C3%B6llopsmusik :broader saogf:Musik .
+
+saogf:Romsk%20musik :broader saogf:Musik .
+
+saogf:Trombonskolor :broader saogf:Musik .
+
+saogf:Motetter :broader saogf:Musik .
+
+saogf:Dubstep :broader saogf:Musik .
+
+saogf:Funk%20%28musik%29 :broader saogf:Musik .
+
+saogf:Kantater :broader saogf:Musik .
+
+saogf:Mezzosopran%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20basso%20continuo :broader saogf:Musik .
+
+saogf:Romanser :broader saogf:Musik .
+
+saogf:Salsa :broader saogf:Musik .
+
+saogf:Ljudkonst :broader saogf:Musik .
+
+saogf:Oratorier :broader saogf:Musik .
+
+saogf:Twist :broader saogf:Musik .
+
+saogf:Marimba :broader saogf:Musik .
+
+saogf:Menuetter :broader saogf:Musik .
+
+saogf:Passioner%20%28musik%29 :broader saogf:Musik .
+
+saogf:Ave%20Maria :broader saogf:Musik .
+
+saogf:Musikteater :broader saogf:Musik .
+
+saogf:Religi%C3%B6sa%20oratorier :broader saogf:Musik .
+
+saogf:Capricer :broader saogf:Musik .
+
+saogf:Slumpmusik :broader saogf:Musik .
+
+saogf:Ren%C3%A4ssansmusik :broader saogf:Musik .
+
+saogf:Barockmusik :broader saogf:Musik .
+
+saogf:Hornkonserter :broader saogf:Musik .
+
+saogf:Str%C3%A5kar :broader saogf:Musik .
+
+saogf:Horn%20%28valthorn%29%20och%20piano :broader saogf:Musik .
+
+saogf:Violoncellsonater :broader saogf:Musik .
+
+saogf:Banjo :broader saogf:Musik .
+
+saogf:Pianosonater :broader saogf:Musik .
+
+saogf:Barbershop :broader saogf:Musik .
+
+saogf:Trombon%20och%20piano :broader saogf:Musik .
+
+saogf:Baletter :broader saogf:Musik .
+
+saogf:Cittra :broader saogf:Musik .
+
+saogf:Pianokvartetter :broader saogf:Musik .
+
+saogf:Ricercari :broader saogf:Musik .
+
+saogf:Pantomimmusik :broader saogf:Musik .
+
+saogf:Mellanh%C3%B6g%20r%C3%B6st%20och%20piano :broader saogf:Musik .
+
+saogf:Romantik%20%28musik%29 :broader saogf:Musik .
+
+saogf:Nu%20jazz :broader saogf:Musik .
+
+saogf:Orkesterkonserter :broader saogf:Musik .
+
+saogf:Gitarrspel :broader saogf:Musik .
+
+saogf:Barnoperor :broader saogf:Musik .
+
+saogf:Partitor :broader saogf:Musik .
+
+saogf:Gitarrkonserter :broader saogf:Musik .
+
+saogf:Enst%C3%A4mmiga%20sekvenser :broader saogf:Musik .
+
+saogf:Gavotter :broader saogf:Musik .
+
+saogf:Improvisationsmusik :broader saogf:Musik .
+
+saogf:Madrigalkomedier :broader saogf:Musik .
+
+saogf:Ensembler%20med%20tangentinstrument%20och%20slagverk :broader saogf:Musik .
+
+saogf:Text-ljudkompositioner :broader saogf:Musik .
+
+saogf:Sprechstimme :broader saogf:Musik .
+
+saogf:Manierismen%20%28musik%29 :broader saogf:Musik .
+
+saogf:Milit%C3%A4rmarscher :broader saogf:Musik .
+
+saogf:Tradjazz :broader saogf:Musik .
+
+saogf:Barkaroller :broader saogf:Musik .
+
+saogf:Berceuser :broader saogf:Musik .
+
+saogf:Doom%20metal :broader saogf:Musik .
+
+saogf:Parodier%20%28musik%29 :broader saogf:Musik .
+
+saogf:Trautonium :broader saogf:Musik .
+
+saogf:Broken%20consort :broader saogf:Musik .
+
+saogf:Melodifestivaler :broader saogf:Musik .
+
+saogf:Bronslurar :broader saogf:Musik .
+
+saogf:Schofar :broader saogf:Musik .
+
+saogf:Videfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Magdans%20%28musik%29 :broader saogf:Musik .
+
+saogf:S%C3%A5g%20%28musikinstrument%29 :broader saogf:Musik .
+
+saogf:Trummaskin :broader saogf:Musik .
+
+saogf:Techno :broader saogf:Musik .
+
+saogf:Religi%C3%B6sa%20kantater :broader saogf:Musik .
+
+saogf:Solos%C3%A5ng :broader saogf:Musik .
+
+saogf:Barnk%C3%B6r :broader saogf:Musik .
+
+saogf:Fanfarer :broader saogf:Musik .
+
+saogf:Orkester :broader saogf:Musik .
+
+saogf:Fugor :broader saogf:Musik .
+
+saogf:Str%C3%A5kkvartetter :broader saogf:Musik .
+
+saogf:Altblockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Etyder%20%28%C3%B6vningar%29 :broader saogf:Musik .
+
+saogf:Kontrabas :broader saogf:Musik .
+
+saogf:Musikaler :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20altblockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Studier%20%28musik%29 :broader saogf:Musik .
+
+saogf:Symfonier :broader saogf:Musik .
+
+saogf:Variationsverk :broader saogf:Musik .
+
+saogf:Ukulele :broader saogf:Musik .
+
+saogf:Uppl%C3%A4sningar%20med%20musik :broader saogf:Musik .
+
+saogf:Popul%C3%A4rmusik :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20orkester :broader saogf:Musik .
+
+saogf:Ballades%20%28fransk%20medeltidsform%29 :broader saogf:Musik .
+
+saogf:Fagott :broader saogf:Musik .
+
+saogf:Oboe%20och%20piano :broader saogf:Musik .
+
+saogf:Trumpet :broader saogf:Musik .
+
+saogf:Kyrkos%C3%A5ng :broader saogf:Musik .
+
+saogf:Str%C3%A5kkvintetter :broader saogf:Musik .
+
+saogf:Baryton%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Biograforgel :broader saogf:Musik .
+
+saogf:K%C3%A4rlekss%C3%A5nger :broader saogf:Musik .
+
+saogf:Bostonvals :broader saogf:Musik .
+
+saogf:Fl%C3%B6jtskolor :broader saogf:Musik .
+
+saogf:Politiska%20s%C3%A5nger :broader saogf:Musik .
+
+saogf:Bl%C3%A5sare :broader saogf:Musik .
+
+saogf:Liturgisk%20musik :broader saogf:Musik .
+
+saogf:Te%20Deum :broader saogf:Musik .
+
+saogf:Religi%C3%B6sa%20s%C3%A5nger :broader saogf:Musik .
+
+saogf:Slowfox :broader saogf:Musik .
+
+saogf:Andliga%20barnvisor :broader saogf:Musik .
+
+saogf:P%C3%A5skmusik :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20instrumentalensemble :broader saogf:Musik .
+
+saogf:Fagottkonserter :broader saogf:Musik .
+
+saogf:Trombonkonserter :broader saogf:Musik .
+
+saogf:Dragspel :broader saogf:Musik .
+
+saogf:Klarinett%20och%20piano :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20continuo :broader saogf:Musik .
+
+saogf:Ensembler%20med%20tangentinstrument%20och%20bl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:Blandade%20r%C3%B6ster :broader saogf:Musik .
+
+saogf:Concertinor :broader saogf:Musik .
+
+saogf:Gossk%C3%B6r :broader saogf:Musik .
+
+saogf:Dubbelkonserter :broader saogf:Musik .
+
+saogf:Programmusik :broader saogf:Musik .
+
+saogf:Violakonserter :broader saogf:Musik .
+
+saogf:Begravningsmusik :broader saogf:Musik .
+
+saogf:Industrimusik :broader saogf:Musik .
+
+saogf:Proggmusik :broader saogf:Musik .
+
+saogf:Br%C3%B6llopsmarscher :broader saogf:Musik .
+
+saogf:Kupletter :broader saogf:Musik .
+
+saogf:Viola%20da%20gamba :broader saogf:Musik .
+
+saogf:Electronic%20body%20music :broader saogf:Musik .
+
+saogf:Impromptun :broader saogf:Musik .
+
+saogf:%C3%85rstidsmusik :broader saogf:Musik .
+
+saogf:Vokalis :broader saogf:Musik .
+
+saogf:Revyer :broader saogf:Musik .
+
+saogf:V%C3%A5rs%C3%A5nger :broader saogf:Musik .
+
+saogf:Dalakoraler :broader saogf:Musik .
+
+saogf:Courantes :broader saogf:Musik .
+
+saogf:Teaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
+
+saogf:Profan%20k%C3%B6rmusik :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20kammarorkester :broader saogf:Musik .
+
+saogf:Ensembler%20med%20bleckbl%C3%A5sinstrument%20och%20slagverk :broader saogf:Musik .
+
+saogf:Orkester%20med%20vokala%20inslag :broader saogf:Musik .
+
+saogf:Rimofficier :broader saogf:Musik .
+
+saogf:Troper%20%28gregoriansk%20s%C3%A5ng%29 :broader saogf:Musik .
+
+saogf:Blockfl%C3%B6jt%20och%20piano :broader saogf:Musik .
+
+saogf:Ballate :broader saogf:Musik .
+
+saogf:Medeltidsmusik :broader saogf:Musik .
+
+saogf:Accordeon :broader saogf:Musik .
+
+saogf:Capriccio :broader saogf:Musik .
+
+saogf:Balladoperor :broader saogf:Musik .
+
+saogf:Oboekonserter :broader saogf:Musik .
+
+saogf:Scherzi :broader saogf:Musik .
+
+saogf:Nunc%20dimittis :broader saogf:Musik .
+
+saogf:Orgelensembler :broader saogf:Musik .
+
+saogf:Quodlibet :broader saogf:Musik .
+
+saogf:Legender%20%28musik%29 :broader saogf:Musik .
+
+saogf:Airs :broader saogf:Musik .
+
+saogf:Klockspel :broader saogf:Musik .
+
+saogf:Metallofon :broader saogf:Musik .
+
+saogf:Kontrabasharpa :broader saogf:Musik .
+
+saogf:Nyckelharpa :broader saogf:Musik .
+
+saogf:Tientos :broader saogf:Musik .
+
+saogf:Konserter%20%28framtr%C3%A4danden%29 :broader saogf:Musik .
+
+saogf:Mazurkor :broader saogf:Musik .
+
+saogf:Dragspelskolor :broader saogf:Musik .
+
+saogf:Klavikord :broader saogf:Musik .
+
+saogf:Milit%C3%A4ra%20signaler%20%28musik%29 :broader saogf:Musik .
+
+saogf:Patriotiska%20s%C3%A5nger :broader saogf:Musik .
+
+saogf:Rockoperor :broader saogf:Musik .
+
+saogf:Kontrabasklarinett :broader saogf:Musik .
+
+saogf:Galopper :broader saogf:Musik .
+
+saogf:Ljudeffekter :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20piano :broader saogf:Musik .
+
+saogf:Valser :broader saogf:Musik .
+
+saogf:Bagateller :broader saogf:Musik .
+
+saogf:Bl%C3%A5sorkester :broader saogf:Musik .
+
+saogf:Ensembler%20med%20str%C3%A5kinstrument :broader saogf:Musik .
+
+saogf:Konsertarior :broader saogf:Musik .
+
+saogf:Operor :broader saogf:Musik .
+
+saogf:Sonatiner :broader saogf:Musik .
+
+saogf:Viola :broader saogf:Musik .
+
+saogf:Viola%20och%20piano :broader saogf:Musik .
+
+saogf:Violin :broader saogf:Musik .
+
+saogf:Violoncell :broader saogf:Musik .
+
+saogf:Elektronisk%20popul%C3%A4rmusik :broader saogf:Musik .
+
+saogf:Glitch :broader saogf:Musik .
+
+saogf:Bl%C3%A5skvintetter :broader saogf:Musik .
+
+saogf:Ensembler%20med%20elektroakustiska%20inslag :broader saogf:Musik .
+
+saogf:Str%C3%A5ktrior :broader saogf:Musik .
+
+saogf:Harpa :broader saogf:Musik .
+
+saogf:Libretton :broader saogf:Musik .
+
+saogf:Toccata%20och%20fuga :broader saogf:Musik .
+
+saogf:Serenader :broader saogf:Musik .
+
+saogf:Ensembler%20med%20tangentinstrument :broader saogf:Musik .
+
+saogf:Vaudeviller :broader saogf:Musik .
+
+saogf:Keyboard :broader saogf:Musik .
+
+saogf:Basfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Balettmusik :broader saogf:Musik .
+
+saogf:Brasskvintetter :broader saogf:Musik .
+
+saogf:Cembalokonserter :broader saogf:Musik .
+
+saogf:Instrumentalmusik :broader saogf:Musik .
+
+saogf:Liturgisk%20s%C3%A5ng :broader saogf:Musik .
+
+saogf:Str%C3%A5ksextetter :broader saogf:Musik .
+
+saogf:Rekviem%20%28musik%29 :broader saogf:Musik .
+
+saogf:Dubbelpiano :broader saogf:Musik .
+
+saogf:Konserter%20%28form%29 :broader saogf:Musik .
+
+saogf:Passacaglior :broader saogf:Musik .
+
+saogf:Alt%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Elbas :broader saogf:Musik .
+
+saogf:Elgitarr :broader saogf:Musik .
+
+saogf:M%C3%A4ssor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Vibrafon :broader saogf:Musik .
+
+saogf:Ensembler%20med%20kn%C3%A4ppinstrument%20och%20bl%C3%A5sintrument :broader saogf:Musik .
+
+saogf:S%C3%A5ngteknik :broader saogf:Musik .
+
+saogf:Antifoner :broader saogf:Musik .
+
+saogf:Samba :broader saogf:Musik .
+
+saogf:Chaconner :broader saogf:Musik .
+
+saogf:Operetter :broader saogf:Musik .
+
+saogf:Vaggvisor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Tr%C3%A4bl%C3%A5sensembler :broader saogf:Musik .
+
+saogf:Trumpetkonserter :broader saogf:Musik .
+
+saogf:Postludier :broader saogf:Musik .
+
+saogf:Polon%C3%A4ser :broader saogf:Musik .
+
+saogf:Uppl%C3%A4sningar :broader saogf:Musik .
+
+saogf:Profana%20oratorier :broader saogf:Musik .
+
+saogf:Blockfl%C3%B6jtskolor :broader saogf:Musik .
+
+saogf:Basblockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Tenorblockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Decetter :broader saogf:Musik .
+
+saogf:Saxofonkvartetter :broader saogf:Musik .
+
+saogf:Fado :broader saogf:Musik .
+
+saogf:Bl%C3%A5ssextetter :broader saogf:Musik .
+
+saogf:Brassband :broader saogf:Musik .
+
+saogf:Sorgemusik :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20luta :broader saogf:Musik .
+
+saogf:Kammarensemble :broader saogf:Musik .
+
+saogf:Fl%C3%B6jt%20och%20orgel :broader saogf:Musik .
+
+saogf:Ondes%20Martenot :broader saogf:Musik .
+
+saogf:Kadenser :broader saogf:Musik .
+
+saogf:Cantica :broader saogf:Musik .
+
+saogf:Carols :broader saogf:Musik .
+
+saogf:Panfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Skolmusik :broader saogf:Musik .
+
+saogf:Countertenor%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Elektroakustiska%20bearbetningar :broader saogf:Musik .
+
+saogf:Klarinettskolor :broader saogf:Musik .
+
+saogf:Kyrkokonserter :broader saogf:Musik .
+
+saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
+
+saogf:Celesta :broader saogf:Musik .
+
+saogf:Sanctus%20%28musik%29 :broader saogf:Musik .
+
+saogf:Anglaiser :broader saogf:Musik .
+
+saogf:Oboesonater :broader saogf:Musik .
+
+saogf:Qin :broader saogf:Musik .
+
+saogf:Barytonhorn :broader saogf:Musik .
+
+saogf:Mandolin :broader saogf:Musik .
+
+saogf:Shakuhachi :broader saogf:Musik .
+
+saogf:Koral%20och%20fuga :broader saogf:Musik .
+
+saogf:A%20cappella :broader saogf:Musik .
+
+saogf:Blandad%20k%C3%B6r :broader saogf:Musik .
+
+saogf:Flerst%C3%A4mmiga%20m%C3%A4ssor :broader saogf:Musik .
+
+saogf:Improvisationer :broader saogf:Musik .
+
+saogf:Karakt%C3%A4rsstycken :broader saogf:Musik .
+
+saogf:Mansk%C3%B6r :broader saogf:Musik .
+
+saogf:Manskvartett :broader saogf:Musik .
+
+saogf:Piano :broader saogf:Musik .
+
+saogf:Pianoskolor :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20tangentinstrument :broader saogf:Musik .
+
+saogf:Slagverksgrupp :broader saogf:Musik .
+
+saogf:Sonater :broader saogf:Musik .
+
+saogf:Violin%20och%20piano :broader saogf:Musik .
+
+saogf:Visor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Fl%C3%B6jt :broader saogf:Musik .
+
+saogf:Fl%C3%B6jtsonater :broader saogf:Musik .
+
+saogf:K%C3%B6rs%C3%A5ng :broader saogf:Musik .
+
+saogf:Kammarmusik :broader saogf:Musik .
+
+saogf:Kontrabas%20och%20piano :broader saogf:Musik .
+
+saogf:Lieder :broader saogf:Musik .
+
+saogf:Psalmer%20%28musik%29 :broader saogf:Musik .
+
+saogf:S%C3%A5ngtexter :broader saogf:Musik .
+
+saogf:Vokalmusik :broader saogf:Musik .
+
+saogf:Preludier :broader saogf:Musik .
+
+saogf:Ren%C3%A4ssansluta :broader saogf:Musik .
+
+saogf:Klassisk%20musik :broader saogf:Musik .
+
+saogf:Pianotrior :broader saogf:Musik .
+
+saogf:Salongsmusik :broader saogf:Musik .
+
+saogf:Synt :broader saogf:Musik .
+
+saogf:Lucias%C3%A5nger :broader saogf:Musik .
+
+saogf:S%C3%A5ngcykler :broader saogf:Musik .
+
+saogf:Uvertyrer :broader saogf:Musik .
+
+saogf:Fl%C3%B6jt%20och%20piano :broader saogf:Musik .
+
+saogf:Salongsorkester :broader saogf:Musik .
+
+saogf:S%C3%A5ngspel :broader saogf:Musik .
+
+saogf:Triosonater :broader saogf:Musik .
+
+saogf:Barnvisor :broader saogf:Musik .
+
+saogf:Ensembler%20med%20slagverk :broader saogf:Musik .
+
+saogf:Ensembler%20med%20str%C3%A5kinstrument%20och%20bl%C3%A5sinstrument :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20orgel :broader saogf:Musik .
+
+saogf:Tema%20med%20variationer :broader saogf:Musik .
+
+saogf:Kvintetter :broader saogf:Musik .
+
+saogf:Bossa%20nova :broader saogf:Musik .
+
+saogf:Etyder%20%28konstmusik%29 :broader saogf:Musik .
+
+saogf:Skillingtryck :broader saogf:Musik .
+
+saogf:Barytonsaxofon :broader saogf:Musik .
+
+saogf:Basso%20continuo :broader saogf:Musik .
+
+saogf:Anthems :broader saogf:Musik .
+
+saogf:Hymner :broader saogf:Musik .
+
+saogf:Experimentell%20musik :broader saogf:Musik .
+
+saogf:Agnus%20Dei%20%28musik%29 :broader saogf:Musik .
+
+saogf:Kammarorkester :broader saogf:Musik .
+
+saogf:Magnificat :broader saogf:Musik .
+
+saogf:Profana%20kantater :broader saogf:Musik .
+
+saogf:Symfoniska%20dikter :broader saogf:Musik .
+
+saogf:Avslappningsmusik :broader saogf:Musik .
+
+saogf:Oktetter :broader saogf:Musik .
+
+saogf:Puka :broader saogf:Musik .
+
+saogf:Electronica :broader saogf:Musik .
+
+saogf:Marscher :broader saogf:Musik .
+
+saogf:Milit%C3%A4rmusik :broader saogf:Musik .
+
+saogf:Psalmb%C3%B6cker :broader saogf:Musik .
+
+saogf:Orkester%C3%B6vningar :broader saogf:Musik .
+
+saogf:Fagott%20och%20piano :broader saogf:Musik .
+
+saogf:Dansmusik :broader saogf:Musik .
+
+saogf:Saz :broader saogf:Musik .
+
+saogf:Humoresker :broader saogf:Musik .
+
+saogf:Unison%20s%C3%A5ng :broader saogf:Musik .
+
+saogf:Gospels%C3%A5ng :broader saogf:Musik .
+
+saogf:Canzone :broader saogf:Musik .
+
+saogf:Thrash%20metal :broader saogf:Musik .
+
+saogf:Altfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Gong :broader saogf:Musik .
+
+saogf:Blockfl%C3%B6jtkonserter :broader saogf:Musik .
+
+saogf:K%C3%B6rmusik :broader saogf:Musik .
+
+saogf:Pianokvintetter :broader saogf:Musik .
+
+saogf:Minnes%C3%A5ng%20%28musik%29 :broader saogf:Musik .
+
+saogf:Eurodisco :broader saogf:Musik .
+
+saogf:Bl%C3%A5skvartetter :broader saogf:Musik .
+
+saogf:Orgelkonserter :broader saogf:Musik .
+
+saogf:Klarinettsonater :broader saogf:Musik .
+
+saogf:Brassextetter :broader saogf:Musik .
+
+saogf:Foxtrot :broader saogf:Musik .
+
+saogf:Tolvtonsmusik :broader saogf:Musik .
+
+saogf:Engelskt%20horn :broader saogf:Musik .
+
+saogf:Poem%20%28symfoniska%20dikter%29 :broader saogf:Musik .
+
+saogf:Piccolafl%C3%B6jt%20och%20piano :broader saogf:Musik .
+
+saogf:Basses%20danses :broader saogf:Musik .
+
+saogf:Teorb :broader saogf:Musik .
+
+saogf:Tenorsaxofon :broader saogf:Musik .
+
+saogf:Tempelmusik :broader saogf:Musik .
+
+saogf:Merengue :broader saogf:Musik .
+
+saogf:Medeltida%20ballader :broader saogf:Musik .
+
+saogf:Sistrum :broader saogf:Musik .
+
+saogf:Viola%20d%27amore :broader saogf:Musik .
+
+saogf:Schottis :broader saogf:Musik .
+
+saogf:Piccolafl%C3%B6jt :broader saogf:Musik .
+
+saogf:Sarabander :broader saogf:Musik .
+
+saogf:Violasonater :broader saogf:Musik .
+
+saogf:Tr%C3%A4ningsmusik :broader saogf:Musik .
+
+saogf:Eolsharpa :broader saogf:Musik .
+
+saogf:Basklarinett :broader saogf:Musik .
+
+saogf:Ritorneller%20%28musik%29 :broader saogf:Musik .
+
+saogf:Mariamusik :broader saogf:Musik .
+
+saogf:Orgelskolor :broader saogf:Musik .
+
+saogf:Graduale%20%28musik%29 :broader saogf:Musik .
+
+saogf:Septetter :broader saogf:Musik .
+
+saogf:Orgelsonater :broader saogf:Musik .
+
+saogf:Koto :broader saogf:Musik .
+
+saogf:Balettsviter :broader saogf:Musik .
+
+saogf:Interludier%20%28dramatisk%20och%20scenisk%20musik%29 :broader saogf:Musik .
+
+saogf:Str%C3%A5kteknik :broader saogf:Musik .
+
+saogf:Symfoniska%20danser :broader saogf:Musik .
+
+saogf:Barockluta :broader saogf:Musik .
+
+saogf:Tidstrogna%20instrument :broader saogf:Musik .
+
+saogf:Fantasi%20och%20fuga :broader saogf:Musik .
+
+saogf:Konsertuvertyrer :broader saogf:Musik .
+
+saogf:S%C3%A5nglekar%20%28musik%29 :broader saogf:Musik .
+
+saogf:Alt%20%28r%C3%B6st%29%20och%20piano :broader saogf:Musik .
+
+saogf:Stams%C3%A5nger :broader saogf:Musik .
+
+saogf:Tarantellor :broader saogf:Musik .
+
+saogf:Munorgel :broader saogf:Musik .
+
+saogf:Pekingopera :broader saogf:Musik .
+
+saogf:Ortodox%20kyrkomusik :broader saogf:Musik .
+
+saogf:Rebab :broader saogf:Musik .
+
+saogf:Nay :broader saogf:Musik .
+
+saogf:Jakthorn :broader saogf:Musik .
+
+saogf:Bj%C3%A4llror :broader saogf:Musik .
+
+saogf:Thumri :broader saogf:Musik .
+
+saogf:Timbales :broader saogf:Musik .
+
+saogf:Rasselinstrument :broader saogf:Musik .
+
+saogf:Regal :broader saogf:Musik .
+
+saogf:Spikpiano :broader saogf:Musik .
+
+saogf:Mugam :broader saogf:Musik .
+
+saogf:Gender%20%28musikinstrument%29 :broader saogf:Musik .
+
+saogf:Orgelklaver :broader saogf:Musik .
+
+saogf:Quena :broader saogf:Musik .
+
+saogf:Quijada :broader saogf:Musik .
+
+saogf:Sousafon :broader saogf:Musik .
+
+saogf:Speldosor :broader saogf:Musik .
+
+saogf:Steel%20pan :broader saogf:Musik .
+
+saogf:Cs%C3%A1rd%C3%A1s :broader saogf:Musik .
+
+saogf:Novachord :broader saogf:Musik .
+
+saogf:Orpharion :broader saogf:Musik .
+
+saogf:Krar :broader saogf:Musik .
+
+saogf:Siku :broader saogf:Musik .
+
+saogf:Bugaku :broader saogf:Musik .
+
+saogf:Crwth :broader saogf:Musik .
+
+saogf:Cuarteto :broader saogf:Musik .
+
+saogf:Cuica :broader saogf:Musik .
+
+saogf:Divisions :broader saogf:Musik .
+
+saogf:Charleston :broader saogf:Musik .
+
+saogf:Darabukka :broader saogf:Musik .
+
+saogf:Ambrosiansk%20s%C3%A5ng :broader saogf:Musik .
+
+saogf:Concertina :broader saogf:Musik .
+
+saogf:Engelskor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Flerst%C3%A4mmiga%20sekvenser :broader saogf:Musik .
+
+saogf:Rebana%20%28instrument%29 :broader saogf:Musik .
+
+saogf:Trubadurs%C3%A5nger :broader saogf:Musik .
+
+saogf:Variet%C3%A9musik :broader saogf:Musik .
+
+saogf:Tempelklockor :broader saogf:Musik .
+
+saogf:Gatumusik :broader saogf:Musik .
+
+saogf:Arpeggione :broader saogf:Musik .
+
+saogf:Cha-cha :broader saogf:Musik .
+
+saogf:Stabat%20mater :broader saogf:Musik .
+
+saogf:Divertimenti :broader saogf:Musik .
+
+saogf:Ud :broader saogf:Musik .
+
+saogf:Spelmanslag :broader saogf:Musik .
+
+saogf:Tabla :broader saogf:Musik .
+
+saogf:Xylofon :broader saogf:Musik .
+
+saogf:Notturni :broader saogf:Musik .
+
+saogf:Flaskor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Monodier :broader saogf:Musik .
+
+saogf:Bambufl%C3%B6jt :broader saogf:Musik .
+
+saogf:Kontrabastuba :broader saogf:Musik .
+
+saogf:Slip-jig :broader saogf:Musik .
+
+saogf:Hornsonater :broader saogf:Musik .
+
+saogf:Vallenato :broader saogf:Musik .
+
+saogf:Postmodernism%20%28musik%29 :broader saogf:Musik .
+
+saogf:Trumpetsonater :broader saogf:Musik .
+
+saogf:Kamancha :broader saogf:Musik .
+
+saogf:Qanum :broader saogf:Musik .
+
+saogf:Kaen :broader saogf:Musik .
+
+saogf:Ars%20antiqua :broader saogf:Musik .
+
+saogf:Sakral%20instrumentalmusik :broader saogf:Musik .
+
+saogf:Virelais :broader saogf:Musik .
+
+saogf:Virginal :broader saogf:Musik .
+
+saogf:Enst%C3%A4mmig%20liturgisk%20s%C3%A5ng :broader saogf:Musik .
+
+saogf:Oden%20%28musik%29 :broader saogf:Musik .
+
+saogf:Raga :broader saogf:Musik .
+
+saogf:Fakeb%C3%B6cker%20%28musik%29 :broader saogf:Musik .
+
+saogf:Litanior :broader saogf:Musik .
+
+saogf:Silk-and-bamboo :broader saogf:Musik .
+
+saogf:Bombard :broader saogf:Musik .
+
+saogf:Cake%20walk%20%28musik%29 :broader saogf:Musik .
+
+saogf:Intermezzi%20%28komiska%20mellanaktsspel%29 :broader saogf:Musik .
+
+saogf:Samai :broader saogf:Musik .
+
+saogf:Krumhorn :broader saogf:Musik .
+
+saogf:Multimediaverk%20%28musik%29 :broader saogf:Musik .
+
+saogf:Quick-step :broader saogf:Musik .
+
+saogf:Gangar :broader saogf:Musik .
+
+saogf:Keltisk%20harpa :broader saogf:Musik .
+
+saogf:Halling :broader saogf:Musik .
+
+saogf:Hat%20cheo :broader saogf:Musik .
+
+saogf:Lerg%C3%B6k :broader saogf:Musik .
+
+saogf:Kolo :broader saogf:Musik .
+
+saogf:S%C3%AErba :broader saogf:Musik .
+
+saogf:Sitar :broader saogf:Musik .
+
+saogf:Minimalism%20%28musik%29 :broader saogf:Musik .
+
+saogf:Uilleann%20pipes :broader saogf:Musik .
+
+saogf:F%C3%A4ngelsevisor :broader saogf:Musik .
+
+saogf:Glasharmonika :broader saogf:Musik .
+
+saogf:Chalumeau :broader saogf:Musik .
+
+saogf:Dubbelfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Kora :broader saogf:Musik .
+
+saogf:Ars%20nova :broader saogf:Musik .
+
+saogf:Joddling :broader saogf:Musik .
+
+saogf:Ensembler%20med%20historiska%20instrument :broader saogf:Musik .
+
+saogf:Klassicism%20%28musik%29 :broader saogf:Musik .
+
+saogf:Berimbau :broader saogf:Musik .
+
+saogf:Stumfilmsmusik :broader saogf:Musik .
+
+saogf:Kadriljer :broader saogf:Musik .
+
+saogf:Oxhorn :broader saogf:Musik .
+
+saogf:Noise%20%28musik%29 :broader saogf:Musik .
+
+saogf:Neoklassicism%20%28musik%29 :broader saogf:Musik .
+
+saogf:One-step :broader saogf:Musik .
+
+saogf:Habanera :broader saogf:Musik .
+
+saogf:Fagottsonater :broader saogf:Musik .
+
+saogf:Lo-fi :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20harpa :broader saogf:Musik .
+
+saogf:Folior :broader saogf:Musik .
+
+saogf:Gigues :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20violin :broader saogf:Musik .
+
+saogf:Religi%C3%B6sa%20spel :broader saogf:Musik .
+
+saogf:Sinka :broader saogf:Musik .
+
+saogf:Datormusik :broader saogf:Musik .
+
+saogf:Mrdanga :broader saogf:Musik .
+
+saogf:Mandocello :broader saogf:Musik .
+
+saogf:Music%20hall%20%28musik%29 :broader saogf:Musik .
+
+saogf:Taiz%C3%A9s%C3%A5nger :broader saogf:Musik .
+
+saogf:Strykidiofoner :broader saogf:Musik .
+
+saogf:Batteri%20%28musikinstrument%29 :broader saogf:Musik .
+
+saogf:Benedictus%20%28canticum%29 :broader saogf:Musik .
+
+saogf:Bysantinsk%20kyrkomusik :broader saogf:Musik .
+
+saogf:Nationalromantik%20%28musik%29 :broader saogf:Musik .
+
+saogf:Rondeaux :broader saogf:Musik .
+
+saogf:Zampogna :broader saogf:Musik .
+
+saogf:Maracas :broader saogf:Musik .
+
+saogf:Jaktsignaler :broader saogf:Musik .
+
+saogf:Flygelhorn :broader saogf:Musik .
+
+saogf:Dubbelfugor :broader saogf:Musik .
+
+saogf:Fandango :broader saogf:Musik .
+
+saogf:Bassaxofon :broader saogf:Musik .
+
+saogf:Tr%C3%A4block :broader saogf:Musik .
+
+saogf:Sn%C3%A4ckskal :broader saogf:Musik .
+
+saogf:Oboe%20d%27amore :broader saogf:Musik .
+
+saogf:Oboeskolor :broader saogf:Musik .
+
+saogf:Baryton%20%28str%C3%A5kinstrument%29 :broader saogf:Musik .
+
+saogf:Str%C3%A5kharpa :broader saogf:Musik .
+
+saogf:Polkamazurkor :broader saogf:Musik .
+
+saogf:Algaita :broader saogf:Musik .
+
+saogf:Kohorn :broader saogf:Musik .
+
+saogf:Koptiska%20och%20etiopiska%20kyrkors%20musik :broader saogf:Musik .
+
+saogf:Politisk%20musik :broader saogf:Musik .
+
+saogf:Pols :broader saogf:Musik .
+
+saogf:Zarzuelas :broader saogf:Musik .
+
+saogf:Basklarinett%20och%20piano :broader saogf:Musik .
+
+saogf:Flickk%C3%B6r :broader saogf:Musik .
+
+saogf:Herdemusik :broader saogf:Musik .
+
+saogf:S%C3%A4lgpipa :broader saogf:Musik .
+
+saogf:Taffelmusik :broader saogf:Musik .
+
+saogf:Triangel :broader saogf:Musik .
+
+saogf:Alls%C3%A5ng :broader saogf:Musik .
+
+saogf:Feministisk%20musik :broader saogf:Musik .
+
+saogf:Fingercymbaler :broader saogf:Musik .
+
+saogf:Kastrats%C3%A5ng :broader saogf:Musik .
+
+saogf:Polketter :broader saogf:Musik .
+
+saogf:Seriell%20musik :broader saogf:Musik .
+
+saogf:Damorkestrar :broader saogf:Musik .
+
+saogf:Kyrkooperor :broader saogf:Musik .
+
+saogf:Flageolett :broader saogf:Musik .
+
+saogf:Ashiko :broader saogf:Musik .
+
+saogf:Psalmodikon :broader saogf:Musik .
+
+saogf:Villanelle :broader saogf:Musik .
+
+saogf:Ecossaiser :broader saogf:Musik .
+
+saogf:Bouzouki :broader saogf:Musik .
+
+saogf:Burlesker%20%28musik%29 :broader saogf:Musik .
+
+saogf:Instrumental%20teater :broader saogf:Musik .
+
+saogf:Viola%20d%27amore-konserter :broader saogf:Musik .
+
+saogf:Valiha :broader saogf:Musik .
+
+saogf:Zurna :broader saogf:Musik .
+
+saogf:Benedictus%20%28musik%29 :broader saogf:Musik .
+
+saogf:Gharnati :broader saogf:Musik .
+
+saogf:Dhrupad :broader saogf:Musik .
+
+saogf:Trouv%C3%A8res%C3%A5nger :broader saogf:Musik .
+
+saogf:Steelband :broader saogf:Musik .
+
+saogf:Shamisen%20%28japansk%20luta%29 :broader saogf:Musik .
+
+saogf:Viola%20da%20gamba-konserter :broader saogf:Musik .
+
+saogf:Siciliano :broader saogf:Musik .
+
+saogf:Symfoniska%20variationer :broader saogf:Musik .
+
+saogf:Kontraalt%20%28r%C3%B6st%29 :broader saogf:Musik .
+
+saogf:Akustiska%20demonstrationer%20och%20experiment :broader saogf:Musik .
+
+saogf:Strathspey :broader saogf:Musik .
+
+saogf:Villancicos :broader saogf:Musik .
+
+saogf:Lira :broader saogf:Musik .
+
+saogf:Sampler :broader saogf:Musik .
+
+saogf:Kriti :broader saogf:Musik .
+
+saogf:Shimmy :broader saogf:Musik .
+
+saogf:G%C3%BCiro :broader saogf:Musik .
+
+saogf:Tam-tam :broader saogf:Musik .
+
+saogf:K%C3%A4rlfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Antifonale :broader saogf:Musik .
+
+saogf:Kabuki%20%28musik%29 :broader saogf:Musik .
+
+saogf:Kamps%C3%A5nger :broader saogf:Musik .
+
+saogf:Kasa :broader saogf:Musik .
+
+saogf:Koralb%C3%B6cker :broader saogf:Musik .
+
+saogf:Pastischer%20%28musik%29 :broader saogf:Musik .
+
+saogf:Bygelgitarr :broader saogf:Musik .
+
+saogf:Dies%20irae%20%28musik%29 :broader saogf:Musik .
+
+saogf:Conductus :broader saogf:Musik .
+
+saogf:Talk%C3%B6r :broader saogf:Musik .
+
+saogf:Farandole :broader saogf:Musik .
+
+saogf:Elviolin :broader saogf:Musik .
+
+saogf:Erotiska%20s%C3%A5nger :broader saogf:Musik .
+
+saogf:Rebec :broader saogf:Musik .
+
+saogf:Vallhorn :broader saogf:Musik .
+
+saogf:Xylofonkonserter :broader saogf:Musik .
+
+saogf:Estampier :broader saogf:Musik .
+
+saogf:Skisser%20%28musik%29 :broader saogf:Musik .
+
+saogf:Musikteaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
+
+saogf:Tangentinstrumentkonserter :broader saogf:Musik .
+
+saogf:Posthorn :broader saogf:Musik .
+
+saogf:Bandoneon :broader saogf:Musik .
+
+saogf:Dubbelkvartetter :broader saogf:Musik .
+
+saogf:T%C3%A1nch%C3%A1z :broader saogf:Musik .
+
+saogf:Cymbal :broader saogf:Musik .
+
+saogf:Pantum :broader saogf:Musik .
+
+saogf:Leksakspiano :broader saogf:Musik .
+
+saogf:Veni%20Sancte%20Spiritus :broader saogf:Musik .
+
+saogf:Skalmeja :broader saogf:Musik .
+
+saogf:Bongos :broader saogf:Musik .
+
+saogf:Tamburin :broader saogf:Musik .
+
+saogf:Zydeco :broader saogf:Musik .
+
+saogf:Snoa :broader saogf:Musik .
+
+saogf:Steel%20guitar :broader saogf:Musik .
+
+saogf:Wienklassicism :broader saogf:Musik .
+
+saogf:Psalterium :broader saogf:Musik .
+
+saogf:R%C3%B6st%20och%20blockfl%C3%B6jt :broader saogf:Musik .
+
+saogf:Ocarina :broader saogf:Musik .
+
+saogf:Orientaliska%20kyrkors%20musik :broader saogf:Musik .
+
+saogf:Harskramla :broader saogf:Musik .
+
+saogf:Kontradanser :broader saogf:Musik .
+
+saogf:No%20wave :broader saogf:Musik .
+
+saogf:Bockhorn :broader saogf:Musik .
+
+saogf:Kantele :broader saogf:Musik .
+
+saogf:Khayal :broader saogf:Musik .
+
+saogf:Krzesany :broader saogf:Musik .
+
+saogf:Launeddas :broader saogf:Musik .
+
+saogf:Melodica :broader saogf:Musik .
+
+saogf:Klockspel%20%28mekaniska%29 :broader saogf:Musik .
+
+saogf:Dundun :broader saogf:Musik .
+
+saogf:Pommer :broader saogf:Musik .
+
+saogf:Danslekar%20%28musik%29 :broader saogf:Musik .
+
+saogf:Discantus :broader saogf:Musik .
+
+saogf:Brunnsmusik :broader saogf:Musik .
+
+saogf:Mbira :broader saogf:Musik .
+
+saogf:Mekaniska%20musikinstrument :broader saogf:Musik .
+
+saogf:Kontrafagottkonserter :broader saogf:Musik .
+
+saogf:Maq%C4%81m :broader saogf:Musik .
+
+saogf:Artistsignaturer :broader saogf:Musik .
+
+saogf:Cai%20luong :broader saogf:Musik .
+
+saogf:Dadra :broader saogf:Musik .
+
+saogf:Jig :broader saogf:Musik .
+
+saogf:Kazoo :broader saogf:Musik .
+
+saogf:Siffernotation :broader saogf:Musik .
+
+saogf:Spexmusik :broader saogf:Musik .
+
+saogf:Tv%C3%A4ttbr%C3%A4de :broader saogf:Musik .
+
+saogf:Dragspelskonserter :broader saogf:Musik .
+
+saogf:Fiddla :broader saogf:Musik .
+
+saogf:Jive :broader saogf:Musik .
+
+saogf:Kamatak :broader saogf:Musik .
+
+saogf:Verbunkos :broader saogf:Musik .
+
+saogf:Vihuela :broader saogf:Musik .
+
+saogf:Klockspel%20%28elektroniska%29 :broader saogf:Musik .
+
+saogf:Spelur :broader saogf:Musik .
+
+saogf:Two-step :broader saogf:Musik .
+
+saogf:Fonn%20mall :broader saogf:Musik .
+
+saogf:Klockor%20%28musikinstrument%29 :broader saogf:Musik .
+
+saogf:Naturhorn :broader saogf:Musik .
+
+saogf:Piccolafl%C3%B6jtkonserter :broader saogf:Musik .
+
+saogf:Festmarscher :broader saogf:Musik .
+
+saogf:Frottole :broader saogf:Musik .
+
+saogf:Paussignaler%20%28musik%29 :broader saogf:Musik .
+
+saogf:L%C3%A4ndler :broader saogf:Musik .
+
+saogf:Musette :broader saogf:Musik .
+
+saogf:Kalindula :broader saogf:Musik .
+
+saogf:Kontrafagott :broader saogf:Musik .
+
+saogf:Kagok :broader saogf:Musik .
+
+saogf:Trippelkonserter :broader saogf:Musik .
+
+saogf:Vinare :broader saogf:Musik .
+
+saogf:Dung%20Chen :broader saogf:Musik .
+
+saogf:Kortholt :broader saogf:Musik .
+
+saogf:Kontrabaskonserter :broader saogf:Musik .
+
+saogf:R%C3%ADmur%20%28musik%29 :broader saogf:Musik .
+
+saogf:Zarb :broader saogf:Musik .
+
+saogf:Lambada :broader saogf:Musik .
+
+saogf:Lambeth%20walk%20%28musik%29 :broader saogf:Musik .
+
+saogf:Laude :broader saogf:Musik .
+
+saogf:Vevlira :broader saogf:Musik .
+
+saogf:Allhelgonamusik :broader saogf:Musik .
+
+saogf:Introitus%20%28musik%29 :broader saogf:Musik .
+
+saogf:Milit%C3%A4rorkester :broader saogf:Musik .
+
+saogf:Orkestrion :broader saogf:Musik .
+
+saogf:Wagnertuba :broader saogf:Musik .
+
+saogf:Pipa :broader saogf:Musik .
+
+saogf:Plachi :broader saogf:Musik .
+
+saogf:Sk%C3%A4llor :broader saogf:Musik .
+
+saogf:Canntaireachd :broader saogf:Musik .
+
+saogf:Tenorhorn :broader saogf:Musik .
+
+saogf:Bhajan :broader saogf:Musik .
+
+saogf:Str%C3%A5koktetter :broader saogf:Musik .
+
+saogf:Dizi :broader saogf:Musik .
+
+saogf:Domra :broader saogf:Musik .
+
+saogf:Caccie :broader saogf:Musik .
+
+saogf:Elpiano :broader saogf:Musik .
+
+saogf:Gamelan :broader saogf:Musik .
+
+saogf:Sohni :broader saogf:Musik .
+
+saogf:Trumpet%20och%20orgel :broader saogf:Musik .
+
+saogf:Basklarinettkonserter :broader saogf:Musik .
+
+saogf:Tenorlieder :broader saogf:Musik .
+
+saogf:Tr%C3%A4skofiol :broader saogf:Musik .
+
+saogf:Balalajka :broader saogf:Musik .
+
+saogf:Elektriska%20musikinstrument :broader saogf:Musik .
+
+saogf:Gagaku%20%28japansk%20hovmusik%29 :broader saogf:Musik .
+
+saogf:M%C3%A4sters%C3%A5nger :broader saogf:Musik .
+
+saogf:Modern%20dansmusik :broader saogf:Musik .
+
+saogf:Gebrauchsmusik :broader saogf:Musik .
+
+saogf:Mungiga :broader saogf:Musik .
+
+saogf:Travesteringar%20%28musik%29 :broader saogf:Musik .
+
+saogf:Vibrafonkonserter :broader saogf:Musik .
+
+saogf:Assaggio :broader saogf:Musik .
+
+saogf:Aubader :broader saogf:Musik .
+
+saogf:Arabesker%20%28musik%29 :broader saogf:Musik .
+
+saogf:Tubasonater :broader saogf:Musik .
+
+saogf:Trombonsonater :broader saogf:Musik .
+
+saogf:Barnramsor%20%28musik%29 :broader saogf:Musik .
+
+saogf:Atonalitet :broader saogf:Musik .
+
+saogf:Kyrie%20%28musik%29 :broader saogf:Musik .
+
+saogf:Br%C3%AEu :broader saogf:Musik .
+
+saogf:Saxofonkonserter :broader saogf:Musik .
+
+saogf:Jitterbugg%20%28musik%29 :broader saogf:Musik .
+
+saogf:Cornamusa :broader saogf:Musik .
+
+saogf:Dulcian :broader saogf:Musik .
+
+saogf:Djurhorn :broader saogf:Musik .
+
+saogf:Schamans%C3%A5ng :broader saogf:Musik .
+
+saogf:Khoomei :broader saogf:Musik .
+
+saogf:Sopransaxofon :broader saogf:Musik .
+
+saogf:Paso%20doble :broader saogf:Musik .
+
+saogf:Ti%20tzu :broader saogf:Musik .
+
+saogf:S%C3%A5nglustspel :broader saogf:Musik .
+
+saogf:Highland%20pipes :broader saogf:Musik .
+
+saogf:Alphorn :broader saogf:Musik .
+
+saogf:Ghaita :broader saogf:Musik .
+
+saogf:Rytminstrument :broader saogf:Musik .
+
+saogf:Tubakonserter :broader saogf:Musik .
+
+saogf:K%C3%B6rsymfonier :broader saogf:Musik .
+
+saogf:Lur :broader saogf:Musik .
+
+saogf:Tanbur :broader saogf:Musik .
+
+saogf:Bakgrundsmusik :broader saogf:Musik .
+
+saogf:Sj%C3%A4lvspelande%20piano :broader saogf:Musik .
+
+saogf:Brukspiano :broader saogf:Musik .
+
+saogf:Biwa :broader saogf:Musik .
+
+saogf:Cister :broader saogf:Musik .
+
+saogf:Mannheimskolan :broader saogf:Musik .
+
+saogf:Vina :broader saogf:Musik .
+
+saogf:Breakbeat :broader saogf:Musik .
+
+saogf:Datorspelsmusik :broader saogf:Musik .
+
+saogf:Ukuleleskolor :broader saogf:Musik .
+
+saogf:Parafraser%20%28musik%29 :broader saogf:Musik ,
+    saogf:Parafraser .
+
+saogf:No%20%28japanskt%20lyriskt%20drama%29 :broader saogf:Musik ,
+    saogf:Dramatik .
+
+saogf:Kaba%20%28musik%29 :broader saogf:Musik .
+
+saogf:Maluf :broader saogf:Musik .
+
+saogf:Partimenti :broader saogf:Musik .
+
+saogf:Madrigaler :broader saogf:Musik .
+
+<https://libris.kb.se/42gks6hn218vr88#it> :broader saogf:Musik .
+
+<https://libris.kb.se/nl0229q652dc80j#it> :broader saogf:Musik .
+
+<https://libris.kb.se/sq47gb6b3x14v12#it> :broader saogf:Musik .
