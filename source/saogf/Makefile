@@ -6,8 +6,10 @@
 
 saogf: build/saogf-patch.ttl
 
+# NOTE the below uses some new features in trld that are at the time of writing only available in th dev branch https://github.com/niklasl/trld/tree/dev/trld
+# To run with the reeased version you need to remove flags -r (recompact) and -s (sort)
 build/saogf-patch.ttl: build saogf-from-ktg.rq saogf-insert-missing.ru genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl saogf-patches.ttl saogf-musik-patches.ttl
-	((cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq ; cat saogf-patches.ttl saogf-musik-patches.ttl) | trld -ittl -ottl > $@.TMP # deactivated tentative patch with null redir!
+	((cat genres.ttl genreforms.ttl marcmatches.ttl marcmatches-music.ttl ; oxrq -f saogf-insert-missing.ru genres.ttl genreforms.ttl) | oxrq -itrig -f saogf-from-ktg.rq ; cat saogf-patches.ttl saogf-musik-patches.ttl) | trld -ittl -r -ottl -s > $@.TMP # deactivated tentative patch with null redir!
 	mv $@.TMP $@
 
 #test: saogf cache/saogf.ttl
