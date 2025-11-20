@@ -3,6 +3,7 @@
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix : <https://id.kb.se/vocab/> .
+@prefix bibdb: <https://id.kb.se/ns/bibdb/> .
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -39,6 +40,14 @@
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
+
+:itemHeldByOrg a owl:ObjectProperty ;
+    rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
+    skos:notation "OCODE"^^:LibrisQueryCode ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Instance ;
+    sdo:rangeIncludes bibdb:Organization ;
+    owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
 
 :instanceOfType a owl:ObjectProperty ;
     :category :shorthand, :pending ;
