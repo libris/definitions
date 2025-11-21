@@ -1,0 +1,36 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix : <https://id.kb.se/vocab/>
+
+construct {
+  ?mapped_s ?target_p ?target_o ;
+    :inScheme ?scheme .
+
+  ?unmapped_s :inCollection owl:Nothing .
+} {
+  values (?prefix ?scheme) {
+    (saogf: <https://id.kb.se/term/saogf>)
+  }
+
+  ?s ?p ?o .
+  bind( if( strstarts(str(?p), str(skos:)),
+            IRI(concat(str(:), strafter(str(?p), str(skos:)))),
+            if(?p = rdfs:seeAlso, :seeAlso, ?p)) as ?target_p )
+  optional {
+    ?s skos:exactMatch ?mapped_s .
+    filter strstarts(str(?s), str(ktg:))
+    filter strstarts(str(?mapped_s), str(?prefix))
+  }
+  bind(if(!bound(?mapped_s), ?s, ?_) as ?unmapped_s)  # "Should Not Happen(TM)"
+
+  optional {
+    ?o skos:exactMatch ?mapped_o .
+    filter strstarts(str(?o), str(ktg:))
+    filter strstarts(str(?mapped_o), str(?prefix))
+  }
+  bind(coalesce(?mapped_o, ?o) as ?target_o)
+  filter(?target_o != ?mapped_s)
+}

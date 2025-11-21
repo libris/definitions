@@ -1,0 +1,195 @@
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+prefix marc: <https://id.kb.se/marc/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+prefix kbrda: <https://id.kb.se/term/rda/>
+base <https://id.kb.se/term/rda/>
+
+## Content types ##
+
+kbrda:CartographicDataset a bf:Content ;
+    owl:sameAs <content/cartographic%20dataset>,
+        <content/crd> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/crd>,
+        <http://rdaregistry.info/termList/RDAContentType/1001> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "crd" .
+
+kbrda:CartographicImage a bf:Content ;
+    owl:sameAs <content/cartographic%20image>,
+        <content/cri> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cri>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1002> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "cri" .
+
+kbrda:CartographicMovingImage a bf:Content ;
+    owl:sameAs <content/cartographic%20moving%20image>,
+        <content/crm> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/crm>,
+        <http://rdaregistry.info/termList/RDAContentType/1003> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "crm" .
+
+kbrda:CartographicTactileImage a bf:Content ;
+    owl:sameAs <content/cartographic%20tactile%20image>,
+        <content/crt> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/crt>,
+        <http://rdaregistry.info/termList/RDAContentType/1004> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "crt" .
+
+kbrda:CartographicTactileThreeDimensionalForm a bf:Content ;
+    owl:sameAs <content/cartographic%20tactile%20three-dimensional%20form>,
+        <content/crn> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/crn>,
+        <http://rdaregistry.info/termList/RDAContentType/1005> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "crn" .
+
+kbrda:CartographicThreeDimensionalForm a bf:Content ;
+    owl:sameAs <content/cartographic%20three-dimensional%20form>,
+        <content/crf> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/crf>,
+        <http://rdaregistry.info/termList/RDAContentType/1006> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "crf" .
+
+kbrda:ComputerDataset a bf:Content ;
+    owl:sameAs <content/cod>,
+        <content/computer%20dataset> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cod>,
+        <http://rdaregistry.info/termList/RDAContentType/1007> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "cod" .
+
+kbrda:ComputerProgram a bf:Content ;
+    owl:sameAs <content/computer%20program>,
+        <content/cop> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cop>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1008>,
+        marc:ComputerProgram ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "cop" .
+
+kbrda:NotatedMovement a bf:Content ;
+    owl:sameAs <content/notated%20movement>,
+        <content/ntv> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/ntv>,
+        <http://rdaregistry.info/termList/RDAContentType/1009> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "ntv" .
+
+kbrda:NotatedMusic a bf:Content ;
+    owl:sameAs <content/notated%20music>,
+        <content/ntm> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/ntm>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1010> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "ntm" .
+
+kbrda:PerformedMusic a bf:Content ;
+  owl:sameAs kbrda:content\/performed%20music ,
+    kbrda:content\/prm ;
+  skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/prm> ,
+    <http://rdaregistry.info/termList/RDAContentType/1011> ;
+  skos:inScheme <https://id.kb.se/term/rda> ;
+  skos:notation "prm" .
+
+kbrda:Sounds a bf:Content ;
+  owl:sameAs kbrda:content\/snd ,
+    kbrda:content\/sounds ;
+  skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/snd> ,
+    <http://rdaregistry.info/termList/RDAContentType/1012> ,
+    marc:Sound ;
+  skos:inScheme <https://id.kb.se/term/rda> ;
+  skos:notation "snd" .
+
+kbrda:SpokenWord a bf:Content ;
+  owl:sameAs kbrda:content\/spoken%20word ,
+    kbrda:content\/spw ;
+  skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/spw> ,
+    <http://rdaregistry.info/termList/RDAContentType/1013> ;
+  skos:inScheme <https://id.kb.se/term/rda> ;
+  skos:notation "spw" .
+
+kbrda:StillImage a bf:Content ;
+    owl:sameAs <content/sti>,
+        <content/still%20image> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/sti>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1014> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "sti" .
+
+kbrda:TactileImage a bf:Content ;
+    owl:sameAs <content/tactile%20image>,
+        <content/tci> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tci>,
+        <http://rdaregistry.info/termList/RDAContentType/1015> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tci" .
+
+kbrda:TactileNotatedMovement a bf:Content ;
+    owl:sameAs <content/tactile%20notated%20movement>,
+        <content/tcn> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tcn>,
+        <http://rdaregistry.info/termList/RDAContentType/1017> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tcn" .
+
+kbrda:TactileNotatedMusic a bf:Content ;
+    owl:sameAs <content/tactile%20notated%20music>,
+        <content/tcm> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tcm>,
+        <http://rdaregistry.info/termList/RDAContentType/1016> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tcm" .
+
+kbrda:TactileText a bf:Content ;
+    owl:sameAs <content/tactile%20text>,
+        <content/tct> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tct>,
+        <http://rdaregistry.info/termList/RDAContentType/1018> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tct" .
+
+kbrda:TactileThreeDimensionalForm a bf:Content ;
+    owl:sameAs <content/tactile%20three-dimensional%20form>,
+        <content/tcf> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tcf>,
+        <http://rdaregistry.info/termList/RDAContentType/1019> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tcf" .
+
+kbrda:Text a bf:Content ;
+    owl:sameAs <content/text>,
+        <content/txt> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/txt>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1020> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "txt" .
+
+kbrda:ThreeDimensionalForm a bf:Content ;
+    owl:sameAs <content/tdf>,
+        <content/three-dimensional%20form> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdf>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1021> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tdf" .
+
+kbrda:ThreeDimensionalMovingImage a bf:Content ;
+    owl:sameAs <content/tdm>,
+        <content/three-dimensional%20moving%20image> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdm>,
+        <http://rdaregistry.info/termList/RDAContentType/1022> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tdm" .
+
+kbrda:TwoDimensionalMovingImage a bf:Content ;
+    owl:sameAs <content/tdi>,
+        <content/two-dimensional%20moving%20image> ;
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdi>, # Used in LC codeMaps.xml
+        <http://rdaregistry.info/termList/RDAContentType/1023> ;
+    skos:inScheme <https://id.kb.se/term/rda> ;
+    skos:notation "tdi" .

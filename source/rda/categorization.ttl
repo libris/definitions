@@ -1,0 +1,111 @@
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix bf: <http://id.loc.gov/ontologies/bibframe/>
+prefix : <https://id.kb.se/vocab/>
+
+prefix marc: <https://id.kb.se/marc/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+
+prefix div: <https://id.kb.se/term/div/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+
+kbrda:CartographicDataset a bf:Content ;
+  skos:broadMatch ktg:Dataset , ktg:Cartography .
+
+kbrda:CartographicImage a bf:Content ;
+  #skos:closeMatch ktg:CartographicImage ;
+  skos:broader kbrda:StillImage ;
+  skos:broadMatch ktg:Cartography .
+
+kbrda:CartographicMovingImage a bf:Content ;
+  skos:broadMatch ktg:Cartography , ktg:MovingImage .
+
+kbrda:CartographicTactileImage a bf:Content ;
+  skos:broadMatch ktg:Tactile , ktg:Cartography , kbrda:StillImage .
+
+kbrda:CartographicTactileThreeDimensionalForm a bf:Content ;
+  skos:broadMatch kbrda:CartographicThreeDimensionalForm , ktg:Tactile .
+
+kbrda:CartographicThreeDimensionalForm a bf:Content ;
+  #skos:closeMatch ktg:CartographicObject ;
+  skos:broadMatch ktg:Cartography ;
+  skos:broader kbrda:ThreeDimensionalForm ;
+  skos:altLabel "Kartografiskt objekt"@sv ,
+     "Cartographic Object"@en .
+
+kbrda:ComputerDataset a bf:Content ;
+  #skos:closeMatch ktg:ComputerDataset ;
+  skos:broadMatch ktg:Software, ktg:Dataset .
+
+kbrda:ComputerProgram a bf:Content ; # ktg:ComputerProgram
+  skos:broadMatch ktg:Software ;
+  skos:exactMatch marc:ComputerProgram .
+
+kbrda:NotatedMovement a bf:Content ;
+  #skos:closeMatch ktg:NotatedMovement ;
+  skos:broadMatch ktg:Movement .
+
+kbrda:NotatedMusic a bf:Content ;
+  #skos:closeMatch ktg:NotatedMusic ;
+  :inCollection div:identify ;
+  skos:broadMatch ktg:Music ;
+  skos:closeMatch saogf:Musikalier .
+
+kbrda:PerformedMovement a bf:Content ;
+  skos:broadMatch ktg:Movement .
+
+kbrda:PerformedMusic a bf:Content ;
+  #skos:closeMatch ktg:PerformedMusic ;
+  :inCollection div:identify ;
+  skos:broadMatch ktg:Audio, ktg:Music .
+
+kbrda:Sounds a bf:Content ;
+  #skos:closeMatch ktg:Sounds ;
+  skos:broadMatch ktg:Audio ;
+  skos:closeMatch marcgt:nos .
+
+kbrda:SpokenWord a bf:Content ;
+  #skos:closeMatch ktg:SpokenWord ;
+  skos:broadMatch ktg:Audio . #, ktg:LinguisticWork
+
+kbrda:StillImage a bf:Content ;
+  #skos:closeMatch ktg:StillImage ;
+  :inCollection div:find ;
+  #:inCollection div:identify ;
+  skos:broader ktg:VisualWork ;
+  #skos:broadMatch saogf:Bilder, tgm:Bilder ;
+  skos:closeMatch marc:Picture ;
+  skos:narrowMatch marc:Graphic . # 8048
+
+kbrda:Text a bf:Content ;
+  #skos:closeMatch ktg:Text ;
+  skos:broadMatch ktg:Literature .
+
+kbrda:ThreeDimensionalForm a bf:Content ;
+  #skos:exactMatch ktg:Object ;
+  :inCollection div:find .
+
+kbrda:ThreeDimensionalMovingImage a bf:Content ;
+  skos:broadMatch ktg:MovingImage .
+
+kbrda:TwoDimensionalMovingImage a bf:Content ;
+  skos:broadMatch ktg:MovingImage .
+
+kbrda:TactileImage a bf:Content ;
+  skos:broadMatch ktg:Tactile , kbrda:StillImage .
+
+kbrda:TactileNotatedMovement a bf:Content ;
+  skos:broadMatch ktg:Tactile , kbrda:NotatedMovement .
+
+kbrda:TactileNotatedMusic a bf:Content ;
+  skos:broadMatch ktg:Tactile , kbrda:NotatedMusic .
+
+kbrda:TactileText a bf:Content ;
+  #skos:closeMatch ktg:TactileText ;
+  skos:broadMatch ktg:Tactile , kbrda:Text .
+
+kbrda:TactileThreeDimensionalForm a bf:Content ;
+  skos:broadMatch ktg:Tactile , kbrda:ThreeDimensionalForm .
