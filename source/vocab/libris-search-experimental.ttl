@@ -33,14 +33,14 @@ ls:composite a skos:Collection ;
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
-    :category :shorthand ;
+    :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 ls:itemHeldByOrg a owl:ObjectProperty ;
     rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
-    skos:notation "OCODE"^^:LibrisQueryCode ;
+    skos:notation "OCODE"^^ls:QueryCode ;
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes bibdb:Organization ;
@@ -71,10 +71,26 @@ ls:hasInstanceCategory a owl:ObjectProperty ;
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
-    :category :shorthand ;
+    :category :shorthand, :pending ;
     rdfs:domain :Work ;
     rdfs:range :Language ;
     owl:propertyChainAxiom ( :translationOf :language ) .
+
+ls:indexKey a :DatatypeProperty .
+
+ls:findCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
+    ls:indexKey "_categoryByCollection.find" .
+
+ls:identifyCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
+    ls:indexKey "_categoryByCollection.identify" .
+
+ls:noneCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    ls:indexKey "_categoryByCollection.@none" .
 
 #ls:someTitle a owl:ObjectProperty ;
 #    :category ls:composite, :shorthand ;
