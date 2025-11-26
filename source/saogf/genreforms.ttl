@@ -18,7 +18,7 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 
 ktg:NonFictionLiterature a :GenreForm ;
   #:category :pending ;
-  :inCollection div:identify ;
+  :inCollection div:find ; # NOTE Experimentally changed to "find" 
   skos:broader ktg:Literature , ktg:NonFiction ;
   skos:closeMatch marc:NotFictionNotFurtherSpecified ;  # 9287608
   skos:prefLabel "Ej skönlitteratur"@sv, "Non-fiction literature"@en .
@@ -35,7 +35,7 @@ ktg:NonFictionLiterature a :GenreForm ;
 #  skos:broader ktg:NonFiction, ktg:Literatur .
 
 ktg:FictionLiterature a :GenreForm ;
-  :inCollection div:identify ;
+  :inCollection div:find ; # NOTE Experimentally changed to "find" 
   skos:broader ktg:Literature , ktg:Fiction ;
   skos:exactMatch saogf:Sk%C3%B6nlitteratur ; # NOTE 6836c1b3: genre-issue resolved: not "practically" broader
   skos:narrowMatch marc:MixedForms ;
