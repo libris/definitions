@@ -80,16 +80,19 @@ ls:indexKey a :DatatypeProperty .
 
 ls:findCategory a :ObjectProperty ;
     rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
     ls:indexKey "_categoryByCollection.find" .
 
 ls:identifyCategory a :ObjectProperty ;
     rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
     ls:indexKey "_categoryByCollection.identify" .
 
 ls:noneCategory a :ObjectProperty ;
     rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
     ls:indexKey "_categoryByCollection.@none" .
 
 ls:title a owl:ObjectProperty ;
