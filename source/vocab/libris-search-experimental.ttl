@@ -20,7 +20,7 @@
 
 :controlNumber skos:notation "ONR"^^ls:QueryCode . # See ./platform.ttl for full definition of :controlNumber
 
-#:hasTitle rdfs:subPropertyOf ls:someTitle . # See ./details.ttl for full definition of :hasTitle
+:hasTitle rdfs:subPropertyOf ls:someTitle . # See ./details.ttl for full definition of :hasTitle
 
 
 ### New definitions for Libris Search ###
@@ -92,12 +92,13 @@ ls:noneCategory a :ObjectProperty ;
     rdfs:subPropertyOf :category ;
     ls:indexKey "_categoryByCollection.@none" .
 
-#ls:someTitle a owl:ObjectProperty ;
-#    :category ls:composite, :shorthand ;
-#    skos:notation "TIT"^^ls:QueryCode ;
-#    owl:propertyChainAxiom ( :translationOf :hasTitle ),
-#        ( :seriesMembership :inSeries :instanceOf :hasTitle ),
-#        ( :relationship :entity :hasTitle ) .
+ls:title a owl:ObjectProperty ;
+    :category ls:composite ;
+    rdfs:label "titel"@sv, "title"@en ;
+    skos:notation "TIT"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :translationOf :hasTitle ),
+        ( :seriesMembership :inSeries :instanceOf :hasTitle ),
+        ( :relationship :entity :hasTitle ) .
 
 #:author a owl:ObjectProperty ;
 #    rdfs:label "författare"@sv, "author"@en ;
