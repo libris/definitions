@@ -57,7 +57,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
           "showProperties": [
-            {"alternateProperties": ["prefLabel", "label", "termComponentList", "code"]}
+            {"alternateProperties": ["prefLabel", "label", "termComponentList", "code", "singularLabel"]}
           ]
         },
         "LanguageTransformRules": {
@@ -122,30 +122,6 @@
             {"alternateProperties": ["prefLabel", "altLabel", "label", "code"]},
             "inScheme",
             "isDefinedBy"
-          ]
-        },
-        "MediaType": {
-          "@id": "MediaType-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "MediaType",
-          "showProperties": [
-            {"alternateProperties": [ "prefLabel", "label" ]}
-          ]
-        },
-        "ContentType": {
-          "@id": "ContentType-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "ContentType",
-          "showProperties": [
-            {"alternateProperties": [ "prefLabel", "label" ]}
-          ]
-        },
-        "CarrierType": {
-          "@id": "CarrierType-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "CarrierType",
-          "showProperties": [
-            {"alternateProperties": [ "prefLabel", "label" ]}
           ]
         },
         "ContentAccessibility": {
@@ -439,6 +415,12 @@
           "classLensDomain": "Library",
           "showProperties": [ "name", "qualifier", "sigel" ]
         },
+        "bibdb:Organization": {
+          "@id": "bibdb:Organization-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:Organization",
+          "showProperties": [ "name", "code" ]
+        },
         "Bibliography": {
           "@id": "Bibliography-chips",
           "@type": "fresnel:Lens",
@@ -450,7 +432,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
           "showProperties": [
-            {"alternateProperties": ["prefLabel", "label", "termComponentList", "code"]},
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]},
             "inScheme"
           ]
         },
@@ -654,6 +636,7 @@
           "@id": "Instance-cards",
           "classLensDomain": "Instance",
           "showProperties": [
+            "category",
             "reproductionOf",
             "identifiedBy",
             "indirectlyIdentifiedBy",
@@ -714,6 +697,7 @@
           "@id": "Work-cards",
           "classLensDomain": "Work",
           "showProperties": [
+            "category",
             {
               "alternateProperties": [
                 {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
@@ -897,20 +881,6 @@
           "fresnel:extends": {"@id": "Material-chips"},
           "showProperties": [ "fresnel:super", "altLabel", "definition", "scopeNote", "code", "exactMatch" ]
         },
-        "MediaType": {
-          "@id": "MediaType-cards",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "MediaType",
-          "fresnel:extends": {"@id": "MediaType-chips"},
-          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup", "definition" ]
-        },
-        "CarrierType": {
-          "@id": "CarrierType-cards",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "CarrierType",
-          "fresnel:extends": {"@id": "CarrierType-chips"},
-          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup", "definition" ]
-        },
         "Notation": {
           "@id": "Notation-cards",
           "@type": "fresnel:Lens",
@@ -938,13 +908,6 @@
           "classLensDomain": "Reproduction",
           "fresnel:extends": {"@id": "Reproduction-chips"},
           "showProperties": [ "fresnel:super", "hasNote" ]
-        },
-        "ContentType": {
-          "@id": "ContentType-cards",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "ContentType",
-          "fresnel:extends": {"@id": "ContentType-chips"},
-          "showProperties": [ "fresnel:super", "code", "inScheme", "termGroup", "definition" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
@@ -1031,7 +994,26 @@
           "@type": "fresnel:Lens",
           "@id": "Concept-cards",
           "classLensDomain": "Concept",
-          "showProperties": [ "prefLabel", "inScheme", "inCollection", "altLabel", "broader", "exactMatch", "closeMatch", "broadMatch",  {"inverseOf": "broader"}, "hasVariant", "isReplacedBy", "related", "scopeNote", "label", "code", "keyword", "termComponentList" ]
+          "showProperties": [
+            "prefLabel",
+            "inScheme",
+            "inCollection",
+            "altLabel",
+            "broader",
+            "exactMatch",
+            "closeMatch",
+            "broadMatch",
+            {"inverseOf": "broader"},
+            {"inverseOf": "broadMatch"},
+            "hasVariant",
+            "isReplacedBy",
+            "related",
+            "scopeNote",
+            "label",
+            "code",
+            "keyword",
+            "termComponentList",
+            "singularLabel" ]
         },
         "Contribution": {
           "@id": "Contribution-cards",
@@ -1230,6 +1212,7 @@
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
           "showProperties": [
+            "category",
             {
               "alternateProperties": [
                 {"subPropertyOf": "hasTitle", "range": "KeyTitle"},
@@ -1338,21 +1321,12 @@
           "fresnel:extends": {"@id": "TitlePart-chips"},
           "showProperties": [ "fresnel:super" ]
         },
-
         "Bibliography": {
           "fresnel:extends": {"@id": "Bibliography-cards"},
           "showProperties": [ "fresnel:super" ]
         },
-        "CarrierType": {
-          "fresnel:extends": {"@id": "CarrierType-cards"},
-          "showProperties": [ "fresnel:super" ]
-        },
         "Cartographic": {
           "fresnel:extends": {"@id": "Cartographic-cards"},
-          "showProperties": [ "fresnel:super" ]
-        },
-        "ContentType": {
-          "fresnel:extends": {"@id": "ContentType-cards"},
           "showProperties": [ "fresnel:super" ]
         },
         "Contribution": {
@@ -1388,10 +1362,6 @@
             "bibdb:latitude",
             "bibdb:longitude"
           ]
-        },
-        "MediaType": {
-          "fresnel:extends": {"@id": "MediaType-cards"},
-          "showProperties": [ "fresnel:super" ]
         },
         "Reproduction": {
           "fresnel:extends": {"@id": "Reproduction-cards"},
@@ -1499,6 +1469,10 @@
       "@id": "search-chips",
       "@type": "fresnel:Group",
       "lenses": {
+        "Record": {
+          "fresnel:extends": {"@id": "Record-chips"},
+          "showProperties": [ "fresnel:super", "bibliography" ]
+        },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
           "showProperties": [ "fresnel:super", "subject", "summary", "hasComponent", "availability" ]
@@ -1522,6 +1496,10 @@
         "Organization": {
           "fresnel:extends": {"@id": "Organization-chips"},
           "showProperties": [ "fresnel:super", "hasVariant" ]
+        },
+        "Concept": {
+          "fresnel:extends": {"@id": "Concept-chips"},
+          "showProperties": [ "fresnel:super", "inCollection" ]
         },
         "HandleAction": {
           "classLensDomain": "HandleAction",

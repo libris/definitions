@@ -11,32 +11,45 @@ base <https://id.kb.se/dataset/>
     :uriSpace "/marc/" ;
     :created "2014-01-23T10:34:17.981Z"^^xsd:dateTime .
 
+# TODO: Replaced with manually controlled option below.
+# But keep some of this for mapping/label verification/comparison during maintenance?
+#<rdaterms> a :Dataset ;
+#    :isPartOf <common> ;
+#    #; NOTE: see also examples/mappings/rda-bf2-types.ttl for possibiliy of
+#    # extending our type system (instead).
+#    :sourceData [ :uri "build/rdaterms.json.lines" ;
+#        :sourceData [ a :QueryConstruct ;
+#                :dataQuery [ :uri "source/construct-rda-terms.rq" ] ;
+#                :sourceData [ :uri 'source/rda-terms.ttl' ;
+#                              :representationOf <rdaterms> ] ,
+#                    <https://www.rdaregistry.info/nt/termList/RDAContentType.nt> ,
+#                    <http://id.loc.gov/vocabulary/contentTypes> ,
+#
+#                    <https://www.rdaregistry.info/nt/termList/RDAMediaType.nt> ,
+#                    <http://id.loc.gov/vocabulary/mediaTypes> ,
+#
+#                    <https://www.rdaregistry.info/nt/termList/RDACarrierType.nt> ,
+#                    <http://id.loc.gov/vocabulary/carriers> ,
+#
+#                    #<http://rdaregistry.info/termList/ModeIssue> ,
+#                    <http://id.loc.gov/vocabulary/issuance.skos.rdf> ,
+#                    [ :uri 'source/categories/rdacategories.ttl' ] ;
+#                # NOTE: this is serialized using system context!
+#            ] ] ;
+#    :uriSpace "/term/rda/" ;
+#    :created "2018-05-16T06:18:01.337Z"^^xsd:dateTime .
 <rdaterms> a :Dataset ;
     :isPartOf <common> ;
-    #; NOTE: see also examples/mappings/rda-bf2-types.ttl for possibiliy of
-    # extending our type system (instead).
     :sourceData [ :uri "build/rdaterms.json.lines" ;
-        :sourceData [ a :QueryConstruct ;
-                :dataQuery [ :uri "source/construct-rda-terms.rq" ] ;
-                :sourceData [ :uri 'source/rda-terms.ttl' ;
-                              :representationOf <rdaterms> ] ,
-                    <https://www.rdaregistry.info/nt/termList/RDAContentType.nt> ,
-                    <http://id.loc.gov/vocabulary/contentTypes> ,
-
-                    <https://www.rdaregistry.info/nt/termList/RDAMediaType.nt> ,
-                    <http://id.loc.gov/vocabulary/mediaTypes> ,
-
-                    <https://www.rdaregistry.info/nt/termList/RDACarrierType.nt> ,
-                    <http://id.loc.gov/vocabulary/carriers> ,
-
-                    #<http://rdaregistry.info/termList/ModeIssue> ,
-                    <http://id.loc.gov/vocabulary/issuance.skos.rdf> ;
-                # NOTE: this is serialized using system context!
-            ] ] ;
+            :sourceData [ :uri "source/rda/content.ttl" ] ,
+               [ :uri "source/rda/mediacarriers.ttl" ] ,
+               [ :uri "source/rda/categorization.ttl" ] ,
+               [ :uri "source/rda/labels.ttl" ] ] ;
+               #[ :uri "source/rda/materials.ttl" ] ] ;
     :uriSpace "/term/rda/" ;
     :created "2018-05-16T06:18:01.337Z"^^xsd:dateTime .
 
-
+# TODO: merge in 'source/categories/materialformat.ttl' (do we need to keep some coordinating categories?)
 <materials> a :Dataset ;
     :isPartOf <common> ;
     :sourceData [ :uri "build/materials.json.lines" ; :sourceData [ a :QueryConstruct ;
@@ -136,6 +149,15 @@ base <https://id.kb.se/dataset/>
             :sourceData [ :uri 'source/kbv-enums.ttl' ] ] ;
     :uriSpace "/term/enum/" ;
     :created "2018-05-29T12:36:01.337Z"^^xsd:dateTime .
+
+<ktg> a :Dataset ;
+    :isPartOf <common> ;
+    :sourceData [ :uri 'build/ktg.json.lines' ;
+            :sourceData [ :uri 'source/categories/workforms.ttl' ] ,
+               [ :uri 'source/categories/instanceforms.ttl' ] ] ;
+    :uriSpace "/term/" ;
+    #:uriSpace "/term/ktg/" ;
+    :created "2025-05-05T09:57:56Z"^^xsd:dateTime .
 
 #NOTE: More suitable name might be needed if usage is broader than digital representations
 <reprterms> a :Dataset ;

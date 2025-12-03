@@ -3,58 +3,116 @@
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix : <https://id.kb.se/vocab/> .
-
+@prefix bibdb: <https://id.kb.se/ns/bibdb/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ls: <https://id.kb.se/ns/librissearch/> .
 
-:LibrisQueryCode a rdfs:Datatype .
-
-:author a owl:ObjectProperty ;
-    rdfs:label "författare"@sv, "author"@en ;
-    :category :shorthand, :pending ;
-    owl:equivalentProperty <https://id.kb.se/relator/author> ;
-    rdfs:subPropertyOf :contributor ;
-    rdfs:range :Agent ;
-    skos:notation "FÖRF"^^:LibrisQueryCode ;
-    owl:propertyChainAxiom (
-            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
-                owl:onProperty :role ;
-                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
-            :agent
-        ) .
+### Extended definitions for Libris Search ###
 
 :isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
 
 :yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
     rdfs:domain :Instance ;
-    skos:notation "ÅR"^^:LibrisQueryCode .
+    skos:notation "ÅR"^^ls:QueryCode .
 
-:language skos:notation "SPRÅK"^^:LibrisQueryCode . # See ./relations.ttl for full definition of :language
+:language skos:notation "SPRÅK"^^ls:QueryCode . # See ./relations.ttl for full definition of :language
 
-:controlNumber skos:notation "ONR"^^:LibrisQueryCode . # See ./platform.ttl for full definition of :controlNumber
+:controlNumber skos:notation "ONR"^^ls:QueryCode . # See ./platform.ttl for full definition of :controlNumber
 
-:itemHeldBy a owl:ObjectProperty ;
+:hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
+
+
+### New definitions for Libris Search ###
+
+ls:QueryCode a rdfs:Datatype .
+
+ls:composite a skos:Collection ;
+    rdfs:label "composite"@en, "sammansatt"@sv ;
+    :code "composite" .
+
+ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
-:instanceOfType a owl:ObjectProperty ;
+ls:itemHeldByOrg a owl:ObjectProperty ;
+    rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
+    skos:notation "OCODE"^^ls:QueryCode ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Instance ;
+    sdo:rangeIncludes bibdb:Organization ;
+    owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
+
+ls:instanceOfType a owl:ObjectProperty ;
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( :instanceOf rdf:type ) .
 
-:hasInstanceType a owl:ObjectProperty ;
+ls:hasInstanceType a owl:ObjectProperty ;
     rdfs:label "format"@sv, "format"@en ;
-    skos:notation "FORMAT"^^:LibrisQueryCode ;
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .
 
-:originalLanguage a owl:ObjectProperty ;
+ls:instanceOfCategory a owl:ObjectProperty ;
+    rdfs:label "kategori på verket"@sv, "category of work"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Instance ;
+    owl:propertyChainAxiom ( :instanceOf :category ) .
+
+ls:hasInstanceCategory a owl:ObjectProperty ;
+    rdfs:label "kategori på instansen"@sv, "category of instance"@en ;
+    :category :shorthand, :pending ;
+    rdfs:domain :Work ;
+    owl:propertyChainAxiom ( :hasInstance :category ) .
+
+ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     rdfs:range :Language ;
     owl:propertyChainAxiom ( :translationOf :language ) .
+
+ls:indexKey a :DatatypeProperty .
+
+ls:findCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
+    ls:indexKey "_categoryByCollection.find" .
+
+ls:identifyCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
+    ls:indexKey "_categoryByCollection.identify" .
+
+ls:noneCategory a :ObjectProperty ;
+    rdfs:subPropertyOf :category ;
+    rdfs:domain :Work ;
+    ls:indexKey "_categoryByCollection.@none" .
+
+ls:title a owl:ObjectProperty ;
+    :category ls:composite ;
+    rdfs:label "titel"@sv, "title"@en ;
+    skos:notation "TIT"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :translationOf :hasTitle ),
+        ( :seriesMembership :inSeries :instanceOf :hasTitle ),
+        ( :relationship :entity :hasTitle ) .
+
+#:author a owl:ObjectProperty ;
+#    rdfs:label "författare"@sv, "author"@en ;
+#    :category :shorthand, :pending ;
+#    owl:equivalentProperty <https://id.kb.se/relator/author> ;
+#    rdfs:subPropertyOf :contributor ;
+#    rdfs:range :Agent ;
+#    skos:notation "FÖRF"^^ls:QueryCode ;
+#    owl:propertyChainAxiom (
+#            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
+#                owl:onProperty :role ;
+#                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
+#            :agent
+#        ) .

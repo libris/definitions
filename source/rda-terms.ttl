@@ -5,6 +5,71 @@
 
 @base <https://id.kb.se/term/rda/> .
 
+# FIXME: OBSOLETE file; remove when source/rda/*.ttl replacement is approved (pending change as of 250512)!
+
+# TODO: Check these rdacarrier mappings:
+#    Deprecated: skos:exactMatch rdacarrier:1001 ; # "Audio carriers" # skos:closeMatch rdamedia:1001
+#    skos:exactMatch rdacarrier:1002 ; # "audio cartridge"
+#    skos:exactMatch rdacarrier:1003 ; # "audio cylinder"
+#    skos:exactMatch rdacarrier:1004 ; # "audio disc"
+#    skos:exactMatch rdacarrier:1005 ; # "sound-track reel"
+#    skos:exactMatch rdacarrier:1006 ; # "audio roll"
+#    skos:exactMatch rdacarrier:1007 ; # "audiocassette"
+#    skos:exactMatch rdacarrier:1008 ; # "audiotape reel"
+
+#    Deprecated: skos:exactMatch rdacarrier:1010 ; # "Computer carriers" # skos:closeMatch rdamedia:1003
+#    skos:exactMatch rdacarrier:1011 ; # "computer card"
+#    skos:exactMatch rdacarrier:1012 ; # "computer chip cartridge"
+#    skos:exactMatch rdacarrier:1013 ; # "computer disc"
+#    skos:exactMatch rdacarrier:1014 ; # "computer disc cartridge"
+#    skos:exactMatch rdacarrier:1015 ; # "computer tape cartridge"
+#    skos:exactMatch rdacarrier:1016 ; # "computer tape cassette"
+#    skos:exactMatch rdacarrier:1017 ; # "computer tape reel"
+#    skos:exactMatch rdacarrier:1018 ; # "online resource"
+
+#    Deprecated: skos:exactMatch rdacarrier:1020 ; # "Microform carriers" # skos:closeMatch rdamedia:1002
+#    skos:exactMatch rdacarrier:1021 ; # "aperture card"
+#    skos:exactMatch rdacarrier:1022 ; # "microfiche"
+#    skos:exactMatch rdacarrier:1023 ; # "microfiche cassette"
+#    skos:exactMatch rdacarrier:1024 ; # "microfilm cartridge"
+#    skos:exactMatch rdacarrier:1025 ; # "microfilm cassette"
+#    skos:exactMatch rdacarrier:1026 ; # "microfilm reel"
+#    skos:exactMatch rdacarrier:1027 ; # "microfilm slip"
+#    skos:exactMatch rdacarrier:1028 ; # "microopaque"
+#    skos:exactMatch rdacarrier:1056 ; # "microfilm roll"
+
+#    Deprecated: rdacarrier:1029 ; # "Microscopic carriers" # skos:closeMatch rdamedia:1004
+#    skos:exactMatch rdacarrier:1030 ; # "microscope slide"
+
+#    Deprecated: skos:exactMatch rdacarrier:1031 ; # "Projected image carriers" # skos:closeMatch rdamedia:1005
+#    skos:exactMatch rdacarrier:1032 ; # "film cartridge"
+#    skos:exactMatch rdacarrier:1033 ; # "film cassette"
+#    skos:exactMatch rdacarrier:1034 ; # "film reel"
+#    skos:exactMatch rdacarrier:1035 ; # "filmslip"
+#    skos:exactMatch rdacarrier:1036 ; # "filmstrip"
+#    skos:exactMatch rdacarrier:1037 ; # "filmstrip cartridge"
+#    skos:exactMatch rdacarrier:1039 ; # "overhead transparency"
+#    skos:exactMatch rdacarrier:1040 ; # "slide"
+#    skos:exactMatch rdacarrier:1069 ; # "film roll"
+
+#    Deprecated: skos:exactMatch rdacarrier:1041 ; # "Stereographic carriers" # skos:closeMatch rdamedia:1006
+#    skos:exactMatch rdacarrier:1042 ; # "stereograph card"
+#    skos:exactMatch rdacarrier:1043 ; # "stereograph disc"
+
+#    Deprecated: skos:exactMatch rdacarrier:1044 ; # "Unmediated carriers" # skos:closeMatch rdamedia:1007
+#    skos:exactMatch rdacarrier:1045 ; # "card"
+#    skos:exactMatch rdacarrier:1046 ; # "flipchart"
+#    skos:exactMatch rdacarrier:1047 ; # "roll"
+#    skos:exactMatch rdacarrier:1048 ; # "sheet"
+#    skos:exactMatch rdacarrier:1049 ; # "volume"
+#    skos:exactMatch rdacarrier:1059 ; # "object"
+
+#    Deprecated: skos:exactMatch rdacarrier:1050 ; # "Video carriers" # skos:closeMatch rdamedia:1008
+#    skos:exactMatch rdacarrier:1051 ; # "video cartridge"
+#    skos:exactMatch rdacarrier:1052 ; # "videocassette"
+#    skos:exactMatch rdacarrier:1053 ; # "videotape reel"
+#    skos:exactMatch rdacarrier:1060 ; # "videodisc"
+
 
 ## Carriers ##
 
@@ -328,7 +393,7 @@
 <PerformedMusic> a bf:Content ;
     owl:sameAs <content/performed%20music>,
         <content/prm> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/prm>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/prm>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1011> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "prm" .
@@ -383,7 +448,7 @@
 <SpokenWord> a bf:Content ;
     owl:sameAs <content/spoken%20word>,
         <content/spw> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/spw>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/spw>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1013> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "spw" .
@@ -469,7 +534,7 @@
 <CartographicImage> a bf:Content ;
     owl:sameAs <content/cartographic%20image>,
         <content/cri> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cri>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cri>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1002> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "cri" .
@@ -536,7 +601,7 @@
 <ComputerProgram> a bf:Content ;
     owl:sameAs <content/computer%20program>,
         <content/cop> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cop>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/cop>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1008>,
         marc:ComputerProgram ;
     skos:inScheme <https://id.kb.se/term/rda> ;
@@ -553,7 +618,7 @@
 <NotatedMusic> a bf:Content ;
     owl:sameAs <content/notated%20music>,
         <content/ntm> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/ntm>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/ntm>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1010> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "ntm" .
@@ -561,7 +626,7 @@
 <StillImage> a bf:Content ;
     owl:sameAs <content/sti>,
         <content/still%20image> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/sti>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/sti>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1014> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "sti" .
@@ -609,7 +674,7 @@
 <Text> a bf:Content ;
     owl:sameAs <content/text>,
         <content/txt> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/txt>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/txt>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1020> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "txt" .
@@ -617,7 +682,7 @@
 <ThreeDimensionalForm> a bf:Content ;
     owl:sameAs <content/tdf>,
         <content/three-dimensional%20form> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdf>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdf>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1021> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "tdf" .
@@ -633,7 +698,7 @@
 <TwoDimensionalMovingImage> a bf:Content ;
     owl:sameAs <content/tdi>,
         <content/two-dimensional%20moving%20image> ;
-    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdi>,
+    skos:exactMatch <http://id.loc.gov/vocabulary/contentTypes/tdi>, # Used in LC codeMaps.xml
         <http://rdaregistry.info/termList/RDAContentType/1023> ;
     skos:inScheme <https://id.kb.se/term/rda> ;
     skos:notation "tdi" .

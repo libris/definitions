@@ -26,28 +26,30 @@
       "statistics": {
         "sliceList": [
           { "dimensionChain": [{"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000 },
-          { "dimensionChain": ["instanceOf", "language"], "itemLimit": 100 },
-          { "dimensionChain": ["carrierType"], "itemLimit": 100 },
-          { "dimensionChain": ["instanceOf", "rdf:type"], "itemLimit": 100 },
-          { "dimensionChain": ["publication", "year"], "itemLimit": 500 },
-          { "dimensionChain": ["issuanceType"], "itemLimit": 100 },
           { "dimensionChain": ["meta", "encodingLevel"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "category"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "language"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOf", "contentType"], "itemLimit": 100 },
           { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["category"], "itemLimit": 100 },
+          { "dimensionChain": ["publication", "year"], "itemLimit": 500 },
           { "dimensionChain": ["inScheme"], "itemLimit": 100 },
           { "dimensionChain": ["inCollection"], "itemLimit": 100 },
+          { "dimensionChain": ["carrierType"], "itemLimit": 100 },
+          { "dimensionChain": ["issuanceType"], "itemLimit": 100 },
           { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["instanceOf", "genreForm"], "itemLimit": 100 },
           { "dimensionChain": ["contentType"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100 },
           { "dimensionChain": ["contribution", "agent"], "itemLimit": 20 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["instanceOf", "subject"], "itemLimit": 100 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["meta", "bibliography"], "itemLimit": 100 },
           { "dimensionChain": ["concerning", {"inverseOfTerm": "itemOf"}, "heldBy"], "itemLimit": 1000, "connective": "OR", "_matchMissing": "concerning" },
-          { "dimensionChain": ["concerning", "issuanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["category"], "itemLimit": 100, "connective": "OR", "_matchMissing": "category"}
+          { "dimensionChain": ["concerning", "issuanceType"], "itemLimit": 100 }
         ]
       }
     },
@@ -76,16 +78,154 @@
       "titleByLang":  {"sv": "Libris sök", "en": "Libris Search"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["category"] },
+          { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000 },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000, "connective": "OR" },
+          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
+          { "dimensionChain": ["nationality"], "itemLimit": 100 },
+          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
+          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+        ]
+      },
+      "filterAliases": [
+        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
+        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
+        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
+        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
+        { "alias": "freeOnline", "filter": "hasInstanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } },
+        { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") hasInstanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
+      ],
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Work" },
+        { "filter": "excludeEplikt" },
+        { "filter": "excludePreliminary" },
+        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
+        { "filter": "NOT inDataset:\"https://id.kb.se/dataset/swepub\"" }
+      ],
+      "optionalSiteFilters": [
+        { "filter": "includeEplikt" },
+        { "filter": "includePreliminary" },
+        { "filter": "existsImage" },
+        { "filter": "freeOnline" }
+      ],
+      "relationFilters": [
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "category", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
+      ]
+    },
+    {
+      "@id": "https://suecia.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "suecia.libris.kb.se",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>SUECIA.LIBRIS.KB.SE</b>.</p>"
+      },
+      "_appTheme": "accent"
+    },
+    {
+      "@id": "https://suecia.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://suecia.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Suecia sök", "en": "Suecia Search"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["category"] },
+          { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 }
+        ]
+      },
+      "filterAliases": [
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
+        { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") hasInstanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
+      ],
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Work" },
+        { "filter": "_suecia" }
+      ],
+      "optionalSiteFilters": [
+        { "filter": "existsImage" }
+      ],
+      "relationFilters": [
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "category", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
+      ]
+    },
+    {
+      "@id": "https://arkdes.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "arkdes.libris.kb.se",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>ARKDES.LIBRIS.KB.SE</b>.</p>"
+      },
+      "_appTheme": "accent"
+    },
+    {
+      "@id": "https://arkdes.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://arkdes.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "ArkDes sök", "en": "ArkDes Search"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["category"] },
+          { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000, "connective": "OR" },
           { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 20 },
           { "dimensionChain": ["genreForm"], "itemLimit": 100 },
           { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
           { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
@@ -98,27 +238,98 @@
         { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
         { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
         { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
-        { "alias": "freeOnline", "filter": "hasInstanceType:Electronic AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
+        { "alias": "freeOnline", "filter": "hasInstanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
       "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Work" },
+        { "filter": "itemHeldBy:\"sigel:Arkm\"" },
         { "filter": "excludeEplikt" },
         { "filter": "excludePreliminary" },
-        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
-        { "filter": "\"rdf:type\":Work", "applyTo": "standardSearch" },
-        { "filter": "\"rdf:type\":(Work OR BibliographicAgent OR Concept)", "applyTo": "objectSearch" }
+        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" }
       ],
       "optionalSiteFilters": [
-        { "filter": "includeEplikt" },
         { "filter": "includePreliminary" },
         { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
-      "relationFilters": {
-        "Agent": [ "contributor", "subject", "publisher" ],
-        "Concept": [ "subject", "genreForm", "hasOccupation", "fieldOfActivity", "termComponentList" ],
-        "Work": [ "subject", "isPartOf" ],
-        "Instance": [ "subject", "isPartOf" ]
+      "relationFilters": [
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "category", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
+      ]
+    },
+    {
+      "@id": "https://swepub-libris-qa.kb.se/",
+      "@type": "DataCatalog",
+      "title": "swepub-libris-qa.kb.se/",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>SWEPUB.LIBRIS.KB.SE</b>.</p>"
+      },
+      "_appTheme": "accent"
+    },
+    {
+      "@id": "https://swepub-libris-qa.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
       }
+    },
+    {
+      "@id": "https://swepub-libris-qa.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Swepub sök", "en": "Swepub Search"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["hasInstanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["category"] },
+          { "dimensionChain": ["hasInstanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["itemHeldBy"], "itemLimit": 1000, "connective": "OR" },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
+          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceOfType"], "itemLimit": 100 },
+          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
+          { "dimensionChain": ["nationality"], "itemLimit": 100 },
+          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
+          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+        ]
+      },
+      "filterAliases": [
+        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
+        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
+        { "alias": "excludePreliminary", "filter": "NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\")", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
+        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
+        { "alias": "freeOnline", "filter": "hasInstanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
+      ],
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Work" },
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" },
+        { "filter": "excludePreliminary" }
+      ],
+      "optionalSiteFilters": [
+        { "filter": "includePreliminary" },
+        { "filter": "existsImage" },
+        { "filter": "freeOnline" }
+      ],
+      "relationFilters": [
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "category", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
+      ]
     },
     {
       "@id": "https://id.kb.se/",

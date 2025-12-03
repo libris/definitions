@@ -1,0 +1,627 @@
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix div: <https://id.kb.se/term/div/>
+prefix : <https://id.kb.se/vocab/>
+
+barngf:Barn-%20och%20ungdom a :Genre ;  # TODO: :IntendedAudience ?
+  :inCollection div:targetaudience ;
+  :prefLabel "Barn och ungdom (målgrupp)" .
+
+barngf:Barn-%20och%20ungdomslitteratur a :GenreForm ;
+  :broader saogf:Sk%C3%B6nlitteratur ,
+    barngf:Barn-%20och%20ungdom ;
+  :singularLabel "Barn- och ungdomslitteratur"@sv .
+
+barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom a :GenreForm ;
+  :broadMatch saogf:Sk%C3%B6nlitteratur ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :inCollection div:subdivision ;
+  :singularLabel "Skönlitteratur för barn- och ungdom"@sv .
+
+barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :inCollection div:subdivision ;
+  :prefLabel "Genrelitteratur" .
+
+barngf:Bilderb%C3%B6cker a :ExpressionForm ;
+  :inCollection div:identify ;
+  :broader saogf:Sk%C3%B6nlitteratur ,
+    saogf:Illustrerade%20verk ;
+  :singularLabel "Bilderbok"@sv ,
+    "Picture Book"@en .
+
+barngf:Kapitelb%C3%B6cker a :ExpressionForm ;
+  :inCollection div:identify ;
+  :broader saogf:Sk%C3%B6nlitteratur ,
+    saogf:Illustrerade%20verk ;
+  :singularLabel "Kapitelbok"@sv ,
+    "Chapter Book"@en .
+
+barngf:Reklamtryck a :GenreForm ;
+  :broadMatch saogf:Reklamtryck ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Reklamtryck för barn" .
+
+barngf:Kartongb%C3%B6cker a :GenreForm ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Kartongböcker"@sv ;
+  :singularLabel "Kartongbok"@sv .
+
+barngf:Bildordb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Bildverk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Bildordböcker"@sv ;
+  :singularLabel "Bildordbok"@sv .
+
+barngf:TAKK a :GenreForm ;
+  :broadMatch saogf:TAKK ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :prefLabel "TAKK för barn" .
+
+barngf:Tecken%20som%20st%C3%B6d%20till%20talet a :GenreForm ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur .
+
+barngf:Faktab%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Faktaböcker"@sv ;
+  :singularLabel "Faktabok"@sv .
+
+barngf:Sm%C3%A5barnsfakta a :GenreForm ;
+  :broadMatch saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur .
+
+barngf:Ordb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Ordböcker"@sv ;
+  :singularLabel "Ordbok"@sv .
+
+barngf:Uppslagsb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Lexikon ,
+    saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Uppslagsböcker för barn"@sv ;
+  :prefLabel "Uppslagsböcker för barn" ;
+  :singularLabel "Uppslagsbok för barn"@sv .
+
+barngf:Kokb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Kokb%C3%B6cker ,
+    saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Kokböcker för barn"@sv ;
+  :singularLabel "Kokbok för barn"@sv .
+
+barngf:Handb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Handböcker"@sv ;
+  :singularLabel "Handbok"@sv .
+
+barngf:Taltr%C3%A4ningsb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Informativa%20verk ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Talträningsböcker"@sv ;
+  :singularLabel "Talträningsbok"@sv .
+
+barngf:Andaktsb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Andaktsb%C3%B6cker ;
+  :broader barngf:Barn-%20och%20ungdomslitteratur ;
+  :pluralLabel "Andaktsböcker för barn"@sv ;
+  :singularLabel "Andaktsbok för barn"@sv .
+
+barngf:Religi%C3%B6sa%20ber%C3%A4ttelser a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Religiösa berättelser"@sv ;
+  :singularLabel "Religiös berättelse"@sv .
+
+barngf:Rollspel a :GenreForm ;
+  :broadMatch saogf:Rollspel ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :singularLabel "Rollspel för barn"@sv .
+
+barngf:All%C3%A5ldersb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Allåldersböcker"@sv ;
+  :singularLabel "Allåldersbok"@sv .
+
+barngf:Filmade%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Filmade böcker"@sv ;
+  :singularLabel "Filmad bok"@sv .
+
+barngf:Leta%20i%20bilden a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Taktila%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Taktila böcker"@sv ;
+  :singularLabel "Taktil bok"@sv .
+
+barngf:Minnesb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Minnesböcker"@sv ;
+  :singularLabel "Minnesbok"@sv .
+
+barngf:S%C3%A5nglekar a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Sånglekar"@sv ;
+  :singularLabel "Sånglek"@sv .
+
+barngf:Kortspel a :GenreForm ;
+  :broader barngf:Barn-%20och%20ungdom .
+
+barngf:Skr%C3%A4ckber%C3%A4ttelser a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Skräckberättelser"@sv ;
+  :singularLabel "Skräckberättelse"@sv .
+
+barngf:Textl%C3%B6sa%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Textlösa böcker"@sv ;
+  :singularLabel "Textlös bok"@sv .
+
+barngf:Pusselb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Pusselböcker"@sv ;
+  :singularLabel "Pusselbok"@sv .
+
+barngf:Pysselb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Pysselb%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Pysselböcker för barn"@sv ;
+  :singularLabel "Pysselbok för barn"@sv .
+
+barngf:Rim%20och%20ramsor a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Rim och ramsor"@sv ;
+  :singularLabel "Rim och ramsa"@sv .
+
+barngf:Taktila%20illustrationer a :GenreForm ;
+  :broadMatch saogf:Illustrerade%20verk ;
+  :broader barngf:Barn-%20och%20ungdom ;
+  :pluralLabel "Taktila illustrationer"@sv ;
+  :singularLabel "Taktil illustration"@sv .
+
+barngf:Titth%C3%A5lsb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Titthålsböcker"@sv ;
+  :singularLabel "Titthålsbok"@sv .
+
+barngf:Teckenspr%C3%A5k a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Samlingar a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Samlingar av berättelser för unga"@sv ;
+  :singularLabel "Samling av berättelser för unga"@sv .
+
+barngf:V%C3%A4ndbara%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Vändbara böcker"@sv ;
+  :singularLabel "Vändbar bok"@sv .
+
+barngf:Mellan%C3%A5ldersb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Mellanåldersböcker"@sv ;
+  :singularLabel "Mellanåldersbok"@sv .
+
+barngf:B%C3%B6rja%20l%C3%A4sa a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Historiska%20ber%C3%A4ttelser a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Historiska berättelser"@sv ;
+  :singularLabel "Historisk berättelse"@sv .
+
+barngf:Kalenderb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Kalenderböcker"@sv ;
+  :singularLabel "Kalenderbok"@sv .
+
+barngf:L%C3%A4ttl%C3%A4sta%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Lättlästa böcker"@sv ;
+  :singularLabel "Lättläst bok"@sv .
+
+barngf:Parallelltext a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Pekb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Bildverk ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Pekböcker"@sv ;
+  :singularLabel "Pekbok"@sv .
+
+barngf:ABC-b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "ABC-böcker"@sv ;
+  :singularLabel "ABC-bok"@sv .
+
+barngf:S%C3%A5ngb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Sångböcker"@sv ;
+  :singularLabel "Sångbok"@sv .
+
+barngf:Sm%C3%A5barnsbilderb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ,
+    barngf:Bilderb%C3%B6cker ;
+  :pluralLabel "Småbarnsbilderböcker"@sv ;
+  :singularLabel "Småbarnsbilderbok"@sv .
+
+barngf:Interaktiva%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Interaktiva böcker"@sv ;
+  :singularLabel "Interaktiv bok"@sv .
+
+barngf:Fotografiska%20illustrationer a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Fotografiska illustrationer"@sv ;
+  :singularLabel "Fotografisk illustration"@sv .
+
+barngf:Skolplanscher a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;  # TODO: not literature?
+  :pluralLabel "Skolplanscher"@sv ;
+  :singularLabel "Skolplansch"@sv .
+
+barngf:Fotografiska%20seriealbum a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Fotografiska seriealbum"@sv ;
+  :singularLabel "Fotografiskt seriealbum"@sv .
+
+barngf:Bliss%20%28symbolspr%C3%A5k%29 a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Widgit%20%28symbolspr%C3%A5k%29 a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Bildst%C3%B6d a :GenreForm ;
+  :broadMatch saogf:Illustrerade%20verk ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:B%C3%B6cker%20med%20ljuseffekter a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Böcker med ljuseffekter"@sv ;
+  :singularLabel "Bok med ljuseffekt"@sv .
+
+barngf:L%C3%A4seb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:L%C3%A4seb%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Läseböcker för barn"@sv ;
+  :singularLabel "Läsebok för barn"@sv .
+
+barngf:Mekaniska%20b%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Mekaniska%20b%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Mekaniska böcker för barn"@sv ;
+  :singularLabel "Mekanisk bok för barn"@sv .
+
+barngf:B%C3%B6cker%20med%20ljudeffekter a :GenreForm ;
+  :broadMatch saogf:B%C3%B6cker%20med%20ljudeffekter ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Böcker med ljudeffekter för barn"@sv ;
+  :singularLabel "Bok med ljudeffekt för barn"@sv .
+
+barngf:Pop-up-b%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Pop-up-b%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Pop-up-böcker för barn"@sv ;
+  :singularLabel "Pop-up-bok för barn"@sv .
+
+barngf:Ljudb%C3%B6cker a :GenreForm ;
+  :broadMatch saogf:Ljudb%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Ljudböcker för barn"@sv ;
+  :singularLabel "Ljudbok för barn"@sv .
+
+barngf:Filmmanus a :GenreForm ;
+  :broadMatch saogf:Filmmanus ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :singularLabel "Filmmanus för barn"@sv .
+
+barngf:Tecknade%20serier a :GenreForm ;
+  :broadMatch saogf:Tecknade%20serier ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Tecknade serier för barn"@sv ;
+  :singularLabel "Tecknad serie för barn"@sv .
+
+barngf:Manga a :GenreForm ;
+  :broadMatch saogf:Manga ,
+    saogf:Bildverk ;
+  :broader barngf:Tecknade%20serier ;
+  :prefLabel "Manga för barn" .
+
+barngf:Manhwa a :GenreForm ;
+  :broader barngf:Tecknade%20serier ;
+  :prefLabel "Manhwa för barn" .
+
+barngf:Noveller a :GenreForm ;
+  :broadMatch saogf:Noveller ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Noveller för barn"@sv ;
+  :singularLabel "Novell för barn"@sv .
+
+barngf:Brevromaner a :GenreForm ;
+  :broadMatch saogf:Brevromaner ,
+    saogf:Romaner ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Brevromaner för barn"@sv ;
+  :singularLabel "Brevroman för barn"@sv .
+
+barngf:Bildromaner a :GenreForm ;
+  :broadMatch saogf:Illustrerade%20verk ,
+    saogf:Romaner ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Bildromaner"@sv ;
+  :singularLabel "Bildroman"@sv .
+
+barngf:Versromaner a :GenreForm ;
+  :broadMatch saogf:Romaner ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Versromaner"@sv ;
+  :singularLabel "Versroman"@sv .
+
+barngf:Citatsamlingar a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Citatsamlingar"@sv ;
+  :singularLabel "Citatsamling"@sv .
+
+barngf:G%C3%A5tsamlingar a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Gåtsamlingar"@sv ;
+  :singularLabel "Gåtsamling"@sv .
+
+barngf:Ungdomsb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Ungdomsböcker"@sv ;
+  :singularLabel "Ungdomsbok"@sv .
+
+barngf:H%C3%A4stb%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Hästböcker"@sv ;
+  :singularLabel "Hästbok"@sv .
+
+barngf:Verklighetsbaserade%20b%C3%B6cker a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Verklighetsbaserade böcker"@sv ;
+  :singularLabel "Verklighetsbaserad bok"@sv .
+
+barngf:%C3%84ventyrsb%C3%B6cker a :GenreForm ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Äventyrsböcker"@sv ;
+  :singularLabel "Äventyrsbok"@sv .
+
+
+## Only Genre below? Not Literature?
+
+barngf:Dialektlitteratur a :Genre ;
+  :broadMatch saogf:Dialektlitteratur ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Dialektlitteratur för barn" .
+
+barngf:Poesi a :Genre ;
+  :broadMatch saogf:Poesi ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Poesi för barn" .
+
+barngf:Sagor a :GenreForm ;
+  :broadMatch saogf:Sagor ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Sagor för barn"@sv ;
+  :singularLabel "Saga för barn"@sv .
+
+barngf:Folksagor a :GenreForm ;
+  :broadMatch saogf:Folksagor ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Folksagor för barn"@sv ;
+  :singularLabel "Folksaga för barn"@sv .
+
+barngf:Ritsagor a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Ritsagor"@sv ;
+  :singularLabel "Ritsaga"@sv .
+
+barngf:Dilemmasagor a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Dilemmasagor"@sv ;
+  :singularLabel "Dilemmasaga"@sv .
+
+barngf:Isl%C3%A4ndska%20sagor a :GenreForm ;
+  :broadMatch saogf:Isl%C3%A4ndska%20sagor ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Isländska sagor för barn"@sv ;
+  :singularLabel "Isländsk saga för barn"@sv .
+
+barngf:Upprepningssagor a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Upprepningssagor"@sv ;
+  :singularLabel "Upprepningssaga"@sv .
+
+barngf:Djur%20ber%C3%A4ttar a :GenreForm ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Fabler a :GenreForm ;
+  :broadMatch saogf:Fabler ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Fabler för barn"@sv ;
+  :singularLabel "Fabel för barn"@sv .
+
+barngf:S%C3%A4gner a :Genre ;
+  :broadMatch saogf:S%C3%A4gner ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Sägner för barn"@sv ;
+  :singularLabel "Sägen för barn"@sv .
+
+barngf:Framtidsskildringar a :Genre ;
+  :broadMatch saogf:Framtidsskildringar ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Framtidsskildringar för barn"@sv ;
+  :singularLabel "Framtidsskildring för barn"@sv .
+
+barngf:Personliga%20b%C3%B6cker a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Personliga böcker"@sv ;
+  :singularLabel "Personlig bok"@sv .
+
+barngf:Dagb%C3%B6cker a :Genre ;
+  :broadMatch saogf:Dagb%C3%B6cker ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Dagböcker för barn"@sv ;
+  :singularLabel "Dagbok för barn"@sv .
+
+barngf:Dramatik a :Genre ;
+  :broadMatch saogf:Dramatik ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Dramatik för barn" .
+
+barngf:Legender a :Genre ;
+  :broadMatch saogf:Legender ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Legender för barn"@sv ;
+  :singularLabel "Legend för barn"@sv .
+
+barngf:Bibliska%20ber%C3%A4ttelser a :Genre ;
+  :broadMatch saogf:Bibliska%20ber%C3%A4ttelser ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Bibliska berättelser för barn"@sv ;
+  :singularLabel "Biblisk berättelse för barn"@sv .
+
+barngf:Roliga%20historier a :Genre ;
+  :broadMatch saogf:Roliga%20historier ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Roliga historier för barn" .
+
+barngf:Mytologi a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Versaler a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Versaler"@sv ;
+  :singularLabel "Versal"@sv .
+
+barngf:Rim a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Visor a :Genre ;
+  :broadMatch saogf:Visor ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Visor för barn" .
+
+barngf:Unga%20vuxna a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Unga vuxna"@sv ;
+  :singularLabel "Ung vuxen"@sv .
+
+barngf:Biografiska%20ber%C3%A4ttelser a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Biografiska berättelser"@sv ;
+  :singularLabel "Biografisk berättelse"@sv .
+
+barngf:Barndomsskildringar a :Genre ;
+  :broadMatch saogf:Barndomsskildringar ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Barndomsskildringar för barn"@sv ;
+  :singularLabel "Barndomsskildring för barn"@sv .
+
+barngf:Barn%20och%20ungdomar%20illustrerar a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Barn och ungdomar illustrerar"@sv ;
+  :singularLabel "Barn och ungdom illustrerar"@sv .
+
+barngf:Barn%20och%20ungdomar%20skriver a :Genre ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Barn och ungdomar skriver"@sv ;
+  :singularLabel "Barn och ungdom skriver"@sv .
+
+barngf:Parafraser a :Genre ;
+  :broadMatch saogf:Parafraser ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Parafraser för barn" .
+
+barngf:Parodier a :Genre ;
+  :broadMatch saogf:Parodier ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Parodier för barn"@sv ;
+  :singularLabel "Parodi för barn"@sv .
+
+barngf:Pastischer a :Genre ;
+  :broadMatch saogf:Pastischer ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Pastischer för barn"@sv ;
+  :singularLabel "Pastisch för barn"@sv .
+
+barngf:Satir a :Genre ;
+  :broadMatch saogf:Satir ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Satir för barn" .
+
+barngf:Fantasy a :Genre ;
+  :broadMatch saogf:Fantasy ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Fantasy för barn" .
+
+barngf:Urban%20fantasy a :Genre ;
+  :broadMatch saogf:Urban%20fantasy ;
+  :broader barngf:Sk%C3%B6nlitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Urban fantasy för barn" .
+
+barngf:Deckare a :Genre ;
+  :broadMatch saogf:Deckare ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Deckare för barn" .
+
+barngf:Faction a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Science%20fiction a :Genre ;
+  :broadMatch saogf:Science%20fiction ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Science fiction för barn" .
+
+barngf:Steampunk a :Genre ;
+  :broadMatch saogf:Steampunk ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :prefLabel "Steampunk för barn" .
+
+barngf:Dystopier a :Genre ;
+  :broadMatch saogf:Dystopier ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Dystopier för barn"@sv ;
+  :singularLabel "Dystopi för barn"@sv .
+
+barngf:Utopier a :Genre ;
+  :broadMatch saogf:Utopier ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Utopier för barn"@sv ;
+  :singularLabel "Utopi för barn"@sv .
+
+barngf:Klassiker a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Alternativa%20handlingar a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Alternativa handlingar"@sv ;
+  :singularLabel "Alternativ handling"@sv .
+
+barngf:Vaggvisor a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Vaggvisor"@sv ;
+  :singularLabel "Vaggvisa"@sv .
+
+barngf:Rysare a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
+
+barngf:Thrillers a :Genre ;
+  :broadMatch saogf:Thrillers ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Thrillers för barn"@sv ;
+  :singularLabel "Thriller för barn"@sv .
+
+barngf:Robinsonader a :Genre ;
+  :broadMatch saogf:Robinsonader ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom ;
+  :pluralLabel "Robinsonader för barn"@sv ;
+  :singularLabel "Robinsonad för barn"@sv .
+
+barngf:Dark%20academia a :Genre ;
+  :broader barngf:Genrelitteratur%20f%C3%B6r%20Barn-%20och%20ungdom .
