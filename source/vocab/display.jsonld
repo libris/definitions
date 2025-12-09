@@ -789,6 +789,7 @@
             "summary",
             "immediateAcquisition",
             "availability",
+            "shelfLabel",
             { "inverseOf": "itemUsed" },
             { "inverseOf": "hasComponent" }
           ]
@@ -1475,7 +1476,15 @@
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
-          "showProperties": [ "fresnel:super", "subject", "summary", "hasComponent", "availability" ]
+          "showProperties": [
+            "fresnel:super",
+            "subject",
+            "summary",
+            "hasComponent",
+            "availability",
+            "physicalLocation",
+            "shelfLabel"
+          ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-chips"},

@@ -22,7 +22,6 @@
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
-
 ### New definitions for Libris Search ###
 
 ls:QueryCode a rdfs:Datatype .
@@ -103,7 +102,15 @@ ls:title a owl:ObjectProperty ;
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
 
-
+ls:itemAccess a owl:DatatypeProperty ;
+     :category ls:composite ;
+     rdfs:label "åtkomst av exemplar"@sv, "item access"@en ;
+     skos:notation "WHYL"^^ls:QueryCode ;
+     owl:propertyChainAxiom ( :hasItem :availability :label ),
+        ( :hasItem :shelfMark :label ),
+        ( :hasItem :shelfControlNumber ),
+        ( :hasItem :shelfLabel ),
+        ( :hasItem :physicalLocation ) .
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
