@@ -240,7 +240,7 @@
           "@id": "Title-chips",
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart" ]
+          "showProperties": [ "mainTitle", "title", "subtitle", "titleRemainder", "partNumber", "partName", "hasPart", "marc:parallelTitle" ]
         },
         "KeyTitle": {
           "@id": "KeyTitle-chips",
@@ -1747,6 +1747,16 @@
 			"fresnel:propertyFormatDomain": ["qualifier"],
 			"fresnel:propertyFormat": {
 				"fresnel:contentBefore": " ",
+				"fresnel:contentFirst": ""
+			}
+		},
+		"Title-parallelTitle-format": {
+			"@id": "Title-parallelTitle-format",
+			"@type": "fresnel:Format",
+			"fresnel:classFormatDomain": ["Title"],
+			"fresnel:propertyFormatDomain": ["marc:parallelTitle"],
+			"fresnel:propertyFormat": {
+				"fresnel:contentBefore": " = ",
 				"fresnel:contentFirst": ""
 			}
 		},
