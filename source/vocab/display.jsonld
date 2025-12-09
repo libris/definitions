@@ -593,12 +593,6 @@
           "classLensDomain": "bulk:Execution",
           "showProperties": [ "bulk:status" ]
         },
-        "bibdb:LibraryOrganization": {
-          "@id": "bibdb:LibraryOrganization-chips",
-          "@type": "fresnel:Lens",
-          "classLensDomain": "bibdb:LibraryOrganization",
-          "showProperties": [ "name", "code" ]
-        },
         "bibdb:PostalAddress": {
           "@id": "bibdb:PostalAddress-chips",
           "@type": "fresnel:Lens",
@@ -833,6 +827,13 @@
           "classLensDomain": "Bibliography",
           "fresnel:extends": {"@id": "Bibliography-chips"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "bibdb:Organization": {
+          "@id": "bibdb:Organization-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "bibdb:Organization",
+          "fresnel:extends": {"@id": "bibdb:Organization-chips"},
+          "showProperties": [ "fresnel:super", {"inverseOf" : "isPartOf"} ]
         },
         "Country": {
           "@id": "Country-cards",
