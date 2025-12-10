@@ -1,8 +1,9 @@
+prefix : <https://id.kb.se/vocab/>
 prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-
+prefix div: <https://id.kb.se/term/div/>
 prefix marc: <https://id.kb.se/marc/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix kbrda: <https://id.kb.se/term/rda/>
@@ -659,6 +660,7 @@ kbrda:VideotapeReel a bf:Carrier ;
     "Videotape reel"@en .
 
 kbrda:Volume a bf:Carrier ;
+  :inCollection div:select ;
   owl:sameAs kbrda:carrier\/nc ,
     kbrda:carrier\/volume ;
   skos:broader kbrda:Unmediated ;
