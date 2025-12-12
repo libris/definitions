@@ -29,7 +29,7 @@ ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in B
 # Rather :productionMethod?
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
 #ktg:Handwritten a :ManifestationForm;
-#  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
+#  skos:broader  kbrda:Unmediated, ktg:ManuscriptForm .
 #ktg:Typewritten a :ManifestationForm;
 #  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
 
@@ -83,7 +83,8 @@ ktg:ComponentPart a :ManifestationForm ;
 #    owl:someValuesFrom :TactileMaterial ] .
 
 ktg:BrailleForm a :ManifestationForm ;
-  skos:exactMatch marc:Braille, marc:TextMaterialType-c ;
+  skos:exactMatch marc:Braille, marc:TextMaterialType-c, 
+    marc:TacMaterialType-b ;
   skos:broader ktg:TactileForm, ktg:Print ;
   skos:prefLabel "Punktskriftsform"@sv, "Braille form"@en .
 
@@ -103,43 +104,41 @@ ktg:StorageMedium a :ManifestationForm ;
   rdfs:label "Lagringsmedium"@sv , "StorageMedium"@en .
 
 
-ktg:TapeCartridge a :ManifestationForm ;
-  skos:broader ktg:ElectronicStorageMedium ;
-  ptg:abstract true ;
-  skos:exactMatch marc:TapeCartridge ;
-  skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
+#ktg:TapeCartridge a :ManifestationForm ;
+#  skos:broader ktg:ElectronicStorageMedium ;
+#  ptg:abstract true ;
+#  skos:exactMatch marc:TapeCartridge ;
+#  skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
 
-ktg:TapeCassette a :ManifestationForm ;
-  skos:broader ktg:ElectronicStorageMedium ;
-  ptg:abstract true ;
-  skos:exactMatch marc:TapeCassette ;
-  skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
+#ktg:TapeCassette a :ManifestationForm ;
+#  skos:broader ktg:ElectronicStorageMedium ;
+#  ptg:abstract true ;
+#  skos:exactMatch marc:TapeCassette ;
+#  skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
 
-ktg:TapeReel a :ManifestationForm ;
-  ptg:abstract true ;
-  skos:broader ktg:ElectronicStorageMedium ;
-  skos:exactMatch marc:TapeReel ;
-  skos:prefLabel "Datorbandspole"@sv, "Tape reel"@en .
+#ktg:TapeReel a :ManifestationForm ;
+#  ptg:abstract true ;
+#  skos:broader ktg:ElectronicStorageMedium ;
+#  skos:exactMatch marc:TapeReel ;
+#  skos:prefLabel "Datorbandspole"@sv, "Tape reel"@en .
 
 # TODO: why not change most ktg:StorageMedium to ktg:ElectronicStorageMedium ?
 
 ktg:MagneticDisk a :ManifestationForm ;
   skos:exactMatch marc:MagneticDisk ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader ktg:ElectronicStorageMedium ;
   skos:prefLabel "Skiva för magnetisk lagring (disketter)"@sv, "Magnetic disk"@en .
 
 ktg:MagnetoOpticalDisc a :ManifestationForm ;
   skos:exactMatch marc:MagnetoOpticalDisc ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader ktg:ElectronicStorageMedium ;
   skos:prefLabel "Magnet-optisk skiva"@sv, "Magneto-optical disc"@en .
 
-ktg:OpticalReel a :ManifestationForm ;
-  ptg:abstract true ;
-  skos:broader ktg:StorageMedium .
+#ktg:OpticalReel a :ManifestationForm ;  ptg:abstract true ;  skos:broader ktg:StorageMedium .
 
 ktg:OpticalDisc a :ManifestationForm ;
   skos:exactMatch marc:OpticalDisc ;
-  skos:broader ktg:StorageMedium ;  # ktg:ElectronicStorageMedium ?
+  skos:broader ktg:ElectronicStorageMedium ;
   skos:prefLabel "Optisk skiva (CD-A, CD-R, CD-ROM)"@sv, "Optical disc"@en .
 
 ktg:CDBook a :ManifestationForm ;
@@ -201,8 +200,9 @@ ktg:SoundStorageMedium a :ManifestationForm ;
   rdfs:label "Audio"@sv, "Audio"@en .
 
 # Zero uses in Libris...
-ktg:AudioWireRecording a :ManifestationForm ;
-  skos:exactMatch marc:WireRecording .
+ktg:AudioWireRecording a :ManifestationForm ; 
+  skos:exactMatch marc:WireRecording ;
+  skos:broader kbrda:Audio, ktg:SoundStorageMedium .
 
 ktg:VideoStorageMedium a :ManifestationForm ;
   owl:sameAs :VideoRecording ;
