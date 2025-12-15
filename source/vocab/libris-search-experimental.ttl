@@ -112,6 +112,13 @@ ls:itemAccess a owl:DatatypeProperty ;
         ( :hasItem :shelfLabel ),
         ( :hasItem :physicalLocation ) .
 
+ls:itemCreated a owl:DatatypeProperty ;
+     :category :shorthand ;
+     rdfs:label "registreringsdatum"@sv, "item created"@en ;
+     rdfs:domain :Instance ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :hasItem :meta :created ) .
+
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
 #    :category :shorthand ;
