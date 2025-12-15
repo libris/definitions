@@ -9,53 +9,57 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+#what does this do?
 base <file:genres.ttl>
 
 saogf:%C3%84ventyrsskildringar a :Genre .
 
 saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Seriella%20publikationer ;
+  :broader saogf:Seriella%20publikationer ;
   :exactMatch marc:Yearbook ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Yearbook"@en ,
     "Årsbok"@sv .
 
-saogf:B%C3%B6cker a :GenreForm ;
-  :broader ktg:Literature ;
-  :category div:abstract ;
-  :closeMatch marcgt:boo ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Böcker"@sv ,
-    "Books"@en ;
-  :singularLabel "Bok"@sv ,
-    "Book"@en .
+#Removed Böcker and all references to it. Check usage of marcgt:boo
+#saogf:B%C3%B6cker a :GenreForm ;
+#  :broader ktg:Literature ;
+#  :category div:abstract ;
+#  :closeMatch marcgt:boo ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Böcker"@sv ,
+#    "Books"@en ;
+#  :singularLabel "Bok"@sv ,
+#    "Book"@en .
 
 saogf:Seriella%20publikationer a :Genre ;
   :broader saogf:Samlande%20resurser ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Serial publication"@en ,
-    "Seriella publikationer"@sv .
+    "Seriell publikation"@sv .
 
 saogf:%C3%85rstidsmusik :broader saogf:Musik .
 
+#Behöver vi ktg:Musik när vi har saogf:Musik? Kan rda-termerna läggas som smalare match till saogf-termen?
 saogf:Musik a :Genre ;
-  :broader ktg:Music .
+  :broader ktg:Music ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026952> .
 
-saogf:%C3%96vriga%20tidskrifter a :Resource ;
-  :isReplacedBy saogf:Periodika .
+#Vi gör detta efter överläggning med tidskriftskatalogisatörer
+#saogf:%C3%96vriga%20tidskrifter a :Resource ;
+# :isReplacedBy saogf:Periodika .
 
 saogf:Periodika a :GenreForm ;
-  :altLabel "Periodika"@sv ;
-  :broader ktg:Literature ,
-    saogf:Samlande%20resurser ;
+#:altLabel "Periodika"@sv ;
+# :broader ktg:Literature ,
+#  saogf:Samlande%20resurser ;
   :closeMatch marc:Periodical ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Tidskrifter"@sv ;
+# :pluralLabel "Tidskrifter"@sv ;
   :singularLabel "Periodical"@en ,
-    "Tidskrift"@sv .
+"Periodika"@sv .
 
 saogf:A%20cappella :broader saogf:Musik .
 
@@ -70,13 +74,14 @@ saogf:Affischer a :ExpressionForm ;
   :exactMatch tgm:Affischer ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Affischer"@sv ;
+  #:pluralLabel "Affischer"@sv ;
   :singularLabel "Poster"@en ,
     "Affisch"@sv .
 
+#Glöm inte att göra om ktg:Visuellt verk till saogf:Visuellt verk
 saogf:Bilder a :ExpressionForm ;
-  :broader saogf:Bildverk ,
-    kbrda:StillImage ;
+  :broader ktg:VisualWork ;
+ #   kbrda:StillImage ;
   :exactMatch tgm:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Picture"@en ,
@@ -90,7 +95,8 @@ saogf:Akustiska%20demonstrationer%20och%20experiment :broader saogf:Musik .
 
 saogf:Algaita :broader saogf:Musik .
 
-saogf:Allegorier a :Genre .
+saogf:Allegorier a :Genre ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial .
 
 saogf:Allemander :broader saogf:Musik .
 
@@ -98,8 +104,7 @@ saogf:Allhelgonamusik :broader saogf:Musik .
 
 saogf:Alls%C3%A5ng :broader saogf:Musik .
 
-saogf:Almanackor a :Genre ,
-    :GenreForm ;
+saogf:Almanackor a :GenreForm ;
   :broader saogf:Referensverk ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :related saogf:Seriella%20publikationer ;
@@ -110,7 +115,7 @@ saogf:Referensverk a :Genre ;
   :broader saogf:Informativa%20verk ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
+  #:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
   :singularLabel "Reference Work"@en ,
     "Referensverk"@sv .
 
@@ -177,6 +182,7 @@ saogf:Arkiv a :Genre ;
   :singularLabel "Archive"@en ,
     "Arkiv"@sv .
 
+#TODO lägg till beskrivning och engelska labels. Kanske lägga till div:abstract
 saogf:Samlande%20resurser a :Genre ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -213,7 +219,7 @@ saogf:Autografer :exactMatch tgm:Autografer .
 
 saogf:Ave%20Maria :broader saogf:Musik .
 
-saogf:Avhandlingar :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
+saogf:Avhandlingar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
     marc:Thesis ;
   :inScheme <https://id.kb.se/term/saogf> .
 
