@@ -85,14 +85,15 @@ ktg:ComponentPart a :ManifestationForm ;
 ktg:BrailleForm a :ManifestationForm ;
   skos:exactMatch marc:Braille, marc:TextMaterialType-c, 
     marc:TacMaterialType-b ;
-  skos:broader ktg:TactileForm, ktg:Print ;
+  skos:broader ktg:Print ; # Remove ktg:TactileForm which isn't defined
   skos:prefLabel "Punktskriftsform"@sv, "Braille form"@en .
 
+# exactMatch with saogf:Punktskriftsb%C3%B6cker seems dubious when one is used on the work, one on on the instance
 ktg:BrailleVolume a :ManifestationForm ;
   skos:broader ktg:BrailleForm, kbrda:Volume ;
-  skos:exactMatch saogf:Punktskriftsb%C3%B6cker ;
+  #skos:exactMatch saogf:Punktskriftsb%C3%B6cker ;
   :singularLabel "Punktskriftsbok"@sv, "Braille volume"@en .
-#  :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
+# :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
 
 
 # "Mediated"
