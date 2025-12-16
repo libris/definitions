@@ -103,7 +103,7 @@ ls:title a owl:ObjectProperty ;
         ( :relationship :entity :hasTitle ) .
 
 ls:itemAccess a owl:DatatypeProperty ;
-     :category ls:composite ;
+     :category ls:composite ; # TODO: ls:merged?
      rdfs:label "åtkomst av exemplar"@sv, "item access"@en ;
      skos:notation "WHYL"^^ls:QueryCode ;
      owl:propertyChainAxiom ( :hasItem :availability :label ),
@@ -167,15 +167,14 @@ ls:itemCreated a owl:DatatypeProperty ;
 #
 #ls:itemNote a owl:DatatypeProperty ;
 #    :category ls:merged ;
-#    ls:indexKey "_itemNote" ;
 #    rdfs:label "anmärkning i bestånd"@sv, "item note"@en ;
 #    skos:notation "BANM"^^ls:QueryCode ;
-#    rdfs:domain :Item ;
-#    owl:propertyChainAxiom ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ), ( marc:hasBindingInformation :label ) .
-#
-#:note rdfs:subPropertyOf ls:itemNote .
-#:cataloguersNote rdfs:subPropertyOf ls:itemNote .
-#:custodialHistory rdfs:subPropertyOf ls:itemNote .
+#    owl:propertyChainAxiom ( :hasItem :hasNote :label ),
+#        ( :hasItem :cataloguersNote ),
+#        ( :hasItem :custodialHistory ),
+#        ( :hasItem marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
+#        ( :hasItem marc:hasBindingInformation :label ),
+#        ( :hasItem marc:hasTextualHoldingsBasicBibliographicUni marc:cataloguersNote ) .
 #
 #:author a owl:ObjectProperty ;
 #    rdfs:label "författare"@sv, "author"@en ;
