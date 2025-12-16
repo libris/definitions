@@ -235,8 +235,7 @@ saogf:B%C3%B6cker%20med%20ljudeffekter a :ExpressionForm ;
     "Bok med ljudeffekt"@sv .
 
 saogf:Mekaniska%20b%C3%B6cker a :ExpressionForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Interaktiva%20objekt ;
+  :broader saogf:Interaktiva%20objekt ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Mechanical Book"@en ,
     "Mekanisk bok"@sv .
@@ -344,7 +343,9 @@ saogf:Bhajan :broader saogf:Musik .
 
 saogf:Bibliografier a :Genre ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:Bibliography ;
+# Tar bort narrowMatch för att undvika att marc:Bibliography byts ut mot Bibliografier (jfr hantering av amerikanskt offentligt tryck)
+# TODO Skapa SAOGF Innehåller bibliografi ich exact/closeMatcha med MARC
+#  :narrowMatch marc:Bibliography ;
   :singularLabel "Bibliography"@en ,
     "Bibliografi"@sv .
 
@@ -362,17 +363,14 @@ saogf:Bildlexikon a :ExpressionForm ;
     "Bildlexikon"@sv .
 
 saogf:Lexikon a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Referensverk ;
+  :broader saogf:Referensverk ;
   :closeMatch marc:Dictionary ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Lexicon"@en ,
     "Lexikon"@sv .
 
 saogf:Grafisk%20litteratur a :ExpressionForm ;
-  :broader kbrda:StillImage ,
-    kbrda:Text ,
-    saogf:Illustrerade%20verk ,
+  :broader saogf:Illustrerade%20verk ,
     ktg:Literature ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -389,7 +387,7 @@ saogf:Biografier a :Genre ;
     "Biografi"@sv .
 
 saogf:Informativa%20verk a :Genre ;
-  :broader saogf:Icke-fiktion ;
+  #:broader saogf:Icke-fiktion ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Informative Work"@en ,
@@ -420,10 +418,9 @@ saogf:Blandad%20k%C3%B6r :broader saogf:Musik .
 saogf:Blandade%20r%C3%B6ster :broader saogf:Musik .
 
 saogf:Blanketter a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
   :exactMatch tgm:Blanketter ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
+#  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
   :singularLabel "Form Document"@en ,
     "Blankett"@sv .
 
@@ -449,7 +446,6 @@ saogf:Webbplatser a :ExpressionForm ;
   :broader saogf:Samlande%20resurser ;
   :closeMatch marc:UpdatingWebSite ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :relatedMatch kbrda:OnlineResource ;
   :singularLabel "Website"@en ,
     "Webbplats"@sv .
 
@@ -486,21 +482,20 @@ saogf:Br%C3%A4dspel a :ExpressionForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Board games"@en ,
     "Brädspel"@sv ;
-  :singularLabel "Board game"@en .
+  :singularLabel "Brädspel"@sv, "Board game"@en .
 
-saogf:Spel%20och%20tanken%C3%B6tter a :Genre ,
-    :GenreForm ;
+saogf:Spel%20och%20tanken%C3%B6tter a :GenreForm ;
   :closeMatch marc:VisualMaterialType-g ,
     <http://id.loc.gov/authorities/genreForms/gf2014026158> ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Puzzle ,
     marc:Game ,
-    marc:VisualMaterialType-g ;
-  :singularLabel "Puzzle or game"@en ,
-    "Spel eller tankenöt"@sv .
+    marc:VisualMaterialType-g .
+  # Och/eller? Och. Hjälper det att ha sing.label på denna? 
+  #:singularLabel "Puzzle or game"@en ,
+  #  "Spel eller tankenöt"@sv .
 
 saogf:Interaktiva%20objekt a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Interactive objects"@en ,
@@ -670,7 +665,7 @@ saogf:Dagstidningar a :GenreForm ;
   :closeMatch marc:Newspaper ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Dagstidningar"@sv ;
+  #:pluralLabel "Dagstidningar"@sv ;
   :singularLabel "Newspaper"@en ,
     "Dagstidning"@sv .
 
@@ -694,12 +689,10 @@ saogf:Darabukka :broader saogf:Musik .
 
 saogf:Databaser a :ExpressionForm ;
   :broader saogf:Informativa%20verk ,
-    kbrda:ComputerDataset ,
     saogf:Samlande%20resurser ;
   :closeMatch marc:UpdatingDatabase ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:UpdatingDatabase ;
   :singularLabel "Database"@en ,
     "Databas"@sv .
 
@@ -713,22 +706,20 @@ saogf:Datorgrafik a :ExpressionForm ;
   :prefLabel "Computer graphics"@en ,
     "Datorgrafik"@sv .
 
-saogf:Datorkod a :ExpressionForm ;
-  :broader ktg:Software ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Computer Code"@en ,
-    "Datorkod"@sv .
+# Behövs denna? Verkar inte användas på något material, ej eller i MARCGT.
+#saogf:Datorkod a :ExpressionForm ;
+#  :broader ktg:Software ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Computer Code"@en ,
+#    "Datorkod"@sv .
 
 saogf:Datormusik :broader saogf:Musik .
 
 saogf:Datorspel a :ExpressionForm ;
-  :broader kbrda:ComputerProgram ,
-    saogf:Spel%20och%20tanken%C3%B6tter ,
-    ktg:Software ;
+  :broader ktg:Software ;
   :exactMatch marc:ComputerTypeOfFileType-g ;
-  :inCollection div:promoted ,
-    div:identify ;
+  :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Computer Game"@en ,
     "Datorspel"@sv .
@@ -757,11 +748,12 @@ saogf:Discantus :broader saogf:Musik .
 
 saogf:Diskantk%C3%B6r :broader saogf:Musik .
 
+# msupplcont/discography = "innehåller diskografi". Behövs ny SAOGF-term motsvarande detta?
 saogf:Diskografier a :GenreForm ;
-  :exactMatch <http://id.loc.gov/vocabulary/msupplcont/discography> ,
-    marc:Discography ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:MusicMatterType-a .
+ # :closeMatch <http://id.loc.gov/vocabulary/msupplcont/discography> ,
+ #   marc:Discography ;
+  :inScheme <https://id.kb.se/term/saogf> .
+  #:narrowMatch marc:MusicMatterType-a .
 
 saogf:Divertimenti :broader saogf:Musik .
 
@@ -789,8 +781,7 @@ saogf:Dragspelskolor :broader saogf:Musik .
 
 saogf:Dragspelskonserter :broader saogf:Musik .
 
-saogf:Dramatik a :GenreForm ,
-    :Genre ;
+saogf:Dramatik a :GenreForm ;
   :broader saogf:Sk%C3%B6nlitteratur ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026297> ,
     marc:Drama ;
@@ -799,16 +790,17 @@ saogf:Dramatik a :GenreForm ,
   :prefLabel "Drama"@en ,
     "Dramatik"@sv .
 
+# Änrar eng plabel till Literature, vilket är mer korrekt och idiomatiskt
+# Borde inte skapa krock med ktg/Literature då den senare är "abstrakt" och inte ska visas för slutanvändare
 saogf:Sk%C3%B6nlitteratur a :GenreForm ;
-  :broader saogf:Fiktion ,
-    ktg:Literature ;
+  :broader ktg:Literature ;
   :closeMatch marc:FictionNotFurtherSpecified ;
   :inCollection div:find ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Fiction ,
     marc:MixedForms ;
   :prefLabel "Skönlitteratur"@sv ,
-    "Fiction literature"@en .
+    "Literature"@en .
 
 saogf:Dubbelfl%C3%B6jt :broader saogf:Musik .
 
@@ -838,15 +830,14 @@ saogf:Dystopier a :Genre .
 
 saogf:Ecossaiser :broader saogf:Musik .
 
-saogf:Efem%C3%A4rt%20material a :Genre ,
-    :GenreForm ;
+saogf:Efem%C3%A4rt%20material a :GenreForm ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Efemärt material"@sv .
+  :prefLabel "Efemärt material"@sv, "Ephemera"@en .
 
+# Döp om till Facklitteratur? Notera att det förändrar URL:en.
 saogf:Ej%20sk%C3%B6nlitteratur a :GenreForm ;
-  :broader saogf:Icke-fiktion ,
-    ktg:Literature ;
+  :broader ktg:Literature ;
   :closeMatch marc:NotFictionNotFurtherSpecified ;
   :inCollection div:constructed ,
     div:find ;
@@ -854,11 +845,12 @@ saogf:Ej%20sk%C3%B6nlitteratur a :GenreForm ;
   :prefLabel "Non-fiction literature"@en ,
     "Ej skönlitteratur"@sv .
 
-saogf:Icke-fiktion a :Genre ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Icke-fiktion"@sv ,
-    "Non- fiction"@en .
+# Överflödig när vi har Skön/Fack-uppdelning - kan återbesäkas när vi bryter ut genrer som kan användas på alla former
+#saogf:Icke-fiktion a :Genre ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Icke-fiktion"@sv ,
+#    "Non- fiction"@en .
 
 saogf:Elbas :broader saogf:Musik .
 
@@ -887,8 +879,7 @@ saogf:Elviolin :broader saogf:Musik .
 saogf:Emigrantvisor :broader saogf:Musik .
 
 saogf:Encyklopedier a :GenreForm ;
-  :broader saogf:B%C3%B6cker ,
-    saogf:Referensverk ;
+  :broader saogf:Referensverk ;
   :closeMatch marc:Encyclopedia ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Encyclopedia"@en ,
@@ -928,18 +919,19 @@ saogf:Ensembler%20med%20tangentinstrument%2C%20str%C3%A5kinstrument%2C%20bl%C3%A
 
 saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
 
-saogf:Enskilda%20kartor a :ExpressionForm ;
-  :broader saogf:Kartor ;
-  :exactMatch marc:MapATwoDimensionalMap ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Two-dimensional map"@en ,
-    "Enskilda kartor"@sv ;
-  :singularLabel "Two-dimensional map"@en ,
-    "Enskild karta"@sv .
+# Behövs denna verkligen, eller är den bara singular av "Kartor" (se mappning marc:SingleMap saogf:Kartor)?
+#saogf:Enskilda%20kartor a :ExpressionForm ;
+#  :broader saogf:Kartor ;
+#  :exactMatch marc:MapATwoDimensionalMap ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Two-dimensional map"@en ,
+#    "Enskilda kartor"@sv ;
+#  :singularLabel "Two-dimensional map"@en ,
+#    "Enskild karta"@sv .
 
+#Lägg på :closeMatch marc:MapATwoDimensionalMap ?
 saogf:Kartor a :ExpressionForm ;
-  :broader kbrda:CartographicImage ;
   :closeMatch marc:Map ,
     marcgt:map ;
   :exactMatch tgm:Kartor ,
