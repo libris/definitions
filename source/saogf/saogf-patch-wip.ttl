@@ -1262,7 +1262,7 @@ saogf:Gotiska%20ber%C3%A4ttelser a :Genre .
 saogf:Graduale%20%28musik%29 :broader saogf:Musik .
 
 saogf:Illustrerade%20verk a :ExpressionForm ;
-  :broader kbrda:StillImage ;
+ # :broader kbrda:StillImage ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Illustrated work"@en ,
     "Illustrerat verk"@sv .
@@ -1279,8 +1279,8 @@ saogf:Halling :broader saogf:Musik .
 saogf:Hambo :broader saogf:Musik .
 
 saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
-  :broader saogf:Instruktions-%20och%20undervisningsmaterial ,
-    kbrda:Text ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
+   # kbrda:Text ;
   :closeMatch marc:Handbook ,
     <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
   :inCollection div:identify ;
@@ -1303,7 +1303,7 @@ saogf:Handlingar%20%28dokument%29 a :ExpressionForm ;
     "Handling (dokument)"@sv .
 
 saogf:Handskrifter a :ExpressionForm ;
-  :broader kbrda:Text ;
+ # :broader kbrda:Text ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :pluralLabel "Handskrifter"@sv ;
   :singularLabel "Handwriting"@en ,
@@ -1340,7 +1340,7 @@ saogf:Himlaglober a :ExpressionForm ;
     "Himlaglob"@sv .
 
 saogf:Kartglober a :ExpressionForm ;
-  :broader kbrda:CartographicThreeDimensionalForm ;
+  #:broader kbrda:CartographicThreeDimensionalForm ;
   :closeMatch marc:Globe ;
   :exactMatch tgm:Glober ;
   :inCollection div:constructed ,
@@ -1562,8 +1562,8 @@ saogf:Karakt%C3%A4rsstycken a :GenreForm ;
 saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 
 saogf:Kartb%C3%B6cker a :ExpressionForm ;
-  :broader kbrda:Text ,
-    kbrda:CartographicImage ;
+  #:broader kbrda:Text ,
+  # kbrda:CartographicImage ;
   :exactMatch tgm:Atlaser ,
     marc:Atlas ;
   :inCollection div:constructed ;
@@ -1575,8 +1575,8 @@ saogf:Kartb%C3%B6cker a :ExpressionForm ;
     "Atlas"@en .
 
 saogf:Kartmodeller a :ExpressionForm ;
-  :broader kbrda:CartographicThreeDimensionalForm ,
-    saogf:Modeller ;
+  #:broader kbrda:CartographicThreeDimensionalForm ,
+  :broader  saogf:Modeller ;
   :closeMatch marc:Model ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1587,7 +1587,7 @@ saogf:Kartmodeller a :ExpressionForm ;
 
 saogf:Modeller a :ExpressionForm ;
   :broadMatch marcgt:mod ;
-  :broader kbrda:ThreeDimensionalForm ;
+ #:broader kbrda:ThreeDimensionalForm ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Models"@en ,
@@ -1889,8 +1889,8 @@ saogf:Liturgisk%20s%C3%A5ng a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ljudb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:B%C3%B6cker ,
-    kbrda:SpokenWord ;
+  :broader saogf:B%C3%B6cker ;
+    #kbrda:SpokenWord ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Audiobook"@en ,
@@ -1901,7 +1901,7 @@ saogf:Ljudeffekter :broader saogf:Musik .
 saogf:Ljudkonst :broader saogf:Musik .
 
 saogf:Ljudprogram a :ExpressionForm ;
-  :broader kbrda:Sounds ;
+  #:broader kbrda:Sounds ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Audio Program"@en ,
@@ -1912,7 +1912,7 @@ saogf:Lo-fi :broader saogf:Musik .
 saogf:Lucias%C3%A5nger :broader saogf:Musik .
 
 saogf:Luck%C3%B6ppningskalendrar a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
+  #:broader kbrda:ThreeDimensionalForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Lucköppningskalender"@sv .
 
@@ -2115,14 +2115,14 @@ saogf:Musikfilmer a :GenreForm ;
   :broader saogf:Musik .
 
 saogf:Musikinspelningar a :ExpressionForm ;
-  :broader kbrda:PerformedMusic ;
+  #:broader kbrda:PerformedMusic ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Music Recording"@en ,
     "Musikinspelning"@sv .
 
 saogf:Musikradioprogram a :ExpressionForm ;
-  :broader kbrda:PerformedMusic ,
-    saogf:Ljudprogram ;
+  #:broader kbrda:PerformedMusic ,
+  :broader   saogf:Ljudprogram ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Music Radio Program"@en ,
@@ -2401,8 +2401,8 @@ saogf:Pipa :broader saogf:Musik .
 saogf:Plachi :broader saogf:Musik .
 
 saogf:Poddar a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Ljudprogram ;
+  #:broader kbrda:SpokenWord ,
+  :broader  saogf:Ljudprogram ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Podcasts"@en ,
@@ -2867,8 +2867,8 @@ saogf:Tecknade%20serier a :ExpressionForm ;
 saogf:Serieromaner a :ExpressionForm ,
     :GenreForm ;
   :broader saogf:Tecknade%20serier ,
-    saogf:Romaner ,
-    kbrda:Text ;
+    saogf:Romaner ;
+   # kbrda:Text ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Graphic Novel"@en ,
     "Serieroman"@sv .
@@ -2965,7 +2965,7 @@ saogf:Skoltidningar :broader saogf:Periodika .
 saogf:Skr%C3%A4ck a :Genre .
 
 saogf:Skulpturer a :ExpressionForm ;
-  :broader kbrda:ThreeDimensionalForm ;
+  #:broader kbrda:ThreeDimensionalForm ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Sculptures"@en ,
@@ -3159,8 +3159,8 @@ saogf:Tal%20%28retorik%29 a :Genre ;
     "Retoriskt tal"@sv .
 
 saogf:Talb%C3%B6cker a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Ljudb%C3%B6cker ;
+  #:broader kbrda:SpokenWord ,
+  :broader saogf:Ljudb%C3%B6cker ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Spoken Book"@en ,
     "Talbok"@sv .
@@ -3168,8 +3168,8 @@ saogf:Talb%C3%B6cker a :ExpressionForm ;
 saogf:Talk%C3%B6r :broader saogf:Musik .
 
 saogf:Taltidningar a :ExpressionForm ;
-  :broader kbrda:SpokenWord ,
-    saogf:Periodika ;
+  #:broader kbrda:SpokenWord ,
+  :broader  saogf:Periodika ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Spoken Paper"@en ,
     "Taltidning"@sv .
@@ -3232,16 +3232,16 @@ saogf:Tersetter :broader saogf:Musik .
 saogf:Text-ljudkompositioner :broader saogf:Musik .
 
 saogf:Textblad a :ExpressionForm ;
-  :broader kbrda:Text ,
-    saogf:Kortare%20texter ;
+  #:broader kbrda:Text ,
+  :broader  saogf:Kortare%20texter ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Text leaf"@en ,
     "Textblad"@sv .
 
 saogf:Texth%C3%A4ften a :ExpressionForm ;
-  :broader kbrda:Text ,
-    saogf:Kortare%20texter ;
+  #:broader kbrda:Text ,
+  :broader  saogf:Kortare%20texter ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Booklets"@en ,
