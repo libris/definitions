@@ -11,7 +11,7 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 
 prefix ktg: <https://id.kb.se/term/ktg/>
 
-
+# Sammanhållande topp-term
 ktg:PhysicalForm a :ManifestationForm ;
   ptg:abstract true ;
   skos:prefLabel "Fysisk form"@sv, "Physical form"@en .
@@ -19,11 +19,13 @@ ktg:PhysicalForm a :ManifestationForm ;
 
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
 ktg:Print a :ManifestationForm;
-  skos:exactMatch marc:Print ;
+# This MARC mapping appears to be incorrect (not Text) - should it be RegularPrint?
+#  skos:exactMatch marc:Print ;
   skos:broader kbrda:Unmediated ;
   rdfs:label "Tryck"@sv, "Print"@en .
 
 ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
+  skos:broader kbrda:Unmediated ;
   rdfs:label "Handskrift"@sv, "Manuscript"@en .
 
 # Rather :productionMethod?
@@ -42,10 +44,10 @@ ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in B
 #ktg:RareVolume a :ManifestationForm ;
 #  rdfs:subClassOf ktg:Rare, kbrda:Volume .
 
-
-ktg:PrintedVolume a :ManifestationForm ;
-  skos:broader ktg:Print, kbrda:Volume ;
-  rdfs:label "Tryckt volym"@sv , "Printed Volume"@en .
+# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+#ktg:PrintedVolume a :ManifestationForm ;
+#  skos:broader ktg:Print, kbrda:Volume ;
+#  rdfs:label "Tryckt volym"@sv , "Printed Volume"@en .
 
 #ktg:HardcoverVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
@@ -53,18 +55,21 @@ ktg:PrintedVolume a :ManifestationForm ;
 #ktg:PaperbackVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
 
-ktg:PrintedSheet a :ManifestationForm ;
-  skos:broader ktg:Print, kbrda:Sheet ;
-  rdfs:label "Tryckt lösblad"@sv , "Printed Sheet"@en .
+# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+#ktg:PrintedSheet a :ManifestationForm ;
+#  skos:broader ktg:Print, kbrda:Sheet ;
+#  rdfs:label "Tryckt lösblad"@sv , "Printed Sheet"@en .
 
-ktg:HandmadeSheet a :ManifestationForm ;
-  skos:broader kbrda:Unmediated, kbrda:Sheet .
+# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+# Unclear what this means - reformulate if adding back
+#ktg:HandmadeSheet a :ManifestationForm ;
+#  skos:broader kbrda:Unmediated, kbrda:Sheet .
 
-
-ktg:PhysicalObject a :ManifestationForm ; # :UnmediatedObject ?
-  skos:exactMatch kbrda:Object ;
-  skos:broader kbrda:Unmediated ;
-  skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
+# Kommenterar ut då den bara dubblerar RDA Object. Exakt match till marc:Realia?
+#ktg:PhysicalObject a :ManifestationForm ; # :UnmediatedObject ?
+  #skos:exactMatch kbrda:Object ;
+  #skos:broader kbrda:Unmediated ;
+  #skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
 
 
 ktg:ComponentPart a :ManifestationForm ;
@@ -82,23 +87,26 @@ ktg:ComponentPart a :ManifestationForm ;
 #    owl:onProperty :format ;
 #    owl:someValuesFrom :TactileMaterial ] .
 
+# Rename Braille to be consistent with "Print / Volume" - can be combined with any carrier type
 ktg:BrailleForm a :ManifestationForm ;
   skos:exactMatch marc:Braille, marc:TextMaterialType-c, 
     marc:TacMaterialType-b ;
-  skos:broader ktg:Print ; # Remove ktg:TactileForm which isn't defined
-  skos:prefLabel "Punktskriftsform"@sv, "Braille form"@en .
+  #skos:broader ktg:Print ; # Remove ktg:TactileForm which isn't defined
+  skos:prefLabel "Punktskrift"@sv, "Braille"@en .
 
 # exactMatch with saogf:Punktskriftsb%C3%B6cker seems dubious when one is used on the work, one on on the instance
-ktg:BrailleVolume a :ManifestationForm ;
-  skos:broader ktg:BrailleForm, kbrda:Volume ;
-  #skos:exactMatch saogf:Punktskriftsb%C3%B6cker ;
-  :singularLabel "Punktskriftsbok"@sv, "Braille volume"@en .
+# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+#ktg:BrailleVolume a :ManifestationForm ;
+#  skos:broader ktg:BrailleForm, kbrda:Volume ;
+#  #skos:exactMatch saogf:Punktskriftsb%C3%B6cker ;
+#  :singularLabel "Punktskriftsbok"@sv, "Braille volume"@en .
 # :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
 
 
 # "Mediated"
 
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
+# Sammanhållande toppterm
 ktg:StorageMedium a :ManifestationForm ;
   ptg:abstract true ;
   skos:broader ktg:PhysicalForm ;
@@ -142,6 +150,8 @@ ktg:OpticalDisc a :ManifestationForm ;
   skos:broader ktg:ElectronicStorageMedium ;
   skos:prefLabel "Optisk skiva (CD-A, CD-R, CD-ROM)"@sv, "Optical disc"@en .
 
+# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+# Unclear what this means - reformulate if adding back
 #ktg:CDBook a :ManifestationForm ;
 #  skos:broadMatch ktg:ComputerDisc, kbrda:AudioDisc ;
 #  :singularLabel "CD-bok"@sv .
@@ -166,13 +176,15 @@ ktg:AbstractElectronic a :ManifestationForm ;
   skos:prefLabel "Elektronisk eller digital resurs"@sv, "Electronic or digital resource"@en ;
   rdfs:comment "A digital or electronically mediated resource."@en .
 
+# Does this have a function or does it just duplicate RDA Online Resource?
 ktg:DigitalForm a :ManifestationForm ;
   skos:broader ktg:AbstractElectronic ;
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en ;
   rdfs:comment 'Kallas ibland "E-resurs"'@sv .
 
+# Remapping broader to AbstractElectronic, so this can be combined with OnlineResource or a physical form
 ktg:EBook a :ManifestationForm ;
-  skos:broader ktg:DigitalForm ;
+  skos:broader ktg:AbstractElectronic ;
   :singularLabel "E-bok"@sv .
 
 
@@ -182,7 +194,7 @@ ktg:ElectronicStorageMedium a :ManifestationForm ;
   skos:exactMatch marc:DirectElectronic ;
   skos:broader ktg:StorageMedium ,
       ktg:AbstractElectronic ;   # Kallas ibland "Elektronisk bärare".
-  rdfs:label "Elektroniskt lagringsmedium"@sv , "StorageMedium"@en .
+  rdfs:label "Elektroniskt lagringsmedium"@sv , "Storage Medium"@en .
 
 ktg:StandaloneDevice a :ManifestationForm ;
   skos:exactMatch marc:StandaloneDevice ;
@@ -193,9 +205,10 @@ ktg:StandaloneDevice a :ManifestationForm ;
 # Or is the *unit for device capable of sound* encoded here (as "mode" of provisioning, not the "purpose" thereof)?
 # See also accesibility concerns.
 
+# Will this be used in a way where it not only duplicates/mirrors RDA Audio?
 ktg:SoundStorageMedium a :ManifestationForm ;
-  owl:sameAs kbrda:SoundRecording ;
   ptg:abstract true ;
+  #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
   skos:exactMatch kbrda:Audio ;
   skos:broader ktg:StorageMedium ;
   rdfs:label "Audio"@sv, "Audio"@en .
@@ -205,6 +218,7 @@ ktg:AudioWireRecording a :ManifestationForm ;
   skos:exactMatch marc:WireRecording ;
   skos:broader kbrda:Audio, ktg:SoundStorageMedium .
 
+# Will this be used in a way where it not only duplicates/mirrors RDA Audio?
 ktg:VideoStorageMedium a :ManifestationForm ;
   owl:sameAs :VideoRecording ;
   ptg:abstract true ;
