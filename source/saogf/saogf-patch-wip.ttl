@@ -1,3 +1,16 @@
+@prefix : <https://id.kb.se/vocab/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix broader: <> .
+@prefix div: <https://id.kb.se/term/div/> .
+@prefix kbrda: <https://id.kb.se/term/rda/> .
+@prefix ktg: <https://id.kb.se/term/ktg/> .
+@prefix marc: <https://id.kb.se/marc/> .
+@prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix saogf: <https://id.kb.se/term/saogf/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tgm: <https://id.kb.se/term/gmgpc/swe/> .
+
 prefix : <https://id.kb.se/vocab/>
 prefix bibo: <http://purl.org/ontology/bibo/>
 prefix div: <https://id.kb.se/term/div/>
@@ -12,29 +25,36 @@ prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 #what does this do?
 base <file:genres.ttl>
 
-### Manuellt tillagda termer som behöver granskas
+### Manuellt tillagda termer
+
+saogf:Visuella%20verk a :GenreForm ;
+  :inCollection div:constructed ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027266> ;
+  :prefLabel "Visuella verk"@sv, "Visual Works"@en ;
+  :singularLabel "Visuellt verk"@sv, "Visual Work"@en .
 
 # Manuellt tillagd från genres.ttl
-# Behöver reviewas av SAO-red
-#saogf:Monografiserier a :GenreForm ;
-#  skos:broader saogf:Seriella%20publikationer ;
-#  skos:exactMatch marc:MonographicSeries ;
-#  :prefLabel "Monografiserier"@sv, "Monographic Series"@en ;
-#  :singularLabel "Monographic Series"@en ,
-#    "Monografiserie"@sv .
+saogf:Monografiserier a :GenreForm ;
+  :inCollection div:constructed ;
+  :broader saogf:Seriella%20publikationer ;
+  :exactMatch marc:MonographicSeries ;
+  :prefLabel "Monografiserier"@sv, "Monographic Series"@en ;
+  :singularLabel "Monographic Series"@en ,
+    "Monografiserie"@sv .
 
-#saogf:IndividualBiography a :Genre ;
-  #:category :pending ;
-  #skos:broader ktg:Biography ; #saogf:Biography finns inte
-  #skos:exactMatch marc:IndividualBiography ; #     69893
-  #:prefLabel "Biografi över en individ"@sv, "Individual biography"@en ;
-  #:singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
+saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
+  :inCollection div:constructed ;
+  :broader saogf:Biografier ;
+  :exactMatch marc:IndividualBiography ; 
+  :prefLabel "Biografier över en individ"@sv, "Individual biographies"@en ;
+  :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
 
-#saogf:CollectiveBiography a :Genre ;
-  #skos:broader ktg:Biography ; #saogf:Biography finns inte
-  #skos:exactMatch marc:CollectiveBiography ; #     17453
-  #:prefLabel "Biografi över flera individer"@sv, "Collective biography"@en ;
-  #:singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
+saogf:Biografier%20%C3%B6ver%20flera%20individer a :GenreForm ;
+  :inCollection div:constructed ;
+  :broader saogf:Biografier ;
+  :exactMatch marc:CollectiveBiography ; 
+  :prefLabel "Biografier över flera individer"@sv, "Collective biographies"@en ;
+  :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
 
 ### Övrigt 
 
@@ -982,13 +1002,12 @@ saogf:Erotiska%20s%C3%A5nger :broader saogf:Musik .
 saogf:Erotiska%20skildringar a :Genre .
 
 saogf:Ess%C3%A4er a :GenreForm ;
-  :broader saogf:Informativa%20verk ,
-    ktg:Literature ;
+  :broader ktg:Literature ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026094> ,
     marc:Essay ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Essay"@en ,
+  :prefLabel "Essays"@en ,
     "Essäer"@sv .
 
 saogf:Estampier :broader saogf:Musik .
@@ -1018,7 +1037,7 @@ saogf:F%C3%A4ngelsevisor :broader saogf:Musik .
 saogf:F%C3%B6ljetonger a :Genre .
 
 saogf:F%C3%B6rel%C3%A4sningar a :Genre ;
-  :broader saogf:L%C3%A4romedel ;
+  #:broader saogf:L%C3%A4romedel ; # Let's keep this on the higher level!
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Lecture"@en ,
     "Föreläsning"@sv .
@@ -1032,7 +1051,7 @@ saogf:L%C3%A4romedel a :Genre ;
     "Läromedel"@sv .
 
 saogf:F%C3%B6rteckningar a :Genre ;
-  :broader saogf:Samlande%20resurser ;
+  :broader saogf:Samlande%20resurser , saogf:Ej%20sk%C3%B6nlitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Register"@en ,
     "Förteckning"@sv .
@@ -1085,17 +1104,18 @@ saogf:Feministisk%20musik :broader saogf:Musik .
 saogf:Festmarscher :broader saogf:Musik .
 
 saogf:Festskrifter :exactMatch marc:Festschrift ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur , saogf:Minnesbevarande%20verk ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Fiddla :broader saogf:Musik .
 
-saogf:Fiktion a :Genre ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
-    marc:Fiction ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Fiktion"@sv ,
-    "Fiction"@en .
+#saogf:Fiktion a :Genre ;
+#  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
+#    marc:Fiction ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Fiktion"@sv ,
+#    "Fiction"@en .
 
 saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
 
@@ -1118,7 +1138,7 @@ saogf:Filmmusik a :GenreForm ;
   :exactMatch marc:MotionPictureMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Filmografi :exactMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
+saogf:Filmografi :closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
     marc:Filmography ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1184,6 +1204,7 @@ saogf:Folksagor a :Genre ;
 saogf:Fonn%20mall :broader saogf:Musik .
 
 saogf:Forsknings%C3%B6versikter a :GenreForm ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
 
 saogf:Fotob%C3%B6cker a :ExpressionForm ;
@@ -1198,13 +1219,11 @@ saogf:Fotografier a :ExpressionForm ;
     tgm:Fotografier ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Photoprint ;
-  :pluralLabel "Fotografier"@sv ;
   :singularLabel "Photograph"@en ,
     "Fotografi"@sv .
 
 saogf:Fotoserier a :ExpressionForm ;
-  :broader saogf:Samlande%20resurser ,
-    saogf:Grafisk%20litteratur ;
+  :broader saogf:Grafisk%20litteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Photoseries"@en ,
     "Fotoserie"@sv .
@@ -1248,6 +1267,7 @@ saogf:Gebrauchsmusik :broader saogf:Musik .
 saogf:Gender%20%28musikinstrument%29 :broader saogf:Musik .
 
 saogf:Genealogiskt%20material :exactMatch marc:GenealogicalTable ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ghaita :broader saogf:Musik .
@@ -1289,11 +1309,13 @@ saogf:Graduale%20%28musik%29 :broader saogf:Musik .
 
 saogf:Illustrerade%20verk a :ExpressionForm ;
  # :broader kbrda:StillImage ;
+  :broader saogf:Visuella%20verk ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Illustrated work"@en ,
     "Illustrerat verk"@sv .
 
 saogf:Guideb%C3%B6cker a :GenreForm ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Guide book"@en ,
     "Guidebok"@sv .
@@ -1305,13 +1327,13 @@ saogf:Halling :broader saogf:Musik .
 saogf:Hambo :broader saogf:Musik .
 
 saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
-  :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial, saogf:Ej%20sk%C3%B6nlitteratur ;
    # kbrda:Text ;
   :closeMatch marc:Handbook ,
     <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
+#  :seeAlso <https://en.wikipedia.org/wiki/Manual> ;
   :singularLabel "Manual"@en ,
     "Handbok eller manual"@sv .
 
@@ -1319,11 +1341,11 @@ saogf:Instruktions-%20och%20undervisningsmaterial a :Genre ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Instruction ;
-  :prefLabel "Instruktions- och undervisningsmaterial"@sv ;
-  :seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
+  :prefLabel "Instruktions- och undervisningsmaterial"@sv .
+  #:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
 
 saogf:Handlingar%20%28dokument%29 a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Record (Document)"@en ,
     "Handling (dokument)"@sv .
@@ -1331,8 +1353,8 @@ saogf:Handlingar%20%28dokument%29 a :ExpressionForm ;
 saogf:Handskrifter a :ExpressionForm ;
  # :broader kbrda:Text ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :pluralLabel "Handskrifter"@sv ;
-  :singularLabel "Handwriting"@en ,
+  :pluralLabel "Handskrifter"@sv , "Manuscripts"@en ;
+  :singularLabel "Manuscript"@en ,
     "Handskrift"@sv .
 
 saogf:Hardangerfela :broader saogf:Musik .
@@ -1357,7 +1379,7 @@ saogf:Highland%20pipes :broader saogf:Musik .
 
 saogf:Himlaglober a :ExpressionForm ;
   :broader saogf:Kartglober ;
-  :closeMatch marc:CelestialGlobe ;
+  :closeMatch marc:CelestialGlobe , tgm:Himmelsglober, <http://id.loc.gov/authorities/genreForms/gf2011026117> ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Celestial globes"@en ,
@@ -1367,6 +1389,7 @@ saogf:Himlaglober a :ExpressionForm ;
 
 saogf:Kartglober a :ExpressionForm ;
   #:broader kbrda:CartographicThreeDimensionalForm ;
+  :broader saogf:Kartografiskt%20material ;
   :closeMatch marc:Globe ;
   :exactMatch tgm:Glober ;
   :inCollection div:constructed ,
@@ -1901,7 +1924,7 @@ saogf:Lira :broader saogf:Musik .
 
 saogf:Litanior :broader saogf:Musik .
 
-saogf:Litter%C3%A4r%20sakprosa :broader saogf:Ej%20sk%C3%B6nlitteratur .
+saogf:Litter%C3%A4r%20sakprosa :broader saogf:E%20sk%C3%B6nlitteratur .
 
 saogf:Litteraturtidskrifter :broader saogf:Periodika .
 
