@@ -158,7 +158,7 @@ saogf:Almanackor a :GenreForm ;
     "Almanacka"@sv .
 
 saogf:Referensverk a :Genre ;
-  :broader saogf:Informativa%20verk ;
+  :broader saogf:Informativa%20verk , saogf:Ej%20sk%C3%B6nlitteratur;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   #:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
@@ -1392,6 +1392,7 @@ saogf:Kartglober a :ExpressionForm ;
   :broader saogf:Kartografiskt%20material ;
   :closeMatch marc:Globe ;
   :exactMatch tgm:Glober ;
+  :narrowMatch marc:PlanetaryOrLunarGlobe ;
   :inCollection div:constructed ,
     div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1400,15 +1401,15 @@ saogf:Kartglober a :ExpressionForm ;
   :singularLabel "Kartglob"@sv ,
     "Cartographic globe"@en .
 
-saogf:Himlakroppsglober a :ExpressionForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:PlanetaryOrLunarGlobe ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Celestial body globes"@en ,
-    "Himlakroppsglober"@sv ;
-  :singularLabel "Celestial body globe"@en ,
-    "Himlakroppsglob"@sv .
+#saogf:Himlakroppsglober a :ExpressionForm ;
+#  :broader saogf:Kartglober ;
+#  :closeMatch marc:PlanetaryOrLunarGlobe ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Celestial body globes"@en ,
+#    "Himlakroppsglober"@sv ;
+#  :singularLabel "Celestial body globe"@en ,
+#    "Himlakroppsglob"@sv .
 
 saogf:Historiska%20skildringar a :Genre .
 
@@ -1428,15 +1429,15 @@ saogf:Humoresker :broader saogf:Musik .
 
 saogf:Humoristiska%20skildringar a :Genre .
 
-saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
+#saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
 
-saogf:TV a :ExpressionForm ;
-  :broader ktg:MovingImage ;
-  :category div:abstract ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "TV"@en ,
-    "TV"@sv .
+#saogf:TV a :ExpressionForm ;
+#  :broader ktg:MovingImage ;
+#  :category div:abstract ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "TV"@en ,
+#    "TV"@sv .
 
 saogf:Hymner :broader saogf:Musik .
 
@@ -1512,7 +1513,7 @@ saogf:Joddling :broader saogf:Musik .
 
 saogf:Jordglober a :ExpressionForm ;
   :broader saogf:Kartglober ;
-  :closeMatch marc:TerrestrialGlobe ;
+  :closeMatch marc:TerrestrialGlobe , tgm:Jordglober ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Terrestial globes"@en ,
@@ -1526,6 +1527,7 @@ saogf:Jultidningar :broader saogf:Periodika .
 
 saogf:Juridiskt%20material a :Genre ;
   :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :narrowMatch marc:LegalCaseOrCaseNote ,
     marc:LawReportOrDigest ,
     marc:Legislation ,
@@ -1563,8 +1565,7 @@ saogf:Kaen :broader saogf:Musik .
 
 saogf:Kagok :broader saogf:Musik .
 
-saogf:Kalendrar a :Genre ,
-    :GenreForm ;
+saogf:Kalendrar a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Calendar ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1610,22 +1611,24 @@ saogf:Karakt%C3%A4rsstycken a :GenreForm ;
 
 saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 
-saogf:Kartb%C3%B6cker a :ExpressionForm ;
-  #:broader kbrda:Text ,
-  # kbrda:CartographicImage ;
-  :exactMatch tgm:Atlaser ,
-    marc:Atlas ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :narrowMatch marc:MapMaterialType-d ;
-  :prefLabel "Kartböcker"@sv ,
-    "Atlases"@en ;
-  :singularLabel "Kartbok"@sv ,
-    "Atlas"@en .
+# TODO: SAO-red lägger till denna manuellt
+#saogf:Kartb%C3%B6cker a :ExpressionForm ;
+#  #:broader kbrda:Text ,
+#  # kbrda:CartographicImage ;
+#  :broader saogf:Kartografiskt%20material ;
+#  :exactMatch tgm:Atlaser ,
+#    marc:Atlas ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :narrowMatch marc:MapMaterialType-d ;
+#  :prefLabel "Kartböcker"@sv ,
+#    "Atlases"@en ;
+#  :singularLabel "Kartbok"@sv ,
+#    "Atlas"@en .
 
 saogf:Kartmodeller a :ExpressionForm ;
   #:broader kbrda:CartographicThreeDimensionalForm ,
-  :broader  saogf:Modeller ;
+  :broader saogf:Modeller , saogf:Kartografiskt%20material ;
   :closeMatch marc:Model ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1635,7 +1638,7 @@ saogf:Kartmodeller a :ExpressionForm ;
     "Kartmodell"@sv .
 
 saogf:Modeller a :ExpressionForm ;
-  :broadMatch marcgt:mod ;
+  :closeMatch marcgt:mod ;
  #:broader kbrda:ThreeDimensionalForm ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1683,8 +1686,7 @@ saogf:Kastanjetter :broader saogf:Musik .
 
 saogf:Kastrats%C3%A5ng :broader saogf:Musik .
 
-saogf:Kataloger a :Genre ,
-    :GenreForm ;
+saogf:Kataloger a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Catalog ;
   :exactMatch tgm:Kataloger ;
@@ -1739,8 +1741,8 @@ saogf:Klostermusik :broader saogf:Musik .
 saogf:Kohorn :broader saogf:Musik .
 
 saogf:Kokb%C3%B6cker a :GenreForm ;
-  :broader saogf:Informativa%20verk ,
-    saogf:B%C3%B6cker ;
+  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+    #saogf:B%C3%B6cker ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Cookbook"@en ,
@@ -1874,14 +1876,15 @@ saogf:Kyrkos%C3%A5ng :broader saogf:Musik .
 
 saogf:L%C3%A4ndler :broader saogf:Musik .
 
-saogf:L%C3%B6sblad a :ExpressionForm ;
-  :broader saogf:Samlande%20resurser ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> ,
-    marc:LooseLeaf ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Loose-leaf"@en ,
-    "Lösblad"@sv .
+# Onlt 10 occurences in Libris, confusingly closeMatched to both loose leaf (maps) and loose leaf (legal material)
+#saogf:L%C3%B6sblad a :ExpressionForm ;
+#  :broader saogf:Samlande%20resurser ;
+#  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> , <- pertains to legal material
+#    marc:LooseLeaf ; <- pertains to maps
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Loose-leaf"@en ,
+#    "Lösblad"@sv .
 
 saogf:Lambada :broader saogf:Musik .
 
@@ -1938,7 +1941,7 @@ saogf:Liturgisk%20s%C3%A5ng a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ljudb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:B%C3%B6cker ;
+  #:broader saogf:B%C3%B6cker ;
     #kbrda:SpokenWord ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1951,6 +1954,7 @@ saogf:Ljudkonst :broader saogf:Musik .
 
 saogf:Ljudprogram a :ExpressionForm ;
   #:broader kbrda:Sounds ;
+  :broader ktg:Audio ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Audio Program"@en ,
@@ -1980,10 +1984,8 @@ saogf:M%C3%A4ssor%20%28musik%29 a :GenreForm ;
 saogf:M%C3%A4sters%C3%A5nger :broader saogf:Musik .
 
 saogf:M%C3%A5larb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Illustrerade%20verk ,
-    saogf:B%C3%B6cker ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Målarbok"@sv .
+  :singularLabel "Målarbok"@sv, "Coloring Book"@en .
 
 saogf:M%C3%A5lningar a :ExpressionForm ;
   :broader saogf:Bilder ;
@@ -2056,10 +2058,10 @@ saogf:Marscher a :GenreForm ;
   :exactMatch marc:March ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
+#saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
 
 saogf:Matsedlar a :ExpressionForm ;
-  :broader saogf:Kortare%20texter ;
+  #:broader saogf:Kortare%20texter ;
   :exactMatch tgm:Matsedlar ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Dining menu"@en ,
@@ -2115,7 +2117,8 @@ saogf:Milit%C3%A4rmusik :broader saogf:Musik .
 saogf:Milit%C3%A4rorkester :broader saogf:Musik .
 
 saogf:Miniatyrb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:B%C3%B6cker ;
+  #:broader saogf:B%C3%B6cker ;
+  :broader ktg:Literature ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Miniature book"@en ,
     "Miniatyrbok"@sv .
@@ -2160,22 +2163,23 @@ saogf:Musikaler :broader saogf:Musik .
 
 saogf:Musikb%C3%A5ge :broader saogf:Musik .
 
-saogf:Musikfilmer a :GenreForm ;
-  :broader saogf:Musik .
+saogf:Musikfilmer a :GenreForm .
+#  :broader saogf:Musik .
 
 saogf:Musikinspelningar a :ExpressionForm ;
+  :broader saogf:Musik ;
   #:broader kbrda:PerformedMusic ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Music Recording"@en ,
     "Musikinspelning"@sv .
 
-saogf:Musikradioprogram a :ExpressionForm ;
-  #:broader kbrda:PerformedMusic ,
-  :broader   saogf:Ljudprogram ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Music Radio Program"@en ,
-    "Musikradioprogram"@sv .
+#saogf:Musikradioprogram a :ExpressionForm ;
+#  #:broader kbrda:PerformedMusic ,
+#  :broader saogf:Ljudprogram ;
+#  :inCollection div:constructed ;
+#  :inScheme <https://id.kb.se/term/saogf> ;
+#  :prefLabel "Music Radio Program"@en ,
+#    "Musikradioprogram"@sv .
 
 saogf:Musikrecensioner a :Genre .
 
@@ -2188,7 +2192,7 @@ saogf:Musikteaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
 saogf:Musiktidskrifter :broader saogf:Periodika .
 
 saogf:Musikvideor a :GenreForm ;
-  :broader saogf:Musik .
+  :broader saogf:Musik , saogf:Videoupptagningar .
 
 saogf:Mysteriespel%20%28musik%29 :broader saogf:Musik .
 
@@ -2263,18 +2267,16 @@ saogf:Ocarina :broader saogf:Musik .
 
 saogf:Oden%20%28musik%29 :broader saogf:Musik .
 
-# Skip until we solve the ID collision with Offentligt tryck (tidskrifter)
-#saogf:Offentligt%20tryck a :Genre ,
-#    :GenreForm ;
-#  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
-#    marc:Local ,
-#    marc:StateProvincialTerritorialDependentEtc ,
-#    marc:InternationalIntergovernmental ,
-#    marc:FederalNational ;
-#  :singularLabel "Government publication"@en ,
-#    "Offentlig resurs"@sv .
+saogf:Offentligt%20tryck a :GenreForm ;
+  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
+    marc:Local ,
+    marc:StateProvincialTerritorialDependentEtc ,
+    marc:InternationalIntergovernmental ,
+    marc:FederalNational ;
+  :singularLabel "Government publication"@en ,
+    "Offentlig resurs"@sv .
 
 saogf:Offentligt%20tryck%20%28tidskrifter%29 :broader saogf:Periodika .
 
@@ -2354,7 +2356,8 @@ saogf:Parafraser%20%28musik%29 :broader saogf:Musik ,
     saogf:Parafraser .
 
 saogf:Parl%C3%B6rer a :GenreForm ;
-  :broader saogf:B%C3%B6cker ;
+  #:broader saogf:B%C3%B6cker ;
+  :broader saogf:Referensverk ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Phrase book"@en ,
     "Parlör"@sv .
@@ -2390,6 +2393,7 @@ saogf:Pastischer%20%28musik%29 :broader saogf:Musik .
 saogf:Pastoraler :broader saogf:Musik .
 
 saogf:Patent a :Genre ;
+  :broader saogf:Handlingar%20%28dokument%29 , saogf:Juridiskt%20material ;
   :closeMatch marc:PatentDocument ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Patent"@en ,
@@ -2411,15 +2415,15 @@ saogf:Pekingopera :broader saogf:Musik .
 
 saogf:Personaltidningar :broader saogf:Periodika .
 
-saogf:Perspektivbilder a :ExpressionForm ;
+saogf:Perspektivbilder%20%28kartor%29 a :ExpressionForm ;
   :broader saogf:Kartor ;
   :closeMatch marc:View ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Perspectice views"@en ,
-    "Perspektivbilder"@sv ;
-  :singularLabel "Perspectice view"@en ,
-    "Perspektivbild"@sv .
+  :prefLabel "Perspectice views (Maps)"@en ,
+    "Perspektivbilder (kartor)"@sv ;
+  :singularLabel "Perspectice view (Map)"@en ,
+    "Perspektivbild (Karta)"@sv .
 
 saogf:Piano :broader saogf:Musik .
 
@@ -2450,14 +2454,15 @@ saogf:Pipa :broader saogf:Musik .
 saogf:Plachi :broader saogf:Musik .
 
 saogf:Poddar a :ExpressionForm ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026450> ;
   #:broader kbrda:SpokenWord ,
-  :broader  saogf:Ljudprogram ;
+  :broader saogf:Ljudprogram ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Podcasts"@en ,
     "Poddar"@sv ;
   :singularLabel "Podcast"@en ,
-    "Podcast"@sv .
+    "Podd"@sv .
 
 saogf:Poem%20%28symfoniska%20dikter%29 :broader saogf:Musik .
 
@@ -2502,7 +2507,7 @@ saogf:Pop-up-b%C3%B6cker a :ExpressionForm ;
   :broader saogf:Mekaniska%20b%C3%B6cker ,
     saogf:Illustrerade%20verk ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :singularLabel "Pop-up bOok"@en ,
+  :singularLabel "Pop-up book"@en ,
     "Pop-up-bok"@sv .
 
 saogf:Popul%C3%A4rmusik a :GenreForm ;
@@ -2519,6 +2524,7 @@ saogf:Porrtidningar :broader saogf:Periodika .
 
 saogf:Portr%C3%A4tt :exactMatch marc:Portrait ,
     tgm:Portr%C3%A4tt ;
+  :broader saogf:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Positiv%20%28vevpositiv%29 :broader saogf:Musik .
@@ -2583,8 +2589,8 @@ saogf:Pussel a :ExpressionForm ;
     "Pussel"@sv .
 
 saogf:Pysselb%C3%B6cker a :ExpressionForm ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
-    saogf:B%C3%B6cker ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ;
+#    saogf:B%C3%B6cker ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Puzzle book"@en ,
     "Pysselbok"@sv .
@@ -2633,17 +2639,16 @@ saogf:R%C3%B6st%20och%20tangentinstrument :broader saogf:Musik .
 
 saogf:R%C3%B6st%20och%20violin :broader saogf:Musik .
 
-saogf:Radio a :ExpressionForm ;
-  :broader ktg:Audio ;
-  :category div:abstract ;
-  :inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Radio"@en ,
-    "Radio"@sv .
+#aogf:Radio a :ExpressionForm ;
+# :broader ktg:Audio ;
+# :category div:abstract ;
+# :inCollection div:constructed ;
+# :inScheme <https://id.kb.se/term/saogf> ;
+# :prefLabel "Radio"@en ,
+#   "Radio"@sv .
 
 saogf:Radioprogram a :ExpressionForm ;
-  :broader saogf:Radio ,
-    saogf:Ljudprogram ;
+  :broader saogf:Ljudprogram ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Radio Program"@en ,
     "Radioprogram"@sv .
@@ -2665,7 +2670,7 @@ saogf:Rapsodier%20%28musik%29 a :GenreForm ;
 
 saogf:Rasselinstrument :broader saogf:Musik .
 
-saogf:Reality-tv :broader saogf:TV .
+#saogf:Reality-tv :broader saogf:TV .
 
 saogf:Rebab :broader saogf:Musik .
 
@@ -3421,14 +3426,13 @@ saogf:Tv%C3%A4ttbr%C3%A4de :broader saogf:Musik .
 saogf:Tv-musik :broader saogf:Musik .
 
 saogf:Tv-program a :ExpressionForm ;
-  :broader saogf:TV ;
+  :broader ktg:MovingImage ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "TV-Program"@en ,
     "Tv-program"@sv .
 
 saogf:Tv-serier a :ExpressionForm ;
-  :broader saogf:TV ;
-  :inScheme <https://id.kb.se/term/saogf> ;
+#  :broader saogf:TV ;
   :singularLabel "TV-Series"@en ,
     "Tv-serie"@sv .
 
