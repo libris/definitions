@@ -102,9 +102,9 @@ ls:title a owl:ObjectProperty ;
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
 
-ls:itemAccess a owl:DatatypeProperty ;
+ls:itemShelf a owl:DatatypeProperty ;
      :category ls:composite ; # TODO: ls:merged?
-     rdfs:label "åtkomst av exemplar"@sv, "item access"@en ;
+     rdfs:label "hyllsignum"@sv, "item shelf"@en ;
      skos:notation "WHYL"^^ls:QueryCode ;
      owl:propertyChainAxiom ( :hasItem :availability :label ),
         ( :hasItem :shelfMark :label ),
