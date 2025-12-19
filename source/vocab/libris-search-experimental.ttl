@@ -22,7 +22,6 @@
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
-
 ### New definitions for Libris Search ###
 
 ls:QueryCode a rdfs:Datatype .
@@ -103,6 +102,80 @@ ls:title a owl:ObjectProperty ;
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
 
+ls:itemShelf a owl:DatatypeProperty ;
+     :category ls:composite ; # TODO: ls:merged?
+     rdfs:label "hyllsignum"@sv, "item shelf"@en ;
+     skos:notation "WHYL"^^ls:QueryCode ;
+     owl:propertyChainAxiom ( :hasItem :availability :label ),
+        ( :hasItem :shelfMark :label ),
+        ( :hasItem :shelfControlNumber ),
+        ( :hasItem :shelfLabel ),
+        ( :hasItem :physicalLocation ) .
+
+ls:itemCreated a owl:DatatypeProperty ;
+     :category :shorthand ;
+     rdfs:label "registreringsdatum"@sv, "item created"@en ;
+     rdfs:domain :Instance ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :hasItem :meta :created ) .
+
+# TODO
+#ls:classificationCode a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "klassifikationskod"@sv, "classification code"@en ;
+#    owl:propertyChainAxiom ( :classification :code ) .
+#
+## Auxiliary
+#ls:schemeCode a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    owl:propertyChainAxiom ( :inScheme :code ) .
+#
+#ls:sab a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "SAB-klassifikationskod"@sv, "SAB classification code"@en ;
+#    owl:propertyChainAxiom (
+#        [ rdfs:subPropertyOf :classification ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty ls:schemeCode ; owl:hasValue "kssb" ] ] ]
+#        :code ) .
+#
+#ls:ddc a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "Dewey-klassifikationskod"@sv, "Dewey classification code"@en ;
+#    owl:propertyChainAxiom (
+#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationDdc ]
+#        :code ) .
+#
+#ls:udc a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "UDK-klassifikationskod"@sv, "UDK classification code"@en ;
+#    owl:propertyChainAxiom (
+#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationUdc ]
+#        :code ) .
+#
+#ls:nlm a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "NLM-klassifikationskod"@sv, "NLM classification code"@en ;
+#    owl:propertyChainAxiom (
+#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationNlm ]
+#        :code ) .
+#
+#ls:lcc a owl:DatatypeProperty ;
+#    :category :shorthand ;
+#    rdfs:label "LC-klassifikationskod"@sv, "LCC classification code"@en ;
+#    owl:propertyChainAxiom (
+#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationLcc ]
+#        :code ) .
+#
+#ls:itemNote a owl:DatatypeProperty ;
+#    :category ls:merged ;
+#    rdfs:label "anmärkning i bestånd"@sv, "item note"@en ;
+#    skos:notation "BANM"^^ls:QueryCode ;
+#    owl:propertyChainAxiom ( :hasItem :hasNote :label ),
+#        ( :hasItem :cataloguersNote ),
+#        ( :hasItem :custodialHistory ),
+#        ( :hasItem marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
+#        ( :hasItem marc:hasBindingInformation :label ),
+#        ( :hasItem marc:hasTextualHoldingsBasicBibliographicUni marc:cataloguersNote ) .
+#
 #:author a owl:ObjectProperty ;
 #    rdfs:label "författare"@sv, "author"@en ;
 #    :category :shorthand, :pending ;

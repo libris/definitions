@@ -783,6 +783,7 @@
             "summary",
             "immediateAcquisition",
             "availability",
+            "shelfLabel",
             { "inverseOf": "itemUsed" },
             { "inverseOf": "hasComponent" }
           ]
@@ -1484,11 +1485,19 @@
       "lenses": {
         "Record": {
           "fresnel:extends": {"@id": "Record-chips"},
-          "showProperties": [ "fresnel:super", "bibliography" ]
+          "showProperties": [ "fresnel:super", "bibliography", "created" ]
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
-          "showProperties": [ "fresnel:super", "subject", "summary", "hasComponent", "availability" ]
+          "showProperties": [
+            "fresnel:super",
+            "subject",
+            "summary",
+            "hasComponent",
+            "availability",
+            "physicalLocation",
+            "shelfLabel"
+          ]
         },
         "Person": {
           "fresnel:extends": {"@id": "Person-chips"},
@@ -1563,7 +1572,7 @@
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
-          "showProperties": [ "fresnel:super", "subject", "summary", "cataloguersNote" ]
+          "showProperties": [ "fresnel:super", "cataloguersNote" ]
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
