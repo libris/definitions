@@ -6,6 +6,7 @@
       "@base": "https://id.kb.se/vocab/display",
       "@vocab": "https://id.kb.se/vocab/",
       "marc": "https://id.kb.se/marc/",
+      "librissearch": "https://id.kb.se/ns/librissearch/",
       "lensGroups": {"@id": "@graph", "@container": "@index"},
       "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
       "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
@@ -785,7 +786,6 @@
             "summary",
             "immediateAcquisition",
             "availability",
-            "shelfLabel",
             { "inverseOf": "itemUsed" },
             { "inverseOf": "hasComponent" }
           ]
@@ -1503,9 +1503,45 @@
             "subject",
             "summary",
             "hasComponent",
-            "availability",
-            "physicalLocation",
-            "shelfLabel"
+            {
+              "fresnel:mergeProperties": [
+                "cataloguersNote",
+                "custodialHistory",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasNote/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasCopyAndVersionIdentificationNote/*/marc:itemCondition"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasBindingInformation/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:cataloguersNote"
+                }
+              ],
+              "fresnel:use": "librissearch:itemNote"
+            },
+            {
+              "fresnel:mergeProperties": [
+                "shelfLabel",
+                "physicalLocation",
+                "shelfControlNumber",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "shelfMark/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "availability/*/label"
+                }
+              ],
+              "fresnel:use": "librissearch:shelf"
+            }
           ]
         },
         "Person": {
