@@ -7,6 +7,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ls: <https://id.kb.se/ns/librissearch/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 ### Extended definitions for Libris Search ###
 :identifier # See ./details.ttl for full definition of :identifier
@@ -88,6 +89,14 @@
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
+:shelfControlNumber rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :shelfControlNumber
+:shelfLabel rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :shelfLabel
+:physicalLocation rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :physicalLocation
+
+:cataloguersNote rdfs:subPropertyOf ls:itemNote . # See ./details.ttl for full definition of :cataloguersNote
+:custodialHistory rdfs:subPropertyOf ls:itemNote . # See ./items.ttl for full definition of :custodialHistory
+
+
 ### New definitions for Libris Search ###
 
 ls:QueryCode a rdfs:Datatype ;
@@ -97,6 +106,10 @@ ls:composite a skos:Collection ;
     rdfs:label "composite"@en, "sammansatt"@sv ;
     :category :pending ;
     :code "composite" .
+
+ls:merged a skos:Collection ;
+    rdfs:label "merged"@en, "sammanslagen"@sv ;
+    :code "merged" .
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
@@ -185,14 +198,34 @@ ls:title a owl:ObjectProperty ;
         ( :relationship :entity :hasTitle ) .
 
 ls:itemShelf a owl:DatatypeProperty ;
-     :category ls:composite, :pending ; # TODO: ls:merged?
-     rdfs:label "hyllsignum"@sv, "item shelf"@en ;
-     skos:notation "WHYL"^^ls:QueryCode ;
-     owl:propertyChainAxiom ( :hasItem :availability :label ),
-        ( :hasItem :shelfMark :label ),
-        ( :hasItem :shelfControlNumber ),
-        ( :hasItem :shelfLabel ),
-        ( :hasItem :physicalLocation ) .
+      :category :shorthand, :pending ;
+      skos:notation "WHYL"^^ls:QueryCode ;
+      rdfs:label "hyllsignum"@sv, "item shelf"@en ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:shelf ) .
+
+ls:shelf a owl:DatatypeProperty ;
+     :category ls:merged, :pending ;
+     rdfs:label "hylla"@sv, "shelf"@en ;
+     rdfs:domain :Item ;
+     owl:propertyChainAxiom ( :availability :label ), ( :shelfMark :label ) .
+
+ls:hasItemNote a owl:DatatypeProperty ;
+      :category :shorthand, :pending ;
+      skos:notation "BANM"^^ls:QueryCode ;
+      rdfs:label "har beståndsanmärkning"@sv, "has item note"@en ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:itemNote ) .
+
+ls:itemNote a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
+    rdfs:label "beståndsanmärkning"@sv, "item note"@en ;
+    rdfs:domain :Item ;
+    owl:propertyChainAxiom ( :hasNote :label ),
+        ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
+        ( marc:hasBindingInformation :label ),
+        ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ),
+        ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) .
 
 ls:itemCreated a owl:DatatypeProperty ;
      :category :shorthand, :pending ;
@@ -246,14 +279,3 @@ ls:itemCreated a owl:DatatypeProperty ;
 #    owl:propertyChainAxiom (
 #        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationLcc ]
 #        :code ) .
-#
-#ls:itemNote a owl:DatatypeProperty ;
-#    :category ls:merged ;
-#    rdfs:label "anmärkning i bestånd"@sv, "item note"@en ;
-#    skos:notation "BANM"^^ls:QueryCode ;
-#    owl:propertyChainAxiom ( :hasItem :hasNote :label ),
-#        ( :hasItem :cataloguersNote ),
-#        ( :hasItem :custodialHistory ),
-#        ( :hasItem marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
-#        ( :hasItem marc:hasBindingInformation :label ),
-#        ( :hasItem marc:hasTextualHoldingsBasicBibliographicUni marc:cataloguersNote ) .
