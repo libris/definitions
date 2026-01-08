@@ -6,19 +6,10 @@ data used by the National Library of Sweden.
 
 ## Dependencies
 
-Requires Python 3.9+. (Use PyPy for a general speed improvement.)
+Make sure you have [uv](https://github.com/astral-sh/uv) installed.
 
-If you have [uv](https://github.com/astral-sh/uv) installed, just prepend
-`uv run` to the commands under "Usage" and skip the following. Otherwise:
-
-Preferably set up a virtualenv:
-
-    $ python3 -m venv PATH_TO_VENV_OF_YOUR_CHOICE
-    $ source PATH_TO_VENV_OF_YOUR_CHOICE/bin/activate
-
-Install the Python-based dependencies:
-
-    $ pip install -r requirements.txt
+_Optionally_ run `uv sync` followed by `source .venv/bin/activate` to avoid the need
+to prepend `uv run` in all the commands below.
 
 ## Usage
 
@@ -27,7 +18,7 @@ See the files in `source/datasets/` for definitions of what is included in each
 
 Run the following to build the full set of datasets:
 
-    $ python datasets.py -l
+    $ uv run python datasets.py -l
 
 This is often not needed, as not all datasets are updated all the time.
 Instead, prefer to set up and use the following to produce a load file only for
@@ -35,18 +26,18 @@ what has been worked on.
 
 This builds the system core dataset:
 
-    $ python syscore.py -l
+    $ uv run python syscore.py -l
 
 Run the following to build the full set of common datasets for id.kb.se:
 
-    $ python common.py -l
+    $ uv run python common.py -l
 
 You can also pass dataset names to generate the different parts in isolation.
 Pass `-h` or `--help` to the script for details.
 
 Finally, this builds as set of documentation articles for id.kb.se:
 
-    $ python docs.py -l
+    $ uv run python docs.py -l
 
 ## Contents
 
@@ -104,22 +95,22 @@ the relevant sources.
 
 *Tip:* During vocab development. Regularly run just:
 
-    $ python syscore.py
+    $ uv run python syscore.py
 
 which generates the vocab build file.
 
 Look at it as Turtle by running:
 
-    $ rdfpipe -ijson-ld:context=sys/context/kbv.jsonld build/vocab.jsonld
+    $ uv run rdfpipe -ijson-ld:context=sys/context/kbv.jsonld build/vocab.jsonld
 
 , and/or make a nice, digested tree view by running:
 
-    $ python scripts/misc/vocab-summary.py build/vocab.jsonld -c sys/context/kbv.jsonld -v
+    $ uv run python scripts/misc/vocab-summary.py build/vocab.jsonld -c sys/context/kbv.jsonld -v
 
 When bigger changes are made, you can generate a more predicable output by
 calling e.g.:
 
-    $ PYTHONHASHSEED=1 python datasets.py -l
+    $ PYTHONHASHSEED=1 uv run python datasets.py -l
 
 Use this in conjunction with switching between a stable branch and a feature,
 backing up the build directory when doing so, then using e.g.:
@@ -202,8 +193,8 @@ generate a basic vocab file:
 
 To generate RDF descriptions from legacy MARC definitions, use:
 
-    $ python scripts/marcframe-skeleton-from-marcmap.py scripts/marc/marcmap.json --enums
+    $ uv run python scripts/marcframe-skeleton-from-marcmap.py scripts/marc/marcmap.json --enums
 
 See that script for other options.
 
-Pipe the output to `rdfpipe -ijson-ld:base=source/ -oturtle -` to get it as Turtle.
+Pipe the output to `uv run rdfpipe -ijson-ld:base=source/ -oturtle -` to get it as Turtle.
