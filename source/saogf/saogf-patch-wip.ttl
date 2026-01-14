@@ -146,7 +146,7 @@ saogf:Almanackor a :GenreForm ;
     "Almanacka"@sv .
 
 saogf:Referensverk a :GenreForm ;
-  :broader saogf:Informativa%20verk , saogf:Ej%20sk%C3%B6nlitteratur;
+  :broader saogf:Informativa%20verk , saogf:Facklitteratur;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   #:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
@@ -168,6 +168,8 @@ saogf:Altsaxofon :broader saogf:Musik .
 saogf:Ambient%20musik :broader saogf:Musik .
 
 saogf:Ambrosiansk%20s%C3%A5ng :broader saogf:Musik .
+
+saogf:Analys%20och%20tolkning :broader saogf:Facklitteratur .
 
 # The term "Andliga barnvisor" has been removed from SAOGF, nothing to patch!
 #saogf:Andliga%20barnvisor :broader saogf:Musik .
@@ -253,6 +255,7 @@ saogf:Ave%20Maria :broader saogf:Musik .
 
 saogf:Avhandlingar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
     marc:Thesis ;
+    :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Avslappningsmusik :broader saogf:Musik .
@@ -373,11 +376,11 @@ saogf:Berimbau :broader saogf:Musik .
 
 saogf:Bhajan :broader saogf:Musik .
 
+#Remove narrowMatch since marc:Bibliography means "is OR contains bibliography" and could even considered broader
 saogf:Bibliografier a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
-# Tar bort narrowMatch för att undvika att marc:Bibliography byts ut mot Bibliografier (jfr hantering av amerikanskt offentligt tryck)
-# TODO Skapa SAOGF Innehåller bibliografi ich exact/closeMatcha med MARC
-  :narrowMatch marc:Bibliography ;
+  #:narrowMatch marc:Bibliography ;
+  :broader saogf:Facklitteratur ;
   :singularLabel "Bibliography"@en ,
     "Bibliografi"@sv .
 
@@ -864,14 +867,14 @@ saogf:Efem%C3%A4rt%20material a :GenreForm ;
   :prefLabel "Efemärt material"@sv, "Ephemera"@en .
 
 # Döp om till Facklitteratur? Notera att det förändrar URL:en.
-saogf:Ej%20sk%C3%B6nlitteratur a :GenreForm ;
+saogf:Facklitteratur a :GenreForm ;
   :broader ktg:Literature ;
   :closeMatch marc:NotFictionNotFurtherSpecified ;
   :inCollection div:constructed ,
     div:find ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Non-fiction literature"@en ,
-    "Ej skönlitteratur"@sv .
+    "Facklitteratur"@sv .
 
 # Överflödig när vi har Skön/Fack-uppdelning - kan återbesäkas när vi bryter ut genrer som kan användas på alla former
 #saogf:Icke-fiktion a :GenreForm ;
@@ -1030,8 +1033,9 @@ saogf:L%C3%A4romedel a :GenreForm ;
     "Läromedel"@sv .
 
 saogf:F%C3%B6rteckningar a :GenreForm ;
-  :broader saogf:Samlande%20resurser , saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Samlande%20resurser , saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Facklitteratur ;
   :singularLabel "Register"@en ,
     "Förteckning"@sv .
 
@@ -1083,7 +1087,7 @@ saogf:Feministisk%20musik :broader saogf:Musik .
 saogf:Festmarscher :broader saogf:Musik .
 
 saogf:Festskrifter :closeMatch marc:Festschrift ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur , saogf:Minnesbevarande%20verk ;
+  :broader saogf:Facklitteratur , saogf:Minnesbevarande%20verk ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Fiddla :broader saogf:Musik .
@@ -1183,7 +1187,7 @@ saogf:Folksagor a :GenreForm ;
 saogf:Fonn%20mall :broader saogf:Musik .
 
 saogf:Forsknings%C3%B6versikter a :GenreForm ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
   :narrowMatch marc:SurveysOfLiteratureInASubjectArea .
 
 saogf:Fotob%C3%B6cker a :GenreForm ;
@@ -1245,7 +1249,7 @@ saogf:Gebrauchsmusik :broader saogf:Musik .
 saogf:Gender%20%28musikinstrument%29 :broader saogf:Musik .
 
 saogf:Genealogiskt%20material :closeMatch marc:GenealogicalTable ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ghaita :broader saogf:Musik .
@@ -1293,7 +1297,7 @@ saogf:Illustrerade%20verk a :GenreForm ;
     "Illustrerat verk"@sv .
 
 saogf:Guideb%C3%B6cker a :GenreForm ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Guide book"@en ,
     "Guidebok"@sv .
@@ -1305,7 +1309,7 @@ saogf:Halling :broader saogf:Musik .
 saogf:Hambo :broader saogf:Musik .
 
 saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
-  :broader saogf:Instruktions-%20och%20undervisningsmaterial, saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Instruktions-%20och%20undervisningsmaterial, saogf:Facklitteratur ;
    # kbrda:Text ;
   :closeMatch marc:Handbook ,
     <http://id.loc.gov/authorities/genreForms/gf2014026109> ;
@@ -1323,7 +1327,7 @@ saogf:Instruktions-%20och%20undervisningsmaterial a :GenreForm ;
   #:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
 
 saogf:Handlingar%20%28dokument%29 a :GenreForm ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Record (Document)"@en ,
     "Handling (dokument)"@sv .
@@ -1503,7 +1507,7 @@ saogf:Jultidningar :broader saogf:Periodika .
 
 saogf:Juridiskt%20material a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
   :narrowMatch marc:LegalCaseOrCaseNote ,
     marc:LawReportOrDigest ,
     marc:Legislation ,
@@ -1714,7 +1718,7 @@ saogf:Klostermusik :broader saogf:Musik .
 saogf:Kohorn :broader saogf:Musik .
 
 saogf:Kokb%C3%B6cker a :GenreForm ;
-  :broader saogf:Ej%20sk%C3%B6nlitteratur ;
+  :broader saogf:Facklitteratur ;
     #saogf:B%C3%B6cker ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
