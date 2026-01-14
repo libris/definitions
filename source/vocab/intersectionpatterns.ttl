@@ -12,8 +12,7 @@ prefix marc: <https://id.kb.se/marc/>
 
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix ktg: <https://id.kb.se/term/ktg/>
-
-prefix : <https://id.kb.se/vocab/>
+prefix saogf: <https://id.kb.se/term/saogf/>
 
 ##
 # Abstract classes entailed by categories (possibly in turn entailed).
@@ -28,7 +27,7 @@ prefix : <https://id.kb.se/vocab/>
   owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:ThreeDimensionalForm]) .
 
 :Cartography ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Cartography]) .
+  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue saogf:Kartografiskt%20material]) .
 
 :Dataset ptg:abstract true ;
   owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Dataset]) .
@@ -46,7 +45,7 @@ prefix : <https://id.kb.se/vocab/>
 
 :Multimedia ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Multimedia]) .
 
-:Music ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Music]) .
+:Music ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue saogf:Musik]) .
 
 :NonMusicAudio ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Sounds]) .
 

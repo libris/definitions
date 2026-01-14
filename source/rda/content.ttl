@@ -17,7 +17,7 @@ kbrda:CartographicDataset a bf:Content ;
     <http://rdaregistry.info/termList/RDAContentType/1001> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
   skos:notation "crd" ;
-  skos:broadMatch ktg:Dataset , ktg:Cartography .
+  skos:broadMatch ktg:Dataset , saogf:Kartografiskt%20material .
 
 kbrda:CartographicImage a bf:Content ;
   owl:sameAs <content/cartographic%20image> ,
@@ -28,7 +28,7 @@ kbrda:CartographicImage a bf:Content ;
   skos:notation "cri" ;
   #skos:closeMatch ktg:CartographicImage ;
   #skos:broader kbrda:StillImage ;
-  skos:broadMatch ktg:Cartography .
+  skos:broadMatch saogf:Kartografiskt%20material .
 
 kbrda:CartographicMovingImage a bf:Content ;
   owl:sameAs <content/cartographic%20moving%20image> ,
@@ -37,7 +37,7 @@ kbrda:CartographicMovingImage a bf:Content ;
     <http://rdaregistry.info/termList/RDAContentType/1003> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
   skos:notation "crm" ;
-  skos:broadMatch ktg:Cartography , ktg:MovingImage .
+  skos:broadMatch saogf:Kartografiskt%20material , ktg:MovingImage .
 
 kbrda:CartographicTactileImage a bf:Content ;
   owl:sameAs <content/cartographic%20tactile%20image> ,
@@ -46,7 +46,7 @@ kbrda:CartographicTactileImage a bf:Content ;
     <http://rdaregistry.info/termList/RDAContentType/1004> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
   skos:notation "crt" ;
-  skos:broadMatch ktg:Tactile , ktg:Cartography , kbrda:StillImage .
+  skos:broadMatch ktg:Tactile , saogf:Kartografiskt%20material , kbrda:StillImage .
 
 kbrda:CartographicTactileThreeDimensionalForm a bf:Content ;
   owl:sameAs <content/cartographic%20tactile%20three-dimensional%20form> ,
@@ -66,7 +66,7 @@ kbrda:CartographicThreeDimensionalForm a bf:Content ;
   skos:inScheme <https://id.kb.se/term/rda> ;
   skos:notation "crf" ;
   #skos:closeMatch ktg:CartographicObject ;
-  skos:broadMatch ktg:Cartography ;
+  skos:broadMatch saogf:Kartografiskt%20material ;
   #skos:broader kbrda:ThreeDimensionalForm ;
   skos:altLabel "Kartografiskt objekt"@sv ,
      "Cartographic Object"@en .
@@ -123,7 +123,7 @@ kbrda:PerformedMusic a bf:Content ;
   skos:notation "prm" ;
   #skos:closeMatch ktg:PerformedMusic ;
   :inCollection div:identify ;
-  skos:broadMatch ktg:Audio, ktg:Music .
+  skos:broadMatch ktg:Audio, saogf:Musik .
 
 kbrda:Sounds a bf:Content ;
   owl:sameAs kbrda:content\/snd ,
@@ -155,7 +155,7 @@ kbrda:StillImage a bf:Content ;
   #skos:closeMatch ktg:StillImage ;
   :inCollection div:find ;
   #:inCollection div:identify ;
-  skos:broadMatch ktg:VisualWork ;
+  skos:broadMatch saogf:Visuella%20verk ;
   #skos:broadMatch saogf:Bilder ;
   skos:closeMatch marc:Picture ;
   skos:narrowMatch marc:Graphic . # 8048

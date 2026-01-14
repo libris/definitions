@@ -80,10 +80,9 @@ saogf:%C3%85rstidsmusik :broader saogf:Musik .
 saogf:Musik a :GenreForm ;
   :prefLabel "Musik"@sv ,
     "Music"@en ;
-  :inScheme <https://id.kb.se/term/saogf> ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
-  :broader ktg:Music ;
+#  :broader ktg:Music ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026952> .
 
 #Vi gör detta efter överläggning med tidskriftskatalogisatörer
@@ -115,9 +114,8 @@ saogf:Affischer a :GenreForm ;
   :singularLabel "Poster"@en ,
     "Affisch"@sv .
 
-#Glöm inte att göra om ktg:Visuellt verk till saogf:Visuellt verk
 saogf:Bilder a :GenreForm ;
-  :broader ktg:VisualWork ;
+  :broader saogf:Visuella%20verk ;
  #   kbrda:StillImage ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Picture"@en ,
@@ -729,7 +727,7 @@ saogf:Databaser a :GenreForm ;
 
 saogf:Datorgrafik a :GenreForm ;
   :broader ktg:Multimedia ,
-    ktg:VisualWork ;
+    saogf:Visuella%20verk ;
   :closeMatch marc:Representational ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1589,19 +1587,18 @@ saogf:Karakt%C3%A4rsstycken a :GenreForm ;
 
 saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 
-# TODO: SAO-red lägger till denna manuellt
-#saogf:Kartb%C3%B6cker a :GenreForm ;
-#  #:broader kbrda:Text ,
-#  # kbrda:CartographicImage ;
-#  :broader saogf:Kartografiskt%20material ;
-#  :closeMatch marc:Atlas ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :narrowMatch marc:MapMaterialType-d ;
-#  :prefLabel "Kartböcker"@sv ,
-#    "Atlases"@en ;
-#  :singularLabel "Kartbok"@sv ,
-#    "Atlas"@en .
+saogf:Kartb%C3%B6cker a :GenreForm ;
+  #:broader kbrda:Text ,
+ # kbrda:CartographicImage ;
+ :broader saogf:Kartografiskt%20material ;
+ :closeMatch marc:Atlas ;
+ :inCollection div:constructed ;
+ :inScheme <https://id.kb.se/term/saogf> ;
+ :narrowMatch marc:MapMaterialType-d ;
+ :prefLabel "Kartböcker"@sv ,
+   "Atlases"@en ;
+ :singularLabel "Kartbok"@sv ,
+   "Atlas"@en .
 
 saogf:Kartmodeller a :GenreForm ;
   #:broader kbrda:CartographicThreeDimensionalForm ,
