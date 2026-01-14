@@ -8,11 +8,13 @@ prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 
 ### Manuellt tillagda termer
 
 saogf:Visuella%20verk a :GenreForm ;
   :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027266> ;
   :prefLabel "Visuella verk"@sv, "Visual Works"@en ;
   :singularLabel "Visuellt verk"@sv, "Visual Work"@en .
@@ -20,6 +22,7 @@ saogf:Visuella%20verk a :GenreForm ;
 # Manuellt tillagd från genres.ttl
 saogf:Monografiserier a :GenreForm ;
   :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
   :broader saogf:Seriella%20publikationer ;
   :closeMatch marc:MonographicSeries ;
   :prefLabel "Monografiserier"@sv, "Monographic Series"@en ;
@@ -28,6 +31,7 @@ saogf:Monografiserier a :GenreForm ;
 
 saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
   :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
   :broader saogf:Biografier ;
   :closeMatch marc:IndividualBiography ; 
   :prefLabel "Biografier över en individ"@sv, "Individual biographies"@en ;
@@ -35,6 +39,7 @@ saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
 
 saogf:Biografier%20%C3%B6ver%20flera%20individer a :GenreForm ;
   :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
   :broader saogf:Biografier ;
   :closeMatch marc:CollectiveBiography ; 
   :prefLabel "Biografier över flera individer"@sv, "Collective biographies"@en ;
@@ -77,6 +82,7 @@ saogf:Musik a :GenreForm ;
     "Music"@en ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :inCollection div:constructed ;
+  :inScheme <https://id.kb.se/term/saogf> ;
   :broader ktg:Music ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026952> .
 
