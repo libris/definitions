@@ -37,7 +37,7 @@ saogf:Visuella%20verk a :GenreForm ;
 saogf:Monografiserier a :GenreForm ;
   :inCollection div:constructed ;
   :broader saogf:Seriella%20publikationer ;
-  :exactMatch marc:MonographicSeries ;
+  :closeMatch marc:MonographicSeries ;
   :prefLabel "Monografiserier"@sv, "Monographic Series"@en ;
   :singularLabel "Monographic Series"@en ,
     "Monografiserie"@sv .
@@ -45,14 +45,14 @@ saogf:Monografiserier a :GenreForm ;
 saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
   :inCollection div:constructed ;
   :broader saogf:Biografier ;
-  :exactMatch marc:IndividualBiography ; 
+  :closeMatch marc:IndividualBiography ; 
   :prefLabel "Biografier över en individ"@sv, "Individual biographies"@en ;
   :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
 
 saogf:Biografier%20%C3%B6ver%20flera%20individer a :GenreForm ;
   :inCollection div:constructed ;
   :broader saogf:Biografier ;
-  :exactMatch marc:CollectiveBiography ; 
+  :closeMatch marc:CollectiveBiography ; 
   :prefLabel "Biografier över flera individer"@sv, "Collective biographies"@en ;
   :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
 
@@ -62,7 +62,7 @@ saogf:%C3%84ventyrsskildringar a :GenreForm .
 
 saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
   :broader saogf:Seriella%20publikationer ;
-  :exactMatch marc:Yearbook ;
+  :closeMatch marc:Yearbook ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Yearbook"@en ,
     "Årsbok"@sv .
@@ -115,13 +115,13 @@ saogf:A%20cappella :broader saogf:Musik .
 
 saogf:Accordeon :broader saogf:Musik .
 
-saogf:Adventskalendrar :exactMatch tgm:Adventskalendrar .
+saogf:Adventskalendrar :closeMatch tgm:Adventskalendrar .
 
 saogf:Adventsmusik :broader saogf:Musik .
 
 saogf:Affischer a :GenreForm ;
   :broader saogf:Bilder ;
-  :exactMatch tgm:Affischer ;
+#  :closeMatch tgm:Affischer ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   #:pluralLabel "Affischer"@sv ;
@@ -132,7 +132,7 @@ saogf:Affischer a :GenreForm ;
 saogf:Bilder a :GenreForm ;
   :broader ktg:VisualWork ;
  #   kbrda:StillImage ;
-  :exactMatch tgm:Bilder ;
+  :closeMatch tgm:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Picture"@en ,
     "Bild"@sv .
@@ -211,7 +211,7 @@ saogf:Kortare%20texter a :GenreForm ;
 saogf:Anthems a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026635> ;
-  :exactMatch marc:Anthem ;
+  :closeMatch marc:Anthem ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Antifonale :broader saogf:Musik .
@@ -265,7 +265,7 @@ saogf:Atonalitet :broader saogf:Musik .
 
 saogf:Aubader :broader saogf:Musik .
 
-saogf:Autografer :exactMatch tgm:Autografer .
+saogf:Autografer :closeMatch tgm:Autografer .
 
 saogf:Ave%20Maria :broader saogf:Musik .
 
@@ -301,7 +301,7 @@ saogf:Balalajkakonserter :broader saogf:Musik .
 saogf:Baletter a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026650> ;
-  :exactMatch marc:Ballet ;
+  :closeMatch marc:Ballet ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Balettmusik :broader saogf:Musik .
@@ -314,7 +314,7 @@ saogf:Ballader%20%28instrumentalmusik%29 :broader saogf:Musik .
 
 saogf:Ballader%20%28vokalmusik%29 a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026648> ;
-  :exactMatch marc:Ballad ;
+  :closeMatch marc:Ballad ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ballades%20%28fransk%20medeltidsform%29 :broader saogf:Musik .
@@ -395,7 +395,7 @@ saogf:Bibliografier a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
 # Tar bort narrowMatch för att undvika att marc:Bibliography byts ut mot Bibliografier (jfr hantering av amerikanskt offentligt tryck)
 # TODO Skapa SAOGF Innehåller bibliografi ich exact/closeMatcha med MARC
-#  :narrowMatch marc:Bibliography ;
+  :narrowMatch marc:Bibliography ;
   :singularLabel "Bibliography"@en ,
     "Bibliografi"@sv .
 
@@ -468,7 +468,7 @@ saogf:Blandad%20k%C3%B6r :broader saogf:Musik .
 saogf:Blandade%20r%C3%B6ster :broader saogf:Musik .
 
 saogf:Blanketter a :GenreForm ;
-  :exactMatch tgm:Blanketter ;
+  :closeMatch tgm:Blanketter ;
   :inScheme <https://id.kb.se/term/saogf> ;
 #  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
   :singularLabel "Form Document"@en ,
@@ -501,13 +501,13 @@ saogf:Webbplatser a :GenreForm ;
 
 saogf:Bluegrass a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026664> ;
-  :exactMatch marc:BluegrassMusic ;
+  :closeMatch marc:BluegrassMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Blues a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026665> ;
-  :exactMatch marc:Blues ;
+  :closeMatch marc:Blues ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Bockhorn :broader saogf:Musik .
@@ -527,7 +527,6 @@ saogf:Bouzouki :broader saogf:Musik .
 saogf:Br%C3%A4dspel a :GenreForm ;
   :broader saogf:Spel%20och%20tanken%C3%B6tter ,
     saogf:Interaktiva%20objekt ;
-  :exactMatch <https://id.kb.se/term/sao/Br%C3%A4dspel> ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Board games"@en ,
@@ -579,7 +578,7 @@ saogf:Bronslurar :broader saogf:Musik .
 
 saogf:Broschyrer a :GenreForm ;
   :broader saogf:Kortare%20texter ;
-  :exactMatch tgm:Broschyrer ;
+  :closeMatch tgm:Broschyrer ;
   :inCollection div:constructed ,
     div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -619,7 +618,7 @@ saogf:Cantica :broader saogf:Musik .
 saogf:Canzone a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026012> ;
-  :exactMatch marc:Canzona ;
+  :closeMatch marc:Canzona ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Canzonette :broader saogf:Musik .
@@ -633,7 +632,7 @@ saogf:Capricer :broader saogf:Musik .
 saogf:Carols a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026695> ;
-  :exactMatch marc:Carol ;
+  :closeMatch marc:Carol ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Celesta :broader saogf:Musik .
@@ -647,7 +646,7 @@ saogf:Cha-cha :broader saogf:Musik .
 saogf:Chaconner a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026701> ;
-  :exactMatch marc:Chaconne ;
+  :closeMatch marc:Chaconne ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Chalumeau :broader saogf:Musik .
@@ -669,7 +668,7 @@ saogf:Cittra :broader saogf:Musik .
 saogf:Concerti%20grossi a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026724> ;
-  :exactMatch marc:ConcertiGrossi ;
+  :closeMatch marc:ConcertiGrossi ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Concertina :broader saogf:Musik .
@@ -687,7 +686,7 @@ saogf:Countertenor%20%28r%C3%B6st%29 :broader saogf:Musik .
 saogf:Countrymusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026739> ;
-  :exactMatch marc:CountryMusic ;
+  :closeMatch marc:CountryMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Courantes :broader saogf:Musik .
@@ -728,7 +727,7 @@ saogf:Damtidningar :broader saogf:Periodika .
 saogf:Danser%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026753> ;
-  :exactMatch marc:DanceForm ;
+  :closeMatch marc:DanceForm ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Danslekar%20%28musik%29 :broader saogf:Musik .
@@ -749,7 +748,7 @@ saogf:Databaser a :GenreForm ;
 saogf:Datorgrafik a :GenreForm ;
   :broader ktg:Multimedia ,
     ktg:VisualWork ;
-  :exactMatch marc:Representational ,
+  :closeMatch marc:Representational ,
     tgm:Datorgrafik ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -768,7 +767,7 @@ saogf:Datormusik :broader saogf:Musik .
 
 saogf:Datorspel a :GenreForm ;
   :broader ktg:Software ;
-  :exactMatch marc:ComputerTypeOfFileType-g ;
+  :closeMatch marc:ComputerTypeOfFileType-g ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Computer Game"@en ,
@@ -972,7 +971,7 @@ saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
 # Behövs denna verkligen, eller är den bara singular av "Kartor" (se mappning marc:SingleMap saogf:Kartor)?
 #saogf:Enskilda%20kartor a :GenreForm ;
 #  :broader saogf:Kartor ;
-#  :exactMatch marc:MapATwoDimensionalMap ;
+#  :closeMatch marc:MapATwoDimensionalMap ;
 #  :inCollection div:constructed ;
 #  :inScheme <https://id.kb.se/term/saogf> ;
 #  :prefLabel "Two-dimensional map"@en ,
@@ -984,7 +983,7 @@ saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
 saogf:Kartor a :GenreForm ;
   :closeMatch marc:Map ,
     marcgt:map ;
-  :exactMatch tgm:Kartor ,
+  :closeMatch tgm:Kartor ,
     marc:SingleMap ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -1019,7 +1018,7 @@ saogf:Estampier :broader saogf:Musik .
 saogf:Etyder%20%28%C3%B6vningar%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027115> ;
-  :exactMatch marc:StudyOrExercise ;
+  :closeMatch marc:StudyOrExercise ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Etyder%20%28konstmusik%29 :broader saogf:Musik .
@@ -1028,7 +1027,7 @@ saogf:Euphonium :broader saogf:Musik .
 
 saogf:Eurodisco :broader saogf:Musik .
 
-saogf:Evighetskalendrar :exactMatch tgm:Evighetskalendrar .
+saogf:Evighetskalendrar :closeMatch tgm:Evighetskalendrar .
 
 saogf:Experimentell%20musik :broader saogf:Musik .
 
@@ -1076,7 +1075,7 @@ saogf:Fagottsonater :broader saogf:Musik .
 
 saogf:Fakeb%C3%B6cker%20%28musik%29 :broader saogf:Musik .
 
-saogf:Faksimiler :exactMatch marc:ReproductionType-f ;
+saogf:Faksimiler :closeMatch marc:ReproductionType-f ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Familjeskildringar a :GenreForm .
@@ -1092,7 +1091,7 @@ saogf:Fantasi%20och%20fuga :broader saogf:Musik .
 saogf:Fantasier%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2018026018> ;
-  :exactMatch marc:Fantasia ;
+  :closeMatch marc:Fantasia ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Fantasy a :GenreForm .
@@ -1107,7 +1106,7 @@ saogf:Feministisk%20musik :broader saogf:Musik .
 
 saogf:Festmarscher :broader saogf:Musik .
 
-saogf:Festskrifter :exactMatch marc:Festschrift ;
+saogf:Festskrifter :closeMatch marc:Festschrift ;
   :broader saogf:Ej%20sk%C3%B6nlitteratur , saogf:Minnesbevarande%20verk ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1139,7 +1138,7 @@ saogf:Filmmanus a :GenreForm ;
 saogf:Filmmusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026950> ;
-  :exactMatch marc:MotionPictureMusic ;
+  :closeMatch marc:MotionPictureMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Filmografi :closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
@@ -1175,7 +1174,7 @@ saogf:Flageolett :broader saogf:Musik .
 
 saogf:Flamenco%20%28musik%29 a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026806> ;
-  :exactMatch marc:Flamenco ;
+  :closeMatch marc:Flamenco ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Flaskor%20%28musik%29 :broader saogf:Musik .
@@ -1197,11 +1196,11 @@ saogf:Folkdiktning a :GenreForm .
 saogf:Folkmusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026809> ;
-  :exactMatch marc:FolkMusic ;
+  :closeMatch marc:FolkMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Folksagor a :GenreForm ;
-  :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026344> ,
     marc:Folktale ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1219,7 +1218,7 @@ saogf:Fotob%C3%B6cker a :GenreForm ;
 
 saogf:Fotografier a :GenreForm ;
   :broader saogf:Bilder ;
-  :exactMatch marc:Photograph ,
+  :closeMatch marc:Photograph ,
     tgm:Fotografier ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Photoprint ;
@@ -1245,7 +1244,7 @@ saogf:Frottole :broader saogf:Musik .
 saogf:Fugor a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026818> ;
-  :exactMatch marc:Fugue ;
+  :closeMatch marc:Fugue ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Funk%20%28musik%29 :broader saogf:Musik .
@@ -1270,7 +1269,7 @@ saogf:Gebrauchsmusik :broader saogf:Musik .
 
 saogf:Gender%20%28musikinstrument%29 :broader saogf:Musik .
 
-saogf:Genealogiskt%20material :exactMatch marc:GenealogicalTable ;
+saogf:Genealogiskt%20material :closeMatch marc:GenealogicalTable ;
   :broader saogf:Ej%20sk%C3%B6nlitteratur ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1300,7 +1299,7 @@ saogf:Gong :broader saogf:Musik .
 
 saogf:Gospel a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026839> ;
-  :exactMatch marc:GospelMusic ;
+  :closeMatch marc:GospelMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Gospels%C3%A5ng :broader saogf:Musik .
@@ -1395,7 +1394,7 @@ saogf:Kartglober a :GenreForm ;
   #:broader kbrda:CartographicThreeDimensionalForm ;
   :broader saogf:Kartografiskt%20material ;
   :closeMatch marc:Globe ;
-  :exactMatch tgm:Glober ;
+  :closeMatch tgm:Glober ;
   :narrowMatch marc:PlanetaryOrLunarGlobe ;
   :inCollection div:constructed ,
     div:identify ;
@@ -1452,7 +1451,7 @@ saogf:Icke-v%C3%A4sterl%C3%A4ndska%20kulturers%20musik :broader saogf:Musik .
 saogf:Illustrationer a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Illustration ;
-  :exactMatch tgm:Illustrationer ;
+  :closeMatch tgm:Illustrationer ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Illustration"@en ,
     "Illustration"@sv .
@@ -1500,7 +1499,7 @@ saogf:Jaktskildringar a :GenreForm .
 saogf:Jazz a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026879> ;
-  :exactMatch marc:Jazz ;
+  :closeMatch marc:Jazz ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Jazzbalettmusik :broader saogf:Musik .
@@ -1550,7 +1549,7 @@ saogf:K%C3%B6rmusik :broader saogf:Musik .
 saogf:K%C3%B6rs%C3%A5ng a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027007> ;
-  :exactMatch marc:ChansonsPolyphonic ;
+  :closeMatch marc:ChansonsPolyphonic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:K%C3%B6rsymfonier :broader saogf:Musik .
@@ -1596,13 +1595,13 @@ saogf:Kamps%C3%A5nger :broader saogf:Musik .
 saogf:Kanons a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026687> ;
-  :exactMatch marc:CanonOrRound ;
+  :closeMatch marc:CanonOrRound ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Kantater a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026688> ;
-  :exactMatch marc:Cantata ;
+  :closeMatch marc:Cantata ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Kantele :broader saogf:Musik .
@@ -1610,7 +1609,7 @@ saogf:Kantele :broader saogf:Musik .
 saogf:Karakt%C3%A4rsstycken a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> ;
-  :exactMatch marc:DivertimentosSerenadesCassationsDivertissementsNotturni ;
+  :closeMatch marc:DivertimentosSerenadesCassationsDivertissementsNotturni ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
@@ -1620,7 +1619,7 @@ saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 #  #:broader kbrda:Text ,
 #  # kbrda:CartographicImage ;
 #  :broader saogf:Kartografiskt%20material ;
-#  :exactMatch tgm:Atlaser ,
+#  :closeMatch tgm:Atlaser ,
 #    marc:Atlas ;
 #  :inCollection div:constructed ;
 #  :inScheme <https://id.kb.se/term/saogf> ;
@@ -1693,7 +1692,7 @@ saogf:Kastrats%C3%A5ng :broader saogf:Musik .
 saogf:Kataloger a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Catalog ;
-  :exactMatch tgm:Kataloger ;
+  :closeMatch tgm:Kataloger ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Catalogue"@en ,
     "Katalog"@sv .
@@ -1773,7 +1772,7 @@ saogf:Konsertarior :broader saogf:Musik .
 saogf:Konserter%20%28form%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026725> ;
-  :exactMatch marc:Concerto ;
+  :closeMatch marc:Concerto ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Konserter%20%28framtr%C3%A4danden%29 :broader saogf:Musik .
@@ -1823,10 +1822,10 @@ saogf:Koralbearbetningar :broader saogf:Musik .
 saogf:Koraler a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026713> ;
-  :exactMatch marc:Chorale ;
+  :closeMatch marc:Chorale ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Korrespondens :exactMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
+saogf:Korrespondens :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026141> ,
     marc:Letter ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1940,7 +1939,7 @@ saogf:Liturgisk%20musik :broader saogf:Musik .
 saogf:Liturgisk%20s%C3%A5ng a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026707> ;
-  :exactMatch marc:ChantsOtherReligion ,
+  :closeMatch marc:ChantsOtherReligion ,
     marc:ChantChristian ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1982,7 +1981,7 @@ saogf:Luta :broader saogf:Musik .
 saogf:M%C3%A4ssor%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026926> ;
-  :exactMatch marc:Mass ;
+  :closeMatch marc:Mass ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:M%C3%A4sters%C3%A5nger :broader saogf:Musik .
@@ -1994,7 +1993,7 @@ saogf:M%C3%A5larb%C3%B6cker a :GenreForm ;
 saogf:M%C3%A5lningar a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Painting ;
-  :exactMatch tgm:M%C3%A5lningar ;
+  :closeMatch tgm:M%C3%A5lningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Paintings"@en ,
@@ -2015,7 +2014,7 @@ saogf:M%C3%A5nglober a :GenreForm ;
 saogf:Madrigaler a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026915> ;
-  :exactMatch marc:Madrigal ;
+  :closeMatch marc:Madrigal ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Madrigalkomedier :broader saogf:Musik .
@@ -2059,14 +2058,14 @@ saogf:Marionettoperor :broader saogf:Musik .
 saogf:Marscher a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026922> ;
-  :exactMatch marc:March ;
+  :closeMatch marc:March ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 #saogf:Matprogram%20p%C3%A5%20tv :broader saogf:TV .
 
 saogf:Matsedlar a :GenreForm ;
   #:broader saogf:Kortare%20texter ;
-  :exactMatch tgm:Matsedlar ;
+  :closeMatch tgm:Matsedlar ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Dining menu"@en ,
     "Matsedel"@sv .
@@ -2074,7 +2073,7 @@ saogf:Matsedlar a :GenreForm ;
 saogf:Mazurkor a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026928> ;
-  :exactMatch marc:Mazurka ;
+  :closeMatch marc:Mazurka ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Mbira :broader saogf:Musik .
@@ -2100,7 +2099,7 @@ saogf:Melodramer%20%28musik%29 :broader saogf:Musik .
 saogf:Menuetter a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026940> ;
-  :exactMatch marc:Minuet ;
+  :closeMatch marc:Minuet ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Merengue :broader saogf:Musik .
@@ -2141,7 +2140,7 @@ saogf:Monodier :broader saogf:Musik .
 saogf:Motetter a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026949> ;
-  :exactMatch marc:Motet ;
+  :closeMatch marc:Motet ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Mrdanga :broader saogf:Musik .
@@ -2215,7 +2214,7 @@ saogf:No%20wave :broader saogf:Musik .
 saogf:Nocturner a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026144> ;
-  :exactMatch marc:Nocturne ;
+  :closeMatch marc:Nocturne ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Noise%20%28musik%29 :broader saogf:Musik .
@@ -2296,13 +2295,13 @@ saogf:Operettlibretton :broader saogf:Musik .
 saogf:Operor a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026976> ;
-  :exactMatch marc:Opera ;
+  :closeMatch marc:Opera ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Oratorier a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026977> ;
-  :exactMatch marc:Oratorio ;
+  :closeMatch marc:Oratorio ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Organisationspress :broader saogf:Periodika .
@@ -2378,13 +2377,13 @@ saogf:Paso%20doble :broader saogf:Musik .
 saogf:Passacaglior a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026989> ;
-  :exactMatch marc:Passacaglia ;
+  :closeMatch marc:Passacaglia ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Passioner%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026861> ;
-  :exactMatch marc:PassionMusic ;
+  :closeMatch marc:PassionMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Pastischer a :GenreForm .
@@ -2409,7 +2408,7 @@ saogf:Paussignaler%20%28musik%29 :broader saogf:Musik .
 saogf:Pavaner a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026994> ;
-  :exactMatch marc:Pavan ;
+  :closeMatch marc:Pavan ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Pekingopera :broader saogf:Musik .
@@ -2493,7 +2492,7 @@ saogf:Polkor :broader saogf:Musik .
 saogf:Polon%C3%A4ser a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027005> ;
-  :exactMatch marc:Polonaise ;
+  :closeMatch marc:Polonaise ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Pols :broader saogf:Musik .
@@ -2514,7 +2513,7 @@ saogf:Pop-up-b%C3%B6cker a :GenreForm ;
 saogf:Popul%C3%A4rmusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027009> ;
-  :exactMatch marc:PopularMusic ;
+  :closeMatch marc:PopularMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Popul%C3%A4rpress :broader saogf:Periodika .
@@ -2523,7 +2522,7 @@ saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
 
 saogf:Porrtidningar :broader saogf:Periodika .
 
-saogf:Portr%C3%A4tt :exactMatch marc:Portrait ,
+saogf:Portr%C3%A4tt :closeMatch marc:Portrait ,
     tgm:Portr%C3%A4tt ;
   :broader saogf:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> .
@@ -2539,14 +2538,14 @@ saogf:Postmodernism%20%28musik%29 :broader saogf:Musik .
 saogf:Preludier a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027013> ;
-  :exactMatch marc:Prelude ;
+  :closeMatch marc:Prelude ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Preludium%20och%20fuga :broader saogf:Musik .
 
 saogf:Preparerat%20piano :broader saogf:Musik .
 
-saogf:Produktkataloger :exactMatch tgm:Produktkataloger .
+saogf:Produktkataloger :closeMatch tgm:Produktkataloger .
 
 saogf:Profan%20k%C3%B6rmusik :broader saogf:Musik .
 
@@ -2565,7 +2564,7 @@ saogf:Program%20%28publikationer%29 a :GenreForm ;
 saogf:Programmusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027017> ;
-  :exactMatch marc:ProgramMusic ;
+  :closeMatch marc:ProgramMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Programsignaturer%20%28musik%29 :broader saogf:Musik .
@@ -2658,7 +2657,7 @@ saogf:Raga :broader saogf:Musik .
 
 saogf:Ragtime a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027034> ;
-  :exactMatch marc:RagtimeMusic ;
+  :closeMatch marc:RagtimeMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Ramber%C3%A4ttelser a :GenreForm .
@@ -2666,7 +2665,7 @@ saogf:Ramber%C3%A4ttelser a :GenreForm .
 saogf:Rapsodier%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027051> ;
-  :exactMatch marc:Rhapsody ;
+  :closeMatch marc:Rhapsody ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Rasselinstrument :broader saogf:Musik .
@@ -2679,7 +2678,7 @@ saogf:Rebana%20%28instrument%29 :broader saogf:Musik .
 
 saogf:Rebec :broader saogf:Musik .
 
-saogf:Rebusar :exactMatch tgm:Rebusar .
+saogf:Rebusar :closeMatch tgm:Rebusar .
 
 saogf:Recensioner a :GenreForm ;
   :closeMatch marc:Review ;
@@ -2694,7 +2693,7 @@ saogf:Regal :broader saogf:Musik .
 saogf:Rekviem%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027048> ;
-  :exactMatch marc:Requiem ;
+  :closeMatch marc:Requiem ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Relationsskildringar a :GenreForm .
@@ -2729,7 +2728,7 @@ saogf:Responsorier :broader saogf:Musik .
 saogf:Revyer a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027050> ;
-  :exactMatch marc:MusicalRevueOrComedy ;
+  :closeMatch marc:MusicalRevueOrComedy ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Revymusik :broader saogf:Musik .
@@ -2737,16 +2736,16 @@ saogf:Revymusik :broader saogf:Musik .
 saogf:Ricercari a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026128> ;
-  :exactMatch marc:Ricercar ;
+  :closeMatch marc:Ricercar ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Rimofficier :broader saogf:Musik .
 
-saogf:Risografier :exactMatch tgm:Risografier .
+saogf:Risografier :closeMatch tgm:Risografier .
 
 saogf:Ritningar a :GenreForm ;
   :broader saogf:Bilder ;
-  :exactMatch tgm:Ritningar ;
+  :closeMatch tgm:Ritningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Design drawings"@en ,
@@ -2760,7 +2759,7 @@ saogf:Robinsonader a :GenreForm .
 
 saogf:Rock a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027054> ;
-  :exactMatch marc:RockMusic ;
+  :closeMatch marc:RockMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Rockoperor :broader saogf:Musik .
@@ -2794,7 +2793,7 @@ saogf:Rondeaux :broader saogf:Musik .
 saogf:Rondon a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027057> ;
-  :exactMatch marc:Rondo ;
+  :closeMatch marc:Rondo ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Rymdopera a :GenreForm .
@@ -2811,7 +2810,7 @@ saogf:S%C3%A5ngcykler :broader saogf:Musik .
 
 saogf:S%C3%A5nger a :GenreForm ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027103> ;
-  :exactMatch marc:Song ;
+  :closeMatch marc:Song ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:S%C3%A5nglekar%20%28musik%29 :broader saogf:Musik .
@@ -2858,7 +2857,7 @@ saogf:Samlingsverk a :GenreForm ;
     "Samlingsverk"@sv .
 
 saogf:Sammanfattningar a :GenreForm ;
-  :exactMatch marc:AbstractsSummary ;
+  :closeMatch marc:AbstractsSummary ;
   :inScheme <https://id.kb.se/term/saogf> ;
 #  :seeAlso <https://en.wikipedia.org/wiki/Abstract_(summary)> ;
   :singularLabel "Abstract Summary"@en ,
@@ -2892,7 +2891,7 @@ saogf:Schottis :broader saogf:Musik .
 
 saogf:Science%20fiction a :GenreForm .
 
-saogf:Screentryck :exactMatch tgm:Screentryck .
+saogf:Screentryck :closeMatch tgm:Screentryck .
 
 saogf:Sedeskildringar a :GenreForm .
 
@@ -2912,7 +2911,7 @@ saogf:Serienoveller a :GenreForm ;
 saogf:Tecknade%20serier a :GenreForm ;
   :altLabel "Serier"@sv ;
   :broader saogf:Grafisk%20litteratur ;
-  :exactMatch marc:ComicOrGraphicNovel ,
+  :closeMatch marc:ComicOrGraphicNovel ,
     tgm:Tecknade%20serier ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -2930,7 +2929,7 @@ saogf:Serieromaner a :GenreForm ,
 
 saogf:Seriestrippar a :GenreForm ;
   :broader saogf:Tecknade%20serier ;
-  :exactMatch marc:ComicStrip ;
+  :closeMatch marc:ComicStrip ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Comic strips"@en ,
@@ -2941,7 +2940,7 @@ saogf:Seriestrippar a :GenreForm ;
 saogf:Serietidningar a :GenreForm ;
   :broader saogf:Tecknade%20serier ,
     saogf:Periodika ;
-  :exactMatch tgm:Serietidningar ;
+  :closeMatch tgm:Serietidningar ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Comic magazine"@en ,
     "Serietidning"@sv .
@@ -2979,7 +2978,7 @@ saogf:Sitar :broader saogf:Musik .
 saogf:Sj%C3%A4lvbiografier a :GenreForm ;
   :broader saogf:Biografier ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026047> ;
-  :exactMatch marc:Autobiography ;
+  :closeMatch marc:Autobiography ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Memoir ;
   :singularLabel "Autobiography"@en ,
@@ -2987,7 +2986,7 @@ saogf:Sj%C3%A4lvbiografier a :GenreForm ;
 
 saogf:Sj%C3%A4lvbiografiska%20skildringar a :GenreForm .
 
-saogf:Sj%C3%A4lvportr%C3%A4tt :exactMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
+saogf:Sj%C3%A4lvportr%C3%A4tt :closeMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
 
 saogf:Sj%C3%A4lvspelande%20piano :broader saogf:Musik .
 
@@ -3007,7 +3006,7 @@ saogf:Sketcher :broader saogf:Musik .
 
 saogf:Skillingtryck :broader saogf:Musik .
 
-saogf:Skisser :exactMatch tgm:Skisser .
+saogf:Skisser :closeMatch tgm:Skisser .
 
 saogf:Skisser%20%28musik%29 :broader saogf:Musik .
 
@@ -3043,7 +3042,7 @@ saogf:Slowfox :broader saogf:Musik .
 saogf:Slumpmusik a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026624> ;
-  :exactMatch marc:ChanceComposition ;
+  :closeMatch marc:ChanceComposition ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Sn%C3%A4ckskal :broader saogf:Musik .
@@ -3057,7 +3056,7 @@ saogf:Solos%C3%A5ng :broader saogf:Musik .
 saogf:Sonater a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> ;
-  :exactMatch marc:Sonata ;
+  :closeMatch marc:Sonata ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Sonatiner :broader saogf:Musik .
@@ -3097,7 +3096,7 @@ saogf:Springar :broader saogf:Musik .
 saogf:Square%20dance%20%28musik%29 a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027111> ;
-  :exactMatch marc:SquareDanceMusic ;
+  :closeMatch marc:SquareDanceMusic ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Stabat%20mater :broader saogf:Musik .
@@ -3164,13 +3163,13 @@ saogf:Stumfilmsmusik :broader saogf:Musik .
 saogf:Sviter a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027116> ;
-  :exactMatch marc:Suite ;
+  :closeMatch marc:Suite ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Symfonier a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027121> ;
-  :exactMatch marc:Symphony ;
+  :closeMatch marc:Symphony ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Symfoniska%20danser :broader saogf:Musik .
@@ -3178,7 +3177,7 @@ saogf:Symfoniska%20danser :broader saogf:Musik .
 saogf:Symfoniska%20dikter a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027120> ;
-  :exactMatch marc:SymphonicPoem ;
+  :closeMatch marc:SymphonicPoem ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Symfoniska%20variationer :broader saogf:Musik .
@@ -3245,14 +3244,14 @@ saogf:Te%20Deum :broader saogf:Musik .
 
 saogf:Teaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
 
-saogf:Teaterprogram :exactMatch tgm:Teaterprogram .
+saogf:Teaterprogram :closeMatch tgm:Teaterprogram .
 
 saogf:Techno :broader saogf:Musik .
 
 saogf:Teckningar a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Drawing ;
-  :exactMatch tgm:Teckningar ;
+  :closeMatch tgm:Teckningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Drawingar"@en ,
@@ -3263,7 +3262,7 @@ saogf:Teckningar a :GenreForm ;
 saogf:Tema%20med%20variationer a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027156> ;
-  :exactMatch marc:Variation ;
+  :closeMatch marc:Variation ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Tempelklockor :broader saogf:Musik .
@@ -3317,7 +3316,7 @@ saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
 saogf:Tidskriftsnummer a :GenreForm ;
   :broader saogf:Kortare%20texter ;
   :closeMatch marcgt:iss ;
-  :exactMatch <https://id.kb.se/term/repr/Issue> ;
+  :closeMatch <https://id.kb.se/term/repr/Issue> ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Periodical Issue"@en ,
@@ -3329,7 +3328,7 @@ saogf:Tidstrogna%20instrument :broader saogf:Musik .
 saogf:Tidtabeller a :GenreForm ;
   :broader saogf:Efem%C3%A4rt%20material ,
     saogf:Tabeller ;
-  :exactMatch tgm:Tidtabeller ;
+  :closeMatch tgm:Tidtabeller ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Timetable"@en ,
     "Tidtabell"@sv .
@@ -3345,7 +3344,7 @@ saogf:Toccata%20och%20fuga :broader saogf:Musik .
 saogf:Toccator a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027140> ;
-  :exactMatch marc:Toccata ;
+  :closeMatch marc:Toccata ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Tolvtonsmusik :broader saogf:Musik .
@@ -3379,7 +3378,7 @@ saogf:Trior :broader saogf:Musik .
 saogf:Triosonater a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027099> ;
-  :exactMatch marc:TrioSonata ;
+  :closeMatch marc:TrioSonata ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Trippelkonserter :broader saogf:Musik .
@@ -3459,18 +3458,18 @@ saogf:Uppl%C3%A4sningar%20med%20musik :broader saogf:Musik .
 
 saogf:Urban%20fantasy a :GenreForm .
 
-saogf:Urklipp :exactMatch tgm:Urklipp .
+saogf:Urklipp :closeMatch tgm:Urklipp .
 
 saogf:Utopier a :GenreForm .
 
-saogf:Utst%C3%A4llningskataloger :exactMatch tgm:Utst%C3%A4llningskataloger .
+saogf:Utst%C3%A4llningskataloger :closeMatch tgm:Utst%C3%A4llningskataloger .
 
 saogf:Utvecklingsromaner a :GenreForm .
 
 saogf:Uvertyrer a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026980> ;
-  :exactMatch marc:Overture ;
+  :closeMatch marc:Overture ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:V%C3%A4sternskildringar a :GenreForm .
@@ -3488,7 +3487,7 @@ saogf:Vallhorn :broader saogf:Musik .
 saogf:Valser a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027167> ;
-  :exactMatch marc:Waltz ;
+  :closeMatch marc:Waltz ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Variationsverk :broader saogf:Musik .
@@ -3535,7 +3534,7 @@ saogf:Vihuela :broader saogf:Musik .
 saogf:Villancicos a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026025> ;
-  :exactMatch marc:Villancico ;
+  :closeMatch marc:Villancico ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Villanelle :broader saogf:Musik .
@@ -3603,7 +3602,7 @@ saogf:Vokalmusik :broader saogf:Musik .
 saogf:Vykort a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:PictureCardPostCard ;
-  :exactMatch tgm:Vykort ;
+  :closeMatch tgm:Vykort ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Postcard"@en ,
@@ -3612,7 +3611,7 @@ saogf:Vykort a :GenreForm ;
 # Commented out as we are not creating new SAOGF terms based on TGM at this point.
 #saogf:Vykortsb%C3%B6cker a :GenreForm ;
 #  :broader saogf:Vykort ;
-#  :exactMatch tgm:Vykortsh%C3%A4ften ;
+#  :closeMatch tgm:Vykortsh%C3%A4ften ;
 #  :inCollection div:constructed ;
 #  :inScheme <https://id.kb.se/term/saogf> ;
 #  :prefLabel "Postcard books"@en ,
@@ -3635,7 +3634,7 @@ saogf:Zarb :broader saogf:Musik .
 saogf:Zarzuelas a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2016026059> ;
-  :exactMatch marc:Zarzuela ;
+  :closeMatch marc:Zarzuela ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Zurna :broader saogf:Musik .
