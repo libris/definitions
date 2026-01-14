@@ -8,7 +8,6 @@ prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix saogf: <https://id.kb.se/term/saogf/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 
 ### Manuellt tillagda termer
 
@@ -100,13 +99,10 @@ saogf:A%20cappella :broader saogf:Musik .
 
 saogf:Accordeon :broader saogf:Musik .
 
-saogf:Adventskalendrar :closeMatch tgm:Adventskalendrar .
-
 saogf:Adventsmusik :broader saogf:Musik .
 
 saogf:Affischer a :GenreForm ;
   :broader saogf:Bilder ;
-#  :closeMatch tgm:Affischer ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   #:pluralLabel "Affischer"@sv ;
@@ -117,7 +113,6 @@ saogf:Affischer a :GenreForm ;
 saogf:Bilder a :GenreForm ;
   :broader ktg:VisualWork ;
  #   kbrda:StillImage ;
-  :closeMatch tgm:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Picture"@en ,
     "Bild"@sv .
@@ -249,8 +244,6 @@ saogf:Assaggio :broader saogf:Musik .
 saogf:Atonalitet :broader saogf:Musik .
 
 saogf:Aubader :broader saogf:Musik .
-
-saogf:Autografer :closeMatch tgm:Autografer .
 
 saogf:Ave%20Maria :broader saogf:Musik .
 
@@ -453,7 +446,6 @@ saogf:Blandad%20k%C3%B6r :broader saogf:Musik .
 saogf:Blandade%20r%C3%B6ster :broader saogf:Musik .
 
 saogf:Blanketter a :GenreForm ;
-  :closeMatch tgm:Blanketter ;
   :inScheme <https://id.kb.se/term/saogf> ;
 #  :seeAlso <https://en.wikipedia.org/wiki/Form_(document)> ;
   :singularLabel "Form Document"@en ,
@@ -563,7 +555,6 @@ saogf:Bronslurar :broader saogf:Musik .
 
 saogf:Broschyrer a :GenreForm ;
   :broader saogf:Kortare%20texter ;
-  :closeMatch tgm:Broschyrer ;
   :inCollection div:constructed ,
     div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -733,8 +724,7 @@ saogf:Databaser a :GenreForm ;
 saogf:Datorgrafik a :GenreForm ;
   :broader ktg:Multimedia ,
     ktg:VisualWork ;
-  :closeMatch marc:Representational ,
-    tgm:Datorgrafik ;
+  :closeMatch marc:Representational ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Computer graphics"@en ,
@@ -968,8 +958,7 @@ saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
 saogf:Kartor a :GenreForm ;
   :closeMatch marc:Map ,
     marcgt:map ;
-  :closeMatch tgm:Kartor ,
-    marc:SingleMap ;
+  :closeMatch marc:SingleMap ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Enskild karta"@sv ,
@@ -1011,8 +1000,6 @@ saogf:Etyder%20%28konstmusik%29 :broader saogf:Musik .
 saogf:Euphonium :broader saogf:Musik .
 
 saogf:Eurodisco :broader saogf:Musik .
-
-saogf:Evighetskalendrar :closeMatch tgm:Evighetskalendrar .
 
 saogf:Experimentell%20musik :broader saogf:Musik .
 
@@ -1203,8 +1190,7 @@ saogf:Fotob%C3%B6cker a :GenreForm ;
 
 saogf:Fotografier a :GenreForm ;
   :broader saogf:Bilder ;
-  :closeMatch marc:Photograph ,
-    tgm:Fotografier ;
+  :closeMatch marc:Photograph ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Photoprint ;
   :singularLabel "Photograph"@en ,
@@ -1367,7 +1353,7 @@ saogf:Highland%20pipes :broader saogf:Musik .
 
 saogf:Himlaglober a :GenreForm ;
   :broader saogf:Kartglober ;
-  :closeMatch marc:CelestialGlobe , tgm:Himmelsglober, <http://id.loc.gov/authorities/genreForms/gf2011026117> ;
+  :closeMatch marc:CelestialGlobe , <http://id.loc.gov/authorities/genreForms/gf2011026117> ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Celestial globes"@en ,
@@ -1379,7 +1365,6 @@ saogf:Kartglober a :GenreForm ;
   #:broader kbrda:CartographicThreeDimensionalForm ;
   :broader saogf:Kartografiskt%20material ;
   :closeMatch marc:Globe ;
-  :closeMatch tgm:Glober ;
   :narrowMatch marc:PlanetaryOrLunarGlobe ;
   :inCollection div:constructed ,
     div:identify ;
@@ -1436,7 +1421,6 @@ saogf:Icke-v%C3%A4sterl%C3%A4ndska%20kulturers%20musik :broader saogf:Musik .
 saogf:Illustrationer a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Illustration ;
-  :closeMatch tgm:Illustrationer ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Illustration"@en ,
     "Illustration"@sv .
@@ -1501,7 +1485,7 @@ saogf:Joddling :broader saogf:Musik .
 
 saogf:Jordglober a :GenreForm ;
   :broader saogf:Kartglober ;
-  :closeMatch marc:TerrestrialGlobe , tgm:Jordglober ;
+  :closeMatch marc:TerrestrialGlobe ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Terrestial globes"@en ,
@@ -1604,8 +1588,7 @@ saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 #  #:broader kbrda:Text ,
 #  # kbrda:CartographicImage ;
 #  :broader saogf:Kartografiskt%20material ;
-#  :closeMatch tgm:Atlaser ,
-#    marc:Atlas ;
+#  :closeMatch marc:Atlas ;
 #  :inCollection div:constructed ;
 #  :inScheme <https://id.kb.se/term/saogf> ;
 #  :narrowMatch marc:MapMaterialType-d ;
@@ -1677,7 +1660,6 @@ saogf:Kastrats%C3%A5ng :broader saogf:Musik .
 saogf:Kataloger a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Catalog ;
-  :closeMatch tgm:Kataloger ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Catalogue"@en ,
     "Katalog"@sv .
@@ -1978,7 +1960,6 @@ saogf:M%C3%A5larb%C3%B6cker a :GenreForm ;
 saogf:M%C3%A5lningar a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Painting ;
-  :closeMatch tgm:M%C3%A5lningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Paintings"@en ,
@@ -2050,7 +2031,6 @@ saogf:Marscher a :GenreForm ;
 
 saogf:Matsedlar a :GenreForm ;
   #:broader saogf:Kortare%20texter ;
-  :closeMatch tgm:Matsedlar ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Dining menu"@en ,
     "Matsedel"@sv .
@@ -2507,8 +2487,7 @@ saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
 
 saogf:Porrtidningar :broader saogf:Periodika .
 
-saogf:Portr%C3%A4tt :closeMatch marc:Portrait ,
-    tgm:Portr%C3%A4tt ;
+saogf:Portr%C3%A4tt :closeMatch marc:Portrait ;
   :broader saogf:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -2529,8 +2508,6 @@ saogf:Preludier a :GenreForm ;
 saogf:Preludium%20och%20fuga :broader saogf:Musik .
 
 saogf:Preparerat%20piano :broader saogf:Musik .
-
-saogf:Produktkataloger :closeMatch tgm:Produktkataloger .
 
 saogf:Profan%20k%C3%B6rmusik :broader saogf:Musik .
 
@@ -2663,8 +2640,6 @@ saogf:Rebana%20%28instrument%29 :broader saogf:Musik .
 
 saogf:Rebec :broader saogf:Musik .
 
-saogf:Rebusar :closeMatch tgm:Rebusar .
-
 saogf:Recensioner a :GenreForm ;
   :closeMatch marc:Review ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -2726,11 +2701,8 @@ saogf:Ricercari a :GenreForm ;
 
 saogf:Rimofficier :broader saogf:Musik .
 
-saogf:Risografier :closeMatch tgm:Risografier .
-
 saogf:Ritningar a :GenreForm ;
   :broader saogf:Bilder ;
-  :closeMatch tgm:Ritningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Design drawings"@en ,
@@ -2876,8 +2848,6 @@ saogf:Schottis :broader saogf:Musik .
 
 saogf:Science%20fiction a :GenreForm .
 
-saogf:Screentryck :closeMatch tgm:Screentryck .
-
 saogf:Sedeskildringar a :GenreForm .
 
 saogf:Septetter :broader saogf:Musik .
@@ -2896,8 +2866,7 @@ saogf:Serienoveller a :GenreForm ;
 saogf:Tecknade%20serier a :GenreForm ;
   :altLabel "Serier"@sv ;
   :broader saogf:Grafisk%20litteratur ;
-  :closeMatch marc:ComicOrGraphicNovel ,
-    tgm:Tecknade%20serier ;
+  :closeMatch marc:ComicOrGraphicNovel ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Comic or graphic novel"@en ,
@@ -2925,7 +2894,6 @@ saogf:Seriestrippar a :GenreForm ;
 saogf:Serietidningar a :GenreForm ;
   :broader saogf:Tecknade%20serier ,
     saogf:Periodika ;
-  :closeMatch tgm:Serietidningar ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Comic magazine"@en ,
     "Serietidning"@sv .
@@ -2971,8 +2939,6 @@ saogf:Sj%C3%A4lvbiografier a :GenreForm ;
 
 saogf:Sj%C3%A4lvbiografiska%20skildringar a :GenreForm .
 
-saogf:Sj%C3%A4lvportr%C3%A4tt :closeMatch tgm:Sj%C3%A4lvportr%C3%A4tt .
-
 saogf:Sj%C3%A4lvspelande%20piano :broader saogf:Musik .
 
 saogf:Sj%C3%B6ber%C3%A4ttelser a :GenreForm .
@@ -2990,8 +2956,6 @@ saogf:Skalmeja :broader saogf:Musik .
 saogf:Sketcher :broader saogf:Musik .
 
 saogf:Skillingtryck :broader saogf:Musik .
-
-saogf:Skisser :closeMatch tgm:Skisser .
 
 saogf:Skisser%20%28musik%29 :broader saogf:Musik .
 
@@ -3229,14 +3193,11 @@ saogf:Te%20Deum :broader saogf:Musik .
 
 saogf:Teaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
 
-saogf:Teaterprogram :closeMatch tgm:Teaterprogram .
-
 saogf:Techno :broader saogf:Musik .
 
 saogf:Teckningar a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:Drawing ;
-  :closeMatch tgm:Teckningar ;
   :inCollection div:constructed ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :prefLabel "Drawingar"@en ,
@@ -3313,7 +3274,6 @@ saogf:Tidstrogna%20instrument :broader saogf:Musik .
 saogf:Tidtabeller a :GenreForm ;
   :broader saogf:Efem%C3%A4rt%20material ,
     saogf:Tabeller ;
-  :closeMatch tgm:Tidtabeller ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Timetable"@en ,
     "Tidtabell"@sv .
@@ -3443,11 +3403,7 @@ saogf:Uppl%C3%A4sningar%20med%20musik :broader saogf:Musik .
 
 saogf:Urban%20fantasy a :GenreForm .
 
-saogf:Urklipp :closeMatch tgm:Urklipp .
-
 saogf:Utopier a :GenreForm .
-
-saogf:Utst%C3%A4llningskataloger :closeMatch tgm:Utst%C3%A4llningskataloger .
 
 saogf:Utvecklingsromaner a :GenreForm .
 
@@ -3587,7 +3543,6 @@ saogf:Vokalmusik :broader saogf:Musik .
 saogf:Vykort a :GenreForm ;
   :broader saogf:Bilder ;
   :closeMatch marc:PictureCardPostCard ;
-  :closeMatch tgm:Vykort ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Postcard"@en ,
@@ -3625,3 +3580,69 @@ saogf:Zarzuelas a :GenreForm ;
 saogf:Zurna :broader saogf:Musik .
 
 saogf:Zydeco :broader saogf:Musik .
+
+
+##
+# TGM
+
+tgm:Adventskalendrar :closeMatch saogf:Adventskalendrar .
+
+tgm:Affischer :broadMatch saogf:Affischer .
+tgm:Postrar :broadMatch saogf:Affischer .
+
+tgm:Autografer :closeMatch saogf:Autografer .
+
+tgm:Bilder :closeMatch saogf:Bilder .
+
+tgm:Blanketter :closeMatch saogf:Blanketter .
+
+tgm:Broschyrer :closeMatch saogf:Broschyrer .
+
+tgm:Kartor :closeMatch saogf:Kartor .
+
+# TODO: add when the saogf term is defined:
+#tgm:Atlaser :broadMatch saogf:Kartb%C3%B6cker .
+
+tgm:Evighetskalendrar :closeMatch saogf:Evighetskalendrar .
+
+tgm:Himmelsglober :closeMatch saogf:Himlaglober .
+
+tgm:Glober :closeMatch saogf:Kartglober .
+
+tgm:Illustrationer :closeMatch saogf:Illustrationer .
+
+tgm:Jordglober :closeMatch saogf:Jordglober .
+
+tgm:Kataloger :closeMatch saogf:Kataloger .
+
+tgm:M%C3%A5lningar :closeMatch saogf:M%C3%A5lningar .
+
+tgm:Matsedlar :closeMatch saogf:Matsedlar .
+
+tgm:Produktkataloger :closeMatch saogf:Produktkataloger .
+
+tgm:Rebusar :closeMatch saogf:Rebusar .
+
+tgm:Risografier :closeMatch saogf:Risografier .
+
+tgm:Ritningar :closeMatch saogf:Ritningar .
+
+tgm:Screentryck :closeMatch saogf:Screentryck .
+
+tgm:Serietidningar :closeMatch saogf:Serietidningar .
+
+tgm:Sj%C3%A4lvportr%C3%A4tt :closeMatch saogf:Sj%C3%A4lvportr%C3%A4tt .
+
+tgm:Skisser :closeMatch saogf:Skisser .
+
+tgm:Teaterprogram :closeMatch saogf:Teaterprogram .
+
+tgm:Teckningar :closeMatch saogf:Teckningar .
+
+tgm:Tidtabeller :closeMatch saogf:Tidtabeller .
+
+tgm:Urklipp :closeMatch saogf:Urklipp .
+
+tgm:Utst%C3%A4llningskataloger :closeMatch saogf:Utst%C3%A4llningskataloger .
+
+tgm:Vykort :closeMatch saogf:Vykort .
