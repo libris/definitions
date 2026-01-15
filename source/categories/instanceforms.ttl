@@ -22,11 +22,11 @@ ktg:Print a :ManifestationForm;
 # This MARC mapping appears to be incorrect (not Text) - should it be RegularPrint?
 #  skos:closeMatch marc:Print ;
   skos:broader kbrda:Unmediated ;
-  skos:preflabel "Tryck"@sv, "Print"@en .
+  skos:prefLabel "Tryck"@sv, "Print"@en .
 
 ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
   skos:broader kbrda:Unmediated ;
-  skos:preflabel "Handskrift"@sv, "Manuscript"@en .
+  skos:prefLabel "Handskrift"@sv, "Manuscript"@en .
 
 # Rather :productionMethod?
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
@@ -47,7 +47,7 @@ ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in B
 # Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
 #ktg:PrintedVolume a :ManifestationForm ;
 #  skos:broader ktg:Print, kbrda:Volume ;
-#  skos:preflabel "Tryckt volym"@sv , "Printed Volume"@en .
+#  skos:prefLabel "Tryckt volym"@sv , "Printed Volume"@en .
 
 #ktg:HardcoverVolume a :ManifestationForm;
 #  skos:broader ktg:PrintedVolume .
@@ -58,7 +58,7 @@ ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in B
 # Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
 #ktg:PrintedSheet a :ManifestationForm ;
 #  skos:broader ktg:Print, kbrda:Sheet ;
-#  skos:preflabel "Tryckt lösblad"@sv , "Printed Sheet"@en .
+#  skos:prefLabel "Tryckt lösblad"@sv , "Printed Sheet"@en .
 
 # Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
 # Unclear what this means - reformulate if adding back
@@ -111,7 +111,7 @@ ktg:Braille a :ManifestationForm ;
 ktg:StorageMedium a :ManifestationForm ;
   ptg:abstract true ;
   skos:broader ktg:PhysicalForm ;
-  skos:preflabel "Lagringsmedium"@sv , "Storage medium"@en .
+  skos:prefLabel "Lagringsmedium"@sv , "Storage medium"@en .
 
 
 #ktg:TapeCartridge a :ManifestationForm ;
@@ -180,7 +180,7 @@ ktg:AbstractElectronic a :ManifestationForm ;
 # Does this have a function or does it just duplicate RDA Online Resource?
 ktg:DigitalForm a :ManifestationForm ;
   skos:broader ktg:AbstractElectronic ;
-  skos:preflabel "Digital resurs"@sv , "Digital resource"@en ;
+  skos:prefLabel "Digital resurs"@sv , "Digital resource"@en ;
   rdfs:comment 'Kallas ibland "E-resurs"'@sv .
 
 # Remapping broader to AbstractElectronic, so this can be combined with OnlineResource or a physical form
@@ -195,12 +195,13 @@ ktg:ElectronicStorageMedium a :ManifestationForm ;
   skos:closeMatch marc:DirectElectronic ;
   skos:broader ktg:StorageMedium ,
       ktg:AbstractElectronic ;   # Kallas ibland "Elektronisk bärare".
-  skos:preflabel "Elektroniskt lagringsmedium"@sv , "Electronic storage medium"@en .
+  skos:prefLabel "Elektroniskt lagringsmedium"@sv , "Electronic storage medium"@en .
 
-ktg:StandaloneDevice a :ManifestationForm ;
-  skos:closeMatch marc:StandaloneDevice ;
-  skos:broader ktg:ElectronicStorageMedium ; # Not: PhysicalObject (that's Unmediated)
-  skos:preflabel "Standalone device "@en .
+# Does not seem to have significant use
+#ktg:StandaloneDevice a :ManifestationForm ;
+#  skos:closeMatch marc:StandaloneDevice ;
+#  skos:broader ktg:ElectronicStorageMedium ; # Not: PhysicalObject (that's Unmediated)
+#  skos:prefLabel "Standalone device "@en .
 
 
 # TODO: Is the media type aspect superfluous if content is on the work?
@@ -213,7 +214,7 @@ ktg:SoundStorageMedium a :ManifestationForm ;
   #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
   skos:closeMatch kbrda:Audio ;
   skos:broader ktg:StorageMedium ;
-  skos:preflabel "Lagringsmedium för ljud"@sv, "Sound storage medium"@en .
+  skos:prefLabel "Lagringsmedium för ljud"@sv, "Sound storage medium"@en .
 
 # Commented out due to comment about 0 uses (literary warrant)
 # Zero uses in Libris...
@@ -228,7 +229,7 @@ ktg:VideoStorageMedium a :ManifestationForm ;
   skos:closeMatch kbrda:Video ;
   skos:relatedMatch marc:Videorecording ;
   skos:broader ktg:StorageMedium ;
-  skos:preflabel "Lagringsmedium för video"@sv, "Video storage medium"@en .
+  skos:prefLabel "Lagringsmedium för video"@sv, "Video storage medium"@en .
 
 ktg:Microfilm a :ManifestationForm ;
   skos:closeMatch marc:Microfilm ;
