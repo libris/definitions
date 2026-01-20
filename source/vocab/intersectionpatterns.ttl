@@ -10,6 +10,7 @@ prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
+prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix saogf: <https://id.kb.se/term/saogf/>
@@ -21,64 +22,63 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 ## Work subclasses
 
 :Audio ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Audio]) .
+# TODO: not only :Monograph (since we don't keep these types as singularly "is" types).
+#  owl:intersectionOf (:Monograph :AudioContent ) .
+#:AudioContent owl:equivalentClass bf:Audio ;
+#  owl:onProperty :category ; owl:hasValue ktg:Audio .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Audio ] .
 
 :Object ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:ThreeDimensionalForm]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:ThreeDimensionalForm ] .
 
 :Cartography ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue saogf:Kartografiskt%20material]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue saogf:Kartografiskt%20material ] .
 
 :Dataset ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Dataset]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Dataset ] .
 
 :MixedMaterial ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:MixedMaterial]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:MixedMaterial ] .
 
 :Kit ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Kit]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Kit ] .
 
 :Movement ptg:abstract true ;
-  owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Movement]) .
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Movement ] .
 
-:MovingImage ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:MovingImage]) .
+:MovingImage ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:MovingImage ] .
 
-:Multimedia ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Multimedia]) .
+:Multimedia ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Software ] .
 
-:Music ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue saogf:Musik]) .
+:Music ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue saogf:Musik ] .
 
-:NonMusicAudio ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Sounds]) .
+:NonMusicAudio ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:Sounds ] .  # saogf:Ljudb%C3%B6cker ??
 
-:NotatedMovement ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement]) .
+:NotatedMovement ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement ] .
 
-:NotatedMusic ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMusic]) .
+:NotatedMusic ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMusic ] .
 
-:PerformedMusic ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:PerformedMusic]) .
+:PerformedMusic ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:PerformedMusic ] .
 
-:StillImage ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:StillImage]) .
+:StillImage ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue saogf:Bilder ] .
 
-:Tactile ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue ktg:Tactile]) .
+:Tactile ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Tactile ] .
 
-:Text ptg:abstract true ; owl:intersectionOf (:Monograph [ owl:onProperty :category ; owl:hasValue kbrda:Text ] ) .
+:Text ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:Text ] .  # saogf:Litteratur ??
+
+
 
 ## Instance subclasses
-
-# Coordinating categories defined in: <../categories/carrierforms.ttl>
-
-# TODO: Deprecate these Instance subclasses; and define blank mappings to just BF base classes (only for TVM)...
-
-:Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Print]) .
-
-:Electronic owl:intersectionOf (:Instance [ owl:onProperty :category ; owl:hasValue ktg:AbstractElectronic ]) .
-
-:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:ManuscriptForm ]) .
-
-:Microform owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue kbrda:Microform ]) .
-
-# TODO: Ensure this is fully dropped!
-#:Archival owl:intersectionOf (:PhysicalResource [ ... ]) .
-
-# Complex Instance Classes
 
 :PhysicalResource a owl:Class ;
   rdfs:subClassOf :Instance , dc:PhysicalResource ;
@@ -99,6 +99,68 @@ prefix saogf: <https://id.kb.se/term/saogf/>
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en .
 
 
+# Coordinating categories defined in: <../categories/instanceforms.ttl>
+
+# :Instance	2_908_983 (mostly print?)
+
+# Deprecate these Instance subclasses; and define private (blank?) mappings to just BF base classes (only for TVM)?
+
+# We ONLY use them as internal pre-postproc classes for mapping from/to bib 007!
+# TODO: ensure all of these (LHS) can be mapped to one specific type.
+# Purpose here is just to define a MARC "rebus" based in on instanceOf (RHS):
+
+# :Print	7_574_881
+:Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Print]) .
+
+# :Electronic	9_682_076
+:Electronic owl:intersectionOf (:Instance [ owl:onProperty :category ; owl:hasValue ktg:AbstractElectronic ]) .
+
+:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:ManuscriptForm ]) .
+
+# :Microform	1_885
+:Microform owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue kbrda:Microform ]) .
+
+# :StillImageInstance	55_933
+:StillImageInstance
+  ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :instanceOf ; owl:someValuesFrom :StillImage ] .
+
+# :Map	12_809
+:Map
+  ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :instanceOf ; owl:someValuesFrom :Cartography ] .
+
+# :Globe	85
+:Globe
+  ptg:abstract true ;
+  owl:equivalentClass [ owl:onProperty :instanceOf ; owl:someValuesFrom [ owl:onProperty :category ; owl:hasValue kbrda:CartographicThreeDimensionalForm] ] .
+
+# :SoundRecording	172_317
+:SoundRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:SoundStorageMedium ]) .
+
+# :VideoRecording	20_961
+:VideoRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:VideoStorageMedium ]) .
+
+# :Tactile	20_357
+:Tactile owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Braille ]) .
+
+# :Manuscript	6_734
+:VideoRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Manuscript ]) .
+
+# - :MovingImageInstance	0!
+# :MovingImageInstance :instanceOf :MovingImage .
+
+# - :ProjectedImageInstance	0!
+# :ProjectedImageInstance :instanceOf :ProjectedImage .
+
+# :NotatedMusicInstance # ignored!
+# :NotatedMusicInstance>	0!
+
+# :KitInstance # ignored!
+# KitInstance>	21
+
+# :Archival	0
+
 # TODO:
 # Upgrade some marc: properties to KBV going forward?
 #:videoCharacteristic
@@ -107,7 +169,10 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 #  sdo:rangeIncludes :VideoFormat .
 # - Or...
 # Replace subclasses below with complex patterns?
-# These richer types belong the discarded direct rich-type-design...
+# These richer types belong to the discarded direct rich-type-design...
+
+:StillImageInstance
+  rdfs:subClassOf [ owl:onProperty :baseMaterial ; owl:someValuesFrom :ImageMaterial ]  .
 
 :TactileMaterial rdfs:subClassOf :Material ;
   skos:closeMatch marc:TacMaterialType .
@@ -120,17 +185,3 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 
 :VideoFormat rdfs:subClassOf :Material ;
   skos:broadMatch marc:VideoFormatType .
-
-# TODO: ensure all of these (LHS) can be mapped to one specific type.
-# Purpose here is just to define a MARC "rebus" based in on instanceOf (RHS):
-
-# :StillImageInstance :instanceOf :StillImage .
-#:StillImageInstance
-#  ptg:abstract true ;
-#  owl:equivalentClass [ owl:onProperty :instanceOf ; owl:allValuesFrom :StillImage ] ;
-#  rdfs:subClassOf [ owl:onProperty :baseMaterial ; owl:someValuesFrom :ImageMaterial ]  .
-
-# :MovingImageInstance :instanceOf :MovingImage .
-# :ProjectedImageInstance :instanceOf :ProjectedImage .
-# :NotatedMusicInstance :instanceOf :NotatedMusic .
-# :KitInstance :instanceOf :Kit .
