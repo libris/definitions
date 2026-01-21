@@ -17,6 +17,7 @@
 @prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix iiif_pres3: <http://iiif.io/api/presentation/3#> .
 
 @prefix quid: <https://w3id.org/quid/> .
 
@@ -240,7 +241,7 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "label"@en, "benämning"@sv;
     rdfs:domain :Resource ;
     :category :heuristicIdentifier ;
-    owl:equivalentProperty rdfs:label, sdo:name .
+    owl:equivalentProperty rdfs:label, sdo:name, iiif_pres3:label .
 
 :comment a owl:DatatypeProperty;
     rdfs:label "comment"@en, "kommentar"@sv;
@@ -273,7 +274,7 @@ rdf:type a owl:ObjectProperty;
 :value a owl:DatatypeProperty;
     rdfs:label "value"@en, "värde"@sv;
     rdfs:domain :Resource;
-    owl:equivalentProperty rdf:value .
+    owl:equivalentProperty rdf:value, iiif_pres3:value .
 
 :seeAlso a owl:ObjectProperty;
     rdfs:label "see also"@en, "se även"@sv;
