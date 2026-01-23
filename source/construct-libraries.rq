@@ -4,6 +4,7 @@ prefix sdo: <http://schema.org/>
 prefix bibdb: <http://libris.kb.se/def/lib#>
 prefix idkbse_bibdb: <https://id.kb.se/ns/bibdb/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dct: <http://purl.org/dc/terms/>
 prefix : <https://id.kb.se/vocab/>
 base <https://libris.kb.se/library/>
 
@@ -16,6 +17,8 @@ construct {
         :name ?name ;
         :url ?url ;
         :qualifier ?dept ;
+        rdfs:comment ?short_description ;
+        dct:description ?description ;
         idkbse_bibdb:libraryType ?libraryTypeUri ;
         idkbse_bibdb:libraryType ?librarySubTypeUri ;
         idkbse_bibdb:openingHours ?openHours ;
@@ -87,6 +90,14 @@ construct {
         bibdb:sigel ?sigel ;
         sdo:name ?name .
         # :organisation, sdo:address
+
+    optional {
+        ?bdb_id rdfs:comment ?short_description.
+    }
+
+    optional {
+        ?bdb_id dct:description ?description.
+    }
 
     optional {
         ?bdb_id bibdb:libris_reg ?reg . filter ( ?reg = true )

@@ -1,5 +1,5 @@
-import datetime
 from lxltools.datacompiler import Compiler
+from rdflib import Graph
 import os
 
 
@@ -44,6 +44,10 @@ def _construct_bibdb_data(query):
                         "date_modified": "http://libris.kb.se/def/lib#date_modified",
                     }
                 ]
+            },
+            {
+                'source': Graph().parse(str(compiler.path('source/bibdb/bibliographies.ttl')), format='turtle'),
+                'dataset': '?'
             }
         ],
         query="source/construct-libraries.rq")
