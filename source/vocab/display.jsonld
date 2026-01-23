@@ -1632,6 +1632,20 @@
           "classLensDomain": "ToCEntry",
           "fresnel:extends": {"@id": "ToCEntry-chips"},
           "showProperties": [ "fresnel:super", "responsibilityStatement" ]
+        },
+        "Publication": {
+          "classLensDomain": "Publication",
+          "fresnel:extends": {"@id": "Publication-chips"},
+          "showProperties": [
+            "fresnel:super",
+            {
+              "fresnel:mergeProperties": [
+                "year",
+                "startYear"
+              ],
+              "fresnel:use": "librissearch:year"
+            }
+          ]
         }
       }
     },

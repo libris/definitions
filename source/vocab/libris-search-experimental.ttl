@@ -30,11 +30,6 @@
     skos:notation "FÖRL"^^ls:QueryCode ;
     skos:notation "FORL"^^ls:QueryCode .
 
-:yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
-    rdfs:domain :Instance ;
-    skos:notation "dc.date"^^ls:QueryCode ;
-    skos:notation "ÅR"^^ls:QueryCode .
-
 :contributor # See ./relations.ttl for full definition of :contributor
     skos:notation "FÖRF"^^ls:QueryCode ;
     skos:notation "FORF"^^ls:QueryCode .
@@ -66,7 +61,6 @@
             :agent
         ) .
 
-
 :subject # See ./relations.ttl for full definition of :subject
     skos:notation "dc.subject"^^ls:QueryCode ;
     skos:notation "bath.topicalSubject"^^ls:QueryCode ;
@@ -89,14 +83,6 @@
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
-:shelfControlNumber rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :shelfControlNumber
-:shelfLabel rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :shelfLabel
-:physicalLocation rdfs:subPropertyOf ls:shelf . # See ./items.ttl for full definition of :physicalLocation
-
-:cataloguersNote rdfs:subPropertyOf ls:itemNote . # See ./details.ttl for full definition of :cataloguersNote
-:custodialHistory rdfs:subPropertyOf ls:itemNote . # See ./items.ttl for full definition of :custodialHistory
-
-
 ### New definitions for Libris Search ###
 
 ls:QueryCode a rdfs:Datatype ;
@@ -107,9 +93,12 @@ ls:composite a skos:Collection ;
     :category :pending ;
     :code "composite" .
 
+# TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
 ls:merged a skos:Collection ;
-    rdfs:label "merged"@en, "sammanslagen"@sv ;
-    :code "merged" .
+    rdfs:label "merged"@en, "sammanslagen"@sv .
+
+# TODO: add e.g. label, domain, comment
+ls:merges a owl:ObjectProperty .
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
@@ -208,7 +197,11 @@ ls:shelf a owl:DatatypeProperty ;
      :category ls:merged, :pending ;
      rdfs:label "hylla"@sv, "shelf"@en ;
      rdfs:domain :Item ;
-     owl:propertyChainAxiom ( :availability :label ), ( :shelfMark :label ) .
+     ls:merges :shelfControlNumber,
+        :shelfLabel,
+        :physicalLocation,
+        [ owl:propertyChainAxiom ( :availability :label ) ],
+        [ owl:propertyChainAxiom ( :shelfMark :label ) ] .
 
 ls:hasItemNote a owl:DatatypeProperty ;
       :category :shorthand, :pending ;
@@ -221,11 +214,14 @@ ls:itemNote a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     rdfs:label "beståndsanmärkning"@sv, "item note"@en ;
     rdfs:domain :Item ;
-    owl:propertyChainAxiom ( :hasNote :label ),
-        ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
-        ( marc:hasBindingInformation :label ),
-        ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ),
-        ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) .
+    ls:merges :cataloguersNote,
+        :custodialHistory,
+        [ owl:propertyChainAxiom ( :hasNote :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ) ],
+        [ owl:propertyChainAxiom ( marc:hasBindingInformation :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ],
+        [ owl:propertyChainAxiom ( :availability :label ) ] .
 
 ls:itemCreated a owl:DatatypeProperty ;
      :category :shorthand, :pending ;
@@ -233,6 +229,17 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:domain :Instance ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
+
+ls:year a owl:DatatypeProperty ;
+    :category ls:merged ;
+    ls:merges :year, :startYear .
+
+ls:yearPublished a owl:DatatypeProperty ;
+    :category :shorthand ;
+    rdfs:label "utgivningsår"@sv, "year of publication"@en ;
+    rdfs:domain :Instance ;
+    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :publication ls:year ) .
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
