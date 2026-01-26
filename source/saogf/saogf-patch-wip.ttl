@@ -975,8 +975,8 @@ saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
 #    "Enskild karta"@sv .
 
 saogf:Kartor a :GenreForm ;
-  :closeMatch marc:Map ,
-    marcgt:map , marc:SingleMap, marc:MapATwoDimensionalMap ;
+  :closeMatch marcgt:map , marc:SingleMap, marc:MapATwoDimensionalMap ;
+  # NOTE: *maybe* :closeMatch marc:Map  # (a marc:BooksIllustrationsType; usage: 78168)
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Enskild karta"@sv ,
@@ -1210,7 +1210,7 @@ saogf:Fotob%C3%B6cker a :GenreForm ;
 
 saogf:Fotografier a :GenreForm ;
   :broader saogf:Bilder ;
-  :closeMatch marc:Photograph ;
+  # NOTE: *maybe* :closeMatch marc:Photograph  # (a marc:BooksIllustrationsType; usage: 8001)
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Photoprint ;
   :singularLabel "Photograph"@en ,
@@ -1260,7 +1260,8 @@ saogf:Gebrauchsmusik :broader saogf:Musik .
 
 saogf:Gender%20%28musikinstrument%29 :broader saogf:Musik .
 
-saogf:Genealogiskt%20material :closeMatch marc:GenealogicalTable ;
+saogf:Genealogiskt%20material
+  # NOTE: *maybe* :closeMatch marc:GenealogicalTable  # (a marc:BooksIllustrationsType; usage: 1106)
   :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1440,7 +1441,7 @@ saogf:Icke-v%C3%A4sterl%C3%A4ndska%20kulturers%20musik :broader saogf:Musik .
 
 saogf:Illustrationer a :GenreForm ;
   :broader saogf:Bilder ;
-  :closeMatch marc:Illustration ;
+  # NOTE: *maybe* :closeMatch marc:Illustration  # (a marc:BooksIllustrationsType; usage: 827426)
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Illustration"@en ,
     "Illustration"@sv .
@@ -2515,7 +2516,8 @@ saogf:Popul%C3%A4rvetenskapliga%20tidskrifter :broader saogf:Periodika .
 
 saogf:Porrtidningar :broader saogf:Periodika .
 
-saogf:Portr%C3%A4tt :closeMatch marc:Portrait ;
+saogf:Portr%C3%A4tt
+  # NOTE: *maybe* :closeMatch marc:Portrait  # (a marc:BooksIllustrationsType;usage: 33110)
   :broader saogf:Bilder ;
   :inScheme <https://id.kb.se/term/saogf> .
 
