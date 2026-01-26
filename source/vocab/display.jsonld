@@ -1259,7 +1259,11 @@
         },
         "Concept": {
           "fresnel:extends": {"@id": "Concept-cards"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [
+            "fresnel:super",
+            {"inverseOf": "exactMatch"},
+            {"inverseOf": "narrowMatch"}
+          ]
         },
         "Jurisdiction": {
           "fresnel:extends": {"@id": "Jurisdiction-cards"},
