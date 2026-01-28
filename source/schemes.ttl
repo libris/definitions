@@ -107,7 +107,16 @@
     rdfs:seeAlso <gmgpc>;
     skos:changeNote "2020-05-19: Ändrat gmgpc-swe till gmgpc/swe (även uppdaterat skos:notation från gmgpc//swe)."@sv,
                     "2020-05-19: Change gmgpc-swe to gmgpc/swe (also update skos:notation from gmgpc//swe)."@en .
-          
+
+<ktg> a skos:ConceptScheme;
+    skos:notation "ktg";
+    dc:alternative "KTG";
+    dc:title "KTG - Kategori"@sv .
+
+<saobf> a skos:ConceptScheme;
+    skos:notation "saobf";
+    dc:alternative "SAOBF";
+    dc:title "SAOBF - Bärarform"@sv .
 
 <rda> a skos:ConceptScheme;
     skos:notation "rda";
@@ -189,16 +198,26 @@
 
 <div/find> a :TermCollection;
     skos:notation "find";
-    dc:title "Användningsfall: hitta"@sv;
+    dc:title "Användningsfall: hitta"@sv , "Use case: find"@en ;
     void:inDataset </> .
 
 <div/identify> a :TermCollection;
     skos:notation "identify";
-    dc:title "Användningsfall: identifiera"@sv;
+    dc:title "Användningsfall: identifiera"@sv , "Use case: identify"@en ;
+    void:inDataset </> .
+
+<div/select> a :TermCollection;
+    skos:notation "select";
+    dc:title "Användningsfall: välja"@sv , "Use case: select"@en ;
+    void:inDataset </> .
+
+<div/obtain> a :TermCollection;
+    skos:notation "obtain";
+    dc:title "Användningsfall: åtkomst"@sv , "Use case: obtain"@en ;
     void:inDataset </> .
 
 <div/abstract> a :TermCollection;
-    skos:notation "identify";
+    skos:notation "abstract";
     dc:title "Abstrakta termer"@sv;
     void:inDataset </> .
 
@@ -268,7 +287,7 @@
 
 <sbiao> a :TopicScheme;
     skos:notation "sbiao";
-    dc:title "Svenska barnboksinstitutets ämnesordsindex för teoretisk litteratur"@sv;
+    dc:title "Svenska Barnboksinstitutets ämnesordsindex för teoretisk litteratur"@sv;
     skos:exactMatch <http://id.loc.gov/vocabulary/subjectSchemes/sbiao>;
     foaf:homepage <http://www.sbi.kb.se/sv/Biblioteket/Soka/Amnesordsindex/Teoretiska-amnesord/> .
 

@@ -9,71 +9,75 @@ prefix marc: <https://id.kb.se/marc/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 
-prefix ktg: <https://id.kb.se/term/ktg/>
+prefix saobf: <https://id.kb.se/term/saobf/>
 
 # Sammanhållande topp-term
-ktg:PhysicalForm a :InstanceCategory ;
+saobf:PhysicalForm a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   ptg:abstract true ;
   skos:prefLabel "Fysisk form"@sv, "Physical form"@en .
 
 
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
 # TODO: replace with kbrda:Printing (a :ProductionMethod ? Also defines e.g. Photocopying, but not "Manuscript/Handmade"...)
-ktg:Print a :ManifestationForm;
+saobf:Print a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
 # This MARC mapping appears to be incorrect (not Text) - should it be RegularPrint?
 #  skos:closeMatch marc:Print ;
   skos:broader kbrda:Unmediated ;
   skos:prefLabel "Tryck"@sv, "Print"@en .
 
-ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
+saobf:HandmadeMaterial a :CarrierForm ;  # NOTE: the type changed to Work in BF; this is about the carrier/production form.
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:broader kbrda:Unmediated ;
-  skos:prefLabel "Handskrift"@sv, "Manuscript"@en .
+  skos:prefLabel "Handgjort material"@sv, "Handmade material"@en .
 
 # Rather :productionMethod?
 # Untenable(?): Handwritten / Typewritten / Photocopied => Purpose (Genre) OR Manufacture/Production
-#ktg:Handwritten a :ManifestationForm;
-#  skos:broader  kbrda:Unmediated, ktg:ManuscriptForm .
-#ktg:Typewritten a :ManifestationForm;
-#  skos:broader kbrda:Unmediated, ktg:ManuscriptForm .
+#saobf:Handwritten a :CarrierForm;
+#  skos:broader  kbrda:Unmediated, saobf:HandmadeMaterial .
+#saobf:Typewritten a :CarrierForm;
+#  skos:broader kbrda:Unmediated, saobf:HandmadeMaterial .
 
 # mer extraordinärt? Sitter på exemplar?
-#ktg:Photocopied a :ManifestationForm; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
+#saobf:Photocopied a :CarrierForm; skos:broader kbrda:Unmediated ; skos:related marc:RegularPrintReproduction .
 
-#ktg:MassProducedVolume a :ManifestationForm ;
-#  rdfs:subClassOf ktg:MassProduced, kbrda:Volume .
+#saobf:MassProducedVolume a :CarrierForm ;
+#  rdfs:subClassOf saobf:MassProduced, kbrda:Volume .
 #
-#ktg:RareVolume a :ManifestationForm ;
-#  rdfs:subClassOf ktg:Rare, kbrda:Volume .
+#saobf:RareVolume a :CarrierForm ;
+#  rdfs:subClassOf saobf:Rare, kbrda:Volume .
 
-# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
-#ktg:PrintedVolume a :ManifestationForm ;
-#  skos:broader ktg:Print, kbrda:Volume ;
+# Commenting this out for now - if we want "precoordinated" saobf forms, add them back later!
+#saobf:PrintedVolume a :CarrierForm ;
+#  skos:broader saobf:Print, kbrda:Volume ;
 #  skos:prefLabel "Tryckt volym"@sv , "Printed Volume"@en .
 
-#ktg:HardcoverVolume a :ManifestationForm;
-#  skos:broader ktg:PrintedVolume .
+#saobf:HardcoverVolume a :CarrierForm;
+#  skos:broader saobf:PrintedVolume .
 #
-#ktg:PaperbackVolume a :ManifestationForm;
-#  skos:broader ktg:PrintedVolume .
+#saobf:PaperbackVolume a :CarrierForm;
+#  skos:broader saobf:PrintedVolume .
 
-# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
-#ktg:PrintedSheet a :ManifestationForm ;
-#  skos:broader ktg:Print, kbrda:Sheet ;
+# Commenting this out for now - if we want "precoordinated" saobf forms, add them back later!
+#saobf:PrintedSheet a :CarrierForm ;
+#  skos:broader saobf:Print, kbrda:Sheet ;
 #  skos:prefLabel "Tryckt lösblad"@sv , "Printed Sheet"@en .
 
-# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+# Commenting this out for now - if we want "precoordinated" saobf forms, add them back later!
 # Unclear what this means - reformulate if adding back
-#ktg:HandmadeSheet a :ManifestationForm ;
+#saobf:HandmadeSheet a :CarrierForm ;
 #  skos:broader kbrda:Unmediated, kbrda:Sheet .
 
 # Kommenterar ut då den bara dubblerar RDA Object. Exakt match till marc:Realia?
-#ktg:PhysicalObject a :ManifestationForm ; # :UnmediatedObject ?
+#saobf:PhysicalObject a :CarrierForm ; # :UnmediatedObject ?
   #skos:closeMatch kbrda:Object ;
   #skos:broader kbrda:Unmediated ;
   #skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
 
 
-ktg:ComponentPart a :InstanceCategory ;
+saobf:ComponentPart a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:prefLabel "Bidrag"@sv, "Component part"@en .
 
 
@@ -82,24 +86,25 @@ ktg:ComponentPart a :InstanceCategory ;
 
 # TODO: Lift these from marc to KBV?
 # If so we need a clear delineation between "braille notation" and "to be experienced with touch".
-#ktg:TactileForm a :ManifestationForm ;
+#saobf:TactileForm a :CarrierForm ;
 #  skos:broader kbrda:Unmediated ;
 #  rdfs:subClassOf [
 #    owl:onProperty :format ;
 #    owl:someValuesFrom :TactileMaterial ] .
 
 # Renamed Braille to be consistent with "Print / Volume" - can be combined with any carrier type
-ktg:Braille a :ManifestationForm ;
+saobf:Braille a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:Braille, marc:TextMaterialType-c, 
     marc:TacMaterialType-b ;
     skos:broader kbrda:Unmediated ;
-  #skos:broader ktg:Print ; # Remove ktg:TactileForm which isn't defined
+  #skos:broader saobf:Print ; # Remove saobf:TactileForm which isn't defined
   skos:prefLabel "Punktskrift"@sv, "Braille"@en .
 
 # exactMatch with saogf:Punktskriftsb%C3%B6cker seems dubious when one is used on the work, one on on the instance
-# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
-#ktg:BrailleVolume a :ManifestationForm ;
-#  skos:broader ktg:BrailleForm, kbrda:Volume ;
+# Commenting this out for now - if we want "precoordinated" saobf forms, add them back later!
+#saobf:BrailleVolume a :CarrierForm ;
+#  skos:broader saobf:BrailleForm, kbrda:Volume ;
 #  #skos:closeMatch saogf:Punktskriftsb%C3%B6cker ;
 #  :singularLabel "Punktskriftsbok"@sv, "Braille volume"@en .
 # :prefLabel "Punktskriftsvolym"@sv, "Braille Volume"@en .
@@ -109,53 +114,58 @@ ktg:Braille a :ManifestationForm ;
 
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
 # Sammanhållande toppterm
-ktg:StorageMedium a :InstanceCategory ;
+saobf:StorageMedium a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   ptg:abstract true ;
-  skos:broader ktg:PhysicalForm ;
+  skos:broader saobf:PhysicalForm ;
   skos:prefLabel "Lagringsmedium"@sv , "Storage medium"@en .
 
 
-#ktg:TapeCartridge a :ManifestationForm ;
-#  skos:broader ktg:ElectronicStorageMedium ;
+#saobf:TapeCartridge a :CarrierForm ;
+#  skos:broader saobf:ElectronicStorageMedium ;
 #  ptg:abstract true ;
 #  skos:closeMatch marc:TapeCartridge ;
 #  skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
 
-#ktg:TapeCassette a :ManifestationForm ;
-#  skos:broader ktg:ElectronicStorageMedium ;
+#saobf:TapeCassette a :CarrierForm ;
+#  skos:broader saobf:ElectronicStorageMedium ;
 #  ptg:abstract true ;
 #  skos:closeMatch marc:TapeCassette ;
 #  skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
 
-#ktg:TapeReel a :ManifestationForm ;
+#saobf:TapeReel a :CarrierForm ;
 #  ptg:abstract true ;
-#  skos:broader ktg:ElectronicStorageMedium ;
+#  skos:broader saobf:ElectronicStorageMedium ;
 #  skos:closeMatch marc:TapeReel ;
 #  skos:prefLabel "Datorbandspole"@sv, "Tape reel"@en .
 
-# TODO: why not change most ktg:StorageMedium to ktg:ElectronicStorageMedium ?
+# TODO: why not change most saobf:StorageMedium to saobf:ElectronicStorageMedium ?
 
-ktg:MagneticDisk a :ManifestationForm ;
+saobf:MagneticDisk a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:MagneticDisk ;
-  skos:broader ktg:ElectronicStorageMedium ;
+  skos:broader saobf:ElectronicStorageMedium ;
   skos:prefLabel "Skiva för magnetisk lagring (disketter)"@sv, "Magnetic disk"@en .
 
-ktg:MagnetoOpticalDisc a :ManifestationForm ;
+# TODO: remove; zero usage?
+saobf:MagnetoOpticalDisc a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:MagnetoOpticalDisc ;
-  skos:broader ktg:ElectronicStorageMedium ;
+  skos:broader saobf:ElectronicStorageMedium ;
   skos:prefLabel "Magnet-optisk skiva"@sv, "Magneto-optical disc"@en .
 
-#ktg:OpticalReel a :ManifestationForm ;  ptg:abstract true ;  skos:broader ktg:StorageMedium .
+#saobf:OpticalReel a :CarrierForm ;  ptg:abstract true ;  skos:broader saobf:StorageMedium .
 
-ktg:OpticalDisc a :ManifestationForm ;
+saobf:OpticalDisc a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:OpticalDisc ;
-  skos:broader ktg:ElectronicStorageMedium ;
+  skos:broader saobf:ElectronicStorageMedium ;
   skos:prefLabel "Optisk skiva (CD-A, CD-R, CD-ROM)"@sv, "Optical disc"@en .
 
-# Commenting this out for now - if we want "precoordinated" ktg forms, add them back later!
+# Commenting this out for now - if we want "precoordinated" saobf forms, add them back later!
 # Unclear what this means - reformulate if adding back
-#ktg:CDBook a :ManifestationForm ;
-#  skos:broadMatch ktg:ComputerDisc, kbrda:AudioDisc ;
+#saobf:CDBook a :CarrierForm ;
+#  skos:broadMatch saobf:ComputerDisc, kbrda:AudioDisc ;
 #  :singularLabel "CD-bok"@sv .
 
 
@@ -172,37 +182,42 @@ ktg:OpticalDisc a :ManifestationForm ;
 #MusicCD
 
 
-ktg:AbstractElectronic a :InstanceCategory ;
+saobf:AbstractElectronic a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   ptg:abstract true ;
   skos:closeMatch marc:Electronic ;
   #skos:narrowMatch marc:Electronic ; # ? Otherwise, ensure this match is down-prioritized
-  skos:prefLabel "Elektronisk eller digital resurs"@sv, "Electronic or digital resource"@en ;
+  skos:prefLabel "Elektronisk eller digital form"@sv, "Electronic or digital form"@en ;
   rdfs:comment "A digital or electronically mediated resource."@en .
 
 # Does this have a function or does it just duplicate RDA Online Resource?
-ktg:DigitalForm a :InstanceCategory ;
-  skos:broader ktg:AbstractElectronic ;
-  skos:prefLabel "Digital resurs"@sv , "Digital resource"@en ;
+saobf:DigitalForm a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
+  skos:broader saobf:AbstractElectronic ;
+  skos:prefLabel "Digital form"@sv , "Digital form"@en ;
   rdfs:comment 'Kallas ibland "E-resurs"'@sv .
 
 # Remapping broader to AbstractElectronic, so this can be combined with OnlineResource or a physical form
-ktg:EBook a :ManifestationForm ;
-  skos:broader ktg:AbstractElectronic ;
+saobf:EBook a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
+  skos:broader saobf:AbstractElectronic ;
   skos:prefLabel "E-bok"@sv, "E-book"@en.
 
 
-ktg:ElectronicStorageMedium a :InstanceCategory ;
+saobf:ElectronicStorageMedium a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   ptg:abstract true ;
   skos:closeMatch kbrda:Computer ;
   skos:closeMatch marc:DirectElectronic ;
-  skos:broader ktg:StorageMedium ,
-      ktg:AbstractElectronic ;   # Kallas ibland "Elektronisk bärare".
+  skos:broader saobf:StorageMedium ,
+      saobf:AbstractElectronic ;   # Kallas ibland "Elektronisk bärare".
   skos:prefLabel "Elektroniskt lagringsmedium"@sv , "Electronic storage medium"@en .
 
-ktg:StandaloneDevice a :ManifestationForm ;
+saobf:StandaloneDevice a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:StandaloneDevice ;
-  skos:broader ktg:ElectronicStorageMedium ; # Not: PhysicalObject (that's Unmediated)
-  skos:prefLabel "Fristående enhet"@en, "Standalone device "@en .
+  skos:broader saobf:ElectronicStorageMedium ; # Not: PhysicalObject (that's Unmediated)
+  skos:prefLabel "Fristående uppspelningsapparat"@en, "Standalone device"@en .
 
 
 # TODO: Is the media type aspect superfluous if content is on the work?
@@ -210,29 +225,32 @@ ktg:StandaloneDevice a :ManifestationForm ;
 # See also accesibility concerns.
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-ktg:SoundStorageMedium a :InstanceCategory ;
+saobf:SoundStorageMedium a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   ptg:abstract true ;
   #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
   skos:closeMatch kbrda:Audio ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader saobf:StorageMedium ;
   skos:prefLabel "Lagringsmedium för ljud"@sv, "Sound storage medium"@en .
 
 # Commented out due to comment about 0 uses (literary warrant)
 # Zero uses in Libris...
-#ktg:AudioWireRecording a :ManifestationForm ; 
+#saobf:AudioWireRecording a :CarrierForm ; 
 #  skos:closeMatch marc:WireRecording ;
-#  skos:broader kbrda:Audio, ktg:SoundStorageMedium .
+#  skos:broader kbrda:Audio, saobf:SoundStorageMedium .
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-ktg:VideoStorageMedium a :InstanceCategory ;
+saobf:VideoStorageMedium a :InstanceCategory ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   owl:sameAs :VideoRecording ;
   ptg:abstract true ;
   skos:closeMatch kbrda:Video ;
   skos:relatedMatch marc:Videorecording ;
-  skos:broader ktg:StorageMedium ;
+  skos:broader saobf:StorageMedium ;
   skos:prefLabel "Lagringsmedium för video"@sv, "Video storage medium"@en .
 
-ktg:Microfilm a :ManifestationForm ;
+saobf:Microfilm a :CarrierForm ;
+  skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:closeMatch marc:Microfilm ;
   skos:broader kbrda:Microform ;
   skos:prefLabel "Mikrofilm"@sv, "Microfilm"@en .

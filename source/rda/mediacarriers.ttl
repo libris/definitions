@@ -5,8 +5,8 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix div: <https://id.kb.se/term/div/>
 prefix marc: <https://id.kb.se/marc/>
-prefix ktg: <https://id.kb.se/term/ktg/>
 prefix kbrda: <https://id.kb.se/term/rda/>
+prefix saobf: <https://id.kb.se/term/saobf/>
 
 ## Media types ##
 
@@ -29,7 +29,7 @@ kbrda:Computer a bf:Media ;
 kbrda:Microform a bf:Media ;
   owl:sameAs kbrda:media\/h ,
     kbrda:media\/microform ;
-  skos:broadMatch ktg:StorageMedium ;
+  skos:broadMatch saobf:StorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/mediaTypes/h> ,
     <http://rdaregistry.info/termList/RDAMediaType/1002> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -41,7 +41,7 @@ kbrda:Microform a bf:Media ;
 kbrda:Microscopic a bf:Media ;
   owl:sameAs kbrda:media\/p ,
     kbrda:media\/microscopic ;
-  skos:broadMatch ktg:StorageMedium ;
+  skos:broadMatch saobf:StorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/mediaTypes/p> ,
     <http://rdaregistry.info/termList/RDAMediaType/1004> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -53,7 +53,7 @@ kbrda:Microscopic a bf:Media ;
 kbrda:Projected a bf:Media ;
   owl:sameAs kbrda:media\/g ,
     kbrda:media\/projected ;
-  skos:broadMatch ktg:StorageMedium ;
+  skos:broadMatch saobf:StorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/mediaTypes/g> ,
     <http://rdaregistry.info/termList/RDAMediaType/1005> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -66,7 +66,7 @@ kbrda:Stereographic a bf:Media ;
   owl:sameAs kbrda:media\/e ,
     kbrda:media\/stereographic ;
   skos:broader marc:Stereographic ;
-  skos:broadMatch ktg:StorageMedium ;
+  skos:broadMatch saobf:StorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/mediaTypes/e> ,
     <http://rdaregistry.info/termList/RDAMediaType/1006> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -78,7 +78,7 @@ kbrda:Stereographic a bf:Media ;
 kbrda:Unmediated a bf:Media ;
   owl:sameAs kbrda:media\/n ,
     kbrda:media\/unmediated ;
-  skos:broadMatch ktg:PhysicalForm ;
+  skos:broadMatch saobf:PhysicalForm ;
   skos:exactMatch <http://id.loc.gov/vocabulary/mediaTypes/n> ,
     <http://rdaregistry.info/termList/RDAMediaType/1007> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -114,7 +114,7 @@ kbrda:AudioCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audio%20cartridge ,
     kbrda:carrier\/sg ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/sg> ,
     <http://rdaregistry.info/termList/RDACarrierType/1002> ;
   skos:closeMatch marc:SoundCartridge ;
@@ -128,7 +128,7 @@ kbrda:AudioCylinder a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audio%20cylinder ,
     kbrda:carrier\/se ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/se> ,
     <http://rdaregistry.info/termList/RDACarrierType/1003> ;
   skos:closeMatch marc:Cylinder ;
@@ -142,7 +142,7 @@ kbrda:AudioDisc a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audio%20disc ,
     kbrda:carrier\/sd ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/sd> ,
     <http://rdaregistry.info/termList/RDACarrierType/1004> ;
   skos:closeMatch marc:SoundDisc ;
@@ -156,7 +156,7 @@ kbrda:AudioRoll a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audio%20roll ,
     kbrda:carrier\/sq ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/sq> ,
     <http://rdaregistry.info/termList/RDACarrierType/1006> ;
   skos:inScheme <https://id.kb.se/term/rda> ;
@@ -169,7 +169,7 @@ kbrda:Audiocassette a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audiocassette ,
     kbrda:carrier\/ss ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/ss> ,
     <http://rdaregistry.info/termList/RDACarrierType/1007> ;
   skos:closeMatch marc:SoundCassette ;
@@ -183,7 +183,7 @@ kbrda:AudiotapeReel a bf:Carrier ;
   owl:sameAs kbrda:carrier\/audiotape%20reel ,
     kbrda:carrier\/st ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/st> ,
     <http://rdaregistry.info/termList/RDACarrierType/1008>,
     marc:SoundTapeReel ;
@@ -209,7 +209,7 @@ kbrda:ComputerCard a bf:Carrier ;
   owl:sameAs kbrda:carrier\/ck ,
     kbrda:carrier\/computer%20card ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/ck> ,
     <http://rdaregistry.info/termList/RDACarrierType/1011> ;
   skos:closeMatch marc:ComputerCard ;
@@ -223,7 +223,7 @@ kbrda:ComputerChipCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/cb ,
     kbrda:carrier\/computer%20chip%20cartridge ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/cb> ,
     <http://rdaregistry.info/termList/RDACarrierType/1012> ;
   skos:closeMatch marc:ChipCartridge ;
@@ -235,8 +235,8 @@ kbrda:ComputerDisc a bf:Carrier ;
   :inCollection div:select ;
   owl:sameAs kbrda:carrier\/cd ,
     kbrda:carrier\/computer%20disc ;
-  skos:relatedMatch ktg:MagneticDisk ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:relatedMatch saobf:MagneticDisk ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:broader kbrda:Computer ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/cd> ,
     <http://rdaregistry.info/termList/RDACarrierType/1013> ;
@@ -251,7 +251,7 @@ kbrda:ComputerDiscCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/ce ,
     kbrda:carrier\/computer%20disc%20cartridge ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/ce> ,
     <http://rdaregistry.info/termList/RDACarrierType/1014> ;
   skos:closeMatch marc:ComputerDiscCartridge ;
@@ -266,7 +266,7 @@ kbrda:ComputerTapeCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/ca ,
     kbrda:carrier\/computer%20tape%20cartridge ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/ca> ,
     <http://rdaregistry.info/termList/RDACarrierType/1015> ;
   skos:closeMatch marc:TapeCartridge ;
@@ -280,7 +280,7 @@ kbrda:ComputerTapeCassette a bf:Carrier ;
   owl:sameAs kbrda:carrier\/cf ,
     kbrda:carrier\/computer%20tape%20cassette ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/cf> ,
     <http://rdaregistry.info/termList/RDACarrierType/1016> ;
   skos:closeMatch marc:TapeCassette ;
@@ -294,7 +294,7 @@ kbrda:ComputerTapeReel a bf:Carrier ;
   owl:sameAs kbrda:carrier\/ch ,
     kbrda:carrier\/computer%20tape%20reel ;
   skos:broader kbrda:Computer ;
-  skos:broadMatch ktg:ElectronicStorageMedium ;
+  skos:broadMatch saobf:ElectronicStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/ch> ,
     <http://rdaregistry.info/termList/RDACarrierType/1017> ;
   skos:closeMatch marc:TapeReel ;
@@ -434,7 +434,7 @@ kbrda:MicrofilmCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/hb ,
     kbrda:carrier\/microfilm%20cartridge ;
   skos:broader kbrda:Microform ;
-  skos:broadMatch ktg:Microfilm ;
+  skos:broadMatch saobf:Microfilm ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/hb> ,
     <http://rdaregistry.info/termList/RDACarrierType/1024> ;
   skos:closeMatch marc:MicrofilmCartridge ;
@@ -448,7 +448,7 @@ kbrda:MicrofilmCassette a bf:Carrier ;
   owl:sameAs kbrda:carrier\/hc ,
     kbrda:carrier\/microfilm%20cassette ;
   skos:broader kbrda:Microform ;
-  skos:broadMatch ktg:Microfilm ;
+  skos:broadMatch saobf:Microfilm ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/hc> ,
     <http://rdaregistry.info/termList/RDACarrierType/1025> ;
   skos:closeMatch marc:MicrofilmCassette ;
@@ -462,7 +462,7 @@ kbrda:MicrofilmReel a bf:Carrier ;
   owl:sameAs kbrda:carrier\/hd ,
     kbrda:carrier\/microfilm%20reel ;
   skos:broader kbrda:Microform ;
-  skos:broadMatch ktg:Microfilm ;
+  skos:broadMatch saobf:Microfilm ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/hd> ,
     <http://rdaregistry.info/termList/RDACarrierType/1026> ;
   skos:closeMatch marc:MicrofilmReel ;
@@ -476,7 +476,7 @@ kbrda:MicrofilmRoll a bf:Carrier ;
   owl:sameAs kbrda:carrier\/hj ,
     kbrda:carrier\/microfilm%20roll ;
   skos:broader kbrda:Microform ;
-  skos:broadMatch ktg:Microfilm ; 
+  skos:broadMatch saobf:Microfilm ; 
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/hj> ,
     <http://rdaregistry.info/termList/RDACarrierType/1056> ;
   skos:closeMatch marc:MicrofilmRoll ;
@@ -539,7 +539,7 @@ kbrda:OnlineResource a bf:Carrier ;
   owl:sameAs kbrda:carrier\/cr ,
     kbrda:carrier\/online%20resource ;
   skos:broader kbrda:Computer ;
-  skos:closeMatch ktg:DigitalForm ;
+  skos:closeMatch saobf:DigitalForm ;
   skos:closeMatch marc:Remote ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/cr> ,
     <http://rdaregistry.info/termList/RDACarrierType/1018> ;
@@ -604,7 +604,7 @@ kbrda:SoundTrackReel a bf:Carrier ;
   owl:sameAs kbrda:carrier\/si ,
     kbrda:carrier\/sound%20track%20reel ;
   skos:broader kbrda:Audio ;
-  skos:broadMatch ktg:SoundStorageMedium ;
+  skos:broadMatch saobf:SoundStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/si> ,
     <http://rdaregistry.info/termList/RDACarrierType/1005> ;
   skos:closeMatch marc:SoundTrackFilm ;
@@ -641,7 +641,7 @@ kbrda:VideoCartridge a bf:Carrier ;
   owl:sameAs kbrda:carrier\/vc ,
     kbrda:carrier\/video%20cartridge ;
   skos:broader kbrda:Video ;
-  skos:broadMatch ktg:VideoStorageMedium ;
+  skos:broadMatch saobf:VideoStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/vc> ,
     <http://rdaregistry.info/termList/RDACarrierType/1051> ;
   skos:closeMatch marc:Videocartridge ;
@@ -655,7 +655,7 @@ kbrda:Videocassette a bf:Carrier ;
   owl:sameAs kbrda:carrier\/vf ,
     kbrda:carrier\/videocassette ;
   skos:broader kbrda:Video ;
-  skos:broadMatch ktg:VideoStorageMedium ;
+  skos:broadMatch saobf:VideoStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/vf> ,
     <http://rdaregistry.info/termList/RDACarrierType/1052> ;
   skos:closeMatch marc:Videocassette ;
@@ -669,7 +669,7 @@ kbrda:Videodisc a bf:Carrier ;
   owl:sameAs kbrda:carrier\/vd ,
     kbrda:carrier\/videodisc ;
   skos:broader kbrda:Video ;
-  skos:broadMatch ktg:VideoStorageMedium ;
+  skos:broadMatch saobf:VideoStorageMedium ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/vd> ,
     <http://rdaregistry.info/termList/RDACarrierType/1060> ;
   skos:closeMatch marc:Videodisc , marc:VideoMaterialType-d ;
@@ -683,7 +683,7 @@ kbrda:VideotapeReel a bf:Carrier ;
   owl:sameAs kbrda:carrier\/videotape%20reel ,
     kbrda:carrier\/vr ;
   skos:broader kbrda:Video ;
-  skos:broadMatch ktg:VideoStorageMedium ;
+  skos:broadMatch saobf:VideoStorageMedium ;
   skos:closeMatch marc:Videotape ;
   skos:exactMatch <http://id.loc.gov/vocabulary/carriers/vr> ,
     <http://rdaregistry.info/termList/RDACarrierType/1053> ;

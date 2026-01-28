@@ -10,10 +10,10 @@ prefix bf: <http://id.loc.gov/ontologies/bibframe/>
 prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 
-prefix saogf: <https://id.kb.se/term/saogf/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix ktg: <https://id.kb.se/term/ktg/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix saobf: <https://id.kb.se/term/saobf/>
 
 ##
 # Abstract classes entailed by categories (possibly in turn entailed).
@@ -56,7 +56,7 @@ prefix saogf: <https://id.kb.se/term/saogf/>
   owl:equivalentClass [ owl:onProperty :category ; owl:hasValue saogf:Musik ] .
 
 :NonMusicAudio ptg:abstract true ;
-  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:Sounds ] .  # saogf:Ljudb%C3%B6cker ?
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Audio ] .  # saogf:Ljudb%C3%B6cker ?
 
 :NotatedMovement ptg:abstract true ;
   owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:NotatedMovement ] .
@@ -70,11 +70,12 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 :StillImage ptg:abstract true ;
   owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:StillImage ] .  # saogf:Bilder ?
 
+# TODO: used; implied by ktg:Braille ?
 :Tactile ptg:abstract true ;
   owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:Tactile ] .
 
 :Text ptg:abstract true ;
-  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue kbrda:Text ] .  # saogf:Litteratur ?
+  owl:equivalentClass [ owl:onProperty :category ; owl:hasValue ktg:WrittenText ] .  # saogf:Litteratur ?
 
 
 
@@ -86,7 +87,7 @@ prefix saogf: <https://id.kb.se/term/saogf/>
           owl:onProperty :category ;
           owl:minQualifiedCardinality 1 ;
           owl:onClass [ owl:onProperty :broaderTransitive ;
-                        owl:hasValue ktg:PhysicalForm ] ] ;
+                        owl:hasValue saobf:PhysicalForm ] ] ;
   rdfs:label "Fysisk resurs"@sv , "Physical resource"@en .
 
 :DigitalResource a owl:Class ;
@@ -95,7 +96,7 @@ prefix saogf: <https://id.kb.se/term/saogf/>
           owl:onProperty :category ;
           owl:minQualifiedCardinality 1 ;
           owl:onClass [ owl:onProperty :broaderTransitive ;
-                        owl:hasValue ktg:DigitalForm ] ] ;
+                        owl:hasValue saobf:DigitalForm ] ] ;
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en .
 
 
@@ -110,12 +111,13 @@ prefix saogf: <https://id.kb.se/term/saogf/>
 # Purpose here is just to define a MARC "rebus" based in on instanceOf (RHS):
 
 # :Print	7_574_881
-:Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Print]) .
+:Print owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saobf:Print]) .
 
 # :Electronic	9_682_076
-:Electronic owl:intersectionOf (:Instance [ owl:onProperty :category ; owl:hasValue ktg:AbstractElectronic ]) .
+:Electronic owl:intersectionOf (:Instance [ owl:onProperty :category ; owl:hasValue saobf:AbstractElectronic ]) .
 
-:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:ManuscriptForm ]) .
+# :Manuscript	6_734
+:Manuscript owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saobf:HandmadeMaterial ]) .
 
 # :Microform	1_885
 :Microform owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue kbrda:Microform ]) .
@@ -136,16 +138,13 @@ prefix saogf: <https://id.kb.se/term/saogf/>
   owl:equivalentClass [ owl:onProperty :instanceOf ; owl:someValuesFrom [ owl:onProperty :category ; owl:hasValue kbrda:CartographicThreeDimensionalForm] ] .
 
 # :SoundRecording	172_317
-:SoundRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:SoundStorageMedium ]) .
+:SoundRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saobf:SoundStorageMedium ]) .
 
 # :VideoRecording	20_961
-:VideoRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:VideoStorageMedium ]) .
+:VideoRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saobf:VideoStorageMedium ]) .
 
 # :Tactile	20_357
-:Tactile owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Braille ]) .
-
-# :Manuscript	6_734
-:VideoRecording owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue ktg:Manuscript ]) .
+:Tactile owl:intersectionOf (:PhysicalResource [ owl:onProperty :category ; owl:hasValue saobf:Braille ]) .
 
 # - :MovingImageInstance	0!
 # :MovingImageInstance :instanceOf :MovingImage .
