@@ -18,6 +18,7 @@ ktg:PhysicalForm a :ManifestationForm ;
 
 
 # TODO: Printed vs. Handmade as mixins for precoordinated (7x7)?
+# TODO: replace with kbrda:Printing (a :ProductionMethod ? Also defines e.g. Photocopying, but not "Manuscript/Handmade"...)
 ktg:Print a :ManifestationForm;
 # This MARC mapping appears to be incorrect (not Text) - should it be RegularPrint?
 #  skos:closeMatch marc:Print ;
@@ -72,7 +73,7 @@ ktg:ManuscriptForm a :ManifestationForm ;  # NOTE: the type changed to Work in B
   #skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
 
 
-ktg:ComponentPart a :ManifestationForm ;
+ktg:ComponentPart a :InstanceCategory ;
   skos:prefLabel "Bidrag"@sv, "Component part"@en .
 
 
@@ -108,7 +109,7 @@ ktg:Braille a :ManifestationForm ;
 
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
 # Sammanhållande toppterm
-ktg:StorageMedium a :ManifestationForm ;
+ktg:StorageMedium a :InstanceCategory ;
   ptg:abstract true ;
   skos:broader ktg:PhysicalForm ;
   skos:prefLabel "Lagringsmedium"@sv , "Storage medium"@en .
@@ -171,14 +172,15 @@ ktg:OpticalDisc a :ManifestationForm ;
 #MusicCD
 
 
-ktg:AbstractElectronic a :ManifestationForm ;
+ktg:AbstractElectronic a :InstanceCategory ;
   ptg:abstract true ;
   skos:closeMatch marc:Electronic ;
+  #skos:narrowMatch marc:Electronic ; # ? Otherwise, ensure this match is down-prioritized
   skos:prefLabel "Elektronisk eller digital resurs"@sv, "Electronic or digital resource"@en ;
   rdfs:comment "A digital or electronically mediated resource."@en .
 
 # Does this have a function or does it just duplicate RDA Online Resource?
-ktg:DigitalForm a :ManifestationForm ;
+ktg:DigitalForm a :InstanceCategory ;
   skos:broader ktg:AbstractElectronic ;
   skos:prefLabel "Digital resurs"@sv , "Digital resource"@en ;
   rdfs:comment 'Kallas ibland "E-resurs"'@sv .
@@ -189,7 +191,7 @@ ktg:EBook a :ManifestationForm ;
   skos:prefLabel "E-bok"@sv, "E-book"@en.
 
 
-ktg:ElectronicStorageMedium a :ManifestationForm ;
+ktg:ElectronicStorageMedium a :InstanceCategory ;
   ptg:abstract true ;
   skos:closeMatch kbrda:Computer ;
   skos:closeMatch marc:DirectElectronic ;
@@ -208,7 +210,7 @@ ktg:StandaloneDevice a :ManifestationForm ;
 # See also accesibility concerns.
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-ktg:SoundStorageMedium a :ManifestationForm ;
+ktg:SoundStorageMedium a :InstanceCategory ;
   ptg:abstract true ;
   #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
   skos:closeMatch kbrda:Audio ;
@@ -222,7 +224,7 @@ ktg:SoundStorageMedium a :ManifestationForm ;
 #  skos:broader kbrda:Audio, ktg:SoundStorageMedium .
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-ktg:VideoStorageMedium a :ManifestationForm ;
+ktg:VideoStorageMedium a :InstanceCategory ;
   owl:sameAs :VideoRecording ;
   ptg:abstract true ;
   skos:closeMatch kbrda:Video ;
