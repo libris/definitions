@@ -13,6 +13,13 @@ prefix ktg: <https://id.kb.se/term/ktg/>
 ##
 # Abstract Forms, applying to WEMI *Work*-level Works.
 
+ktg:WrittenText a :WorkCategory ;
+  :category div:abstract ;
+  skos:prefLabel "Skriven text"@sv ,
+    "Written Text"@en ;
+  skos:related ktg:Literature ;
+  skos:scopeNote "Någon form av skrift; visuell eller taktil."@sv .
+
 ktg:Literature a :GenreForm ;
   :category div:abstract ; # may be *expressed* as written text *or* spoken form...
 #  :inCollection div:find ;
