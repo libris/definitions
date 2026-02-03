@@ -56,8 +56,14 @@ ktg:Dataset a :GenreForm ;
 # Abstract ExpressionForms for ContentTypes, applying to WEMI *Expression*-level Works.
 
 ktg:Audio a :ExpressionForm ;
-  :catgory div:abstract ;  # div:sensoryform ;  # Hear
+  :category div:abstract ;  # div:sensoryform ;  # Hear
   skos:prefLabel "Ljud"@sv, "Audio"@en .
+
+ktg:NonMusicAudio a :ExpressionForm ;
+  :category div:abstract ;
+  skos:broader ktg:Audio ;
+  skos:prefLabel "Ljud (ej musik)"@sv, "Non-music audio"@en ;
+  skos:scopeNote "Inkluderar talat språk och naturljud."@sv .
 
 ktg:MovingImage a :ExpressionForm ;
   :category div:abstract ;
