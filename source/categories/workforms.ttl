@@ -42,10 +42,9 @@ ktg:Literature a :GenreForm ;
 #    "Cartographic material"@en .
 
 ktg:Software a :GenreForm ;
-  :inCollection div:find ;
+  :inCollection div:find ; # TODO: demote in favour of Datorspel?
   skos:prefLabel "Mjukvara"@sv ,
     "Software"@en ;
-  #:pluralLabel
   skos:altLabel "Datorspel, program och multimedia"@sv .
 
 ktg:Dataset a :GenreForm ;
@@ -55,24 +54,24 @@ ktg:Dataset a :GenreForm ;
 ##
 # Abstract ExpressionForms for ContentTypes, applying to WEMI *Expression*-level Works.
 
-ktg:Audio a :ExpressionForm ;
+ktg:Audio a :WorkCategory ;
   :category div:abstract ;  # div:sensoryform ;  # Hear
   skos:prefLabel "Ljud"@sv, "Audio"@en .
 
-ktg:NonMusicAudio a :ExpressionForm ;
+ktg:NonMusicAudio a :WorkCategory ;
   :category div:abstract ;
   skos:broader ktg:Audio ;
   skos:prefLabel "Ljud (ej musik)"@sv, "Non-music audio"@en ;
   skos:scopeNote "Inkluderar talat språk och naturljud."@sv .
 
-ktg:MovingImage a :ExpressionForm ;
+ktg:MovingImage a :GenreForm ;
   :category div:abstract ;
   :inCollection div:find ;
   skos:broader saogf:Visuella%20verk ;
   skos:prefLabel "Rörlig bild"@sv, "Moving image"@en .
 
 # TODO Can we use saogf:Taktila verk instead of creating this ktg term?
-ktg:Tactile a :ExpressionForm ;
+ktg:Tactile a :WorkCategory ;
   :category div:abstract ;
   #:inCollection div:sensoryform ;  # Feel
   skos:closeMatch saogf:Taktila%20verk ;
@@ -84,25 +83,25 @@ ktg:Tactile a :ExpressionForm ;
 #  #:inCollection div:sensoryform ;  # See
 #  skos:prefLabel "Visuellt verk"@sv, "Visual work"@en .
 
-ktg:Movement a :ExpressionForm ;
+ktg:Movement a :WorkCategory ;
   :category div:abstract ;  # ContentForm
   skos:prefLabel "Rörelser"@sv .
 
 # Idiomatic ExpressionForms
 
-ktg:Multimedia a :ExpressionForm ;
+ktg:Multimedia a :GenreForm ;
   :inCollection div:identify ;
   skos:narrowMatch marc:Combination ;  # 28501 (MTM; se identifiedBy.qualifier "talbok_text")
   skos:broader ktg:Software ;
   skos:prefLabel "Multimedia"@sv ,
     "Multimedia"@en .
 
-ktg:MixedMaterial a :ExpressionForm ;
+ktg:MixedMaterial a :GenreForm ;
 #  :inCollection div:find ;
   skos:prefLabel "Blandat material"@sv ,
     "Mixed material"@en .
 
-ktg:Kit a :ExpressionForm ;
+ktg:Kit a :GenreForm ;
   :inCollection div:identify ;
   skos:broader ktg:MixedMaterial ;
   skos:prefLabel "Paket"@sv ,
