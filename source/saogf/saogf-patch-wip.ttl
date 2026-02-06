@@ -7,6 +7,7 @@ prefix marc: <https://id.kb.se/marc/>
 prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 
@@ -155,7 +156,7 @@ saogf:Almanackor a :GenreForm ;
 
 saogf:Referensverk a :GenreForm ;
   :broader saogf:Informativa%20verk , saogf:Facklitteratur;
-  :inCollection div:identify ;
+  :inCollection div:identify ; # TODO: remove in favour of keeping selected narrower terms as identify?
   :inScheme <https://id.kb.se/term/saogf> ;
   #:seeAlso <https://en.wikipedia.org/wiki/Reference_work> ;
   :singularLabel "Reference Work"@en ,
@@ -177,7 +178,8 @@ saogf:Ambient%20musik :broader saogf:Musik .
 
 saogf:Ambrosiansk%20s%C3%A5ng :broader saogf:Musik .
 
-saogf:Analys%20och%20tolkning :broader saogf:Facklitteratur .
+saogf:Analys%20och%20tolkning :broader saogf:Facklitteratur ;
+  :inCollection div:identify .  # TODO: really promote a Genre to "this is what the work *is*"?
 
 # The term "Andliga barnvisor" has been removed from SAOGF, nothing to patch!
 #saogf:Andliga%20barnvisor :broader saogf:Musik .
@@ -262,6 +264,7 @@ saogf:Ave%20Maria :broader saogf:Musik .
 saogf:Avhandlingar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026039> ,
     marc:Thesis ;
     :broader saogf:Facklitteratur ;
+  :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Avslappningsmusik :broader saogf:Musik .
@@ -404,6 +407,7 @@ saogf:Bildlexikon a :GenreForm ;
     "Bildlexikon"@sv .
 
 saogf:Lexikon a :GenreForm ;
+  :inCollection div:identify ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Dictionary ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -427,8 +431,8 @@ saogf:Biografier a :GenreForm ;
     "Biografi"@sv .
 
 saogf:Informativa%20verk a :GenreForm ;
-  #:broader saogf:Icke-fiktion ;
-  :inCollection div:identify ;
+  #:broader ktg:NonFictionLiterature ;
+  #:inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Informative Work"@en ,
     "Informativt verk"@sv .
@@ -914,6 +918,7 @@ saogf:Encyklopedier a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Encyclopedia ;
   :inScheme <https://id.kb.se/term/saogf> ;
+  :inCollection div:identify ;
   :singularLabel "Encyclopedia"@en ,
     "Encyklopedia"@sv .
 
@@ -1083,6 +1088,7 @@ saogf:Feministisk%20musik :broader saogf:Musik .
 saogf:Festmarscher :broader saogf:Musik .
 
 saogf:Festskrifter :closeMatch marc:Festschrift ;
+  :inCollection div:identify ;
   :broader saogf:Facklitteratur , saogf:Minnesbevarande%20verk ;
   :inScheme <https://id.kb.se/term/saogf> .
 
@@ -1294,6 +1300,7 @@ saogf:Illustrerade%20verk a :GenreForm ;
     "Illustrerat verk"@sv .
 
 saogf:Guideb%C3%B6cker a :GenreForm ;
+  :inCollection div:identify ;
   :broader saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Guide book"@en ,
@@ -1317,7 +1324,7 @@ saogf:Handb%C3%B6cker%2C%20manualer%20etc\. a :GenreForm ;
     "Handbok eller manual"@sv .
 
 saogf:Instruktions-%20och%20undervisningsmaterial a :GenreForm ;
-  :inCollection div:identify ;
+  :inCollection div:find ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:Instruction .
   #:seeAlso <https://en.wikipedia.org/wiki/Instructional_materials> .
@@ -1538,6 +1545,7 @@ saogf:Kagok :broader saogf:Musik .
 saogf:Kalendrar a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Calendar ;
+  :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:MapsFormatType-k ;
   :singularLabel "Calendar"@en ,
@@ -1657,6 +1665,7 @@ saogf:Kastrats%C3%A5ng :broader saogf:Musik .
 saogf:Kataloger a :GenreForm ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Catalog ;
+  :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Catalogue"@en ,
     "Katalog"@sv .
@@ -1896,7 +1905,7 @@ saogf:Lira :broader saogf:Musik .
 
 saogf:Litanior :broader saogf:Musik .
 
-saogf:Litter%C3%A4r%20sakprosa :broader saogf:E%20sk%C3%B6nlitteratur .
+saogf:Litter%C3%A4r%20sakprosa :broader saogf:Facklitteratur .
 
 saogf:Litteraturtidskrifter :broader saogf:Periodika .
 
@@ -2230,10 +2239,13 @@ saogf:Ocarina :broader saogf:Musik .
 saogf:Oden%20%28musik%29 :broader saogf:Musik .
 
 saogf:Offentligt%20tryck a :GenreForm ;
+  :inCollection div:identify ;
   :closeMatch marc:GovernmentPublicationLevelUndetermined ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
     marc:Local ,
+    marc:Multilocal ,
+    marc:Multistate ,
     marc:StateProvincialTerritorialDependentEtc ,
     marc:InternationalIntergovernmental ,
     marc:FederalNational .
@@ -2631,6 +2643,7 @@ saogf:Rebana%20%28instrument%29 :broader saogf:Musik .
 saogf:Rebec :broader saogf:Musik .
 
 saogf:Recensioner a :GenreForm ;
+  :inCollection div:identify ;  # TODO: om det är konsekvent pålagt så är den bra som "detta är en recension"
   :closeMatch marc:Review ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Review"@en ,
@@ -3043,6 +3056,7 @@ saogf:Stabat%20mater :broader saogf:Musik .
 saogf:Stams%C3%A5nger :broader saogf:Musik .
 
 saogf:Standarder a :GenreForm ;
+  :inCollection div:identify ;
   :broader saogf:Referensverk ;
   :closeMatch marc:StandardsSpecification ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -3050,6 +3064,7 @@ saogf:Standarder a :GenreForm ;
     "Standard"@sv .
 
 saogf:Statistik a :GenreForm ;
+  :inCollection div:identify ;
   :broader saogf:Referensverk ;
   :closeMatch marc:Statistics ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -3564,6 +3579,11 @@ saogf:Zurna :broader saogf:Musik .
 saogf:Zydeco :broader saogf:Musik .
 
 saogf:%C3%96vriga%20tidskrifter :broader saogf:Periodika .
+
+##
+# BarnGF
+
+barngf:Barn-%20och%20ungdomslitteratur :inCollection div:find .
 
 ##
 # TGM
