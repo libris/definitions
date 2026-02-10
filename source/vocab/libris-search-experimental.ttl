@@ -25,6 +25,11 @@
 
 :controlNumber # See ./platform.ttl for full definition of :controlNumber
     skos:notation "ONR"^^ls:QueryCode ;
+    # rec.recordIdentifier is used A LOT in Libris SRU
+    # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
+    # https://web.archive.org/web/20130515105512/https://srw.cheshire3.org/contextSets/rec/1.1/
+    # Webbsök SRU does not support rec.id (from Bath profile) or rec.identifier
+    skos:notation "rec.recordIdentifier"^^ls:QueryCode ;
     skos:notation "BIBID"^^ls:QueryCode .
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
