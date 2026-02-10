@@ -9,16 +9,48 @@
 @prefix ls: <https://id.kb.se/ns/librissearch/> .
 
 ### Extended definitions for Libris Search ###
+:identifier # See ./details.ttl for full definition of :identifier
+    skos:notation "dc.identifier"^^ls:QueryCode .
 
-:isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
+:isbn rdfs:domain :Instance ; # See ./details.ttl for full definition of :isbn
+    skos:notation "bath.isbn"^^ls:QueryCode .
+
+:issn rdfs:domain :Instance ; # See ./details.ttl for full definition of :issn
+    skos:notation "bath.issn"^^ls:QueryCode .
+
+:lccn rdfs:domain :Instance ; # See ./details.ttl for full definition of :lccn
+    skos:notation "bath.lccn"^^ls:QueryCode .
+
+:publisher # See ./details.ttl for full definition of :publisher
+    skos:notation "dc.publisher"^^ls:QueryCode ;
+    skos:notation "FÖRLAG"^^ls:QueryCode ;
+    skos:notation "FÖRL"^^ls:QueryCode ;
+    skos:notation "FORL"^^ls:QueryCode .
 
 :yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
     rdfs:domain :Instance ;
+    skos:notation "dc.date"^^ls:QueryCode ;
     skos:notation "ÅR"^^ls:QueryCode .
 
-:language skos:notation "SPRÅK"^^ls:QueryCode . # See ./relations.ttl for full definition of :language
+:subject # See ./relations.ttl for full definition of :subject
+    skos:notation "dc.subject"^^ls:QueryCode ;
+    skos:notation "bath.topicalSubject"^^ls:QueryCode ;
+    skos:notation "AMNE"^^ls:QueryCode .
 
-:controlNumber skos:notation "ONR"^^ls:QueryCode . # See ./platform.ttl for full definition of :controlNumber
+:language # See ./relations.ttl for full definition of :language
+    skos:notation "dc.language"^^ls:QueryCode ;
+    skos:notation "SPRÅK"^^ls:QueryCode ;
+    skos:notation "SPR"^^ls:QueryCode ;
+    skos:notation "SPR1"^^ls:QueryCode .
+
+:controlNumber # See ./platform.ttl for full definition of :controlNumber
+    skos:notation "ONR"^^ls:QueryCode ;
+    # rec.recordIdentifier is used A LOT in Libris SRU
+    # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
+    # https://web.archive.org/web/20130515105512/https://srw.cheshire3.org/contextSets/rec/1.1/
+    # Webbsök SRU does not support rec.id (from Bath profile) or rec.identifier
+    skos:notation "rec.recordIdentifier"^^ls:QueryCode ;
+    skos:notation "BIBID"^^ls:QueryCode .
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
@@ -32,6 +64,10 @@ ls:composite a skos:Collection ;
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
+    skos:notation "bath.possessingInstitution"^^ls:QueryCode ;
+    skos:notation "BIBL"^^ls:QueryCode ;
+    skos:notation "LIBRARY"^^ls:QueryCode ;
+    # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
@@ -70,6 +106,10 @@ ls:hasInstanceCategory a owl:ObjectProperty ;
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
+    skos:notation "ÖVERS"^^ls:QueryCode ;
+    # skos:notation "ORIG"^^ls:QueryCode ; # TODO deprecate?
+    # skos:notation "TRANS"^^ls:QueryCode ; # TODO deprecate?
+    # skos:notation "TRANSLATION"^^ls:QueryCode ; # TODO deprecate?
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     rdfs:range :Language ;
@@ -98,6 +138,8 @@ ls:title a owl:ObjectProperty ;
     :category ls:composite ;
     rdfs:label "titel"@sv, "title"@en ;
     skos:notation "TIT"^^ls:QueryCode ;
+    skos:notation "bath.title"^^ls:QueryCode ;
+    skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .

@@ -223,6 +223,15 @@
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISSN ] :value ) ;
     rdfs:range :ISSN .
 
+:lccn a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "LCCN";
+    rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :LCCN ] :value ) ;
+    rdfs:range :LCCN ;
+    rdfs:comment "Library of Congress Control Number."@sv ;
+    rdfs:comment "Library of Congress Control Number."@en .
+
 :doi a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "DOI";
