@@ -52,9 +52,7 @@
     skos:notation "rec.recordIdentifier"^^ls:QueryCode ;
     skos:notation "BIBID"^^ls:QueryCode .
 
-:hasTitle rdfs:subPropertyOf ls:title ; # See ./details.ttl for full definition of :hasTitle
-    skos:notation "bath.title"^^ls:QueryCode ;
-    skos:notation "dc.title"^^ls:QueryCode .
+:hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
 ### New definitions for Libris Search ###
 
@@ -140,6 +138,8 @@ ls:title a owl:ObjectProperty ;
     :category ls:composite ;
     rdfs:label "titel"@sv, "title"@en ;
     skos:notation "TIT"^^ls:QueryCode ;
+    skos:notation "bath.title"^^ls:QueryCode ;
+    skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
