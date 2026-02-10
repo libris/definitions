@@ -16,9 +16,16 @@
     rdfs:domain :Instance ;
     skos:notation "ÅR"^^ls:QueryCode .
 
-:language skos:notation "SPRÅK"^^ls:QueryCode . # See ./relations.ttl for full definition of :language
+:language # See ./relations.ttl for full definition of :language
+    skos:notation "dc.language"^^ls:QueryCode ;
+    skos:notation "SPRÅK"^^ls:QueryCode ;
+    skos:notation "SPR"^^ls:QueryCode ;
+    skos:notation "SPR1"^^ls:QueryCode .
 
-:controlNumber skos:notation "ONR"^^ls:QueryCode . # See ./platform.ttl for full definition of :controlNumber
+
+:controlNumber # See ./platform.ttl for full definition of :controlNumber
+    skos:notation "ONR"^^ls:QueryCode ;
+    skos:notation "BIBID"^^ls:QueryCode .
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
@@ -32,6 +39,10 @@ ls:composite a skos:Collection ;
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
+    skos:notation "bath.possessingInstitution"^^ls:QueryCode ;
+    skos:notation "BIBL"^^ls:QueryCode ;
+    skos:notation "LIBRARY"^^ls:QueryCode ;
+    # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
     :category :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
@@ -70,6 +81,10 @@ ls:hasInstanceCategory a owl:ObjectProperty ;
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
+    skos:notation "ÖVERS"^^ls:QueryCode ;
+    # skos:notation "ORIG"^^ls:QueryCode ; # TODO deprecate?
+    # skos:notation "TRANS"^^ls:QueryCode ; # TODO deprecate?
+    # skos:notation "TRANSLATION"^^ls:QueryCode ; # TODO deprecate?
     :category :shorthand, :pending ;
     rdfs:domain :Work ;
     rdfs:range :Language ;
