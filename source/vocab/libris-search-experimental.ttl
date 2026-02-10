@@ -10,18 +10,38 @@
 
 ### Extended definitions for Libris Search ###
 
-:isbn rdfs:domain :Instance . # See ./details.ttl for full definition of :isbn
+:isbn rdfs:domain :Instance ; # See ./details.ttl for full definition of :isbn
+    skos:notation "bath.isbn"^^ls:QueryCode .
+
+:issn rdfs:domain :Instance ; # See ./details.ttl for full definition of :issn
+    skos:notation "bath.issn"^^ls:QueryCode .
+
+:lccn rdfs:domain :Instance ; # See ./details.ttl for full definition of :lccn
+    skos:notation "bath.lccn"^^ls:QueryCode .
+
+:publisher # See ./details.ttl for full definition of :issn
+    skos:notation "dc.publisher"^^ls:QueryCode ;
+    skos:notation "FÖRLAG"^^ls:QueryCode ;
+    skos:notation "FÖRL"^^ls:QueryCode ;
+    skos:notation "FORL"^^ls:QueryCode .
+
+:identifier # See ./details.ttl for full definition of :identifier
+    skos:notation "dc.identifier"^^ls:QueryCode .
 
 :yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
     rdfs:domain :Instance ;
     skos:notation "ÅR"^^ls:QueryCode .
+
+:subject # See ./relations.ttl for full definition of :subject
+    skos:notation "dc.subject"^^ls:QueryCode ;
+    skos:notation "bath.topicalSubject"^^ls:QueryCode ;
+    skos:notation "AMNE"^^ls:QueryCode .
 
 :language # See ./relations.ttl for full definition of :language
     skos:notation "dc.language"^^ls:QueryCode ;
     skos:notation "SPRÅK"^^ls:QueryCode ;
     skos:notation "SPR"^^ls:QueryCode ;
     skos:notation "SPR1"^^ls:QueryCode .
-
 
 :controlNumber # See ./platform.ttl for full definition of :controlNumber
     skos:notation "ONR"^^ls:QueryCode ;
@@ -32,7 +52,9 @@
     skos:notation "rec.recordIdentifier"^^ls:QueryCode ;
     skos:notation "BIBID"^^ls:QueryCode .
 
-:hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
+:hasTitle rdfs:subPropertyOf ls:title ; # See ./details.ttl for full definition of :hasTitle
+    skos:notation "bath.title"^^ls:QueryCode ;
+    skos:notation "dc.title"^^ls:QueryCode .
 
 ### New definitions for Libris Search ###
 
