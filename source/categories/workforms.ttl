@@ -20,6 +20,13 @@ ktg:WrittenText a :WorkCategory ;
   skos:related ktg:Literature ;
   skos:scopeNote "Någon form av skrift; visuell eller taktil."@sv .
 
+ktg:NonFictionLiterature a :GenreForm ;
+  :category div:abstract ;
+  skos:prefLabel "Ej skönlitteratur"@sv ,
+    "Non-fiction literature"@en ;
+  skos:broader ktg:Literature ;
+  :closeMatch marc:NotFictionNotFurtherSpecified .
+
 ktg:Literature a :GenreForm ;
   :category div:abstract ; # may be *expressed* as written text *or* spoken form...
 #  :inCollection div:find ;
