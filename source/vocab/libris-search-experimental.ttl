@@ -32,6 +32,38 @@
     skos:notation "dc.date"^^ls:QueryCode ;
     skos:notation "ÅR"^^ls:QueryCode .
 
+:contributor # See ./relations.ttl for full definition of :contributor
+    skos:notation "FÖRF"^^ls:QueryCode ;
+    skos:notation "FORF"^^ls:QueryCode .
+
+# NOTE: Old webbsök code 'author' was same as 'FÖRF'
+:author a owl:ObjectProperty ;
+    rdfs:label "författare"@sv, "author"@en ;
+    :category :shorthand, :pending ;
+    owl:equivalentProperty <https://id.kb.se/relator/author> ;
+    rdfs:subPropertyOf :contributor ;
+    rdfs:range :Agent ;
+    owl:propertyChainAxiom (
+            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
+                owl:onProperty :role ;
+                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
+            :agent
+        ) .
+
+:translator a owl:ObjectProperty ;
+    rdfs:label "översättare"@sv, "translator"@en ;
+    :category :shorthand, :pending ;
+    owl:equivalentProperty <https://id.kb.se/relator/translator> ;
+    rdfs:subPropertyOf :contributor ;
+    rdfs:range :Agent ;
+    owl:propertyChainAxiom (
+            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
+                owl:onProperty :role ;
+                owl:hasValue <https://id.kb.se/relator/translator> ] ] ]
+            :agent
+        ) .
+
+
 :subject # See ./relations.ttl for full definition of :subject
     skos:notation "dc.subject"^^ls:QueryCode ;
     skos:notation "bath.topicalSubject"^^ls:QueryCode ;
@@ -217,17 +249,3 @@ ls:itemCreated a owl:DatatypeProperty ;
 #        ( :hasItem marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
 #        ( :hasItem marc:hasBindingInformation :label ),
 #        ( :hasItem marc:hasTextualHoldingsBasicBibliographicUni marc:cataloguersNote ) .
-#
-#:author a owl:ObjectProperty ;
-#    rdfs:label "författare"@sv, "author"@en ;
-#    :category :shorthand, :pending ;
-#    owl:equivalentProperty <https://id.kb.se/relator/author> ;
-#    rdfs:subPropertyOf :contributor ;
-#    rdfs:range :Agent ;
-#    skos:notation "FÖRF"^^ls:QueryCode ;
-#    owl:propertyChainAxiom (
-#            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
-#                owl:onProperty :role ;
-#                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
-#            :agent
-#        ) .
