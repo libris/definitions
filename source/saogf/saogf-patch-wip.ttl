@@ -1027,7 +1027,7 @@ saogf:F%C3%B6rel%C3%A4sningar a :GenreForm ;
 
 saogf:L%C3%A4romedel a :GenreForm ;
   :broader saogf:Instruktions-%20och%20undervisningsmaterial ;
-  :closeMatch marc:ProgrammedText ;
+  :narrowMatch marc:ProgrammedText ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Teaching Material"@en ,
@@ -2247,9 +2247,11 @@ saogf:Ocarina :broader saogf:Musik .
 saogf:Oden%20%28musik%29 :broader saogf:Musik .
 
 saogf:Offentligt%20tryck a :GenreForm ;
-  :inCollection div:identify ;
+  :inCollection div:identify , div:constructed , <https://id.kb.se/term/fack> ;
   :closeMatch marc:GovernmentPublicationLevelUndetermined ;
+  :broader saogf:Informativa%20verk , saogf:Facklitteratur ;
   :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Offentligt tryck"@sv ;  
   :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
     marc:Local ,
     marc:Multilocal ,
