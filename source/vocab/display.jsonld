@@ -1489,19 +1489,30 @@
         "Title": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Title",
-          "fresnel:extends": {"@id": "Title-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [
+            "mainTitle",
+            "title",
+            "subtitle",
+            "titleRemainder",
+            "partNumber",
+            "partName",
+            "hasPart",
+            {
+              "fresnel:property": "hasPart",
+              "fresnel:subLens": {
+                "showProperties": [
+                  "partNumber",
+                  "partName"
+                ]
+              }
+            },
+            "marc:parallelTitle"
+          ]
         },
         "KeyTitle": {
           "@type": "fresnel:Lens",
           "classLensDomain": "KeyTitle",
           "fresnel:extends": {"@id": "KeyTitle-chips"},
-          "showProperties": [ "fresnel:super" ]
-        },
-        "TitlePart": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "TitlePart",
-          "fresnel:extends": {"@id": "TitlePart-chips"},
           "showProperties": [ "fresnel:super" ]
         },
         "ProvisionActivity": {
@@ -1529,10 +1540,6 @@
       "@id": "search-chips",
       "@type": "fresnel:Group",
       "lenses": {
-        "Record": {
-          "fresnel:extends": {"@id": "Record-chips"},
-          "showProperties": [ "fresnel:super", "bibliography" ]
-        },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
           "showProperties": [
@@ -1544,6 +1551,10 @@
               "fresnel:mergeProperties": [
                 "cataloguersNote",
                 "custodialHistory",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "summary/*/label"
+                },
                 {
                   "@type": "fresnel:fslselector",
                   "@value": "hasNote/*/label"
@@ -1672,7 +1683,11 @@
             "summary",
             "tableOfContents",
             "videoCharacteristic",
-            "image"
+            "image",
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/bibliography"
+            }
           ]
         },
         "Item": {

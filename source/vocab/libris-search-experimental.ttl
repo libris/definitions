@@ -216,12 +216,12 @@ ls:itemNote a owl:DatatypeProperty ;
     rdfs:domain :Item ;
     ls:merges :cataloguersNote,
         :custodialHistory,
+        [ owl:propertyChainAxiom ( :summary :label ) ],
         [ owl:propertyChainAxiom ( :hasNote :label ) ],
         [ owl:propertyChainAxiom ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ) ],
         [ owl:propertyChainAxiom ( marc:hasBindingInformation :label ) ],
         [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ],
-        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ],
-        [ owl:propertyChainAxiom ( :availability :label ) ] .
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ] .
 
 ls:itemCreated a owl:DatatypeProperty ;
      :category :shorthand, :pending ;
