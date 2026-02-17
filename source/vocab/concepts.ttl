@@ -416,7 +416,8 @@
     # NOTE: Very (too?) powerful; relied on for classes derived from KBVF.
     owl:propertyChainAxiom (:genreForm :broader) ;
     rdfs:subPropertyOf dc:type, sdo:genre ;
-    owl:equivalentProperty bf2:genreForm .
+    owl:equivalentProperty bf2:genreForm ;
+    owl:propertyChainAxiom (:category _:a_GenreForm) .
 
 :Topic a owl:Class;
     rdfs:label "Allmänt ämnesord"@sv;
@@ -429,7 +430,8 @@
     owl:equivalentClass bf2:GenreForm, madsrdf:GenreForm ;
     rdfs:subClassOf [ a owl:Restriction;
          owl:onProperty :inScheme;
-         owl:someValuesFrom :GenreFormScheme ] .
+         owl:someValuesFrom :GenreFormScheme ] ;
+    owl:equivalentClass [ owl:onProperty _:a_GenreForm ; owl:hasSelf true ] .
 
 # Might be added later if we decide to split Genre and Form into separate classes.
 #:Genre a owl:Class;
