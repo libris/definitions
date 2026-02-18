@@ -2100,7 +2100,8 @@ skos:related <editor> ;
     skos:definition "Agent som nämns i exempelvis förtexten till en film (“X presenterar”) och som på något sätt är inblandad i produktion, finansiering eller distribution."@sv .
 
 <primaryRightsHolder> a bf:Role ;
-    ptg:abstract true ;
+    ptg:abstract true ;  # only added to block it in the cataloguing interface
+    owl:deprecated true ;  # not yet supported
     rdfs:comment "Obsolet. Använd ej."@sv ;
     rdfs:domain :Creation ;
     owl:sameAs <9pu> ;
