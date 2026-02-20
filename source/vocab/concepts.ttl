@@ -413,8 +413,6 @@
 :genreForm a owl:ObjectProperty;
     rdfs:label "genre/form"@sv;
     rdfs:range :GenreForm;
-    # NOTE: Very (too?) powerful; relied on for classes derived from KBVF.
-    owl:propertyChainAxiom (:genreForm :broader) ;
     rdfs:subPropertyOf dc:type, sdo:genre ;
     owl:equivalentProperty bf2:genreForm ;
     owl:propertyChainAxiom (:category _:a_GenreForm) .
