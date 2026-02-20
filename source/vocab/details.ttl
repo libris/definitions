@@ -223,6 +223,15 @@
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISSN ] :value ) ;
     rdfs:range :ISSN .
 
+:lccn a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "LCCN";
+    rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :LCCN ] :value ) ;
+    rdfs:range :LCCN ;
+    rdfs:comment "Library of Congress Control Number."@sv ;
+    rdfs:comment "Library of Congress Control Number."@en .
+
 :doi a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "DOI";
@@ -639,7 +648,6 @@
 :LibrisLocalLanguageCode a rdfs:Datatype ;
     rdfs:label "Librisdefinierad MARC-språkkod" ;
     rdfs:subClassOf :Local .
-
 
 ## Used by SwePub {{{
 
@@ -1062,7 +1070,7 @@
     owl:propertyChainAxiom ( :publication :year ) .
 
 :publisher a owl:ObjectProperty;
-    #:category :shorthand;
+    :category :shorthand;
     rdfs:label "utgivare"@sv, "publisher"@en ;
     rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
                  "An entity responsible for making the resource available."@en ;
@@ -1301,7 +1309,7 @@
 
 :cataloguersNote a owl:DatatypeProperty;
     rdfs:label "Cataloguers Note"@en, "Katalogisatörens anmärkning"@sv;
-    sdo:domainIncludes :Item, :Record, :Document, :MediaObject, :Electronic ;
+    sdo:domainIncludes :Item, :Record, :Document, :MediaObject, :DigitalResource ; # This list needs a review!
     rdfs:subPropertyOf skos:editorialNote, rdael:cataloguersNote .
 
 :qualifier a owl:DatatypeProperty;

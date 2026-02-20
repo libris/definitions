@@ -5,9 +5,14 @@ from rdflib.plugins.parsers.jsonld import to_rdf
 
 def to_jsonld(source: Graph, context_uri: str, contextobj) -> dict:
     data = from_rdf(source, context_data=contextobj)
+    assert isinstance(data, dict)
+    if '@graph' not in data:
+        data = {'@graph': [data]}
+
     data['@context'] = context_uri
     _embed_singly_referenced_bnodes(data)
     _expand_ids(data['@graph'], contextobj['@context'])
+
     return data
 
 

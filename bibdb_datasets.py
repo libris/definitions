@@ -1,5 +1,5 @@
-import datetime
 from lxltools.datacompiler import Compiler
+from rdflib import Graph
 import os
 
 
@@ -31,7 +31,7 @@ def bibliographies():
 def _construct_bibdb_data(query):
     libraries = _fetch_libraries(f'https://bibdb.libris.kb.se/api?{query}')
     bidb_context = 'https://bibdb.libris.kb.se/libdb/static/meta/context.jsonld'
-    return compiler.construct(sources=[
+    graph = compiler.construct(sources=[
             {
                 "dataset": BASE + "dataset/libraries",
                 "data": libraries,
@@ -47,6 +47,10 @@ def _construct_bibdb_data(query):
             }
         ],
         query="source/construct-libraries.rq")
+
+    graph |= Graph().parse(str(compiler.path('source/bibdb/bibliographies.ttl')), format='turtle')
+
+    return graph
 
 
 def _fetch_libraries(start_url):
