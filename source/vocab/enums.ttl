@@ -18,7 +18,7 @@
 
 :cartographicAttributes a owl:ObjectProperty;
     owl:equivalentProperty bf2:cartographicAttributes;
-    rdfs:domain :Cartography ;
+    rdfs:domain :Work ; # :Cartography ;
     rdfs:range :Cartographic ;
     rdfs:comment "Kartografiska attribut som identifierar karakteristika för resursen, såsom koordinater och kartprojektion."@sv;
     rdfs:label "Cartographic data"@en, "kartografiska data"@sv .
@@ -29,8 +29,8 @@
 
 :projectionCharacteristic a owl:ObjectProperty;
     owl:equivalentProperty bf2:projectionCharacteristic ;
-    rdfs:domain :Cartography ;
-    rdfs:range :Cartographic ;
+    rdfs:domain :Work ; # :Cartography ; Is this actually an instance property?
+    rdfs:range :Cartographic ; 
     rdfs:label "Projection characteristic"@en, "Projektionskarakteristika"@sv .
 
 :Cartographic a owl:Class;
