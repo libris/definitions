@@ -13,7 +13,7 @@ prefix div: <https://id.kb.se/term/div/>
 prefix saobf: <https://id.kb.se/term/saobf/>
 
 # Sammanhållande topp-term
-saobf:PhysicalForm a :InstanceCategory ;
+saobf:PhysicalForm a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   :category div:abstract ;
   skos:prefLabel "Fysisk form"@sv, "Physical form"@en .
@@ -77,7 +77,7 @@ saobf:HandmadeMaterial a :CarrierForm ;  # NOTE: the type changed to Work in BF;
   #skos:prefLabel "Fysiskt föremål"@sv , "Physical object"@en .
 
 
-saobf:ComponentPart a :InstanceCategory ;
+saobf:ComponentPart a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   skos:prefLabel "Bidrag"@sv, "Component part"@en .
 
@@ -115,7 +115,7 @@ saobf:Braille a :CarrierForm ;
 
 # TODO: other StorageMedium? Magnetic / Optical / Mechanical ?
 # Sammanhållande toppterm
-saobf:StorageMedium a :InstanceCategory ;
+saobf:StorageMedium a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   :category div:abstract ;
   skos:broader saobf:PhysicalForm ;
@@ -183,7 +183,7 @@ saobf:OpticalDisc a :CarrierForm ;
 #MusicCD
 
 
-saobf:AbstractElectronic a :InstanceCategory ;
+saobf:AbstractElectronic a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   :category div:abstract ;
   skos:closeMatch marc:Electronic ;
@@ -206,7 +206,7 @@ saobf:EBook a :CarrierForm ;
   skos:prefLabel "E-bok"@sv, "E-book"@en.
 
 
-saobf:ElectronicStorageMedium a :InstanceCategory ;
+saobf:ElectronicStorageMedium a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   :category div:abstract ;
   skos:closeMatch kbrda:Computer ;
@@ -227,7 +227,7 @@ saobf:StandaloneDevice a :CarrierForm ;
 # See also accesibility concerns.
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-saobf:SoundStorageMedium a :InstanceCategory ;
+saobf:SoundStorageMedium a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   :category div:abstract ;
   #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
@@ -242,7 +242,7 @@ saobf:SoundStorageMedium a :InstanceCategory ;
 #  skos:broader kbrda:Audio, saobf:SoundStorageMedium .
 
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
-saobf:VideoStorageMedium a :InstanceCategory ;
+saobf:VideoStorageMedium a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   #owl:sameAs :VideoRecording ;
   :category div:abstract ;
