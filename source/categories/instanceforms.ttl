@@ -8,13 +8,14 @@ prefix : <https://id.kb.se/vocab/>
 prefix marc: <https://id.kb.se/marc/>
 prefix kbrda: <https://id.kb.se/term/rda/>
 prefix saogf: <https://id.kb.se/term/saogf/>
+prefix div: <https://id.kb.se/term/div/>
 
 prefix saobf: <https://id.kb.se/term/saobf/>
 
 # Sammanhållande topp-term
 saobf:PhysicalForm a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
-  ptg:abstract true ;
+  :category div:abstract ;
   skos:prefLabel "Fysisk form"@sv, "Physical form"@en .
 
 
@@ -116,25 +117,25 @@ saobf:Braille a :CarrierForm ;
 # Sammanhållande toppterm
 saobf:StorageMedium a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
-  ptg:abstract true ;
+  :category div:abstract ;
   skos:broader saobf:PhysicalForm ;
   skos:prefLabel "Lagringsmedium"@sv , "Storage medium"@en .
 
 
 #saobf:TapeCartridge a :CarrierForm ;
 #  skos:broader saobf:ElectronicStorageMedium ;
-#  ptg:abstract true ;
+#  :category div:abstract ;
 #  skos:closeMatch marc:TapeCartridge ;
 #  skos:prefLabel "Datorbandmagasin"@sv, "Tape cartridge"@en .
 
 #saobf:TapeCassette a :CarrierForm ;
 #  skos:broader saobf:ElectronicStorageMedium ;
-#  ptg:abstract true ;
+#  :category div:abstract ;
 #  skos:closeMatch marc:TapeCassette ;
 #  skos:prefLabel "Datorkassett"@sv, "Tape cassette"@en .
 
 #saobf:TapeReel a :CarrierForm ;
-#  ptg:abstract true ;
+#  :category div:abstract ;
 #  skos:broader saobf:ElectronicStorageMedium ;
 #  skos:closeMatch marc:TapeReel ;
 #  skos:prefLabel "Datorbandspole"@sv, "Tape reel"@en .
@@ -154,7 +155,7 @@ saobf:MagnetoOpticalDisc a :CarrierForm ;
   skos:broader saobf:ElectronicStorageMedium ;
   skos:prefLabel "Magnet-optisk skiva"@sv, "Magneto-optical disc"@en .
 
-#saobf:OpticalReel a :CarrierForm ;  ptg:abstract true ;  skos:broader saobf:StorageMedium .
+#saobf:OpticalReel a :CarrierForm ;  :category div:abstract ;  skos:broader saobf:StorageMedium .
 
 saobf:OpticalDisc a :CarrierForm ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
@@ -184,7 +185,7 @@ saobf:OpticalDisc a :CarrierForm ;
 
 saobf:AbstractElectronic a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
-  ptg:abstract true ;
+  :category div:abstract ;
   skos:closeMatch marc:Electronic ;
   #skos:narrowMatch marc:Electronic ; # ? Otherwise, ensure this match is down-prioritized
   skos:prefLabel "Elektronisk eller digital form"@sv, "Electronic or digital form"@en ;
@@ -206,7 +207,7 @@ saobf:EBook a :CarrierForm ;
 
 saobf:ElectronicStorageMedium a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
-  ptg:abstract true ;
+  :category div:abstract ;
   skos:closeMatch kbrda:Computer ;
   skos:closeMatch marc:DirectElectronic ;
   skos:broader saobf:StorageMedium ,
@@ -227,7 +228,7 @@ saobf:StandaloneDevice a :CarrierForm ;
 # Will this be used in a way where it not only duplicates/mirrors RDA Audio?
 saobf:SoundStorageMedium a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
-  ptg:abstract true ;
+  :category div:abstract ;
   #owl:sameAs kbrda:SoundRecording ; This is not an RDA type
   skos:closeMatch kbrda:Audio ;
   skos:broader saobf:StorageMedium ;
@@ -243,7 +244,7 @@ saobf:SoundStorageMedium a :InstanceCategory ;
 saobf:VideoStorageMedium a :InstanceCategory ;
   skos:inScheme <https://id.kb.se/term/saobf> ;
   #owl:sameAs :VideoRecording ;
-  ptg:abstract true ;
+  :category div:abstract ;
   skos:closeMatch kbrda:Video ;
   skos:relatedMatch marc:Videorecording ;
   skos:broader saobf:StorageMedium ;
