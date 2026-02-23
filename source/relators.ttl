@@ -14,6 +14,7 @@
 @prefix wikidata: <https://www.wikidata.org/entity/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+prefix div: <https://id.kb.se/term/div/>
 
 @base <https://id.kb.se/relator/> .
 
@@ -2101,7 +2102,7 @@ skos:related <editor> ;
     skos:definition "Agent som nämns i exempelvis förtexten till en film (“X presenterar”) och som på något sätt är inblandad i produktion, finansiering eller distribution."@sv .
 
 <primaryRightsHolder> a bf:Role ;
-    ptg:abstract true ;  # only added to block it in the cataloguing interface
+    :category div:abstract ;  # only added to block it in the cataloguing interface
     owl:deprecated true ;  # not yet supported
     rdfs:comment "Obsolet. Använd ej."@sv ;
     rdfs:domain :Creation ;
