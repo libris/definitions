@@ -220,6 +220,13 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
+ls:itemSubject a owl:DatatypeProperty ;
+     :category :shorthand, :pending ;
+     rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
+     rdfs:domain :Instance ;
+     skos:notation "LOKÄMNE"^^ls:QueryCode ;
+     owl:propertyChainAxiom ( :hasItem :subject ) .
+
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
 #    :category :shorthand ;
