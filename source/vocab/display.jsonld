@@ -1447,6 +1447,26 @@
       "@id": "search-tokens",
       "@type": "fresnel:Group",
       "lenses": {
+        "Agent": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Agent",
+          "showProperties": ["name"]
+        },
+        "Bibliography": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Bibliography",
+          "fresnel:extends": {"@id": "Bibliography-chips"},
+          "showProperties": [
+            "fresnel:super"
+          ]
+        },
+        "Concept": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
+          "showProperties": [
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]}
+          ]
+        },
         "Creation": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Creation",
@@ -1469,6 +1489,20 @@
             }
           ]
         },
+        "Language": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Language",
+          "fresnel:extends": {"@id": "Language-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "Library": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Library",
+          "fresnel:extends": {"@id": "Library-chips"},
+          "showProperties": [
+            "fresnel:super"
+          ]
+        },
         "Person": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
@@ -1478,12 +1512,45 @@
             "name"
           ]
         },
-        "Library": {
+        "ProvisionActivity": {
           "@type": "fresnel:Lens",
-          "classLensDomain": "Library",
+          "classLensDomain": "ProvisionActivity",
+          "fresnel:extends": {"@id": "ProvisionActivity-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "SeriesMembership": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "SeriesMembership",
           "showProperties": [
-            "name",
-            "qualifier"
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "inSeries/*/identifiedBy/ISSN/value"
+            },
+            {
+              "alternateProperties": [
+                "seriesStatement",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "inSeries/*/instanceOf/*/hasTitle/*/mainTitle"
+                }
+              ]
+            },
+            "seriesEnumeration"
+          ]
+        },
+        "TableOfContents": {
+          "classLensDomain": "TableOfContents",
+          "showProperties": [
+            "label",
+            {
+              "fresnel:property": "hasPart",
+              "fresnel:subLens": {
+                "showProperties": [
+                  "label",
+                  "responsibilityStatement"
+                ]
+              }
+            }
           ]
         },
         "Title": {
@@ -1507,25 +1574,6 @@
               }
             },
             "marc:parallelTitle"
-          ]
-        },
-        "ProvisionActivity": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "ProvisionActivity",
-          "fresnel:extends": {"@id": "ProvisionActivity-chips"},
-          "showProperties": [ "fresnel:super" ]
-        },
-        "Language": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Language",
-          "fresnel:extends": {"@id": "Language-chips"},
-          "showProperties": [ "fresnel:super" ]
-        },
-        "Concept": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Concept",
-          "showProperties": [
-            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]}
           ]
         }
       }
