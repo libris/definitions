@@ -11,55 +11,6 @@ prefix barngf: <https://id.kb.se/term/barngf/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
 
-### Manuellt tillagda termer
-
-saogf:Visuella%20verk a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027266> ;
-  :prefLabel "Visuella verk"@sv ;
-  :singularLabel "Visuellt verk"@sv, "Visual Work"@en .
-
-saogf:Index a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :broader saogf:Referensverk ;
-  :closeMatch marc:Index, <http://id.loc.gov/authorities/genreForms/gf2014026112> ;
-  :prefLabel "Index"@sv ;
-  :singularLabel "Index"@sv, "Index"@en .
-
-# Manuellt tillagd från genres.ttl
-saogf:Monografiserier a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :broader saogf:Seriella%20publikationer ;
-  :closeMatch marc:MonographicSeries ;
-  :prefLabel "Monografiserier"@sv ;
-  :singularLabel "Monographic Series"@en ,
-    "Monografiserie"@sv .
-
-saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :broader saogf:Biografier ;
-  :closeMatch marc:IndividualBiography ;
-  :prefLabel "Biografier över en individ"@sv ;
-  :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
-
-saogf:Biografier%20%C3%B6ver%20flera%20individer a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :broader saogf:Biografier ;
-  :closeMatch marc:CollectiveBiography ; 
-  :prefLabel "Biografier över flera individer"@sv ;
-  :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
-
-### Övrigt 
-
 saogf:%C3%84ventyrsskildringar a :GenreForm .
 
 saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
@@ -69,18 +20,6 @@ saogf:%C3%85rsb%C3%B6cker a :GenreForm ;
   :singularLabel "Yearbook"@en ,
     "Årsbok"@sv .
 
-#Removed Böcker and all references to it. Check usage of marcgt:boo
-#saogf:B%C3%B6cker a :GenreForm ;
-#  :broader ktg:Literature ;
-#  :category div:abstract ;
-#  :closeMatch marcgt:boo ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Böcker"@sv ,
-#    "Books"@en ;
-#  :singularLabel "Bok"@sv ,
-#    "Book"@en .
-
 saogf:Seriella%20publikationer a :GenreForm ;
   :broader saogf:Samlande%20resurser , ktg:Literature;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -88,15 +27,6 @@ saogf:Seriella%20publikationer a :GenreForm ;
     "Seriell publikation"@sv .
 
 saogf:%C3%85rstidsmusik :broader saogf:Musik .
-
-#Behöver vi ktg:Musik när vi har saogf:Musik? Kan rda-termerna läggas som smalare match till saogf-termen?
-saogf:Musik a :GenreForm ;
-  :prefLabel "Musik"@sv ;
-  #:inCollection div:constructed ;
-  :inCollection div:find ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-#  :broader ktg:Music ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026952> .
 
 #Vi gör detta efter överläggning med tidskriftskatalogisatörer
 #saogf:%C3%96vriga%20tidskrifter a :Resource ;
@@ -200,16 +130,6 @@ saogf:Anteckningar a :GenreForm ;
   :singularLabel "Note"@en ,
     "Anteckning"@sv .
 
-saogf:Kortare%20texter a :GenreForm ;
-  :broader ktg:Literature ;
-  :category div:abstract ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Kortare texter"@sv ;
-  :singularLabel "Kortare text"@sv ,
-    "Text piece"@en .
-
 saogf:Anthems a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026635> ;
@@ -234,29 +154,11 @@ saogf:Arkiv a :GenreForm ;
   :singularLabel "Archive"@en ,
     "Arkiv"@sv .
 
-#TODO lägg till beskrivning och engelska labels. Kanske lägga till div:abstract
-saogf:Samlande%20resurser a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon>;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Samlande resurser"@sv ;
-  :singularLabel "Samlande resurs"@sv .
-
 saogf:Arpeggione :broader saogf:Musik .
 
 saogf:Ars%20antiqua :broader saogf:Musik .
 
 saogf:Ars%20nova :broader saogf:Musik .
-
-saogf:Artiklar a :GenreForm ;
-  :broader saogf:Kortare%20texter ;
-  :closeMatch marcgt:art ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> , <https://id.kb.se/term/skon>;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Artiklar"@sv ;
-  :singularLabel "Article"@en ,
-    "Artikel"@sv .
 
 saogf:Artistsignaturer :broader saogf:Musik .
 
@@ -422,14 +324,6 @@ saogf:Lexikon a :GenreForm ;
   :singularLabel "Lexicon"@en ,
     "Lexikon"@sv .
 
-saogf:Grafisk%20litteratur a :GenreForm ;
-  :broader saogf:Illustrerade%20verk ,
-    ktg:Literature ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon>;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Grafisk litteratur"@sv .
-
 saogf:Biografier a :GenreForm ;
   :broader saogf:Informativa%20verk , saogf:Facklitteratur;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026049> ,
@@ -531,15 +425,6 @@ saogf:Bostonvals :broader saogf:Musik .
 
 saogf:Bouzouki :broader saogf:Musik .
 
-saogf:Br%C3%A4dspel a :GenreForm ;
-  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
-    saogf:Interaktiva%20objekt ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026048> ;
-  #:inCollection div:constructed ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Brädspel"@sv ;
-  :singularLabel "Brädspel"@sv, "Board game"@en .
-
 saogf:Spel%20och%20tanken%C3%B6tter a :GenreForm ;
   :closeMatch marc:VisualMaterialType-g ,
     <http://id.loc.gov/authorities/genreForms/gf2014026158> ;
@@ -550,14 +435,6 @@ saogf:Spel%20och%20tanken%C3%B6tter a :GenreForm ;
   # Och/eller? Och. Hjälper det att ha sing.label på denna? 
   #:singularLabel "Puzzle or game"@en ,
   #  "Spel eller tankenöt"@sv .
-
-saogf:Interaktiva%20objekt a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Interaktiva objekt"@sv ;
-  :singularLabel "Interactive object"@en ,
-    "Interaktivt objekt"@sv .
 
 saogf:Br%C3%AEu :broader saogf:Musik .
 
@@ -582,16 +459,6 @@ saogf:Brevromaner a :GenreForm .
 saogf:Broken%20consort :broader saogf:Musik .
 
 saogf:Bronslurar :broader saogf:Musik .
-
-#saogf:Broschyrer a :GenreForm ;
-#  :broader saogf:Kortare%20texter ;
-#  #:inCollection div:constructed ;
-#  :inCollection div:identify ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Brochures"@en ,
-#    "Broschyrer"@sv ;
-#  :singularLabel "Brochure"@en ,
-#    "Broschyr"@sv .
 
 saogf:Brukspiano :broader saogf:Musik .
 
@@ -751,23 +618,6 @@ saogf:Databaser a :GenreForm ;
   :singularLabel "Database"@en ,
     "Databas"@sv .
 
-#saogf:Datorgrafik a :GenreForm ;
-#  :broader ktg:Multimedia ,
-#    saogf:Visuella%20verk ;
-#  :closeMatch marc:Representational ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Computer graphics"@en ,
-#    "Datorgrafik"@sv .
-
-# Behövs denna? Verkar inte användas på något material, ej eller i MARCGT.
-#saogf:Datorkod a :GenreForm ;
-#  :broader ktg:Software ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Computer Code"@en ,
-#    "Datorkod"@sv .
-
 saogf:Datormusik :broader saogf:Musik .
 
 saogf:Datorspel a :GenreForm ;
@@ -884,21 +734,6 @@ saogf:Efem%C3%A4rt%20material a :GenreForm ;
   :inCollection div:identify ;
   :inScheme <https://id.kb.se/term/saogf> .
 
-saogf:Facklitteratur a :GenreForm ;
-  :broader ktg:NonFictionLiterature ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ,
-    div:find ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Facklitteratur"@sv .
-
-# Överflödig när vi har Skön/Fack-uppdelning - kan återbesäkas när vi bryter ut genrer som kan användas på alla former
-#saogf:Icke-fiktion a :GenreForm ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Icke-fiktion"@sv ,
-#    "Non- fiction"@en .
-
 saogf:Elbas :broader saogf:Musik .
 
 saogf:Electronic%20body%20music :broader saogf:Musik .
@@ -966,17 +801,6 @@ saogf:Ensembler%20med%20tangentinstrument%2C%20str%C3%A5kinstrument%20och%20bl%C
 saogf:Ensembler%20med%20tangentinstrument%2C%20str%C3%A5kinstrument%2C%20bl%C3%A5sinstrument%20och%20slagverk :broader saogf:Musik .
 
 saogf:Ensembler%20med%20vokala%20inslag :broader saogf:Musik .
-
-# Behövs denna verkligen, eller är den bara singular av "Kartor" (se mappning marc:SingleMap saogf:Kartor)?
-#saogf:Enskilda%20kartor a :GenreForm ;
-#  :broader saogf:Kartor ;
-#  :closeMatch marc:MapATwoDimensionalMap ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Two-dimensional map"@en ,
-#    "Enskilda kartor"@sv ;
-#  :singularLabel "Two-dimensional map"@en ,
-#    "Enskild karta"@sv .
 
 saogf:Kartor a :GenreForm ;
   :closeMatch marcgt:map , marc:SingleMap, marc:MapATwoDimensionalMap ;
@@ -1105,15 +929,6 @@ saogf:Festskrifter :closeMatch marc:Festschrift ;
 
 saogf:Fiddla :broader saogf:Musik .
 
-# Notera att marc:Fiction är en "MusicTextType" som hade behövt narrowMatchas till en saogf:Fiktion
-#saogf:Fiktion a :GenreForm ;
-#  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026339> ,
-#    marc:Fiction ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Fiktion"@sv ,
-#    "Fiction"@en .
-
 saogf:Filmad%20st%C3%A5uppkomik :broader saogf:R%C3%B6rlig%20bild .
 
 saogf:Filmer a :GenreForm ;
@@ -1140,17 +955,6 @@ saogf:Filmografi :closeMatch <http://id.loc.gov/vocabulary/msupplcont/film> ,
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Fingercymbaler :broader saogf:Musik .
-
-saogf:Fj%C3%A4rranalysbilder a :GenreForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:RemoteSensingImage ,
-    marcgt:rem , <http://id.loc.gov/authorities/genreForms/gf2011026530>;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Fjärranalysbilder"@sv ;
-  :singularLabel "Remote-sensing image"@en ,
-    "Fjärranalysbild"@sv .
 
 saogf:Fl%C3%B6jt :broader saogf:Musik .
 
@@ -1378,38 +1182,7 @@ saogf:Herrtidningar :broader saogf:Periodika .
 
 saogf:Highland%20pipes :broader saogf:Musik .
 
-saogf:Himmelsglober a :GenreForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:CelestialGlobe , <http://id.loc.gov/authorities/genreForms/gf2011026117> ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Himmelsglober"@sv ;
-  :singularLabel "Celestial globe"@en ,
-    "Himmelsglob"@sv .
-
 saogf:J%C3%A4mf%C3%B6rande%20studier :broader saogf:Facklitteratur .
-
-saogf:Kartglober a :GenreForm ;
-  #:broader kbrda:CartographicThreeDimensionalForm ;
-  :broader saogf:Modeller, saogf:Kartografiskt%20material ;
-  :closeMatch marc:Globe ;
-  :narrowMatch marc:PlanetaryOrLunarGlobe ;
-  #:inCollection div:constructed ;
-  :inCollection div:identify, <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Kartglober"@sv ;
-  :singularLabel "Kartglob"@sv ,
-    "Cartographic globe"@en .
-
-#saogf:Himlakroppsglober a :GenreForm ;
-#  :broader saogf:Kartglober ;
-#  :closeMatch marc:PlanetaryOrLunarGlobe ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Himlakroppsglober"@sv ;
-#  :singularLabel "Celestial body globe"@en ,
-#    "Himlakroppsglob"@sv .
 
 saogf:Historiska%20skildringar a :GenreForm .
 
@@ -1428,15 +1201,6 @@ saogf:Humor%20%28musik%29 :broader saogf:Musik .
 saogf:Humoresker :broader saogf:Musik .
 
 saogf:Humoristiska%20skildringar a :GenreForm .
-
-#saogf:Humorprogram%20p%C3%A5%20tv :broader saogf:TV .
-
-#saogf:TV a :GenreForm ;
-#  :broader ktg:MovingImage ;
-#  :category div:abstract ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "TV"@sv .
 
 saogf:Hymner :broader saogf:Musik ;
   :closeMatch marc:Hymn .
@@ -1509,16 +1273,6 @@ saogf:Jitterbugg%20%28musik%29 :broader saogf:Musik .
 saogf:Jive :broader saogf:Musik .
 
 saogf:Joddling :broader saogf:Musik .
-
-saogf:Jordglober a :GenreForm ;
-  :broader saogf:Kartglober ;
-  :closeMatch marc:TerrestrialGlobe ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Jordglober"@sv ;
-  :singularLabel "Terrestial globe"@en ,
-    "Jordglob"@sv .
 
 saogf:Julmusik :broader saogf:Musik .
 
@@ -1610,72 +1364,6 @@ saogf:Karakt%C3%A4rsstycken a :GenreForm ;
 saogf:Karaoke%20%28musik%29 :broader saogf:Musik .
 
 saogf:Kartografiskt%20material :inCollection div:find .
-
-saogf:Kartb%C3%B6cker a :GenreForm ;
-  #:broader kbrda:Text ,
- # kbrda:CartographicImage ;
- :broader saogf:Kartografiskt%20material , saogf:Facklitteratur ;
- :closeMatch marc:Atlas ;
- #:inCollection div:constructed ;
- :inCollection <https://id.kb.se/term/fack> ;
- :inScheme <https://id.kb.se/term/saogf> ;
- :narrowMatch marc:MapMaterialType-d ;  # TODO:marc_instance_gf
- :prefLabel "Kartböcker"@sv ;
- :singularLabel "Kartbok"@sv ,
-   "Atlas"@en .
-
-#saogf:Kartmodeller a :GenreForm ;
-#  #:broader kbrda:CartographicThreeDimensionalForm ,
-#  :broader saogf:Modeller , saogf:Kartografiskt%20material ;
-#  :closeMatch marc:Model ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Map models"@en ,
-#    "Kartmodeller"@sv ;
-#  :singularLabel "Map model"@en ,
-#    "Kartmodell"@sv .
-
-saogf:Modeller a :GenreForm ;
-  :broader saogf:Visuella%20verk ;
-  :closeMatch marcgt:mod , <http://id.loc.gov/authorities/genreForms/gf2017027245>;
-  #:broader kbrda:ThreeDimensionalForm ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Modeller"@sv ;
-  :singularLabel "Model"@en ,
-    "Modell"@sv .
-
-#saogf:Kartor%20i%20diagramform a :GenreForm ;
-#  :broader saogf:Diagram ,
-#    saogf:Kartor ;
-#  :closeMatch marc:Diagram ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Map diagrams"@en ,
-#    "Kartor i diagramform"@sv ;
-#  :singularLabel "Map diagram"@en ,
-#    "Karta i diagramform"@sv .
-
-#saogf:Kartprofiler a :GenreForm ;
-#  :broader saogf:Kartor ;
-#  :closeMatch marc:Profile ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Map profiles"@en ,
-#    "Kartprofiler"@sv ;
-#  :singularLabel "Map profile"@en ,
-#    "Kartprofil"@sv .
-
-saogf:Kartsektioner a :GenreForm ;
-  :broader saogf:Kartor ;
-  :closeMatch marc:Section ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Kartsektioner"@sv ;
-  :singularLabel "Map section"@en ,
-    "Kartsektion"@sv .
 
 saogf:Kasa :broader saogf:Musik .
 
@@ -1880,15 +1568,6 @@ saogf:K%C3%A5serier :closeMatch marc:HumorSatiresEtc ;
 
 saogf:L%C3%A4ndler :broader saogf:Musik .
 
-# Onlt 10 occurences in Libris, confusingly closeMatched to both loose leaf (maps) and loose leaf (legal material)
-#saogf:L%C3%B6sblad a :GenreForm ;
-#  :broader saogf:Samlande%20resurser ;
-#  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026373> , <- pertains to legal material
-#    marc:LooseLeaf ; <- pertains to maps
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Lösblad"@sv .
-
 saogf:Lambada :broader saogf:Musik .
 
 saogf:Lambeth%20walk%20%28musik%29 :broader saogf:Musik .
@@ -1906,17 +1585,6 @@ saogf:Legender a :GenreForm .
 saogf:Legender%20%28musik%29 :broader saogf:Musik .
 
 saogf:Legendspel :broader saogf:Musik .
-
-saogf:Leksaker a :GenreForm ;
-  :broader saogf:Interaktiva%20objekt ;
-  :closeMatch marcgt:toy ,
-    marc:Toy ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Leksaker"@sv ;
-  :singularLabel "Toy"@en ,
-    "Leksak"@sv .
 
 saogf:Leksakspiano :broader saogf:Musik .
 
@@ -1955,15 +1623,6 @@ saogf:Ljudeffekter :broader saogf:Musik .
 
 saogf:Ljudkonst :broader saogf:Musik .
 
-saogf:Ljudupptagningar a :GenreForm ;
-  #:broader kbrda:Sounds ;
-  :broader ktg:Audio ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026594> ;
-  :prefLabel "Ljudupptagningar"@sv .
-
 saogf:Lo-fi :broader saogf:Musik .
 
 saogf:Lucias%C3%A5nger :broader saogf:Musik .
@@ -1990,26 +1649,6 @@ saogf:M%C3%A4sters%C3%A5nger :broader saogf:Musik .
 saogf:M%C3%A5larb%C3%B6cker a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Målarbok"@sv, "Coloring Book"@en .
-
-saogf:M%C3%A5lningar a :GenreForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:Painting , <http://id.loc.gov/authorities/genreForms/gf2017027246> ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Målningar"@sv ;
-  :singularLabel "Painting"@en ,
-    "Målning"@sv .
-
-#saogf:M%C3%A5nglober a :GenreForm ;
-#  :broader saogf:Kartglober ;
-#  :closeMatch marc:EarthMoonGlobe ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Moon globes"@en ,
-#    "Månglober"@sv ;
-#  :singularLabel "Moon globe"@en ,
-#    "Månglob"@sv .
 
 saogf:Madrigaler a :GenreForm ;
   :broader saogf:Musik ;
@@ -2172,13 +1811,6 @@ saogf:Musikinspelningar a :GenreForm ;
   :singularLabel "Music Recording"@en ,
     "Musikinspelning"@sv .
 
-#saogf:Musikradioprogram a :GenreForm ;
-#  #:broader kbrda:PerformedMusic ,
-#  :broader saogf:Ljudupptagningar ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Musikradioprogram"@sv .
-
 saogf:Musikrecensioner a :GenreForm .
 
 saogf:Musikspel :broader saogf:Musik .
@@ -2264,21 +1896,6 @@ saogf:Oboesonater :broader saogf:Musik .
 saogf:Ocarina :broader saogf:Musik .
 
 saogf:Oden%20%28musik%29 :broader saogf:Musik .
-
-saogf:Offentligt%20tryck a :GenreForm ;
-  #:inCollection div:constructed ;
-  :inCollection div:identify , <https://id.kb.se/term/fack> ;
-  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
-  :broader saogf:Informativa%20verk , saogf:Facklitteratur ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Offentligt tryck"@sv ;  
-  :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
-    marc:Local ,
-    marc:Multilocal ,
-    marc:Multistate ,
-    marc:StateProvincialTerritorialDependentEtc ,
-    marc:InternationalIntergovernmental ,
-    marc:FederalNational .
 
 saogf:Offentligt%20tryck%20%28tidskrifter%29 :broader saogf:Periodika .
 
@@ -2419,16 +2036,6 @@ saogf:Personlig%20utveckling :broader saogf:Facklitteratur .
 
 saogf:Personliga%20ber%C3%A4ttelser :broader saogf:Facklitteratur .
 
-#saogf:Perspektivbilder%20%28kartor%29 a :GenreForm ;
-#  :broader saogf:Kartor ;
-#  :closeMatch marc:View ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Perspectice views (Maps)"@en ,
-#    "Perspektivbilder (kartor)"@sv ;
-#  :singularLabel "Perspectice view (Map)"@en ,
-#    "Perspektivbild (Karta)"@sv .
-
 saogf:Piano :broader saogf:Musik .
 
 saogf:Piano%20%284%20h%C3%A4nder%29 :broader saogf:Musik .
@@ -2456,17 +2063,6 @@ saogf:Pikareskromaner a :GenreForm .
 saogf:Pipa :broader saogf:Musik .
 
 saogf:Plachi :broader saogf:Musik .
-
-# Commenting out as we don't use this yet - might add back later!
-#saogf:Poddar a :GenreForm ;
-#  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026450> ;
-#  #:broader kbrda:SpokenWord ,
-#  :broader saogf:Ljudupptagningar ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Poddar"@sv ;
-#  :singularLabel "Podcast"@en ,
-#    "Podd"@sv .
 
 saogf:Poem%20%28symfoniska%20dikter%29 :broader saogf:Musik .
 
@@ -2639,13 +2235,6 @@ saogf:R%C3%B6st%20och%20tangentinstrument :broader saogf:Musik .
 
 saogf:R%C3%B6st%20och%20violin :broader saogf:Musik .
 
-#aogf:Radio a :GenreForm ;
-# :broader ktg:Audio ;
-# :category div:abstract ;
-# :inCollection div:constructed ;
-# :inScheme <https://id.kb.se/term/saogf> ;
-# :prefLabel "Radio"@sv .
-
 saogf:Radioprogram a :GenreForm ;
   :broader saogf:Ljudupptagningar ;
   :inScheme <https://id.kb.se/term/saogf> ;
@@ -2737,14 +2326,6 @@ saogf:Ricercari a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> .
 
 saogf:Rimofficier :broader saogf:Musik .
-
-#saogf:Ritningar a :GenreForm ;
-#  :broader saogf:Bilder ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Ritningar"@sv ;
-#  :singularLabel "Design drawing"@en ,
-#    "Ritning"@sv .
 
 saogf:Ritorneller%20%28musik%29 :broader saogf:Musik .
 
@@ -2918,15 +2499,6 @@ saogf:Serieromaner a :GenreForm ;
   :singularLabel "Graphic Novel"@en ,
     "Serieroman"@sv .
 
-#saogf:Seriestrippar a :GenreForm ;
-#  :broader saogf:Tecknade%20serier ;
-#  :closeMatch marc:ComicStrip ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Seriestrippar"@sv ;
-#  :singularLabel "Comic strip"@en ,
-#    "Seriestripp"@sv .
-
 saogf:Serietidningar a :GenreForm ;
   :broader saogf:Tecknade%20serier ,
     saogf:Periodika ;
@@ -3005,17 +2577,6 @@ saogf:Skolorkestrar :broader saogf:Musik .
 saogf:Skoltidningar :broader saogf:Periodika .
 
 saogf:Skr%C3%A4ck a :GenreForm .
-
-saogf:Skulpturer a :GenreForm ;
-  #:broader kbrda:ThreeDimensionalForm ;
-  :broader saogf:Visuella%20verk ;
-  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027259> ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack>;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Skulpturer"@sv ;
-  :singularLabel "Sculpture"@en ,
-    "Skulptur"@sv .
 
 saogf:Sl%C3%A4ktber%C3%A4ttelser a :GenreForm .
 
@@ -3234,16 +2795,6 @@ saogf:Teaterf%C3%B6rest%C3%A4llningar :broader saogf:Musik .
 
 saogf:Techno :broader saogf:Musik .
 
-saogf:Teckningar a :GenreForm ;
-  :broader saogf:Bilder ;
-  :closeMatch marc:Drawing ;
-  #:inCollection div:constructed;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Teckningar"@sv ;
-  :singularLabel "Drawing"@en ,
-    "Teckning"@sv .
-
 saogf:Tema%20med%20variationer a :GenreForm ;
   :broader saogf:Musik ;
   :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027156> ;
@@ -3270,24 +2821,6 @@ saogf:Tersetter :broader saogf:Musik .
 
 saogf:Text-ljudkompositioner :broader saogf:Musik .
 
-#saogf:Textblad a :GenreForm ;
-#  #:broader kbrda:Text ,
-#  :broader  saogf:Kortare%20texter ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Text leaf"@en ,
-#    "Textblad"@sv .
-
-#saogf:Texth%C3%A4ften a :GenreForm ;
-#  #:broader kbrda:Text ,
-#  :broader  saogf:Kortare%20texter ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Booklets"@en ,
-#    "Texthäften"@sv ;
-#  :singularLabel "Booklet"@en ,
-#    "Texthäfte"@sv .
-
 saogf:Thrash%20metal :broader saogf:Musik .
 
 saogf:Thumri :broader saogf:Musik .
@@ -3297,16 +2830,6 @@ saogf:Ti%20tzu :broader saogf:Musik .
 saogf:Tideg%C3%A4rd%20%28musik%29 :broader saogf:Musik .
 
 saogf:Tidskrifter%20f%C3%B6r%20etniska%20minoriteter :broader saogf:Periodika .
-
-saogf:Tidskriftsnummer a :GenreForm ;
-  :broader saogf:Periodika ;
-  :closeMatch marcgt:iss ;
-  :closeMatch <https://id.kb.se/term/repr/Issue> ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Tidskriftsnummer"@sv ;
-  :singularLabel "Tidskriftsnummer"@sv, "Periodical Issue"@en .
 
 saogf:Tidstrogna%20instrument :broader saogf:Musik .
 
@@ -3499,16 +3022,6 @@ saogf:Vibrafonkonserter :broader saogf:Musik .
 
 saogf:Videfl%C3%B6jt :broader saogf:Musik .
 
-saogf:Videoupptagningar a :GenreForm ;
-  :broader ktg:MovingImage ;
-  :closeMatch marc:Videorecording , <http://id.loc.gov/authorities/genreForms/gf2011026723> ;
-  #:inCollection div:constructed ;
-  :inCollection <https://id.kb.se/term/fack> ;
-  :inScheme <https://id.kb.se/term/saogf> ;
-  :prefLabel "Videoupptagningar"@sv ;
-  :singularLabel "Video recording"@en ,
-    "Videoupptagning"@sv .
-
 saogf:Vihuela :broader saogf:Musik .
 
 saogf:Villancicos a :GenreForm ;
@@ -3586,16 +3099,6 @@ saogf:Vykort a :GenreForm ;
   :inScheme <https://id.kb.se/term/saogf> ;
   :singularLabel "Postcard"@en ,
     "Vykort"@sv .
-
-# Commented out as we are not creating new SAOGF terms based on TGM at this point.
-#saogf:Vykortsb%C3%B6cker a :GenreForm ;
-#  :broader saogf:Vykort ;
-#  :closeMatch tgm:Vykortsh%C3%A4ften ;
-#  :inCollection div:constructed ;
-#  :inScheme <https://id.kb.se/term/saogf> ;
-#  :prefLabel "Vykortsböcker"@sv ;
-#  :singularLabel "Postcard book"@en ,
-#    "Vykortsbok"@sv .
 
 saogf:Wagnertuba :broader saogf:Musik .
 
