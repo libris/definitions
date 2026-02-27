@@ -35,6 +35,9 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 
 # TODO: Work out preferable ways to refer to relevant RDA origins (context: translations by the RDA group).
 
+# TODO: for those that are now marked <obsoleted-by-typenormalization>, the following may be better (since they will be kept for entailments):
+#    ptg:abstract true ; # ~ <abstracted-by-typenormalization>
+
 
 ##
 # Creative Works
@@ -622,6 +625,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 # of :Category.
 
 :contentType a owl:ObjectProperty;
+    :category :pending ;
     owl:deprecated true ; # ~ <obsoleted-by-typenormalization>
     rdfs:label "innehållstyp"@sv ;
     rdfs:range :ContentType ;
@@ -631,6 +635,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
     owl:propertyChainAxiom (:category _:a_ContentType) .
 
 :mediaType a owl:ObjectProperty;
+    :category :pending ;
     owl:deprecated true ; # ~ <obsoleted-by-typenormalization>
     rdfs:label "medietyp"@sv ;
     rdfs:range :MediaType ;
@@ -641,6 +646,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 
 # NOTE: a given value implies value for :media from base :MediaType.
 :carrierType a owl:ObjectProperty;
+    :category :pending ;
     owl:deprecated true ; # ~ <obsoleted-by-typenormalization>
     rdfs:label "bärartyp"@sv ;
     rdfs:range :CarrierType ;
@@ -732,11 +738,13 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 :MusicFormat a owl:Class; # TODO: =~ marc:MusicFormatType (?)
     owl:equivalentClass bf2:MusicFormat;
     rdfs:label "Notated music format"@en, "Format för noterad musik"@sv .
+
 ##
 # Issuance (clearly on instances since typenormalization).
 
 # alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
 :issuanceType a owl:ObjectProperty;
+    :category :pending ;
     rdfs:label "Mode of issuance"@en, "utgivningssätt"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty bf2:issuance;

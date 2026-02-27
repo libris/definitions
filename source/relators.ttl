@@ -6,6 +6,7 @@
 @prefix locrel: <http://id.loc.gov/vocabulary/relators/> .
 @prefix mts: <http://urn.fi/URN:NBN:fi:au:mts:> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ptg:  <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -13,6 +14,7 @@
 @prefix wikidata: <https://www.wikidata.org/entity/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+prefix div: <https://id.kb.se/term/div/>
 
 @base <https://id.kb.se/relator/> .
 
@@ -2100,11 +2102,14 @@ skos:related <editor> ;
     skos:definition "Agent som nämns i exempelvis förtexten till en film (“X presenterar”) och som på något sätt är inblandad i produktion, finansiering eller distribution."@sv .
 
 <primaryRightsHolder> a bf:Role ;
+    :category div:abstract ;  # only added to block it in the cataloguing interface
+    owl:deprecated true ;  # not yet supported
+    rdfs:comment "Obsolet. Använd ej."@sv ;
     rdfs:domain :Creation ;
     owl:sameAs <9pu> ;
     skos:notation "9pu" ;
     skos:prefLabel "Primärt upphovsansvarig"@sv ;
-    skos:definition "LIBRIS-definierad kod. Används endast av Kungliga biblioteket."@sv .
+    skos:definition "LIBRIS-definierad kod. Användes tidigare av Kungliga biblioteket."@sv .
 
 <printer> a bf:Role ;
     rdfs:domain :Instance ;
