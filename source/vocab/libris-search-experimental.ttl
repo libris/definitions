@@ -157,7 +157,7 @@ ls:hasInstanceCategory a owl:ObjectProperty ;
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
-    rdfs:comment "Språk som resursen översatts från."@sv, "Language that resource was translated from."@sv;
+    rdfs:comment "Språk som resursen översatts från."@sv, "Language that resource was translated from."@en;
     skos:notation "ÖVERS"^^ls:QueryCode ;
     # skos:notation "ORIG"^^ls:QueryCode ; # TODO deprecate?
     # skos:notation "TRANS"^^ls:QueryCode ; # TODO deprecate?
@@ -213,7 +213,7 @@ ls:itemShelf a owl:DatatypeProperty ;
 ls:itemCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
-     rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@sv;
+     rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
      rdfs:domain :Instance ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
