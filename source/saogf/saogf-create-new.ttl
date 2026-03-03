@@ -1,0 +1,261 @@
+prefix : <https://id.kb.se/vocab/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix div: <https://id.kb.se/term/div/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix marc: <https://id.kb.se/marc/>
+prefix marcgt: <http://id.loc.gov/vocabulary/marcgt/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix barngf: <https://id.kb.se/term/barngf/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix tgm: <https://id.kb.se/term/gmgpc/swe/>
+
+saogf:Teckningar a :GenreForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:Drawing ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Teckningar"@sv ;
+  :singularLabel "Drawing"@en ,
+    "Teckning"@sv .
+
+saogf:Visuella%20verk a :GenreForm ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027266> ;
+  :prefLabel "Visuella verk"@sv ;
+  :singularLabel "Visuellt verk"@sv, "Visual Work"@en .
+
+saogf:Index a :GenreForm ;
+  :inCollection <https://id.kb.se/term/fack>;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Referensverk ;
+  :closeMatch marc:Index, <http://id.loc.gov/authorities/genreForms/gf2014026112> ;
+  :prefLabel "Index"@sv ;
+  :singularLabel "Index"@sv, "Index"@en .
+
+saogf:Monografiserier a :GenreForm ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Seriella%20publikationer ;
+  :closeMatch marc:MonographicSeries ;
+  :prefLabel "Monografiserier"@sv ;
+  :singularLabel "Monographic Series"@en ,
+    "Monografiserie"@sv .
+
+saogf:Biografier%20%C3%B6ver%20en%20individ a :GenreForm ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Biografier ;
+  :closeMatch marc:IndividualBiography ;
+  :prefLabel "Biografier över en individ"@sv ;
+  :singularLabel "Biografi över en individ"@sv , "Individual biography"@en .
+
+saogf:Biografier%20%C3%B6ver%20flera%20individer a :GenreForm ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :broader saogf:Biografier ;
+  :closeMatch marc:CollectiveBiography ; 
+  :prefLabel "Biografier över flera individer"@sv ;
+  :singularLabel "Biografi över flera individer"@sv , "Collective biography"@en .
+
+saogf:Musik a :GenreForm ;
+  :prefLabel "Musik"@sv ;
+  :inCollection div:find ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+#  :broader ktg:Music ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026952> .
+
+saogf:Kortare%20texter a :GenreForm ;
+  :broader ktg:Literature ;
+  :category div:abstract ;
+  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Kortare texter"@sv ;
+  :singularLabel "Kortare text"@sv ,
+    "Text piece"@en .
+
+saogf:Samlande%20resurser a :GenreForm ;
+  :category div:abstract ;
+  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon>;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Samlande resurser"@sv ;
+  :singularLabel "Samlande resurs"@sv, "Collecting resource"@en .
+
+saogf:Artiklar a :GenreForm ;
+  :broader saogf:Kortare%20texter ;
+  :closeMatch marcgt:art ;
+  :inCollection <https://id.kb.se/term/fack> , <https://id.kb.se/term/skon>;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Artiklar"@sv ;
+  :singularLabel "Article"@en ,
+    "Artikel"@sv .
+
+saogf:Grafisk%20litteratur a :GenreForm ;
+  :broader saogf:Illustrerade%20verk ,
+    ktg:Literature ;
+  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon>;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Grafisk litteratur"@sv .
+
+saogf:Br%C3%A4dspel a :GenreForm ;
+  :broader saogf:Spel%20och%20tanken%C3%B6tter ,
+    saogf:Interaktiva%20objekt ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026048> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Brädspel"@sv ;
+  :singularLabel "Brädspel"@sv, "Board game"@en .
+
+saogf:Interaktiva%20objekt a :GenreForm ;
+  :inCollection <https://id.kb.se/term/fack>, <https://id.kb.se/term/skon> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Interaktiva objekt"@sv ;
+  :singularLabel "Interactive object"@en ,
+    "Interaktivt objekt"@sv .
+
+saogf:Facklitteratur a :GenreForm ;
+  :broader ktg:NonFictionLiterature ;
+  :inCollection <https://id.kb.se/term/fack> ,
+    div:find ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Facklitteratur"@sv .
+
+saogf:Fj%C3%A4rranalysbilder a :GenreForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:RemoteSensingImage ,
+    marcgt:rem , <http://id.loc.gov/authorities/genreForms/gf2011026530>;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Fjärranalysbilder"@sv ;
+  :singularLabel "Remote-sensing image"@en ,
+    "Fjärranalysbild"@sv .
+
+saogf:Himmelsglober a :GenreForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:CelestialGlobe , <http://id.loc.gov/authorities/genreForms/gf2011026117> ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Himmelsglober"@sv ;
+  :singularLabel "Celestial globe"@en ,
+    "Himmelsglob"@sv .
+
+saogf:Kartglober a :GenreForm ;
+  #:broader kbrda:CartographicThreeDimensionalForm ;
+  :broader saogf:Modeller, saogf:Kartografiskt%20material ;
+  :closeMatch marc:Globe ;
+  :narrowMatch marc:PlanetaryOrLunarGlobe ;
+  :inCollection div:identify, <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Kartglober"@sv ;
+  :singularLabel "Kartglob"@sv ,
+    "Cartographic globe"@en .
+
+saogf:Jordglober a :GenreForm ;
+  :broader saogf:Kartglober ;
+  :closeMatch marc:TerrestrialGlobe ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Jordglober"@sv ;
+  :singularLabel "Terrestial globe"@en ,
+    "Jordglob"@sv .
+
+saogf:Kartb%C3%B6cker a :GenreForm ;
+  #:broader kbrda:Text ,
+ # kbrda:CartographicImage ;
+ :broader saogf:Kartografiskt%20material , saogf:Facklitteratur ;
+ :closeMatch marc:Atlas ;
+ :inCollection <https://id.kb.se/term/fack> ;
+ :inScheme <https://id.kb.se/term/saogf> ;
+ :narrowMatch marc:MapMaterialType-d ;  # TODO:marc_instance_gf
+ :prefLabel "Kartböcker"@sv ;
+ :singularLabel "Kartbok"@sv ,
+   "Atlas"@en .
+
+saogf:Modeller a :GenreForm ;
+  :broader saogf:Visuella%20verk ;
+  :closeMatch marcgt:mod , <http://id.loc.gov/authorities/genreForms/gf2017027245>;
+  #:broader kbrda:ThreeDimensionalForm ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Modeller"@sv ;
+  :singularLabel "Model"@en ,
+    "Modell"@sv .
+
+saogf:Kartsektioner a :GenreForm ;
+  :broader saogf:Kartor ;
+  :closeMatch marc:Section ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Kartsektioner"@sv ;
+  :singularLabel "Map section"@en ,
+    "Kartsektion"@sv .
+
+saogf:Leksaker a :GenreForm ;
+  :broader saogf:Interaktiva%20objekt ;
+  :closeMatch marcgt:toy ,
+    marc:Toy ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Leksaker"@sv ;
+  :singularLabel "Toy"@en ,
+    "Leksak"@sv .
+
+saogf:Ljudupptagningar a :GenreForm ;
+  #:broader kbrda:Sounds ;
+  :broader ktg:Audio ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026594> ;
+  :prefLabel "Ljudupptagningar"@sv .
+
+saogf:M%C3%A5lningar a :GenreForm ;
+  :broader saogf:Bilder ;
+  :closeMatch marc:Painting , <http://id.loc.gov/authorities/genreForms/gf2017027246> ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Målningar"@sv ;
+  :singularLabel "Painting"@en ,
+    "Målning"@sv .
+
+saogf:Offentligt%20tryck a :GenreForm ;
+  :inCollection div:identify , <https://id.kb.se/term/fack> ;
+  :closeMatch marc:GovernmentPublicationLevelUndetermined ;
+  :broader saogf:Informativa%20verk , saogf:Facklitteratur ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Offentligt tryck"@sv ;  
+  :narrowMatch marc:AutonomousOrSemiAutonomousComponent ,
+    marc:Local ,
+    marc:Multilocal ,
+    marc:Multistate ,
+    marc:StateProvincialTerritorialDependentEtc ,
+    marc:InternationalIntergovernmental ,
+    marc:FederalNational .
+
+saogf:Skulpturer a :GenreForm ;
+  #:broader kbrda:ThreeDimensionalForm ;
+  :broader saogf:Visuella%20verk ;
+  :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027259> ;
+  :inCollection <https://id.kb.se/term/fack>;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Skulpturer"@sv ;
+  :singularLabel "Sculpture"@en ,
+    "Skulptur"@sv .
+
+saogf:Tidskriftsnummer a :GenreForm ;
+  :broader saogf:Periodika ;
+  :closeMatch marcgt:iss ;
+  :closeMatch <https://id.kb.se/term/repr/Issue> ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Tidskriftsnummer"@sv ;
+  :singularLabel "Tidskriftsnummer"@sv, "Periodical Issue"@en .
+
+saogf:Videoupptagningar a :GenreForm ;
+  :broader ktg:MovingImage ;
+  :closeMatch marc:Videorecording , <http://id.loc.gov/authorities/genreForms/gf2011026723> ;
+  :inCollection <https://id.kb.se/term/fack> ;
+  :inScheme <https://id.kb.se/term/saogf> ;
+  :prefLabel "Videoupptagningar"@sv ;
+  :singularLabel "Video recording"@en ,
+    "Videoupptagning"@sv .
+

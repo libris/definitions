@@ -1652,14 +1652,13 @@
         "Förvärvsstatus"@sv .
 
 :additionalCarrierType a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial,
-        kbv:Visual ;
+    sdo:domainIncludes kbv:Instance ; # kbv:Serial, kbv:Visual ; Usage: 0. Seems to actually be an instance property.
     sdo:rangeIncludes :ItemType ;
     skos:prefLabel "Form of Item"@en,
         "Form"@sv .
 
-:alphabet a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial, kbv:Instance ;
+:alphabet a owl:ObjectProperty ; 
+    sdo:domainIncludes kbv:Instance ; # Removed kbv:Serial, which seemed inconsistent with usage and intention
     sdo:rangeIncludes :SerialsAlphabetType ;
     skos:prefLabel "Alphabet"@en,
         "Alfabet/Skriftart"@sv .
@@ -1908,7 +1907,7 @@
 #          "Objekttyp"@sv .
 
 :originalItem a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial ;
+    sdo:domainIncludes kbv:Instance ; #Removed kbv:Serial to be consistent with template and usage
     sdo:rangeIncludes :SerialsOriginalItemType ;
     skos:prefLabel "Original Item"@en,
         "Form för den ursprungliga utgåvan"@sv .
@@ -1985,7 +1984,7 @@
 
 :runningTime a owl:DatatypeProperty ;
     :category :pending ;
-    sdo:domainIncludes kbv:Visual ;
+    sdo:domainIncludes kbv:Work ; # kbv:Visual ;
     # sdo:rangeIncludes :VisualRunningTimeType ;
     skos:prefLabel "Running Time"@en,
         "Speltid"@sv .
@@ -1996,7 +1995,7 @@
 #     skos:prefLabel "Original vs. Reproduction Aspect (OBSOLETE)"@en .
 
 :soundCapture a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:SoundRecording ;
+    sdo:domainIncludes kbv:Instance ; #kbv:SoundRecording ;
     sdo:rangeIncludes :SoundCaptureType ;
     skos:prefLabel "Capture & Storage Techniques"@en,
         "Inspelnings- och lagringsteknik"@sv .
@@ -2060,7 +2059,7 @@
 #        "Typ av underindelning"@sv .
 
 :technique a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Visual ;
+    sdo:domainIncludes kbv:Work ; # kbv:Visual ;
     sdo:rangeIncludes :VisualTechniqueType ;
     skos:prefLabel "Technique"@en,
         "Teknik"@sv .
@@ -2077,7 +2076,7 @@
 #         "Kontrollkod för arkivmaterial"@sv .
 
 :typeOfEntry a owl:ObjectProperty ;
-    sdo:domainIncludes kbv:Serial ;
+    sdo:domainIncludes kbv:Instance ; #Removed kbv:Serial to be consistent with template and usage
     sdo:rangeIncludes :SerialsTypeOfEntryType ;
     skos:prefLabel "Entry Convention"@en,
         "Behandling vid titeländring"@sv .

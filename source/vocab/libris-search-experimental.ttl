@@ -11,31 +11,41 @@
 
 ### Extended definitions for Libris Search ###
 :identifier # See ./details.ttl for full definition of :identifier
+    :category :searchfilter ;
     skos:notation "dc.identifier"^^ls:QueryCode .
 
 :isbn rdfs:domain :Instance ; # See ./details.ttl for full definition of :isbn
+    :category :searchfilter ;
     skos:notation "bath.isbn"^^ls:QueryCode .
 
 # TODO cataloging also searches identifiedBy / marc:canceledIssn, marc:incorrectIssn, marc:issnL, marc:canceledIssnL
 # webbsök has FELN / LINKISXN
 :issn rdfs:domain :Instance ; # See ./details.ttl for full definition of :issn
+    :category :searchfilter ;
     skos:notation "bath.issn"^^ls:QueryCode .
 
 :lccn rdfs:domain :Instance ; # See ./details.ttl for full definition of :lccn
+    :category :searchfilter ;
     skos:notation "bath.lccn"^^ls:QueryCode .
 
 :publisher # See ./details.ttl for full definition of :publisher
+    :category :searchfilter ;
     skos:notation "dc.publisher"^^ls:QueryCode ;
     skos:notation "FÖRLAG"^^ls:QueryCode ;
     skos:notation "FÖRL"^^ls:QueryCode ;
     skos:notation "FORL"^^ls:QueryCode .
 
 :contributor # See ./relations.ttl for full definition of :contributor
+    :category :searchfilter ;
+    skos:notation "dc.author"^^ls:QueryCode ;
+    skos:notation "dc.contributor"^^ls:QueryCode ;
+    skos:notation "dc.creator"^^ls:QueryCode ;
     skos:notation "FÖRF"^^ls:QueryCode ;
     skos:notation "FORF"^^ls:QueryCode .
 
 # NOTE: Old webbsök code 'author' was same as 'FÖRF'
 :author a owl:ObjectProperty ;
+    :category :searchfilter ;
     rdfs:label "författare"@sv, "author"@en ;
     :category :shorthand, :pending ;
     owl:equivalentProperty <https://id.kb.se/relator/author> ;
@@ -49,6 +59,7 @@
         ) .
 
 :translator a owl:ObjectProperty ;
+    :category :searchfilter ;
     rdfs:label "översättare"@sv, "translator"@en ;
     :category :shorthand, :pending ;
     owl:equivalentProperty <https://id.kb.se/relator/translator> ;
@@ -62,17 +73,20 @@
         ) .
 
 :subject # See ./relations.ttl for full definition of :subject
+    :category :searchfilter ;
     skos:notation "dc.subject"^^ls:QueryCode ;
     skos:notation "bath.topicalSubject"^^ls:QueryCode ;
     skos:notation "AMNE"^^ls:QueryCode .
 
 :language # See ./relations.ttl for full definition of :language
+    :category :searchfilter ;
     skos:notation "dc.language"^^ls:QueryCode ;
     skos:notation "SPRÅK"^^ls:QueryCode ;
     skos:notation "SPR"^^ls:QueryCode ;
     skos:notation "SPR1"^^ls:QueryCode .
 
 :controlNumber # See ./platform.ttl for full definition of :controlNumber
+    :category :searchfilter ;
     skos:notation "ONR"^^ls:QueryCode ;
     # rec.recordIdentifier is used A LOT in Libris SRU
     # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
@@ -82,6 +96,8 @@
     skos:notation "BIBID"^^ls:QueryCode .
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
+
+:textQuery skos:notation "cql.anywhere"^^ls:QueryCode . # See ./platform.ttl for full definition of :textQuery
 
 ### New definitions for Libris Search ###
 
@@ -106,7 +122,7 @@ ls:itemHeldBy a owl:ObjectProperty ;
     skos:notation "BIBL"^^ls:QueryCode ;
     skos:notation "LIBRARY"^^ls:QueryCode ;
     # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
-    :category :shorthand, :pending ;
+    :category :searchfilter, :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
@@ -114,7 +130,7 @@ ls:itemHeldBy a owl:ObjectProperty ;
 ls:itemHeldByOrg a owl:ObjectProperty ;
     rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
     skos:notation "OCODE"^^ls:QueryCode ;
-    :category :shorthand, :pending ;
+    :category :searchfilter, :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes bibdb:Organization ;
     owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
@@ -144,11 +160,12 @@ ls:hasInstanceCategory a owl:ObjectProperty ;
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
+    rdfs:comment "Språk som resursen översatts från."@sv, "Language that resource was translated from."@en;
     skos:notation "ÖVERS"^^ls:QueryCode ;
     # skos:notation "ORIG"^^ls:QueryCode ; # TODO deprecate?
     # skos:notation "TRANS"^^ls:QueryCode ; # TODO deprecate?
     # skos:notation "TRANSLATION"^^ls:QueryCode ; # TODO deprecate?
-    :category :shorthand, :pending ;
+    :category :searchfilter, :shorthand, :pending ;
     rdfs:domain :Work ;
     rdfs:range :Language ;
     owl:propertyChainAxiom ( :translationOf :language ) .
@@ -177,7 +194,7 @@ ls:noneCategory a :ObjectProperty ;
     ls:indexKey "_categoryByCollection.@none" .
 
 ls:title a owl:ObjectProperty ;
-    :category ls:composite, :pending ;
+    :category :searchfilter, ls:composite, :pending ;
     rdfs:label "titel"@sv, "title"@en ;
     skos:notation "TIT"^^ls:QueryCode ;
     skos:notation "bath.title"^^ls:QueryCode ;
@@ -187,6 +204,7 @@ ls:title a owl:ObjectProperty ;
         ( :relationship :entity :hasTitle ) .
 
 ls:itemShelf a owl:DatatypeProperty ;
+<<<<<<< HEAD
       :category :shorthand, :pending ;
       skos:notation "WHYL"^^ls:QueryCode ;
       rdfs:label "hyllsignum"@sv, "item shelf"@en ;
@@ -224,8 +242,9 @@ ls:itemNote a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ] .
 
 ls:itemCreated a owl:DatatypeProperty ;
-     :category :shorthand, :pending ;
+     :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
+     rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
      rdfs:domain :Instance ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .

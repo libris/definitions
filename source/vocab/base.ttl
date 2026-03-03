@@ -165,7 +165,10 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
     sdo:domainIncludes :ChangeNote, :Work, :Instance ;
     sdo:rangeIncludes :Category, :GenreForm, :ContentType ;
-    owl:equivalentProperty sdo:category .
+    owl:equivalentProperty sdo:category ;
+    # NOTE: Very (too?) powerful; acts like rdf:type/rdfs:subClassOf*.
+    # Used to derive the "legacy" work/instance types (mapped to BF).
+    owl:propertyChainAxiom (:category :broader) .
 
 :Category a owl:Class ;
     rdfs:subClassOf :Concept ;
@@ -235,6 +238,10 @@ rdf:type a owl:ObjectProperty;
     skos:example "instanceOf, translationOf, locatedIn"@sv ;
     skos:scopeNote "Används i XL för att presentera relaterade resurser tillsammans med huvudsaklig resurs."@sv ;
     :code "integral" .
+
+:searchfilter a skos:Collection ;
+    rdfs:label "search filter"@en, "sökfilter"@sv ;
+    :code "searchFilter" .
 
 
 ##
