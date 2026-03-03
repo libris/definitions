@@ -204,8 +204,7 @@ ls:title a owl:ObjectProperty ;
         ( :relationship :entity :hasTitle ) .
 
 ls:itemShelf a owl:DatatypeProperty ;
-<<<<<<< HEAD
-      :category :shorthand, :pending ;
+      :category :searchfilter, :shorthand, :pending ;
       skos:notation "WHYL"^^ls:QueryCode ;
       rdfs:label "hyllsignum"@sv, "item shelf"@en ;
       rdfs:domain :Instance ;
@@ -222,7 +221,7 @@ ls:shelf a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :shelfMark :label ) ] .
 
 ls:hasItemNote a owl:DatatypeProperty ;
-      :category :shorthand, :pending ;
+      :category :searchfilter, :shorthand, :pending ;
       skos:notation "LANM"^^ls:QueryCode ;
       rdfs:label "lokal anmärkning"@sv, "local note"@en ;
       rdfs:domain :Instance ;
@@ -257,11 +256,11 @@ ls:itemSubject a owl:DatatypeProperty ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
 
 ls:year a owl:DatatypeProperty ;
-    :category ls:merged ;
+    :category ls:merged, :pending ;
     ls:merges :year, :startYear .
 
 ls:yearPublished a owl:DatatypeProperty ;
-    :category :shorthand ;
+    :category :searchfilter, :shorthand, :pending ;
     rdfs:label "utgivningsår"@sv, "year of publication"@en ;
     rdfs:domain :Instance ;
     skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
