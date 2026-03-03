@@ -15,13 +15,19 @@
 
 :isbn rdfs:domain :Instance ; # See ./details.ttl for full definition of :isbn
     :category :searchfilter ;
-    skos:notation "bath.isbn"^^ls:QueryCode .
+    skos:notation "bath.isbn"^^ls:QueryCode ;
+    rdfs:subPropertyOf ls:isxn .
+
+:ismn rdfs:domain :Instance ; # See ./details.ttl for full definition of :ismn
+    :category :searchfilter ;
+    rdfs:subPropertyOf ls:isxn .
 
 # TODO cataloging also searches identifiedBy / marc:canceledIssn, marc:incorrectIssn, marc:issnL, marc:canceledIssnL
 # webbsök has FELN / LINKISXN
 :issn rdfs:domain :Instance ; # See ./details.ttl for full definition of :issn
     :category :searchfilter ;
-    skos:notation "bath.issn"^^ls:QueryCode .
+    skos:notation "bath.issn"^^ls:QueryCode ;
+    rdfs:subPropertyOf ls:isxn .
 
 :lccn rdfs:domain :Instance ; # See ./details.ttl for full definition of :lccn
     :category :searchfilter ;
@@ -114,6 +120,10 @@ ls:composite a skos:Collection ;
     rdfs:label "composite"@en, "sammansatt"@sv ;
     :category :pending ;
     :code "composite" .
+
+ls:isxn a owl:DatatypeProperty ;
+    :category ls:composite, :pending, :searchfilter ;
+    rdfs:label "ISXN"@sv, "ISXN"@en .
 
 ls:itemHeldBy a owl:ObjectProperty ;
     rdfs:label "Bibliotek"@sv, "Library"@en ;
@@ -219,6 +229,12 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:domain :Instance ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
+
+ls:itemSubject a owl:DatatypeProperty ;
+     :category :shorthand, :pending, :searchfilter ;
+     rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
+     rdfs:domain :Instance ;
+     owl:propertyChainAxiom ( :hasItem :subject ) .
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
