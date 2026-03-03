@@ -122,7 +122,7 @@ ls:composite a skos:Collection ;
     :code "composite" .
 
 ls:isxn a owl:ObjectProperty ;
-    :category ls:composite, :pending ;
+    :category ls:composite, :pending, :searchfilter ;
     rdfs:label "ISXN"@sv, "ISXN"@en .
 
 ls:itemHeldBy a owl:ObjectProperty ;
@@ -231,7 +231,7 @@ ls:itemCreated a owl:DatatypeProperty ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
 ls:itemSubject a owl:DatatypeProperty ;
-     :category :shorthand, :pending ;
+     :category :shorthand, :pending, :searchfilter ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
      rdfs:domain :Instance ;
      skos:notation "LOKÄMNE"^^ls:QueryCode ;
