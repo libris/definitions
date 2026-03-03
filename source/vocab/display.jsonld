@@ -1460,10 +1460,7 @@
         "Bibliography": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Bibliography",
-          "fresnel:extends": {"@id": "Bibliography-chips"},
-          "showProperties": [
-            "fresnel:super"
-          ]
+          "showProperties": [ "name", "qualifier", "sigel" ]
         },
         "Concept": {
           "@type": "fresnel:Lens",
@@ -1497,16 +1494,14 @@
         "Language": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
-          "fresnel:extends": {"@id": "Language-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [
+            { "alternateProperties": ["prefLabel", "label", "code"] }
+          ]
         },
         "Library": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Library",
-          "fresnel:extends": {"@id": "Library-chips"},
-          "showProperties": [
-            "fresnel:super"
-          ]
+          "showProperties": [ "name", "qualifier", "sigel" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
@@ -1520,8 +1515,7 @@
         "ProvisionActivity": {
           "@type": "fresnel:Lens",
           "classLensDomain": "ProvisionActivity",
-          "fresnel:extends": {"@id": "ProvisionActivity-chips"},
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "country", "place", "agent", "hasPart", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "SeriesMembership": {
           "@type": "fresnel:Lens",
