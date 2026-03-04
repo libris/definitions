@@ -1457,11 +1457,6 @@
       "@id": "search-tokens",
       "@type": "fresnel:Group",
       "lenses": {
-        "Agent": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "Agent",
-          "showProperties": ["name"]
-        },
         "bibdb:Organization": {
           "@type": "fresnel:Lens",
           "classLensDomain": "bibdb:Organization",
@@ -1479,33 +1474,35 @@
             {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]}
           ]
         },
-        "Creation": {
+        "Instance": {
           "@type": "fresnel:Lens",
-          "classLensDomain": "Creation",
+          "classLensDomain": "Instance",
           "showProperties": [
+            "hasTitle",
             {
-              "alternateProperties": [
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/KeyTitle/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/Title/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/*/mainTitle"
-                }
-              ]
+              "@type": "fresnel:fslselector",
+              "@value": "identifiedBy/*/value"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "describedBy/*/controlNumber"
             }
+          ]
+        },
+        "Work": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [
+            "hasTitle"
           ]
         },
         "Language": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Language",
           "showProperties": [
-            { "alternateProperties": ["prefLabel", "label", "code"] }
+            "prefLabel",
+            "label",
+            "code"
           ]
         },
         "Library": {
@@ -1513,37 +1510,49 @@
           "classLensDomain": "Library",
           "showProperties": [ "name", "qualifier", "sigel" ]
         },
+        "Family": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Family",
+          "showProperties": [ "name", "marc:titlesAndOtherWordsAssociatedWithAName", "lifeSpan", "place" ]
+        },
+        "Jurisdiction": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Jurisdiction",
+          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit" ]
+        },
+        "Meeting": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Meeting",
+          "showProperties": [ "name", "marc:numeration", "date", "place" ]
+        },
+        "Organization": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Organization",
+          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit" ]
+        },
         "Person": {
           "@type": "fresnel:Lens",
           "classLensDomain": "Person",
           "showProperties": [
             "givenName",
             "familyName",
-            "name"
+            "name",
+            "marc:numeration",
+            "lifeSpan",
+            "marc:titlesAndOtherWordsAssociatedWithAName",
+            "fullerFormOfName"
           ]
-        },
-        "ProvisionActivity": {
-          "@type": "fresnel:Lens",
-          "classLensDomain": "ProvisionActivity",
-          "showProperties": [ "country", "place", "agent", "hasPart", "year", "startYear", "endYear", "date", "marc:publicationStatus" ]
         },
         "SeriesMembership": {
           "@type": "fresnel:Lens",
           "classLensDomain": "SeriesMembership",
           "showProperties": [
-            {
+            "inSeries",
+             {
               "@type": "fresnel:fslselector",
-              "@value": "inSeries/*/identifiedBy/ISSN/value"
+              "@value": "inSeries/*/instanceOf/*/hasTitle"
             },
-            {
-              "alternateProperties": [
-                "seriesStatement",
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "inSeries/*/instanceOf/*/hasTitle/*/mainTitle"
-                }
-              ]
-            },
+            "seriesStatement",
             "seriesEnumeration"
           ]
         },
@@ -1556,7 +1565,8 @@
               "fresnel:subLens": {
                 "showProperties": [
                   "label",
-                  "responsibilityStatement"
+                  "responsibilityStatement",
+                  "comment"
                 ]
               }
             }
@@ -1567,6 +1577,7 @@
           "classLensDomain": "Title",
           "showProperties": [
             "mainTitle",
+            "qualifier",
             "title",
             "subtitle",
             "titleRemainder",
@@ -1781,6 +1792,62 @@
         "ImageObject": {
           "fresnel:extends": {"@id": "ImageObject-cards"},
           "showProperties": [ "fresnel:super" ]
+        }
+      }
+    },
+    "top-search-tokens": {
+      "@id": "top-search-tokens",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Agent": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Agent",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                "name",
+                "label"
+              ]
+            }
+          ]
+        },
+        "Person": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Person",
+          "showProperties": [
+            "givenName",
+            "familyName",
+            "name"
+          ]
+        },
+        "Creation": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Creation",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/KeyTitle/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/Title/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/*/mainTitle"
+                }
+              ]
+            }
+          ]
+        },
+        "Language": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Language",
+          "showProperties": [
+            { "alternateProperties": ["prefLabel", "label", "code"] }
+          ]
         }
       }
     },
