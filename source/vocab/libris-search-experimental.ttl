@@ -7,6 +7,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ls: <https://id.kb.se/ns/librissearch/> .
+@prefix marc: <https://id.kb.se/marc/> .
 
 ### Extended definitions for Libris Search ###
 :identifier # See ./details.ttl for full definition of :identifier
@@ -39,12 +40,6 @@
     skos:notation "FÖRLAG"^^ls:QueryCode ;
     skos:notation "FÖRL"^^ls:QueryCode ;
     skos:notation "FORL"^^ls:QueryCode .
-
-:yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ; # See ./details.ttl for full definition of :yearPublished
-    :category :searchfilter ;
-    rdfs:domain :Instance ;
-    skos:notation "dc.date"^^ls:QueryCode ;
-    skos:notation "ÅR"^^ls:QueryCode .
 
 :contributor # See ./relations.ttl for full definition of :contributor
     :category :searchfilter ;
@@ -83,7 +78,6 @@
             :agent
         ) .
 
-
 :subject # See ./relations.ttl for full definition of :subject
     :category :searchfilter ;
     skos:notation "dc.subject"^^ls:QueryCode ;
@@ -120,6 +114,13 @@ ls:composite a skos:Collection ;
     rdfs:label "composite"@en, "sammansatt"@sv ;
     :category :pending ;
     :code "composite" .
+
+# TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
+ls:merged a skos:Collection ;
+    rdfs:label "merged"@en, "sammanslagen"@sv .
+
+# TODO: add e.g. label, domain, comment
+ls:merges a owl:ObjectProperty .
 
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
@@ -213,14 +214,40 @@ ls:title a owl:ObjectProperty ;
         ( :relationship :entity :hasTitle ) .
 
 ls:itemShelf a owl:DatatypeProperty ;
-     :category :searchfilter, ls:composite, :pending ; # TODO: ls:merged?
-     rdfs:label "hyllsignum"@sv, "item shelf"@en ;
-     skos:notation "WHYL"^^ls:QueryCode ;
-     owl:propertyChainAxiom ( :hasItem :availability :label ),
-        ( :hasItem :shelfMark :label ),
-        ( :hasItem :shelfControlNumber ),
-        ( :hasItem :shelfLabel ),
-        ( :hasItem :physicalLocation ) .
+      :category :searchfilter, :shorthand, :pending ;
+      skos:notation "WHYL"^^ls:QueryCode ;
+      rdfs:label "hyllsignum"@sv, "item shelf"@en ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:shelf ) .
+
+ls:shelf a owl:DatatypeProperty ;
+     :category ls:merged, :pending ;
+     rdfs:label "hylla"@sv, "shelf"@en ;
+     rdfs:domain :Item ;
+     ls:merges :shelfControlNumber,
+        :shelfLabel,
+        :physicalLocation,
+        [ owl:propertyChainAxiom ( :availability :label ) ],
+        [ owl:propertyChainAxiom ( :shelfMark :label ) ] .
+
+ls:hasItemNote a owl:DatatypeProperty ;
+      :category :searchfilter, :shorthand, :pending ;
+      rdfs:label "lokal anmärkning"@sv, "local note"@en ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:itemNote ) .
+
+ls:itemNote a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
+    rdfs:label "beståndsanmärkning"@sv, "item note"@en ;
+    rdfs:domain :Item ;
+    ls:merges :cataloguersNote,
+        :custodialHistory,
+        [ owl:propertyChainAxiom ( :summary :label ) ],
+        [ owl:propertyChainAxiom ( :hasNote :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ) ],
+        [ owl:propertyChainAxiom ( marc:hasBindingInformation :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ] .
 
 ls:itemCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
@@ -235,6 +262,18 @@ ls:itemSubject a owl:DatatypeProperty ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
      rdfs:domain :Instance ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
+
+ls:year a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
+    ls:merges :year, :startYear .
+
+ls:yearPublished a owl:DatatypeProperty ;
+    :category :searchfilter, :shorthand, :pending ;
+    rdfs:label "utgivningsår"@sv, "year of publication"@en ;
+    rdfs:domain :Instance ;
+    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :publication ls:year ) .
+
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
@@ -281,14 +320,3 @@ ls:itemSubject a owl:DatatypeProperty ;
 #    owl:propertyChainAxiom (
 #        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationLcc ]
 #        :code ) .
-#
-#ls:itemNote a owl:DatatypeProperty ;
-#    :category ls:merged ;
-#    rdfs:label "anmärkning i bestånd"@sv, "item note"@en ;
-#    skos:notation "BANM"^^ls:QueryCode ;
-#    owl:propertyChainAxiom ( :hasItem :hasNote :label ),
-#        ( :hasItem :cataloguersNote ),
-#        ( :hasItem :custodialHistory ),
-#        ( :hasItem marc:hasCopyAndVersionIdentificationNote marc:itemCondition ),
-#        ( :hasItem marc:hasBindingInformation :label ),
-#        ( :hasItem marc:hasTextualHoldingsBasicBibliographicUni marc:cataloguersNote ) .

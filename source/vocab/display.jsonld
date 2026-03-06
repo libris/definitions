@@ -6,6 +6,7 @@
       "@base": "https://id.kb.se/vocab/display",
       "@vocab": "https://id.kb.se/vocab/",
       "marc": "https://id.kb.se/marc/",
+      "librissearch": "https://id.kb.se/ns/librissearch/",
       "lensGroups": {"@id": "@graph", "@container": "@index"},
       "lenses": {"@reverse": "fresnel:group", "@container": "@index"},
       "showProperties": {"@id": "fresnel:showProperties", "@container": "@list", "@type": "@vocab"},
@@ -795,7 +796,6 @@
             "summary",
             "immediateAcquisition",
             "availability",
-            "shelfLabel",
             { "inverseOf": "itemUsed" },
             { "inverseOf": "hasComponent" }
           ]
@@ -1457,27 +1457,91 @@
       "@id": "search-tokens",
       "@type": "fresnel:Group",
       "lenses": {
-        "Creation": {
+        "bibdb:Organization": {
           "@type": "fresnel:Lens",
-          "classLensDomain": "Creation",
+          "classLensDomain": "bibdb:Organization",
+          "showProperties": [ "name", "code" ]
+        },
+        "Bibliography": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Bibliography",
+          "showProperties": [ "name", "qualifier", "sigel" ]
+        },
+        "Concept": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Concept",
           "showProperties": [
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]}
+          ]
+        },
+        "Instance": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Instance",
+          "showProperties": [
+            "hasTitle",
             {
-              "alternateProperties": [
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/KeyTitle/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/Title/mainTitle"
-                },
-                {
-                  "@type": "fresnel:fslselector",
-                  "@value": "hasTitle/*/mainTitle"
-                }
-              ]
+              "@type": "fresnel:fslselector",
+              "@value": "identifiedBy/*/value"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "describedBy/*/controlNumber"
             }
           ]
+        },
+        "Work": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Work",
+          "showProperties": [
+            "hasTitle"
+          ]
+        },
+        "Language": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Language",
+          "showProperties": [
+            "prefLabel",
+            "label",
+            "code"
+          ]
+        },
+        "Library": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Library",
+          "showProperties": [ "name", "qualifier", "sigel" ]
+        },
+        "Agent": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Agent",
+          "showProperties": [ "label", "name" ]
+        },
+        "Family": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Family",
+          "showProperties": [ "name", "marc:titlesAndOtherWordsAssociatedWithAName", "lifeSpan" ]
+        },
+        "Jurisdiction": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Jurisdiction",
+          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit" ]
+        },
+        "Meeting": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Meeting",
+          "showProperties": [
+            "name",
+            "marc:numeration",
+            "date",
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "place/*/label"
+            }
+          ]
+        },
+        "Organization": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Organization",
+          "showProperties": [ "name", "isPartOf", "marc:subordinateUnit" ]
         },
         "Person": {
           "@type": "fresnel:Lens",
@@ -1485,15 +1549,64 @@
           "showProperties": [
             "givenName",
             "familyName",
-            "name"
+            "name",
+            "marc:numeration",
+            "lifeSpan",
+            "marc:titlesAndOtherWordsAssociatedWithAName",
+            "fullerFormOfName"
           ]
         },
-        "Library": {
+        "SeriesMembership": {
           "@type": "fresnel:Lens",
-          "classLensDomain": "Library",
+          "classLensDomain": "SeriesMembership",
           "showProperties": [
-            "name",
-            "qualifier"
+            "inSeries",
+             {
+              "@type": "fresnel:fslselector",
+              "@value": "inSeries/*/instanceOf/*/hasTitle"
+            },
+            "seriesStatement",
+            "seriesEnumeration"
+          ]
+        },
+        "TableOfContents": {
+          "classLensDomain": "TableOfContents",
+          "showProperties": [
+            "label",
+            {
+              "fresnel:property": "hasPart",
+              "fresnel:subLens": {
+                "showProperties": [
+                  "label",
+                  "responsibilityStatement",
+                  "comment"
+                ]
+              }
+            }
+          ]
+        },
+        "Title": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Title",
+          "showProperties": [
+            "mainTitle",
+            "qualifier",
+            "title",
+            "subtitle",
+            "titleRemainder",
+            "partNumber",
+            "partName",
+            "hasPart",
+            {
+              "fresnel:property": "hasPart",
+              "fresnel:subLens": {
+                "showProperties": [
+                  "partNumber",
+                  "partName"
+                ]
+              }
+            },
+            "marc:parallelTitle"
           ]
         }
       }
@@ -1502,10 +1615,6 @@
       "@id": "search-chips",
       "@type": "fresnel:Group",
       "lenses": {
-        "Record": {
-          "fresnel:extends": {"@id": "Record-chips"},
-          "showProperties": [ "fresnel:super", "bibliography", "created" ]
-        },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
           "showProperties": [
@@ -1513,9 +1622,57 @@
             "subject",
             "summary",
             "hasComponent",
-            "availability",
-            "physicalLocation",
-            "shelfLabel"
+            {
+              "fresnel:mergeProperties": [
+                "cataloguersNote",
+                "custodialHistory",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "summary/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasNote/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasCopyAndVersionIdentificationNote/*/marc:itemCondition"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasBindingInformation/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:cataloguersNote"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:publicNote"
+                }
+              ],
+              "fresnel:use": "librissearch:itemNote"
+            },
+            {
+              "fresnel:mergeProperties": [
+                "shelfLabel",
+                "physicalLocation",
+                "shelfControlNumber",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "shelfMark/*/label"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "availability/*/label"
+                }
+              ],
+              "fresnel:use": "librissearch:shelf"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/created"
+            }
           ]
         },
         "Person": {
@@ -1561,6 +1718,20 @@
           "classLensDomain": "ToCEntry",
           "fresnel:extends": {"@id": "ToCEntry-chips"},
           "showProperties": [ "fresnel:super", "responsibilityStatement" ]
+        },
+        "Publication": {
+          "classLensDomain": "Publication",
+          "fresnel:extends": {"@id": "Publication-chips"},
+          "showProperties": [
+            "fresnel:super",
+            {
+              "fresnel:mergeProperties": [
+                "year",
+                "startYear"
+              ],
+              "fresnel:use": "librissearch:year"
+            }
+          ]
         }
       }
     },
@@ -1573,7 +1744,7 @@
           "showProperties": [
             "fresnel:super",
             "appliedMaterial",
-            "basematerial",
+            "baseMaterial",
             "bookFormat",
             "colorContent",
             "hasNote",
@@ -1587,7 +1758,11 @@
             "summary",
             "tableOfContents",
             "videoCharacteristic",
-            "image"
+            "image",
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/bibliography"
+            }
           ]
         },
         "Item": {
@@ -1630,6 +1805,62 @@
         "ImageObject": {
           "fresnel:extends": {"@id": "ImageObject-cards"},
           "showProperties": [ "fresnel:super" ]
+        }
+      }
+    },
+    "top-search-tokens": {
+      "@id": "top-search-tokens",
+      "@type": "fresnel:Group",
+      "lenses": {
+        "Agent": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Agent",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                "name",
+                "label"
+              ]
+            }
+          ]
+        },
+        "Person": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Person",
+          "showProperties": [
+            "givenName",
+            "familyName",
+            "name"
+          ]
+        },
+        "Creation": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Creation",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/KeyTitle/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/Title/mainTitle"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "hasTitle/*/mainTitle"
+                }
+              ]
+            }
+          ]
+        },
+        "Language": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Language",
+          "showProperties": [
+            { "alternateProperties": ["prefLabel", "label", "code"] }
+          ]
         }
       }
     },
