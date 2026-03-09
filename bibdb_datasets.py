@@ -25,6 +25,7 @@ def libraries():
 @compiler.dataset
 def bibliographies():
     graph = _construct_bibdb_data('sigel=*&org_type=bibliography')
+    graph |= Graph().parse(str(compiler.path('source/bibdb/bibliographies.ttl')), format='turtle')
     return "/library", "2019-03-14T19:32:20.000Z", graph
 
 
@@ -47,8 +48,6 @@ def _construct_bibdb_data(query):
             }
         ],
         query="source/construct-libraries.rq")
-
-    graph |= Graph().parse(str(compiler.path('source/bibdb/bibliographies.ttl')), format='turtle')
 
     return graph
 
