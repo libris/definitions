@@ -1718,20 +1718,6 @@
           "classLensDomain": "ToCEntry",
           "fresnel:extends": {"@id": "ToCEntry-chips"},
           "showProperties": [ "fresnel:super", "responsibilityStatement" ]
-        },
-        "Publication": {
-          "classLensDomain": "Publication",
-          "fresnel:extends": {"@id": "Publication-chips"},
-          "showProperties": [
-            "fresnel:super",
-            {
-              "fresnel:mergeProperties": [
-                "year",
-                "startYear"
-              ],
-              "fresnel:use": "librissearch:year"
-            }
-          ]
         }
       }
     },
@@ -1805,6 +1791,20 @@
         "ImageObject": {
           "fresnel:extends": {"@id": "ImageObject-cards"},
           "showProperties": [ "fresnel:super" ]
+        },
+        "Publication": {
+          "classLensDomain": "Publication",
+          "fresnel:extends": {"@id": "Publication-cards"},
+          "showProperties": [
+            "fresnel:super",
+            {
+              "fresnel:mergeProperties": [
+                "year",
+                "startYear"
+              ],
+              "fresnel:use": "librissearch:year"
+            }
+          ]
         }
       }
     },
