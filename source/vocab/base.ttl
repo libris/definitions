@@ -165,7 +165,7 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
     sdo:domainIncludes :ChangeNote, :Work, :Instance ;
     sdo:rangeIncludes :Category, :GenreForm, :ContentType ;
-    :category :mainfilterforrange ;
+    :category :impliedByObject ;
     owl:equivalentProperty sdo:category ;
     # NOTE: Very (too?) powerful; acts like rdf:type/rdfs:subClassOf*.
     # Used to derive the "legacy" work/instance types (mapped to BF).
@@ -244,8 +244,12 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "search filter"@en, "sökfilter"@sv ;
     :code "searchfilter" .
 
-:mainfilterforrange a skos:Collection ;
-    :code "mainfilterforrange" .
+:impliedByObject a skos:Collection ;
+    rdfs:label "implied by object"@en, "impliceras av objektet"@sv ;
+    rdfs:comment "Anges som kategori på relationer. Relationen är den vanligast förekommande för en typ och framgår därför av värdet."@sv ;
+    skos:example "language, category"@sv ;
+    skos:scopeNote "Används i XL för att markera att etiketten för dessa egenskaper inte alltid behöver skrivas ut."@sv ;
+    :code ":impliedByObject" .
 
 ##
 # Common Properties
