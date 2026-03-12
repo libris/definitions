@@ -166,7 +166,8 @@ rdf:type a owl:ObjectProperty;
     sdo:domainIncludes :ChangeNote, :Work, :Instance ;
     sdo:rangeIncludes :Category, :GenreForm, :ContentType ;
     :category :impliedByObject ;
-    owl:equivalentProperty sdo:category ;
+    owl:equivalentProperty sdo:category, dc:type ;
+
     # NOTE: Very (too?) powerful; acts like rdf:type/rdfs:subClassOf*.
     # Used to derive the "legacy" work/instance types (mapped to BF).
     owl:propertyChainAxiom (:category :broader) .
