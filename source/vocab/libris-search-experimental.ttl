@@ -42,7 +42,7 @@
     skos:notation "FORL"^^ls:QueryCode .
 
 :contributor # See ./relations.ttl for full definition of :contributor
-    :category :searchfilter ;
+    :category :searchfilter, :impliedByObject ;
     skos:notation "dc.author"^^ls:QueryCode ;
     skos:notation "dc.contributor"^^ls:QueryCode ;
     skos:notation "dc.creator"^^ls:QueryCode ;
@@ -85,7 +85,7 @@
     skos:notation "AMNE"^^ls:QueryCode .
 
 :language # See ./relations.ttl for full definition of :language
-    :category :searchfilter ;
+    :category :searchfilter, :impliedByObject ;
     skos:notation "dc.language"^^ls:QueryCode ;
     skos:notation "SPRÅK"^^ls:QueryCode ;
     skos:notation "SPR"^^ls:QueryCode ;
@@ -132,7 +132,7 @@ ls:itemHeldBy a owl:ObjectProperty ;
     skos:notation "BIBL"^^ls:QueryCode ;
     skos:notation "LIBRARY"^^ls:QueryCode ;
     # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
-    :category :searchfilter, :shorthand, :pending ;
+    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes :Library ;
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
@@ -140,30 +140,30 @@ ls:itemHeldBy a owl:ObjectProperty ;
 ls:itemHeldByOrg a owl:ObjectProperty ;
     rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
     skos:notation "OCODE"^^ls:QueryCode ;
-    :category :searchfilter, :shorthand, :pending ;
+    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
     rdfs:domain :Instance ;
     sdo:rangeIncludes bibdb:Organization ;
     owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
 
 ls:instanceOfType a owl:ObjectProperty ;
-    :category :shorthand, :pending ;
+    :category :shorthand, :impliedByObject, :pending ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( :instanceOf rdf:type ) .
 
 ls:hasInstanceType a owl:ObjectProperty ;
-    :category :shorthand, :pending ;
+    :category :shorthand, :impliedByObject, :pending ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .
 
 ls:instanceOfCategory a owl:ObjectProperty ;
     rdfs:label "kategori på verket"@sv, "category of work"@en ;
-    :category :shorthand, :pending ;
+    :category :shorthand, :impliedByObject, :pending ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( :instanceOf :category ) .
 
 ls:hasInstanceCategory a owl:ObjectProperty ;
     rdfs:label "format"@sv, "format"@en ;
-    :category :shorthand, :pending ;
+    :category :shorthand, :impliedByObject, :pending ;
     rdfs:domain :Work ;
     sdo:rangeIncludes :InstanceCategory ;
     owl:propertyChainAxiom ( :hasInstance :category ) .
