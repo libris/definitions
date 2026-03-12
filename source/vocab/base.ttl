@@ -165,6 +165,7 @@ rdf:type a owl:ObjectProperty;
     rdfs:label "category"@en, "kategori"@sv;
     sdo:domainIncludes :ChangeNote, :Work, :Instance ;
     sdo:rangeIncludes :Category, :GenreForm, :ContentType ;
+    :category :mainfilterforrange ;
     owl:equivalentProperty sdo:category ;
     # NOTE: Very (too?) powerful; acts like rdf:type/rdfs:subClassOf*.
     # Used to derive the "legacy" work/instance types (mapped to BF).
@@ -241,8 +242,10 @@ rdf:type a owl:ObjectProperty;
 
 :searchfilter a skos:Collection ;
     rdfs:label "search filter"@en, "sökfilter"@sv ;
-    :code "searchFilter" .
+    :code "searchfilter" .
 
+:mainfilterforrange a skos:Collection ;
+    :code "mainfilterforrange" .
 
 ##
 # Common Properties
