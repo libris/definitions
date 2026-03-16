@@ -279,19 +279,14 @@ ls:year a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     ls:merges :year, :startYear .
 
-:yearPublished rdfs:label "utgivningsår"@sv, "year of publication"@en ;
-    :category :searchfilter ;
+ls:yearPublished a owl:DatatypeProperty ;
+    :category :searchfilter, :shorthand, :pending ;
+    rdfs:label "utgivningsår"@sv, "year of publication"@en ;
     rdfs:domain :Instance ;
-    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode . 
+    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :publication ls:year ) .
 
-#ls:yearPublished a owl:DatatypeProperty ;
-#    :category :searchfilter, :shorthand, :pending ;
-#    rdfs:label "utgivningsår"@sv, "year of publication"@en ;
-#    rdfs:domain :Instance ;
-#    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
-#    owl:propertyChainAxiom ( :publication ls:year ) .
-#
-#
+
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
 #    :category :shorthand ;
