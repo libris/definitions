@@ -34,13 +34,6 @@
     :category :searchfilter ;
     skos:notation "bath.lccn"^^ls:QueryCode .
 
-:publisher # See ./details.ttl for full definition of :publisher
-    :category :searchfilter ;
-    skos:notation "dc.publisher"^^ls:QueryCode ;
-    skos:notation "FÖRLAG"^^ls:QueryCode ;
-    skos:notation "FÖRL"^^ls:QueryCode ;
-    skos:notation "FORL"^^ls:QueryCode .
-
 :seriesMembership :category :searchfilter . # See ./relations.ttl for full definition of :seriesMembership
 
 :responsibilityStatement :category :searchfilter . # See ./details.ttl for full definition of :responsibilityStatement
@@ -292,6 +285,16 @@ ls:publicationPlace a owl:ObjectProperty;
     sdo:domainIncludes :Instance ;
     rdfs:range :Place ;
     owl:propertyChainAxiom ( :publication :place ), ( :publication :hasPart :place ) .
+
+ls:publisher a owl:ObjectProperty;
+    :category ls:composite, :searchfilter ;
+    rdfs:label "utgivare"@sv, "publisher"@en ;
+    sdo:domainIncludes :Instance ;
+    skos:notation "dc.publisher"^^ls:QueryCode,
+        "FÖRLAG"^^ls:QueryCode,
+        "FÖRL"^^ls:QueryCode,
+        "FORL"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :publication :agent ), ( :publication :hasPart :agent ) .
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
