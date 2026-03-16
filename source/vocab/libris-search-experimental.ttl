@@ -286,6 +286,12 @@ ls:yearPublished a owl:DatatypeProperty ;
     skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
     owl:propertyChainAxiom ( :publication ls:year ) .
 
+ls:publicationPlace a owl:ObjectProperty;
+    :category ls:composite, :searchfilter;
+    rdfs:label "utgivningsort"@sv, "place of publication"@en ;
+    sdo:domainIncludes :Instance ;
+    rdfs:range :Place ;
+    owl:propertyChainAxiom ( :publication :place ), ( :publication :hasPart :place ) .
 
 # TODO
 #ls:classificationCode a owl:DatatypeProperty ;
