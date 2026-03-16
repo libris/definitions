@@ -867,7 +867,17 @@
           "@id": "Place-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Place",
-          "showProperties": [ "prefLabel", "locatedIn", "country", "description" ]
+          "showProperties": [
+            {
+              "alternateProperties": [
+                "prefLabel",
+                "label"
+              ]
+            },
+            "locatedIn",
+            "country",
+            "description"
+          ]
         },
         "DescriptionConventions": {
           "@id": "DescriptionConventions-cards",
@@ -1554,6 +1564,18 @@
             "lifeSpan",
             "marc:titlesAndOtherWordsAssociatedWithAName",
             "fullerFormOfName"
+          ]
+        },
+        "Place": {
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Place",
+          "showProperties": [
+            {
+              "alternateProperties": [
+                "prefLabel",
+                "label"
+              ]
+            }
           ]
         },
         "SeriesMembership": {
