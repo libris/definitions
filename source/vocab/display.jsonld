@@ -226,6 +226,27 @@
           "classLensDomain": "Item",
           "showProperties": [ "heldBy", "itemOf", "shelfMark", "shelfControlNumber" ]
         },
+        "marc:TextualHoldingsBasicBibliographicUnit": {
+          "@id": "marc:TextualHoldingsBasicBibliographicUnit-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:TextualHoldingsBasicBibliographicUnit",
+          "showProperties": [
+            "marc:textualString",
+            "marc:publicNote"
+          ]
+        },
+        "marc:CopyAndVersionIdentificationNote": {
+          "@id": "marc:CopyAndVersionIdentificationNote-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:CopyAndVersionIdentificationNote",
+          "showProperties": [
+            "marc:inventoryLevel",
+            "marc:copyIdentification",
+            "marc:versionIdentification",
+            "marc:itemCondition",
+            "marc:presentationFormat"
+          ]
+        },
         "ShelfMark": {
           "@id": "ShelfMark-chips",
           "@type": "fresnel:Lens",
@@ -793,6 +814,7 @@
            ]
         },
         "Item": {
+          "NOTE": "separate from search-cards",
           "@id": "Item-cards",
           "@type": "fresnel:Lens",
           "classLensDomain": "Item",
@@ -800,6 +822,7 @@
             "itemOf",
             "heldBy",
             "hasComponent",
+            "appliesTo",
             "physicalLocation",
             "shelfMark",
             "shelfControlNumber",
@@ -811,8 +834,29 @@
             "immediateAcquisition",
             "availability",
             { "inverseOf": "itemUsed" },
-            { "inverseOf": "hasComponent" }
+            { "inverseOf": "hasComponent" },
+            "associatedMedia",
+            "isPrimaryTopicOf",
+            "hasNote",
+            "custodialHistory",
+            "marc:hasBindingInformation",
+            "marc:hasTextualHoldingsBasicBibliographicUnit",
+            "marc:hasCopyAndVersionIdentificationNote"
           ]
+        },
+        "marc:TextualHoldingsBasicBibliographicUnit": {
+          "@id": "marc:TextualHoldingsBasicBibliographicUnit-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:TextualHoldingsBasicBibliographicUnit",
+          "fresnel:extends": {"@id": "marc:TextualHoldingsBasicBibliographicUnit-chips"},
+          "showProperties": [ "fresnel:super" ]
+        },
+        "marc:CopyAndVersionIdentificationNote": {
+          "@id": "marc:CopyAndVersionIdentificationNote-cards",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "marc:CopyAndVersionIdentificationNote",
+          "fresnel:extends": {"@id": "marc:CopyAndVersionIdentificationNote-chips"},
+          "showProperties": [ "fresnel:super" ]
         },
         "StructuredValue": {
           "@id": "StructuredValue-cards",
@@ -1786,8 +1830,25 @@
           ]
         },
         "Item": {
-          "fresnel:extends": {"@id": "Item-cards"},
-          "showProperties": [ "fresnel:super", "cataloguersNote" ]
+          "NOTE": "separate from cards",
+          "showProperties": [
+            "itemOf",
+            "heldBy",
+            "hasComponent",
+            "physicalLocation",
+            "shelfMark",
+            "shelfControlNumber",
+            "language",
+            "genreForm",
+            "classification",
+            "subject",
+            "summary",
+            "immediateAcquisition",
+            "availability",
+            { "inverseOf": "itemUsed" },
+            { "inverseOf": "hasComponent" },
+            "cataloguersNote"
+          ]
         },
         "Work": {
           "fresnel:extends": {"@id": "Work-cards"},
