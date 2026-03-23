@@ -117,12 +117,17 @@ ls:composite a skos:Collection ;
 ls:preferLike a skos:Collection ;
     :code "preferLike" .
 
+ls:coercing a skos:Collection ;
+    :category :pending .
+
 # TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
 ls:merged a skos:Collection ;
+    :category :pending ;
     rdfs:label "merged"@en, "sammanslagen"@sv .
 
 # TODO: add e.g. label, domain, comment
-ls:merges a owl:ObjectProperty .
+ls:merges a owl:ObjectProperty ;
+    :category :pending .
 
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
@@ -157,19 +162,6 @@ ls:hasInstanceType a owl:ObjectProperty ;
     rdfs:domain :Work ;
     owl:propertyChainAxiom ( :hasInstance rdf:type ) .
 
-ls:instanceOfCategory a owl:ObjectProperty ;
-    rdfs:label "kategori på verket"@sv, "category of work"@en ;
-    :category :shorthand, :impliedByObject, :pending ;
-    rdfs:domain :Instance ;
-    owl:propertyChainAxiom ( :instanceOf :category ) .
-
-ls:hasInstanceCategory a owl:ObjectProperty ;
-    rdfs:label "format"@sv, "format"@en ;
-    :category :shorthand, :impliedByObject, :pending ;
-    rdfs:domain :Work ;
-    sdo:rangeIncludes :InstanceCategory ;
-    owl:propertyChainAxiom ( :hasInstance :category ) .
-
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
     rdfs:comment "Språk som resursen översatts från."@sv, "Language that resource was translated from."@en;
@@ -185,28 +177,31 @@ ls:originalLanguage a owl:ObjectProperty ;
 ls:indexKey a :DatatypeProperty ;
     :category :pending .
 
-ls:findCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
+ls:workCategory a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
+    rdfs:label "kategori"@sv, "category"@en ;
     rdfs:domain :Work ;
+    rdfs:range :WorkCategory ;
+    ls:indexKey "_categoryByCollection.@none" .
+
+ls:instanceCategory a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
+    rdfs:label "format"@sv, "format"@en ;
+    rdfs:domain :Instance ;
+    rdfs:range :InstanceCategory ;
+    ls:indexKey "_categoryByCollection.@none" .
+
+ls:findCategory a :ObjectProperty ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
-    sdo:rangeIncludes :WorkCategory ;
     ls:indexKey "_categoryByCollection.find" .
 
 ls:identifyCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
-    rdfs:domain :Work ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
-    sdo:rangeIncludes :WorkCategory ;
     ls:indexKey "_categoryByCollection.identify" .
-
-ls:noneCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
-    rdfs:domain :Work ;
-    sdo:rangeIncludes :WorkCategory ;
-    ls:indexKey "_categoryByCollection.@none" .
 
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
