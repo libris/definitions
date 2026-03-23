@@ -43,7 +43,7 @@
 :tableOfContents :category :searchfilter . # See ./details.ttl for full definition of :tableOfContents
 
 :contributor # See ./relations.ttl for full definition of :contributor
-    :category :searchfilter, :impliedByObject ;
+    :category :searchfilter, :impliedByObject, ls:preferLike ;
     skos:notation "dc.author"^^ls:QueryCode ;
     skos:notation "dc.contributor"^^ls:QueryCode ;
     skos:notation "dc.creator"^^ls:QueryCode ;
@@ -52,9 +52,8 @@
 
 # NOTE: Old webbsök code 'author' was same as 'FÖRF'
 :author a owl:ObjectProperty ;
-    :category :searchfilter ;
+    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
     rdfs:label "författare"@sv, "author"@en ;
-    :category :shorthand, :pending ;
     owl:equivalentProperty <https://id.kb.se/relator/author> ;
     rdfs:subPropertyOf :contributor ;
     rdfs:range :Agent ;
@@ -66,9 +65,8 @@
         ) .
 
 :translator a owl:ObjectProperty ;
-    :category :searchfilter ;
+    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
     rdfs:label "översättare"@sv, "translator"@en ;
-    :category :shorthand, :pending ;
     owl:equivalentProperty <https://id.kb.se/relator/translator> ;
     rdfs:subPropertyOf :contributor ;
     rdfs:range :Agent ;
@@ -115,6 +113,9 @@ ls:composite a skos:Collection ;
     rdfs:label "composite"@en, "sammansatt"@sv ;
     :category :pending ;
     :code "composite" .
+
+ls:preferLike a skos:Collection ;
+    :code "preferLike" .
 
 # TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
 ls:merged a skos:Collection ;
