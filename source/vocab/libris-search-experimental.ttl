@@ -152,15 +152,15 @@ ls:itemHeldByOrg a owl:ObjectProperty ;
     sdo:rangeIncludes bibdb:Organization ;
     owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
 
-ls:instanceOfType a owl:ObjectProperty ;
-    :category :shorthand, :impliedByObject, :pending ;
-    rdfs:domain :Instance ;
-    owl:propertyChainAxiom ( :instanceOf rdf:type ) .
-
-ls:hasInstanceType a owl:ObjectProperty ;
-    :category :shorthand, :impliedByObject, :pending ;
+ls:workType a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
     rdfs:domain :Work ;
-    owl:propertyChainAxiom ( :hasInstance rdf:type ) .
+    ls:indexKey "@type" .
+
+ls:instanceType a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
+    rdfs:domain :Instance ;
+    ls:indexKey "@type" .
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
