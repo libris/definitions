@@ -174,7 +174,7 @@ ls:originalLanguage a owl:ObjectProperty ;
     rdfs:range :Language ;
     owl:propertyChainAxiom ( :translationOf :language ) .
 
-ls:indexKey a :DatatypeProperty ;
+ls:indexKey a owl:DatatypeProperty ;
     :category :pending .
 
 ls:workCategory a owl:ObjectProperty ;
@@ -191,13 +191,13 @@ ls:instanceCategory a owl:ObjectProperty ;
     rdfs:range :InstanceCategory ;
     ls:indexKey "_categoryByCollection.@none" .
 
-ls:findCategory a :ObjectProperty ;
+ls:findCategory a owl:ObjectProperty ;
     :category :pending, ls:coercing ;
     rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
     ls:indexKey "_categoryByCollection.find" .
 
-ls:identifyCategory a :ObjectProperty ;
+ls:identifyCategory a owl:ObjectProperty ;
     :category :pending, ls:coercing ;
     rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
