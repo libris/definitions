@@ -3,7 +3,7 @@ if bytes is not str:
     unicode = str
 
 import json
-from rdflib import ConjunctiveGraph, URIRef, RDF, RDFS, OWL, XSD
+from rdflib import ConjunctiveGraph, URIRef, BNode, RDF, RDFS, OWL, XSD
 from rdflib.util import guess_format, SUFFIX_FORMAT_MAP
 from rdflib.resource import Resource
 
@@ -133,6 +133,8 @@ def get_preferred(term, pred, ns_pref_order=None):
     relateds = list(term.objects(pred))
     term_pfx = _pfx(term)
     for related in relateds:
+        if type(related.identifier) == BNode:
+            continue
         pfx = _pfx(related)
         if pfx == term_pfx or pfx not in ns_pref_order:
             continue
