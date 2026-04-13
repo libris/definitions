@@ -376,11 +376,13 @@
     rdfs:subClassOf :Agent .
 
 :bibliography a owl:ObjectProperty ;
-    rdfs:comment "in bibliography"@en, "bibliografi som resursen ingår i"@sv ;
+    :category :searchfilter, :impliedByObject ;
+    rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
+    rdfs:comment "Anger vilken bibliografisk förteckning som resursen är upptagen i. En bibliografi är en systematisk förteckning med en specifik urvalsprincip, t.ex. utgivningsland, ämne, språk eller materialtyp."@sv,
+                 "Indicates which bibliography the resource is listed in. A bibliography is a systematic listing with a specific selection principle, e.g. country of publication, subject, language, or material type."@en ;
     rdfs:domain :Record ;
     sdo:rangeIncludes :Bibliography ;
-    rdfs:subPropertyOf dc:isPartOf ;
-    rdfs:label "bibliografi"@sv .
+    rdfs:subPropertyOf dc:isPartOf .
 
 :sigel a owl:DatatypeProperty;
     rdfs:label "sigel code"@en, "sigel"@sv ;

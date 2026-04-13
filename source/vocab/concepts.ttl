@@ -322,6 +322,7 @@
 # Classification Classes
 
 :classification a owl:ObjectProperty;
+    :category :searchfilter ;
     owl:equivalentProperty bf2:classification;
     rdfs:domain :Endeavour ;
     rdfs:range :Classification ;
@@ -329,6 +330,7 @@
     rdfs:label "Classification"@en, "klassifikation"@sv .
 
 :additionalClassificationDdc a owl:ObjectProperty;
+    :category :searchfilter ;
     rdfs:subPropertyOf :classification;
     rdfs:domain :Creation ;
     rdfs:range :ClassificationDdc ;
@@ -414,7 +416,7 @@
     :category :pending ;
     rdfs:label "genre/form"@sv;
     rdfs:range :GenreForm;
-    rdfs:subPropertyOf dc:type, sdo:genre ;
+    rdfs:subPropertyOf sdo:genre ;
     owl:equivalentProperty bf2:genreForm ;
     owl:propertyChainAxiom (:category _:a_GenreForm) .
 

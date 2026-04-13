@@ -215,6 +215,13 @@
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISBN ] :value ) ;
     rdfs:range :ISBN .
 
+:ismn a owl:DatatypeProperty ;
+    :category :shorthand;
+    rdfs:label "ISMN";
+    rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :ISMN ] :value ) ;
+    rdfs:range :ISMN .
+
 :issn a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "ISSN";
@@ -1083,6 +1090,20 @@
     # there is no corresponding correlation in these mappings.
     # (We have ~600k linked publisher roles in contribution (as of 2021).)
     owl:propertyChainAxiom ( :publication :agent ) .
+
+:manufacturer a owl:ObjectProperty;
+    :category :shorthand, :searchfilter;
+    rdfs:label "tillverkare"@sv, "manufacturer"@en ;
+    sdo:domainIncludes :Instance ;
+    rdfs:range :Place ;
+    owl:propertyChainAxiom ( :manufacture :agent ) .
+
+:manufacturePlace a owl:ObjectProperty;
+    :category :shorthand, :searchfilter;
+    rdfs:label "tillverkningsort"@sv, "place of manufacture"@en ;
+    sdo:domainIncludes :Instance ;
+    rdfs:range :Place ;
+    owl:propertyChainAxiom ( :manufacture :place ) .
 
 :firstIssue a owl:DatatypeProperty;
     rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
