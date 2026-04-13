@@ -1165,10 +1165,6 @@
           "fresnel:extends": {"@id": "ClassificationDdc-chips"},
           "showProperties": [ "fresnel:super", "marc:explanatoryTerm" ]
         },
-        "MediaObject": {
-          "fresnel:extends": {"@id": "MediaObject-chips"},
-          "showProperties": [ "fresnel:super" ]
-        },
         "EntityContainer": {
           "@id": "EntityContainer-cards",
           "showProperties": [ "administeredBy", "membershipResource", "isMemberOfRelation", "memberClass", "slugProperty" ]
@@ -1239,7 +1235,7 @@
           "@type": "fresnel:Lens",
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "classLensDomain": "MediaObject",
-          "showProperties": [ "fresnel:super" ]
+          "showProperties": [ "fresnel:super", "marc:publicNote" ]
         },
         "License": {
           "@id": "License-cards",
@@ -1882,10 +1878,6 @@
         "AdministrativeAction": {
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
-        },
-        "MediaObject": {
-          "fresnel:extends": {"@id": "MediaObject-cards"},
-          "showProperties": [ "fresnel:super", "marc:publicNote" ]
         },
         "ImageObject": {
           "fresnel:extends": {"@id": "ImageObject-cards"},
