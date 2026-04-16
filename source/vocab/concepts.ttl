@@ -250,6 +250,13 @@
     :category :heuristicIdentifier ;
     owl:equivalentProperty skos:altLabel .
 
+:searchLabel a owl:DatatypeProperty;
+    rdfs:label "sökbenämning"@sv, "search label"@en;
+    rdfs:subPropertyOf :altLabel;
+    skos:definition "Användarvänlig benämning för visning i publika söktjänster."@sv;
+    skos:scopeNote "Används när enbart prefLabel upplevs som för abstrakt."@sv;
+    sdo:domainIncludes :Concept .   
+
 :related a owl:ObjectProperty;
     rdfs:label "related"@en, "relaterad"@sv;
     sdo:domainIncludes :Concept ;
