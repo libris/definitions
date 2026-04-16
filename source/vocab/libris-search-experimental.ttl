@@ -178,11 +178,10 @@ ls:indexKey a owl:DatatypeProperty ;
     :category :pending .
 
 ls:workCategory a owl:ObjectProperty ;
-    :category :impliedByObject, :pending ;
+    :category :impliedByObject, :pending, ls:composite ;
     rdfs:label "kategori"@sv, "category"@en ;
     rdfs:domain :Work ;
-    rdfs:range :WorkCategory ;
-    ls:indexKey "_categoryByCollection.@none" .
+    rdfs:range :WorkCategory .
 
 ls:instanceCategory a owl:ObjectProperty ;
     :category :impliedByObject, :pending ;
@@ -202,6 +201,14 @@ ls:identifyCategory a owl:ObjectProperty ;
     rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
     ls:indexKey "_categoryByCollection.identify" .
+
+ls:noneCategory a :ObjectProperty ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :inCollection;
+            owl:allValuesFrom [ owl:complementOf [ owl:oneOf ( <https://id.kb.se/term/div/find> <https://id.kb.se/term/div/identify> ) ] ] ] ] ;
+    ls:indexKey "_categoryByCollection.@none" .
 
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
