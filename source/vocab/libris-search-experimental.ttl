@@ -218,8 +218,14 @@ ls:title a owl:ObjectProperty ;
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
 
+ls:itemInformation a owl:DatatypeProperty ;
+      :category :searchfilter, ls:composite, :pending ;
+      rdfs:label "bestånd"@sv, "item"@en ;
+      rdfs:domain :Instance .
+
 ls:itemShelf a owl:DatatypeProperty ;
-      :category :searchfilter, :shorthand, :pending ;
+      :category :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
       skos:notation "WHYL"^^ls:QueryCode ;
       rdfs:label "hyllsignum"@sv, "item shelf"@en ;
       rdfs:domain :Instance ;
@@ -236,7 +242,8 @@ ls:shelf a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :shelfMark :label ) ] .
 
 ls:hasItemNote a owl:DatatypeProperty ;
-      :category :searchfilter, :shorthand, :pending ;
+      :category :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
       rdfs:label "lokal anmärkning"@sv, "local note"@en ;
       rdfs:domain :Instance ;
       owl:propertyChainAxiom ( :hasItem ls:itemNote ) .
@@ -264,7 +271,8 @@ ls:itemCreated a owl:DatatypeProperty ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
 ls:itemSubject a owl:DatatypeProperty ;
-     :category :shorthand, :pending, :searchfilter ;
+     :category :shorthand, :pending ;
+     rdfs:subPropertyOf ls:itemInformation ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
      rdfs:domain :Instance ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
