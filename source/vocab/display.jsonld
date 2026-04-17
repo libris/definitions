@@ -470,7 +470,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Category",
           "showProperties": [
-            {"alternateProperties": ["prefLabel", "singularLabel", "label", "code"]},
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "searchLabel" ,"code"]},
             "rdf:type",
             "inScheme"
           ]
@@ -480,7 +480,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
           "showProperties": [
-            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]},
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "searchLabel", "termComponentList", "code"]},
             "inScheme"
           ]
         },
@@ -566,6 +566,12 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "MediaObject",
           "showProperties": [ "uri" ]
+        },
+        "Document": {
+          "@id": "Document-chips",
+          "@type": "fresnel:Lens",
+          "classLensDomain": "Document",
+          "showProperties": [ "uri", "marc:publicNote" ]
         },
         "ImageObject": {
           "@id": "ImageObject-chips",
@@ -826,6 +832,7 @@
             "physicalLocation",
             "shelfMark",
             "shelfControlNumber",
+            "shelfLabel",
             "language",
             "genreForm",
             "classification",
@@ -1097,7 +1104,8 @@
             "code",
             "keyword",
             "termComponentList",
-            "singularLabel" ]
+            "singularLabel",
+            "searchLabel" ]
         },
         "Contribution": {
           "@id": "Contribution-cards",
@@ -1164,10 +1172,6 @@
           "@id": "ClassificationDdc-cards",
           "fresnel:extends": {"@id": "ClassificationDdc-chips"},
           "showProperties": [ "fresnel:super", "marc:explanatoryTerm" ]
-        },
-        "MediaObject": {
-          "fresnel:extends": {"@id": "MediaObject-chips"},
-          "showProperties": [ "fresnel:super" ]
         },
         "EntityContainer": {
           "@id": "EntityContainer-cards",
@@ -1239,6 +1243,13 @@
           "@type": "fresnel:Lens",
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "classLensDomain": "MediaObject",
+          "showProperties": [ "fresnel:super", "marc:publicNote" ]
+        },
+        "Document": {
+          "@id": "Document-cards",
+          "@type": "fresnel:Lens",
+          "fresnel:extends": {"@id": "Document-chips"},
+          "classLensDomain": "Document",
           "showProperties": [ "fresnel:super" ]
         },
         "License": {
@@ -1368,7 +1379,7 @@
         },
         "Item": {
           "fresnel:extends": {"@id": "Item-cards"},
-          "showProperties": [ "fresnel:super", "shelfLabel" ]
+          "showProperties": [ "fresnel:super" ]
         },
         "Identifier": {
           "fresnel:extends": {"@id": "Identifier-cards"},
@@ -1534,7 +1545,7 @@
           "@type": "fresnel:Lens",
           "classLensDomain": "Concept",
           "showProperties": [
-            {"alternateProperties": ["prefLabel", "singularLabel", "label", "termComponentList", "code"]}
+            {"alternateProperties": ["prefLabel", "singularLabel", "label", "searchLabel", "termComponentList", "code"]}
           ]
         },
         "Instance": {
@@ -1882,10 +1893,6 @@
         "AdministrativeAction": {
           "fresnel:extends": {"@id": "AdministrativeAction-cards"},
           "showProperties": [ "fresnel:super", {"inverseOf": "concerning"} ]
-        },
-        "MediaObject": {
-          "fresnel:extends": {"@id": "MediaObject-cards"},
-          "showProperties": [ "fresnel:super", "marc:publicNote" ]
         },
         "ImageObject": {
           "fresnel:extends": {"@id": "ImageObject-cards"},
@@ -2253,6 +2260,16 @@
 			"fresnel:classFormatDomain": ["Subdivision"],
 			"fresnel:resourceStyle": ["link"]
 		},
+        "SeriesMembership-seriesEnumeration-format": {
+			"@id": "SeriesMembership-seriesEnumeration-format",
+			"@type": "fresnel:Format",
+			"fresnel:classFormatDomain": ["SeriesMembership"],
+			"fresnel:propertyFormatDomain": ["seriesEnumeration"],
+			"fresnel:propertyFormat": {
+				"fresnel:contentBefore": " ; ",
+				"fresnel:contentFirst": ""
+			}
+		},
 		"Instance-format": {
 			"@id": "Instance-format",
 			"@type": "fresnel:Format",
@@ -2429,7 +2446,7 @@
 		"default-separators": {
 			"@id": "default-separators",
 			"@type": "fresnel:Format",
-			"fresnel:classFormatDomain": ["Resource"],
+			"fresnel:classFormatDomain": ["Resource", "QualifiedRole"],
 			"fresnel:propertyFormatDomain": ["*"],
 			"fresnel:propertyFormat": {
 				"fresnel:contentBefore": " · ",

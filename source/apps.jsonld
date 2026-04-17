@@ -84,13 +84,13 @@
           { "dimensionChain": ["findCategory"], "itemLimit": 20,
             "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
           },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["workCategory"] },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 30, "connective": "OR", "showIf": ["workCategory"] },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 20 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
+          { "dimensionChain": ["subject"], "itemLimit": 30 },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
           { "dimensionChain": ["workType"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
@@ -153,17 +153,18 @@
       "titleByLang":  {"sv": "Suecia sök", "en": "Suecia Search"},
       "statistics": {
         "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
           { "dimensionChain": ["findCategory"], "itemLimit": 20,
             "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
           },
           { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["workCategory"] },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["contributor"], "itemLimit": 20 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
+          { "dimensionChain": ["subject"], "itemLimit": 30 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["workType"], "itemLimit": 100 }
         ]
       },
@@ -211,7 +212,8 @@
       "titleByLang":  {"sv": "ArkDes sök", "en": "ArkDes Search"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["rdf:type"], "itemLimit": 10 },
+          { "dimensionChain": ["instanceType"], "itemLimit": 10 },
           { "dimensionChain": ["findCategory"], "itemLimit": 20,
             "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
           },
@@ -220,13 +222,10 @@
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
           { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 20 },
-          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
+          { "dimensionChain": ["subject"], "itemLimit": 30 },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
           { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
           { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
@@ -285,6 +284,7 @@
       "titleByLang":  {"sv": "Swepub sök", "en": "Swepub Search"},
       "statistics": {
         "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["instanceType"], "itemLimit": 100 },
           { "dimensionChain": ["findCategory"], "itemLimit": 20,
             "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
@@ -293,12 +293,11 @@
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 20 },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
           { "dimensionChain": ["genreForm"], "itemLimit": 100 },
           { "dimensionChain": ["subject"], "itemLimit": 100 },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
           { "dimensionChain": ["workType"], "itemLimit": 100 },
           { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
           { "dimensionChain": ["nationality"], "itemLimit": 100 },
