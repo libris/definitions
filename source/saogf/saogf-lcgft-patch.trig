@@ -1,6 +1,18 @@
 prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 
+## Saknar closeMatch - felstavning eller broadMatch?
+#saogf:F%C3%B6retagshandlingar%20%28dokument%29
+#saogf:Filmprogram
+#saogf:Homoerotiska%20skildringar
+#saogf:Lantm%C3%A4terihandlingar
+#saogf:Sportprogram%20%28text%29
+
+# TODO[69e799a0]: Dubbla match; ändra en till broadMatch och ta bort andra om :broader/:closeMatch?
+#saogf:Tal%20%28retorik%29
+#saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar
+#saogf:Bibliska%20ber%C3%A4ttelser
+
 saogf:%C3%84ventyrsfilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026005> ;
   :prefLabel "Action and adventure films"@en .
 
@@ -40,7 +52,8 @@ saogf:Anagram :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026043
 saogf:Animerade%20filmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026049> ;
   :prefLabel "Animated films"@en .
 
-saogf:Annaler%20och%20kr%C3%B6nikor :prefLabel "Annals and chronicals"@en .
+saogf:Annaler%20och%20kr%C3%B6nikor :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026045> ;
+  :prefLabel "Annals and chronicles"@en .
 
 saogf:Anteckningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026133> ;
   :prefLabel "Notebooks"@en .
@@ -72,7 +85,8 @@ saogf:Avlatsbrev :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026
 saogf:B%C3%B6cker%20med%20ljudeffekter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026177> ;
   :prefLabel "Sound books"@en .
 
-saogf:Bakl%C3%A4ngeslexikon :prefLabel "Reverse indexes"@en .
+saogf:Bakl%C3%A4ngeslexikon :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026167> ;
+  :prefLabel "Reverse dictionaries"@en .
 
 saogf:Barn-%20och%20familjefilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026123> ;
   :prefLabel "Children's films"@en .
@@ -104,10 +118,11 @@ saogf:Bibliografier :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014
 saogf:Bibliotekskataloger :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026003> ;
   :prefLabel "Library catalogs"@en .
 
-saogf:Bibliska%20ber%C3%A4ttelser :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026240> ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026242> ;
-  :prefLabel "Bible fiction"@en ,
-    "Bible stories"@en .
+# TODO[69e799a0]
+#saogf:Bibliska%20ber%C3%A4ttelser :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026240> ,
+#    <http://id.loc.gov/authorities/genreForms/gf2014026242> ;
+#  :prefLabel "Bible fiction"@en ,
+#    "Bible stories"@en .
 
 saogf:Bilder :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027251> ;
   :prefLabel "Pictures"@en .
@@ -154,10 +169,9 @@ saogf:Bossa%20nova :closeMatch <http://id.loc.gov/authorities/genreForms/gf20140
 saogf:Br%C3%B6llopsdikter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026317> ;
   :prefLabel "Epithalamia"@en .
 
-saogf:Brevromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026314> ,
-    <http://id.loc.gov/authorities/genreForms/gf2015026020> ;
-  :prefLabel "Epistolary fiction"@en ,
-    "Novels"@en .
+saogf:Brevromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026314> ;
+  :prefLabel "Epistolary fiction"@en ;
+  :altLabel "Novels in letters"@en .
 
 saogf:Burlesker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026254> ;
   :prefLabel "Burlesques (Literature)"@en .
@@ -203,8 +217,7 @@ saogf:Dagb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf201
 
 saogf:Dagboksromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026020> ,
     <http://id.loc.gov/authorities/genreForms/gf2014026286> ;
-  :prefLabel "Novels"@en ,
-    "Diary fiction"@en .
+  :prefLabel "Diary fiction"@en .
 
 saogf:Dagstidningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026132> ;
   :prefLabel "Newspapers"@en .
@@ -227,10 +240,8 @@ saogf:Death%20metal :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014
 saogf:Debatter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026083> ;
   :prefLabel "Debates"@en .
 
-saogf:Deckare :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026280> ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026452> ;
-  :prefLabel "Detective and mystery fiction"@en ,
-    "Noir fiction"@en .
+saogf:Deckare :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026280> ;
+  :prefLabel "Detective and mystery fiction"@en .
 
 saogf:Diagram :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026061> ;
   :prefLabel "Graphs"@en .
@@ -327,7 +338,8 @@ saogf:F%C3%B6rel%C3%A4sningar :closeMatch <http://id.loc.gov/authorities/genreFo
 
 saogf:F%C3%B6retagshandlingar%20%28dokument%29 :prefLabel "Corporate resolutions"@en .
 
-saogf:F%C3%B6rkortade%20verk :prefLabel "Abridgements"@en .
+saogf:F%C3%B6rkortade%20verk :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026037> ;
+  :prefLabel "Abridgments"@en .
 
 saogf:F%C3%B6rordningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026030> ;
   :prefLabel "Administrative regulations"@en .
@@ -377,16 +389,16 @@ saogf:Fiktiva%20filmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2
 saogf:Film-%20och%20tv-bearbetningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026254> ;
   :prefLabel "Film adaptations"@en .
 
-saogf:Filmad%20st%C3%A5uppkomik :prefLabel "Filmed stand-up comedy routines"@en .
+#saogf:Filmad%20st%C3%A5uppkomik :prefLabel "Filmed stand-up comedy routines"@en .
 
-saogf:Filmade%20dansf%C3%B6rest%C3%A4llningar :prefLabel "Filmed dance"@en .
-
-saogf:Filmade%20intervjuer :prefLabel "Filmed interviews"@en .
-
-saogf:Filmade%20konserter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026161> ;
-  :prefLabel "Concert films"@en .
-
-saogf:Filmade%20teaterf%C3%B6rest%C3%A4llningar :prefLabel "Filmed plays"@en .
+#saogf:Filmade%20dansf%C3%B6rest%C3%A4llningar :prefLabel "Filmed dance"@en .
+#
+#saogf:Filmade%20intervjuer :prefLabel "Filmed interviews"@en .
+#
+#saogf:Filmade%20konserter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026161> ;
+#  :prefLabel "Concert films"@en .
+#
+#saogf:Filmade%20teaterf%C3%B6rest%C3%A4llningar :prefLabel "Filmed plays"@en .
 
 saogf:Filmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026406> ;
   :prefLabel "Motion pictures"@en .
@@ -468,7 +480,8 @@ saogf:Handb%C3%B6cker%2C%20manualer%20etc\. :closeMatch <http://id.loc.gov/autho
 saogf:Handlingar%20%28dokument%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026163> ;
   :prefLabel "Records (Documents)"@en .
 
-saogf:Handlingar%20och%20intriger :prefLabel "Plot summeries"@en .
+saogf:Handlingar%20och%20intriger :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026149> ;
+  :prefLabel "Plot summaries"@en .
 
 saogf:Hardcore :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026850> ;
   :prefLabel "Hardcore (Music)"@en .
@@ -562,10 +575,11 @@ saogf:K%C3%A4rleksskildringar :closeMatch <http://id.loc.gov/authorities/genreFo
 saogf:Kalendrar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> ;
   :prefLabel "Calendars"@en .
 
-saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027224> ,
-    <http://id.loc.gov/authorities/genreForms/gf2017027225> ;
-  :prefLabel "Caricatures"@en ,
-    "Cartoons (Humor)"@en .
+# TODO[69e799a0]
+#saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027224> ,
+#    <http://id.loc.gov/authorities/genreForms/gf2017027225> ;
+#  :prefLabel "Caricatures"@en ,
+#    "Cartoons (Humor)"@en .
 
 saogf:Kartb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026058> ;
   :prefLabel "Atlases"@en .
@@ -615,7 +629,8 @@ saogf:Konsertprogram :closeMatch <http://id.loc.gov/authorities/genreForms/gf201
 saogf:Konstsagor :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026329> ;
   :prefLabel "Fairy tales"@en .
 
-saogf:Kontrafaktisk%20historia :prefLabel "Alternative histories (fiction)"@en .
+saogf:Kontrafaktisk%20historia :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026220> ;
+  :prefLabel "Alternative histories (Fiction)"@en .
 
 saogf:Kontrollerade%20vokabul%C3%A4rer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026070> ;
   :prefLabel "Controlled vocabularies"@en .
@@ -662,7 +677,8 @@ saogf:Kursmaterial :closeMatch <http://id.loc.gov/authorities/genreForms/gf20140
 saogf:Kyrkohandb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026039> ;
   :prefLabel "Liturgical books"@en .
 
-saogf:L%C3%A4rarhandledningar :prefLabel "Teachers’ guides"@en .
+saogf:L%C3%A4rarhandledningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026188> ;
+  :prefLabel "Teachers' guides"@en .
 
 saogf:L%C3%A4romedel :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026191> ;
   :prefLabel "Textbooks"@en .
@@ -723,7 +739,8 @@ saogf:Mekaniska%20b%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreFo
 saogf:Merengue :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026933> ;
   :prefLabel "Merengues (Music)"@en .
 
-saogf:Miniatyrb%C3%B6cker :prefLabel "Miniature books—Specimens"@en .
+saogf:Miniatyrb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/subjects/sh85085644> ;
+  :prefLabel "Miniature books—Specimens"@en .
 
 saogf:Minnesbevarande%20verk :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026064> ;
   :prefLabel "Commemorative works"@en .
@@ -731,7 +748,8 @@ saogf:Minnesbevarande%20verk :closeMatch <http://id.loc.gov/authorities/genreFor
 saogf:Musikfilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026414> ;
   :prefLabel "Musical films"@en .
 
-saogf:Musikrecensioner :prefLabel "Music reviews"@en .
+saogf:Musikrecensioner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026130> ;
+  :prefLabel "Music criticism and reviews"@en .
 
 saogf:Musikvideor :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026413> ;
   :prefLabel "Music videos"@en .
@@ -781,7 +799,9 @@ saogf:Parodier :closeMatch <http://id.loc.gov/authorities/genreForms/gf201402647
 saogf:Partimenti :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026985> ;
   :prefLabel "Partimenti"@en .
 
-saogf:Passagerarlistor :prefLabel "Passanger lists"@en .
+saogf:Passagerarlistor :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026138> ;
+  :prefLabel "Passenger lists"@en .
+
 
 saogf:Patent :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026438> ;
   :prefLabel "Patents"@en .
@@ -795,10 +815,8 @@ saogf:Personlig%20utveckling :closeMatch <http://id.loc.gov/authorities/genreFor
 saogf:Personliga%20ber%C3%A4ttelser :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026142> ;
   :prefLabel "Personal narratives"@en .
 
-saogf:Pikareskromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026479> ,
-    <http://id.loc.gov/authorities/genreForms/gf2015026020> ;
-  :prefLabel "Picaresque fiction"@en ,
-    "Novels"@en .
+saogf:Pikareskromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026479> ;
+  :prefLabel "Picaresque fiction"@en .
 
 saogf:Poesi :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026481> ;
   :prefLabel "Poetry"@en .
@@ -830,9 +848,12 @@ saogf:Pressmeddelanden :closeMatch <http://id.loc.gov/authorities/genreForms/gf2
 saogf:Privatfilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026038> ;
   :prefLabel "Amateur films"@en .
 
-saogf:Problemsamlingar :prefLabel "Problems, exercises, etc."@en .
+saogf:Problemsamlingar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026154> ;
+  :prefLabel "Problems and exercises"@en .
 
-saogf:Produktkataloger :prefLabel "Manufacturers' catalogs"@en .
+saogf:Produktkataloger :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026198> ;
+  :prefLabel "Trade catalogs"@en ;
+  :altLabel "Manufacturers' catalogs"@en .
 
 saogf:Program%20%28publikationer%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026156> ;
   :prefLabel "Programs (Publications)"@en .
@@ -846,7 +867,8 @@ saogf:Propagandafilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2
 saogf:Prosadikter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026488> ;
   :prefLabel "Prose poems"@en .
 
-saogf:Protokoll :prefLabel "Minutes (records)"@en .
+saogf:Protokoll :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026128> ;
+  :prefLabel "Minutes (Records)"@en .
 
 saogf:Prov%20och%20examinationer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026096> ;
   :prefLabel "Examinations"@en .
@@ -857,7 +879,8 @@ saogf:Psalmb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2
 saogf:Psalmer%20%28musik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017026134> ;
   :prefLabel "Hymn tunes"@en .
 
-saogf:Psaltarpsalmer%20%28musik%29 :prefLabel "Psalms (music)"@en .
+saogf:Psaltarpsalmer%20%28musik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027023> ;
+  :prefLabel "Psalms (Music)"@en .
 
 saogf:Psykedelia :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027024> ;
   :prefLabel "Psychedelic rock music"@en .
@@ -979,7 +1002,8 @@ saogf:Romantisk%20komedi%20%28film%29 :closeMatch <http://id.loc.gov/authorities
 saogf:Rumba :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014027059> ;
   :prefLabel "Rumbas (Music)"@en .
 
-saogf:Rymdopera :prefLabel "Space operas"@en .
+saogf:Rymdopera :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026551> ;
+  :prefLabel "Space operas (Fiction)"@en .
 
 saogf:S%C3%B6khj%C3%A4lper :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026103> ;
   :prefLabel "Finding aids"@en .
@@ -1020,7 +1044,9 @@ saogf:Science%20fiction :closeMatch <http://id.loc.gov/authorities/genreForms/gf
 saogf:Science%20fiction-filmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026556> ;
   :prefLabel "Science fiction films"@en .
 
-saogf:Scrapbooks :prefLabel "Scrapbooks"@en .
+saogf:Scrapbooks :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026173> ;
+  :prefLabel "Albums (Books)"@en ;
+  :altLabel "Scrapbooks"@en .
 
 saogf:Screentryck :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027258> ;
   :prefLabel "Screen prints"@en .
@@ -1123,10 +1149,11 @@ saogf:Tabeller :closeMatch <http://id.loc.gov/authorities/genreForms/gf201402618
 saogf:Taktila%20verk :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026187> ;
   :prefLabel "Tactile works"@en .
 
-saogf:Tal%20%28retorik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ,
-    <http://id.loc.gov/authorities/genreForms/gf2014026196> ;
-  :prefLabel "Speeches"@en ,
-    "Toasts (Speeches)"@en .
+# TODO[69e799a0]
+#saogf:Tal%20%28retorik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ,
+#    <http://id.loc.gov/authorities/genreForms/gf2014026196> ;
+#  :prefLabel "Speeches"@en ,
+#    "Toasts (Speeches)"@en .
 
 saogf:Talb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026630> ;
   :prefLabel "Talking books"@en .
@@ -1191,7 +1218,8 @@ saogf:Trycksaker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027
 saogf:Tv-program :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026673> ;
   :prefLabel "Television programs"@en .
 
-saogf:Tv-recensioner :prefLabel "Television programs reviews"@en .
+saogf:Tv-recensioner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026190> ;
+  :prefLabel "Television program reviews"@en .
 
 saogf:Tv-serier :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026680> ;
   :prefLabel "Television series"@en .
@@ -1199,7 +1227,8 @@ saogf:Tv-serier :closeMatch <http://id.loc.gov/authorities/genreForms/gf20110266
 saogf:UK%20garage :closeMatch <http://id.loc.gov/authorities/genreForms/gf2020026048> ;
   :prefLabel "UK garage (Music)"@en .
 
-saogf:Unders%C3%B6kningar :prefLabel "Surveys"@en .
+saogf:Unders%C3%B6kningar :closeMatch <http://id.loc.gov/authorities/subjects/sh99001768> ;
+  :prefLabel "Surveys"@en .
 
 saogf:Undervisningsfilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026219> ;
   :prefLabel "Educational films"@en .
@@ -1404,12 +1433,12 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcsh> ;
         :prefLabel "Library catalogs" ] .
 
-  saogf:Bibliska%20ber%C3%A4ttelser :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Bible fiction" ] ,
-      [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Bible stories" ] .
+  #saogf:Bibliska%20ber%C3%A4ttelser :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcsh> ;
+  #      :prefLabel "Bible fiction" ] ,
+  #    [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcsh> ;
+  #      :prefLabel "Bible stories" ] .
 
   saogf:Bilder :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -1589,10 +1618,7 @@ graph <#delete> {
 
   saogf:Deckare :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Detective and mystery fiction" ] ,
-      [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Noir fiction" ] .
+        :prefLabel "Detective and mystery fiction" ] .
 
   saogf:Diagram :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -1735,7 +1761,7 @@ graph <#delete> {
 
   saogf:F%C3%B6rkortade%20verk :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Abridgements" ] .
+        :prefLabel "Abridgments" ] .
 
   saogf:F%C3%B6rordningar :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
@@ -1803,25 +1829,25 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcgft> ;
         :prefLabel "Film adaptations" ] .
 
-  saogf:Filmad%20st%C3%A5uppkomik :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Filmed stand-up comedy routines" ] .
+  #saogf:Filmad%20st%C3%A5uppkomik :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Filmed stand-up comedy routines" ] .
 
-  saogf:Filmade%20dansf%C3%B6rest%C3%A4llningar :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Filmed dance" ] .
+  #saogf:Filmade%20dansf%C3%B6rest%C3%A4llningar :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Filmed dance" ] .
 
-  saogf:Filmade%20intervjuer :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Filmed interviews" ] .
+  #saogf:Filmade%20intervjuer :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Filmed interviews" ] .
 
-  saogf:Filmade%20konserter :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Concert films" ] .
+  #saogf:Filmade%20konserter :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Concert films" ] .
 
-  saogf:Filmade%20teaterf%C3%B6rest%C3%A4llningar :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Filmed plays" ] .
+  #saogf:Filmade%20teaterf%C3%B6rest%C3%A4llningar :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Filmed plays" ] .
 
   saogf:Filmer :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -1943,7 +1969,7 @@ graph <#delete> {
 
   saogf:Handlingar%20och%20intriger :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Plot summeries" ] .
+        :prefLabel "Plot summaries" ] .
 
   saogf:Hardcore :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2085,14 +2111,14 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcgft> ;
         :prefLabel "Calendars" ] .
 
-  saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Caricatures" ;
-        :uri "http://id.loc.gov/authorities/genreForms/gf2017027224"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] ,
-      [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Cartoons (Humor)" ;
-        :uri "http://id.loc.gov/authorities/genreForms/gf2017027225"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] .
+  #saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Caricatures" ;
+  #      :uri "http://id.loc.gov/authorities/genreForms/gf2017027224"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] ,
+  #    [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Cartoons (Humor)" ;
+  #      :uri "http://id.loc.gov/authorities/genreForms/gf2017027225"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] .
 
   saogf:Kartb%C3%B6cker :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2168,7 +2194,7 @@ graph <#delete> {
 
   saogf:Kontrafaktisk%20historia :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Alternative histories (fiction)" ] .
+        :prefLabel "Alternative histories (Fiction)" ] .
 
   saogf:Kontrollerade%20vokabul%C3%A4rer :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2336,7 +2362,7 @@ graph <#delete> {
 
   saogf:Musikrecensioner :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Music reviews" ] .
+        :prefLabel "Music criticism and reviews" ] .
 
   saogf:Musikvideor :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2408,7 +2434,7 @@ graph <#delete> {
 
   saogf:Passagerarlistor :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Passanger lists" ] .
+        :prefLabel "Passenger lists" ] .
 
   saogf:Patent :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2479,11 +2505,11 @@ graph <#delete> {
 
   saogf:Problemsamlingar :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Problems, exercises, etc." ] .
+        :prefLabel "Problems and exercises" ] .
 
   saogf:Produktkataloger :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Manufacturers' catalogs" ] .
+        :prefLabel "Trade catalogs" ] .
 
   saogf:Program%20%28publikationer%29 :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2505,7 +2531,7 @@ graph <#delete> {
 
   saogf:Protokoll :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Minutes (records)" ] .
+        :prefLabel "Minutes (Records)" ] .
 
   saogf:Prov%20och%20examinationer :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2523,7 +2549,7 @@ graph <#delete> {
 
   saogf:Psaltarpsalmer%20%28musik%29 :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Psalms (music)" ;
+        :prefLabel "Psalms (Music)" ;
         :uri "http://id.loc.gov/authorities/genreForms/gf2014027023"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] .
 
   saogf:Psykedelia :closeMatch [ a :GenreForm ;
@@ -2706,7 +2732,7 @@ graph <#delete> {
 
   saogf:Rymdopera :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
-        :prefLabel "Space operas" ] .
+        :prefLabel "Space operas (Fiction)" ] .
 
   saogf:S%C3%B6khj%C3%A4lper :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2764,7 +2790,7 @@ graph <#delete> {
 
   saogf:Scrapbooks :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Scrapbooks" ] .
+        :prefLabel "Albums (Books)" ] .
 
   saogf:Screentryck :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2911,12 +2937,12 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcgft> ;
         :prefLabel "Tactile works" ] .
 
-  saogf:Tal%20%28retorik%29 :closeMatch [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Speeches" ] ,
-      [ a :GenreForm ;
-        :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Toasts (Speeches)" ] .
+  #saogf:Tal%20%28retorik%29 :closeMatch [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Speeches" ] ,
+  #    [ a :GenreForm ;
+  #      :inScheme <https://id.kb.se/term/lcgft> ;
+  #      :prefLabel "Toasts (Speeches)" ] .
 
   saogf:Talb%C3%B6cker :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
@@ -3014,7 +3040,7 @@ graph <#delete> {
 
   saogf:Tv-recensioner :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
-        :prefLabel "Television programs reviews" ] .
+        :prefLabel "Television program reviews" ] .
 
   saogf:Tv-serier :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
