@@ -284,6 +284,15 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
+ls:instanceModified a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
+     rdfs:domain :Instance ;
+     skos:notation "BDAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :meta :modified ) .
+
 ls:itemSubject a owl:ObjectProperty ;
      :category :shorthand, :pending ;
      rdfs:subPropertyOf ls:itemInformation ;
