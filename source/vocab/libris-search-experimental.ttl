@@ -219,6 +219,8 @@ ls:title a owl:ObjectProperty ;
     skos:notation "TIT"^^ls:QueryCode ;
     skos:notation "bath.title"^^ls:QueryCode ;
     skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
+    skos:notation "HTIT"^^ls:QueryCode ; # "Titel" - drop specificity
+    skos:notation "WUTI"^^ls:QueryCode ; # "Uniform titel (ordindex)" - drop specificity
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
