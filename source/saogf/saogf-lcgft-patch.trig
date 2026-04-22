@@ -1,18 +1,6 @@
 prefix : <https://id.kb.se/vocab/>
 prefix saogf: <https://id.kb.se/term/saogf/>
 
-## Saknar closeMatch - felstavning eller broadMatch?
-#saogf:F%C3%B6retagshandlingar%20%28dokument%29
-#saogf:Filmprogram
-#saogf:Homoerotiska%20skildringar
-#saogf:Lantm%C3%A4terihandlingar
-#saogf:Sportprogram%20%28text%29
-
-# TODO[69e799a0]: Dubbla match; ändra en till broadMatch och ta bort andra om :broader/:closeMatch?
-#saogf:Tal%20%28retorik%29
-#saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar
-#saogf:Bibliska%20ber%C3%A4ttelser
-
 saogf:%C3%84ventyrsfilmer :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026005> ;
   :prefLabel "Action and adventure films"@en .
 
@@ -118,11 +106,10 @@ saogf:Bibliografier :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014
 saogf:Bibliotekskataloger :closeMatch <http://id.loc.gov/authorities/genreForms/gf2015026003> ;
   :prefLabel "Library catalogs"@en .
 
-# TODO[69e799a0]
-#saogf:Bibliska%20ber%C3%A4ttelser :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026240> ,
-#    <http://id.loc.gov/authorities/genreForms/gf2014026242> ;
-#  :prefLabel "Bible fiction"@en ,
-#    "Bible stories"@en .
+saogf:Bibliska%20ber%C3%A4ttelser :narrowMatch <http://id.loc.gov/authorities/genreForms/gf2014026240> ,
+    <http://id.loc.gov/authorities/genreForms/gf2014026242> ;
+  :prefLabel "Bible stories"@en ;
+  :altLabel "Bible fiction"@en .
 
 saogf:Bilder :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027251> ;
   :prefLabel "Pictures"@en .
@@ -169,9 +156,10 @@ saogf:Bossa%20nova :closeMatch <http://id.loc.gov/authorities/genreForms/gf20140
 saogf:Br%C3%B6llopsdikter :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026317> ;
   :prefLabel "Epithalamia"@en .
 
-saogf:Brevromaner :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026314> ;
-  :prefLabel "Epistolary fiction"@en ;
-  :altLabel "Novels in letters"@en .
+saogf:Brevromaner :broadMatch <http://id.loc.gov/authorities/genreForms/gf2014026314> ;
+  :prefLabel "Epistolary novels"@en ;
+  :altLabel "Novels in letters"@en ,
+    "Epistolary fiction"@en .
 
 saogf:Burlesker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026254> ;
   :prefLabel "Burlesques (Literature)"@en .
@@ -575,11 +563,11 @@ saogf:K%C3%A4rleksskildringar :closeMatch <http://id.loc.gov/authorities/genreFo
 saogf:Kalendrar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026055> ;
   :prefLabel "Calendars"@en .
 
-# TODO[69e799a0]
-#saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch <http://id.loc.gov/authorities/genreForms/gf2017027224> ,
-#    <http://id.loc.gov/authorities/genreForms/gf2017027225> ;
-#  :prefLabel "Caricatures"@en ,
-#    "Cartoons (Humor)"@en .
+saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :narrowMatch <http://id.loc.gov/authorities/genreForms/gf2017027224> ,
+    <http://id.loc.gov/authorities/genreForms/gf2017027225> ;
+  :prefLabel "Caricatures and Cartoons"@en ;
+  :altLabel "Caricatures"@en ,
+    "Cartoons (Humor)"@en .
 
 saogf:Kartb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026058> ;
   :prefLabel "Atlases"@en .
@@ -1149,11 +1137,8 @@ saogf:Tabeller :closeMatch <http://id.loc.gov/authorities/genreForms/gf201402618
 saogf:Taktila%20verk :closeMatch <http://id.loc.gov/authorities/genreForms/gf2014026187> ;
   :prefLabel "Tactile works"@en .
 
-# TODO[69e799a0]
-#saogf:Tal%20%28retorik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ,
-#    <http://id.loc.gov/authorities/genreForms/gf2014026196> ;
-#  :prefLabel "Speeches"@en ,
-#    "Toasts (Speeches)"@en .
+saogf:Tal%20%28retorik%29 :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026363> ;
+  :prefLabel "Speeches"@en .
 
 saogf:Talb%C3%B6cker :closeMatch <http://id.loc.gov/authorities/genreForms/gf2011026630> ;
   :prefLabel "Talking books"@en .
@@ -1433,12 +1418,12 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcsh> ;
         :prefLabel "Library catalogs" ] .
 
-  #saogf:Bibliska%20ber%C3%A4ttelser :closeMatch [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcsh> ;
-  #      :prefLabel "Bible fiction" ] ,
-  #    [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcsh> ;
-  #      :prefLabel "Bible stories" ] .
+  saogf:Bibliska%20ber%C3%A4ttelser :closeMatch [ a :GenreForm ;
+        :inScheme <https://id.kb.se/term/lcsh> ;
+        :prefLabel "Bible fiction" ] ,
+      [ a :GenreForm ;
+        :inScheme <https://id.kb.se/term/lcsh> ;
+        :prefLabel "Bible stories" ] .
 
   saogf:Bilder :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2111,14 +2096,14 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcgft> ;
         :prefLabel "Calendars" ] .
 
-  #saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcgft> ;
-  #      :prefLabel "Caricatures" ;
-  #      :uri "http://id.loc.gov/authorities/genreForms/gf2017027224"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] ,
-  #    [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcgft> ;
-  #      :prefLabel "Cartoons (Humor)" ;
-  #      :uri "http://id.loc.gov/authorities/genreForms/gf2017027225"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] .
+  saogf:Karikatyrer%20och%20sk%C3%A4mtteckningar :closeMatch [ a :GenreForm ;
+        :inScheme <https://id.kb.se/term/lcgft> ;
+        :prefLabel "Caricatures" ;
+        :uri "http://id.loc.gov/authorities/genreForms/gf2017027224"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] ,
+      [ a :GenreForm ;
+        :inScheme <https://id.kb.se/term/lcgft> ;
+        :prefLabel "Cartoons (Humor)" ;
+        :uri "http://id.loc.gov/authorities/genreForms/gf2017027225"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] .
 
   saogf:Kartb%C3%B6cker :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcgft> ;
@@ -2937,12 +2922,9 @@ graph <#delete> {
         :inScheme <https://id.kb.se/term/lcgft> ;
         :prefLabel "Tactile works" ] .
 
-  #saogf:Tal%20%28retorik%29 :closeMatch [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcgft> ;
-  #      :prefLabel "Speeches" ] ,
-  #    [ a :GenreForm ;
-  #      :inScheme <https://id.kb.se/term/lcgft> ;
-  #      :prefLabel "Toasts (Speeches)" ] .
+  saogf:Tal%20%28retorik%29 :closeMatch [ a :GenreForm ;
+        :inScheme <https://id.kb.se/term/lcgft> ;
+        :prefLabel "Speeches" ] .
 
   saogf:Talb%C3%B6cker :closeMatch [ a :GenreForm ;
         :inScheme <https://id.kb.se/term/lcsh> ;
