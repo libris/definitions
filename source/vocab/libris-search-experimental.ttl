@@ -48,7 +48,13 @@
     skos:notation "dc.contributor"^^ls:QueryCode ;
     skos:notation "dc.creator"^^ls:QueryCode ;
     skos:notation "FÖRF"^^ls:QueryCode ;
-    skos:notation "FORF"^^ls:QueryCode .
+    skos:notation "FORF"^^ls:QueryCode ;
+    skos:notation "PERS"^^ls:QueryCode ;
+    skos:notation "WFRF"^^ls:QueryCode ;
+    skos:notation "WINS"^^ls:QueryCode .
+
+:bibliography # See ./agents.ttl for full definition of :bibliography
+    skos:notation "DB"^^ls:QueryCode .
 
 # NOTE: Old webbsök code 'author' was same as 'FÖRF'
 :author a owl:ObjectProperty ;
@@ -131,6 +137,7 @@ ls:merges a owl:ObjectProperty ;
 
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
+    skos:notation "NUMM"^^ls:QueryCode ;
     rdfs:label "ISXN"@sv, "ISXN"@en .
 
 ls:itemHeldBy a owl:ObjectProperty ;
@@ -138,6 +145,7 @@ ls:itemHeldBy a owl:ObjectProperty ;
     skos:notation "bath.possessingInstitution"^^ls:QueryCode ;
     skos:notation "BIBL"^^ls:QueryCode ;
     skos:notation "LIBRARY"^^ls:QueryCode ;
+    skos:notation "BIB"^^ls:QueryCode ;
     # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
     :category :searchfilter, :impliedByObject, :shorthand, :pending ;
     rdfs:domain :Instance ;
@@ -216,6 +224,8 @@ ls:title a owl:ObjectProperty ;
     skos:notation "TIT"^^ls:QueryCode ;
     skos:notation "bath.title"^^ls:QueryCode ;
     skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
+    skos:notation "HTIT"^^ls:QueryCode ; # "Titel" - drop specificity
+    skos:notation "WUTI"^^ls:QueryCode ; # "Uniform titel (ordindex)" - drop specificity
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
@@ -269,8 +279,19 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
      rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
      rdfs:domain :Instance ;
+     skos:notation "HDAT"^^ls:QueryCode ;
+     skos:notation "FORVDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
+
+ls:instanceModified a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
+     rdfs:domain :Instance ;
+     skos:notation "BDAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :meta :modified ) .
 
 ls:itemSubject a owl:ObjectProperty ;
      :category :shorthand, :pending ;
@@ -287,7 +308,9 @@ ls:yearPublished a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "utgivningsår"@sv, "year of publication"@en ;
     rdfs:domain :Instance ;
-    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
+    skos:notation "ÅR"^^ls:QueryCode,
+                  "dc.date"^^ls:QueryCode,
+                  "AR1"^^ls:QueryCode;
     owl:propertyChainAxiom ( :publication ls:year ) .
 
 ls:publicationPlace a owl:ObjectProperty;
