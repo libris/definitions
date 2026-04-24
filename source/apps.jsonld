@@ -105,6 +105,7 @@
         { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
         { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } },
+        { "alias": "_collections", "filter": "type:(Bibliography) comment:()", "prefLabelByLang": { "sv": "Särskilda samlingar", "en": "Special collections" } },
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
       "defaultSiteFilters": [
@@ -121,6 +122,7 @@
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
+        { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
         { "objectType": "Concept", "predicates": [ "subject", "genreForm", "workCategory", "instanceCategory", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
