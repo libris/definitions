@@ -133,23 +133,28 @@ ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
     rdfs:label "ISXN"@sv, "ISXN"@en .
 
+ls:library a owl:ObjectProperty ;
+   :category :searchfilter, :impliedByObject, ls:composite, :pending ;
+   rdfs:label "bibliotek"@sv, "library"@en ;
+   skos:notation "bath.possessingInstitution"^^ls:QueryCode,
+                 "BIBL"^^ls:QueryCode,
+                 "LIB"^^ls:QueryCode, # TODO deprecate?
+                 "OCODE"^^ls:QueryCode ;
+   rdfs:domain :Instance ;
+   sdo:rangeIncludes :Library, bibdb:Organization .
+
 ls:itemHeldBy a owl:ObjectProperty ;
-    rdfs:label "Bibliotek"@sv, "Library"@en ;
-    skos:notation "bath.possessingInstitution"^^ls:QueryCode ;
-    skos:notation "BIBL"^^ls:QueryCode ;
-    skos:notation "LIBRARY"^^ls:QueryCode ;
-    # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
-    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
-    rdfs:domain :Instance ;
-    sdo:rangeIncludes :Library ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:library ;
+    rdfs:range :Library ;
+    ls:indexKey "@reverse.itemOf.heldBy" ; # FIXME: Implement support for ls:coercing + :shorthand in XL
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 ls:itemHeldByOrg a owl:ObjectProperty ;
-    rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
-    skos:notation "OCODE"^^ls:QueryCode ;
-    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
-    rdfs:domain :Instance ;
-    sdo:rangeIncludes bibdb:Organization ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:library ;
+    rdfs:range bibdb:Organization ;
+    ls:indexKey "@reverse.itemOf.heldBy.isPartOf" ; # FIXME: Implement support for ls:coercing + :shorthand in XL
     owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
 
 ls:workType a owl:ObjectProperty ;
