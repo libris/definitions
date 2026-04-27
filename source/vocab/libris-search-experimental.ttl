@@ -239,13 +239,12 @@ ls:itemShelf a owl:DatatypeProperty ;
       :category :searchfilter, :shorthand, :pending ;
       rdfs:subPropertyOf ls:itemInformation ;
       skos:notation "WHYL"^^ls:QueryCode ;
-      rdfs:label "hyllsignum"@sv, "item shelf"@en ;
+      rdfs:label "placering"@sv, "shelf"@en ;
       rdfs:domain :Instance ;
       owl:propertyChainAxiom ( :hasItem ls:shelf ) .
 
 ls:shelf a owl:DatatypeProperty ;
      :category ls:merged, :pending ;
-     rdfs:label "hylla"@sv, "shelf"@en ;
      rdfs:domain :Item ;
      ls:merges :shelfControlNumber,
         :shelfLabel,
@@ -253,26 +252,52 @@ ls:shelf a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :availability :label ) ],
         [ owl:propertyChainAxiom ( :shelfMark :label ) ] .
 
-ls:hasItemNote a owl:DatatypeProperty ;
+ls:hasItemStatement a owl:DatatypeProperty ;
       :category :searchfilter, :shorthand, :pending ;
       rdfs:subPropertyOf ls:itemInformation ;
-      rdfs:label "lokal anmärkning"@sv, "local note"@en ;
+      rdfs:label "beståndsuppgift"@sv, "item statement"@en ;
+      skos:notation "H8XZ"^^ls:QueryCode ;
       rdfs:domain :Instance ;
-      owl:propertyChainAxiom ( :hasItem ls:itemNote ) .
+      owl:propertyChainAxiom ( :hasItem ls:itemStatement ) .
 
-ls:itemNote a owl:DatatypeProperty ;
+ls:itemStatement a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
-    rdfs:label "beståndsanmärkning"@sv, "item note"@en ;
+    rdfs:domain :Item ;
+    ls:merges [ owl:propertyChainAxiom ( :hasNote :label ) ],
+        [ owl:propertyChainAxiom ( :summary :label ) ],
+        [ owl:propertyChainAxiom ( :appliesTo :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ] .
+
+ls:hasInternalItemNote a owl:DatatypeProperty ;
+      :category :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
+      rdfs:label "intern beståndsanmärkning"@sv, "internal item note"@en ;
+      skos:notation "H8XX"^^ls:QueryCode ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:internalItemNote ) .
+
+ls:internalItemNote a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
     rdfs:domain :Item ;
     ls:merges :cataloguersNote,
-        :custodialHistory,
-        [ owl:propertyChainAxiom ( :summary :label ) ],
-        [ owl:propertyChainAxiom ( :hasNote :label ) ],
-        [ owl:propertyChainAxiom ( :appliesTo :label ) ],
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ] .
+
+ls:hasAdditionalItemInformation a owl:DatatypeProperty ;
+      :category :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
+      rdfs:label "övrig beståndsinformation"@sv, "additional item information"@en ;
+      rdfs:domain :Instance ;
+      owl:propertyChainAxiom ( :hasItem ls:additionalItemInformation ) .
+
+ls:additionalItemInformation a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
+    rdfs:domain :Item ;
+    ls:merges :custodialHistory,
         [ owl:propertyChainAxiom ( marc:hasCopyAndVersionIdentificationNote marc:itemCondition ) ],
         [ owl:propertyChainAxiom ( marc:hasBindingInformation :label ) ],
-        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ],
-        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:publicNote ) ] .
+        [ owl:propertyChainAxiom ( marc:immediateAcquisition marc:sourceOfAcquisition ) ],
+        [ owl:propertyChainAxiom ( marc:immediateAcquisition :identifiedBy :value ) ],
+        [ owl:propertyChainAxiom ( :classification :code ) ] .
 
 ls:itemCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;

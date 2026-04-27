@@ -1701,11 +1701,9 @@
           "showProperties": [
             "fresnel:super",
             "subject",
-            "summary",
             "hasComponent",
             {
               "fresnel:mergeProperties": [
-                "cataloguersNote",
                 "custodialHistory",
                 {
                   "@type": "fresnel:fslselector",
@@ -1721,6 +1719,26 @@
                 },
                 {
                   "@type": "fresnel:fslselector",
+                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:publicNote"
+                }
+              ],
+              "fresnel:use": "librissearch:itemStatement"
+            },
+            {
+              "fresnel:mergeProperties": [
+                "cataloguersNote",
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:cataloguersNote"
+                }
+              ],
+              "fresnel:use": "librissearch:internalItemNote"
+            },
+            {
+              "fresnel:mergeProperties": [
+                "custodialHistory",
+                {
+                  "@type": "fresnel:fslselector",
                   "@value": "marc:hasCopyAndVersionIdentificationNote/*/marc:itemCondition"
                 },
                 {
@@ -1729,14 +1747,18 @@
                 },
                 {
                   "@type": "fresnel:fslselector",
-                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:cataloguersNote"
+                  "@value": "marc:immediateAcquisition/*/marc:sourceOfAcquisition"
                 },
                 {
                   "@type": "fresnel:fslselector",
-                  "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:publicNote"
+                  "@value": "marc:immediateAcquisition/*/identifiedBy/*/value"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "classification/*/code"
                 }
               ],
-              "fresnel:use": "librissearch:itemNote"
+              "fresnel:use": "librissearch:additionalItemInformation"
             },
             {
               "fresnel:mergeProperties": [
