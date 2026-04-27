@@ -150,10 +150,10 @@ ls:itemHeldBy a owl:ObjectProperty ;
     :category :searchfilter, :pending, ls:coercing ;
     rdfs:subPropertyOf ls:library ;
     rdfs:label "bibliotek (sigel)"@sv, "library (sigel)"@en ;
-    skos:notation bath.possessingInstitution"^^ls:QueryCode,
+    skos:notation "bath.possessingInstitution"^^ls:QueryCode,
         "BIBL"^^ls:QueryCode,
         "LIB"^^ls:QueryCode, # TODO deprecate?
-        "BIB"^^ls:QueryCode .
+        "BIB"^^ls:QueryCode ;
     rdfs:range :Library ;
     ls:indexKey "@reverse.itemOf.heldBy" ; # FIXME: Implement support for ls:coercing + :shorthand in XL
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
