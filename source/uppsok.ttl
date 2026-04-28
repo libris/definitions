@@ -105,6 +105,38 @@ upp:H5 a :WorkCategory ;
   :definition "Självständigt arbete på avancerad nivå (konstnärlig masterexamen)"@sv, "Independent thesis Advanced level (degree of Master of Fine Arts (Two Years))"@en ;
   :broader upp:H .
 
+# Pre-bologna Swedish levels
+upp:A a :WorkCategory ;
+  :code "A" ;
+  :prefLabel ""@sv ;
+  :definition ""@sv, ""@en ;
+  :broader upp: .
+
+upp:B a :WorkCategory ;
+  :code "B" ;
+  :prefLabel ""@sv ;
+  :definition ""@sv, ""@en ;
+  :broader upp: .
+
+upp:C a :WorkCategory ;
+  :code "C" ;
+  :prefLabel ""@sv ;
+  :definition ""@sv, ""@en ;
+  :broader upp: .
+
+upp:D a :WorkCategory ;
+  :code "D" ;
+  :prefLabel ""@sv ;
+  :definition ""@sv, ""@en ;
+  :broader upp: .
+
+upp:Y a :WorkCategory ;
+  :code "Y" ;
+  :prefLabel ""@sv ;
+  :definition ""@sv, ""@en ;
+  :broader upp: .
+
+
 # A ingen uppgift om omfattning     | B1 - ingen uppgift om omfattning
 # B ingen uppgift om omfattning     | B2 B2 - ingen uppgift om omfattning
 # C 120p, examensarbete 10p         | B2 G2 kandidat 180 hp, examensarbete 15hp
@@ -112,9 +144,40 @@ upp:H5 a :WorkCategory ;
 # D 160 p, examensarbete 20p        | A1 magister 240 hp, examensarbete 15 hp
 # Y skiljer inte på grund/avancerad | A3 yrkes avancerad nivå omfattning varierar
 
-## Subject terms?
-# ämneskategori (+ överordnad från setspec?)
+## Uppsök SetName
+upp:BioGeo a :Classification ;
+  :prefLabel "Bio- och geovetenskaper"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/1> .
+
+upp:FysKemMat a :Classification ;
+  :prefLabel "Fysik, kemi och matematik"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/1> .
+
+upp:TekVet a :Classification ;
+  :prefLabel "Tekniska vetenskaper"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/2> .
+
+upp:Med a :Classification ;
+  :prefLabel "Medicin"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/3> .
+
+upp:LanVetSko a :Classification ;
+  :prefLabel "Lantbruk, veterinärmedicin och skoglig vetenskap"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/4> .
+
+upp:SamBetJur a :Classification ;
+  :prefLabel "Samhälls-, beteendevetenskap och juridik"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/5> .
+
+upp:KonArb a :Classification ;
+  :prefLabel "Konstnärligt arbete"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/6> .
+
+upp:HumTeo a :Classification ;
+  :prefLabel "Humaniora och teologi"@sv ;
+  :broadMatch <https://begrepp.uka.se/SSIF/6> .
 
 ## Model?
 # relation - use :relatedTo (or :Relationship...)?
+# or omething more specific in case the data we get is acutally dc.relation.ispartofseries?
 
