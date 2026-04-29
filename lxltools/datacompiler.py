@@ -115,10 +115,11 @@ class Compiler:
     def path(self, pth):
         return self.base_dir / pth
 
-    def to_jsonld(self, graph):
+    def to_jsonld(self, graph, context=None):
+        context = (context or self.context)
         return ldutil.to_jsonld(graph,
-                         "../" + self.context,
-                         self.load_json(self.context))
+                         "../" + context,
+                         self.load_json(context))
 
     def _compile_datasets(self, names):
         self._create_dataset_description(self.dataset_id,
@@ -150,9 +151,6 @@ class Compiler:
 
         ds_created_ms = timeutil.w3c_dtz_to_ms(created_time)
         ds_modified_ms = last_modified_ms(self.current_ds_resources)
-
-        if isinstance(data, Graph):
-            data = self.to_jsonld(data)
 
         ds_url = urljoin(self.dataset_id, name)
         self._create_dataset_description(ds_url, ds_created_ms, ds_modified_ms)
@@ -380,7 +378,7 @@ class Compiler:
     def read_csv(self, fpath, **kws):
         return _read_csv(self.path(fpath), **kws)
 
-    def construct(self, sources, query=None):
+    def construct(self, sources, query=None, context=None):
         return _construct(self, sources, query)
 
     def _handlers_from_datasets_description(self, description_path):
@@ -402,9 +400,10 @@ def _make_handler(compiler, ds):
             sources=source.get('source', []),
             query=source.get('query')
         )
+        data = compiler.to_jsonld(graph, ds.get('jsonld:context'))
 
         ztime = ds['created']['@value'].replace('+00:00', 'Z')
-        return ds.get('uriSpace'), ztime, graph
+        return ds.get('uriSpace'), ztime, data
 
     dataset_handler.__name__ = ds['@id'].rsplit('/', 1)[-1]
 
