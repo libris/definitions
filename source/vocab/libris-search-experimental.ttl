@@ -48,7 +48,13 @@
     skos:notation "dc.contributor"^^ls:QueryCode ;
     skos:notation "dc.creator"^^ls:QueryCode ;
     skos:notation "FÖRF"^^ls:QueryCode ;
-    skos:notation "FORF"^^ls:QueryCode .
+    skos:notation "FORF"^^ls:QueryCode ;
+    skos:notation "PERS"^^ls:QueryCode ;
+    skos:notation "WFRF"^^ls:QueryCode ;
+    skos:notation "WINS"^^ls:QueryCode .
+
+:bibliography # See ./agents.ttl for full definition of :bibliography
+    skos:notation "DB"^^ls:QueryCode .
 
 # NOTE: Old webbsök code 'author' was same as 'FÖRF'
 :author a owl:ObjectProperty ;
@@ -117,58 +123,59 @@ ls:composite a skos:Collection ;
 ls:preferLike a skos:Collection ;
     :code "preferLike" .
 
+ls:coercing a skos:Collection ;
+    :category :pending .
+
 # TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
 ls:merged a skos:Collection ;
+    :category :pending ;
     rdfs:label "merged"@en, "sammanslagen"@sv .
 
 # TODO: add e.g. label, domain, comment
-ls:merges a owl:ObjectProperty .
+ls:merges a owl:ObjectProperty ;
+    :category :pending .
 
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
+    skos:notation "NUMM"^^ls:QueryCode ;
     rdfs:label "ISXN"@sv, "ISXN"@en .
 
+ls:library a owl:ObjectProperty ;
+   :category :searchfilter, :impliedByObject, ls:composite, :pending ;
+   rdfs:label "bibliotek"@sv, "library"@en ;
+   rdfs:domain :Instance ;
+   sdo:rangeIncludes :Library, bibdb:Organization .
+
 ls:itemHeldBy a owl:ObjectProperty ;
-    rdfs:label "Bibliotek"@sv, "Library"@en ;
-    skos:notation "bath.possessingInstitution"^^ls:QueryCode ;
-    skos:notation "BIBL"^^ls:QueryCode ;
-    skos:notation "LIBRARY"^^ls:QueryCode ;
-    # skos:notation "LIB"^^ls:QueryCode ; # TODO deprecate?
-    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
-    rdfs:domain :Instance ;
-    sdo:rangeIncludes :Library ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:library ;
+    rdfs:label "bibliotek (sigel)"@sv, "library (sigel)"@en ;
+    skos:notation "bath.possessingInstitution"^^ls:QueryCode,
+        "BIBL"^^ls:QueryCode,
+        "LIB"^^ls:QueryCode, # TODO deprecate?
+        "BIB"^^ls:QueryCode ;
+    rdfs:range :Library ;
+    ls:indexKey "@reverse.itemOf.heldBy" ; # FIXME: Implement support for ls:coercing + :shorthand in XL
     owl:propertyChainAxiom ( :hasItem :heldBy ) .
 
 ls:itemHeldByOrg a owl:ObjectProperty ;
-    rdfs:label "Biblioteksorganisation"@sv, "Library organization"@en ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:library ;
+    rdfs:label "biblioteksorganisation"@sv, "library organization"@en ;
     skos:notation "OCODE"^^ls:QueryCode ;
-    :category :searchfilter, :impliedByObject, :shorthand, :pending ;
-    rdfs:domain :Instance ;
-    sdo:rangeIncludes bibdb:Organization ;
+    rdfs:range bibdb:Organization ;
+    ls:indexKey "@reverse.itemOf.heldBy.isPartOf" ; # FIXME: Implement support for ls:coercing + :shorthand in XL
     owl:propertyChainAxiom ( :hasItem :heldBy :isPartOf ) .
 
-ls:instanceOfType a owl:ObjectProperty ;
-    :category :shorthand, :impliedByObject, :pending ;
-    rdfs:domain :Instance ;
-    owl:propertyChainAxiom ( :instanceOf rdf:type ) .
-
-ls:hasInstanceType a owl:ObjectProperty ;
-    :category :shorthand, :impliedByObject, :pending ;
+ls:workType a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
     rdfs:domain :Work ;
-    owl:propertyChainAxiom ( :hasInstance rdf:type ) .
+    ls:indexKey "@type" .
 
-ls:instanceOfCategory a owl:ObjectProperty ;
-    rdfs:label "kategori på verket"@sv, "category of work"@en ;
-    :category :shorthand, :impliedByObject, :pending ;
+ls:instanceType a owl:ObjectProperty ;
+    :category :impliedByObject, :pending ;
     rdfs:domain :Instance ;
-    owl:propertyChainAxiom ( :instanceOf :category ) .
-
-ls:hasInstanceCategory a owl:ObjectProperty ;
-    rdfs:label "format"@sv, "format"@en ;
-    :category :shorthand, :impliedByObject, :pending ;
-    rdfs:domain :Work ;
-    sdo:rangeIncludes :InstanceCategory ;
-    owl:propertyChainAxiom ( :hasInstance :category ) .
+    ls:indexKey "@type" .
 
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
@@ -182,30 +189,40 @@ ls:originalLanguage a owl:ObjectProperty ;
     rdfs:range :Language ;
     owl:propertyChainAxiom ( :translationOf :language ) .
 
-ls:indexKey a :DatatypeProperty ;
+ls:indexKey a owl:DatatypeProperty ;
     :category :pending .
 
-ls:findCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
+ls:workCategory a owl:ObjectProperty ;
+    :category :searchfilter, :impliedByObject, :pending, ls:composite ;
+    rdfs:label "kategori"@sv, "category"@en ;
     rdfs:domain :Work ;
+    rdfs:range :WorkCategory .
+
+ls:instanceCategory a owl:ObjectProperty ;
+    :category :searchfilter, :impliedByObject, :pending ;
+    rdfs:label "format"@sv, "format"@en ;
+    rdfs:domain :Instance ;
+    rdfs:range :InstanceCategory ;
+    ls:indexKey "_categoryByCollection.@none" .
+
+ls:findCategory a owl:ObjectProperty ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/find> ] ] ;
-    sdo:rangeIncludes :WorkCategory ;
     ls:indexKey "_categoryByCollection.find" .
 
-ls:identifyCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
-    rdfs:domain :Work ;
+ls:identifyCategory a owl:ObjectProperty ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
     rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :inCollection ; owl:hasValue <https://id.kb.se/term/div/identify> ] ] ;
-    sdo:rangeIncludes :WorkCategory ;
     ls:indexKey "_categoryByCollection.identify" .
 
 ls:noneCategory a :ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :category ;
-    rdfs:domain :Work ;
-    sdo:rangeIncludes :WorkCategory ;
+    :category :pending, ls:coercing ;
+    rdfs:subPropertyOf ls:workCategory ;
+    rdfs:range [ rdfs:subClassOf [ a owl:Restriction;
+            owl:onProperty :inCollection;
+            owl:allValuesFrom [ owl:complementOf [ owl:oneOf ( <https://id.kb.se/term/div/find> <https://id.kb.se/term/div/identify> ) ] ] ] ] ;
     ls:indexKey "_categoryByCollection.@none" .
 
 ls:title a owl:ObjectProperty ;
@@ -214,12 +231,20 @@ ls:title a owl:ObjectProperty ;
     skos:notation "TIT"^^ls:QueryCode ;
     skos:notation "bath.title"^^ls:QueryCode ;
     skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
+    skos:notation "HTIT"^^ls:QueryCode ; # "Titel" - drop specificity
+    skos:notation "WUTI"^^ls:QueryCode ; # "Uniform titel (ordindex)" - drop specificity
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
 
+ls:itemInformation a owl:DatatypeProperty ;
+      :category :searchfilter, ls:composite, :pending ;
+      rdfs:label "bestånd"@sv, "item"@en ;
+      rdfs:domain :Instance .
+
 ls:itemShelf a owl:DatatypeProperty ;
       :category :searchfilter, :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
       skos:notation "WHYL"^^ls:QueryCode ;
       rdfs:label "hyllsignum"@sv, "item shelf"@en ;
       rdfs:domain :Instance ;
@@ -237,6 +262,7 @@ ls:shelf a owl:DatatypeProperty ;
 
 ls:hasItemNote a owl:DatatypeProperty ;
       :category :searchfilter, :shorthand, :pending ;
+      rdfs:subPropertyOf ls:itemInformation ;
       rdfs:label "lokal anmärkning"@sv, "local note"@en ;
       rdfs:domain :Instance ;
       owl:propertyChainAxiom ( :hasItem ls:itemNote ) .
@@ -260,11 +286,23 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
      rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
      rdfs:domain :Instance ;
+     skos:notation "HDAT"^^ls:QueryCode ;
+     skos:notation "FORVDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
-ls:itemSubject a owl:DatatypeProperty ;
-     :category :shorthand, :pending, :searchfilter ;
+ls:instanceModified a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
+     rdfs:domain :Instance ;
+     skos:notation "BDAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :meta :modified ) .
+
+ls:itemSubject a owl:ObjectProperty ;
+     :category :shorthand, :pending ;
+     rdfs:subPropertyOf ls:itemInformation ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
      rdfs:domain :Instance ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
@@ -277,7 +315,9 @@ ls:yearPublished a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "utgivningsår"@sv, "year of publication"@en ;
     rdfs:domain :Instance ;
-    skos:notation "ÅR"^^ls:QueryCode, "dc.date"^^ls:QueryCode ;
+    skos:notation "ÅR"^^ls:QueryCode,
+                  "dc.date"^^ls:QueryCode,
+                  "AR1"^^ls:QueryCode;
     owl:propertyChainAxiom ( :publication ls:year ) .
 
 ls:publicationPlace a owl:ObjectProperty;
@@ -297,48 +337,79 @@ ls:publisher a owl:ObjectProperty;
         "FORL"^^ls:QueryCode ;
     owl:propertyChainAxiom ( :publication :agent ), ( :publication :hasPart :agent ) .
 
-# TODO
-#ls:classificationCode a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "klassifikationskod"@sv, "classification code"@en ;
-#    owl:propertyChainAxiom ( :classification :code ) .
-#
-## Auxiliary
-#ls:schemeCode a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    owl:propertyChainAxiom ( :inScheme :code ) .
-#
-#ls:sab a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "SAB-klassifikationskod"@sv, "SAB classification code"@en ;
-#    owl:propertyChainAxiom (
-#        [ rdfs:subPropertyOf :classification ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ; owl:onProperty ls:schemeCode ; owl:hasValue "kssb" ] ] ]
-#        :code ) .
-#
-#ls:ddc a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "Dewey-klassifikationskod"@sv, "Dewey classification code"@en ;
-#    owl:propertyChainAxiom (
-#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationDdc ]
-#        :code ) .
-#
-#ls:udc a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "UDK-klassifikationskod"@sv, "UDK classification code"@en ;
-#    owl:propertyChainAxiom (
-#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationUdc ]
-#        :code ) .
-#
-#ls:nlm a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "NLM-klassifikationskod"@sv, "NLM classification code"@en ;
-#    owl:propertyChainAxiom (
-#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationNlm ]
-#        :code ) .
-#
-#ls:lcc a owl:DatatypeProperty ;
-#    :category :shorthand ;
-#    rdfs:label "LC-klassifikationskod"@sv, "LCC classification code"@en ;
-#    owl:propertyChainAxiom (
-#        [ rdfs:subPropertyOf :classification ; rdfs:range :ClassificationLcc ]
-#        :code ) .
+# Auxiliary
+ls:schemeCode a owl:DatatypeProperty ;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :inScheme :code ) .
+
+ls:sab a owl:DatatypeProperty ;
+    :category :shorthand, :pending, :searchfilter ;
+    rdfs:label "SAB-klassifikation"@sv, "SAB classification"@en ;
+    ls:indexKey "classification._sab" ;
+    sdo:domainIncludes :Work ;
+    owl:propertyChainAxiom (
+        [
+            rdfs:subPropertyOf :classification ;
+            rdfs:range [
+                rdfs:subClassOf [
+                    a owl:Restriction ;
+                    owl:onProperty ls:schemeCode ;
+                    owl:hasValue "kssb"
+                ]
+            ]
+        ]
+        :code
+    ) .
+
+ls:ddc a owl:DatatypeProperty ;
+    :category :shorthand, :pending, :searchfilter ;
+    rdfs:label "Dewey-klassifikation"@sv, "Dewey classification"@en ;
+    ls:indexKey "classification._ddc" ;
+    skos:notation "DDK"^^ls:QueryCode ;
+    sdo:domainIncludes :Work ;
+    owl:propertyChainAxiom (
+        [
+            rdfs:subPropertyOf :classification ;
+            rdfs:range :ClassificationDdc
+        ]
+        :code
+    ) .
+
+ls:udc a owl:DatatypeProperty ;
+    :category :shorthand, :pending, :searchfilter ;
+    rdfs:label "UDK-klassifikation"@sv, "UDC classification"@en ;
+    ls:indexKey "classification._udc" ;
+    sdo:domainIncludes :Work ;
+    owl:propertyChainAxiom (
+        [
+            rdfs:subPropertyOf :classification ;
+            rdfs:range :ClassificationUdc
+        ]
+        :code
+    ) .
+
+ls:nlm a owl:DatatypeProperty ;
+    :category :shorthand, :pending, :searchfilter ;
+    rdfs:label "NLM-klassifikation"@sv, "NLM classification"@en ;
+    ls:indexKey "classification._nlm" ;
+    sdo:domainIncludes :Work ;
+    owl:propertyChainAxiom (
+        [
+            rdfs:subPropertyOf :classification ;
+            rdfs:range :ClassificationNlm
+        ]
+        :code
+    ) .
+
+ls:lcc a owl:DatatypeProperty ;
+    :category :shorthand, :pending, :searchfilter ;
+    rdfs:label "LC-klassifikation"@sv, "LCC classification"@en ;
+    ls:indexKey "classification._lcc" ;
+    sdo:domainIncludes :Work ;
+    owl:propertyChainAxiom (
+        [
+            rdfs:subPropertyOf :classification ;
+            rdfs:range :ClassificationLcc
+        ]
+        :code
+    ) .
