@@ -1,0 +1,35 @@
+prefix : <https://id.kb.se/vocab/>
+prefix saogf: <https://id.kb.se/term/saogf/>
+prefix div: <https://id.kb.se/term/div/>
+prefix ktg: <https://id.kb.se/term/ktg/>
+prefix kbrda: <https://id.kb.se/term/rda/>
+
+# Seriella publikationer 
+
+# find
+saogf:Seriella%20publikationer :inCollection div:find .
+
+# identify
+saogf:Periodika :searchLabel "Tidskrifter"@sv ; # Ändra prefLabel = ändra uri
+    :inCollection div:identify .
+
+saogf:Dagstidningar :inCollection div:identify .
+
+saogf:Monografiserier :inCollection div:identify .
+
+saogf:Nyhetsbrev :inCollection div:identify .
+
+saogf:%C3%85rsb%C3%B6cker :inCollection div:identify .
+
+# Det har inkommit önskemål från KB:s seriekatalogisatörer om att även inkludera Webbplatser här.
+
+# saogf:Seriella%20publikationer :searchLabel "Tidningar och tidskrifter" . # Avvaktar - kräver mer reflektion/utreding.
+
+# Övriga UX-förslag - behöver göras
+# ktg:MovingImage :searchLabel "Film och video" .
+# rda:NotatedMusic :searchLabel "Noter" .
+# saogf:Musikinspelningar :inCollection div:identify .
+# Ta boert identify på rda:PerformedMusic
+
+# Städa bort find på Periodika
+graph <#deletes> { saogf:Periodika :inCollection div:find . }
