@@ -347,14 +347,14 @@ ls:yearPublished a owl:DatatypeProperty ;
     owl:propertyChainAxiom ( :publication ls:year ) .
 
 ls:publicationPlace a owl:ObjectProperty;
-    :category ls:composite, :searchfilter;
+    :category ls:composite, :searchfilter, :pending ;
     rdfs:label "utgivningsort"@sv, "place of publication"@en ;
     sdo:domainIncludes :Instance ;
     rdfs:range :Place ;
     owl:propertyChainAxiom ( :publication :place ), ( :publication :hasPart :place ) .
 
 ls:publisher a owl:ObjectProperty;
-    :category ls:composite, :searchfilter ;
+    :category ls:composite, :searchfilter, :pending ;
     rdfs:label "utgivare"@sv, "publisher"@en ;
     sdo:domainIncludes :Instance ;
     skos:notation "dc.publisher"^^ls:QueryCode,
