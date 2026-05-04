@@ -111,20 +111,19 @@
       "defaultSiteFilters": [
         { "filter": "\"rdf:type\":Work" },
         { "filter": "excludeEplikt" },
-        { "filter": "excludePreliminary" },
         { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
         { "filter": "NOT inDataset:\"https://id.kb.se/dataset/swepub\"" }
       ],
       "optionalSiteFilters": [
         { "filter": "includeEplikt" },
-        { "filter": "includePreliminary" },
+        { "filter": "excludePreliminary" },
         { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
         { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "workCategory", "instanceCategory", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
       ]
@@ -183,7 +182,7 @@
       ],
       "relationFilters": [
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "workCategory", "instanceCategory", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
       ]
@@ -245,17 +244,16 @@
         { "filter": "\"rdf:type\":Work" },
         { "filter": "itemHeldBy:\"sigel:Arkm\"" },
         { "filter": "excludeEplikt" },
-        { "filter": "excludePreliminary" },
         { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" }
       ],
       "optionalSiteFilters": [
-        { "filter": "includePreliminary" },
+        { "filter": "excludePreliminary" },
         { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "workCategory", "instanceCategory", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
       ]
@@ -317,17 +315,16 @@
       ],
       "defaultSiteFilters": [
         { "filter": "\"rdf:type\":Work" },
-        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" },
-        { "filter": "excludePreliminary" }
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" }
       ],
       "optionalSiteFilters": [
-        { "filter": "includePreliminary" },
+        { "filter": "excludePreliminary" },
         { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "genreForm", "workCategory", "instanceCategory", "hasOccupation", "fieldOfActivity", "termComponentList" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
       ]
