@@ -96,6 +96,10 @@
     skos:notation "SPR"^^ls:QueryCode ;
     skos:notation "SPR1"^^ls:QueryCode .
 
+:intendedAudience # See ./enums.ttl for full definition of :intendedAudience
+    :category :searchfilter, :impliedByObject ;
+    skos:notation "ART"^^ls:QueryCode .
+
 :controlNumber # See ./platform.ttl for full definition of :controlNumber
     :category :searchfilter ;
     skos:notation "ONR"^^ls:QueryCode ;
@@ -352,6 +356,14 @@ ls:publicationPlace a owl:ObjectProperty;
     sdo:domainIncludes :Instance ;
     rdfs:range :Place ;
     owl:propertyChainAxiom ( :publication :place ), ( :publication :hasPart :place ) .
+
+ls:publicationCountry a owl:ObjectProperty;
+    :category :shorthand, :searchfilter, :impliedByObject, :pending ;
+    rdfs:label "utgivningsland"@sv, "country of publication"@en ;
+    skos:notation "LAND"^^ls:QueryCode ;
+    sdo:domainIncludes :Instance ;
+    rdfs:range :Country ;
+    owl:propertyChainAxiom ( :publication :country ) .
 
 ls:publisher a owl:ObjectProperty;
     :category ls:composite, :searchfilter, :pending ;
