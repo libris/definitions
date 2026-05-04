@@ -353,6 +353,14 @@ ls:publicationPlace a owl:ObjectProperty;
     rdfs:range :Place ;
     owl:propertyChainAxiom ( :publication :place ), ( :publication :hasPart :place ) .
 
+ls:publicationCountry a owl:ObjectProperty;
+    :category :shorthand, :searchfilter, :pending ;
+    rdfs:label "utgivningsland"@sv, "country of publication"@en ;
+    skos:notation "LAND"^^ls:QueryCode ;
+    sdo:domainIncludes :Instance ;
+    rdfs:range :Country ;
+    owl:propertyChainAxiom ( :publication :country ) .
+
 ls:publisher a owl:ObjectProperty;
     :category ls:composite, :searchfilter, :pending ;
     rdfs:label "utgivare"@sv, "publisher"@en ;
