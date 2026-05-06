@@ -1,6 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -199,14 +200,18 @@
     rdfs:range :ItemAction .
 
 :ItemAction a owl:Class ;
-    rdfs:label "Beståndsåtgärd" .
+    ptg:abstract true ;
+    rdfs:label "Beståndsåtgärd" ;
+    rdfs:subClassOf [ a owl:ObjectProperty ;
+            owl:onProperty :category ;
+            owl:allValuesFrom :ItemActionCategory ] .
 
 :CommitmentToRetainAction a owl:Class ;
     rdfs:label "Commitment to retain action"@en, "Bevarandeåtgärd"@sv ;
     rdfs:subClassOf :ItemAction .
 
-:ItemCategory a owl:Class ;
-   # ptg:abstract true ;
+:ItemActionCategory a owl:Class ;
+    # ptg:abstract true ;
     rdfs:subClassOf :Category ;
     rdfs:label "Item category"@en, "Beståndskategori"@sv .
 
