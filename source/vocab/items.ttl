@@ -191,6 +191,26 @@
   rdfs:range xsd:positiveInteger .
 
 ##
+# SHARED PRINT ACTIONS
+
+:hasItemAction a owl:ObjectProperty ;
+  rdfs:label "has item action"@en, "har beståndsåtgärd"@sv ;
+  rdfs:domain :Item ;
+  rdfs:range :ItemAction .
+
+:ItemAction a owl:Class ;
+  rdfs:label "Beståndsåtgärd" .
+
+:CommitmentToRetainAction a owl:Class ;
+    rdfs:label "Commitment to retain action"@en, "Bevarandeåtgärd"@sv ;
+    rdfs:subClassOf :ItemAction .
+
+:ItemCategory a owl:Class ;
+   # ptg:abstract true ;
+    rdfs:subClassOf :Category ;
+    rdfs:label "Item category"@en, "Beståndskategori"@sv .
+
+##
 # OTHER ITEM PROPERTIES AND CLASSES
 
 :callNumberPrefix a owl:DatatypeProperty;
