@@ -83,7 +83,11 @@ with gzip.open(usagefpath, "rt") as f:
 
             if part.startswith('.'):
                 assert first
-                part = first[0] + part
+                for i in range(len(first), 0, -1):
+                    controlled_part = first[:i] + part
+                    if controlled_part in sabcodes:
+                        part = controlled_part
+                        break
 
             if part not in sabcodes:
                 lit_transl_to_sv_code = 'Hce'
