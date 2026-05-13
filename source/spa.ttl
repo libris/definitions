@@ -1,8 +1,5 @@
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix : <https://id.kb.se/vocab/>
 prefix spa: <https://id.kb.se/term/spa/>
-base <https://id.kb.se/term/spa/>
 
 ###
 # Based on <https://wordpress.clir.org/wp-content/uploads/sites/62/Shared-Print-Actions_-Terminology-for-MARC-21-Field-583-April-2024.pdf>
@@ -13,11 +10,22 @@ base <https://id.kb.se/term/spa/>
 ##
 # ActionStatus
 
-<committed-to-retain> a :ItemActionCategory ;
+spa:committed-to-retain a :ItemActionCategory ;
   :sameAs <aa> ;
   :code "aa" ;
   :label "committed to retain"@en ;
-  :comment "Commitment by the institution to retain the materials for a given shared print program (or multiple programs, recorded in the $f) for the duration stipulated by the shared print program(s) (recorded in the $d)."@en ;
-  #:url <https://.... sps programmet ...> ;
-.
+  :comment "Commitment by the institution to retain the materials for a given shared print program (or multiple programs, recorded in the $f) for the duration stipulated by the shared print program(s) (recorded in the $d)."@en .
+
+spa:will-commit-to-retain a :ItemActionCategory; # :ProspectiveAction ;
+  :sameAs <ab> ;
+  :code "ab" ;
+  :label "will commit to retain"@en ;
+  :comment "See “committed to retain”"@en .
+
+spa:will-not-commit-to-retain a :ItemActionCategory; # :NegativeDecision ;
+  :sameAs <ac> ;
+  :code "ac" ;
+  :label "will not commit to retain"@en ;
+  :comment "See “committed to retain”"@en .
+
 
