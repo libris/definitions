@@ -197,23 +197,24 @@
 :hasItemAction a owl:ObjectProperty ;
     rdfs:label "has item action"@en, "har beståndsåtgärd"@sv ;
     rdfs:domain :Item ;
-    rdfs:range :ItemAction .
+    rdfs:range :ItemAction ;
+    skos:related <http://id.loc.gov/vocabulary/mnotetype/action> .
 
 :ItemAction a owl:Class ;
-    ptg:abstract true ;
+    #ptg:abstract true ;
     rdfs:label "Beståndsåtgärd" ;
     rdfs:subClassOf [ a owl:ObjectProperty ;
             owl:onProperty :category ;
             owl:allValuesFrom :ItemActionCategory ] .
 
-:CommitmentToRetainAction a owl:Class ;
-    rdfs:label "Commitment to retain action"@en, "Bevarandeåtgärd"@sv ;
-    rdfs:subClassOf :ItemAction .
-
 :ItemActionCategory a owl:Class ;
-    # ptg:abstract true ;
+    #ptg:abstract true ;
     rdfs:subClassOf :Category ;
-    rdfs:label "Item category"@en, "Beståndskategori"@sv .
+    rdfs:label "Item action category"@en, "Kategori för beståndsåtgärd"@sv .
+
+#:ItemRetentionAction a owl:Class ;
+#    rdfs:label "Item retention action"@en, "Bevarandeåtgärd"@sv ;
+#    rdfs:subClassOf :ItemAction .
 
 ##
 # OTHER ITEM PROPERTIES AND CLASSES
