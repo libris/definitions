@@ -330,6 +330,15 @@ ls:instanceModified a owl:DatatypeProperty ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :meta :modified ) .
 
+ls:instanceCreated a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
+     rdfs:domain :Instance ;
+     skos:notation "DAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( :meta :created ) .
+
 ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:subPropertyOf ls:itemInformation ;
