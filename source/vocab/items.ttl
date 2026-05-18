@@ -1,6 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -20,7 +21,6 @@
 # OTHER ITEM PROPERTIES AND CLASSES
 # RETAINED SCHEMA/BF1 MAPPINGS
 # EARLY LOCAL LIBRIS HOLDING TERMS
-# MODEL SUGGESTIONS
 
 ##
 # BF2 ITEM/HOLDING LOCATION
@@ -28,16 +28,29 @@
 :Item a owl:Class ;
     rdfs:label "Item"@en, "Bestånd"@sv ;
     :category marc:hold;
-    rdfs:subClassOf :Embodiment;
+    rdfs:subClassOf :Embodiment, sdo:Product;
     skos:closeMatch rdaent:Item;
-    owl:equivalentClass bf2:Item, sdo:Product, holding:Item .
-    #TODO?: owl:equivalentClass [ owl:unionOf (sdo:Product sdo:Offer) ] ;
+    owl:equivalentClass bf2:Item, holding:Item .
+
+:ItemHolding a owl:Class ;
+    rdfs:label "Item holding"@en, "Beståndsinnehav"@sv ;
+    rdfs:subClassOf :Item , sdo:Offer  .
+
+:SomeItem a owl:Class ;
+    #ptg:abstract true ;
+    :category marc:none ;
+    rdfs:label "Some item"@en, "Något exemplar"@sv ;
+    rdfs:subClassOf :Item .
+
+:MultipleItems a owl:Class ;
+    rdfs:subClassOf :Item ;
+    rdfs:subClassOf sdo:SomeProducts ;
+    rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
 
 :SingleItem a owl:Class ;
-    rdfs:subClassOf :Item ;
+    rdfs:subClassOf :SomeItem , sdo:IndividualProduct ;
     :category marc:none ;
-    owl:equivalentClass sdo:IndividualProduct ;
-    rdfs:label "Single item"@en, "Exemplar"@sv .
+    rdfs:label "Single item"@en, "Enskilt exemplar"@sv .
 
 :itemOf a owl:ObjectProperty ;
     rdfs:label "Holding for"@en, "bestånd på"@sv ;
@@ -255,11 +268,10 @@
 :hasComponent a owl:ObjectProperty ;
     rdfs:label "has component"@en, "har komponent"@sv ;
     :category :compositional, :integral;
-    rdfs:subPropertyOf bf2:hasPart ;
-    rdfs:domain :Item ;
+    rdfs:subPropertyOf bf2:hasPart, sdo:itemOffered ;
+    rdfs:domain :ItemHolding ;
     owl:inverseOf :componentOf ;
-    # TODO: rdfs:domain :SomeItems ;
-    rdfs:range :Item ;
+    rdfs:range :SomeItem ;
     skos:note "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
 
 :componentOf a owl:ObjectProperty ;
@@ -312,16 +324,3 @@
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;
     skos:example "Deckare", "Lagerlöf" .
-
-
-# MODEL SUGGESTIONS
-#
-# :MultipleItems a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass sdo:SomeProducts ;
-#     rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
-
-# :IndividualItem a owl:Class ;
-#     rdfs:subClassOf :Item ;
-#     owl:equivalentClass sdo:IndividualProduct ;
-#     rdfs:label "Individual item"@en, "Enskilt exemplar"@sv .
