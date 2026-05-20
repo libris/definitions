@@ -328,7 +328,7 @@ ls:instanceModified a owl:DatatypeProperty ;
      rdfs:domain :Instance ;
      skos:notation "BDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :modified ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :modified ) .
 
 ls:instanceCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
@@ -337,7 +337,7 @@ ls:instanceCreated a owl:DatatypeProperty ;
      rdfs:domain :Instance ;
      skos:notation "DAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :created ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
