@@ -26,6 +26,7 @@
 # BF2 ITEM/HOLDING LOCATION
 
 :Item a owl:Class ;
+    #ptg:abstract true ;
     rdfs:label "Item"@en, "Bestånd"@sv ;
     :category marc:hold;
     rdfs:subClassOf :Embodiment, sdo:Product;
@@ -37,7 +38,6 @@
     rdfs:subClassOf :Item , sdo:Offer  .
 
 :HeldComponent a owl:Class ;
-    #ptg:abstract true ;
     :category marc:none ;
     rdfs:label "Held component"@en, "Beståndskomponent"@sv ;
     rdfs:subClassOf :Item .
