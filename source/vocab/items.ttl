@@ -36,10 +36,10 @@
     rdfs:label "Item holding"@en, "Beståndsinnehav"@sv ;
     rdfs:subClassOf :Item , sdo:Offer  .
 
-:SomeItem a owl:Class ;
+:HeldComponent a owl:Class ;
     #ptg:abstract true ;
     :category marc:none ;
-    rdfs:label "Some item"@en, "Något exemplar"@sv ;
+    rdfs:label "Held component"@en, "Beståndskomponent"@sv ;
     rdfs:subClassOf :Item .
 
 :MultipleItems a owl:Class ;
@@ -48,7 +48,7 @@
     rdfs:label "Multiple items"@en, "Flera exemplar"@sv .
 
 :SingleItem a owl:Class ;
-    rdfs:subClassOf :SomeItem , sdo:IndividualProduct ;
+    rdfs:subClassOf :HeldComponent , sdo:IndividualProduct ;
     :category marc:none ;
     rdfs:label "Single item"@en, "Enskilt exemplar"@sv .
 
@@ -271,7 +271,7 @@
     rdfs:subPropertyOf bf2:hasPart, sdo:itemOffered ;
     rdfs:domain :ItemHolding ;
     owl:inverseOf :componentOf ;
-    rdfs:range :SomeItem ;
+    rdfs:range :HeldComponent ;
     skos:note "Retained from BF1 to enable an Item entity to describe several Items within the same holding. (Historically due to local variations in Libris MARC21-spec.)"@en .
 
 :componentOf a owl:ObjectProperty ;
