@@ -392,6 +392,11 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 
 :DigitalResource a owl:Class ;
   rdfs:subClassOf :Electronic ;  
+  rdfs:subClassOf [ a owl:Restriction ;
+          owl:onProperty :category ;
+          owl:minQualifiedCardinality 1 ;
+          owl:onClass [ owl:onProperty :broaderTransitive ;
+                        owl:hasValue saobf:DigitalForm ] ] ;
   rdfs:label "Digital resurs"@sv , "Digital Resource"@en .
 
 
