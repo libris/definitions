@@ -53,9 +53,6 @@
     skos:notation "WFRF"^^ls:QueryCode ;
     skos:notation "WINS"^^ls:QueryCode .
 
-:bibliography # See ./agents.ttl for full definition of :bibliography
-    skos:notation "DB"^^ls:QueryCode .
-
 # NOTE: Old webbsök code 'author' was same as 'FÖRF'
 :author a owl:ObjectProperty ;
     :category :searchfilter, ls:preferLike, :shorthand, :pending ;
@@ -100,21 +97,13 @@
     :category :searchfilter, :impliedByObject ;
     skos:notation "ART"^^ls:QueryCode .
 
-:controlNumber # See ./platform.ttl for full definition of :controlNumber
-    :category :searchfilter ;
-    skos:notation "ONR"^^ls:QueryCode ;
-    # rec.recordIdentifier is used A LOT in Libris SRU
-    # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
-    # https://web.archive.org/web/20130515105512/https://srw.cheshire3.org/contextSets/rec/1.1/
-    # Webbsök SRU does not support rec.id (from Bath profile) or rec.identifier
-    skos:notation "rec.recordIdentifier"^^ls:QueryCode ;
-    skos:notation "BIBID"^^ls:QueryCode .
-
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
 
 :textQuery skos:notation "cql.anywhere"^^ls:QueryCode . # See ./platform.ttl for full definition of :textQuery
 
 ### New definitions for Libris Search ###
+
+## Auxiliary definitions
 
 ls:QueryCode a rdfs:Datatype ;
     :category :pending .
@@ -138,6 +127,53 @@ ls:merged a skos:Collection ;
 # TODO: add e.g. label, domain, comment
 ls:merges a owl:ObjectProperty ;
     :category :pending .
+
+## Record search filters
+
+ls:recordControlNumber a owl:DatatypeProperty ;
+    :category :searchfilter, :shorthand, :pending ;
+    rdfs:label "control number"@en, "kontrollnummer"@sv ;
+    skos:notation "ONR"^^ls:QueryCode,
+    # rec.recordIdentifier is used A LOT in Libris SRU
+    # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
+    # https://web.archive.org/web/20130515105512/https://srw.cheshire3.org/contextSets/rec/1.1/
+    # Webbsök SRU does not support rec.id (from Bath profile) or rec.identifier
+        "rec.recordIdentifier"^^ls:QueryCode,
+        "BIBID"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :meta :controlNumber ) .
+
+ls:instanceRecordModified a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
+     rdfs:domain :Instance ;
+     skos:notation "BDAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :modified ) .
+
+ls:instanceRecordCreated a owl:DatatypeProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
+     rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
+     rdfs:domain :Instance ;
+     skos:notation "DAT"^^ls:QueryCode ;
+     rdfs:range xsd:dateTime ;
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
+
+ls:bibliography a owl:ObjectProperty ;
+    :category :searchfilter, :shorthand, :impliedByObject, :pending ;
+    rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
+    skos:notation "DB"^^ls:QueryCode ;
+    rdfs:domain :Instance ;
+    rdfs:range :Bibliography ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography ) .
+
+ls:encodingLevel a owl:ObjectProperty;
+    :category :shorthand, :pending ;
+    rdfs:label "Encoding level"@en, "Beskrivningsnivå"@sv ;
+    rdfs:domain :Instance ;
+    rdfs:range marc:EncLevelType ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :encodingLevel ) .
 
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
@@ -320,24 +356,6 @@ ls:itemRecordCreated a owl:DatatypeProperty ;
      skos:notation "FORVDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
-
-ls:instanceRecordModified a owl:DatatypeProperty ;
-     :category :searchfilter, :shorthand, :pending ;
-     rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
-     rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
-     rdfs:domain :Instance ;
-     skos:notation "BDAT"^^ls:QueryCode ;
-     rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :modified ) .
-
-ls:instanceRecordCreated a owl:DatatypeProperty ;
-     :category :searchfilter, :shorthand, :pending ;
-     rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
-     rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
-     rdfs:domain :Instance ;
-     skos:notation "DAT"^^ls:QueryCode ;
-     rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
