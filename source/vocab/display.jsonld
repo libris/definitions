@@ -1899,8 +1899,17 @@
             "relationship",
             "hasPart",
             {
-              "@type": "fresnel:fslselector",
-              "@value": "additionalClassificationDdc/ClassificationDdc/code"
+              "fresnel:mergeProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "additionalClassificationDdc/ClassificationDdc/code"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "classification/ClassificationDdc/code"
+                }
+              ],
+              "fresnel:use": "librissearch:dewey"
             },
             {
               "@type": "fresnel:fslselector",
