@@ -31,7 +31,8 @@ compiler = Compiler(base_dir=SCRIPT_DIR,
                     context='sys/context/base.jsonld',
                     record_thing_link='mainEntity',
                     system_base_iri='',
-                    union='syscore.jsonld.lines')
+                    union='syscore.jsonld.lines',
+                    last_backwards_id_time='2022-11-20T00:00:00Z')
 
 
 @compiler.handler
@@ -145,7 +146,7 @@ def _insert_record(graph, created_ms, dataset_id):
     record = {'@type': 'SystemRecord'}
     record[compiler.record_thing_link] = {'@id': entity['@id']}
     graph.insert(0, record)
-    record['@id'] = compiler.generate_record_id(created_ms, entity['@id'])
+    compiler.set_record_id(record, created_ms, entity['@id'])
     record['inDataset'] = [{'@id': compiler.dataset_id}, {'@id': dataset_id}]
 
 
