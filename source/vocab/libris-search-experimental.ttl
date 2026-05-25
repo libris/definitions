@@ -408,19 +408,23 @@ ls:sab a owl:DatatypeProperty ;
         :code
     ) .
 
-ls:ddc a owl:DatatypeProperty ;
-    :category :shorthand, :pending, :searchfilter ;
+ls:dewey a owl:DatatypeProperty ;
+    :category ls:merged, :pending, :searchfilter ;
     rdfs:label "Dewey-klassifikation"@sv, "Dewey classification"@en ;
-    ls:indexKey "classification._ddc" ;
-    skos:notation "DDK"^^ls:QueryCode ;
+    skos:notation "DDC"^^ls:QueryCode,
+        "DDC2"^^ls:QueryCode,
+        "DDK"^^ls:QueryCode ;
     sdo:domainIncludes :Work ;
-    owl:propertyChainAxiom (
+    ls:merges [ owl:propertyChainAxiom ( :additionalClassificationDdc :code ) ],
         [
-            rdfs:subPropertyOf :classification ;
-            rdfs:range :ClassificationDdc
-        ]
-        :code
-    ) .
+            owl:propertyChainAxiom (
+                [
+                    rdfs:subPropertyOf :classification ;
+                    rdfs:range :ClassificationDdc
+                ]
+                :code
+            )
+        ] .
 
 ls:udc a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
