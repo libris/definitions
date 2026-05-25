@@ -311,7 +311,7 @@ ls:additionalItemInformation a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :immediateAcquisition :identifiedBy :value ) ],
         [ owl:propertyChainAxiom ( :classification :code ) ] .
 
-ls:itemCreated a owl:DatatypeProperty ;
+ls:itemRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
      rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
@@ -321,23 +321,23 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
-ls:instanceModified a owl:DatatypeProperty ;
+ls:instanceRecordModified a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
      rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
      rdfs:domain :Instance ;
      skos:notation "BDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :modified ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :modified ) .
 
-ls:instanceCreated a owl:DatatypeProperty ;
+ls:instanceRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
      rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
      rdfs:domain :Instance ;
      skos:notation "DAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :created ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
