@@ -613,6 +613,66 @@
     rdfs:range :PartialCollectionView;
     owl:inverseOf :items .
 
+:and a owl:ObjectProperty ;
+    :category :platform, :pending ;
+    rdfs:label "and"@en, "och"@sv ;
+    skos:altLabel "&&" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range :SearchMapping .
+
+:or a owl:ObjectProperty ;
+    :category :platform, :pending ;
+    rdfs:label "or"@en, "eller"@sv ;
+    skos:altLabel "||" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range :SearchMapping .
+
+:not a owl:ObjectProperty ;
+    :category :platform, :pending ;
+    rdfs:label "not"@en, "ej"@sv ;
+    skos:altLabel "!" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range :SearchMapping .
+
+:equals a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "equals"@en, "likamed"@sv ;
+    skos:altLabel "=" ;
+    rdfs:domain :SearchMapping .
+
+:notEquals a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "not equals"@en, "ej likamed"@sv ;
+    skos:altLabel "!=" ;
+    rdfs:domain :SearchMapping .
+
+:greaterThan a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "greater than"@en, "större än"@sv ;
+    skos:altLabel ">" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range rdf:Literal .
+
+:greaterThanOrEquals a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "greater than or equals"@en, "större än eller likamed"@sv ;
+    skos:altLabel ">=" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range rdf:Literal .
+
+:lessThan a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "less than"@en, "mindre än"@sv ;
+    skos:altLabel "<" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range rdf:Literal .
+
+:lessThanOrEquals a rdf:Property ;
+    :category :platform, :pending ;
+    rdfs:label "less than or equals"@en, "mindre än eller likamed"@sv ;
+    skos:altLabel "<=" ;
+    rdfs:domain :SearchMapping ;
+    rdfs:range rdf:Literal .
 
 ##
 # Containers (mainly used here for controlled URI:s)
