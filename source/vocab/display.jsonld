@@ -1865,6 +1865,18 @@
             {
               "@type": "fresnel:fslselector",
               "@value": "meta/*/controlNumber"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/created"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/modified"
+            },
+            {
+              "@type": "fresnel:fslselector",
+              "@value": "meta/*/encodingLevel"
             }
           ]
         },
@@ -1898,6 +1910,19 @@
             "image",
             "relationship",
             "hasPart",
+            {
+              "fresnel:mergeProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "additionalClassificationDdc/ClassificationDdc/code"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "classification/ClassificationDdc/code"
+                }
+              ],
+              "fresnel:use": "librissearch:dewey"
+            },
             {
               "@type": "fresnel:fslselector",
               "@value": "meta/*/controlNumber"

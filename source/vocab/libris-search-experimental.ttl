@@ -34,7 +34,9 @@
     :category :searchfilter ;
     skos:notation "bath.lccn"^^ls:QueryCode .
 
-:seriesMembership :category :searchfilter . # See ./relations.ttl for full definition of :seriesMembership
+:seriesMembership  # See ./relations.ttl for full definition of :seriesMembership
+    :category :searchfilter ;
+    skos:notation "WSER"^^ls:QueryCode .
 
 :responsibilityStatement :category :searchfilter . # See ./details.ttl for full definition of :responsibilityStatement
 
@@ -311,7 +313,7 @@ ls:additionalItemInformation a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :immediateAcquisition :identifiedBy :value ) ],
         [ owl:propertyChainAxiom ( :classification :code ) ] .
 
-ls:itemCreated a owl:DatatypeProperty ;
+ls:itemRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
      rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
@@ -321,23 +323,23 @@ ls:itemCreated a owl:DatatypeProperty ;
      rdfs:range xsd:dateTime ;
      owl:propertyChainAxiom ( :hasItem :meta :created ) .
 
-ls:instanceModified a owl:DatatypeProperty ;
+ls:instanceRecordModified a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
      rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
      rdfs:domain :Instance ;
      skos:notation "BDAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :modified ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :modified ) .
 
-ls:instanceCreated a owl:DatatypeProperty ;
+ls:instanceRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
      rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
      rdfs:domain :Instance ;
      skos:notation "DAT"^^ls:QueryCode ;
      rdfs:range xsd:dateTime ;
-     owl:propertyChainAxiom ( :meta :created ) .
+     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
@@ -408,19 +410,23 @@ ls:sab a owl:DatatypeProperty ;
         :code
     ) .
 
-ls:ddc a owl:DatatypeProperty ;
-    :category :shorthand, :pending, :searchfilter ;
+ls:dewey a owl:DatatypeProperty ;
+    :category ls:merged, :pending, :searchfilter ;
     rdfs:label "Dewey-klassifikation"@sv, "Dewey classification"@en ;
-    ls:indexKey "classification._ddc" ;
-    skos:notation "DDK"^^ls:QueryCode ;
+    skos:notation "DDC"^^ls:QueryCode,
+        "DDC2"^^ls:QueryCode,
+        "DDK"^^ls:QueryCode ;
     sdo:domainIncludes :Work ;
-    owl:propertyChainAxiom (
+    ls:merges [ owl:propertyChainAxiom ( :additionalClassificationDdc :code ) ],
         [
-            rdfs:subPropertyOf :classification ;
-            rdfs:range :ClassificationDdc
-        ]
-        :code
-    ) .
+            owl:propertyChainAxiom (
+                [
+                    rdfs:subPropertyOf :classification ;
+                    rdfs:range :ClassificationDdc
+                ]
+                :code
+            )
+        ] .
 
 ls:udc a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
