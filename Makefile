@@ -45,3 +45,6 @@ cache/ssif-2025.csv: cache/Nyckel_SSIF2011_SSIF2025_digg.xlsx
 	# Fix incomplete change type
 	sed -i '/^60411.*\tBytt benämning\t/ s/Bytt benämning/Ny kod, Bytt benämning/' "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv"
 	cp "cache/Nyckel_SSIF2011_SSIF2025_digg-Nyckel SSIF2011-SSIF25.csv" $@
+
+cache/lcgft.ttl.gz:
+	curl -sL "https://id.loc.gov/download/authorities/genreForms.skosrdf.ttl.gz" -o $@
