@@ -23,44 +23,6 @@
 
 :tableOfContents :category :searchfilter . # See ./details.ttl for full definition of :tableOfContents
 
-:contributor # See ./relations.ttl for full definition of :contributor
-    :category :searchfilter, :impliedByObject, ls:preferLike ;
-    skos:notation "dc.author"^^ls:QueryCode ;
-    skos:notation "dc.contributor"^^ls:QueryCode ;
-    skos:notation "dc.creator"^^ls:QueryCode ;
-    skos:notation "FÖRF"^^ls:QueryCode ;
-    skos:notation "FORF"^^ls:QueryCode ;
-    skos:notation "PERS"^^ls:QueryCode ;
-    skos:notation "WFRF"^^ls:QueryCode ;
-    skos:notation "WINS"^^ls:QueryCode .
-
-# NOTE: Old webbsök code 'author' was same as 'FÖRF'
-:author a owl:ObjectProperty ;
-    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
-    rdfs:label "författare"@sv, "author"@en ;
-    owl:equivalentProperty <https://id.kb.se/relator/author> ;
-    rdfs:subPropertyOf :contributor ;
-    rdfs:range :Agent ;
-    owl:propertyChainAxiom (
-            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
-                owl:onProperty :role ;
-                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
-            :agent
-        ) .
-
-:translator a owl:ObjectProperty ;
-    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
-    rdfs:label "översättare"@sv, "translator"@en ;
-    owl:equivalentProperty <https://id.kb.se/relator/translator> ;
-    rdfs:subPropertyOf :contributor ;
-    rdfs:range :Agent ;
-    owl:propertyChainAxiom (
-            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
-                owl:onProperty :role ;
-                owl:hasValue <https://id.kb.se/relator/translator> ] ] ]
-            :agent
-        ) .
-
 :subject # See ./relations.ttl for full definition of :subject
     :category :searchfilter ;
     skos:notation "dc.subject"^^ls:QueryCode ;
@@ -171,14 +133,55 @@ ls:recordType a owl:ObjectProperty;
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
     rdfs:label "titel"@sv, "title"@en ;
-    skos:notation "TIT"^^ls:QueryCode ;
-    skos:notation "bath.title"^^ls:QueryCode ;
-    skos:notation "dc.title"^^ls:QueryCode ; # TODO only hasTitle?
-    skos:notation "HTIT"^^ls:QueryCode ; # "Titel" - drop specificity
-    skos:notation "WUTI"^^ls:QueryCode ; # "Uniform titel (ordindex)" - drop specificity
+        "TIT"^^ls:QueryCode,
+        "bath.title"^^ls:QueryCode,
+        "dc.title"^^ls:QueryCode, # TODO only hasTitle?
+        "HTIT"^^ls:QueryCode, # "Titel" - drop specificity
+        "WUTI"^^ls:QueryCode, # "Uniform titel (ordindex)" - drop specificity
+    sdo:domainIncludes :Creation ;
     owl:propertyChainAxiom ( :translationOf :hasTitle ),
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ) .
+
+ls:contributor a owl:ObjectProperty ;
+    :category :searchfilter, :shorthand, ls:composite, :impliedByObject, ls:preferLike ;
+    rdfs:label "Author/Contributor"@en, "Författare/upphov"@sv ;
+    skos:notation "dc.author"^^ls:QueryCode,
+        "dc.contributor"^^ls:QueryCode,
+        "dc.creator"^^ls:QueryCode,
+        "FÖRF"^^ls:QueryCode,
+        "FORF"^^ls:QueryCode,
+        "PERS"^^ls:QueryCode,
+        "WFRF"^^ls:QueryCode,
+        "WINS"^^ls:QueryCode ;
+    sdo:domainIncludes :Creation ;
+    sdo:rangeIncludes :BibliographicAgent ;
+    owl:propertyChainAxiom ( :contribution :agent ) .
+
+# NOTE: Old webbsök code 'author' was same as 'FÖRF'
+ls:author a owl:ObjectProperty ;
+    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
+    rdfs:label "författare"@sv, "author"@en ;
+    sdo:domainIncludes :Work ;
+    sdo:rangeIncludes :BibliographicAgent ;
+    owl:propertyChainAxiom (
+            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
+                owl:onProperty :role ;
+                owl:hasValue <https://id.kb.se/relator/author> ] ] ]
+            :agent
+        ) .
+
+ls:translator a owl:ObjectProperty ;
+    :category :searchfilter, ls:preferLike, :shorthand, :pending ;
+    rdfs:label "översättare"@sv, "translator"@en ;
+    sdo:domainIncludes :Work ;
+    sdo:rangeIncludes :BibliographicAgent ;
+    owl:propertyChainAxiom (
+            [ rdfs:subPropertyOf :contribution ; rdfs:range [ rdfs:subClassOf [ a owl:Restriction ;
+                owl:onProperty :role ;
+                owl:hasValue <https://id.kb.se/relator/translator> ] ] ]
+            :agent
+        ) .
 
 
 ## Work
