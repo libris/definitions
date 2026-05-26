@@ -175,6 +175,10 @@ ls:encodingLevel a owl:ObjectProperty;
     rdfs:range marc:EncLevelType ;
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :encodingLevel ) .
 
+ls:recordType a owl:ObjectProperty;
+    :category :shorthand, :pending ;
+    owl:propertyChainAxiom ( :meta rdf:type ) .
+
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
     skos:notation "NUMM"^^ls:QueryCode ;
