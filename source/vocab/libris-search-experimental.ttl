@@ -194,7 +194,7 @@ ls:contributor a owl:ObjectProperty ;
     sdo:rangeIncludes :BibliographicAgent ;
     owl:propertyChainAxiom ( :contribution :agent ),
         ( [ rdfs:subPropertyOf :hasPart ; rdfs:domain :Work ] :contribution :agent ),
-        ( [ rdfs:subPropertyOf :relationship ; rdfs:domain :Work ] :entity :contribution :agent ) ;
+        ( [ rdfs:subPropertyOf :relationship ; rdfs:domain :Work ] :entity :contribution :agent ),
         ( [ rdfs:subPropertyOf :tableOfContents ; rdfs:domain :Instance ] :hasPart :responsibilityStatement ) .
 
 _:authorContribution rdfs:subPropertyOf :contribution ;
