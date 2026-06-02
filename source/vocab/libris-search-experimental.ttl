@@ -439,7 +439,7 @@ ls:ismn a owl:DatatypeProperty ;
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:domain :Instance ; rdfs:range :ISMN ] :value ) .
 
 # TODO cataloging also searches identifiedBy / marc:canceledIssn, marc:incorrectIssn, marc:issnL, marc:canceledIssnL
-ls:issn rdfs:domain :Instance ;
+ls:issn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "ISSN";
     skos:notation "bath.issn"^^ls:QueryCode ;
