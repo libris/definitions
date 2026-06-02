@@ -1,7 +1,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix ptg: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix sdo: <http://schema.org/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix rdaent: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
@@ -201,20 +200,15 @@
     skos:related <http://id.loc.gov/vocabulary/mnotetype/action> .
 
 :ItemAction a owl:Class ;
-    #ptg:abstract true ;
     rdfs:label "Beståndsåtgärd" ;
     rdfs:subClassOf [ a owl:ObjectProperty ;
             owl:onProperty :category ;
             owl:allValuesFrom :ItemActionCategory ] .
 
 :ItemActionCategory a owl:Class ;
-    #ptg:abstract true ;
     rdfs:subClassOf :Category ;
     rdfs:label "Item action category"@en, "Kategori för beståndsåtgärd"@sv .
 
-#:ItemRetentionAction a owl:Class ;
-#    rdfs:label "Item retention action"@en, "Bevarandeåtgärd"@sv ;
-#    rdfs:subClassOf :ItemAction .
 
 ##
 # OTHER ITEM PROPERTIES AND CLASSES
