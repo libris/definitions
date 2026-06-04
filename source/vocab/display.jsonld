@@ -1881,6 +1881,31 @@
             {
               "@type": "fresnel:fslselector",
               "@value": "relationship/*/entity/*/hasTitle"
+            },
+            {
+              "fresnel:mergeProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/value"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "indirectlyIdentifiedBy/*/value"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/marc:incorrectIssn"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/marc:canceledIssn"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "meta/*/identifiedBy/LibrisIIINumber/value"
+                }
+              ],
+              "fresnel:use": "librissearch:instanceIdentifier"
             }
           ]
         },
