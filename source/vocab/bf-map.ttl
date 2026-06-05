@@ -46,6 +46,12 @@ kbv:relatedTo owl:equivalentProperty bf2:relatedTo ;
     rdfs:domain kbv:Resource ; # NOTE: loosens implied bf2 domain
     rdfs:range kbv:Resource . # NOTE: loosens implied bf2 range
 
+# IMPORTANT: BF swapped these when incorporating from BFLC. We depend on the BFLC form!
+kbv:relationship owl:equivalentProperty bf2:relation .
+kbv:relation owl:equivalentProperty bf2:relationship .
+kbv:Relation owl:equivalentClass bf2:Relationship .
+kbv:Relationship owl:equivalentClass bf2:Relation .
+
 kbv:CODEN a rdfs:Datatype; owl:equivalentClass bf2:Coden .
 kbv:DOI a rdfs:Datatype; owl:equivalentClass bf2:Doi .
 kbv:EAN a rdfs:Datatype; owl:equivalentClass bf2:Ean .
