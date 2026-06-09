@@ -364,6 +364,25 @@
           { "dimensionChain": ["inCollection"], "itemLimit": 100 }
         ]
       }
+    },
+    {
+      "@id": "https://libris.kb.se/sru/libris",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "SRU", "en": "SRU"},
+      "filterAliases": [
+        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))" }
+      ]
+    },
+    {
+      "@id": "https://libris.kb.se/xsearch",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "XSearch", "en": "XSearch"},
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Instance" }
+      ],
+      "filterAliases": [
+        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))" }
+      ]
     }
   ]
 }
