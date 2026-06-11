@@ -185,30 +185,10 @@
     skos:prefLabel "Active shelf label"@en, "Aktiv signumsvit"@sv .
     # TODO: description ?
 
-:nextShelfControlNumber a owl:DatatypeProperty ;
+:nextShelfControlNumber a :DatatypeProperty ;
   rdfs:label "Next shelf control Number"@en, "Nästa löpnummer"@sv ;
   rdfs:domain :ShelfMarkSequence ;
   rdfs:range xsd:positiveInteger .
-
-##
-# SHARED PRINT ACTIONS
-
-:hasItemAction a owl:ObjectProperty ;
-    rdfs:label "has item action"@en, "har beståndsåtgärd"@sv ;
-    rdfs:domain :Item ;
-    rdfs:range :ItemAction ;
-    skos:related <http://id.loc.gov/vocabulary/mnotetype/action> .
-
-:ItemAction a owl:Class ;
-    rdfs:label "Beståndsåtgärd" ;
-    rdfs:subClassOf [ a owl:ObjectProperty ;
-            owl:onProperty :category ;
-            owl:allValuesFrom :ItemActionCategory ] .
-
-:ItemActionCategory a owl:Class ;
-    rdfs:subClassOf :Category ;
-    rdfs:label "Item action category"@en, "Kategori för beståndsåtgärd"@sv .
-
 
 ##
 # OTHER ITEM PROPERTIES AND CLASSES
