@@ -198,9 +198,7 @@ ls:contributor a owl:ObjectProperty ;
         ( [ rdfs:subPropertyOf :hasPart ; rdfs:domain :Work ] :contribution :agent ),
         ( [ rdfs:subPropertyOf :relationship ; rdfs:domain :Work ] :entity :contribution :agent ) .
 
-ls:authorContribution a owl:ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :contribution ;
+_:authorContribution rdfs:subPropertyOf :contribution ;
     rdfs:domain :Work ;
     rdfs:range [
         rdfs:subClassOf [
@@ -217,24 +215,22 @@ ls:author a owl:ObjectProperty ;
     rdfs:domain :Work ;
     sdo:rangeIncludes :BibliographicAgent ;
     owl:propertyChainAxiom (
-            ls:authorContribution
+            _:authorContribution
             :agent
         ),
         (
             [ rdfs:subPropertyOf :hasPart ; rdfs:domain :Work ]
-            ls:authorContribution
+            _:authorContribution
             :agent
         ),
         (
             [ rdfs:subPropertyOf :relationship ; rdfs:domain :Work ]
             :entity
-            ls:authorContribution
+            _:authorContribution
             :agent
         ) .
 
-ls:translatorContribution a owl:ObjectProperty ;
-    :category :pending ;
-    rdfs:subPropertyOf :contribution ;
+_:translatorContribution rdfs:subPropertyOf :contribution ;
     rdfs:domain :Work ;
     rdfs:range [
         rdfs:subClassOf [
@@ -250,18 +246,18 @@ ls:translator a owl:ObjectProperty ;
     sdo:domainIncludes :Work ;
     sdo:rangeIncludes :BibliographicAgent ;
     owl:propertyChainAxiom (
-            ls:translatorContribution
+            _:translatorContribution
             :agent
         ),
         (
             [ rdfs:subPropertyOf :hasPart ; rdfs:domain :Work ]
-            ls:translatorContribution
+            _:translatorContribution
             :agent
         ),
         (
             [ rdfs:subPropertyOf :relationship ; rdfs:domain :Work ]
             :entity
-            ls:translatorContribution
+            _:translatorContribution
             :agent
         ) .
 
