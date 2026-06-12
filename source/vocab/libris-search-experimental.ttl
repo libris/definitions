@@ -593,7 +593,8 @@ ls:internalItemNote a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     rdfs:domain :Item ;
     ls:merges :cataloguersNote,
-        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ] .
+        [ owl:propertyChainAxiom ( marc:hasTextualHoldingsBasicBibliographicUnit marc:cataloguersNote ) ],
+        [ owl:propertyChainAxiom ( :meta :cataloguersNote ) ] .
 
 ls:hasAdditionalItemInformation a owl:DatatypeProperty ;
       :category :shorthand, :pending ;
