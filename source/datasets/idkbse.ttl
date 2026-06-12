@@ -1,3 +1,4 @@
+prefix jsonld: <http://www.w3.org/ns/json-ld#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix : <https://id.kb.se/vocab/>
 base <https://id.kb.se/dataset/>
@@ -92,6 +93,15 @@ base <https://id.kb.se/dataset/>
                     [ :uri 'source/swepub/types.ttl' ]
         ] ] ;
     :uriSpace "/term/swepub/" ;
+    :created "2018-05-29T12:36:01.337Z"^^xsd:dateTime .
+
+<uppsokterms> a :Dataset ;
+    jsonld:context "sys/context/kbv.jsonld" ;
+    :isPartOf <common> ;
+    :sourceData [ :uri "build/uppsokterms.json.lines" ;
+            :sourceData [ :uri 'source/uppsok.ttl' ]
+        ] ;
+    :uriSpace "/term/uppsok/" ;
     :created "2018-05-29T12:36:01.337Z"^^xsd:dateTime .
 
 <relators> a :Dataset ;
