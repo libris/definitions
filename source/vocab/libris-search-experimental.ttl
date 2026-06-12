@@ -14,11 +14,6 @@
 
 ### Extended definitions for Libris Search ###
 
-:identifier # See ./details.ttl for full definition of :identifier
-    :category :searchfilter ;
-    skos:notation "dc.identifier"^^ls:QueryCode ;
-    skos:notation "z3950.1104"^^ls:QueryCode .
-
 :seriesMembership  # See ./relations.ttl for full definition of :seriesMembership
     :category :searchfilter ;
     skos:notation "WSER"^^ls:QueryCode ;
@@ -110,7 +105,13 @@ ls:controlNumber a owl:DatatypeProperty ;
         "z3950.1032"^^ls:QueryCode ,
         "z3950.5000"^^ls:QueryCode ,
         "z3950.7000"^^ls:QueryCode ;
+    rdfs:subPropertyOf ls:identifier ;
     owl:propertyChainAxiom ( :meta :controlNumber ) .
+    # Switch to after reindex:
+    # owl:propertyChainAxiom ( :meta ls:controlNumbers ) .
+
+ls:controlNumbers a owl:DatatypeProperty ; # Includes the fnurgel ID when it differs from the controlNumber
+    :category :pending .
 
 ls:instanceRecordModified a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
@@ -152,6 +153,14 @@ ls:recordType a owl:ObjectProperty;
 
 
 ## Creation (Work/Instance)
+
+ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier
+    :category :searchfilter, ls:composite, :pending ;
+    rdfs:label "identifier"@en, "identifikator"@sv ;
+    skos:notation "dc.identifier"^^ls:QueryCode,
+        "z3950.1104"^^ls:QueryCode,
+        "LINKISXN"^^ls:QueryCode,
+        "NUMM"^^ls:QueryCode .
 
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
@@ -399,6 +408,16 @@ ls:lcc a owl:DatatypeProperty ;
 
 ## Instance
 
+ls:instanceIdentifier a owl:DatatypeProperty ;
+    :category ls:merged, :pending ;
+    rdfs:subPropertyOf ls:identifier ;
+    sdo:domainIncludes :Instance ;
+    ls:merges [ owl:propertyChainAxiom ( :identifiedBy :value ) ],
+        [ owl:propertyChainAxiom ( :indirectlyIdentifiedBy :value ) ],
+        [ owl:propertyChainAxiom ( :identifiedBy marc:incorrectIssn ) ],
+        [ owl:propertyChainAxiom ( :identifiedBy marc:canceledIssn ) ],
+        [ owl:propertyChainAxiom ( :meta [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :LibrisIIINumber ] :value ) ] .
+
 ls:instanceType a owl:ObjectProperty ;
     :category :impliedByObject, :pending ;
     rdfs:domain :Instance ;
@@ -411,20 +430,11 @@ ls:instanceCategory a owl:ObjectProperty ;
     rdfs:range :InstanceCategory ;
     ls:indexKey "_categoryByCollection.@none" .
 
-ls:linkisxn a owl:DatatypeProperty ;
-    :category ls:composite, :pending ;
-    rdfs:label "LINKISXN" ;
-    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:domain :Instance ] marc:incorrectIssn ),
-        ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:domain :Instance ] marc:canceledIssn ),
-        ( [ rdfs:subPropertyOf :indirectlyIdentifiedBy ; rdfs:domain :Instance ] :value ) .
-
 ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
-    skos:notation "NUMM"^^ls:QueryCode ;
     skos:notation "z3950.1007"^^ls:QueryCode ;
     skos:notation "z3950.5002"^^ls:QueryCode ;
-    rdfs:label "ISXN"@sv, "ISXN"@en ;
-    rdfs:subPropertyOf ls:linkisxn .
+    rdfs:label "ISXN"@sv, "ISXN"@en .
 
 ls:isbn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
