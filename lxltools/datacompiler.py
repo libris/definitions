@@ -400,7 +400,7 @@ def _make_handler(compiler, ds):
             sources=source.get('source', []),
             query=source.get('query')
         )
-        data = compiler.to_jsonld(graph, ds.get('jsonld:context'))
+        data = compiler.to_jsonld(graph, ds.get('dataContext'))
 
         ztime = ds['created']['@value'].replace('+00:00', 'Z')
         return ds.get('uriSpace'), ztime, data
