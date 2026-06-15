@@ -14,19 +14,29 @@
 
 ### Extended definitions for Libris Search ###
 
+:identifier # See ./details.ttl for full definition of :identifier
+    :category :searchfilter ;
+    ls:filterDescription "Används för att söka i alla typer av identifikatorer, till exempel ISBN eller ISSN" ;
+    skos:notation "dc.identifier"^^ls:QueryCode ;
+    skos:notation "z3950.1104"^^ls:QueryCode .
+
 :seriesMembership  # See ./relations.ttl for full definition of :seriesMembership
     :category :searchfilter ;
+    ls:filterDescription "Används för att hitta delar tillhörande samma serie. Söker på till exempel seriens titel, delnummer eller ISSN." ;
     skos:notation "WSER"^^ls:QueryCode ;
     skos:notation "z3950.5"^^ls:QueryCode .
 
 :responsibilityStatement :category :searchfilter . # See ./details.ttl for full definition of :responsibilityStatement
 
-:note :category :searchfilter . # See ./details.ttl for full definition of :note
+:note :category :searchfilter ; # See ./details.ttl for full definition of :note
+    ls:filterDescription "Kompletterande uppgifter om resursen" .
 
-:tableOfContents :category :searchfilter . # See ./details.ttl for full definition of :tableOfContents
+:tableOfContents :category :searchfilter ; # See ./details.ttl for full definition of :tableOfContents
+    ls:filterDescription "Används för att söka efter till exempel titlar och kapitelförfattare i antologier och samlingsverk, med mera" .
 
 :subject # See ./relations.ttl for full definition of :subject
     :category :searchfilter ;
+    ls:filterDescription "Används för att filtrera på det ämne resursen behandlar med hjälp av standardiserade ämnesord från ämnesordslistor" ;
     skos:notation "dc.subject"^^ls:QueryCode ;
     skos:notation "bath.topicalSubject"^^ls:QueryCode ;
     skos:notation "AMNE"^^ls:QueryCode ;
@@ -37,6 +47,7 @@
 
 :classification # See ./concepts.ttl for full definition of :classification
     :category :searchfilter ;
+    ls:filterDescription "Klassifikationskod enligt ett klassifikationssystem som till exempel SAB, DDK eller UDK" ;
     skos:notation "z3950.1040"^^ls:QueryCode .
 
 :language # See ./relations.ttl for full definition of :language
@@ -49,6 +60,7 @@
 
 :intendedAudience # See ./enums.ttl for full definition of :intendedAudience
     :category :searchfilter, :impliedByObject ;
+    ls:filterDescription "Avsedd målgrupp för resursen, till exempel \"Barn och ungdom\"" ;
     skos:notation "ART"^^ls:QueryCode .
 
 :hasTitle rdfs:subPropertyOf ls:title . # See ./details.ttl for full definition of :hasTitle
@@ -89,12 +101,18 @@ ls:merges a owl:ObjectProperty ;
 ls:indexKey a owl:DatatypeProperty ;
     :category :pending .
 
+ls:filterDescription a owl:DatatypeProperty ;
+    :category :pending .
+
+ls:descriptionRemark a owl:DatatypeProperty ;
+    :category :pending .
 
 ## Record
 
 ls:controlNumber a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "control number"@en, "kontrollnummer"@sv ;
+    ls:filterDescription "Postens Libris-ID i MARC21-formatet" ;
     skos:notation "ONR"^^ls:QueryCode,
     # rec.recordIdentifier is used A LOT in Libris SRU
     # it looks like its part of "Record Metadata Context Set" based on the prefix. But it is not.
@@ -116,6 +134,7 @@ ls:controlNumbers a owl:DatatypeProperty ; # Includes the fnurgel ID when it dif
 ls:instanceRecordModified a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "uppdateringsdatum (instans)"@sv, "modified date (instance)"@en ;
+     ls:filterDescription "Det datum då en bibliografisk post uppdaterats" ;
      rdfs:comment "Datum när bibliografisk post uppdaterades."@sv, "Date when bibliographic record was updated."@en;
      rdfs:domain :Instance ;
      skos:notation "BDAT"^^ls:QueryCode ;
@@ -125,6 +144,7 @@ ls:instanceRecordModified a owl:DatatypeProperty ;
 ls:instanceRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum (instans)"@sv, "created date (instance)"@en ;
+     ls:filterDescription "Det datum då en bibliografisk post skapats" ;
      rdfs:comment "Datum när bibliografisk post skapades."@sv, "Date when bibliographic record was created."@en;
      rdfs:domain :Instance ;
      skos:notation "DAT"^^ls:QueryCode ;
@@ -134,6 +154,7 @@ ls:instanceRecordCreated a owl:DatatypeProperty ;
 ls:bibliography a owl:ObjectProperty ;
     :category :searchfilter, :shorthand, :impliedByObject, :pending ;
     rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
+    ls:filterDescription "Särskild samling som resursen ingår i, till exempel ämnesspecialiserade och lokala/regionala bibliografier" ;
     skos:notation "DB"^^ls:QueryCode ;
     skos:notation "z3950.5001"^^ls:QueryCode ;
     rdfs:domain :Instance ;
@@ -184,6 +205,7 @@ ls:title a owl:ObjectProperty ;
 ls:contributor a owl:ObjectProperty ;
     :category :searchfilter, :shorthand, ls:composite, :impliedByObject, ls:preferLike, :pending ;
     rdfs:label "Author/Contributor"@en, "Författare/upphov"@sv ;
+    ls:filterDescription "Författare och andra upphovspersoner som till exempel illustratörer, översättare, redaktörer med flera. Inkluderar personer, institutioner, organisationer och grupper." ;
     skos:notation "dc.author"^^ls:QueryCode,
         "dc.contributor"^^ls:QueryCode,
         "dc.creator"^^ls:QueryCode,
@@ -285,6 +307,7 @@ ls:workType a owl:ObjectProperty ;
 ls:originalLanguage a owl:ObjectProperty ;
     rdfs:label "originalspråk"@sv, "original language"@en ;
     rdfs:comment "Språk som resursen översatts från."@sv, "Language that resource was translated from."@en;
+    ls:filterDescription "Det språk som en resurs översatts från. Används för att exempelvis hitta böcker översatta från ett visst språk. Kombinera med filtret Språk för att avgränsa ytterligare." ;
     skos:notation "ÖVERS"^^ls:QueryCode ;
     # skos:notation "ORIG"^^ls:QueryCode ; # TODO deprecate?
     # skos:notation "TRANS"^^ls:QueryCode ; # TODO deprecate?
@@ -296,6 +319,7 @@ ls:originalLanguage a owl:ObjectProperty ;
 
 ls:workCategory a owl:ObjectProperty ;
     :category :searchfilter, :impliedByObject, :pending, ls:composite ;
+    ls:filterDescription "Beskriver verkets genre och innehåll med termer från fördefinerade listor. Till exempel poesi, datorspel eller tidskrifter." ;
     rdfs:label "kategori"@sv, "category"@en ;
     skos:notation "WGEN"^^ls:QueryCode ;
     skos:notation "z3950.1075"^^ls:QueryCode ;
@@ -329,6 +353,7 @@ ls:schemeCode a owl:DatatypeProperty ;
 ls:sab a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
     rdfs:label "SAB-klassifikation"@sv, "SAB classification"@en ;
+    ls:filterDescription "Klassifikationskod enligt klassifikationssystemet för svenska bibliotek (SAB)" ;
     ls:indexKey "classification._sab" ;
     skos:notation "z3950.20"^^ls:QueryCode ;
     sdo:domainIncludes :Work ;
@@ -349,6 +374,7 @@ ls:sab a owl:DatatypeProperty ;
 ls:dewey a owl:DatatypeProperty ;
     :category ls:merged, :pending, :searchfilter ;
     rdfs:label "Dewey-klassifikation"@sv, "Dewey classification"@en ;
+    ls:filterDescription "Klassifikationskod enligt Dewey decimalklassifikation" ;
     skos:notation "DDC"^^ls:QueryCode,
         "DDC2"^^ls:QueryCode,
         "DDK"^^ls:QueryCode ,
@@ -368,6 +394,7 @@ ls:dewey a owl:DatatypeProperty ;
 ls:udc a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
     rdfs:label "UDK-klassifikation"@sv, "UDC classification"@en ;
+    ls:filterDescription "Klassifikationskod enligt Universella decimalklassifikationen (UDK)" ;
     ls:indexKey "classification._udc" ;
     skos:notation "z3950.14"^^ls:QueryCode ;
     sdo:domainIncludes :Work ;
@@ -382,6 +409,7 @@ ls:udc a owl:DatatypeProperty ;
 ls:nlm a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
     rdfs:label "NLM-klassifikation"@sv, "NLM classification"@en ;
+    ls:filterDescription "Klassifikationskod enligt National Library of Medicines (NLM) klassifkationssystem" ;
     ls:indexKey "classification._nlm" ;
     sdo:domainIncludes :Work ;
     owl:propertyChainAxiom (
@@ -395,6 +423,7 @@ ls:nlm a owl:DatatypeProperty ;
 ls:lcc a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
     rdfs:label "LC-klassifikation"@sv, "LCC classification"@en ;
+    ls:filterDescription "Klassifikationskod enligt Library of Congress klassifikationssystem (LCC)" ;
     ls:indexKey "classification._lcc" ;
     sdo:domainIncludes :Work ;
     owl:propertyChainAxiom (
@@ -426,6 +455,7 @@ ls:instanceType a owl:ObjectProperty ;
 ls:instanceCategory a owl:ObjectProperty ;
     :category :searchfilter, :impliedByObject, :pending ;
     rdfs:label "format"@sv, "format"@en ;
+    ls:filterDescription "Resursens format, till exempel bok, onlineresurs, e-bok, ljudskiva, video eller punktskrift" ;
     rdfs:domain :Instance ;
     rdfs:range :InstanceCategory ;
     ls:indexKey "_categoryByCollection.@none" .
@@ -434,11 +464,21 @@ ls:isxn a owl:DatatypeProperty ;
     :category ls:composite, :pending, :searchfilter ;
     skos:notation "z3950.1007"^^ls:QueryCode ;
     skos:notation "z3950.5002"^^ls:QueryCode ;
-    rdfs:label "ISXN"@sv, "ISXN"@en .
+    rdfs:label "ISXN"@sv, "ISXN"@en ;
+    ls:filterDescription """Sammansättning av sökfiltren:
+                            ISBN
+                            ISSN
+                            ISMN """ ;
+    ls:descriptionRemark "Kan sökas med eller utan bindestreck" ;
+    rdfs:subPropertyOf ls:linkisxn .
 
 ls:isbn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
-    rdfs:label "ISBN";
+    rdfs:label "ISBN" ;
+    ls:filterDescription "Identifikator för monografiska publikationer som till exempel böcker och kartor" ;
+    ls:descriptionRemark
+        "Kan sökas med eller utan bindestreck",
+        "Kan sökas med 10 eller 13 siffror" ;
     skos:notation "bath.isbn"^^ls:QueryCode ;
     skos:notation "z3950.7"^^ls:QueryCode ;
     rdfs:subPropertyOf ls:isxn ;
@@ -448,6 +488,8 @@ ls:isbn a owl:DatatypeProperty ;
 ls:ismn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "ISMN";
+    ls:filterDescription "Identifikator för tryckta musikaliska publikationer som till exempel noter och partitur" ;
+    ls:descriptionRemark "Kan sökas med eller utan bindestreck" ;
     rdfs:subPropertyOf ls:isxn ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:domain :Instance ; rdfs:range :ISMN ] :value ) .
@@ -456,6 +498,8 @@ ls:ismn a owl:DatatypeProperty ;
 ls:issn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "ISSN";
+    ls:filterDescription "Identifikator för seriella resurser som till exempel tidskrifter och dagstidningar" ;
+    ls:descriptionRemark "Kan sökas med eller utan bindestreck" ;
     skos:notation "bath.issn"^^ls:QueryCode ;
     skos:notation "z3950.8"^^ls:QueryCode ;
     rdfs:subPropertyOf ls:isxn ;
@@ -464,7 +508,8 @@ ls:issn a owl:DatatypeProperty ;
 
 ls:lccn rdfs:domain :Instance ;
     :category :searchfilter, :shorthand, :pending ;
-    rdfs:label "LCCN";
+    rdfs:label "LCCN" ;
+    ls:filterDescription "Identifikator i Library of Congress nummersystem" ;
     skos:notation "bath.lccn"^^ls:QueryCode ;
     rdfs:domain :Instance ;
     owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:domain :Instance ; rdfs:range :LCCN ] :value ) .
@@ -517,6 +562,8 @@ ls:publisher a owl:ObjectProperty;
 ls:library a owl:ObjectProperty ;
    :category :searchfilter, :impliedByObject, ls:composite, :pending ;
    rdfs:label "bibliotek"@sv, "library"@en ;
+   ls:filterDescription "Det bibliotek som innehar resursen" ;
+   ls:descriptionRemark "Kan även sökas med organisationskod eller sigel" ;
    skos:notation "bath.possessingInstitution"^^ls:QueryCode,
        "BIBL"^^ls:QueryCode,
        "LIB"^^ls:QueryCode, # TODO deprecate?
@@ -545,6 +592,13 @@ ls:itemHeldByOrg a owl:ObjectProperty ;
 ls:itemInformation a owl:DatatypeProperty ;
       :category :searchfilter, ls:composite, :pending ;
       rdfs:label "bestånd"@sv, "item"@en ;
+      ls:filterDescription """Sammansättning av sökfiltren:
+                              Beståndsuppgift
+                              Placering
+                              Övrig beståndsinformation
+                              Intern beståndsanmärkning
+                              Lokalt ämnesord""" ;
+      ls:descriptionRemark "För att avgränsa sökningen till ett specifikt bibliotek, kombinera med filtret Bibliotek" ;
       rdfs:domain :Instance .
 
 ls:itemShelf a owl:DatatypeProperty ;
@@ -552,6 +606,7 @@ ls:itemShelf a owl:DatatypeProperty ;
       rdfs:subPropertyOf ls:itemInformation ;
       skos:notation "WHYL"^^ls:QueryCode ;
       rdfs:label "placering"@sv, "shelf"@en ;
+      ls:filterDescription "Används för att hitta var ett exemplar finns uppställt" ;
       rdfs:domain :Instance ;
       owl:propertyChainAxiom ( :hasItem ls:shelf ) .
 
@@ -569,6 +624,7 @@ ls:hasItemStatement a owl:DatatypeProperty ;
       :category :searchfilter, :shorthand, :pending ;
       rdfs:subPropertyOf ls:itemInformation ;
       rdfs:label "beståndsuppgift"@sv, "item statement"@en ;
+      ls:filterDescription "Kompletterande uppgift om hyllsignum och bestånd" ;
       skos:notation "H8XZ"^^ls:QueryCode ;
       rdfs:domain :Instance ;
       owl:propertyChainAxiom ( :hasItem ls:itemStatement ) .
@@ -616,6 +672,7 @@ ls:additionalItemInformation a owl:DatatypeProperty ;
 ls:itemRecordCreated a owl:DatatypeProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:label "registreringsdatum"@sv, "item created"@en ;
+     ls:filterDescription "Det datum då en beståndspost registrerats" ;
      rdfs:comment "Datum när exemplar/bestånd registrerades."@sv, "Date when item/holding/copy was registered."@en;
      rdfs:domain :Instance ;
      skos:notation "HDAT"^^ls:QueryCode ;
@@ -627,6 +684,7 @@ ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:subPropertyOf ls:itemInformation ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
+     ls:filterDescription "Ämnesord angivna för specifika exemplar" ;
      rdfs:domain :Instance ;
      sdo:rangeIncludes :BibliographicAgent, :Subject, :Work ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
