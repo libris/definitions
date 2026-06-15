@@ -1363,7 +1363,7 @@
 
 :date a owl:DatatypeProperty;
     #rdfs:domain :Resource ?;
-    sdo:domainIncludes :Agent, :Capture, :Title, :ProvisionActivity, :Dissertation ;
+    sdo:domainIncludes :Agent, :Capture, :Title, :ProvisionActivity, :Dissertation, :ItemAction ;
     rdfs:label "datum"@sv;
     rdfs:comment "Oformaterad uppgift om datum/årtal/tidsperiod."@sv;
     owl:equivalentProperty bf2:date, dc:date .
@@ -1382,11 +1382,12 @@
     rdfs:comment "Formatera årtalet med fyra siffror eller 'u' för okänd del."@sv .
 
 :startDate a owl:DatatypeProperty;
+    sdo:domainIncludes :ItemAction ;
     rdfs:label "start date"@en,"startdatum"@sv;
     rdfs:subPropertyOf :date .
 
 :endDate a owl:DatatypeProperty;
-    sdo:domainIncludes :Embargo;
+    sdo:domainIncludes :Embargo , :ItemAction ;
     rdfs:label "end date"@en, "slutdatum"@sv;
     rdfs:subPropertyOf :date .
 
