@@ -14,12 +14,6 @@
 
 ### Extended definitions for Libris Search ###
 
-:identifier # See ./details.ttl for full definition of :identifier
-    :category :searchfilter ;
-    ls:filterDescription "Används för att söka i alla typer av identifikatorer, till exempel ISBN eller ISSN" ;
-    skos:notation "dc.identifier"^^ls:QueryCode ;
-    skos:notation "z3950.1104"^^ls:QueryCode .
-
 :seriesMembership  # See ./relations.ttl for full definition of :seriesMembership
     :category :searchfilter ;
     ls:filterDescription "Används för att hitta delar tillhörande samma serie. Söker på till exempel seriens titel, delnummer eller ISSN." ;
@@ -174,6 +168,16 @@ ls:recordType a owl:ObjectProperty;
 
 
 ## Creation (Work/Instance)
+
+
+ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier
+    :category :searchfilter, ls:composite, :pending ;
+    rdfs:label "identifier"@en, "identifikator"@sv ;
+    ls:filterDescription "Används för att söka i alla typer av identifikatorer, till exempel ISBN eller ISSN" ;
+    skos:notation "dc.identifier"^^ls:QueryCode,
+        "z3950.1104"^^ls:QueryCode,
+        "LINKISXN"^^ls:QueryCode,
+        "NUMM"^^ls:QueryCode .
 
 ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier
     :category :searchfilter, ls:composite, :pending ;
