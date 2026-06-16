@@ -118,9 +118,7 @@ ls:controlNumber a owl:DatatypeProperty ;
         "z3950.5000"^^ls:QueryCode ,
         "z3950.7000"^^ls:QueryCode ;
     rdfs:subPropertyOf ls:identifier ;
-    owl:propertyChainAxiom ( :meta :controlNumber ) .
-    # Switch to after reindex:
-    # owl:propertyChainAxiom ( :meta ls:controlNumbers ) .
+    owl:propertyChainAxiom ( :meta ls:controlNumbers ) .
 
 ls:controlNumbers a owl:DatatypeProperty ; # Includes the fnurgel ID when it differs from the controlNumber
     :category :pending .
