@@ -179,7 +179,7 @@ ls:title a owl:ObjectProperty ;
         ( :seriesMembership :inSeries :instanceOf :hasTitle ),
         ( :relationship :entity :hasTitle ),
         ( :hasPart :hasTitle ),
-        ( :hasPart :translationOf :hasTitle ) .
+        ( [ rdfs:subPropertyOf :hasPart ; rdfs:domain :Work ] :translationOf :hasTitle ) .
 
 ls:contributor a owl:ObjectProperty ;
     :category :searchfilter, :shorthand, ls:composite, :impliedByObject, ls:preferLike, :pending ;
