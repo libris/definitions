@@ -1730,6 +1730,10 @@
                 {
                   "@type": "fresnel:fslselector",
                   "@value": "marc:hasTextualHoldingsBasicBibliographicUnit/*/marc:cataloguersNote"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "meta/*/cataloguersNote"
                 }
               ],
               "fresnel:use": "librissearch:internalItemNote"
@@ -1831,6 +1835,15 @@
           "classLensDomain": "MediaObject",
           "fresnel:extends": {"@id": "MediaObject-chips"},
           "showProperties": [ "fresnel:super", "marc:publicNote" ]
+        },
+        "Work": {
+          "classLensDomain": "Work",
+          "fresnel:extends": {"@id": "Work-chips"},
+          "showProperties": [
+            "fresnel:super",
+            "musicMedium",
+            "musicKey"
+          ]
         }
       }
     },
@@ -1881,6 +1894,31 @@
             {
               "@type": "fresnel:fslselector",
               "@value": "relationship/*/entity/*/hasTitle"
+            },
+            {
+              "fresnel:mergeProperties": [
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/value"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "indirectlyIdentifiedBy/*/value"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/marc:incorrectIssn"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "identifiedBy/*/marc:canceledIssn"
+                },
+                {
+                  "@type": "fresnel:fslselector",
+                  "@value": "meta/*/identifiedBy/LibrisIIINumber/value"
+                }
+              ],
+              "fresnel:use": "librissearch:instanceIdentifier"
             }
           ]
         },
