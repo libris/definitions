@@ -149,6 +149,7 @@ ls:bibliography a owl:ObjectProperty ;
     :category :searchfilter, :shorthand, :impliedByObject, :pending ;
     rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
     ls:filterDescription "Särskild samling som resursen ingår i, till exempel ämnesspecialiserade och lokala/regionala bibliografier" ;
+    ls:descriptionRemark "Kan även sökas med sigel" ;
     skos:notation "DB"^^ls:QueryCode ;
     skos:notation "z3950.5001"^^ls:QueryCode ;
     rdfs:domain :Instance ;
@@ -323,7 +324,7 @@ ls:originalLanguage a owl:ObjectProperty ;
 
 ls:workCategory a owl:ObjectProperty ;
     :category :searchfilter, :impliedByObject, :pending, ls:composite ;
-    ls:filterDescription "Beskriver verkets genre och innehåll med termer från fördefinerade listor. Till exempel poesi, datorspel eller tidskrifter." ;
+    ls:filterDescription "Beskriver verkets genre och innehåll med termer från fördefinierade listor. Till exempel poesi, datorspel eller tidskrifter." ;
     rdfs:label "kategori"@sv, "category"@en ;
     skos:notation "WGEN"^^ls:QueryCode ;
     skos:notation "z3950.1075"^^ls:QueryCode ;
