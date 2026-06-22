@@ -101,6 +101,9 @@ ls:filterDescription a owl:DatatypeProperty ;
 ls:descriptionRemark a owl:DatatypeProperty ;
     :category :pending .
 
+ls:filterGroupDescription a owl:DatatypeProperty ;
+    :category :pending .
+
 ## Record
 
 ls:controlNumber a owl:DatatypeProperty ;
@@ -648,7 +651,7 @@ ls:internalItemNote a owl:DatatypeProperty ;
         [ owl:propertyChainAxiom ( :meta :cataloguersNote ) ] .
 
 ls:hasAdditionalItemInformation a owl:DatatypeProperty ;
-      :category :shorthand, :pending ;
+      :category :shorthand, :searchfilter, :pending ;
       rdfs:subPropertyOf ls:itemInformation ;
       rdfs:label "övrig beståndsinformation"@sv, "additional item information"@en ;
       rdfs:domain :Instance ;
@@ -679,7 +682,135 @@ ls:itemSubject a owl:ObjectProperty ;
      :category :searchfilter, :shorthand, :pending ;
      rdfs:subPropertyOf ls:itemInformation ;
      rdfs:label "lokalt ämnesord"@sv, "item subject"@en ;
-     ls:filterDescription "Ämnesord angivna för specifika exemplar" ;
+     ls:filterDescription "Ämnesord angivna för specifika exemplar"@sv ;
      rdfs:domain :Instance ;
      sdo:rangeIncludes :BibliographicAgent, :Subject, :Work ;
      owl:propertyChainAxiom ( :hasItem :subject ) .
+
+
+## Display
+
+#ls:curatedFilters a :PartialCollectionView ;
+#    :items (
+#        ls:contributor
+#        ls:title
+#        ls:language
+#        ls:yearPublished
+#        ls:workCategory
+#        :subject
+#        ls:originalLanguage
+#    ).
+
+ls:filters a :PartialCollectionView ;
+   :items (
+           ls:contributor
+           ls:title
+           ls:language
+           ls:originalLanguage
+           ls:yearPublished
+           ls:workCategory
+           :subject
+           ls:instanceCategory
+           ls:library
+           :seriesMembership
+           ls:identifier
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Upphov" ;
+               :items (
+                        ls:contributor
+                        ls:author
+                        ls:translator
+                        :tableOfContents
+                        :responsibilityStatement
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Utgivning" ;
+               :items (
+                        ls:yearPublished
+                        ls:publisher
+                        ls:publicationPlace
+                        ls:publicationCountry
+                        :manufacturer
+                        :manufacturePlace
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Identifikatorer" ;
+               :items (
+                        ls:identifier
+                        ls:isbn
+                        ls:issn
+                        ls:ismn
+                        ls:isxn
+                        ls:lccn
+                        ls:controlNumber
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Identifikatorer"@sv, "Identifiers"@en ;
+               :items (
+                       :identifier
+                       ls:isxn
+                       :isbn
+                       :ismn
+                       :issn
+                       :lccn
+                       :controlNumber
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Klassifikation" ;
+               :items (
+                       :classification
+                       ls:sab
+                       ls:ddc
+                       ls:udc
+                       ls:lcc
+                       ls:nlm
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Biblioteksspecifika filter" ;
+               ls:filterGroupDescription "Uppgifter som rör exemplarens plats, placering, skick, ursprung med mera" ;
+               :items (
+                       ls:library
+                       ls:itemInformation
+                       ls:itemShelf
+                       ls:hasItemStatement
+                       ls:itemSubject
+                       ls:hasInternalItemNote
+                       ls:hasAdditionalItemInformation
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Tidsstämplar för katalogposter" ;
+               ls:filterGroupDescription """Anges på någon av formerna:
+                                            åååå
+                                            åååå-mm
+                                            åååå-mm-dd
+                                            ååååmm
+                                            ååååmmdd""" ;
+               :items (
+                       ls:itemRecordCreated
+                       ls:instanceRecordCreated
+                       ls:instanceRecordModified
+                      )
+           ]
+           [
+               a :PartialCollectionView ;
+               rdfs:label "Övrigt" ;
+               :items (
+                       :intendedAudience
+                       ls:bibliography
+                       :note
+                      )
+           ]
+   ) .
