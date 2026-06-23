@@ -703,17 +703,23 @@ ls:itemSubject a owl:ObjectProperty ;
 
 ls:filters a :PartialCollectionView ;
    :items (
-           ls:contributor
-           ls:title
-           ls:language
-           ls:originalLanguage
-           ls:yearPublished
-           ls:workCategory
-           :subject
-           ls:instanceCategory
-           ls:library
-           :seriesMembership
-           ls:identifier
+            [
+                a :PartialCollectionView ;
+                rdfs:label "" ;
+                :items (
+                        ls:contributor
+                        ls:title
+                        ls:language
+                        ls:originalLanguage
+                        ls:yearPublished
+                        ls:workCategory
+                        :subject
+                        ls:instanceCategory
+                        ls:library
+                        :seriesMembership
+                        ls:identifier
+                     )
+          ]
            [
                a :PartialCollectionView ;
                rdfs:label "Upphov" ;
