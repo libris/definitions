@@ -1133,7 +1133,7 @@
     rdfs:label "upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:comment "En uppgift som identifierar den upplaga eller version till vilken en resurs hör, samt upplagespecifika upphovsuppgifter."@sv;
-    rdfs:equivalentProperty bf2:editionStatement ;
+    owl:equivalentProperty bf2:editionStatement ;
     owl:propertyChainAxiom (:isIssueOfEdition :label) .
 
 :editionStatementRemainder a owl:DatatypeProperty;
@@ -1180,7 +1180,7 @@
     owl:equivalentProperty bflc:publicationStatement .
 
 :seriesStatement a owl:DatatypeProperty ;
-    rdfs:equivalentProperty bf2:seriesStatement;
+    owl:equivalentProperty bf2:seriesStatement;
     sdo:domainIncludes :SeriesMembership ;
     rdfs:label "serieuppgift"@sv;
     rdfs:comment "Ange uppgiften som den står i objektet."@sv .
@@ -1191,12 +1191,12 @@
     owl:equivalentProperty bf2:seriesEnumeration .
 
 :subseriesStatement a owl:DatatypeProperty ;
-    rdfs:equivalentProperty bf2:subseriesStatement;
+    owl:equivalentProperty bf2:subseriesStatement;
     rdfs:label "uppgift om underserie"@sv;
     rdfs:comment "Ange uppgiften som den står i objektet."@sv .
 
 :subseriesEnumeration a owl:DatatypeProperty ;
-    rdfs:equivalentProperty bf2:subseriesEnumeration;
+    owl:equivalentProperty bf2:subseriesEnumeration;
     rdfs:label "numrering inom underserie"@sv .
 
 # Collection arrangement
