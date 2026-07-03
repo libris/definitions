@@ -409,7 +409,7 @@ ls:udc a owl:DatatypeProperty ;
     :category :shorthand, :pending, :searchfilter ;
     rdfs:label "UDK-klassifikation"@sv, "UDC classification"@en ;
     ls:filterDescription "Klassifikationskod enligt Universella decimalklassifikationen (UDK)"@sv,
-                         "Classification code according to the Dewey Decimal Classification (DDC)"@en ;
+                         "Classification code according to the Universal Decimal Classification (UDC)"@en ;
     ls:indexKey "classification._udc" ;
     skos:notation "z3950.14"^^ls:QueryCode ;
     sdo:domainIncludes :Work ;
@@ -752,7 +752,7 @@ ls:filters a :PartialCollectionView ;
                 :items (
                         ls:contributor
                         ls:title
-                        ls:language
+                        :language
                         ls:originalLanguage
                         ls:yearPublished
                         ls:workCategory
@@ -805,7 +805,7 @@ ls:filters a :PartialCollectionView ;
                :items (
                        :classification
                        ls:sab
-                       ls:ddc
+                       ls:dewey
                        ls:udc
                        ls:lcc
                        ls:nlm
