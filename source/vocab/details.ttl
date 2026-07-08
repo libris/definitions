@@ -202,7 +202,9 @@
 :identifier a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "identifier"@en, "identifikator"@sv;
+    rdfs:comment "Används enbart för enkla identifikatorer på administrativa resurser."@sv;
     rdfs:subPropertyOf :label;
+    sdo:domainIncludes :DocumentPart ;
     rdfs:range :Identifier;
     owl:equivalentProperty dc:identifier, bibo:identifier;
     owl:propertyChainAxiom ( :identifiedBy :value ) .
