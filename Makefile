@@ -13,7 +13,7 @@ source/sab/precoordinated.ttl: scripts/make_precoordinated_sab_terms.py source/s
 	python3 $^ > $@ 2>logs/sab-unknown.tsv
 
 cache/sab-usages.tsv.gz: scripts/sab-usages.rq
-	curl -s https://libris.kb.se/sparql -HAccept:text/tab-separated-values --data-urlencode query@$^ | gzip - > /tmp/sab-usages.tsv.gz
+	curl --fail-with-body https://libris.kb.se/sparql -HAccept:text/tab-separated-values --data-urlencode query@$^ | gzip - > /tmp/sab-usages.tsv.gz
 	cp /tmp/sab-usages.tsv.gz $@
 
 ## SSIF 2011 (Obsolete)
