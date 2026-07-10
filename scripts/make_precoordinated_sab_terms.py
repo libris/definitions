@@ -52,7 +52,7 @@ with gzip.open(usagefpath, "rt") as f:
         if i == 0 and row == ("cls", "count", "sample"):
             continue
 
-        code, count, sample = row
+        code, versions, count, sample, maxyear = row
 
         # NOTE: skipping the long tail of usages less than...
         if count.isnumeric() and int(count) < 20:
