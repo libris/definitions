@@ -369,6 +369,151 @@
       ]
     },
     {
+      "@id": "https://uppsok.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "Uppsök",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>UPPSOK.LIBRIS.KB.SE</b>.</p>"
+      },
+      "lxlwebConfiguration": {
+        "favicon": "libris",
+        "heroImage": "bg-ba26.jpg",
+        "locales": {
+          "sv": {
+            "home": {
+              "metaDescription": "Uppsök - examensarbeten och uppsatser i fulltext",
+              "pageHeadingTitle": "Examensarbeten och uppsatser",
+              "pageHeadingTitleNoWrap": "i fulltext",
+              "pageDescription": "Sök bland examensarbeten och studentuppsatser från svenska universitet och högskolor.",
+              "pageDescriptionReadMore1": "Läs mer",
+              "pageDescriptionReadMore2": "om Uppsök",
+              "searchLabel": "Sök i Uppsök"
+            },
+            "appMenu": {
+              "search": "Sök i Uppsök"
+            },
+            "about": {
+              "pageTitle": "Om Uppsök",
+              "metaDescription": "Uppsök - examensarbeten och uppsatser i fulltext från svenska universitet och högskolor."
+            },
+            "help": {
+              "metaDescription": "Hjälp och dokumentation för att använda Uppsök"
+            },
+            "footer": {
+              "about": "Om Uppsök"
+            },
+            "errors": {
+              "goneDescription": "Den här posten finns inte längre i Uppsök.",
+              "wrongLink": "Klickade du på en länk i Uppsök som inte fungerade?"
+            }
+          }
+        },
+        "features": {
+          "specialCollections": false,
+          "myPages": false,
+          "favouriteLibraries": false,
+          "holdings": false,
+          "resourceImages": false
+        },
+        "footer": [
+          {
+            "id": "nav-info",
+            "titleKey": "footer.information",
+            "items": [
+              {
+                "titleKey": "footer.about",
+                "href": "/about"
+              },
+              {
+                "titleKey": "footer.cookies",
+                "href": "[cookies]"
+              },
+              {
+                "titleKey": "footer.gdpr",
+                "href": "https://www.kb.se/om-oss/hantering-av-personuppgifter#Librisuppsok"
+              }
+            ]
+          },
+          {
+            "id": "nav-shortcuts",
+            "titleKey": "footer.shortcuts",
+            "items": [
+              {
+                "titleKey": "appMenu.help",
+                "href": "/help/search"
+              }
+            ]
+          }
+        ],
+        "featuredSearches": [],
+        "featuredSearches2": [],
+        "articles": {
+          "about": {
+            "articleBodyByLang": {
+              "sv": "# Om Uppsök\n\n...",
+              "en": "# About Uppsok\n\n..."
+            }
+          }
+        }
+      }
+    },
+    {
+      "@id": "https://uppsok.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://uppsok.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Uppsök", "en": "Uppsök"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 30, "connective": "OR", "showIf": ["workCategory"] },
+          { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
+          { "dimensionChain": ["subject"], "itemLimit": 30 },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["workType"], "itemLimit": 100 },
+          { "dimensionChain": ["nationality"], "itemLimit": 100 },
+          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
+          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+        ]
+      },
+      "filterAliases": [
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
+        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
+      ],
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Instance" },
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+      ],
+      "optionalSiteFilters": [
+        { "filter": "freeOnline" }
+      ],
+      "relationFilters": [
+        { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Country", "predicates": [ "publicationCountry" ] }
+      ]
+    },
+    {
       "@id": "https://id.kb.se/",
       "@type": "DataCatalog",
       "title": "ID.KB.SE",
