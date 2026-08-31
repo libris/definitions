@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix exif: <http://www.w3.org/2003/12/exif#> .
 @prefix sdo: <http://schema.org/> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
@@ -141,3 +142,12 @@
     rdfs:label "height"@en, "höjd"@sv ;
     sdo:domainIncludes :MediaObject ; # TODO: broaden domain later to also apply on Manifest and physical objects
     owl:equivalentProperty sdo:height .
+
+:colorSpace a owl:ObjectProperty ;
+    :category :pending ;
+    rdfs:label "color space"@en, "färgrymd"@sv ;
+    sdo:domainIncludes :MediaObject ;
+    owl:equivalentProperty exif:colorSpace .
+
+:imageBitDepth a owl:DatatypeProperty ;
+  owl:propertyChainAxiom (:digitalCharacteristic [ :isSelfType :ImageBitDepth ] :value) .
