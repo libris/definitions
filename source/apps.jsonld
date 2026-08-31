@@ -129,17 +129,17 @@
       ]
     },
     {
-      "@id": "https://suecia.libris.kb.se/",
+      "@id": "https://suecia.kb.se/",
       "@type": "DataCatalog",
-      "title": "suecia.libris.kb.se",
+      "title": "Suecia",
       "article": {
         "@type": "Article",
-        "articleBody": "<p xml:lang='sv'>Data på <b>SUECIA.LIBRIS.KB.SE</b>.</p>"
+        "articleBody": "<p xml:lang='sv'>Data på <b>SUECIA.KB.SE</b>.</p>"
       },
       "_appTheme": "accent"
     },
     {
-      "@id": "https://suecia.libris.kb.se/data",
+      "@id": "https://suecia.kb.se/data",
       "@type": "DataService",
       "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
       "statistics": {
@@ -149,7 +149,7 @@
       }
     },
     {
-      "@id": "https://suecia.libris.kb.se/find",
+      "@id": "https://suecia.kb.se/find",
       "@type": "DataService",
       "titleByLang":  {"sv": "Suecia sök", "en": "Suecia Search"},
       "statistics": {
@@ -188,88 +188,127 @@
       ]
     },
     {
-      "@id": "https://arkdes.libris.kb.se/",
+      "@id": "https://swepub.kb.se/",
       "@type": "DataCatalog",
-      "title": "arkdes.libris.kb.se",
+      "title": "Swepub",
       "article": {
         "@type": "Article",
-        "articleBody": "<p xml:lang='sv'>Data på <b>ARKDES.LIBRIS.KB.SE</b>.</p>"
+        "articleBody": "<p xml:lang='sv'>Data på <b>SWEPUB.SE</b>.</p>"
       },
-      "_appTheme": "accent"
-    },
-    {
-      "@id": "https://arkdes.libris.kb.se/data",
-      "@type": "DataService",
-      "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
-      "statistics": {
-        "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
-        ]
-      }
-    },
-    {
-      "@id": "https://arkdes.libris.kb.se/find",
-      "@type": "DataService",
-      "titleByLang":  {"sv": "ArkDes sök", "en": "ArkDes Search"},
-      "statistics": {
-        "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 10 },
-          { "dimensionChain": ["instanceType"], "itemLimit": 10 },
-          { "dimensionChain": ["findCategory"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+      "lxlwebConfiguration": {
+        "themeName": "accent",
+        "favicon": "kb",
+        "heroImage": "bg-ba02.jpg",
+        "locales": {
+          "sv": {
+            "home": {
+              "metaDescription": "Swepub är en nationell ingång för forskningspublikationer",
+              "pageHeadingTitle": "Vetenskaplig publicering",
+              "pageHeadingTitleNoWrap": "vid svenska lärosäten",
+              "pageDescription": "Sök bland artiklar, konferensbidrag och avhandlingar med mera",
+              "pageDescriptionReadMore1": "Läs mer",
+              "pageDescriptionReadMore2": "om Swepub",
+              "searchLabel": "Sök i Swepub"
+            },
+            "appMenu": {
+              "search": "Sök i Swepub"
+            },
+            "about": {
+              "pageTitle": "Om Swepub",
+              "metaDescription": "Swepub är en nationell ingång för forskningspublikationer."
+            },
+            "help": {
+              "metaDescription": "Hjälp och dokumentation för att använda Swepub"
+            },
+            "footer": {
+              "about": "Om Swepub"
+            },
+            "errors": {
+              "goneDescription": "Den här posten finns inte längre i Swepub.",
+              "wrongLink": "Klickade du på en länk i Swepub som inte fungerade?"
+            }
+          }
+        },
+        "features": {
+          "specialCollections": false,
+          "myPages": false,
+          "favouriteLibraries": false,
+          "holdings": false,
+          "resourceImages": false
+        },
+        "footer": [
+          {
+            "id": "nav-info",
+            "titleKey": "footer.information",
+            "items": [
+              {
+                "titleKey": "footer.about",
+                "href": "/about"
+              },
+              {
+                "titleKey": "footer.cookies",
+                "href": "[cookies]"
+              },
+              {
+                "titleKey": "footer.gdpr",
+                "href": "https://www.kb.se/om-oss/hantering-av-personuppgifter#Librisswepub"
+              }
+            ]
           },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["workCategory"] },
-          { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
-          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 10 },
-          { "dimensionChain": ["subject"], "itemLimit": 30 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["nationality"], "itemLimit": 100 },
-          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
-          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
-        ]
-      },
-      "filterAliases": [
-        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
-        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
-        { "alias": "excludePreliminary", "filter": "NOT recordType:VirtualRecord OR (NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\"))", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
-        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
-        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
-        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
-      ],
-      "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
-        { "filter": "itemHeldBy:\"sigel:Arkm\"" },
-        { "filter": "excludeEplikt" },
-        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" }
-      ],
-      "optionalSiteFilters": [
-        { "filter": "excludePreliminary" },
-        { "filter": "existsImage" },
-        { "filter": "freeOnline" }
-      ],
-      "relationFilters": [
-        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
-        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
-        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
-      ]
+          {
+            "id": "nav-shortcuts",
+            "titleKey": "footer.shortcuts",
+            "items": [
+              {
+                "titleKey": "appMenu.help",
+                "href": "/help/search"
+              }
+            ]
+          },
+          {
+            "id": "nav-foo",
+            "titleKey": "footer.foo",
+            "items": [
+              {
+                "titleKey": "footer.bar",
+                "href": "https://example.com"
+              }
+            ]
+          }
+        ],
+        "appMenu": [
+          {
+            "href": "https://example.com",
+            "titleKey": "appMenu.foo"
+          }
+        ],
+        "featuredSearches": [
+          {
+            "headingByLang": {
+              "sv": "Nya avhandlingar",
+              "en": "New dissertations"
+            },
+            "findHref": "/find?_q=workCategory%3A\"saogf%3AAvhandlingar\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "workCategory:\"saogf:Avhandlingar\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          }
+        ],
+        "featuredSearches2": [],
+        "articles": {
+          "about": {
+            "articleBodyByLang": {
+              "sv": "# Om Swepub\n\nSwepub är en nationell ingång för forskningspublikationer. Här finns metadata från publikationer vid universitet och högskolor, forskande myndigheter och andra forskningsinstitut i Sverige. All data samlas in från deltagande organisationer.\n\nSwepub ger en överblick av den forskning som har publicerats av forskare verksamma i Sverige. Tjänsten innehåller alla typer av forskningspublikationer inom samtliga ämnesområden. Här finns vetenskapliga tidskriftsartiklar, böcker, bokkapitel, konferensbidrag, rapporter och doktorsavhandlingar.\n\nSwepub innehåller även metadata om konstnärliga arbeten, dataset och immaterialrättsligt material. Mest fullständig är informationen om publikationer från 2000-talet, och det mesta från och med 2012 är kvalitetssäkrat.",
+              "en": "# About Swepub\n\n..."
+            }
+          }
+        }
+      }
     },
     {
-      "@id": "https://swepub-libris-qa.kb.se/",
-      "@type": "DataCatalog",
-      "title": "swepub-libris-qa.kb.se/",
-      "article": {
-        "@type": "Article",
-        "articleBody": "<p xml:lang='sv'>Data på <b>SWEPUB.LIBRIS.KB.SE</b>.</p>"
-      },
-      "_appTheme": "accent"
-    },
-    {
-      "@id": "https://swepub-libris-qa.kb.se/data",
+      "@id": "https://swepub.kb.se/data",
       "@type": "DataService",
       "titleByLang": {"en": "TODO ...... LIBRIS-XL Linked Data Platform API"},
       "statistics": {
@@ -279,7 +318,7 @@
       }
     },
     {
-      "@id": "https://swepub-libris-qa.kb.se/find",
+      "@id": "https://swepub.kb.se/find",
       "@type": "DataService",
       "titleByLang":  {"sv": "Swepub sök", "en": "Swepub Search"},
       "statistics": {
@@ -314,7 +353,7 @@
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
+        { "filter": "\"rdf:type\":Instance" },
         { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" }
       ],
       "optionalSiteFilters": [
@@ -327,6 +366,151 @@
         { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] }
+      ]
+    },
+    {
+      "@id": "https://uppsok.libris.kb.se/",
+      "@type": "DataCatalog",
+      "title": "Uppsök",
+      "article": {
+        "@type": "Article",
+        "articleBody": "<p xml:lang='sv'>Data på <b>UPPSOK.LIBRIS.KB.SE</b>.</p>"
+      },
+      "lxlwebConfiguration": {
+        "favicon": "libris",
+        "heroImage": "bg-ba26.jpg",
+        "locales": {
+          "sv": {
+            "home": {
+              "metaDescription": "Uppsök - examensarbeten och uppsatser i fulltext",
+              "pageHeadingTitle": "Examensarbeten och uppsatser",
+              "pageHeadingTitleNoWrap": "i fulltext",
+              "pageDescription": "Sök bland examensarbeten och studentuppsatser från svenska universitet och högskolor.",
+              "pageDescriptionReadMore1": "Läs mer",
+              "pageDescriptionReadMore2": "om Uppsök",
+              "searchLabel": "Sök i Uppsök"
+            },
+            "appMenu": {
+              "search": "Sök i Uppsök"
+            },
+            "about": {
+              "pageTitle": "Om Uppsök",
+              "metaDescription": "Uppsök - examensarbeten och uppsatser i fulltext från svenska universitet och högskolor."
+            },
+            "help": {
+              "metaDescription": "Hjälp och dokumentation för att använda Uppsök"
+            },
+            "footer": {
+              "about": "Om Uppsök"
+            },
+            "errors": {
+              "goneDescription": "Den här posten finns inte längre i Uppsök.",
+              "wrongLink": "Klickade du på en länk i Uppsök som inte fungerade?"
+            }
+          }
+        },
+        "features": {
+          "specialCollections": false,
+          "myPages": false,
+          "favouriteLibraries": false,
+          "holdings": false,
+          "resourceImages": false
+        },
+        "footer": [
+          {
+            "id": "nav-info",
+            "titleKey": "footer.information",
+            "items": [
+              {
+                "titleKey": "footer.about",
+                "href": "/about"
+              },
+              {
+                "titleKey": "footer.cookies",
+                "href": "[cookies]"
+              },
+              {
+                "titleKey": "footer.gdpr",
+                "href": "https://www.kb.se/om-oss/hantering-av-personuppgifter#Librisuppsok"
+              }
+            ]
+          },
+          {
+            "id": "nav-shortcuts",
+            "titleKey": "footer.shortcuts",
+            "items": [
+              {
+                "titleKey": "appMenu.help",
+                "href": "/help/search"
+              }
+            ]
+          }
+        ],
+        "featuredSearches": [],
+        "featuredSearches2": [],
+        "articles": {
+          "about": {
+            "articleBodyByLang": {
+              "sv": "# Om Uppsök\n\n...",
+              "en": "# About Uppsok\n\n..."
+            }
+          }
+        }
+      }
+    },
+    {
+      "@id": "https://uppsok.libris.kb.se/data",
+      "@type": "DataService",
+      "titleByLang": {"en": "LIBRIS-XL Linked Data Platform API"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 400 }
+        ]
+      }
+    },
+    {
+      "@id": "https://uppsok.libris.kb.se/find",
+      "@type": "DataService",
+      "titleByLang":  {"sv": "Uppsök", "en": "Uppsök"},
+      "statistics": {
+        "sliceList": [
+          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
+          { "dimensionChain": ["findCategory"], "itemLimit": 20,
+            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
+          },
+          { "dimensionChain": ["noneCategory"], "itemLimit": 30, "connective": "OR", "showIf": ["workCategory"] },
+          { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
+          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["contributor"], "itemLimit": 10 },
+          { "dimensionChain": ["subject"], "itemLimit": 30 },
+          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
+          { "dimensionChain": ["workType"], "itemLimit": 100 },
+          { "dimensionChain": ["nationality"], "itemLimit": 100 },
+          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
+          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+        ]
+      },
+      "filterAliases": [
+        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
+        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
+      ],
+      "defaultSiteFilters": [
+        { "filter": "\"rdf:type\":Instance" },
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+      ],
+      "optionalSiteFilters": [
+        { "filter": "freeOnline" }
+      ],
+      "relationFilters": [
+        { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
+        { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
+        { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] },
+        { "objectType": "Country", "predicates": [ "publicationCountry" ] }
       ]
     },
     {
