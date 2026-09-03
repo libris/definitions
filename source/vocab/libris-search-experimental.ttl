@@ -549,6 +549,22 @@ ls:year a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     ls:merges :year, :startYear .
 
+ls:startYear a owl:DatatypeProperty ;
+    :category :searchfilter, :shorthand, :pending ;
+    ls:filterDescription "Startår för seriella (fortlöpande) resurser"@sv,
+                         "Start year for serial resources"@en ;
+    rdfs:label "startår"@sv, "start year"@en ;
+    rdfs:domain :Instance ;
+    owl:propertyChainAxiom ( :publication :startYear ) .
+
+ls:endYear a owl:DatatypeProperty ;
+    :category :searchfilter, :shorthand, :pending ;
+    ls:filterDescription "Slutår för seriella (fortlöpande) resurser"@sv,
+                         "End year for serial resources"@en ;
+    rdfs:label "slutår"@sv, "end year"@en ;
+    rdfs:domain :Instance ;
+    owl:propertyChainAxiom ( :publication :endYear ) .
+
 ls:yearPublished a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
     rdfs:label "utgivningsår"@sv, "year of publication"@en ;
@@ -784,6 +800,8 @@ ls:filters a :PartialCollectionView ;
                         ls:publicationCountry
                         :manufacturer
                         :manufacturePlace
+                        ls:startYear
+                        ls:endYear
                       )
            ]
            [
