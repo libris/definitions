@@ -1709,6 +1709,10 @@
       "@id": "search-chips",
       "@type": "fresnel:Group",
       "lenses": {
+        "Bibliography": {
+          "fresnel:extends": {"@id": "Bibliography-chips"},
+          "showProperties": [ "fresnel:super", "isPartOf" ]
+        },
         "Item": {
           "fresnel:extends": {"@id": "Item-chips"},
           "showProperties": [
@@ -1885,24 +1889,16 @@
             "videoCharacteristic",
             "image",
             {
-              "@type": "fresnel:fslselector",
-              "@value": "meta/*/bibliography"
-            },
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "meta/*/controlNumber"
-            },
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "meta/*/created"
-            },
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "meta/*/modified"
-            },
-            {
-              "@type": "fresnel:fslselector",
-              "@value": "meta/*/encodingLevel"
+              "fresnel:property": "meta",
+              "fresnel:subLens": {
+                "showProperties": [
+                  "bibliography",
+                  "controlNumber",
+                  "created",
+                  "modified",
+                  "encodingLevel"
+                ]
+              }
             },
             {
               "@type": "fresnel:fslselector",
