@@ -243,17 +243,20 @@
     :category :shorthand;
     rdfs:label "DOI";
     rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :DOI ] :value ) ;
     rdfs:range :DOI .
 
 :ean a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "EAN";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :EAN ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :EAN .
 
 :upc a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "UPC";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :UPC ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :UPC .
 
