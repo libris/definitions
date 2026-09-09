@@ -103,11 +103,13 @@
 #    rdfs:subClassOf :Title;
 #    rdfs:label "Work Title"@en, "Uniform titel"@sv .
 
-:alternative a owl:DatatypeProperty;
+:variantTitle a owl:DatatypeProperty;
     :category :shorthand;
-    rdfs:label "alternative title"@en, "alternativ titel"@sv;
-    owl:equivalentProperty dc:alternative .
-    #TODO? owl:propertyChainAxiom ( :hasVariant :mainTitle ) .
+    rdfs:label "variant title"@en, "varianttitel"@sv;
+    owl:equivalentProperty dc:alternative ;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :VariantTitle ]
+                :mainTitle ) .
 
 :VariantTitle  a owl:Class;
     owl:equivalentClass bf2:VariantTitle;
@@ -243,17 +245,20 @@
     :category :shorthand;
     rdfs:label "DOI";
     rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :DOI ] :value ) ;
     rdfs:range :DOI .
 
 :ean a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "EAN";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :EAN ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :EAN .
 
 :upc a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "UPC";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :UPC ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :UPC .
 
