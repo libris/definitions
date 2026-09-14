@@ -155,7 +155,7 @@ ls:instanceRecordCreated a owl:DatatypeProperty ;
      owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:bibliography a owl:ObjectProperty ;
-    :category :searchfilter, :shorthand, :impliedByObject, :pending ;
+    :category :searchfilter, ls:composite, :impliedByObject, :pending ;
     rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
     ls:filterDescription "Särskild samling som resursen ingår i, till exempel ämnesspecialiserade och lokala/regionala bibliografier"@sv,
                          "Special collection that the resource is part of, such as subject-specific or local/regional bibliographies"@en ;
@@ -165,7 +165,8 @@ ls:bibliography a owl:ObjectProperty ;
     skos:notation "z3950.5001"^^ls:QueryCode ;
     rdfs:domain :Instance ;
     rdfs:range :Bibliography ;
-    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography ) .
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography ),
+        ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography :isPartOf ) .
 
 ls:encodingLevel a owl:ObjectProperty;
     :category :shorthand, :pending ;
