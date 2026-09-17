@@ -474,23 +474,12 @@
       "titleByLang":  {"sv": "Uppsök", "en": "Uppsök"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
-          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["findCategory"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
-          },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 30, "connective": "OR", "showIf": ["workCategory"] },
+          { "dimensionChain": ["workCategory"], "itemLimit": 30 },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
           { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 10 },
           { "dimensionChain": ["subject"], "itemLimit": 30 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["nationality"], "itemLimit": 100 },
-          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
-          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+          { "dimensionChain": ["classification"], "itemLimit": 50 }
         ]
       },
       "filterAliases": [
@@ -507,7 +496,7 @@
       "relationFilters": [
         { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory", "classification" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Country", "predicates": [ "publicationCountry" ] }
