@@ -1,45 +1,48 @@
-# -*- coding: UTF-8 -*-
-from __future__ import unicode_literals
 import csv
 import json
 import re
 import sys
-import urllib
+from urllib.parse import quote
 
-
-SKOS = "http://www.w3.org/2004/02/skos/core#"
-SAB_BASE = "https://id.kb.se/def/scheme/sab/{0}"
-DDC_BASE = "http://dewey.info/class/{0}/"
+KBV = "https://id.kb.se/vocab/"
+# SKOS = "http://www.w3.org/2004/02/skos/core#"
+SAB_BASE = "https://id.kb.se/term/kssb/{0}"
+DDC_BASE = None  # "http://dewey.info/class/{0}/"
 LANG = 'sv'
 
 hint_link_map = {
     #'#H': SKOS+'closeMatch',
     #'#G': SKOS+'closeMatch',
     #'#M': inverseOf SKOS+'closeMatch',
-    '#1': SKOS+'exactMatch',
-    '#2': SKOS+'broadMatch',
-    '#3': SKOS+'narrowMatch',
-    '#4': SKOS+'closeMatch',
-    'DDK22': SKOS+'relatedMatch', # TODO
+    '#1': 'exactMatch',
+    '#2': 'broadMatch',
+    '#3': 'narrowMatch',
+    '#4': 'closeMatch',
+    'DDK22': 'relatedMatch',  # TODO
 }
 
-def create_data(sab_codes_fpath, ddc_map_fpath, limit):
+
+def create_data(ddc_map_fpath, sab_codes_fpath):
     rmap = {}
-    create_sab_skos_data(rmap, sab_codes_fpath, limit=limit)
+    if sab_codes_fpath:
+        create_sab_skos_data(rmap, sab_codes_fpath)
     create_sab_ddc_data(rmap, ddc_map_fpath)
     return {
         "@context": {
-            "@vocab": SKOS,
-            "prefLabel": {"@language": LANG}
+            "@vocab": KBV,
+            "@base": SAB_BASE.format(""),
+            "prefLabel": {"@language": LANG},
         },
-        "@graph": rmap.values()
+        "@graph": list(rmap.values()),
     }
 
+
 def to_uri(base, code):
-    slug = urllib.quote(code.encode('utf-8'), safe=b':(),')
+    slug = quote(code.encode('utf-8'), safe='')  # TODO: safe=':(),' (as in generated sab?)
     return base.format(slug)
 
-def create_sab_skos_data(rmap, fpath, limit=0):
+
+def create_sab_skos_data(rmap, fpath):
     label_map = {}
     pending_broader = []
 
@@ -49,41 +52,54 @@ def create_sab_skos_data(rmap, fpath, limit=0):
             "@id": uri,
             "@type": "Concept",
             "notation": code,
-            "prefLabel": label
+            "prefLabel": label,
         }
         label_map[label] = uri
         if ': ' in label:
             pending_broader.append((r, label.rsplit(': ', 1)[0]))
-        if limit and i > limit:
-            break
 
     for r, broader_label in pending_broader:
         broader_uri = label_map.get(broader_label)
         if broader_uri:
             r.setdefault("broader", []).append({"@id": broader_uri})
 
+
 def create_sab_ddc_data(rmap, fpath):
     for number, sab_code, ddc_code, hint in read_csv_items(
-            fpath, skip_comment=True, coding='utf-8', size=4):
+        fpath, skip_comment=True, size=4
+    ):
         hint = re.split(r'\s+|\w(?=#)', hint)[-1].strip()
         link = hint_link_map.get(hint)
         if not link:
-            print >> sys.stderr, "No link map for", hint.encode('utf-8')
+            print("No link map for", hint, file=sys.stderr)
             continue
-        uri = to_uri(SAB_BASE, sab_code)
+        uri = to_uri("{}", sab_code)
         rmap.setdefault(uri, {"@id": uri}).setdefault(link, []).append(
-                {"@id": to_uri(DDC_BASE, ddc_code)})
+            {
+                "@id": to_uri(DDC_BASE, ddc_code)
+            } if DDC_BASE else {
+                "@type": "ClassificationDdc",
+                "code": ddc_code
+            }
+        )
 
-def read_csv_items(fpath, skip_first=True, skip_comment=False,
-        csv_dialect='excel-tab', coding='latin-1', size=0):
-    with open(fpath, 'rb') as fp:
+
+def read_csv_items(
+    fpath,
+    skip_first=True,
+    skip_comment=False,
+    csv_dialect='excel-tab',
+    encoding='latin-1',
+    size=0,
+):
+    with open(fpath, 'rt', encoding=encoding) as fp:
         reader = csv.reader(fp, csv_dialect)
         if skip_first is True:
-            reader.next()
+            next(reader)
         for row in reader:
-            if not row or skip_comment and row[0].startswith(b'#'):
+            if not row or skip_comment and row[0].startswith('#'):
                 continue
-            cols = [col.strip().decode(coding) for col in row]
+            cols = [col.strip() for col in row]
             if size and len(cols) > size:
                 cols = cols[0:size]
             yield cols
@@ -91,11 +107,11 @@ def read_csv_items(fpath, skip_first=True, skip_comment=False,
 
 if __name__ == '__main__':
     args = sys.argv[1:]
-    sab_codes_fpath = args.pop(0)
     ddc_map_fpath = args.pop(0)
-    limit = int(args.pop(0)) if args else 0
+    sab_codes_fpath = args.pop(0) if args else None
 
-    data = create_data(sab_codes_fpath, ddc_map_fpath, limit)
-    print json.dumps(data,
-            indent=2, separators=(',', ': '), sort_keys=True, ensure_ascii=False
-            ).encode('utf-8')
+    data = create_data(ddc_map_fpath, sab_codes_fpath)
+    s = json.dumps(
+        data, indent=2, separators=(',', ': '), sort_keys=True, ensure_ascii=False
+    )
+    print(s)
