@@ -19,7 +19,7 @@
 @prefix marc: <https://id.kb.se/marc/> .
 
 
-##
+##test
 # Agents
 
 :name a owl:DatatypeProperty;
@@ -27,8 +27,8 @@
     rdfs:comment "Namn i rak följd och fraser som ej lämpar sig att invertera (Kan ej kombineras med egenskaperna förnamn och efternamn.)"@sv;
     # hur tala om: Del av föredraget namn som är det namn eller den namnform som väljs som grund för den auktoriserade sökingångar. 
     rdfs:domain :Agent;
-    rdfs:subPropertyOf :label;
-    owl:equivalentProperty foaf:name .
+    rdfs:subPropertyOf :label ;
+       owl:equivalentProperty foaf:name .
 
 :additionalName a owl:DatatypeProperty ;
     owl:equivalentProperty sdo:additionalName;
@@ -38,7 +38,7 @@
 
 :fullerFormOfName a owl:DatatypeProperty; 
     rdfs:label "has fuller form of name"@en, "fullständigare namnform"@sv; 
-    rdfs:domain :Person; 
+    rdfs:domain :Person ;
     owl:equivalentProperty rdau:P60530, rdau:fullerFormOfName.en . 
 
 :Agent a owl:Class;
