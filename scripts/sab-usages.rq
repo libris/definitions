@@ -1,0 +1,30 @@
+prefix : <https://id.kb.se/vocab/>
+
+select distinct
+    ?code
+    (group_concat(distinct ?ver; separator=", ") as ?versions)
+    (count(distinct ?x) as ?count)
+    (sample(?rec) as ?sample)
+    (max(year(?mod)) as ?maxyear)
+{
+
+  ?x ^:mainEntity ?rec ; :instanceOf? / :classification ?cls .
+  ?rec :modified ?mod .
+  filter(isBLANK(?cls))  # exclude already linked (practically none though)
+
+  # NOTE: Excluding Item classification from precoordinated terms.
+  filter not exists { ?x :itemOf [] }
+
+  ?cls :code ?code .
+  filter(!regex(?code, "/[A-Z]+"))
+  # NOTE: Excluding "name forms".
+  #filter(!contains(?code, "z "))
+  filter(!contains(?code, " "))
+
+  ?cls :inScheme ?sch .
+  ?sch :code "kssb" .
+  optional { ?sch :version ?ver . filter regex(?ver, "^[0-9]+$") }
+
+}
+group by ?code
+order by desc(?count)
