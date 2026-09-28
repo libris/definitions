@@ -30,17 +30,7 @@
     ls:filterDescription "Används för att söka efter till exempel titlar och kapitelförfattare i antologier och samlingsverk, med mera"@sv,
                          "Used to search for, for example, titles and chapter authors in anthologies and collected works, among other things."@en.
 
-:subject # See ./relations.ttl for full definition of :subject
-    :category :searchfilter ;
-    ls:filterDescription "Används för att filtrera på det ämne resursen behandlar med hjälp av standardiserade ämnesord från ämnesordslistor"@sv,
-                         "Used to filter by the subject covered by the resource using standardized subject headings from controlled vocabularies."@en ;
-    skos:notation "dc.subject"^^ls:QueryCode ;
-    skos:notation "bath.topicalSubject"^^ls:QueryCode ;
-    skos:notation "AMNE"^^ls:QueryCode ;
-    skos:notation "z3950.21"^^ls:QueryCode ;
-    skos:notation "z3950.27"^^ls:QueryCode ;
-    skos:notation "z3950.1079"^^ls:QueryCode ;
-    skos:notation "z3950.1099"^^ls:QueryCode .
+:subject rdfs:subPropertyOf ls:subject . # See ./relations.ttl for full definition of :subject
 
 :classification # See ./concepts.ttl for full definition of :classification
     :category :searchfilter ;
@@ -451,6 +441,21 @@ ls:lcc a owl:DatatypeProperty ;
         :code
     ) .
 
+ls:subject a owl:ObjectProperty ;
+    :category :searchfilter, :pending, ls:composite ;
+    rdfs:label "ämne"@sv, "subject"@en ;
+    sdo:rangeIncludes :Subject, :BibliographicAgent, :Work ;
+    sdo:domainIncludes :Work, :Item ;
+    ls:filterDescription "Används för att filtrera på det ämne resursen behandlar med hjälp av standardiserade ämnesord från ämnesordslistor"@sv,
+                         "Used to filter by the subject covered by the resource using standardized subject headings from controlled vocabularies."@en ;
+    skos:notation "dc.subject"^^ls:QueryCode,
+        "bath.topicalSubject"^^ls:QueryCode,
+        "AMNE"^^ls:QueryCode,
+        "z3950.21"^^ls:QueryCode,
+        "z3950.27"^^ls:QueryCode,
+        "z3950.1079"^^ls:QueryCode,
+        "z3950.1099"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :subject :termComponentList ) . # includes :subject too via :subject rdfs:subPropertyOf ls:subject
 
 ## Instance
 
@@ -743,7 +748,7 @@ ls:itemSubject a owl:ObjectProperty ;
      ls:filterDescription "Ämnesord angivna för specifika exemplar"@sv, "Subject headings assigned for specific copies"@en ;
      rdfs:domain :Instance ;
      sdo:rangeIncludes :BibliographicAgent, :Subject, :Work ;
-     owl:propertyChainAxiom ( :hasItem :subject ) .
+     owl:propertyChainAxiom ( :hasItem ls:subject ) .
 
 
 ## Display
