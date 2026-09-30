@@ -1082,13 +1082,14 @@
     owl:propertyChainAxiom ( :publication :year ) .
 
 :publisher a owl:ObjectProperty;
-    :category :shorthand;
     rdfs:label "utgivare"@sv, "publisher"@en ;
     rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
                  "An entity responsible for making the resource available."@en ;
-    sdo:domainIncludes :MediaObject, :Instance ;
-    # TODO: also sdo:domainIncludes :Embodiment ; but on those, we prefer
-    # :publication, and should treat this as a :shorthand.
+    sdo:domainIncludes :MediaObject ;
+    # NOTE: while sdo:domainIncludes :Embodiment would make sense, on those
+    # :publication is preferred, and :publisher would have to be treated as a
+    # :shorthand (which would prevent it from appearing in Cataloguing for
+    # :MediaObject instances).
     rdfs:range :Agent ;
     owl:equivalentProperty dc:publisher, sdo:publisher, kbrel:publisher ;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
