@@ -279,6 +279,7 @@
             ]
           }
         ],
+        "featuredCategories": [],
         "appMenu": [
           {
             "href": "https://example.com",
@@ -326,33 +327,16 @@
       "titleByLang":  {"sv": "Swepub sök", "en": "Swepub Search"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["workCategory"], "itemLimit": 30 },
           { "dimensionChain": ["instanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["findCategory"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
-          },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["workCategory"] },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
           { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 10 },
-          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
-          { "dimensionChain": ["nationality"], "itemLimit": 100 },
-          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
-          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+          { "dimensionChain": ["subject"], "itemLimit": 100 }
         ]
       },
       "filterAliases": [
-        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
-        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
-        { "alias": "excludePreliminary", "filter": "NOT recordType:VirtualRecord OR (NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\"))", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
-        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
-        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
       "defaultSiteFilters": [
@@ -360,8 +344,6 @@
         { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" }
       ],
       "optionalSiteFilters": [
-        { "filter": "excludePreliminary" },
-        { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
