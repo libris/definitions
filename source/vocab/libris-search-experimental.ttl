@@ -182,7 +182,7 @@ ls:recordType a owl:ObjectProperty;
 ## Creation (Work/Instance)
 
 
-ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier
+ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier + (:identifiedBy :value)
     :category :searchfilter, ls:composite, :pending ;
     rdfs:label "identifier"@en, "identifikator"@sv ;
     ls:filterDescription "Används för att söka i alla typer av identifikatorer, till exempel ISBN eller ISSN"@sv,
@@ -190,7 +190,8 @@ ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifie
     skos:notation "dc.identifier"^^ls:QueryCode,
         "z3950.1104"^^ls:QueryCode,
         "LINKISXN"^^ls:QueryCode,
-        "NUMM"^^ls:QueryCode .
+        "NUMM"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :identifiedBy :value ) .
 
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
@@ -454,12 +455,13 @@ ls:lcc a owl:DatatypeProperty ;
 
 ## Instance
 
+# TODO: Rename to e.g. ls:otherIdentifier? Must be reflected in ES index:
+# https://github.com/libris/librisxl/blob/develop/librisxl-tools/elasticsearch/libris_config.json#L311
 ls:instanceIdentifier a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     rdfs:subPropertyOf ls:identifier ;
     sdo:domainIncludes :Instance ;
-    ls:merges [ owl:propertyChainAxiom ( :identifiedBy :value ) ],
-        [ owl:propertyChainAxiom ( :indirectlyIdentifiedBy :value ) ],
+    ls:merges [ owl:propertyChainAxiom ( :indirectlyIdentifiedBy :value ) ],
         [ owl:propertyChainAxiom ( :identifiedBy marc:incorrectIssn ) ],
         [ owl:propertyChainAxiom ( :identifiedBy marc:canceledIssn ) ],
         [ owl:propertyChainAxiom ( :meta [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :LibrisIIINumber ] :value ) ] .
