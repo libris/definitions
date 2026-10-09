@@ -110,10 +110,9 @@
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
-        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
-        { "filter": "NOT inDataset:\"https://id.kb.se/dataset/swepub\"" },
-        { "filter": "NOT inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+        { "filter": "\"rdf:type\":Work NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
+        { "filter": "NOT meta.inDataset:\"https://id.kb.se/dataset/swepub\"" },
+        { "filter": "NOT meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
       ],
       "optionalSiteFilters": [
         { "filter": "excludeEplikt" },
