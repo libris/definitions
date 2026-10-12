@@ -6,7 +6,7 @@ import re
 from zipfile import ZipFile
 import json
 from lxml import etree
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 
 NS = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
@@ -61,17 +61,21 @@ class TableHandler:
 
     def handle_main_row(self, level, parts):
         current = self._stack[-1]
+
         node = self._make_node(parts, current=current)
         if node is None:
             return
 
         code = node['code']
 
+        dangling = False
+
         if node['@type'].endswith('Subdivision'):
             current.setdefault('element', []).append(node)
             return
         elif not level and not len(code) == 1:
-            return
+            # FIXME: we seem to lose parent 'B' from e.g. ':a' in HJÄLPTABELLER
+            dangling = True
 
         if node['@type'].endswith('Collection'):
             self._current_coll = [ node[ID] ] + code.split('--')
@@ -79,14 +83,18 @@ class TableHandler:
             # classification, instead of:
             #return
         elif self._current_coll:
-            # FIXME: _current_coll needs to be like _stack ...
+            # TODO 668fe2a3: _current_coll needs to be like _stack ...
             coll_id, coll_start, coll_end = self._current_coll
             if (len(code) == len(coll_start) and
                     code >= coll_start and code <= coll_end):
                 node['inCollection'] = {ID: coll_id}
 
-        if len(code) > len(current['code']):
-            # "Deeper" Collection nodes got lost otherwise (see FIXME though)
+        if dangling:
+            prev_parent = self._stack[-1]
+            if node['code'].startswith(prev_parent['code']):
+                prev_parent.setdefault('narrower', []).append(node)
+        elif len(code) > len(current['code']):
+            # "Deeper" Collection nodes got lost otherwise (but see 668fe2a3)
             if node['@type'].endswith('Collection'):
                 self.helptable.append(node)
             elif code.startswith(current['code']):
@@ -130,17 +138,21 @@ class TableHandler:
             #if debug: print(element_type, parts, file=sys.stderr)
             return None
 
-        node = None # TODO: USE self._index.get(code) OR merge in final step
+        node = self._index.get(code) # Obviates merge in final step?
         if not node:
             node = OrderedDict()
             if code[0].isalpha():
                 self._index[code] = node
         else:
-            assert node['prefLabel'] == label, "%r != %r" % (
-                    (node['code'], node['prefLabel']), (code, label))
+            if node['prefLabel'] != label:
+                if len(label) < len(node['prefLabel']):
+                    node['altLabel'] = node['prefLabel']
+                    node['prefLabel'] = label
+                else:
+                    node['altLabel'] = label
 
         if is_collection:
-            node['@type'] = 'Collection'
+            node['@type'] = 'TermCollection'
         elif element_type:
             node['@type'] = element_type
         else:
@@ -148,26 +160,33 @@ class TableHandler:
 
         node['inScheme'] = {ID: f'/term/{SAB_CODE}'}
 
-        node_id = "%s" % quote(code.encode('utf-8'), safe=b'')
+        node_id = "%s" % quote(code, safe='')
 
+        prefixed_code = None
         # NOTE: Many local elements are similar to their top-level element, but
         # far from all (and special '.0' elements are always locally unique).
         if current and element_type:
             if code[0:2] != '.0':
                 node['broader'] = {ID: node_id}
-            node_id = current[ID] + code
+            prefixed_code = unquote(current[ID]) + code
+            node_id = quote(prefixed_code)
+            code = prefixed_code
 
         node[ID] = node_id
 
+        if 'code' in node:
+            assert node['code'] == code
         node['code'] = code
-        node['prefLabel'] = label
+
+        if 'prefLabel' not in node:
+            node['prefLabel'] = label
 
         if len(parts) > 2:
             node['comment'] = parts[2]
 
         # TODO: Really create additional Elements, or add alias ID and itemPortion?
         # (... Or only use in SAB-code parsing code?)
-        if not is_collection and len(code) > 1:
+        if not is_collection and not prefixed_code and len(code) > 1:
 
             if re.match(r'^F[åb-z]\w*$', code): # Fb--Få
                 if aux_elem := self._make_node(['=' + code[1:], parts[1]]):
@@ -271,6 +290,9 @@ def error_correct(parts):
 
     parts = [re.sub(r' +', ' ', p.strip()) for p in parts]
 
+    if parts[1].startswith('och'):
+        return
+
     if parts[1] == 'Sjukhusbibliot ek':
         parts[1] = 'Sjukhusbibliotek'
 
@@ -330,7 +352,7 @@ def extract_sab(doc, debug=False):
             assert not indent
             in_section = HEADING_MAP.get(parts[0], in_section)
             if debug:
-                print("#", parts[0])
+                print("#", parts[0], '=>', in_section)
         else:
             if len(parts) > 2:
                 parts[2] = ' '.join(parts[2:])
@@ -347,18 +369,30 @@ def extract_sab(doc, debug=False):
 
             if debug:
                 print(indent, sep='', end='')
-                print(('%s =' % parts[0]), *parts[1:], sep='\t')
+                print(in_section, '%s =' % parts[0], *parts[1:], sep='\t')
 
     return flatten(thandler.get_results())
 
 
-def flatten(data, results=None, broader=None):
+def flatten(data, results=None, broader_ref=None):
+    top_level = results is None
+
     results = {} if results is None else results
+    elements = {}
+
     for item in data:
-        if broader:
-            item['broader'] = broader
+        if broader_ref:
+            item['broader'] = broader_ref
+
         if 'narrower' in item:
-            flatten(item.pop('narrower'), results, broader={ID: item[ID]})
+            flatten(item.pop('narrower'), results, broader_ref={ID: item[ID]})
+
+        for element in item.get('element', []):
+            elements.setdefault(element[ID], []).append(element)  # there may be dups
+
+        for element in item.get('related', []):
+            elements.setdefault(element[ID], []).append(element)  # there may be dups?
+
         existing = results.get(item[ID])
         if existing:
             for k, v in item.items():
@@ -369,14 +403,43 @@ def flatten(data, results=None, broader=None):
         else:
             results[item[ID]] = item
 
+    # Merge element description(s) and add to result index
+    for elem_id, elem_dups in elements.items():
+        elem = dict()
+
+        for dup in elem_dups:
+            if 'prefLabel' in elem:
+                if len(dup.get('prefLabel', '')) > len(elem['prefLabel']):
+                    del dup['prefLabel']
+
+            elem.update(dup)
+
+            # Turn into references
+            dup.clear()
+            dup[ID] = elem_id
+
+        # Keep label from element accidentally interpreted as regular term
+        item = results.get(elem_id)
+        if item and elem['prefLabel'] != item['prefLabel']:
+            elem['altLabel'] = item['prefLabel']
+
+        # Add to flattended result index (and drop evntual said accidental item)
+        results[elem_id] = elem
+
+    if not top_level:
+        return None
+
+    items = sorted(results.values(), key=lambda x: x[ID])
+
     return {
         '@context': {
             '@vocab': 'https://id.kb.se/vocab/',
             '@base': f'https://id.kb.se/term/{SAB_CODE}/',
             'prefLabel': {'@language': 'sv'},
+            'altLabel': {'@language': 'sv'},
             'comment': {'@language': 'sv'},
         },
-        '@graph': list(results.values())
+        '@graph': items
     }
 
 
