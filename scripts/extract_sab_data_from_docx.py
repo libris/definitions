@@ -429,6 +429,8 @@ def flatten(data, results=None, broader_ref=None):
     if not top_level:
         return None
 
+    make_full_labels(results)
+
     items = sorted(results.values(), key=lambda x: x[ID])
 
     return {
@@ -441,6 +443,38 @@ def flatten(data, results=None, broader_ref=None):
         },
         '@graph': items
     }
+
+
+def make_full_labels(results):
+    for term in results.values():
+        if 'prefLabel' not in term:
+            continue
+        if 'broader' not in term:
+            continue
+
+        pref_label = term['prefLabel']
+        parts = [pref_label]
+
+        broader = term['broader']
+
+        while broader:
+            assert not isinstance(broader, list)
+
+            if '@id' not in broader:
+                break
+            broader = results.get(broader['@id'])
+            if broader and 'prefLabel' in broader:
+                broader_label = broader['prefLabel']
+                if not broader_label[0].isupper():
+                    break
+                if broader_label.lower() in pref_label.lower():
+                    break
+                parts.insert(0, broader_label)
+                broader = broader.get('broader')
+
+        if len(parts) > 1:
+            term['prefLabel'] = ': '.join(parts)
+            term['altLabel'] = pref_label
 
 
 if __name__ == '__main__':
