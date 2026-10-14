@@ -882,11 +882,11 @@
     #rdfs:subPropertyOf dc:source;
     sdo:domainIncludes :Record; # Possibly :Resource later, :Record for sake of MARC21 reconversion, even though not for bib or hold.
     rdfs:range :SourceData;
-    owl:equivalentProperty madsrdf:hasSource, rdaz:P60001, rdaz:sourceConsulted.en .
+    rdfs:subPropertyOf madsrdf:hasSource, rdaz:P60001, rdau:sourceConsulted.en , dc:source .
 
 :SourceData a owl:Class;
     rdfs:label "Source data"@en, "Källa vid belagd uppgift"@sv;
-    rdfs:subClassOf madsrdf:Source, :QualifiedRole .
+    rdfs:subClassOf madsrdf:Source, :QualifiedRole , :AdminMetadata .
 
 :SourceDataNotFound a owl:Class;
     rdfs:label "Source data not found"@en, "Källa vid icke-belagd uppgift"@sv;
