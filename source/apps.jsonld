@@ -109,11 +109,11 @@
         { "alias": "_collections", "filter": "type:(Bibliography) comment:()", "prefLabelByLang": { "sv": "Särskilda samlingar", "en": "Special collections" } },
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
-        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
-        { "filter": "NOT meta.inDataset:\"https://id.kb.se/dataset/swepub\"" },
-        { "filter": "NOT meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"", "applyTo": ["Work"] },
+        { "filter": "NOT meta.inDataset:(\"https://id.kb.se/dataset/swepub\" OR \"https://id.kb.se/dataset/uppsok\")", "applyTo": ["Creation", "Agent"] },
+        { "filter": "NOT inScheme:(\"https://id.kb.se/term/swepub\" OR \"https://id.kb.se/term/uppsok\")", "applyTo": ["Concept"] }
       ],
       "optionalSiteFilters": [
         { "filter": "excludeEplikt" },
@@ -176,8 +176,8 @@
         { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
         { "filter": "_suecia" }
       ],
       "optionalSiteFilters": [
@@ -339,9 +339,10 @@
       "filterAliases": [
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "(\"rdf:type\":Work OR \"rdf:type\":Text)" },
-        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" }
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"", "applyTo": ["Creation", "Agent"]},
+        { "filter": "inScheme:\"https://id.kb.se/term/swepub\"", "applyTo": ["Concept"] }
       ],
       "optionalSiteFilters": [
         { "filter": "freeOnline" }
@@ -593,9 +594,10 @@
         ]
       },
       "filterAliases": [],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "(\"rdf:type\":Work OR \"rdf:type\":Text)" },
-        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"", "applyTo": ["Creation", "Agent"]},
+        { "filter": "inScheme:\"https://id.kb.se/term/uppsok\"", "applyTo": ["Concept"] }
       ],
       "optionalSiteFilters": [],
       "relationFilters": [
