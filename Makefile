@@ -21,8 +21,7 @@ cache/sab-usages.tsv.gz: scripts/sab-usages.rq
 	cp /tmp/sab-usages.tsv.gz $@
 
 cache/dewey_sab.jsonld: cache/Dewey_SAB.txt
-	echo '{}' > $@
-	#python scripts/create_sab_skos_data.py $^ > $@
+	python scripts/create_sab_skos_data.py $^ > $@
 
 cache/Dewey_SAB.txt:
 	curl -L https://libris.kb.se/api/dewey-sab/Dewey_SAB.txt -o $@
