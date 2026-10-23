@@ -88,7 +88,7 @@
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
           { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 10 },
           { "dimensionChain": ["subject"], "itemLimit": 30 },
           { "dimensionChain": ["bibliography"], "itemLimit": 200 },
@@ -105,19 +105,22 @@
         { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
         { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } },
+        { "alias": "alias-myLibraries", "prefLabelByLang": { "sv": "Avgränsa till favoritbibliotek", "en": "Limit to favourite libraries" } },
         { "alias": "_collections", "filter": "type:(Bibliography) comment:()", "prefLabelByLang": { "sv": "Särskilda samlingar", "en": "Special collections" } },
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
-        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"" },
-        { "filter": "NOT inDataset:\"https://id.kb.se/dataset/swepub\"" }
+        { "filter": "NOT inCollection:\"https://id.kb.se/term/uniformWorkTitle\"", "applyTo": ["Work"] },
+        { "filter": "NOT meta.inDataset:(\"https://id.kb.se/dataset/swepub\" OR \"https://id.kb.se/dataset/uppsok\")", "applyTo": ["Creation", "Agent"] },
+        { "filter": "NOT inScheme:(\"https://id.kb.se/term/swepub\" OR \"https://id.kb.se/term/uppsok\")", "applyTo": ["Concept"] }
       ],
       "optionalSiteFilters": [
         { "filter": "excludeEplikt" },
         { "filter": "excludePreliminary" },
         { "filter": "existsImage" },
-        { "filter": "freeOnline" }
+        { "filter": "freeOnline" },
+        { "filter": "alias-myLibraries" }
       ],
       "relationFilters": [
         { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
@@ -173,8 +176,8 @@
         { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "_suecia", "filter": "(bibliography:\"sigel:SAHF\" OR bibliography:\"sigel:SAHT\" OR bibliography:\"sigel:SAH\") instanceType:DigitalResource", "prefLabelByLang": { "sv": "Suecia", "en": "Suecia" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Work" },
         { "filter": "_suecia" }
       ],
       "optionalSiteFilters": [
@@ -196,9 +199,9 @@
         "articleBody": "<p xml:lang='sv'>Data på <b>SWEPUB.SE</b>.</p>"
       },
       "lxlwebConfiguration": {
-        "themeName": "accent",
+        "themeName": "swepub",
         "favicon": "kb",
-        "heroImage": "bg-ba02.jpg",
+        "heroImage": "https://cdn.kb.se/lxlweb/hero/swepub2.jpg",
         "locales": {
           "sv": {
             "home": {
@@ -234,7 +237,8 @@
           "myPages": false,
           "favouriteLibraries": false,
           "holdings": false,
-          "resourceImages": false
+          "resourceImages": true,
+          "resourceImagesHorizontal": false
         },
         "footer": [
           {
@@ -276,6 +280,7 @@
             ]
           }
         ],
+        "featuredCategories": [],
         "appMenu": [
           {
             "href": "https://example.com",
@@ -288,9 +293,21 @@
               "sv": "Nya avhandlingar",
               "en": "New dissertations"
             },
-            "findHref": "/find?_q=workCategory%3A\"saogf%3AAvhandlingar\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "findHref": "/find?_q=workCategory%3A\"https://id.kb.se/term/swepub/output/publication/doctoral-thesis\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
             "previewParams": {
-              "_q": "workCategory:\"saogf:Avhandlingar\"",
+              "_q": "workCategory:\"https://id.kb.se/term/swepub/output/publication/doctoral-thesis\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Postrar",
+              "en": "Posters"
+            },
+            "findHref": "/find?_q=workCategory%3A\"https://id.kb.se/term/swepub/output/conference/poster\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "workCategory:\"https://id.kb.se/term/swepub/output/conference/poster\"",
               "_limit": 20,
               "_sort": "-@reverse.instanceOf.publication.librissearch:year"
             }
@@ -323,42 +340,25 @@
       "titleByLang":  {"sv": "Swepub sök", "en": "Swepub Search"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
+          { "dimensionChain": ["workCategory"], "itemLimit": 30 },
           { "dimensionChain": ["instanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["findCategory"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
-          },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 100, "connective": "OR", "showIf": ["workCategory"] },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
+          { "dimensionChain": ["classification"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
           { "dimensionChain": ["contributor"], "itemLimit": 10 },
-          { "dimensionChain": ["genreForm"], "itemLimit": 100 },
-          { "dimensionChain": ["subject"], "itemLimit": 100 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["intendedAudience"], "itemLimit": 100 },
-          { "dimensionChain": ["nationality"], "itemLimit": 100 },
-          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
-          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+          { "dimensionChain": ["subject"], "itemLimit": 100 }
         ]
       },
       "filterAliases": [
-        { "alias": "excludeEplikt", "filter": "NOT (bibliography:\"sigel:EPLK\" AND itemHeldBy:\"sigel:APIS\" AND reverseLinks.totalItemsByRelation.itemOf.instanceOf=1)", "prefLabelByLang": { "sv": "Exkludera elektroniska pliktleveranser", "en": "Exclude electronic legal deposit" } },
-        { "alias": "includeEplikt", "filter": "NOT excludeEplikt", "prefLabelByLang": { "sv": "Inkludera elektroniska pliktleveranser", "en": "Include electronic legal deposit"  } },
-        { "alias": "excludePreliminary", "filter": "NOT recordType:VirtualRecord OR (NOT encodingLevel:(\"marc:PartialPreliminaryLevel\" OR \"marc:PrepublicationLevel\"))", "prefLabelByLang": { "sv": "Exkludera kommande publiceringar", "en": "Exclude upcoming publications" } },
-        { "alias": "includePreliminary", "filter": "NOT excludePreliminary", "prefLabelByLang": { "sv": "Inkludera kommande publiceringar", "en": "Include upcoming publications" } },
-        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
       ],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Instance" },
-        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"" }
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/swepub\"", "applyTo": ["Creation", "Agent"]},
+        { "filter": "inScheme:\"https://id.kb.se/term/swepub\"", "applyTo": ["Concept"] }
       ],
       "optionalSiteFilters": [
-        { "filter": "excludePreliminary" },
-        { "filter": "existsImage" },
         { "filter": "freeOnline" }
       ],
       "relationFilters": [
@@ -377,8 +377,9 @@
         "articleBody": "<p xml:lang='sv'>Data på <b>UPPSOK.LIBRIS.KB.SE</b>.</p>"
       },
       "lxlwebConfiguration": {
+        "themeName": "uppsok",
         "favicon": "libris",
-        "heroImage": "bg-ba26.jpg",
+        "heroImage": "https://cdn.kb.se/lxlweb/hero/uppsok5.jpg",
         "locales": {
           "sv": {
             "home": {
@@ -414,7 +415,8 @@
           "myPages": false,
           "favouriteLibraries": false,
           "holdings": false,
-          "resourceImages": false
+          "resourceImages": true,
+          "resourceImagesHorizontal": false
         },
         "footer": [
           {
@@ -446,8 +448,132 @@
             ]
           }
         ],
-        "featuredSearches": [],
-        "featuredSearches2": [],
+        "featuredCategories": [
+          {
+            "id": "M2-category",
+            "href": "/find?_q=workCategory:\"https://id.kb.se/term/uppsok/M2\"",
+            "labelByLang": {
+              "sv": "Kandidatuppsats",
+              "en": "Kandidatuppsats"
+            }
+          },
+          {
+            "id": "H2-category",
+            "href": "/find?_q=workCategory:\"https://id.kb.se/term/uppsok/H2\"",
+            "labelByLang": {
+              "sv": "Masteruppsats",
+              "en": "Masteruppsats"
+            }
+          },
+          {
+            "id": "H1-category",
+            "href": "/find?_q=workCategory:\"https://id.kb.se/term/uppsok/H1\"",
+            "labelByLang": {
+              "sv": "Magisteruppsats",
+              "en": "Magisteruppsats"
+            }
+          }
+        ],
+        "featuredSearches": [
+          {
+            "headingByLang": {
+              "sv": "Tekniska vetenskaper",
+              "en": "Technology"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FTechnology\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/Technology\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Lantbruk, veterinärmedicin och skoglig vetenskap",
+              "en": "Agriculture, Veterinary Medicine and Forestry"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FAgricultureVeterinaryMedForestry\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/AgricultureVeterinaryMedForestry\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Konstnärliga arbeten",
+              "en": "Fine Art"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FFineArt\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/FineArt\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Humaniora och teologi",
+              "en": "Humanities and Theology"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FHumanitiesTheology\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/HumanitiesTheology\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          }
+        ],
+        "featuredSearches2": [
+          {
+            "headingByLang": {
+              "sv": "Medicin",
+              "en": "Medicine"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FMedicine\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/Medicine\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Samhälls-, beteendevetenskap och juridik",
+              "en": "Social Science, Behavioural Science and Law"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FSocialBehaviourLaw\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/SocialBehaviourLaw\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Bio- och geovetenskaper",
+              "en": "Life and Earth Science"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FLifeEarthScience\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/LifeEarthScience\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          },
+          {
+            "headingByLang": {
+              "sv": "Fysik, kemi och matematik",
+              "en": "Physics, Chemistry and Maths"
+            },
+            "findHref": "/find?_q=classification%3A\"https%3A%2F%2Fid.kb.se%2Fterm%2Fuppsok%2FPhysicsChemistryMaths\"&_sort=-%40reverse.instanceOf.publication.librissearch%3Ayear",
+            "previewParams": {
+              "_q": "classification:\"https://id.kb.se/term/uppsok/PhysicsChemistryMaths\"",
+              "_limit": 20,
+              "_sort": "-@reverse.instanceOf.publication.librissearch:year"
+            }
+          }
+        ],
         "articles": {
           "about": {
             "articleBodyByLang": {
@@ -474,40 +600,25 @@
       "titleByLang":  {"sv": "Uppsök", "en": "Uppsök"},
       "statistics": {
         "sliceList": [
-          { "dimensionChain": ["rdf:type"], "itemLimit": 100 },
-          { "dimensionChain": ["instanceType"], "itemLimit": 100 },
-          { "dimensionChain": ["findCategory"], "itemLimit": 20,
-            "slice": { "dimensionChain": ["identifyCategory"], "itemLimit": 50 }
-          },
-          { "dimensionChain": ["noneCategory"], "itemLimit": 30, "connective": "OR", "showIf": ["workCategory"] },
+          { "dimensionChain": ["classification"], "itemLimit": 50 },
+          { "dimensionChain": ["workCategory"], "itemLimit": 30 },
           { "dimensionChain": ["instanceCategory"], "itemLimit": 100 },
           { "dimensionChain": ["language"], "itemLimit": 100, "connective": "OR" },
-          { "dimensionChain": ["itemHeldByOrg"], "itemLimit": 1000, "connective": "OR", "countTopLevelDocs": true },
-          { "dimensionChain": ["yearPublished"], "itemLimit": 10, "range": true },
-          { "dimensionChain": ["contributor"], "itemLimit": 10 },
-          { "dimensionChain": ["subject"], "itemLimit": 30 },
-          { "dimensionChain": ["bibliography"], "itemLimit": 200 },
-          { "dimensionChain": ["workType"], "itemLimit": 100 },
-          { "dimensionChain": ["nationality"], "itemLimit": 100 },
-          { "dimensionChain": ["hasOccupation"], "itemLimit": 100 },
-          { "dimensionChain": ["fieldOfActivity"], "itemLimit": 100 }
+          { "dimensionChain": ["yearPublished"], "itemLimit": 500, "range": true },
+          { "dimensionChain": ["subject"], "itemLimit": 30 }
         ]
       },
-      "filterAliases": [
-        { "alias": "existsImage", "filter": "image:*", "prefLabelByLang": { "sv": "Har omslags-/miniatyrbild", "en": "Has cover/thumbnail" } },
-        { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))", "prefLabelByLang": { "sv": "Fritt online", "en": "Free online material" } }
-      ],
+      "filterAliases": [],
+      "defaultTypeFilter": "\"rdf:type\":Work",
       "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Instance" },
-        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"" }
+        { "filter": "meta.inDataset:\"https://id.kb.se/dataset/uppsok\"", "applyTo": ["Creation", "Agent"]},
+        { "filter": "inScheme:\"https://id.kb.se/term/uppsok\"", "applyTo": ["Concept"] }
       ],
-      "optionalSiteFilters": [
-        { "filter": "freeOnline" }
-      ],
+      "optionalSiteFilters": [],
       "relationFilters": [
         { "objectType": "Bibliography", "predicates": [ "bibliography" ] },
         { "objectType": "Agent", "predicates": [ "contributor", "subject", "publisher" ] },
-        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory" ] },
+        { "objectType": "Concept", "predicates": [ "subject", "workCategory", "instanceCategory", "classification" ] },
         { "objectType": "Work", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Instance", "predicates": [ "subject", "isPartOf" ] },
         { "objectType": "Country", "predicates": [ "publicationCountry" ] }
@@ -552,9 +663,7 @@
       "@id": "https://libris.kb.se/sru/libris",
       "@type": "DataService",
       "titleByLang":  {"sv": "SRU", "en": "SRU"},
-      "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Instance" }
-      ],
+      "defaultTypeFilter": "\"rdf:type\":Instance",
       "filterAliases": [
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))" }
       ]
@@ -563,9 +672,7 @@
       "@id": "https://libris.kb.se/xsearch",
       "@type": "DataService",
       "titleByLang":  {"sv": "XSearch", "en": "XSearch"},
-      "defaultSiteFilters": [
-        { "filter": "\"rdf:type\":Instance" }
-      ],
+      "defaultTypeFilter": "\"rdf:type\":Instance",
       "filterAliases": [
         { "alias": "freeOnline", "filter": "instanceType:DigitalResource AND (usageAndAccessPolicy.label:gratis OR \"associatedMedia.marc:publicNote\":\"fritt tillgänglig\" OR usageAndAccessPolicy:(\"https://id.kb.se/policy/freely-available\" OR \"https://id.kb.se/policy/oa/gratis\"))" }
       ]

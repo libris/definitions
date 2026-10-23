@@ -3,7 +3,7 @@ Convert RDA term lists in Box Notes to JSON-LD
 
 1. Download all lists from a given Box folder (here "Värdevokabulär") as a ZIP file.
 2. Run this script (pipe or redirect output as desired):
-        $ python scripts/rdabox2jsonld.py cache/Värdevokabulär.zip
+        $ python3 scripts/oneoffs/rdabox2jsonld.py cache/Värdevokabulär.zip | trld -ottl
 
 """
 from urllib.parse import quote
@@ -13,7 +13,8 @@ import re
 import sys
 
 
-def convert(doc, rtype):
+def convert(fname, doc):
+    folder_id, rtype = to_folder_and_type(fname)
     items = []
     for block in doc['content']:
         if block['type'] == 'table':
@@ -74,7 +75,7 @@ def convert(doc, rtype):
 
                 id_label = clean(label_en) or clean(label_sv)
 
-                r_id = label_to_slug(id_label)
+                r_id = folder_id + label_to_slug(id_label)
 
                 # NOTE: related_sv is probably superfluous
                 # (those labels *should* already be on the targets)
@@ -153,9 +154,18 @@ def find_with_content(items):
     return [item for item in items if 'content' in item]
 
 
-def to_type(fname):
-    fname = fname.rsplit('/')[-1].rsplit('.')[0]
-    return re.sub(r'\W', '', fname.title().replace(' ', ''))
+def to_folder_and_type(fname):
+    name = fname.rsplit('/')[-1].rsplit('.')[0].removesuffix('_')
+    name, paren, typenote = name.partition('(of an analog ')
+    if paren:
+        name = typenote.removesuffix(')') + ' ' + name
+    elif ' of ' in name:
+        kind, oftype = name.split(' of ', 1)
+        name = oftype.removesuffix('s') + ' ' + kind
+
+    rtype = re.sub(r'\W', '', name.title().replace(' ', ''))
+
+    return rtype.lower() + '/', rtype
 
 
 def label_to_slug(label):
@@ -180,7 +190,7 @@ def main():
         if not (doc := source.get('doc')) or 'content' not in doc:
             return
 
-        results = convert(doc, to_type(fname))
+        results = convert(fname, doc)
         for key, item in results.items():
             if dup := result_map.get(key):
                 print(
@@ -191,6 +201,7 @@ def main():
                     item['@type'],
                     file=sys.stderr
                 )
+                # item['@id'] += '_' + re.sub(r'[a-z]+', '', item['@type'])
         result_map.update(results)
 
     for fname in sys.argv[1:]:
@@ -205,6 +216,8 @@ def main():
                 source = json.load(f)
             convert_and_add_results(source, fname)
 
+    nodes = sorted(result_map.values(), key=lambda node: (node['@type'], node['@type']))
+
     doc = {
         "@context": {
             "@vocab": "https://id.kb.se/vocab/",
@@ -218,7 +231,7 @@ def main():
             "scopeNote_sv": {"@id": "scopeNote", "@language": "sv"},
             "scopeNote_en": {"@id": "scopeNote", "@language": "en"},
         },
-        "@graph": list(result_map.values())
+        "@graph": nodes
     }
 
     print(json.dumps(doc, indent=2, ensure_ascii=False))

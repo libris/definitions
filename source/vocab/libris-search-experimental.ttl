@@ -30,17 +30,7 @@
     ls:filterDescription "Används för att söka efter till exempel titlar och kapitelförfattare i antologier och samlingsverk, med mera"@sv,
                          "Used to search for, for example, titles and chapter authors in anthologies and collected works, among other things."@en.
 
-:subject # See ./relations.ttl for full definition of :subject
-    :category :searchfilter ;
-    ls:filterDescription "Används för att filtrera på det ämne resursen behandlar med hjälp av standardiserade ämnesord från ämnesordslistor"@sv,
-                         "Used to filter by the subject covered by the resource using standardized subject headings from controlled vocabularies."@en ;
-    skos:notation "dc.subject"^^ls:QueryCode ;
-    skos:notation "bath.topicalSubject"^^ls:QueryCode ;
-    skos:notation "AMNE"^^ls:QueryCode ;
-    skos:notation "z3950.21"^^ls:QueryCode ;
-    skos:notation "z3950.27"^^ls:QueryCode ;
-    skos:notation "z3950.1079"^^ls:QueryCode ;
-    skos:notation "z3950.1099"^^ls:QueryCode .
+:subject rdfs:subPropertyOf ls:subject . # See ./relations.ttl for full definition of :subject
 
 :classification # See ./concepts.ttl for full definition of :classification
     :category :searchfilter ;
@@ -155,7 +145,7 @@ ls:instanceRecordCreated a owl:DatatypeProperty ;
      owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :created ) .
 
 ls:bibliography a owl:ObjectProperty ;
-    :category :searchfilter, :shorthand, :impliedByObject, :pending ;
+    :category :searchfilter, ls:composite, :impliedByObject, :pending ;
     rdfs:label "in bibliography"@en, "ingår i bibliografi"@sv ;
     ls:filterDescription "Särskild samling som resursen ingår i, till exempel ämnesspecialiserade och lokala/regionala bibliografier"@sv,
                          "Special collection that the resource is part of, such as subject-specific or local/regional bibliographies"@en ;
@@ -165,7 +155,8 @@ ls:bibliography a owl:ObjectProperty ;
     skos:notation "z3950.5001"^^ls:QueryCode ;
     rdfs:domain :Instance ;
     rdfs:range :Bibliography ;
-    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography ) .
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography ),
+        ( [ rdfs:subPropertyOf :meta ; rdfs:domain :Instance ] :bibliography :isPartOf ) .
 
 ls:encodingLevel a owl:ObjectProperty;
     :category :shorthand, :pending ;
@@ -182,7 +173,7 @@ ls:recordType a owl:ObjectProperty;
 ## Creation (Work/Instance)
 
 
-ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier
+ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifier + (:identifiedBy :value)
     :category :searchfilter, ls:composite, :pending ;
     rdfs:label "identifier"@en, "identifikator"@sv ;
     ls:filterDescription "Används för att söka i alla typer av identifikatorer, till exempel ISBN eller ISSN"@sv,
@@ -190,7 +181,8 @@ ls:identifier a owl:DatatypeProperty ; # ls:controlNumber + ls:instanceIdentifie
     skos:notation "dc.identifier"^^ls:QueryCode,
         "z3950.1104"^^ls:QueryCode,
         "LINKISXN"^^ls:QueryCode,
-        "NUMM"^^ls:QueryCode .
+        "NUMM"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :identifiedBy :value ) .
 
 ls:title a owl:ObjectProperty ;
     :category :searchfilter, ls:composite, :pending ;
@@ -451,15 +443,31 @@ ls:lcc a owl:DatatypeProperty ;
         :code
     ) .
 
+ls:subject a owl:ObjectProperty ;
+    :category :searchfilter, :pending, ls:composite ;
+    rdfs:label "ämne"@sv, "subject"@en ;
+    sdo:rangeIncludes :Subject, :BibliographicAgent, :Work ;
+    sdo:domainIncludes :Work, :Item ;
+    ls:filterDescription "Används för att filtrera på det ämne resursen behandlar med hjälp av standardiserade ämnesord från ämnesordslistor"@sv,
+                         "Used to filter by the subject covered by the resource using standardized subject headings from controlled vocabularies."@en ;
+    skos:notation "dc.subject"^^ls:QueryCode,
+        "bath.topicalSubject"^^ls:QueryCode,
+        "AMNE"^^ls:QueryCode,
+        "z3950.21"^^ls:QueryCode,
+        "z3950.27"^^ls:QueryCode,
+        "z3950.1079"^^ls:QueryCode,
+        "z3950.1099"^^ls:QueryCode ;
+    owl:propertyChainAxiom ( :subject :termComponentList ) . # includes :subject too via :subject rdfs:subPropertyOf ls:subject
 
 ## Instance
 
+# TODO: Rename to e.g. ls:otherIdentifier? Must be reflected in ES index:
+# https://github.com/libris/librisxl/blob/develop/librisxl-tools/elasticsearch/libris_config.json#L311
 ls:instanceIdentifier a owl:DatatypeProperty ;
     :category ls:merged, :pending ;
     rdfs:subPropertyOf ls:identifier ;
     sdo:domainIncludes :Instance ;
-    ls:merges [ owl:propertyChainAxiom ( :identifiedBy :value ) ],
-        [ owl:propertyChainAxiom ( :indirectlyIdentifiedBy :value ) ],
+    ls:merges [ owl:propertyChainAxiom ( :indirectlyIdentifiedBy :value ) ],
         [ owl:propertyChainAxiom ( :identifiedBy marc:incorrectIssn ) ],
         [ owl:propertyChainAxiom ( :identifiedBy marc:canceledIssn ) ],
         [ owl:propertyChainAxiom ( :meta [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :LibrisIIINumber ] :value ) ] .
@@ -492,8 +500,7 @@ ls:isxn a owl:DatatypeProperty ;
                             ISSN
                             ISMN """@en ;
     ls:descriptionRemark "Kan sökas med eller utan bindestreck"@sv,
-                         "Can be searched with or without hyphen"@en ;
-    rdfs:subPropertyOf ls:linkisxn .
+                         "Can be searched with or without hyphen"@en .
 
 ls:isbn a owl:DatatypeProperty ;
     :category :searchfilter, :shorthand, :pending ;
@@ -744,7 +751,7 @@ ls:itemSubject a owl:ObjectProperty ;
      ls:filterDescription "Ämnesord angivna för specifika exemplar"@sv, "Subject headings assigned for specific copies"@en ;
      rdfs:domain :Instance ;
      sdo:rangeIncludes :BibliographicAgent, :Subject, :Work ;
-     owl:propertyChainAxiom ( :hasItem :subject ) .
+     owl:propertyChainAxiom ( :hasItem ls:subject ) .
 
 
 ## Display

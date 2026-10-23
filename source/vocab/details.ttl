@@ -103,11 +103,13 @@
 #    rdfs:subClassOf :Title;
 #    rdfs:label "Work Title"@en, "Uniform titel"@sv .
 
-:alternative a owl:DatatypeProperty;
+:variantTitle a owl:DatatypeProperty;
     :category :shorthand;
-    rdfs:label "alternative title"@en, "alternativ titel"@sv;
-    owl:equivalentProperty dc:alternative .
-    #TODO? owl:propertyChainAxiom ( :hasVariant :mainTitle ) .
+    rdfs:label "variant title"@en, "varianttitel"@sv;
+    owl:equivalentProperty dc:alternative ;
+    owl:propertyChainAxiom (
+                [ rdfs:subPropertyOf :hasTitle; rdfs:range :VariantTitle ]
+                :mainTitle ) .
 
 :VariantTitle  a owl:Class;
     owl:equivalentClass bf2:VariantTitle;
@@ -243,17 +245,20 @@
     :category :shorthand;
     rdfs:label "DOI";
     rdfs:subPropertyOf :identifier ;
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :DOI ] :value ) ;
     rdfs:range :DOI .
 
 :ean a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "EAN";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :EAN ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :EAN .
 
 :upc a owl:DatatypeProperty ;
     :category :shorthand;
     rdfs:label "UPC";
+    owl:propertyChainAxiom ( [ rdfs:subPropertyOf :identifiedBy ; rdfs:range :UPC ] :value ) ;
     rdfs:subPropertyOf :identifier ;  #TODO? relate to https://schema.org/gtin
     rdfs:range :UPC .
 
@@ -877,11 +882,11 @@
     #rdfs:subPropertyOf dc:source;
     sdo:domainIncludes :Record; # Possibly :Resource later, :Record for sake of MARC21 reconversion, even though not for bib or hold.
     rdfs:range :SourceData;
-    owl:equivalentProperty madsrdf:hasSource, rdaz:P60001, rdaz:sourceConsulted.en .
+    rdfs:subPropertyOf madsrdf:hasSource, rdaz:P60001, rdau:sourceConsulted.en , dc:source .
 
 :SourceData a owl:Class;
     rdfs:label "Source data"@en, "Källa vid belagd uppgift"@sv;
-    rdfs:subClassOf madsrdf:Source, :QualifiedRole .
+    rdfs:subClassOf madsrdf:Source, :QualifiedRole , :AdminMetadata .
 
 :SourceDataNotFound a owl:Class;
     rdfs:label "Source data not found"@en, "Källa vid icke-belagd uppgift"@sv;
@@ -1077,13 +1082,14 @@
     owl:propertyChainAxiom ( :publication :year ) .
 
 :publisher a owl:ObjectProperty;
-    :category :shorthand;
     rdfs:label "utgivare"@sv, "publisher"@en ;
     rdfs:comment "En entitet ansvarig för att tillgängliggöra resursen."@sv,
                  "An entity responsible for making the resource available."@en ;
-    sdo:domainIncludes :MediaObject, :Instance ;
-    # TODO: also sdo:domainIncludes :Embodiment ; but on those, we prefer
-    # :publication, and should treat this as a :shorthand.
+    sdo:domainIncludes :MediaObject ;
+    # NOTE: while sdo:domainIncludes :Embodiment would make sense, on those
+    # :publication is preferred, and :publisher would have to be treated as a
+    # :shorthand (which would prevent it from appearing in Cataloguing for
+    # :MediaObject instances).
     rdfs:range :Agent ;
     owl:equivalentProperty dc:publisher, sdo:publisher, kbrel:publisher ;
     # NOTE: :publisher may also be derived from :role on a :contribution, but
