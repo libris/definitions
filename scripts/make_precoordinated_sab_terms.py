@@ -149,18 +149,21 @@ def create_sab_description(
         if len(parts) < 2 and (not parts or any(parts[0].startswith(code) for code in SPECIAL_LANG_CODES)):
             return None, unknown
 
-        if cleancode in compositebases:
-            return None, unknown
-
         if 'z ' not in code and cleancode not in sabcodes:
             altcode = code.replace(' ', '')
+            extras = {}
             if cleancode != altcode:
                 extras = {
                     "sameAs": {"@id": qc(altcode)}
                     # "altCode": code
                 }
-            else:
-                extras = {}
+            elif code.endswith(',u'):
+                # TODO: remove the same "smartness" in sabcodeparser (if so, skip those "unknown")
+                base = code[:-2]
+                extras = {"sameAs": {"@id": qc('u' + base)}}
+
+            if cleancode in compositebases:
+                return None, unknown
 
             compositebases.add(cleancode)
 
