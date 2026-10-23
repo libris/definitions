@@ -20,6 +20,31 @@ def qc(c: str) -> str:
 MIN_EXPECTED_SAB_SIZE = 7000
 LONG_TAIL_MIN = 20
 
+SPECIAL_LANG_CODES = {
+    'Hce': '=c',  # Utländsk skönlitteratur i svensk översättning
+    'Hcc': None,  # Svensk skönlitteratur på främmande språk
+}
+
+# TODO: Should these always correspond to TermCollection:s?
+COMPOSITE_BASES = {
+    'Aa': None,
+    'Cca': 'Cba',
+    'Ccb': 'Cbb',
+    'Ccc': 'Cbc',
+    'Cf': None,
+    'Dg': None,
+    'Eab': None,
+    'Epa': None,
+    'G': 'F',
+    'H': 'F',
+    'J': 'N',
+    'K': 'N',
+    # TOODO: 'Ma--Ms': 'N',
+    'Qim': None,
+    'Udba': 'Uf',
+    'Udbb': 'Ug',
+}
+
 
 def write_precoordinated_sab_terms(
     reader: Iterator[list[str]],
@@ -28,6 +53,7 @@ def write_precoordinated_sab_terms(
     mapping_index: dict[str, dict]
 ) -> None:
 
+    # Tracks successful term construction attempts
     compositebases: set[str] = set()
 
     print(json.dumps({"@context": {
@@ -51,7 +77,6 @@ def write_precoordinated_sab_terms(
         if code in sabcodes:
             continue
 
-        # TODO: write json lines instead!
         description, unknown = create_sab_description(
             code, sabcodes, sablangcodes, compositebases
         )
@@ -107,6 +132,14 @@ def create_sab_description(
                 if lang_desc:
                     print(json.dumps(lang_desc))
                 continue
+
+            new_atom_desc, success = attempt_constructed_atom(
+                first, part, parts, sabcodes, compositebases
+            )
+            if success:
+                if new_atom_desc:
+                    print(json.dumps(new_atom_desc))
+                continue
             else:
                 unknown.append(part)
                 break
@@ -136,12 +169,6 @@ def create_sab_description(
             } | extras, unknown
 
     return None, unknown
-
-
-SPECIAL_LANG_CODES = {
-    'Hce': '=c',  # Utländsk skönlitteratur i svensk översättning
-    'Hcc': None,  # Svensk skönlitteratur på främmande språk
-}
 
 
 def attempt_lang_composite(
@@ -231,6 +258,53 @@ def reconstruct_combo(letter: str, first: str, part: str, sabcodes: set[str]) ->
             if combo_part in sabcodes:
                 return base_part, combo_part
     return None
+
+
+def attempt_constructed_atom(
+    first: str,
+    part: str,
+    parts: list[str],
+    sabcodes: set[str],
+    compositebases: set[str],
+) -> tuple[dict | None, bool]:
+    if part != first or len(parts) > 1:
+        return None, False
+
+    if part in compositebases:
+        parts.append(part)
+        return None, True
+
+    for lead, use_lead in COMPOSITE_BASES.items():
+        if not part.startswith(lead):
+            continue
+
+        rest = part[len(lead):]
+        if use_lead:
+            rest = use_lead + rest
+        else:
+            if rest[0].isalpha():
+                rest = rest.title()
+
+        if rest not in sabcodes:
+            return None, False
+
+        compositebases.add(part)
+
+        components = [
+            {"@id": lead},
+            {"@id": qc(rest)},
+        ]
+        # TODO: Do we rather construct *real* atoms (with more correct prefLabel)?
+        desc = {
+            "@id": qc(part),
+            "@type": "Classification",
+            "code": part,
+            "termComponentList": {"@list": components},
+            "inScheme": {"@id": "/term/kssb"}
+        }
+        return desc, True
+
+    return None, False
 
 
 def main() -> None:
