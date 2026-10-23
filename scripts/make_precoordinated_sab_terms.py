@@ -2,12 +2,13 @@
 # processing a SPARQL result of all uses. It then parses the SAB codes, to
 # check if they can be constructed from known "atoms" (which are loaded first).
 # It also lists all unknown components on stderr.
+from collections.abc import Iterator
 from urllib.parse import quote, unquote
 import csv
 import gzip
+import json
 import re
 import sys
-from textwrap import dedent
 
 from sabcodeparser import parse_sab_code
 
@@ -19,73 +20,57 @@ def qc(c: str) -> str:
 MIN_EXPECTED_SAB_SIZE = 7000
 LONG_TAIL_MIN = 20
 
-args = sys.argv[1:]
 
-sabterms = args.pop(0)
+def write_precoordinated_sab_terms(
+    reader: Iterator[list[str]],
+    sabcodes: set[str],
+    sablangcodes: set[str],
+    mapping_index: dict[str, dict]
+) -> None:
 
-sabcodes: set[str] = set()
-sablangcodes: set[str] = set()
+    compositebases: set[str] = set()
 
-with open(sabterms) as f:
-    for l in f:
-        for slug in re.findall('^<([^>]+)>', l):
+    print(json.dumps({"@context": {
+        "@vocab": "https://id.kb.se/vocab/",
+        "@base": "https://id.kb.se/term/kssb/"
+    }}))
+
+    for i, row in enumerate(reader):
+        if i == 0 and row == ("cls", "count", "sample"):
+            continue
+
+        code, versions, count, sample, maxyear = row
+
+        # NOTE: skipping the long tail of usages less than...
+        if count.isnumeric() and int(count) < LONG_TAIL_MIN:
             break
-        else:
+
+        if re.search(r'\\u[0-9A-F]{4}', code):
+            code = code.encode().decode('unicode-escape')
+
+        if code in sabcodes:
             continue
 
-        code = unquote(slug)
+        # TODO: write json lines instead!
+        description, unknown = create_sab_description(
+            code, sabcodes, sablangcodes, compositebases
+        )
+        if description:
+            if mapping := mapping_index.get(description['@id']):
+                del mapping['@id']
+                description |= mapping
+            print(json.dumps(description))
 
-        if '--' in code:
-            continue
-
-        if code.startswith('='):
-            assert 'LanguageSubdivision' in l
-            sablangcodes.add(code[1:])
-
-        sabcodes.add(code)
-
-assert len(sabcodes) > MIN_EXPECTED_SAB_SIZE
-
-usagefpath = args.pop(0)
-
-compositebases: set[str] = set()
+        if unknown:
+            print(code, "|".join(unknown), count, sample, sep='\t', file=sys.stderr)
 
 
-def make_precoordinated_sab_terms() -> None:
-
-    print(dedent("""\
-    prefix owl: <http://www.w3.org/2002/07/owl#>
-    prefix : <https://id.kb.se/vocab/>
-    base <https://id.kb.se/term/kssb/>"""))
-
-    with gzip.open(usagefpath, "rt") as f:
-        reader = csv.reader(f, 'excel-tab')  # type: ignore
-
-        for i, row in enumerate(reader):
-            if i == 0 and row == ("cls", "count", "sample"):
-                continue
-
-            code, versions, count, sample, maxyear = row
-
-            # NOTE: skipping the long tail of usages less than...
-            if count.isnumeric() and int(count) < LONG_TAIL_MIN:
-                break
-
-            if re.search(r'\\u[0-9A-F]{4}', code):
-                code = code.encode().decode('unicode-escape')
-
-            if code in sabcodes:
-                continue
-
-            description, unknown = create_sab_description(code, count, sample)
-            if description:
-                print(description)
-
-            if unknown:
-                print(code, "|".join(unknown), count, sample, sep='\t', file=sys.stderr)
-
-
-def create_sab_description(code: str, count, sample) -> tuple[str | None, list]:
+def create_sab_description(
+    code: str,
+    sabcodes: set[str],
+    sablangcodes: set[str],
+    compositebases: set[str],
+) -> tuple[dict | None, list]:
     first = None
     cleancode = ""
     parts: list[str] = []
@@ -115,10 +100,12 @@ def create_sab_description(code: str, count, sample) -> tuple[str | None, list]:
                     break
 
         if part not in sabcodes:
-            lang_desc, success = attempt_lang_composite(first, part, parts, sabcodes, sablangcodes)
+            lang_desc, success = attempt_lang_composite(
+                first, part, parts, sabcodes, sablangcodes, compositebases
+            )
             if success:
                 if lang_desc:
-                    print(lang_desc)
+                    print(json.dumps(lang_desc))
                 continue
             else:
                 unknown.append(part)
@@ -132,20 +119,21 @@ def create_sab_description(code: str, count, sample) -> tuple[str | None, list]:
         if 'z ' not in code and cleancode not in sabcodes:
             altcode = code.replace(' ', '')
             if cleancode != altcode:
-                sameas = f' owl:sameAs <{qc(altcode)}> ;'
-                altcode = f';  # "{code}"^^:SABAltCode '
+                extras = {
+                    "sameAs": {"@id": qc(altcode)}
+                    # "altCode": code
+                }
             else:
-                sameas = ''
-                altcode = ''
+                extras = {}
 
-            part_ref = ' '.join(f"<{qc(part)}>" for part in parts)
-            return dedent(
-                f"""
-                <{qc(cleancode)}> a :Classification ;{sameas}
-                    :code "{cleancode}" {altcode};
-                    :termComponentList ( {part_ref} ) ;
-                    :inScheme </term/kssb> ."""
-            ), unknown
+            part_refs = [{"@id": qc(part)} for part in parts]
+            return {
+                "@id": qc(cleancode),
+                "@type": "Classification",
+                "code": cleancode,
+                "termComponentList": {"@list": part_refs},
+                "inScheme": {"@id": "/term/kssb"}
+            } | extras, unknown
 
     return None, unknown
 
@@ -157,8 +145,13 @@ SPECIAL_LANG_CODES = {
 
 
 def attempt_lang_composite(
-    first: str, part: str, parts: list[str], sabcodes: set[str], sablangcodes: set[str]
-) -> tuple[str | None, bool]:
+    first: str,
+    part: str,
+    parts: list[str],
+    sabcodes: set[str],
+    sablangcodes: set[str],
+    compositebases: set[str],
+) -> tuple[dict | None, bool]:
     # TODO: Specify below rules with doctests:
     #  Examples:
     # - Heej => He + Hj
@@ -176,26 +169,34 @@ def attempt_lang_composite(
             hcode_transl_to_or_from_code = m.group(1)
             altlang = m.group(2)
 
-    description: str | None = None
+    description: dict | None = None
 
     if altlang in sablangcodes:
         altcode = 'H' + altlang
         if altcode in sabcodes and part not in compositebases:
 
+            components = [
+                {"@id": hcode_transl_to_or_from_code},
+                {"@id": qc(altcode)},
+            ]
+
             lang_fromto = SPECIAL_LANG_CODES.get(hcode_transl_to_or_from_code or "")
             if lang_fromto:
                 altcode_fromto = altcode + lang_fromto
-                trailing =  f" <{qc(lang_fromto)}>"
+                #components.append({"@id": qc(lang_fromto)})
             else:
                 altcode_fromto = None
-                trailing = ""
 
-            description = dedent(f"""
-            <{qc(part)}> a :Classification ;""" + (f"""
-                :exactMatch <{qc(altcode_fromto)}> ;""" if altcode_fromto else "") + f"""
-                :code "{part}" ;""" + (f'  # "{altcode_fromto}"^^:SABEduCode ;' if altcode_fromto else "") + f"""
-                :termComponentList (<{hcode_transl_to_or_from_code}> <{qc(altcode)}>{trailing} ) ;
-                :inScheme </term/kssb> .""")
+            description = {
+                "@id": qc(part),
+                "@type": "Classification",
+                "code": part, # "{altcode_fromto}"^^:SABEduCode
+                "termComponentList": {"@list": components},
+                "inScheme": {"@id": "/term/kssb"}
+            }
+
+            if altcode_fromto:
+                description["exactMatch"] = {"@id": qc(altcode_fromto)}
 
             compositebases.add(part)
             parts.append(part)
@@ -232,5 +233,44 @@ def reconstruct_combo(letter: str, first: str, part: str, sabcodes: set[str]) ->
     return None
 
 
+def main() -> None:
+    args = sys.argv[1:]
+
+    usagefpath = args.pop(0)
+    sabterms = args.pop(0)
+    added_mappings = args.pop(0) if args else None
+
+    sabcodes: set[str] = set()
+    sablangcodes: set[str] = set()
+
+    with open(sabterms) as f:
+        sabdata = json.load(f)
+        for term in sabdata['@graph']:
+            code = term['code']
+            ttype = term['@type']
+            if ttype == 'TermCollection':
+                continue
+            if ttype == 'LanguageSubdivision':
+                sablangcodes.add(code[1:])
+            sabcodes.add(code)
+
+    assert len(sabcodes) > MIN_EXPECTED_SAB_SIZE
+
+    mapping_index = {}
+    if added_mappings:
+        with open(added_mappings) as f:
+            mappings = json.load(f)
+            if '@graph' in mappings:
+                mapping_index = {
+                    item['@id']: item
+                    for item in mappings['@graph']
+                    if '@id' in item
+                }
+
+    with gzip.open(usagefpath, "rt") as f:
+        reader = csv.reader(f, 'excel-tab')  # type: ignore
+        write_precoordinated_sab_terms(reader, sabcodes, sablangcodes, mapping_index)
+
+
 if __name__ == '__main__':
-    make_precoordinated_sab_terms()
+    main()

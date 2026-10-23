@@ -2,19 +2,30 @@ source/cc-licenses.ttl: source/construct-cc-license-data.rq
 	cat source/cc-licenses-header.txt > $@
 	(echo https://creativecommons.org/publicdomain/mark/1.0/ && echo https://creativecommons.org/publicdomain/mark/1.0/deed.sv && curl -sL https://creativecommons.org/about/cclicenses/ | sed -nE 's!.*<a href="([^"]+)"><img .*!\1\n\1deed.sv!p') | xargs uv run python3 scripts/construct.py $^ >> $@
 
-source/sab.ttl: scripts/extract_sab_data_from_docx.py cache/esab-2015_1.docx
-	python3 $^ | trld -ijsonld -ottl > $@
-	# TODO 1: enhance with DDC-mappings: scripts/create_sab_skos_data.py +
-	# ../librisxl/whelk-core/src/main/java/se/kb/libris/export/dewey/dewey_sab.txt
+source/sab.ttl: cache/sab.jsonld
+	trld $^ -ottl > $@
+
+cache/sab.jsonld: scripts/extract_sab_data_from_docx.py cache/esab-2015_1.docx cache/dewey_sab.jsonld
+	python3 $^ > $@
 	# TODO 2: In XL, add precomposed usages (extract from usage in records)? See:
 	# ../librisxl/marc_export/src/main/resources/se/kb/libris/export/sabrub.txt # precomposed
 
-source/sab/precoordinated.ttl: scripts/make_precoordinated_sab_terms.py source/sab.ttl cache/sab-usages.tsv.gz
+source/sab/precoordinated.ttl: cache/sab-precoordinated.ndjson
+	cat $^ | trld -indjson -ottl > $@
+
+cache/sab-precoordinated.ndjson: scripts/make_precoordinated_sab_terms.py cache/sab-usages.tsv.gz cache/sab.jsonld cache/dewey_sab.jsonld
 	python3 $^ > $@ 2>logs/sab-unknown.tsv
 
 cache/sab-usages.tsv.gz: scripts/sab-usages.rq
 	curl --fail-with-body https://libris.kb.se/sparql -HAccept:text/tab-separated-values --data-urlencode query@$^ | gzip - > /tmp/sab-usages.tsv.gz
 	cp /tmp/sab-usages.tsv.gz $@
+
+cache/dewey_sab.jsonld: cache/Dewey_SAB.txt
+	echo '{}' > $@
+	#python scripts/create_sab_skos_data.py $^ > $@
+
+cache/Dewey_SAB.txt:
+	curl -L https://libris.kb.se/api/dewey-sab/Dewey_SAB.txt -o $@
 
 ## SSIF 2011 (Obsolete)
 #

@@ -490,6 +490,22 @@ if __name__ == '__main__':
 
     fpath = args.pop(0)
 
+    added_mappings = args.pop(0) if args else None
+
     results = extract_sab(get_doc(fpath), debug=debug)
+
+    if added_mappings:
+        with open(added_mappings) as f:
+            mappings = json.load(f)
+            if '@graph' in mappings:
+                index = {
+                    item['@id']: item
+                    for item in mappings['@graph']
+                    if '@id' in item
+                }
+                for item in results['@graph']:
+                    if mapping := index.get(item['@id']):
+                        del mapping['@id']
+                        item |= mapping
 
     print(json.dumps(results, indent=2, ensure_ascii=False))
