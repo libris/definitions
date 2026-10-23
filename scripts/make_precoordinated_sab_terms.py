@@ -149,6 +149,9 @@ def create_sab_description(
         if len(parts) < 2 and (not parts or any(parts[0].startswith(code) for code in SPECIAL_LANG_CODES)):
             return None, unknown
 
+        if cleancode in compositebases:
+            return None, unknown
+
         if 'z ' not in code and cleancode not in sabcodes:
             altcode = code.replace(' ', '')
             if cleancode != altcode:
@@ -158,6 +161,8 @@ def create_sab_description(
                 }
             else:
                 extras = {}
+
+            compositebases.add(cleancode)
 
             part_refs = [{"@id": qc(part)} for part in parts]
             return {
