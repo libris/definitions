@@ -76,7 +76,7 @@
     :category :pending ;
     rdfs:comment "Catch for unmatched 245$b properties at conversion from MARC21. Use ':subtitle' as preferred property."@en, "Egenskap som fångar upp omatchade 245$b vid konvertering från MARC21. Använd ':subtitle' som föredragen egenskap."@sv;
     rdfs:domain :Title ;
-    rdfs:label "Övrig titelinformation"@sv .
+    rdfs:label "övrig titelinformation"@sv .
 
 :subtitle a owl:DatatypeProperty;
     rdfs:label "övrig titelinformation"@sv;
@@ -123,7 +123,7 @@
 
 :abbreviatedTitle a owl:DatatypeProperty;
     :category :shorthand;
-    rdfs:label "Abbreviated title"@en, "Förkortad titel"@sv;
+    rdfs:label "abbreviated title"@en, "förkortad titel"@sv;
     rdfs:subPropertyOf :title;
     rdfs:domain :Endeavour;
     owl:propertyChainAxiom (
@@ -137,7 +137,7 @@
 
 :keyTitle a owl:DatatypeProperty;
     :category :shorthand;
-    rdfs:label "Key title"@en, "Nyckeltitel"@sv;
+    rdfs:label "key title"@en, "nyckeltitel"@sv;
     rdfs:subPropertyOf :title;
     owl:propertyChainAxiom (
                 [ rdfs:subPropertyOf :hasTitle; rdfs:range :KeyTitle ]
@@ -272,7 +272,7 @@
 ## Relations ->
 
 :identifiedBy a owl:ObjectProperty ;
-    rdfs:label "Identifier"@en, "Identifikator"@sv;
+    rdfs:label "identifier"@en, "identifikator"@sv;
     skos:altLabel "Identifierad av"@sv;
     owl:equivalentProperty bf2:identifiedBy;
     owl:inverseOf :identifies;
@@ -281,21 +281,21 @@
     rdfs:range :Identifier .
 
 :indirectlyIdentifiedBy a owl:ObjectProperty ;
-    rdfs:label "Indirectly identified by"@en, "Indirekt identifierad av"@sv;
+    rdfs:label "indirectly identified by"@en, "indirekt identifierad av"@sv;
     sdo:domainIncludes :Document;
     rdfs:range :Identifier ;
     rdfs:comment "En identifikator som indirekt är knuten till denna resurs (den kan vara hämtad från en resurs på annat format, eller vara en inkorrekt men ändå använd identifikator)."@sv;
     owl:propertyChainAxiom ( :hasEquivalent :identifiedBy ) .
 
 :incorrectlyIdentifiedBy a owl:ObjectProperty ;
-    rdfs:label "Incorrectly identified by"@en, "Inkorrekt identifierad av"@sv;
+    rdfs:label "incorrectly identified by"@en, "inkorrekt identifierad av"@sv;
     sdo:domainIncludes :Document;
     rdfs:range :Identifier ;
     rdfs:comment "En identifikator som är inkorrekt använd för denna resurs. Identifikatorn i sig kan vara korrekt, invalid i formatet, eller indragen (vilket kan anges med status-egenskapen på själva identifikatorn). Denna relation används för att klargöra att den inte går att använda för att unikt identifiera resursen."@sv;
     skos:broadMatch :identifiedBy .
 
 :identifies a owl:ObjectProperty;
-    rdfs:label "Identifierad resurs"@sv; #english bflabel misspelled
+    rdfs:label "identifierad resurs"@sv; #english bflabel misspelled
     #rdfs:domain :Identifier;
     owl:inverseOf :identifiedBy;
     owl:equivalentProperty bf2:identifies .
@@ -788,14 +788,14 @@
 :acquisitionTerms a owl:DatatypeProperty;
     owl:equivalentProperty bf2:acquisitionTerms;
     sdo:domainIncludes :AcquisitionSource, :Identifier;
-    rdfs:label "Anskaffningsvillkor"@sv .
+    rdfs:label "anskaffningsvillkor"@sv .
 
 :AcquisitionSource a owl:Class;
     rdfs:label "Acquisition source"@en, "Förvärvskälla"@sv;
     owl:equivalentClass bf2:AcquisitionSource .
 
 :acquisitionSource a owl:ObjectProperty;
-    rdfs:label "Source of acquisition"@en, "förvärvskälla"@sv;  
+    rdfs:label "source of acquisition"@en, "förvärvskälla"@sv;  
     rdfs:range :AcquisitionSource;
     owl:equivalentProperty bf2:acquisitionSource .
 
@@ -810,7 +810,7 @@
     skos:closeMatch bf2:part ;
     owl:equivalentProperty bflc:appliesTo ;
     rdfs:domain :Resource ;
-    rdfs:label "Applies to"@en, "Del av materialet som avses"@sv ;
+    rdfs:label "applies to"@en, "del av materialet som avses"@sv ;
     rdfs:range :Resource .
 
 :Review a owl:Class;
@@ -818,7 +818,7 @@
     owl:equivalentClass bf2:Review .
 
 :review a owl:ObjectProperty;
-    rdfs:label "Review content"@en, "recension"@sv;
+    rdfs:label "review content"@en, "recension"@sv;
     rdfs:range :Review;
     owl:equivalentProperty bf2:review .
 
@@ -846,14 +846,14 @@
 #    owl:equivalentProperty dc:modified .
 
 :coverage a owl:DatatypeProperty;
-    rdfs:label "Täckning eller tillkomst"@sv, "Coverage"@en;
+    rdfs:label "täckning eller tillkomst"@sv, "coverage"@en;
     rdfs:subPropertyOf dc:coverage ; # TODO objectProperty and baseclass for temporalCoverage and geographicCoverage
     skos:narrowMatch bf2:date ;
     #rdfs:seeAlso <http://web.archive.org/web/20070606222636/http:/www.kb.se/Metadata/dcmes/default.htm> ;
     sdo:domainIncludes :Title .
 
 :coverArt a owl:ObjectProperty ;
-    rdfs:label "Cover art"@en, "Omslagsbild"@sv ;
+    rdfs:label "cover art"@en, "omslagsbild"@sv ;
     rdfs:range :CoverArt ; # :Image?
     rdfs:comment "Omslagsbilden för en resurs" ;
     owl:equivalentProperty bf2:coverArt .
@@ -899,7 +899,7 @@
 #    owl:equivalentProperty madsrdf:citationSource .
 
 :citationNote a owl:DatatypeProperty;
-    rdfs:label "Citation Note"@en, "Uppgift från källa"@sv;
+    rdfs:label "citation Note"@en, "uppgift från källa"@sv;
     rdfs:domain :SourceData;
     owl:equivalentProperty madsrdf:citationNote .
 
@@ -913,7 +913,7 @@
 
 :provisionActivity a owl:ObjectProperty;
     ptg:abstract true;
-    rdfs:label "Provision activity"@en, "Produktion, utgivning, distribution och/eller tillverkning"@sv;
+    rdfs:label "provision activity"@en, "produktion, utgivning, distribution och/eller tillverkning"@sv;
     rdfs:domain :Instance;
     rdfs:range :ProvisionActivity;
     owl:equivalentProperty bf2:provisionActivity;
@@ -1112,12 +1112,12 @@
     owl:propertyChainAxiom ( :manufacture :place ) .
 
 :firstIssue a owl:DatatypeProperty;
-    rdfs:label "Multipart first issue"@en, "Numrering av seriella resurser (första)"@sv;
+    rdfs:label "multipart first issue"@en, "numrering av seriella resurser (första)"@sv;
     rdfs:comment "Används för närvarande ej i Libris."@sv;
     owl:equivalentProperty bf2:firstIssue .
 
 :lastIssue a owl:DatatypeProperty;
-    rdfs:label "Multipart last issue"@en, "Numrering av seriella resurser (sista)"@sv;
+    rdfs:label "multipart last issue"@en, "numrering av seriella resurser (sista)"@sv;
     rdfs:comment "Används för närvarande ej i Libris."@sv;
     owl:equivalentProperty bf2:lastIssue .
 
@@ -1143,12 +1143,12 @@
     owl:propertyChainAxiom (:isIssueOfEdition :label) .
 
 :editionStatementRemainder a owl:DatatypeProperty;
-    rdfs:label "edition statement remainder"@en, "Påföljande upplageuppgift"@sv;
+    rdfs:label "edition statement remainder"@en, "påföljande upplageuppgift"@sv;
     rdfs:domain :Instance;
     rdfs:subPropertyOf :editionStatement .
     
 :editionEnumeration a owl:DatatypeProperty;
-    rdfs:label "Parallell upplagebeteckning/Upplagespecifik upphovsuppgift"@sv;
+    rdfs:label "parallell upplagebeteckning/upplagespecifik upphovsuppgift"@sv;
     rdfs:domain :Instance;
     owl:equivalentProperty bf2:editionEnumeration .
 
@@ -1213,7 +1213,7 @@
     owl:equivalentClass bf2:CollectionArrangement .
 
 :collectionArrangement a owl:ObjectProperty;
-    rdfs:label "Collection Organization and arrangement"@en, "Ordning och sorteringsprinciper"@sv;
+    rdfs:label "collection Organization and arrangement"@en, "ordning och sorteringsprinciper"@sv;
     rdfs:range :CollectionArrangement;
     owl:equivalentProperty bf2:collectionArrangement .
 
@@ -1222,19 +1222,19 @@
     owl:equivalentProperty bf2:collectionArrangementOf .
 
 :pattern a owl:DatatypeProperty;
-    rdfs:label "Arrangement of material"@en, "Sorteringsprinciper"@sv;
+    rdfs:label "arrangement of material"@en, "sorteringsprinciper"@sv;
     rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:pattern .
 
 :hierarchicalLevel a owl:DatatypeProperty;
-    rdfs:label "Hierarchical level of material"@en, "Hierarkisk nivå"@sv;
+    rdfs:label "hierarchical level of material"@en, "hierarkisk nivå"@sv;
     rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:hierarchicalLevel .
 
 :collectionOrganization a owl:DatatypeProperty;
-    rdfs:label "Organization of material"@en, "Uppdelningsprinciper"@sv;
+    rdfs:label "organization of material"@en, "uppdelningsprinciper"@sv;
     rdfs:domain :CollectionArrangement;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:collectionOrganization;
@@ -1267,12 +1267,12 @@
     owl:equivalentClass bf2:Note .
 
 :noteType a owl:DatatypeProperty;
-    rdfs:label "Note type"@en, "Typ av anmärkning"@sv;
+    rdfs:label "note type"@en, "typ av anmärkning"@sv;
     rdfs:domain :Note;
     owl:equivalentProperty bf2:noteType .
 
 :physicalDetailsNote a owl:DatatypeProperty ;
-    rdfs:label "Physical details note"@en, "Övriga fysiska detaljer"@sv ;
+    rdfs:label "physical details note"@en, "övriga fysiska detaljer"@sv ;
     rdfs:domain :Instance ;
     rdfs:range rdfs:Literal ;
     rdfs:subPropertyOf skos:note ;
@@ -1289,11 +1289,11 @@
     :category :pending ;
     sdo:domainIncludes :Agent;
     rdfs:subPropertyOf :description, sdo:disambiguatingDescription ;
-    rdfs:label "Disambiguating description"@en, "Särskiljande beskrivning"@sv;
+    rdfs:label "disambiguating description"@en, "särskiljande beskrivning"@sv;
     rdfs:comment "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation."@en, "En särskiljande beskrivning av resursen."@sv.
 
 :awardsNote a owl:DatatypeProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
-    rdfs:label "Award note"@en, "Anmärkning om utmärkelse"@sv;
+    rdfs:label "award note"@en, "anmärkning om utmärkelse"@sv;
     sdo:domainIncludes :Creation ;
     rdfs:range rdfs:Literal;
     skos:scopeNote "Används normalt ej i Libris."@sv;
@@ -1301,20 +1301,20 @@
   
 :creditsNote a owl:DatatypeProperty;
     :category :pending ;
-    rdfs:label "credits note"@en, "Anmärkning om upphov"@sv;
+    rdfs:label "credits note"@en, "anmärkning om upphov"@sv;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:credits .
 
 :participantNote a owl:DatatypeProperty;
     # previously note domain, has been used in error and should probably be deprecated after analysis.
-    rdfs:label "Anmärkning om medverkan"@sv .
+    rdfs:label "anmärkning om medverkan"@sv .
 
 :ContentAccessibility a owl:Class;
     rdfs:label "Content accessibility information"@en, "Information om innehållets tillgänglighet"@sv;
     owl:equivalentClass bf2:ContentAccessibility .
 
 :contentAccessibility a owl:ObjectProperty;
-    rdfs:label "Content accessibility information"@en, "Information om innehållets tillgänglighet"@sv;
+    rdfs:label "content accessibility information"@en, "information om innehållets tillgänglighet"@sv;
     rdfs:range :ContentAccessibility;
     rdfs:comment "Information för personer med sensoriska funktionsnedsättningar om alternativa sätt och hjälpmedel för att ta till sig innehållet i en resurs."@sv ;
     # skos:relatedMatch rdam:P30452 ; keep as comment until we can establish proper relationship.
@@ -1325,7 +1325,7 @@
     owl:equivalentClass bf2:CopyrightRegistration .
 
 :copyrightRegistration a owl:ObjectProperty;
-    rdfs:label "Copyright registration information"@en, "Anmärkning om registrering av copyright"@sv;
+    rdfs:label "copyright registration information"@en, "anmärkning om registrering av copyright"@sv;
     rdfs:range :CopyrightRegistration;
     owl:equivalentProperty bf2:copyrightRegistration .
 
@@ -1335,17 +1335,17 @@
     owl:equivalentProperty bf2:custodialHistory .
 
 :cataloguersNote a owl:DatatypeProperty;
-    rdfs:label "Cataloguers Note"@en, "Katalogisatörens anmärkning"@sv;
+    rdfs:label "cataloguers Note"@en, "katalogisatörens anmärkning"@sv;
     sdo:domainIncludes :Item, :Record, :Document, :MediaObject, :DigitalResource ; # This list needs a review!
     rdfs:subPropertyOf skos:editorialNote, rdael:cataloguersNote .
 
 :qualifier a owl:DatatypeProperty;
-    rdfs:label "Qualifier"@en, "Särskiljande tillägg"@sv;
+    rdfs:label "qualifier"@en, "särskiljande tillägg"@sv;
     owl:equivalentProperty bf2:qualifier, skos:note;
     sdo:domainIncludes :Creation, :Person, :Title, :Identifier, :ShelfMarkSequence, :Library, :Bibliography.
 
 :typeNote a owl:DatatypeProperty;
-    rdfs:label "Type note"@en, "Typanmärkning"@sv;
+    rdfs:label "type note"@en, "typanmärkning"@sv;
     owl:propertyChainAxiom (:type :note);
     sdo:domainIncludes :VariantTitle, :Identifier, :Reproduction .
 
@@ -1405,13 +1405,13 @@
     owl:equivalentProperty bf2:originDate .
 
 :historyOfWork a owl:DatatypeProperty;
-    rdfs:label "History of the work"@en, "Verkets historia"@sv;
+    rdfs:label "history of the work"@en, "verkets historia"@sv;
     rdfs:domain :Work;
     owl:equivalentProperty bf2:historyOfWork .
 
 :copyrightDate a owl:DatatypeProperty;
     sdo:domainIncludes :PrimaryPublication, :Instance;
-    rdfs:label "Copyright date"@en, "Copyrightdatum"@sv;
+    rdfs:label "copyright date"@en, "copyrightdatum"@sv;
     rdfs:range rdfs:Literal;
     rdfs:comment "Används för närvarande ej."@sv;
     rdfs:subPropertyOf bf2:date;
@@ -1420,20 +1420,20 @@
     owl:propertyChainAxiom (:copyright :date) .
 
 :projectedProvisionDate a owl:DatatypeProperty;
-    rdfs:label "Projected publication date"@en, "Förväntad utgivningstid"@sv;
+    rdfs:label "projected publication date"@en, "förväntad utgivningstid"@sv;
     rdfs:subPropertyOf :date;
     rdfs:domain :Instance;
     owl:equivalentProperty bflc:projectedProvisionDate .
 
 :version a owl:DatatypeProperty;
-    rdfs:label "Version"@en, "Version"@sv;
+    rdfs:label "version"@en, "version"@sv;
     rdfs:domain :Work;
     owl:equivalentProperty bf2:version .
 
 :aspectRatio a owl:ObjectProperty;
     rdfs:range :AspectRatio;
     owl:equivalentProperty bf2:aspectRatio;
-    rdfs:label "Aspect ratio"@en, "bildförhållande"@sv .
+    rdfs:label "aspect ratio"@en, "bildförhållande"@sv .
 
 :AspectRatio a owl:Class;
     owl:equivalentClass bf2:AspectRatio;
@@ -1442,7 +1442,7 @@
 :capture a owl:ObjectProperty;
     rdfs:range :Capture;
     owl:equivalentProperty bf2:capture;
-    rdfs:label "Capture of content"@en, "inspelning"@sv .
+    rdfs:label "capture of content"@en, "inspelning"@sv .
 
 :Capture a owl:Class;
     owl:equivalentClass bf2:Capture;
@@ -1461,7 +1461,7 @@
     rdfs:label "Capture of discovery of content"@en, "Upptäckt"@sv .
 
 :hasDuration a owl:ObjectProperty;
-    rdfs:label "Has duration"@en, "Speltid"@sv;
+    rdfs:label "has duration"@en, "speltid"@sv;
     rdfs:comment "Information om resursens eller framförandets speltid/längd."@sv ;
     rdfs:domain :Instance ;
     rdfs:range :Duration ;
@@ -1531,7 +1531,7 @@
     rdfs:domain :Instance;
     rdfs:range :Dimensions;
     rdfs:comment "Mått på resursens bärare eller behållare."@sv;
-    rdfs:label "Mått"@sv, "dimensions"@en .
+    rdfs:label "mått"@sv, "dimensions"@en .
 
 :TableOfContents a owl:Class;
     rdfs:label "Table of contents"@en, "Innehållsförteckning"@sv;
@@ -1540,7 +1540,7 @@
 
 :tableOfContents a owl:ObjectProperty;
     rdfs:range :TableOfContents;
-    rdfs:label "Table of contents content"@en, "har innehållsförteckning"@sv;
+    rdfs:label "table of contents content"@en, "har innehållsförteckning"@sv;
     owl:equivalentProperty bf2:tableOfContents .
 
 # Content description information
@@ -1555,18 +1555,18 @@
     owl:equivalentClass bf2:Dissertation .
 
 :dissertation a owl:ObjectProperty;
-    rdfs:label "Dissertation Information"@en, "Anmärkning om akademisk avhandling"@sv;
+    rdfs:label "dissertation Information"@en, "anmärkning om akademisk avhandling"@sv;
     rdfs:range :Dissertation;
     owl:equivalentProperty bf2:dissertation .
 
 :degree a owl:DatatypeProperty;
-    rdfs:label "Degree"@en, "Examen"@sv;
+    rdfs:label "degree"@en, "examen"@sv;
     rdfs:domain :Dissertation;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:degree .
 
 :grantingInstitution a owl:ObjectProperty;
-    rdfs:label "Degree issuing institution"@en, "Lärosäte som utfärdat examen"@sv;
+    rdfs:label "degree issuing institution"@en, "lärosäte som utfärdat examen"@sv;
     rdfs:domain :Dissertation;
     rdfs:range :Agent;
     owl:equivalentProperty bf2:grantingInstitution .
@@ -1580,7 +1580,7 @@
     owl:equivalentClass bf2:GeographicCoverage .
 
 :geographicCoverage a owl:ObjectProperty;
-    rdfs:label "Geographic coverage"@en, "Geografisk täckning"@sv;
+    rdfs:label "geographic coverage"@en, "geografisk täckning"@sv;
     rdfs:domain :Creation;
     rdfs:range :GeographicCoverage;
     rdfs:comment "Geografisk täckning avseende innehållet i resursen."@sv;
@@ -1589,10 +1589,10 @@
 
 :TemporalCoverage a owl:Class ;
     rdfs:subClassOf :TemporalQualification ;
-    rdfs:label "temporal coverage"@en, "kronologisk täckning"@sv .
+    rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv .
 
 :temporalCoverage a owl:ObjectProperty ;
-    rdfs:label "Temporal coverage"@en, "Kronologisk täckning"@sv;
+    rdfs:label "temporal coverage"@en, "kronologisk täckning"@sv;
     rdfs:domain :Work ;
     rdfs:range :TemporalCoverage ;
     rdfs:comment "Kronologisk täckning avseende innehållet i resursen."@sv;
@@ -1604,7 +1604,7 @@
     owl:equivalentClass bf2:MusicMedium .
 
 :musicMedium a owl:ObjectProperty;
-    rdfs:label "Music medium of performance"@en, "Besättning för framförande"@sv;
+    rdfs:label "music medium of performance"@en, "besättning för framförande"@sv;
     rdfs:domain :Work;
     rdfs:range :MusicMedium;
     owl:equivalentProperty bf2:musicMedium .
@@ -1614,13 +1614,13 @@
     owl:equivalentClass bf2:MusicVoice .
 
 :voice a owl:ObjectProperty;
-    rdfs:label "Voice"@en, "Röst"@sv;
+    rdfs:label "voice"@en, "röst"@sv;
     rdfs:domain :Work;
     rdfs:range :MusicVoice;
     owl:equivalentProperty bf2:voice .
 
 :voiceType a owl:DatatypeProperty;
-    rdfs:label "Type of voice"@en, "Rösttyp"@sv;
+    rdfs:label "type of voice"@en, "rösttyp"@sv;
     rdfs:domain :MusicVoice;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:voiceType .
@@ -1630,13 +1630,13 @@
     owl:equivalentClass bf2:MusicInstrument .
 
 :instrument a owl:ObjectProperty;
-    rdfs:label "Instrument"@en, "Instrument"@sv;
+    rdfs:label "instrument"@en, "instrument"@sv;
     rdfs:domain :Work;
     rdfs:range :MusicInstrument;
     owl:equivalentProperty bf2:instrument .
 
 :instrumentalType a owl:DatatypeProperty;
-    rdfs:label "Instrument role"@en, "Instrumentroll"@sv;
+    rdfs:label "instrument role"@en, "instrumentroll"@sv;
     rdfs:domain :MusicInstrument;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:instrumentalType .
@@ -1651,43 +1651,43 @@
     owl:equivalentClass bf2:MusicEnsemble .
 
 :ensemble a owl:ObjectProperty;
-    rdfs:label "Ensemble"@en, "Ensemble"@sv;
+    rdfs:label "ensemble"@en, "ensemble"@sv;
     rdfs:domain :Work;
     rdfs:range :Ensemble;
     owl:equivalentProperty bf2:ensemble .
 
 :ensembleType a owl:DatatypeProperty;
-    rdfs:label "Ensembletyp"@sv;
+    rdfs:label "ensembletyp"@sv;
     rdfs:domain :Ensemble;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:ensembleType .
     
 :musicSerialNumber a owl:DatatypeProperty;
-    rdfs:label "Music serial number"@en, "Nummer i verkförteckning"@sv;
+    rdfs:label "music serial number"@en, "nummer i verkförteckning"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:musicSerialNumber .
 
 :musicOpusNumber a owl:DatatypeProperty;
-    rdfs:label "Music opus number"@en, "Opusnummer"@sv;
+    rdfs:label "music opus number"@en, "opusnummer"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:musicOpusNumber .
 
 :musicThematicNumber a owl:DatatypeProperty;
-    rdfs:label "Music thematic number"@en, "Nummer i tematisk förteckning"@sv;
+    rdfs:label "music thematic number"@en, "nummer i tematisk förteckning"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:musicThematicNumber .
 
 :musicKey a owl:DatatypeProperty;
-    rdfs:label "Music key"@en, "Tonart"@sv;
+    rdfs:label "music key"@en, "tonart"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     owl:equivalentProperty bf2:musicKey .
 
 :legalDate a owl:DatatypeProperty;
-    rdfs:label "Date of legal work"@en, "Tid för rättsligt verk"@sv;
+    rdfs:label "date of legal work"@en, "tid för rättsligt verk"@sv;
     rdfs:domain :Work;
     rdfs:range rdfs:Literal;
     rdfs:subPropertyOf :date;
@@ -1724,7 +1724,7 @@
 :summary a owl:ObjectProperty;
     rdfs:range :Summary;
     rdfs:comment "Beskrivning av innehållet i en resurs, till exempel abstract, sammanfattning, synopsis."@sv;
-    rdfs:label "Summary content"@en, "sammanfattning av innehåll"@sv;
+    rdfs:label "summary content"@en, "sammanfattning av innehåll"@sv;
     owl:equivalentProperty bf2:summary .
 
 :SystemRequirement a owl:Class;
@@ -1784,7 +1784,7 @@
     rdfs:subClassOf :UsageAndAccessPolicy .
 
 :usageAndAccessPolicy a owl:ObjectProperty;
-    rdfs:label "Use and access condition"@en, "Villkor för användning och åtkomst"@sv;
+    rdfs:label "use and access condition"@en, "villkor för användning och åtkomst"@sv;
     sdo:domainIncludes :Embodiment, :MediaObject ;
     rdfs:range :UsageAndAccessPolicy;
     skos:narrowMatch dc:license, sdo:license ;

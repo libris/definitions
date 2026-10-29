@@ -92,19 +92,19 @@
     rdfs:subPropertyOf dc:relation .
 
 :absorbed a owl:ObjectProperty;
-    rdfs:label "Absorption of"@en, "har införlivat"@sv;
+    rdfs:label "absorption of"@en, "har införlivat"@sv;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :absorbedBy;
     owl:equivalentProperty bf2:absorbed .
 
 :absorbedBy a owl:ObjectProperty;
-    rdfs:label "Absorbed by"@en, "har uppgått i"@sv;
+    rdfs:label "absorbed by"@en, "har uppgått i"@sv;
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :absorbed;
     owl:equivalentProperty bf2:absorbedBy .
 
 :absorbedInPart a owl:ObjectProperty;
-    rdfs:label "Absorbed in part"@en, "Har delvis införlivat"@sv;
+    rdfs:label "absorbed in part"@en, "har delvis införlivat"@sv;
     rdfs:subPropertyOf :precededBy;
     rdfs:domain :Creation;
     rdfs:range :Creation;
@@ -114,7 +114,7 @@
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :absorbedInPartBy a owl:ObjectProperty;
-    rdfs:label "Absorbed in part by"@en, "Har delvis uppgått i"@sv;
+    rdfs:label "absorbed in part by"@en, "har delvis uppgått i"@sv;
     rdfs:subPropertyOf :succeededBy;
     rdfs:domain :Creation;
     rdfs:range :Creation;
@@ -124,7 +124,7 @@
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
 
 :precededInPartBy a owl:ObjectProperty;
-    rdfs:label "Preceded in part by"@en, "Ersätter delvis"@sv;
+    rdfs:label "preceded in part by"@en, "ersätter delvis"@sv;
     rdfs:domain :Creation;
     rdfs:range :Creation;
     rdfs:subPropertyOf :precededBy;
@@ -134,7 +134,7 @@
     # NOTE: These were removed from BF1 to BF2. We retain them for conversion.
     
 :succeededInPartBy a owl:ObjectProperty;
-    rdfs:label "Succeeded in part by"@en, "Ersättes delvis av"@sv;
+    rdfs:label "succeeded in part by"@en, "ersättes delvis av"@sv;
     rdfs:subPropertyOf :succeededBy;
     rdfs:domain :Creation;
     rdfs:range :Creation;
@@ -151,7 +151,7 @@
 
 :arrangement a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "arrangemang"@sv, "Arrangement"@en;
+    rdfs:label "arrangemang"@sv, "arrangement"@en;
     rdfs:comment "Resurs som är ett arrangemang av den beskrivna resursen"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -161,7 +161,7 @@
 
 :arrangementOf a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "arrangemang av"@sv, "Arrangement of"@en;
+    rdfs:label "arrangemang av"@sv, "arrangement of"@en;
     rdfs:comment "Resurs som den beskrivna resursen är ett arrangemang av"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -221,13 +221,13 @@
     owl:equivalentClass sdo:ImageObject .
 
 :electronicLocator a owl:ObjectProperty;
-    rdfs:label "Electronic location"@en, "Elektronisk adress"@sv;
+    rdfs:label "electronic location"@en, "elektronisk adress"@sv;
     sdo:domainIncludes :Item, :Instance;
     sdo:rangeIncludes :Document;
     owl:equivalentProperty bf2:electronicLocator .
 
 :accompaniedBy a owl:ObjectProperty;
-    rdfs:label "Medföljs av"@sv;
+    rdfs:label "medföljs av"@sv;
     rdfs:comment "Resurs som medföljer den beskrivna resursen."@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:inverseOf :accompanies;
@@ -308,11 +308,11 @@
 :indexedIn a owl:ObjectProperty ;
     rdfs:domain :Endeavour ;
     sdo:rangeIncludes :Instance, :Work ;
-    rdfs:label "Indexed in"@en, "Indexerad i"@sv ;
+    rdfs:label "indexed in"@en, "indexerad i"@sv ;
     owl:equivalentProperty bflc:indexedIn .
 
 :hasEquivalent a owl:SymmetricProperty;
-    rdfs:label "Equivalence"@en, "Likvärdighet"@sv;
+    rdfs:label "equivalence"@en, "likvärdighet"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:equivalentProperty bf2:hasEquivalent .
 
@@ -329,13 +329,13 @@
     owl:equivalentProperty bf2:mergedToForm .
 
 :originalVersion a owl:ObjectProperty;
-    rdfs:label "Original version"@en, "Originalversion"@sv;
+    rdfs:label "original version"@en, "originalversion"@sv;
     rdfs:subPropertyOf :derivativeOf;
     owl:inverseOf :originalVersionOf;
     owl:equivalentProperty bf2:originalVersion .
 
 :originalVersionOf a owl:ObjectProperty;
-    rdfs:label "Original version of"@en, "Originalversion av"@sv;
+    rdfs:label "original version of"@en, "originalversion av"@sv;
     rdfs:subPropertyOf :hasDerivative ;
     owl:inverseOf :originalVersion;
     owl:equivalentProperty bf2:originalVersionOf .
@@ -350,10 +350,10 @@
     rdfs:domain :Instance;
     rdfs:range :Instance;
     rdfs:subPropertyOf :hasEquivalent;
-    rdfs:label "Annat bärarformat"@sv .
+    rdfs:label "annat bärarformat"@sv .
 
 :hasSubseries a owl:ObjectProperty;
-    rdfs:label "Underserie"@sv;
+    rdfs:label "underserie"@sv;
     owl:equivalentProperty bf2:hasSubseries;
     rdfs:subPropertyOf :isPartOf;
     owl:inverseOf :subseriesOf .
@@ -443,7 +443,7 @@
     owl:inverseOf :replacedBy .
 
 :hasReproduction a owl:ObjectProperty;
-    rdfs:label "Reproduced as"@en, "Reproducerad som"@sv;
+    rdfs:label "reproduced as"@en, "reproducerad som"@sv;
     rdfs:domain :Instance;
     rdfs:range :Instance;
     owl:equivalentProperty bf2:hasReproduction;
@@ -452,7 +452,7 @@
 
 :reproductionOf a owl:ObjectProperty;
     :category :integral ;
-    rdfs:label "Reproduction of"@en, "Reproduktion av"@sv;
+    rdfs:label "reproduction of"@en, "reproduktion av"@sv;
     rdfs:domain :Instance;
     rdfs:range :Instance;
     owl:equivalentProperty bf2:reproductionOf;
@@ -478,15 +478,15 @@
     owl:equivalentProperty bf2:hasSeries .
 
 :seriesOf a owl:ObjectProperty;
-    rdfs:label "Series container of"@en, "Ingående seriedel"@sv;
+    rdfs:label "series container of"@en, "ingående seriedel"@sv;
     rdfs:subPropertyOf :hasPart;
     owl:inverseOf :hasSeries;
     owl:equivalentProperty bf2:seriesOf .
 
 :isIssueOf a owl:ObjectProperty;
-    rdfs:label "Is issue of"@en, "nummer av"@sv;
+    rdfs:label "is issue of"@en, "nummer av"@sv;
     rdfs:subPropertyOf :isPartOf;
-    owl:inverseOf [rdfs:label "Has issue"@en, "har nummer"@sv] ; #NOTE: Until we need a properly defined inverse term (For reference rdau:P60240).
+    owl:inverseOf [rdfs:label "has issue"@en, "har nummer"@sv] ; #NOTE: Until we need a properly defined inverse term (For reference rdau:P60240).
     rdfs:range :Instance ;
     owl:equivalentProperty rdau:P60193 .
 
@@ -494,7 +494,7 @@
     sdo:domainIncludes :Instance ;
     rdfs:subPropertyOf :hasStatement ;
     rdfs:range :SeriesMembership ;
-    rdfs:label "Series membership"@en, "Seriemedlemskap"@sv .
+    rdfs:label "series membership"@en, "seriemedlemskap"@sv .
 
 :inSeries a owl:ObjectProperty ;
     rdfs:domain :SeriesMembership ;
@@ -513,7 +513,7 @@
 :isPrimaryTopicOf a owl:ObjectProperty;
     sdo:domainIncludes :Item, :Instance ;
     rdfs:range :Document ;
-    rdfs:label "Relaterad beskrivning eller innehåll"@sv ;
+    rdfs:label "relaterad beskrivning eller innehåll"@sv ;
     skos:relatedMatch bf2:supplementaryContent ;
     owl:equivalentProperty foaf:isPrimaryTopicOf .
 
@@ -575,7 +575,7 @@
 
 ## Qualified form of subject; used by SwePub {{{
 :qualifiedSubject a owl:ObjectProperty;
-    rdfs:label "Kvalificerat ämnespåstående"@sv;
+    rdfs:label "kvalificerat ämnespåstående"@sv;
     rdfs:comment "Ofta automatiskt genererade"@sv;
     rdfs:subPropertyOf :hasStatement;
     rdfs:range :SubjectStatement .
@@ -614,7 +614,7 @@
     owl:equivalentProperty bf2:role, prov:hadRole .
 
 :contribution a owl:ObjectProperty;
-    rdfs:label "Medverkan och funktion"@sv;
+    rdfs:label "medverkan och funktion"@sv;
     skos:altLabel "Upphov"@sv;
     rdfs:comment "Agent och dess funktion i relation till resursen."@sv;
     owl:equivalentProperty bf2:contribution;
@@ -627,7 +627,7 @@
 
 :contributor a owl:ObjectProperty;
     :category :shorthand;
-    rdfs:label "Author/Contributor"@en, "Författare/upphov"@sv;
+    rdfs:label "author/contributor"@en, "författare/upphov"@sv;
     sdo:domainIncludes :Endeavour, :MediaObject ;
     sdo:rangeIncludes :BibliographicAgent;
     owl:equivalentProperty dc:contributor;
@@ -661,14 +661,14 @@
     owl:equivalentProperty bf2:agentOf .
 
 :relationship a owl:ObjectProperty;
-    rdfs:label "Relation"@sv;
+    rdfs:label "relation"@sv;
     owl:equivalentProperty bflc:relationship ;
     rdfs:subPropertyOf :hasStatement, prov:qualifiedPrimarySource ;
     rdfs:domain :Endeavour ;
     rdfs:range :Relationship .
 
 :relation a owl:ObjectProperty;
-    rdfs:label "Relationstyp"@sv;
+    rdfs:label "relationstyp"@sv;
     rdfs:subPropertyOf :role;
     rdfs:domain :Relationship;
     rdfs:range :Relation ;
@@ -694,7 +694,7 @@
 :applicableInstitution a owl:ObjectProperty ;
     rdfs:range :Agent ;
     rdfs:domain :Endeavour ;
-    rdfs:label "Applicable institution"@en, "Tillämplig institution"@sv ;
+    rdfs:label "applicable institution"@en, "tillämplig institution"@sv ;
     owl:equivalentProperty bflc:applicableInstitution .
 # Range restrictions:
 :Agent rdfs:subClassOf [ a owl:Restriction;

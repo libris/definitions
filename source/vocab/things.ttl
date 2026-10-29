@@ -685,7 +685,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 
 :termGroup a owl:DatatypeProperty;
     sdo:domainIncludes :ContentType, :MediaType, :CarrierType ;
-    rdfs:label "Termgroup"@en, "Termgrupp"@sv .
+    rdfs:label "termgroup"@en, "termgrupp"@sv .
 
 #:ExpressionForm a owl:Class ;
 #    rdfs:label "Expression Form"@en, "Uttrycksform"@sv ;
@@ -708,7 +708,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
     owl:equivalentProperty dc:isFormatOf .
 
 :hasFormat a owl:ObjectProperty;
-    rdfs:label "Format"@sv;
+    rdfs:label "format"@sv;
     rdfs:comment "Är på angivet format."@sv;
     rdfs:subPropertyOf sdo:exampleOfWork;
     owl:equivalentProperty dc:hasFormat .
@@ -723,7 +723,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
     owl:equivalentClass bf2:BookFormat, sdo:BookFormat .
 
 :bookFormat a owl:ObjectProperty ; # TODO: =~ marc:BooksItemType (?)
-    rdfs:label "Book format"@en, "bokformat"@sv;
+    rdfs:label "book format"@en, "bokformat"@sv;
     rdfs:domain :Instance;
     rdfs:range :BookFormat;
     rdfs:subPropertyOf :format;
@@ -745,7 +745,7 @@ prefix saobf: <https://id.kb.se/term/saobf/>
 # alternative: kbv:issuanceType dct:isReferencedBy [ rdfs:label "RDA 2.13" ]
 :issuanceType a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "Mode of issuance"@en, "utgivningssätt"@sv ;
+    rdfs:label "mode of issuance"@en, "utgivningssätt"@sv ;
     rdfs:domain :Instance ;
     owl:equivalentProperty bf2:issuance;
     rdfs:comment "Kategorisering som reflekterar om en resurs är utgiven i en eller flera delar."@sv ;
