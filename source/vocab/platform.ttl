@@ -118,7 +118,7 @@
 
 :adminMetadata a owl:ObjectProperty;
     rdfs:range :AdminMetadata;
-    rdfs:label "administrative metadata"@en, "administrativ metadata"@sv;
+    rdfs:label "Administrative metadata"@en, "administrativ metadata"@sv;
     owl:equivalentProperty bf2:adminMetadata .
 
 :adminMetadataFor a owl:ObjectProperty ;
@@ -126,14 +126,14 @@
     owl:equivalentProperty bf2:adminMetadataFor .
 
 :assigner a owl:ObjectProperty;
-    rdfs:label "assigner"@en, "tilldelad av"@sv;
+    rdfs:label "Assigner"@en, "tilldelad av"@sv;
     rdfs:domain :Resource ;
     rdfs:range :Resource ;
     owl:equivalentProperty bf2:assigner .
 
 :descriptionModifier a owl:ObjectProperty;
     ptg:abstract true;
-    rdfs:label "description modifier"@en, "ändrad av"@sv ;
+    rdfs:label "Description modifier"@en, "ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
     rdfs:subPropertyOf dc:contributor ;
@@ -190,7 +190,7 @@
     owl:equivalentClass bf2:DescriptionConventions .
 
 :descriptionConventions a owl:ObjectProperty;
-    rdfs:label "description conventions"@en, "katalogiseringsregler"@sv;
+    rdfs:label "Description conventions"@en, "katalogiseringsregler"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionConventions;
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
@@ -198,7 +198,7 @@
 
 :derivedFrom a owl:ObjectProperty;
     :category :platform ;
-    rdfs:label "source metadata"@en, "metadatakälla"@sv;
+    rdfs:label "Source metadata"@en, "metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :AdminMetadata;
@@ -211,14 +211,14 @@
     owl:equivalentClass bf2:GenerationProcess .
 
 :generationProcess a owl:ObjectProperty;
-    rdfs:label "description generation"@en, "beskrivningsprocess"@sv;
+    rdfs:label "Description generation"@en, "beskrivningsprocess"@sv;
     rdfs:comment "Indikation på program eller process använt för att generera beskrivningen eller specifik konvertering."@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :GenerationProcess;
     owl:equivalentProperty bf2:generationProcess .
 
 :generationDate a owl:DatatypeProperty;
-    rdfs:label "date generated"@en, "konverteringsdatum"@sv;
+    rdfs:label "Date generated"@en, "konverteringsdatum"@sv;
     rdfs:comment "Datum för konvertering"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range rdfs:Literal;
@@ -231,7 +231,7 @@
     owl:equivalentClass bf2:DescriptionAuthentication .
 
 :descriptionAuthentication a owl:ObjectProperty;
-    rdfs:label "description authentication"@en, "beskrivningskontroll"@sv;
+    rdfs:label "Description authentication"@en, "beskrivningskontroll"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionAuthentication;
     owl:equivalentProperty bf2:descriptionAuthentication .

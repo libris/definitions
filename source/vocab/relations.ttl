@@ -92,13 +92,13 @@
     rdfs:subPropertyOf dc:relation .
 
 :absorbed a owl:ObjectProperty;
-    rdfs:label "absorption of"@en, "har införlivat"@sv;
+    rdfs:label "Absorption of"@en, "har införlivat"@sv;
     rdfs:subPropertyOf :precededBy;
     owl:inverseOf :absorbedBy;
     owl:equivalentProperty bf2:absorbed .
 
 :absorbedBy a owl:ObjectProperty;
-    rdfs:label "absorbed by"@en, "har uppgått i"@sv;
+    rdfs:label "Absorbed by"@en, "har uppgått i"@sv;
     rdfs:subPropertyOf :succeededBy;
     owl:inverseOf :absorbed;
     owl:equivalentProperty bf2:absorbedBy .
@@ -151,7 +151,7 @@
 
 :arrangement a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "arrangemang"@sv, "arrangement"@en;
+    rdfs:label "arrangemang"@sv, "Arrangement"@en;
     rdfs:comment "Resurs som är ett arrangemang av den beskrivna resursen"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -161,7 +161,7 @@
 
 :arrangementOf a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "arrangemang av"@sv, "arrangement of"@en;
+    rdfs:label "arrangemang av"@sv, "Arrangement of"@en;
     rdfs:comment "Resurs som den beskrivna resursen är ett arrangemang av"@sv;
     rdfs:domain :Work;
     rdfs:range :Work;
@@ -221,7 +221,7 @@
     owl:equivalentClass sdo:ImageObject .
 
 :electronicLocator a owl:ObjectProperty;
-    rdfs:label "electronic location"@en, "elektronisk adress"@sv;
+    rdfs:label "Electronic location"@en, "elektronisk adress"@sv;
     sdo:domainIncludes :Item, :Instance;
     sdo:rangeIncludes :Document;
     owl:equivalentProperty bf2:electronicLocator .
@@ -312,7 +312,7 @@
     owl:equivalentProperty bflc:indexedIn .
 
 :hasEquivalent a owl:SymmetricProperty;
-    rdfs:label "equivalence"@en, "likvärdighet"@sv;
+    rdfs:label "Equivalence"@en, "likvärdighet"@sv;
     rdfs:subPropertyOf :relatedTo;
     owl:equivalentProperty bf2:hasEquivalent .
 
@@ -329,19 +329,19 @@
     owl:equivalentProperty bf2:mergedToForm .
 
 :originalVersion a owl:ObjectProperty;
-    rdfs:label "original version"@en, "originalversion"@sv;
+    rdfs:label "Original version"@en, "originalversion"@sv;
     rdfs:subPropertyOf :derivativeOf;
     owl:inverseOf :originalVersionOf;
     owl:equivalentProperty bf2:originalVersion .
 
 :originalVersionOf a owl:ObjectProperty;
-    rdfs:label "original version of"@en, "originalversion av"@sv;
+    rdfs:label "Original version of"@en, "originalversion av"@sv;
     rdfs:subPropertyOf :hasDerivative ;
     owl:inverseOf :originalVersion;
     owl:equivalentProperty bf2:originalVersionOf .
 
 :otherEdition a owl:ObjectProperty;
-    rdfs:label "other edition"@en, "annan utgåva"@sv;
+    rdfs:label "Other edition"@en, "annan utgåva"@sv;
     rdfs:subPropertyOf :derivativeOf;
     owl:equivalentProperty bf2:otherEdition .
 
@@ -443,7 +443,7 @@
     owl:inverseOf :replacedBy .
 
 :hasReproduction a owl:ObjectProperty;
-    rdfs:label "reproduced as"@en, "reproducerad som"@sv;
+    rdfs:label "Reproduced as"@en, "reproducerad som"@sv;
     rdfs:domain :Instance;
     rdfs:range :Instance;
     owl:equivalentProperty bf2:hasReproduction;
@@ -452,7 +452,7 @@
 
 :reproductionOf a owl:ObjectProperty;
     :category :integral ;
-    rdfs:label "reproduction of"@en, "reproduktion av"@sv;
+    rdfs:label "Reproduction of"@en, "reproduktion av"@sv;
     rdfs:domain :Instance;
     rdfs:range :Instance;
     owl:equivalentProperty bf2:reproductionOf;
@@ -478,7 +478,7 @@
     owl:equivalentProperty bf2:hasSeries .
 
 :seriesOf a owl:ObjectProperty;
-    rdfs:label "series container of"@en, "ingående seriedel"@sv;
+    rdfs:label "Series container of"@en, "ingående seriedel"@sv;
     rdfs:subPropertyOf :hasPart;
     owl:inverseOf :hasSeries;
     owl:equivalentProperty bf2:seriesOf .

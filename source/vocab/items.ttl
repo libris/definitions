@@ -40,7 +40,7 @@
     rdfs:label "Single item"@en, "Exemplar"@sv .
 
 :itemOf a owl:ObjectProperty ;
-    rdfs:label "holding for"@en, "bestånd på"@sv ;
+    rdfs:label "Holding for"@en, "bestånd på"@sv ;
     owl:inverseOf :hasItem;
     rdfs:domain :Item ;
     rdfs:range :Instance;
@@ -48,7 +48,7 @@
     owl:equivalentProperty bf2:itemOf, holding:examplarOf .
 
 :hasItem a owl:ObjectProperty;
-    rdfs:label "has holding"@en, "har bestånd"@sv;
+    rdfs:label "Has holding"@en, "har bestånd"@sv;
     owl:inverseOf :itemOf;
     rdfs:domain :Instance;
     rdfs:range :Item;
@@ -56,14 +56,14 @@
     owl:equivalentProperty bf2:hasItem .
 
 :heldBy a owl:ObjectProperty ;
-    rdfs:label "held by"@en, "innehas av"@sv;
+    rdfs:label "Held by"@en, "innehas av"@sv;
     rdfs:domain :Item;
     rdfs:range :Agent;
     rdfs:comment "Sigel som innehar beståndet eller från vilket det är tillgängligt."@sv;
     owl:equivalentProperty bf2:heldBy, holding:heldBy .
 
 :physicalLocation a owl:DatatypeProperty;
-    rdfs:label "storing or shelving location"@en, "hyllplacering (avdelning, samling)"@sv;
+    rdfs:label "Storing or shelving location"@en, "hyllplacering (avdelning, samling)"@sv;
     rdfs:domain :Item;
     rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
     skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
@@ -71,7 +71,7 @@
 
 :sublocation a owl:ObjectProperty ;
     :category :pending; #NOTE: Not used in Libris holdings.
-    rdfs:label "held in sublocation"@en ;
+    rdfs:label "Held in sublocation"@en ;
     rdfs:range :Sublocation ;
     owl:equivalentProperty bf2:sublocation .
 
@@ -109,7 +109,7 @@
 # BF2 IMMEDIATE ACQUISITION
 
 :immediateAcquisition a owl:ObjectProperty;
-    rdfs:label "immediate acquisition"@en, "förvärvsuppgifter"@sv;
+    rdfs:label "Immediate acquisition"@en, "förvärvsuppgifter"@sv;
     rdfs:domain :Item;
     rdfs:range :ImmediateAcquisition;
     rdfs:comment "Huvudsakligen avsett för uppgift avseende förvärv av antikvariskt material och arkivmaterial."@sv;
@@ -124,7 +124,7 @@
 # BF2 SHELFMARKS
 
 :shelfMark a owl:ObjectProperty;
-    rdfs:label "shelf mark"@en, "hyllkod"@sv; 
+    rdfs:label "Shelf mark"@en, "hyllkod"@sv; 
     rdfs:domain :Item;
     sdo:rangeIncludes :ShelfMark, :ShelfMarkSequence;
     owl:equivalentProperty bf2:shelfMark .

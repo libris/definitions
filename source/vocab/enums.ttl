@@ -21,7 +21,7 @@
     rdfs:domain :Work ; # :Cartography ;
     rdfs:range :Cartographic ;
     rdfs:comment "Kartografiska attribut som identifierar karakteristika för resursen, såsom koordinater och kartprojektion."@sv;
-    rdfs:label "cartographic data"@en, "kartografiska data"@sv .
+    rdfs:label "Cartographic data"@en, "kartografiska data"@sv .
 
 :ProjectionCharacteristic a owl:Class;
     rdfs:label "Projection characteristic"@en, "Projektionskarakteristika"@sv;
@@ -31,7 +31,7 @@
     owl:equivalentProperty bf2:projectionCharacteristic ;
     rdfs:domain :Work ; # :Cartography ; Is this actually an instance property?
     rdfs:range :Cartographic ; 
-    rdfs:label "projection characteristic"@en, "projektionskarakteristika"@sv .
+    rdfs:label "Projection characteristic"@en, "projektionskarakteristika"@sv .
 
 :Cartographic a owl:Class;
     rdfs:label "Kartografisk information"@sv, "Cartographic information"@en;
@@ -41,14 +41,14 @@
     owl:equivalentProperty bf2:projection ;
     rdfs:domain :Cartographic ;
     rdfs:range :Projection ;
-    rdfs:label "cartographic projection"@en, "kartprojektion"@sv .
+    rdfs:label "Cartographic projection"@en, "kartprojektion"@sv .
 
 :Projection a owl:Class;
     rdfs:label "Projection"@en, "Projektion"@sv;
     owl:equivalentClass bf2:Projection .
 
 :illustrativeContent a owl:ObjectProperty;
-    rdfs:label "illustrativt innehåll"@sv, "illustrative content information"@en;
+    rdfs:label "illustrativt innehåll"@sv, "Illustrative content information"@en;
     rdfs:range :Illustration;
     owl:equivalentProperty bf2:illustrativeContent .
 
@@ -58,7 +58,7 @@
 
 :colorContent a owl:ObjectProperty;
     rdfs:range :ColorContent;
-    rdfs:label "color content"@en, "färginnehåll"@sv;
+    rdfs:label "Color content"@en, "färginnehåll"@sv;
     rdfs:comment "Färgkarakteristika, t ex svartvit, färg, kolorerad."@sv;
     owl:equivalentProperty bf2:colorContent .
 
@@ -155,7 +155,7 @@
 :mount a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Mount;
-    rdfs:label "monteringsmaterial eller monteringsobjekt"@sv, "mount material or object"@en;
+    rdfs:label "monteringsmaterial eller monteringsobjekt"@sv, "Mount material or object"@en;
     owl:equivalentProperty bf2:mount .
 
 :Mount a owl:Class;
@@ -165,7 +165,7 @@
 :polarity a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Polarity;
-    rdfs:label "polaritet"@sv, "polarity"@en;
+    rdfs:label "polaritet"@sv, "Polarity"@en;
     rdfs:comment "Förhållandet mellan färger och nyanser i en bild eller film och det avbildade objektets färger och nyanser."@sv;
     owl:equivalentProperty bf2:polarity .
 
@@ -186,7 +186,7 @@
 :emulsion a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Emulsion;
-    rdfs:label "emulsion"@sv, "emulsion"@en;
+    rdfs:label "emulsion"@sv, "Emulsion"@en;
     owl:equivalentProperty bf2:emulsion .
 
 :Emulsion a owl:Class;
@@ -206,7 +206,7 @@
 :material a owl:ObjectProperty;
     rdfs:domain :Instance; # NOTE: BF2 Suggested use - With Work, Instance or Item
     rdfs:range :Material;
-    rdfs:label "material"@en, "material"@sv;
+    rdfs:label "Material"@en, "material"@sv;
     rdfs:comment "Material som resursen använder, består av, integrerar etc."@sv;
     owl:equivalentProperty bf2:material .
 
@@ -222,7 +222,7 @@
 :baseMaterial a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Material;
-    rdfs:label "bärande material"@sv, "base material"@en;
+    rdfs:label "bärande material"@sv, "Base material"@en;
     rdfs:comment "Det underliggande fysiska materialet för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:baseMaterial .
@@ -239,7 +239,7 @@
 :appliedMaterial a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :Material;
-    rdfs:label "applied material"@en, "applicerat material"@sv;
+    rdfs:label "Applied material"@en, "applicerat material"@sv;
     rdfs:comment "Substans som är applicerad på ett bärande material för en resurs."@sv;
     rdfs:subPropertyOf :material;
     owl:equivalentProperty bf2:appliedMaterial .
@@ -256,7 +256,7 @@
 :productionMethod a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :ProductionMethod;
-    rdfs:label "production method"@en, "produktionsmetod"@sv;
+    rdfs:label "Production method"@en, "produktionsmetod"@sv;
     rdfs:comment "Process som används för att producera en resurs."@sv;
     owl:equivalentProperty bf2:productionMethod .
 
@@ -267,7 +267,7 @@
 :fontSize a owl:ObjectProperty; #NOTE: See also the ARM Ontology for strategies to model this information in greater detail.
     rdfs:domain :Instance;
     rdfs:range :FontSize;
-    rdfs:label "font size"@en, "teckengrad"@sv;
+    rdfs:label "Font size"@en, "teckengrad"@sv;
     rdfs:comment "För resurser med typsnitt anpassat för personer med synnedsättning, ange storleken på typsnittet med termen stor stil."@sv;
     owl:equivalentProperty bf2:fontSize .
 
@@ -280,7 +280,7 @@
     rdfs:domain :Cartographic;
     owl:equivalentProperty bf2:scale;
     rdfs:comment "Förhållandet mellan avstånden i en resurs och de verkliga avstånd som de representerar, t ex för stillbilder eller kartor."@sv;
-    rdfs:label "scale"@en, "skala"@sv .
+    rdfs:label "Scale"@en, "skala"@sv .
 
 :Scale a owl:Class;
     owl:equivalentClass bf2:Scale;
@@ -289,25 +289,25 @@
 :coordinates a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     rdfs:range rdfs:Literal;
-    rdfs:label "cartographic coordinates"@en, "koordinater"@sv;
+    rdfs:label "Cartographic coordinates"@en, "koordinater"@sv;
     owl:equivalentProperty bf2:coordinates .
 
 :ascensionAndDeclination a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     rdfs:range rdfs:Literal;
-    rdfs:label "cartographic ascension and declination"@en, "rektascension och deklination"@sv;
+    rdfs:label "Cartographic ascension and declination"@en, "rektascension och deklination"@sv;
     owl:equivalentProperty bf2:ascensionAndDeclination .
 
 :equinox a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     rdfs:range rdfs:Literal;
-    rdfs:label "cartographic equinox"@en, "ekvinoktium"@sv;
+    rdfs:label "Cartographic equinox"@en, "ekvinoktium"@sv;
     owl:equivalentProperty bf2:equinox .
 
 :outerGRing a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     rdfs:range rdfs:Literal;
-    rdfs:label "cartographic outer G ring area covered"@en;
+    rdfs:label "Cartographic outer G ring area covered"@en;
     #rdfs:label "Koordinatpar för yttre G-ring"@sv;
     rdfs:comment "Saknar motsvarande svensk översättning, används normalt ej i Libris.";
     owl:equivalentProperty bf2:outerGRing .
@@ -315,7 +315,7 @@
 :exclusionGRing a owl:DatatypeProperty;
     rdfs:domain :Cartographic;
     rdfs:range rdfs:Literal;
-    rdfs:label "cartographic G ring area excluded"@en;
+    rdfs:label "Cartographic G ring area excluded"@en;
     #rdfs:label "Koordinatpar för exkluderande G-ring"@sv;
     rdfs:comment "Saknar motsvarande svensk översättning, används normalt ej i Libris.";
     owl:equivalentProperty bf2:exclusionGRing .
@@ -323,7 +323,7 @@
 :digitalCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :DigitalCharacteristic;
-    rdfs:label "digital characteristic"@en, "digital karakteristika"@sv;
+    rdfs:label "Digital characteristic"@en, "digital karakteristika"@sv;
     owl:equivalentClass bf2:digitalCharacteristic .
 
 :DigitalCharacteristic a owl:Class;
@@ -388,7 +388,7 @@
 :soundCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :SoundCharacteristic;
-    rdfs:label "har ljudkarakteristika"@sv, "sound characteristic"@en;
+    rdfs:label "har ljudkarakteristika"@sv, "Sound characteristic"@en;
     skos:closeMatch rdam:P30125;
     owl:equivalentProperty bf2:soundCharacteristic .
 
@@ -449,7 +449,7 @@
 :videoCharacteristic a owl:ObjectProperty;
     rdfs:domain :Instance;
     rdfs:range :VideoCharacteristic;
-    rdfs:label "video characteristic"@en, "videokarakteristika"@sv;
+    rdfs:label "Video characteristic"@en, "videokarakteristika"@sv;
     rdfs:comment "Teknisk specifikation avseende kodning av video."@sv;
     owl:equivalentProperty bf2:VideoCharacteristic .
 
@@ -469,7 +469,7 @@
 
 :soundContent a owl:ObjectProperty;
     rdfs:range :SoundContent;
-    rdfs:label "ljudinnehåll"@sv, "sound content"@en;
+    rdfs:label "ljudinnehåll"@sv, "Sound content"@en;
     owl:equivalentProperty bf2:soundContent .
 
 :SoundContent a owl:Class;
