@@ -568,6 +568,15 @@
     ptg:abstract true;
     owl:equivalentProperty bf2:subjectOf .
 
+:mentions a owl:ObjectProperty;
+    :category :pending ;
+    vs:term_status "unstable" ;
+    rdfs:label "omnämner"@sv, "mentions"@en ;
+    sdo:domainIncludes :Work ;
+    sdo:rangeIncludes :Identity ;
+    rdfs:subPropertyOf sdo:mentions;
+    rdfs:comment "Anger att en resurs innehåller en referens till ett något, men inte nödvändigtvis handlar om detta något."@sv .
+
 #:artform a owl:ObjectProperty ;
 #    owl:equivalentProperty sdo:artform;
 #    rdfs:label "artform"@en, "verksform"@sv .
