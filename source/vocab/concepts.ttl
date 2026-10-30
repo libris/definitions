@@ -293,7 +293,7 @@
     owl:equivalentProperty skos:scopeNote .
 
 :changeNote a owl:DatatypeProperty;
-    rdfs:label "Change note"@en, "Anmärkning om ändring"@sv;
+    rdfs:label "change note"@en, "anmärkning om ändring"@sv;
     rdfs:domain :Concept;
     owl:equivalentProperty skos:changeNote ;
     owl:propertyChainAxiom (:hasChangeNote :label) .
@@ -324,7 +324,7 @@
     rdfs:subPropertyOf vann:termGroup;
     rdfs:domain :Concept;
     rdfs:range :TermCollection;
-    rdfs:label "Part of collection"@en, "Del av termsamling"@sv .
+    rdfs:label "part of collection"@en, "del av termsamling"@sv .
 
 # Classification Classes
 
@@ -333,14 +333,14 @@
     rdfs:domain :Endeavour ;
     rdfs:range :Classification ;
     rdfs:subPropertyOf sdo:hasCategoryCode ;
-    rdfs:label "Classification"@en, "klassifikation"@sv .
+    rdfs:label "classification"@en, "klassifikation"@sv .
 
 :additionalClassificationDdc a owl:ObjectProperty;
     rdfs:subPropertyOf :classification;
     rdfs:domain :Creation ;
     rdfs:range :ClassificationDdc ;
     rdfs:comment "Kompletterande klassifikationskod, kan användas som ämnesingång tillsammans med den primära klassifikationen"@sv;
-    rdfs:label "Additional DDC Classification"@en, "DDK-klassifikation (Sekundär)"@sv .
+    rdfs:label "additional DDC Classification"@en, "DDK-klassifikation (Sekundär)"@sv .
 
 :Classification a owl:Class;
     rdfs:subClassOf :Concept;
@@ -386,7 +386,7 @@
     owl:equivalentProperty bf2:classificationPortion .
 
 :edition a owl:DatatypeProperty;
-    rdfs:label "Klassifikationsupplaga"@sv;
+    rdfs:label "klassifikationsupplaga"@sv;
     rdfs:domain :Classification ;
     owl:equivalentProperty bf2:edition .
 
@@ -401,12 +401,12 @@
     owl:equivalentProperty bf2:schedulePart .
 
 :spanEnd a owl:DatatypeProperty;
-    rdfs:label "Slut på spann"@sv;
+    rdfs:label "slut på spann"@sv;
     rdfs:domain :Classification ;
     owl:equivalentProperty bf2:spanEnd .
 
 :table a owl:DatatypeProperty;
-    rdfs:label "Klassfikationstabell"@sv;
+    rdfs:label "klassifikationstabell"@sv;
     rdfs:domain :Classification ;
     owl:equivalentProperty bf2:table .
 
@@ -489,7 +489,7 @@
     skos:related :broader;
     rdfs:domain :Concept;
     sdo:rangeIncludes :Topic, :Geographic, :Temporal, :Subdivision, :Work, :Agent ;
-    rdfs:label "Term components"@en, "Termkomponenter"@sv;
+    rdfs:label "term components"@en, "termkomponenter"@sv;
     rdfs:comment "En ordnad lista på de komponenter som termen består av."@sv .
 
 :Subdivision a owl:Class;

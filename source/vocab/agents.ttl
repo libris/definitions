@@ -161,7 +161,7 @@
 
 :hasBiographicalInformation a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "has biographical information"@en, "Biografiska uppgifter"@sv;
+    rdfs:label "has biographical information"@en, "biografiska uppgifter"@sv;
     sdo:domainIncludes :Person, :Family;
     # separate instance and agent properties?
     rdfs:range :BiographicalNote;
@@ -174,7 +174,7 @@
 
 :hasHistoricalData a owl:ObjectProperty;
     :category :pending ;
-    rdfs:label "has historical data"@en, "Administrativ historik"@sv;
+    rdfs:label "has historical data"@en, "administrativ historik"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction, :Meeting;
     # separate instance and agent properties?
     rdfs:range :AdministrativeHistoryNote;
@@ -221,7 +221,7 @@
 #    rdfs:label "death year"@en, "dödsår"@sv .
 
 :fieldOfActivity a owl:ObjectProperty;
-    rdfs:label "Field of Activity"@en, "Verksamhetsområde"@sv;
+    rdfs:label "field of Activity"@en, "verksamhetsområde"@sv;
     rdfs:domain :Agent;
     sdo:rangeIncludes :FieldOfActivity, :Topic;
     owl:equivalentProperty madsrdf:fieldOfActivity, rdau:P60089, rdau:fieldOfActivity.en .
@@ -232,46 +232,46 @@
 
 :address a owl:DatatypeProperty;
     :category :pending ;
-    rdfs:label "Address"@en, "Adress"@sv;
+    rdfs:label "address"@en, "adress"@sv;
     sdo:domainIncludes :Organization;
     owl:equivalentProperty sdo:address .
 
 :birthPlace a owl:ObjectProperty;
-    rdfs:label "Birthplace"@en,"Födelseplats"@sv;
+    rdfs:label "birthplace"@en,"födelseplats"@sv;
     rdfs:subPropertyOf :place;
     rdfs:domain :Person;
     rdfs:range :Place;
     owl:equivalentProperty sdo:birthPlace, madsrdf:birthPlace, rdau:P60593, rdau:placeOfBirth.en .
 
 :deathPlace a owl:ObjectProperty;
-    rdfs:label "Deathplace"@en,"Dödsplats"@sv;
+    rdfs:label "deathplace"@en,"dödsplats"@sv;
     rdfs:subPropertyOf :place;
     rdfs:domain :Person;
     rdfs:range :Place;
     owl:equivalentProperty sdo:deathPlace, madsrdf:deathPlace, rdau:P60592, rdau:placeOfDeath.en .
 
 :activityStartDate a owl:DatatypeProperty;
-    rdfs:label "Start date"@en, "Verksamhetens starttid"@sv;
+    rdfs:label "start date"@en, "verksamhetens starttid"@sv;
     rdfs:domain :Agent;
     owl:equivalentProperty madsrdf:activityStartDate .
 
 :activityEndDate a owl:DatatypeProperty;
-    rdfs:label "End date"@en, "Verksamhetens sluttid"@sv;
+    rdfs:label "end date"@en, "verksamhetens sluttid"@sv;
     rdfs:domain :Agent;
     owl:equivalentProperty madsrdf:activityEndDate .
 
 :establishDate a owl:DatatypeProperty;
-    rdfs:label "Established"@en, "Tid för grundande"@sv;
+    rdfs:label "established"@en, "tid för grundande"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:establishDate .
 
 :terminateDate a owl:DatatypeProperty;
-    rdfs:label "Terminated"@en, "Tid för upphörande"@sv;
+    rdfs:label "terminated"@en, "tid för upphörande"@sv;
     sdo:domainIncludes :Organization, :Jurisdiction;
     owl:equivalentProperty madsrdf:terminateDate .
 
 :hasAffiliation a owl:ObjectProperty;
-    rdfs:label "Has affiliation"@en, "Organisatorisk tillhörighet"@sv;
+    rdfs:label "has affiliation"@en, "organisatorisk tillhörighet"@sv;
     rdfs:domain :Agent;
     rdfs:range :Affiliation;
     owl:equivalentProperty madsrdf:hasAffiliation, rdau:P60095, rdau:affiliation.en .
@@ -281,7 +281,7 @@
     owl:equivalentClass madsrdf:Affiliation .
 
 :associatedLanguage a owl:ObjectProperty;
-    rdfs:label "Associated language"@en, "Språk"@sv;
+    rdfs:label "associated language"@en, "språk"@sv;
     rdfs:domain :Agent;
     rdfs:range :Language;
     owl:equivalentProperty madsrdf:associatedLanguage .
@@ -295,7 +295,7 @@
 #    owl:equivalentProperty madsrdf:hasAssociatedLocale, rdau:P60325, rdau:placeAssociatedWithTheAgent.en .
 
 :hasTypeOfFamily a owl:ObjectProperty;
-    rdfs:label "Has type of family"@en, "Typ av släkt"@sv;
+    rdfs:label "has type of family"@en, "typ av släkt"@sv;
     rdfs:domain :Family;
     rdfs:range :TypeOfFamily;
     owl:equivalentProperty rdaa:P50051, rdaa:typeOfFamily.en .
@@ -304,7 +304,7 @@
     rdfs:label "Type of family"@en, "Typ av släkt"@sv .
 
 :hasProminentFamilyMember a owl:ObjectProperty;
-    rdfs:label "Has prominent member of family"@en, "Har välkänd släktmedlem"@sv;
+    rdfs:label "has prominent member of family"@en, "har välkänd släktmedlem"@sv;
     rdfs:domain :Family;
     rdfs:range :Person;
     #rdfs:subPropertyOf :hasFamilyMember ;
@@ -313,17 +313,17 @@
 :prominentFamilyMember a owl:DatatypeProperty;
     :category :shorthand;
     ptg:abstract true;
-    rdfs:label "Prominent Family Member"@en, "Välkänd släktmedlem"@sv;
+    rdfs:label "prominent family member"@en, "välkänd släktmedlem"@sv;
     owl:equivalentProperty madsrdf:prominentFamilyMember;
     owl:propertyChainAxiom ( :hasProminentFamilyMember :prefLabel ) .
 
 :nationality a owl:ObjectProperty;
-    rdfs:label "Nationality"@en, "Nationalitet/verksamhetsland"@sv;
+    rdfs:label "nationality"@en, "nationalitet/verksamhetsland"@sv;
     rdfs:range :Nationality;
     rdfs:domain :Agent .
 
 :lifeSpan a owl:DatatypeProperty;
-    rdfs:label "Date Associated"@en, "Födelsetid och/eller dödstid"@sv;
+    rdfs:label "date associated"@en, "födelsetid och/eller dödstid"@sv;
     rdfs:comment "Associerade datum som kan agera särskiljande för namn på agent. Exempel: '1854-1932' eller '1963-'."@sv;
     rdfs:subPropertyOf dc:date ;
     rdfs:domain :Agent.
@@ -333,7 +333,7 @@
     owl:equivalentClass sdo:Occupation, madsrdf:Occupation .
 
 :hasOccupation a owl:ObjectProperty;
-    rdfs:label "has occupation"@en, "Har yrke eller sysselsättning"@sv;
+    rdfs:label "has occupation"@en, "har yrke eller sysselsättning"@sv;
     rdfs:domain :Person;
     sdo:rangeIncludes :Occupation, :Topic;
     owl:equivalentProperty sdo:hasOccupation, madsrdf:occupation, rdau:P60468 .

@@ -40,7 +40,7 @@
     rdfs:label "Single item"@en, "Exemplar"@sv .
 
 :itemOf a owl:ObjectProperty ;
-    rdfs:label "Holding for"@en, "bestånd på"@sv ;
+    rdfs:label "holding for"@en, "bestånd på"@sv ;
     owl:inverseOf :hasItem;
     rdfs:domain :Item ;
     rdfs:range :Instance;
@@ -48,7 +48,7 @@
     owl:equivalentProperty bf2:itemOf, holding:examplarOf .
 
 :hasItem a owl:ObjectProperty;
-    rdfs:label "Has holding"@en, "Har bestånd"@sv;
+    rdfs:label "has holding"@en, "har bestånd"@sv;
     owl:inverseOf :itemOf;
     rdfs:domain :Instance;
     rdfs:range :Item;
@@ -56,14 +56,14 @@
     owl:equivalentProperty bf2:hasItem .
 
 :heldBy a owl:ObjectProperty ;
-    rdfs:label "Held by"@en, "innehas av"@sv;
+    rdfs:label "held by"@en, "innehas av"@sv;
     rdfs:domain :Item;
     rdfs:range :Agent;
     rdfs:comment "Sigel som innehar beståndet eller från vilket det är tillgängligt."@sv;
     owl:equivalentProperty bf2:heldBy, holding:heldBy .
 
 :physicalLocation a owl:DatatypeProperty;
-    rdfs:label "Storing or shelving location"@en, "Hyllplacering (Avdelning, samling)"@sv;
+    rdfs:label "storing or shelving location"@en, "hyllplacering (avdelning, samling)"@sv;
     rdfs:domain :Item;
     rdfs:comment "Kan användas om bibliotekets material är uppdelat på olika avdelningar, byggnader eller samlingar. Kan kombineras med kompletterande placeringsuppgift, t.ex. uppställningsord och eller utlånestatus."@sv;
     skos:example "Mag", "REF", "Stiftsbiblioteket", "Uppställningsord", "Topografi";
@@ -71,7 +71,7 @@
 
 :sublocation a owl:ObjectProperty ;
     :category :pending; #NOTE: Not used in Libris holdings.
-    rdfs:label "Held in sublocation"@en ;
+    rdfs:label "held in sublocation"@en ;
     rdfs:range :Sublocation ;
     owl:equivalentProperty bf2:sublocation .
 
@@ -109,7 +109,7 @@
 # BF2 IMMEDIATE ACQUISITION
 
 :immediateAcquisition a owl:ObjectProperty;
-    rdfs:label "Immediate acquisition"@en, "Förvärvsuppgifter"@sv;
+    rdfs:label "immediate acquisition"@en, "förvärvsuppgifter"@sv;
     rdfs:domain :Item;
     rdfs:range :ImmediateAcquisition;
     rdfs:comment "Huvudsakligen avsett för uppgift avseende förvärv av antikvariskt material och arkivmaterial."@sv;
@@ -124,7 +124,7 @@
 # BF2 SHELFMARKS
 
 :shelfMark a owl:ObjectProperty;
-    rdfs:label "Shelf mark"@en, "Hyllkod"@sv; 
+    rdfs:label "shelf mark"@en, "hyllkod"@sv; 
     rdfs:domain :Item;
     sdo:rangeIncludes :ShelfMark, :ShelfMarkSequence;
     owl:equivalentProperty bf2:shelfMark .
@@ -167,7 +167,7 @@
 
 :shelfMarkStatus a owl:ObjectProperty ;
     rdfs:subPropertyOf :status ;
-    rdfs:label "Shelf label status"@en, "Status för signumsvit"@sv ;
+    rdfs:label "shelf label status"@en, "status för signumsvit"@sv ;
     rdfs:comment "Shelf label status"@en, "Signumsvitens status"@sv ;
     rdfs:domain :ShelfMarkSequence ;
     rdfs:range :ShelfMarkStatusType .
@@ -186,7 +186,7 @@
     # TODO: description ?
 
 :nextShelfControlNumber a owl:DatatypeProperty ;
-  rdfs:label "Next shelf control Number"@en, "Nästa löpnummer"@sv ;
+  rdfs:label "next shelf control Number"@en, "nästa löpnummer"@sv ;
   rdfs:domain :ShelfMarkSequence ;
   rdfs:range xsd:positiveInteger .
 
@@ -238,7 +238,7 @@
     rdfs:range rdfs:Literal .
 
 :itemUsed a owl:ObjectProperty ;
-    rdfs:label "Item used"@en, "Exemplaret som använts"@sv ;
+    rdfs:label "item used"@en, "exemplaret som använts"@sv ;
     rdfs:domain :ProvisionActivity ;
     rdfs:range :Item .
 
@@ -248,22 +248,22 @@
     rdfs:range rdfs:Literal .
 
 :organizationalUnit a owl:DatatypeProperty;
-    rdfs:label "Organizational unit"@en, "Underordnad organisation/enhet"@sv;
+    rdfs:label "organizational unit"@en, "underordnad organisation/enhet"@sv;
     sdo:domainIncludes :Item, :Note ;
     rdfs:range rdfs:Literal .
 
 :inventoryLevel a owl:DatatypeProperty ;
-    rdfs:label "Inventory level"@en, "Inventarienivå"@sv ;
+    rdfs:label "inventory level"@en, "inventarienivå"@sv ;
     rdfs:domain :Item ;
     rdfs:range rdfs:Literal .
 
 :codedLocationQualifier a owl:DatatypeProperty ;
-    rdfs:label "Coded location qualifier"@en, "Kodad platskvalifikator"@sv ;
+    rdfs:label "coded location qualifier"@en, "kodad platskvalifikator"@sv ;
     rdfs:domain :Item ;
     rdfs:range rdfs:Literal .
 
 :copyrightArticleFeeCode a owl:DatatypeProperty ;
-    rdfs:label "Copyright article fee code"@en, "Avgiftskod för copyrightartikel"@sv ;
+    rdfs:label "copyright article fee code"@en, "avgiftskod för copyrightartikel"@sv ;
     rdfs:domain :Item ;
     rdfs:range rdfs:Literal .
 
@@ -301,7 +301,7 @@
 # EARLY LOCAL LIBRIS HOLDING TERMS
 
 :availability a owl:ObjectProperty;
-    rdfs:label "Item availability"@en, "Exemplarstatus"@sv;
+    rdfs:label "item availability"@en, "exemplarstatus"@sv;
     rdfs:domain :Item;
     rdfs:range :ItemAvailability;
     rdfs:comment "Statusinformation om tillgänglighet och eventuella begränsningar i utlån."@sv;
@@ -314,7 +314,7 @@
 
 :copyNumber a owl:DatatypeProperty;
     #TODO: possibly remodel to bf2:enumerationAndChronology.
-    rdfs:label "Copy number"@en, "Exemplarnummer"@sv;
+    rdfs:label "copy number"@en, "exemplarnummer"@sv;
     rdfs:domain :Item;
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om så önskas, ange nummer/beteckning på det eller de exemplar som placeringen avser."@sv;
@@ -322,7 +322,7 @@
 
 :shelfControlNumber a owl:DatatypeProperty;
     #TODO: possibly remodel to bf2:shelfMark.
-    rdfs:label "Shelf control number"@en, "Hyllsignum: Löpnummer"@sv;
+    rdfs:label "shelf control number"@en, "hyllsignum: löpnummer"@sv;
     rdfs:domain :Item;
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om materialet ställs upp efter någon form av löpande numrering. Kan kombineras med ytterligare placeringsuppgifter, t.ex. klassifikation eller titel-/författarord."@sv;
@@ -331,7 +331,7 @@
 
 :shelfLabel a owl:DatatypeProperty;
     #TODO: possibly remodel to bf2:shelfMark.
-    rdfs:label "Shelf label"@en, "Hyllsignum: Uppställningsord"@sv;
+    rdfs:label "shelf label"@en, "hyllsignum: uppställningsord"@sv;
     rdfs:domain :Item;
     rdfs:range rdfs:Literal ;
     rdfs:comment "Om materialet ställs upp efter titel, författare, ämne eller annat beskrivande uppställningsord. Kan kombineras med kompletterande placeringsuppgifter, t.ex. klassifikation eller uppställningsord."@sv;

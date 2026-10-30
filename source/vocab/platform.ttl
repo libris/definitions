@@ -87,7 +87,7 @@
 
 :meta a owl:ObjectProperty;
     :category :platform ;
-    rdfs:label "Metadata"@en, "Metadata"@sv;
+    rdfs:label "metadata"@en, "metadata"@sv;
     owl:inverseOf :mainEntity;
     owl:equivalentProperty bf2:adminMetadata, foaf:isPrimaryTopicOf, sdo:mainEntityOfPage, xhv:meta ;
     rdfs:subPropertyOf :describedBy ;
@@ -98,7 +98,7 @@
     :category :platform ;
     sdo:domainIncludes :Document;
     rdfs:range :Document;
-    rdfs:label "Described by"@en, "Beskriven av"@sv;
+    rdfs:label "described by"@en, "beskriven av"@sv;
     owl:equivalentProperty iana:describedby, wdrs:describedby .
 
 # NOTE: additional data about automapped BF2 terms {{{
@@ -106,7 +106,7 @@
 :recordStatus a owl:ObjectProperty;
     #:category :platform ;
     rdfs:subPropertyOf :status;
-    rdfs:label "Record status"@en, "Poststatus"@sv;
+    rdfs:label "record status"@en, "poststatus"@sv;
     rdfs:comment "Postens status, sätts automatiskt."@sv;
     rdfs:domain :Record;
     sdo:rangeIncludes marc:StatusType .
@@ -118,7 +118,7 @@
 
 :adminMetadata a owl:ObjectProperty;
     rdfs:range :AdminMetadata;
-    rdfs:label "Administrative metadata"@en, "Administrativ metadata"@sv;
+    rdfs:label "administrative metadata"@en, "administrativ metadata"@sv;
     owl:equivalentProperty bf2:adminMetadata .
 
 :adminMetadataFor a owl:ObjectProperty ;
@@ -126,21 +126,21 @@
     owl:equivalentProperty bf2:adminMetadataFor .
 
 :assigner a owl:ObjectProperty;
-    rdfs:label "Assigner"@en, "Tilldelad av"@sv;
+    rdfs:label "assigner"@en, "tilldelad av"@sv;
     rdfs:domain :Resource ;
     rdfs:range :Resource ;
     owl:equivalentProperty bf2:assigner .
 
 :descriptionModifier a owl:ObjectProperty;
     ptg:abstract true;
-    rdfs:label "Description modifier"@en, "Ändrad av"@sv ;
+    rdfs:label "description modifier"@en, "ändrad av"@sv ;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:descriptionModifier ;
     rdfs:subPropertyOf dc:contributor ;
     rdfs:range :Agent .
 
 :descriptionCreator a owl:ObjectProperty;
-    rdfs:label "Description creator"@en, "Skapad av"@sv ;
+    rdfs:label "description creator"@en, "skapad av"@sv ;
     rdfs:comment "Entitet som upprättat beskrivningen."@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier, dc:creator ;
@@ -148,20 +148,20 @@
 
 :descriptionUpgrader a owl:ObjectProperty;
     :category :compositional ;
-    rdfs:label "Description upgrader"@en, "Uppgraderad eller importerad av"@sv ;
+    rdfs:label "description upgrader"@en, "uppgraderad eller importerad av"@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier ;
     rdfs:range :Agent .
 
 :descriptionLastModifier a owl:ObjectProperty;
-    rdfs:label "Description last modifier"@en, "Senast ändrad av"@sv ;
+    rdfs:label "description last modifier"@en, "senast ändrad av"@sv ;
     rdfs:domain :Record;
     rdfs:subPropertyOf :descriptionModifier ;
     rdfs:range :Agent .
 
 :created a owl:DatatypeProperty;
     :category :platform ;
-    rdfs:label "Skapad"@sv;
+    rdfs:label "skapad"@sv;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:creationDate ;
     rdfs:subPropertyOf dc:created, sdo:dateCreated;
@@ -169,14 +169,14 @@
 
 :modified a owl:DatatypeProperty;
     :category :platform ;
-    rdfs:label "Ändrad"@sv;
+    rdfs:label "ändrad"@sv;
     rdfs:domain :AdminMetadata;
     owl:equivalentProperty bf2:changeDate ;
     rdfs:subPropertyOf dc:modified, sdo:dateModified ;
     rdfs:range xsd:dateTime .
 
 :descriptionLanguage a owl:ObjectProperty;
-    rdfs:label "Katalogiseringsspråk"@sv;
+    rdfs:label "katalogiseringsspråk"@sv;
     rdfs:comment "Språk använt för att beskriva resursen."@sv;
     rdfs:domain :AdminMetadata;
     rdfs:subPropertyOf :language;
@@ -190,7 +190,7 @@
     owl:equivalentClass bf2:DescriptionConventions .
 
 :descriptionConventions a owl:ObjectProperty;
-    rdfs:label "Description conventions"@en, "Katalogiseringsregler"@sv;
+    rdfs:label "description conventions"@en, "katalogiseringsregler"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionConventions;
     rdfs:comment "Regler som använts för att beskriva resursen."@sv;
@@ -198,7 +198,7 @@
 
 :derivedFrom a owl:ObjectProperty;
     :category :platform ;
-    rdfs:label "Source metadata"@en, "Metadatakälla"@sv;
+    rdfs:label "source metadata"@en, "metadatakälla"@sv;
     rdfs:comment "Länk till metadata som var källan för resursen"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :AdminMetadata;
@@ -211,14 +211,14 @@
     owl:equivalentClass bf2:GenerationProcess .
 
 :generationProcess a owl:ObjectProperty;
-    rdfs:label "Description generation"@en, "Beskrivningsprocess"@sv;
+    rdfs:label "description generation"@en, "beskrivningsprocess"@sv;
     rdfs:comment "Indikation på program eller process använt för att generera beskrivningen eller specifik konvertering."@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :GenerationProcess;
     owl:equivalentProperty bf2:generationProcess .
 
 :generationDate a owl:DatatypeProperty;
-    rdfs:label "Date generated"@en, "Konverteringsdatum"@sv;
+    rdfs:label "date generated"@en, "konverteringsdatum"@sv;
     rdfs:comment "Datum för konvertering"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range rdfs:Literal;
@@ -231,7 +231,7 @@
     owl:equivalentClass bf2:DescriptionAuthentication .
 
 :descriptionAuthentication a owl:ObjectProperty;
-    rdfs:label "Description authentication"@en, "Beskrivningskontroll"@sv;
+    rdfs:label "description authentication"@en, "beskrivningskontroll"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :DescriptionAuthentication;
     owl:equivalentProperty bf2:descriptionAuthentication .
@@ -242,7 +242,7 @@
     owl:equivalentClass bflc:MetadataLicensor .
 
 :metadataLicensor a owl:ObjectProperty;
-    rdfs:label "Metadata licensor"@en, "Licensgivare för metadata"@sv;
+    rdfs:label "metadata licensor"@en, "licensgivare för metadata"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :MetadataLicensor;
     owl:equivalentProperty bflc:metadataLicensor .
@@ -252,7 +252,7 @@
     owl:equivalentClass bflc:EncodingLevel .
 
 :encodingLevel a owl:ObjectProperty;
-    rdfs:label "Encoding level"@en, "Beskrivningsnivå"@sv;
+    rdfs:label "encoding level"@en, "beskrivningsnivå"@sv;
     rdfs:domain :AdminMetadata;
     rdfs:range :EncodingLevel;
     rdfs:comment "Beteckning som anger den bibliografiska beskrivningens fullständighetsnivå"@sv;
@@ -295,7 +295,7 @@
     rdfs:subPropertyOf :technicalNote ;
     sdo:domainIncludes :Record ;
     rdfs:range :ChangeNote ;
-    rdfs:label "Change note"@en, "Ändringsanmärkning"@sv .
+    rdfs:label "change note"@en, "ändringsanmärkning"@sv .
 
 :ChangeNote a owl:Class ;
     :category :platform ;
@@ -320,7 +320,7 @@
     :category :platform ;
     sdo:domainIncludes :ChangeNote ;
     sdo:rangeIncludes :GenerationProcess ;
-    rdfs:label "Tool"@en, "Verktyg"@sv .
+    rdfs:label "tool"@en, "verktyg"@sv .
 
 :AdministrativeAction a owl:Class ;
     :category :platform ;
@@ -375,13 +375,13 @@
     :category :platform ;
     :category :pending ;
     rdfs:domain :ChangeObservation;
-    rdfs:label "Previous value"@en, "Tidigare värde"@sv .
+    rdfs:label "previous value"@en, "tidigare värde"@sv .
 
 :representationAfter a owl:ObjectProperty ;
     :category :platform ;
     :category :pending ;
     rdfs:domain :ChangeObservation;
-    rdfs:label "New value"@en, "Nytt värde"@sv .
+    rdfs:label "new value"@en, "nytt värde"@sv .
 
 # }}}
 
@@ -404,7 +404,7 @@
     :category :pending ;
     rdfs:domain :Dataset ;
     rdfs:range owl:Class ;
-    rdfs:label "Beskriver resurser av klass"@sv, "Describes resources of class"@en ;
+    rdfs:label "beskriver resurser av klass"@sv, "describes resources of class"@en ;
     owl:equivalentProperty void:class .
 
 :displayLens a owl:ObjectProperty ;
@@ -924,22 +924,22 @@ bulk:report a owl:ObjectProperty ;
     rdfs:domain bulk:Execution .
 
 bulk:numUpdated a :DatatypeProperty ;
-  rdfs:label "Number of updated records"@en, "Antal ändrade poster"@sv ;
+  rdfs:label "number of updated records"@en, "antal ändrade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
 
 bulk:numCreated a :DatatypeProperty ;
-  rdfs:label "Number of created records"@en, "Antal skapade poster"@sv ;
+  rdfs:label "number of created records"@en, "antal skapade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
 
 bulk:numDeleted a :DatatypeProperty ;
-  rdfs:label "Number of deleted records"@en, "Antal raderade poster"@sv ;
+  rdfs:label "number of deleted records"@en, "antal raderade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
 
 bulk:numFailed a :DatatypeProperty ;
-  rdfs:label "Number of failed records"@en, "Antal misslyckade poster"@sv ;
+  rdfs:label "number of failed records"@en, "antal misslyckade poster"@sv ;
   rdfs:domain bulk:Execution ;
   rdfs:range xsd:nonNegativeInteger .
 
@@ -976,7 +976,7 @@ bibdb:LinkResolver a owl:Class ;
 bibdb:openingHours a owl:DatatypeProperty;
     :category :platform ;
     rdfs:range xsd:string ;
-    rdfs:label "Opening hours"@en, "Öppettider"@sv .
+    rdfs:label "opening hours"@en, "öppettider"@sv .
 
 bibdb:ILS a owl:Class ;
     :category :platform ;
@@ -1065,37 +1065,37 @@ bibdb:extendedAddress a owl:DatatypeProperty;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:extendedAddress ;
     rdfs:comment "Till exempel att. eller C/O."@sv;
-    rdfs:label "Address extension"@en, "Ytterligare addressinformation"@sv .
+    rdfs:label "address extension"@en, "ytterligare addressinformation"@sv .
 
 bibdb:streetAddress a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:streetAddress ;
-    rdfs:label "Street address"@en, "Gatuadress"@sv .
+    rdfs:label "street address"@en, "gatuadress"@sv .
 
 bibdb:postalCode a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:postalCode ;
-    rdfs:label "Postal code"@en, "Postnummer"@sv .
+    rdfs:label "postal code"@en, "postnummer"@sv .
 
 bibdb:addressLocality a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:addressLocality ;
-    rdfs:label "Address locality code"@en, "Ort"@sv .
+    rdfs:label "address locality code"@en, "ort"@sv .
 
 bibdb:email a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:email ;
-    rdfs:label "Email"@en, "E-post"@sv .
+    rdfs:label "email"@en, "e-post"@sv .
 
 bibdb:telephone a owl:DatatypeProperty;
     :category :platform ;
     rdfs:domain bibdb:PostalAddress ;
     owl:equivalentProperty sdo:telephone ;
-    rdfs:label "Telephone"@en, "Telefon"@sv .
+    rdfs:label "telephone"@en, "telefon"@sv .
 
 bibdb:latitude a owl:DatatypeProperty;
     :category :platform ;
