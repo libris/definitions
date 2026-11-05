@@ -42,9 +42,9 @@ construct {
 
     ?ils a idkbse_bibdb:ILS ;
        :url ?ils_url ;
-       idkbse_bibdb:bibIdSearchUri ?bibIdUri ;
-       idkbse_bibdb:isbnSearchUri ?isbnUri ;
-       idkbse_bibdb:issnSearchUri ?issnUri ;
+       idkbse_bibdb:bibIdSearchUri ?ils_bibIdUri ;
+       idkbse_bibdb:isbnSearchUri ?ils_isbnUri ;
+       idkbse_bibdb:issnSearchUri ?ils_issnUri ;
        idkbse_bibdb:itemStatusUri ?itemStatusUri .
 
     ?linkResolver a idkbse_bibdb:LinkResolver ;
@@ -137,14 +137,17 @@ construct {
         optional {
             ?ils bibdb:opacsyntax_bibid ?bibIdUri .
             FILTER(?bibIdUri != "")
+            BIND( STRLANG(str(?bibIdUri), "sv") AS ?ils_bibIdUri ) .
         }
         optional {
             ?ils bibdb:opacsyntax_isbn ?isbnUri .
             FILTER(?isbnUri != "")
+            BIND( STRLANG(str(?isbnUri), "sv") AS ?ils_isbnUri ) .
         }
         optional {
             ?ils bibdb:opacsyntax_issn ?issnUri .
             FILTER(?issnUri != "")
+            BIND( STRLANG(str(?issnUri), "sv") AS ?ils_issnUri ) .
         }
 
         optional {
@@ -155,9 +158,9 @@ construct {
         }
 
         FILTER(bound(?ils_url)
-            || bound(?bibIdUri)
-            || bound(?isbnUri)
-            || bound(?issnUri)
+            || bound(?ils_bibIdUri)
+            || bound(?ils_isbnUri)
+            || bound(?ils_issnUri)
             || bound(?itemStatusUri)
         )
     }
