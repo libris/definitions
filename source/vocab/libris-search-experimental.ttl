@@ -78,6 +78,9 @@ ls:preferLike a skos:Collection ;
 ls:coercing a skos:Collection ;
     :category :pending .
 
+ls:sortKey a skos:Collection ;
+    :category :pending .
+
 # TODO? Could be ls:MergedProperty rdfs:subClassOf owl:ObjectProperty
 ls:merged a skos:Collection ;
     :category :pending ;
@@ -573,7 +576,7 @@ ls:publicationEndYear a owl:DatatypeProperty ;
     owl:propertyChainAxiom ( :publication :endYear ) .
 
 ls:yearPublished a owl:DatatypeProperty ;
-    :category :searchfilter, :shorthand, :pending ;
+    :category :searchfilter, :shorthand, :pending, ls:sortKey ;
     rdfs:label "utgivningsår"@sv, "year of publication"@en ;
     rdfs:domain :Instance ;
     skos:notation "ÅR"^^ls:QueryCode,
