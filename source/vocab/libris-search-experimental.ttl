@@ -887,3 +887,20 @@ ls:filters a :PartialCollectionView ;
                       )
            ]
    ) .
+
+## Sort
+
+ls:libraryCount a owl:DatatypeProperty ;
+     :category ls:composite, ls:sortKey, :pending .
+
+ls:workLibraryCount a owl:DatatypeProperty ;
+    :category ls:coercing, :pending ;
+    rdfs:subPropertyOf ls:libraryCount ;
+    rdfs:domain :Work ;
+    ls:indexKey "reverseLinks.totalItemsByRelation.itemOf.instanceOf" .
+
+ls:instanceLibraryCount a owl:DatatypeProperty ;
+    :category ls:coercing, :pending ;
+    rdfs:subPropertyOf ls:libraryCount ;
+    rdfs:domain :Instance ;
+    ls:indexKey "reverseLinks.totalItemsByRelation.itemOf" .
