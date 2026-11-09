@@ -469,7 +469,8 @@ def make_full_labels(results):
                     break
                 if broader_label.lower() in pref_label.lower():
                     break
-                parts.insert(0, broader_label)
+                if not broader_label.lower().endswith(parts[0].split()[-1].lower()):
+                    parts.insert(0, broader_label)
                 broader = broader.get('broader')
 
         if len(parts) > 1:
