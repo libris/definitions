@@ -5,7 +5,7 @@ from collections import OrderedDict
 import re
 from zipfile import ZipFile
 import json
-from lxml import etree
+from lxml import etree  # type: ignore[import-untyped]
 from urllib.parse import quote, unquote
 
 
@@ -463,19 +463,34 @@ def make_full_labels(results):
             if '@id' not in broader:
                 break
             broader = results.get(broader['@id'])
+
             if broader and 'prefLabel' in broader:
                 broader_label = broader['prefLabel']
-                if not broader_label[0].isupper():
+
+                if not (first := broader_label[0]).isnumeric() and not first.isupper():
                     break
-                if broader_label.lower() in pref_label.lower():
-                    break
-                if not broader_label.lower().endswith(parts[0].split()[-1].lower()):
+
+                if not _is_redundant(broader_label, parts):
                     parts.insert(0, broader_label)
+
                 broader = broader.get('broader')
 
         if len(parts) > 1:
             term['prefLabel'] = ': '.join(parts)
             term['altLabel'] = pref_label
+
+
+def _is_redundant(broader_label: str, parts: list[str]) -> bool:
+    broader_lower = broader_label.lower()
+    return (
+        any(broader_lower in part.lower() for part in parts)
+        or (
+            ' och ' in broader_lower
+            and any(
+                word in broader_lower for word in parts[0].lower().split() if len(word) > 3
+            )
+        )
+    )
 
 
 if __name__ == '__main__':
