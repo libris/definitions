@@ -487,7 +487,9 @@ def _is_redundant(broader_label: str, parts: list[str]) -> bool:
         or (
             ' och ' in broader_lower
             and any(
-                word in broader_lower for word in parts[0].lower().split() if len(word) > 3
+                word[:4] in broader_lower
+                for chunk in parts[0].lower().split()
+                if len(word := chunk.removesuffix(':')) > 3
             )
         )
     )
