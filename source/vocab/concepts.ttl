@@ -10,6 +10,8 @@
 @prefix bf2: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix sdo: <http://schema.org/> .
 @prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix gn: <https://www.geonames.org/ontology#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
 
 @prefix : <https://id.kb.se/vocab/> .
 @prefix marc: <https://id.kb.se/marc/> .
@@ -19,11 +21,16 @@
     rdfs:label "Place"@en, "Plats"@sv;
     owl:equivalentClass bf2:Place, prov:Location, sdo:Place .
 
+:AdministrativeRegion a owl:Class ;
+    rdfs:label "Administrativt/politiskt avgränsat område"@sv, "Administrative region"@en ;
+    rdfs:subClassOf :Place ;
+    owl:equivalentClass gn:A.ADMD, wd:Q56061 .
+
 :Country a owl:Class;
     rdfs:label "Country"@en, "Land"@sv;
     owl:equivalentClass sdo:Country, madsrdf:Country;
     :category :heuristicIdentity;
-    rdfs:subClassOf :Place .
+    rdfs:subClassOf :AdministrativeRegion .
 
 :locatedIn a owl:ObjectProperty ;
     :category :integral ;
