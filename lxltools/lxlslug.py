@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-from __future__ import unicode_literals, print_function
-
+from typing import Any
 from zlib import crc32
 import string
 import time
@@ -32,9 +31,12 @@ def caesarize(alphabet, s):
 def checksum(data):
     return crc32(data.encode('utf-8')) & 0xffffffff
 
-def librisencode(a, b):
+def librisencode(a, b, backwards_form=False):
     alphabet = lower_consonants_numbers
-    timepart = "".join(reversed(caesarize(alphabet, tobase(alphabet, a))))
+    chars = caesarize(alphabet, tobase(alphabet, a))
+    if backwards_form:
+        chars = reversed(chars)
+    timepart = "".join(chars)
     codepart = tobase(alphabet, b)
     codelen = len(codepart)
     if codelen < 7:
@@ -53,7 +55,7 @@ if __name__ == '__main__':
         print("Usage: %s TIMESTAMP IDENTIFIER" % (cmd), file=sys.stderr)
         exit(1)
 
-    timestamp = args.pop(0)
+    timestamp: Any = args.pop(0)
     identifiers = args
 
     try:
