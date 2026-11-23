@@ -301,6 +301,24 @@ ls:translator a owl:ObjectProperty ;
             :agent
         ) .
 
+ls:libraryCount a owl:DatatypeProperty ;
+     :category ls:composite, ls:sortKey, :pending ;
+     rdfs:label "antal bibliotek"@sv, "number of libraries"@en .
+
+ls:workLibraryCount a owl:DatatypeProperty ;
+    :category ls:coercing, :pending ;
+    rdfs:label "antal bibliotek (verk)"@sv, "number of libraries (work)"@en ;
+    rdfs:subPropertyOf ls:libraryCount ;
+    rdfs:domain :Work ;
+    ls:indexKey "reverseLinks.totalItemsByRelation.itemOf.instanceOf" .
+
+ls:instanceLibraryCount a owl:DatatypeProperty ;
+    :category ls:coercing, :pending ;
+    rdfs:label "antal bibliotek (instans)"@sv, "number of libraries (instance)"@en ;
+    rdfs:subPropertyOf ls:libraryCount ;
+    rdfs:domain :Instance ;
+    ls:indexKey "reverseLinks.totalItemsByRelation.itemOf" .
+
 
 ## Work
 
