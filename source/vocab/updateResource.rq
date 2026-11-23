@@ -2,22 +2,27 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix : <https://id.kb.se/vocab/>
 
-insert {
+insert { #:
+    # :Resource as baseclass of a term
     ?term rdfs:subClassOf :Resource
 
-} where {
-    ?term a owl:Class
+} where { #:
+    # term is a class...
+    ?term a owl:Class .
 
-    # Add Resource where subClassOf is missing (Is this part redundant? Enough with the minus clause?)
-    optional {?term rdfs:subClassOf ?subClassOf}
-    filter(!bound(?subClassOf))
+    # defined in : (kbv)...
+    filter strstarts(str(?term), str(:))
 
-    # Don't add subClassOf if term already is :Resource
+    # unless it *is* that class...
     filter(?term != :Resource)
 
-    # Don't add if ?subClassOf contains refs that starts with <https://id.kb.se/vocab/>
-    MINUS {
-        ?term rdfs:subClassOf ?baseClassUri
-        filter ((?baseClassUri != :) && strstarts(str(?baseClassUri), str(:)))
+    # and as long as it is *not* the case that:
+    filter not exists {
+      # another baseclass is defined...
+      ?term rdfs:subClassOf ?baseclass .
+      # which is identified by an IRI...
+      filter isURI(?baseclass)
+      # and is defined by : (kbv).
+      filter strstarts(str(?baseclass), str(:))
     }
 }
