@@ -757,6 +757,13 @@ ls:itemSubject a owl:ObjectProperty ;
      sdo:rangeIncludes :BibliographicAgent, :Subject, :Work ;
      owl:propertyChainAxiom ( :hasItem ls:subject ) .
 
+ls:derivedFromPublisher a owl:ObjectProperty ;
+     :category :searchfilter, :shorthand, :pending ;
+     rdfs:label "Metadatakälla"@sv, "Metadata source"@en ;
+     ls:filterDescription "."@sv, "..."@en ;
+     rdfs:domain :Instance ;
+     sdo:rangeIncludes :Organization ;
+     owl:propertyChainAxiom ( :meta :derivedFrom :publisher ) .
 
 ## Display
 
