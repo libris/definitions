@@ -1,0 +1,24 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix : <https://id.kb.se/vocab/>
+prefix swepub: <https://id.kb.se/term/swepub/>
+prefix svep: <https://id.kb.se/term/swepub/svep/>
+
+svep:ref a swepub:ContentType ;
+     skos:prefLabel "Sakkunniggranskat"@sv ;
+     skos:prefLabel "Peer-reviewed"@en ;
+     rdfs:comment "Verk som har genomgått granskning av sakkunniga vars samlade bedömning avgör om det uppfyller tillräckliga krav på vetenskaplig eller konstnärlig kvalitet för att accepteras för publicering eller framförande."@sv ;
+     rdfs:comment "Work reviewed by independent researchers and considered to meet the requirements for a scholar publication."@en .
+
+svep:vet a swepub:ContentType ;
+     skos:prefLabel "Övrigt vetenskapligt/konstnärligt"@sv ;
+     skos:prefLabel "Other academic"@en ;
+     skos:changeNote '2023-12: omdöpt från "Övrigt vetenskapligt"'@sv ;
+     rdfs:comment "Verk som riktar sig mot forskningssamhället men har inte genomgått sakkunniggranskning."@sv ;
+     rdfs:comment "Other works which are intended for the scholarly society but not peer-reviewed."@en .
+
+svep:pop a swepub:ContentType ;
+     skos:prefLabel "Övrigt (populärvetenskap, debatt)"@sv ;
+     skos:prefLabel "Popular scientific"@en ;
+     rdfs:comment "Verk av populärvetenskaplig karaktär som riktar sig mot allmänheten."@sv ;
+     rdfs:comment "Works intended to mediate scholar information to a general audience."@en .
