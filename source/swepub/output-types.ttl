@@ -4,8 +4,10 @@ prefix : <https://id.kb.se/vocab/>
 prefix swepub: <https://id.kb.se/term/swepub/>
 prefix sppubl: <https://id.kb.se/term/swepub/publication/>
 prefix spout: <https://id.kb.se/term/swepub/output/>
+prefix div: <https://id.kb.se/term/div/>
 
 spout:publication a swepub:OutputType ;
+    :inCollection div:find ;
     skos:exactMatch sppubl:ovr ;
     skos:narrowMatch sppubl:ovr\/vet ;
     :code "publication" ;
@@ -15,6 +17,7 @@ spout:publication a swepub:OutputType ;
     rdfs:comment "Text-based scholarly publication."@en .
 
 spout:conference a swepub:OutputType ;
+    :inCollection div:find ;
     :code "conference" ;
     skos:prefLabel "Konferensoutput"@sv ;
     skos:exactMatch sppubl:kon ;
@@ -24,6 +27,7 @@ spout:conference a swepub:OutputType ;
     rdfs:comment "Publications and presentations from conferences."@en .
 
 spout:intellectual-property a swepub:OutputType ;
+    :inCollection div:find ;
     :code "intellectual-property" ;
     skos:prefLabel "Immaterialrättslig output"@sv ;
     skos:closeMatch sppubl:pat\/vet ;
@@ -32,6 +36,7 @@ spout:intellectual-property a swepub:OutputType ;
     rdfs:comment "Patents and other types of intellectual property outputs, such as registered trademarks or licenses."@en .
 
 spout:artistic-work a swepub:OutputType ;
+    :inCollection div:find ;
     :code "artistic-work" ;
     skos:prefLabel "Konstnärlig output"@sv ;
     skos:exactMatch sppubl:kfu ;
@@ -41,6 +46,7 @@ spout:artistic-work a swepub:OutputType ;
     rdfs:comment "Output based on artistic development processes and/or research processes from the perspective of reflection and development of new knowledge."@en .
 
 spout:other a swepub:OutputType ;
+    :inCollection div:find ;
     :code "other" ;
     skos:prefLabel "Övrig output"@sv ;
     skos:closeMatch sppubl:ovr\/vet ;
@@ -49,6 +55,7 @@ spout:other a swepub:OutputType ;
     rdfs:comment "Other output refers to output that is not text-based research publications, conference output, artistic or intellectual property output, such as research data or software."@en .
 
 spout:publication\/book a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:bok ;
     skos:narrowMatch sppubl:bok\/vet ;
@@ -58,6 +65,7 @@ spout:publication\/book a swepub:OutputType ;
     rdfs:comment "Monographic publication in one or more parts intended to form a complete unity, describing the authorship."@en .
 
 spout:publication\/edited-book a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:sam ;
     skos:narrowMatch sppubl:sam\/vet ;
@@ -67,6 +75,7 @@ spout:publication\/edited-book a swepub:OutputType ;
     rdfs:comment "Publication of the type of anthology or collection, describing the editorship."@en .
 
 spout:publication\/book-chapter a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:kap ;
     skos:narrowMatch sppubl:kap\/vet ;
@@ -76,6 +85,7 @@ spout:publication\/book-chapter a swepub:OutputType ;
     rdfs:comment "Independent part of the monographic publication, which describes the authorship. Often included in collections, a number of independent works published together, possibly selected by editors for a certain theme."@en .
 
 spout:publication\/foreword-afterword a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "foreword-afterword" ;
@@ -84,6 +94,7 @@ spout:publication\/foreword-afterword a swepub:OutputType ;
     rdfs:comment "Introductory or closing text for a work written by someone other than the author of the work."@en .
 
 spout:publication\/report-chapter a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "report-chapter" ;
@@ -92,6 +103,7 @@ spout:publication\/report-chapter a swepub:OutputType ;
     rdfs:comment "Independent part of report describing the authorship."@en .
 
 spout:publication\/report a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:rap ;
     skos:narrowMatch sppubl:rap\/vet ;
@@ -101,6 +113,7 @@ spout:publication\/report a swepub:OutputType ;
     rdfs:comment "Publication that e.g. is part of a report series, for example, reports from a study or an assignment/a project performed."@en .
 
 spout:publication\/journal-article a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/ref ;
     :code "journal-article" ;
@@ -109,6 +122,7 @@ spout:publication\/journal-article a swepub:OutputType ;
     rdfs:comment "Article in a peer-reviewed scientific journal."@en .
 
 spout:publication\/review-article a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:for ;
     skos:narrowMatch sppubl:for\/ref ;
@@ -118,6 +132,7 @@ spout:publication\/review-article a swepub:OutputType ;
     rdfs:comment "Review article in a scientific journal that summarizes and analyzes research in the respective research fields."@en .
 
 spout:publication\/doctoral-thesis a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:dok ;
     skos:narrowMatch sppubl:dok\/vet ;
@@ -127,6 +142,7 @@ spout:publication\/doctoral-thesis a swepub:OutputType ;
     rdfs:comment "Approved dissertation for Doctoral degree."@en .
 
 spout:publication\/licentiate-thesis a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:lic ;
     skos:narrowMatch sppubl:lic\/vet ;
@@ -136,6 +152,7 @@ spout:publication\/licentiate-thesis a swepub:OutputType ;
     rdfs:comment "Approved dissertation for Licentiate degree."@en .
 
 spout:publication\/critical-edition a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "critical-edition" ;
@@ -145,6 +162,7 @@ spout:publication\/critical-edition a swepub:OutputType ;
     rdfs:comment "Scholarly edition of a work, such as text-critical edition/translation or annotated edition."@en .
 
 spout:publication\/working-paper a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:closeMatch sppubl:ovr\/vet ;
     skos:broader spout:publication ;
     :code "working-paper" ;
@@ -153,6 +171,7 @@ spout:publication\/working-paper a swepub:OutputType ;
     rdfs:comment "Contribution on ongoing research presented for comments and published in working paper series."@en .
 
 spout:publication\/editorial-letter a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/vet ;
     :code "editorial-letter" ;
@@ -161,6 +180,7 @@ spout:publication\/editorial-letter a swepub:OutputType ;
     rdfs:comment "Introductory text in journal or proceeding, as an opinion or policy statement from a named person. Also texts from one or more authors to the publisher of the publication commenting on an article in the publication, or shorter notes on new research findings."@en . 
 
 spout:publication\/book-review a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:exactMatch sppubl:rec ;
     skos:narrowMatch sppubl:rec\/vet ;
@@ -170,6 +190,7 @@ spout:publication\/book-review a swepub:OutputType ;
     rdfs:comment "Review and criticism of output, such as book, journal or software."@en .
 
 spout:publication\/magazine-article a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/vet ;
     :code "magazine-article" ;
@@ -178,6 +199,7 @@ spout:publication\/magazine-article a swepub:OutputType ;
     rdfs:comment "Article in journal that is not peer-reviewed scientific journal, for example article in popular scientific journals."@en .
 
 spout:publication\/newspaper-article a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:art\/pop ;
     :code "newspaper-article" ;
@@ -186,6 +208,7 @@ spout:publication\/newspaper-article a swepub:OutputType ;
     rdfs:comment "Articles in news magazines to a general audience."@en .
 
 spout:publication\/encyclopedia-entry a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:kap\/vet ;
     :code "encyclopedia-entry" ;
@@ -194,6 +217,7 @@ spout:publication\/encyclopedia-entry a swepub:OutputType ;
     rdfs:comment "Contribution to an encyclopedia or a reference work where the author is named."@en .
 
 spout:publication\/journal-issue a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "journal-issue" ;
@@ -202,6 +226,7 @@ spout:publication\/journal-issue a swepub:OutputType ;
     rdfs:comment "Special/theme issue of journal with named editors (guest editors)."@en .
 
 spout:publication\/preprint a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "preprint" ;
@@ -211,6 +236,7 @@ spout:publication\/preprint a swepub:OutputType ;
     rdfs:comment "Published preprints that have not yet been peer-reviewed before the process of publishing in a journal."@en .
 
 spout:publication\/other a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:publication ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "other" ;
@@ -220,6 +246,7 @@ spout:publication\/other a swepub:OutputType ;
     rdfs:comment "Presented but not necessarily published outputs without identifiers."@en .
 
 spout:conference\/poster a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:conference ;
     skos:closeMatch sppubl:kon\/vet ;
     :code "poster" ;
@@ -228,6 +255,7 @@ spout:conference\/poster a swepub:OutputType ;
     rdfs:comment "Conference poster."@en .
 
 spout:conference\/paper a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:conference ;
     skos:closeMatch sppubl:kon\/ref ;
     :code "paper" ;
@@ -236,6 +264,7 @@ spout:conference\/paper a swepub:OutputType ;
     rdfs:comment "Compilation of full length papers from a conference published in proceeding."@en .
 
 spout:conference\/proceeding a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:conference ;
     skos:exactMatch sppubl:pro ;
     skos:narrowMatch sppubl:pro\/vet ;
@@ -245,6 +274,7 @@ spout:conference\/proceeding a swepub:OutputType ;
     rdfs:comment "Conference proceeding, describing the editorship"@en .
 
 spout:conference\/other a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:conference ;
     skos:closeMatch sppubl:kon\/vet ;
     :code "other" ;
@@ -254,6 +284,7 @@ spout:conference\/other a swepub:OutputType ;
     rdfs:comment "Conference outputs published on conference website/database, key notes, invited speeches, oral presentations, abstracts and powerpoints, available in printed or electronic form, for example in an electronic archive or USB."@en .
 
 spout:intellectual-property\/patent a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:intellectual-property ;
     skos:exactMatch sppubl:pat ;
     skos:narrowMatch sppubl:pat\/vet ;
@@ -263,6 +294,7 @@ spout:intellectual-property\/patent a swepub:OutputType ;
     rdfs:comment "Patent invention."@en .
 
 spout:intellectual-property\/other a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:intellectual-property ;
     skos:closeMatch sppubl:pat\/vet ;
     :code "other" ;
@@ -272,6 +304,7 @@ spout:intellectual-property\/other a swepub:OutputType ;
     rdfs:comment "Intellectual property output other than patent, such as registered trademarks or licenses."@en .
 
 spout:artistic-work\/original-creative-work a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:artistic-work ;
     skos:closeMatch sppubl:kfu\/vet ;
     :code "original-creative-work" ;
@@ -280,6 +313,7 @@ spout:artistic-work\/original-creative-work a swepub:OutputType ;
     rdfs:comment "Artistic works, such as musical compositions, visual arts, design/architecture, crafts, artists' books, film, video, TV, radio, performance, theater, music, dance, circus, curated/produced exhibitions/events and non-published fiction as a text-based publication."@en .
 
 spout:artistic-work\/artistic-thesis a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:artistic-work ;
     skos:closeMatch sppubl:kfu\/vet, sppubl:dok\/vet ;
     :code "artistic-thesis" ;
@@ -289,6 +323,7 @@ spout:artistic-work\/artistic-thesis a swepub:OutputType ;
     rdfs:comment "Documented artistic research project for Doctoral degree."@en .
 
 spout:other\/data-set a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:other ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "data-set" ;
@@ -297,6 +332,7 @@ spout:other\/data-set a swepub:OutputType ;
     rdfs:comment "Research data that is available digitally as a dataset in an archive and/or platform."@en .
 
 spout:other\/software a swepub:OutputType ;
+    :inCollection div:identify ;
     skos:broader spout:other ;
     skos:closeMatch sppubl:ovr\/vet ;
     :code "software" ;
