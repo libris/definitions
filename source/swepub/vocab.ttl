@@ -1,4 +1,5 @@
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix swepub: <https://id.kb.se/term/swepub/>
 prefix : <https://id.kb.se/vocab/>
 
@@ -22,4 +23,13 @@ swepub:PublicationStatus a :EnumerationClass ;
     rdfs:label "Publication status"@en, "Publiceringsstatus"@sv ;
     rdfs:comment "Anmärkningar rörande verkets status"@sv;
     rdfs:subClassOf :Note ; #TODO Status?;
+    :category :pending .
+
+swepub:contentType a owl:ObjectProperty ;
+    rdfs:label "Innehållsmärkning"@en, "Content labeling"@sv ;
+    rdfs:comment """Nivå av sakkunniggranskning och målgrupp för enstaka output. Innehållsmärkning kan skilja sig från
+        bedömningen av sakkunniggranskning i Svenska listan, som utgår från publiceringskanalen i sin helhet."""@sv;
+    :category :searchfilter ;
+    rdfs:domain :Work ;
+    rdfs:range swepub:ContentType ;
     :category :pending .
